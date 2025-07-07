@@ -1,6 +1,6 @@
 x-service-templates:
   payment-processor: &payment-processor
-    image: zanfranceschi/payment-processor:amd64
+    image: zanfranceschi/payment-processor:linux-amd64
     networks:
       - payment-processor
     deploy:
@@ -8,7 +8,7 @@ x-service-templates:
         limits:
           cpus: "1.5"
           memory: "100MB"
-  
+
   payment-processor-db: &payment-processor-db
     image: postgres:17-alpine
     networks:
@@ -39,7 +39,7 @@ services:
       - 8001:8080
     depends_on:
       - payment-processor-db-1
-    
+
   payment-processor-db-1:
     <<: *payment-processor-db
     container_name: payment-processor-default-db
@@ -60,7 +60,7 @@ services:
       - 8002:8080
     depends_on:
       - payment-processor-db-2
-  
+
   payment-processor-db-2:
     <<: *payment-processor-db
     container_name: payment-processor-fallback-db
