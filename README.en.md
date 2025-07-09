@@ -255,22 +255,22 @@ The tables below provide a summary to facilitate a general overview of the solut
 
 **Endpoints to be developed**
 
-| Endpoint | Description |
-|---|---|
-| POST /payments | Mediates the request for processing a payment. |
-| GET /payments-summary | Displays details of payment processing requests. |
+| Endpoint                          | Description       |
+| -                                 | -                 |
+| POST /payments                    | Mediates the request for processing a payment. |
+| GET /payments-summary             | Displays details of payment processing requests. |
 
 **Endpoints available in the two Payment Processor services**
-| Endpoint | Description |
-|---|---|
-| POST /payments | Requests the processing of a payment. |
-| GET /payments/service-health | Checks the operational status of the payments endpoint. Limit of 1 call every 5 seconds. |
-| GET /payments/{id} | Displays details of a payment processing request. |
-| GET /admin/payments-summary | Displays details of payment processing requests. |
-| PUT /admin/configurations/token | Resets an access token required for all endpoints prefixed with '/admin/'. |
-| PUT /admin/configurations/delay | Configures the delay in the payments endpoint. |
+| Endpoint                          | Description       |
+| -                                 | -                 |
+| POST /payments                    | Requests the processing of a payment. |
+| GET /payments/service-health      | Checks the operational status of the payments endpoint. Limit of 1 call every 5 seconds. |
+| GET /payments/{id}                | Displays details of a payment processing request. |
+| GET /admin/payments-summary       | Displays details of payment processing requests. |
+| PUT /admin/configurations/token   | Resets an access token required for all endpoints prefixed with '/admin/'. |
+| PUT /admin/configurations/delay   | Configures the delay in the payments endpoint. |
 | PUT /admin/configurations/failure | Configures failure in the payments endpoint. |
-| POST /admin/purge-payments | Deletes all payments from the database. For development only. |
+| POST /admin/purge-payments        | Deletes all payments from the database. For development only. |
 
 ## Architecture
 
