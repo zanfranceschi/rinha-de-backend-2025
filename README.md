@@ -36,7 +36,7 @@ Os dois serviços Payment Processor são idênticos em termos de endpoints – a
 
 Pessoas de todos os níveis costumam participar da Rinha de Backend – desde iniciantes até pessoas bastante experientes. O mais importante da Rinha é o espírito de cooperação entre os participantes e aprendizado. Entretanto, é recomendado que você tenha conhecimento em alguma linguagem de programação, docker, e git – pelo menos o básico. Ah, e pode participar em dupla de dois, dupla de três, dupla de 15, individualmente, etc. O importante é participar!
 
-As seções seguintes mostram como participar da Rinha.
+As seções seguintes mostram como participar da Rinha. Você também pode acompanhar nosso [mini-guia caso tenha dúvidas de como configurar seu ambiente de desenvolvimento](SETUP.md).
 
 ### Desenvolver um backend com uma API HTTP
 
