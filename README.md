@@ -1,11 +1,22 @@
 # Rinha de Backend 2025 - Submissão
-Tecnologias utilizadas
-Linguagem: C#
-Armazenamento/Fila: Redis
-Balanceador: Nginx
-Orquestração: Docker Compose
-Como rodar
-Suba o docker-compose dos Payment Processors primeiro (conforme instruções do repositório oficial).
-Depois, suba este compose:
+
+## 🚀 Tecnologias utilizadas
+
+- **Linguagem:** C#  
+- **Armazenamento / Fila:** Redis  
+- **Balanceador:** Nginx  
+- **Orquestração:** Docker Compose
+
+---
+
+## ⚙️ Como rodar
+
+1️⃣ **Suba o `docker-compose` dos Payment Processors**  
+(conforme instruções do [repositório oficial](https://github.com/Rinha-de-Backend-Official/2025)).
+
+**Projeto**: https://github.com/BoscoBecker/dotnetRinha
+
+2️⃣ **Depois, suba este compose:**
+
+```bash
 docker compose up --build
-O backend ficará disponível na porta 9999.
