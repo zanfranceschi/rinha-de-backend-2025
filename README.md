@@ -20,6 +20,10 @@ Nessa terceira edição da Rinha de Backend o desafio é intermediar solicitaç�
 
 **[Instruções detalhadas sobre o desafio](INSTRUCOES.md)**
 
+Você também pode assistir a [esse vídeo](https://www.youtube.com/watch?v=ldPkTtkJ86k) no YouTube sobre as instruções para participar da Rinha.
+
+[![youtube](./misc/imgs/youtube-thumb.jpg)](https://www.youtube.com/watch?v=ldPkTtkJ86k)
+
 
 ## Pontos em Aberto
 
