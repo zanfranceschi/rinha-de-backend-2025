@@ -28,7 +28,7 @@ while true; do
             git pull
             participant=$(echo $directory | sed -e 's/..\/participantes\///g' -e 's/\///g')
             echo "participant: $participant"
-            
+
             testedFile="$directory/partial-result.json"
 
             if ! test -f $testedFile; then
