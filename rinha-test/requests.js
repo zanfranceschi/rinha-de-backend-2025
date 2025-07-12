@@ -118,7 +118,7 @@ export async function getBackendPaymentsSummary(from, to) {
     const response = await backendHttp.asyncGet(`/payments-summary?from=${from}&to=${to}`);
 
     if (response.status != 200) {
-        exec.test.abort(`Erro ao obter admin payments summary do backend (HTTP ${response.status}).`);
+        exec.test.abort(`Erro ao obter payments summary do backend (HTTP ${response.status}).`);
     }
 
     return JSON.parse(response.body);
