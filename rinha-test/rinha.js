@@ -222,12 +222,12 @@ export async function checkPayments() {
 
   if (inconsistencies > 0) {
     console.log(`Found summary inconsistencies.`);
-    console.log(`------------------- totalAmount   totalRequests`);
+    console.log(`------------------- totalAmount    totalRequests`);
     console.log(`Backend.Default:    ${backendPaymentsSummary.default.totalAmount.toString().padEnd(14)} ${backendPaymentsSummary.default.totalRequests}`);
     console.log(`Processor.Default:  ${defaultAdminPaymentsSummary.totalAmount.toString().padEnd(14)} ${defaultAdminPaymentsSummary.totalRequests}`);
     console.log(`Backend.Fallback:   ${backendPaymentsSummary.fallback.totalAmount.toString().padEnd(14)} ${backendPaymentsSummary.fallback.totalRequests}`);
     console.log(`Processor.Fallback: ${fallbackAdminPaymentsSummary.totalAmount.toString().padEnd(14)} ${fallbackAdminPaymentsSummary.totalRequests}`);
-    console.log(`Time: ${from} to ${to}`);
+    console.log(`Time range: ${from} to ${to}`);
     console.log(`-------------------`);
   }
 
