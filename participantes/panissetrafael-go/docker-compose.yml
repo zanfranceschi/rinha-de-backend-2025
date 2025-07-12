@@ -1,0 +1,70 @@
+version: '3.8'
+
+services:
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "9999:9999"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - rinha-backend-1
+      - rinha-backend-2
+    networks:
+      - backend
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          cpus: "0.1"
+          memory: 6MB
+
+  redis:
+    image: redis:alpine
+    networks:
+      - backend
+    deploy:
+      resources:
+        limits:
+          cpus: "0.1"
+          memory: 14MB
+
+  rinha-backend-1:
+    image: panissetrafael/rinha-backend-go:v1.0
+    environment:
+      - PAYMENT_PROCESSOR_URL_DEFAULT=http://payment-processor-default:8080
+      - PAYMENT_PROCESSOR_URL_FALLBACK=http://payment-processor-fallback:8080
+      - REDIS_URL=redis://redis:6379
+    depends_on:
+      - redis
+    networks:
+      - backend
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          cpus: "0.65"
+          memory: 165MB
+
+  rinha-backend-2:
+    image: panissetrafael/rinha-backend-go:v1.0
+    environment:
+      - PAYMENT_PROCESSOR_URL_DEFAULT=http://payment-processor-default:8080
+      - PAYMENT_PROCESSOR_URL_FALLBACK=http://payment-processor-fallback:8080
+      - REDIS_URL=redis://redis:6379
+    depends_on:
+      - redis
+    networks:
+      - backend
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          cpus: "0.65"
+          memory: 165MB
+
+networks:
+  backend:
+    driver: bridge
+  payment-processor:
+    external: true
