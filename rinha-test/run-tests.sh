@@ -38,9 +38,11 @@ while true; do
                 sleep 12
                 k6 run -e MAX_REQUESTS=850 -e PARTICIPANT=$participant rinha.js
                 stopContainers $participant
-                git add $testedFile
-                git commit -m "add $participant's partial result"
-                git push
+                if test -f $testedFile; then
+                    git add $testedFile
+                    git commit -m "add $participant's partial result"
+                    git push
+                end
                 #echo "submissão '$participant' já testada - ignorando"
                 #rm -rf "$RESULTS_WORKSPACE/$participant"
                 #countAPIsToBeTested
