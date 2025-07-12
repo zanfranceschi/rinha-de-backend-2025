@@ -1,3 +1,4 @@
+import { textSummary } from 'https://jslib.k6.io/k6-summary/0.1.0/index.js';
 import { uuidv4 } from "https://jslib.k6.io/k6-utils/1.4.0/index.js";
 import { sleep } from "k6";
 import exec from "k6/execution";
@@ -16,13 +17,6 @@ import {
 
 export const options = {
   summaryTrendStats: [
-    //"avg",
-    //"min",
-    //"med",
-    //"max",
-    //"p(90)",
-    //"p(95)",
-    "p(98)",
     "p(99)",
     "count",
   ],
@@ -173,11 +167,13 @@ export async function teardown() {
   fallbackTotalFeeCounter.add(fallbackTotalFee);
 }
 
+const paymentRequestFixedAmount = 19.90;
+
 export async function payments() {
 
   const payload = {
     correlationId: uuidv4(),
-    amount: 19.90
+    amount: paymentRequestFixedAmount
   };
 
   const response = await requestBackendPayment(payload);
@@ -240,4 +236,62 @@ export async function define_stage() {
   await setPPFailure("fallback", fallbackFailure);
 
   sleep(1);
+}
+
+export function handleSummary(data) {
+
+  const expected_total_amount = data.metrics.transactions_success.values.count * paymentRequestFixedAmount;
+  const actual_total_amount = data.metrics.total_transactions_amount.values.count;
+  const difference_total_amount = expected_total_amount - actual_total_amount;
+
+  const default_total_fee = data.metrics.default_total_fee.values.count;
+  const fallback_total_fee = data.metrics.fallback_total_fee.values.count;
+  const total_fee = default_total_fee + fallback_total_fee;
+  
+  const p_99 = data.metrics["http_req_duration{expected_response:true}"].values["p(99)"];
+  const p_99_bonus = Math.max((11 - p_99) * 0.02, 0);
+  const contains_inconsistencies = difference_total_amount != 0 || data.metrics.balance_inconsistency_amount.values.count != 0;
+  const inconsistencies_fine = contains_inconsistencies ? 0.35 : 0;
+
+  const liquid_partial_amount = (actual_total_amount - total_fee);
+
+  const liquid_amount =  liquid_partial_amount
+                      + (liquid_partial_amount * p_99_bonus)
+                      - (liquid_partial_amount * inconsistencies_fine);
+
+  const custom_data = {
+    liquid_amount: Math.round(liquid_amount, 2),
+    points: "The 'liquid_amount' is the total points/profit you got.",
+    actual_total_amount: actual_total_amount,
+    expected_total_amount: expected_total_amount,
+    p_99: Math.round(p_99, 2),
+    p_99_bonus: p_99_bonus,
+    inconsistencies_fine: inconsistencies_fine,
+    fine_amount: Math.round(liquid_partial_amount * inconsistencies_fine, 2),
+
+    balance_inconsistency_amount: Math.round(data.metrics.balance_inconsistency_amount.values.count, 2),
+    
+    transactions_success: data.metrics.transactions_success.values.count,
+    transactions_failure: data.metrics.transactions_failure.values.count,
+    
+    default_total_amount: data.metrics.default_total_amount.values.count,
+    default_total_requests: data.metrics.default_total_requests.values.count,
+    fallback_total_amount: data.metrics.fallback_total_amount.values.count,
+    fallback_total_requests: data.metrics.fallback_total_requests.values.count,
+    default_total_fee: data.metrics.default_total_fee.values.count,
+    fallback_total_fee: data.metrics.fallback_total_fee.values.count,
+  };
+
+  const result = {
+    stdout: textSummary(data),
+  };
+
+  const participant = __ENV.PARTICIPANT;
+
+  if (participant != null) {
+    const summaryJsonFileName = `../participantes/${participant}/partial-result.json`
+    result[summaryJsonFileName] = JSON.stringify(custom_data);
+  }
+
+  return result;
 }
