@@ -1,0 +1,86 @@
+services:
+  nginx:
+    image: nginx:1.25-alpine
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - api01
+      - api02
+      - worker
+    ports:
+      - "9999:9999"
+    networks:
+      - rinha
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          cpus: "0.2"
+          memory: "30MB"
+
+  worker:
+    hostname: worker
+    image: rodscaldeira/rinha_backend_2025:latest
+    networks:
+      - rinha
+      - payment-processor
+    volumes:
+      - db:/db
+    environment:
+      - ROLE=worker
+      - DATABASE_PATH=/db/rinha.db
+      - DATABASE_POOL_SIZE=18
+      - WORKER_POOL_SIZE=16
+      - DEFAULT_SERVICE_NAME=default
+      - DEFAULT_SERVICE_URL=http://payment-processor-default:8080
+      - FALLBACK_SERVICE_NAME=fallback
+      - FALLBACK_SERVICE_URL=http://payment-processor-fallback:8080
+      - RELEASE_NAME=worker
+      - RELEASE_COOKIE=rinha
+    deploy:
+      resources:
+        limits:
+          cpus: "0.6"
+          memory: "158MB"
+
+  api01: &api
+    hostname: api01
+    image: rodscaldeira/rinha_backend_2025:latest
+    ports:
+      - "8080:8080"
+    networks:
+      - rinha
+      - payment-processor
+    environment:
+      - ROLE=api
+      - PORT=8080
+      - RELEASE_NAME=api01
+      - RELEASE_COOKIE=rinha
+    depends_on:
+      - worker
+    deploy:
+      resources:
+        limits:
+          cpus: "0.35"
+          memory: "81MB"
+
+  api02:
+    <<: *api
+    hostname: api02
+    ports:
+      - "8081:8081"
+    environment:
+      - ROLE=api
+      - PORT=8081
+      - RELEASE_NAME=api02
+      - RELEASE_COOKIE=rinha
+
+volumes:
+  db:
+
+networks:
+  rinha:
+    name: rinha
+    driver: bridge
+  payment-processor:
+    external: true
