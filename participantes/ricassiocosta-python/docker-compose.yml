@@ -1,0 +1,159 @@
+services:
+  nginx:
+    image: nginx:alpine
+    container_name: rinha-nginx
+    restart: unless-stopped
+    ports:
+      - "9999:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - backend-api-1
+      - backend-api-2
+    networks:
+      - backend
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          cpus: "0.1"
+          memory: "16MB"
+
+  backend-api-1:
+    build: .
+    image: ricassiocosta/rinha-backend-2025-python:latest
+    container_name: rinha-backend-api-1
+    restart: unless-stopped
+    environment:
+      - PAYMENT_PROCESSOR_URL_DEFAULT=http://payment-processor-default:8080
+      - PAYMENT_PROCESSOR_URL_FALLBACK=http://payment-processor-fallback:8080
+      - REDIS_URL=redis://redis:6379/0
+    depends_on:
+      - redis
+    networks:
+      - backend
+      - payment-processor
+    expose:
+      - "9999"
+    deploy:
+      resources:
+        limits:
+          cpus: "0.1"
+          memory: "64MB"
+
+  backend-api-2:
+    build: .
+    image: ricassiocosta/rinha-backend-2025-python:latest
+    container_name: rinha-backend-api-2
+    restart: unless-stopped
+    environment:
+      - PAYMENT_PROCESSOR_URL_DEFAULT=http://payment-processor-default:8080
+      - PAYMENT_PROCESSOR_URL_FALLBACK=http://payment-processor-fallback:8080
+      - REDIS_URL=redis://redis:6379/0
+    depends_on:
+      - redis
+    networks:
+      - backend
+      - payment-processor
+    expose:
+      - "9999"
+    deploy:
+      resources:
+        limits:
+          cpus: "0.1"
+          memory: "64MB"
+
+  worker-light:
+    build: .
+    image: ricassiocosta/rinha-backend-2025-python:latest
+    container_name: worker-light
+    command: ["python", "-m", "app.worker"]
+    restart: unless-stopped
+    environment:
+      - PAYMENT_PROCESSOR_URL_DEFAULT=http://payment-processor-default:8080
+      - PAYMENT_PROCESSOR_URL_FALLBACK=http://payment-processor-fallback:8080
+      - REDIS_URL=redis://redis:6379/0
+      - CONSUMER_NAME=worker-light
+      - MAX_PARALLELISM=4
+    depends_on:
+      - redis
+    networks:
+      - backend
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          cpus: "0.3"
+          memory: "48MB"
+
+  worker-heavy:
+    build: .
+    image: ricassiocosta/rinha-backend-2025-python:latest
+    container_name: worker-heavy
+    command: ["python", "-m", "app.worker"]
+    restart: unless-stopped
+    environment:
+      - PAYMENT_PROCESSOR_URL_DEFAULT=http://payment-processor-default:8080
+      - PAYMENT_PROCESSOR_URL_FALLBACK=http://payment-processor-fallback:8080
+      - REDIS_URL=redis://redis:6379/0
+      - CONSUMER_NAME=worker-heavy
+      - MAX_PARALLELISM=8
+    depends_on:
+      - redis
+    networks:
+      - backend
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          cpus: "0.7"
+          memory: "80MB"
+
+  health-check:
+    build: .
+    image: ricassiocosta/rinha-backend-2025-python:latest
+    container_name: rinha-health-check
+    command: ["python", "-m", "app.health_check"]
+    restart: unless-stopped
+    environment:
+      - PAYMENT_PROCESSOR_URL_DEFAULT=http://payment-processor-default:8080
+      - PAYMENT_PROCESSOR_URL_FALLBACK=http://payment-processor-fallback:8080
+      - REDIS_URL=redis://redis:6379/0
+    depends_on:
+      - redis
+    networks:
+      - backend
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          cpus: "0.1"
+          memory: "14MB"
+
+  redis:
+    image: redis:7-alpine
+    container_name: rinha-redis
+    restart: unless-stopped
+    command:
+      [
+        "redis-server",
+        "--save",
+        "",
+        "--appendonly",
+        "no",
+        "--maxclients",
+        "500",
+      ]
+    networks:
+      - backend
+    deploy:
+      resources:
+        limits:
+          cpus: "0.1"
+          memory: "64MB"
+
+networks:
+  backend:
+    driver: bridge
+  payment-processor:
+    external: true
