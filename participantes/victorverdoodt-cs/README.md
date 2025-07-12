@@ -36,4 +36,5 @@ O código-fonte da API pode ser encontrado no repositório abaixo:
 </div>
 
 ## Resultado
+<img width="923" height="593" alt="image" src="https://github.com/user-attachments/assets/7cf2047e-e47f-4430-a133-070e8989ea29" />
 
