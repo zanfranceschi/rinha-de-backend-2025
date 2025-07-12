@@ -1,0 +1,70 @@
+x-service-templates:
+  api: &api
+    image: leoralph/rinha-de-backend-2025-api:latest
+    depends_on:
+      redis:
+        condition: service_healthy
+    networks:
+      - backend
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          cpus: "0.3"
+          memory: "90M"
+
+services:
+  caddy:
+    image: caddy:latest
+    ports:
+      - "9999:9999"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+    networks:
+      - backend
+    deploy:
+      resources:
+        limits:
+          cpus: "0.15"
+          memory: "50M"
+
+  redis:
+    image: redis:latest
+    networks:
+      - backend
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+    deploy:
+      resources:
+        limits:
+          cpus: "0.15"
+          memory: "40M"
+
+  worker:
+    image: leoralph/rinha-de-backend-2025-worker:latest
+    depends_on:
+      redis:
+        condition: service_healthy
+    networks:
+      - backend
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          cpus: "0.6"
+          memory: "80M"
+
+  api01:
+    <<: *api
+
+  api02:
+    <<: *api
+
+networks:
+  backend:
+    driver: bridge
+  payment-processor:
+    external: true
