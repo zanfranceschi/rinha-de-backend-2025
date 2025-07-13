@@ -1,0 +1,115 @@
+services:
+  load-balancer:
+    image: traefik:v3.0
+    container_name: traefik
+    command:
+      - "--api.insecure=true"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.web.address=:80"
+      - "--entrypoints.processor-api.address=:9999"
+      - "--providers.docker.network=backend"
+
+    ports:
+      - "80:80"
+      - "9999:9999"
+    networks:
+      - backend
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          memory: 100m
+          cpus: '0.5'
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+
+  postgres:
+    image: postgres:17-alpine
+    container_name: payment-db
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+    networks:
+      - backend
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          memory: 120m
+          cpus: '0.3'
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  messaging:
+    container_name: messaging
+    image: jccl/messaging:latest
+    environment:
+      - DEFAULT_PROCESSOR_URL=http://payment-processor-default:8080
+      - FALLBACK_PROCESSOR_URL=http://payment-processor-fallback:8080
+    networks:
+      - backend
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          cpus: '0.3'
+          memory: 100M
+    depends_on:
+      - postgres
+
+  processor-api-1:
+    image: jccl/processor-api:latest
+    container_name: processor-api-1
+    networks:
+      - backend
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          memory: 15m
+          cpus: '0.2'
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.processor-api.rule=PathPrefix(`/`)"
+      - "traefik.http.routers.processor-api.entrypoints=processor-api"
+      - "traefik.http.services.processor-api.loadbalancer.server.port=4000"
+      - "traefik.docker.network=backend"
+      
+    depends_on:
+      - load-balancer
+      - messaging
+
+  processor-api-2:
+    image: jccl/processor-api
+    container_name: processor-api-2
+    networks:
+      - backend
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          memory: 15m
+          cpus: '0.2'
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.processor-api.rule=PathPrefix(`/`)"
+      - "traefik.http.routers.processor-api.entrypoints=processor-api"
+      - "traefik.http.services.processor-api.loadbalancer.server.port=4000"
+      - "traefik.docker.network=backend"
+    depends_on:
+      - load-balancer
+      - messaging                                              
+
+networks:
+  backend:
+    driver: bridge
+    name: backend
+  payment-processor:
+    external: true
+
+volumes:
+  pgdata:
