@@ -15,6 +15,8 @@ import {
   requestBackendPayment
 } from "./requests.js";
 
+const MAX_REQUESTS = __ENV.MAX_REQUESTS ?? 500;
+
 export const options = {
   summaryTrendStats: [
     "p(99)",
@@ -32,7 +34,7 @@ export const options = {
       executor: "ramping-vus",
       startVUs: 1,
       gracefulRampDown: "0s",
-      stages: [{ target: __ENV.MAX_REQUESTS ?? 500, duration: "60s" }],
+      stages: [{ target: MAX_REQUESTS, duration: "60s" }],
     },
     payments_consistency: {
       exec: "checkPayments",
@@ -270,6 +272,7 @@ export function handleSummary(data) {
     p99: {
       valor: `${p_99}ms`,
       bonus: p_99_bonus,
+      max_requests: MAX_REQUESTS,
       descricao: "Fórmula para o bônus: max((11 - p99.valor) * 0.02, 0)",
     },
     multa: {
