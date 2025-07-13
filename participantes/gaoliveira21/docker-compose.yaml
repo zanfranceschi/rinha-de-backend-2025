@@ -1,0 +1,78 @@
+x-service-templates:
+  app: &app
+    image: gaoliveira21/rinha2025:latest
+    environment:
+      - PORT=8080
+      - PAYMENT_PROCESSOR_DEFAULT_URL=http://payment-processor-default:8080
+      - PAYMENT_PROCESSOR_FALLBACK_URL=http://payment-processor-fallback:8080
+      - DB_URL=postgres://postgres:postgres@db:5432/rinha_payments
+    networks:
+      - backend
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          cpus: "0.375"
+          memory: "90M"
+
+services:
+  nginx:
+    image: nginx:1.29-alpine
+    container_name: rinha-nginx
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - app01
+      - app02
+    ports:
+      - "9999:9999"
+    networks:
+      - backend
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          cpus: "0.15"
+          memory: "30MB"
+  db:
+    image: postgres:17-alpine
+    networks:
+      - backend
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=rinha_payments
+    healthcheck:
+      test: ["CMD-SHELL", "sh -c 'pg_isready -U postgres -d rinha_payments'"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    ports:
+      - "5432:5432"
+    deploy:
+      resources:
+        limits:
+          cpus: "0.60"
+          memory: "140MB"
+  app01:
+    <<: *app
+    container_name: rinha2025-app-01
+    hostname: app01
+    depends_on:
+      db:
+        condition: service_healthy
+  app02:
+    <<: *app
+    container_name: rinha2025-app-02
+    hostname: app02
+    depends_on:
+      db:
+        condition: service_healthy
+
+networks:
+  backend:
+    driver: bridge
+  payment-processor:
+    external: true
