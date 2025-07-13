@@ -21,3 +21,4 @@ Atualizado em **Sun Jul 13 08:39:45 PM -03 2025**
 |	ryangst-bun	|	0	|	0	|	0	|
 |	victorverdoodt-cs	|	0	|	0	|	0	|
 |	willzada-aGOrinha	|	0	|	17383.247	|	32283.173	|
+|	willzada-BUNrinha	|	0.08691974300000219	|	897.0919999999999	|	1888.8137316781656	|
