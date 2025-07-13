@@ -45,7 +45,6 @@ while true; do
             if test -f $testedFile; then
                 echo "======================================="
                 echo "working on $participant"
-                pwd
                 sed -i '1001,$d' $directory/docker-compose.logs
                 sed -i '1001,$d' $directory/k6.logs
                 echo "log truncated at line 1000" >> $directory/docker-compose.logs
