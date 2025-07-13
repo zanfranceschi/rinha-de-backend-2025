@@ -43,9 +43,13 @@ while true; do
             k6 run -e MAX_REQUESTS=$MAX_REQUESTS -e PARTICIPANT=$participant --log-output=file=$directory/k6.logs rinha.js
             stopContainers $participant
             if test -f $testedFile; then
-                git add $testedFile
-                git add $directory/k6.logs
-                git add $directory/docker-compose.logs
+                pwd
+                sed -i '1001,$d' $directory/docker-compose.logs
+                sed -i '1001,$d' $directory/k6.logs
+                echo "log truncated at line 1000" >> $directory/docker-compose.logs
+                echo "log truncated at line 1000" >> $directory/k6.logs
+                echo "git add $testedFile $directory/k6.logs $directory/docker-compose.logs"
+                git add $testedFile $directory/k6.logs $directory/docker-compose.logs
                 git commit -m "add $participant's partial result"
                 git push
             fi
@@ -70,7 +74,7 @@ while true; do
     echo -e "Atualizado em **$(date)**" >> ../PREVIA_RESULTADOS.md
     echo -e "*Testes executados com MAX_REQUESTS=$MAX_REQUESTS*."
     echo -e "\n" >> ../PREVIA_RESULTADOS.md
-    echo -e "| participante | bônus p99 | multa | lucro |" >> ../PREVIA_RESULTADOS.md
+    echo -e "| participante | bônus por desempenho (%) | multa ($) | lucro |" >> ../PREVIA_RESULTADOS.md
     echo -e "| -- | -- | -- | -- |" >> ../PREVIA_RESULTADOS.md
 
     for partialResult in ../participantes/*/partial-results.json; do
