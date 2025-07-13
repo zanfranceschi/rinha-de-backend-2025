@@ -43,15 +43,19 @@ while true; do
             k6 run -e MAX_REQUESTS=$MAX_REQUESTS -e PARTICIPANT=$participant --log-output=file=$directory/k6.logs rinha.js
             stopContainers $participant
             if test -f $testedFile; then
+                echo "======================================="
+                echo "working on $participant"
                 pwd
                 sed -i '1001,$d' $directory/docker-compose.logs
                 sed -i '1001,$d' $directory/k6.logs
                 echo "log truncated at line 1000" >> $directory/docker-compose.logs
                 echo "log truncated at line 1000" >> $directory/k6.logs
-                echo "git add $testedFile $directory/k6.logs $directory/docker-compose.logs"
-                git add $testedFile $directory/k6.logs $directory/docker-compose.logs
+                git add $testedFile
+                git add $directory/k6.logs
+                git add $directory/docker-compose.logs
                 git commit -m "add $participant's partial result"
                 git push
+                echo "======================================="
             fi
             #echo "submissão '$participant' já testada - ignorando"
             #rm -rf "$RESULTS_WORKSPACE/$participant"
