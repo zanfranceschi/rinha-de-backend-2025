@@ -1,0 +1,1001 @@
+ Network rinha  Creating
+ Network rinha  Created
+ Volume "rodrigocaldeira-elixir_db"  Creating
+ Volume "rodrigocaldeira-elixir_db"  Created
+ Container rodrigocaldeira-elixir-worker-1  Creating
+ Container rodrigocaldeira-elixir-worker-1  Created
+ Container rodrigocaldeira-elixir-api02-1  Creating
+ Container rodrigocaldeira-elixir-api01-1  Creating
+ Container rodrigocaldeira-elixir-api01-1  Created
+ Container rodrigocaldeira-elixir-api02-1  Created
+ Container rodrigocaldeira-elixir-nginx-1  Creating
+ Container rodrigocaldeira-elixir-nginx-1  Created
+Attaching to api01-1, api02-1, nginx-1, worker-1
+nginx-1   | /docker-entrypoint.sh: /docker-entrypoint.d/ is not empty, will attempt to perform configuration
+nginx-1   | /docker-entrypoint.sh: Looking for shell scripts in /docker-entrypoint.d/
+nginx-1   | /docker-entrypoint.sh: Launching /docker-entrypoint.d/10-listen-on-ipv6-by-default.sh
+nginx-1   | 10-listen-on-ipv6-by-default.sh: info: Getting the checksum of /etc/nginx/conf.d/default.conf
+nginx-1   | 10-listen-on-ipv6-by-default.sh: info: Enabled listen on IPv6 in /etc/nginx/conf.d/default.conf
+nginx-1   | /docker-entrypoint.sh: Sourcing /docker-entrypoint.d/15-local-resolvers.envsh
+nginx-1   | /docker-entrypoint.sh: Launching /docker-entrypoint.d/20-envsubst-on-templates.sh
+nginx-1   | /docker-entrypoint.sh: Launching /docker-entrypoint.d/30-tune-worker-processes.sh
+nginx-1   | /docker-entrypoint.sh: Configuration complete; ready for start up
+worker-1  | 
+worker-1  | 23:00:19.914 [info] == Running 20250709000325 Rinha.Repo.Migrations.CreatePayments.change/0 forward
+worker-1  | 
+worker-1  | 23:00:19.914 [info] create table payments
+worker-1  | 
+worker-1  | 23:00:19.915 [info] create index payments_correlation_id_index
+worker-1  | 
+worker-1  | 23:00:19.915 [info] create index payments_processor_index
+worker-1  | 
+worker-1  | 23:00:19.915 [info] create index payments_requested_at_index
+worker-1  | 
+worker-1  | 23:00:19.915 [info] == Migrated 20250709000325 in 0.0s
+worker-1  | 
+worker-1  | 23:00:19.916 [info] Starting worker pool with 16 workers
+worker-1  | 
+worker-1  | 23:00:19.916 [info] Starting worker worker_1
+worker-1  | 
+worker-1  | 23:00:19.916 [info] Starting worker worker_2
+worker-1  | 
+worker-1  | 23:00:19.916 [info] Starting worker worker_3
+worker-1  | 
+worker-1  | 23:00:19.916 [info] Starting worker worker_4
+worker-1  | 
+worker-1  | 23:00:19.917 [info] Starting worker worker_5
+worker-1  | 
+worker-1  | 23:00:19.917 [info] Starting worker worker_6
+worker-1  | 
+worker-1  | 23:00:19.917 [info] Starting worker worker_7
+worker-1  | 
+worker-1  | 23:00:19.917 [info] Starting worker worker_8
+worker-1  | 
+worker-1  | 23:00:19.917 [info] Starting worker worker_9
+worker-1  | 
+worker-1  | 23:00:19.917 [info] Starting worker worker_10
+worker-1  | 
+worker-1  | 23:00:19.918 [info] Starting worker worker_11
+worker-1  | 
+worker-1  | 23:00:19.918 [info] Starting worker worker_12
+worker-1  | 
+worker-1  | 23:00:19.918 [info] Starting worker worker_13
+worker-1  | 
+worker-1  | 23:00:19.918 [info] Starting worker worker_14
+worker-1  | 
+worker-1  | 23:00:19.918 [info] Starting worker worker_15
+worker-1  | 
+worker-1  | 23:00:19.918 [info] Starting worker worker_16
+worker-1  | 
+worker-1  | 23:00:19.918 [info] Starting worker Elixir.ServicesHealthWorker
+api01-1   | 
+api01-1   | 23:00:22.912 [info] Running Rinha.Router with Bandit 1.7.0 at 0.0.0.0:8080 (http)
+api02-1   | 
+api02-1   | 23:00:22.964 [info] Running Rinha.Router with Bandit 1.7.0 at 0.0.0.0:8081 (http)
+api01-1   | 
+api01-1   | 23:00:28.923 [info] POST /purge-payments
+api01-1   | 
+api01-1   | 23:00:28.932 [info] Sent 200 in 8ms
+api02-1   | 
+api02-1   | 23:00:28.960 [info] POST /payments
+api02-1   | 
+api02-1   | 23:00:28.961 [info] Sent 201 in 282µs
+worker-1  | 
+worker-1  | 23:00:28.983 [info] Sending payment adc466a8-42f5-4d8e-bdc3-de1dde10b476 to default
+worker-1  | 
+worker-1  | 23:00:29.020 [info] Payment adc466a8-42f5-4d8e-bdc3-de1dde10b476 done.
+api01-1   | 
+api01-1   | 23:00:29.080 [info] POST /payments
+api01-1   | 
+api01-1   | 23:00:29.080 [info] Sent 201 in 297µs
+worker-1  | 
+worker-1  | 23:00:29.082 [info] Sending payment 4205358e-ec16-48c6-85b4-e18325e8b423 to default
+worker-1  | 
+worker-1  | 23:00:29.085 [info] Payment 4205358e-ec16-48c6-85b4-e18325e8b423 done.
+api02-1   | 
+api02-1   | 23:00:29.106 [info] GET /payments-summary
+api02-1   | 
+api02-1   | 23:00:29.108 [info] Sent 200 in 2ms
+api01-1   | 
+api01-1   | 23:00:29.200 [info] POST /payments
+worker-1  | 
+worker-1  | 23:00:29.201 [info] Sending payment 63e46844-5944-4ca5-8c54-e77e1caeddaf to default
+api01-1   | 
+api01-1   | 23:00:29.200 [info] Sent 201 in 57µs
+worker-1  | 
+worker-1  | 23:00:29.205 [info] Payment 63e46844-5944-4ca5-8c54-e77e1caeddaf done.
+api02-1   | 
+api02-1   | 23:00:29.320 [info] POST /payments
+api02-1   | 
+api02-1   | 23:00:29.320 [info] Sent 201 in 56µs
+worker-1  | 
+worker-1  | 23:00:29.322 [info] Sending payment 232707aa-ae37-44ef-9d89-3e3e8fa01a83 to default
+worker-1  | 
+worker-1  | 23:00:29.327 [info] Payment 232707aa-ae37-44ef-9d89-3e3e8fa01a83 done.
+api01-1   | 
+api01-1   | 23:00:29.440 [info] POST /payments
+api01-1   | 
+api01-1   | 23:00:29.440 [info] Sent 201 in 45µs
+worker-1  | 
+worker-1  | 23:00:29.441 [info] Sending payment 5e7ac7b9-d100-4532-98e1-2401b78ba668 to default
+worker-1  | 
+worker-1  | 23:00:29.483 [info] Payment 5e7ac7b9-d100-4532-98e1-2401b78ba668 done.
+api02-1   | 
+api02-1   | 23:00:29.561 [info] POST /payments
+api02-1   | 
+api02-1   | 23:00:29.561 [info] Sent 201 in 50µs
+worker-1  | 
+worker-1  | 23:00:29.582 [info] Sending payment 8784cf1d-11da-47b3-95a4-7fa29c799a98 to default
+worker-1  | 
+worker-1  | 23:00:29.585 [info] Payment 8784cf1d-11da-47b3-95a4-7fa29c799a98 done.
+api01-1   | 
+api01-1   | 23:00:29.680 [info] POST /payments
+api01-1   | 
+api01-1   | 23:00:29.681 [info] Sent 201 in 44µs
+worker-1  | 
+worker-1  | 23:00:29.682 [info] Sending payment 2b365c3b-1a0b-4e7d-bbd8-e9e4372aa644 to default
+worker-1  | 
+worker-1  | 23:00:29.685 [info] Payment 2b365c3b-1a0b-4e7d-bbd8-e9e4372aa644 done.
+api02-1   | 
+api02-1   | 23:00:29.801 [info] POST /payments
+api02-1   | 
+api02-1   | 23:00:29.801 [info] Sent 201 in 42µs
+worker-1  | 
+worker-1  | 23:00:29.802 [info] Sending payment 5ea0a655-1f15-4e1f-8f81-db4f48937bbd to default
+worker-1  | 
+worker-1  | 23:00:29.805 [info] Payment 5ea0a655-1f15-4e1f-8f81-db4f48937bbd done.
+api01-1   | 
+api01-1   | 23:00:29.921 [info] POST /payments
+api01-1   | 
+api01-1   | 23:00:29.921 [info] Sent 201 in 43µs
+worker-1  | 
+worker-1  | 23:00:29.922 [info] Sending payment 591c19ef-846e-4259-9749-f1601261e40b to default
+worker-1  | 
+worker-1  | 23:00:29.924 [info] Payment 591c19ef-846e-4259-9749-f1601261e40b done.
+api02-1   | 
+api02-1   | 23:00:29.964 [info] POST /payments
+api02-1   | 
+api02-1   | 23:00:29.964 [info] Sent 201 in 45µs
+worker-1  | 
+worker-1  | 23:00:29.982 [info] Sending payment 2d739d39-c772-4d91-a402-d82c6da42301 to default
+worker-1  | 
+worker-1  | 23:00:29.984 [info] Payment 2d739d39-c772-4d91-a402-d82c6da42301 done.
+api01-1   | 
+api01-1   | 23:00:30.042 [info] POST /payments
+api01-1   | 
+api01-1   | 23:00:30.042 [info] Sent 201 in 48µs
+worker-1  | 
+worker-1  | 23:00:30.082 [info] Sending payment c6ed2bb1-dc06-4ba1-8ddd-99a184e57d69 to default
+api02-1   | 
+api02-1   | 23:00:30.083 [info] POST /payments
+api02-1   | 
+api02-1   | 23:00:30.083 [info] Sent 201 in 193µs
+worker-1  | 
+worker-1  | 23:00:30.084 [info] Sending payment 47cff92a-a1d0-448f-b6d3-ead1c655effb to default
+worker-1  | 
+worker-1  | 23:00:30.085 [info] Payment c6ed2bb1-dc06-4ba1-8ddd-99a184e57d69 done.
+worker-1  | 
+worker-1  | 23:00:30.088 [info] Payment 47cff92a-a1d0-448f-b6d3-ead1c655effb done.
+api01-1   | 
+api01-1   | 23:00:30.162 [info] POST /payments
+api01-1   | 
+api01-1   | 23:00:30.162 [info] Sent 201 in 61µs
+worker-1  | 
+worker-1  | 23:00:30.182 [info] Sending payment 85569f2a-3020-4d46-b339-1be352bbb336 to default
+worker-1  | 
+worker-1  | 23:00:30.185 [info] Payment 85569f2a-3020-4d46-b339-1be352bbb336 done.
+api02-1   | 
+api02-1   | 23:00:30.204 [info] POST /payments
+api02-1   | 
+api02-1   | 23:00:30.204 [info] Sent 201 in 50µs
+worker-1  | 
+worker-1  | 23:00:30.205 [info] Sending payment 7679c958-f916-456b-987d-4a2e4765fd67 to default
+worker-1  | 
+worker-1  | 23:00:30.210 [info] Payment 7679c958-f916-456b-987d-4a2e4765fd67 done.
+worker-1  | 
+worker-1  | 23:00:30.283 [info] Sending payment 7e1dd88c-c149-4df3-966c-1fcd71b3356c to default
+api01-1   | 
+api01-1   | 23:00:30.282 [info] POST /payments
+api01-1   | 
+api01-1   | 23:00:30.282 [info] Sent 201 in 60µs
+worker-1  | 
+worker-1  | 23:00:30.286 [info] Payment 7e1dd88c-c149-4df3-966c-1fcd71b3356c done.
+api02-1   | 
+api02-1   | 23:00:30.322 [info] POST /payments
+api02-1   | 
+api02-1   | 23:00:30.322 [info] Sent 201 in 71µs
+worker-1  | 
+worker-1  | 23:00:30.323 [info] Sending payment 9dc80c52-eb51-4e41-abca-974b9d22dff7 to default
+worker-1  | 
+worker-1  | 23:00:30.326 [info] Payment 9dc80c52-eb51-4e41-abca-974b9d22dff7 done.
+api01-1   | 
+api01-1   | 23:00:30.403 [info] POST /payments
+api01-1   | 
+api01-1   | 23:00:30.403 [info] Sent 201 in 51µs
+worker-1  | 
+worker-1  | 23:00:30.403 [info] Sending payment 79c0762f-6415-43ce-b66b-6ce1dd309b37 to default
+worker-1  | 
+worker-1  | 23:00:30.406 [info] Payment 79c0762f-6415-43ce-b66b-6ce1dd309b37 done.
+api02-1   | 
+api02-1   | 23:00:30.442 [info] POST /payments
+api02-1   | 
+api02-1   | 23:00:30.442 [info] Sent 201 in 42µs
+worker-1  | 
+worker-1  | 23:00:30.482 [info] Sending payment 2754e861-09e7-46ad-8c4e-3f35e02e005c to default
+worker-1  | 
+worker-1  | 23:00:30.484 [info] Payment 2754e861-09e7-46ad-8c4e-3f35e02e005c done.
+api01-1   | 
+api01-1   | 23:00:30.523 [info] POST /payments
+api01-1   | 
+api01-1   | 23:00:30.523 [info] Sent 201 in 56µs
+worker-1  | 
+worker-1  | 23:00:30.523 [info] Sending payment 25290b1c-9d84-4b1d-8f18-9fba56ea000c to default
+worker-1  | 
+worker-1  | 23:00:30.525 [info] Payment 25290b1c-9d84-4b1d-8f18-9fba56ea000c done.
+api02-1   | 
+api02-1   | 23:00:30.563 [info] POST /payments
+api02-1   | 
+api02-1   | 23:00:30.563 [info] Sent 201 in 43µs
+worker-1  | 
+worker-1  | 23:00:30.582 [info] Sending payment 3df58f04-5a69-4242-8f82-50b64930a238 to default
+worker-1  | 
+worker-1  | 23:00:30.585 [info] Payment 3df58f04-5a69-4242-8f82-50b64930a238 done.
+api01-1   | 
+api01-1   | 23:00:30.643 [info] POST /payments
+api01-1   | 
+api01-1   | 23:00:30.643 [info] Sent 201 in 47µs
+worker-1  | 
+worker-1  | 23:00:30.682 [info] Sending payment 738b2ad6-a06d-4482-b264-003a960382a1 to default
+api02-1   | 
+api02-1   | 23:00:30.683 [info] POST /payments
+api02-1   | 
+api02-1   | 23:00:30.683 [info] Sent 201 in 42µs
+worker-1  | 
+worker-1  | 23:00:30.683 [info] Sending payment fb84079b-e672-42bc-836b-3ca862357c12 to default
+worker-1  | 
+worker-1  | 23:00:30.685 [info] Payment 738b2ad6-a06d-4482-b264-003a960382a1 done.
+worker-1  | 
+worker-1  | 23:00:30.685 [info] Payment fb84079b-e672-42bc-836b-3ca862357c12 done.
+api01-1   | 
+api01-1   | 23:00:30.763 [info] POST /payments
+api01-1   | 
+api01-1   | 23:00:30.763 [info] Sent 201 in 49µs
+worker-1  | 
+worker-1  | 23:00:30.782 [info] Sending payment cdd0f3ea-da22-4472-a8be-29ba6afce0fc to default
+worker-1  | 
+worker-1  | 23:00:30.784 [info] Payment cdd0f3ea-da22-4472-a8be-29ba6afce0fc done.
+api02-1   | 
+api02-1   | 23:00:30.803 [info] POST /payments
+api02-1   | 
+api02-1   | 23:00:30.803 [info] Sent 201 in 45µs
+worker-1  | 
+worker-1  | 23:00:30.803 [info] Sending payment 2ee54f98-8df6-4b56-b55a-952a82f2b797 to default
+worker-1  | 
+worker-1  | 23:00:30.806 [info] Payment 2ee54f98-8df6-4b56-b55a-952a82f2b797 done.
+api01-1   | 
+api01-1   | 23:00:30.883 [info] POST /payments
+api01-1   | 
+api01-1   | 23:00:30.883 [info] Sent 201 in 65µs
+worker-1  | 
+worker-1  | 23:00:30.884 [info] Sending payment d22047a6-52d4-4b82-b330-8375e4ebb541 to default
+worker-1  | 
+worker-1  | 23:00:30.887 [info] Payment d22047a6-52d4-4b82-b330-8375e4ebb541 done.
+api02-1   | 
+api02-1   | 23:00:30.923 [info] POST /payments
+api02-1   | 
+api02-1   | 23:00:30.923 [info] Sent 201 in 46µs
+worker-1  | 
+worker-1  | 23:00:30.924 [info] Sending payment 8f79a428-4d5a-4a73-9c80-6ff5af0130bd to default
+worker-1  | 
+worker-1  | 23:00:30.926 [info] Payment 8f79a428-4d5a-4a73-9c80-6ff5af0130bd done.
+api01-1   | 
+api01-1   | 23:00:30.966 [info] POST /payments
+api01-1   | 
+api01-1   | 23:00:30.966 [info] Sent 201 in 52µs
+worker-1  | 
+worker-1  | 23:00:30.982 [info] Sending payment baa6bd90-e2e9-4963-a635-d91ff2e14a71 to default
+worker-1  | 
+worker-1  | 23:00:30.984 [info] Payment baa6bd90-e2e9-4963-a635-d91ff2e14a71 done.
+api02-1   | 
+api02-1   | 23:00:31.004 [info] POST /payments
+api02-1   | 
+api02-1   | 23:00:31.004 [info] Sent 201 in 48µs
+worker-1  | 
+worker-1  | 23:00:31.004 [info] Sending payment 245c11f7-8019-49c3-bcd2-9fa7a3a0c14f to default
+worker-1  | 
+worker-1  | 23:00:31.007 [info] Payment 245c11f7-8019-49c3-bcd2-9fa7a3a0c14f done.
+api01-1   | 
+api01-1   | 23:00:31.044 [info] POST /payments
+api01-1   | 
+api01-1   | 23:00:31.044 [info] Sent 201 in 52µs
+worker-1  | 
+worker-1  | 23:00:31.082 [info] Sending payment ee02a230-4a1a-4166-ac95-15af95331510 to default
+worker-1  | 
+worker-1  | 23:00:31.085 [info] Payment ee02a230-4a1a-4166-ac95-15af95331510 done.
+api02-1   | 
+api02-1   | 23:00:31.085 [info] POST /payments
+api02-1   | 
+api02-1   | 23:00:31.086 [info] Sent 201 in 52µs
+worker-1  | 
+worker-1  | 23:00:31.086 [info] Sending payment ea932e8e-f3ac-4716-8e82-4dafeede2998 to default
+worker-1  | 
+worker-1  | 23:00:31.089 [info] Payment ea932e8e-f3ac-4716-8e82-4dafeede2998 done.
+api01-1   | 
+api01-1   | 23:00:31.138 [info] POST /payments
+api01-1   | 
+api01-1   | 23:00:31.138 [info] Sent 201 in 43µs
+api02-1   | 
+api02-1   | 23:00:31.165 [info] POST /payments
+api02-1   | 
+api02-1   | 23:00:31.165 [info] Sent 201 in 44µs
+worker-1  | 
+worker-1  | 23:00:31.182 [info] Sending payment 8f691dd3-b52c-451e-8fc5-9e949d56f051 to default
+worker-1  | 
+worker-1  | 23:00:31.182 [info] Sending payment c05efb62-6c7a-4bf6-90f1-f853c6cc1d5c to default
+worker-1  | 
+worker-1  | 23:00:31.185 [info] Payment 8f691dd3-b52c-451e-8fc5-9e949d56f051 done.
+worker-1  | 
+worker-1  | 23:00:31.186 [info] Payment c05efb62-6c7a-4bf6-90f1-f853c6cc1d5c done.
+api01-1   | 
+api01-1   | 23:00:31.209 [info] POST /payments
+api01-1   | 
+api01-1   | 23:00:31.209 [info] Sent 201 in 47µs
+worker-1  | 
+worker-1  | 23:00:31.209 [info] Sending payment 53b62696-e5bb-4572-a8cf-cbec09151614 to default
+worker-1  | 
+worker-1  | 23:00:31.212 [info] Payment 53b62696-e5bb-4572-a8cf-cbec09151614 done.
+api02-1   | 
+api02-1   | 23:00:31.244 [info] POST /payments
+api02-1   | 
+api02-1   | 23:00:31.244 [info] Sent 201 in 46µs
+worker-1  | 
+worker-1  | 23:00:31.282 [info] Sending payment 52571c4d-318c-4d6d-a1b8-c1be238399c7 to default
+worker-1  | 
+worker-1  | 23:00:31.284 [info] Payment 52571c4d-318c-4d6d-a1b8-c1be238399c7 done.
+api01-1   | 
+api01-1   | 23:00:31.285 [info] POST /payments
+api01-1   | 
+api01-1   | 23:00:31.285 [info] Sent 201 in 51µs
+worker-1  | 
+worker-1  | 23:00:31.285 [info] Sending payment 3cbea024-8fd7-4a15-b13a-a2a1abe32139 to default
+worker-1  | 
+worker-1  | 23:00:31.287 [info] Payment 3cbea024-8fd7-4a15-b13a-a2a1abe32139 done.
+api02-1   | 
+api02-1   | 23:00:31.325 [info] POST /payments
+api02-1   | 
+api02-1   | 23:00:31.325 [info] Sent 201 in 56µs
+worker-1  | 
+worker-1  | 23:00:31.326 [info] Sending payment abaacd02-5bd4-4246-9ecc-03299215524d to default
+worker-1  | 
+worker-1  | 23:00:31.328 [info] Payment abaacd02-5bd4-4246-9ecc-03299215524d done.
+api01-1   | 
+api01-1   | 23:00:31.364 [info] POST /payments
+api01-1   | 
+api01-1   | 23:00:31.364 [info] Sent 201 in 48µs
+worker-1  | 
+worker-1  | 23:00:31.382 [info] Sending payment e9399e12-304d-4068-acd9-f285f59c8a7b to default
+worker-1  | 
+worker-1  | 23:00:31.384 [info] Payment e9399e12-304d-4068-acd9-f285f59c8a7b done.
+api02-1   | 
+api02-1   | 23:00:31.404 [info] POST /payments
+api02-1   | 
+api02-1   | 23:00:31.404 [info] Sent 201 in 52µs
+worker-1  | 
+worker-1  | 23:00:31.405 [info] Sending payment 95531827-b7e6-47a1-a42a-7c4cd268be37 to default
+worker-1  | 
+worker-1  | 23:00:31.407 [info] Payment 95531827-b7e6-47a1-a42a-7c4cd268be37 done.
+api01-1   | 
+api01-1   | 23:00:31.445 [info] POST /payments
+api01-1   | 
+api01-1   | 23:00:31.445 [info] Sent 201 in 44µs
+worker-1  | 
+worker-1  | 23:00:31.482 [info] Sending payment c8866f69-7bfb-4d9a-900a-5f4a40da4e21 to default
+api02-1   | 
+api02-1   | 23:00:31.484 [info] POST /payments
+worker-1  | 
+worker-1  | 23:00:31.484 [info] Payment c8866f69-7bfb-4d9a-900a-5f4a40da4e21 done.
+api02-1   | 
+api02-1   | 23:00:31.484 [info] Sent 201 in 44µs
+worker-1  | 
+worker-1  | 23:00:31.485 [info] Sending payment 0e89d525-1402-47e2-a18e-ddb9f7c20ad2 to default
+worker-1  | 
+worker-1  | 23:00:31.487 [info] Payment 0e89d525-1402-47e2-a18e-ddb9f7c20ad2 done.
+api01-1   | 
+api01-1   | 23:00:31.525 [info] POST /payments
+api01-1   | 
+api01-1   | 23:00:31.526 [info] Sent 201 in 54µs
+worker-1  | 
+worker-1  | 23:00:31.526 [info] Sending payment 0433feae-17ef-4a56-8f92-431f4caf8925 to default
+worker-1  | 
+worker-1  | 23:00:31.529 [info] Payment 0433feae-17ef-4a56-8f92-431f4caf8925 done.
+api02-1   | 
+api02-1   | 23:00:31.565 [info] POST /payments
+api02-1   | 
+api02-1   | 23:00:31.565 [info] Sent 201 in 57µs
+worker-1  | 
+worker-1  | 23:00:31.582 [info] Sending payment 3bf4c9f1-5630-4d33-8a3c-5d4911cd9a40 to default
+worker-1  | 
+worker-1  | 23:00:31.585 [info] Payment 3bf4c9f1-5630-4d33-8a3c-5d4911cd9a40 done.
+api01-1   | 
+api01-1   | 23:00:31.605 [info] POST /payments
+api01-1   | 
+api01-1   | 23:00:31.605 [info] Sent 201 in 42µs
+worker-1  | 
+worker-1  | 23:00:31.606 [info] Sending payment 7453d6ee-07bb-487c-9c1a-c35c7382a581 to default
+worker-1  | 
+worker-1  | 23:00:31.609 [info] Payment 7453d6ee-07bb-487c-9c1a-c35c7382a581 done.
+api02-1   | 
+api02-1   | 23:00:31.645 [info] POST /payments
+api02-1   | 
+api02-1   | 23:00:31.645 [info] Sent 201 in 40µs
+worker-1  | 
+worker-1  | 23:00:31.682 [info] Sending payment f7d3430d-226d-4ccb-9202-372d0aaf2ebc to default
+worker-1  | 
+worker-1  | 23:00:31.684 [info] Payment f7d3430d-226d-4ccb-9202-372d0aaf2ebc done.
+api01-1   | 
+api01-1   | 23:00:31.685 [info] POST /payments
+api01-1   | 
+api01-1   | 23:00:31.685 [info] Sent 201 in 41µs
+worker-1  | 
+worker-1  | 23:00:31.685 [info] Sending payment 140ae278-a5ea-45fb-aab2-0411dbd33fb0 to default
+worker-1  | 
+worker-1  | 23:00:31.688 [info] Payment 140ae278-a5ea-45fb-aab2-0411dbd33fb0 done.
+api02-1   | 
+api02-1   | 23:00:31.725 [info] POST /payments
+api02-1   | 
+api02-1   | 23:00:31.725 [info] Sent 201 in 54µs
+worker-1  | 
+worker-1  | 23:00:31.725 [info] Sending payment 87ba54f8-09a3-475c-ab49-519dfc3f7511 to default
+worker-1  | 
+worker-1  | 23:00:31.728 [info] Payment 87ba54f8-09a3-475c-ab49-519dfc3f7511 done.
+api01-1   | 
+api01-1   | 23:00:31.765 [info] POST /payments
+api01-1   | 
+api01-1   | 23:00:31.765 [info] Sent 201 in 42µs
+worker-1  | 
+worker-1  | 23:00:31.782 [info] Sending payment bed28069-5c46-4c98-81de-de03151398ce to default
+worker-1  | 
+worker-1  | 23:00:31.784 [info] Payment bed28069-5c46-4c98-81de-de03151398ce done.
+api02-1   | 
+api02-1   | 23:00:31.805 [info] POST /payments
+api02-1   | 
+api02-1   | 23:00:31.805 [info] Sent 201 in 48µs
+worker-1  | 
+worker-1  | 23:00:31.805 [info] Sending payment 9a7b6dba-53a2-4047-985b-8ce37e59d62c to default
+worker-1  | 
+worker-1  | 23:00:31.808 [info] Payment 9a7b6dba-53a2-4047-985b-8ce37e59d62c done.
+api01-1   | 
+api01-1   | 23:00:31.845 [info] POST /payments
+api01-1   | 
+api01-1   | 23:00:31.845 [info] Sent 201 in 50µs
+worker-1  | 
+worker-1  | 23:00:31.882 [info] Sending payment 6174de3a-be83-4797-acaf-05474e2a94d7 to default
+worker-1  | 
+worker-1  | 23:00:31.884 [info] Payment 6174de3a-be83-4797-acaf-05474e2a94d7 done.
+api02-1   | 
+api02-1   | 23:00:31.886 [info] POST /payments
+api02-1   | 
+api02-1   | 23:00:31.886 [info] Sent 201 in 47µs
+worker-1  | 
+worker-1  | 23:00:31.886 [info] Sending payment dec4249e-c367-499d-a40a-aa47bc52edca to default
+worker-1  | 
+worker-1  | 23:00:31.888 [info] Payment dec4249e-c367-499d-a40a-aa47bc52edca done.
+api01-1   | 
+api01-1   | 23:00:31.925 [info] POST /payments
+api01-1   | 
+api01-1   | 23:00:31.926 [info] Sent 201 in 57µs
+worker-1  | 
+worker-1  | 23:00:31.926 [info] Sending payment bed28426-c145-42a4-9c20-4a5fd35132b6 to default
+worker-1  | 
+worker-1  | 23:00:31.928 [info] Payment bed28426-c145-42a4-9c20-4a5fd35132b6 done.
+api02-1   | 
+api02-1   | 23:00:31.966 [info] POST /payments
+api02-1   | 
+api02-1   | 23:00:31.966 [info] Sent 201 in 51µs
+api01-1   | 
+api01-1   | 23:00:31.968 [info] POST /payments
+api01-1   | 
+api01-1   | 23:00:31.968 [info] Sent 201 in 57µs
+worker-1  | 
+worker-1  | 23:00:31.982 [info] Sending payment 132cfc56-1175-464d-abf4-21be7a88e11c to default
+worker-1  | 
+worker-1  | 23:00:31.982 [info] Sending payment 1377ebfd-8389-4915-9ab5-4bad93846590 to default
+worker-1  | 
+worker-1  | 23:00:31.985 [info] Payment 1377ebfd-8389-4915-9ab5-4bad93846590 done.
+worker-1  | 
+worker-1  | 23:00:31.986 [info] Payment 132cfc56-1175-464d-abf4-21be7a88e11c done.
+api02-1   | 
+api02-1   | 23:00:32.006 [info] POST /payments
+api02-1   | 
+api02-1   | 23:00:32.006 [info] Sent 201 in 52µs
+worker-1  | 
+worker-1  | 23:00:32.007 [info] Sending payment 7502f8c4-be50-47ea-8bb2-f831f15edbeb to default
+worker-1  | 
+worker-1  | 23:00:32.009 [info] Payment 7502f8c4-be50-47ea-8bb2-f831f15edbeb done.
+api01-1   | 
+api01-1   | 23:00:32.046 [info] POST /payments
+api01-1   | 
+api01-1   | 23:00:32.046 [info] Sent 201 in 56µs
+worker-1  | 
+worker-1  | 23:00:32.082 [info] Sending payment 1b602122-c80b-442b-a392-6b92625dde1d to default
+worker-1  | 
+worker-1  | 23:00:32.084 [info] Payment 1b602122-c80b-442b-a392-6b92625dde1d done.
+api02-1   | 
+api02-1   | 23:00:32.086 [info] POST /payments
+api02-1   | 
+api02-1   | 23:00:32.086 [info] Sent 201 in 69µs
+worker-1  | 
+worker-1  | 23:00:32.087 [info] Sending payment d792c5ee-6927-4795-9944-72cc4ed5402f to default
+api01-1   | 
+api01-1   | 23:00:32.088 [info] POST /payments
+api01-1   | 
+api01-1   | 23:00:32.088 [info] Sent 201 in 49µs
+worker-1  | 
+worker-1  | 23:00:32.088 [info] Sending payment 332ecdcd-91f2-42ad-b52c-d991a0a5e5c2 to default
+worker-1  | 
+worker-1  | 23:00:32.090 [info] Payment d792c5ee-6927-4795-9944-72cc4ed5402f done.
+worker-1  | 
+worker-1  | 23:00:32.091 [info] Payment 332ecdcd-91f2-42ad-b52c-d991a0a5e5c2 done.
+api02-1   | 
+api02-1   | 23:00:32.141 [info] POST /payments
+api02-1   | 
+api02-1   | 23:00:32.141 [info] Sent 201 in 41µs
+api01-1   | 
+api01-1   | 23:00:32.167 [info] POST /payments
+api01-1   | 
+api01-1   | 23:00:32.167 [info] Sent 201 in 45µs
+worker-1  | 
+worker-1  | 23:00:32.182 [info] Sending payment c12af8aa-683a-486e-ad74-e823aed32536 to default
+worker-1  | 
+worker-1  | 23:00:32.182 [info] Sending payment e8e003bc-8095-40fb-a24e-9ced6b6d2ff9 to default
+worker-1  | 
+worker-1  | 23:00:32.185 [info] Payment e8e003bc-8095-40fb-a24e-9ced6b6d2ff9 done.
+worker-1  | 
+worker-1  | 23:00:32.185 [info] Payment c12af8aa-683a-486e-ad74-e823aed32536 done.
+api02-1   | 
+api02-1   | 23:00:32.206 [info] POST /payments
+api02-1   | 
+api02-1   | 23:00:32.206 [info] Sent 201 in 51µs
+worker-1  | 
+worker-1  | 23:00:32.207 [info] Sending payment c4f92838-ae9c-4817-ab6b-0bc9f8a36684 to default
+worker-1  | 
+worker-1  | 23:00:32.210 [info] Payment c4f92838-ae9c-4817-ab6b-0bc9f8a36684 done.
+api01-1   | 
+api01-1   | 23:00:32.211 [info] POST /payments
+api01-1   | 
+api01-1   | 23:00:32.211 [info] Sent 201 in 64µs
+worker-1  | 
+worker-1  | 23:00:32.211 [info] Sending payment 7d85db41-7dcb-47f9-9b05-24f5975c85ac to default
+worker-1  | 
+worker-1  | 23:00:32.214 [info] Payment 7d85db41-7dcb-47f9-9b05-24f5975c85ac done.
+api02-1   | 
+api02-1   | 23:00:32.247 [info] POST /payments
+api02-1   | 
+api02-1   | 23:00:32.247 [info] Sent 201 in 51µs
+worker-1  | 
+worker-1  | 23:00:32.282 [info] Sending payment 9bdc49c3-e009-4fce-97cb-8b3df70672e9 to default
+worker-1  | 
+worker-1  | 23:00:32.284 [info] Payment 9bdc49c3-e009-4fce-97cb-8b3df70672e9 done.
+api01-1   | 
+api01-1   | 23:00:32.287 [info] POST /payments
+api01-1   | 
+api01-1   | 23:00:32.287 [info] Sent 201 in 52µs
+worker-1  | 
+worker-1  | 23:00:32.288 [info] Sending payment bcd4a93c-fd97-4b8a-a032-055bcbf27401 to default
+worker-1  | 
+worker-1  | 23:00:32.291 [info] Payment bcd4a93c-fd97-4b8a-a032-055bcbf27401 done.
+api02-1   | 
+api02-1   | 23:00:32.326 [info] POST /payments
+api02-1   | 
+api02-1   | 23:00:32.326 [info] Sent 201 in 43µs
+worker-1  | 
+worker-1  | 23:00:32.326 [info] Sending payment 7bc4c95b-2139-4609-b9dd-d0a266608000 to default
+api01-1   | 
+api01-1   | 23:00:32.327 [info] POST /payments
+api01-1   | 
+api01-1   | 23:00:32.327 [info] Sent 201 in 70µs
+worker-1  | 
+worker-1  | 23:00:32.328 [info] Sending payment 056d08c6-f380-4058-907a-8e95062b8409 to default
+worker-1  | 
+worker-1  | 23:00:32.330 [info] Payment 056d08c6-f380-4058-907a-8e95062b8409 done.
+worker-1  | 
+worker-1  | 23:00:32.331 [info] Payment 7bc4c95b-2139-4609-b9dd-d0a266608000 done.
+api02-1   | 
+api02-1   | 23:00:32.367 [info] POST /payments
+api02-1   | 
+api02-1   | 23:00:32.367 [info] Sent 201 in 51µs
+worker-1  | 
+worker-1  | 23:00:32.382 [info] Sending payment ae8060c0-eb71-4f06-959e-2d71cb615457 to default
+worker-1  | 
+worker-1  | 23:00:32.384 [info] Payment ae8060c0-eb71-4f06-959e-2d71cb615457 done.
+api01-1   | 
+api01-1   | 23:00:32.407 [info] POST /payments
+api01-1   | 
+api01-1   | 23:00:32.407 [info] Sent 201 in 50µs
+worker-1  | 
+worker-1  | 23:00:32.407 [info] Sending payment 519ac1c3-3b6d-4869-a01b-5562caaf9c6d to default
+worker-1  | 
+worker-1  | 23:00:32.409 [info] Payment 519ac1c3-3b6d-4869-a01b-5562caaf9c6d done.
+api01-1   | 
+api01-1   | 23:00:32.447 [info] POST /payments
+api01-1   | 
+api01-1   | 23:00:32.447 [info] Sent 201 in 42µs
+api02-1   | 
+api02-1   | 23:00:32.447 [info] POST /payments
+api02-1   | 
+api02-1   | 23:00:32.447 [info] Sent 201 in 51µs
+worker-1  | 
+worker-1  | 23:00:32.482 [info] Sending payment 1f5f7616-6d36-4129-b4ba-49e4c9ca57c0 to default
+worker-1  | 
+worker-1  | 23:00:32.482 [info] Sending payment b715d319-4d29-4d31-acc5-b8dafb0dff7f to default
+worker-1  | 
+worker-1  | 23:00:32.485 [info] Payment b715d319-4d29-4d31-acc5-b8dafb0dff7f done.
+api02-1   | 
+api02-1   | 23:00:32.487 [info] POST /payments
+worker-1  | 
+worker-1  | 23:00:32.487 [info] Payment 1f5f7616-6d36-4129-b4ba-49e4c9ca57c0 done.
+api02-1   | 
+api02-1   | 23:00:32.487 [info] Sent 201 in 54µs
+worker-1  | 
+worker-1  | 23:00:32.488 [info] Sending payment 3b6b4fd4-618a-49df-bba9-caf670e2ac3a to default
+worker-1  | 
+worker-1  | 23:00:32.491 [info] Payment 3b6b4fd4-618a-49df-bba9-caf670e2ac3a done.
+api01-1   | 
+api01-1   | 23:00:32.528 [info] POST /payments
+api01-1   | 
+api01-1   | 23:00:32.528 [info] Sent 201 in 45µs
+worker-1  | 
+worker-1  | 23:00:32.528 [info] Sending payment 0216cfdb-1893-4aa0-abe6-c9e76364bbb3 to default
+worker-1  | 
+worker-1  | 23:00:32.531 [info] Payment 0216cfdb-1893-4aa0-abe6-c9e76364bbb3 done.
+api01-1   | 
+api01-1   | 23:00:32.567 [info] POST /payments
+api02-1   | 
+api02-1   | 23:00:32.567 [info] POST /payments
+api02-1   | 
+api02-1   | 23:00:32.567 [info] Sent 201 in 53µs
+api01-1   | 
+api01-1   | 23:00:32.567 [info] Sent 201 in 51µs
+worker-1  | 
+worker-1  | 23:00:32.582 [info] Sending payment e831bbf2-0350-443a-97c6-b55c00128b5e to default
+worker-1  | 
+worker-1  | 23:00:32.582 [info] Sending payment 2939537d-73ab-489d-931c-f0cba4d15fe6 to default
+worker-1  | 
+worker-1  | 23:00:32.585 [info] Payment 2939537d-73ab-489d-931c-f0cba4d15fe6 done.
+worker-1  | 
+worker-1  | 23:00:32.586 [info] Payment e831bbf2-0350-443a-97c6-b55c00128b5e done.
+api02-1   | 
+api02-1   | 23:00:32.607 [info] POST /payments
+api02-1   | 
+api02-1   | 23:00:32.607 [info] Sent 201 in 42µs
+worker-1  | 
+worker-1  | 23:00:32.608 [info] Sending payment 8aa32a2c-255f-4a7e-af37-0a02b444ba31 to default
+worker-1  | 
+worker-1  | 23:00:32.610 [info] Payment 8aa32a2c-255f-4a7e-af37-0a02b444ba31 done.
+api01-1   | 
+api01-1   | 23:00:32.647 [info] POST /payments
+api01-1   | 
+api01-1   | 23:00:32.647 [info] Sent 201 in 42µs
+worker-1  | 
+worker-1  | 23:00:32.682 [info] Sending payment 1d14eea6-aed3-4573-9803-718cfbb6756d to default
+worker-1  | 
+worker-1  | 23:00:32.684 [info] Payment 1d14eea6-aed3-4573-9803-718cfbb6756d done.
+api02-1   | 
+api02-1   | 23:00:32.686 [info] POST /payments
+api01-1   | 
+api01-1   | 23:00:32.687 [info] POST /payments
+api02-1   | 
+api02-1   | 23:00:32.686 [info] Sent 201 in 47µs
+api01-1   | 
+api01-1   | 23:00:32.687 [info] Sent 201 in 44µs
+worker-1  | 
+worker-1  | 23:00:32.687 [info] Sending payment 6f82abdd-74e4-476c-8a9d-3b7bb56d1b11 to default
+worker-1  | 
+worker-1  | 23:00:32.688 [info] Sending payment b2d275e2-1778-4ca1-9a36-923ecc42ee3e to default
+worker-1  | 
+worker-1  | 23:00:32.690 [info] Payment 6f82abdd-74e4-476c-8a9d-3b7bb56d1b11 done.
+worker-1  | 
+worker-1  | 23:00:32.691 [info] Payment b2d275e2-1778-4ca1-9a36-923ecc42ee3e done.
+api02-1   | 
+api02-1   | 23:00:32.727 [info] POST /payments
+api02-1   | 
+api02-1   | 23:00:32.727 [info] Sent 201 in 47µs
+worker-1  | 
+worker-1  | 23:00:32.728 [info] Sending payment 196c0922-cfae-439f-83e3-f2d389423e86 to default
+worker-1  | 
+worker-1  | 23:00:32.730 [info] Payment 196c0922-cfae-439f-83e3-f2d389423e86 done.
+api01-1   | 
+api01-1   | 23:00:32.767 [info] POST /payments
+api01-1   | 
+api01-1   | 23:00:32.767 [info] Sent 201 in 43µs
+worker-1  | 
+worker-1  | 23:00:32.782 [info] Sending payment a1eb1354-4692-4f79-a470-55b9909cc39b to default
+worker-1  | 
+worker-1  | 23:00:32.784 [info] Payment a1eb1354-4692-4f79-a470-55b9909cc39b done.
+api02-1   | 
+api02-1   | 23:00:32.807 [info] POST /payments
+api01-1   | 
+api01-1   | 23:00:32.807 [info] POST /payments
+api02-1   | 
+api02-1   | 23:00:32.807 [info] Sent 201 in 55µs
+api01-1   | 
+api01-1   | 23:00:32.807 [info] Sent 201 in 54µs
+worker-1  | 
+worker-1  | 23:00:32.808 [info] Sending payment 137ebab7-3706-44a1-8f92-7b7843b6b4c1 to default
+worker-1  | 
+worker-1  | 23:00:32.808 [info] Sending payment 12418465-f617-4635-a25f-8281a61abcf0 to default
+worker-1  | 
+worker-1  | 23:00:32.811 [info] Payment 137ebab7-3706-44a1-8f92-7b7843b6b4c1 done.
+worker-1  | 
+worker-1  | 23:00:32.812 [info] Payment 12418465-f617-4635-a25f-8281a61abcf0 done.
+api02-1   | 
+api02-1   | 23:00:32.847 [info] POST /payments
+api02-1   | 
+api02-1   | 23:00:32.847 [info] Sent 201 in 52µs
+worker-1  | 
+worker-1  | 23:00:32.882 [info] Sending payment 92bec58a-cb54-463a-af6a-c1845a222149 to default
+worker-1  | 
+worker-1  | 23:00:32.884 [info] Payment 92bec58a-cb54-463a-af6a-c1845a222149 done.
+api01-1   | 
+api01-1   | 23:00:32.888 [info] POST /payments
+api01-1   | 
+api01-1   | 23:00:32.888 [info] Sent 201 in 43µs
+worker-1  | 
+worker-1  | 23:00:32.888 [info] Sending payment fd2c912c-90fe-44b9-a9ab-8f88e6c2af22 to default
+worker-1  | 
+worker-1  | 23:00:32.890 [info] Payment fd2c912c-90fe-44b9-a9ab-8f88e6c2af22 done.
+api02-1   | 
+api02-1   | 23:00:32.927 [info] POST /payments
+api02-1   | 
+api02-1   | 23:00:32.927 [info] Sent 201 in 53µs
+api01-1   | 
+api01-1   | 23:00:32.928 [info] POST /payments
+api01-1   | 
+api01-1   | 23:00:32.928 [info] Sent 201 in 59µs
+worker-1  | 
+worker-1  | 23:00:32.928 [info] Sending payment 172bb288-7de6-4f2e-a270-0b87092e7dbe to default
+worker-1  | 
+worker-1  | 23:00:32.929 [info] Sending payment 73c6fe4a-4003-49fe-ad67-2f22bec1f65f to default
+worker-1  | 
+worker-1  | 23:00:32.931 [info] Payment 172bb288-7de6-4f2e-a270-0b87092e7dbe done.
+worker-1  | 
+worker-1  | 23:00:32.932 [info] Payment 73c6fe4a-4003-49fe-ad67-2f22bec1f65f done.
+api02-1   | 
+api02-1   | 23:00:32.968 [info] POST /payments
+api02-1   | 
+api02-1   | 23:00:32.969 [info] Sent 201 in 47µs
+api01-1   | 
+api01-1   | 23:00:32.970 [info] POST /payments
+api01-1   | 
+api01-1   | 23:00:32.970 [info] Sent 201 in 48µs
+worker-1  | 
+worker-1  | 23:00:32.982 [info] Sending payment eefeee8d-61f1-45b7-8952-50f00164e560 to default
+worker-1  | 
+worker-1  | 23:00:32.982 [info] Sending payment 8d5dc3c5-47e1-4f08-9159-5a5ef882d967 to default
+worker-1  | 
+worker-1  | 23:00:32.985 [info] Payment eefeee8d-61f1-45b7-8952-50f00164e560 done.
+worker-1  | 
+worker-1  | 23:00:32.986 [info] Payment 8d5dc3c5-47e1-4f08-9159-5a5ef882d967 done.
+api02-1   | 
+api02-1   | 23:00:33.009 [info] POST /payments
+api02-1   | 
+api02-1   | 23:00:33.009 [info] Sent 201 in 47µs
+worker-1  | 
+worker-1  | 23:00:33.009 [info] Sending payment e2ae9eb1-6676-4655-ace0-ac5cb8372a6a to default
+worker-1  | 
+worker-1  | 23:00:33.011 [info] Payment e2ae9eb1-6676-4655-ace0-ac5cb8372a6a done.
+api02-1   | 
+api02-1   | 23:00:33.048 [info] POST /payments
+api01-1   | 
+api01-1   | 23:00:33.048 [info] POST /payments
+api01-1   | 
+api01-1   | 23:00:33.048 [info] Sent 201 in 51µs
+api02-1   | 
+api02-1   | 23:00:33.048 [info] Sent 201 in 47µs
+worker-1  | 
+worker-1  | 23:00:33.082 [info] Sending payment 46f1c9dd-a80c-42c3-a342-cf07e9049ed9 to default
+worker-1  | 
+worker-1  | 23:00:33.082 [info] Sending payment c9c988a6-0944-4649-9d0c-f35a185d5c31 to default
+worker-1  | 
+worker-1  | 23:00:33.084 [info] Payment 46f1c9dd-a80c-42c3-a342-cf07e9049ed9 done.
+worker-1  | 
+worker-1  | 23:00:33.086 [info] Payment c9c988a6-0944-4649-9d0c-f35a185d5c31 done.
+api01-1   | 
+api01-1   | 23:00:33.089 [info] POST /payments
+api01-1   | 
+api01-1   | 23:00:33.089 [info] Sent 201 in 43µs
+api02-1   | 
+api02-1   | 23:00:33.089 [info] POST /payments
+api02-1   | 
+api02-1   | 23:00:33.090 [info] Sent 201 in 176µs
+worker-1  | 
+worker-1  | 23:00:33.090 [info] Sending payment 12599107-0f4d-4153-8f14-debfca83845c to default
+worker-1  | 
+worker-1  | 23:00:33.091 [info] Sending payment 576cf443-6ddf-422f-8e69-b15bcf4ace2e to default
+worker-1  | 
+worker-1  | 23:00:33.092 [info] Payment 12599107-0f4d-4153-8f14-debfca83845c done.
+worker-1  | 
+worker-1  | 23:00:33.093 [info] Payment 576cf443-6ddf-422f-8e69-b15bcf4ace2e done.
+api01-1   | 
+api01-1   | 23:00:33.142 [info] POST /payments
+api01-1   | 
+api01-1   | 23:00:33.143 [info] Sent 201 in 42µs
+api02-1   | 
+api02-1   | 23:00:33.168 [info] POST /payments
+api01-1   | 
+api01-1   | 23:00:33.168 [info] POST /payments
+api01-1   | 
+api01-1   | 23:00:33.168 [info] Sent 201 in 46µs
+api02-1   | 
+api02-1   | 23:00:33.168 [info] Sent 201 in 56µs
+worker-1  | 
+worker-1  | 23:00:33.182 [info] Sending payment 7f5eeaf5-b49b-4089-8398-42afd7de0e51 to default
+worker-1  | 
+worker-1  | 23:00:33.182 [info] Sending payment 4fb16da1-bfef-4227-9426-40b1ebc6c95e to default
+worker-1  | 
+worker-1  | 23:00:33.182 [info] Sending payment bff3ae07-82ae-4ab4-bd16-09e3e052b9a7 to default
+worker-1  | 
+worker-1  | 23:00:33.185 [info] Payment 7f5eeaf5-b49b-4089-8398-42afd7de0e51 done.
+worker-1  | 
+worker-1  | 23:00:33.185 [info] Payment 4fb16da1-bfef-4227-9426-40b1ebc6c95e done.
+worker-1  | 
+worker-1  | 23:00:33.186 [info] Payment bff3ae07-82ae-4ab4-bd16-09e3e052b9a7 done.
+api02-1   | 
+api02-1   | 23:00:33.208 [info] POST /payments
+api02-1   | 
+api02-1   | 23:00:33.208 [info] Sent 201 in 41µs
+worker-1  | 
+worker-1  | 23:00:33.208 [info] Sending payment 1c922031-54a0-446e-9c21-6f43f9163d67 to default
+worker-1  | 
+worker-1  | 23:00:33.211 [info] Payment 1c922031-54a0-446e-9c21-6f43f9163d67 done.
+api01-1   | 
+api01-1   | 23:00:33.212 [info] POST /payments
+api01-1   | 
+api01-1   | 23:00:33.212 [info] Sent 201 in 47µs
+worker-1  | 
+worker-1  | 23:00:33.213 [info] Sending payment cdd78df6-42bb-4734-9786-5fb8a40f69a6 to default
+worker-1  | 
+worker-1  | 23:00:33.215 [info] Payment cdd78df6-42bb-4734-9786-5fb8a40f69a6 done.
+api02-1   | 
+api02-1   | 23:00:33.249 [info] POST /payments
+api02-1   | 
+api02-1   | 23:00:33.249 [info] Sent 201 in 93µs
+worker-1  | 
+worker-1  | 23:00:33.282 [info] Sending payment 618df949-eb18-4e7a-80b6-e9d43653bb06 to default
+worker-1  | 
+worker-1  | 23:00:33.284 [info] Payment 618df949-eb18-4e7a-80b6-e9d43653bb06 done.
+api01-1   | 
+api01-1   | 23:00:33.288 [info] POST /payments
+api01-1   | 
+api01-1   | 23:00:33.289 [info] Sent 201 in 44µs
+worker-1  | 
+worker-1  | 23:00:33.289 [info] Sending payment d41e579c-e8dd-4ffa-ac52-5940165a2379 to default
+api02-1   | 
+api02-1   | 23:00:33.290 [info] POST /payments
+api02-1   | 
+api02-1   | 23:00:33.290 [info] Sent 201 in 54µs
+worker-1  | 
+worker-1  | 23:00:33.291 [info] Sending payment 7987bd69-5823-4bfa-a872-ccba1b569760 to default
+worker-1  | 
+worker-1  | 23:00:33.292 [info] Payment d41e579c-e8dd-4ffa-ac52-5940165a2379 done.
+worker-1  | 
+worker-1  | 23:00:33.293 [info] Payment 7987bd69-5823-4bfa-a872-ccba1b569760 done.
+api01-1   | 
+api01-1   | 23:00:33.328 [info] POST /payments
+api01-1   | 
+api01-1   | 23:00:33.328 [info] Sent 201 in 57µs
+worker-1  | 
+worker-1  | 23:00:33.329 [info] Sending payment f3864e74-e261-4263-b823-bd7ed7be71b8 to default
+api02-1   | 
+api02-1   | 23:00:33.329 [info] POST /payments
+api02-1   | 
+api02-1   | 23:00:33.329 [info] Sent 201 in 42µs
+worker-1  | 
+worker-1  | 23:00:33.330 [info] Sending payment 16520922-8d82-477f-9df3-77b4c3f46227 to default
+worker-1  | 
+worker-1  | 23:00:33.331 [info] Payment f3864e74-e261-4263-b823-bd7ed7be71b8 done.
+worker-1  | 
+worker-1  | 23:00:33.332 [info] Payment 16520922-8d82-477f-9df3-77b4c3f46227 done.
+api01-1   | 
+api01-1   | 23:00:33.369 [info] POST /payments
+api01-1   | 
+api01-1   | 23:00:33.369 [info] Sent 201 in 43µs
+worker-1  | 
+worker-1  | 23:00:33.382 [info] Sending payment 7be55574-930c-4ba7-9715-28931a5f74f1 to default
+worker-1  | 
+worker-1  | 23:00:33.384 [info] Payment 7be55574-930c-4ba7-9715-28931a5f74f1 done.
+api02-1   | 
+api02-1   | 23:00:33.408 [info] POST /payments
+api01-1   | 
+api01-1   | 23:00:33.408 [info] POST /payments
+api02-1   | 
+api02-1   | 23:00:33.408 [info] Sent 201 in 43µs
+api01-1   | 
+api01-1   | 23:00:33.408 [info] Sent 201 in 60µs
+worker-1  | 
+worker-1  | 23:00:33.409 [info] Sending payment a3ee9cd3-5fcb-4e8e-b7e0-668196af19f1 to default
+worker-1  | 
+worker-1  | 23:00:33.410 [info] Sending payment 31d34a48-97bf-4f65-a88b-be57d021bc09 to default
+worker-1  | 
+worker-1  | 23:00:33.411 [info] Payment a3ee9cd3-5fcb-4e8e-b7e0-668196af19f1 done.
+worker-1  | 
+worker-1  | 23:00:33.413 [info] Payment 31d34a48-97bf-4f65-a88b-be57d021bc09 done.
+api01-1   | 
+api01-1   | 23:00:33.449 [info] POST /payments
+api01-1   | 
+api02-1   | 
+api01-1   | 23:00:33.449 [info] Sent 201 in 54µs
+api02-1   | 23:00:33.448 [info] POST /payments
+api02-1   | 
+api02-1   | 23:00:33.449 [info] Sent 201 in 64µs
+worker-1  | 
+worker-1  | 23:00:33.482 [info] Sending payment 9e62b665-92b8-4ea1-9d57-8b10bc585f14 to default
+worker-1  | 
+worker-1  | 23:00:33.482 [info] Sending payment a034977e-4076-4e5f-9280-58ae14895109 to default
+worker-1  | 
+worker-1  | 23:00:33.484 [info] Payment a034977e-4076-4e5f-9280-58ae14895109 done.
+worker-1  | 
+worker-1  | 23:00:33.485 [info] Payment 9e62b665-92b8-4ea1-9d57-8b10bc585f14 done.
+api02-1   | 
+api02-1   | 23:00:33.490 [info] POST /payments
+api02-1   | 
+api02-1   | 23:00:33.490 [info] Sent 201 in 101µs
+worker-1  | 
+worker-1  | 23:00:33.490 [info] Sending payment 1a5f6549-6a8c-4d3f-ba41-aec7d03163a1 to default
+worker-1  | 
+worker-1  | 23:00:33.493 [info] Payment 1a5f6549-6a8c-4d3f-ba41-aec7d03163a1 done.
+api01-1   | 
+api01-1   | 23:00:33.529 [info] POST /payments
+api02-1   | 
+api02-1   | 23:00:33.529 [info] POST /payments
+api02-1   | 
+api02-1   | 23:00:33.529 [info] Sent 201 in 51µs
+api01-1   | 
+api01-1   | 23:00:33.529 [info] Sent 201 in 51µs
+worker-1  | 
+worker-1  | 23:00:33.530 [info] Sending payment ca43ba5f-0dda-45cc-acaa-7d45667044dd to default
+worker-1  | 
+worker-1  | 23:00:33.530 [info] Sending payment f7e0ad14-17e8-4d5a-ad03-4429de56d07c to default
+worker-1  | 
+worker-1  | 23:00:33.532 [info] Payment ca43ba5f-0dda-45cc-acaa-7d45667044dd done.
+worker-1  | 
+worker-1  | 23:00:33.533 [info] Payment f7e0ad14-17e8-4d5a-ad03-4429de56d07c done.
+api01-1   | 
+api01-1   | 23:00:33.569 [info] POST /payments
+api02-1   | 
+api02-1   | 23:00:33.569 [info] POST /payments
+api01-1   | 
+api01-1   | 23:00:33.569 [info] Sent 201 in 52µs
+api02-1   | 
+api02-1   | 23:00:33.569 [info] Sent 201 in 52µs
+worker-1  | 
+worker-1  | 23:00:33.582 [info] Sending payment 59a6942a-ea4c-497c-b21a-35f566a36aa0 to default
+worker-1  | 
+worker-1  | 23:00:33.582 [info] Sending payment bb5a1b2d-8fdc-40b7-9620-8ef73784d202 to default
+worker-1  | 
+worker-1  | 23:00:33.585 [info] Payment 59a6942a-ea4c-497c-b21a-35f566a36aa0 done.
+worker-1  | 
+worker-1  | 23:00:33.586 [info] Payment bb5a1b2d-8fdc-40b7-9620-8ef73784d202 done.
+api01-1   | 
+api01-1   | 23:00:33.609 [info] POST /payments
+api01-1   | 
+api01-1   | 23:00:33.609 [info] Sent 201 in 67µs
+worker-1  | 
+worker-1  | 23:00:33.610 [info] Sending payment 3271c20e-1bfc-48f2-af00-3f67384157b9 to default
+worker-1  | 
+worker-1  | 23:00:33.612 [info] Payment 3271c20e-1bfc-48f2-af00-3f67384157b9 done.
+api02-1   | 
+api02-1   | 23:00:33.648 [info] POST /payments
+api02-1   | 
+api02-1   | 23:00:33.648 [info] Sent 201 in 41µs
+api01-1   | 
+api01-1   | 23:00:33.662 [info] POST /payments
+api01-1   | 
+api01-1   | 23:00:33.662 [info] Sent 201 in 81µs
+worker-1  | 
+worker-1  | 23:00:33.682 [info] Sending payment e26cda73-39db-4d1d-a469-2c5603b3e419 to default
+worker-1  | 
+worker-1  | 23:00:33.682 [info] Sending payment 6c08060b-0bfe-4397-9d20-20c396662d1c to default
+worker-1  | 
+worker-1  | 23:00:33.684 [info] Payment 6c08060b-0bfe-4397-9d20-20c396662d1c done.
+log truncated at line 1000
