@@ -1,0 +1,41 @@
+ Network davidalecrim1-go_app  Creating
+ Network davidalecrim1-go_app  Created
+ Container redis-db  Creating
+ Container redis-db  Created
+ Container go-backend-1  Creating
+ Container go-backend-2  Creating
+ go-backend-2 The requested image's platform (linux/arm64/v8) does not match the detected host platform (linux/amd64/v3) and no specific platform was requested 
+ Container go-backend-2  Created
+ go-backend-1 The requested image's platform (linux/arm64/v8) does not match the detected host platform (linux/amd64/v3) and no specific platform was requested 
+ Container go-backend-1  Created
+ Container load-balancer-nginx  Creating
+ Container load-balancer-nginx  Created
+Attaching to go-backend-1, go-backend-2, load-balancer-nginx, redis-db
+redis-db             | 1:C 13 Jul 2025 19:47:47.740 # WARNING Memory overcommit must be enabled! Without it, a background save or replication may fail under low memory condition. Being disabled, it can also cause failures without low memory condition, see https://github.com/jemalloc/jemalloc/issues/1328. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.
+redis-db             | 1:C 13 Jul 2025 19:47:47.740 * oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+redis-db             | 1:C 13 Jul 2025 19:47:47.740 * Redis version=7.2.10, bits=64, commit=00000000, modified=0, pid=1, just started
+redis-db             | 1:C 13 Jul 2025 19:47:47.740 * Configuration loaded
+redis-db             | 1:M 13 Jul 2025 19:47:47.740 * monotonic clock: POSIX clock_gettime
+redis-db             | 1:M 13 Jul 2025 19:47:47.741 * Running mode=standalone, port=6379.
+redis-db             | 1:M 13 Jul 2025 19:47:47.741 * Server initialized
+redis-db             | 1:M 13 Jul 2025 19:47:47.741 * Ready to accept connections tcp
+go-backend-1         | exec ./main: exec format error
+go-backend-2         | exec ./main: exec format error
+[Kgo-backend-1 exited with code 255
+[Kgo-backend-2 exited with code 255
+load-balancer-nginx  | /docker-entrypoint.sh: /docker-entrypoint.d/ is not empty, will attempt to perform configuration
+load-balancer-nginx  | /docker-entrypoint.sh: Looking for shell scripts in /docker-entrypoint.d/
+load-balancer-nginx  | /docker-entrypoint.sh: Launching /docker-entrypoint.d/10-listen-on-ipv6-by-default.sh
+load-balancer-nginx  | 10-listen-on-ipv6-by-default.sh: info: Getting the checksum of /etc/nginx/conf.d/default.conf
+load-balancer-nginx  | 10-listen-on-ipv6-by-default.sh: info: Enabled listen on IPv6 in /etc/nginx/conf.d/default.conf
+load-balancer-nginx  | /docker-entrypoint.sh: Sourcing /docker-entrypoint.d/15-local-resolvers.envsh
+load-balancer-nginx  | /docker-entrypoint.sh: Launching /docker-entrypoint.d/20-envsubst-on-templates.sh
+load-balancer-nginx  | /docker-entrypoint.sh: Launching /docker-entrypoint.d/30-tune-worker-processes.sh
+load-balancer-nginx  | /docker-entrypoint.sh: Configuration complete; ready for start up
+load-balancer-nginx  | 2025/07/13 19:47:48 [emerg] 1#1: host not found in upstream "go-backend-1:80" in /etc/nginx/nginx.conf:20
+load-balancer-nginx  | nginx: [emerg] host not found in upstream "go-backend-1:80" in /etc/nginx/nginx.conf:20
+[Kload-balancer-nginx exited with code 1
+redis-db             | 1:signal-handler (1752436140) Received SIGTERM scheduling shutdown...
+redis-db             | 1:M 13 Jul 2025 19:49:00.817 * User requested shutdown...
+redis-db             | 1:M 13 Jul 2025 19:49:00.817 # Redis is now ready to exit, bye bye...
+[Kredis-db exited with code 0
