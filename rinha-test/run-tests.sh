@@ -45,7 +45,7 @@ while true; do
             if test -f $testedFile; then
                 git add $testedFile
                 git add $directory/k6.logs
-                git add $directory/docker-compose.log
+                git add $directory/docker-compose.logs
                 git commit -m "add $participant's partial result"
                 git push
             fi
