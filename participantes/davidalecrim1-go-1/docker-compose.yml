@@ -1,6 +1,6 @@
 x-service-templates:
   go-backend: &go-backend
-    image: davidalecrim1/rinha-with-go-2025:latest
+    image: davidalecrim1/rinha-with-go-2025:v0.4-redis
     networks:
       - app
       - payment-processor
@@ -22,7 +22,7 @@ services:
       resources:
         limits:
           cpus: "0.5"
-          memory: "75MB"
+          memory: "100MB"
 
   go-backend-2:
     <<: *go-backend
@@ -38,7 +38,7 @@ services:
       resources:
         limits:
           cpus: "0.5"
-          memory: "75MB"
+          memory: "100MB"
 
   redis:
     image: redis:7.2-alpine
@@ -74,7 +74,7 @@ services:
       resources:
         limits:
           cpus: "0.2"
-          memory: "100MB"
+          memory: "50MB"
 
 networks:
   app:
