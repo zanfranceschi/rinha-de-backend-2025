@@ -16,3 +16,4 @@ Atualizado em **Sun Jul 13 08:39:45 PM -03 2025**
 |	luizcordista-go	|	0.003085922399999639	|	96779.02325	|	180585.7647662779	|
 |	panissetrafael-go	|	0	|	40605.733349999995	|	75410.64765	|
 |	ricassiocosta-python	|	0	|	0	|	0	|
+|	robertAlmeida	|	0	|	0	|	0	|
