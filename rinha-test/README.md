@@ -10,7 +10,7 @@ Instale o k6 caso ainda já não o tenha feito. Siga as instruções [aqui](http
 
 ### Execução dos Testes
 
-Antes de executar os testes, você precisa subir os containers do seu backend e dos [Payment Processors](../payment-processor/docker-compose.yml). Após ter feito isso, basta entrar no diretório [rinha-test](./rinha-test) e executar o seguinte comando:
+Antes de executar os testes, você precisa subir os containers do seu backend e dos [Payment Processors](../payment-processor/docker-compose.yml). Após ter feito isso, basta entrar no diretório [rinha-test](./) e executar o seguinte comando:
 
 ```shell
 k6 run rinha.js
