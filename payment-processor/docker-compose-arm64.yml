@@ -3,6 +3,7 @@ x-service-templates:
     image: zanfranceschi/payment-processor:arm64-20250707101540
     networks:
       - payment-processor
+      - payment-processor-db
     deploy:
       resources:
         limits:
@@ -12,7 +13,7 @@ x-service-templates:
   payment-processor-db: &payment-processor-db
     image: postgres:17-alpine
     networks:
-      - payment-processor
+      - payment-processor-db
     volumes:
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
     environment:
@@ -71,4 +72,6 @@ services:
 networks:
   payment-processor:
     name: payment-processor
+    driver: bridge
+  payment-processor-db:
     driver: bridge
