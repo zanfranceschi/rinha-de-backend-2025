@@ -259,7 +259,10 @@ export function handleSummary(data) {
     + (liquid_partial_amount * p_99_bonus)
     - (liquid_partial_amount * inconsistencies_fine);
 
+  const name = __ENV.PARTICIPANT ?? "anonymous";
+
   const custom_data = {
+    participante: name,
     descricao: "'total_liquido' é sua pontuação final. Equivale ao seu lucro. Fórmula: total_liquido + (total_liquido * p99.bonus) - (total_liquido * multa.porcentagem)",
     total_liquido: liquid_amount,
     total_bruto: actual_total_amount,
@@ -299,10 +302,10 @@ export function handleSummary(data) {
   };
 
   const participant = __ENV.PARTICIPANT;
-  let summaryJsonFileName = `../participantes/${participant}/partial-result.json`
+  let summaryJsonFileName = `../participantes/${participant}/partial-results.json`
 
   if (participant == undefined) {
-    summaryJsonFileName = `./results/partial-result.json`
+    summaryJsonFileName = `./results/partial-results.json`
   }
 
   result[summaryJsonFileName] = JSON.stringify(custom_data, null, 2);
