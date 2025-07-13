@@ -3,6 +3,7 @@ x-service-templates:
     image: zanfranceschi/payment-processor:amd64-20250707101540
     networks:
       - payment-processor
+      - payment-processor-db
     deploy:
       resources:
         limits:
@@ -12,7 +13,7 @@ x-service-templates:
   payment-processor-db: &payment-processor-db
     image: postgres:17-alpine
     networks:
-      - payment-processor
+      - payment-processor-db
     volumes:
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
     environment:
@@ -44,8 +45,6 @@ services:
     <<: *payment-processor-db
     container_name: payment-processor-default-db
     hostname: payment-processor-default-db
-    ports:
-      - 54321:5432
 
   payment-processor-2:
     <<: *payment-processor
@@ -58,6 +57,9 @@ services:
       - DB_CONNECTION_STRING=Host=payment-processor-fallback-db;Port=5432;Database=rinha;Username=postgres;Password=postgres;Minimum Pool Size=15;Maximum Pool Size=20;Connection Pruning Interval=3
     ports:
       - 8002:8080
+    networks:
+      - payment-processor
+      - payment-processor-db
     depends_on:
       - payment-processor-db-2
   
@@ -65,10 +67,10 @@ services:
     <<: *payment-processor-db
     container_name: payment-processor-fallback-db
     hostname: payment-processor-fallback-db
-    ports:
-      - 54322:5432
 
 networks:
   payment-processor:
     name: payment-processor
+    driver: bridge
+  payment-processor-db:
     driver: bridge
