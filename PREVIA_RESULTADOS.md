@@ -9,3 +9,4 @@ Atualizado em **Sun Jul 13 08:39:45 PM -03 2025**
 |	davidalecrim1-go-2	|	0.10075864160000031	|	89629.10249998799	|	192256.63783062337	|
 |	davidalecrim1-go	|	0	|	0	|	0	|
 |	dotnetRinha	|	0	|	0	|	0	|
+|	henriqueramos13-node	|	0	|	53582.4275	|	99510.2225	|
