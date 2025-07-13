@@ -6,7 +6,7 @@ startContainers() {
     popd > /dev/null
     pushd ../participantes/$1 > /dev/null
         services=$(docker compose config --services | wc -l)
-        echo "" > docker-compose.logs
+        echo "" > ../participantes/$1/docker-compose.logs
         nohup docker compose up --build >> docker-compose.logs &
     popd > /dev/null
     #expectedServicesUp=$(( services + 4 ))
