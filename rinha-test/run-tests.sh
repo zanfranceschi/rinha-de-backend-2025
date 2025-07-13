@@ -92,6 +92,6 @@ while true; do
     git commit -m "previa resultados @ $(date)"
     git push
     done
-    # 10 minutinhos de espera, ninguém morre
-    sleep 600
+    # 5 minutinhos de espera... ninguém morre
+    sleep 300
 done
