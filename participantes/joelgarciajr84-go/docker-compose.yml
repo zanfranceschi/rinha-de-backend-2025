@@ -1,0 +1,90 @@
+version: "3.8"
+
+services:
+  rinha_1:
+    image: joelgarciajr84/rinha-backend-go:latest
+    init: true
+    networks:
+      - backend
+      - payment-processor
+    environment:
+      - PAYMENT_PROCESSOR_URL_DEFAULT=http://payment-processor-default:8080
+      - PAYMENT_PROCESSOR_URL_FALLBACK=http://payment-processor-fallback:8080
+      - X_RINHA_TOKEN=123
+      - REDIS_ADDR=redis:6379
+    ports:
+      - "9991:9999"
+    depends_on:
+      - redis
+    deploy:
+      resources:
+        limits:
+          cpus: "0.625"
+          memory: "130MB"
+
+  rinha_2:
+    image: joelgarciajr84/rinha-backend-go:latest
+    init: true
+    networks:
+      - backend
+      - payment-processor
+    environment:
+      - PAYMENT_PROCESSOR_URL_DEFAULT=http://payment-processor-default:8080
+      - PAYMENT_PROCESSOR_URL_FALLBACK=http://payment-processor-fallback:8080
+      - X_RINHA_TOKEN=123
+      - REDIS_ADDR=redis:6379
+    ports:
+      - "9992:9999"
+    depends_on:
+      - redis
+    deploy:
+      resources:
+        limits:
+          cpus: "0.625"
+          memory: "130MB"
+
+  nginx:
+    image: nginx:alpine
+    init: true
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+    ports:
+      - "9999:80"
+    networks:
+      - backend
+    depends_on:
+      - rinha_1
+      - rinha_2
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: "0.15"
+          memory: "50MB"
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    networks:
+      - backend
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+      start_period: 10s
+    deploy:
+      resources:
+        limits:
+          cpus: "0.1"
+          memory: "40MB"
+    tmpfs:
+      - /data
+
+networks:
+  backend:
+    driver: bridge
+  payment-processor:
+    external: true
