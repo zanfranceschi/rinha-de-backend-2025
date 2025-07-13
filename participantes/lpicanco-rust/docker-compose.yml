@@ -1,0 +1,92 @@
+services:
+  api01: &api
+    image: ghcr.io/lpicanco/backend-dogfight-rust-25:latest
+    hostname: api01
+    restart: unless-stopped
+    environment:
+      RUST_LOG: warn
+      REDIS_URL: redis://redis:6379
+      PORT: 3042
+      PAYMENT_ENDPOINT: http://payment-processor-default:8080
+      PAYMENT_FALLBACK_ENDPOINT: http://payment-processor-fallback:8080
+    depends_on:
+      - redis
+    networks:
+      - backend-dogfight-rust-25
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          cpus: '0.15'
+          memory: "50MB"
+
+  api02:
+    <<: *api
+    hostname: api02
+    environment:
+      RUST_LOG: warn
+      REDIS_URL: redis://redis:6379
+      PORT: 3043
+      PAYMENT_ENDPOINT: http://payment-processor-default:8080
+      PAYMENT_FALLBACK_ENDPOINT: http://payment-processor-fallback:8080
+  nginx:
+    image: nginx:1.25.3
+    configs:
+      - source: nginx_conf
+        target: /etc/nginx/nginx.conf
+    restart: unless-stopped
+    ports:
+      - "9999:9999"
+    depends_on:
+      - api01
+      - api02
+    deploy:
+      resources:
+        limits:
+          cpus: "0.2"
+          memory: "50MB"
+    networks:
+      - backend-dogfight-rust-25
+  redis:
+    image: redis:8-alpine
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    command: redis-server --save 300 1000 --loglevel warning
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: "200MB"
+    networks:
+      - backend-dogfight-rust-25
+networks:
+  backend-dogfight-rust-25:
+    driver: bridge
+  payment-processor:
+    external: true
+
+configs:
+  nginx_conf:
+    name: nginx.conf
+    content: |
+      events {
+        worker_connections 4096;
+        use epoll;
+      }
+      http {
+        access_log off;
+        sendfile   on;
+        
+        upstream api {
+          server api01:3042;
+          server api02:3043;
+        }
+        server {
+          listen 9999;
+          location / {
+            proxy_pass http://api;
+          }
+          access_log  off;
+        }
+      }
