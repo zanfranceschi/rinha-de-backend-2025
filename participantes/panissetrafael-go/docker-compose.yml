@@ -6,7 +6,7 @@ services:
     ports:
       - "9999:9999"
     volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
     depends_on:
       - rinha-backend-1
       - rinha-backend-2
@@ -16,52 +16,87 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.1"
-          memory: 6MB
+          cpus: "0.15"
+          memory: "25MB"
+    restart: unless-stopped
 
   redis:
-    image: redis:alpine
+    image: redis:7-alpine
+    command: >
+      redis-server
+      --save ""
+      --appendonly no
+      --maxmemory 45mb
+      --maxmemory-policy noeviction
+      --tcp-backlog 512
+      --timeout 0
+      --tcp-keepalive 60
+      --databases 1
     networks:
       - backend
     deploy:
       resources:
         limits:
-          cpus: "0.1"
-          memory: 14MB
+          cpus: "0.2"
+          memory: "50MB"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
 
   rinha-backend-1:
-    image: panissetrafael/rinha-backend-go:v1.0
+    image: panissetrafael/rinha-backend-go:v3.0
     environment:
       - PAYMENT_PROCESSOR_URL_DEFAULT=http://payment-processor-default:8080
       - PAYMENT_PROCESSOR_URL_FALLBACK=http://payment-processor-fallback:8080
       - REDIS_URL=redis://redis:6379
+      - GOMAXPROCS=2
+      - GIN_MODE=release
     depends_on:
-      - redis
+      redis:
+        condition: service_healthy
     networks:
       - backend
       - payment-processor
     deploy:
       resources:
         limits:
-          cpus: "0.65"
-          memory: 165MB
+          cpus: "0.575"
+          memory: "137MB"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://localhost:8080/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
 
   rinha-backend-2:
-    image: panissetrafael/rinha-backend-go:v1.0
+    image: panissetrafael/rinha-backend-go:v3.0
     environment:
       - PAYMENT_PROCESSOR_URL_DEFAULT=http://payment-processor-default:8080
       - PAYMENT_PROCESSOR_URL_FALLBACK=http://payment-processor-fallback:8080
       - REDIS_URL=redis://redis:6379
+      - GOMAXPROCS=2
+      - GIN_MODE=release
     depends_on:
-      - redis
+      redis:
+        condition: service_healthy
     networks:
       - backend
       - payment-processor
     deploy:
       resources:
         limits:
-          cpus: "0.65"
-          memory: 165MB
+          cpus: "0.575"
+          memory: "138MB"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://localhost:8080/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
 
 networks:
   backend:

@@ -9,7 +9,7 @@
 
 ## Estratégia
 
-Trocar para fallback antes do default falhar.
+Processamento paralelo com workers e estado compartilhado via Redis.
 
 ## Código Fonte
 
