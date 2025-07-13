@@ -27,7 +27,7 @@ stopContainers() {
 MAX_REQUESTS=500
 
 while true; do
-    for directory in ../participantes/v*; do
+    for directory in ../participantes/*; do
     (
         git pull
         participant=$(echo $directory | sed -e 's/..\/participantes\///g' -e 's/\///g')
