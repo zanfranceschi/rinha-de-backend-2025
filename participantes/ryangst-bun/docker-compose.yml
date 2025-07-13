@@ -12,6 +12,10 @@ services:
       - "--entrypoints.websecure.address=:443"
       - "--entrypoints.api.address=:9999"
       - "--log.level=WARN"
+      - "--accesslog=false"
+      - "--serversTransport.maxIdleConnsPerHost=4"
+      - "--entrypoints.api.transport.respondingTimeouts.readTimeout=5s"
+      - "--entrypoints.api.transport.respondingTimeouts.writeTimeout=5s"
     ports:
       - "80:80"
       - "443:443"
@@ -24,8 +28,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.15"
-          memory: "42MB"
+          cpus: "0.20"
+          memory: "60MB"
 
   redis:
     image: redis:7.4-alpine
@@ -60,9 +64,7 @@ services:
           memory: "110MB"
 
   api:
-    build:
-      context: .
-      dockerfile: apps/api/Dockerfile
+    image: ghcr.io/ryangst/rinha-backend-api:latest
     env_file: .env
     container_name: api-rinha
     depends_on:
@@ -79,12 +81,10 @@ services:
       resources:
         limits:
           cpus: "0.35"
-          memory: "60MB"
+          memory: "52MB"
 
   api-2:
-    build:
-      context: .
-      dockerfile: apps/api/Dockerfile
+    image: ghcr.io/ryangst/rinha-backend-api:latest
     container_name: api-rinha-2
     env_file: .env
     environment:
@@ -102,13 +102,11 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.35"
-          memory: "60MB"
+          cpus: "0.30"
+          memory: "50MB"
 
   worker:
-    build:
-      context: .
-      dockerfile: apps/worker/Dockerfile
+    image: ghcr.io/ryangst/rinha-backend-worker:latest
     env_file: .env
     container_name: worker-rinha
     depends_on:
