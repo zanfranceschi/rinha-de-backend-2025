@@ -1,0 +1,675 @@
+type: collection.insomnia.rest/5.0
+name: rinha-2025
+meta:
+  id: wrk_ac66bb07a924481f909ef08645f659c6
+  created: 1752433774506
+  modified: 1752433774506
+  description: ""
+collection:
+  - name: processors
+    meta:
+      id: fld_4a01a2556777485787d3dc1c526ee051
+      created: 1752432307844
+      modified: 1752433695593
+      sortKey: -1752433342624.25
+      description: ""
+    children:
+      - name: default
+        meta:
+          id: fld_8b941df5494449c6a24cec887a863bfa
+          created: 1752433464520
+          modified: 1752433464520
+          sortKey: -1752433464520
+          description: ""
+        children:
+          - name: admin
+            meta:
+              id: fld_1818923dfa7742dfb664762e6f2aede8
+              created: 1752433378790
+              modified: 1752433480840
+              sortKey: -1752433477905
+              description: ""
+            children:
+              - url: "{{ _['processor-url-1'] }}/admin/configurations/delay"
+                name: add delay
+                meta:
+                  id: req_9c5d1c78c12649a1a6a53fcc5bf91e9e
+                  created: 1752432367141
+                  modified: 1752433391464
+                  isPrivate: false
+                  description: ""
+                  sortKey: -1752433382205
+                method: PUT
+                headers:
+                  - name: User-Agent
+                    value: insomnia/11.3.0
+                authentication:
+                  type: apikey
+                  key: "{{ _.token.header }}"
+                  value: "{{ _.token.value }}"
+                  disabled: false
+                  addTo: header
+                scripts:
+                  preRequest: ""
+                  afterResponse: ""
+                settings:
+                  renderRequestBody: true
+                  encodeUrl: true
+                  followRedirects: global
+                  cookies:
+                    send: true
+                    store: true
+                  rebuildPath: true
+              - url: "{{ _['processor-url-1'] }}/admin/payments-summary"
+                name: get payments summary
+                meta:
+                  id: req_7e55a5192aad4398919b728d4172396d
+                  created: 1752432598440
+                  modified: 1752433446855
+                  isPrivate: false
+                  description: ""
+                  sortKey: -1752433382405
+                method: GET
+                parameters:
+                  - name: from
+                    value: ""
+                    disabled: true
+                    id: pair_1ce275b545fd45acba6bafe42a1e0154
+                  - name: to
+                    value: ""
+                    disabled: true
+                    id: pair_70565f76a41b44ecacfb948011e73472
+                headers:
+                  - name: User-Agent
+                    value: insomnia/11.3.0
+                authentication:
+                  type: apikey
+                  key: "{{ _.token.header }}"
+                  value: "{{ _.token.value }}"
+                  disabled: false
+                  addTo: header
+                scripts:
+                  preRequest: ""
+                  afterResponse: ""
+                settings:
+                  renderRequestBody: true
+                  encodeUrl: true
+                  followRedirects: global
+                  cookies:
+                    send: true
+                    store: true
+                  rebuildPath: true
+              - url: "{{ _['processor-url-1'] }}/admin/configurations/token"
+                name: set admin token
+                meta:
+                  id: req_bd894dd3a44743f0914a3fb8c01821eb
+                  created: 1752432661582
+                  modified: 1752433382039
+                  isPrivate: false
+                  description: ""
+                  sortKey: -1752433382005
+                method: PUT
+                body:
+                  mimeType: application/json
+                  text: |-
+                    {
+                    	"token": "{{ _.token }}"
+                    }
+                headers:
+                  - name: Content-Type
+                    value: application/json
+                  - name: User-Agent
+                    value: insomnia/11.3.0
+                authentication:
+                  type: apikey
+                  key: "{{ _.token.header }}"
+                  value: "{{ _.token.value }}"
+                  disabled: false
+                  addTo: header
+                scripts:
+                  preRequest: ""
+                  afterResponse: ""
+                settings:
+                  renderRequestBody: true
+                  encodeUrl: true
+                  followRedirects: global
+                  cookies:
+                    send: true
+                    store: true
+                  rebuildPath: true
+              - url: "{{ _['processor-url-1'] }}/admin/configurations/failure"
+                name: set processor failure
+                meta:
+                  id: req_db3a9b85974b41ffba96953b87aaec56
+                  created: 1752432774215
+                  modified: 1752433387930
+                  isPrivate: false
+                  description: ""
+                  sortKey: -1752433382105
+                method: PUT
+                body:
+                  mimeType: application/json
+                  text: |-
+                    {
+                        "failure" : true
+                    }
+                headers:
+                  - name: Content-Type
+                    value: application/json
+                  - name: User-Agent
+                    value: insomnia/11.3.0
+                authentication:
+                  type: apikey
+                  key: "{{ _.token.header }}"
+                  value: "{{ _.token.value }}"
+                  disabled: false
+                  addTo: header
+                scripts:
+                  preRequest: ""
+                  afterResponse: ""
+                settings:
+                  renderRequestBody: true
+                  encodeUrl: true
+                  followRedirects: global
+                  cookies:
+                    send: true
+                    store: true
+                  rebuildPath: true
+              - url: "{{ _['processor-url-1'] }}/admin/purge-payments"
+                name: purge database
+                meta:
+                  id: req_b7addd47f5f544229259094b6fe003dc
+                  created: 1752432832097
+                  modified: 1752433419795
+                  isPrivate: false
+                  description: ""
+                  sortKey: -1752433382305
+                method: POST
+                headers:
+                  - name: User-Agent
+                    value: insomnia/11.3.0
+                authentication:
+                  type: apikey
+                  key: "{{ _.token.header }}"
+                  value: "{{ _.token.value }}"
+                  disabled: false
+                  addTo: header
+                scripts:
+                  preRequest: ""
+                  afterResponse: ""
+                settings:
+                  renderRequestBody: true
+                  encodeUrl: true
+                  followRedirects: global
+                  cookies:
+                    send: true
+                    store: true
+                  rebuildPath: true
+            scripts:
+              afterResponse: ""
+              preRequest: ""
+          - url: "{{ _['processor-url-1'] }}/payments/:id"
+            name: get payment datails
+            meta:
+              id: req_9877805a46b845cc860e061a6de7ce45
+              created: 1752432524831
+              modified: 1752433483689
+              isPrivate: false
+              description: ""
+              sortKey: -1752433477855
+            method: GET
+            headers:
+              - name: User-Agent
+                value: insomnia/11.3.0
+            scripts:
+              preRequest: ""
+              afterResponse: ""
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+            pathParameters:
+              - name: id
+                value: ""
+          - url: "{{ _['processor-url-1'] }}/payments"
+            name: insert payment
+            meta:
+              id: req_5ddfbb1c00d04a2da1de2beadac2c49d
+              created: 1752432877679
+              modified: 1752433486703
+              isPrivate: false
+              description: ""
+              sortKey: -1752433477705
+            method: POST
+            body:
+              mimeType: application/json
+              text: |-
+                {
+                	"correlationId": "4a7901b8-7d26-4d9d-aa19-4dc1c7cf60b3",
+                	"amount": 19.90,
+                	"requestedAt": "2025-07-15T12:34:56.000Z"
+                }
+            headers:
+              - name: Content-Type
+                value: application/json
+              - name: User-Agent
+                value: insomnia/11.3.0
+            scripts:
+              preRequest: ""
+              afterResponse: ""
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: "{{ _['processor-url-1'] }}/payments/service-health"
+            name: health check
+            meta:
+              id: req_542ab4abccf8448386a2559db9d3f41a
+              created: 1752432933121
+              modified: 1752433479324
+              isPrivate: false
+              description: ""
+              sortKey: -1752433477805
+            method: GET
+            headers:
+              - name: User-Agent
+                value: insomnia/11.3.0
+            authentication:
+              type: none
+            scripts:
+              preRequest: ""
+              afterResponse: ""
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+        scripts:
+          afterResponse: ""
+          preRequest: ""
+      - name: fallback
+        meta:
+          id: fld_d159ccf2da3542c98df92ee6f105f869
+          created: 1752433496658
+          modified: 1752433496658
+          sortKey: -1752432886182
+          description: ""
+        children:
+          - name: admin
+            meta:
+              id: fld_cc891d7ed52c45f7848e8520d9cd5469
+              created: 1752433496659
+              modified: 1752433496659
+              sortKey: -1752433477905
+              description: ""
+            children:
+              - url: "{{ _['processor-url-2'] }}/admin/configurations/delay"
+                name: add delay
+                meta:
+                  id: req_f474da8a3d6a4dec8d9c942d3c51e3fa
+                  created: 1752433496661
+                  modified: 1752433520947
+                  isPrivate: false
+                  description: ""
+                  sortKey: -1752433382205
+                method: PUT
+                headers:
+                  - name: User-Agent
+                    value: insomnia/11.3.0
+                authentication:
+                  type: apikey
+                  key: "{{ _.token.header }}"
+                  value: "{{ _.token.value }}"
+                  disabled: false
+                  addTo: header
+                scripts:
+                  preRequest: ""
+                  afterResponse: ""
+                settings:
+                  renderRequestBody: true
+                  encodeUrl: true
+                  followRedirects: global
+                  cookies:
+                    send: true
+                    store: true
+                  rebuildPath: true
+              - url: "{{ _['processor-url-2'] }}/admin/payments-summary"
+                name: get payments summary
+                meta:
+                  id: req_1937f2329724477284b21e62c4faea8e
+                  created: 1752433496662
+                  modified: 1752433508617
+                  isPrivate: false
+                  description: ""
+                  sortKey: -1752433382405
+                method: GET
+                parameters:
+                  - name: from
+                    value: ""
+                    disabled: true
+                    id: pair_1ce275b545fd45acba6bafe42a1e0154
+                  - name: to
+                    value: ""
+                    disabled: true
+                    id: pair_70565f76a41b44ecacfb948011e73472
+                headers:
+                  - name: User-Agent
+                    value: insomnia/11.3.0
+                authentication:
+                  type: apikey
+                  key: "{{ _.token.header }}"
+                  value: "{{ _.token.value }}"
+                  disabled: false
+                  addTo: header
+                scripts:
+                  preRequest: ""
+                  afterResponse: ""
+                settings:
+                  renderRequestBody: true
+                  encodeUrl: true
+                  followRedirects: global
+                  cookies:
+                    send: true
+                    store: true
+                  rebuildPath: true
+              - url: "{{ _['processor-url-2'] }}/admin/configurations/token"
+                name: set admin token
+                meta:
+                  id: req_bd9809f073f243d9813b194cdbb8a3a9
+                  created: 1752433496663
+                  modified: 1752433529168
+                  isPrivate: false
+                  description: ""
+                  sortKey: -1752433382005
+                method: PUT
+                body:
+                  mimeType: application/json
+                  text: |-
+                    {
+                    	"token": "{{ _.token }}"
+                    }
+                headers:
+                  - name: Content-Type
+                    value: application/json
+                  - name: User-Agent
+                    value: insomnia/11.3.0
+                authentication:
+                  type: apikey
+                  key: "{{ _.token.header }}"
+                  value: "{{ _.token.value }}"
+                  disabled: false
+                  addTo: header
+                scripts:
+                  preRequest: ""
+                  afterResponse: ""
+                settings:
+                  renderRequestBody: true
+                  encodeUrl: true
+                  followRedirects: global
+                  cookies:
+                    send: true
+                    store: true
+                  rebuildPath: true
+              - url: "{{ _['processor-url-2'] }}/admin/configurations/failure"
+                name: set processor failure
+                meta:
+                  id: req_9d96c878ff0c452097e1aed5d77a802f
+                  created: 1752433496664
+                  modified: 1752433524518
+                  isPrivate: false
+                  description: ""
+                  sortKey: -1752433382105
+                method: PUT
+                body:
+                  mimeType: application/json
+                  text: |-
+                    {
+                        "failure" : true
+                    }
+                headers:
+                  - name: Content-Type
+                    value: application/json
+                  - name: User-Agent
+                    value: insomnia/11.3.0
+                authentication:
+                  type: apikey
+                  key: "{{ _.token.header }}"
+                  value: "{{ _.token.value }}"
+                  disabled: false
+                  addTo: header
+                scripts:
+                  preRequest: ""
+                  afterResponse: ""
+                settings:
+                  renderRequestBody: true
+                  encodeUrl: true
+                  followRedirects: global
+                  cookies:
+                    send: true
+                    store: true
+                  rebuildPath: true
+              - url: "{{ _['processor-url-2'] }}/admin/purge-payments"
+                name: purge database
+                meta:
+                  id: req_ffd941f18afa4ca2af80062460b7282b
+                  created: 1752433496665
+                  modified: 1752433517229
+                  isPrivate: false
+                  description: ""
+                  sortKey: -1752433382305
+                method: POST
+                headers:
+                  - name: User-Agent
+                    value: insomnia/11.3.0
+                authentication:
+                  type: apikey
+                  key: "{{ _.token.header }}"
+                  value: "{{ _.token.value }}"
+                  disabled: false
+                  addTo: header
+                scripts:
+                  preRequest: ""
+                  afterResponse: ""
+                settings:
+                  renderRequestBody: true
+                  encodeUrl: true
+                  followRedirects: global
+                  cookies:
+                    send: true
+                    store: true
+                  rebuildPath: true
+            scripts:
+              afterResponse: ""
+              preRequest: ""
+          - url: "{{ _['processor-url-2'] }}/payments/:id"
+            name: get payment datails
+            meta:
+              id: req_30de96c8387543799e11ba3ac1a41bb5
+              created: 1752433496666
+              modified: 1752433534282
+              isPrivate: false
+              description: ""
+              sortKey: -1752433477855
+            method: GET
+            headers:
+              - name: User-Agent
+                value: insomnia/11.3.0
+            scripts:
+              preRequest: ""
+              afterResponse: ""
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+            pathParameters:
+              - name: id
+                value: ""
+          - url: "{{ _['processor-url-2'] }}/payments"
+            name: insert payment
+            meta:
+              id: req_0c3ba6891bf54ef8a254a9144810b3c0
+              created: 1752433496667
+              modified: 1752433541834
+              isPrivate: false
+              description: ""
+              sortKey: -1752433477705
+            method: POST
+            body:
+              mimeType: application/json
+              text: |-
+                {
+                	"correlationId": "4a7901b8-7d26-4d9d-aa19-4dc1c7cf60b3",
+                	"amount": 19.90,
+                	"requestedAt": "2025-07-15T12:34:56.000Z"
+                }
+            headers:
+              - name: Content-Type
+                value: application/json
+              - name: User-Agent
+                value: insomnia/11.3.0
+            scripts:
+              preRequest: ""
+              afterResponse: ""
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: "{{ _['processor-url-2'] }}/payments/service-health"
+            name: health check
+            meta:
+              id: req_89f75b8901124962a17fae46b6af2e79
+              created: 1752433496668
+              modified: 1752433538272
+              isPrivate: false
+              description: ""
+              sortKey: -1752433477805
+            method: GET
+            headers:
+              - name: User-Agent
+                value: insomnia/11.3.0
+            authentication:
+              type: none
+            scripts:
+              preRequest: ""
+              afterResponse: ""
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+        scripts:
+          afterResponse: ""
+          preRequest: ""
+    scripts:
+      afterResponse: ""
+      preRequest: ""
+  - name: backend
+    meta:
+      id: fld_5236e97632244a28b54b190a46b4a7da
+      created: 1752433687551
+      modified: 1752433687551
+      sortKey: -1752433687551
+      description: ""
+    children:
+      - url: "{{ _['backend-url'] }}/payments"
+        name: insert payment
+        meta:
+          id: req_63730c0971b747c2a7b20c6a79c445b5
+          created: 1752068275837
+          modified: 1752433702012
+          isPrivate: false
+          description: ""
+          sortKey: -1752433700836
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"correlationId": "4a4101b28-7d26-4d9d-aa19-4dc1c7cf60b3",
+            	"amount": 49.987
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.2.0
+        scripts:
+          preRequest: ""
+          afterResponse: ""
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _['backend-url'] }}/payments-summary"
+        name: get summary
+        meta:
+          id: req_dff30477f21b4bd7960c1fefe512bdef
+          created: 1752344400864
+          modified: 1752433700760
+          isPrivate: false
+          description: ""
+          sortKey: -1752433700736
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.2.0
+        scripts:
+          preRequest: ""
+          afterResponse: ""
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+    scripts:
+      afterResponse: ""
+      preRequest: ""
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_e37ced2d294e4283a0e9cfe3f08ef643
+    created: 1752067499940
+    modified: 1752067499940
+environments:
+  name: Base Environment
+  meta:
+    id: env_b01e4fa44463413a8ee7baecf9fbd003
+    created: 1752067499939
+    modified: 1752433798517
+    isPrivate: false
+  data:
+    processor-url-1: http://localhost:8001
+    processor-url-2: http://localhost:8002
+    backend-url: http://localhost:3000
+    token:
+      value: 123
+      header: X-Rinha-Token
