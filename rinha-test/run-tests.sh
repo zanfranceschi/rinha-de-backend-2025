@@ -68,6 +68,7 @@ while true; do
                 echo "log truncated at line 1000" >> $directory/docker-compose.logs
                 echo "log truncated at line 1000" >> $directory/k6.logs
             else
+                stopContainers $participant
                 echo "Could not get a successful response from backend... aborting test for $participant"
             fi
 
