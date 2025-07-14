@@ -17,3 +17,4 @@ Atualizado em **Sun Jul 13 10:32:43 PM -03 2025**
 |	lpicanco-rust	|	0	|	75830.39274999186	|	140827.87224998488	|
 |	luizcordista-go	|	0	|	0	|	276755.26999999996	|
 |	panissetrafael-go	|	0	|	40605.733349999995	|	75410.64765	|
+|	ricassiocosta-python	|	0	|	0	|	0	|
