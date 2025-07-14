@@ -52,7 +52,7 @@ while true; do
             while [ $success -ne 0 ] && [ $max_attempts -ge $attempt ]; do
                 curl -f -s http://localhost:9999/payments-summary
                 success=$?
-                echo "trying $attempt from $max_attempts..."
+                echo "trying $attempt out of $max_attempts..."
                 sleep 5
                 ((attempt++))
             done
