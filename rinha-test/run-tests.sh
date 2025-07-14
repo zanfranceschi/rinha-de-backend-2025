@@ -24,7 +24,7 @@ stopContainers() {
     popd > /dev/null
 }
 
-MAX_REQUESTS=500
+MAX_REQUESTS=550
 
 while true; do
     
