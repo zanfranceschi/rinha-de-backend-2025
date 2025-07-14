@@ -146,11 +146,15 @@ export async function setup() {
 }
 
 export async function teardown() {
-  const from = "2000-01-01T00:00:00Z";
-  const to = "2900-01-01T00:00:00Z";
-  const defaultResponse = await getPPPaymentsSummary("default", from, to);
-  const fallbackResponse = await getPPPaymentsSummary("fallback", from, to);
-  const backendPaymentsSummary = await getBackendPaymentsSummary(from, to);
+  
+  const to = new Date();
+  const from = new Date(to.getTime() - 70 * 1000); // 1 minuto e 10 segundos atrás
+
+  console.info(`summaries from ${from.toISOString()} to ${to.toISOString()}`);
+
+  const defaultResponse = await getPPPaymentsSummary("default", from.toISOString(), to.toISOString());
+  const fallbackResponse = await getPPPaymentsSummary("fallback", from.toISOString(), to.toISOString());
+  const backendPaymentsSummary = await getBackendPaymentsSummary(from.toISOString(), to.toISOString());
 
   totalTransactionsAmountCounter.add(
     backendPaymentsSummary.default.totalAmount +
@@ -307,7 +311,7 @@ export function handleSummary(data) {
   let summaryJsonFileName = `../participantes/${participant}/partial-results.json`
 
   if (participant == undefined) {
-    summaryJsonFileName = `./results/partial-results.json`
+    summaryJsonFileName = `./partial-results.json`
   }
 
   result[summaryJsonFileName] = JSON.stringify(custom_data, null, 2);
