@@ -82,7 +82,7 @@ while true; do
 
     for partialResult in ../participantes/*/partial-results.json; do
     (
-        if test -f $partialResult; then
+        if [ -s $partialResult ]; then
             cat $partialResult | jq -r '(["|", .participante, "|", .p99.bonus, "|", .multa.total, "|", .total_liquido, "|"]) | @tsv' >> ../PREVIA_RESULTADOS.md
         fi
     )
