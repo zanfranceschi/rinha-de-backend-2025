@@ -19,3 +19,4 @@ Atualizado em **Sun Jul 13 10:18:54 PM -03 2025**
 |	panissetrafael-go	|	0	|	40605.733349999995	|	75410.64765	|
 |	ricassiocosta-python	|	0	|	0	|	0	|
 |	robertAlmeida	|	0	|	0	|	0	|
+|	rodrigocaldeira-elixir	|	0	|	65625.62299999999	|	121876.157	|
