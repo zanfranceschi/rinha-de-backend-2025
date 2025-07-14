@@ -22,3 +22,4 @@ Atualizado em **Sun Jul 13 09:23:40 PM -03 2025**
 |	rodrigocaldeira-elixir	|	0	|	65625.62299999999	|	121876.157	|
 |	ryangst-bun	|	0	|	2507.0517499999996	|	4655.95325	|
 |	victorverdoodt-cs	|	0	|	0	|	0	|
+|	willzada-aGOrinha	|	0	|	17383.247	|	32283.173	|
