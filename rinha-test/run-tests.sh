@@ -40,6 +40,7 @@ while true; do
             stopContainers $participant
             startContainers $participant
             sleep 12
+            echo "" > $directory/k6.logs
             k6 run -e MAX_REQUESTS=$MAX_REQUESTS -e PARTICIPANT=$participant --log-output=file=$directory/k6.logs rinha.js
             stopContainers $participant
             if test -f $testedFile; then
