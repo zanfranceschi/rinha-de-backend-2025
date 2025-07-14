@@ -47,43 +47,33 @@ while true; do
             startContainers $participant
             
             success=1
-            max_attempts=20
+            max_attempts=15
             attempt=1
             while [ $success -ne 0 ] && [ $max_attempts -ge $attempt ]; do
                 curl -f -s http://localhost:9999/payments-summary
                 success=$?
                 echo "trying $attempt from $max_attempts..."
-                sleep 2
+                sleep 5
                 ((attempt++))
             done
 
-            if [ $success -ne 0 ]; then
-                echo "health-check failed... sorry"
-                break
+            if [ $success -eq 0 ]; then
+                echo "" > $directory/k6.logs
+                k6 run -e MAX_REQUESTS=$MAX_REQUESTS -e PARTICIPANT=$participant --log-output=file=$directory/k6.logs rinha.js
+                stopContainers $participant
+                echo "======================================="
+                echo "working on $participant"
+                sed -i '1001,$d' $directory/docker-compose.logs
+                sed -i '1001,$d' $directory/k6.logs
+                echo "log truncated at line 1000" >> $directory/docker-compose.logs
+                echo "log truncated at line 1000" >> $directory/k6.logs
+                git add $directory
+                git commit -m "add $participant's partial result"
+                git push
+                echo "======================================="
+            else
+                echo "Could not get a successful response from backend... aborting test for $participant"
             fi
-
-            echo "" > $directory/k6.logs
-            k6 run -e MAX_REQUESTS=$MAX_REQUESTS -e PARTICIPANT=$participant --log-output=file=$directory/k6.logs rinha.js
-            stopContainers $participant
-            echo "======================================="
-            echo "working on $participant"
-            sed -i '1001,$d' $directory/docker-compose.logs
-            sed -i '1001,$d' $directory/k6.logs
-            echo "log truncated at line 1000" >> $directory/docker-compose.logs
-            echo "log truncated at line 1000" >> $directory/k6.logs
-            git add $directory
-            git commit -m "add $participant's partial result"
-            git push
-            echo "======================================="
-            
-            #echo "submissão '$participant' já testada - ignorando"
-            #rm -rf "$RESULTS_WORKSPACE/$participant"
-            #countAPIsToBeTested
-            #startApi $participant
-            #startTest $participant
-            #stopApi $participant
-            #echo "testada em $(date)" > $testedFile
-            #echo "abra um PR removendo esse arquivo caso queira que sua API seja testada novamente" >> $testedFile
         else
             echo "skipping $participant"
         fi
