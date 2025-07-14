@@ -43,6 +43,12 @@ services:
           cpus: '0.3'
     volumes:
       - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U admin -d postgres"]
+      interval: 2s
+      timeout: 5s
+      retries: 3
+      start_period: 2s
 
   messaging:
     container_name: messaging
@@ -59,7 +65,8 @@ services:
           cpus: '0.3'
           memory: 100M
     depends_on:
-      - postgres
+      postgres:
+        condition: service_healthy
 
   processor-api-1:
     image: jccl/processor-api:latest
