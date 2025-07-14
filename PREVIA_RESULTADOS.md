@@ -4,3 +4,4 @@ Atualizado em **Mon Jul 14 05:31:05 PM -03 2025**
 
 | participante | p99 | bônus por desempenho (%) | multa ($) | lucro |
 | -- | -- | -- | -- | -- |
+|	davidalecrim1-go-1	|	3.7105129400000125ms	|	0.14578974119999974	|	104131.97374998374	|	236763.30411755634	|
