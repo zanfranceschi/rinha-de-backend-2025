@@ -20,3 +20,4 @@ Atualizado em **Sun Jul 13 11:42:06 PM -03 2025**
 |	ricassiocosta-python	|	333.63223297999997ms	|	0	|	0	|	0	|
 |	robertAlmeida	|	320.00366407999996ms	|	0	|	0	|	0	|
 |	rodrigocaldeira-elixir	|	12.607534439999997ms	|	0	|	65625.62299999999	|	121876.157	|
+|	ryangst-bun	|	1305.6865755699998ms	|	0	|	2507.0517499999996	|	4655.95325	|
