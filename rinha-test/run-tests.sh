@@ -77,13 +77,13 @@ while true; do
     echo -e "Atualizado em **$(date)**" >> ../PREVIA_RESULTADOS.md
     echo -e "*Testes executados com MAX_REQUESTS=$MAX_REQUESTS*."
     echo -e "\n" >> ../PREVIA_RESULTADOS.md
-    echo -e "| participante | bônus por desempenho (%) | multa ($) | lucro |" >> ../PREVIA_RESULTADOS.md
-    echo -e "| -- | -- | -- | -- |" >> ../PREVIA_RESULTADOS.md
+    echo -e "| participante | p99 | bônus por desempenho (%) | multa ($) | lucro |" >> ../PREVIA_RESULTADOS.md
+    echo -e "| -- | -- | -- | -- | -- |" >> ../PREVIA_RESULTADOS.md
 
     for partialResult in ../participantes/*/partial-results.json; do
     (
         if [ -s $partialResult ]; then
-            cat $partialResult | jq -r '(["|", .participante, "|", .p99.bonus, "|", .multa.total, "|", .total_liquido, "|"]) | @tsv' >> ../PREVIA_RESULTADOS.md
+            cat $partialResult | jq -r '(["|", .participante, "|", p99.valor, "|", .p99.bonus, "|", .multa.total, "|", .total_liquido, "|"]) | @tsv' >> ../PREVIA_RESULTADOS.md
         fi
     )
 
