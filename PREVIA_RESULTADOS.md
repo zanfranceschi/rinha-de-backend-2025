@@ -9,3 +9,4 @@ Atualizado em **Sun Jul 13 10:12:00 PM -03 2025**
 |	davidalecrim1-go-2	|	0.10075864160000031	|	89629.10249998799	|	192256.63783062337	|
 |	davidalecrim1-go	|	0	|	0	|	0	|
 |	dotnetRinha	|	0	|	0	|	0	|
+|	gaoliveira21	|	0	|	98271.97099999999	|	182505.089	|
