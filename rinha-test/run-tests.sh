@@ -50,9 +50,7 @@ while true; do
                 sed -i '1001,$d' $directory/k6.logs
                 echo "log truncated at line 1000" >> $directory/docker-compose.logs
                 echo "log truncated at line 1000" >> $directory/k6.logs
-                git add $testedFile
-                git add $directory/k6.logs
-                git add $directory/docker-compose.logs
+                git add $directory
                 git commit -m "add $participant's partial result"
                 git push
                 echo "======================================="

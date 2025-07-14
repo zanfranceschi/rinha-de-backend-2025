@@ -146,30 +146,26 @@ export async function setup() {
 }
 
 export async function teardown() {
-  try {
-    const from = "2000-01-01T00:00:00Z";
-    const to = "2900-01-01T00:00:00Z";
-    const defaultResponse = await getPPPaymentsSummary("default", from, to);
-    const fallbackResponse = await getPPPaymentsSummary("fallback", from, to);
-    const backendPaymentsSummary = await getBackendPaymentsSummary(from, to);
+  const from = "2000-01-01T00:00:00Z";
+  const to = "2900-01-01T00:00:00Z";
+  const defaultResponse = await getPPPaymentsSummary("default", from, to);
+  const fallbackResponse = await getPPPaymentsSummary("fallback", from, to);
+  const backendPaymentsSummary = await getBackendPaymentsSummary(from, to);
 
-    totalTransactionsAmountCounter.add(
-      backendPaymentsSummary.default.totalAmount +
-      backendPaymentsSummary.fallback.totalAmount);
+  totalTransactionsAmountCounter.add(
+    backendPaymentsSummary.default.totalAmount +
+    backendPaymentsSummary.fallback.totalAmount);
 
-    defaultTotalAmountCounter.add(backendPaymentsSummary.default.totalAmount);
-    defaultTotalRequestsCounter.add(backendPaymentsSummary.default.totalRequests);
-    fallbackTotalAmountCounter.add(backendPaymentsSummary.fallback.totalAmount);
-    fallbackTotalRequestsCounter.add(backendPaymentsSummary.fallback.totalRequests);
+  defaultTotalAmountCounter.add(backendPaymentsSummary.default.totalAmount);
+  defaultTotalRequestsCounter.add(backendPaymentsSummary.default.totalRequests);
+  fallbackTotalAmountCounter.add(backendPaymentsSummary.fallback.totalAmount);
+  fallbackTotalRequestsCounter.add(backendPaymentsSummary.fallback.totalRequests);
 
-    const defaultTotalFee = defaultResponse.feePerTransaction * backendPaymentsSummary.default.totalAmount;
-    const fallbackTotalFee = fallbackResponse.feePerTransaction * backendPaymentsSummary.fallback.totalAmount;
+  const defaultTotalFee = defaultResponse.feePerTransaction * backendPaymentsSummary.default.totalAmount;
+  const fallbackTotalFee = fallbackResponse.feePerTransaction * backendPaymentsSummary.fallback.totalAmount;
 
-    defaultTotalFeeCounter.add(defaultTotalFee);
-    fallbackTotalFeeCounter.add(fallbackTotalFee);
-  } catch (error) {
-    console.error(`tear down failed: ${error}`);
-  }
+  defaultTotalFeeCounter.add(defaultTotalFee);
+  fallbackTotalFeeCounter.add(fallbackTotalFee);
 }
 
 const paymentRequestFixedAmount = 19.90;
