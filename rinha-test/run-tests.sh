@@ -27,6 +27,10 @@ stopContainers() {
 MAX_REQUESTS=500
 
 while true; do
+    
+    docker image prune -a -f
+    docker volume prune -a -f
+
     for directory in ../participantes/*; do
     (
         git pull
