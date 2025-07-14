@@ -21,3 +21,4 @@ Atualizado em **Sun Jul 13 10:45:23 PM -03 2025**
 |	robertAlmeida	|	0	|	0	|	0	|
 |	rodrigocaldeira-elixir	|	0	|	65625.62299999999	|	121876.157	|
 |	ryangst-bun	|	0	|	2507.0517499999996	|	4655.95325	|
+|	victorverdoodt-cs	|	0	|	18232.280499999997	|	33859.9495	|
