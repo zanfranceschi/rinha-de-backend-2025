@@ -52,7 +52,7 @@ while true; do
             while [ $success -ne 0 ] && [ $max_attempts -ge $attempt ]; do
                 curl -f -s http://localhost:9999/payments-summary
                 success=$?
-                echo "trying $attempt out of $max_attempts..."
+                echo "tried $attempt out of $max_attempts..."
                 sleep 5
                 ((attempt++))
             done
@@ -67,13 +67,15 @@ while true; do
                 sed -i '1001,$d' $directory/k6.logs
                 echo "log truncated at line 1000" >> $directory/docker-compose.logs
                 echo "log truncated at line 1000" >> $directory/k6.logs
-                git add $directory
-                git commit -m "add $participant's partial result"
-                git push
-                echo "======================================="
             else
+                stopContainers $participant
                 echo "Could not get a successful response from backend... aborting test for $participant"
             fi
+
+            git add $directory
+            git commit -m "add $participant's partial result"
+            git push
+
         else
             echo "skipping $participant"
         fi

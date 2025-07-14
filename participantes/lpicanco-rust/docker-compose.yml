@@ -17,7 +17,7 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '0.15'
+          cpus: '0.4'
           memory: "50MB"
 
   api02:
@@ -50,13 +50,11 @@ services:
   redis:
     image: redis:8-alpine
     restart: unless-stopped
-    ports:
-      - "6379:6379"
     command: redis-server --save 300 1000 --loglevel warning
     deploy:
       resources:
         limits:
-          cpus: '1'
+          cpus: '0.5'
           memory: "200MB"
     networks:
       - backend-dogfight-rust-25
@@ -71,7 +69,7 @@ configs:
     name: nginx.conf
     content: |
       events {
-        worker_connections 4096;
+        worker_connections 2048;
         use epoll;
       }
       http {

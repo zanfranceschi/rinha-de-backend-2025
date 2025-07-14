@@ -1,0 +1,1001 @@
+
+time="2025-07-14T20:07:04-03:00" level=warning msg="/home/rinha-user/rinha-de-backend-2025/participantes/ryangst-bun/docker-compose.yml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion"
+ Network ryangst-bun_ryangst  Creating
+ Network ryangst-bun_ryangst  Created
+ Volume "ryangst-bun_mongodb_data"  Creating
+ Volume "ryangst-bun_mongodb_data"  Created
+ Volume "ryangst-bun_redis_data"  Creating
+ Volume "ryangst-bun_redis_data"  Created
+ Container traefik  Creating
+ Container ryangst-bun-redis-1  Creating
+ Container ryangst-bun-mongodb-1  Creating
+ Container ryangst-bun-mongodb-1  Created
+ Container traefik  Created
+ Container ryangst-bun-redis-1  Created
+ Container worker-rinha  Creating
+ Container api-rinha  Creating
+ Container api-rinha-2  Creating
+ Container api-rinha  Created
+ Container api-rinha-2  Created
+ Container worker-rinha  Created
+Attaching to api-rinha, api-rinha-2, mongodb-1, redis-1, traefik, worker-rinha
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:05.807+00:00"},"s":"I",  "c":"CONTROL",  "id":23285,   "ctx":"main","msg":"Automatically disabling TLS 1.0, to force-enable TLS 1.0 specify --sslDisabledProtocols 'none'"}
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:05.807+00:00"},"s":"I",  "c":"NETWORK",  "id":4915701, "ctx":"main","msg":"Initialized wire specification","attr":{"spec":{"incomingExternalClient":{"minWireVersion":0,"maxWireVersion":21},"incomingInternalClient":{"minWireVersion":0,"maxWireVersion":21},"outgoing":{"minWireVersion":6,"maxWireVersion":21},"isInternalClient":true}}}
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:05.883+00:00"},"s":"I",  "c":"NETWORK",  "id":4648601, "ctx":"main","msg":"Implicit TCP FastOpen unavailable. If TCP FastOpen is required, set tcpFastOpenServer, tcpFastOpenClient, and tcpFastOpenQueueSize."}
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:05.885+00:00"},"s":"I",  "c":"REPL",     "id":5123008, "ctx":"main","msg":"Successfully registered PrimaryOnlyService","attr":{"service":"TenantMigrationDonorService","namespace":"config.tenantMigrationDonors"}}
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:05.886+00:00"},"s":"I",  "c":"REPL",     "id":5123008, "ctx":"main","msg":"Successfully registered PrimaryOnlyService","attr":{"service":"TenantMigrationRecipientService","namespace":"config.tenantMigrationRecipients"}}
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:05.886+00:00"},"s":"I",  "c":"CONTROL",  "id":5945603, "ctx":"main","msg":"Multi threading initialized"}
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:05.886+00:00"},"s":"I",  "c":"TENANT_M", "id":7091600, "ctx":"main","msg":"Starting TenantMigrationAccessBlockerRegistry"}
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:05.887+00:00"},"s":"I",  "c":"CONTROL",  "id":4615611, "ctx":"initandlisten","msg":"MongoDB starting","attr":{"pid":1,"port":27017,"dbPath":"/data/db","architecture":"64-bit","host":"6d087dd23ad0"}}
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:05.887+00:00"},"s":"W",  "c":"CONTROL",  "id":20720,   "ctx":"initandlisten","msg":"Memory available to mongo process is less than total system memory","attr":{"availableMemSizeMB":110,"systemMemSizeMB":7823}}
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:05.887+00:00"},"s":"I",  "c":"CONTROL",  "id":23403,   "ctx":"initandlisten","msg":"Build Info","attr":{"buildInfo":{"version":"7.0.21","gitVersion":"a47b62aff2bae1914085c3ef1d90fc099acf000c","openSSLVersion":"OpenSSL 3.0.2 15 Mar 2022","modules":[],"allocator":"tcmalloc","environment":{"distmod":"ubuntu2204","distarch":"x86_64","target_arch":"x86_64"}}}}
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:05.887+00:00"},"s":"I",  "c":"CONTROL",  "id":51765,   "ctx":"initandlisten","msg":"Operating System","attr":{"os":{"name":"Ubuntu","version":"22.04"}}}
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:05.887+00:00"},"s":"I",  "c":"CONTROL",  "id":21951,   "ctx":"initandlisten","msg":"Options set by command line","attr":{"options":{"net":{"bindIp":"*"}}}}
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:05.891+00:00"},"s":"I",  "c":"STORAGE",  "id":22297,   "ctx":"initandlisten","msg":"Using the XFS filesystem is strongly recommended with the WiredTiger storage engine. See http://dochub.mongodb.org/core/prodnotes-filesystem","tags":["startupWarnings"]}
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:05.891+00:00"},"s":"I",  "c":"STORAGE",  "id":22300,   "ctx":"initandlisten","msg":"The configured WiredTiger cache size is more than 80% of available RAM. See http://dochub.mongodb.org/core/faq-memory-diagnostics-wt","tags":["startupWarnings"]}
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:05.891+00:00"},"s":"I",  "c":"STORAGE",  "id":22315,   "ctx":"initandlisten","msg":"Opening WiredTiger","attr":{"config":"create,cache_size=256M,session_max=33000,eviction=(threads_min=4,threads_max=4),config_base=false,statistics=(fast),log=(enabled=true,remove=true,path=journal,compressor=snappy),builtin_extension_config=(zstd=(compression_level=6)),file_manager=(close_idle_time=600,close_scan_interval=10,close_handle_minimum=2000),statistics_log=(wait=0),json_output=(error,message),verbose=[recovery_progress:1,checkpoint_progress:1,compact_progress:1,backup:0,checkpoint:0,compact:0,evict:0,history_store:0,recovery:0,rts:0,salvage:0,tiered:0,timestamp:0,transaction:0,verify:0,log:0],"}}
+redis-1       | 1:C 14 Jul 2025 23:07:06.189 # WARNING Memory overcommit must be enabled! Without it, a background save or replication may fail under low memory condition. Being disabled, it can also cause failures without low memory condition, see https://github.com/jemalloc/jemalloc/issues/1328. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.
+redis-1       | 1:C 14 Jul 2025 23:07:06.189 * oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+redis-1       | 1:C 14 Jul 2025 23:07:06.189 * Redis version=7.4.5, bits=64, commit=00000000, modified=0, pid=1, just started
+redis-1       | 1:C 14 Jul 2025 23:07:06.189 * Configuration loaded
+redis-1       | 1:M 14 Jul 2025 23:07:06.189 * monotonic clock: POSIX clock_gettime
+redis-1       | 1:M 14 Jul 2025 23:07:06.282 * Running mode=standalone, port=6379.
+redis-1       | 1:M 14 Jul 2025 23:07:06.282 * Server initialized
+redis-1       | 1:M 14 Jul 2025 23:07:06.283 * Ready to accept connections tcp
+traefik       | time="2025-07-14T23:07:07Z" level=info msg="Configuration loaded from flags."
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:07.667+00:00"},"s":"I",  "c":"WTRECOV",  "id":22430,   "ctx":"initandlisten","msg":"WiredTiger message","attr":{"message":{"ts_sec":1752534427,"ts_usec":667318,"thread":"1:0x7fb09cdaec80","session_name":"txn-recover","category":"WT_VERB_RECOVERY_PROGRESS","category_id":30,"verbose_level":"DEBUG_1","verbose_level_id":1,"msg":"recovery log replay has successfully finished and ran for 0 milliseconds"}}}
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:07.667+00:00"},"s":"I",  "c":"WTRECOV",  "id":22430,   "ctx":"initandlisten","msg":"WiredTiger message","attr":{"message":{"ts_sec":1752534427,"ts_usec":667436,"thread":"1:0x7fb09cdaec80","session_name":"txn-recover","category":"WT_VERB_RECOVERY_PROGRESS","category_id":30,"verbose_level":"DEBUG_1","verbose_level_id":1,"msg":"Set global recovery timestamp: (0, 0)"}}}
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:07.667+00:00"},"s":"I",  "c":"WTRECOV",  "id":22430,   "ctx":"initandlisten","msg":"WiredTiger message","attr":{"message":{"ts_sec":1752534427,"ts_usec":667454,"thread":"1:0x7fb09cdaec80","session_name":"txn-recover","category":"WT_VERB_RECOVERY_PROGRESS","category_id":30,"verbose_level":"DEBUG_1","verbose_level_id":1,"msg":"Set global oldest timestamp: (0, 0)"}}}
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:07.667+00:00"},"s":"I",  "c":"WTRECOV",  "id":22430,   "ctx":"initandlisten","msg":"WiredTiger message","attr":{"message":{"ts_sec":1752534427,"ts_usec":667486,"thread":"1:0x7fb09cdaec80","session_name":"txn-recover","category":"WT_VERB_RECOVERY_PROGRESS","category_id":30,"verbose_level":"DEBUG_1","verbose_level_id":1,"msg":"recovery was completed successfully and took 0ms, including 0ms for the log replay, 0ms for the rollback to stable, and 0ms for the checkpoint."}}}
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:07.707+00:00"},"s":"I",  "c":"STORAGE",  "id":4795906, "ctx":"initandlisten","msg":"WiredTiger opened","attr":{"durationMillis":1816}}
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:07.707+00:00"},"s":"I",  "c":"RECOVERY", "id":23987,   "ctx":"initandlisten","msg":"WiredTiger recoveryTimestamp","attr":{"recoveryTimestamp":{"$timestamp":{"t":0,"i":0}}}}
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:07.864+00:00"},"s":"W",  "c":"CONTROL",  "id":22120,   "ctx":"initandlisten","msg":"Access control is not enabled for the database. Read and write access to data and configuration is unrestricted","tags":["startupWarnings"]}
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:07.864+00:00"},"s":"W",  "c":"CONTROL",  "id":9068900, "ctx":"initandlisten","msg":"For customers running MongoDB 7.0, we suggest changing the contents of the following sysfsFile","attr":{"sysfsFile":"/sys/kernel/mm/transparent_hugepage","currentValue":"always","desiredValue":"never"},"tags":["startupWarnings"]}
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:07.864+00:00"},"s":"W",  "c":"CONTROL",  "id":5123300, "ctx":"initandlisten","msg":"vm.max_map_count is too low","attr":{"currentValue":65530,"recommendedMinimum":1677720,"maxConns":838860},"tags":["startupWarnings"]}
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:07.864+00:00"},"s":"I",  "c":"STORAGE",  "id":20320,   "ctx":"initandlisten","msg":"createCollection","attr":{"namespace":"admin.system.version","uuidDisposition":"provided","uuid":{"uuid":{"$uuid":"37850bfb-3138-4314-aff7-96bfa9f99ec3"}},"options":{"uuid":{"$uuid":"37850bfb-3138-4314-aff7-96bfa9f99ec3"}}}}
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:08.147+00:00"},"s":"I",  "c":"INDEX",    "id":20345,   "ctx":"initandlisten","msg":"Index build: done building","attr":{"buildUUID":null,"collectionUUID":{"uuid":{"$uuid":"37850bfb-3138-4314-aff7-96bfa9f99ec3"}},"namespace":"admin.system.version","index":"_id_","ident":"index-1--4613705795105569502","collectionIdent":"collection-0--4613705795105569502","commitTimestamp":null}}
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:08.147+00:00"},"s":"I",  "c":"REPL",     "id":20459,   "ctx":"initandlisten","msg":"Setting featureCompatibilityVersion","attr":{"newVersion":"7.0"}}
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:08.147+00:00"},"s":"I",  "c":"REPL",     "id":5853300, "ctx":"initandlisten","msg":"current featureCompatibilityVersion value","attr":{"featureCompatibilityVersion":"7.0","context":"setFCV"}}
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:08.147+00:00"},"s":"I",  "c":"NETWORK",  "id":4915702, "ctx":"initandlisten","msg":"Updated wire specification","attr":{"oldSpec":{"incomingExternalClient":{"minWireVersion":0,"maxWireVersion":21},"incomingInternalClient":{"minWireVersion":0,"maxWireVersion":21},"outgoing":{"minWireVersion":6,"maxWireVersion":21},"isInternalClient":true},"newSpec":{"incomingExternalClient":{"minWireVersion":0,"maxWireVersion":21},"incomingInternalClient":{"minWireVersion":21,"maxWireVersion":21},"outgoing":{"minWireVersion":21,"maxWireVersion":21},"isInternalClient":true}}}
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:08.148+00:00"},"s":"I",  "c":"NETWORK",  "id":4915702, "ctx":"initandlisten","msg":"Updated wire specification","attr":{"oldSpec":{"incomingExternalClient":{"minWireVersion":0,"maxWireVersion":21},"incomingInternalClient":{"minWireVersion":21,"maxWireVersion":21},"outgoing":{"minWireVersion":21,"maxWireVersion":21},"isInternalClient":true},"newSpec":{"incomingExternalClient":{"minWireVersion":0,"maxWireVersion":21},"incomingInternalClient":{"minWireVersion":21,"maxWireVersion":21},"outgoing":{"minWireVersion":21,"maxWireVersion":21},"isInternalClient":true}}}
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:08.148+00:00"},"s":"I",  "c":"REPL",     "id":5853300, "ctx":"initandlisten","msg":"current featureCompatibilityVersion value","attr":{"featureCompatibilityVersion":"7.0","context":"startup"}}
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:08.148+00:00"},"s":"I",  "c":"STORAGE",  "id":5071100, "ctx":"initandlisten","msg":"Clearing temp directory"}
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:08.148+00:00"},"s":"I",  "c":"CONTROL",  "id":6608200, "ctx":"initandlisten","msg":"Initializing cluster server parameters from disk"}
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:08.148+00:00"},"s":"I",  "c":"CONTROL",  "id":20536,   "ctx":"initandlisten","msg":"Flow Control is enabled on this deployment"}
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:08.148+00:00"},"s":"I",  "c":"FTDC",     "id":20625,   "ctx":"initandlisten","msg":"Initializing full-time diagnostic data capture","attr":{"dataDirectory":"/data/db/diagnostic.data"}}
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:08.150+00:00"},"s":"I",  "c":"STORAGE",  "id":20320,   "ctx":"initandlisten","msg":"createCollection","attr":{"namespace":"local.startup_log","uuidDisposition":"generated","uuid":{"uuid":{"$uuid":"6e2bcc0c-802e-4c24-9838-8ea575bfa0e1"}},"options":{"capped":true,"size":10485760}}}
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:08.235+00:00"},"s":"I",  "c":"INDEX",    "id":20345,   "ctx":"initandlisten","msg":"Index build: done building","attr":{"buildUUID":null,"collectionUUID":{"uuid":{"$uuid":"6e2bcc0c-802e-4c24-9838-8ea575bfa0e1"}},"namespace":"local.startup_log","index":"_id_","ident":"index-3--4613705795105569502","collectionIdent":"collection-2--4613705795105569502","commitTimestamp":null}}
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:08.235+00:00"},"s":"I",  "c":"REPL",     "id":6015317, "ctx":"initandlisten","msg":"Setting new configuration state","attr":{"newState":"ConfigReplicationDisabled","oldState":"ConfigPreStart"}}
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:08.235+00:00"},"s":"I",  "c":"STORAGE",  "id":22262,   "ctx":"initandlisten","msg":"Timestamp monitor starting"}
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:08.236+00:00"},"s":"I",  "c":"STORAGE",  "id":20320,   "ctx":"LogicalSessionCacheRefresh","msg":"createCollection","attr":{"namespace":"config.system.sessions","uuidDisposition":"generated","uuid":{"uuid":{"$uuid":"8a69943e-4962-4ace-a7c3-739f2219c28d"}},"options":{}}}
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:08.236+00:00"},"s":"I",  "c":"CONTROL",  "id":20712,   "ctx":"LogicalSessionCacheReap","msg":"Sessions collection is not set up; waiting until next sessions reap interval","attr":{"error":"NamespaceNotFound: config.system.sessions does not exist"}}
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:08.236+00:00"},"s":"I",  "c":"NETWORK",  "id":23015,   "ctx":"listener","msg":"Listening on","attr":{"address":"/tmp/mongodb-27017.sock"}}
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:08.236+00:00"},"s":"I",  "c":"NETWORK",  "id":23015,   "ctx":"listener","msg":"Listening on","attr":{"address":"0.0.0.0"}}
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:08.236+00:00"},"s":"I",  "c":"NETWORK",  "id":23016,   "ctx":"listener","msg":"Waiting for connections","attr":{"port":27017,"ssl":"off"}}
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:08.236+00:00"},"s":"I",  "c":"CONTROL",  "id":8423403, "ctx":"initandlisten","msg":"mongod startup complete","attr":{"Summary of time elapsed":{"Startup from clean shutdown?":true,"Statistics":{"Transport layer setup":"0 ms","Run initial syncer crash recovery":"0 ms","Create storage engine lock file in the data directory":"0 ms","Get metadata describing storage engine":"0 ms","Create storage engine":"1949 ms","Write current PID to file":"0 ms","Write a new metadata for storage engine":"23 ms","Initialize FCV before rebuilding indexes":"1 ms","Drop abandoned idents and get back indexes that need to be rebuilt or builds that need to be restarted":"0 ms","Rebuild indexes for collections":"0 ms","Load cluster parameters from disk for a standalone":"0 ms","Build user and roles graph":"0 ms","Set up the background thread pool responsible for waiting for opTimes to be majority committed":"0 ms","Initialize information needed to make a mongod instance shard aware":"0 ms","Start up the replication coordinator":"0 ms","Start transport layer":"0 ms","_initAndListen total elapsed time":"2349 ms"}}}}
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:08.241+00:00"},"s":"I",  "c":"NETWORK",  "id":22943,   "ctx":"listener","msg":"Connection accepted","attr":{"remote":"172.20.0.5:33112","uuid":{"uuid":{"$uuid":"f1787108-f0a5-418b-9356-d87657923c6f"}},"connectionId":1,"connectionCount":1}}
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:08.282+00:00"},"s":"I",  "c":"NETWORK",  "id":22943,   "ctx":"listener","msg":"Connection accepted","attr":{"remote":"172.20.0.6:37686","uuid":{"uuid":{"$uuid":"823809be-2497-4ece-a572-a2014f85b0c8"}},"connectionId":2,"connectionCount":2}}
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:08.295+00:00"},"s":"I",  "c":"NETWORK",  "id":51800,   "ctx":"conn2","msg":"client metadata","attr":{"remote":"172.20.0.6:37686","client":"conn2","negotiatedCompressors":[],"doc":{"driver":{"name":"nodejs|Mongoose","version":"6.17.0|8.16.2"},"platform":"Bun v1.2.18, LE","os":{"name":"linux","architecture":"x64","version":"6.1.0-37-amd64","type":"Linux"},"env":{"container":{"runtime":"docker"}}}}}
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:08.296+00:00"},"s":"I",  "c":"NETWORK",  "id":51800,   "ctx":"conn1","msg":"client metadata","attr":{"remote":"172.20.0.5:33112","client":"conn1","negotiatedCompressors":[],"doc":{"driver":{"name":"nodejs|Mongoose","version":"6.17.0|8.16.2"},"platform":"Bun v1.2.18, LE","os":{"name":"linux","architecture":"x64","version":"6.1.0-37-amd64","type":"Linux"},"env":{"container":{"runtime":"docker"}}}}}
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:08.311+00:00"},"s":"I",  "c":"NETWORK",  "id":22943,   "ctx":"listener","msg":"Connection accepted","attr":{"remote":"172.20.0.6:37692","uuid":{"uuid":{"$uuid":"2ab2d61f-6a01-4364-a931-32e07e021011"}},"connectionId":3,"connectionCount":3}}
+api-rinha-2   | Connected to database
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:08.318+00:00"},"s":"I",  "c":"REPL",     "id":7360102, "ctx":"LogicalSessionCacheRefresh","msg":"Added oplog entry for create to transaction","attr":{"namespace":"config.$cmd","uuid":{"uuid":{"$uuid":"8a69943e-4962-4ace-a7c3-739f2219c28d"}},"object":{"create":"system.sessions","idIndex":{"v":2,"key":{"_id":1},"name":"_id_"}}}}
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:08.319+00:00"},"s":"I",  "c":"REPL",     "id":7360100, "ctx":"LogicalSessionCacheRefresh","msg":"Added oplog entry for createIndexes to transaction","attr":{"namespace":"config.$cmd","uuid":{"uuid":{"$uuid":"8a69943e-4962-4ace-a7c3-739f2219c28d"}},"object":{"createIndexes":"system.sessions","v":2,"key":{"lastUse":1},"name":"lsidTTLIndex","expireAfterSeconds":1800}}}
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:08.325+00:00"},"s":"I",  "c":"NETWORK",  "id":22943,   "ctx":"listener","msg":"Connection accepted","attr":{"remote":"172.20.0.5:33118","uuid":{"uuid":{"$uuid":"aa13581b-cb42-44c4-9883-9604d08b780a"}},"connectionId":4,"connectionCount":4}}
+api-rinha     | Connected to database
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:08.340+00:00"},"s":"I",  "c":"INDEX",    "id":20345,   "ctx":"LogicalSessionCacheRefresh","msg":"Index build: done building","attr":{"buildUUID":null,"collectionUUID":{"uuid":{"$uuid":"8a69943e-4962-4ace-a7c3-739f2219c28d"}},"namespace":"config.system.sessions","index":"_id_","ident":"index-5--4613705795105569502","collectionIdent":"collection-4--4613705795105569502","commitTimestamp":null}}
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:08.340+00:00"},"s":"I",  "c":"INDEX",    "id":20345,   "ctx":"LogicalSessionCacheRefresh","msg":"Index build: done building","attr":{"buildUUID":null,"collectionUUID":{"uuid":{"$uuid":"8a69943e-4962-4ace-a7c3-739f2219c28d"}},"namespace":"config.system.sessions","index":"lsidTTLIndex","ident":"index-6--4613705795105569502","collectionIdent":"collection-4--4613705795105569502","commitTimestamp":null}}
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:08.340+00:00"},"s":"I",  "c":"COMMAND",  "id":51803,   "ctx":"LogicalSessionCacheRefresh","msg":"Slow query","attr":{"type":"command","ns":"config.system.sessions","command":{"createIndexes":"system.sessions","v":2,"indexes":[{"key":{"lastUse":1},"name":"lsidTTLIndex","expireAfterSeconds":1800}],"ignoreUnknownIndexOptions":false,"writeConcern":{},"$db":"config"},"numYields":0,"reslen":114,"locks":{"ParallelBatchWriterMode":{"acquireCount":{"r":4}},"FeatureCompatibilityVersion":{"acquireCount":{"r":1,"w":3}},"ReplicationStateTransition":{"acquireCount":{"w":4}},"Global":{"acquireCount":{"r":1,"w":3}},"Database":{"acquireCount":{"r":1,"w":3}},"Collection":{"acquireCount":{"r":1,"w":3}},"Mutex":{"acquireCount":{"r":2}}},"flowControl":{"acquireCount":1},"storage":{},"cpuNanos":8154502,"protocol":"op_msg","durationMillis":103}}
+api-rinha     | 🦊 Elysia is running at localhost:9999
+api-rinha-2   | 🦊 Elysia is running at localhost:9998
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:08.494+00:00"},"s":"I",  "c":"NETWORK",  "id":22943,   "ctx":"listener","msg":"Connection accepted","attr":{"remote":"172.20.0.5:33126","uuid":{"uuid":{"$uuid":"ede53ede-b724-4b04-ae4f-6d67c0be64a8"}},"connectionId":5,"connectionCount":5}}
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:08.498+00:00"},"s":"I",  "c":"NETWORK",  "id":22943,   "ctx":"listener","msg":"Connection accepted","attr":{"remote":"172.20.0.6:37706","uuid":{"uuid":{"$uuid":"2af09eb2-baf6-45d5-8f0c-be084620c1e1"}},"connectionId":6,"connectionCount":6}}
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:08.599+00:00"},"s":"I",  "c":"NETWORK",  "id":51800,   "ctx":"conn4","msg":"client metadata","attr":{"remote":"172.20.0.5:33118","client":"conn4","negotiatedCompressors":[],"doc":{"driver":{"name":"nodejs|Mongoose","version":"6.17.0|8.16.2"},"platform":"Bun v1.2.18, LE","os":{"name":"linux","architecture":"x64","version":"6.1.0-37-amd64","type":"Linux"},"env":{"container":{"runtime":"docker"}}}}}
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:08.600+00:00"},"s":"I",  "c":"NETWORK",  "id":51800,   "ctx":"conn3","msg":"client metadata","attr":{"remote":"172.20.0.6:37692","client":"conn3","negotiatedCompressors":[],"doc":{"driver":{"name":"nodejs|Mongoose","version":"6.17.0|8.16.2"},"platform":"Bun v1.2.18, LE","os":{"name":"linux","architecture":"x64","version":"6.1.0-37-amd64","type":"Linux"},"env":{"container":{"runtime":"docker"}}}}}
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:08.602+00:00"},"s":"I",  "c":"NETWORK",  "id":51800,   "ctx":"conn6","msg":"client metadata","attr":{"remote":"172.20.0.6:37706","client":"conn6","negotiatedCompressors":[],"doc":{"driver":{"name":"nodejs|Mongoose","version":"6.17.0|8.16.2"},"platform":"Bun v1.2.18, LE","os":{"name":"linux","architecture":"x64","version":"6.1.0-37-amd64","type":"Linux"},"env":{"container":{"runtime":"docker"}}}}}
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:08.603+00:00"},"s":"I",  "c":"NETWORK",  "id":51800,   "ctx":"conn5","msg":"client metadata","attr":{"remote":"172.20.0.5:33126","client":"conn5","negotiatedCompressors":[],"doc":{"driver":{"name":"nodejs|Mongoose","version":"6.17.0|8.16.2"},"platform":"Bun v1.2.18, LE","os":{"name":"linux","architecture":"x64","version":"6.1.0-37-amd64","type":"Linux"},"env":{"container":{"runtime":"docker"}}}}}
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:08.608+00:00"},"s":"I",  "c":"NETWORK",  "id":6788700, "ctx":"conn5","msg":"Received first command on ingress connection since session start or auth handshake","attr":{"elapsedMillis":5}}
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:08.608+00:00"},"s":"I",  "c":"STORAGE",  "id":20320,   "ctx":"conn5","msg":"createCollection","attr":{"namespace":"rinha-ryangst.payments","uuidDisposition":"generated","uuid":{"uuid":{"$uuid":"26d0b95e-b7da-4c75-85e5-b0ca765f633c"}},"options":{}}}
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:08.653+00:00"},"s":"I",  "c":"REPL",     "id":7360102, "ctx":"conn5","msg":"Added oplog entry for create to transaction","attr":{"namespace":"rinha-ryangst.$cmd","uuid":{"uuid":{"$uuid":"26d0b95e-b7da-4c75-85e5-b0ca765f633c"}},"object":{"create":"payments","idIndex":{"v":2,"key":{"_id":1},"name":"_id_"}}}}
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:08.653+00:00"},"s":"I",  "c":"INDEX",    "id":20345,   "ctx":"conn5","msg":"Index build: done building","attr":{"buildUUID":null,"collectionUUID":{"uuid":{"$uuid":"26d0b95e-b7da-4c75-85e5-b0ca765f633c"}},"namespace":"rinha-ryangst.payments","index":"_id_","ident":"index-8--4613705795105569502","collectionIdent":"collection-7--4613705795105569502","commitTimestamp":null}}
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:08.696+00:00"},"s":"I",  "c":"NETWORK",  "id":6788700, "ctx":"conn6","msg":"Received first command on ingress connection since session start or auth handshake","attr":{"elapsedMillis":94}}
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:08.700+00:00"},"s":"I",  "c":"NETWORK",  "id":22943,   "ctx":"listener","msg":"Connection accepted","attr":{"remote":"172.20.0.7:57934","uuid":{"uuid":{"$uuid":"90822ad8-1724-4659-8db4-379dc48ea6f2"}},"connectionId":7,"connectionCount":7}}
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:08.707+00:00"},"s":"I",  "c":"INDEX",    "id":20438,   "ctx":"conn5","msg":"Index build: registering","attr":{"buildUUID":{"uuid":{"$uuid":"e22a82f4-7f65-4beb-a2b5-62fa0d236563"}},"namespace":"rinha-ryangst.payments","collectionUUID":{"uuid":{"$uuid":"26d0b95e-b7da-4c75-85e5-b0ca765f633c"}},"indexes":1,"firstIndex":{"name":"requestedAt_1_processor_1"},"command":{"createIndexes":"payments","v":2,"indexes":[{"background":true,"partialFilterExpression":{"processor":{"$in":["default","fallback"]}},"name":"requestedAt_1_processor_1","key":{"requestedAt":1,"processor":1}}],"ignoreUnknownIndexOptions":false}}}
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:08.708+00:00"},"s":"I",  "c":"REPL",     "id":7360100, "ctx":"conn5","msg":"Added oplog entry for createIndexes to transaction","attr":{"namespace":"rinha-ryangst.$cmd","uuid":{"uuid":{"$uuid":"26d0b95e-b7da-4c75-85e5-b0ca765f633c"}},"object":{"createIndexes":"payments","v":2,"key":{"requestedAt":1,"processor":1},"name":"requestedAt_1_processor_1","background":true,"partialFilterExpression":{"processor":{"$in":["default","fallback"]}}}}}
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:08.712+00:00"},"s":"I",  "c":"NETWORK",  "id":22943,   "ctx":"listener","msg":"Connection accepted","attr":{"remote":"172.20.0.5:39296","uuid":{"uuid":{"$uuid":"82fbfef9-18a7-4d79-9919-11ce030d16a4"}},"connectionId":8,"connectionCount":8}}
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:08.714+00:00"},"s":"I",  "c":"NETWORK",  "id":51800,   "ctx":"conn8","msg":"client metadata","attr":{"remote":"172.20.0.5:39296","client":"conn8","negotiatedCompressors":[],"doc":{"driver":{"name":"nodejs|Mongoose","version":"6.17.0|8.16.2"},"platform":"Bun v1.2.18, LE","os":{"name":"linux","architecture":"x64","version":"6.1.0-37-amd64","type":"Linux"},"env":{"container":{"runtime":"docker"}}}}}
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:08.718+00:00"},"s":"I",  "c":"NETWORK",  "id":51800,   "ctx":"conn7","msg":"client metadata","attr":{"remote":"172.20.0.7:57934","client":"conn7","negotiatedCompressors":[],"doc":{"driver":{"name":"nodejs|Mongoose","version":"6.17.0|8.16.2"},"platform":"Bun v1.2.18, LE","os":{"name":"linux","architecture":"x64","version":"6.1.0-37-amd64","type":"Linux"},"env":{"container":{"runtime":"docker"}}}}}
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:08.729+00:00"},"s":"I",  "c":"NETWORK",  "id":22943,   "ctx":"listener","msg":"Connection accepted","attr":{"remote":"172.20.0.7:57946","uuid":{"uuid":{"$uuid":"382a10c7-a08a-4a39-b4d4-839d0bb889a0"}},"connectionId":9,"connectionCount":9}}
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:08.729+00:00"},"s":"I",  "c":"INDEX",    "id":20345,   "ctx":"conn5","msg":"Index build: done building","attr":{"buildUUID":null,"collectionUUID":{"uuid":{"$uuid":"26d0b95e-b7da-4c75-85e5-b0ca765f633c"}},"namespace":"rinha-ryangst.payments","index":"requestedAt_1_processor_1","ident":"index-9--4613705795105569502","collectionIdent":"collection-7--4613705795105569502","commitTimestamp":null}}
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:08.729+00:00"},"s":"I",  "c":"INDEX",    "id":20440,   "ctx":"conn5","msg":"Index build: waiting for index build to complete","attr":{"buildUUID":{"uuid":{"$uuid":"e22a82f4-7f65-4beb-a2b5-62fa0d236563"}},"deadline":{"$date":{"$numberLong":"9223372036854775807"}}}}
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:08.729+00:00"},"s":"I",  "c":"INDEX",    "id":20447,   "ctx":"conn5","msg":"Index build: completed","attr":{"buildUUID":{"uuid":{"$uuid":"e22a82f4-7f65-4beb-a2b5-62fa0d236563"}}}}
+worker-rinha  | Connected to database
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:08.785+00:00"},"s":"I",  "c":"NETWORK",  "id":22943,   "ctx":"listener","msg":"Connection accepted","attr":{"remote":"172.20.0.7:57960","uuid":{"uuid":{"$uuid":"246d0d3e-7818-4441-ad49-0ff4e81654fe"}},"connectionId":10,"connectionCount":10}}
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:08.791+00:00"},"s":"I",  "c":"NETWORK",  "id":51800,   "ctx":"conn9","msg":"client metadata","attr":{"remote":"172.20.0.7:57946","client":"conn9","negotiatedCompressors":[],"doc":{"driver":{"name":"nodejs|Mongoose","version":"6.17.0|8.16.2"},"platform":"Bun v1.2.18, LE","os":{"name":"linux","architecture":"x64","version":"6.1.0-37-amd64","type":"Linux"},"env":{"container":{"runtime":"docker"}}}}}
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:08.794+00:00"},"s":"I",  "c":"NETWORK",  "id":51800,   "ctx":"conn10","msg":"client metadata","attr":{"remote":"172.20.0.7:57960","client":"conn10","negotiatedCompressors":[],"doc":{"driver":{"name":"nodejs|Mongoose","version":"6.17.0|8.16.2"},"platform":"Bun v1.2.18, LE","os":{"name":"linux","architecture":"x64","version":"6.1.0-37-amd64","type":"Linux"},"env":{"container":{"runtime":"docker"}}}}}
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:08.798+00:00"},"s":"I",  "c":"NETWORK",  "id":22943,   "ctx":"listener","msg":"Connection accepted","attr":{"remote":"172.20.0.6:41448","uuid":{"uuid":{"$uuid":"6204e37e-7cff-4564-81b1-cfc3c53f3b0d"}},"connectionId":11,"connectionCount":11}}
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:08.802+00:00"},"s":"I",  "c":"INDEX",    "id":20438,   "ctx":"conn6","msg":"Index build: registering","attr":{"buildUUID":{"uuid":{"$uuid":"fe32a40a-9a97-422f-be53-0f3629d32e21"}},"namespace":"rinha-ryangst.payments","collectionUUID":{"uuid":{"$uuid":"26d0b95e-b7da-4c75-85e5-b0ca765f633c"}},"indexes":1,"firstIndex":{"name":"correlationId_1"},"command":{"createIndexes":"payments","v":2,"indexes":[{"unique":true,"background":true,"name":"correlationId_1","key":{"correlationId":1}}],"ignoreUnknownIndexOptions":false}}}
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:08.802+00:00"},"s":"I",  "c":"REPL",     "id":7360100, "ctx":"conn6","msg":"Added oplog entry for createIndexes to transaction","attr":{"namespace":"rinha-ryangst.$cmd","uuid":{"uuid":{"$uuid":"26d0b95e-b7da-4c75-85e5-b0ca765f633c"}},"object":{"createIndexes":"payments","v":2,"unique":true,"key":{"correlationId":1},"name":"correlationId_1","background":true}}}
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:08.804+00:00"},"s":"I",  "c":"NETWORK",  "id":51800,   "ctx":"conn11","msg":"client metadata","attr":{"remote":"172.20.0.6:41448","client":"conn11","negotiatedCompressors":[],"doc":{"driver":{"name":"nodejs|Mongoose","version":"6.17.0|8.16.2"},"platform":"Bun v1.2.18, LE","os":{"name":"linux","architecture":"x64","version":"6.1.0-37-amd64","type":"Linux"},"env":{"container":{"runtime":"docker"}}}}}
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:08.820+00:00"},"s":"I",  "c":"NETWORK",  "id":6788700, "ctx":"conn10","msg":"Received first command on ingress connection since session start or auth handshake","attr":{"elapsedMillis":26}}
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:08.821+00:00"},"s":"I",  "c":"NETWORK",  "id":22943,   "ctx":"listener","msg":"Connection accepted","attr":{"remote":"172.20.0.5:39298","uuid":{"uuid":{"$uuid":"723e02cf-c9fb-409c-8167-b349faf92f94"}},"connectionId":12,"connectionCount":12}}
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:08.823+00:00"},"s":"I",  "c":"NETWORK",  "id":51800,   "ctx":"conn12","msg":"client metadata","attr":{"remote":"172.20.0.5:39298","client":"conn12","negotiatedCompressors":[],"doc":{"driver":{"name":"nodejs|Mongoose","version":"6.17.0|8.16.2"},"platform":"Bun v1.2.18, LE","os":{"name":"linux","architecture":"x64","version":"6.1.0-37-amd64","type":"Linux"},"env":{"container":{"runtime":"docker"}}}}}
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:08.831+00:00"},"s":"I",  "c":"INDEX",    "id":20345,   "ctx":"conn6","msg":"Index build: done building","attr":{"buildUUID":null,"collectionUUID":{"uuid":{"$uuid":"26d0b95e-b7da-4c75-85e5-b0ca765f633c"}},"namespace":"rinha-ryangst.payments","index":"correlationId_1","ident":"index-10--4613705795105569502","collectionIdent":"collection-7--4613705795105569502","commitTimestamp":null}}
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:08.831+00:00"},"s":"I",  "c":"INDEX",    "id":20440,   "ctx":"conn6","msg":"Index build: waiting for index build to complete","attr":{"buildUUID":{"uuid":{"$uuid":"fe32a40a-9a97-422f-be53-0f3629d32e21"}},"deadline":{"$date":{"$numberLong":"9223372036854775807"}}}}
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:08.831+00:00"},"s":"I",  "c":"INDEX",    "id":20447,   "ctx":"conn6","msg":"Index build: completed","attr":{"buildUUID":{"uuid":{"$uuid":"fe32a40a-9a97-422f-be53-0f3629d32e21"}}}}
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:08.833+00:00"},"s":"I",  "c":"INDEX",    "id":20438,   "ctx":"conn6","msg":"Index build: registering","attr":{"buildUUID":{"uuid":{"$uuid":"45caae32-c9ab-42b0-b7c6-6064df16b82f"}},"namespace":"rinha-ryangst.payments","collectionUUID":{"uuid":{"$uuid":"26d0b95e-b7da-4c75-85e5-b0ca765f633c"}},"indexes":1,"firstIndex":{"name":"processor_1_requestedAt_1"},"command":{"createIndexes":"payments","v":2,"indexes":[{"background":true,"name":"processor_1_requestedAt_1","key":{"processor":1,"requestedAt":1}}],"ignoreUnknownIndexOptions":false}}}
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:08.833+00:00"},"s":"I",  "c":"REPL",     "id":7360100, "ctx":"conn6","msg":"Added oplog entry for createIndexes to transaction","attr":{"namespace":"rinha-ryangst.$cmd","uuid":{"uuid":{"$uuid":"26d0b95e-b7da-4c75-85e5-b0ca765f633c"}},"object":{"createIndexes":"payments","v":2,"key":{"processor":1,"requestedAt":1},"name":"processor_1_requestedAt_1","background":true}}}
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:08.851+00:00"},"s":"I",  "c":"INDEX",    "id":20345,   "ctx":"conn6","msg":"Index build: done building","attr":{"buildUUID":null,"collectionUUID":{"uuid":{"$uuid":"26d0b95e-b7da-4c75-85e5-b0ca765f633c"}},"namespace":"rinha-ryangst.payments","index":"processor_1_requestedAt_1","ident":"index-11--4613705795105569502","collectionIdent":"collection-7--4613705795105569502","commitTimestamp":null}}
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:08.851+00:00"},"s":"I",  "c":"INDEX",    "id":20440,   "ctx":"conn6","msg":"Index build: waiting for index build to complete","attr":{"buildUUID":{"uuid":{"$uuid":"45caae32-c9ab-42b0-b7c6-6064df16b82f"}},"deadline":{"$date":{"$numberLong":"9223372036854775807"}}}}
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:08.851+00:00"},"s":"I",  "c":"INDEX",    "id":20447,   "ctx":"conn6","msg":"Index build: completed","attr":{"buildUUID":{"uuid":{"$uuid":"45caae32-c9ab-42b0-b7c6-6064df16b82f"}}}}
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:08.912+00:00"},"s":"I",  "c":"NETWORK",  "id":22943,   "ctx":"listener","msg":"Connection accepted","attr":{"remote":"172.20.0.6:41454","uuid":{"uuid":{"$uuid":"04bccb19-7447-4661-97db-3508b77fe3f8"}},"connectionId":13,"connectionCount":13}}
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:08.913+00:00"},"s":"I",  "c":"NETWORK",  "id":51800,   "ctx":"conn13","msg":"client metadata","attr":{"remote":"172.20.0.6:41454","client":"conn13","negotiatedCompressors":[],"doc":{"driver":{"name":"nodejs|Mongoose","version":"6.17.0|8.16.2"},"platform":"Bun v1.2.18, LE","os":{"name":"linux","architecture":"x64","version":"6.1.0-37-amd64","type":"Linux"},"env":{"container":{"runtime":"docker"}}}}}
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:08.923+00:00"},"s":"I",  "c":"NETWORK",  "id":22943,   "ctx":"listener","msg":"Connection accepted","attr":{"remote":"172.20.0.7:57972","uuid":{"uuid":{"$uuid":"c9a07116-ce33-47bf-92fc-a8af37d2ce86"}},"connectionId":14,"connectionCount":14}}
+worker-rinha  | Worker ready payments
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:08.985+00:00"},"s":"I",  "c":"NETWORK",  "id":22943,   "ctx":"listener","msg":"Connection accepted","attr":{"remote":"172.20.0.5:39302","uuid":{"uuid":{"$uuid":"6df62c14-9a41-4c8c-99b2-f2502e474227"}},"connectionId":15,"connectionCount":15}}
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:08.987+00:00"},"s":"I",  "c":"NETWORK",  "id":51800,   "ctx":"conn15","msg":"client metadata","attr":{"remote":"172.20.0.5:39302","client":"conn15","negotiatedCompressors":[],"doc":{"driver":{"name":"nodejs|Mongoose","version":"6.17.0|8.16.2"},"platform":"Bun v1.2.18, LE","os":{"name":"linux","architecture":"x64","version":"6.1.0-37-amd64","type":"Linux"},"env":{"container":{"runtime":"docker"}}}}}
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:09.003+00:00"},"s":"I",  "c":"NETWORK",  "id":51800,   "ctx":"conn14","msg":"client metadata","attr":{"remote":"172.20.0.7:57972","client":"conn14","negotiatedCompressors":[],"doc":{"driver":{"name":"nodejs|Mongoose","version":"6.17.0|8.16.2"},"platform":"Bun v1.2.18, LE","os":{"name":"linux","architecture":"x64","version":"6.1.0-37-amd64","type":"Linux"},"env":{"container":{"runtime":"docker"}}}}}
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:09.083+00:00"},"s":"I",  "c":"NETWORK",  "id":22943,   "ctx":"listener","msg":"Connection accepted","attr":{"remote":"172.20.0.6:41458","uuid":{"uuid":{"$uuid":"be118e6d-5a81-47e2-8a31-881ff37ef5f7"}},"connectionId":16,"connectionCount":16}}
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:09.089+00:00"},"s":"I",  "c":"NETWORK",  "id":51800,   "ctx":"conn16","msg":"client metadata","attr":{"remote":"172.20.0.6:41458","client":"conn16","negotiatedCompressors":[],"doc":{"driver":{"name":"nodejs|Mongoose","version":"6.17.0|8.16.2"},"platform":"Bun v1.2.18, LE","os":{"name":"linux","architecture":"x64","version":"6.1.0-37-amd64","type":"Linux"},"env":{"container":{"runtime":"docker"}}}}}
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:09.184+00:00"},"s":"I",  "c":"NETWORK",  "id":22943,   "ctx":"listener","msg":"Connection accepted","attr":{"remote":"172.20.0.7:57974","uuid":{"uuid":{"$uuid":"c097e130-7c58-4c1d-8375-046696863e87"}},"connectionId":17,"connectionCount":17}}
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:09.186+00:00"},"s":"I",  "c":"NETWORK",  "id":51800,   "ctx":"conn17","msg":"client metadata","attr":{"remote":"172.20.0.7:57974","client":"conn17","negotiatedCompressors":[],"doc":{"driver":{"name":"nodejs|Mongoose","version":"6.17.0|8.16.2"},"platform":"Bun v1.2.18, LE","os":{"name":"linux","architecture":"x64","version":"6.1.0-37-amd64","type":"Linux"},"env":{"container":{"runtime":"docker"}}}}}
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:09.296+00:00"},"s":"I",  "c":"NETWORK",  "id":22943,   "ctx":"listener","msg":"Connection accepted","attr":{"remote":"172.20.0.7:57978","uuid":{"uuid":{"$uuid":"e8564adb-a5ed-4dcd-98e9-374ec868c9cc"}},"connectionId":18,"connectionCount":18}}
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:09.297+00:00"},"s":"I",  "c":"NETWORK",  "id":51800,   "ctx":"conn18","msg":"client metadata","attr":{"remote":"172.20.0.7:57978","client":"conn18","negotiatedCompressors":[],"doc":{"driver":{"name":"nodejs|Mongoose","version":"6.17.0|8.16.2"},"platform":"Bun v1.2.18, LE","os":{"name":"linux","architecture":"x64","version":"6.1.0-37-amd64","type":"Linux"},"env":{"container":{"runtime":"docker"}}}}}
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:18.822+00:00"},"s":"I",  "c":"NETWORK",  "id":22943,   "ctx":"listener","msg":"Connection accepted","attr":{"remote":"172.20.0.6:47398","uuid":{"uuid":{"$uuid":"dc9b1e14-4433-4a74-bc99-1bec2131a61a"}},"connectionId":19,"connectionCount":19}}
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:18.832+00:00"},"s":"I",  "c":"NETWORK",  "id":22943,   "ctx":"listener","msg":"Connection accepted","attr":{"remote":"172.20.0.5:49256","uuid":{"uuid":{"$uuid":"7f2a5e77-db5a-4ca7-84c1-9cbbf6a0e09a"}},"connectionId":20,"connectionCount":20}}
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:18.837+00:00"},"s":"I",  "c":"NETWORK",  "id":51800,   "ctx":"conn20","msg":"client metadata","attr":{"remote":"172.20.0.5:49256","client":"conn20","negotiatedCompressors":[],"doc":{"driver":{"name":"nodejs|Mongoose","version":"6.17.0|8.16.2"},"platform":"Bun v1.2.18, LE","os":{"name":"linux","architecture":"x64","version":"6.1.0-37-amd64","type":"Linux"},"env":{"container":{"runtime":"docker"}}}}}
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:18.837+00:00"},"s":"I",  "c":"NETWORK",  "id":51800,   "ctx":"conn19","msg":"client metadata","attr":{"remote":"172.20.0.6:47398","client":"conn19","negotiatedCompressors":[],"doc":{"driver":{"name":"nodejs|Mongoose","version":"6.17.0|8.16.2"},"platform":"Bun v1.2.18, LE","os":{"name":"linux","architecture":"x64","version":"6.1.0-37-amd64","type":"Linux"},"env":{"container":{"runtime":"docker"}}}}}
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:19.236+00:00"},"s":"I",  "c":"NETWORK",  "id":22943,   "ctx":"listener","msg":"Connection accepted","attr":{"remote":"172.20.0.7:44650","uuid":{"uuid":{"$uuid":"4f3dcb7a-cb80-4b19-bd10-f3c4e11156c5"}},"connectionId":21,"connectionCount":21}}
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:19.238+00:00"},"s":"I",  "c":"NETWORK",  "id":51800,   "ctx":"conn21","msg":"client metadata","attr":{"remote":"172.20.0.7:44650","client":"conn21","negotiatedCompressors":[],"doc":{"driver":{"name":"nodejs|Mongoose","version":"6.17.0|8.16.2"},"platform":"Bun v1.2.18, LE","os":{"name":"linux","architecture":"x64","version":"6.1.0-37-amd64","type":"Linux"},"env":{"container":{"runtime":"docker"}}}}}
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:21.309+00:00"},"s":"I",  "c":"NETWORK",  "id":6788700, "ctx":"conn9","msg":"Received first command on ingress connection since session start or auth handshake","attr":{"elapsedMillis":12518}}
+worker-rinha  | Worker completed payments with id: "6d2a2000-1073-46bb-959c-d85778fa1527"
+worker-rinha  | Worker completed payments with id: "ae62c597-ec24-4fd1-ad86-538eead2fb9e"
+worker-rinha  | Worker completed payments with id: "0552c860-3c0b-45df-b633-9472f3f89448"
+worker-rinha  | Worker completed payments with id: "bbaedcc8-7fa5-4f4a-a349-ad320ac52c09"
+worker-rinha  | Worker completed payments with id: "f6ffd1a7-eb00-48e0-a7e0-19855b0b1316"
+worker-rinha  | Worker completed payments with id: "34511dcc-0269-4bd8-893a-f1a5697a7e6f"
+worker-rinha  | Worker completed payments with id: "7a494fba-436c-4cf6-b1d5-5fe71a18f6ad"
+worker-rinha  | Worker completed payments with id: "67dff261-0d9c-4b09-a6ff-98c7b9a8a969"
+worker-rinha  | Worker completed payments with id: "d6a10055-02bd-4b27-ada9-f646c51b51d8"
+worker-rinha  | Worker completed payments with id: "4c5e87fa-b332-42f4-96a2-33a66917bc51"
+worker-rinha  | Worker completed payments with id: "ca45f3ee-995f-46b5-807c-bae091161958"
+worker-rinha  | Worker completed payments with id: "229a89a4-cdc2-4b82-8394-94dca00fe0cf"
+worker-rinha  | Worker completed payments with id: "09f7a2df-5b72-4837-b959-67e437160b1e"
+worker-rinha  | Worker completed payments with id: "57b47495-141b-4952-af39-cc1c226ccc15"
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:22.594+00:00"},"s":"I",  "c":"NETWORK",  "id":6788700, "ctx":"conn14","msg":"Received first command on ingress connection since session start or auth handshake","attr":{"elapsedMillis":13590}}
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:22.595+00:00"},"s":"I",  "c":"NETWORK",  "id":6788700, "ctx":"conn17","msg":"Received first command on ingress connection since session start or auth handshake","attr":{"elapsedMillis":13409}}
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:22.598+00:00"},"s":"I",  "c":"NETWORK",  "id":6788700, "ctx":"conn18","msg":"Received first command on ingress connection since session start or auth handshake","attr":{"elapsedMillis":13300}}
+worker-rinha  | Worker completed payments with id: "6e995a01-1448-4bbf-8414-b2db2889fffb"
+worker-rinha  | Worker completed payments with id: "14926ad3-15cf-4b0b-9a2a-63c3486c64f3"
+worker-rinha  | Worker completed payments with id: "6fc436cf-1298-4acf-9695-871f5e04778a"
+worker-rinha  | Worker completed payments with id: "a30cd8b2-54f1-4bc1-9161-709bc20d487d"
+worker-rinha  | Worker completed payments with id: "09d7d3ec-7e2b-4430-a8ab-44a9e0cfa45b"
+worker-rinha  | Worker completed payments with id: "71af43bd-4278-4d85-a04a-a94612ade99a"
+worker-rinha  | Worker completed payments with id: "fe8ed3c5-2579-4715-9b32-92f6e016b0f9"
+worker-rinha  | Worker completed payments with id: "d5340a1d-6970-4470-8207-61cd2b7cce9c"
+worker-rinha  | Worker completed payments with id: "d0ce0721-f06a-4a88-b45b-3961db617ff8"
+worker-rinha  | Worker completed payments with id: "487521ed-0bff-49bd-81a0-2713c48079e1"
+worker-rinha  | Worker completed payments with id: "24bc5e02-8d28-48e6-9eb4-9fd84507eb8c"
+worker-rinha  | Worker completed payments with id: "6686c451-9a8e-4e18-bfdd-1da6eff48f2e"
+worker-rinha  | Worker completed payments with id: "5b6e7c69-1972-42fc-99a1-e770e14ec967"
+worker-rinha  | Worker completed payments with id: "9e455a4e-27ef-448a-9239-e43b44b1a292"
+worker-rinha  | Worker completed payments with id: "8ad007d0-5694-4f04-acf3-ca0bc5cec102"
+worker-rinha  | Worker completed payments with id: "acb08d28-0e09-4122-9765-bf25ab131353"
+worker-rinha  | Worker completed payments with id: "c7a311f7-b24a-470c-bb72-eaada4aa7017"
+worker-rinha  | Worker completed payments with id: "9aad6906-a73c-4e70-a136-093cf4e17ecb"
+worker-rinha  | Worker completed payments with id: "eaa8bf7e-6a30-462f-b55b-6f6317416469"
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:23.592+00:00"},"s":"I",  "c":"NETWORK",  "id":22943,   "ctx":"listener","msg":"Connection accepted","attr":{"remote":"172.20.0.7:44654","uuid":{"uuid":{"$uuid":"b1ca327d-5bce-43ee-890d-1d1b1a749c31"}},"connectionId":22,"connectionCount":22}}
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:23.592+00:00"},"s":"I",  "c":"NETWORK",  "id":22943,   "ctx":"listener","msg":"Connection accepted","attr":{"remote":"172.20.0.7:44662","uuid":{"uuid":{"$uuid":"acc3c0bf-8201-44de-aab9-1e234fa746ae"}},"connectionId":23,"connectionCount":23}}
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:23.601+00:00"},"s":"I",  "c":"NETWORK",  "id":51800,   "ctx":"conn22","msg":"client metadata","attr":{"remote":"172.20.0.7:44654","client":"conn22","negotiatedCompressors":[],"doc":{"driver":{"name":"nodejs|Mongoose","version":"6.17.0|8.16.2"},"platform":"Bun v1.2.18, LE","os":{"name":"linux","architecture":"x64","version":"6.1.0-37-amd64","type":"Linux"},"env":{"container":{"runtime":"docker"}}}}}
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:23.601+00:00"},"s":"I",  "c":"NETWORK",  "id":51800,   "ctx":"conn23","msg":"client metadata","attr":{"remote":"172.20.0.7:44662","client":"conn23","negotiatedCompressors":[],"doc":{"driver":{"name":"nodejs|Mongoose","version":"6.17.0|8.16.2"},"platform":"Bun v1.2.18, LE","os":{"name":"linux","architecture":"x64","version":"6.1.0-37-amd64","type":"Linux"},"env":{"container":{"runtime":"docker"}}}}}
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:23.694+00:00"},"s":"I",  "c":"NETWORK",  "id":6788700, "ctx":"conn22","msg":"Received first command on ingress connection since session start or auth handshake","attr":{"elapsedMillis":93}}
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:23.696+00:00"},"s":"I",  "c":"NETWORK",  "id":6788700, "ctx":"conn23","msg":"Received first command on ingress connection since session start or auth handshake","attr":{"elapsedMillis":94}}
+worker-rinha  | Worker completed payments with id: "691714fb-f8d4-4837-a26a-6fb159392cae"
+worker-rinha  | Worker completed payments with id: "bccff58e-9bce-4408-93b2-43aac9ee4f23"
+worker-rinha  | Worker completed payments with id: "9c44acf4-9f75-40b1-a99d-ce3047fa8b27"
+worker-rinha  | Worker completed payments with id: "aecad05a-404e-49fd-9ed8-0e37ca68566f"
+worker-rinha  | Worker completed payments with id: "67df2c29-2bc1-4681-bd76-9e7f1caa12a5"
+worker-rinha  | Worker completed payments with id: "2bb9cd3a-b0ce-46f0-9241-9ffdcf41da65"
+worker-rinha  | Worker completed payments with id: "c31d3e8b-4063-4f07-82f4-16b6714a77cd"
+worker-rinha  | Worker completed payments with id: "038fcd09-0e8a-41f7-bd76-5779fdc71948"
+worker-rinha  | Worker completed payments with id: "4d486d21-56b6-4731-ad07-fc6cd02adf1e"
+worker-rinha  | Worker completed payments with id: "985ce225-1a17-4ced-8d8f-88ad5b003c92"
+worker-rinha  | Worker completed payments with id: "cdf42f5a-7a3e-4fd8-b04d-58915df719f9"
+worker-rinha  | Worker completed payments with id: "8bfa7ca1-6ea2-4330-8164-930cdbdd30cf"
+worker-rinha  | Worker completed payments with id: "5aa64b3e-aa3b-4505-a018-9012845dbe7b"
+worker-rinha  | Worker completed payments with id: "2fa2e529-7b1a-4d3d-8256-122bdad33c03"
+worker-rinha  | Worker completed payments with id: "347ef620-c628-48ac-aa48-8e4620a903b6"
+worker-rinha  | Worker completed payments with id: "2f42be5a-3f66-4998-9659-0f8e6d96c6ab"
+worker-rinha  | Worker completed payments with id: "09800a31-4756-435d-a9c5-cfbc0c5fa753"
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:24.490+00:00"},"s":"I",  "c":"NETWORK",  "id":22943,   "ctx":"listener","msg":"Connection accepted","attr":{"remote":"172.20.0.7:44678","uuid":{"uuid":{"$uuid":"231f367d-95f6-4896-8b49-e32bb80abb15"}},"connectionId":24,"connectionCount":24}}
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:24.505+00:00"},"s":"I",  "c":"NETWORK",  "id":51800,   "ctx":"conn24","msg":"client metadata","attr":{"remote":"172.20.0.7:44678","client":"conn24","negotiatedCompressors":[],"doc":{"driver":{"name":"nodejs|Mongoose","version":"6.17.0|8.16.2"},"platform":"Bun v1.2.18, LE","os":{"name":"linux","architecture":"x64","version":"6.1.0-37-amd64","type":"Linux"},"env":{"container":{"runtime":"docker"}}}}}
+mongodb-1     | {"t":{"$date":"2025-07-14T23:07:24.595+00:00"},"s":"I",  "c":"NETWORK",  "id":6788700, "ctx":"conn24","msg":"Received first command on ingress connection since session start or auth handshake","attr":{"elapsedMillis":90}}
+worker-rinha  | Worker completed payments with id: "c891d5c5-18ab-4592-8ea6-97e323f660de"
+worker-rinha  | Worker completed payments with id: "62c2781d-d1e5-4337-a838-e22f21f74151"
+worker-rinha  | Worker completed payments with id: "2789c8a8-3103-4335-9f3e-ac991c54233c"
+worker-rinha  | Worker completed payments with id: "b972bd55-19d1-42c0-804d-dde6f3637821"
+worker-rinha  | Worker completed payments with id: "1d926aec-7763-4941-99fc-a13df591c3d6"
+worker-rinha  | Worker completed payments with id: "ebadb9c1-0825-4976-ac65-3443d684846d"
+worker-rinha  | Worker completed payments with id: "f854f5d1-0bdd-496d-88ba-c4bd1cce5ef8"
+worker-rinha  | Worker completed payments with id: "1f6130a6-a670-43f8-abcd-99e209853846"
+worker-rinha  | Worker completed payments with id: "8a882ef0-2ea9-495c-a542-9f25b44057db"
+worker-rinha  | Worker completed payments with id: "a45fc07c-afd2-486a-9191-76a86c03b165"
+worker-rinha  | Worker completed payments with id: "dee48493-e430-40dd-8d1a-2e5678ad2198"
+worker-rinha  | Worker completed payments with id: "8785f6f2-378a-478a-8435-39a178352ad2"
+worker-rinha  | Worker completed payments with id: "2daf36eb-2cd7-45b5-b553-c98fd95a326f"
+worker-rinha  | Worker completed payments with id: "abe35908-4b01-4ca2-9c4c-1d5731266e28"
+worker-rinha  | Worker completed payments with id: "aa4032f7-d08f-47aa-bb2c-9d6317718519"
+worker-rinha  | Worker completed payments with id: "ecfeed37-c99e-4a02-b4b5-74bf6a512f3f"
+worker-rinha  | Worker completed payments with id: "1f2f0b6c-0974-4b0c-bccc-f85c868e76a6"
+worker-rinha  | Worker completed payments with id: "e89aaa75-8ece-4f7e-bbb6-dcf5206e8862"
+worker-rinha  | Worker completed payments with id: "2fbd29c1-dd72-4f9d-af43-d988a4b7aad6"
+worker-rinha  | Worker completed payments with id: "4cf661a8-83ef-46c8-b01c-6a27ce9943ad"
+worker-rinha  | Worker completed payments with id: "f2a8f861-cc46-4404-9f2f-657f6e219883"
+worker-rinha  | Worker completed payments with id: "96c528b5-9868-4806-a060-f1f478d0e1de"
+worker-rinha  | Worker completed payments with id: "ee2fdfd3-280e-41c9-8dff-00819cbb795a"
+worker-rinha  | Both processors failing, delaying job e63d85b9-2e94-415b-a3e5-cd410dee3ccf
+worker-rinha  | Both processors failing, delaying job d4580063-5885-4f09-96d9-908cee7979b0
+worker-rinha  | Both processors failing, delaying job 17ba0b10-8461-4bf1-a67f-68ad1d6872bb
+worker-rinha  | Both processors failing, delaying job 16a9df5f-e928-4c64-a449-70543ac8a0ad
+worker-rinha  | Both processors failing, delaying job ec389f10-0325-4f87-8106-55cec144ed2c
+worker-rinha  | Both processors failing, delaying job 290e342a-8206-46dd-95d4-47e99b4aedbd
+worker-rinha  | Both processors failing, delaying job fb4eb8aa-db5b-43c1-8f4c-c116d98d38ab
+worker-rinha  | Worker completed payments with id: "9c1b313a-fec1-4a7f-b056-8f7a18109013"
+worker-rinha  | Worker completed payments with id: "fe9ad2d0-9ce3-41eb-8ea6-19c03879f664"
+worker-rinha  | Worker completed payments with id: "5b2360d4-cc09-4685-89f7-f8eb88e24a61"
+worker-rinha  | Worker completed payments with id: "f1de2b65-1123-45f8-a76b-0e57c8405d1c"
+worker-rinha  | Worker completed payments with id: "6495d3d8-8c43-42e9-b9c6-64e1fde10a24"
+worker-rinha  | Worker completed payments with id: "df9a11bf-96ce-4c61-9476-d8df90b774a0"
+worker-rinha  | Worker completed payments with id: "3dec2e51-b352-46b2-b8e7-9477f4dac9d3"
+worker-rinha  | Worker completed payments with id: "1c4c7087-aa6f-46c5-a462-9e8fd54ae961"
+worker-rinha  | Worker completed payments with id: "2945dd3a-bb79-4d5f-9f83-e926950d185d"
+worker-rinha  | Worker completed payments with id: "23980979-506c-43f3-9fd8-42d6b4a619c6"
+worker-rinha  | Worker completed payments with id: "14980e6f-6df6-4ba4-939d-205309c38fda"
+worker-rinha  | Worker completed payments with id: "6fe3cdd4-76e4-4e38-b978-76353f3c877d"
+worker-rinha  | Worker completed payments with id: "10bdaf0d-3d09-4e09-ad69-9e11240b0432"
+worker-rinha  | Worker completed payments with id: "91ef3ebd-3770-41bd-bac5-646fab82aa46"
+worker-rinha  | Worker completed payments with id: "78195a78-0094-4526-9f42-abc4b23e27db"
+worker-rinha  | Worker completed payments with id: "806d9008-dfab-4f8d-b98d-fb832c7db025"
+worker-rinha  | Worker completed payments with id: "97af0375-3d5d-4914-a76b-993b689ab4e2"
+worker-rinha  | Worker completed payments with id: "90a70414-99ed-46a6-8155-07ffa6624f6c"
+worker-rinha  | Worker completed payments with id: "039f46b0-fd26-4356-a1ca-68085037e9f1"
+worker-rinha  | Worker completed payments with id: "de882629-b365-4c21-9615-5e7cc5225068"
+worker-rinha  | Worker completed payments with id: "a0292227-409e-4a23-ae57-5121ff4a252d"
+worker-rinha  | Worker completed payments with id: "c44ba992-e766-49b8-9201-daab7afa1734"
+worker-rinha  | Worker completed payments with id: "be61945f-0d53-4b17-adf4-3bd06333f5ee"
+worker-rinha  | Worker completed payments with id: "da6f54d9-ada1-4f42-8523-5d38eb4d6ab3"
+worker-rinha  | Worker completed payments with id: "50623796-423b-4eef-8886-e74acb29aaf7"
+worker-rinha  | Worker completed payments with id: "afd20219-0e6d-45ba-8d5d-1014dcde1fc4"
+worker-rinha  | Worker completed payments with id: "d776b030-afd4-444f-ae04-fb40eac34f3a"
+worker-rinha  | Worker completed payments with id: "380b2ada-2f6f-4c5d-8ed9-d9ec9a68f6ca"
+worker-rinha  | Worker completed payments with id: "ff3d6067-9267-4306-af5b-05321f03b5e3"
+worker-rinha  | Worker completed payments with id: "5781a860-68c1-477d-b696-d006a2c5120c"
+worker-rinha  | Worker completed payments with id: "0bdd4212-4198-42ac-a084-95bf18071d31"
+worker-rinha  | Worker completed payments with id: "d7d97298-74f9-41c6-b00d-b7152f371b7c"
+worker-rinha  | Worker completed payments with id: "5ab8b068-efa8-4ec8-a4da-aabf3c32e545"
+worker-rinha  | Worker completed payments with id: "1a41ab20-f10c-48b6-8d07-3f99cf11feea"
+worker-rinha  | Worker completed payments with id: "0884ec99-b45f-4388-829b-68bb34fd1586"
+worker-rinha  | Worker completed payments with id: "7825a66a-537a-4497-bbe4-87cc30a781ed"
+worker-rinha  | Worker completed payments with id: "31a3add5-fdc6-4a30-a243-0cc587a662c3"
+worker-rinha  | Worker completed payments with id: "011aabf1-5606-41c4-bb82-61a522677fd1"
+worker-rinha  | Worker completed payments with id: "b84be5a7-1b7c-4c94-99be-e85278d3ea32"
+worker-rinha  | Worker completed payments with id: "d4226300-a5e9-41b2-9737-286419d2c227"
+worker-rinha  | Worker completed payments with id: "36ec1af0-49dc-45c5-a7b7-f0773415f265"
+worker-rinha  | Worker completed payments with id: "38397b58-9a87-4251-bc32-a49863d0d99c"
+worker-rinha  | Worker completed payments with id: "a9428d4b-2da5-477e-a954-5dd7f2935d7a"
+worker-rinha  | Worker completed payments with id: "738aec13-1f1a-4a36-ad32-05542419ceec"
+worker-rinha  | Worker completed payments with id: "765103b8-2255-43b9-92db-8c4b022b820f"
+worker-rinha  | Worker completed payments with id: "6ab4891d-caf9-4e72-83ef-6f20f3b4e543"
+worker-rinha  | Worker completed payments with id: "addd9400-8165-45dd-a004-db7594ae0360"
+worker-rinha  | Worker completed payments with id: "a72f1e3d-7a38-45ee-8d22-1496e0522576"
+worker-rinha  | Worker completed payments with id: "91bb1c6d-7778-4821-8d0b-f6177b84db71"
+worker-rinha  | Worker completed payments with id: "0f6b9494-75a6-4eab-abf5-e49790d33b27"
+worker-rinha  | Worker completed payments with id: "ed683a08-08d1-493c-a996-f7995db0a56b"
+worker-rinha  | Worker completed payments with id: "7d95f988-9c03-461d-a0f0-9d032be812c8"
+worker-rinha  | Worker completed payments with id: "b432743c-88ab-445c-a530-af58a28dc78e"
+worker-rinha  | Worker completed payments with id: "6e2fd39e-cbb3-4a4b-936a-9385c8712074"
+worker-rinha  | Worker completed payments with id: "5d6b9e49-0e63-40e7-8123-e8cf61093f60"
+worker-rinha  | Worker completed payments with id: "7587ad45-3cbb-4bb0-8a74-cff2a57c0807"
+worker-rinha  | Worker completed payments with id: "bd614ede-5f41-4d99-9019-1af031141e0f"
+worker-rinha  | Worker completed payments with id: "129f30d2-68d6-4135-ae1c-6b0cd63f1420"
+worker-rinha  | Worker completed payments with id: "05c6fb6a-4245-442a-93f5-7cf45d77dd13"
+worker-rinha  | Worker completed payments with id: "e7a6c5e8-709e-43f7-a60d-0b16ae76f7aa"
+worker-rinha  | Worker completed payments with id: "4e325d8d-0b8a-4b2a-9dd9-0b8a099683b1"
+worker-rinha  | Worker completed payments with id: "cae6fa71-5284-4877-8e93-c2dee7684ce8"
+worker-rinha  | Both processors failing, delaying job b464bb85-bae6-4563-8d3d-f4a7d7a19287
+worker-rinha  | Both processors failing, delaying job c66c951d-e237-4182-8fb0-97cdbef1fea6
+worker-rinha  | Both processors failing, delaying job 8da7d0c2-f520-4175-9024-7df91635f7ed
+worker-rinha  | Both processors failing, delaying job 46516a44-7d2d-4769-8386-b62a4e43274d
+worker-rinha  | Both processors failing, delaying job c4b848d0-f9b3-4b28-a476-47b05530f087
+worker-rinha  | Both processors failing, delaying job ca75d69a-360d-4c02-b260-f1880079209c
+worker-rinha  | Worker completed payments with id: "3e7a19e1-325a-4cb9-b7d9-965fe71f9637"
+worker-rinha  | Worker completed payments with id: "40db638a-b411-402d-8b6b-c337bf2e39ed"
+worker-rinha  | Worker completed payments with id: "6aa12fa1-c8db-4fe4-984e-34248e6eba5f"
+worker-rinha  | Worker completed payments with id: "f992548e-11b9-409f-ad2e-8f2e26f92305"
+worker-rinha  | Worker completed payments with id: "b68680c7-29bb-4a70-a67c-f42464920c81"
+worker-rinha  | Worker completed payments with id: "42943854-f2f5-49ff-948e-2d6180ddaa53"
+worker-rinha  | Worker completed payments with id: "527445b8-58da-4fd7-8c60-b3085e8c2a93"
+worker-rinha  | Worker completed payments with id: "91d1c94e-5cb3-468b-9fef-95b5ede3c06c"
+worker-rinha  | Worker completed payments with id: "3b63424c-3a55-4e18-b601-44f8de57d378"
+worker-rinha  | Worker completed payments with id: "24b241b8-1f9c-4372-99b3-4d6fd0abac4d"
+worker-rinha  | Worker completed payments with id: "fd2be654-b88b-4dc5-b364-4252c2a6ea5f"
+worker-rinha  | Worker completed payments with id: "5090e11c-5034-4e4e-a001-9df6f05e4827"
+worker-rinha  | Worker completed payments with id: "af7bd4ea-4af6-4db8-ae93-75beb226fece"
+worker-rinha  | Worker completed payments with id: "bd02fdbb-d559-410e-a374-53d3e913f3dc"
+worker-rinha  | Worker completed payments with id: "ac065daa-e98d-474e-b387-3155206815b0"
+worker-rinha  | Worker completed payments with id: "a5412bcd-9d2f-48c9-9d2c-38f2d7860872"
+worker-rinha  | Worker completed payments with id: "46acee13-1425-4cff-95b0-3baa4be76969"
+worker-rinha  | Worker completed payments with id: "1c31bb62-41d0-4b8e-af3b-7295eb3406bb"
+worker-rinha  | Worker completed payments with id: "d04c6e1c-0ebc-4cbe-b481-eaf52a0db48c"
+worker-rinha  | Worker completed payments with id: "8400bda1-15ec-4fb3-a9ac-17bad47a51cd"
+worker-rinha  | Worker completed payments with id: "bdbaff1b-24c3-4702-882b-19bfefc75d28"
+worker-rinha  | Worker completed payments with id: "d022d28e-ab2e-4e54-bdf9-61adacded41a"
+worker-rinha  | Worker completed payments with id: "5ee6dfda-8906-43dc-a75b-8d95853ef1ea"
+worker-rinha  | Worker completed payments with id: "3c7970ef-e146-4907-9d42-ed1c0dd5c14a"
+worker-rinha  | Worker completed payments with id: "845149aa-1dbd-4df0-a395-e81324a0b9ad"
+worker-rinha  | Worker completed payments with id: "20c270e7-6078-4a75-b424-65ea811bbea3"
+worker-rinha  | Worker completed payments with id: "61f724ed-6776-4d12-b6ff-784dcb3c77a7"
+worker-rinha  | Worker completed payments with id: "bf069cb5-f781-4244-89c7-d9b9d8057af9"
+worker-rinha  | Worker completed payments with id: "7a6369a3-29d8-4764-9eb3-c74541bf8ab9"
+worker-rinha  | Worker completed payments with id: "e3e74f2a-34c6-4ee8-9dd2-bc06b0db9e71"
+worker-rinha  | Worker completed payments with id: "7c85800b-41fa-4a7e-b979-e2183bc57c90"
+worker-rinha  | Worker completed payments with id: "0cb55f03-abc4-4291-beff-29c3772949c4"
+worker-rinha  | Worker completed payments with id: "4d6dac02-7163-4562-ac78-01e7e644c5f5"
+worker-rinha  | Worker completed payments with id: "b3dab10f-6358-4f03-a159-a3ac219c8092"
+worker-rinha  | Worker completed payments with id: "f82290c5-e61d-4d99-afa7-f7fda5905946"
+worker-rinha  | Worker completed payments with id: "22465d31-70bc-49e9-85ed-a391e6d6a647"
+worker-rinha  | Worker completed payments with id: "c7d9fe15-36bd-4e1d-82d3-c400ca250644"
+worker-rinha  | Worker completed payments with id: "1673d4b5-7e25-48d9-8c43-0b751f4de5e0"
+worker-rinha  | Worker completed payments with id: "e8946606-0c34-49d8-9316-fd91c4c9df58"
+worker-rinha  | Worker completed payments with id: "418915df-d2ed-49a3-8ca5-c9fed9a99752"
+worker-rinha  | Worker completed payments with id: "fd3e6d63-938d-4ecc-86cc-107627ad9c33"
+worker-rinha  | Worker completed payments with id: "e27a47c1-89ac-46ce-9a02-e9bb54051eed"
+worker-rinha  | Worker completed payments with id: "dab7bc30-790c-4e30-be1b-f7467afb3f09"
+worker-rinha  | Worker completed payments with id: "86c35ad0-1198-48dd-9f36-bb7f7acc2999"
+worker-rinha  | Worker completed payments with id: "96a8b046-7f64-4b12-820b-864db7971ba4"
+worker-rinha  | Worker completed payments with id: "7765f145-e1bf-4860-b146-21267b7d6746"
+worker-rinha  | Worker completed payments with id: "4f7b6ff3-ec22-43e2-b96f-c276acb7b03e"
+worker-rinha  | Worker completed payments with id: "980e983d-23cf-4fd2-aacd-a8335c7dea43"
+worker-rinha  | Worker completed payments with id: "7e0a2157-3c90-46e8-b4ab-9f5dd42de725"
+worker-rinha  | Worker completed payments with id: "da1c79d5-bf49-4e82-be7d-c4fa295a43b9"
+worker-rinha  | Worker completed payments with id: "f6dbdd07-3402-4060-96de-4686b9581c42"
+worker-rinha  | Worker completed payments with id: "27f3e7a6-5d99-442a-a189-3bd3ee539776"
+worker-rinha  | Worker completed payments with id: "f52ac8bb-4e9b-4b32-af43-51f2aeeeb356"
+worker-rinha  | Worker completed payments with id: "b4789de0-a6d8-4353-8fe6-215e530a8e8b"
+worker-rinha  | Worker completed payments with id: "ac2bb7d2-8ba1-4a76-aa8a-0396fc9508d4"
+worker-rinha  | Worker completed payments with id: "1af0d8b2-a123-422d-8e6f-d19eccfb810e"
+worker-rinha  | Worker completed payments with id: "6ce90100-d2f0-4180-8c24-183600498174"
+worker-rinha  | Worker completed payments with id: "e012a87e-d4c1-4d58-ab64-13c4741c3022"
+worker-rinha  | Worker completed payments with id: "610e130e-7edd-4537-9ad2-4061be009546"
+worker-rinha  | Worker completed payments with id: "85264725-6ecc-4171-941a-a46486393b4f"
+worker-rinha  | Worker completed payments with id: "c5b892a3-c66e-44f5-9665-84566d8f9813"
+worker-rinha  | Worker completed payments with id: "4962d772-fa53-47bc-b284-7219e77e7f88"
+worker-rinha  | Worker completed payments with id: "c831d256-f7a4-4e60-93ae-b3f97b60adbd"
+worker-rinha  | Worker completed payments with id: "949548b2-c78c-417a-b0a3-f59f22ca70fd"
+worker-rinha  | Worker completed payments with id: "85ac3b0b-8087-458c-91f4-5503a8b7b7be"
+worker-rinha  | Worker completed payments with id: "30a3f85a-eaa5-442a-86c9-f0a9cfb1c507"
+worker-rinha  | Worker completed payments with id: "6487ebf0-17ea-492a-81ff-7e92caa2135c"
+worker-rinha  | Worker completed payments with id: "d4a84d37-c72a-4b59-8b61-33f960a9fc27"
+worker-rinha  | Worker completed payments with id: "5ee129d6-ae28-4cfe-a33c-252f511e2477"
+worker-rinha  | Worker completed payments with id: "bc798761-7634-4307-aaf4-8f07891ffc37"
+worker-rinha  | Worker completed payments with id: "487fefe9-21f5-476e-8852-fdf25f070c66"
+worker-rinha  | Worker completed payments with id: "0da55b38-9b19-44c0-bcae-2e02c57a76cc"
+worker-rinha  | Worker completed payments with id: "aded7d76-2659-485c-975b-95e3b5d5160c"
+worker-rinha  | Worker completed payments with id: "9dc49b6a-a31e-4e13-b4fe-42b3d7021b29"
+worker-rinha  | Worker completed payments with id: "a0cdc96c-6345-486c-b395-618336e13e8e"
+worker-rinha  | Worker completed payments with id: "0906e448-c2c5-479e-9c4c-5b2ed9554be9"
+worker-rinha  | Worker completed payments with id: "789527ed-594b-4ab3-9dbd-183298109382"
+worker-rinha  | Worker completed payments with id: "bd93c984-e948-4ef7-8cb9-ba2a2788bd1d"
+worker-rinha  | Worker completed payments with id: "aaa3b57b-7b55-48f0-8a15-efd84ab1c136"
+worker-rinha  | Worker completed payments with id: "59be4e74-c827-4fdb-93d6-5a7596af739c"
+worker-rinha  | Worker completed payments with id: "0ee3b330-5056-426c-adb3-048247e4e65f"
+worker-rinha  | Both processors failing, delaying job 916202a6-42a3-4170-a55c-dcb363b66760
+worker-rinha  | Both processors failing, delaying job 4399c6c3-8014-43fe-b1af-0c0fed3fd65c
+worker-rinha  | Both processors failing, delaying job f21ec755-b81b-48a7-b11c-0e7c1fc6b2a4
+worker-rinha  | Both processors failing, delaying job e5e6789d-a962-46d4-a0fb-157c060917be
+worker-rinha  | Both processors failing, delaying job 5bdde583-7816-4a9a-a44a-7bf49db58378
+worker-rinha  | Worker completed payments with id: "584c2ae1-f8eb-4d65-b119-b88ca23cb356"
+worker-rinha  | Worker completed payments with id: "193a1686-f133-4b95-b4b8-b3efdaa6f105"
+worker-rinha  | Worker completed payments with id: "2a038e45-d5fc-45a2-b08e-5bbd5347e1e2"
+worker-rinha  | Worker completed payments with id: "805e5b2a-59e1-454f-969b-46ffd7e90b00"
+worker-rinha  | Worker completed payments with id: "400050c9-8354-442a-a61c-3e1535a19ba4"
+worker-rinha  | Worker completed payments with id: "ed21e814-86c5-4ea8-896f-a4d2c5679474"
+worker-rinha  | Worker completed payments with id: "93bf190a-255f-4970-b997-d9261f60e268"
+worker-rinha  | Worker completed payments with id: "861dcfd4-7ddf-4ec0-b26b-cde135b37687"
+worker-rinha  | Worker completed payments with id: "2f520db5-da38-4d30-8040-db5f64497407"
+worker-rinha  | Worker completed payments with id: "2375cb4a-4912-4d68-a629-99eb5affdc35"
+worker-rinha  | Worker completed payments with id: "07e98f6f-27b8-4218-b7c3-fdd169746252"
+worker-rinha  | Worker completed payments with id: "402339b7-87e6-4213-af66-7ecf02e86561"
+worker-rinha  | Worker completed payments with id: "8e86b00e-d534-4d5e-bb17-e46a35e71e99"
+worker-rinha  | Worker completed payments with id: "62c23efb-006f-4c2a-b994-fb2e7cd00996"
+worker-rinha  | Worker completed payments with id: "3d58ae8f-dd4b-493f-9002-9a83e2fc7017"
+worker-rinha  | Worker completed payments with id: "1d25a31b-0352-4e29-9541-cf06d2eccbe0"
+worker-rinha  | Worker completed payments with id: "0e11dfd1-c62d-4f38-b927-0ba950bf1234"
+worker-rinha  | Worker completed payments with id: "cd9f54e8-b14f-4360-9da3-cf5f18a34e69"
+worker-rinha  | Worker completed payments with id: "a4effef4-53d0-44db-b7cc-4e5afeb0caec"
+worker-rinha  | Worker completed payments with id: "717dd6a3-a162-463c-bc06-b0acb9851f98"
+worker-rinha  | Worker completed payments with id: "fa5069bf-5684-47cd-b81c-360f7b4165b7"
+worker-rinha  | Worker completed payments with id: "e579e5c7-0e8c-446f-9670-bd03ced7a7af"
+worker-rinha  | Worker completed payments with id: "b8aa05ba-0a93-43f5-b944-5373a8d85648"
+worker-rinha  | Worker completed payments with id: "7feed886-8098-42a0-a2a2-d8b03cb2c400"
+worker-rinha  | Worker completed payments with id: "ff3cf0b9-7265-420a-924b-cfc26f06b513"
+worker-rinha  | Worker completed payments with id: "e63d85b9-2e94-415b-a3e5-cd410dee3ccf"
+worker-rinha  | Worker completed payments with id: "17ba0b10-8461-4bf1-a67f-68ad1d6872bb"
+worker-rinha  | Worker completed payments with id: "d4580063-5885-4f09-96d9-908cee7979b0"
+worker-rinha  | Worker completed payments with id: "ec389f10-0325-4f87-8106-55cec144ed2c"
+worker-rinha  | Worker completed payments with id: "16a9df5f-e928-4c64-a449-70543ac8a0ad"
+worker-rinha  | Worker completed payments with id: "0b99bb2e-25f4-445c-9fe8-7c935cd3d19f"
+worker-rinha  | Worker completed payments with id: "290e342a-8206-46dd-95d4-47e99b4aedbd"
+worker-rinha  | Worker completed payments with id: "8bfbec6a-4204-4edd-b3a4-6a0ba7657879"
+worker-rinha  | Worker completed payments with id: "d68281c0-1a86-445d-aa4c-e11efcd56ed6"
+worker-rinha  | Worker completed payments with id: "f9c9c3fd-bb51-449a-9b8e-7887e10644e0"
+worker-rinha  | Worker completed payments with id: "62d765cc-11b6-491b-8920-c5cf308b797b"
+worker-rinha  | Worker completed payments with id: "46e6f993-3da7-4ce8-bf43-4849282bb711"
+worker-rinha  | Worker completed payments with id: "1666ddbb-0835-47f0-bba8-087cdca065c5"
+worker-rinha  | Worker completed payments with id: "1fcc5c2d-fd65-49f4-a11a-b2dba68223e8"
+worker-rinha  | Worker completed payments with id: "fb4eb8aa-db5b-43c1-8f4c-c116d98d38ab"
+worker-rinha  | Worker completed payments with id: "9811c890-5cc7-4139-bbea-0762fb37abe2"
+worker-rinha  | Worker completed payments with id: "2e527e3d-d47e-4587-b5c7-7921f3e49b36"
+worker-rinha  | Worker completed payments with id: "39dcf126-7bc3-40bc-a3bf-82a7862c2fc2"
+worker-rinha  | Worker completed payments with id: "1975de9a-4be9-4d9d-9923-8928b739d53a"
+worker-rinha  | Worker completed payments with id: "a9501482-0ab8-4eeb-b8c0-7b6cc87c2f72"
+worker-rinha  | Worker completed payments with id: "6de0f1c0-4f7c-4c25-a5b0-d9825a199b5b"
+worker-rinha  | Worker completed payments with id: "8eeb603a-c989-462d-8bb7-7c32508adfee"
+worker-rinha  | Worker completed payments with id: "821ec4f3-818b-4fa3-a978-08f7fa7fd3b3"
+worker-rinha  | Worker completed payments with id: "59867ad5-a90e-4d95-afba-f24b87d6b155"
+worker-rinha  | Worker completed payments with id: "c219e985-535e-454a-919e-7e31bda028ef"
+worker-rinha  | Worker completed payments with id: "6ad0dba4-d509-4bd1-81eb-1bfbab525404"
+worker-rinha  | Worker completed payments with id: "03812994-8e93-40a9-9044-71c262f42df5"
+worker-rinha  | Worker completed payments with id: "bb53ced1-e12c-42fa-81d6-401f28ab6ab5"
+worker-rinha  | Worker completed payments with id: "f66e25dd-7f8b-4f15-925f-228e314ec240"
+worker-rinha  | Worker completed payments with id: "5517dd79-3a56-4fe1-bcce-e1adb8cf6159"
+worker-rinha  | Worker completed payments with id: "27f86362-518b-4027-a361-25a2127e1332"
+worker-rinha  | Worker completed payments with id: "2598a50b-a764-42c5-b4c2-31c9c5d3e790"
+worker-rinha  | Worker completed payments with id: "09cf0a7a-61e3-4130-b460-a4671f49c07f"
+worker-rinha  | Worker completed payments with id: "fc1450ec-e341-44c0-b2d9-45752c281ee4"
+worker-rinha  | Worker completed payments with id: "b2eabd53-ff55-436e-916e-609a2ec54c39"
+worker-rinha  | Worker completed payments with id: "140d6039-e660-4238-94e3-ce8a5ae654c3"
+worker-rinha  | Worker completed payments with id: "169ceafb-bbd2-45f2-a5ad-72999c9da8bc"
+worker-rinha  | Worker completed payments with id: "109f9364-a1b6-4330-88f9-4c3320ebf49c"
+worker-rinha  | Worker completed payments with id: "12d6435e-7ee6-4629-83f1-f65d8a95e9b6"
+worker-rinha  | Worker completed payments with id: "18cc06d6-bf5c-48f2-9021-291eb034b1fd"
+worker-rinha  | Worker completed payments with id: "d55432f0-9cb2-4b1d-8f63-6b903de8f288"
+worker-rinha  | Worker completed payments with id: "7ead5c17-fc10-4008-ad55-5ca04083dc1c"
+worker-rinha  | Worker completed payments with id: "ccd1d88d-00bc-4c51-abb8-321162a99652"
+worker-rinha  | Worker completed payments with id: "9558471f-1fc9-483c-a928-ad1150eab895"
+worker-rinha  | Worker completed payments with id: "a345b30d-2825-4ad9-93ff-74fda490e57b"
+worker-rinha  | Worker completed payments with id: "8368643c-2cc6-472e-8094-91dbb9f388b2"
+worker-rinha  | Worker completed payments with id: "55f7bec2-b6b7-432e-af6f-1ccfce805892"
+worker-rinha  | Worker completed payments with id: "44cf6a28-be07-4a5b-8de8-fcabbf83b38b"
+worker-rinha  | Worker completed payments with id: "7f44728f-ac7b-42b7-99da-35c8efd80950"
+worker-rinha  | Worker completed payments with id: "960ba373-79b0-4cbb-a20d-68fc69287e75"
+worker-rinha  | Worker completed payments with id: "294e2ca5-3fe5-4608-9623-e82b1e7971ff"
+worker-rinha  | Worker completed payments with id: "d16b159a-b200-466f-b424-8785a09f3c58"
+worker-rinha  | Worker completed payments with id: "72a61667-042f-4047-9bc8-505a6cdd229f"
+worker-rinha  | Worker completed payments with id: "48a383e7-227a-4411-97bb-a57595bd432f"
+worker-rinha  | Worker completed payments with id: "ab2c6df6-1c81-4d42-950f-6836d0f5de37"
+worker-rinha  | Worker completed payments with id: "74399886-8a63-41cc-90ef-107eafdf0194"
+worker-rinha  | Worker completed payments with id: "b49ac2c1-05f5-4069-b670-a226e1cea575"
+worker-rinha  | Worker completed payments with id: "d6ec58ed-9d43-4d59-9aed-218c9987d214"
+worker-rinha  | Worker completed payments with id: "073327d3-40ee-4e16-ae84-dd6c55bf9f0a"
+worker-rinha  | Worker completed payments with id: "88968af4-5bec-495e-967b-d2bd8ce741ec"
+worker-rinha  | Worker completed payments with id: "95e6d30a-073b-440b-b737-7fdf9b4f255b"
+worker-rinha  | Worker completed payments with id: "d9028b84-d816-4de7-8e6f-269f24792880"
+worker-rinha  | Worker completed payments with id: "d593ae8e-a452-4973-b9ee-9cf4948bba58"
+worker-rinha  | Worker completed payments with id: "9ad30cdf-1132-4017-9bca-ebde406069bf"
+worker-rinha  | Worker completed payments with id: "fd7d430a-f276-4cea-b354-17d5a078ae69"
+worker-rinha  | Worker completed payments with id: "56955878-668e-4532-83a5-cc9242db3a4b"
+worker-rinha  | Worker completed payments with id: "ec724571-6ce3-48d2-af68-315a7e3a6e61"
+worker-rinha  | Worker completed payments with id: "f5a8387d-edaa-4380-9698-1552c50e8324"
+worker-rinha  | Worker completed payments with id: "9ed70f3a-0906-4b7a-b636-682683843110"
+worker-rinha  | Both processors failing, delaying job 5ca19710-9e6c-4504-a625-6a5c62482d74
+worker-rinha  | Both processors failing, delaying job 9968258b-8032-4e37-bbde-70abac69eeef
+worker-rinha  | Both processors failing, delaying job 7833e337-5daf-4dc2-937f-6cfd13d50f5a
+worker-rinha  | Both processors failing, delaying job a3537627-2046-41ce-8393-39e43056a66c
+worker-rinha  | Both processors failing, delaying job 2371514f-2867-48a4-80b4-34c588e47e74
+worker-rinha  | Both processors failing, delaying job 2f0d6a79-82f3-4d88-92a6-3a6b24e4f3a2
+worker-rinha  | Both processors failing, delaying job 928840f7-f1f1-493c-a370-2c193d31c204
+worker-rinha  | Worker completed payments with id: "7b0fdb36-1193-47a6-b273-42a0a4f6944d"
+worker-rinha  | Worker completed payments with id: "f70eea44-6796-42bf-afec-7c29d59648e8"
+worker-rinha  | Worker completed payments with id: "97cbc3d5-8b42-4b6f-97ab-2f94d203136c"
+worker-rinha  | Worker completed payments with id: "3c931f1d-9073-4c0c-b7fd-f14ce39654f4"
+worker-rinha  | Worker completed payments with id: "205c1223-21f5-47e7-aa3f-486f211582d1"
+worker-rinha  | Worker completed payments with id: "f9f23554-98b7-4441-9e61-e0a93e5d4d76"
+worker-rinha  | Worker completed payments with id: "24f13f80-17b0-4d2f-aecc-bd7efc9af168"
+worker-rinha  | Worker completed payments with id: "0701ae9c-2151-47ac-a498-f4b9f8cb00f0"
+worker-rinha  | Worker completed payments with id: "7b2e704c-5183-4496-adad-dd2b5f9c5a8e"
+worker-rinha  | Worker completed payments with id: "dbfe968a-ec1b-4f23-be7f-ca5d91edc678"
+worker-rinha  | Worker completed payments with id: "331b92b5-ac31-451b-bd7b-6629f1d9f33e"
+worker-rinha  | Worker completed payments with id: "dfad2448-16cb-4e7e-9c93-4a49c9ceb6e8"
+worker-rinha  | Worker completed payments with id: "0d147815-fa0b-4b26-9586-a472635de899"
+worker-rinha  | Worker completed payments with id: "45e233b8-c77e-462d-be96-20296a3f98e0"
+worker-rinha  | Worker completed payments with id: "8f7312a9-cd1e-4a59-b7d7-19a3fec1039c"
+worker-rinha  | Worker completed payments with id: "498cd34a-bda6-4c7b-a74d-9590ca471dff"
+worker-rinha  | Worker completed payments with id: "bc8d8c6f-a170-4f9b-97cd-8951f125b3c1"
+worker-rinha  | Worker completed payments with id: "9dd3598d-7e0a-4b92-80cf-27166e4e1cb1"
+worker-rinha  | Worker completed payments with id: "0a84abd7-e391-4c6c-90b3-49cb111bc22a"
+worker-rinha  | Worker completed payments with id: "7f5664bc-d2bc-4f10-b9e0-114aabe4a63f"
+worker-rinha  | Worker completed payments with id: "67657bc1-a252-476f-ad41-9e44ae5ae4dc"
+worker-rinha  | Worker completed payments with id: "e3362e9e-a46f-4754-956f-bf6883e5aff2"
+worker-rinha  | Worker completed payments with id: "68d71c15-040d-42ee-ba90-7b9693da22bc"
+worker-rinha  | Worker completed payments with id: "cce4c3a9-a5d3-4529-9dc4-1cf209773215"
+worker-rinha  | Worker completed payments with id: "1b15be7e-246e-4456-8d9b-26e596b3705a"
+worker-rinha  | Worker completed payments with id: "97618c4d-d612-4456-9785-d2e9f395021e"
+worker-rinha  | Worker completed payments with id: "87684ecd-be75-4187-b7d8-394da059ad73"
+worker-rinha  | Worker completed payments with id: "c944c260-5a30-48e5-92e4-a9ac3f288a4d"
+worker-rinha  | Worker completed payments with id: "93ee03bc-8092-4ce1-8991-2bdadaf3f332"
+worker-rinha  | Worker completed payments with id: "6011c090-f5d9-4c3c-9a63-c4c8bd9b7a8c"
+worker-rinha  | Worker completed payments with id: "5d7d0ba3-6301-4237-85e1-4811dda86d87"
+worker-rinha  | Worker completed payments with id: "df885c00-0ef0-47e3-bec2-0580fb345ced"
+worker-rinha  | Worker completed payments with id: "06b33ce9-ea4a-46e7-a675-cc544094c04d"
+worker-rinha  | Worker completed payments with id: "5f65461c-2b54-49eb-9d6f-a6f40576a95f"
+worker-rinha  | Worker completed payments with id: "955678a7-4e15-442b-b6eb-d6e88224582a"
+worker-rinha  | Worker completed payments with id: "fbd5133d-ab8d-4e45-ab66-71a205e52e1f"
+worker-rinha  | Worker completed payments with id: "88da8108-153b-4fcc-a044-668762c6a1f1"
+worker-rinha  | Worker completed payments with id: "35b0cdbd-55e5-4681-8dc6-6413414c8569"
+worker-rinha  | Worker completed payments with id: "3e2ad2d9-a45d-4cd6-99bb-64819832c7d0"
+worker-rinha  | Worker completed payments with id: "d9064b17-17f9-4f21-b323-517e1b4349de"
+worker-rinha  | Worker completed payments with id: "c2c21574-0304-4845-a1e9-61db6becd443"
+worker-rinha  | Worker completed payments with id: "d4fdcb0f-e724-4ad7-a93b-f4e836d421e1"
+worker-rinha  | Worker completed payments with id: "fa83ae0f-a195-4b25-9ce7-627b9ba00da8"
+worker-rinha  | Worker completed payments with id: "dabd5e25-73c5-4f52-8c73-4b34913f3bec"
+worker-rinha  | Worker completed payments with id: "7542d911-6be9-4ed6-8d19-16c4c3eb4d41"
+worker-rinha  | Worker completed payments with id: "93d295f9-ee3b-4cad-9e3c-49c26d0f9830"
+worker-rinha  | Worker completed payments with id: "6d37892d-e620-4375-8b0d-3e2bb3f397ad"
+worker-rinha  | Worker completed payments with id: "bd2ad3a0-3721-424c-b31c-765bdcc460e3"
+worker-rinha  | Worker completed payments with id: "e2c7207c-6a1f-4107-887e-5d8f1c022539"
+worker-rinha  | Worker completed payments with id: "ae1cdb7f-e417-4876-a32d-dd4836af3747"
+worker-rinha  | Worker completed payments with id: "6ccc9fd7-8e0e-4bb0-afdc-398c66e221c7"
+worker-rinha  | Worker completed payments with id: "5ea87a04-552a-4b36-9711-c29c46d18bbc"
+worker-rinha  | Worker completed payments with id: "2e58d193-8c7f-4eea-bf95-55034431d998"
+worker-rinha  | Worker completed payments with id: "d10cd476-6a19-4676-8dcc-305c549e65e2"
+worker-rinha  | Worker completed payments with id: "ae8b357b-5135-4321-87e8-fd421b012d4b"
+worker-rinha  | Worker completed payments with id: "1cb6a235-242e-4b15-88ab-43c8aff3a518"
+worker-rinha  | Worker completed payments with id: "658ac1b0-ef00-4f1d-9043-434ce1def7bb"
+worker-rinha  | Worker completed payments with id: "30bf7f57-2eed-4382-9079-2688275bf9f5"
+worker-rinha  | Worker completed payments with id: "5ffc1528-2f1e-42c8-8309-2fdb2168f1fe"
+worker-rinha  | Both processors failing, delaying job 8b512e6a-6d4e-4ac6-8621-2d4c447453da
+worker-rinha  | Both processors failing, delaying job 889a925f-4bae-404b-a7a7-d78647e10161
+worker-rinha  | Both processors failing, delaying job 530af99e-5773-4c9a-af7a-dfae5b1d5b1d
+worker-rinha  | Both processors failing, delaying job cfb20909-c00c-4e9c-a821-80ae6a65774d
+worker-rinha  | Both processors failing, delaying job e6cbd61a-b50d-4596-a25a-dd134d740d92
+worker-rinha  | Worker completed payments with id: "c56698b8-bf83-4309-935b-3d926afe2b0c"
+worker-rinha  | Both processors failing, delaying job 6a993a74-0606-4eaf-bb32-dbde0e691433
+worker-rinha  | Worker completed payments with id: "048b17dc-ae4d-4bfb-8f8f-8da3a5060512"
+worker-rinha  | Worker completed payments with id: "5b64a1c6-ac96-43d0-84f8-58b7c4a27fcb"
+worker-rinha  | Worker completed payments with id: "ee409897-d019-4d2c-8f09-05d97e13431f"
+worker-rinha  | Worker completed payments with id: "ac8e9164-ea75-4281-a430-09bc5c3d14f3"
+worker-rinha  | Worker completed payments with id: "fa8c67df-48c0-491d-9d50-63a6fda4390d"
+worker-rinha  | Worker completed payments with id: "d70063ff-e0f4-4318-a81a-6c363d10e315"
+worker-rinha  | Worker completed payments with id: "ce475821-ad79-458b-9308-5edf4fc11a17"
+worker-rinha  | Worker completed payments with id: "f7556efd-d5f8-4b90-8bee-470c8d0dcf0e"
+worker-rinha  | Worker completed payments with id: "432e255d-dfba-488b-9ac9-e36cf1e4d1dc"
+worker-rinha  | Worker completed payments with id: "4da24a4e-ad9c-4541-8b62-52d004eea2d5"
+worker-rinha  | Worker completed payments with id: "0d3b4637-4f8c-4c43-899e-6a01f1a2fe66"
+worker-rinha  | Worker completed payments with id: "ff728a18-86ca-411b-95d7-dbb07878f76d"
+worker-rinha  | Worker completed payments with id: "179c3cf4-8937-4761-8115-1724c15c368c"
+worker-rinha  | Worker completed payments with id: "411c9569-71c1-4abe-875e-68efecd8e94f"
+worker-rinha  | Worker completed payments with id: "0767b2c4-3bd9-4d78-bbb6-0cb4d317f1ca"
+worker-rinha  | Worker completed payments with id: "19d3860a-af6c-4c3e-8e8b-52a0ac091ab1"
+worker-rinha  | Worker completed payments with id: "de1e14db-9ca3-467f-95e3-162dd42e6f61"
+worker-rinha  | Worker completed payments with id: "867e9687-a2ff-48f4-bafa-906c1b116026"
+worker-rinha  | Worker completed payments with id: "bf111fe3-db12-4f12-9682-644d73ecebab"
+worker-rinha  | Worker completed payments with id: "79675190-9f09-465e-8ba9-e9aa8756124b"
+worker-rinha  | Worker completed payments with id: "15e810b0-6d7c-4b73-b9a4-4421ba1ad71a"
+worker-rinha  | Worker completed payments with id: "2aa37d1e-ce0f-449c-b168-61f3253beed3"
+worker-rinha  | Worker completed payments with id: "7f76b5fd-ca92-4ff1-a820-49d0818918b3"
+worker-rinha  | Worker completed payments with id: "5cac4d71-62c6-4c1f-933c-ffa3349a85cb"
+worker-rinha  | Worker completed payments with id: "c7e9fe3e-c0d4-4ace-8f12-f9f60d623b39"
+worker-rinha  | Worker completed payments with id: "132513cc-f66a-424a-afd5-67789c556fca"
+worker-rinha  | Worker completed payments with id: "2c44f86c-8590-494f-afc6-6a5fa743d9b1"
+worker-rinha  | Worker completed payments with id: "124e82e7-ccdf-442f-8c14-3de3cbc9cb10"
+worker-rinha  | Worker completed payments with id: "00042848-0c64-4da2-ae61-14f9f0cd40fd"
+worker-rinha  | Worker completed payments with id: "a30452a3-af49-45a5-a99e-6dc0b05d7908"
+worker-rinha  | Worker completed payments with id: "f6abf869-2765-4d00-9d06-2a2759ee49a4"
+worker-rinha  | Worker completed payments with id: "16e68a86-d30d-4c06-8fdf-2289690e8183"
+worker-rinha  | Worker completed payments with id: "8ccde167-c9ab-4a0b-96b3-89f6b4950d5f"
+worker-rinha  | Worker completed payments with id: "79da9278-8b50-4244-a755-78ad010b0842"
+worker-rinha  | Worker completed payments with id: "efb9d0ef-f39f-4223-bda0-f61044ee6091"
+worker-rinha  | Worker completed payments with id: "6696a00b-8f7f-4ec7-90d2-440c7e70a7df"
+worker-rinha  | Worker completed payments with id: "c5cf9afe-22f3-442f-b8c8-547d47da06cc"
+worker-rinha  | Worker completed payments with id: "cf975158-22e8-403c-bd31-29bc9e36d8bf"
+worker-rinha  | Worker completed payments with id: "7cba0432-108b-4c39-bb59-37383e337321"
+worker-rinha  | Worker completed payments with id: "1c92a4b2-a01f-400a-9f3f-49e8bdd4ef0a"
+worker-rinha  | Worker completed payments with id: "c573ed76-950a-49b5-9cef-c11b9269f66e"
+worker-rinha  | Worker completed payments with id: "c2170312-eb44-4d87-8244-b49de7d3546f"
+worker-rinha  | Worker completed payments with id: "d3f05c29-8cd2-4d26-b90c-55fffe84c39d"
+worker-rinha  | Worker completed payments with id: "a9abd58a-6da0-465d-b861-08a8bc954f07"
+worker-rinha  | Worker completed payments with id: "f5451a44-c0c2-4bb3-b8c8-4e9f6c5ac370"
+worker-rinha  | Worker completed payments with id: "faa41c6a-2f3b-4e90-83c5-1d2666347bf2"
+worker-rinha  | Worker completed payments with id: "7b7d4f70-4acb-4e31-b5d6-a2a95cd1dba7"
+worker-rinha  | Worker completed payments with id: "9695d4f9-72f3-4b17-ac12-8c7961781765"
+worker-rinha  | Worker completed payments with id: "47fc4cc9-a8cf-4e44-aecf-6c0a0f5c1aec"
+worker-rinha  | Worker completed payments with id: "f3676703-357a-44c1-8371-ab2ca7a3b9b7"
+worker-rinha  | Worker completed payments with id: "918b0808-c4a4-4af3-b9d7-53f26b325b6f"
+worker-rinha  | Worker completed payments with id: "68c01078-0c90-4014-bb49-195e0d627305"
+worker-rinha  | Worker completed payments with id: "dd37c612-2842-423e-a728-e88f43d890f2"
+worker-rinha  | Worker completed payments with id: "acb70eea-1919-43ba-8733-8ff885ac3cb4"
+worker-rinha  | Worker completed payments with id: "780d4012-9345-4e8e-91c9-1afb8cf71ea1"
+worker-rinha  | Worker completed payments with id: "37706c82-6ad7-4a32-99df-ffa3ba5ae102"
+worker-rinha  | Both processors failing, delaying job bd39ca6a-6fff-446b-ac1b-f5509edfdb83
+worker-rinha  | Both processors failing, delaying job 816628c2-4279-44ea-aedf-c385c4e5b790
+worker-rinha  | Both processors failing, delaying job c4e5641e-28aa-4a15-bb18-02656bc7b404
+worker-rinha  | Both processors failing, delaying job d3ec30c7-407c-4073-8b78-518c41e76363
+worker-rinha  | Both processors failing, delaying job 675a3f06-777e-4f77-884a-f8ee56f86012
+worker-rinha  | Both processors failing, delaying job b4b60879-43a3-42d4-9cd7-c1439f491650
+worker-rinha  | Both processors failing, delaying job 2e937302-2d9a-4334-a293-a768969d64be
+worker-rinha  | Both processors failing, delaying job e3768297-d09a-4f12-8d2d-eb4625ffffc7
+worker-rinha  | Both processors failing, delaying job 57e96ead-c7af-44b9-a5e3-a02bc7496787
+worker-rinha  | Both processors failing, delaying job 7039a332-40c1-4f95-9bd9-c06629d4fb56
+worker-rinha  | Both processors failing, delaying job f90993ac-11fa-488f-89a5-7bf6bf422104
+worker-rinha  | Both processors failing, delaying job 5fc753fd-6784-4a46-8a21-de2c7852ae04
+worker-rinha  | Both processors failing, delaying job 1dae7626-a7f8-4859-85f8-28aa91d618f4
+worker-rinha  | Both processors failing, delaying job 3d4ce611-17b0-4f23-9842-c7488224f0f9
+worker-rinha  | Both processors failing, delaying job 945a79a3-78f5-4753-a765-b54d3f8bd1a7
+worker-rinha  | Both processors failing, delaying job d77ed40c-6f29-4e6c-a70e-075a5ec82bf0
+worker-rinha  | Both processors failing, delaying job 38cd4561-6a56-471e-8e47-74a5f897f8f6
+worker-rinha  | Both processors failing, delaying job d57068da-8090-4d9f-ad13-f3411dd91234
+worker-rinha  | Both processors failing, delaying job 1977878a-6292-48ff-99a8-ff7054fbac79
+worker-rinha  | Both processors failing, delaying job 5eeea020-6881-4bb1-8b5e-c3940027eb09
+worker-rinha  | Both processors failing, delaying job 3143f266-84fe-42e4-a4ec-48f86a66c19d
+worker-rinha  | Both processors failing, delaying job ddfc4bc6-25b0-42f6-ab0f-70ee71b48808
+worker-rinha  | Both processors failing, delaying job 6d33de62-c08e-4f28-b695-4c47df64343c
+worker-rinha  | Both processors failing, delaying job 2c85603d-23ee-4b15-9a43-952b33efe112
+worker-rinha  | Both processors failing, delaying job de62b28e-efa5-442f-a3ae-256c6a2b4ee0
+worker-rinha  | Both processors failing, delaying job f5453748-69fb-4e05-a72d-e6019a1c7cc5
+worker-rinha  | Both processors failing, delaying job 807fa3ca-25c7-4b46-acac-962c03b9a143
+worker-rinha  | Both processors failing, delaying job e510fbee-9b3b-49af-916e-e922343d3bd6
+worker-rinha  | Both processors failing, delaying job ddd90b12-0082-4741-bf59-46dc4281af27
+worker-rinha  | Both processors failing, delaying job f09ffcb5-afa2-4ed8-80a2-ca73be0dee4c
+worker-rinha  | Both processors failing, delaying job 0d78fcd2-d85e-48e4-a424-1416f5fc8208
+worker-rinha  | Both processors failing, delaying job e0bd9550-a7f8-47b2-acbe-5ee4cc496b41
+worker-rinha  | Both processors failing, delaying job 29a2d8f8-e811-48f7-a736-fd753d38af57
+worker-rinha  | Both processors failing, delaying job a8fc2fa1-8db6-4530-8ebf-3f5de6e52838
+worker-rinha  | Both processors failing, delaying job 035aaf9e-86b2-4940-b415-ff1954276bba
+worker-rinha  | Both processors failing, delaying job f8591a03-147b-4ee5-a3d8-d80263257b86
+worker-rinha  | Both processors failing, delaying job 0e94aad9-859c-4a7f-8645-9a3eed8a3075
+worker-rinha  | Both processors failing, delaying job b4ccf73a-d2fe-4437-bbd3-e8e90341a032
+worker-rinha  | Both processors failing, delaying job cd81576e-8a84-4560-bc45-863a766cc5b0
+worker-rinha  | Both processors failing, delaying job 19141b99-9306-4b04-b6c1-f0f48e5d147f
+worker-rinha  | Both processors failing, delaying job af77ec84-35bd-4113-bc32-afc6adba813e
+worker-rinha  | Both processors failing, delaying job 73827a30-5d97-48d4-ad3e-bb0e889af606
+worker-rinha  | Both processors failing, delaying job af44776e-c95d-40e0-a854-cbc5aa7eed56
+worker-rinha  | Both processors failing, delaying job 8e1c541d-ae6b-4328-a077-6a8f3a12a59b
+worker-rinha  | Both processors failing, delaying job 27c9ad05-97d2-4b0b-8a51-93d3735fda0d
+worker-rinha  | Both processors failing, delaying job c1b73970-c2cc-4dc2-a8d3-41d67669e7be
+worker-rinha  | Both processors failing, delaying job 66217a2f-4b74-48fc-95d0-417bc0a6b65f
+worker-rinha  | Both processors failing, delaying job a7be6fd2-62ef-4d0a-bdfb-e51d7b61cd74
+worker-rinha  | Both processors failing, delaying job e03a2e9e-9984-45e9-b919-d84374f8220f
+worker-rinha  | Both processors failing, delaying job b4866138-2dcc-4e5b-a885-ac06e3947860
+worker-rinha  | Both processors failing, delaying job 6bd3c82a-5a6f-4af6-90d2-c0fbc92e1dce
+worker-rinha  | Both processors failing, delaying job 6bb79689-07f6-4752-b3ba-dc4abbc92ccb
+worker-rinha  | Both processors failing, delaying job 5b9597e7-18c4-471b-92e3-de92d0eefef7
+worker-rinha  | Both processors failing, delaying job 0720d99c-71ce-45f1-9b9b-c34fd0df65ba
+worker-rinha  | Both processors failing, delaying job d0871701-6fde-4f54-b7b7-b80cc0d75225
+worker-rinha  | Both processors failing, delaying job ed800033-5539-4e8f-a312-6a2c654e4032
+worker-rinha  | Both processors failing, delaying job a4f9529d-e2ed-4c62-9fa0-603b4c17d18c
+worker-rinha  | Both processors failing, delaying job 85a17062-6719-4a7d-9a53-a70f3d731592
+worker-rinha  | Both processors failing, delaying job 8faeb175-c86b-4fa1-8ee4-7b90208bb1ae
+worker-rinha  | Both processors failing, delaying job 1d6c9321-dabe-4ad0-bfa4-87b6728a3763
+worker-rinha  | Both processors failing, delaying job 8493dee5-c0af-4db5-ab96-d482965bde0d
+worker-rinha  | Both processors failing, delaying job afb8429c-a09c-494c-866c-aca019468b19
+worker-rinha  | Both processors failing, delaying job 8788b7b5-42a8-4428-8133-0668995a85c8
+worker-rinha  | Both processors failing, delaying job 5a378b76-63d0-43cc-b5bd-516dcfe3fcf8
+worker-rinha  | Both processors failing, delaying job a78092d1-e816-4300-9175-342300b8da1d
+worker-rinha  | Both processors failing, delaying job 8b749242-bd3e-4633-aa83-15e3e4e57fe3
+worker-rinha  | Both processors failing, delaying job 715d7dd6-7997-4655-ab9d-86fa02f7de08
+worker-rinha  | Both processors failing, delaying job e08f2321-83a7-4fdf-b8e6-2c6349620967
+worker-rinha  | Both processors failing, delaying job 79f6b56f-f3b0-45fd-a34a-8756cc2e97ef
+worker-rinha  | Both processors failing, delaying job b528f95b-89d4-4edc-8cff-5d25dd4eb552
+worker-rinha  | Both processors failing, delaying job aecd78c9-d78b-463e-b390-d11f29cd7622
+worker-rinha  | Both processors failing, delaying job 27491d53-0d42-467b-88f4-760dc4a15a64
+worker-rinha  | Both processors failing, delaying job 0c881480-fedc-4d96-ac95-9008da3a1c8b
+worker-rinha  | Both processors failing, delaying job 91d97fb4-3b3c-4c40-8c54-1bb7e85772c3
+worker-rinha  | Both processors failing, delaying job 2a112686-b7cf-4c2f-9703-7331e736274a
+worker-rinha  | Both processors failing, delaying job d8265d52-e1f5-4039-a3f1-3813634a3b4a
+worker-rinha  | Both processors failing, delaying job 9114a959-f1b9-4093-9512-9af50e137259
+worker-rinha  | Both processors failing, delaying job e98e583b-d422-4e27-9be6-e04207e3b6cf
+worker-rinha  | Both processors failing, delaying job 9bee021f-156d-44ff-a8b1-54dbe1a38c35
+worker-rinha  | Both processors failing, delaying job 3676dc75-1166-491c-aa18-1551faaadcf9
+worker-rinha  | Both processors failing, delaying job 063832e4-371c-4163-9c8e-4698e9ecbd72
+worker-rinha  | Both processors failing, delaying job 9c10b349-9a05-4ac9-851d-539c5b152ec8
+worker-rinha  | Both processors failing, delaying job e2044c16-a839-4e9e-a957-b2964f293f16
+worker-rinha  | Both processors failing, delaying job b62dbc26-39ff-44dd-aab1-1e830293258b
+worker-rinha  | Both processors failing, delaying job dd386e29-e46e-41fb-9491-564c120b9d85
+worker-rinha  | Both processors failing, delaying job 34214383-aa17-4f86-af19-55bb1c013dc7
+worker-rinha  | Both processors failing, delaying job 0ca882a2-2a77-425b-8aa5-21f6b3939352
+worker-rinha  | Both processors failing, delaying job 4010a820-5a3c-43aa-92fd-31bee84fa9a1
+worker-rinha  | Both processors failing, delaying job 500b88e2-6f9c-4591-9453-21d0ddc53a43
+worker-rinha  | Both processors failing, delaying job da803977-c176-4ead-875f-a4bd550b1eea
+worker-rinha  | Both processors failing, delaying job 278b4c9c-20bf-43e2-bc7c-1d2f79bb1543
+worker-rinha  | Both processors failing, delaying job 140161b9-acf5-418b-8f0d-01f31c3b0483
+worker-rinha  | Both processors failing, delaying job 79f21e48-72be-4db1-917e-fc63a19af62d
+worker-rinha  | Both processors failing, delaying job dcbd7b7f-f6d2-432e-8848-2259e98bdd59
+worker-rinha  | Both processors failing, delaying job a4fad690-03ec-4e65-b3fe-f8a2e6127e16
+worker-rinha  | Both processors failing, delaying job d86d819e-2777-47d9-b7c0-75e672082374
+worker-rinha  | Both processors failing, delaying job 70c057e5-33bf-4dd1-9bbc-011874cca57d
+worker-rinha  | Both processors failing, delaying job 59f48ae5-bdbf-4752-bae9-98ac076327da
+worker-rinha  | Both processors failing, delaying job db7b921b-cfb8-4d2b-a88f-4b70741b63a8
+worker-rinha  | Both processors failing, delaying job 06147ed6-c287-4d0e-9147-6a40e8dc9f6c
+worker-rinha  | Both processors failing, delaying job 0acf1f55-21f4-40cf-928b-c48a14a98b42
+worker-rinha  | Both processors failing, delaying job 0fb2d922-7fe6-45d1-a6b9-db232dc163e1
+worker-rinha  | Both processors failing, delaying job dc6ebf91-f4c2-4d15-94be-4bed5b0f6154
+worker-rinha  | Both processors failing, delaying job 26720965-49fb-4eb2-bf1a-fae9598dd4d0
+worker-rinha  | Both processors failing, delaying job 59c6d1d0-b210-4429-a0d7-846e8c38096f
+worker-rinha  | Both processors failing, delaying job 92cfc96c-404c-4081-87d1-d0dbcef86d6b
+worker-rinha  | Both processors failing, delaying job 844d3b17-8ce8-46e1-b543-07a9806ce204
+worker-rinha  | Both processors failing, delaying job 1d29cea0-8a78-414d-83a5-84325096fca9
+worker-rinha  | Both processors failing, delaying job 66d27404-6692-4ccc-a088-f2e83b5c83b1
+worker-rinha  | Both processors failing, delaying job 74d7ff2e-85ab-45f2-8d9b-7e304d78e6f4
+worker-rinha  | Both processors failing, delaying job 2da43a70-7041-4b2a-a6ec-7e05924b597c
+worker-rinha  | Both processors failing, delaying job be4ae247-c5b8-4f09-8c7a-3c9765ed972e
+worker-rinha  | Both processors failing, delaying job bb608e5f-fb21-4a29-b302-f2c40276b9a2
+worker-rinha  | Both processors failing, delaying job 10782215-bffc-46d4-bd87-40d437d1fb9c
+worker-rinha  | Both processors failing, delaying job 95356395-c90c-4bd4-a8dd-70e1aba52c73
+worker-rinha  | Both processors failing, delaying job 7e09c31f-8c2e-44ca-889d-e7e2a405f993
+worker-rinha  | Both processors failing, delaying job 81e4926e-8b64-434e-b809-99cf616a592e
+worker-rinha  | Both processors failing, delaying job d4cb0d2c-0ee9-46b2-9588-78391fcded2d
+worker-rinha  | Both processors failing, delaying job dab2b23a-c9a2-4455-a149-d2b7eeaace8d
+worker-rinha  | Both processors failing, delaying job d3a16b41-883a-4ab9-a2ca-3ba06724ad20
+worker-rinha  | Both processors failing, delaying job ea6bf430-d38d-480b-aec9-529a9ef3d369
+worker-rinha  | Both processors failing, delaying job c3690715-4bac-494e-98c3-564c5e529125
+worker-rinha  | Both processors failing, delaying job 2e11c48d-0932-4911-8d9f-6d4b16e61794
+worker-rinha  | Both processors failing, delaying job 73016b49-1664-4ea4-9951-e69d8c1ba91e
+worker-rinha  | Both processors failing, delaying job df0221bd-95eb-4629-98a6-5cf8f5804428
+worker-rinha  | Both processors failing, delaying job a299cee1-d311-47cf-adad-d9bdbc163529
+worker-rinha  | Both processors failing, delaying job 8cee2cb6-af49-463a-8e92-132b90fdcf97
+worker-rinha  | Both processors failing, delaying job 5d41638a-13f5-41a9-897b-e660a2cf9d87
+worker-rinha  | Both processors failing, delaying job 7c158c61-9568-44e2-945b-a625b66bf22b
+worker-rinha  | Both processors failing, delaying job f171d31e-bc83-4e0c-b51a-20f75e4a350b
+worker-rinha  | Both processors failing, delaying job ecbd8115-2411-49c8-ae94-58902f42a3e8
+worker-rinha  | Both processors failing, delaying job 5450058b-dace-4d07-8cda-0acf80fb9f27
+worker-rinha  | Both processors failing, delaying job 1a6580ce-6dbf-49ed-8a52-b83fab90e03a
+worker-rinha  | Both processors failing, delaying job aa8f4057-fc4a-4560-8b9d-eb0997184ee7
+worker-rinha  | Both processors failing, delaying job 6e3b4c2e-8b96-4631-b086-a8ffac076bc4
+worker-rinha  | Both processors failing, delaying job ac84e7e1-875b-4aab-a3eb-5527a0ce57d3
+worker-rinha  | Both processors failing, delaying job ebd97bea-1ecd-4ed2-a50b-449474d6fa7f
+worker-rinha  | Both processors failing, delaying job 870cab3c-fc86-4a35-86ab-470d50f17f17
+worker-rinha  | Both processors failing, delaying job 04b40f48-a2ca-4d69-9799-b78e2d9d0126
+worker-rinha  | Both processors failing, delaying job b11ef54a-2665-46ed-bb85-e79a278f404b
+worker-rinha  | Both processors failing, delaying job a2a9684e-031b-456c-8da3-709b9176c9be
+worker-rinha  | Both processors failing, delaying job bd96df03-1a54-41db-8895-9766cfafcf2c
+worker-rinha  | Both processors failing, delaying job ee5bcf64-854a-4289-9ee4-67c5cb7a7993
+worker-rinha  | Both processors failing, delaying job ae92a21b-166d-4fdb-bad7-09b9f40f4f98
+worker-rinha  | Both processors failing, delaying job 2947949c-da54-4e62-8086-55e1b5565e0b
+worker-rinha  | Both processors failing, delaying job ddec51b4-a554-422b-80e2-ef4d3ee3e2b4
+worker-rinha  | Both processors failing, delaying job 11e1d536-f3b5-4924-855a-cf99a445b317
+worker-rinha  | Both processors failing, delaying job 584d3a3c-050f-497f-ac94-341df5276072
+worker-rinha  | Both processors failing, delaying job e12c42f5-fab7-42f8-9bb2-27369991f991
+worker-rinha  | Both processors failing, delaying job c0c6f51c-f384-4953-96a9-bea6b647d508
+worker-rinha  | Both processors failing, delaying job 5d9ba5fd-3cd6-40a8-8499-06e231d336b0
+worker-rinha  | Both processors failing, delaying job fea3f26e-48fc-4e4a-8720-b7994d50b729
+worker-rinha  | Both processors failing, delaying job 9ca37659-cc14-4b2b-a6fa-559199f6825e
+worker-rinha  | Both processors failing, delaying job 53c5fbe3-15b5-4b4a-adfb-1058819d6a8b
+worker-rinha  | Both processors failing, delaying job 05df98f7-b513-4c9b-a653-cbe3b3f899e8
+worker-rinha  | Both processors failing, delaying job 41f33b5c-aead-4c6f-b172-3ade514f097e
+worker-rinha  | Both processors failing, delaying job f70edc37-350c-4424-ab5e-06363aa30e19
+worker-rinha  | Both processors failing, delaying job 42d5f3ec-6bd6-42b9-9693-cb90fc93950b
+worker-rinha  | Both processors failing, delaying job 9e304657-975b-42a3-8c26-2f8af54cbc3c
+worker-rinha  | Both processors failing, delaying job 66b4d2e7-7771-4ec8-b7bf-a167b8e22671
+worker-rinha  | Both processors failing, delaying job a4ef1b95-22e1-4c48-a235-1982efebc669
+worker-rinha  | Both processors failing, delaying job 27401810-383a-41ea-98f7-fb2978870e10
+worker-rinha  | Both processors failing, delaying job 00687dbe-f5fe-46f9-838c-13a42db93fda
+worker-rinha  | Both processors failing, delaying job 1714687c-030d-4518-8f51-3337541057a7
+worker-rinha  | Both processors failing, delaying job 9d2907df-9f78-4636-bc5d-a1bf0b12449c
+worker-rinha  | Both processors failing, delaying job d5cad3fb-16b9-41a4-8dd2-5e9a5d17c693
+worker-rinha  | Both processors failing, delaying job e6759b06-faf4-472c-b7f4-8347e944a6d3
+worker-rinha  | Both processors failing, delaying job 1edd2d07-eb56-4992-a608-c5524f6ddeb0
+worker-rinha  | Worker completed payments with id: "c18af759-6b61-4af0-b9db-d855bdc643b3"
+worker-rinha  | Worker completed payments with id: "49b19d43-e61f-485b-a98d-8ef09b5f9aa5"
+worker-rinha  | Worker completed payments with id: "63bebd3b-3a5e-4313-9318-dc88c5da0f8d"
+worker-rinha  | Worker completed payments with id: "a0caf874-25cc-478e-a39e-04fd523ca5fc"
+worker-rinha  | Worker completed payments with id: "23c266a4-a79c-4b3b-b106-76ccba41c67d"
+worker-rinha  | Worker completed payments with id: "3eb68f8f-e869-4ace-a42a-a5d454da778a"
+worker-rinha  | Worker completed payments with id: "ff3786c3-02a3-48e8-96ac-4e8e2f334ce7"
+worker-rinha  | Worker completed payments with id: "204b9eaa-b918-481f-9135-8394e12e5888"
+worker-rinha  | Worker completed payments with id: "a4e92f79-a398-49ad-840e-d765adadfde8"
+worker-rinha  | Worker completed payments with id: "9b0b524e-0b18-4ec2-9bce-f728a15e36f6"
+worker-rinha  | Worker completed payments with id: "5b41c2c6-95c2-4f42-b1f7-16ccc73ad2e9"
+worker-rinha  | Worker completed payments with id: "cb504905-b986-46e9-b322-2757a33a6469"
+worker-rinha  | Worker completed payments with id: "858b22b7-b9ab-4f06-ba8e-9e826b97e526"
+worker-rinha  | Worker completed payments with id: "6cfac3bb-6087-44c3-add2-5dddc9783520"
+worker-rinha  | Worker completed payments with id: "9a7d9bcf-56d8-4004-b02b-8f9fd4eca863"
+worker-rinha  | Worker completed payments with id: "a0d8a7f4-6ebc-48e2-aff1-11887b80092a"
+worker-rinha  | Worker completed payments with id: "2ac07e10-7c3a-4a02-8cf3-eeabecd97afb"
+worker-rinha  | Worker completed payments with id: "22a5885e-a77c-4ba2-acd8-ceceb0d25b1c"
+worker-rinha  | Worker completed payments with id: "db776130-1084-4d4e-a70a-77dafcba6954"
+worker-rinha  | Worker completed payments with id: "ff8edfca-fa55-40d0-a313-3253f0627411"
+worker-rinha  | Worker completed payments with id: "f6557f1a-4c9d-491b-9cff-fc9d7264d0e3"
+worker-rinha  | Worker completed payments with id: "44bcde90-cef0-4f4f-90b6-38f0c0af5ded"
+worker-rinha  | Worker completed payments with id: "884e5a00-739d-4181-b862-278a5ae75a20"
+worker-rinha  | Both processors failing, delaying job 9d1ef23c-6435-4dc0-a3e7-8960d460b68f
+worker-rinha  | Both processors failing, delaying job 262aa785-6dff-41e1-b5de-5e81c12c7c5b
+worker-rinha  | Both processors failing, delaying job 643a42d7-e9de-4838-8bd8-18a90f033463
+worker-rinha  | Both processors failing, delaying job 3217c19a-bfab-4988-be55-63af50bc381f
+worker-rinha  | Both processors failing, delaying job b5c08d92-cf54-42ff-ab72-38d6702706d9
+worker-rinha  | Both processors failing, delaying job 957f1860-36d6-4e2d-8d5c-023e38696f96
+worker-rinha  | Worker completed payments with id: "b52060db-459f-4bea-8759-1c922cab616b"
+worker-rinha  | Worker completed payments with id: "d93e9c5f-a2bf-4d03-89ca-6a372f15dd17"
+worker-rinha  | Worker completed payments with id: "67036d13-2d2d-42c9-9651-c57201f5903c"
+redis-1       | 1:M 14 Jul 2025 23:08:07.091 * 10000 changes in 60 seconds. Saving...
+redis-1       | 1:M 14 Jul 2025 23:08:07.091 * Background saving started by pid 22
+worker-rinha  | Worker completed payments with id: "1441081d-94a0-48f0-9c79-77d1e1fd7eb9"
+worker-rinha  | Worker completed payments with id: "9317eeb1-a9b5-4db4-aef2-ddfc55a857fd"
+mongodb-1     | {"t":{"$date":"2025-07-14T23:08:07.866+00:00"},"s":"I",  "c":"WTCHKPT",  "id":22430,   "ctx":"Checkpointer","msg":"WiredTiger message","attr":{"message":{"ts_sec":1752534487,"ts_usec":866229,"thread":"1:0x7fb093d9b640","session_name":"WT_SESSION.checkpoint","category":"WT_VERB_CHECKPOINT_PROGRESS","category_id":6,"verbose_level":"DEBUG_1","verbose_level_id":1,"msg":"saving checkpoint snapshot min: 508, snapshot max: 508 snapshot count: 0, oldest timestamp: (0, 0) , meta checkpoint timestamp: (0, 0) base write gen: 1"}}}
+worker-rinha  | Worker completed payments with id: "c5e229fe-11b3-4461-828f-fcea5a14e7a7"
+worker-rinha  | Worker completed payments with id: "ac76090b-e5e2-4b97-b325-d5e9487be915"
+worker-rinha  | Worker completed payments with id: "20f260ef-fac1-45b2-a798-574992840385"
+redis-1       | 22:C 14 Jul 2025 23:08:09.113 * DB saved on disk
+redis-1       | 22:C 14 Jul 2025 23:08:09.183 * Fork CoW for RDB: current 2 MB, peak 2 MB, average 1 MB
+worker-rinha  | Worker completed payments with id: "964f81fc-41ca-463c-92a6-f63e13746d73"
+redis-1       | 1:M 14 Jul 2025 23:08:09.291 * Background saving terminated with success
+worker-rinha  | Worker completed payments with id: "1805665b-953e-4cf8-bc2e-24a7425a106a"
+worker-rinha  | Worker completed payments with id: "396d791a-80e3-4a5f-b254-a60a4bc09f57"
+worker-rinha  | Worker completed payments with id: "2018ccb5-b2d4-47dd-9a3f-9b1148fa1cf8"
+worker-rinha  | Worker completed payments with id: "caedbb8a-cd11-480a-b67c-20f2dca0c905"
+worker-rinha  | Worker completed payments with id: "5c9a1e07-d7f4-4643-8ffb-90be1e99f52e"
+worker-rinha  | Worker completed payments with id: "982c6940-bf0d-46d1-8343-deee2b8d084a"
+worker-rinha  | Worker completed payments with id: "c9637e34-028d-4021-914f-326eedcf3307"
+worker-rinha  | Worker completed payments with id: "3a4c1c03-b085-4059-a2b2-f41f5aaea5ac"
+worker-rinha  | Worker completed payments with id: "9e576db9-43f2-46f9-90a5-a0c67be93aef"
+worker-rinha  | Both processors failing, delaying job 2be06f27-368a-4ada-bd92-0b64b27b544a
+worker-rinha  | Both processors failing, delaying job be0b9f0b-1db3-4613-b8b0-b0da02d0184a
+worker-rinha  | Both processors failing, delaying job 31468c25-f497-4af1-b77d-9335e0e92474
+worker-rinha  | Both processors failing, delaying job 3711b5d2-a5d3-4767-b315-9a76ef9cafb8
+worker-rinha  | Both processors failing, delaying job b0cf9217-2ed0-48c7-bb14-810d95b1bbe3
+worker-rinha  | Both processors failing, delaying job 4f8f8d01-9b7f-49f7-b3bf-7048ec46a5f5
+worker-rinha  | Worker completed payments with id: "507bdb99-3896-4e28-9399-be49ac26b507"
+worker-rinha  | Worker completed payments with id: "fcea440c-6bef-4ab5-9cb5-33c75a71092b"
+worker-rinha  | Worker completed payments with id: "ae637a5f-520c-4f39-a613-a2ba1493ada3"
+worker-rinha  | Worker completed payments with id: "0672a9ff-06dc-4194-ba52-704a4badba40"
+worker-rinha  | Worker completed payments with id: "1dab84a4-640b-4554-b450-8cc1fdb968f4"
+worker-rinha  | Worker completed payments with id: "ecda8220-548d-4d43-b6d6-5e63bbf4433f"
+worker-rinha  | Worker completed payments with id: "f66ec5a8-9772-45cd-8137-0221458704a9"
+worker-rinha  | Worker completed payments with id: "12b5d43e-42c0-4f62-ae4d-ce3ad4399125"
+worker-rinha  | Worker completed payments with id: "d8324022-ecff-4a47-8053-483edadc9966"
+worker-rinha  | Worker completed payments with id: "6b010170-0194-4bea-8e86-c9349c14a420"
+worker-rinha  | Worker completed payments with id: "85733414-528a-4327-83c5-7b1df98abb96"
+worker-rinha  | Worker completed payments with id: "54dbeb04-b4b8-4b32-8de9-ae07ae41a2f5"
+worker-rinha  | Worker completed payments with id: "37d59d3d-4aa8-46ce-920b-2cddf33b775f"
+worker-rinha  | Worker completed payments with id: "5707d35e-87e4-472f-87f5-95f82bf9e71d"
+worker-rinha  | Worker completed payments with id: "e8645401-244a-4446-81a0-65b8f44b3b67"
+worker-rinha  | Worker completed payments with id: "87f5142e-af0c-477d-8acd-4dd999ab7b18"
+worker-rinha  | Worker completed payments with id: "01c7d6d6-dbd1-46a9-813c-a6f48edcd251"
+worker-rinha  | Worker completed payments with id: "84f6b887-74dd-4cf2-88e0-df982f329d7e"
+worker-rinha  | Worker completed payments with id: "f7a24439-a395-4094-b574-739a61ad8a1a"
+worker-rinha  | Worker completed payments with id: "f6f83cd2-a3b3-4e47-924b-6090b76e32d5"
+worker-rinha  | Worker completed payments with id: "a74912f3-048a-4238-bcc7-0d61852364cf"
+worker-rinha  | Worker completed payments with id: "231a9eb5-c5cb-4f1d-9b96-989862ed6b07"
+worker-rinha  | Worker completed payments with id: "d117ec0d-fc8c-4e0f-944b-68423c73487b"
+worker-rinha  | Worker completed payments with id: "d8aaacf3-08c9-44c4-9f7b-520b57f52e57"
+worker-rinha  | Worker completed payments with id: "272e6050-3f66-4f8c-997f-41f7eb6e4b4f"
+worker-rinha  | Worker completed payments with id: "f4685a24-1943-4038-ae9b-df6b0893b452"
+worker-rinha  | Worker completed payments with id: "990815d6-e2d4-491f-9eff-281b782360bf"
+worker-rinha  | Worker completed payments with id: "098d713f-a74b-4678-a67a-414b93f93262"
+worker-rinha  | Worker completed payments with id: "b03018cb-a26e-400e-b126-c00e29dacfcc"
+worker-rinha  | Worker completed payments with id: "11b03906-efb1-4911-af59-6db7f9e0671b"
+worker-rinha  | Worker completed payments with id: "11f6cf5c-d4ab-4b2c-82e8-5aa1d0f3ffad"
+worker-rinha  | Worker completed payments with id: "e21e4534-c329-403c-ae31-e1fd001e110c"
+worker-rinha  | Worker completed payments with id: "9ff8580c-ea38-458f-8f4b-44bf6940a596"
+worker-rinha  | Worker completed payments with id: "12cbfab0-b675-4415-87f4-348de14ddb17"
+worker-rinha  | Worker completed payments with id: "ea8680d7-e962-4834-97c3-5dd455d80bb2"
+worker-rinha  | Worker completed payments with id: "79f7af6e-de93-4869-9677-fb1f4873a98a"
+worker-rinha  | Worker completed payments with id: "bdfdc966-3ad8-4804-a3bb-16ed0f16c901"
+worker-rinha  | Worker completed payments with id: "1c83f5bd-0aac-40ca-b5ea-ef9112875ffe"
+worker-rinha  | Worker completed payments with id: "6170b438-05a6-4cbc-ae37-1ec666a3a4a5"
+worker-rinha  | Worker completed payments with id: "38af0454-2163-40e8-99b9-c04b88209129"
+worker-rinha  | Worker completed payments with id: "ad6cb938-dd79-4a40-9c66-76e1fc3e2ff6"
+worker-rinha  | Worker completed payments with id: "59e86e58-c290-4305-9746-0036d9429e16"
+worker-rinha  | Worker completed payments with id: "a101c447-9ee3-4017-9d6a-42d47768ae1a"
+worker-rinha  | Worker completed payments with id: "0aaa78fc-3121-4d70-95f9-03b17fdc3991"
+worker-rinha  | Worker completed payments with id: "c697d8e3-39b4-4d69-8a31-b56ba99757a8"
+worker-rinha  | Worker completed payments with id: "20e06b79-3821-4a6a-a1ae-8e3a5378a75e"
+worker-rinha  | Worker completed payments with id: "c54297f0-59eb-41cb-9603-849f8d6696ae"
+worker-rinha  | Worker completed payments with id: "4107f7e3-df22-490f-bb7a-abbf8a41ad32"
+worker-rinha  | Worker completed payments with id: "c205e72e-9a7e-4c21-a350-f25222e55e2b"
+worker-rinha  | Worker completed payments with id: "2a682417-6fd4-47a1-8ed9-95ded3e9536a"
+worker-rinha  | Worker completed payments with id: "dab36aa0-9cef-423c-84a8-bb63f6b6e641"
+worker-rinha  | Worker completed payments with id: "dafa3285-e7dd-4611-9ccf-4a63d6217c65"
+worker-rinha  | Worker completed payments with id: "2cde85d1-f927-45bb-89da-2236e5be5caf"
+worker-rinha  | Worker completed payments with id: "94a09cce-f155-4d3d-bc93-e6c6d9026d8b"
+worker-rinha  | Both processors failing, delaying job 8f8734db-432e-4665-9b81-bfb06cc071af
+worker-rinha  | Both processors failing, delaying job cdc0e289-b2f7-49d4-9a99-bf2a65c70d74
+worker-rinha  | Both processors failing, delaying job 6bfee434-bbcc-4d57-87c2-9f88e0103c2e
+worker-rinha  | Both processors failing, delaying job 8f3c0d4d-0cb5-47b8-ae6b-9bcdfb117978
+worker-rinha  | Both processors failing, delaying job ccb912f3-6bac-47a4-a326-5d82b047367b
+worker-rinha  | Both processors failing, delaying job b464bb85-bae6-4563-8d3d-f4a7d7a19287
+worker-rinha  | Worker completed payments with id: "1fcd05d4-8d82-45b5-9b87-1a3042ca5ae6"
+worker-rinha  | Worker completed payments with id: "bb3a9108-e789-45c8-8595-c7cb1781a569"
+worker-rinha  | Both processors failing, delaying job 46516a44-7d2d-4769-8386-b62a4e43274d
+worker-rinha  | Both processors failing, delaying job 8da7d0c2-f520-4175-9024-7df91635f7ed
+worker-rinha  | Both processors failing, delaying job c4b848d0-f9b3-4b28-a476-47b05530f087
+worker-rinha  | Both processors failing, delaying job 09db86f1-48e2-45a6-9dfd-8e353240f75e
+worker-rinha  | Both processors failing, delaying job ca75d69a-360d-4c02-b260-f1880079209c
+worker-rinha  | Both processors failing, delaying job b437a637-7710-41b8-8f78-f30143d6cb5c
+worker-rinha  | Worker completed payments with id: "143b9ea4-bf0b-4721-a2db-8b9ca4b4ee6c"
+[Ktraefik exited with code 0
+worker-rinha  | Worker completed payments with id: "57f24daa-c27b-4833-b49c-ac6d5c618500"
+worker-rinha  | Worker completed payments with id: "b32998bd-0edf-4077-b4bc-3e855b9ca82f"
+worker-rinha  | Worker completed payments with id: "20e93c86-8701-4598-a234-62d2809a19e3"
+worker-rinha  | Worker completed payments with id: "9c08fe91-881f-4c32-9431-a363154c9ebf"
+worker-rinha  | Worker completed payments with id: "8d73ec78-5457-4f9b-976b-6b66bd8a5d12"
+worker-rinha  | Worker completed payments with id: "1d2fa050-a363-43e3-9588-a7d165a8cdcc"
+worker-rinha  | Worker completed payments with id: "25ed8421-646d-4dae-b8d9-72a8d545a515"
+worker-rinha  | Worker completed payments with id: "606a6670-f5c3-4433-ab27-6b6ee6b26e14"
+worker-rinha  | Worker completed payments with id: "278b31a8-a8e4-45c2-bbd1-52a636602396"
+worker-rinha  | Worker completed payments with id: "3ec0a0f1-ceea-4ca7-b082-2e7605d4b9f9"
+worker-rinha  | Worker completed payments with id: "d7b451c5-bc09-4a66-bdd9-0aba940b2892"
+worker-rinha  | Worker completed payments with id: "705cc91c-c361-4c9a-850b-52e85394253e"
+worker-rinha  | Worker completed payments with id: "ca626597-3fa5-49bc-be27-42b7d18b2944"
+worker-rinha  | Worker completed payments with id: "9119925a-29ef-4506-af8e-5bbb5d2a872b"
+worker-rinha  | Worker completed payments with id: "4a3f1d0b-f880-49ef-a254-51a7b834b13c"
+worker-rinha  | Worker completed payments with id: "84f846d7-765e-4a06-b4e1-4c27743d7087"
+worker-rinha  | Worker completed payments with id: "69737906-58a0-46a1-8e0f-1fbb7d271f31"
+worker-rinha  | Worker completed payments with id: "e0b95661-a80e-4398-a1e7-6a3eb7ee40ef"
+worker-rinha  | Worker completed payments with id: "fce6f6eb-d0b9-442b-8855-90020ac45dc4"
+worker-rinha  | Worker completed payments with id: "2b119a4b-c2d2-4e59-b97d-19d8c77d1c2b"
+worker-rinha  | Worker completed payments with id: "bfe77271-d705-45c6-8031-2de2aec99241"
+worker-rinha  | Worker completed payments with id: "c9ea862d-d29c-43dc-9b5a-096b12a61f54"
+worker-rinha  | Worker completed payments with id: "6e9fdf61-c243-45de-87ae-82599f231549"
+worker-rinha  | Worker completed payments with id: "f9e4df12-cbec-4863-99fe-08eb290739a8"
+worker-rinha  | Worker completed payments with id: "b658d394-07c2-4cfc-bbd6-7c7714c38cb1"
+worker-rinha  | Worker completed payments with id: "cf64e350-2fc2-4a0c-ae93-9e18d203a704"
+worker-rinha  | Worker completed payments with id: "374d1ad6-24c6-43b4-97f6-6cd85aaa424a"
+worker-rinha  | Worker completed payments with id: "2e949ac0-9dd2-4a91-a7ba-06542c05109a"
+worker-rinha  | Worker completed payments with id: "aed9b40c-7634-4f03-9ee8-cf880f980543"
+worker-rinha  | Worker completed payments with id: "17bd25d3-b759-4a68-8bc4-eea45b0f489c"
+worker-rinha  | Worker completed payments with id: "bfe8c9e8-0545-4ba6-a5bf-62fa198af427"
+worker-rinha  | Worker completed payments with id: "89194df8-b2e0-4480-a847-65aceeedb651"
+worker-rinha  | Worker completed payments with id: "b11948ec-b9b4-4d20-8fc7-95cc0692b092"
+worker-rinha  | Worker completed payments with id: "e3a2b2b1-e759-49cd-9040-467b14d5dd58"
+worker-rinha  | Worker completed payments with id: "e1a63334-7c0c-45bc-bac5-63dd27deaa39"
+worker-rinha  | Worker completed payments with id: "9878528c-1023-49a9-ab35-1cf981f198c7"
+worker-rinha  | Worker completed payments with id: "c9b44d23-f162-4c7e-86af-d45a6c953305"
+worker-rinha  | Worker completed payments with id: "7f5aaf61-6eeb-4009-ac2b-edc5ab635269"
+worker-rinha  | Worker completed payments with id: "efc3199c-713a-4755-9758-4c59062bba06"
+worker-rinha  | Worker completed payments with id: "1e0c9839-bb05-45cc-889d-199e1a904552"
+worker-rinha  | Worker completed payments with id: "664c926a-8e01-4aee-81d7-760c59a20dd2"
+worker-rinha  | Worker completed payments with id: "4b670e8b-9b8c-4527-b81a-fcd7e1f13106"
+worker-rinha  | Worker completed payments with id: "09214cc1-d686-4daa-bc7b-bc5d504d805e"
+traefik       | time="2025-07-14T23:08:22Z" level=info msg="Configuration loaded from flags."
+worker-rinha  | Worker completed payments with id: "b461f71d-23b1-4eed-a8c9-88310e8f566b"
+worker-rinha  | Worker completed payments with id: "32173586-d9b3-4f69-9266-c5bd0afdf47e"
+worker-rinha  | Worker completed payments with id: "fabbb8d9-0f54-4222-9cc6-990eff30f625"
+worker-rinha  | Worker completed payments with id: "7f4c57b0-7cf0-4b4d-8ffa-4bcbbc6a0057"
+worker-rinha  | Worker completed payments with id: "15dbcdab-7151-4c65-b8c2-69a9a0093c16"
+worker-rinha  | Worker completed payments with id: "36accfda-0b53-4057-9427-651364f7b76b"
+worker-rinha  | Worker completed payments with id: "78b09d6a-99fb-43c5-9dbf-ca4a979ebb9e"
+worker-rinha  | Worker completed payments with id: "170a6f2b-16de-47d3-bfb0-f7d1b6cca753"
+worker-rinha  | Worker completed payments with id: "c9cd124f-bd25-4bce-a2d1-e8e384d27745"
+worker-rinha  | Worker completed payments with id: "950a17f8-3076-49e0-8f88-dc8e7003a020"
+worker-rinha  | Worker completed payments with id: "dc7325a1-988c-4a4d-bca6-daeb1691f710"
+worker-rinha  | Worker completed payments with id: "77b909fc-bdf4-4639-8817-ddc1ea686e4d"
+worker-rinha  | Worker completed payments with id: "fddb809f-bc5d-49e6-82bd-832c4c7b009a"
+worker-rinha  | Worker completed payments with id: "37b60f91-1673-46dd-8451-bfe3f8e94810"
+worker-rinha  | Worker completed payments with id: "7d146835-efc6-4311-9574-597e05a26990"
+worker-rinha  | Worker completed payments with id: "02aa00f7-95bb-46d4-bb1c-cf955af5667b"
+worker-rinha  | Worker completed payments with id: "638745b7-897f-4fbd-94ee-0d6c8d097bb3"
+worker-rinha  | Worker completed payments with id: "29d3d96b-5622-48d5-acf9-351dc2a36a0e"
+worker-rinha  | Worker completed payments with id: "e55357e2-e78f-4298-b5e8-f13636b1f574"
+worker-rinha  | Worker completed payments with id: "cdd656e9-5a24-46cb-a176-45e4e3a7ed4a"
+worker-rinha  | Worker completed payments with id: "637cbdfa-2725-401b-8ce0-ce27d445dd69"
+worker-rinha  | Worker completed payments with id: "d9d5ea19-b28e-4179-98e1-eb9e04c7e4b3"
+worker-rinha  | Worker completed payments with id: "2317ff72-2205-4617-9f6b-89d6ecdb8d1c"
+worker-rinha  | Worker completed payments with id: "587023f8-96ce-4df8-9c50-f4540db6b75b"
+worker-rinha  | Worker completed payments with id: "7c74fd73-217a-4310-8eea-ff92b2f67d08"
+worker-rinha  | Worker completed payments with id: "cb94f626-c99c-4028-9eb4-25ea381ff51f"
+traefik       | time="2025-07-14T23:08:23Z" level=error msg="accept tcp [::]:9999: use of closed network connection" entryPointName=api
+traefik       | time="2025-07-14T23:08:23Z" level=error msg="accept tcp [::]:443: use of closed network connection" entryPointName=websecure
+traefik       | time="2025-07-14T23:08:23Z" level=error msg="accept tcp [::]:80: use of closed network connection" entryPointName=web
+traefik       | time="2025-07-14T23:08:23Z" level=error msg="Error while starting server: accept tcp [::]:80: use of closed network connection" entryPointName=web
+traefik       | time="2025-07-14T23:08:23Z" level=error msg="close tcp [::]:443: use of closed network connection" entryPointName=websecure
+traefik       | time="2025-07-14T23:08:23Z" level=error msg="close tcp [::]:9999: use of closed network connection" entryPointName=api
+traefik       | time="2025-07-14T23:08:23Z" level=error msg="Cannot connect to docker server context canceled" providerName=docker
+worker-rinha  | Worker completed payments with id: "8c5dec0c-8467-4477-a2b7-6fa02d3d4d6f"
+worker-rinha  | Worker completed payments with id: "4dc1ea70-e70b-4d44-9676-5fd34884a5e7"
+worker-rinha  | Worker completed payments with id: "6d0fa023-7d3f-4d02-8cc5-7fcef971450d"
+worker-rinha  | Worker completed payments with id: "b5641bc4-f6b0-4670-8cc9-50d309de55ef"
+worker-rinha  | Worker completed payments with id: "c6dc1b8a-db03-4406-a538-defe7f70c4b0"
+worker-rinha  | Worker completed payments with id: "af7a9166-ddd7-4bd8-be71-a735fcd56fd4"
+worker-rinha  | Worker completed payments with id: "81183212-52fb-48b4-89a7-4f832b84b413"
+log truncated at line 1000

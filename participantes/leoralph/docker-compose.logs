@@ -1,0 +1,157 @@
+
+ Network leoralph_backend  Creating
+ Network leoralph_backend  Created
+ Container leoralph-redis-1  Creating
+ Container leoralph-caddy-1  Creating
+ Container leoralph-caddy-1  Created
+ Container leoralph-redis-1  Created
+ Container leoralph-worker-1  Creating
+ Container leoralph-api02-1  Creating
+ Container leoralph-api01-1  Creating
+ Container leoralph-api02-1  Created
+ Container leoralph-worker-1  Created
+ Container leoralph-api01-1  Created
+Attaching to api01-1, api02-1, caddy-1, redis-1, worker-1
+redis-1   | Starting Redis Server
+redis-1   | 1:C 14 Jul 2025 22:53:01.989 # WARNING Memory overcommit must be enabled! Without it, a background save or replication may fail under low memory condition. Being disabled, it can also cause failures without low memory condition, see https://github.com/jemalloc/jemalloc/issues/1328. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.
+redis-1   | 1:C 14 Jul 2025 22:53:01.989 * oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+redis-1   | 1:C 14 Jul 2025 22:53:01.989 * Redis version=8.0.3, bits=64, commit=00000000, modified=1, pid=1, just started
+redis-1   | 1:C 14 Jul 2025 22:53:01.989 * Configuration loaded
+redis-1   | 1:M 14 Jul 2025 22:53:01.989 * monotonic clock: POSIX clock_gettime
+redis-1   | 1:M 14 Jul 2025 22:53:01.990 * Running mode=standalone, port=6379.
+redis-1   | 1:M 14 Jul 2025 22:53:01.992 * <bf> RedisBloom version 8.0.1 (Git=unknown)
+redis-1   | 1:M 14 Jul 2025 22:53:01.992 * <bf> Registering configuration options: [
+redis-1   | 1:M 14 Jul 2025 22:53:01.992 * <bf> 	{ bf-error-rate       :      0.01 }
+redis-1   | 1:M 14 Jul 2025 22:53:01.992 * <bf> 	{ bf-initial-size     :       100 }
+redis-1   | 1:M 14 Jul 2025 22:53:01.992 * <bf> 	{ bf-expansion-factor :         2 }
+redis-1   | 1:M 14 Jul 2025 22:53:01.992 * <bf> 	{ cf-bucket-size      :         2 }
+redis-1   | 1:M 14 Jul 2025 22:53:01.992 * <bf> 	{ cf-initial-size     :      1024 }
+redis-1   | 1:M 14 Jul 2025 22:53:01.992 * <bf> 	{ cf-max-iterations   :        20 }
+redis-1   | 1:M 14 Jul 2025 22:53:01.992 * <bf> 	{ cf-expansion-factor :         1 }
+redis-1   | 1:M 14 Jul 2025 22:53:01.992 * <bf> 	{ cf-max-expansions   :        32 }
+redis-1   | 1:M 14 Jul 2025 22:53:01.992 * <bf> ]
+redis-1   | 1:M 14 Jul 2025 22:53:01.992 * Module 'bf' loaded from /usr/local/lib/redis/modules//redisbloom.so
+redis-1   | 1:M 14 Jul 2025 22:53:02.015 * <search> Redis version found by RedisSearch : 8.0.3 - oss
+redis-1   | 1:M 14 Jul 2025 22:53:02.015 * <search> RediSearch version 8.0.1 (Git=5688fcc)
+redis-1   | 1:M 14 Jul 2025 22:53:02.015 * <search> Low level api version 1 initialized successfully
+redis-1   | 1:M 14 Jul 2025 22:53:02.022 * <search> gc: ON, prefix min length: 2, min word length to stem: 4, prefix max expansions: 200, query timeout (ms): 500, timeout policy: return, cursor read size: 1000, cursor max idle (ms): 300000, max doctable size: 1000000, max number of search results:  1000000, 
+redis-1   | 1:M 14 Jul 2025 22:53:02.022 * <search> Initialized thread pools!
+redis-1   | 1:M 14 Jul 2025 22:53:02.022 * <search> Disabled workers threadpool of size 0
+redis-1   | 1:M 14 Jul 2025 22:53:02.022 * <search> Subscribe to config changes
+redis-1   | 1:M 14 Jul 2025 22:53:02.022 * <search> Enabled role change notification
+redis-1   | 1:M 14 Jul 2025 22:53:02.022 * <search> Cluster configuration: AUTO partitions, type: 0, coordinator timeout: 0ms
+redis-1   | 1:M 14 Jul 2025 22:53:02.023 * <search> Register write commands
+redis-1   | 1:M 14 Jul 2025 22:53:02.023 * Module 'search' loaded from /usr/local/lib/redis/modules//redisearch.so
+redis-1   | 1:M 14 Jul 2025 22:53:02.045 * <timeseries> RedisTimeSeries version 80001, git_sha=577bfa8b5909e7ee572f0b651399be8303dc6641
+redis-1   | 1:M 14 Jul 2025 22:53:02.045 * <timeseries> Redis version found by RedisTimeSeries : 8.0.3 - oss
+redis-1   | 1:M 14 Jul 2025 22:53:02.045 * <timeseries> Registering configuration options: [
+redis-1   | 1:M 14 Jul 2025 22:53:02.045 * <timeseries> 	{ ts-compaction-policy   :              }
+redis-1   | 1:M 14 Jul 2025 22:53:02.045 * <timeseries> 	{ ts-num-threads         :            3 }
+redis-1   | 1:M 14 Jul 2025 22:53:02.045 * <timeseries> 	{ ts-retention-policy    :            0 }
+redis-1   | 1:M 14 Jul 2025 22:53:02.045 * <timeseries> 	{ ts-duplicate-policy    :        block }
+redis-1   | 1:M 14 Jul 2025 22:53:02.045 * <timeseries> 	{ ts-chunk-size-bytes    :         4096 }
+redis-1   | 1:M 14 Jul 2025 22:53:02.045 * <timeseries> 	{ ts-encoding            :   compressed }
+redis-1   | 1:M 14 Jul 2025 22:53:02.045 * <timeseries> 	{ ts-ignore-max-time-diff:            0 }
+redis-1   | 1:M 14 Jul 2025 22:53:02.045 * <timeseries> 	{ ts-ignore-max-val-diff :     0.000000 }
+redis-1   | 1:M 14 Jul 2025 22:53:02.045 * <timeseries> ]
+redis-1   | 1:M 14 Jul 2025 22:53:02.053 * <timeseries> Detected redis oss
+redis-1   | 1:M 14 Jul 2025 22:53:02.054 * Module 'timeseries' loaded from /usr/local/lib/redis/modules//redistimeseries.so
+redis-1   | 1:M 14 Jul 2025 22:53:02.357 * <ReJSON> Created new data type 'ReJSON-RL'
+redis-1   | 1:M 14 Jul 2025 22:53:02.358 * <ReJSON> version: 80001 git sha: unknown branch: unknown
+redis-1   | 1:M 14 Jul 2025 22:53:02.358 * <ReJSON> Exported RedisJSON_V1 API
+redis-1   | 1:M 14 Jul 2025 22:53:02.358 * <ReJSON> Exported RedisJSON_V2 API
+redis-1   | 1:M 14 Jul 2025 22:53:02.358 * <ReJSON> Exported RedisJSON_V3 API
+redis-1   | 1:M 14 Jul 2025 22:53:02.358 * <ReJSON> Exported RedisJSON_V4 API
+redis-1   | 1:M 14 Jul 2025 22:53:02.358 * <ReJSON> Exported RedisJSON_V5 API
+redis-1   | 1:M 14 Jul 2025 22:53:02.358 * <ReJSON> Enabled diskless replication
+redis-1   | 1:M 14 Jul 2025 22:53:02.358 * <ReJSON> Initialized shared string cache, thread safe: false.
+redis-1   | 1:M 14 Jul 2025 22:53:02.358 * Module 'ReJSON' loaded from /usr/local/lib/redis/modules//rejson.so
+redis-1   | 1:M 14 Jul 2025 22:53:02.358 * <search> Acquired RedisJSON_V5 API
+redis-1   | 1:M 14 Jul 2025 22:53:02.359 * Server initialized
+redis-1   | 1:M 14 Jul 2025 22:53:02.359 * Ready to accept connections tcp
+caddy-1   | {"level":"info","ts":1752533582.697117,"msg":"maxprocs: Updating GOMAXPROCS=1: using minimum allowed GOMAXPROCS"}
+caddy-1   | {"level":"info","ts":1752533582.6983724,"msg":"GOMEMLIMIT is updated","package":"github.com/KimMachineGun/automemlimit/memlimit","GOMEMLIMIT":47185920,"previous":9223372036854775807}
+caddy-1   | {"level":"info","ts":1752533582.6988807,"msg":"using config from file","file":"/etc/caddy/Caddyfile"}
+caddy-1   | {"level":"info","ts":1752533582.7077577,"msg":"adapted config to JSON","adapter":"caddyfile"}
+caddy-1   | {"level":"info","ts":1752533582.7097235,"logger":"admin","msg":"admin endpoint started","address":"localhost:2019","enforce_origin":false,"origins":["//localhost:2019","//[::1]:2019","//127.0.0.1:2019"]}
+caddy-1   | {"level":"info","ts":1752533582.7128174,"logger":"tls.cache.maintenance","msg":"started background certificate maintenance","cache":"0xc0004dd100"}
+caddy-1   | {"level":"warn","ts":1752533582.7143881,"logger":"http","msg":"HTTP/2 skipped because it requires TLS","network":"tcp","addr":":9999"}
+caddy-1   | {"level":"warn","ts":1752533582.7144084,"logger":"http","msg":"HTTP/3 skipped because it requires TLS","network":"tcp","addr":":9999"}
+caddy-1   | {"level":"info","ts":1752533582.7144125,"logger":"http.log","msg":"server running","name":"srv0","protocols":["h1","h2","h3"]}
+caddy-1   | {"level":"info","ts":1752533582.7157898,"msg":"autosaved config (load with --resume flag)","file":"/config/caddy/autosave.json"}
+caddy-1   | {"level":"info","ts":1752533582.7158208,"msg":"serving initial configuration"}
+caddy-1   | {"level":"info","ts":1752533582.722364,"logger":"tls","msg":"cleaning storage unit","storage":"FileStorage:/data/caddy"}
+caddy-1   | {"level":"info","ts":1752533582.7294407,"logger":"tls","msg":"finished cleaning storage units"}
+caddy-1   | {"level":"error","ts":1752533584.998743,"logger":"http.log.error","msg":"dial tcp: lookup api02 on 127.0.0.11:53: no such host","request":{"remote_ip":"172.20.0.1","remote_port":"59772","client_ip":"172.20.0.1","proto":"HTTP/1.1","method":"GET","host":"localhost:9999","uri":"/payments-summary","headers":{"User-Agent":["curl/7.88.1"],"Accept":["*/*"]}},"duration":0.030917644,"status":502,"err_id":"abug3fisa","err_trace":"reverseproxy.statusError (reverseproxy.go:1390)"}
+caddy-1   | {"level":"error","ts":1752533590.0098476,"logger":"http.log.error","msg":"dial tcp: lookup api02 on 127.0.0.11:53: no such host","request":{"remote_ip":"172.20.0.1","remote_port":"33040","client_ip":"172.20.0.1","proto":"HTTP/1.1","method":"GET","host":"localhost:9999","uri":"/payments-summary","headers":{"Accept":["*/*"],"User-Agent":["curl/7.88.1"]}},"duration":0.001828209,"status":502,"err_id":"bhxk9i7bh","err_trace":"reverseproxy.statusError (reverseproxy.go:1390)"}
+worker-1  | Worker started. Listening for payment jobs...
+api02-1   | {"level":"info","ts":1752533593.6008205,"msg":"maxprocs: Updating GOMAXPROCS=1: using minimum allowed GOMAXPROCS"}
+api02-1   | {"level":"info","ts":1752533593.6011126,"msg":"GOMEMLIMIT is updated","package":"github.com/KimMachineGun/automemlimit/memlimit","GOMEMLIMIT":84934656,"previous":9223372036854775807}
+api02-1   | {"level":"info","ts":1752533593.6012123,"msg":"using config from file","file":"/etc/frankenphp/Caddyfile"}
+api02-1   | {"level":"warn","ts":1752533593.6013136,"msg":"No files matching import glob pattern","pattern":"Caddyfile.d/*.caddyfile"}
+api02-1   | {"level":"info","ts":1752533593.6025314,"msg":"adapted config to JSON","adapter":"caddyfile"}
+api02-1   | {"level":"warn","ts":1752533593.6025472,"msg":"Caddyfile input is not formatted; run 'caddy fmt --overwrite' to fix inconsistencies","adapter":"caddyfile","file":"/etc/frankenphp/Caddyfile","line":5}
+api02-1   | {"level":"info","ts":1752533593.6037307,"logger":"admin","msg":"admin endpoint started","address":"localhost:2019","enforce_origin":false,"origins":["//localhost:2019","//[::1]:2019","//127.0.0.1:2019"]}
+api02-1   | {"level":"warn","ts":1752533593.6039364,"logger":"http.auto_https","msg":"server is listening only on the HTTP port, so no automatic HTTPS will be applied to this server","server_name":"srv0","http_port":80}
+api02-1   | {"level":"info","ts":1752533593.6122293,"logger":"tls.cache.maintenance","msg":"started background certificate maintenance","cache":"0xc000229300"}
+api01-1   | {"level":"info","ts":1752533593.6858075,"msg":"maxprocs: Updating GOMAXPROCS=1: using minimum allowed GOMAXPROCS"}
+api01-1   | {"level":"info","ts":1752533593.6860962,"msg":"GOMEMLIMIT is updated","package":"github.com/KimMachineGun/automemlimit/memlimit","GOMEMLIMIT":84934656,"previous":9223372036854775807}
+api01-1   | {"level":"info","ts":1752533593.6862009,"msg":"using config from file","file":"/etc/frankenphp/Caddyfile"}
+api01-1   | {"level":"warn","ts":1752533593.6863568,"msg":"No files matching import glob pattern","pattern":"Caddyfile.d/*.caddyfile"}
+api01-1   | {"level":"info","ts":1752533593.6873875,"msg":"adapted config to JSON","adapter":"caddyfile"}
+api01-1   | {"level":"warn","ts":1752533593.6874347,"msg":"Caddyfile input is not formatted; run 'caddy fmt --overwrite' to fix inconsistencies","adapter":"caddyfile","file":"/etc/frankenphp/Caddyfile","line":5}
+api01-1   | {"level":"info","ts":1752533593.688416,"logger":"admin","msg":"admin endpoint started","address":"localhost:2019","enforce_origin":false,"origins":["//localhost:2019","//[::1]:2019","//127.0.0.1:2019"]}
+api01-1   | {"level":"warn","ts":1752533593.6886802,"logger":"http.auto_https","msg":"server is listening only on the HTTP port, so no automatic HTTPS will be applied to this server","server_name":"srv0","http_port":80}
+api02-1   | {"level":"info","ts":1752533593.6989377,"logger":"frankenphp","msg":"FrankenPHP started 🐘","php_version":"8.4.10","num_threads":3,"max_threads":3}
+api02-1   | {"level":"warn","ts":1752533593.6991973,"logger":"http","msg":"HTTP/2 skipped because it requires TLS","network":"tcp","addr":":80"}
+api02-1   | {"level":"warn","ts":1752533593.6992116,"logger":"http","msg":"HTTP/3 skipped because it requires TLS","network":"tcp","addr":":80"}
+api02-1   | {"level":"info","ts":1752533593.699215,"logger":"http.log","msg":"server running","name":"srv0","protocols":["h1","h2","h3"]}
+api02-1   | {"level":"info","ts":1752533593.6992235,"logger":"pki.ca.local","msg":"root certificate trust store installation disabled; unconfigured clients may show warnings","path":"storage:pki/authorities/local/root.crt"}
+api02-1   | {"level":"info","ts":1752533593.6996338,"msg":"autosaved config (load with --resume flag)","file":"/config/caddy/autosave.json"}
+api02-1   | {"level":"info","ts":1752533593.6996446,"msg":"serving initial configuration"}
+api01-1   | {"level":"info","ts":1752533593.7036645,"logger":"tls.cache.maintenance","msg":"started background certificate maintenance","cache":"0xc0002f5700"}
+api02-1   | {"level":"info","ts":1752533593.708038,"logger":"tls","msg":"cleaning storage unit","storage":"FileStorage:/data/caddy"}
+api02-1   | {"level":"info","ts":1752533593.719561,"logger":"tls","msg":"finished cleaning storage units"}
+api01-1   | {"level":"info","ts":1752533593.7838676,"logger":"frankenphp","msg":"FrankenPHP started 🐘","php_version":"8.4.10","num_threads":3,"max_threads":3}
+api01-1   | {"level":"warn","ts":1752533593.7839715,"logger":"http","msg":"HTTP/2 skipped because it requires TLS","network":"tcp","addr":":80"}
+api01-1   | {"level":"warn","ts":1752533593.7839851,"logger":"http","msg":"HTTP/3 skipped because it requires TLS","network":"tcp","addr":":80"}
+api01-1   | {"level":"info","ts":1752533593.783989,"logger":"http.log","msg":"server running","name":"srv0","protocols":["h1","h2","h3"]}
+api01-1   | {"level":"info","ts":1752533593.7839992,"logger":"pki.ca.local","msg":"root certificate trust store installation disabled; unconfigured clients may show warnings","path":"storage:pki/authorities/local/root.crt"}
+api01-1   | {"level":"info","ts":1752533593.7844012,"msg":"autosaved config (load with --resume flag)","file":"/config/caddy/autosave.json"}
+api01-1   | {"level":"info","ts":1752533593.7844133,"msg":"serving initial configuration"}
+api01-1   | {"level":"info","ts":1752533593.792077,"logger":"tls","msg":"cleaning storage unit","storage":"FileStorage:/data/caddy"}
+api01-1   | {"level":"info","ts":1752533593.7973206,"logger":"tls","msg":"finished cleaning storage units"}
+redis-1   | 1:M 14 Jul 2025 22:53:21.225 * DB saved on disk
+redis-1   | 1:M 14 Jul 2025 22:54:22.046 * 10000 changes in 60 seconds. Saving...
+redis-1   | 1:M 14 Jul 2025 22:54:22.047 * Background saving started by pid 73
+redis-1   | 73:C 14 Jul 2025 22:54:22.195 * DB saved on disk
+redis-1   | 73:C 14 Jul 2025 22:54:22.196 * Fork CoW for RDB: current 1 MB, peak 1 MB, average 0 MB
+redis-1   | 1:M 14 Jul 2025 22:54:22.282 * Background saving terminated with success
+caddy-1   | {"level":"info","ts":1752533662.7433732,"msg":"shutting down apps, then terminating","signal":"SIGTERM"}
+caddy-1   | {"level":"warn","ts":1752533662.745158,"msg":"exiting; byeee!! 👋","signal":"SIGTERM"}
+api02-1   | {"level":"info","ts":1752533662.7477918,"msg":"shutting down apps, then terminating","signal":"SIGTERM"}
+api02-1   | {"level":"warn","ts":1752533662.747818,"msg":"exiting; byeee!! 👋","signal":"SIGTERM"}
+api02-1   | {"level":"info","ts":1752533662.747847,"logger":"frankenphp","msg":"FrankenPHP stopped 🐘"}
+api02-1   | {"level":"info","ts":1752533662.7483644,"logger":"http","msg":"servers shutting down with eternal grace period"}
+api01-1   | {"level":"info","ts":1752533662.7496357,"msg":"shutting down apps, then terminating","signal":"SIGTERM"}
+api01-1   | {"level":"warn","ts":1752533662.749662,"msg":"exiting; byeee!! 👋","signal":"SIGTERM"}
+api01-1   | {"level":"info","ts":1752533662.7496982,"logger":"http","msg":"servers shutting down with eternal grace period"}
+api01-1   | {"level":"info","ts":1752533662.7505105,"logger":"frankenphp","msg":"FrankenPHP stopped 🐘"}
+api01-1   | {"level":"info","ts":1752533662.7510746,"logger":"admin","msg":"stopped previous server","address":"localhost:2019"}
+api01-1   | {"level":"info","ts":1752533662.7510893,"msg":"shutdown complete","signal":"SIGTERM","exit_code":0}
+api02-1   | {"level":"info","ts":1752533662.749367,"logger":"admin","msg":"stopped previous server","address":"localhost:2019"}
+api02-1   | {"level":"info","ts":1752533662.749383,"msg":"shutdown complete","signal":"SIGTERM","exit_code":0}
+caddy-1   | {"level":"info","ts":1752533662.7579563,"logger":"http","msg":"servers shutting down with eternal grace period"}
+caddy-1   | {"level":"info","ts":1752533662.769928,"logger":"admin","msg":"stopped previous server","address":"localhost:2019"}
+caddy-1   | {"level":"info","ts":1752533662.7702622,"msg":"shutdown complete","signal":"SIGTERM","exit_code":0}
+[Kcaddy-1 exited with code 0
+[Kapi01-1 exited with code 0
+[Kapi02-1 exited with code 0
+[Kworker-1 exited with code 137
+redis-1   | 1:signal-handler (1752533673) Received SIGTERM scheduling shutdown...
+redis-1   | 1:M 14 Jul 2025 22:54:33.366 * User requested shutdown...
+redis-1   | 1:M 14 Jul 2025 22:54:33.366 * Saving the final RDB snapshot before exiting.
+redis-1   | 1:M 14 Jul 2025 22:54:33.510 * DB saved on disk
+redis-1   | 1:M 14 Jul 2025 22:54:33.510 # Redis is now ready to exit, bye bye...
+[Kredis-1 exited with code 0
+log truncated at line 1000
