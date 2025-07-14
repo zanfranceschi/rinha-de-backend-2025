@@ -93,5 +93,6 @@ while true; do
     git push
     done
     # 5 minutinhos de espera... ninguém morre
+    echo "wating 5 minutes for the next round..."
     sleep 300
 done
