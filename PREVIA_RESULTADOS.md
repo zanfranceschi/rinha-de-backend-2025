@@ -11,3 +11,4 @@ Atualizado em **Mon Jul 14 02:32:31 PM -03 2025**
 |	dotnetRinha	|	321.4784757199999ms	|	0	|	0	|	0	|
 |	gaoliveira21	|	21.910366049999908ms	|	0	|	98271.97099999999	|	182505.089	|
 |	henriqueramos13-node	|	56.49622859999999ms	|	0	|	53582.4275	|	99510.2225	|
+|	henriquevalcanaia-swift-vapor	|	338.10613787999995ms	|	0	|	0	|	0	|
