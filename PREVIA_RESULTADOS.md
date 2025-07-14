@@ -1,6 +1,7 @@
 # Prévia do Resultados da Rinha de Backend 2025
-Atualizado em **Sun Jul 13 11:19:31 PM -03 2025**
+Atualizado em **dom 13 jul 2025 23:21:48 -03**
 
 
 | participante | p99 | bônus por desempenho (%) | multa ($) | lucro |
 | -- | -- | -- | -- | -- |
+|	d4vz	|	80.28816053999999ms	|	0	|	0	|	284898.35	|
