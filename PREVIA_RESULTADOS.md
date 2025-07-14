@@ -18,3 +18,4 @@ Atualizado em **Mon Jul 14 12:37:16 AM -03 2025**
 |	luizcordista-go	|	12.126946829999884ms	|	0	|	0	|	276755.26999999996	|
 |	panissetrafael-go	|	74.80811112000002ms	|	0	|	40605.733349999995	|	75410.64765	|
 |	ricassiocosta-python	|	333.63223297999997ms	|	0	|	0	|	0	|
+|	robertAlmeida	|	320.00366407999996ms	|	0	|	0	|	0	|
