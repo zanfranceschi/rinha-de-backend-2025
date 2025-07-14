@@ -33,9 +33,11 @@ while true; do
         participant=$(echo $directory | sed -e 's/..\/participantes\///g' -e 's/\///g')
         echo "participant: $participant"
 
+        
         testedFile="$directory/partial-results.json"
 
         if ! test -f $testedFile; then
+            touch $testedFile
             echo "executing test for $participant..."
             stopContainers $participant
             startContainers $participant
@@ -43,18 +45,17 @@ while true; do
             echo "" > $directory/k6.logs
             k6 run -e MAX_REQUESTS=$MAX_REQUESTS -e PARTICIPANT=$participant --log-output=file=$directory/k6.logs rinha.js
             stopContainers $participant
-            if test -f $testedFile; then
-                echo "======================================="
-                echo "working on $participant"
-                sed -i '1001,$d' $directory/docker-compose.logs
-                sed -i '1001,$d' $directory/k6.logs
-                echo "log truncated at line 1000" >> $directory/docker-compose.logs
-                echo "log truncated at line 1000" >> $directory/k6.logs
-                git add $directory
-                git commit -m "add $participant's partial result"
-                git push
-                echo "======================================="
-            fi
+            echo "======================================="
+            echo "working on $participant"
+            sed -i '1001,$d' $directory/docker-compose.logs
+            sed -i '1001,$d' $directory/k6.logs
+            echo "log truncated at line 1000" >> $directory/docker-compose.logs
+            echo "log truncated at line 1000" >> $directory/k6.logs
+            git add $directory
+            git commit -m "add $participant's partial result"
+            git push
+            echo "======================================="
+            
             #echo "submissão '$participant' já testada - ignorando"
             #rm -rf "$RESULTS_WORKSPACE/$participant"
             #countAPIsToBeTested
