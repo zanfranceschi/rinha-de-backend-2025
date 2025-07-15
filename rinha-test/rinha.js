@@ -246,7 +246,7 @@ export async function define_stage() {
 export function handleSummary(data) {
 
   const expected_total_amount = data.metrics.transactions_success.values.count * paymentRequestFixedAmount;
-  const actual_total_amount = data.metrics.total_transactions_amount.values.count;
+  const actual_total_amount = data.metrics.total_transactions_amount.values.count * paymentRequestFixedAmount;
   const difference_total_amount = expected_total_amount - actual_total_amount;
 
   const default_total_fee = data.metrics.default_total_fee.values.count;
