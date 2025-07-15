@@ -1,0 +1,8 @@
+FROM ubuntu:latest
+
+WORKDIR /app
+
+RUN apt-get update && apt-get install -y xinetd
+
+COPY config/xinetd.conf /etc/xinetd.conf
+COPY config/balanceador /etc/xinetd.d/balanceador

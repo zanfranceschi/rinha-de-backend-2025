@@ -1,0 +1,86 @@
+#version: '3.8'
+services:
+  load-balancer:
+    container_name: balanceador
+    build: 
+      context: .
+      # nome diferente, pois terá mais de um dockerfile para configuração dos containers.
+      dockerfile: Dockerfile_balancer
+    command: /usr/sbin/xinetd -dontfork
+    depends_on:
+      - backend1
+      - backend2
+    ports:
+      - "9999:9999"
+    networks:
+      - backend
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          # 30% do processamento para balanceador: 0.5
+          cpus: "0.5"
+          memory: "70MB" # ideal mas com excesso
+
+# APIS:
+  backend1: &backend
+    container_name: balanceador
+    build: 
+      context: .
+      # nome diferente, pois terá mais de um dockerfile para configuração dos containers.
+      dockerfile: Dockerfile_backend
+    command: /usr/sbin/xinetd -dontfork
+    hostname: backend1
+    environment:
+      - PAYMENT_PROCESSOR_URL_DEFAULT=http://payment-processor-default:8080
+      - PAYMENT_PROCESSOR_URL_FALLBACK=http://payment-processor-fallback:8080
+    ports:
+      - "8080:8080"
+    networks:
+      - backend
+      - payment-processor
+    depends_on:
+      database
+    deploy:
+      resources:
+        limits:
+# 30% do processamento para balanceador: 0.5
+          cpus: "0.5"
+          memory: "105MB" # MUITO excesso
+
+  backend2:
+    <<: *backend
+    hostname: backend2
+
+  database:
+    container_name: database
+    build: 
+      context: .
+      # nome diferente, pois terá mais de um dockerfile para configuração dos containers.
+      dockerfile: Dockerfile_database
+    command: /usr/sbin/xinetd -dontfork
+    hostname: database
+    ports:
+      - "8080:8080"
+    deploy:
+      resources:
+        limits:
+# 30% do processamento para DB: 0.4
+          cpus: "0.4"
+          memory: "70MB" # excesso
+
+networks:
+  backend:
+    driver: bridge
+  payment-processor:
+    external: true
+
+# recursos máximos:
+# cpus: "1.5"
+# memory: "350MB"
+# distribuição:
+# 20% do processamento para cada backend, backend1 e backend2: 0.3 + 0.3 = 0.6, restando 0.9
+# 30% do processamento para DB: 0.4
+# 30% do processamento para balanceador: 0.5
+# total: 0.3 + 0.3 + 0.4 + 0.5 = 1.5CPU
+# memória total distribuida: 105+105+70+70 = 350mb (foi na cagada)

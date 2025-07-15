@@ -1,0 +1,12 @@
+FROM ubuntu:latest
+
+WORKDIR /app
+
+COPY app/database.sh .
+
+RUN apt-get update && apt-get install -y xinetd uuid-runtime sqlite3
+
+COPY config/xinetd.conf /etc/xinetd.conf
+COPY config/servidor-database /etc/xinetd.d/servidor-service1
+
+RUN chmod +x ./database.sh
