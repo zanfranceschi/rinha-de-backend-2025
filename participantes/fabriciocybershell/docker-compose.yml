@@ -24,7 +24,7 @@ services:
 
 # APIS:
   backend1: &backend
-    container_name: balanceador
+    container_name: backend1
     build: 
       context: .
       # nome diferente, pois terá mais de um dockerfile para configuração dos containers.
@@ -40,7 +40,7 @@ services:
       - backend
       - payment-processor
     depends_on:
-      database
+      - database
     deploy:
       resources:
         limits:
@@ -50,6 +50,7 @@ services:
 
   backend2:
     <<: *backend
+    container_name: backend2
     hostname: backend2
 
   database:
