@@ -3,6 +3,7 @@ import { uuidv4 } from "https://jslib.k6.io/k6-utils/1.4.0/index.js";
 import { sleep } from "k6";
 import exec from "k6/execution";
 import { Counter } from "k6/metrics";
+import Big from 'https://cdn.skypack.dev/big.js';
 import {
   token,
   setPPToken,
@@ -157,28 +158,29 @@ export async function teardown() {
   const backendPaymentsSummary = await getBackendPaymentsSummary(from.toISOString(), to.toISOString());
 
   totalTransactionsAmountCounter.add(
-    backendPaymentsSummary.default.totalAmount +
-    backendPaymentsSummary.fallback.totalAmount);
+    new Big(backendPaymentsSummary.default.totalAmount)
+      .plus(backendPaymentsSummary.fallback.totalAmount)
+      .toNumber());
 
   defaultTotalAmountCounter.add(backendPaymentsSummary.default.totalAmount);
   defaultTotalRequestsCounter.add(backendPaymentsSummary.default.totalRequests);
   fallbackTotalAmountCounter.add(backendPaymentsSummary.fallback.totalAmount);
   fallbackTotalRequestsCounter.add(backendPaymentsSummary.fallback.totalRequests);
 
-  const defaultTotalFee = defaultResponse.feePerTransaction * backendPaymentsSummary.default.totalAmount;
-  const fallbackTotalFee = fallbackResponse.feePerTransaction * backendPaymentsSummary.fallback.totalAmount;
+  const defaultTotalFee = new Big(defaultResponse.feePerTransaction).mul(backendPaymentsSummary.default.totalAmount);
+  const fallbackTotalFee = new Big(fallbackResponse.feePerTransaction).mul(backendPaymentsSummary.fallback.totalAmount);
 
-  defaultTotalFeeCounter.add(defaultTotalFee);
-  fallbackTotalFeeCounter.add(fallbackTotalFee);
+  defaultTotalFeeCounter.add(defaultTotalFee.toNumber());
+  fallbackTotalFeeCounter.add(fallbackTotalFee.toNumber());
 }
 
-const paymentRequestFixedAmount = 19.90;
+const paymentRequestFixedAmount = new Big('19.90');
 
 export async function payments() {
 
   const payload = {
     correlationId: uuidv4(),
-    amount: paymentRequestFixedAmount
+    amount: paymentRequestFixedAmount.toNumber()
   };
 
   const response = await requestBackendPayment(payload);
@@ -214,16 +216,16 @@ export async function checkPayments() {
   const backendPaymentsSummary = await getBackendPaymentsSummary(from, to);
 
   const inconsistencies =
-    Math.abs(
-      backendPaymentsSummary.default.totalAmount -
-      defaultAdminPaymentsSummary.totalAmount,
-    ) +
-    Math.abs(
-      backendPaymentsSummary.fallback.totalAmount -
-      fallbackAdminPaymentsSummary.totalAmount,
-    );
+    new Big(backendPaymentsSummary.default.totalAmount)
+      .minus(defaultAdminPaymentsSummary.totalAmount)
+      .abs()
+      .plus(
+        new Big(backendPaymentsSummary.fallback.totalAmount)
+          .minus(fallbackAdminPaymentsSummary.totalAmount)
+          .abs()
+      );
 
-  balanceInconsistencyCounter.add(inconsistencies);
+  balanceInconsistencyCounter.add(inconsistencies.toNumber());
 
   sleep(10);
 }
@@ -245,33 +247,37 @@ export async function define_stage() {
 
 export function handleSummary(data) {
 
-  const expected_total_amount = data.metrics.transactions_success.values.count * paymentRequestFixedAmount;
-  const actual_total_amount = data.metrics.total_transactions_amount.values.count;
-  const difference_total_amount = expected_total_amount - actual_total_amount;
+  const expected_total_amount = paymentRequestFixedAmount.mul(data.metrics.transactions_success.values.count);
+  const actual_total_amount = new Big(data.metrics.total_transactions_amount.values.count);
+  const difference_total_amount = expected_total_amount.minus(actual_total_amount);
 
-  const default_total_fee = data.metrics.default_total_fee.values.count;
-  const fallback_total_fee = data.metrics.fallback_total_fee.values.count;
-  const total_fee = default_total_fee + fallback_total_fee;
+  const default_total_fee = new Big(data.metrics.default_total_fee.values.count);
+  const fallback_total_fee = new Big(data.metrics.fallback_total_fee.values.count);
+  const total_fee = default_total_fee.plus(fallback_total_fee);
 
   const p_99 = data.metrics["http_req_duration{expected_response:true}"].values["p(99)"];
   const p_99_bonus = Math.max((11 - p_99) * 0.02, 0);
-  const contains_inconsistencies = difference_total_amount != 0 || data.metrics.balance_inconsistency_amount.values.count != 0;
-  const inconsistencies_fine = contains_inconsistencies ? 0.35 : 0;
+  const contains_inconsistencies = !difference_total_amount.eq(0) || data.metrics.balance_inconsistency_amount.values.count != 0;
+  const inconsistencies_fine = contains_inconsistencies ? new Big('0.35') : new Big('0');
 
-  const liquid_partial_amount = (actual_total_amount - total_fee);
+  const liquid_partial_amount = actual_total_amount.minus(total_fee);
 
+  const p_99_bonus_big = new Big(p_99_bonus);
+  const bonus_amount = liquid_partial_amount.mul(p_99_bonus_big);
+  const fine_amount = liquid_partial_amount.mul(inconsistencies_fine);
+  
   const liquid_amount = liquid_partial_amount
-    + (liquid_partial_amount * p_99_bonus)
-    - (liquid_partial_amount * inconsistencies_fine);
+    .plus(bonus_amount)
+    .minus(fine_amount);
 
   const name = __ENV.PARTICIPANT ?? "anonymous";
 
   const custom_data = {
     participante: name,
     descricao: "'total_liquido' é sua pontuação final. Equivale ao seu lucro. Fórmula: total_liquido + (total_liquido * p99.bonus) - (total_liquido * multa.porcentagem)",
-    total_liquido: liquid_amount,
-    total_bruto: actual_total_amount,
-    total_taxas: total_fee,
+    total_liquido: liquid_amount.toNumber(),
+    total_bruto: actual_total_amount.toNumber(),
+    total_taxas: total_fee.toNumber(),
     p99: {
       valor: `${p_99}ms`,
       bonus: p_99_bonus,
@@ -279,11 +285,11 @@ export function handleSummary(data) {
       descricao: "Fórmula para o bônus: max((11 - p99.valor) * 0.02, 0)",
     },
     multa: {
-      porcentagem: inconsistencies_fine,
-      total: (liquid_partial_amount * inconsistencies_fine),
+      porcentagem: inconsistencies_fine.toNumber(),
+      total: fine_amount.toNumber(),
       composicao: {
         descricao: "Se 'total_bruto' != 'total_bruto_esperado' ou 'total_inconsistencias' > 0, há multa de 35%.",
-        total_bruto_esperado: expected_total_amount,
+        total_bruto_esperado: expected_total_amount.toNumber(),
         total_inconsistencias: data.metrics.balance_inconsistency_amount.values.count,
       }
     },
