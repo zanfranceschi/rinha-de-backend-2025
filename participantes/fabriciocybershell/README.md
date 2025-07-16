@@ -3,7 +3,7 @@
 ## Tecnologias utilizadas:
 - **ShellScript** - Tempo de inicialização, menor dependências, merreca de memória e processamento.
 - **Xinetd** - Antigo e rápido pra época, servidores de alto desempenho, fácil configuração, merreca de memória, processamento variavel porém baixo.
-- **SQLite** - Velocidade, baixo consumo, merreca de memória e processamento.
+- **MariaDB** - Simplicidade.
 
 ## Estratégia:
 focando na disponibilidade do serviço pelo baixo consumo, permite garantir recebimento dos dados de maneira mais ágil.
@@ -17,5 +17,5 @@ docker compose up
 ```
 OBS: ainda não deve funcionar, estou montando e calculando/revendo a estrutura primeiro (baixa familiaridade com docker).
 
-## Informação adicional não relevante:
- Ainda é necessário a construção do código inteiro em si no momento em que escrevo este README.md, estou focando em montar a estrutura completa corretamente, pela minha baixa familiaridade com docker, os códigos produzidos até o breve momento foram códigos conceituais e experimentais para projetos pessoais que realizei, os resultados foram muito bons para tecnologias negligenciadas, me fazendo rever bastante sobre opiniões muito reproduzidas no mundo DEV de maneira geral.
+## meu github:
+https://github.com/fabriciocybershell/Rinha_Backend/tree/main/guardiao
