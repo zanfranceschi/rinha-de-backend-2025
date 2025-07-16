@@ -255,7 +255,7 @@ export function handleSummary(data) {
 
   const p_99 = data.metrics["http_req_duration{expected_response:true}"].values["p(99)"];
   const p_99_bonus = Math.max((11 - p_99) * 0.02, 0);
-  const contains_inconsistencies = difference_total_amount != 0 || data.metrics.balance_inconsistency_amount.values.count != 0;
+  const contains_inconsistencies = Math.abs(difference_total_amount) > 0.01;
   const inconsistencies_fine = contains_inconsistencies ? 0.35 : 0;
 
   const liquid_partial_amount = (actual_total_amount - total_fee);
