@@ -1,0 +1,83 @@
+services:
+  app1:
+    image: cgbrunelli/rinha-backend-2025:latest
+    hostname: app1
+    environment:
+      - PP_DEFAULT=http://payment-processor-default:8080
+      - PP_FALLBACK=http://payment-processor-fallback:8080
+      - REDIS_ADDR=redis:6379
+      - GOGC=50
+      - PORT=80
+      - MONITOR_HEALTH=true
+    networks:
+      - default
+      - payment-processor
+    depends_on:
+      - redis
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: "100MB"
+    restart: on-failure
+
+  app2:
+    image: cgbrunelli/rinha-backend-2025:latest
+    hostname: app2
+    environment:
+      - PP_DEFAULT=http://payment-processor-default:8080
+      - PP_FALLBACK=http://payment-processor-fallback:8080
+      - REDIS_ADDR=redis:6379
+      - GOGC=50
+      - PORT=80
+      - MONITOR_HEALTH=false
+    networks:
+      - default
+      - payment-processor
+    depends_on:
+      - redis
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: "100MB"
+    restart: on-failure
+
+  nginx:
+    image: nginx:1.27.1-alpine
+    hostname: nginx
+    ports:
+      - "9999:9999"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - app1
+      - app2
+    networks:
+      - default
+    deploy:
+      resources:
+        limits:
+          cpus: "0.2"
+          memory: "50MB"
+    restart: on-failure
+
+  redis:
+    image: redis:7.2-alpine
+    hostname: redis
+    command: redis-server --save "" --appendonly no --maxclients 20000
+    networks:
+      - default
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          cpus: "0.3"
+          memory: "100MB"
+    restart: on-failure
+
+networks:
+  default:
+    driver: bridge
+  payment-processor:
+    external: true
