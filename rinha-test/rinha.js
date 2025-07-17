@@ -146,7 +146,7 @@ export async function setup() {
 }
 
 export async function teardown() {
-  
+
   const to = new Date();
   const from = new Date(to.getTime() - 70 * 1000); // 1 minuto e 10 segundos atrás
 
@@ -245,9 +245,8 @@ export async function define_stage() {
 
 export function handleSummary(data) {
 
-  const expected_total_amount = data.metrics.transactions_success.values.count * paymentRequestFixedAmount;
+  const total_transactions_requested = data.metrics.transactions_success.values.count;
   const actual_total_amount = data.metrics.total_transactions_amount.values.count;
-  const difference_total_amount = expected_total_amount - actual_total_amount;
 
   const default_total_fee = data.metrics.default_total_fee.values.count;
   const fallback_total_fee = data.metrics.fallback_total_fee.values.count;
@@ -255,7 +254,7 @@ export function handleSummary(data) {
 
   const p_99 = data.metrics["http_req_duration{expected_response:true}"].values["p(99)"];
   const p_99_bonus = Math.max((11 - p_99) * 0.02, 0);
-  const contains_inconsistencies = difference_total_amount != 0 || data.metrics.balance_inconsistency_amount.values.count != 0;
+  const contains_inconsistencies = data.metrics.balance_inconsistency_amount.values.count != 0;
   const inconsistencies_fine = contains_inconsistencies ? 0.35 : 0;
 
   const liquid_partial_amount = (actual_total_amount - total_fee);
@@ -268,10 +267,10 @@ export function handleSummary(data) {
 
   const custom_data = {
     participante: name,
-    descricao: "'total_liquido' é sua pontuação final. Equivale ao seu lucro. Fórmula: total_liquido + (total_liquido * p99.bonus) - (total_liquido * multa.porcentagem)",
     total_liquido: liquid_amount,
     total_bruto: actual_total_amount,
     total_taxas: total_fee,
+    descricao: "'total_liquido' é sua pontuação final. Equivale ao seu lucro. Fórmula: total_liquido + (total_liquido * p99.bonus) - (total_liquido * multa.porcentagem)",
     p99: {
       valor: `${p_99}ms`,
       bonus: p_99_bonus,
@@ -282,25 +281,33 @@ export function handleSummary(data) {
       porcentagem: inconsistencies_fine,
       total: (liquid_partial_amount * inconsistencies_fine),
       composicao: {
-        descricao: "Se 'total_bruto' != 'total_bruto_esperado' ou 'total_inconsistencias' > 0, há multa de 35%.",
-        total_bruto_esperado: expected_total_amount,
         total_inconsistencias: data.metrics.balance_inconsistency_amount.values.count,
+        descricao: "Se 'total_inconsistencias' > 0, há multa de 35%.",
       }
     },
-    pagamentos: {
+    lag: {
+      num_pagamentos_total: data.metrics.default_total_requests.values.count + data.metrics.fallback_total_requests.values.count,
+      num_pagamentos_solicitados: data.metrics.transactions_success.values.count,
+      lag: data.metrics.transactions_success.values.count - (data.metrics.default_total_requests.values.count + data.metrics.fallback_total_requests.values.count),
+      descricao: "Lag é a diferença entre a quantidade de solicitações de pagamentos vs o que foi realmente computado pelo backend. Mostra a perda de pagamentos possivelmente por estarem enfileirados."
+    },
+    pagamentos_solicitados: {
       qtd_sucesso: data.metrics.transactions_success.values.count,
       qtd_falha: data.metrics.transactions_failure.values.count,
+      descricao: "'qtd_sucesso' foram requests bem sucedidos para 'POST /payments' e 'qtd_falha' os requests com erro."
     },
-    default: {
+    pagamentos_realizados_default: {
       total_bruto: data.metrics.default_total_amount.values.count,
       num_pagamentos: data.metrics.default_total_requests.values.count,
       total_taxas: data.metrics.default_total_fee.values.count,
+      descricao: "Informações do backend sobre solicitações de pagamento para o Payment Processor Default."
     },
-    fallback: {
+    pagamentos_realizados_fallback: {
       total_bruto: data.metrics.fallback_total_amount.values.count,
       num_pagamentos: data.metrics.fallback_total_requests.values.count,
-      total_taxas: data.metrics.fallback_total_fee.values.count
-    },
+      total_taxas: data.metrics.fallback_total_fee.values.count,
+      descricao: "Informações do backend sobre solicitações de pagamento para o Payment Processor Fallback."
+    }
   };
 
   const result = {

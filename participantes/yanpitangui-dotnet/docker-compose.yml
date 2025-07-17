@@ -1,0 +1,97 @@
+x-service-templates:
+  backend: &backend
+    image: ghcr.io/yanpitangui/rinha-2025-01:latest
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: "80MB"
+    networks:
+      - backend
+      - payment-processor
+    depends_on:
+      rinha-db:
+        condition: service_healthy
+    healthcheck:
+      test: wget --no-verbose --tries=1 --spider http://localhost:8080/healthz/akka || exit 1
+      interval: 5m
+      timeout: 3s
+      retries: 3
+      start_period: 2m
+
+services:
+  backend-1:
+    <<: *backend
+    container_name: backend-1
+    hostname: backend-1
+    environment:
+      - Cluster__Ip=backend-1
+      - Cluster__Port=5213
+      - Cluster__Seeds__0=akka.tcp://Rinha@backend-1:5213
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ConnectionStrings__default=http://payment-processor-default:8080
+      - ConnectionStrings__fallback=http://payment-processor-fallback:8080
+      - ConnectionStrings__postgres=Host=rinha-db;Port=5432;Database=rinha;Username=postgres;Password=postgres;Pooling=true;Maximum Pool Size=256;Multiplexing=true;Timeout=15;Command Timeout=15;Cancellation Timeout=-1;No Reset On Close=true;Max Auto Prepare=20;Auto Prepare Min Usages=1;
+  backend-2:
+    <<: *backend
+    container_name: backend-2
+    hostname: backend-2
+    environment:
+      - Cluster__Ip=backend-2
+      - Cluster__Port=5214
+      - Cluster__Seeds__0=akka.tcp://Rinha@backend-1:5213
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ConnectionStrings__default=http://payment-processor-default:8080
+      - ConnectionStrings__fallback=http://payment-processor-fallback:8080
+      - ConnectionStrings__postgres=Host=rinha-db;Port=5432;Database=rinha;Username=postgres;Password=postgres;Pooling=true;Maximum Pool Size=200;Multiplexing=true;Timeout=15;Command Timeout=15;Cancellation Timeout=-1;No Reset On Close=true;Max Auto Prepare=20;Auto Prepare Min Usages=1;
+  nginx:
+    image: nginx:alpine
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    ports:
+      - "9999:8080"
+    depends_on:
+      backend-1:
+        condition: service_healthy
+      backend-2:
+        condition: service_healthy
+    networks:
+      - backend
+    ulimits:
+      nofile:
+        soft: 65536
+        hard: 65536
+    deploy:
+      resources:
+        limits:
+          cpus: "0.2"
+          memory: "50MB"
+  rinha-db:
+    image: postgres:17-alpine
+    command: 'postgres -c max_connections=400 -c synchronous_commit=off -c fsync=off -c full_page_writes=off'
+    networks:
+      - payment-processor
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=rinha
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres -d rinha" ]
+      interval: 1s
+      timeout: 5s
+      retries: 5
+    deploy:
+      resources:
+        limits:
+          cpus: "0.3"
+          memory: "140MB"
+
+networks:
+  backend:
+    driver: bridge
+  payment-processor:
+    external: true

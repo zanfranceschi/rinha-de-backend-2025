@@ -1,0 +1,146 @@
+services:
+  haproxy:
+    image: haproxy:3.2.3-alpine
+    command: >
+      sh -c "
+      echo 'global
+        maxconn 5000
+      frontend api_frontend
+        bind *:80
+        default_backend api_backend
+      backend api_backend
+        balance static-rr
+        server backend1 backend1:8080
+        server backend2 backend2:8080
+        default-server init-addr none' > /tmp/haproxy.cfg &&
+      haproxy -f /tmp/haproxy.cfg"
+    ports:
+      - "9999:80"
+    depends_on:
+      - backend1
+      - backend2
+    logging:
+      driver: "none"
+    networks:
+      - backend
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          memory: 25M
+          cpus: '0.2'
+  
+  backend1:
+    image: not4rt/rinha-2025-fast:latest
+    environment:
+      PORT: 8080
+      DATABASE_URL: postgres://payments_user:payments_pass@postgres:5432/payments_db
+      DEFAULT_PROCESSOR_URL: http://payment-processor-default:8080
+      FALLBACK_PROCESSOR_URL: http://payment-processor-fallback:8080
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - backend
+      - payment-processor
+    restart: unless-stopped
+    command: >
+      sh -c "
+      ./rust_coroutines_rinha_2025
+      --server
+      "
+    deploy:
+      resources:
+        limits:
+          memory: 60M
+          cpus: '0.2'
+
+  backend2:
+    image: not4rt/rinha-2025-fast:latest
+    environment:
+      PORT: 8080
+      DATABASE_URL: postgres://payments_user:payments_pass@postgres:5432/payments_db
+      DEFAULT_PROCESSOR_URL: http://payment-processor-default:8080
+      FALLBACK_PROCESSOR_URL: http://payment-processor-fallback:8080
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - backend
+      - payment-processor
+    restart: unless-stopped
+    command: >
+      sh -c "
+      ./rust_coroutines_rinha_2025
+      --server
+      "
+    deploy:
+      resources:
+        limits:
+          memory: 60M
+          cpus: '0.2'
+
+  worker:
+    image: not4rt/rinha-2025-fast:latest
+    environment:
+      PORT: 8080
+      DATABASE_URL: postgres://payments_user:payments_pass@postgres:5432/payments_db
+      DEFAULT_PROCESSOR_URL: http://payment-processor-default:8080
+      FALLBACK_PROCESSOR_URL: http://payment-processor-fallback:8080
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - backend
+      - payment-processor
+    restart: unless-stopped
+    command: >
+      sh -c "
+      ./rust_coroutines_rinha_2025
+      --workers
+      "
+    deploy:
+      resources:
+        limits:
+          memory: 90M
+          cpus: '0.4'
+  
+  postgres:
+    image: postgres:17-alpine
+    command: >
+      postgres
+      -c checkpoint_completion_target=0.9
+      -c random_page_cost=1.1
+      -c effective_io_concurrency=200
+      -c logging_collector=off
+      -c log_statement=none
+      -c log_duration=off
+      -c log_connections=off
+      -c log_disconnections=off
+      -c fsync=off
+      -c synchronous_commit=off
+      -c full_page_writes=off
+    environment:
+      POSTGRES_USER: payments_user
+      POSTGRES_PASSWORD: payments_pass
+      POSTGRES_DB: payments_db
+    ports:
+      - "5432:5432"
+    networks:
+      - backend
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U payments_user -d payments_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    deploy:
+      resources:
+        limits:
+          memory: 115M
+          cpus: '0.5'
+
+networks:
+  backend:
+    driver: bridge
+  payment-processor:
+    external: true

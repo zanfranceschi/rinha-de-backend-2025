@@ -1,0 +1,100 @@
+x-common-deploy: &common-deploy
+  resources:
+    limits:
+      memory: 100M
+      cpus: '0.4'
+
+x-app-template: &app-template
+  image: rodrigoschonardt/backend-rinha-go:latest
+  expose:
+    - "8080"
+  networks:
+    - app-network
+    - payment-processor
+  environment:
+    - PAYMENT_PROCESSOR_URL_DEFAULT=http://payment-processor-default:8080
+    - PAYMENT_PROCESSOR_URL_FALLBACK=http://payment-processor-fallback:8080
+    - DB_URL=postgres://postgres:postgres@postgres:5432/payments?sslmode=disable
+    - THROTTLE=0
+  depends_on:
+    postgres:
+      condition: service_healthy
+    redis:
+      condition: service_started
+  restart: unless-stopped
+  deploy:
+    <<: *common-deploy
+
+x-network-template: &network-template
+  networks:
+    - app-network
+
+services:
+  app1:
+    <<: *app-template
+
+  app2:
+    <<: *app-template
+
+  haproxy:
+    image: haproxy:latest
+    volumes:
+      - ./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
+    ports:
+      - "9999:80"
+    depends_on:
+      - app1
+      - app2
+    <<: *network-template
+    deploy:
+      resources:
+        limits:
+          memory: 25M
+          cpus: '0.2'
+
+  postgres:
+    image: postgres:15-alpine
+    environment:
+      - POSTGRES_DB=payments
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_INITDB_ARGS=--auth-host=scram-sha-256
+    expose:
+      - "5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d payments"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: unless-stopped
+    <<: *network-template
+    deploy:
+      resources:
+        limits:
+          memory: 75M
+          cpus: '0.3'
+
+  redis:
+    image: redis:latest
+    expose:
+      - "6379"
+    restart: unless-stopped
+    <<: *network-template
+    deploy:
+      resources:
+        limits:
+          memory: 50M
+          cpus: '0.2'
+
+networks:
+  app-network:
+    driver: bridge
+  payment-processor:
+    external: true
+
+volumes:
+  postgres_data:
+    driver: local

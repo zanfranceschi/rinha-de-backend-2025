@@ -1,0 +1,136 @@
+version: "3.5"
+services:
+  api1: &app
+    image: marcosisocram/a11pl3z-producer:1.0.0
+    networks:
+      - backend
+    hostname: api1
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+      db:
+        condition: service_healthy
+    ports:
+      - "9081:8080"
+    environment:
+      - DB_URL=jdbc:postgresql://db:5433/postgres
+      - DB_USER=user
+      - DB_PASSWORD=rinha-de-bK
+      - DB_HIKARI_MAXIMUN_POOL_SIZE=2
+      - SPRING_LOG_LEVEL=error
+      - RABBIT_USER=user
+      - RABBIT_PASSWORD=rinha-de-bK
+      - RABBIT_HOST=rabbit
+      - RABBIT_PORT=5672
+    deploy:
+      resources:
+        limits:
+          cpus: "0.2"
+          memory: "35MB"
+
+  api2: # API - Instância 02
+    <<: *app
+    ports:
+      - "9082:8080"
+    hostname: api2
+
+  api-consumer:
+    image: marcosisocram/a11pl3z-consumer:1.0.0
+    networks:
+      - payment-processor
+      - backend
+    hostname: consumer
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+      db:
+        condition: service_healthy
+    ports:
+      - "9083:8080"
+    environment:
+      - DB_URL=jdbc:postgresql://db:5433/postgres
+      - DB_USER=user
+      - DB_PASSWORD=rinha-de-bK
+      - DB_HIKARI_MAXIMUN_POOL_SIZE=2
+      - SPRING_LOG_LEVEL=error
+      - PROCESSOR_DEFAULT_URL=http://payment-processor-default:8080
+      - PROCESSOR_FALLBACK_URL=http://payment-processor-fallback:8080
+      - RABBIT_USER=user
+      - RABBIT_PASSWORD=rinha-de-bK
+      - RABBIT_HOST=rabbit
+      - RABBIT_PORT=5672
+    deploy:
+      resources:
+        limits:
+          cpus: "0.2"
+          memory: "70MB"
+
+  db:
+    networks:
+      - backend
+    image: postgres:17.5-alpine3.22
+    hostname: db
+    environment:
+      - POSTGRES_PASSWORD=rinha-de-bK
+      - POSTGRES_USER=user
+      - POSTGRES_DB=postgres
+      - PGPORT=5433
+    ports:
+      - "55433:5433"
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./postgresql.conf:/docker-entrypoint-initdb.d/postgresql.conf
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready"]
+      interval: 2s
+      timeout: 5s
+      retries: 7
+    deploy:
+      resources:
+        limits:
+          cpus: "0.2"
+          memory: "45MB"
+
+  rabbitmq:
+    networks:
+      - backend
+    hostname: rabbit
+    image: rabbitmq:4.1.2-alpine
+    environment:
+      - "RABBITMQ_DEFAULT_PASS=rinha-de-bK"
+      - "RABBITMQ_DEFAULT_USER=user"
+    ports:
+      - "55672:5672"
+    healthcheck:
+      test: rabbitmq-diagnostics -q ping
+      interval: 4s
+      timeout: 5s
+      retries: 5
+    deploy:
+      resources:
+        limits:
+          cpus: "0.4"
+          memory: "105MB"
+
+  haproxy:
+    networks:
+      - backend
+    image: haproxy:3.2.3-alpine3.22
+    volumes:
+      - ./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
+    depends_on:
+      - api1
+      - api2
+    ports:
+      - "9999:9999"
+    deploy:
+      resources:
+        limits:
+          cpus: "0.3"
+          memory: "60MB"
+
+networks:
+  payment-processor:
+    external: true
+  backend:
+    driver: bridge

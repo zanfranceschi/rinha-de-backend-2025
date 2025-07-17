@@ -1,20 +1,3 @@
-# Docker Compose file for Vapor
-#
-# Install Docker on your system to run and test
-# your Vapor app in a production-like environment.
-#
-# Note: This file is intended for testing and does not
-# implement best practices for a production deployment.
-#
-# Learn more: https://docs.docker.com/compose/reference/
-#
-#   Build images: docker compose build
-#      Start app: docker compose up app
-#       Stop all: docker compose down
-#
-
-version: '3.8'
-
 services:
   nginx:
     image: nginx:alpine
@@ -28,7 +11,6 @@ services:
     deploy:
       resources:
         limits:
-          # Phase 3C: Minimal nginx for maximum app resources
           cpus: '0.1'
           memory: 30M
     networks:
@@ -36,59 +18,38 @@ services:
 
   api01:
     image: valcanaia/rinha-backend-2025-swift:latest
+    platform: linux/amd64
     environment:
       - ENVIRONMENT=production
-      # CRITICAL: URLs mudaram de host.docker.internal para nomes dos containers
-      # DESCOBERTA: Scripts .sh locais conseguiam acessar localhost:8001/8002 (200 OK)
-      # PROBLEMA: APIs dentro do Docker recebiam 415/timeout tentando host.docker.internal
-      # CAUSA: host.docker.internal não funciona entre containers em redes diferentes
-      # SOLUÇÃO: Usar nomes dos containers (payment-processor-default:8080) via rede externa
-      # TESTE: Scripts validaram que processadores funcionam, problema era conectividade Docker
       - DEFAULT_PROCESSOR_URL=http://payment-processor-default:8080
       - FALLBACK_PROCESSOR_URL=http://payment-processor-fallback:8080
     deploy:
       resources:
         limits:
-          # Phase 3C: Maximum resources for ultra-aggressive processing
           cpus: '0.7'
           memory: 160M
     networks:
       - rinha-network
-      - payment-processor  # CONECTA à rede externa dos processadores para comunicação
+      - payment-processor
 
   api02:
     image: valcanaia/rinha-backend-2025-swift:latest
+    platform: linux/amd64
     environment:
       - ENVIRONMENT=production
-      # CRITICAL: URLs mudaram de host.docker.internal para nomes dos containers
-      # DESCOBERTA: Scripts .sh locais conseguiam acessar localhost:8001/8002 (200 OK)
-      # PROBLEMA: APIs dentro do Docker recebiam 415/timeout tentando host.docker.internal
-      # CAUSA: host.docker.internal não funciona entre containers em redes diferentes
-      # SOLUÇÃO: Usar nomes dos containers (payment-processor-default:8080) via rede externa
-      # TESTE: Scripts validaram que processadores funcionam, problema era conectividade Docker
       - DEFAULT_PROCESSOR_URL=http://payment-processor-default:8080
       - FALLBACK_PROCESSOR_URL=http://payment-processor-fallback:8080
     deploy:
       resources:
         limits:
-          # Phase 3C: Maximum resources for ultra-aggressive processing
           cpus: '0.7'
           memory: 160M
     networks:
       - rinha-network
-      - payment-processor  # CONECTA à rede externa dos processadores para comunicação
+      - payment-processor
 
 networks:
   rinha-network:
     driver: bridge
-  # PROBLEMA RESOLVIDO: Conectividade entre APIs e Processadores
-  # DESCOBERTA VIA SCRIPTS: test-*.sh conseguiam curl localhost:8001/8002 com sucesso (200 OK)
-  # PROBLEMA IDENTIFICADO: APIs no Docker falhavam com 415/timeout em host.docker.internal
-  # DIAGNÓSTICO: docker network ls mostrou redes isoladas (rinha-network vs payment-processor)
-  # ANTES: APIs usavam host.docker.internal:8001/8002 mas não funcionava entre redes
-  # CAUSA: Processadores rodavam em rede separada 'payment-processor'
-  # SOLUÇÃO: Conectar APIs à rede externa dos processadores + usar nomes dos containers
-  # RESULTADO: APIs acessam payment-processor-default:8080 e payment-processor-fallback:8080
-  # VALIDAÇÃO: Scripts confirmaram que processadores funcionam, problema era só conectividade
   payment-processor:
     external: true

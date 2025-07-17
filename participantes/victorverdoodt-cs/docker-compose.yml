@@ -21,12 +21,12 @@ services:
       - ConnectionStrings__Redis=redis:6379
       - Gateways__Primary=http://payment-processor-default:8080
       - Gateways__Fallback=http://payment-processor-fallback:8080
-      - DB_HOSTNAME=Host=db;Database=rinha;Username=admin;Password=123;No Reset On Close=true;Max Auto Prepare=10;Auto Prepare Min Usages=1;Pooling=true;Maximum Pool Size=10
+      - DB_HOSTNAME=Host=db;Database=rinha;Username=admin;Password=123;No Reset On Close=true;Max Auto Prepare=10;Auto Prepare Min Usages=1;Pooling=true;Maximum Pool Size=100
     deploy:
       resources:
         limits:
-          cpus: "0.30"
-          memory: "120MB"
+          cpus: "0.475"
+          memory: "125MB"
 
   rinhadebackend-aot02:
     <<: *api 
@@ -75,12 +75,15 @@ services:
       resources:
         limits:
           cpus: "0.15"
-          memory: "75MB"
+          memory: "70MB"
 
   redis:
     image: redis:7.2-alpine
     container_name: redis-cache
     hostname: redis
+    volumes:
+      - ./redis-conf/redis.conf:/usr/local/etc/redis/redis.conf
+    command: redis-server /usr/local/etc/redis/redis.conf
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]
       interval: 5s
@@ -95,7 +98,7 @@ services:
       resources:
         limits:
           cpus: "0.15"
-          memory: "25MB"
+          memory: "20MB"
 
 networks:
   backend:

@@ -1,0 +1,61 @@
+version: "3.9"
+services:
+  db:
+    image: ricardovhz/rinha-2025:db
+    hostname: db
+    ports:
+      - "3000:3000"
+    networks:
+      - rinha-net
+    deploy:
+      resources:
+        limits:
+          cpus: "0.8"
+          memory: "225MB"
+
+  api01: &api
+    image: ricardovhz/rinha-2025:latest
+    hostname: api01
+    environment:
+      - DB_HOST=http://db:3000
+      - DB_PORT=9042
+      - DEFAULT_BACKEND_HOST=http://payment-processor-default:8080
+      - FALLBACK_BACKEND_HOST=http://payment-processor-fallback:8080
+    networks:
+      - payment-processor
+      - rinha-net
+    depends_on:
+    - db
+    deploy:
+      resources:
+        limits:
+          cpus: "0.25"
+          memory: "55MB"
+
+  api02:
+    <<: *api
+    hostname: api02
+
+  lb:
+    image: nginx:1.27.0-alpine
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    ports:
+      - "9999:9999"
+    networks:
+      - payment-processor
+      - rinha-net
+    depends_on:
+      - api01
+      - api02
+    deploy:
+      resources:
+        limits:
+          cpus: "0.2"
+          memory: "15MB"
+
+networks:
+  payment-processor:
+    external: true
+  rinha-net:
+    driver: bridge

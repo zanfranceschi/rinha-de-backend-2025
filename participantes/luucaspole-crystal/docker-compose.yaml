@@ -1,0 +1,110 @@
+version: '3.4'
+services:
+  app1: &app
+    image: docker.io/lukas8219/rinha-de-backend-2025-app:latest
+    hostname: app1
+    restart: unless-stopped
+    environment:
+      PROCESSOR_URL: "http://payment-processor-default:8080"
+      FALLBACK_URL: "http://payment-processor-fallback:8080"
+      DISABLE_LOG: "true"
+      SQLITE_PATH: "/dev/shm/database.sqlite3?sync=off&journal_mode=WAL&busy_timeout=1000"
+      AMQP_URL: "amqp://guest:guest@lavinmq:5672/"
+      PREFETCH_COUNT: "0"
+      SHARD_COUNT: "5"
+      SKIP_DELAY: "true"
+    networks:
+      - backend
+      - payment-processor
+    expose:
+      - "3000"
+    depends_on:
+      lavinmq:
+        condition: service_healthy
+    ipc: host
+    ulimits:
+      nproc: 1000000
+      nofile:
+        soft: 1000000
+        hard: 1000000
+    deploy:
+      resources:
+        limits:
+          cpus: '0.1'
+          memory: '30MB'
+  app2:
+    <<: *app
+    hostname: app2
+  app3:
+    <<: *app
+    hostname: app3
+
+  consumer: &consumer
+    <<: *app
+    image: docker.io/lukas8219/rinha-de-backend-2025-worker:latest
+    hostname: "1"
+    deploy:
+      resources:
+        limits:
+          cpus: '0.25'
+          memory: '35MB'
+  consumer2:
+    <<: *consumer
+    hostname: "2"
+  consumer3:
+    <<: *consumer
+    hostname: "3"
+  consumer4:
+    <<: *consumer
+    hostname: "4"
+  consumer5:
+    <<: *consumer
+    hostname: "5"
+
+  lavinmq:
+    image: cloudamqp/lavinmq:latest
+    container_name: lavinmq
+    healthcheck:
+      test: ["CMD", "lavinmqctl", "status"]
+      interval: 5s
+      timeout: 10s
+      retries: 20
+      start_period: 5s
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    networks:
+      - backend
+    deploy:
+      resources:
+        limits:
+          cpus: '0.05'
+          memory: '35MB'
+
+  nginx: # Load Balancer
+    image: nginx:latest
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - app1
+      - app2
+    ports:
+      - "9999:9999"
+    ulimits:
+      nproc: 1000000
+      nofile:
+        soft: 1000000
+        hard: 1000000
+    networks:
+      - backend
+    deploy:
+      resources:
+        limits:
+          cpus: '0.1'
+          memory: '25MB'
+
+networks:
+  backend:
+    driver: bridge
+  payment-processor:
+    external: true

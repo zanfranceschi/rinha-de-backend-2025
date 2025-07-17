@@ -1,0 +1,81 @@
+services:
+  nginx:
+    image: nginx:alpine
+    container_name: nginx-lb
+    hostname: nginx-lb
+    ports:
+      - 9999:9999
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    networks:
+      - backend
+    depends_on:
+      - backend-go-1
+      - backend-go-2
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: '50MB'
+
+  backend-go-1:
+    image: arthurschur/rinha-de-golo:v.1
+    container_name: backend-go-1
+    hostname: backend-go-1
+    expose:
+      - '8080'
+    networks:
+      - backend
+      - payment-processor
+    environment:
+      - PORT=8080
+      - REDIS_URL=backend-go-redis:6379
+      - PAYMENT_PROCESSOR_URL_DEFAULT=http://payment-processor-default:8080
+      - PAYMENT_PROCESSOR_URL_FALLBACK=http://payment-processor-fallback:8080
+    depends_on:
+      - backend-go-redis
+    deploy:
+      resources:
+        limits:
+          cpus: '0.75'
+          memory: '115MB'
+
+  backend-go-2:
+    image: arthurschur/rinha-de-golo:v.1
+    container_name: backend-go-2
+    hostname: backend-go-2
+    expose:
+      - '8080'
+    networks:
+      - backend
+      - payment-processor
+    environment:
+      - PORT=8080
+      - REDIS_URL=backend-go-redis:6379
+      - PAYMENT_PROCESSOR_URL_DEFAULT=http://payment-processor-default:8080
+      - PAYMENT_PROCESSOR_URL_FALLBACK=http://payment-processor-fallback:8080
+    depends_on:
+      - backend-go-redis
+    deploy:
+      resources:
+        limits:
+          cpus: '0.75'
+          memory: '115MB'
+
+  backend-go-redis:
+    image: redis:7-alpine
+    container_name: backend-go-redis
+    hostname: backend-go-redis
+    networks:
+      - backend
+    deploy:
+      resources:
+        limits:
+          cpus: '0.25'
+          memory: '70MB'
+
+networks:
+  backend:
+    driver: bridge
+  payment-processor:
+    external: true

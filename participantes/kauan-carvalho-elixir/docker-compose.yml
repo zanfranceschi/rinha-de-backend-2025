@@ -1,0 +1,89 @@
+services:
+  redis:
+    image: redis:8.0.3-alpine
+    container_name: backend-fight-redis
+    restart: unless-stopped
+    command:
+      [
+        "redis-server",
+        "--save",
+        "",
+        "--appendonly",
+        "no",
+        "--maxclients",
+        "10000",
+      ]
+    networks:
+      - backend
+    deploy:
+      resources:
+        limits:
+          cpus: "0.15"
+          memory: "30MB"
+
+  app1: &app
+    image: kauancarvalhocalasans/rinha-elixir-2025:latest
+    container_name: app1
+    environment: &app_env
+      MIX_ENV: prod
+      PHX_SERVER: true
+      PORT: 3000
+      SECRET_KEY_BASE: 7VEPFiqSBvMCcmYjUbt45ulgjalZbBkcLy6qZ9BNW7FVC984h7VNaaLFZaQxORCc
+      ERL_MAX_PORTS: 2046
+      ELIXIR_ERL_OPTIONS: "+S 1:1 +sbwt none +sbwtdcpu none +sbwtdio none +A 0"
+      RELEASE_DISTRIBUTION: name
+      RELEASE_NODE: app1@127.0.0.1
+      PAYMENT_PROCESSOR_DEFAULT_HOST: http://payment-processor-default:8080
+      PAYMENT_PROCESSOR_FALLBACK_HOST: http://payment-processor-fallback:8080
+    depends_on:
+      - redis
+    networks:
+      - backend
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          cpus: "0.6"
+          memory: "180MB"
+
+  app2:
+    <<: *app
+    container_name: app2
+    environment:
+      <<: *app_env
+      RELEASE_NODE: app2@127.0.0.1
+      BACKGROUND_PROCCESSES: "false"
+    depends_on:
+      - redis
+    networks:
+      - backend
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          cpus: "0.6"
+          memory: "120MB"
+
+  nginx:
+    image: nginx:1.29.0-alpine 
+    container_name: backend-fight-nginx
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    ports:
+      - 9999:9999
+    depends_on:
+      - app1
+      - app2
+    networks:
+      - backend
+    deploy:
+      resources:
+        limits:
+          cpus: '0.15'
+          memory: '20MB'
+
+networks:
+  backend:
+    driver: bridge
+  payment-processor:
+    external: true

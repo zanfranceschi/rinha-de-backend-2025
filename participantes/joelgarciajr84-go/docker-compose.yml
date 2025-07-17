@@ -16,6 +16,13 @@ services:
       - "9991:9999"
     depends_on:
       - redis
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9999/payments-summary"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+      start_period: 5s
     deploy:
       resources:
         limits:
@@ -37,6 +44,13 @@ services:
       - "9992:9999"
     depends_on:
       - redis
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9999/payments-summary"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+      start_period: 5s
     deploy:
       resources:
         limits:

@@ -1,4 +1,5 @@
 version: "3.9"
+
 services:
   cache:
     image: redis:7.2-alpine
@@ -28,7 +29,7 @@ services:
       - POSTGRES_DB=rinha
     ports:
       - "5432:5432"
-    command: postgres -c max_connections=450 -c shared_buffers=40MB -c effective_cache_size=120MB -c work_mem=4MB -c maintenance_work_mem=16MB -c synchronous_commit=off -c fsync=off
+    command: postgres -c max_connections=450 -c shared_buffers=32MB -c effective_cache_size=96MB -c work_mem=3MB -c maintenance_work_mem=12MB -c synchronous_commit=off -c fsync=off
     networks:
       - rinha-net
     healthcheck:
@@ -40,8 +41,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.5"
-          memory: "165MB"
+          cpus: "0.35"
+          memory: "110MB"
 
   api01: &api
     image: d4vz/rinha-backend-2025
@@ -69,8 +70,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.25"
-          memory: "55MB"
+          cpus: "0.32"
+          memory: "70MB"
 
   api02:
     <<: *api

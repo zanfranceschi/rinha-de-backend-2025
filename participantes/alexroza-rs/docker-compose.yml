@@ -1,0 +1,69 @@
+services:
+  load-balance-one:
+    image: alexroza/ld-tr
+    environment:
+      - PAYMENT_PROCESSOR_DEFAULT=http://payment-processor-default:8080
+      - PAYMENT_PROCESSOR_FALLBACK=http://payment-processor-fallback:8080
+      - REDIS=redis://redis:6379/
+    networks:
+      - backend
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          cpus: '0.15'
+          memory: "50MB"
+    depends_on:
+      - redis
+
+  load-balance-two:
+    image: alexroza/ld-tr
+    environment:
+      - PAYMENT_PROCESSOR_DEFAULT=http://payment-processor-default:8080
+      - PAYMENT_PROCESSOR_FALLBACK=http://payment-processor-fallback:8080
+      - REDIS=redis://redis:6379/
+    networks:
+      - backend
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          cpus: '0.15'
+          memory: "50MB"
+    depends_on:
+      - redis
+
+  nginx:
+    image: nginx:alpine
+    container_name: nginx-lb
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    ports:
+      - "9999:9999"
+    depends_on:
+      - load-balance-one
+      - load-balance-two
+    deploy:
+      resources:
+        limits:
+          cpus: '0.2'
+          memory: "50MB"
+    networks:
+      - backend
+  redis:
+    container_name: redis
+    image: redis:8-alpine
+    ports:
+      - "6379:6379"
+    networks:
+      - backend
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: "200MB"
+networks:
+  backend:
+    driver: bridge
+  payment-processor:
+    external: true

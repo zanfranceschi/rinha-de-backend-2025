@@ -21,7 +21,7 @@ Além do endpoint `POST /payments`, também é necessário disponibilizar um end
 
 ![diagrama](misc/imgs/instrucoes/image-03.png)
 
-Essas chamadas periódicas durante o teste da Rinha vão comprar as respostas e, a cada inconsistência, uma multa salgada será aplicada!
+Essas chamadas periódicas durante o teste da Rinha vão comparar as respostas e, a cada inconsistência, uma multa salgada será aplicada!
 
 #### A Vida é uma Montanha Russa Mesmo...
 
@@ -31,7 +31,7 @@ Para facilitar sua vida e a verificação da disponibilidade dos Payment Process
 
 O critério de pontução da Rinha de Backend será quanto de lucro seu backend conseguiu ter ao final do teste. Ou seja, quanto mais pagamentos você fizer com a menor taxa financeira, melhor. Lembre-se de que se houver inconsistências detectadas pelo Banco Central, você terá que pagar uma multa de 35% sobre o total de lucro.
 
-Existe um critério técnico para pontuação também. Se seu backend e os Payment Processors tiverem tempos de respostas muito rápidos, você poderá pontuar também. A métrica usada para performance será o p99 (pegaremos o 1% piores tempos de resposta - percentil 99). A partir de um p99 de 10ms para menos, vocẽ recebe um bônus sobre seu total lucro de 2% para cada 1ms abaixo de 11ms.
+Existe um critério técnico para pontuação também. Se seu backend e os Payment Processors tiverem tempos de respostas muito rápidos, você poderá pontuar também. A métrica usada para performance será o p99 (pegaremos o 1% piores tempos de resposta - percentil 99). A partir de um p99 de 10ms para menos, você recebe um bônus sobre seu total lucro de 2% para cada 1ms abaixo de 11ms.
 
 A fórmula para a porcentagem de bônus por performance é `(11 - p99) * 0,02`. Se o valor for negativo, o bônus é 0% – não há penalidade para resultados com p99 maiores que 11ms.
 
@@ -146,7 +146,7 @@ Esses dois endereços também estão acessíveis via host para que você consiga
 
 Sigas [estas instruções](rinha-test/README.md) para testar seu backend localmente.
 
-O [leonardosegfault](https://github.com/leonardosegfault) gentilmente elaborou um [mini-guia de setup](rinha-test/MINIGUIA.md) para ajudar na configuração local para rodas os testes.
+O [leonardosegfault](https://github.com/leonardosegfault) gentilmente elaborou um [mini-guia de setup](rinha-test/MINIGUIA.md) para ajudar na configuração local para rodar os testes.
 
 
 ## Detalhes dos Endpoints
@@ -390,4 +390,5 @@ As tabelas abaixo oferem um resumo para facilitar a visão geral da solução.
 
 ## Outras Informações
 
+- As especificações sobre o servidor de testes podem ser encontradas [aqui](./SPECTESTENV.md).
 - O código fonte do **Payment Processor** está disponível [aqui](https://github.com/zanfranceschi/rinha-de-backend-2025-payment-processor).

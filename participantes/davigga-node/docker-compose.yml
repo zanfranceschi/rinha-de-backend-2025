@@ -1,0 +1,90 @@
+services:
+  nginx:
+    image: nginx:latest
+    container_name: nginx-lb
+    ports:
+      - "9999:9999"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - app1
+      - app2
+    networks:
+      - app-network
+    deploy:
+      resources:
+        limits:
+          cpus: "0.15"
+          memory: "20MB"
+  app1:
+    image: davigga/rinhapayment-app
+    container_name: app1
+    networks:
+      - app-network
+      - payment-processor
+    depends_on:
+      - redis
+      - mongodb
+    environment:
+      - PAYMENT_PROCESSOR_URL_DEFAULT=http://payment-processor-default:8080
+      - PAYMENT_PROCESSOR_URL_FALLBACK=http://payment-processor-fallback:8080
+      - MONGO_URI=mongodb://mongodb/payment
+      - REDIS_URI=redis://redis:6379
+    deploy:
+      resources:
+        limits:
+          cpus: "0.4"
+          memory: "75MB"
+  app2:
+    image: davigga/rinhapayment-app
+    container_name: app2
+    networks:
+      - app-network
+      - payment-processor
+    depends_on:
+      - redis
+      - mongodb
+    environment:
+      - PAYMENT_PROCESSOR_URL_DEFAULT=http://payment-processor-default:8080
+      - PAYMENT_PROCESSOR_URL_FALLBACK=http://payment-processor-fallback:8080
+      - MONGO_URI=mongodb://mongodb/payment
+      - REDIS_URI=redis://redis:6379
+    deploy:
+      resources:
+        limits:
+          cpus: "0.4"
+          memory: "75MB"
+  mongodb:
+    image: mongo
+    container_name: payment-db
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_INITDB_DATABASE=payment
+    deploy:
+      resources:
+        limits:
+          cpus: "0.35"
+          memory: "90MB"
+    networks:
+      - app-network
+    restart: always
+  redis:
+    image: redis:7.2-alpine
+    container_name: redis
+    ports:
+      - "6379:6379"
+    deploy:
+      resources:
+        limits:
+          cpus: "0.2"
+          memory: "90MB"
+    networks:
+      - app-network
+networks:
+  payment-processor:
+    external: true
+  app-network:
+
+
+

@@ -1,0 +1,104 @@
+version: "3.9"
+
+services:
+  nginx:
+    image: nginx:1.25.5-alpine
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - api1
+      - api2
+    ports:
+      - "9999:9999"
+    deploy:
+      resources:
+        limits:
+          cpus: "0.1"
+          memory: "20MB"
+    networks:
+      - rinha-net
+
+  api1:
+    build: rodrixl/rinha2025
+    command: gunicorn --worker-class uvicorn.workers.UvicornWorker --bind 0.0.0.0:8000 --workers 1 main:app
+    depends_on:
+      - redis
+    environment:
+      - REDIS_HOST=redis
+    deploy:
+      resources:
+        limits:
+          cpus: "0.3"
+          memory: "70MB"
+    networks:
+      - rinha-net
+      - payment-processor-net
+
+  api2:
+    build: rodrixl/rinha2025
+    command: gunicorn --worker-class uvicorn.workers.UvicornWorker --bind 0.0.0.0:8000 --workers 1 main:app
+    depends_on:
+      - redis
+    environment:
+      - REDIS_HOST=redis
+    deploy:
+      resources:
+        limits:
+          cpus: "0.3"
+          memory: "70MB"
+    networks:
+      - rinha-net
+      - payment-processor-net
+
+  worker:
+    build: rodrixl/rinha2025
+    command: python app/worker.py
+    depends_on:
+      - redis
+    environment:
+      - REDIS_HOST=redis
+      - PAYMENT_PROCESSOR_URL_DEFAULT=http://payment-processor-default:8080
+      - PAYMENT_PROCESSOR_URL_FALLBACK=http://payment-processor-fallback:8080
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: "100MB"
+    networks:
+      - rinha-net
+      - payment-processor-net
+
+  health_checker:
+    build: rodrixl/rinha2025
+    command: python app/health_checker.py
+    depends_on:
+      - redis
+    environment:
+      - REDIS_HOST=redis
+      - PAYMENT_PROCESSOR_URL_DEFAULT=http://payment-processor-default:8080
+      - PAYMENT_PROCESSOR_URL_FALLBACK=http://payment-processor-fallback:8080
+    deploy:
+      resources:
+        limits:
+          cpus: "0.1"
+          memory: "30MB"
+    networks:
+      - rinha-net
+      - payment-processor-net
+
+  redis:
+    image: redis:7.2.5-alpine
+    deploy:
+      resources:
+        limits:
+          cpus: "0.2"
+          memory: "60MB"
+    networks:
+      - rinha-net
+
+networks:
+  rinha-net:
+    driver: bridge
+  payment-processor-net:
+    name: payment-processor
+    external: true
