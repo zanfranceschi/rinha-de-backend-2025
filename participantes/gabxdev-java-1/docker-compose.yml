@@ -1,0 +1,144 @@
+version: '3.8'
+
+services:
+  backend-1:
+    image: gabxdevv/rinha-backend-2025-java:1.0.0
+    container_name: gaxdev_backend-1
+    environment:
+      RETRY_API_DEFAULT: 16
+      HTTP_CLIENT_WORKER: 25
+      TIMEOUT_DEFAULT: 180
+      TIMEOUT_FALLBACK: 95
+      QUEUE_BUFFER: 9000
+      THREADS_VIRTUAL_ENABLED: true
+      PAYMENT_PROCESSOR_URL_DEFAULT: http://payment-processor-default:8080/payments
+      PAYMENT_PROCESSOR_URL_FALLBACK: http://payment-processor-fallback:8080/payments
+      LOG_LEVEL: off
+      SERVER_PORT: 8080
+      BACK_END_URL: http://backend-2:8080
+      JAVA_OPTS: >-
+        -server
+        -Xms64g -Xmx64g
+        -XX:+UseG1GC
+        -XX:+UseFastAccessorMethods
+        -Xlog:disable
+        -XX:G1HeapRegionSize=32m
+        -XX:G1NewSizePercent=40
+        -XX:G1MaxNewSizePercent=60
+        -XX:G1MixedGCCountTarget=8
+        -XX:G1HeapWastePercent=5
+        -XX:G1MixedGCLiveThresholdPercent=85
+        -XX:G1OldCSetRegionThresholdPercent=10
+        -XX:+UseLargePages
+        -XX:+UseNUMA
+        -XX:+TieredCompilation
+        -XX:TieredStopAtLevel=4
+        -XX:+AggressiveOpts
+        -XX:+OptimizeStringConcat
+        -XX:-UseCounterDecay
+        -XX:+DisableExplicitGC
+        -XX:+UseStringCache
+        -XX:-PrintGC
+        -XX:-PrintGCDetails
+        -XX:-FlightRecorder
+        -XX:+UseTransparentHugePages
+        -XX:LargePageSizeInBytes=2m
+        -XX:+UseNUMAInterleaving
+        -XX:+UseCompressedOops
+        -XX:+UseCompressedClassPointers
+        -XX:+UseFastUnorderedTimeStamps
+        -XX:+UnlockExperimentalVMOptions
+        -XX:-UseBiasedLocking
+        -XX:MaxGCPauseMillis=200
+    networks:
+      - backend
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          cpus: '0.625'
+          memory: '140MB'
+
+  backend-2:
+    image: gabxdevv/rinha-backend-2025-java:1.0.0
+    container_name: gaxdev_backend-2
+    restart: always
+    environment:
+      RETRY_API_DEFAULT: 16
+      HTTP_CLIENT_WORKER: 25
+      TIMEOUT_DEFAULT: 180
+      TIMEOUT_FALLBACK: 95
+      QUEUE_BUFFER: 9000
+      THREADS_VIRTUAL_ENABLED: true
+      PAYMENT_PROCESSOR_URL_DEFAULT: http://payment-processor-default:8080/payments
+      PAYMENT_PROCESSOR_URL_FALLBACK: http://payment-processor-fallback:8080/payments
+      LOG_LEVEL: off
+      SERVER_PORT: 8080
+      BACK_END_URL: http://backend-1:8080
+      JAVA_OPTS: >-
+        -server
+        -Xms64g -Xmx64g
+        -XX:+UseG1GC
+        -XX:+UseFastAccessorMethods
+        -Xlog:disable
+        -XX:G1HeapRegionSize=32m
+        -XX:G1NewSizePercent=40
+        -XX:G1MaxNewSizePercent=60
+        -XX:G1MixedGCCountTarget=8
+        -XX:G1HeapWastePercent=5
+        -XX:G1MixedGCLiveThresholdPercent=85
+        -XX:G1OldCSetRegionThresholdPercent=10
+        -XX:+UseLargePages
+        -XX:+UseNUMA
+        -XX:+TieredCompilation
+        -XX:TieredStopAtLevel=4
+        -XX:+AggressiveOpts
+        -XX:+OptimizeStringConcat
+        -XX:-UseCounterDecay
+        -XX:+DisableExplicitGC
+        -XX:+UseStringCache
+        -XX:-PrintGC
+        -XX:-PrintGCDetails
+        -XX:-FlightRecorder
+        -XX:+UseTransparentHugePages
+        -XX:LargePageSizeInBytes=2m
+        -XX:+UseNUMAInterleaving
+        -XX:+UseCompressedOops
+        -XX:+UseCompressedClassPointers
+        -XX:+UseFastUnorderedTimeStamps
+        -XX:+UnlockExperimentalVMOptions
+        -XX:-UseBiasedLocking
+        -XX:MaxGCPauseMillis=200
+    networks:
+      - backend
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          cpus: '0.625'
+          memory: '140MB'
+
+  load-balancer:
+    image: nginx:alpine
+    restart: always
+    container_name: gabxdev-load-balancer
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - backend-1
+      - backend-2
+    ports:
+      - "9999:80"
+    networks:
+      - backend
+    deploy:
+      resources:
+        limits:
+          cpus: "0.25"
+          memory: "70MB"
+
+networks:
+  backend:
+    driver: bridge
+  payment-processor:
+    external: true

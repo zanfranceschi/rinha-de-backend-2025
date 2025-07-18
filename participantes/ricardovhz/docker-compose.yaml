@@ -10,13 +10,14 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.8"
-          memory: "225MB"
+          cpus: "0.5"
+          memory: "200MB"
 
   api01: &api
     image: ricardovhz/rinha-2025:latest
     hostname: api01
     environment:
+      - WORKERS_NUMBER=20
       - DB_HOST=http://db:3000
       - DB_PORT=9042
       - DEFAULT_BACKEND_HOST=http://payment-processor-default:8080
@@ -29,8 +30,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.25"
-          memory: "55MB"
+          cpus: "0.4"
+          memory: "65MB"
 
   api02:
     <<: *api
@@ -52,7 +53,7 @@ services:
       resources:
         limits:
           cpus: "0.2"
-          memory: "15MB"
+          memory: "20MB"
 
 networks:
   payment-processor:

@@ -1,0 +1,169 @@
+services:
+  redis:
+    image: redis:7-alpine
+    container_name: redis
+    hostname: redis
+    networks:
+      - payment-processor
+      - backend
+    ports:
+      - "6379:6379"
+    deploy:
+      resources:
+        limits:
+          cpus: "0.10"
+          memory: "25MB"
+
+  haproxy:
+    image: haproxy:2.8-alpine
+    container_name: haproxy
+    ports:
+      - "9999:9999"
+    volumes:
+      - ./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
+    restart: unless-stopped
+    networks:
+      - payment-processor
+      - backend
+    depends_on:
+      - core01
+      - core02
+    deploy:
+      resources:
+        limits:
+          cpus: "0.20"
+          memory: "40MB"
+
+  postgres:
+    container_name: postgres
+    image: postgres:16.2-bookworm
+    hostname: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./init-db/init-db.sql:/docker-entrypoint-initdb.d/init-db.sql
+    command: >
+      postgres -p 5432 
+          -c max_wal_size=4096 
+          -c checkpoint_timeout=600 
+          -c shared_buffers=256MB 
+          -c max_connections=5000
+          -c synchronous_commit=off
+          -c log_statement=none
+          -c commit_delay=1200
+          -c fsync=off
+          -c max_parallel_workers=0
+          -c autovacuum_vacuum_scale_factor=.5
+          -c log_duration=off
+          -c log_checkpoints=0
+          -c log_min_error_statement='panic'
+    environment:
+      POSTGRES_PASSWORD: "postgres"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    networks:
+      - payment-processor
+      - backend
+    deploy:
+      resources:
+        limits:
+          cpus: "0.60"
+          memory: "195MB"
+
+  core01:
+    container_name: core01
+    hostname: core01
+    image: nilferreira/anibalmf1-rinha-2025-core
+    ports:
+      - "8003:8003"
+    environment:
+      APP_SERVER_URL: 0.0.0.0
+      APP_SERVER_PORT: 8003
+      APP_REDIS_URL: redis://redis:6379
+      APP_PAYMENT_PROCESSOR_URL: http://proxy:8005/payments
+      APP_PAYMENT_TOPIC: payment
+      APP_DB_HOST: postgres
+      APP_DB_PORT: 5432
+      APP_DB_NAME: postgres
+      APP_DB_USER: postgres
+      APP_DB_PASSWORD: postgres
+    networks:
+      - payment-processor
+      - backend
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_started
+      proxy:
+        condition: service_started
+    deploy:
+      resources:
+        limits:
+          cpus: "0.20"
+          memory: "30MB"
+
+  core02:
+    container_name: core02
+    hostname: core02
+    image: nilferreira/anibalmf1-rinha-2025-core
+    ports:
+      - "8004:8004"
+    environment:
+      APP_SERVER_URL: 0.0.0.0
+      APP_SERVER_PORT: 8004
+      APP_REDIS_URL: redis://redis:6379
+      APP_PAYMENT_PROCESSOR_URL: http://proxy:8005/payments
+      APP_PAYMENT_TOPIC: payment
+      APP_DB_HOST: postgres
+      APP_DB_PORT: 5432
+      APP_DB_NAME: postgres
+      APP_DB_USER: postgres
+      APP_DB_PASSWORD: postgres
+    networks:
+      - payment-processor
+      - backend
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_started
+      proxy:
+        condition: service_started
+    deploy:
+      resources:
+        limits:
+          cpus: "0.20"
+          memory: "30MB"
+
+  proxy:
+    container_name: proxy
+    hostname: proxy
+    image: nilferreira/anibalmf1-rinha-2025-proxy
+    ports:
+      - "8005:8005"
+    environment:
+      APP_SERVER_URL: 0.0.0.0
+      APP_SERVER_PORT: 8005
+      APP_PAYMENT_PROCESSOR_DEFAULT: http://payment-processor-default:8080
+      APP_PAYMENT_PROCESSOR_FALLBACK: http://payment-processor-fallback:8080
+    networks:
+      - payment-processor
+      - backend
+    depends_on:
+      - postgres
+    deploy:
+      resources:
+        limits:
+          cpus: "0.20"
+          memory: "30MB"
+
+networks:
+  backend:
+    driver: bridge
+  payment-processor:
+    external: true

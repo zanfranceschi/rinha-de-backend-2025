@@ -15,9 +15,8 @@ startContainers() {
 
 stopContainers() {
     pushd ../participantes/$1
-        docker compose rm -f
-        docker compose down --volumes
-        docker compose rm -v -f
+        docker compose down -v --remove-orphans
+        docker compose rm -s -v -f
     popd > /dev/null
     pushd ../payment-processor > /dev/null
         docker compose down --volumes > /dev/null
@@ -27,10 +26,6 @@ stopContainers() {
 MAX_REQUESTS=550
 
 while true; do
-    
-    docker image prune -a -f
-    docker volume prune -a -f
-
     for directory in ../participantes/*; do
     (
         git pull
@@ -104,7 +99,6 @@ while true; do
     git commit -m "previa resultados @ $(date)"
     git push
     done
-    # 5 minutinhos de espera... ninguém morre
-    echo "$(date) - waiting 5 minutes for the next round..."
+    echo "$(date) - waiting some time until next round..."
     sleep 300
 done

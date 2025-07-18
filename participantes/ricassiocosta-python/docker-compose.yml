@@ -20,7 +20,7 @@ services:
           memory: "16MB"
 
   backend-api-1: &api
-    image: ricassiocosta/rinha-backend-2025-python:latest
+    image: ricassiocosta/rinha-backend-2025-python:v0.7.1
     hostname: rinha-backend-api-1
     restart: unless-stopped
     environment:
@@ -45,7 +45,7 @@ services:
     hostname: rinha-backend-api-2
 
   worker-light:
-    image: ricassiocosta/rinha-backend-2025-python:latest
+    image: ricassiocosta/rinha-backend-2025-python:v0.7.1
     hostname: worker-light
     command: ["python", "-m", "app.worker"]
     restart: unless-stopped
@@ -67,7 +67,7 @@ services:
           memory: "48MB"
 
   worker-heavy:
-    image: ricassiocosta/rinha-backend-2025-python:latest
+    image: ricassiocosta/rinha-backend-2025-python:v0.7.1
     hostname: worker-heavy
     command: ["python", "-m", "app.worker"]
     restart: unless-stopped
@@ -89,7 +89,7 @@ services:
           memory: "72MB"
 
   health-check:
-    image: ricassiocosta/rinha-backend-2025-python:latest
+    image: ricassiocosta/rinha-backend-2025-python:v0.7.1
     hostname: rinha-health-check
     command: ["python", "-m", "app.health_check"]
     restart: unless-stopped

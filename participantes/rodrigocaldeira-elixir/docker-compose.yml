@@ -8,15 +8,14 @@ services:
       - api02
       - worker
     ports:
-      - "9999:9999"
+      - "9999:80"
     networks:
       - rinha
-      - payment-processor
     deploy:
       resources:
         limits:
-          cpus: "0.2"
-          memory: "30MB"
+          cpus: "0.08"
+          memory: "10MB"
 
   worker:
     hostname: worker
@@ -29,8 +28,8 @@ services:
     environment:
       - ROLE=worker
       - DATABASE_PATH=/db/rinha.db
-      - DATABASE_POOL_SIZE=18
-      - WORKER_POOL_SIZE=16
+      - DATABASE_POOL_SIZE=10
+      - WORKER_POOL_SIZE=4
       - DEFAULT_SERVICE_NAME=default
       - DEFAULT_SERVICE_URL=http://payment-processor-default:8080
       - FALLBACK_SERVICE_NAME=fallback
@@ -40,8 +39,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.6"
-          memory: "158MB"
+          cpus: "0.82"
+          memory: "140MB"
 
   api01: &api
     hostname: api01
@@ -50,7 +49,6 @@ services:
       - "8080:8080"
     networks:
       - rinha
-      - payment-processor
     environment:
       - ROLE=api
       - PORT=8080
@@ -61,8 +59,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.35"
-          memory: "81MB"
+          cpus: "0.3"
+          memory: "100MB"
 
   api02:
     <<: *api
