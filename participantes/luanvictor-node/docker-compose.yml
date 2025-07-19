@@ -1,0 +1,136 @@
+services:
+  # -----
+  # INFRA
+  # -----
+  db:
+    image: postgres:16-alpine
+    hostname: db
+    environment:
+      - POSTGRES_PASSWORD=rinha
+      - POSTGRES_USER=rinha
+      - POSTGRES_DB=rinha
+    volumes:
+      - ./sql:/docker-entrypoint-initdb.d
+    networks:
+      - backend
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U rinha -d rinha"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    deploy:
+      resources:
+        limits:
+          cpus: "0.30"
+          memory: "100MB"
+
+  cache:
+    image: redis:7.2-alpine
+    hostname: cache
+    command: redis-server --save "" --appendonly no --maxclients 20000
+    networks:
+      - backend
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    deploy:
+      resources:
+        limits:
+          cpus: "0.15"
+          memory: "25MB"
+
+  # -------------
+  # LOAD BALANCER
+  # -------------
+  nginx:
+    image: nginx:1.25-alpine
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - api1
+      - api2
+    ports:
+      - "9999:9999"
+    networks:
+      - backend
+    deploy:
+      resources:
+        limits:
+          cpus: "0.05"
+          memory: "15MB"
+
+  # -------------
+  # API + WATCHER
+  # -------------
+  api1: &api
+    image: luzin7/rinha-2025-app:latest
+    build: .
+    hostname: api1
+    command: node dist/app.js
+    environment:
+      - APP_PORT=9999
+      - PAYMENT_PROCESSOR_URL_DEFAULT=http://payment-processor-default:8080
+      - PAYMENT_PROCESSOR_URL_FALLBACK=http://payment-processor-fallback:8080
+      - DB_USER=rinha
+      - DB_PASSWORD=rinha
+      - DB_NAME=rinha
+      - CACHE_HOST=cache
+      - CACHE_PORT=6379
+    networks:
+      - backend
+      - payment-processor
+    depends_on:
+      db: { condition: service_healthy }
+      cache: { condition: service_healthy }
+    deploy:
+      resources:
+        limits:
+          cpus: "0.15"
+          memory: "50MB"
+
+  api2:
+    <<: *api
+    hostname: api2
+
+  # ------
+  # WORKER
+  # ------
+  worker1: &worker
+    image: luzin7/rinha-2025-app:latest
+    build: .
+    hostname: worker1
+    command: sh -c "node dist/worker.js & node dist/watcher.js"
+    environment:
+      - APP_PORT=9999
+      - PAYMENT_PROCESSOR_URL_DEFAULT=http://payment-processor-default:8080
+      - PAYMENT_PROCESSOR_URL_FALLBACK=http://payment-processor-fallback:8080
+      - DB_USER=rinha
+      - DB_PASSWORD=rinha
+      - DB_NAME=rinha
+      - CACHE_HOST=cache
+      - CACHE_PORT=6379
+    networks:
+      - backend
+      - payment-processor
+    depends_on:
+      db: { condition: service_healthy }
+      cache: { condition: service_healthy }
+    deploy:
+      resources:
+        limits:
+          cpus: "0.35"
+          memory: "55MB"
+
+  worker2:
+    <<: *worker
+    hostname: worker2
+
+networks:
+  backend:
+    driver: bridge
+  payment-processor:
+    name: payment-processor
+    external: true
