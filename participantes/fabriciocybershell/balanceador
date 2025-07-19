@@ -1,0 +1,32 @@
+# configuração para balanceamento:
+service balancer
+{
+        type = UNLISTED
+        flags = REUSE
+        socket_type = stream
+        protocol = tcp
+        wait = no
+        user = nobody
+        instances = 10
+        disable = no
+        port = 9999
+        per_source = 1000
+        cps = 1000 0
+        redirect = backend1:8081
+}
+
+service balancer
+{
+        type = UNLISTED
+        flags = REUSE
+        socket_type = stream
+        protocol = tcp
+        wait = no
+        user = nobody
+        instances = 10
+        disable = no
+        port = 9999
+        per_source = 1000
+        cps = 1000 0
+        redirect = backend2:8081
+}
