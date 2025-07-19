@@ -201,17 +201,23 @@ export async function checkPayments() {
   const from = new Date(now - 1000 * 10).toISOString();
   const to = new Date(now - 100).toISOString();
 
-  const defaultAdminPaymentsSummary = await getPPPaymentsSummary(
+  const defaultAdminPaymentsSummaryPromise = getPPPaymentsSummary(
     "default",
     from,
     to,
   );
-  const fallbackAdminPaymentsSummary = await getPPPaymentsSummary(
+  const fallbackAdminPaymentsSummaryPromise = getPPPaymentsSummary(
     "fallback",
     from,
     to,
   );
-  const backendPaymentsSummary = await getBackendPaymentsSummary(from, to);
+  const backendPaymentsSummaryPromise = getBackendPaymentsSummary(from, to);
+
+  const [defaultAdminPaymentsSummary, fallbackAdminPaymentsSummary, backendPaymentsSummary] = await Promise.all([
+    defaultAdminPaymentsSummaryPromise,
+    fallbackAdminPaymentsSummaryPromise,
+    backendPaymentsSummaryPromise
+  ]);
 
   const inconsistencies =
     Math.abs(
