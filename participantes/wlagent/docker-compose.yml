@@ -3,8 +3,8 @@ x-app-base: &app-base
   environment:
     - DEFAULT_URL=http://payment-processor-default:8080
     - FALLBACK_URL=http://payment-processor-fallback:8080
-    - MAX_WORKERS=2
-    - MAX_ACK_PENDING=100
+    - MAX_WORKERS=5
+    - MAX_ACK_PENDING=20
     - BROKER_URL=nats://nats:4222
   networks:
     - backend
@@ -23,7 +23,6 @@ services:
     command: ["-js"]
     ports:
       - "4222:4222"
-      - "8222:8222"
     networks:
       - backend
     volumes:
@@ -32,15 +31,17 @@ services:
       resources:
         limits:
           cpus: "0.20"
-          memory: "25MB"
+          memory: "50MB"
 
   app1:
     <<: *app-base
+    hostname: api1
     depends_on:
       - nats
 
   app2:
     <<: *app-base
+    hostname: api2
     depends_on:
       - nats
 
@@ -59,7 +60,7 @@ services:
       resources:
         limits:
           cpus: "0.20"
-          memory: "85MB"
+          memory: "60MB"
 
 networks:
   backend:
