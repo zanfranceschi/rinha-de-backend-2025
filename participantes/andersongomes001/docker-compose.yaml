@@ -1,19 +1,20 @@
+x-api_template: &api_template
+  image: andersongomes001/rinha-api-2025:latest
+  environment:
+    PAYMENT_PROCESSOR_DEFAULT_URL: "http://payment-processor-default:8080"
+    PAYMENT_PROCESSOR_FALLBACK_URL: "http://payment-processor-fallback:8080"
+    REDIS_URL: "redis://redis:6379/"
+    PORT: 80
+  networks:
+    - backend
+    - payment-processor
+  deploy:
+    resources:
+      limits:
+        cpus: "0.3"
+        memory: "80MB"
+          
 services:
-  api_template: &api_template
-    image: andersongomes001/rinha-api-2025:latest
-    environment:
-      PAYMENT_PROCESSOR_DEFAULT_URL: "http://payment-processor-default:8080"
-      PAYMENT_PROCESSOR_FALLBACK_URL: "http://payment-processor-fallback:8080"
-      REDIS_URL: "redis://redis:6379/"
-      PORT: 80
-    networks:
-      - backend
-      - payment-processor
-    deploy:
-      resources:
-        limits:
-          cpus: "0.3"
-          memory: "80MB"
   api01:
     <<: *api_template
     hostname: api01

@@ -26,7 +26,7 @@ rinha-2025/
 ├── README.md                # Este arquivo :)
 └── src/
     ├── bin/
-    │   └── worker.rs        # Binário separado para o worker (Imcompleto)
+    │   └── worker.rs        # Binário separado para o worker (Incompleto)
     ├── lib.rs               # Módulos compartilhados entre API e worker
     └── main.rs              # Ponto de entrada da API
 ```
