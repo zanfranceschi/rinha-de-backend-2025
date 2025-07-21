@@ -18,31 +18,36 @@ x-backend-templates:
   app-env: &app-env
     SERVER_PORT: "8080"
     THREAD_POOL_SIZE: "25"
+    THREAD_QUEUE_SIZE: "5000"
     REDIS-HOST: "redis"
-    JAVA_OPTS: "\
-    -Xmx110m \
-    -Xms110m \
-    -XX:MaxMetaspaceSize=70m \
-    -XX:+UseSerialGC \ \
-    -XX:+UseNUMA \
-    -Xss512k \
-    -XX:+UseCompressedOops \
-    -XX:+AlwaysPreTouch \
-    -Xbatch \
-    -XX:+ExitOnOutOfMemoryError \
-    -XX:+TieredCompilation \
-    -XX:TieredStopAtLevel=1 \
-    -XX:CompileThreshold=100
-    -XX:+HeapDumpOnOutOfMemoryError \
-    -Dlogging.level.root=warn \
-    -Dspring.threads.virtual.enabled=false \
-    -Dserver.undertow.threads.io=4 \
-    -Dserver.undertow.threads.worker=5"
-#    -XX:+UnlockDiagnosticVMOptions \
-#    -XX:+PrintCompilation \
-#    -XX:+PrintTieredEvents \
-#    -XX:+PrintCodeCache \
-#    -XX:+PrintInlining"
+    REQUEST_CONNECTION_TIMEOUT: "100"
+    REQUEST_READ_TIMEOUT: "300"
+    payment-processor.default.url: "http://payment-processor-default:8080"
+    payment-processor.fallback.url: "http://payment-processor-fallback:8080"
+    JAVA_OPTS: >
+      -Xmx110m
+      -Xms110m
+      -XX:MaxMetaspaceSize=70m
+      -XX:MaxGCPauseMillis=200
+      -Xss512k
+      -XX:+UseG1GC
+      -XX:+UseCompressedOops
+      -XX:+UseCompressedClassPointers
+      -XX:+AlwaysPreTouch
+      -Xbatch
+      -XX:+UnlockExperimentalVMOptions
+      -XX:+UnlockDiagnosticVMOptions
+      -XX:+UseFastUnorderedTimeStamps
+      -XX:+ExitOnOutOfMemoryError
+      -XX:+TieredCompilation
+      -XX:TieredStopAtLevel=1
+      -XX:CompileThreshold=100
+      -XX:+HeapDumpOnOutOfMemoryError
+      -Dlogging.level.root=error
+      -Dspring.threads.virtual.enabled=true
+      -Dserver.port=8080
+      -Dserver.undertow.threads.io=4
+      -Dserver.undertow.threads.worker=8
 
 services:
   nginx:
