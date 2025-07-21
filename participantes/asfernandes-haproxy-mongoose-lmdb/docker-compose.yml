@@ -1,0 +1,68 @@
+x-service-templates:
+  api: &api
+    image: asfernandes/rinhaback25:haproxy-mongoose-lmdb-api
+    volumes:
+      - ./data:/data
+    environment: &api-env
+      SERVER_POLL_TIME: 4
+      SERVER_WORKERS: 8
+      PROCESSOR_WORKERS: 8
+      DATABASE: /data/database
+      DATABASE_SIZE: 41943040
+      LISTEN_ADDRESS: 0.0.0.0:8080
+      PROCESSOR_DEFAULT_URL: http://payment-processor-default:8080
+      PROCESSOR_FALLBACK_URL: http://payment-processor-fallback:8080
+    ulimits:
+      nofile:
+        soft: 1000000
+        hard: 1000000
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: "100MB"
+    networks:
+      - rinha-net
+      - payment-processor-net
+
+
+services:
+  api1:
+    <<: *api
+    ipc: shareable
+    environment:
+      <<: *api-env
+      DATABASE_INIT: "true"
+
+  api2:
+    <<: *api
+    pid: service:api1
+    ipc: service:api1
+    depends_on:
+      - api1
+
+  haproxy:
+    image: haproxy:3.2.3-alpine
+    volumes:
+      - ./config/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: "150MB"
+    networks:
+      - rinha-net
+    ports:
+      - 9999:9999
+    depends_on:
+      - api1
+      - api2
+
+
+networks:
+  rinha-net:
+    driver: bridge
+
+  payment-processor-net:
+    name: payment-processor
+    external: true

@@ -4,6 +4,7 @@ Obrigado por participar da Rinha de Backend!
 
 - [ ] Incluí um README.md com informações sobre minha participação.
 - [ ] O arquivo `docker-compose.yml` está na raiz do meu diretório.
+- [ ] Eu não incluí um arquivo `partial-results.json`, `k6.logs` e/ou `docker-compose.logs` no meu PR.
 - [ ] Não ultrapassei os limites de memória (350MB) e CPU (1.5).
 - [ ] Não estou incluindo arquivos desnecessários para a execução do teste no meu pull request tais como código fonte, scripts, e excesso de imagens.
 - [ ] Não estou alterando arquivos fora do ou dos meus diretórios de participação.

@@ -1,0 +1,94 @@
+services:
+  api1: &api
+    image: lhuizf/rinha-de-backend-2025-bun:latest
+    hostname: api1
+    container_name: api1
+    environment:
+      - DATABASE_HOST=db
+      - PORT=3333
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=password
+      - REDIS_URL=redis://redis:6379
+      - DATABASE_PORT=5432
+      - PROCESSOR_DEFAULT_URL=http://payment-processor-default:8080
+      - PROCESSOR_FALLBACK_URL=http://payment-processor-fallback:8080
+    networks:
+      - backend
+      - payment-processor
+    depends_on:
+      redis:
+        condition: service_healthy
+    deploy:
+      resources:
+        limits:
+          cpus: "0.40"
+          memory: "110MB"
+
+  api2:
+    <<: *api
+    hostname: api2
+    container_name: api2
+
+  redis:
+    image: redis:7.2-alpine
+    container_name: redis
+    command: redis-server --save "" --appendonly no --maxclients 20000
+    networks:
+      - backend
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    deploy:
+      resources:
+        limits:
+          cpus: "0.15"
+          memory: "35MB"
+
+  db:
+    image: postgres:17-alpine
+    container_name: db
+    hostname: db
+    environment:
+      - POSTGRES_DB=rinha_db
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=password
+    ports:
+      - "5432:5432"
+    networks:
+      - backend
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    deploy:
+      resources:
+        limits:
+          cpus: "0.40"
+          memory: "80MB"
+
+  load-balancer:
+    image: nginx:1.25.2-alpine
+    container_name: load-balancer
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    ports:
+      - "9999:9999"
+    networks:
+      - backend
+    depends_on:
+      - api1
+      - api2
+    deploy:
+      resources:
+        limits:
+          cpus: "0.15"
+          memory: "15MB"
+
+networks:
+  backend:
+    name: backend
+    driver: bridge
+  payment-processor:
+    external: true

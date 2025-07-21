@@ -1,0 +1,87 @@
+services:
+  postgres:
+    image: postgres:17-alpine
+    container_name: postgres_db
+    networks:
+      - rinha
+    environment:
+      POSTGRES_USER: rinha_user
+      POSTGRES_PASSWORD: rinha_pass
+      POSTGRES_DB: rinha_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    deploy:
+      resources:
+        limits:
+          cpus: "0.25"
+          memory: "80MB"
+
+  redis:
+    image: redis:7.2-alpine
+    container_name: redis-cache
+    networks:
+      - rinha
+    hostname: redis
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+      start_period: 3s
+    ports:
+      - "6379:6379"
+    deploy:
+      resources:
+        limits:
+          cpus: "0.1"
+          memory: "20MB"
+
+  nginx:
+    image: nginx:latest
+    networks:
+      - rinha
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    ports:
+      - "9999:9999"
+    deploy:
+      resources:
+        limits:
+          cpus: "0.1"
+          memory: "15MB"
+
+  rinhabackend01: &backend-template
+    image: leo9114/rinha-de-backend-2025-csharp:latest
+    networks:
+      - rinha
+      - payment-processor
+    environment:
+      - ASPNETCORE_URLS=http://+:80
+      - postgres-connection-string=Host=postgres;Port=5432;Username=rinha_user;Password=rinha_pass;Database=rinha_db
+      - redis-connection-string=redis:6379
+      - payment-processor-default=http://payment-processor-default:8080
+      - payment-processor-fallback=http://payment-processor-fallback:8080
+    depends_on:
+      - postgres
+      - redis
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: "100MB"
+    ports:
+      - "8088:80"
+
+  rinhabackend02:
+    <<: *backend-template
+    ports:
+      - "8089:80"
+
+networks:
+  rinha:
+    name: rinha
+    driver: bridge
+  payment-processor:
+    external: true

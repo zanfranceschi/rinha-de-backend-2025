@@ -1,0 +1,102 @@
+services:
+  database:
+    image: postgres:16-alpine
+    command: >
+      postgres
+      -c checkpoint_completion_target=0.9
+      -c random_page_cost=1.1
+      -c effective_io_concurrency=200
+      -c logging_collector=off
+      -c log_statement=none
+      -c log_duration=off
+      -c log_connections=off
+      -c log_disconnections=off
+      -c fsync=off
+      -c synchronous_commit=off
+      -c full_page_writes=off
+    deploy:
+      resources:
+        limits:
+          cpus: "0.3"    # AJUSTE: Aumentado de 0.4
+          memory: "100MB" # AJUSTE: Aumentado de 140MB
+    environment:
+      - POSTGRES_DB=rinha
+      - POSTGRES_USER=rinha
+      - POSTGRES_PASSWORD=rinha
+    volumes:
+      - ./schema.sql:/docker-entrypoint-initdb.d/init.sql
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  cache:
+    image: redis:7.2-alpine
+    deploy:
+      resources:
+        limits:
+          cpus: "0.1"
+          memory: "30MB"
+
+  api1: &api-template
+    image: wandersonmatosdev/rinhadebackend2025-api:latest
+    hostname: api1
+    environment:
+      - ConnectionStrings__Postgres=Host=database;Port=5432;Database=rinha;Username=rinha;Password=rinha
+      - ConnectionStrings__Redis=cache:6379
+      - ASPNETCORE_URLS=http://+:8080
+    deploy:
+      resources:
+        limits:
+          cpus: "0.2"    
+          memory: "60MB" 
+    depends_on:
+      - database
+      - cache
+  
+  api2:
+    <<: *api-template
+    hostname: api2
+
+  worker1: &worker-template
+    image: wandersonmatosdev/rinhadebackend2025-worker:latest
+    hostname: worker1
+    deploy:
+      resources:
+        limits:
+          cpus: "0.25"
+          memory: "40MB"
+    environment:
+      - ConnectionStrings__Postgres=Host=database;Port=5432;Database=rinha;Username=rinha;Password=rinha
+      - ConnectionStrings__Redis=cache:6379
+    depends_on:
+      - database
+      - cache
+    networks:
+      - default
+      - payment-processor
+  worker2:
+    <<: *worker-template 
+    hostname: worker2
+
+  nginx:
+    image: nginx:1.25.2-alpine
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    ports:
+      - "9999:9999"
+    deploy:
+      resources:
+        limits:
+          cpus: "0.2"
+          memory: "20MB"
+    depends_on:
+      - api1
+      - api2
+
+volumes:
+  postgres_data:
+
+networks:
+  payment-processor:
+    external: true
+    name: payment-processor

@@ -1,0 +1,1001 @@
+
+ Network backend  Creating
+ Network backend  Created
+ Container redis  Creating
+ Container db  Creating
+ Container db  Created
+ Container redis  Created
+ Container api2  Creating
+ Container api1  Creating
+ Container api1  Created
+ Container api2  Created
+ Container load-balancer  Creating
+ Container load-balancer  Created
+Attaching to api1, api2, db, load-balancer, redis
+redis          | 1:C 21 Jul 2025 02:39:27.181 # WARNING Memory overcommit must be enabled! Without it, a background save or replication may fail under low memory condition. Being disabled, it can also cause failures without low memory condition, see https://github.com/jemalloc/jemalloc/issues/1328. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.
+redis          | 1:C 21 Jul 2025 02:39:27.181 * oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+redis          | 1:C 21 Jul 2025 02:39:27.181 * Redis version=7.2.10, bits=64, commit=00000000, modified=0, pid=1, just started
+redis          | 1:C 21 Jul 2025 02:39:27.181 * Configuration loaded
+redis          | 1:M 21 Jul 2025 02:39:27.181 * monotonic clock: POSIX clock_gettime
+redis          | 1:M 21 Jul 2025 02:39:27.182 * Running mode=standalone, port=6379.
+redis          | 1:M 21 Jul 2025 02:39:27.182 * Server initialized
+redis          | 1:M 21 Jul 2025 02:39:27.182 * Ready to accept connections tcp
+db             | The files belonging to this database system will be owned by user "postgres".
+db             | This user must also own the server process.
+db             | 
+db             | The database cluster will be initialized with locale "en_US.utf8".
+db             | The default database encoding has accordingly been set to "UTF8".
+db             | The default text search configuration will be set to "english".
+db             | 
+db             | Data page checksums are disabled.
+db             | 
+db             | fixing permissions on existing directory /var/lib/postgresql/data ... ok
+db             | creating subdirectories ... ok
+db             | selecting dynamic shared memory implementation ... posix
+db             | selecting default "max_connections" ... 100
+db             | selecting default "shared_buffers" ... 128MB
+db             | selecting default time zone ... UTC
+db             | creating configuration files ... ok
+db             | running bootstrap script ... ok
+db             | sh: locale: not found
+db             | 2025-07-21 02:39:28.519 UTC [35] WARNING:  no usable system locales were found
+db             | performing post-bootstrap initialization ... ok
+db             | syncing data to disk ... ok
+db             | 
+db             | 
+db             | Success. You can now start the database server using:
+db             | 
+db             |     pg_ctl -D /var/lib/postgresql/data -l logfile start
+db             | 
+db             | initdb: warning: enabling "trust" authentication for local connections
+db             | initdb: hint: You can change this by editing pg_hba.conf or using the option -A, or --auth-local and --auth-host, the next time you run initdb.
+db             | waiting for server to start....2025-07-21 02:39:30.103 UTC [41] LOG:  starting PostgreSQL 17.5 on x86_64-pc-linux-musl, compiled by gcc (Alpine 14.2.0) 14.2.0, 64-bit
+db             | 2025-07-21 02:39:30.108 UTC [41] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+db             | 2025-07-21 02:39:30.124 UTC [44] LOG:  database system was shut down at 2025-07-21 02:39:29 UTC
+db             | 2025-07-21 02:39:30.135 UTC [41] LOG:  database system is ready to accept connections
+db             |  done
+db             | server started
+db             | CREATE DATABASE
+db             | 
+db             | 
+db             | /usr/local/bin/docker-entrypoint.sh: running /docker-entrypoint-initdb.d/init.sql
+db             | CREATE TABLE
+db             | CREATE INDEX
+db             | 
+db             | 
+db             | waiting for server to shut down....2025-07-21 02:39:30.410 UTC [41] LOG:  received fast shutdown request
+db             | 2025-07-21 02:39:30.417 UTC [41] LOG:  aborting any active transactions
+db             | 2025-07-21 02:39:30.421 UTC [41] LOG:  background worker "logical replication launcher" (PID 47) exited with exit code 1
+db             | 2025-07-21 02:39:30.421 UTC [42] LOG:  shutting down
+db             | 2025-07-21 02:39:30.428 UTC [42] LOG:  checkpoint starting: shutdown immediate
+db             | 2025-07-21 02:39:30.542 UTC [42] LOG:  checkpoint complete: wrote 932 buffers (5.7%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.041 s, sync=0.050 s, total=0.121 s; sync files=306, longest=0.008 s, average=0.001 s; distance=4276 kB, estimate=4276 kB; lsn=0/191A360, redo lsn=0/191A360
+db             | 2025-07-21 02:39:30.551 UTC [41] LOG:  database system is shut down
+db             |  done
+db             | server stopped
+db             | 
+db             | PostgreSQL init process complete; ready for start up.
+db             | 
+db             | 2025-07-21 02:39:30.643 UTC [1] LOG:  starting PostgreSQL 17.5 on x86_64-pc-linux-musl, compiled by gcc (Alpine 14.2.0) 14.2.0, 64-bit
+db             | 2025-07-21 02:39:30.643 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+db             | 2025-07-21 02:39:30.643 UTC [1] LOG:  listening on IPv6 address "::", port 5432
+db             | 2025-07-21 02:39:30.654 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+db             | 2025-07-21 02:39:30.668 UTC [59] LOG:  database system was shut down at 2025-07-21 02:39:30 UTC
+db             | 2025-07-21 02:39:30.683 UTC [1] LOG:  database system is ready to accept connections
+load-balancer  | /docker-entrypoint.sh: /docker-entrypoint.d/ is not empty, will attempt to perform configuration
+load-balancer  | /docker-entrypoint.sh: Looking for shell scripts in /docker-entrypoint.d/
+load-balancer  | /docker-entrypoint.sh: Launching /docker-entrypoint.d/10-listen-on-ipv6-by-default.sh
+load-balancer  | 10-listen-on-ipv6-by-default.sh: info: Getting the checksum of /etc/nginx/conf.d/default.conf
+load-balancer  | 10-listen-on-ipv6-by-default.sh: info: Enabled listen on IPv6 in /etc/nginx/conf.d/default.conf
+load-balancer  | /docker-entrypoint.sh: Sourcing /docker-entrypoint.d/15-local-resolvers.envsh
+load-balancer  | /docker-entrypoint.sh: Launching /docker-entrypoint.d/20-envsubst-on-templates.sh
+load-balancer  | /docker-entrypoint.sh: Launching /docker-entrypoint.d/30-tune-worker-processes.sh
+load-balancer  | /docker-entrypoint.sh: Configuration complete; ready for start up
+api1           | 🦊 Elysia is running at localhost:3333
+api1           | starting worker
+api2           | 🦊 Elysia is running at localhost:3333
+api2           | starting worker
+api1           | [QueueService] Redis Conectado com sucesso!
+api2           | [QueueService] Redis Conectado com sucesso!
+api1           | Fallback processor check count: 1
+api1           | Default processor check count: 1
+api1           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api2           | Default processor check count: 1
+api2           | Fallback processor check count: 1
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | Default processor check count: 2
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api2           | Fallback processor check count: 2
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api2           | [PaymentService] Using processor: fallback
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api2           | [PaymentService] Using processor: fallback
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api1           | [PaymentService] Using processor: default
+api2           | [PaymentService] Using processor: fallback
+api2           | [PaymentService] Using processor: fallback
+log truncated at line 1000

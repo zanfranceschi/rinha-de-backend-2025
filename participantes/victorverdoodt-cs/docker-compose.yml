@@ -2,7 +2,7 @@ services:
   rinhadebackend-aot:
     &api
     hostname: api01
-    image: vyctor17/rinhadebackendaot:2025
+    image: vyctor17/rinhadebackendaot:2025-2
     depends_on:
       db:
         condition: service_healthy
@@ -19,18 +19,40 @@ services:
       start_period: 5s
     environment:
       - ConnectionStrings__Redis=redis:6379
-      - Gateways__Primary=http://payment-processor-default:8080
-      - Gateways__Fallback=http://payment-processor-fallback:8080
       - DB_HOSTNAME=Host=db;Database=rinha;Username=admin;Password=123;No Reset On Close=true;Max Auto Prepare=10;Auto Prepare Min Usages=1;Pooling=true;Maximum Pool Size=100
     deploy:
       resources:
         limits:
-          cpus: "0.475"
-          memory: "125MB"
+          cpus: "0.2"
+          memory: "60MB"
 
   rinhadebackend-aot02:
     <<: *api 
     hostname: api02
+
+  rinhadebackend-aot.worker:
+    image: vyctor17/rinhadebackendaotworker:2025-2
+    networks:
+      - backend
+      - payment-processor
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    environment:
+      - ConnectionStrings__Redis=redis:6379
+      - Gateways__Primary=http://payment-processor-default:8080
+      - Gateways__Fallback=http://payment-processor-fallback:8080
+      - DB_HOSTNAME=Host=db;Database=rinha;Username=admin;Password=123;No Reset On Close=true;Max Auto Prepare=10;Auto Prepare Min Usages=1;Pooling=true;Maximum Pool Size=100
+      - Workers__ConcurrencyLevel=1
+      - Workers__BatchSize=200
+      - Workers__FlushTimeoutMs=20
+    deploy:
+      resources:
+        limits:
+          cpus: "0.4"
+          memory: "90MB"
 
   nginx:
     image: nginx:latest
@@ -49,11 +71,11 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.25"
-          memory: "10MB"
+          cpus: "0.2"
+          memory: "15MB"
 
   db:
-    image: postgres:latest
+    image: postgres:17-alpine
     hostname: db
     environment:
       - POSTGRES_PASSWORD=123
@@ -65,7 +87,7 @@ services:
       - backend
     volumes:
       - ./pg-conf/script.sql:/docker-entrypoint-initdb.d/script.sql
-    command: postgres -c checkpoint_timeout=600 -c max_wal_size=4096 -c synchronous_commit=0 -c fsync=0 -c full_page_writes=0
+    command: postgres -c checkpoint_timeout=600 -c max_wal_size=4096 -c synchronous_commit=0 -c fsync=0 -c full_page_writes=0 -c log_disconnections=0 -c log_connections=0 -c log_duration=0 -c log_statement=none -c logging_collector=off -c effective_io_concurrency=200 -c random_page_cost=1.1 -c checkpoint_completion_target=0.9
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U admin -d rinha"]
       interval: 5s
@@ -74,8 +96,9 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.15"
-          memory: "70MB"
+          cpus: "0.35"
+          memory: "120MB"
+
 
   redis:
     image: redis:7.2-alpine
@@ -98,10 +121,11 @@ services:
       resources:
         limits:
           cpus: "0.15"
-          memory: "20MB"
+          memory: "10MB"
 
 networks:
   backend:
     driver: bridge
   payment-processor:
     external: true
+

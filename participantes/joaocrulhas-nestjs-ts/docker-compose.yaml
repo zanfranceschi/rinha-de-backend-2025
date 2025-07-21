@@ -1,6 +1,6 @@
 x-service-templates:
   app-base: &app-base
-    image: joaocrulhas/rinha_backend:1.1
+    image: joaocrulhas/rinha_backend:1.2-mongo
     networks:
       - backend
       - payment-processor
@@ -14,33 +14,36 @@ x-service-templates:
     volumes:
       - rinha-store:/data
     environment:
+      - MONGO_URI=mongodb://mongodb:27017
       - PAYMENT_PROCESSOR_URL_DEFAULT=http://payment-processor-default:8080
       - PAYMENT_PROCESSOR_URL_FALLBACK=http://payment-processor-fallback:8080
-      - DATABASE_PATH=/app/database.sqlite
       - NODE_ENV=production
       - REDIS_HOST=redis
       - RINHA_TOKEN=123
     restart: unless-stopped
     depends_on:
-      - redis
+      redis:
+        condition: service_healthy
 
 services:
+  mongodb:
+    image: mongodb/mongodb-community-server:latest
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    networks:
+      - payment-processor
+      - backend
+    volumes:
+      - rinha-store:/data
 
   app2:
     <<: *app-base
     container_name: app2
-#    platform: linux/amd64
-    depends_on:
-      redis:
-        condition: service_healthy
 
   app1:
     <<: *app-base
     container_name: app1
-#    platform: linux/amd64
-    depends_on:
-      redis:
-        condition: service_healthy
 
   redis:
     hostname: redis

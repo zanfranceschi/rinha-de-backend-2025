@@ -11,8 +11,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '0.15'
-          memory: "50MB"
+          cpus: '0.4'
+          memory: "90MB"
     depends_on:
       - redis
 
@@ -28,8 +28,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '0.15'
-          memory: "50MB"
+          cpus: '0.4'
+          memory: "90MB"
     depends_on:
       - redis
 
@@ -46,10 +46,11 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '0.2'
-          memory: "50MB"
+          cpus: '0.1'
+          memory: "30MB"
     networks:
       - backend
+
   redis:
     container_name: redis
     image: redis:8-alpine
@@ -60,8 +61,9 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '1'
-          memory: "200MB"
+          cpus: '0.6'
+          memory: "140MB"
+
 networks:
   backend:
     driver: bridge

@@ -1,0 +1,88 @@
+services:
+  api1:
+    image: oliveigah/rinha-backend-v3:1.0.0
+    hostname: api1.com
+    networks:
+      - payment-processor
+    environment:
+      ERL_MAX_PORTS: 4500
+      HTTP_SERVER_PORT: 3000
+      RELEASE_COOKIE: "secret_cookie"
+      RELEASE_NODE: "api@api1.com"
+      RELEASE_DISTRIBUTION: "name"
+      BOOTSTRAP_NODES: "api@api2.com"
+      PROCESSORS_COUNT: 10
+    healthcheck:
+      test: curl -f http://api1:3000/health
+      interval: 15s
+      timeout: 15s
+      start_period: 30s
+      start_interval: 1s
+      retries: 3
+    restart: always
+    deploy:
+      resources:
+        limits:
+          cpus: "0.6"
+          memory: "147.5MB"
+
+  api2:
+    image: oliveigah/rinha-backend-v3:1.0.0
+    networks:
+      - payment-processor
+    hostname: api2.com
+    environment:
+      ERL_MAX_PORTS: 4500
+      HTTP_SERVER_PORT: 3000
+      RELEASE_COOKIE: "secret_cookie"
+      RELEASE_NODE: "api@api2.com"
+      RELEASE_DISTRIBUTION: "name"
+      BOOTSTRAP_NODES: "api@api1.com"
+      PROCESSORS_COUNT: 10
+    healthcheck:
+      test: curl -f http://api2:3000/health
+      timeout: 15s
+      start_period: 30s
+      start_interval: 1s
+      retries: 3
+    restart: always
+    deploy:
+      resources:
+        limits:
+          cpus: "0.6"
+          memory: "147.5MB"
+
+  haproxy:
+    image: haproxy:3.1.7
+    depends_on:
+      api1:
+        condition: service_healthy
+      api2:
+        condition: service_healthy
+    networks:
+      - payment-processor
+    ports:
+      - "9999:9999"
+    healthcheck:
+      test: |
+        bash -c 'exec 3<>/dev/tcp/127.0.0.1/9797; echo -e "GET / HTTP/1.1\nConnection: close\n" >&3; cat <&3 | grep -q "200 OK"'
+      interval: 15s
+      timeout: 15s
+      start_period: 30s
+      start_interval: 1s
+      retries: 3
+    restart: always
+    deploy:
+      resources:
+        limits:
+          cpus: "0.3"
+          # base 15MB + 10MB/1k conn
+          memory: "55MB"
+    volumes:
+      - ./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
+
+networks:
+  backend:
+    driver: bridge
+  payment-processor:
+    external: true

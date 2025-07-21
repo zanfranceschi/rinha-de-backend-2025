@@ -1,0 +1,125 @@
+x-service-templates:
+  api: &api
+    image: laurentinodeev/rinha-2025-go:v1
+    networks:
+      - rinha
+      - payment-processor
+    ulimits:
+      nproc: 1000000
+      nofile:
+        soft: 1000000
+        hard: 1000000
+
+services:
+  api1:
+    <<: *api
+    container_name: api1
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      SERVER: "main"
+      WORKERS_POOL_SIZE: "5"
+      PG_MAX_CONNS: "25"
+    deploy:
+      resources:
+        limits:
+          cpus: "0.2"
+          memory: "25MB"
+
+  api2:
+    <<: *api
+    container_name: api2
+    depends_on:
+      - api1
+    environment:
+      WORKERS_POOL_SIZE: "5"
+      PG_MAX_CONNS: "25"
+    deploy:
+      resources:
+        limits:
+          cpus: "0.2"
+          memory: "25MB"
+  api3:
+    <<: *api
+    container_name: api3
+    depends_on:
+      - api1
+    environment:
+      WORKERS_POOL_SIZE: "5"
+      PG_MAX_CONNS: "25"
+    deploy:
+      resources:
+        limits:
+          cpus: "0.2"
+          memory: "25MB"
+  api4:
+    <<: *api
+    container_name: api4
+    depends_on:
+      - api1
+    environment:
+      WORKERS_POOL_SIZE: "5"
+      PG_MAX_CONNS: "25"
+    deploy:
+      resources:
+        limits:
+          cpus: "0.2"
+          memory: "25MB"
+
+  postgres:
+    container_name: postgres
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_PASSWORD: rinha
+      POSTGRES_USER: rinha
+      POSTGRES_DB: rinha
+    ports:
+      - 1010:5432
+    volumes:
+      - ./configs/postgresql.conf:/etc/postgresql.conf:ro
+      - ./configs/init.sql:/docker-entrypoint-initdb.d/init.sql
+    command: ["postgres", "-c", "config_file=/etc/postgresql.conf"]
+    networks:
+      - rinha
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: "190MB"
+    healthcheck: 
+      test: ["CMD-SHELL", "pg_isready -U rinha -d rinha"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      start_period: 30s 
+
+  nginx:
+    image: nginx:alpine
+    container_name: nginx
+    ports:
+      - "9999:9999"
+    volumes:
+      - ./configs/nginx.conf:/etc/nginx/nginx.conf:ro
+    networks:
+      - rinha
+    depends_on:
+      - postgres
+      - api1
+      - api2
+    ulimits:
+      nproc: 1000000
+      nofile:
+        soft: 1000000
+        hard: 1000000
+    deploy:
+      resources:
+        limits:
+          cpus: '0.2'
+          memory: 60M
+
+networks:
+  rinha:
+    driver: bridge
+  payment-processor:
+    external: true

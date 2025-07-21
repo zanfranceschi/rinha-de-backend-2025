@@ -30,7 +30,7 @@ services:
       PAYMENT_ENDPOINT: http://payment-processor-default:8080
       PAYMENT_FALLBACK_ENDPOINT: http://payment-processor-fallback:8080
   nginx:
-    image: nginx:1.25.3
+    image: ghcr.io/lpicanco/backend-dogfight-rust-25:nginx-1.29
     configs:
       - source: nginx_conf
         target: /etc/nginx/nginx.conf
@@ -48,7 +48,7 @@ services:
     networks:
       - backend-dogfight-rust-25
   redis:
-    image: redis:8-alpine
+    image: ghcr.io/lpicanco/backend-dogfight-rust-25:redis-8-alpine
     restart: unless-stopped
     command: redis-server --save 300 1000 --loglevel warning
     deploy:

@@ -1,0 +1,277 @@
+
+ Network anibalferreira-rust_backend  Creating
+ Network anibalferreira-rust_backend  Created
+ Container redis  Creating
+ Container postgres  Creating
+ Container redis  Created
+ Container postgres  Created
+ Container proxy  Creating
+ Container proxy  Created
+ Container core02  Creating
+ Container core01  Creating
+ Container core02  Created
+ Container core01  Created
+ Container haproxy  Creating
+ Container haproxy  Created
+Attaching to core01, core02, haproxy, postgres, proxy, redis
+redis     | 1:C 21 Jul 2025 01:50:13.882 # WARNING Memory overcommit must be enabled! Without it, a background save or replication may fail under low memory condition. Being disabled, it can also cause failures without low memory condition, see https://github.com/jemalloc/jemalloc/issues/1328. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.
+redis     | 1:C 21 Jul 2025 01:50:13.882 * oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+redis     | 1:C 21 Jul 2025 01:50:13.882 * Redis version=7.4.5, bits=64, commit=00000000, modified=0, pid=1, just started
+redis     | 1:C 21 Jul 2025 01:50:13.882 # Warning: no config file specified, using the default config. In order to specify a config file use redis-server /path/to/redis.conf
+redis     | 1:M 21 Jul 2025 01:50:13.883 * monotonic clock: POSIX clock_gettime
+redis     | 1:M 21 Jul 2025 01:50:13.884 * Running mode=standalone, port=6379.
+redis     | 1:M 21 Jul 2025 01:50:13.884 * Server initialized
+redis     | 1:M 21 Jul 2025 01:50:13.884 * Ready to accept connections tcp
+postgres  | The files belonging to this database system will be owned by user "postgres".
+postgres  | This user must also own the server process.
+postgres  | 
+postgres  | The database cluster will be initialized with locale "en_US.utf8".
+postgres  | The default database encoding has accordingly been set to "UTF8".
+postgres  | The default text search configuration will be set to "english".
+postgres  | 
+postgres  | Data page checksums are disabled.
+postgres  | 
+postgres  | fixing permissions on existing directory /var/lib/postgresql/data ... ok
+postgres  | creating subdirectories ... ok
+postgres  | selecting dynamic shared memory implementation ... posix
+postgres  | selecting default max_connections ... 100
+postgres  | selecting default shared_buffers ... 128MB
+postgres  | selecting default time zone ... Etc/UTC
+postgres  | creating configuration files ... ok
+proxy     | [2m2025-07-21T01:50:14.485753Z[0m [32m INFO[0m [2mactix_server::builder[0m[2m:[0m [2m310:[0m starting 1 workers
+proxy     | [2m2025-07-21T01:50:14.485817Z[0m [32m INFO[0m [2mactix_server::server[0m[2m:[0m [2m191:[0m Actix runtime found; starting in Actix runtime
+proxy     | [2m2025-07-21T01:50:14.485826Z[0m [32m INFO[0m [2mactix_server::server[0m[2m:[0m [2m197:[0m starting service: "actix-web-service-0.0.0.0:8005", workers: 1, listening on: 0.0.0.0:8005
+postgres  | running bootstrap script ... ok
+postgres  | performing post-bootstrap initialization ... ok
+postgres  | initdb: warning: enabling "trust" authentication for local connections
+postgres  | initdb: hint: You can change this by editing pg_hba.conf or using the option -A, or --auth-local and --auth-host, the next time you run initdb.
+postgres  | syncing data to disk ... ok
+postgres  | 
+postgres  | 
+postgres  | Success. You can now start the database server using:
+postgres  | 
+postgres  |     pg_ctl -D /var/lib/postgresql/data -l logfile start
+postgres  | 
+postgres  | waiting for server to start....2025-07-21 01:50:15.531 UTC [50] LOG:  starting PostgreSQL 16.2 (Debian 16.2-1.pgdg120+2) on x86_64-pc-linux-gnu, compiled by gcc (Debian 12.2.0-14) 12.2.0, 64-bit
+postgres  | 2025-07-21 01:50:15.531 UTC [50] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+postgres  | 2025-07-21 01:50:15.540 UTC [53] LOG:  database system was shut down at 2025-07-21 01:50:15 UTC
+postgres  | 2025-07-21 01:50:15.592 UTC [50] LOG:  database system is ready to accept connections
+postgres  |  done
+postgres  | server started
+postgres  | 
+postgres  | /usr/local/bin/docker-entrypoint.sh: running /docker-entrypoint-initdb.d/init-db.sql
+postgres  | CREATE TABLE
+postgres  | CREATE INDEX
+postgres  | 
+postgres  | 
+postgres  | waiting for server to shut down....2025-07-21 01:50:15.781 UTC [50] LOG:  received fast shutdown request
+postgres  | 2025-07-21 01:50:15.781 UTC [50] LOG:  aborting any active transactions
+postgres  | 2025-07-21 01:50:15.784 UTC [50] LOG:  background worker "logical replication launcher" (PID 56) exited with exit code 1
+postgres  | 2025-07-21 01:50:15.811 UTC [51] LOG:  shutting down
+postgres  | 2025-07-21 01:50:15.839 UTC [50] LOG:  database system is shut down
+postgres  |  done
+postgres  | server stopped
+postgres  | 
+postgres  | PostgreSQL init process complete; ready for start up.
+postgres  | 
+postgres  | 2025-07-21 01:50:16.033 UTC [1] LOG:  starting PostgreSQL 16.2 (Debian 16.2-1.pgdg120+2) on x86_64-pc-linux-gnu, compiled by gcc (Debian 12.2.0-14) 12.2.0, 64-bit
+postgres  | 2025-07-21 01:50:16.033 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+postgres  | 2025-07-21 01:50:16.033 UTC [1] LOG:  listening on IPv6 address "::", port 5432
+postgres  | 2025-07-21 01:50:16.033 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+postgres  | 2025-07-21 01:50:16.037 UTC [66] LOG:  database system was shut down at 2025-07-21 01:50:15 UTC
+postgres  | 2025-07-21 01:50:16.088 UTC [1] LOG:  database system is ready to accept connections
+core01    | [2m2025-07-21T01:50:19.916230Z[0m [32m INFO[0m [2mcore[0m[2m:[0m [2m27:[0m Starting anibalmf1-rust server
+core01    | [2m2025-07-21T01:50:19.916841Z[0m [32m INFO[0m [2mcore::queue::redis[0m[2m:[0m [2m27:[0m Connected to Redis at redis://redis:6379
+core01    | [2m2025-07-21T01:50:19.916853Z[0m [32m INFO[0m [2mcore::queue::redis[0m[2m:[0m [2m185:[0m Connected to Redis at redis://redis:6379
+core02    | [2m2025-07-21T01:50:19.993928Z[0m [32m INFO[0m [2mcore[0m[2m:[0m [2m27:[0m Starting anibalmf1-rust server
+core02    | [2m2025-07-21T01:50:19.994279Z[0m [32m INFO[0m [2mcore::queue::redis[0m[2m:[0m [2m27:[0m Connected to Redis at redis://redis:6379
+core02    | [2m2025-07-21T01:50:19.994295Z[0m [32m INFO[0m [2mcore::queue::redis[0m[2m:[0m [2m185:[0m Connected to Redis at redis://redis:6379
+core01    | [2m2025-07-21T01:50:20.099509Z[0m [32m INFO[0m [2mcore::queue::redis[0m[2m:[0m [2m99:[0m Connected to Redis at redis://redis:6379 for DLQ consumer
+core01    | [2m2025-07-21T01:50:20.099523Z[0m [32m INFO[0m [2mcore::queue::redis[0m[2m:[0m [2m200:[0m Starting to consume messages from queue: payment
+core01    | [2m2025-07-21T01:50:20.099526Z[0m [32m INFO[0m [2mcore::queue::redis[0m[2m:[0m [2m201:[0m DLQ configured as: payment_dlq
+core01    | [2m2025-07-21T01:50:20.099531Z[0m [32m INFO[0m [2mcore::queue::redis[0m[2m:[0m [2m113:[0m Starting to consume messages from DLQ: payment_dlq
+core01    | [2m2025-07-21T01:50:20.100007Z[0m [32m INFO[0m [2mactix_server::builder[0m[2m:[0m [2m310:[0m starting 1 workers
+core01    | [2m2025-07-21T01:50:20.100034Z[0m [32m INFO[0m [2mactix_server::server[0m[2m:[0m [2m191:[0m Actix runtime found; starting in Actix runtime
+core01    | [2m2025-07-21T01:50:20.100040Z[0m [32m INFO[0m [2mactix_server::server[0m[2m:[0m [2m197:[0m starting service: "actix-web-service-0.0.0.0:8003", workers: 1, listening on: 0.0.0.0:8003
+core02    | [2m2025-07-21T01:50:20.195389Z[0m [32m INFO[0m [2mcore::queue::redis[0m[2m:[0m [2m99:[0m Connected to Redis at redis://redis:6379 for DLQ consumer
+core02    | [2m2025-07-21T01:50:20.195406Z[0m [32m INFO[0m [2mcore::queue::redis[0m[2m:[0m [2m200:[0m Starting to consume messages from queue: payment
+core02    | [2m2025-07-21T01:50:20.195409Z[0m [32m INFO[0m [2mcore::queue::redis[0m[2m:[0m [2m201:[0m DLQ configured as: payment_dlq
+core02    | [2m2025-07-21T01:50:20.195413Z[0m [32m INFO[0m [2mcore::queue::redis[0m[2m:[0m [2m113:[0m Starting to consume messages from DLQ: payment_dlq
+core02    | [2m2025-07-21T01:50:20.195549Z[0m [32m INFO[0m [2mactix_server::builder[0m[2m:[0m [2m310:[0m starting 1 workers
+core02    | [2m2025-07-21T01:50:20.195562Z[0m [32m INFO[0m [2mactix_server::server[0m[2m:[0m [2m191:[0m Actix runtime found; starting in Actix runtime
+core02    | [2m2025-07-21T01:50:20.195566Z[0m [32m INFO[0m [2mactix_server::server[0m[2m:[0m [2m197:[0m starting service: "actix-web-service-0.0.0.0:8004", workers: 1, listening on: 0.0.0.0:8004
+haproxy   | [NOTICE]   (1) : New worker (9) forked
+haproxy   | [NOTICE]   (1) : Loading success.
+postgres  | 2025-07-21 01:50:22.147 UTC [78] ERROR:  column "payment_processor" does not exist at character 8
+core01    | 
+core01    | thread 'actix-rt|system:0|arbiter:0' panicked at src/store/payment.rs:162:140:
+core01    | called `Result::unwrap()` on an `Err` value: Error { kind: Db, cause: Some(DbError { severity: "ERROR", parsed_severity: Some(Error), code: SqlState(E42703), message: "column \"payment_processor\" does not exist", detail: None, hint: None, position: Some(Original(8)), where_: None, schema: None, table: None, column: None, datatype: None, constraint: None, file: Some("parse_relation.c"), line: Some(3713), routine: Some("errorMissingColumn") }) }
+core01    | note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+core01    | [2m2025-07-21T01:50:23.105439Z[0m [32m INFO[0m [2mcore::queue::redis[0m[2m:[0m [2m124:[0m Checking DLQ for messages: payment_dlq
+core01    | [2m2025-07-21T01:50:23.105665Z[0m [32m INFO[0m [2mcore::queue::redis[0m[2m:[0m [2m164:[0m No more messages in DLQ
+core02    | [2m2025-07-21T01:50:23.198335Z[0m [32m INFO[0m [2mcore::queue::redis[0m[2m:[0m [2m124:[0m Checking DLQ for messages: payment_dlq
+core02    | [2m2025-07-21T01:50:23.198561Z[0m [32m INFO[0m [2mcore::queue::redis[0m[2m:[0m [2m164:[0m No more messages in DLQ
+core01    | [2m2025-07-21T01:50:26.106857Z[0m [32m INFO[0m [2mcore::queue::redis[0m[2m:[0m [2m124:[0m Checking DLQ for messages: payment_dlq
+core01    | [2m2025-07-21T01:50:26.107066Z[0m [32m INFO[0m [2mcore::queue::redis[0m[2m:[0m [2m164:[0m No more messages in DLQ
+core02    | [2m2025-07-21T01:50:26.199815Z[0m [32m INFO[0m [2mcore::queue::redis[0m[2m:[0m [2m124:[0m Checking DLQ for messages: payment_dlq
+core02    | [2m2025-07-21T01:50:26.200024Z[0m [32m INFO[0m [2mcore::queue::redis[0m[2m:[0m [2m164:[0m No more messages in DLQ
+postgres  | 2025-07-21 01:50:27.159 UTC [79] ERROR:  column "payment_processor" does not exist at character 8
+core02    | 
+core02    | thread 'actix-rt|system:0|arbiter:0' panicked at src/store/payment.rs:162:140:
+core02    | called `Result::unwrap()` on an `Err` value: Error { kind: Db, cause: Some(DbError { severity: "ERROR", parsed_severity: Some(Error), code: SqlState(E42703), message: "column \"payment_processor\" does not exist", detail: None, hint: None, position: Some(Original(8)), where_: None, schema: None, table: None, column: None, datatype: None, constraint: None, file: Some("parse_relation.c"), line: Some(3713), routine: Some("errorMissingColumn") }) }
+core02    | note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+core01    | [2m2025-07-21T01:50:29.108217Z[0m [32m INFO[0m [2mcore::queue::redis[0m[2m:[0m [2m124:[0m Checking DLQ for messages: payment_dlq
+core01    | [2m2025-07-21T01:50:29.108439Z[0m [32m INFO[0m [2mcore::queue::redis[0m[2m:[0m [2m164:[0m No more messages in DLQ
+core02    | [2m2025-07-21T01:50:29.201318Z[0m [32m INFO[0m [2mcore::queue::redis[0m[2m:[0m [2m124:[0m Checking DLQ for messages: payment_dlq
+core02    | [2m2025-07-21T01:50:29.201557Z[0m [32m INFO[0m [2mcore::queue::redis[0m[2m:[0m [2m164:[0m No more messages in DLQ
+core01    | [2m2025-07-21T01:50:32.109601Z[0m [32m INFO[0m [2mcore::queue::redis[0m[2m:[0m [2m124:[0m Checking DLQ for messages: payment_dlq
+core01    | [2m2025-07-21T01:50:32.109837Z[0m [32m INFO[0m [2mcore::queue::redis[0m[2m:[0m [2m164:[0m No more messages in DLQ
+postgres  | 2025-07-21 01:50:32.170 UTC [78] ERROR:  column "payment_processor" does not exist at character 8
+core01    | 
+core01    | thread 'actix-rt|system:0|arbiter:0' panicked at src/store/payment.rs:162:140:
+core01    | called `Result::unwrap()` on an `Err` value: Error { kind: Db, cause: Some(DbError { severity: "ERROR", parsed_severity: Some(Error), code: SqlState(E42703), message: "column \"payment_processor\" does not exist", detail: None, hint: None, position: Some(Original(8)), where_: None, schema: None, table: None, column: None, datatype: None, constraint: None, file: Some("parse_relation.c"), line: Some(3713), routine: Some("errorMissingColumn") }) }
+core02    | [2m2025-07-21T01:50:32.202690Z[0m [32m INFO[0m [2mcore::queue::redis[0m[2m:[0m [2m124:[0m Checking DLQ for messages: payment_dlq
+core02    | [2m2025-07-21T01:50:32.202902Z[0m [32m INFO[0m [2mcore::queue::redis[0m[2m:[0m [2m164:[0m No more messages in DLQ
+core01    | [2m2025-07-21T01:50:35.111028Z[0m [32m INFO[0m [2mcore::queue::redis[0m[2m:[0m [2m124:[0m Checking DLQ for messages: payment_dlq
+core01    | [2m2025-07-21T01:50:35.111185Z[0m [32m INFO[0m [2mcore::queue::redis[0m[2m:[0m [2m164:[0m No more messages in DLQ
+core02    | [2m2025-07-21T01:50:35.204094Z[0m [32m INFO[0m [2mcore::queue::redis[0m[2m:[0m [2m124:[0m Checking DLQ for messages: payment_dlq
+core02    | [2m2025-07-21T01:50:35.204291Z[0m [32m INFO[0m [2mcore::queue::redis[0m[2m:[0m [2m164:[0m No more messages in DLQ
+core02    | 
+postgres  | 2025-07-21 01:50:37.180 UTC [79] ERROR:  column "payment_processor" does not exist at character 8
+core02    | thread 'actix-rt|system:0|arbiter:0' panicked at src/store/payment.rs:162:140:
+core02    | called `Result::unwrap()` on an `Err` value: Error { kind: Db, cause: Some(DbError { severity: "ERROR", parsed_severity: Some(Error), code: SqlState(E42703), message: "column \"payment_processor\" does not exist", detail: None, hint: None, position: Some(Original(8)), where_: None, schema: None, table: None, column: None, datatype: None, constraint: None, file: Some("parse_relation.c"), line: Some(3713), routine: Some("errorMissingColumn") }) }
+core01    | [2m2025-07-21T01:50:38.112524Z[0m [32m INFO[0m [2mcore::queue::redis[0m[2m:[0m [2m124:[0m Checking DLQ for messages: payment_dlq
+core01    | [2m2025-07-21T01:50:38.112754Z[0m [32m INFO[0m [2mcore::queue::redis[0m[2m:[0m [2m164:[0m No more messages in DLQ
+core02    | [2m2025-07-21T01:50:38.205805Z[0m [32m INFO[0m [2mcore::queue::redis[0m[2m:[0m [2m124:[0m Checking DLQ for messages: payment_dlq
+core02    | [2m2025-07-21T01:50:38.206012Z[0m [32m INFO[0m [2mcore::queue::redis[0m[2m:[0m [2m164:[0m No more messages in DLQ
+core01    | [2m2025-07-21T01:50:41.113958Z[0m [32m INFO[0m [2mcore::queue::redis[0m[2m:[0m [2m124:[0m Checking DLQ for messages: payment_dlq
+core01    | [2m2025-07-21T01:50:41.114148Z[0m [32m INFO[0m [2mcore::queue::redis[0m[2m:[0m [2m164:[0m No more messages in DLQ
+core02    | [2m2025-07-21T01:50:41.207320Z[0m [32m INFO[0m [2mcore::queue::redis[0m[2m:[0m [2m124:[0m Checking DLQ for messages: payment_dlq
+core02    | [2m2025-07-21T01:50:41.207531Z[0m [32m INFO[0m [2mcore::queue::redis[0m[2m:[0m [2m164:[0m No more messages in DLQ
+core01    | 
+core01    | thread 'actix-rt|system:0|arbiter:0' panicked at src/store/payment.rs:162:140:
+postgres  | 2025-07-21 01:50:42.192 UTC [78] ERROR:  column "payment_processor" does not exist at character 8
+core01    | called `Result::unwrap()` on an `Err` value: Error { kind: Db, cause: Some(DbError { severity: "ERROR", parsed_severity: Some(Error), code: SqlState(E42703), message: "column \"payment_processor\" does not exist", detail: None, hint: None, position: Some(Original(8)), where_: None, schema: None, table: None, column: None, datatype: None, constraint: None, file: Some("parse_relation.c"), line: Some(3713), routine: Some("errorMissingColumn") }) }
+core01    | [2m2025-07-21T01:50:44.115333Z[0m [32m INFO[0m [2mcore::queue::redis[0m[2m:[0m [2m124:[0m Checking DLQ for messages: payment_dlq
+core01    | [2m2025-07-21T01:50:44.115536Z[0m [32m INFO[0m [2mcore::queue::redis[0m[2m:[0m [2m164:[0m No more messages in DLQ
+core02    | [2m2025-07-21T01:50:44.208738Z[0m [32m INFO[0m [2mcore::queue::redis[0m[2m:[0m [2m124:[0m Checking DLQ for messages: payment_dlq
+core02    | [2m2025-07-21T01:50:44.208930Z[0m [32m INFO[0m [2mcore::queue::redis[0m[2m:[0m [2m164:[0m No more messages in DLQ
+core01    | [2m2025-07-21T01:50:47.118735Z[0m [32m INFO[0m [2mcore::queue::redis[0m[2m:[0m [2m124:[0m Checking DLQ for messages: payment_dlq
+core01    | [2m2025-07-21T01:50:47.118944Z[0m [32m INFO[0m [2mcore::queue::redis[0m[2m:[0m [2m164:[0m No more messages in DLQ
+postgres  | 2025-07-21 01:50:47.202 UTC [79] ERROR:  column "payment_processor" does not exist at character 8
+core02    | 
+core02    | thread 'actix-rt|system:0|arbiter:0' panicked at src/store/payment.rs:162:140:
+core02    | called `Result::unwrap()` on an `Err` value: Error { kind: Db, cause: Some(DbError { severity: "ERROR", parsed_severity: Some(Error), code: SqlState(E42703), message: "column \"payment_processor\" does not exist", detail: None, hint: None, position: Some(Original(8)), where_: None, schema: None, table: None, column: None, datatype: None, constraint: None, file: Some("parse_relation.c"), line: Some(3713), routine: Some("errorMissingColumn") }) }
+core02    | [2m2025-07-21T01:50:47.210602Z[0m [32m INFO[0m [2mcore::queue::redis[0m[2m:[0m [2m124:[0m Checking DLQ for messages: payment_dlq
+core02    | [2m2025-07-21T01:50:47.210849Z[0m [32m INFO[0m [2mcore::queue::redis[0m[2m:[0m [2m164:[0m No more messages in DLQ
+core01    | [2m2025-07-21T01:50:50.120188Z[0m [32m INFO[0m [2mcore::queue::redis[0m[2m:[0m [2m124:[0m Checking DLQ for messages: payment_dlq
+core01    | [2m2025-07-21T01:50:50.120417Z[0m [32m INFO[0m [2mcore::queue::redis[0m[2m:[0m [2m164:[0m No more messages in DLQ
+core02    | [2m2025-07-21T01:50:50.212008Z[0m [32m INFO[0m [2mcore::queue::redis[0m[2m:[0m [2m124:[0m Checking DLQ for messages: payment_dlq
+core02    | [2m2025-07-21T01:50:50.212197Z[0m [32m INFO[0m [2mcore::queue::redis[0m[2m:[0m [2m164:[0m No more messages in DLQ
+postgres  | 2025-07-21 01:50:52.212 UTC [78] ERROR:  column "payment_processor" does not exist at character 8
+core01    | 
+core01    | thread 'actix-rt|system:0|arbiter:0' panicked at src/store/payment.rs:162:140:
+core01    | called `Result::unwrap()` on an `Err` value: Error { kind: Db, cause: Some(DbError { severity: "ERROR", parsed_severity: Some(Error), code: SqlState(E42703), message: "column \"payment_processor\" does not exist", detail: None, hint: None, position: Some(Original(8)), where_: None, schema: None, table: None, column: None, datatype: None, constraint: None, file: Some("parse_relation.c"), line: Some(3713), routine: Some("errorMissingColumn") }) }
+core01    | [2m2025-07-21T01:50:53.121245Z[0m [32m INFO[0m [2mcore::queue::redis[0m[2m:[0m [2m124:[0m Checking DLQ for messages: payment_dlq
+core01    | [2m2025-07-21T01:50:53.121564Z[0m [32m INFO[0m [2mcore::queue::redis[0m[2m:[0m [2m164:[0m No more messages in DLQ
+core02    | [2m2025-07-21T01:50:53.213471Z[0m [32m INFO[0m [2mcore::queue::redis[0m[2m:[0m [2m124:[0m Checking DLQ for messages: payment_dlq
+core02    | [2m2025-07-21T01:50:53.213725Z[0m [32m INFO[0m [2mcore::queue::redis[0m[2m:[0m [2m164:[0m No more messages in DLQ
+core01    | [2m2025-07-21T01:50:56.122745Z[0m [32m INFO[0m [2mcore::queue::redis[0m[2m:[0m [2m124:[0m Checking DLQ for messages: payment_dlq
+core01    | [2m2025-07-21T01:50:56.122965Z[0m [32m INFO[0m [2mcore::queue::redis[0m[2m:[0m [2m164:[0m No more messages in DLQ
+core02    | [2m2025-07-21T01:50:56.214884Z[0m [32m INFO[0m [2mcore::queue::redis[0m[2m:[0m [2m124:[0m Checking DLQ for messages: payment_dlq
+core02    | [2m2025-07-21T01:50:56.215087Z[0m [32m INFO[0m [2mcore::queue::redis[0m[2m:[0m [2m164:[0m No more messages in DLQ
+postgres  | 2025-07-21 01:50:57.221 UTC [79] ERROR:  column "payment_processor" does not exist at character 8
+core02    | 
+core02    | thread 'actix-rt|system:0|arbiter:0' panicked at src/store/payment.rs:162:140:
+core02    | called `Result::unwrap()` on an `Err` value: Error { kind: Db, cause: Some(DbError { severity: "ERROR", parsed_severity: Some(Error), code: SqlState(E42703), message: "column \"payment_processor\" does not exist", detail: None, hint: None, position: Some(Original(8)), where_: None, schema: None, table: None, column: None, datatype: None, constraint: None, file: Some("parse_relation.c"), line: Some(3713), routine: Some("errorMissingColumn") }) }
+core01    | [2m2025-07-21T01:50:59.124269Z[0m [32m INFO[0m [2mcore::queue::redis[0m[2m:[0m [2m124:[0m Checking DLQ for messages: payment_dlq
+core01    | [2m2025-07-21T01:50:59.124479Z[0m [32m INFO[0m [2mcore::queue::redis[0m[2m:[0m [2m164:[0m No more messages in DLQ
+core02    | [2m2025-07-21T01:50:59.216788Z[0m [32m INFO[0m [2mcore::queue::redis[0m[2m:[0m [2m124:[0m Checking DLQ for messages: payment_dlq
+core02    | [2m2025-07-21T01:50:59.217091Z[0m [32m INFO[0m [2mcore::queue::redis[0m[2m:[0m [2m164:[0m No more messages in DLQ
+core01    | [2m2025-07-21T01:51:02.124719Z[0m [32m INFO[0m [2mcore::queue::redis[0m[2m:[0m [2m124:[0m Checking DLQ for messages: payment_dlq
+core01    | [2m2025-07-21T01:51:02.124983Z[0m [32m INFO[0m [2mcore::queue::redis[0m[2m:[0m [2m164:[0m No more messages in DLQ
+core02    | [2m2025-07-21T01:51:02.218274Z[0m [32m INFO[0m [2mcore::queue::redis[0m[2m:[0m [2m124:[0m Checking DLQ for messages: payment_dlq
+core02    | [2m2025-07-21T01:51:02.218551Z[0m [32m INFO[0m [2mcore::queue::redis[0m[2m:[0m [2m164:[0m No more messages in DLQ
+postgres  | 2025-07-21 01:51:02.233 UTC [78] ERROR:  column "payment_processor" does not exist at character 8
+core01    | 
+core01    | thread 'actix-rt|system:0|arbiter:0' panicked at src/store/payment.rs:162:140:
+core01    | called `Result::unwrap()` on an `Err` value: Error { kind: Db, cause: Some(DbError { severity: "ERROR", parsed_severity: Some(Error), code: SqlState(E42703), message: "column \"payment_processor\" does not exist", detail: None, hint: None, position: Some(Original(8)), where_: None, schema: None, table: None, column: None, datatype: None, constraint: None, file: Some("parse_relation.c"), line: Some(3713), routine: Some("errorMissingColumn") }) }
+core01    | [2m2025-07-21T01:51:05.126495Z[0m [32m INFO[0m [2mcore::queue::redis[0m[2m:[0m [2m124:[0m Checking DLQ for messages: payment_dlq
+core01    | [2m2025-07-21T01:51:05.126730Z[0m [32m INFO[0m [2mcore::queue::redis[0m[2m:[0m [2m164:[0m No more messages in DLQ
+core02    | [2m2025-07-21T01:51:05.219730Z[0m [32m INFO[0m [2mcore::queue::redis[0m[2m:[0m [2m124:[0m Checking DLQ for messages: payment_dlq
+core02    | [2m2025-07-21T01:51:05.219941Z[0m [32m INFO[0m [2mcore::queue::redis[0m[2m:[0m [2m164:[0m No more messages in DLQ
+postgres  | 2025-07-21 01:51:07.243 UTC [79] ERROR:  column "payment_processor" does not exist at character 8
+core02    | 
+core02    | thread 'actix-rt|system:0|arbiter:0' panicked at src/store/payment.rs:162:140:
+core02    | called `Result::unwrap()` on an `Err` value: Error { kind: Db, cause: Some(DbError { severity: "ERROR", parsed_severity: Some(Error), code: SqlState(E42703), message: "column \"payment_processor\" does not exist", detail: None, hint: None, position: Some(Original(8)), where_: None, schema: None, table: None, column: None, datatype: None, constraint: None, file: Some("parse_relation.c"), line: Some(3713), routine: Some("errorMissingColumn") }) }
+core01    | [2m2025-07-21T01:51:08.127885Z[0m [32m INFO[0m [2mcore::queue::redis[0m[2m:[0m [2m124:[0m Checking DLQ for messages: payment_dlq
+core01    | [2m2025-07-21T01:51:08.128105Z[0m [32m INFO[0m [2mcore::queue::redis[0m[2m:[0m [2m164:[0m No more messages in DLQ
+core02    | [2m2025-07-21T01:51:08.221708Z[0m [32m INFO[0m [2mcore::queue::redis[0m[2m:[0m [2m124:[0m Checking DLQ for messages: payment_dlq
+core02    | [2m2025-07-21T01:51:08.221945Z[0m [32m INFO[0m [2mcore::queue::redis[0m[2m:[0m [2m164:[0m No more messages in DLQ
+core01    | [2m2025-07-21T01:51:11.129335Z[0m [32m INFO[0m [2mcore::queue::redis[0m[2m:[0m [2m124:[0m Checking DLQ for messages: payment_dlq
+core01    | [2m2025-07-21T01:51:11.129546Z[0m [32m INFO[0m [2mcore::queue::redis[0m[2m:[0m [2m164:[0m No more messages in DLQ
+core02    | [2m2025-07-21T01:51:11.223146Z[0m [32m INFO[0m [2mcore::queue::redis[0m[2m:[0m [2m124:[0m Checking DLQ for messages: payment_dlq
+core02    | [2m2025-07-21T01:51:11.223450Z[0m [32m INFO[0m [2mcore::queue::redis[0m[2m:[0m [2m164:[0m No more messages in DLQ
+postgres  | 2025-07-21 01:51:12.253 UTC [78] ERROR:  column "payment_processor" does not exist at character 8
+core01    | 
+core01    | thread 'actix-rt|system:0|arbiter:0' panicked at src/store/payment.rs:162:140:
+core01    | called `Result::unwrap()` on an `Err` value: Error { kind: Db, cause: Some(DbError { severity: "ERROR", parsed_severity: Some(Error), code: SqlState(E42703), message: "column \"payment_processor\" does not exist", detail: None, hint: None, position: Some(Original(8)), where_: None, schema: None, table: None, column: None, datatype: None, constraint: None, file: Some("parse_relation.c"), line: Some(3713), routine: Some("errorMissingColumn") }) }
+core01    | [2m2025-07-21T01:51:14.130308Z[0m [32m INFO[0m [2mcore::queue::redis[0m[2m:[0m [2m124:[0m Checking DLQ for messages: payment_dlq
+core01    | [2m2025-07-21T01:51:14.130479Z[0m [32m INFO[0m [2mcore::queue::redis[0m[2m:[0m [2m164:[0m No more messages in DLQ
+core02    | [2m2025-07-21T01:51:14.224685Z[0m [32m INFO[0m [2mcore::queue::redis[0m[2m:[0m [2m124:[0m Checking DLQ for messages: payment_dlq
+core02    | [2m2025-07-21T01:51:14.225371Z[0m [32m INFO[0m [2mcore::queue::redis[0m[2m:[0m [2m164:[0m No more messages in DLQ
+core01    | [2m2025-07-21T01:51:17.131647Z[0m [32m INFO[0m [2mcore::queue::redis[0m[2m:[0m [2m124:[0m Checking DLQ for messages: payment_dlq
+core01    | [2m2025-07-21T01:51:17.131869Z[0m [32m INFO[0m [2mcore::queue::redis[0m[2m:[0m [2m164:[0m No more messages in DLQ
+core02    | [2m2025-07-21T01:51:17.226609Z[0m [32m INFO[0m [2mcore::queue::redis[0m[2m:[0m [2m124:[0m Checking DLQ for messages: payment_dlq
+core02    | [2m2025-07-21T01:51:17.226824Z[0m [32m INFO[0m [2mcore::queue::redis[0m[2m:[0m [2m164:[0m No more messages in DLQ
+postgres  | 2025-07-21 01:51:17.263 UTC [79] ERROR:  column "payment_processor" does not exist at character 8
+core02    | 
+core02    | thread 'actix-rt|system:0|arbiter:0' panicked at src/store/payment.rs:162:140:
+core02    | called `Result::unwrap()` on an `Err` value: Error { kind: Db, cause: Some(DbError { severity: "ERROR", parsed_severity: Some(Error), code: SqlState(E42703), message: "column \"payment_processor\" does not exist", detail: None, hint: None, position: Some(Original(8)), where_: None, schema: None, table: None, column: None, datatype: None, constraint: None, file: Some("parse_relation.c"), line: Some(3713), routine: Some("errorMissingColumn") }) }
+core01    | [2m2025-07-21T01:51:20.133035Z[0m [32m INFO[0m [2mcore::queue::redis[0m[2m:[0m [2m124:[0m Checking DLQ for messages: payment_dlq
+core01    | [2m2025-07-21T01:51:20.133207Z[0m [32m INFO[0m [2mcore::queue::redis[0m[2m:[0m [2m164:[0m No more messages in DLQ
+core02    | [2m2025-07-21T01:51:20.228797Z[0m [32m INFO[0m [2mcore::queue::redis[0m[2m:[0m [2m124:[0m Checking DLQ for messages: payment_dlq
+core02    | [2m2025-07-21T01:51:20.228990Z[0m [32m INFO[0m [2mcore::queue::redis[0m[2m:[0m [2m164:[0m No more messages in DLQ
+postgres  | 2025-07-21 01:51:22.275 UTC [78] ERROR:  column "payment_processor" does not exist at character 8
+core01    | 
+core01    | thread 'actix-rt|system:0|arbiter:0' panicked at src/store/payment.rs:162:140:
+core01    | called `Result::unwrap()` on an `Err` value: Error { kind: Db, cause: Some(DbError { severity: "ERROR", parsed_severity: Some(Error), code: SqlState(E42703), message: "column \"payment_processor\" does not exist", detail: None, hint: None, position: Some(Original(8)), where_: None, schema: None, table: None, column: None, datatype: None, constraint: None, file: Some("parse_relation.c"), line: Some(3713), routine: Some("errorMissingColumn") }) }
+core01    | [2m2025-07-21T01:51:23.133806Z[0m [32m INFO[0m [2mcore::queue::redis[0m[2m:[0m [2m124:[0m Checking DLQ for messages: payment_dlq
+core01    | [2m2025-07-21T01:51:23.133970Z[0m [32m INFO[0m [2mcore::queue::redis[0m[2m:[0m [2m164:[0m No more messages in DLQ
+core02    | [2m2025-07-21T01:51:23.230276Z[0m [32m INFO[0m [2mcore::queue::redis[0m[2m:[0m [2m124:[0m Checking DLQ for messages: payment_dlq
+core02    | [2m2025-07-21T01:51:23.230493Z[0m [32m INFO[0m [2mcore::queue::redis[0m[2m:[0m [2m164:[0m No more messages in DLQ
+core01    | [2m2025-07-21T01:51:26.135284Z[0m [32m INFO[0m [2mcore::queue::redis[0m[2m:[0m [2m124:[0m Checking DLQ for messages: payment_dlq
+core01    | [2m2025-07-21T01:51:26.135465Z[0m [32m INFO[0m [2mcore::queue::redis[0m[2m:[0m [2m164:[0m No more messages in DLQ
+core02    | [2m2025-07-21T01:51:26.231697Z[0m [32m INFO[0m [2mcore::queue::redis[0m[2m:[0m [2m124:[0m Checking DLQ for messages: payment_dlq
+core02    | [2m2025-07-21T01:51:26.231912Z[0m [32m INFO[0m [2mcore::queue::redis[0m[2m:[0m [2m164:[0m No more messages in DLQ
+haproxy   | [NOTICE]   (1) : haproxy version is 2.8.15-a9aef56
+haproxy   | [WARNING]  (1) : Exiting Master process...
+haproxy   | [WARNING]  (9) : Proxy web_frontend stopped (cumulated conns: FE: 13, BE: 0).
+haproxy   | [WARNING]  (9) : Proxy api_servers stopped (cumulated conns: FE: 0, BE: 13).
+haproxy   | [WARNING]  (1) : Current worker (9) exited with code 0 (Exit)
+haproxy   | [WARNING]  (1) : All workers exited. Exiting... (0)
+[Khaproxy exited with code 0
+core01    | [2m2025-07-21T01:51:28.046036Z[0m [32m INFO[0m [2mactix_server::server[0m[2m:[0m [2m342:[0m SIGTERM received; starting graceful shutdown
+core01    | [2m2025-07-21T01:51:28.046074Z[0m [32m INFO[0m [2mactix_server::worker[0m[2m:[0m [2m593:[0m shutting down idle worker
+core01    | [2m2025-07-21T01:51:28.046079Z[0m [32m INFO[0m [2mactix_server::accept[0m[2m:[0m [2m143:[0m accept thread stopped
+core02    | [2m2025-07-21T01:51:28.046645Z[0m [32m INFO[0m [2mactix_server::server[0m[2m:[0m [2m342:[0m SIGTERM received; starting graceful shutdown
+core02    | [2m2025-07-21T01:51:28.046680Z[0m [32m INFO[0m [2mactix_server::accept[0m[2m:[0m [2m143:[0m accept thread stopped
+core02    | [2m2025-07-21T01:51:28.046705Z[0m [32m INFO[0m [2mactix_server::worker[0m[2m:[0m [2m593:[0m shutting down idle worker
+[Kcore01 exited with code 0
+[Kcore02 exited with code 0
+proxy     | [2m2025-07-21T01:51:29.034259Z[0m [32m INFO[0m [2mactix_server::server[0m[2m:[0m [2m342:[0m SIGTERM received; starting graceful shutdown
+proxy     | [2m2025-07-21T01:51:29.034326Z[0m [32m INFO[0m [2mactix_server::worker[0m[2m:[0m [2m593:[0m shutting down idle worker
+proxy     | [2m2025-07-21T01:51:29.034681Z[0m [32m INFO[0m [2mactix_server::accept[0m[2m:[0m [2m143:[0m accept thread stopped
+redis     | 1:signal-handler (1753062689) Received SIGTERM scheduling shutdown...
+redis     | 1:M 21 Jul 2025 01:51:29.105 * User requested shutdown...
+redis     | 1:M 21 Jul 2025 01:51:29.105 * Saving the final RDB snapshot before exiting.
+redis     | 1:M 21 Jul 2025 01:51:29.118 * DB saved on disk
+redis     | 1:M 21 Jul 2025 01:51:29.118 # Redis is now ready to exit, bye bye...
+[Kredis exited with code 0
+[Kproxy exited with code 0
+postgres  | 2025-07-21 01:51:29.964 UTC [1] LOG:  received fast shutdown request
+postgres  | 2025-07-21 01:51:29.964 UTC [1] LOG:  aborting any active transactions
+postgres  | 2025-07-21 01:51:29.967 UTC [1] LOG:  background worker "logical replication launcher" (PID 69) exited with exit code 1
+postgres  | 2025-07-21 01:51:29.969 UTC [64] LOG:  shutting down
+postgres  | 2025-07-21 01:51:30.009 UTC [1] LOG:  database system is shut down
+[Kpostgres exited with code 0

@@ -17,58 +17,39 @@ services:
           cpus: "0.15"
           memory: "20MB"
   app1:
-    image: davigga/rinhapayment-app
+    image: davigga/rinhapayment-app:latest
     container_name: app1
     networks:
       - app-network
       - payment-processor
     depends_on:
       - redis
-      - mongodb
     environment:
       - PAYMENT_PROCESSOR_URL_DEFAULT=http://payment-processor-default:8080
       - PAYMENT_PROCESSOR_URL_FALLBACK=http://payment-processor-fallback:8080
-      - MONGO_URI=mongodb://mongodb/payment
       - REDIS_URI=redis://redis:6379
     deploy:
       resources:
         limits:
-          cpus: "0.4"
-          memory: "75MB"
+          cpus: "0.6"
+          memory: "125MB"
   app2:
-    image: davigga/rinhapayment-app
+    image: davigga/rinhapayment-app:latest
     container_name: app2
     networks:
       - app-network
       - payment-processor
     depends_on:
       - redis
-      - mongodb
     environment:
       - PAYMENT_PROCESSOR_URL_DEFAULT=http://payment-processor-default:8080
       - PAYMENT_PROCESSOR_URL_FALLBACK=http://payment-processor-fallback:8080
-      - MONGO_URI=mongodb://mongodb/payment
       - REDIS_URI=redis://redis:6379
     deploy:
       resources:
         limits:
-          cpus: "0.4"
-          memory: "75MB"
-  mongodb:
-    image: mongo
-    container_name: payment-db
-    ports:
-      - "27017:27017"
-    environment:
-      - MONGO_INITDB_DATABASE=payment
-    deploy:
-      resources:
-        limits:
-          cpus: "0.35"
-          memory: "90MB"
-    networks:
-      - app-network
-    restart: always
+          cpus: "0.6"
+          memory: "125MB"
   redis:
     image: redis:7.2-alpine
     container_name: redis
@@ -77,8 +58,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.2"
-          memory: "90MB"
+          cpus: "0.15"
+          memory: "80MB"
     networks:
       - app-network
 networks:

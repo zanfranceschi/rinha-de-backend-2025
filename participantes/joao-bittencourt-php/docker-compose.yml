@@ -1,0 +1,84 @@
+services:
+    app1:
+        image: joaogsbittencourt/rinha-de-backend-2025-php:1.5
+        restart: unless-stopped
+        working_dir: /var/www/
+        networks:
+            - rinha
+            - payment-processor
+        deploy:
+            resources:
+                limits:
+                    cpus: "0.25"
+                    memory: "25MB"
+
+    app2:
+        image: joaogsbittencourt/rinha-de-backend-2025-php:1.5
+        restart: unless-stopped
+        working_dir: /var/www/
+        networks:
+            - rinha
+            - payment-processor
+        deploy:
+            resources:
+                limits:
+                    cpus: "0.25"
+                    memory: "25MB"
+
+    nginx:      
+        image: nginx:alpine
+        restart: unless-stopped
+        ports:
+            - "9999:80"
+        volumes:
+            - ./default.conf:/etc/nginx/conf.d/default.conf
+        networks:
+            - rinha
+        depends_on:
+            - app1
+            - app2
+        deploy:
+            resources:
+                limits:
+                    cpus: "0.20"
+                    memory: "30MB"
+
+    db:
+        image: mysql:8.0.36
+        restart: unless-stopped
+        environment:
+            MYSQL_DATABASE: ${DB_DATABASE:-rinha}
+            MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:-root}
+            MYSQL_PASSWORD: ${DB_PASSWORD:-userpass}
+            MYSQL_USER: ${DB_USERNAME:-username}
+        volumes:
+            - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+        command: >
+            --default-authentication-plugin=mysql_native_password
+            --innodb_buffer_pool_size=128M
+            --innodb_log_file_size=32M
+            --max_connections=1000
+            --innodb_flush_log_at_trx_commit=2
+            --skip-log-bin
+        ports:
+            - "3388:3306"
+        networks:
+            - rinha
+        healthcheck:
+            test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+            interval: 10s
+            timeout: 5s
+            retries: 5
+            start_period: 10s
+        deploy:
+            resources:
+                limits:
+                    cpus: "0.80"
+                    memory: "270MB"
+# Redes
+networks:
+    rinha:
+        driver: bridge
+    payment-processor:
+        external: true
+

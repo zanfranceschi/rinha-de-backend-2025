@@ -1,0 +1,101 @@
+
+ Network felipemcassiano_backend  Creating
+ Network felipemcassiano_backend  Created
+ Container felipemcassiano-redis-1  Creating
+ Container felipemcassiano-redis-1  Created
+ Container felipemcassiano-worker-1  Creating
+ Container felipemcassiano-api1-1  Creating
+ Container felipemcassiano-api2-1  Creating
+ Container felipemcassiano-worker-1  Created
+ Container felipemcassiano-api2-1  Created
+ Container felipemcassiano-api1-1  Created
+ Container nginx  Creating
+ Container nginx  Created
+Attaching to api1-1, api2-1, redis-1, worker-1, nginx
+redis-1   | Starting Redis Server
+redis-1   | 1:C 21 Jul 2025 02:13:06.788 # WARNING Memory overcommit must be enabled! Without it, a background save or replication may fail under low memory condition. Being disabled, it can also cause failures without low memory condition, see https://github.com/jemalloc/jemalloc/issues/1328. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.
+redis-1   | 1:C 21 Jul 2025 02:13:06.788 * oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+redis-1   | 1:C 21 Jul 2025 02:13:06.788 * Redis version=8.1.240, bits=64, commit=00000000, modified=1, pid=1, just started
+redis-1   | 1:C 21 Jul 2025 02:13:06.788 * Configuration loaded
+redis-1   | 1:M 21 Jul 2025 02:13:06.788 * monotonic clock: POSIX clock_gettime
+redis-1   | 1:M 21 Jul 2025 02:13:06.789 * Running mode=standalone, port=6379.
+redis-1   | 1:M 21 Jul 2025 02:13:06.793 * <bf> RedisBloom version 8.1.90 (Git=unknown)
+redis-1   | 1:M 21 Jul 2025 02:13:06.793 * <bf> Registering configuration options: [
+redis-1   | 1:M 21 Jul 2025 02:13:06.793 * <bf> 	{ bf-error-rate       :      0.01 }
+redis-1   | 1:M 21 Jul 2025 02:13:06.793 * <bf> 	{ bf-initial-size     :       100 }
+redis-1   | 1:M 21 Jul 2025 02:13:06.793 * <bf> 	{ bf-expansion-factor :         2 }
+redis-1   | 1:M 21 Jul 2025 02:13:06.793 * <bf> 	{ cf-bucket-size      :         2 }
+redis-1   | 1:M 21 Jul 2025 02:13:06.793 * <bf> 	{ cf-initial-size     :      1024 }
+redis-1   | 1:M 21 Jul 2025 02:13:06.793 * <bf> 	{ cf-max-iterations   :        20 }
+redis-1   | 1:M 21 Jul 2025 02:13:06.793 * <bf> 	{ cf-expansion-factor :         1 }
+redis-1   | 1:M 21 Jul 2025 02:13:06.793 * <bf> 	{ cf-max-expansions   :        32 }
+redis-1   | 1:M 21 Jul 2025 02:13:06.793 * <bf> ]
+redis-1   | 1:M 21 Jul 2025 02:13:06.793 * Module 'bf' loaded from /usr/local/lib/redis/modules//redisbloom.so
+redis-1   | 1:M 21 Jul 2025 02:13:06.800 * <search> Redis version found by RedisSearch : 8.1.240 - oss
+redis-1   | 1:M 21 Jul 2025 02:13:06.800 * <search> RediSearch version 8.1.90 (Git=ce7d9d3)
+redis-1   | 1:M 21 Jul 2025 02:13:06.800 * <search> Low level api version 1 initialized successfully
+redis-1   | 1:M 21 Jul 2025 02:13:06.800 * <search> gc: ON, prefix min length: 2, min word length to stem: 4, prefix max expansions: 200, query timeout (ms): 500, timeout policy: return, cursor read size: 1000, cursor max idle (ms): 300000, max doctable size: 1000000, max number of search results:  1000000, 
+redis-1   | 1:M 21 Jul 2025 02:13:06.800 * <search> Initialized thread pools!
+redis-1   | 1:M 21 Jul 2025 02:13:06.800 * <search> Disabled workers threadpool of size 0
+redis-1   | 1:M 21 Jul 2025 02:13:06.800 * <search> Subscribe to config changes
+redis-1   | 1:M 21 Jul 2025 02:13:06.800 * <search> Enabled role change notification
+redis-1   | 1:M 21 Jul 2025 02:13:06.801 * <search> Cluster configuration: AUTO partitions, type: 0, coordinator timeout: 0ms
+redis-1   | 1:M 21 Jul 2025 02:13:06.801 * <search> Register write commands
+redis-1   | 1:M 21 Jul 2025 02:13:06.801 * Module 'search' loaded from /usr/local/lib/redis/modules//redisearch.so
+redis-1   | 1:M 21 Jul 2025 02:13:06.802 * <timeseries> RedisTimeSeries version 80190, git_sha=3289406cfcff9c2c2b744f5e3e5bf5ba865219a1
+redis-1   | 1:M 21 Jul 2025 02:13:06.802 * <timeseries> Redis version found by RedisTimeSeries : 8.1.240 - oss
+redis-1   | 1:M 21 Jul 2025 02:13:06.802 * <timeseries> Registering configuration options: [
+redis-1   | 1:M 21 Jul 2025 02:13:06.802 * <timeseries> 	{ ts-compaction-policy   :              }
+redis-1   | 1:M 21 Jul 2025 02:13:06.802 * <timeseries> 	{ ts-num-threads         :            3 }
+redis-1   | 1:M 21 Jul 2025 02:13:06.802 * <timeseries> 	{ ts-retention-policy    :            0 }
+redis-1   | 1:M 21 Jul 2025 02:13:06.802 * <timeseries> 	{ ts-duplicate-policy    :        block }
+redis-1   | 1:M 21 Jul 2025 02:13:06.802 * <timeseries> 	{ ts-chunk-size-bytes    :         4096 }
+redis-1   | 1:M 21 Jul 2025 02:13:06.802 * <timeseries> 	{ ts-encoding            :   compressed }
+redis-1   | 1:M 21 Jul 2025 02:13:06.802 * <timeseries> 	{ ts-ignore-max-time-diff:            0 }
+redis-1   | 1:M 21 Jul 2025 02:13:06.802 * <timeseries> 	{ ts-ignore-max-val-diff :     0.000000 }
+redis-1   | 1:M 21 Jul 2025 02:13:06.802 * <timeseries> ]
+redis-1   | 1:M 21 Jul 2025 02:13:06.802 * <timeseries> Detected redis oss
+redis-1   | 1:M 21 Jul 2025 02:13:06.802 * <timeseries> Enabled diskless replication
+redis-1   | 1:M 21 Jul 2025 02:13:06.802 * Module 'timeseries' loaded from /usr/local/lib/redis/modules//redistimeseries.so
+redis-1   | 1:M 21 Jul 2025 02:13:06.811 * <ReJSON> Created new data type 'ReJSON-RL'
+redis-1   | 1:M 21 Jul 2025 02:13:06.811 * <ReJSON> version: 80190 git sha: unknown branch: unknown
+redis-1   | 1:M 21 Jul 2025 02:13:06.811 * <ReJSON> Exported RedisJSON_V1 API
+redis-1   | 1:M 21 Jul 2025 02:13:06.811 * <ReJSON> Exported RedisJSON_V2 API
+redis-1   | 1:M 21 Jul 2025 02:13:06.811 * <ReJSON> Exported RedisJSON_V3 API
+redis-1   | 1:M 21 Jul 2025 02:13:06.811 * <ReJSON> Exported RedisJSON_V4 API
+redis-1   | 1:M 21 Jul 2025 02:13:06.811 * <ReJSON> Exported RedisJSON_V5 API
+redis-1   | 1:M 21 Jul 2025 02:13:06.811 * <ReJSON> Enabled diskless replication
+redis-1   | 1:M 21 Jul 2025 02:13:06.811 * <ReJSON> Initialized shared string cache, thread safe: false.
+redis-1   | 1:M 21 Jul 2025 02:13:06.811 * Module 'ReJSON' loaded from /usr/local/lib/redis/modules//rejson.so
+redis-1   | 1:M 21 Jul 2025 02:13:06.811 * <search> Acquired RedisJSON_V5 API
+redis-1   | 1:M 21 Jul 2025 02:13:06.811 * Server initialized
+redis-1   | 1:M 21 Jul 2025 02:13:06.812 * Ready to accept connections tcp
+nginx     | /docker-entrypoint.sh: /docker-entrypoint.d/ is not empty, will attempt to perform configuration
+nginx     | /docker-entrypoint.sh: Looking for shell scripts in /docker-entrypoint.d/
+nginx     | /docker-entrypoint.sh: Launching /docker-entrypoint.d/10-listen-on-ipv6-by-default.sh
+nginx     | 10-listen-on-ipv6-by-default.sh: info: Getting the checksum of /etc/nginx/conf.d/default.conf
+nginx     | 10-listen-on-ipv6-by-default.sh: info: Enabled listen on IPv6 in /etc/nginx/conf.d/default.conf
+nginx     | /docker-entrypoint.sh: Sourcing /docker-entrypoint.d/15-local-resolvers.envsh
+nginx     | /docker-entrypoint.sh: Launching /docker-entrypoint.d/20-envsubst-on-templates.sh
+nginx     | /docker-entrypoint.sh: Launching /docker-entrypoint.d/30-tune-worker-processes.sh
+nginx     | /docker-entrypoint.sh: Configuration complete; ready for start up
+nginx     | 2025/07/21 02:13:09 [error] 30#30: *1 connect() failed (111: Connection refused) while connecting to upstream, client: 172.20.0.1, server: , request: "GET /payments-summary HTTP/1.1", upstream: "http://172.20.0.3:3000/payments-summary", host: "localhost:9999"
+nginx     | 2025/07/21 02:13:09 [error] 30#30: *1 connect() failed (111: Connection refused) while connecting to upstream, client: 172.20.0.1, server: , request: "GET /payments-summary HTTP/1.1", upstream: "http://172.20.0.5:3000/payments-summary", host: "localhost:9999"
+api2-1    | Server listening at http://127.0.0.1:3000
+api1-1    | Server listening at http://127.0.0.1:3000
+redis-1   | 1:M 21 Jul 2025 02:14:07.047 * 10000 changes in 60 seconds. Saving...
+redis-1   | 1:M 21 Jul 2025 02:14:07.047 * Background saving started by pid 31
+redis-1   | 31:C 21 Jul 2025 02:14:07.225 * DB saved on disk
+redis-1   | 31:C 21 Jul 2025 02:14:07.226 * Fork CoW for RDB: current 1 MB, peak 1 MB, average 1 MB
+redis-1   | 1:M 21 Jul 2025 02:14:07.285 * Background saving terminated with success
+[Knginx exited with code 0
+[Kworker-1 exited with code 137
+[Kapi1-1 exited with code 137
+[Kapi2-1 exited with code 137
+redis-1   | 1:signal-handler (1753064073) Received SIGTERM scheduling shutdown...
+redis-1   | 1:M 21 Jul 2025 02:14:33.584 * User requested shutdown...
+redis-1   | 1:M 21 Jul 2025 02:14:33.584 * Saving the final RDB snapshot before exiting.
+redis-1   | 1:M 21 Jul 2025 02:14:33.928 * DB saved on disk
+redis-1   | 1:M 21 Jul 2025 02:14:33.928 # Redis is now ready to exit, bye bye...
+[Kredis-1 exited with code 0
+log truncated at line 1000

@@ -1,11 +1,1001 @@
 
-time="2025-07-16T17:25:45-03:00" level=warning msg="/home/rinha-user/rinha-de-backend-2025/participantes/robertAlmeida/docker-compose.yml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion"
- backend2 Pulling 
- backend1 Pulling 
- redis Pulling 
- nginx Pulling 
- backend1 Error toomanyrequests: You have reached your unauthenticated pull rate limit. https://www.docker.com/increase-rate-limit
- backend2  Interrupted
- redis  Interrupted
- nginx  Interrupted
-Error response from daemon: toomanyrequests: You have reached your unauthenticated pull rate limit. https://www.docker.com/increase-rate-limit
+ Network robertalmeida_backend  Creating
+ Network robertalmeida_backend  Created
+ Container robertalmeida-redis-1  Creating
+ Container robertalmeida-redis-1  Created
+ Container robertalmeida-backend2-1  Creating
+ Container robertalmeida-backend1-1  Creating
+ Container robertalmeida-backend2-1  Created
+ Container robertalmeida-backend1-1  Created
+ Container robertalmeida-nginx-1  Creating
+ Container robertalmeida-nginx-1  Created
+Attaching to backend1-1, backend2-1, nginx-1, redis-1
+redis-1     | 1:C 21 Jul 2025 03:08:39.412 # WARNING Memory overcommit must be enabled! Without it, a background save or replication may fail under low memory condition. Being disabled, it can also cause failures without low memory condition, see https://github.com/jemalloc/jemalloc/issues/1328. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.
+redis-1     | 1:C 21 Jul 2025 03:08:39.412 * oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+redis-1     | 1:C 21 Jul 2025 03:08:39.412 * Redis version=7.4.5, bits=64, commit=00000000, modified=0, pid=1, just started
+redis-1     | 1:C 21 Jul 2025 03:08:39.412 * Configuration loaded
+redis-1     | 1:M 21 Jul 2025 03:08:39.412 * monotonic clock: POSIX clock_gettime
+redis-1     | 1:M 21 Jul 2025 03:08:39.413 * Running mode=standalone, port=6379.
+redis-1     | 1:M 21 Jul 2025 03:08:39.413 * Server initialized
+redis-1     | 1:M 21 Jul 2025 03:08:39.413 * Ready to accept connections tcp
+backend1-1  | 2025/07/21 03:08:39 Servidor iniciando na porta 8080
+backend2-1  | 2025/07/21 03:08:39 Servidor iniciando na porta 8080
+nginx-1     | /docker-entrypoint.sh: /docker-entrypoint.d/ is not empty, will attempt to perform configuration
+nginx-1     | /docker-entrypoint.sh: Looking for shell scripts in /docker-entrypoint.d/
+nginx-1     | /docker-entrypoint.sh: Launching /docker-entrypoint.d/10-listen-on-ipv6-by-default.sh
+nginx-1     | 10-listen-on-ipv6-by-default.sh: info: Getting the checksum of /etc/nginx/conf.d/default.conf
+nginx-1     | 10-listen-on-ipv6-by-default.sh: info: Enabled listen on IPv6 in /etc/nginx/conf.d/default.conf
+nginx-1     | /docker-entrypoint.sh: Sourcing /docker-entrypoint.d/15-local-resolvers.envsh
+nginx-1     | /docker-entrypoint.sh: Launching /docker-entrypoint.d/20-envsubst-on-templates.sh
+nginx-1     | /docker-entrypoint.sh: Launching /docker-entrypoint.d/30-tune-worker-processes.sh
+nginx-1     | /docker-entrypoint.sh: Configuration complete; ready for start up
+backend1-1  | [GIN] 2025/07/21 - 03:08:42 | 200 |     454.715µs |      172.19.0.1 | GET      "/payments-summary"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:42 +0000] "GET /payments-summary HTTP/1.1" 200 94 "-" "curl/7.88.1"
+backend2-1  | [GIN] 2025/07/21 - 03:08:48 | 404 |         967ns |      172.19.0.1 | POST     "/purge-payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:48 +0000] "POST /purge-payments HTTP/1.1" 404 18 "-" "Grafana k6/1.1.0"
+backend2-1  | [GIN] 2025/07/21 - 03:08:48 | 200 |     175.212µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:48 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:48 +0000] "GET /payments-summary?from=2025-07-21T03:08:38.990Z&to=2025-07-21T03:08:48.890Z HTTP/1.1" 200 94 "-" "Grafana k6/1.1.0"
+backend1-1  | [GIN] 2025/07/21 - 03:08:48 | 200 |    1.969054ms |      172.19.0.1 | GET      "/payments-summary?from=2025-07-21T03:08:38.990Z&to=2025-07-21T03:08:48.890Z"
+backend2-1  | 2025/07/21 03:08:49 Health check atualizado para default: failing=false, minResponseTime=0
+backend2-1  | 2025/07/21 03:08:49 Pagamento abd856ee-97d9-4988-9b01-dbef57ef1e51 processado com sucesso pelo default
+backend2-1  | [GIN] 2025/07/21 - 03:08:49 | 200 |      50.718µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:49 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:49 Pagamento 2645a6cb-748c-495b-98b2-ed23e6ebd8ad processado com sucesso pelo default
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:49 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | [GIN] 2025/07/21 - 03:08:49 | 200 |     148.305µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:49 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | [GIN] 2025/07/21 - 03:08:49 | 200 |      49.243µs |      172.19.0.1 | POST     "/payments"
+backend2-1  | 2025/07/21 03:08:49 Pagamento ab8248d2-0611-41e0-963f-df677e0e832f processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:49 | 200 |      62.411µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:49 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:49 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | [GIN] 2025/07/21 - 03:08:49 | 200 |      89.683µs |      172.19.0.1 | POST     "/payments"
+backend2-1  | 2025/07/21 03:08:49 Pagamento cd29d8f7-4f69-4487-90b3-b158ec21a5dd processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:49 | 200 |      61.373µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:49 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | 2025/07/21 03:08:49 Rate limit excedido para health check do default
+backend1-1  | 2025/07/21 03:08:49 Pagamento a33b72ab-df3e-4153-8709-03f58c731887 processado com sucesso pelo default
+backend2-1  | [GIN] 2025/07/21 - 03:08:49 | 200 |      58.095µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:49 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:49 Pagamento 93d7c059-e16a-4b97-9595-64db73051148 processado com sucesso pelo default
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:49 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | [GIN] 2025/07/21 - 03:08:49 | 200 |      54.312µs |      172.19.0.1 | POST     "/payments"
+backend1-1  | 2025/07/21 03:08:49 Rate limit excedido para health check do default
+backend1-1  | 2025/07/21 03:08:49 Pagamento a52142b3-9fe7-46ca-aefe-59431a8bc0e6 processado com sucesso pelo default
+backend2-1  | [GIN] 2025/07/21 - 03:08:49 | 200 |      61.292µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:49 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:49 Pagamento 3f205ea7-55ba-4fea-9f0b-e8313cf29039 processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:49 | 200 |      48.863µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:49 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | 2025/07/21 03:08:49 Rate limit excedido para health check do default
+backend1-1  | 2025/07/21 03:08:49 Pagamento 964e9e56-2864-46c1-a1bd-95515905ceae processado com sucesso pelo default
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:50 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | [GIN] 2025/07/21 - 03:08:50 | 200 |      46.981µs |      172.19.0.1 | POST     "/payments"
+backend2-1  | 2025/07/21 03:08:50 Pagamento 52f4d4b8-9dd0-4aee-bfec-6de2d967459b processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:50 | 200 |      71.961µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:50 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | 2025/07/21 03:08:50 Rate limit excedido para health check do default
+backend1-1  | 2025/07/21 03:08:50 Pagamento 4519452a-6d1b-470d-8773-5420aaa2504f processado com sucesso pelo default
+backend2-1  | [GIN] 2025/07/21 - 03:08:50 | 200 |      53.485µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:50 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:50 Pagamento 9328e0f0-3549-478a-b555-cc70065d2e3d processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:50 | 200 |      74.444µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:50 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | 2025/07/21 03:08:50 Rate limit excedido para health check do default
+backend1-1  | 2025/07/21 03:08:50 Pagamento a25237ba-393d-4606-b6bf-b94d84cb5207 processado com sucesso pelo default
+backend2-1  | [GIN] 2025/07/21 - 03:08:50 | 200 |      51.573µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:50 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:50 Pagamento a3fac564-a988-4bac-bdab-45bc288e61ab processado com sucesso pelo default
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:50 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | [GIN] 2025/07/21 - 03:08:50 | 200 |      55.694µs |      172.19.0.1 | POST     "/payments"
+backend1-1  | 2025/07/21 03:08:50 Rate limit excedido para health check do default
+backend1-1  | 2025/07/21 03:08:50 Pagamento efd8b62d-3c9b-49a4-860d-6494b27ab202 processado com sucesso pelo default
+backend2-1  | [GIN] 2025/07/21 - 03:08:50 | 200 |      65.267µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:50 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:50 Pagamento 5ea71b03-15d3-40bf-8bd0-93fbebc570e1 processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:50 | 200 |      57.928µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:50 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | 2025/07/21 03:08:50 Rate limit excedido para health check do default
+backend1-1  | 2025/07/21 03:08:50 Pagamento 26698f59-6c17-4706-a17a-4ab1e75016c2 processado com sucesso pelo default
+backend2-1  | [GIN] 2025/07/21 - 03:08:50 | 200 |      54.506µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:50 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:50 Pagamento c8f3fad7-8221-4ac4-b66a-4d798c7e19e6 processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:50 | 200 |       47.48µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:50 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | 2025/07/21 03:08:50 Rate limit excedido para health check do default
+backend1-1  | 2025/07/21 03:08:50 Pagamento ecb09efb-094f-496d-ab75-29037bd3bf76 processado com sucesso pelo default
+backend2-1  | [GIN] 2025/07/21 - 03:08:50 | 200 |      49.795µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:50 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:50 Pagamento 620e419f-6bea-44e2-88f0-05b8400a703d processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:50 | 200 |      45.169µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:50 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | 2025/07/21 03:08:50 Rate limit excedido para health check do default
+backend1-1  | 2025/07/21 03:08:50 Pagamento 85af94f9-2407-47db-93e0-8114295a1b91 processado com sucesso pelo default
+backend2-1  | [GIN] 2025/07/21 - 03:08:50 | 200 |       52.31µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:50 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:50 Pagamento 53ddc949-bab8-4cbc-872a-ef2ab10c0a5e processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:50 | 200 |       60.13µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:50 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | 2025/07/21 03:08:50 Rate limit excedido para health check do default
+backend1-1  | 2025/07/21 03:08:50 Pagamento e28d0ed2-e1d7-424f-b07a-720490dad7e7 processado com sucesso pelo default
+backend2-1  | [GIN] 2025/07/21 - 03:08:50 | 200 |      81.834µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:50 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:50 Pagamento 417ac15a-50e4-420f-8a8a-b9df45df69e9 processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:50 | 200 |       53.95µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:50 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | 2025/07/21 03:08:50 Rate limit excedido para health check do default
+backend1-1  | 2025/07/21 03:08:50 Pagamento 1a36dec3-abd8-4707-9ce7-4f075eb703f6 processado com sucesso pelo default
+backend2-1  | [GIN] 2025/07/21 - 03:08:50 | 200 |      57.046µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:50 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:50 Pagamento f253b460-faa0-4a58-a39a-79a6f1297ca9 processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:50 | 200 |      70.725µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:50 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | 2025/07/21 03:08:50 Rate limit excedido para health check do default
+backend1-1  | 2025/07/21 03:08:50 Pagamento b23412d0-b869-46fe-8b09-65d22aa54f24 processado com sucesso pelo default
+backend2-1  | [GIN] 2025/07/21 - 03:08:50 | 200 |       58.28µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:50 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:50 Pagamento 7230da18-3510-4258-b520-f3bd058e65c9 processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:51 | 200 |      70.876µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:51 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | 2025/07/21 03:08:51 Rate limit excedido para health check do default
+backend1-1  | 2025/07/21 03:08:51 Pagamento 329aa44a-0422-4d81-bd3d-a0113d517387 processado com sucesso pelo default
+backend2-1  | [GIN] 2025/07/21 - 03:08:51 | 200 |      62.502µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:51 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:51 Pagamento 37e3b3e6-7bed-4e31-9265-8d8c0c387dde processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:51 | 200 |      50.894µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:51 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | 2025/07/21 03:08:51 Rate limit excedido para health check do default
+backend1-1  | 2025/07/21 03:08:51 Pagamento f93184c4-85ca-4d3e-b203-88e0bde97d3d processado com sucesso pelo default
+backend2-1  | [GIN] 2025/07/21 - 03:08:51 | 200 |      58.526µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:51 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:51 Pagamento c341dfaf-265e-4d57-85c1-a59286ce50c8 processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:51 | 200 |      52.656µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:51 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | 2025/07/21 03:08:51 Rate limit excedido para health check do default
+backend1-1  | 2025/07/21 03:08:51 Pagamento da7737ca-d845-441e-bc3c-7ab9acdebd4e processado com sucesso pelo default
+backend2-1  | [GIN] 2025/07/21 - 03:08:51 | 200 |      60.921µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:51 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:51 Pagamento 2a65ac59-2266-45f1-8181-7f033903c811 processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:51 | 200 |      45.868µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:51 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | 2025/07/21 03:08:51 Rate limit excedido para health check do default
+backend1-1  | 2025/07/21 03:08:51 Pagamento 3c051de4-6ac8-40d4-ad28-a737eeebe041 processado com sucesso pelo default
+backend2-1  | [GIN] 2025/07/21 - 03:08:51 | 200 |      54.864µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:51 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:51 Pagamento 7c376e0d-80f5-48ab-a36c-e2b66e51207f processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:51 | 200 |      70.114µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:51 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | 2025/07/21 03:08:51 Rate limit excedido para health check do default
+backend1-1  | 2025/07/21 03:08:51 Pagamento 14f81376-0657-4939-bdb0-fa49971d24c1 processado com sucesso pelo default
+backend2-1  | [GIN] 2025/07/21 - 03:08:51 | 200 |      47.851µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:51 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:51 Pagamento 7678959d-8e3f-43ad-a0e7-0469749c83e3 processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:51 | 200 |       47.57µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:51 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | 2025/07/21 03:08:51 Rate limit excedido para health check do default
+backend1-1  | 2025/07/21 03:08:51 Pagamento c4fa5807-4c3d-4dad-93ed-f74db0c26b00 processado com sucesso pelo default
+backend2-1  | [GIN] 2025/07/21 - 03:08:51 | 200 |      83.753µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:51 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:51 Pagamento 3b06b4be-c367-4ec2-9c6d-12ec364635bd processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:51 | 200 |      53.589µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:51 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | 2025/07/21 03:08:51 Rate limit excedido para health check do default
+backend1-1  | 2025/07/21 03:08:51 Pagamento e075d011-d7bb-41a7-8406-3496460b4085 processado com sucesso pelo default
+backend2-1  | [GIN] 2025/07/21 - 03:08:51 | 200 |      61.841µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:51 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:51 Pagamento 56addf9f-774b-4b13-85e7-9e6d23c87496 processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:51 | 200 |      50.795µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:51 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | 2025/07/21 03:08:51 Rate limit excedido para health check do default
+backend1-1  | 2025/07/21 03:08:51 Pagamento 37093053-1580-4d5a-b01b-b920b14de001 processado com sucesso pelo default
+backend2-1  | [GIN] 2025/07/21 - 03:08:51 | 200 |      47.887µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:51 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:51 Pagamento ff27a1b5-931f-4adc-8272-128a97fee3d4 processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:51 | 200 |      54.875µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:51 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | 2025/07/21 03:08:51 Rate limit excedido para health check do default
+backend1-1  | 2025/07/21 03:08:51 Pagamento 478ac64d-1d5d-403c-a88d-ca140eeaa25d processado com sucesso pelo default
+backend2-1  | [GIN] 2025/07/21 - 03:08:51 | 200 |     121.672µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:51 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:51 Pagamento 1df411e7-01a2-4337-a368-1cd5db2a565e processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:51 | 200 |      59.205µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:51 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | 2025/07/21 03:08:51 Rate limit excedido para health check do default
+backend1-1  | 2025/07/21 03:08:51 Pagamento 0a66e485-fa9a-41f0-bd1c-30a38016129b processado com sucesso pelo default
+backend2-1  | [GIN] 2025/07/21 - 03:08:51 | 200 |      89.317µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:51 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:51 Pagamento b071f116-2193-44d0-963a-2d1acbe3f49c processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:51 | 200 |        53.7µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:51 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | 2025/07/21 03:08:51 Rate limit excedido para health check do default
+backend1-1  | 2025/07/21 03:08:51 Pagamento f38bf214-21ce-4024-b084-60404d0e6546 processado com sucesso pelo default
+backend2-1  | [GIN] 2025/07/21 - 03:08:51 | 200 |      64.604µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:51 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:51 Pagamento be050988-0e5a-46f3-a6a4-2df2fe3a3bbf processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:51 | 200 |      61.598µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:51 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | 2025/07/21 03:08:51 Rate limit excedido para health check do default
+backend1-1  | 2025/07/21 03:08:51 Pagamento 946b2c6a-5a7e-42a4-bfad-2a8fe6401c49 processado com sucesso pelo default
+backend2-1  | [GIN] 2025/07/21 - 03:08:51 | 200 |      58.169µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:51 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:51 Pagamento dbc122ab-66fd-49e6-a8bb-ff55fb040633 processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:51 | 200 |      74.749µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:51 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | 2025/07/21 03:08:51 Rate limit excedido para health check do default
+backend1-1  | 2025/07/21 03:08:51 Pagamento d85bfc02-1cf3-4f7b-9b84-bea013571c92 processado com sucesso pelo default
+backend2-1  | [GIN] 2025/07/21 - 03:08:51 | 200 |      55.281µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:51 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:51 Pagamento 73805568-e7ad-459d-97a2-0971657c9486 processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:51 | 200 |       50.06µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:51 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | 2025/07/21 03:08:51 Rate limit excedido para health check do default
+backend1-1  | 2025/07/21 03:08:51 Pagamento 8301fefb-4881-4cc5-9abb-41a6ed79ecdc processado com sucesso pelo default
+backend2-1  | [GIN] 2025/07/21 - 03:08:51 | 200 |      57.864µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:51 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:52 Pagamento 3e8eed72-810b-40bd-a90a-d982de52262d processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:52 | 200 |      56.419µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:52 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | 2025/07/21 03:08:52 Rate limit excedido para health check do default
+backend1-1  | 2025/07/21 03:08:52 Pagamento ba52594b-a68e-450a-abd0-698604be5fa2 processado com sucesso pelo default
+backend2-1  | [GIN] 2025/07/21 - 03:08:52 | 200 |      60.423µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:52 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:52 Pagamento fe27941f-055a-4027-8394-fd7fc20b3468 processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:52 | 200 |      45.913µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:52 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | 2025/07/21 03:08:52 Rate limit excedido para health check do default
+backend1-1  | 2025/07/21 03:08:52 Pagamento 55123a18-bcd2-4a60-8bec-720364a777ce processado com sucesso pelo default
+backend2-1  | [GIN] 2025/07/21 - 03:08:52 | 200 |      61.046µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:52 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:52 Pagamento a99fa88f-11fb-4be8-a14a-a9429e887d21 processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:52 | 200 |      50.571µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:52 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | 2025/07/21 03:08:52 Rate limit excedido para health check do default
+backend1-1  | 2025/07/21 03:08:52 Pagamento 964feca8-9b82-495a-922a-67563a0c188e processado com sucesso pelo default
+backend2-1  | [GIN] 2025/07/21 - 03:08:52 | 200 |      78.836µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:52 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:52 Pagamento fa8c7ed0-d8b5-4ac3-b176-d3bb1eef5568 processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:52 | 200 |      48.876µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:52 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | 2025/07/21 03:08:52 Rate limit excedido para health check do default
+backend1-1  | 2025/07/21 03:08:52 Pagamento 7f46382a-227b-4cc3-93dd-a06726898aa6 processado com sucesso pelo default
+backend2-1  | [GIN] 2025/07/21 - 03:08:52 | 200 |       62.17µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:52 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:52 Pagamento b514c278-932f-483e-b0fa-9f43f1d49554 processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:52 | 200 |       83.04µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:52 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | 2025/07/21 03:08:52 Rate limit excedido para health check do default
+backend1-1  | 2025/07/21 03:08:52 Pagamento a3767a7d-019e-4286-b8fc-659b56f1a4f7 processado com sucesso pelo default
+backend2-1  | [GIN] 2025/07/21 - 03:08:52 | 200 |      47.622µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:52 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:52 Pagamento afcc249d-20f2-41fd-b430-a6fd830b81d7 processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:52 | 200 |      84.849µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:52 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | 2025/07/21 03:08:52 Rate limit excedido para health check do default
+backend1-1  | 2025/07/21 03:08:52 Pagamento 038c1e9a-4bc4-4c29-bbcc-64db53262531 processado com sucesso pelo default
+backend2-1  | [GIN] 2025/07/21 - 03:08:52 | 200 |      60.762µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:52 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:52 Pagamento 1c8c244d-f7a4-48e6-8d66-cb32b1d01e3c processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:52 | 200 |      62.485µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:52 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | 2025/07/21 03:08:52 Rate limit excedido para health check do default
+backend1-1  | 2025/07/21 03:08:52 Pagamento 83103dae-8a1e-41e8-9a1f-489890d879a8 processado com sucesso pelo default
+backend2-1  | [GIN] 2025/07/21 - 03:08:52 | 200 |      67.468µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:52 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:52 Pagamento c1e541cb-3f28-4799-9f8a-1e0df151f79e processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:52 | 200 |      51.755µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:52 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | 2025/07/21 03:08:52 Rate limit excedido para health check do default
+backend1-1  | 2025/07/21 03:08:52 Pagamento 4e64a6d4-c84c-4c7b-846e-f1e27c462a72 processado com sucesso pelo default
+backend2-1  | [GIN] 2025/07/21 - 03:08:52 | 200 |      67.733µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:52 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:52 Pagamento 88e6559d-4378-4da9-a16c-74b056ce5c96 processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:52 | 200 |      50.273µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:52 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | 2025/07/21 03:08:52 Rate limit excedido para health check do default
+backend1-1  | 2025/07/21 03:08:52 Pagamento 64781b1e-a645-4e2a-b4be-58d4e06b9db8 processado com sucesso pelo default
+backend2-1  | [GIN] 2025/07/21 - 03:08:52 | 200 |      93.756µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:52 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:52 Pagamento adc6e912-dffa-4f03-b5c9-515b2027b24f processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:52 | 200 |      50.512µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:52 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | 2025/07/21 03:08:52 Rate limit excedido para health check do default
+backend1-1  | 2025/07/21 03:08:52 Pagamento e6692432-21b3-49a0-891b-5eea3911d185 processado com sucesso pelo default
+backend2-1  | [GIN] 2025/07/21 - 03:08:52 | 200 |      58.039µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:52 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:52 Pagamento 3fdc51da-98d3-45d0-b5fc-5df042a52d78 processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:52 | 200 |      47.986µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:52 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | 2025/07/21 03:08:52 Rate limit excedido para health check do default
+backend1-1  | 2025/07/21 03:08:52 Pagamento 22052861-aafd-4385-9295-11a93e88045a processado com sucesso pelo default
+backend2-1  | [GIN] 2025/07/21 - 03:08:52 | 200 |      48.077µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:52 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:52 Pagamento 160439ef-9255-4a07-9370-6758f517040e processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:52 | 200 |      61.791µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:52 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | 2025/07/21 03:08:52 Rate limit excedido para health check do default
+backend1-1  | 2025/07/21 03:08:52 Pagamento 9909445a-aa63-452a-81a3-71c29c20e962 processado com sucesso pelo default
+backend2-1  | [GIN] 2025/07/21 - 03:08:52 | 200 |      50.171µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:52 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:52 Pagamento c1dd8050-02a3-4b8a-b804-0a7d5d4be6fe processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:52 | 200 |      64.099µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:52 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | 2025/07/21 03:08:52 Rate limit excedido para health check do default
+backend1-1  | 2025/07/21 03:08:52 Pagamento 5df13fde-3957-4e47-bef4-2ff8e4f38583 processado com sucesso pelo default
+backend2-1  | [GIN] 2025/07/21 - 03:08:52 | 200 |      53.396µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:52 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:52 Pagamento b59a6b29-b4a5-4f61-9af3-031a610417c8 processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:52 | 200 |      50.005µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:52 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | 2025/07/21 03:08:52 Rate limit excedido para health check do default
+backend1-1  | 2025/07/21 03:08:52 Pagamento 69432263-ad5b-423a-991f-51c4559d2c91 processado com sucesso pelo default
+backend2-1  | [GIN] 2025/07/21 - 03:08:52 | 200 |       64.23µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:52 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:52 Pagamento 47cb406d-7056-436d-9be2-83a35c64aaf2 processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:52 | 200 |      49.958µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:52 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | 2025/07/21 03:08:52 Rate limit excedido para health check do default
+backend1-1  | 2025/07/21 03:08:52 Pagamento 0e4f2d18-7a14-4be3-b768-36f2214d9db0 processado com sucesso pelo default
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:52 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | [GIN] 2025/07/21 - 03:08:52 | 200 |      50.898µs |      172.19.0.1 | POST     "/payments"
+backend2-1  | 2025/07/21 03:08:52 Pagamento 2bcd4090-17c7-48a4-9ab7-74c2732e42b9 processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:52 | 200 |      54.962µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:52 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | 2025/07/21 03:08:52 Rate limit excedido para health check do default
+backend1-1  | 2025/07/21 03:08:52 Pagamento de3aa76d-2892-479e-8020-00c3ae9462d6 processado com sucesso pelo default
+backend2-1  | [GIN] 2025/07/21 - 03:08:52 | 200 |      52.329µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:52 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:52 Pagamento 2fad231f-2268-4866-8a4f-b616c9c3b5a7 processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:52 | 200 |      52.087µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:52 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | 2025/07/21 03:08:52 Rate limit excedido para health check do default
+backend1-1  | 2025/07/21 03:08:52 Pagamento 2269f09f-d062-41cc-8912-f747c1fb9b44 processado com sucesso pelo default
+backend2-1  | [GIN] 2025/07/21 - 03:08:52 | 200 |      48.395µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:52 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:52 Pagamento e7a37401-a5ff-471e-bc92-6e804da8786c processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:52 | 200 |      55.718µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:52 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | 2025/07/21 03:08:52 Rate limit excedido para health check do default
+backend2-1  | [GIN] 2025/07/21 - 03:08:52 | 200 |      54.492µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:52 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | 2025/07/21 03:08:52 Pagamento d9c9f6e1-b57a-4bc7-a295-8b3f30fe358f processado com sucesso pelo default
+backend2-1  | 2025/07/21 03:08:52 Pagamento a85380f8-57e9-4499-a4ec-5307ca646dec processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:53 | 200 |      49.003µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:53 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | 2025/07/21 03:08:53 Rate limit excedido para health check do default
+backend1-1  | 2025/07/21 03:08:53 Pagamento ffff4d8f-fb86-4259-96e0-36042887ddfd processado com sucesso pelo default
+backend2-1  | [GIN] 2025/07/21 - 03:08:53 | 200 |      47.952µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:53 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:53 Pagamento ce338de1-4cfd-408f-a6da-7aedd85ad02c processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:53 | 200 |      65.515µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:53 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | 2025/07/21 03:08:53 Rate limit excedido para health check do default
+backend1-1  | 2025/07/21 03:08:53 Pagamento 7e5b3336-e5eb-4b24-be2c-c7413aaf89e4 processado com sucesso pelo default
+backend2-1  | [GIN] 2025/07/21 - 03:08:53 | 200 |      61.401µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:53 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:53 Pagamento 9c87f66b-beb5-4ffc-8cf4-a5c47136f8e2 processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:53 | 200 |      49.888µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:53 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | 2025/07/21 03:08:53 Rate limit excedido para health check do default
+backend1-1  | 2025/07/21 03:08:53 Pagamento 424b1448-f6f4-44bc-9b7d-aaf7db19ab7c processado com sucesso pelo default
+backend2-1  | [GIN] 2025/07/21 - 03:08:53 | 200 |      61.754µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:53 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:53 Pagamento 38223602-ac8c-404a-956d-39538924e548 processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:53 | 200 |      47.152µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:53 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | 2025/07/21 03:08:53 Rate limit excedido para health check do default
+backend1-1  | 2025/07/21 03:08:53 Pagamento 8979f596-2e9f-48b9-b3a1-b56464487299 processado com sucesso pelo default
+backend2-1  | [GIN] 2025/07/21 - 03:08:53 | 200 |      46.708µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:53 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:53 Pagamento b7114df3-6169-455e-9129-bda863ac37f4 processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:53 | 200 |      48.811µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:53 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | 2025/07/21 03:08:53 Rate limit excedido para health check do default
+backend1-1  | 2025/07/21 03:08:53 Pagamento 9b7797f7-098f-4320-8f5a-aa2d14fe5fe3 processado com sucesso pelo default
+backend2-1  | [GIN] 2025/07/21 - 03:08:53 | 200 |       62.66µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:53 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:53 Pagamento beda25b8-101d-4c12-9e34-bf1f060bd5aa processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:53 | 200 |      77.185µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:53 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | 2025/07/21 03:08:53 Rate limit excedido para health check do default
+backend1-1  | 2025/07/21 03:08:53 Pagamento 82f5a455-79d2-4297-83ce-74e07e99f265 processado com sucesso pelo default
+backend2-1  | [GIN] 2025/07/21 - 03:08:53 | 200 |      52.515µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:53 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:53 Pagamento 338879fd-6ca5-4a9b-a6ad-395a62804d90 processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:53 | 200 |      64.704µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:53 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | 2025/07/21 03:08:53 Rate limit excedido para health check do default
+backend1-1  | 2025/07/21 03:08:53 Pagamento e001ff54-49e5-40a9-bc7d-6080e845fe23 processado com sucesso pelo default
+backend2-1  | [GIN] 2025/07/21 - 03:08:53 | 200 |      61.137µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:53 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:53 Pagamento 330ad268-1b9c-460f-a06d-c31c2be4a021 processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:53 | 200 |      57.672µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:53 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | 2025/07/21 03:08:53 Rate limit excedido para health check do default
+backend1-1  | 2025/07/21 03:08:53 Pagamento 3b0c4ba3-a4b0-4ed2-a3cc-73d64d1aa532 processado com sucesso pelo default
+backend2-1  | [GIN] 2025/07/21 - 03:08:53 | 200 |      67.317µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:53 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:53 Pagamento 8e906043-5dcc-41c7-8ca8-cf94afaa9996 processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:53 | 200 |       46.77µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:53 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | 2025/07/21 03:08:53 Rate limit excedido para health check do default
+backend1-1  | 2025/07/21 03:08:53 Pagamento 282be2dc-27b4-4566-ab21-3fe02bb468ef processado com sucesso pelo default
+backend2-1  | [GIN] 2025/07/21 - 03:08:53 | 200 |      49.606µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:53 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:53 Pagamento b2ce71b7-0ef4-407f-9ede-ebcdb13c16d5 processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:53 | 200 |      64.111µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:53 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | 2025/07/21 03:08:53 Rate limit excedido para health check do default
+backend1-1  | 2025/07/21 03:08:53 Pagamento 74338a27-0993-4b2e-af34-87d2a4d264fc processado com sucesso pelo default
+backend2-1  | [GIN] 2025/07/21 - 03:08:53 | 200 |      55.418µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:53 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:53 Pagamento d5f4499d-9d24-444d-8639-0eeef96e2247 processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:53 | 200 |      53.725µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:53 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | 2025/07/21 03:08:53 Rate limit excedido para health check do default
+backend1-1  | 2025/07/21 03:08:53 Pagamento 68a3af88-8317-4310-8881-2ad22abcc41c processado com sucesso pelo default
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:53 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | [GIN] 2025/07/21 - 03:08:53 | 200 |      67.265µs |      172.19.0.1 | POST     "/payments"
+backend2-1  | 2025/07/21 03:08:53 Pagamento 69efa9fa-5a5a-4dfa-9305-8b4bd8ddfd22 processado com sucesso pelo default
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:53 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | [GIN] 2025/07/21 - 03:08:53 | 200 |      46.494µs |      172.19.0.1 | POST     "/payments"
+backend1-1  | 2025/07/21 03:08:53 Rate limit excedido para health check do default
+backend1-1  | 2025/07/21 03:08:53 Pagamento 40aaf456-9db7-4409-a530-fe89922cf525 processado com sucesso pelo default
+backend2-1  | [GIN] 2025/07/21 - 03:08:53 | 200 |      51.946µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:53 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:53 Pagamento 2c57ae88-8cb2-4326-a790-5095e36b8851 processado com sucesso pelo default
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:53 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | [GIN] 2025/07/21 - 03:08:53 | 200 |      70.776µs |      172.19.0.1 | POST     "/payments"
+backend1-1  | 2025/07/21 03:08:53 Rate limit excedido para health check do default
+backend1-1  | 2025/07/21 03:08:53 Pagamento 1345269a-7f05-4de8-ae76-03f876600ef9 processado com sucesso pelo default
+backend2-1  | [GIN] 2025/07/21 - 03:08:53 | 200 |      87.501µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:53 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:53 Pagamento 1d8a03ac-ef17-4c4f-ae44-a9568dac0b2d processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:53 | 200 |      60.021µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:53 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | 2025/07/21 03:08:53 Rate limit excedido para health check do default
+backend1-1  | 2025/07/21 03:08:53 Pagamento ffab5381-3509-4cf5-ade4-1cc1927a2621 processado com sucesso pelo default
+backend2-1  | [GIN] 2025/07/21 - 03:08:53 | 200 |      47.711µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:53 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:53 Pagamento 848f7f0f-2a6e-49ea-8905-a8714be0ed03 processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:53 | 200 |      53.352µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:53 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | 2025/07/21 03:08:53 Rate limit excedido para health check do default
+backend1-1  | 2025/07/21 03:08:53 Pagamento 7b30f965-32e8-41bb-a2a1-180cc4f4606f processado com sucesso pelo default
+backend2-1  | [GIN] 2025/07/21 - 03:08:53 | 200 |      62.744µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:53 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:53 Pagamento f8579946-4ce7-4702-81ee-63d620ac4925 processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:53 | 200 |      49.283µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:53 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | 2025/07/21 03:08:53 Rate limit excedido para health check do default
+backend1-1  | 2025/07/21 03:08:53 Pagamento 8065e71d-6e92-4d89-9957-322c3a95e89f processado com sucesso pelo default
+backend2-1  | [GIN] 2025/07/21 - 03:08:53 | 200 |      48.628µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:53 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:53 Pagamento 6bbb4408-658b-46b1-8981-fc501330d8c6 processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:53 | 200 |      48.496µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:53 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | 2025/07/21 03:08:53 Rate limit excedido para health check do default
+backend1-1  | 2025/07/21 03:08:53 Pagamento 060f049e-0f31-42b6-8cc8-9cc6f9854cdf processado com sucesso pelo default
+backend2-1  | [GIN] 2025/07/21 - 03:08:53 | 200 |      66.224µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:53 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:53 Pagamento 815b48e8-b3b8-44cf-bf6f-9dee5097d913 processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:53 | 200 |      50.153µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:53 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | 2025/07/21 03:08:53 Rate limit excedido para health check do default
+backend1-1  | 2025/07/21 03:08:53 Pagamento 8e78cc33-d7b1-4368-97cd-7399728d7739 processado com sucesso pelo default
+backend2-1  | [GIN] 2025/07/21 - 03:08:53 | 200 |      60.672µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:53 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:53 Pagamento 9bdacd47-92c7-4bc7-b148-86df05117fdc processado com sucesso pelo default
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:53 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | [GIN] 2025/07/21 - 03:08:53 | 200 |      59.811µs |      172.19.0.1 | POST     "/payments"
+backend1-1  | 2025/07/21 03:08:53 Rate limit excedido para health check do default
+backend1-1  | 2025/07/21 03:08:53 Pagamento 6b3ab7a7-8188-4463-8a82-cedd337e7511 processado com sucesso pelo default
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:53 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | [GIN] 2025/07/21 - 03:08:53 | 200 |       47.09µs |      172.19.0.1 | POST     "/payments"
+backend2-1  | 2025/07/21 03:08:53 Pagamento ec12bd8a-77f1-4ac1-933b-623b8ca77780 processado com sucesso pelo default
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:53 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | [GIN] 2025/07/21 - 03:08:53 | 200 |      50.043µs |      172.19.0.1 | POST     "/payments"
+backend1-1  | 2025/07/21 03:08:53 Rate limit excedido para health check do default
+backend1-1  | 2025/07/21 03:08:53 Pagamento 584174f2-a2e2-4b78-88ce-e49aba1c994c processado com sucesso pelo default
+backend2-1  | [GIN] 2025/07/21 - 03:08:53 | 200 |      46.391µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:53 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:53 Pagamento 0d1ec011-6996-46a8-a08a-b17c93cf0e2e processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:53 | 200 |      73.629µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:53 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | 2025/07/21 03:08:53 Rate limit excedido para health check do default
+backend1-1  | 2025/07/21 03:08:53 Pagamento c7d7ffa3-df10-4e2c-b303-68e4312410b0 processado com sucesso pelo default
+backend2-1  | [GIN] 2025/07/21 - 03:08:53 | 200 |      47.723µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:53 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:53 Pagamento e25202d9-898f-4026-b0d6-9a7f2193ab6e processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:53 | 200 |      72.781µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:53 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | 2025/07/21 03:08:53 Rate limit excedido para health check do default
+backend1-1  | 2025/07/21 03:08:53 Pagamento 5377fb4b-ae77-4591-a4d2-e13664fff9e5 processado com sucesso pelo default
+backend2-1  | [GIN] 2025/07/21 - 03:08:53 | 200 |      59.409µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:53 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:53 Pagamento 51fedcb2-b071-47e1-ade5-ed88debb5483 processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:53 | 200 |      48.006µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:53 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | 2025/07/21 03:08:53 Rate limit excedido para health check do default
+backend2-1  | [GIN] 2025/07/21 - 03:08:53 | 200 |      46.448µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:53 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | 2025/07/21 03:08:53 Pagamento 079ee95e-e5e3-4554-94ff-b3570076a31f processado com sucesso pelo default
+backend2-1  | 2025/07/21 03:08:53 Pagamento 54ddd492-3c92-43b3-9ad9-99d28dae573d processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:54 | 200 |      69.235µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:54 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | 2025/07/21 03:08:54 Rate limit excedido para health check do default
+backend1-1  | 2025/07/21 03:08:54 Pagamento a6c53d00-7c07-4317-9a8f-e3522f0986de processado com sucesso pelo default
+backend2-1  | [GIN] 2025/07/21 - 03:08:54 | 200 |      61.889µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:54 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:54 Rate limit excedido para health check do default
+backend2-1  | 2025/07/21 03:08:54 Pagamento 81d66b41-55ca-4cf8-a219-694ea7ff7047 processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:54 | 200 |      53.564µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:54 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | 2025/07/21 03:08:54 Rate limit excedido para health check do default
+backend1-1  | 2025/07/21 03:08:54 Pagamento 7ebadb87-2931-48a5-93ff-6e75c852ae24 processado com sucesso pelo default
+backend2-1  | [GIN] 2025/07/21 - 03:08:54 | 200 |      66.019µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:54 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:54 Rate limit excedido para health check do default
+backend2-1  | 2025/07/21 03:08:54 Pagamento 9b818cd7-7bac-487b-9af4-defb15646062 processado com sucesso pelo default
+backend1-1  | 2025/07/21 03:08:54 Health check atualizado para default: failing=false, minResponseTime=0
+backend1-1  | 2025/07/21 03:08:54 Pagamento 8dc741da-a70e-4352-83d3-be0c98cc8db3 processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:54 | 200 |      45.752µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:54 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | 2025/07/21 03:08:54 Pagamento 510b38cc-8bba-4176-a7c0-25772db2da40 processado com sucesso pelo default
+backend2-1  | [GIN] 2025/07/21 - 03:08:54 | 200 |      67.201µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:54 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | [GIN] 2025/07/21 - 03:08:54 | 200 |       51.22µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:54 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | 2025/07/21 03:08:54 Pagamento c0359bdc-5a31-4f88-9301-b80a18e89707 processado com sucesso pelo default
+backend2-1  | [GIN] 2025/07/21 - 03:08:54 | 200 |      65.264µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:54 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:54 Rate limit excedido para health check do default
+backend2-1  | 2025/07/21 03:08:54 Pagamento c7f88014-ee61-4bb6-a139-5c7e64d7e43b processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:54 | 200 |      50.283µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:54 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | 2025/07/21 03:08:54 Pagamento efaf5829-a97e-4fb0-8ab0-9868c3e049ea processado com sucesso pelo default
+backend2-1  | [GIN] 2025/07/21 - 03:08:54 | 200 |      65.656µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:54 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:54 Rate limit excedido para health check do default
+backend2-1  | 2025/07/21 03:08:54 Pagamento cef4f29a-4f0f-4ab0-a4ba-90fd21b3bce3 processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:54 | 200 |      62.688µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:54 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | 2025/07/21 03:08:54 Pagamento eaf31c7c-c1db-434b-91a5-93285b189d5b processado com sucesso pelo default
+backend2-1  | [GIN] 2025/07/21 - 03:08:54 | 200 |      70.041µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:54 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:54 Rate limit excedido para health check do default
+backend2-1  | 2025/07/21 03:08:54 Pagamento d814e909-a866-49cb-8ea9-3202e1e539c6 processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:54 | 200 |      58.528µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:54 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | 2025/07/21 03:08:54 Pagamento 757cb1e8-2171-4931-bba2-7583e301207f processado com sucesso pelo default
+backend2-1  | [GIN] 2025/07/21 - 03:08:54 | 200 |      63.367µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:54 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:54 Rate limit excedido para health check do default
+backend2-1  | 2025/07/21 03:08:54 Pagamento caa7b6f3-0851-4d2d-b278-84c2ecbc5ad9 processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:54 | 200 |       47.57µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:54 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | 2025/07/21 03:08:54 Pagamento 6886b6b3-9d7e-4937-a54f-e229f0221bd4 processado com sucesso pelo default
+backend2-1  | [GIN] 2025/07/21 - 03:08:54 | 200 |      58.564µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:54 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:54 Rate limit excedido para health check do default
+backend2-1  | 2025/07/21 03:08:54 Pagamento 9284de08-f154-4a51-8028-1c110abda135 processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:54 | 200 |      75.022µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:54 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | 2025/07/21 03:08:54 Pagamento ef6ca003-a3ce-45b7-8c6b-22c14f01c815 processado com sucesso pelo default
+backend2-1  | [GIN] 2025/07/21 - 03:08:54 | 200 |      46.586µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:54 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:54 Rate limit excedido para health check do default
+backend2-1  | 2025/07/21 03:08:54 Pagamento 0c3e6348-0c2d-460b-9934-8c1fe6868e80 processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:54 | 200 |      52.382µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:54 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | 2025/07/21 03:08:54 Pagamento e9217e32-039c-4510-8fe6-807bed5f91e8 processado com sucesso pelo default
+backend2-1  | [GIN] 2025/07/21 - 03:08:54 | 200 |      66.074µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:54 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:54 Rate limit excedido para health check do default
+backend2-1  | 2025/07/21 03:08:54 Pagamento 0f902931-21e7-420b-8c05-d8298bca8cc6 processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:54 | 200 |      69.835µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:54 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | 2025/07/21 03:08:54 Pagamento 5e647b47-934f-4281-9d3f-d97d709fa310 processado com sucesso pelo default
+backend2-1  | [GIN] 2025/07/21 - 03:08:54 | 200 |      49.827µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:54 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:54 Rate limit excedido para health check do default
+backend2-1  | 2025/07/21 03:08:54 Pagamento 9d766769-0cf2-4e8b-a02d-ef44f2145866 processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:54 | 200 |      54.829µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:54 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | 2025/07/21 03:08:54 Pagamento ca0d7d7a-8fc3-40de-8a4f-23740e542b5a processado com sucesso pelo default
+backend2-1  | [GIN] 2025/07/21 - 03:08:54 | 200 |      60.702µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:54 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:54 Rate limit excedido para health check do default
+backend2-1  | 2025/07/21 03:08:54 Pagamento 2515ede2-6ac6-4774-88af-2189edbcda4e processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:54 | 200 |      52.532µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:54 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | 2025/07/21 03:08:54 Pagamento 772a64f4-7fdd-4077-acf9-65b08adc6a28 processado com sucesso pelo default
+backend2-1  | [GIN] 2025/07/21 - 03:08:54 | 200 |      58.662µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:54 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:54 Rate limit excedido para health check do default
+backend2-1  | 2025/07/21 03:08:54 Pagamento b4bd90e1-95e1-42e6-b37e-5e4111d9a7e9 processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:54 | 200 |      67.999µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:54 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | 2025/07/21 03:08:54 Pagamento 07c5328f-a845-4e80-ab67-247de1bcdb66 processado com sucesso pelo default
+backend2-1  | [GIN] 2025/07/21 - 03:08:54 | 200 |      49.794µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:54 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:54 Rate limit excedido para health check do default
+backend2-1  | 2025/07/21 03:08:54 Pagamento 1b365017-bb3f-4287-abc9-1932befa1b2d processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:54 | 200 |      49.472µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:54 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | 2025/07/21 03:08:54 Pagamento 1def7fcf-956e-4e14-8606-8953e14c4d76 processado com sucesso pelo default
+backend2-1  | [GIN] 2025/07/21 - 03:08:54 | 200 |      56.478µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:54 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:54 Rate limit excedido para health check do default
+backend2-1  | 2025/07/21 03:08:54 Pagamento 1c1413cf-4815-4a0b-87c1-024c6f6d2c60 processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:54 | 200 |      73.647µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:54 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | 2025/07/21 03:08:54 Pagamento d5eb0b95-c931-4fbd-afd7-f47b3cb63aa0 processado com sucesso pelo default
+backend2-1  | [GIN] 2025/07/21 - 03:08:54 | 200 |      47.559µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:54 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:54 Rate limit excedido para health check do default
+backend2-1  | 2025/07/21 03:08:54 Pagamento ded447be-0a96-4578-9ea4-10fc8a995c95 processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:54 | 200 |      64.812µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:54 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | 2025/07/21 03:08:54 Pagamento 14155af5-a370-43b6-8ef4-45ae37073a30 processado com sucesso pelo default
+backend2-1  | [GIN] 2025/07/21 - 03:08:54 | 200 |      47.409µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:54 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:54 Rate limit excedido para health check do default
+backend2-1  | 2025/07/21 03:08:54 Pagamento 3ea2bd21-eba8-4577-ae1b-8e74d408ebb0 processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:54 | 200 |      51.181µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:54 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | 2025/07/21 03:08:54 Pagamento db490899-e32a-4265-819e-bf08bbd67dba processado com sucesso pelo default
+backend2-1  | [GIN] 2025/07/21 - 03:08:54 | 200 |      58.036µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:54 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:54 Rate limit excedido para health check do default
+backend2-1  | 2025/07/21 03:08:54 Pagamento f7426b7c-9713-4423-a00c-9b453689abed processado com sucesso pelo default
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:54 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | [GIN] 2025/07/21 - 03:08:54 | 200 |      63.145µs |      172.19.0.1 | POST     "/payments"
+backend1-1  | 2025/07/21 03:08:54 Pagamento 90931f37-6f93-403a-ade6-861a86864e16 processado com sucesso pelo default
+backend2-1  | [GIN] 2025/07/21 - 03:08:54 | 200 |      61.861µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:54 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:54 Rate limit excedido para health check do default
+backend2-1  | 2025/07/21 03:08:54 Pagamento 69dd5e14-52ef-4b1c-9e18-d00709f9c832 processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:54 | 200 |      47.173µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:54 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | 2025/07/21 03:08:54 Pagamento 12f509f8-870a-4374-ace1-3c057a773127 processado com sucesso pelo default
+backend2-1  | [GIN] 2025/07/21 - 03:08:54 | 200 |      48.239µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:54 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:54 Rate limit excedido para health check do default
+backend2-1  | 2025/07/21 03:08:54 Pagamento d6aa7e09-a6fe-43fe-ad6a-ab16bbdb4110 processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:54 | 200 |      47.147µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:54 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | 2025/07/21 03:08:54 Pagamento 618457a7-aa57-4795-8537-960e9c3abe55 processado com sucesso pelo default
+backend2-1  | [GIN] 2025/07/21 - 03:08:54 | 200 |      55.969µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:54 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:54 Rate limit excedido para health check do default
+backend2-1  | 2025/07/21 03:08:54 Pagamento 0dccb10a-4799-4412-953b-8cdb55a32c8c processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:54 | 200 |      58.364µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:54 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | 2025/07/21 03:08:54 Pagamento 589b67a5-2d6f-4179-87c4-6c904d66016f processado com sucesso pelo default
+backend2-1  | [GIN] 2025/07/21 - 03:08:54 | 200 |       47.15µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:54 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:54 Rate limit excedido para health check do default
+backend2-1  | 2025/07/21 03:08:54 Pagamento 0db864cb-a07a-460e-9c29-3f1da39b5e6d processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:54 | 200 |       55.18µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:54 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | 2025/07/21 03:08:54 Pagamento 0c83706d-224a-407d-9928-3c8ddd52127e processado com sucesso pelo default
+backend2-1  | [GIN] 2025/07/21 - 03:08:54 | 200 |      46.953µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:54 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:54 Rate limit excedido para health check do default
+backend2-1  | 2025/07/21 03:08:54 Pagamento 34752998-d906-40fc-b8df-bdddc1605351 processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:54 | 200 |      54.233µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:54 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | 2025/07/21 03:08:54 Pagamento b2b716dd-ed41-4488-9a91-d50e49d2d1c7 processado com sucesso pelo default
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:54 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | [GIN] 2025/07/21 - 03:08:54 | 200 |      63.796µs |      172.19.0.1 | POST     "/payments"
+backend2-1  | 2025/07/21 03:08:54 Rate limit excedido para health check do default
+backend2-1  | 2025/07/21 03:08:54 Pagamento 30ca2311-9256-47fb-8270-444a4926504b processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:54 | 200 |      49.653µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:54 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | 2025/07/21 03:08:54 Pagamento 6d994a71-a7c7-44e1-a9dc-d2f865727137 processado com sucesso pelo default
+backend2-1  | [GIN] 2025/07/21 - 03:08:54 | 200 |      52.485µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:54 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:54 Rate limit excedido para health check do default
+backend2-1  | 2025/07/21 03:08:54 Pagamento 74a9bbcf-547b-4b37-b72c-bd1b9eaac36a processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:54 | 200 |      49.128µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:54 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | 2025/07/21 03:08:54 Pagamento bef38397-4a2d-4bc6-812d-2ed155d06cb5 processado com sucesso pelo default
+backend2-1  | [GIN] 2025/07/21 - 03:08:54 | 200 |      68.446µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:54 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:54 Rate limit excedido para health check do default
+backend2-1  | 2025/07/21 03:08:54 Pagamento 5f25d761-001e-47e1-ad94-3b591b167918 processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:54 | 200 |      54.838µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:54 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | 2025/07/21 03:08:54 Pagamento 80bb2c8e-fb3c-4520-a109-8714a6d93ea3 processado com sucesso pelo default
+backend2-1  | [GIN] 2025/07/21 - 03:08:54 | 200 |      56.534µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:54 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:54 Rate limit excedido para health check do default
+backend2-1  | 2025/07/21 03:08:54 Pagamento 18be1715-c9c2-4647-8169-30dff05fad7a processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:54 | 200 |       64.82µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:54 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | 2025/07/21 03:08:54 Pagamento fb9ee66a-5c3e-4754-901a-7c0bde164988 processado com sucesso pelo default
+backend2-1  | [GIN] 2025/07/21 - 03:08:55 | 200 |      78.621µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:55 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | [GIN] 2025/07/21 - 03:08:55 | 200 |       47.36µs |      172.19.0.1 | POST     "/payments"
+backend2-1  | 2025/07/21 03:08:55 Rate limit excedido para health check do default
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:55 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:55 Pagamento 37b69995-e70b-4355-bec1-1d7bcf3d86ce processado com sucesso pelo default
+backend1-1  | 2025/07/21 03:08:55 Pagamento 7d34b002-e8f0-4311-8326-ff3715d75c1b processado com sucesso pelo default
+backend2-1  | [GIN] 2025/07/21 - 03:08:55 | 200 |      72.617µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:55 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:55 Rate limit excedido para health check do default
+backend2-1  | 2025/07/21 03:08:55 Pagamento bf5b1cd9-71e6-4a89-bd70-27a8e88aa500 processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:55 | 200 |      52.059µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:55 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | 2025/07/21 03:08:55 Pagamento 48becb9a-9d46-4ca4-ae42-debb6bd906fb processado com sucesso pelo default
+backend2-1  | [GIN] 2025/07/21 - 03:08:55 | 200 |      74.197µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:55 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:55 Rate limit excedido para health check do default
+backend2-1  | 2025/07/21 03:08:55 Pagamento b2294633-53ab-4889-9e02-32edfd690aa9 processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:55 | 200 |       50.25µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:55 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | 2025/07/21 03:08:55 Pagamento 947760cb-5327-4f03-80d5-e71609500b91 processado com sucesso pelo default
+backend2-1  | [GIN] 2025/07/21 - 03:08:55 | 200 |      48.461µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:55 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:55 Rate limit excedido para health check do default
+backend2-1  | 2025/07/21 03:08:55 Pagamento 3bb53167-289c-4f51-bc47-29d3df4c7cce processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:55 | 200 |      48.348µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:55 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | [GIN] 2025/07/21 - 03:08:55 | 200 |      61.731µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:55 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | 2025/07/21 03:08:55 Pagamento ff8c08b7-fa5a-41ba-af09-95264833b82d processado com sucesso pelo default
+backend2-1  | 2025/07/21 03:08:55 Rate limit excedido para health check do default
+backend2-1  | 2025/07/21 03:08:55 Pagamento 7e3fb308-e638-4745-95f0-1560bff7b9d3 processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:55 | 200 |      51.183µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:55 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | 2025/07/21 03:08:55 Pagamento a8b54749-0017-45c8-9c20-47f698d950ae processado com sucesso pelo default
+backend2-1  | [GIN] 2025/07/21 - 03:08:55 | 200 |      46.549µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:55 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:55 Rate limit excedido para health check do default
+backend2-1  | 2025/07/21 03:08:55 Pagamento 19337a93-3a74-4662-9677-f4cca061b953 processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:55 | 200 |      48.322µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:55 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | 2025/07/21 03:08:55 Pagamento 812b1606-17f1-4ac8-8d97-707d8ba60b5e processado com sucesso pelo default
+backend2-1  | [GIN] 2025/07/21 - 03:08:55 | 200 |      53.293µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:55 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:55 Rate limit excedido para health check do default
+backend2-1  | 2025/07/21 03:08:55 Pagamento fb0f3782-cffa-42e8-a6d4-8943ceeacfbc processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:55 | 200 |      59.517µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:55 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | 2025/07/21 03:08:55 Pagamento 18a695c6-7bc9-4083-b3ec-b6396cb4bb9c processado com sucesso pelo default
+backend2-1  | [GIN] 2025/07/21 - 03:08:55 | 200 |      47.358µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:55 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | [GIN] 2025/07/21 - 03:08:55 | 200 |       45.18µs |      172.19.0.1 | POST     "/payments"
+backend2-1  | 2025/07/21 03:08:55 Rate limit excedido para health check do default
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:55 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | 2025/07/21 03:08:55 Pagamento 2c6fc62a-6f32-4996-a0ad-f6dce9ef3d01 processado com sucesso pelo default
+backend2-1  | 2025/07/21 03:08:55 Pagamento 159bb1aa-d2e5-4e3d-a1b1-066b4d29142e processado com sucesso pelo default
+backend2-1  | [GIN] 2025/07/21 - 03:08:55 | 200 |      56.478µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:55 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:55 Rate limit excedido para health check do default
+backend2-1  | 2025/07/21 03:08:55 Pagamento 1b56c87f-ba68-4c49-947e-4116b8494dfd processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:55 | 200 |      57.159µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:55 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | 2025/07/21 03:08:55 Pagamento 95996e77-746b-4ecb-94dd-610efd4aa2d8 processado com sucesso pelo default
+backend2-1  | [GIN] 2025/07/21 - 03:08:55 | 200 |      44.309µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:55 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:55 Rate limit excedido para health check do default
+backend2-1  | 2025/07/21 03:08:55 Pagamento 828b6704-9f09-4369-ae30-e68f24edcfbe processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:55 | 200 |      64.001µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:55 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | 2025/07/21 03:08:55 Pagamento 02854370-b909-4a53-a503-9a7919eb0780 processado com sucesso pelo default
+backend2-1  | [GIN] 2025/07/21 - 03:08:55 | 200 |      63.478µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:55 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:55 Rate limit excedido para health check do default
+backend2-1  | 2025/07/21 03:08:55 Pagamento 29a602f1-689e-42a2-8260-2a72bfb8f126 processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:55 | 200 |      53.171µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:55 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | [GIN] 2025/07/21 - 03:08:55 | 200 |      39.736µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:55 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | 2025/07/21 03:08:55 Pagamento 9a68d7a1-e394-414c-880d-55084436d986 processado com sucesso pelo default
+backend2-1  | 2025/07/21 03:08:55 Rate limit excedido para health check do default
+backend2-1  | 2025/07/21 03:08:55 Pagamento 83d514ee-cafb-45ed-9ada-6e769ba4d0f7 processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:55 | 200 |      50.678µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:55 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | 2025/07/21 03:08:55 Pagamento 49787c79-0e31-4617-ad76-860aafb089aa processado com sucesso pelo default
+backend2-1  | [GIN] 2025/07/21 - 03:08:55 | 200 |      50.895µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:55 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:55 Rate limit excedido para health check do default
+backend2-1  | 2025/07/21 03:08:55 Pagamento b22a35c9-8a8c-43eb-a709-f7f1c4c964bc processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:55 | 200 |      79.782µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:55 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | 2025/07/21 03:08:55 Pagamento 352b5904-313f-4788-ad9b-54eda6f4330a processado com sucesso pelo default
+backend2-1  | [GIN] 2025/07/21 - 03:08:55 | 200 |      50.738µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:55 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:55 Rate limit excedido para health check do default
+backend2-1  | 2025/07/21 03:08:55 Pagamento d9d3cd27-74d7-4840-ba1f-c2fc8b745dde processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:55 | 200 |      48.701µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:55 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | 2025/07/21 03:08:55 Pagamento 79d9ad25-4f80-41b4-91a1-7ab28db3b5ba processado com sucesso pelo default
+backend2-1  | [GIN] 2025/07/21 - 03:08:55 | 200 |      75.628µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:55 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:55 Rate limit excedido para health check do default
+backend2-1  | 2025/07/21 03:08:55 Pagamento 81949feb-ae93-44d2-8435-3331ded9e533 processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:55 | 200 |       57.59µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:55 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | 2025/07/21 03:08:55 Pagamento 19318081-cc2b-4def-9542-72ddb5889958 processado com sucesso pelo default
+backend2-1  | [GIN] 2025/07/21 - 03:08:55 | 200 |      68.872µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:55 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:55 Rate limit excedido para health check do default
+backend2-1  | 2025/07/21 03:08:55 Pagamento cbf36077-94ea-4c1c-94a9-851e40fae9e2 processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:55 | 200 |      56.527µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:55 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | 2025/07/21 03:08:55 Pagamento f2611404-2bd7-42f7-abfa-ad04a9a568fb processado com sucesso pelo default
+backend2-1  | [GIN] 2025/07/21 - 03:08:55 | 200 |      56.454µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:55 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:55 Rate limit excedido para health check do default
+backend2-1  | 2025/07/21 03:08:55 Pagamento fa8bae62-1c9f-4f14-880d-73e2bb82ba50 processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:55 | 200 |      88.665µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:55 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | 2025/07/21 03:08:55 Pagamento 8129b6ce-d20b-404f-a17c-64ef9425eead processado com sucesso pelo default
+backend2-1  | [GIN] 2025/07/21 - 03:08:55 | 200 |      52.878µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:55 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:55 Rate limit excedido para health check do default
+backend2-1  | 2025/07/21 03:08:55 Pagamento 8898706a-68b1-4c86-8281-632ddb2b4e9e processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:55 | 200 |      57.069µs |      172.19.0.1 | POST     "/payments"
+backend2-1  | [GIN] 2025/07/21 - 03:08:55 | 200 |      25.713µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:55 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:55 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:55 Rate limit excedido para health check do default
+backend1-1  | 2025/07/21 03:08:55 Pagamento 45b945a1-bbbc-4ef2-bfe5-e968efb728f9 processado com sucesso pelo default
+backend2-1  | 2025/07/21 03:08:55 Pagamento 886b217b-f988-4ba4-976a-dd11e37f6eef processado com sucesso pelo default
+backend2-1  | [GIN] 2025/07/21 - 03:08:55 | 200 |      69.266µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:55 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:55 Rate limit excedido para health check do default
+backend2-1  | 2025/07/21 03:08:55 Pagamento 5845ff19-414f-4d5e-bb41-d02d25e57d93 processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:55 | 200 |      53.699µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:55 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | 2025/07/21 03:08:55 Pagamento 57807862-1a90-48f4-84bd-27441f23d25a processado com sucesso pelo default
+backend2-1  | [GIN] 2025/07/21 - 03:08:55 | 200 |      55.255µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:55 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:55 Rate limit excedido para health check do default
+backend2-1  | 2025/07/21 03:08:55 Pagamento 82edbc6f-88d4-4218-92cf-b260a22aa09f processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:55 | 200 |      51.243µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:55 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | 2025/07/21 03:08:55 Pagamento 8fed3415-ba16-4b1c-b112-5c6f64843df6 processado com sucesso pelo default
+backend2-1  | [GIN] 2025/07/21 - 03:08:55 | 200 |      48.186µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:55 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:55 Rate limit excedido para health check do default
+backend2-1  | 2025/07/21 03:08:55 Pagamento 07dfe37a-8a09-46b1-84a2-0c381328fe83 processado com sucesso pelo default
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:55 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | [GIN] 2025/07/21 - 03:08:55 | 200 |      46.047µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:55 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | [GIN] 2025/07/21 - 03:08:55 | 200 |      51.639µs |      172.19.0.1 | POST     "/payments"
+backend2-1  | 2025/07/21 03:08:55 Rate limit excedido para health check do default
+backend1-1  | 2025/07/21 03:08:55 Pagamento af0ddb8e-3d6c-4feb-98f0-925c021a43ff processado com sucesso pelo default
+backend2-1  | 2025/07/21 03:08:55 Pagamento 5e630244-c525-4b35-ad6b-efc0c719b539 processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:55 | 200 |       55.61µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:55 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | 2025/07/21 03:08:55 Pagamento 269807b6-58aa-4253-8e0c-2e19671b4416 processado com sucesso pelo default
+backend2-1  | [GIN] 2025/07/21 - 03:08:55 | 200 |      57.428µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:55 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:55 Rate limit excedido para health check do default
+backend2-1  | 2025/07/21 03:08:55 Pagamento c6d23188-7e31-4712-a531-91b3a1325e38 processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:55 | 200 |        47.4µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:55 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | 2025/07/21 03:08:55 Pagamento 0f87d164-eaf3-4207-8cbd-95ab0100a0cb processado com sucesso pelo default
+backend2-1  | [GIN] 2025/07/21 - 03:08:55 | 200 |      54.899µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:55 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:55 Rate limit excedido para health check do default
+backend2-1  | 2025/07/21 03:08:55 Pagamento ea91e681-c947-4299-9347-25afa9dd5c4a processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:55 | 200 |      66.742µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:55 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | 2025/07/21 03:08:55 Pagamento 9c93d1cf-be89-4344-beed-077bd71a6627 processado com sucesso pelo default
+backend2-1  | [GIN] 2025/07/21 - 03:08:55 | 200 |      49.265µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:55 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | [GIN] 2025/07/21 - 03:08:55 | 200 |      65.414µs |      172.19.0.1 | POST     "/payments"
+backend2-1  | 2025/07/21 03:08:55 Rate limit excedido para health check do default
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:55 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:55 Pagamento d3a4eb3f-bf91-46a1-89e3-8015a29c4fbb processado com sucesso pelo default
+backend1-1  | 2025/07/21 03:08:55 Pagamento 860e403c-3460-44e0-9886-684c78151134 processado com sucesso pelo default
+backend2-1  | [GIN] 2025/07/21 - 03:08:55 | 200 |      47.849µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:55 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:55 Rate limit excedido para health check do default
+backend2-1  | 2025/07/21 03:08:55 Pagamento 754656ae-a9a3-4cee-895b-5d4b9c6351b4 processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:55 | 200 |      84.466µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:55 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | 2025/07/21 03:08:55 Pagamento bcf52c09-f38e-4bd5-86d3-089f8a40bd01 processado com sucesso pelo default
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:55 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | [GIN] 2025/07/21 - 03:08:55 | 200 |      47.974µs |      172.19.0.1 | POST     "/payments"
+backend2-1  | 2025/07/21 03:08:55 Rate limit excedido para health check do default
+backend2-1  | 2025/07/21 03:08:55 Pagamento b63f1f6c-d042-4fc5-aa0d-50b37f6ab84b processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:55 | 200 |      53.477µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:55 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | 2025/07/21 03:08:55 Pagamento 31d8f010-d912-4ae7-986a-5f029dc61347 processado com sucesso pelo default
+backend2-1  | [GIN] 2025/07/21 - 03:08:55 | 200 |      48.953µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:55 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:55 Rate limit excedido para health check do default
+backend2-1  | 2025/07/21 03:08:55 Pagamento 455e6e30-a3e2-49d6-8427-7a3d3cb75dd7 processado com sucesso pelo default
+backend2-1  | [GIN] 2025/07/21 - 03:08:55 | 200 |      25.008µs |      172.19.0.1 | POST     "/payments"
+backend1-1  | [GIN] 2025/07/21 - 03:08:55 | 200 |      61.694µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:55 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:55 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:55 Rate limit excedido para health check do default
+backend1-1  | 2025/07/21 03:08:55 Pagamento 57ad9eea-9629-4b37-b6d8-1c2e3706d929 processado com sucesso pelo default
+backend2-1  | 2025/07/21 03:08:55 Pagamento ca56d98b-8257-4c03-9e34-fcb656e86784 processado com sucesso pelo default
+backend2-1  | [GIN] 2025/07/21 - 03:08:55 | 200 |      60.309µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:55 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:55 Rate limit excedido para health check do default
+backend2-1  | 2025/07/21 03:08:55 Pagamento c3117906-f073-4a48-97ac-523583c768a1 processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:55 | 200 |      54.674µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:55 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | 2025/07/21 03:08:55 Pagamento 4889dce7-6afa-4dce-be30-d6e3300e2eea processado com sucesso pelo default
+backend2-1  | [GIN] 2025/07/21 - 03:08:55 | 200 |      50.215µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:55 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:55 Rate limit excedido para health check do default
+backend2-1  | 2025/07/21 03:08:55 Pagamento 1f9dcfe9-26a7-4d61-b578-79b6afb537a6 processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:55 | 200 |      50.971µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:55 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | 2025/07/21 03:08:55 Pagamento 37fc41fc-585d-4145-ae22-faa568fc3df0 processado com sucesso pelo default
+backend2-1  | [GIN] 2025/07/21 - 03:08:55 | 200 |      56.357µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:55 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:55 Rate limit excedido para health check do default
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:55 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:55 Pagamento ea135ede-04e8-444d-a394-5c018ca86d11 processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:55 | 200 |      50.999µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:55 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | [GIN] 2025/07/21 - 03:08:55 | 200 |     300.516µs |      172.19.0.1 | POST     "/payments"
+backend2-1  | 2025/07/21 03:08:55 Rate limit excedido para health check do default
+backend1-1  | 2025/07/21 03:08:55 Pagamento a3ef3b41-d05f-4643-a3db-651ba6c0087c processado com sucesso pelo default
+backend2-1  | 2025/07/21 03:08:55 Pagamento 77dae7dd-66fe-43d4-b411-203354ff42af processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:56 | 200 |      48.056µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:56 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | [GIN] 2025/07/21 - 03:08:56 | 200 |      38.793µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:56 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | 2025/07/21 03:08:56 Pagamento 2965059e-93af-49fd-bb0c-8c8fddab9a00 processado com sucesso pelo default
+backend2-1  | 2025/07/21 03:08:56 Rate limit excedido para health check do default
+backend2-1  | 2025/07/21 03:08:56 Pagamento e6f53da3-7cf3-44ce-94ed-d9606a3f0f78 processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:56 | 200 |      46.248µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:56 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | 2025/07/21 03:08:56 Pagamento d217782a-0710-46c8-bcac-a1019bfed19d processado com sucesso pelo default
+backend2-1  | [GIN] 2025/07/21 - 03:08:56 | 200 |      70.626µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:56 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:56 Rate limit excedido para health check do default
+backend2-1  | 2025/07/21 03:08:56 Pagamento bef998e9-7be3-4b58-b980-61a6c1b4d895 processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:56 | 200 |       63.84µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:56 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | 2025/07/21 03:08:56 Pagamento 00470c90-b4b9-4c60-8c07-efc7b5ceb0c0 processado com sucesso pelo default
+backend2-1  | [GIN] 2025/07/21 - 03:08:56 | 200 |       47.88µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:56 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:56 Rate limit excedido para health check do default
+backend2-1  | 2025/07/21 03:08:56 Pagamento 96a66b32-1627-4413-b22e-eeea8b9360b2 processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:56 | 200 |      48.719µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:56 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | [GIN] 2025/07/21 - 03:08:56 | 200 |      36.571µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:56 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:56 Rate limit excedido para health check do default
+backend1-1  | 2025/07/21 03:08:56 Pagamento 40464e01-d4e1-4884-a67d-cb40b968b69a processado com sucesso pelo default
+backend2-1  | 2025/07/21 03:08:56 Pagamento c98361f9-cdb1-42f2-9824-5dae38efb61b processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:56 | 200 |      88.217µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:56 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | [GIN] 2025/07/21 - 03:08:56 | 200 |      49.171µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:56 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:56 Rate limit excedido para health check do default
+backend1-1  | 2025/07/21 03:08:56 Pagamento da23de85-6e0a-4e8d-8c58-f8d48e603517 processado com sucesso pelo default
+backend2-1  | 2025/07/21 03:08:56 Pagamento 63f444c9-d1b8-4479-bd67-1df71914a331 processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:56 | 200 |      51.499µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:56 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | 2025/07/21 03:08:56 Pagamento 79b88316-a465-4471-bb5e-070419e2064d processado com sucesso pelo default
+backend2-1  | [GIN] 2025/07/21 - 03:08:56 | 200 |      50.757µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:56 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:56 Rate limit excedido para health check do default
+backend2-1  | 2025/07/21 03:08:56 Pagamento f734bf46-ade0-49de-8bfe-146f5a469c29 processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:56 | 200 |      55.629µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:56 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend1-1  | 2025/07/21 03:08:56 Pagamento 81c59787-aa6f-453a-b7f4-fa14a6d8df1f processado com sucesso pelo default
+backend2-1  | [GIN] 2025/07/21 - 03:08:56 | 200 |      48.358µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:56 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | 2025/07/21 03:08:56 Rate limit excedido para health check do default
+backend2-1  | 2025/07/21 03:08:56 Pagamento 1aeb918d-909f-477d-bf93-11a764702602 processado com sucesso pelo default
+backend1-1  | [GIN] 2025/07/21 - 03:08:56 | 200 |      56.375µs |      172.19.0.1 | POST     "/payments"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:56 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+nginx-1     | 172.19.0.1 - - [21/Jul/2025:03:08:56 +0000] "POST /payments HTTP/1.1" 200 30 "-" "Grafana k6/1.1.0"
+backend2-1  | [GIN] 2025/07/21 - 03:08:56 | 200 |      33.971µs |      172.19.0.1 | POST     "/payments"
+backend2-1  | 2025/07/21 03:08:56 Rate limit excedido para health check do default
+log truncated at line 1000

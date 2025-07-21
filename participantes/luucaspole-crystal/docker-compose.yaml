@@ -1,18 +1,23 @@
+x-enviromments: &x-enviromments
+  - SQLITE_PATH: "/dev/shm/database.sqlite3?sync=off&journal_mode=WAL&busy_timeout=1000&cache_size=100000"
+  - AMQP_URL: "amqp://guest:guest@lavinmq:5672/"
+  - BATCH_INTERVAL: "50"
+  - PREFETCH_COUNT: "0"
+  - SHARD_COUNT: "5"
+  - SKIP_DELAY: "true"
+  - PROCESSOR_URL: "http://payment-processor-default:8080"
+  - FALLBACK_URL: "http://payment-processor-fallback:8080"
+  - DISABLE_LOG: "true"
+
 version: '3.4'
 services:
   app1: &app
-    image: docker.io/lukas8219/rinha-de-backend-2025-app:latest
+    image: docker.io/lukas8219/rinha-de-backend-2025-app:main-0ecadfc84-1753043469
     hostname: app1
     restart: unless-stopped
     environment:
-      PROCESSOR_URL: "http://payment-processor-default:8080"
-      FALLBACK_URL: "http://payment-processor-fallback:8080"
-      DISABLE_LOG: "true"
-      SQLITE_PATH: "/dev/shm/database.sqlite3?sync=off&journal_mode=WAL&busy_timeout=1000"
-      AMQP_URL: "amqp://guest:guest@lavinmq:5672/"
-      PREFETCH_COUNT: "0"
-      SHARD_COUNT: "5"
-      SKIP_DELAY: "true"
+      <<: *x-enviromments
+      SOCKET_PATH: "/dev/shm/app1.sock"
     networks:
       - backend
       - payment-processor
@@ -34,14 +39,20 @@ services:
           memory: '30MB'
   app2:
     <<: *app
+    environment:
+      <<: *x-enviromments
+      SOCKET_PATH: "/dev/shm/app2.sock"
     hostname: app2
   app3:
     <<: *app
+    environment:
+      <<: *x-enviromments
+      SOCKET_PATH: "/dev/shm/app3.sock"
     hostname: app3
 
   consumer: &consumer
     <<: *app
-    image: docker.io/lukas8219/rinha-de-backend-2025-worker:latest
+    image: docker.io/lukas8219/rinha-de-backend-2025-app:main-0ecadfc84-1753043469
     hostname: "1"
     deploy:
       resources:
@@ -78,16 +89,24 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '0.05'
+          cpus: '0.1'
           memory: '35MB'
 
   nginx: # Load Balancer
+    ipc: host
     image: nginx:latest
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf:ro
     depends_on:
       - app1
       - app2
+      - app3
+      - lavinmq
+      - consumer
+      - consumer2
+      - consumer3
+      - consumer4
+      - consumer5
     ports:
       - "9999:9999"
     ulimits:

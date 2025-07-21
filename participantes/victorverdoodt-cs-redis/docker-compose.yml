@@ -1,0 +1,106 @@
+services:
+  rinhadebackend-aot:
+    &api
+    hostname: api01
+    image: vyctor17/rinhadebackendaot:2025-redis
+    depends_on:
+      redis:
+        condition: service_healthy
+    networks:
+      - backend
+      - payment-processor
+    healthcheck:
+      test: curl --silent --fail http://localhost:8080/payments-summary || exit 1
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 5s
+    environment:
+      - ConnectionStrings__Redis=redis:6379,allowAdmin=true
+    deploy:
+      resources:
+        limits:
+          cpus: "0.2"
+          memory: "60MB"
+
+  rinhadebackend-aot02:
+    <<: *api 
+    hostname: api02
+
+  rinhadebackend-aot.worker:
+    image: vyctor17/rinhadebackendaotworker:2025-redis
+    networks:
+      - backend
+      - payment-processor
+    depends_on:
+      redis:
+        condition: service_healthy
+    environment:
+      - ConnectionStrings__Redis=redis:6379
+      - Gateways__Primary=http://payment-processor-default:8080
+      - Gateways__Fallback=http://payment-processor-fallback:8080
+      - Workers__ConcurrencyLevel=2
+      - Workers__BatchSize=10
+      - Workers__FlushTimeoutMs=0
+    deploy:
+      resources:
+        limits:
+          cpus: "0.4"
+          memory: "90MB"
+
+  nginx:
+    image: nginx:latest
+    networks:
+      - backend
+      - payment-processor
+    volumes:
+     - ./nginx-conf/default.conf:/etc/nginx/nginx.conf
+    depends_on:
+      rinhadebackend-aot:
+        condition: service_healthy
+      rinhadebackend-aot02:
+        condition: service_healthy
+    ports:
+      - "9999:9999" 
+    deploy:
+      resources:
+        limits:
+          cpus: "0.15"
+          memory: "10MB"
+
+  redis:
+    image: redis:7.2-alpine
+    container_name: redis-cache
+    hostname: redis
+    command:
+      [
+        "redis-server",
+        "--save",
+        "",
+        "--appendonly",
+        "no",
+        "--maxclients",
+        "10000",
+      ]
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+      start_period: 3s
+    ports:
+      - "6379:6379"
+    networks:
+      - backend
+    deploy:
+      resources:
+        limits:
+          cpus: "0.55"
+          memory: "120MB"
+
+networks:
+  backend:
+    driver: bridge
+  payment-processor:
+    external: true
+

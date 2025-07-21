@@ -7,6 +7,5 @@ https://github.com/rodrigocaldeira/rinha_backend_2025
 ## Tecnologias
 - Linguagem: **Elixir**
 - Web Server: **Bandit**
-- Banco de dados: **SQLite3**
 - Mensageria, filas, e processamento assíncrono: **Implementado no projeto**
 

@@ -1,0 +1,135 @@
+
+ Network rinha  Creating
+ Network rinha  Created
+ Container leonardotomas-cs-nginx-1  Creating
+ Container postgres_db  Creating
+ Container redis-cache  Creating
+ Container leonardotomas-cs-nginx-1  Created
+ Container redis-cache  Created
+ Container postgres_db  Created
+ Container leonardotomas-cs-rinhabackend02-1  Creating
+ Container leonardotomas-cs-rinhabackend01-1  Creating
+ Container leonardotomas-cs-rinhabackend02-1  Created
+ Container leonardotomas-cs-rinhabackend01-1  Created
+Attaching to nginx-1, rinhabackend01-1, rinhabackend02-1, postgres_db, redis-cache
+nginx-1           | /docker-entrypoint.sh: /docker-entrypoint.d/ is not empty, will attempt to perform configuration
+nginx-1           | /docker-entrypoint.sh: Looking for shell scripts in /docker-entrypoint.d/
+nginx-1           | /docker-entrypoint.sh: Launching /docker-entrypoint.d/10-listen-on-ipv6-by-default.sh
+nginx-1           | 10-listen-on-ipv6-by-default.sh: info: Getting the checksum of /etc/nginx/conf.d/default.conf
+postgres_db       | The files belonging to this database system will be owned by user "postgres".
+postgres_db       | This user must also own the server process.
+postgres_db       | 
+postgres_db       | The database cluster will be initialized with locale "en_US.utf8".
+postgres_db       | The default database encoding has accordingly been set to "UTF8".
+postgres_db       | The default text search configuration will be set to "english".
+postgres_db       | 
+postgres_db       | Data page checksums are disabled.
+postgres_db       | 
+postgres_db       | fixing permissions on existing directory /var/lib/postgresql/data ... ok
+postgres_db       | creating subdirectories ... ok
+postgres_db       | selecting dynamic shared memory implementation ... posix
+nginx-1           | 10-listen-on-ipv6-by-default.sh: info: Enabled listen on IPv6 in /etc/nginx/conf.d/default.conf
+nginx-1           | /docker-entrypoint.sh: Sourcing /docker-entrypoint.d/15-local-resolvers.envsh
+nginx-1           | /docker-entrypoint.sh: Launching /docker-entrypoint.d/20-envsubst-on-templates.sh
+postgres_db       | selecting default "max_connections" ... 100
+nginx-1           | /docker-entrypoint.sh: Launching /docker-entrypoint.d/30-tune-worker-processes.sh
+redis-cache       | 1:C 21 Jul 2025 02:36:26.389 # WARNING Memory overcommit must be enabled! Without it, a background save or replication may fail under low memory condition. Being disabled, it can also cause failures without low memory condition, see https://github.com/jemalloc/jemalloc/issues/1328. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.
+redis-cache       | 1:C 21 Jul 2025 02:36:26.389 * oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+redis-cache       | 1:C 21 Jul 2025 02:36:26.389 * Redis version=7.2.10, bits=64, commit=00000000, modified=0, pid=1, just started
+redis-cache       | 1:C 21 Jul 2025 02:36:26.389 # Warning: no config file specified, using the default config. In order to specify a config file use redis-server /path/to/redis.conf
+redis-cache       | 1:M 21 Jul 2025 02:36:26.389 * monotonic clock: POSIX clock_gettime
+nginx-1           | /docker-entrypoint.sh: Configuration complete; ready for start up
+redis-cache       | 1:M 21 Jul 2025 02:36:26.390 * Running mode=standalone, port=6379.
+redis-cache       | 1:M 21 Jul 2025 02:36:26.391 * Server initialized
+redis-cache       | 1:M 21 Jul 2025 02:36:26.391 * Ready to accept connections tcp
+postgres_db       | selecting default "shared_buffers" ... 128MB
+nginx-1           | 2025/07/21 02:36:26 [emerg] 1#1: host not found in upstream "rinhabackend01:80" in /etc/nginx/nginx.conf:9
+nginx-1           | nginx: [emerg] host not found in upstream "rinhabackend01:80" in /etc/nginx/nginx.conf:9
+postgres_db       | selecting default time zone ... UTC
+postgres_db       | creating configuration files ... ok
+[Knginx-1 exited with code 1
+postgres_db       | running bootstrap script ... ok
+rinhabackend01-1  | warn: Microsoft.AspNetCore.Hosting.Diagnostics[15]
+rinhabackend01-1  |       Overriding HTTP_PORTS '8080' and HTTPS_PORTS ''. Binding to values defined by URLS instead 'http://+:80'.
+rinhabackend02-1  | warn: Microsoft.AspNetCore.Hosting.Diagnostics[15]
+rinhabackend02-1  |       Overriding HTTP_PORTS '8080' and HTTPS_PORTS ''. Binding to values defined by URLS instead 'http://+:80'.
+rinhabackend01-1  | info: Microsoft.Hosting.Lifetime[14]
+rinhabackend01-1  |       Now listening on: http://[::]:80
+rinhabackend01-1  | info: Microsoft.Hosting.Lifetime[0]
+rinhabackend01-1  |       Application started. Press Ctrl+C to shut down.
+rinhabackend01-1  | info: Microsoft.Hosting.Lifetime[0]
+rinhabackend01-1  |       Hosting environment: Production
+rinhabackend01-1  | info: Microsoft.Hosting.Lifetime[0]
+rinhabackend01-1  |       Content root path: /app
+rinhabackend02-1  | info: Microsoft.Hosting.Lifetime[14]
+rinhabackend02-1  |       Now listening on: http://[::]:80
+rinhabackend02-1  | info: Microsoft.Hosting.Lifetime[0]
+rinhabackend02-1  |       Application started. Press Ctrl+C to shut down.
+rinhabackend02-1  | info: Microsoft.Hosting.Lifetime[0]
+rinhabackend02-1  |       Hosting environment: Production
+rinhabackend02-1  | info: Microsoft.Hosting.Lifetime[0]
+rinhabackend02-1  |       Content root path: /app
+postgres_db       | sh: locale: not found
+postgres_db       | 2025-07-21 02:36:28.589 UTC [35] WARNING:  no usable system locales were found
+postgres_db       | performing post-bootstrap initialization ... ok
+postgres_db       | syncing data to disk ... ok
+postgres_db       | 
+postgres_db       | 
+postgres_db       | Success. You can now start the database server using:
+postgres_db       | 
+postgres_db       |     pg_ctl -D /var/lib/postgresql/data -l logfile start
+postgres_db       | 
+postgres_db       | initdb: warning: enabling "trust" authentication for local connections
+postgres_db       | initdb: hint: You can change this by editing pg_hba.conf or using the option -A, or --auth-local and --auth-host, the next time you run initdb.
+postgres_db       | waiting for server to start....2025-07-21 02:36:31.005 UTC [41] LOG:  starting PostgreSQL 17.5 on x86_64-pc-linux-musl, compiled by gcc (Alpine 14.2.0) 14.2.0, 64-bit
+postgres_db       | 2025-07-21 02:36:31.010 UTC [41] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+postgres_db       | 2025-07-21 02:36:31.030 UTC [44] LOG:  database system was shut down at 2025-07-21 02:36:30 UTC
+postgres_db       | 2025-07-21 02:36:31.040 UTC [41] LOG:  database system is ready to accept connections
+postgres_db       |  done
+postgres_db       | server started
+postgres_db       | CREATE DATABASE
+postgres_db       | 
+postgres_db       | 
+postgres_db       | /usr/local/bin/docker-entrypoint.sh: running /docker-entrypoint-initdb.d/init.sql
+postgres_db       | CREATE TABLE
+postgres_db       | CREATE INDEX
+postgres_db       | 
+postgres_db       | 
+postgres_db       | 2025-07-21 02:36:31.413 UTC [41] LOG:  received fast shutdown request
+postgres_db       | 2025-07-21 02:36:31.419 UTC [41] LOG:  aborting any active transactions
+postgres_db       | waiting for server to shut down....2025-07-21 02:36:31.482 UTC [41] LOG:  background worker "logical replication launcher" (PID 47) exited with exit code 1
+postgres_db       | 2025-07-21 02:36:31.485 UTC [42] LOG:  shutting down
+postgres_db       | 2025-07-21 02:36:31.494 UTC [42] LOG:  checkpoint starting: shutdown immediate
+postgres_db       | 2025-07-21 02:36:31.648 UTC [42] LOG:  checkpoint complete: wrote 927 buffers (5.7%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.076 s, sync=0.054 s, total=0.163 s; sync files=306, longest=0.014 s, average=0.001 s; distance=4276 kB, estimate=4276 kB; lsn=0/191A500, redo lsn=0/191A500
+postgres_db       | 2025-07-21 02:36:31.656 UTC [41] LOG:  database system is shut down
+postgres_db       |  done
+postgres_db       | server stopped
+postgres_db       | 
+postgres_db       | PostgreSQL init process complete; ready for start up.
+postgres_db       | 
+postgres_db       | 2025-07-21 02:36:31.717 UTC [1] LOG:  starting PostgreSQL 17.5 on x86_64-pc-linux-musl, compiled by gcc (Alpine 14.2.0) 14.2.0, 64-bit
+postgres_db       | 2025-07-21 02:36:31.717 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+postgres_db       | 2025-07-21 02:36:31.717 UTC [1] LOG:  listening on IPv6 address "::", port 5432
+postgres_db       | 2025-07-21 02:36:31.735 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+postgres_db       | 2025-07-21 02:36:31.756 UTC [59] LOG:  database system was shut down at 2025-07-21 02:36:31 UTC
+postgres_db       | 2025-07-21 02:36:31.782 UTC [1] LOG:  database system is ready to accept connections
+rinhabackend02-1  | info: Microsoft.Hosting.Lifetime[0]
+rinhabackend02-1  |       Application is shutting down...
+rinhabackend01-1  | info: Microsoft.Hosting.Lifetime[0]
+rinhabackend01-1  |       Application is shutting down...
+[Krinhabackend02-1 exited with code 0
+[Krinhabackend01-1 exited with code 0
+redis-cache       | 1:signal-handler (1753065460) Received SIGTERM scheduling shutdown...
+postgres_db       | 2025-07-21 02:37:40.278 UTC [1] LOG:  received fast shutdown request
+redis-cache       | 1:M 21 Jul 2025 02:37:40.283 * User requested shutdown...
+redis-cache       | 1:M 21 Jul 2025 02:37:40.283 * Saving the final RDB snapshot before exiting.
+postgres_db       | 2025-07-21 02:37:40.294 UTC [1] LOG:  aborting any active transactions
+postgres_db       | 2025-07-21 02:37:40.297 UTC [1] LOG:  background worker "logical replication launcher" (PID 62) exited with exit code 1
+postgres_db       | 2025-07-21 02:37:40.297 UTC [57] LOG:  shutting down
+postgres_db       | 2025-07-21 02:37:40.311 UTC [57] LOG:  checkpoint starting: shutdown immediate
+redis-cache       | 1:M 21 Jul 2025 02:37:40.315 * DB saved on disk
+redis-cache       | 1:M 21 Jul 2025 02:37:40.315 # Redis is now ready to exit, bye bye...
+postgres_db       | 2025-07-21 02:37:40.394 UTC [57] LOG:  checkpoint complete: wrote 41 buffers (0.3%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.025 s, sync=0.031 s, total=0.097 s; sync files=13, longest=0.024 s, average=0.003 s; distance=194 kB, estimate=194 kB; lsn=0/194AD00, redo lsn=0/194AD00
+postgres_db       | 2025-07-21 02:37:40.400 UTC [1] LOG:  database system is shut down
+[Kredis-cache exited with code 0
+[Kpostgres_db exited with code 0

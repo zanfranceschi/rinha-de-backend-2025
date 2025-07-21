@@ -138,11 +138,11 @@ const defaultTotalFeeCounter = new Counter("default_total_fee");
 const fallbackTotalFeeCounter = new Counter("fallback_total_fee");
 
 export async function setup() {
+  await setPPToken("default", token);
+  await setPPToken("fallback", token);
   await resetPPDatabase("default");
   await resetPPDatabase("fallback");
   await resetBackendDatabase();
-  await setPPToken("default", token);
-  await setPPToken("fallback", token);
 }
 
 export async function teardown() {
@@ -201,17 +201,23 @@ export async function checkPayments() {
   const from = new Date(now - 1000 * 10).toISOString();
   const to = new Date(now - 100).toISOString();
 
-  const defaultAdminPaymentsSummary = await getPPPaymentsSummary(
+  const defaultAdminPaymentsSummaryPromise = getPPPaymentsSummary(
     "default",
     from,
     to,
   );
-  const fallbackAdminPaymentsSummary = await getPPPaymentsSummary(
+  const fallbackAdminPaymentsSummaryPromise = getPPPaymentsSummary(
     "fallback",
     from,
     to,
   );
-  const backendPaymentsSummary = await getBackendPaymentsSummary(from, to);
+  const backendPaymentsSummaryPromise = getBackendPaymentsSummary(from, to);
+
+  const [defaultAdminPaymentsSummary, fallbackAdminPaymentsSummary, backendPaymentsSummary] = await Promise.all([
+    defaultAdminPaymentsSummaryPromise,
+    fallbackAdminPaymentsSummaryPromise,
+    backendPaymentsSummaryPromise
+  ]);
 
   const inconsistencies =
     Math.abs(

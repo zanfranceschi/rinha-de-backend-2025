@@ -1,6 +1,6 @@
 services:
   haproxy:
-    image: haproxy:3.2.3-alpine
+    image: haproxy:latest
     command: >
       sh -c "
       echo 'global
@@ -27,19 +27,18 @@ services:
     deploy:
       resources:
         limits:
-          memory: 25M
-          cpus: '0.2'
-  
+          memory: 45M
+          cpus: "0.2"
+
   backend1:
     image: not4rt/rinha-2025-fast:latest
     environment:
       PORT: 8080
-      DATABASE_URL: postgres://payments_user:payments_pass@postgres:5432/payments_db
       DEFAULT_PROCESSOR_URL: http://payment-processor-default:8080
       FALLBACK_PROCESSOR_URL: http://payment-processor-fallback:8080
+      REDIS_URL: redis://valkey
     depends_on:
-      postgres:
-        condition: service_healthy
+      - valkey
     networks:
       - backend
       - payment-processor
@@ -52,19 +51,18 @@ services:
     deploy:
       resources:
         limits:
-          memory: 60M
-          cpus: '0.2'
+          memory: 55M
+          cpus: "0.2"
 
   backend2:
     image: not4rt/rinha-2025-fast:latest
     environment:
       PORT: 8080
-      DATABASE_URL: postgres://payments_user:payments_pass@postgres:5432/payments_db
       DEFAULT_PROCESSOR_URL: http://payment-processor-default:8080
       FALLBACK_PROCESSOR_URL: http://payment-processor-fallback:8080
+      REDIS_URL: redis://valkey
     depends_on:
-      postgres:
-        condition: service_healthy
+      - valkey
     networks:
       - backend
       - payment-processor
@@ -77,19 +75,18 @@ services:
     deploy:
       resources:
         limits:
-          memory: 60M
-          cpus: '0.2'
+          memory: 55M
+          cpus: "0.2"
 
-  worker:
+  worker1:
     image: not4rt/rinha-2025-fast:latest
     environment:
       PORT: 8080
-      DATABASE_URL: postgres://payments_user:payments_pass@postgres:5432/payments_db
       DEFAULT_PROCESSOR_URL: http://payment-processor-default:8080
       FALLBACK_PROCESSOR_URL: http://payment-processor-fallback:8080
+      REDIS_URL: redis://valkey
     depends_on:
-      postgres:
-        condition: service_healthy
+      - valkey
     networks:
       - backend
       - payment-processor
@@ -102,42 +99,61 @@ services:
     deploy:
       resources:
         limits:
-          memory: 90M
-          cpus: '0.4'
-  
-  postgres:
-    image: postgres:17-alpine
-    command: >
-      postgres
-      -c checkpoint_completion_target=0.9
-      -c random_page_cost=1.1
-      -c effective_io_concurrency=200
-      -c logging_collector=off
-      -c log_statement=none
-      -c log_duration=off
-      -c log_connections=off
-      -c log_disconnections=off
-      -c fsync=off
-      -c synchronous_commit=off
-      -c full_page_writes=off
+          memory: 55M
+          cpus: "0.3"
+
+  worker2:
+    image: not4rt/rinha-2025-fast:latest
     environment:
-      POSTGRES_USER: payments_user
-      POSTGRES_PASSWORD: payments_pass
-      POSTGRES_DB: payments_db
-    ports:
-      - "5432:5432"
+      PORT: 8080
+      DEFAULT_PROCESSOR_URL: http://payment-processor-default:8080
+      FALLBACK_PROCESSOR_URL: http://payment-processor-fallback:8080
+      REDIS_URL: redis://valkey
+    depends_on:
+      - valkey
     networks:
       - backend
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U payments_user -d payments_db"]
-      interval: 5s
-      timeout: 5s
-      retries: 5
+      - payment-processor
+    restart: unless-stopped
+    command: >
+      sh -c "
+      ./rust_coroutines_rinha_2025
+      --workers
+      "
     deploy:
       resources:
         limits:
-          memory: 115M
-          cpus: '0.5'
+          memory: 55M
+          cpus: "0.3"
+
+  valkey:
+    image: valkey/valkey:latest
+    command: >
+      valkey-server
+      --save ""
+      --appendonly no
+      --io-threads 2
+      --maxmemory 80mb
+      --maxmemory-policy allkeys-lru
+      --tcp-keepalive 0
+      --timeout 0
+      --tcp-backlog 65535
+      --databases 1
+      --stop-writes-on-bgsave-error no
+      --rdbcompression no
+      --lazyfree-lazy-eviction yes
+      --lazyfree-lazy-expire yes
+      --lazyfree-lazy-server-del yes
+      --replica-lazy-flush yes
+    logging:
+      driver: "none"
+    networks:
+      - backend
+    deploy:
+      resources:
+        limits:
+          memory: 85M # valkey is using less than 15mb :/
+          cpus: "0.3"
 
 networks:
   backend:

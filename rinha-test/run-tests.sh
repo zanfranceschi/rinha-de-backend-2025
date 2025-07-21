@@ -15,9 +15,8 @@ startContainers() {
 
 stopContainers() {
     pushd ../participantes/$1
-        docker compose rm -f
-        docker compose down --volumes
-        docker compose rm -v -f
+        docker compose down -v --remove-orphans
+        docker compose rm -s -v -f
     popd > /dev/null
     pushd ../payment-processor > /dev/null
         docker compose down --volumes > /dev/null
@@ -27,10 +26,6 @@ stopContainers() {
 MAX_REQUESTS=550
 
 while true; do
-    
-    docker image prune -a -f
-    docker volume prune -a -f
-
     for directory in ../participantes/*; do
     (
         git pull
@@ -59,7 +54,7 @@ while true; do
 
             if [ $success -eq 0 ]; then
                 echo "" > $directory/k6.logs
-                k6 run -e MAX_REQUESTS=$MAX_REQUESTS -e PARTICIPANT=$participant --log-output=file=$directory/k6.logs rinha.js
+                k6 run -e MAX_REQUESTS=$MAX_REQUESTS -e PARTICIPANT=$participant -e TOKEN=$(uuidgen) --log-output=file=$directory/k6.logs rinha.js
                 stopContainers $participant
                 echo "======================================="
                 echo "working on $participant"
@@ -69,6 +64,8 @@ while true; do
                 echo "log truncated at line 1000" >> $directory/k6.logs
             else
                 stopContainers $participant
+                echo "[$(date)] Seu backend não respondeu nenhuma das $max_attempts tentativas de GET para http://localhost:9999/payments-summary. Teste abortado." > $directory/error.logs
+                echo "[$(date)] Inspecione o arquivo docker-compose.logs para mais informações." >> $directory/error.logs
                 echo "Could not get a successful response from backend... aborting test for $participant"
             fi
 
@@ -84,27 +81,48 @@ while true; do
 
     date
     echo "generating results preview..."
+
+    PREVIA_RESULTADOS=../PREVIA_RESULTADOS.md
     
-    echo -e "# Prévia do Resultados da Rinha de Backend 2025" > ../PREVIA_RESULTADOS.md
-    echo -e "Atualizado em **$(date)**" >> ../PREVIA_RESULTADOS.md
+    results=$(find ../participantes/*/partial-results.json -size +1b | wc -l)
+    errors=$(find ../participantes/*/partial-results.json -size 0 | wc -l)
+    total=$(find ../participantes/*/partial-results.json | wc -l)
+
+    echo -e "# Prévia do Resultados da Rinha de Backend 2025" > $PREVIA_RESULTADOS
+    echo -e "Atualizado em **$(date)**" >> $PREVIA_RESULTADOS
+    echo -e "$total submissões / $results resultados / $errors submissões com erro" >> $PREVIA_RESULTADOS
     echo -e "*Testes executados com MAX_REQUESTS=$MAX_REQUESTS*."
-    echo -e "\n" >> ../PREVIA_RESULTADOS.md
-    echo -e "| participante | p99 | bônus por desempenho (%) | multa ($) | lucro |" >> ../PREVIA_RESULTADOS.md
-    echo -e "| -- | -- | -- | -- | -- |" >> ../PREVIA_RESULTADOS.md
+    echo -e "\n" >> $PREVIA_RESULTADOS
+    echo -e "| participante | p99 | bônus por desempenho (%) | multa ($) | lucro | submissão |" >> $PREVIA_RESULTADOS
+    echo -e "| -- | -- | -- | -- | -- | -- |" >> $PREVIA_RESULTADOS
 
     for partialResult in ../participantes/*/partial-results.json; do
     (
+        participant=$(echo $partialResult | sed -e 's/..\/participantes\///g' -e 's/\///g' -e 's/partial\-results\.json//g')
+        link="https://github.com/zanfranceschi/rinha-de-backend-2025/tree/main/participantes/$participant"
+        
         if [ -s $partialResult ]; then
-            cat $partialResult | jq -r '(["|", .participante, "|", .p99.valor, "|", .p99.bonus, "|", .multa.total, "|", .total_liquido, "|"]) | @tsv' >> ../PREVIA_RESULTADOS.md
+            cat $partialResult | jq -r '(["|", .participante, "|", .p99.valor, "|", .p99.bonus, "|", .multa.total, "|", .total_liquido, "|", "['$participant']('$link')"]) | @tsv' >> $PREVIA_RESULTADOS
         fi
     )
+    done
+
+    echo -e "### Submissões com Erro" >> $PREVIA_RESULTADOS
+    echo -e "\n" >> $PREVIA_RESULTADOS
+    echo -e "| participante | submissão |" >> $PREVIA_RESULTADOS
+    echo -e "| -- | -- |" >> $PREVIA_RESULTADOS
+    for errorLog in ../participantes/*/error.logs; do
+    (
+        participant=$(echo $errorLog | sed -e 's/..\/participantes\///g' -e 's/\///g' -e 's/error\.logs//g')
+        link="https://github.com/zanfranceschi/rinha-de-backend-2025/tree/main/participantes/$participant"
+        echo "| $participant | [logs]($link) |" >> $PREVIA_RESULTADOS
+    )
+    done
 
     git pull
-    git add ../PREVIA_RESULTADOS.md
+    git add $PREVIA_RESULTADOS
     git commit -m "previa resultados @ $(date)"
     git push
-    done
-    # 5 minutinhos de espera... ninguém morre
-    echo "$(date) - waiting 5 minutes for the next round..."
+    echo "$(date) - waiting some time until next round..."
     sleep 300
 done

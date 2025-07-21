@@ -1,0 +1,76 @@
+services:
+  db:
+    image: postgres:alpine
+    hostname: db
+    environment:
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_USER=root
+      - POSTGRES_DB=rinha
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./script.sql:/docker-entrypoint-initdb.d/script.sql
+    networks:
+      - rinha-back
+    deploy:
+      resources:
+        limits:
+          cpus: "0.40"
+          memory: "100MB"
+
+  api01: &api
+    image: guilhermetiburcio/rinha-2025-gtiburcio:latest
+    hostname: api01
+    ports:
+      - "3001:3000"
+    depends_on:
+      - db
+    environment:
+      - DB_PASS=root
+      - DB_USER=root
+      - DB_HOST=db:5432
+      - DB_NAME=rinha
+      - DEFAULT_HOST=payment-processor-default:8080
+      - FALLBACK_HOST=payment-processor-fallback:8080
+      - RETRY_TIMES=50
+      - RETRY_DELAY=500
+      - DEFAULT_TIMEOUT=3000
+      - FALLBACK_TIMEOUT=3000
+    networks:
+      - rinha-back
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          cpus: "0.45"
+          memory: "100MB"
+
+  api02:
+    <<: *api
+    hostname: api02
+    ports:
+      - "3002:3000"
+
+  nginx:
+    image: nginx:1.27.0-alpine
+    volumes:
+      - ./nginx.config:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - api01
+      - api02
+    ports:
+      - "9999:9999"
+    networks:
+      - rinha-back
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          cpus: "0.20"
+          memory: "50MB"
+
+networks:
+  rinha-back:
+    driver: bridge
+  payment-processor:
+    external: true
