@@ -7,7 +7,7 @@ startContainers() {
     pushd ../participantes/$1 > /dev/null
         services=$(docker compose config --services | wc -l)
         echo "" > docker-compose.logs
-        nohup docker compose up --build >> docker-compose.logs &
+        nohup docker compose up --build --force-recreate --pull always >> docker-compose.logs &
     popd > /dev/null
     #expectedServicesUp=$(( services + 4 ))
     #servicesUp=$(docker ps | grep ' Up ' | wc -l)
