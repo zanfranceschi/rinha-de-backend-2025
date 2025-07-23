@@ -373,6 +373,7 @@ As tabelas abaixo oferem um resumo para facilitar a visão geral da solução.
 | -                                 | -               |
 | POST /payments                    | Intermedia a requisição para o processamento dum pagamento. |
 | GET /payments-summary             | Exibe detalhes das requisições de processamento de pagamentos. |
+| POST /purge-payments              | Elimina todos os pagamentos da base de dados. |
 
 
 **Endpoints disponíveis nos dois serviços Payment Processor**
