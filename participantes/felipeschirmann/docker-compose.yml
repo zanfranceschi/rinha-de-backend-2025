@@ -15,17 +15,17 @@ services:
       # These values override the defaults set in application.properties.
 
       # --- HTTP Client: Timeouts (tuned for fail-fast behavior) ---
-      - app.http-client.connect-timeout-ms=250
-      - app.http-client.response-timeout-ms=650
+      - app.http-client.connect-timeout-ms=${APP_CONNECT_TIMEOUT_MS:-250}
+      - app.http-client.response-timeout-ms=${APP_RESPONSE_TIMEOUT_MS:-650}
 
       # --- HTTP Client: Connection Pool ---
-      - app.http-client.pool.max-total=400
-      - app.http-client.pool.max-per-route=200
+      - app.http-client.pool.max-total=${APP_POOL_MAX_TOTAL:-200}
+      - app.http-client.pool.max-per-route=${APP_POOL_MAX_PER_ROUTE:-100}
 
       # --- Queue and Workers ---
-      - app.workers.count=1000000
-      - app.queue.capacity=10000000
-      - app.queue.drain-timeout-ms=1200
+      - app.workers.count=${APP_WORKERS_COUNT:-8}
+      - app.queue.capacity=${APP_QUEUE_CAPACITY:-7500}
+      - app.queue.drain-timeout-ms=${APP_DRAIN_TIMEOUT_MS:-1200}
       - app.queue.contention-threshold-percent=90
       - app.payment.high-value-threshold=100.00
 
@@ -33,10 +33,10 @@ services:
       #                  TOMCAT PERFORMANCE TUNING
       # ===================================================================
       # Increases the maximum number of worker threads the Tomcat server can use.
-      - server.tomcat.threads.max=10000
+      - server.tomcat.threads.max=1000
 
       # Increases the size of the connection queue.
-      - server.tomcat.accept-count=5000
+      - server.tomcat.accept-count=500
 
     # Maps port 9999 of the host machine to port 8080 inside the container.
     ports:
