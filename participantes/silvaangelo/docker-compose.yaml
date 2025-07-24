@@ -8,8 +8,6 @@ services:
       --appendonly no
       --maxclients 20000
       --hz 1000
-    tmpfs:
-      - /data
     networks:
       - rinha-net
       - payment-processor
@@ -25,7 +23,7 @@ services:
           memory: "50MB"
 
   api01: &api
-    image: silvaangelolambda/rinha-api-2025:20250723
+    image: silvaangelolambda/rinha-api-2025:20250723-2
     command: >
       bun --optimize-for-size --heap-limit=200 --gc-interval=1000 --gc-treshhold=0.7 /api/index.js
     environment:
