@@ -9,8 +9,10 @@ x-enviromments: &x-enviromments
 version: '3.4'
 services:
   app1: &app
-    image: docker.io/lukas8219/rinha-de-backend-2025-app:main-1ca9312f1-1753450997
-    user: "1001:1001"
+    # image: lukas8219/rinha-be-2023-q3:latest
+    build:
+      context: .
+      target: app
     hostname: app1
     restart: unless-stopped
     environment:
@@ -40,7 +42,6 @@ services:
           memory: '50MB'
   app2:
     <<: *app
-    user: "1001:1001"
     environment:
       <<: *x-enviromments
       SOCKET_PATH: "/shared/sockets/app2.sock"
@@ -55,7 +56,6 @@ services:
 
   consumer: &consumer
     <<: *app
-    user: "1001:1001"
     hostname: "1"
     environment:
       <<: *x-enviromments
@@ -67,11 +67,13 @@ services:
       resources:
         limits:
           cpus: '0.9'
-          memory: '140MB'
+          memory: '150MB'
         reservations:
           cpus: '0.9'
-          memory: '140MB'
-    image: docker.io/lukas8219/rinha-de-backend-2025-worker:main-1ca9312f1-1753450997
+          memory: '150MB'
+    build:
+      context: .
+      target: worker
     depends_on:
       lavinmq:
         condition: service_healthy
@@ -101,13 +103,9 @@ services:
 
   nginx: # Load Balancer
     image: nginx:latest
-    user: "1001:1001"
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf:ro
       - unix_sockets:/shared/sockets
-      - nginx_cache:/var/cache/nginx
-      - nginx_run:/var/run
-      - nginx_log:/var/log/nginx
     depends_on:
       - app1
       - app2
@@ -132,58 +130,14 @@ services:
           cpus: '0.1'
           memory: '35MB'
 
-  socket-stats:
-    image: alpine:latest
-    depends_on:
-      - nginx
-    volumes:
-      - unix_sockets:/shared/sockets
-    entrypoint: ["/bin/sh", "-c"]
-    restart: no
-    deploy:
-      resources:
-        limits:
-          cpus: '0.1'
-          memory: '6MB'
-        reservations:
-          cpus: '0.1'
-          memory: '6MB'
-    command:
-      - |
-        # Wait for nginx to be up by checking the port
-        echo "nginx is up, statting unix socket files:"
-        stat /shared/sockets/* || echo "No socket files found"
 
 
 volumes:
   unix_sockets:
     driver: local
-    driver_opts:
-      type: tmpfs
-      device: tmpfs
-      o: "uid=1001,gid=1001,mode=0777"
-  nginx_cache:
-    driver: local
-    driver_opts:
-      type: tmpfs
-      device: tmpfs
-      o: "uid=1001,gid=1001,mode=0755"
-  nginx_run:
-    driver: local
-    driver_opts:
-      type: tmpfs
-      device: tmpfs
-      o: "uid=1001,gid=1001,mode=0755"
-  nginx_log:
-    driver: local
-    driver_opts:
-      type: tmpfs
-      device: tmpfs
-      o: "uid=1001,gid=1001,mode=0755"
 
 networks:
   backend:
     driver: bridge
   payment-processor:
     external: true
-
