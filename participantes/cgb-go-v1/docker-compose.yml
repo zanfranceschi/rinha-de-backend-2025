@@ -30,6 +30,7 @@ services:
 
   rinha-v1-api:
     image: cicerocg/rinha-v1:latest
+    platform: linux/amd64
     container_name: rinha-v1-api
     ports:
       - "9999:8080"
@@ -41,6 +42,8 @@ services:
         condition: service_healthy
     environment:
       - REDIS_URL=rinha-redis:6379
+      - DEFAULT_PROCESSOR_URL=http://payment-processor-default:8080
+      - FALLBACK_PROCESSOR_URL=http://payment-processor-fallback:8080
       - GOMAXPROCS=2
       - GOGC=200
     deploy:
