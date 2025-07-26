@@ -1,7 +1,6 @@
 services:
   backend-1:
     image: gabxdevv/rinha-backend-2025-java:2.0.1
-    container_name: gaxdev-backend-1
     environment:
       RETRY_API_DEFAULT: 14
       WORKER_POOL_SIZE: 21
@@ -31,7 +30,6 @@ services:
 
   backend-2:
     image: gabxdevv/rinha-backend-2025-java:2.0.1
-    container_name: gaxdev-backend-2
     restart: always
     environment:
       RETRY_API_DEFAULT: 14
@@ -63,7 +61,6 @@ services:
   load-balancer:
     image: gabxdevv/loud-balance-diferenciado:1.0.2
     restart: always
-    container_name: gabxdev-load-balance-bolado
     depends_on:
       - backend-1
       - backend-2
