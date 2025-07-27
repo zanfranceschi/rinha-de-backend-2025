@@ -1,6 +1,6 @@
 services:
   backend-1:
-    image: gabxdevv/rinha-backend-2025-java-puro:1.0.2
+    image: gabxdevv/rinha-backend-2025-java-puro:1.0.3
     environment:
       RETRY_API_DEFAULT: 16
       WORKER_POOL_SIZE: 21
@@ -13,7 +13,7 @@ services:
       UDP_CHANNEL_INTERNAL_PORT: 9003
       EXTERNAL_UDP_HOST: backend-2
       EXTERNAL_UDP_PORT: 9004
-      HANDLER_UDP_POOL_SIZE: 3
+      HANDLER_UDP_POOL_SIZE: 4
       JAVA_OPTS: >-
         -server
         -XX:+UseG1GC
@@ -34,7 +34,7 @@ services:
           memory: '120MB'
 
   backend-2:
-    image: gabxdevv/rinha-backend-2025-java-puro:1.0.2
+    image: gabxdevv/rinha-backend-2025-java-puro:1.0.3
     restart: always
     environment:
       RETRY_API_DEFAULT: 16
@@ -48,7 +48,7 @@ services:
       UDP_CHANNEL_INTERNAL_PORT: 9004
       EXTERNAL_UDP_HOST: backend-1
       EXTERNAL_UDP_PORT: 9003
-      HANDLER_UDP_POOL_SIZE: 3
+      HANDLER_UDP_POOL_SIZE: 4
       JAVA_OPTS: >-
         -server
         -XX:+UseG1GC
