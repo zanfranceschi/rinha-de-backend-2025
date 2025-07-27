@@ -1,0 +1,59 @@
+services:
+  payment-lb:
+    image: nginx:1.25-alpine
+    container_name: payment-lb
+    ports:
+      - "9999:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      payment-api-1:
+        condition: service_healthy
+      payment-api-2:
+        condition: service_healthy
+    networks:
+      - backend
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: "100MB"
+
+  payment-api-1: &api
+    image: libardi/rinha-2025-3:latest
+    container_name: payment-api-1
+    hostname: payment-api-1
+    environment: &env
+      ASPNETCORE_ENVIRONMENT: Production
+      ConnectionStrings__OtherService: "http://payment-api-2:8080"
+      PaymentProcessors__Default__BaseUrl: "http://payment-processor-default:8080"
+      PaymentProcessors__Fallback__BaseUrl: "http://payment-processor-fallback:8080"
+    networks:
+      - backend
+      - payment-processor
+    healthcheck:
+      test: ["CMD-SHELL", "curl --fail http://localhost:8080/healthz || exit 1"]
+      interval: 15s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: "125MB"
+
+  payment-api-2:
+    <<: *api
+    container_name: payment-api-2
+    hostname: payment-api-2
+    environment:
+      <<: *env
+      ConnectionStrings__OtherService: "http://payment-api-1:8080"
+
+networks:
+  backend:
+    driver: bridge
+  payment-processor:
+    external: true
