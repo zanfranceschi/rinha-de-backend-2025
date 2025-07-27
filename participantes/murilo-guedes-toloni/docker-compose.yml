@@ -16,11 +16,13 @@ services:
       resources:
         limits:
           cpus: "0.3"
-          memory: "50MB"
+          memory: "43MB"
   api1: &api
     image: enermaxx/rinha-backend:latest
     container_name: springboot-api1
     hostname: api1
+    ports:
+      - "7777:8080"
     environment:
       - HOST_TO_LOCK=api2
       - PORT_TO_LOCK=8080
@@ -36,12 +38,14 @@ services:
       resources:
         limits:
           cpus: "0.60"
-          memory: "150MB"
+          memory: "141MB"
 
   api2:
     <<: *api
     container_name: springboot-api2
     hostname: api2
+    ports:
+      - "7778:8080"
     environment:
       - HOST_TO_LOCK=api1
       - PORT_TO_LOCK=8080
@@ -54,7 +58,7 @@ services:
       resources:
         limits:
           cpus: "0.60"
-          memory: "150MB"
+          memory: "141MB"
 networks:
   backend:
     driver: bridge
