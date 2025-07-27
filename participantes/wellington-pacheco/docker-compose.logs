@@ -2,5 +2,97 @@
  Network wellington-pacheco_rinha-backend-ex  Creating
  Network wellington-pacheco_rinha-backend-ex  Created
  Container rinha-db  Creating
- Container rinha-db  Error response from daemon: Conflict. The container name "/rinha-db" is already in use by container "8f53ea083db73bc1d94fe4955336707e4f843b8c0047d6db0880cb2714992d98". You have to remove (or rename) that container to be able to reuse that name.
-Error response from daemon: Conflict. The container name "/rinha-db" is already in use by container "8f53ea083db73bc1d94fe4955336707e4f843b8c0047d6db0880cb2714992d98". You have to remove (or rename) that container to be able to reuse that name.
+ Container rinha-db  Created
+ Container api-2  Creating
+ Container api-1  Creating
+ Container api-1  Created
+ Container api-2  Created
+ Container wellington-pacheco-lb-1  Creating
+ Container wellington-pacheco-lb-1  Created
+Attaching to api-1, api-2, rinha-db, lb-1
+rinha-db  | The files belonging to this database system will be owned by user "postgres".
+rinha-db  | This user must also own the server process.
+rinha-db  | 
+rinha-db  | The database cluster will be initialized with locale "en_US.utf8".
+rinha-db  | The default database encoding has accordingly been set to "UTF8".
+rinha-db  | The default text search configuration will be set to "english".
+rinha-db  | 
+rinha-db  | Data page checksums are disabled.
+rinha-db  | 
+rinha-db  | fixing permissions on existing directory /var/lib/postgresql/data ... ok
+rinha-db  | creating subdirectories ... ok
+rinha-db  | selecting dynamic shared memory implementation ... posix
+rinha-db  | selecting default "max_connections" ... 100
+rinha-db  | selecting default "shared_buffers" ... 128MB
+rinha-db  | selecting default time zone ... UTC
+rinha-db  | creating configuration files ... ok
+lb-1      | /docker-entrypoint.sh: /docker-entrypoint.d/ is not empty, will attempt to perform configuration
+lb-1      | /docker-entrypoint.sh: Looking for shell scripts in /docker-entrypoint.d/
+lb-1      | /docker-entrypoint.sh: Launching /docker-entrypoint.d/10-listen-on-ipv6-by-default.sh
+lb-1      | 10-listen-on-ipv6-by-default.sh: info: Getting the checksum of /etc/nginx/conf.d/default.conf
+lb-1      | 10-listen-on-ipv6-by-default.sh: info: Enabled listen on IPv6 in /etc/nginx/conf.d/default.conf
+lb-1      | /docker-entrypoint.sh: Sourcing /docker-entrypoint.d/15-local-resolvers.envsh
+lb-1      | /docker-entrypoint.sh: Launching /docker-entrypoint.d/20-envsubst-on-templates.sh
+lb-1      | /docker-entrypoint.sh: Launching /docker-entrypoint.d/30-tune-worker-processes.sh
+lb-1      | /docker-entrypoint.sh: Configuration complete; ready for start up
+rinha-db  | running bootstrap script ... ok
+rinha-db  | sh: locale: not found
+rinha-db  | 2025-07-27 19:49:32.375 UTC [35] WARNING:  no usable system locales were found
+rinha-db  | performing post-bootstrap initialization ... ok
+rinha-db  | initdb: warning: enabling "trust" authentication for local connections
+rinha-db  | initdb: hint: You can change this by editing pg_hba.conf or using the option -A, or --auth-local and --auth-host, the next time you run initdb.
+rinha-db  | syncing data to disk ... ok
+rinha-db  | 
+rinha-db  | 
+rinha-db  | Success. You can now start the database server using:
+rinha-db  | 
+rinha-db  |     pg_ctl -D /var/lib/postgresql/data -l logfile start
+rinha-db  | 
+rinha-db  | waiting for server to start....2025-07-27 19:49:34.989 UTC [41] LOG:  starting PostgreSQL 17.5 on x86_64-pc-linux-musl, compiled by gcc (Alpine 14.2.0) 14.2.0, 64-bit
+rinha-db  | 2025-07-27 19:49:34.990 UTC [41] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+rinha-db  | 2025-07-27 19:49:35.122 UTC [44] LOG:  database system was shut down at 2025-07-27 19:49:34 UTC
+rinha-db  | 2025-07-27 19:49:35.129 UTC [41] LOG:  database system is ready to accept connections
+rinha-db  |  done
+rinha-db  | server started
+rinha-db  | CREATE DATABASE
+rinha-db  | 
+rinha-db  | 
+rinha-db  | /usr/local/bin/docker-entrypoint.sh: running /docker-entrypoint-initdb.d/init.sql
+rinha-db  | CREATE TABLE
+rinha-db  | DELETE 0
+rinha-db  | INSERT 0 2
+rinha-db  | CREATE TABLE
+rinha-db  | DELETE 0
+rinha-db  | 
+rinha-db  | 
+rinha-db  | waiting for server to shut down....2025-07-27 19:49:35.769 UTC [41] LOG:  received fast shutdown request
+rinha-db  | 2025-07-27 19:49:35.770 UTC [41] LOG:  aborting any active transactions
+rinha-db  | 2025-07-27 19:49:35.773 UTC [41] LOG:  background worker "logical replication launcher" (PID 47) exited with exit code 1
+rinha-db  | 2025-07-27 19:49:35.773 UTC [42] LOG:  shutting down
+rinha-db  | 2025-07-27 19:49:35.775 UTC [42] LOG:  checkpoint starting: shutdown immediate
+rinha-db  | 2025-07-27 19:49:35.914 UTC [42] LOG:  checkpoint complete: wrote 930 buffers (5.7%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.103 s, sync=0.032 s, total=0.141 s; sync files=309, longest=0.002 s, average=0.001 s; distance=4288 kB, estimate=4288 kB; lsn=0/191D3E8, redo lsn=0/191D3E8
+rinha-db  | 2025-07-27 19:49:35.969 UTC [41] LOG:  database system is shut down
+rinha-db  |  done
+rinha-db  | server stopped
+rinha-db  | 
+rinha-db  | PostgreSQL init process complete; ready for start up.
+rinha-db  | 
+rinha-db  | 2025-07-27 19:49:36.095 UTC [1] LOG:  starting PostgreSQL 17.5 on x86_64-pc-linux-musl, compiled by gcc (Alpine 14.2.0) 14.2.0, 64-bit
+rinha-db  | 2025-07-27 19:49:36.095 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+rinha-db  | 2025-07-27 19:49:36.095 UTC [1] LOG:  listening on IPv6 address "::", port 5432
+rinha-db  | 2025-07-27 19:49:36.097 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+rinha-db  | 2025-07-27 19:49:36.102 UTC [59] LOG:  database system was shut down at 2025-07-27 19:49:35 UTC
+rinha-db  | 2025-07-27 19:49:36.132 UTC [60] FATAL:  the database system is starting up
+rinha-db  | 2025-07-27 19:49:36.166 UTC [1] LOG:  database system is ready to accept connections
+[Klb-1 exited with code 0
+[Kapi-1 exited with code 137
+[Kapi-2 exited with code 137
+rinha-db  | 2025-07-27 19:50:54.716 UTC [1] LOG:  received fast shutdown request
+rinha-db  | 2025-07-27 19:50:54.718 UTC [1] LOG:  aborting any active transactions
+rinha-db  | 2025-07-27 19:50:54.720 UTC [1] LOG:  background worker "logical replication launcher" (PID 63) exited with exit code 1
+rinha-db  | 2025-07-27 19:50:54.721 UTC [57] LOG:  shutting down
+rinha-db  | 2025-07-27 19:50:54.722 UTC [57] LOG:  checkpoint starting: shutdown immediate
+rinha-db  | 2025-07-27 19:50:54.736 UTC [57] LOG:  checkpoint complete: wrote 284 buffers (1.7%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.006 s, sync=0.005 s, total=0.016 s; sync files=23, longest=0.002 s, average=0.001 s; distance=3890 kB, estimate=3890 kB; lsn=0/1CE9C90, redo lsn=0/1CE9C90
+rinha-db  | 2025-07-27 19:50:54.744 UTC [1] LOG:  database system is shut down
+[Krinha-db exited with code 0
+log truncated at line 1000
