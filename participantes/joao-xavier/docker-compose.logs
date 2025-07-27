@@ -1,0 +1,1001 @@
+
+ api_0 Pulling 
+ api_1 Pulling 
+ worker Pulling 
+ 356d26ade73a Already exists 
+ 054d88452167 Pulling fs layer 
+ 054d88452167 Downloading [>                                                  ]  39.83kB/3.859MB
+ 054d88452167 Downloading [==>                                                ]  228.2kB/3.859MB
+ 054d88452167 Downloading [========>                                          ]  621.4kB/3.859MB
+ 356d26ade73a Already exists 
+ 054d88452167 Downloading [====================>                              ]  1.589MB/3.859MB
+ 356d26ade73a Already exists 
+ 054d88452167 Pulling fs layer 
+ 054d88452167 Downloading [====================>                              ]  1.589MB/3.859MB
+ 054d88452167 Pulling fs layer 
+ 054d88452167 Downloading [====================>                              ]  1.589MB/3.859MB
+ 054d88452167 Downloading [================================================>  ]  3.779MB/3.859MB
+ 054d88452167 Downloading [================================================>  ]  3.779MB/3.859MB
+ 054d88452167 Downloading [================================================>  ]  3.779MB/3.859MB
+ 054d88452167 Verifying Checksum 
+ 054d88452167 Verifying Checksum 
+ 054d88452167 Download complete 
+ 054d88452167 Verifying Checksum 
+ 054d88452167 Download complete 
+ 054d88452167 Download complete 
+ 054d88452167 Extracting [>                                                  ]  65.54kB/3.859MB
+ 054d88452167 Extracting [>                                                  ]  65.54kB/3.859MB
+ 054d88452167 Extracting [>                                                  ]  65.54kB/3.859MB
+ 054d88452167 Extracting [==================================================>]  3.859MB/3.859MB
+ 054d88452167 Extracting [==================================================>]  3.859MB/3.859MB
+ 054d88452167 Extracting [==================================================>]  3.859MB/3.859MB
+ 054d88452167 Extracting [==================================================>]  3.859MB/3.859MB
+ 054d88452167 Extracting [==================================================>]  3.859MB/3.859MB
+ 054d88452167 Extracting [==================================================>]  3.859MB/3.859MB
+ 054d88452167 Pull complete 
+ 054d88452167 Pull complete 
+ 054d88452167 Pull complete 
+ api_1 Pulled 
+ worker Pulled 
+ api_0 Pulled 
+ Network joao-xavier_backend  Creating
+ Network joao-xavier_backend  Created
+ Volume "joao-xavier_data"  Creating
+ Volume "joao-xavier_data"  Created
+ Container joao-xavier-worker-1  Creating
+ Container joao-xavier-worker-1  Created
+ Container joao-xavier-api_1-1  Creating
+ Container joao-xavier-api_0-1  Creating
+ Container joao-xavier-api_1-1  Created
+ Container joao-xavier-api_0-1  Created
+ Container joao-xavier-nginx-1  Creating
+ Container joao-xavier-nginx-1  Created
+Attaching to api_0-1, api_1-1, nginx-1, worker-1
+worker-1  | 2025-07-27T21:44:20.663637Z  INFO ThreadId(01) serve: src/worker/mod.rs:31: Starting worker on port 80
+worker-1  | 2025-07-27T21:44:20.723867Z  INFO ThreadId(01) serve:start_consumer: src/worker/mod.rs:70: Starting mpsc consumer
+api_0-1   | 2025-07-27T21:44:20.959545Z  INFO ThreadId(01) serve: src/api/mod.rs:15: Starting API on port 80
+api_1-1   | 2025-07-27T21:44:20.993393Z  INFO ThreadId(01) serve: src/api/mod.rs:15: Starting API on port 80
+nginx-1   | /docker-entrypoint.sh: /docker-entrypoint.d/ is not empty, will attempt to perform configuration
+nginx-1   | /docker-entrypoint.sh: Looking for shell scripts in /docker-entrypoint.d/
+nginx-1   | /docker-entrypoint.sh: Launching /docker-entrypoint.d/10-listen-on-ipv6-by-default.sh
+nginx-1   | 10-listen-on-ipv6-by-default.sh: info: Getting the checksum of /etc/nginx/conf.d/default.conf
+nginx-1   | 10-listen-on-ipv6-by-default.sh: info: Enabled listen on IPv6 in /etc/nginx/conf.d/default.conf
+nginx-1   | /docker-entrypoint.sh: Sourcing /docker-entrypoint.d/15-local-resolvers.envsh
+nginx-1   | /docker-entrypoint.sh: Launching /docker-entrypoint.d/20-envsubst-on-templates.sh
+nginx-1   | /docker-entrypoint.sh: Launching /docker-entrypoint.d/30-tune-worker-processes.sh
+nginx-1   | /docker-entrypoint.sh: Configuration complete; ready for start up
+api_0-1   | 2025-07-27T21:44:21.677587Z  INFO ThreadId(02) get: src/api/summary.rs:24: pp_payments_summary_http_time: 89.933µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:21 +0000] "GET /payments-summary HTTP/1.1" 200 98 "-" "curl/7.88.1"
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:28 +0000] "POST /purge-payments HTTP/1.1" 404 0 "-" "Grafana k6/1.1.0"
+api_0-1   | 2025-07-27T21:44:28.042018Z  INFO ThreadId(02) get: src/api/summary.rs:24: pp_payments_summary_http_time: 111.574µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:28 +0000] "GET /payments-summary?from=2025-07-27T21:44:18.039Z&to=2025-07-27T21:44:27.939Z HTTP/1.1" 200 98 "-" "Grafana k6/1.1.0"
+api_1-1   | 2025-07-27T21:44:28.044249Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: 9a09085a-dcfe-4e3b-a03e-5aff6015cf19
+api_1-1   | 2025-07-27T21:44:28.044285Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 38.795µs
+worker-1  | 2025-07-27T21:44:28.044583Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: 9a09085a-dcfe-4e3b-a03e-5aff6015cf19
+worker-1  | 2025-07-27T21:44:28.044645Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: 9a09085a-dcfe-4e3b-a03e-5aff6015cf19
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:28 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+api_0-1   | 2025-07-27T21:44:28.150264Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: 4ffccb96-7f1b-4ac1-8099-84657f41298d
+api_0-1   | 2025-07-27T21:44:28.150303Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 41.83µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:28 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:28.150493Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: 4ffccb96-7f1b-4ac1-8099-84657f41298d
+worker-1  | 2025-07-27T21:44:28.150557Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: 4ffccb96-7f1b-4ac1-8099-84657f41298d
+api_1-1   | 2025-07-27T21:44:28.259437Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: e2820993-b3ea-4eb0-944c-fd086315704c
+api_1-1   | 2025-07-27T21:44:28.259456Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 20.799µs
+worker-1  | 2025-07-27T21:44:28.259662Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: e2820993-b3ea-4eb0-944c-fd086315704c
+worker-1  | 2025-07-27T21:44:28.259720Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: e2820993-b3ea-4eb0-944c-fd086315704c
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:28 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+api_0-1   | 2025-07-27T21:44:28.369047Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: b3696ef5-5325-4dfe-a726-d12660dca072
+api_0-1   | 2025-07-27T21:44:28.369077Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 31.018µs
+worker-1  | 2025-07-27T21:44:28.369359Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: b3696ef5-5325-4dfe-a726-d12660dca072
+worker-1  | 2025-07-27T21:44:28.369420Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: b3696ef5-5325-4dfe-a726-d12660dca072
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:28 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+api_1-1   | 2025-07-27T21:44:28.478352Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: 42191b12-e406-4487-9960-e151b4552ae6
+api_1-1   | 2025-07-27T21:44:28.478377Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 27.022µs
+worker-1  | 2025-07-27T21:44:28.478851Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: 42191b12-e406-4487-9960-e151b4552ae6
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:28 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:28.479313Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: 42191b12-e406-4487-9960-e151b4552ae6
+api_0-1   | 2025-07-27T21:44:28.586944Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: 7050f82c-929e-4167-8d34-c18fff832385
+api_0-1   | 2025-07-27T21:44:28.586979Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 36.056µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:28 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:28.587313Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: 7050f82c-929e-4167-8d34-c18fff832385
+worker-1  | 2025-07-27T21:44:28.587373Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: 7050f82c-929e-4167-8d34-c18fff832385
+api_1-1   | 2025-07-27T21:44:28.696551Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: f339ce1d-fed4-45b4-a0f4-4ec5552df443
+api_1-1   | 2025-07-27T21:44:28.696580Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 30.718µs
+worker-1  | 2025-07-27T21:44:28.696859Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: f339ce1d-fed4-45b4-a0f4-4ec5552df443
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:28 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:28.696913Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: f339ce1d-fed4-45b4-a0f4-4ec5552df443
+api_0-1   | 2025-07-27T21:44:28.806018Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: 00260113-3062-4136-b5de-9dc36f65978c
+api_0-1   | 2025-07-27T21:44:28.806041Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 24.147µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:28 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:28.806511Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: 00260113-3062-4136-b5de-9dc36f65978c
+worker-1  | 2025-07-27T21:44:28.806573Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: 00260113-3062-4136-b5de-9dc36f65978c
+api_1-1   | 2025-07-27T21:44:28.915443Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: c8d4eb1a-5689-42d5-b065-4405fce32bca
+api_1-1   | 2025-07-27T21:44:28.915464Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 23.794µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:28 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:28.915781Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: c8d4eb1a-5689-42d5-b065-4405fce32bca
+worker-1  | 2025-07-27T21:44:28.915841Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: c8d4eb1a-5689-42d5-b065-4405fce32bca
+api_0-1   | 2025-07-27T21:44:29.025059Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: 799a9794-637d-4fe9-85d8-16de055e7d2b
+api_0-1   | 2025-07-27T21:44:29.025084Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 26.317µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:29 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:29.025271Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: 799a9794-637d-4fe9-85d8-16de055e7d2b
+worker-1  | 2025-07-27T21:44:29.025428Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: 799a9794-637d-4fe9-85d8-16de055e7d2b
+api_1-1   | 2025-07-27T21:44:29.046305Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: 461e20db-9f79-4680-8145-d7516a0dbdca
+api_1-1   | 2025-07-27T21:44:29.046328Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 25.218µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:29 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:29.046694Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: 461e20db-9f79-4680-8145-d7516a0dbdca
+worker-1  | 2025-07-27T21:44:29.046765Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: 461e20db-9f79-4680-8145-d7516a0dbdca
+api_0-1   | 2025-07-27T21:44:29.134117Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: 109e5c39-b61b-43f1-b1db-1fc05dc10533
+api_0-1   | 2025-07-27T21:44:29.134148Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 32.714µs
+worker-1  | 2025-07-27T21:44:29.134326Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: 109e5c39-b61b-43f1-b1db-1fc05dc10533
+worker-1  | 2025-07-27T21:44:29.134380Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: 109e5c39-b61b-43f1-b1db-1fc05dc10533
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:29 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+api_1-1   | 2025-07-27T21:44:29.152067Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: cff8ee63-e4c6-4ae3-a1d7-4db1f16244db
+api_1-1   | 2025-07-27T21:44:29.152098Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 32.013µs
+worker-1  | 2025-07-27T21:44:29.152280Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: cff8ee63-e4c6-4ae3-a1d7-4db1f16244db
+worker-1  | 2025-07-27T21:44:29.152337Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: cff8ee63-e4c6-4ae3-a1d7-4db1f16244db
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:29 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+api_0-1   | 2025-07-27T21:44:29.243092Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: f46ff8d4-9715-4aef-a201-fc3dd8e2a1fc
+api_0-1   | 2025-07-27T21:44:29.243115Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 25.163µs
+worker-1  | 2025-07-27T21:44:29.243290Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: f46ff8d4-9715-4aef-a201-fc3dd8e2a1fc
+worker-1  | 2025-07-27T21:44:29.243374Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: f46ff8d4-9715-4aef-a201-fc3dd8e2a1fc
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:29 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+api_1-1   | 2025-07-27T21:44:29.261861Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: b32d167c-db40-4a8f-ab45-9a3700eb00ad
+api_1-1   | 2025-07-27T21:44:29.261886Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 27.065µs
+worker-1  | 2025-07-27T21:44:29.262071Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: b32d167c-db40-4a8f-ab45-9a3700eb00ad
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:29 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:29.262284Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: b32d167c-db40-4a8f-ab45-9a3700eb00ad
+api_0-1   | 2025-07-27T21:44:29.353112Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: 0cc444e5-8d2c-40bd-93f9-d8a1e48c83ba
+api_0-1   | 2025-07-27T21:44:29.353135Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 24.24µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:29 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:29.353725Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: 0cc444e5-8d2c-40bd-93f9-d8a1e48c83ba
+worker-1  | 2025-07-27T21:44:29.353793Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: 0cc444e5-8d2c-40bd-93f9-d8a1e48c83ba
+api_1-1   | 2025-07-27T21:44:29.370712Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: 86128d7a-6e25-4ef9-a815-27ea16d0d660
+api_1-1   | 2025-07-27T21:44:29.370743Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 33.786µs
+worker-1  | 2025-07-27T21:44:29.370973Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: 86128d7a-6e25-4ef9-a815-27ea16d0d660
+worker-1  | 2025-07-27T21:44:29.371034Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: 86128d7a-6e25-4ef9-a815-27ea16d0d660
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:29 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+api_0-1   | 2025-07-27T21:44:29.462340Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: abdbf587-0e96-474e-982f-b94b17691f86
+api_0-1   | 2025-07-27T21:44:29.462367Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 28.637µs
+worker-1  | 2025-07-27T21:44:29.462575Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: abdbf587-0e96-474e-982f-b94b17691f86
+worker-1  | 2025-07-27T21:44:29.462631Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: abdbf587-0e96-474e-982f-b94b17691f86
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:29 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+api_1-1   | 2025-07-27T21:44:29.480832Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: 5c7083be-264c-4f9f-ae75-f10bab41a3e4
+api_1-1   | 2025-07-27T21:44:29.480855Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 25.056µs
+worker-1  | 2025-07-27T21:44:29.481052Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: 5c7083be-264c-4f9f-ae75-f10bab41a3e4
+worker-1  | 2025-07-27T21:44:29.481104Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: 5c7083be-264c-4f9f-ae75-f10bab41a3e4
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:29 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+api_0-1   | 2025-07-27T21:44:29.571278Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: f147291d-2f71-4362-b1aa-d8642194a198
+api_0-1   | 2025-07-27T21:44:29.571298Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 20.74µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:29 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:29.571519Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: f147291d-2f71-4362-b1aa-d8642194a198
+worker-1  | 2025-07-27T21:44:29.571574Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: f147291d-2f71-4362-b1aa-d8642194a198
+api_1-1   | 2025-07-27T21:44:29.588434Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: a604de32-24b9-4d32-9b0f-a9fe2241ff33
+api_1-1   | 2025-07-27T21:44:29.588462Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 28.881µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:29 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:29.588626Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: a604de32-24b9-4d32-9b0f-a9fe2241ff33
+worker-1  | 2025-07-27T21:44:29.588827Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: a604de32-24b9-4d32-9b0f-a9fe2241ff33
+api_0-1   | 2025-07-27T21:44:29.680825Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: f406bf0b-c9db-4729-bcfa-cd0b2949308e
+api_0-1   | 2025-07-27T21:44:29.680859Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 35.828µs
+worker-1  | 2025-07-27T21:44:29.681049Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: f406bf0b-c9db-4729-bcfa-cd0b2949308e
+worker-1  | 2025-07-27T21:44:29.681107Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: f406bf0b-c9db-4729-bcfa-cd0b2949308e
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:29 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+api_1-1   | 2025-07-27T21:44:29.698215Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: 24539a4a-6a5c-472c-9c7f-6083470cbd47
+api_1-1   | 2025-07-27T21:44:29.698269Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 54.908µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:29 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:29.698732Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: 24539a4a-6a5c-472c-9c7f-6083470cbd47
+worker-1  | 2025-07-27T21:44:29.698862Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: 24539a4a-6a5c-472c-9c7f-6083470cbd47
+api_0-1   | 2025-07-27T21:44:29.789224Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: 538a6428-759f-48a1-815f-9948b054809c
+api_0-1   | 2025-07-27T21:44:29.789245Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 22.215µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:29 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:29.789417Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: 538a6428-759f-48a1-815f-9948b054809c
+worker-1  | 2025-07-27T21:44:29.789481Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: 538a6428-759f-48a1-815f-9948b054809c
+api_1-1   | 2025-07-27T21:44:29.807796Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: 2c9e902b-afd3-46f7-be01-080cfc016b16
+api_1-1   | 2025-07-27T21:44:29.807817Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 22.511µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:29 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:29.807991Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: 2c9e902b-afd3-46f7-be01-080cfc016b16
+worker-1  | 2025-07-27T21:44:29.808076Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: 2c9e902b-afd3-46f7-be01-080cfc016b16
+api_0-1   | 2025-07-27T21:44:29.898789Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: f602d0d6-ee54-4144-a337-017cd50b7b82
+api_0-1   | 2025-07-27T21:44:29.898828Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 41.187µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:29 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:29.899012Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: f602d0d6-ee54-4144-a337-017cd50b7b82
+worker-1  | 2025-07-27T21:44:29.899060Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: f602d0d6-ee54-4144-a337-017cd50b7b82
+api_1-1   | 2025-07-27T21:44:29.918175Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: f7e9d99d-4811-47ed-8c47-a9f5c3b89876
+api_1-1   | 2025-07-27T21:44:29.918205Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 32.477µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:29 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:29.918346Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: f7e9d99d-4811-47ed-8c47-a9f5c3b89876
+worker-1  | 2025-07-27T21:44:29.918406Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: f7e9d99d-4811-47ed-8c47-a9f5c3b89876
+api_0-1   | 2025-07-27T21:44:30.026249Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: 5569aa68-e76b-485c-85b7-ad25f82f68f6
+api_0-1   | 2025-07-27T21:44:30.026275Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 26.865µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:30 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:30.026518Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: 5569aa68-e76b-485c-85b7-ad25f82f68f6
+worker-1  | 2025-07-27T21:44:30.026560Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: 5569aa68-e76b-485c-85b7-ad25f82f68f6
+api_1-1   | 2025-07-27T21:44:30.026982Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: 8a9abf7d-a606-41aa-8a36-43122b5e17ee
+api_1-1   | 2025-07-27T21:44:30.026999Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 18.008µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:30 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:30.027181Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: 8a9abf7d-a606-41aa-8a36-43122b5e17ee
+worker-1  | 2025-07-27T21:44:30.028627Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: 8a9abf7d-a606-41aa-8a36-43122b5e17ee
+api_0-1   | 2025-07-27T21:44:30.048529Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: 764eb6ff-f8f1-4064-80a5-de5a7cbc78c1
+api_0-1   | 2025-07-27T21:44:30.048552Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 25.156µs
+worker-1  | 2025-07-27T21:44:30.048785Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: 764eb6ff-f8f1-4064-80a5-de5a7cbc78c1
+worker-1  | 2025-07-27T21:44:30.048825Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: 764eb6ff-f8f1-4064-80a5-de5a7cbc78c1
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:30 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+api_1-1   | 2025-07-27T21:44:30.117707Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: e6af0a78-8245-41ee-83e1-1ca82aa65409
+api_1-1   | 2025-07-27T21:44:30.117731Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 25.923µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:30 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:30.117951Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: e6af0a78-8245-41ee-83e1-1ca82aa65409
+worker-1  | 2025-07-27T21:44:30.118010Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: e6af0a78-8245-41ee-83e1-1ca82aa65409
+api_0-1   | 2025-07-27T21:44:30.136129Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: ae6e6d4d-829f-43a7-9331-9842ef3897da
+api_0-1   | 2025-07-27T21:44:30.136149Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 21.183µs
+worker-1  | 2025-07-27T21:44:30.136346Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: ae6e6d4d-829f-43a7-9331-9842ef3897da
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:30 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:30.136405Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: ae6e6d4d-829f-43a7-9331-9842ef3897da
+api_1-1   | 2025-07-27T21:44:30.153654Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: aae785a9-2da1-42eb-9fc5-d97c4b9aa676
+api_1-1   | 2025-07-27T21:44:30.153683Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 30.299µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:30 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:30.153888Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: aae785a9-2da1-42eb-9fc5-d97c4b9aa676
+worker-1  | 2025-07-27T21:44:30.153930Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: aae785a9-2da1-42eb-9fc5-d97c4b9aa676
+api_0-1   | 2025-07-27T21:44:30.226870Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: 1e38bbe9-273b-4e2b-a083-adcb0d1015f7
+api_0-1   | 2025-07-27T21:44:30.226892Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 24.303µs
+worker-1  | 2025-07-27T21:44:30.227083Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: 1e38bbe9-273b-4e2b-a083-adcb0d1015f7
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:30 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:30.227246Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: 1e38bbe9-273b-4e2b-a083-adcb0d1015f7
+api_1-1   | 2025-07-27T21:44:30.245356Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: 96202827-e2cc-4165-b51f-10dc138800ec
+api_1-1   | 2025-07-27T21:44:30.245377Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 22.562µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:30 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:30.245587Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: 96202827-e2cc-4165-b51f-10dc138800ec
+worker-1  | 2025-07-27T21:44:30.245645Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: 96202827-e2cc-4165-b51f-10dc138800ec
+api_0-1   | 2025-07-27T21:44:30.264111Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: 9e67900f-01c4-47b3-b117-7d15fdbcd854
+api_0-1   | 2025-07-27T21:44:30.264132Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 22.633µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:30 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:30.264272Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: 9e67900f-01c4-47b3-b117-7d15fdbcd854
+worker-1  | 2025-07-27T21:44:30.264309Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: 9e67900f-01c4-47b3-b117-7d15fdbcd854
+api_1-1   | 2025-07-27T21:44:30.336430Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: 099aa3ce-6075-4902-ab1b-d37a4fc60945
+api_1-1   | 2025-07-27T21:44:30.336450Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 21.284µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:30 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:30.336604Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: 099aa3ce-6075-4902-ab1b-d37a4fc60945
+worker-1  | 2025-07-27T21:44:30.336648Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: 099aa3ce-6075-4902-ab1b-d37a4fc60945
+api_0-1   | 2025-07-27T21:44:30.354985Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: 9072fd94-4565-45ba-9435-1a2a6ab7e654
+api_0-1   | 2025-07-27T21:44:30.355006Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 22.202µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:30 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:30.355183Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: 9072fd94-4565-45ba-9435-1a2a6ab7e654
+worker-1  | 2025-07-27T21:44:30.355238Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: 9072fd94-4565-45ba-9435-1a2a6ab7e654
+api_1-1   | 2025-07-27T21:44:30.373135Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: 0148d935-6005-4f60-9267-ad7d951958ab
+api_1-1   | 2025-07-27T21:44:30.373156Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 22.4µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:30 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:30.373337Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: 0148d935-6005-4f60-9267-ad7d951958ab
+worker-1  | 2025-07-27T21:44:30.373390Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: 0148d935-6005-4f60-9267-ad7d951958ab
+api_0-1   | 2025-07-27T21:44:30.445182Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: a39c6abe-e2db-4a6a-bc65-1ec006413ec7
+api_0-1   | 2025-07-27T21:44:30.445206Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 25.364µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:30 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:30.445384Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: a39c6abe-e2db-4a6a-bc65-1ec006413ec7
+worker-1  | 2025-07-27T21:44:30.445437Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: a39c6abe-e2db-4a6a-bc65-1ec006413ec7
+api_1-1   | 2025-07-27T21:44:30.463728Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: 4faee1fa-4008-4b05-b771-cc43807a3d45
+api_1-1   | 2025-07-27T21:44:30.463750Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 23.629µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:30 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:30.463962Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: 4faee1fa-4008-4b05-b771-cc43807a3d45
+worker-1  | 2025-07-27T21:44:30.464012Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: 4faee1fa-4008-4b05-b771-cc43807a3d45
+api_0-1   | 2025-07-27T21:44:30.483076Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: a6735482-6e4f-46ab-aa56-84dad2c40a47
+api_0-1   | 2025-07-27T21:44:30.483097Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 22.583µs
+worker-1  | 2025-07-27T21:44:30.483239Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: a6735482-6e4f-46ab-aa56-84dad2c40a47
+worker-1  | 2025-07-27T21:44:30.483407Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: a6735482-6e4f-46ab-aa56-84dad2c40a47
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:30 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+api_1-1   | 2025-07-27T21:44:30.554287Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: 979cead9-319d-43e4-baab-b0c362cf7853
+api_1-1   | 2025-07-27T21:44:30.554307Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 21.637µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:30 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:30.554614Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: 979cead9-319d-43e4-baab-b0c362cf7853
+worker-1  | 2025-07-27T21:44:30.555011Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: 979cead9-319d-43e4-baab-b0c362cf7853
+api_0-1   | 2025-07-27T21:44:30.572805Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: 6fb10f38-33e2-4074-bd2b-c540f331569b
+api_0-1   | 2025-07-27T21:44:30.572825Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 20.733µs
+worker-1  | 2025-07-27T21:44:30.573066Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: 6fb10f38-33e2-4074-bd2b-c540f331569b
+worker-1  | 2025-07-27T21:44:30.573121Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: 6fb10f38-33e2-4074-bd2b-c540f331569b
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:30 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:30 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+api_1-1   | 2025-07-27T21:44:30.590141Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: 308e2b5b-09db-4391-beaf-5c165d9061e7
+api_1-1   | 2025-07-27T21:44:30.590159Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 21.241µs
+worker-1  | 2025-07-27T21:44:30.590398Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: 308e2b5b-09db-4391-beaf-5c165d9061e7
+worker-1  | 2025-07-27T21:44:30.590436Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: 308e2b5b-09db-4391-beaf-5c165d9061e7
+api_0-1   | 2025-07-27T21:44:30.664405Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: c393ff21-cd97-4919-8267-125fbff567bb
+api_0-1   | 2025-07-27T21:44:30.664425Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 21.673µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:30 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:30.664893Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: c393ff21-cd97-4919-8267-125fbff567bb
+worker-1  | 2025-07-27T21:44:30.664936Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: c393ff21-cd97-4919-8267-125fbff567bb
+api_1-1   | 2025-07-27T21:44:30.682714Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: 18e45bae-8b2d-4f02-a04b-ea5c97c2c90f
+api_1-1   | 2025-07-27T21:44:30.682733Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 20.668µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:30 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:30.682894Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: 18e45bae-8b2d-4f02-a04b-ea5c97c2c90f
+worker-1  | 2025-07-27T21:44:30.682945Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: 18e45bae-8b2d-4f02-a04b-ea5c97c2c90f
+api_0-1   | 2025-07-27T21:44:30.699982Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: addefcdd-19cf-4a7c-94c8-016181138a84
+api_0-1   | 2025-07-27T21:44:30.700004Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 23.385µs
+worker-1  | 2025-07-27T21:44:30.700184Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: addefcdd-19cf-4a7c-94c8-016181138a84
+worker-1  | 2025-07-27T21:44:30.700238Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: addefcdd-19cf-4a7c-94c8-016181138a84
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:30 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+api_1-1   | 2025-07-27T21:44:30.773075Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: 4fcf01c9-6671-4d94-9b57-0f0095454fc0
+api_1-1   | 2025-07-27T21:44:30.773094Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 21.219µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:30 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:30.773275Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: 4fcf01c9-6671-4d94-9b57-0f0095454fc0
+worker-1  | 2025-07-27T21:44:30.773326Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: 4fcf01c9-6671-4d94-9b57-0f0095454fc0
+api_0-1   | 2025-07-27T21:44:30.791400Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: 924858ce-9014-4846-ba5c-b5946128e1c2
+api_0-1   | 2025-07-27T21:44:30.791437Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 38.689µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:30 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:30.791651Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: 924858ce-9014-4846-ba5c-b5946128e1c2
+worker-1  | 2025-07-27T21:44:30.791700Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: 924858ce-9014-4846-ba5c-b5946128e1c2
+api_1-1   | 2025-07-27T21:44:30.810170Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: 4267528a-0d0d-4c0c-a016-d20bff77d178
+api_1-1   | 2025-07-27T21:44:30.810189Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 21.355µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:30 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:30.810341Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: 4267528a-0d0d-4c0c-a016-d20bff77d178
+worker-1  | 2025-07-27T21:44:30.810384Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: 4267528a-0d0d-4c0c-a016-d20bff77d178
+api_0-1   | 2025-07-27T21:44:30.882062Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: 3f9d4caf-0814-413e-8cad-91af920d235b
+api_0-1   | 2025-07-27T21:44:30.882085Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 24.17µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:30 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:30.882276Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: 3f9d4caf-0814-413e-8cad-91af920d235b
+worker-1  | 2025-07-27T21:44:30.882525Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: 3f9d4caf-0814-413e-8cad-91af920d235b
+api_1-1   | 2025-07-27T21:44:30.900590Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: 70a43802-ecae-4933-983b-27f77ce358b1
+api_1-1   | 2025-07-27T21:44:30.900610Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 21.508µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:30 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:30.900839Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: 70a43802-ecae-4933-983b-27f77ce358b1
+worker-1  | 2025-07-27T21:44:30.900890Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: 70a43802-ecae-4933-983b-27f77ce358b1
+api_0-1   | 2025-07-27T21:44:30.919975Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: f8a02010-27a0-45f9-b620-95a6e6ae0c13
+api_0-1   | 2025-07-27T21:44:30.920002Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 28.889µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:30 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:30.920201Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: f8a02010-27a0-45f9-b620-95a6e6ae0c13
+worker-1  | 2025-07-27T21:44:30.920246Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: f8a02010-27a0-45f9-b620-95a6e6ae0c13
+api_1-1   | 2025-07-27T21:44:30.992441Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: f45aa59c-3c81-4cc6-a315-a49c615d678e
+api_1-1   | 2025-07-27T21:44:30.992460Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 20.635µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:30 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:30.992738Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: f45aa59c-3c81-4cc6-a315-a49c615d678e
+worker-1  | 2025-07-27T21:44:30.992850Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: f45aa59c-3c81-4cc6-a315-a49c615d678e
+api_0-1   | 2025-07-27T21:44:31.027892Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: b2949035-193f-43c4-a5de-ff062b360d36
+api_0-1   | 2025-07-27T21:44:31.027921Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 30.627µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:31 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+api_1-1   | 2025-07-27T21:44:31.028087Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: a912080b-5965-4b79-a724-67055554ec40
+api_1-1   | 2025-07-27T21:44:31.028104Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 17.759µs
+worker-1  | 2025-07-27T21:44:31.028384Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: a912080b-5965-4b79-a724-67055554ec40
+worker-1  | 2025-07-27T21:44:31.028473Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: b2949035-193f-43c4-a5de-ff062b360d36
+worker-1  | 2025-07-27T21:44:31.028513Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: a912080b-5965-4b79-a724-67055554ec40
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:31 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:31.030031Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: b2949035-193f-43c4-a5de-ff062b360d36
+api_0-1   | 2025-07-27T21:44:31.051064Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: 1eef7f93-8169-4ef6-985a-acc670111a8b
+api_0-1   | 2025-07-27T21:44:31.051090Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 27.907µs
+worker-1  | 2025-07-27T21:44:31.051377Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: 1eef7f93-8169-4ef6-985a-acc670111a8b
+worker-1  | 2025-07-27T21:44:31.051431Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: 1eef7f93-8169-4ef6-985a-acc670111a8b
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:31 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+api_1-1   | 2025-07-27T21:44:31.101246Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: d6fd2d8f-e950-41a1-843e-241042ae974c
+api_1-1   | 2025-07-27T21:44:31.101271Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 26.226µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:31 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:31.101511Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: d6fd2d8f-e950-41a1-843e-241042ae974c
+worker-1  | 2025-07-27T21:44:31.101628Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: d6fd2d8f-e950-41a1-843e-241042ae974c
+api_0-1   | 2025-07-27T21:44:31.120233Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: 0ff01647-a570-4ea3-ac87-c3ccb4d1f7ae
+api_0-1   | 2025-07-27T21:44:31.120256Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 24.745µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:31 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:31.120449Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: 0ff01647-a570-4ea3-ac87-c3ccb4d1f7ae
+worker-1  | 2025-07-27T21:44:31.120619Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: 0ff01647-a570-4ea3-ac87-c3ccb4d1f7ae
+api_1-1   | 2025-07-27T21:44:31.137697Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: ac453fa9-229c-4468-a135-ee147d7108cd
+api_1-1   | 2025-07-27T21:44:31.137718Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 21.957µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:31 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:31.137924Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: ac453fa9-229c-4468-a135-ee147d7108cd
+worker-1  | 2025-07-27T21:44:31.137978Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: ac453fa9-229c-4468-a135-ee147d7108cd
+api_0-1   | 2025-07-27T21:44:31.155255Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: 4577dd87-c4ae-4e0e-8b62-4f3d5bdf090f
+api_0-1   | 2025-07-27T21:44:31.155278Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 25.136µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:31 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:31.155465Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: 4577dd87-c4ae-4e0e-8b62-4f3d5bdf090f
+worker-1  | 2025-07-27T21:44:31.155528Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: 4577dd87-c4ae-4e0e-8b62-4f3d5bdf090f
+api_1-1   | 2025-07-27T21:44:31.210192Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: 8374fbeb-80c5-441a-b6cc-f610bdcb262d
+api_1-1   | 2025-07-27T21:44:31.210212Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 20.901µs
+worker-1  | 2025-07-27T21:44:31.210370Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: 8374fbeb-80c5-441a-b6cc-f610bdcb262d
+worker-1  | 2025-07-27T21:44:31.210411Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: 8374fbeb-80c5-441a-b6cc-f610bdcb262d
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:31 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+api_0-1   | 2025-07-27T21:44:31.228667Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: acd20245-96a7-4110-849e-e514f6e8c63a
+api_0-1   | 2025-07-27T21:44:31.228691Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 25.346µs
+worker-1  | 2025-07-27T21:44:31.228886Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: acd20245-96a7-4110-849e-e514f6e8c63a
+worker-1  | 2025-07-27T21:44:31.228935Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: acd20245-96a7-4110-849e-e514f6e8c63a
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:31 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+api_1-1   | 2025-07-27T21:44:31.247113Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: 21a5dbde-29dd-4014-bfc1-bebc397d7520
+api_1-1   | 2025-07-27T21:44:31.247136Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 23.525µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:31 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:31.247340Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: 21a5dbde-29dd-4014-bfc1-bebc397d7520
+worker-1  | 2025-07-27T21:44:31.247390Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: 21a5dbde-29dd-4014-bfc1-bebc397d7520
+api_0-1   | 2025-07-27T21:44:31.265602Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: fc891c44-0306-4f97-a578-1ecb20907efb
+api_0-1   | 2025-07-27T21:44:31.265622Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 21.231µs
+worker-1  | 2025-07-27T21:44:31.265845Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: fc891c44-0306-4f97-a578-1ecb20907efb
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:31 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:31.265995Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: fc891c44-0306-4f97-a578-1ecb20907efb
+api_1-1   | 2025-07-27T21:44:31.319530Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: ffa88da5-61fa-436d-9afa-aec5d4b7f4a1
+api_1-1   | 2025-07-27T21:44:31.319549Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 21.083µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:31 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:31.319707Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: ffa88da5-61fa-436d-9afa-aec5d4b7f4a1
+worker-1  | 2025-07-27T21:44:31.319757Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: ffa88da5-61fa-436d-9afa-aec5d4b7f4a1
+api_0-1   | 2025-07-27T21:44:31.337993Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: 9cb22689-4292-49ed-af83-3cece7d42624
+api_0-1   | 2025-07-27T21:44:31.338015Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 23.176µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:31 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:31.338214Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: 9cb22689-4292-49ed-af83-3cece7d42624
+worker-1  | 2025-07-27T21:44:31.338276Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: 9cb22689-4292-49ed-af83-3cece7d42624
+api_1-1   | 2025-07-27T21:44:31.356863Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: c010149d-9f41-4f93-b8c1-9ed355274519
+api_1-1   | 2025-07-27T21:44:31.356883Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 21.697µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:31 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:31.357123Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: c010149d-9f41-4f93-b8c1-9ed355274519
+worker-1  | 2025-07-27T21:44:31.357280Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: c010149d-9f41-4f93-b8c1-9ed355274519
+api_0-1   | 2025-07-27T21:44:31.375118Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: 3476c3ad-80fe-4433-94ca-ae277bea8b51
+api_0-1   | 2025-07-27T21:44:31.375138Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 22.102µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:31 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:31.375278Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: 3476c3ad-80fe-4433-94ca-ae277bea8b51
+worker-1  | 2025-07-27T21:44:31.375312Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: 3476c3ad-80fe-4433-94ca-ae277bea8b51
+api_1-1   | 2025-07-27T21:44:31.429206Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: c76f69dc-c45c-4fef-ba42-89ddb77f6ae9
+api_1-1   | 2025-07-27T21:44:31.429226Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 21.822µs
+worker-1  | 2025-07-27T21:44:31.429372Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: c76f69dc-c45c-4fef-ba42-89ddb77f6ae9
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:31 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:31.429465Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: c76f69dc-c45c-4fef-ba42-89ddb77f6ae9
+api_0-1   | 2025-07-27T21:44:31.447762Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: 5c3cdcee-188c-465c-9727-dc948794013c
+api_0-1   | 2025-07-27T21:44:31.447785Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 25.808µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:31 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:31.448055Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: 5c3cdcee-188c-465c-9727-dc948794013c
+worker-1  | 2025-07-27T21:44:31.448094Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: 5c3cdcee-188c-465c-9727-dc948794013c
+api_1-1   | 2025-07-27T21:44:31.465963Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: ea86293f-a6eb-4282-a4e9-d7e34ad029ad
+api_1-1   | 2025-07-27T21:44:31.466002Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 41.903µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:31 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:31.466190Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: ea86293f-a6eb-4282-a4e9-d7e34ad029ad
+worker-1  | 2025-07-27T21:44:31.466231Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: ea86293f-a6eb-4282-a4e9-d7e34ad029ad
+api_0-1   | 2025-07-27T21:44:31.485370Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: 351dc9c3-8849-4367-a864-11d184319931
+api_0-1   | 2025-07-27T21:44:31.485393Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 23.909µs
+worker-1  | 2025-07-27T21:44:31.485592Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: 351dc9c3-8849-4367-a864-11d184319931
+worker-1  | 2025-07-27T21:44:31.485671Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: 351dc9c3-8849-4367-a864-11d184319931
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:31 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+api_1-1   | 2025-07-27T21:44:31.538529Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: 7178bcf1-4d50-4fb1-a551-1c6ad06ba0a4
+api_1-1   | 2025-07-27T21:44:31.538551Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 23.186µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:31 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:31.538705Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: 7178bcf1-4d50-4fb1-a551-1c6ad06ba0a4
+worker-1  | 2025-07-27T21:44:31.538754Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: 7178bcf1-4d50-4fb1-a551-1c6ad06ba0a4
+api_0-1   | 2025-07-27T21:44:31.556225Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: 40e757fb-1ac4-4bfb-a960-85ce0007f331
+api_0-1   | 2025-07-27T21:44:31.556246Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 22.361µs
+worker-1  | 2025-07-27T21:44:31.556417Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: 40e757fb-1ac4-4bfb-a960-85ce0007f331
+worker-1  | 2025-07-27T21:44:31.556460Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: 40e757fb-1ac4-4bfb-a960-85ce0007f331
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:31 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+api_1-1   | 2025-07-27T21:44:31.574627Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: bec38ac5-26ab-46aa-906d-ae97aec2d11b
+api_1-1   | 2025-07-27T21:44:31.574650Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 23.804µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:31 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:31.575150Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: bec38ac5-26ab-46aa-906d-ae97aec2d11b
+worker-1  | 2025-07-27T21:44:31.575204Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: bec38ac5-26ab-46aa-906d-ae97aec2d11b
+api_0-1   | 2025-07-27T21:44:31.591953Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: b35b96d1-152e-4376-8335-c5e1e649a5ea
+api_0-1   | 2025-07-27T21:44:31.591984Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 31.747µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:31 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:31.592182Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: b35b96d1-152e-4376-8335-c5e1e649a5ea
+worker-1  | 2025-07-27T21:44:31.592227Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: b35b96d1-152e-4376-8335-c5e1e649a5ea
+api_1-1   | 2025-07-27T21:44:31.647344Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: bc60e3e4-c517-462a-8495-172cf749c09c
+api_1-1   | 2025-07-27T21:44:31.647369Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 26.119µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:31 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:31.648052Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: bc60e3e4-c517-462a-8495-172cf749c09c
+worker-1  | 2025-07-27T21:44:31.648097Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: bc60e3e4-c517-462a-8495-172cf749c09c
+api_0-1   | 2025-07-27T21:44:31.666039Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: 9243925d-9533-498e-b566-f86694d36a57
+api_0-1   | 2025-07-27T21:44:31.666079Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 42.117µs
+worker-1  | 2025-07-27T21:44:31.666263Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: 9243925d-9533-498e-b566-f86694d36a57
+worker-1  | 2025-07-27T21:44:31.666408Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: 9243925d-9533-498e-b566-f86694d36a57
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:31 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+api_1-1   | 2025-07-27T21:44:31.684520Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: d78718bd-53bd-4a54-8f69-1ad08b0d6700
+api_1-1   | 2025-07-27T21:44:31.684538Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 19.819µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:31 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:31.684855Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: d78718bd-53bd-4a54-8f69-1ad08b0d6700
+worker-1  | 2025-07-27T21:44:31.684908Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: d78718bd-53bd-4a54-8f69-1ad08b0d6700
+api_0-1   | 2025-07-27T21:44:31.702098Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: 02e6c56b-af1c-4422-a6ea-581ecfed0419
+api_0-1   | 2025-07-27T21:44:31.702118Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 20.806µs
+worker-1  | 2025-07-27T21:44:31.702252Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: 02e6c56b-af1c-4422-a6ea-581ecfed0419
+worker-1  | 2025-07-27T21:44:31.702288Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: 02e6c56b-af1c-4422-a6ea-581ecfed0419
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:31 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+api_1-1   | 2025-07-27T21:44:31.757058Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: a733766b-24d0-4244-ac8b-ac4844c6eb09
+api_1-1   | 2025-07-27T21:44:31.757078Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 21.086µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:31 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:31.757337Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: a733766b-24d0-4244-ac8b-ac4844c6eb09
+worker-1  | 2025-07-27T21:44:31.757490Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: a733766b-24d0-4244-ac8b-ac4844c6eb09
+api_0-1   | 2025-07-27T21:44:31.774410Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: 886fd3bf-3a0b-4c0e-8803-17bdf5e2f032
+api_0-1   | 2025-07-27T21:44:31.774432Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 24.261µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:31 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:31.774686Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: 886fd3bf-3a0b-4c0e-8803-17bdf5e2f032
+worker-1  | 2025-07-27T21:44:31.774764Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: 886fd3bf-3a0b-4c0e-8803-17bdf5e2f032
+api_1-1   | 2025-07-27T21:44:31.792867Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: a054a544-8fb5-4e2a-96d5-eda25dd4c2bd
+api_1-1   | 2025-07-27T21:44:31.792889Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 22.647µs
+worker-1  | 2025-07-27T21:44:31.793061Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: a054a544-8fb5-4e2a-96d5-eda25dd4c2bd
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:31 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:31.793139Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: a054a544-8fb5-4e2a-96d5-eda25dd4c2bd
+api_0-1   | 2025-07-27T21:44:31.812494Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: 4e28852b-9471-4548-be12-9dc0185745aa
+api_0-1   | 2025-07-27T21:44:31.812529Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 36.508µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:31 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:31.812742Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: 4e28852b-9471-4548-be12-9dc0185745aa
+worker-1  | 2025-07-27T21:44:31.812840Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: 4e28852b-9471-4548-be12-9dc0185745aa
+api_1-1   | 2025-07-27T21:44:31.866832Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: 0861a0b4-c115-49cc-adf8-3ea450d2a938
+api_1-1   | 2025-07-27T21:44:31.866854Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 23.404µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:31 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:31.867035Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: 0861a0b4-c115-49cc-adf8-3ea450d2a938
+worker-1  | 2025-07-27T21:44:31.867082Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: 0861a0b4-c115-49cc-adf8-3ea450d2a938
+api_0-1   | 2025-07-27T21:44:31.883420Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: f51cb775-0086-49df-8867-98553b09bfc6
+api_0-1   | 2025-07-27T21:44:31.883442Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 22.727µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:31 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:31.883642Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: f51cb775-0086-49df-8867-98553b09bfc6
+worker-1  | 2025-07-27T21:44:31.883693Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: f51cb775-0086-49df-8867-98553b09bfc6
+api_1-1   | 2025-07-27T21:44:31.902059Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: 69ee3c40-0bb3-4d00-8eee-a6d7087f6a0e
+api_1-1   | 2025-07-27T21:44:31.902079Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 22.05µs
+worker-1  | 2025-07-27T21:44:31.902235Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: 69ee3c40-0bb3-4d00-8eee-a6d7087f6a0e
+worker-1  | 2025-07-27T21:44:31.902275Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: 69ee3c40-0bb3-4d00-8eee-a6d7087f6a0e
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:31 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+api_0-1   | 2025-07-27T21:44:31.922637Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: 83a9441d-6985-4d22-a199-2ed9dcd84845
+api_0-1   | 2025-07-27T21:44:31.922660Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 24.213µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:31 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:31.922886Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: 83a9441d-6985-4d22-a199-2ed9dcd84845
+worker-1  | 2025-07-27T21:44:31.922980Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: 83a9441d-6985-4d22-a199-2ed9dcd84845
+api_1-1   | 2025-07-27T21:44:31.975679Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: 9dad895a-1c27-4c83-ac98-5319f060143d
+api_1-1   | 2025-07-27T21:44:31.975699Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 21.275µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:31 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:31.975845Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: 9dad895a-1c27-4c83-ac98-5319f060143d
+worker-1  | 2025-07-27T21:44:31.975884Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: 9dad895a-1c27-4c83-ac98-5319f060143d
+api_0-1   | 2025-07-27T21:44:31.994035Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: b90dab42-e725-4e03-b2b2-8b3b03f685e3
+api_0-1   | 2025-07-27T21:44:31.994055Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 21.253µs
+worker-1  | 2025-07-27T21:44:31.994213Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: b90dab42-e725-4e03-b2b2-8b3b03f685e3
+worker-1  | 2025-07-27T21:44:31.994252Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: b90dab42-e725-4e03-b2b2-8b3b03f685e3
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:31 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+api_1-1   | 2025-07-27T21:44:32.029570Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: c40b9962-4cd5-4ada-ae48-9058df87396f
+api_1-1   | 2025-07-27T21:44:32.029592Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 23.683µs
+api_0-1   | 2025-07-27T21:44:32.029792Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: b74c1e78-dcd2-4dfd-bc17-fe3040a67948
+api_0-1   | 2025-07-27T21:44:32.029809Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 17.477µs
+worker-1  | 2025-07-27T21:44:32.029788Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: c40b9962-4cd5-4ada-ae48-9058df87396f
+worker-1  | 2025-07-27T21:44:32.029836Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: c40b9962-4cd5-4ada-ae48-9058df87396f
+worker-1  | 2025-07-27T21:44:32.029963Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: b74c1e78-dcd2-4dfd-bc17-fe3040a67948
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:32 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:32 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:32.031001Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: b74c1e78-dcd2-4dfd-bc17-fe3040a67948
+api_1-1   | 2025-07-27T21:44:32.053575Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: ba22c39a-e309-4757-95e9-a26de0ff9bb1
+api_1-1   | 2025-07-27T21:44:32.053595Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 21.755µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:32 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:32.053739Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: ba22c39a-e309-4757-95e9-a26de0ff9bb1
+worker-1  | 2025-07-27T21:44:32.053803Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: ba22c39a-e309-4757-95e9-a26de0ff9bb1
+api_0-1   | 2025-07-27T21:44:32.085142Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: afc651df-dc9c-478b-ac28-fe4c12e6ff79
+api_0-1   | 2025-07-27T21:44:32.085161Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 20.727µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:32 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:32.085303Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: afc651df-dc9c-478b-ac28-fe4c12e6ff79
+worker-1  | 2025-07-27T21:44:32.085340Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: afc651df-dc9c-478b-ac28-fe4c12e6ff79
+api_1-1   | 2025-07-27T21:44:32.103582Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: 10b0013d-bb39-4b9f-973a-97edc184bc66
+api_1-1   | 2025-07-27T21:44:32.103602Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 21.134µs
+worker-1  | 2025-07-27T21:44:32.103780Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: 10b0013d-bb39-4b9f-973a-97edc184bc66
+worker-1  | 2025-07-27T21:44:32.103822Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: 10b0013d-bb39-4b9f-973a-97edc184bc66
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:32 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+api_0-1   | 2025-07-27T21:44:32.121850Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: a6d507db-fc0a-46cd-9e2b-6ca108ea7f64
+api_0-1   | 2025-07-27T21:44:32.121869Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 20.468µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:32 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:32.122033Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: a6d507db-fc0a-46cd-9e2b-6ca108ea7f64
+worker-1  | 2025-07-27T21:44:32.122073Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: a6d507db-fc0a-46cd-9e2b-6ca108ea7f64
+api_1-1   | 2025-07-27T21:44:32.139148Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: e4670d6b-c9a4-4172-92ee-b76f196931e3
+api_1-1   | 2025-07-27T21:44:32.139166Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 19.44µs
+worker-1  | 2025-07-27T21:44:32.139341Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: e4670d6b-c9a4-4172-92ee-b76f196931e3
+worker-1  | 2025-07-27T21:44:32.139392Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: e4670d6b-c9a4-4172-92ee-b76f196931e3
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:32 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+api_0-1   | 2025-07-27T21:44:32.156683Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: 9dfa5844-14f1-41a5-9c2b-793d5121cd42
+api_0-1   | 2025-07-27T21:44:32.156704Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 22.841µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:32 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:32.156912Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: 9dfa5844-14f1-41a5-9c2b-793d5121cd42
+worker-1  | 2025-07-27T21:44:32.157032Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: 9dfa5844-14f1-41a5-9c2b-793d5121cd42
+api_1-1   | 2025-07-27T21:44:32.194347Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: 6cb5f6df-2ec4-4406-b334-7f37a258c21a
+api_1-1   | 2025-07-27T21:44:32.194365Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 19.8µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:32 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:32.194692Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: 6cb5f6df-2ec4-4406-b334-7f37a258c21a
+worker-1  | 2025-07-27T21:44:32.194743Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: 6cb5f6df-2ec4-4406-b334-7f37a258c21a
+api_0-1   | 2025-07-27T21:44:32.211805Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: b1bfa595-d67d-44d3-8c45-ede4562aa3a2
+api_0-1   | 2025-07-27T21:44:32.211827Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 22.385µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:32 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:32.212018Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: b1bfa595-d67d-44d3-8c45-ede4562aa3a2
+worker-1  | 2025-07-27T21:44:32.212199Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: b1bfa595-d67d-44d3-8c45-ede4562aa3a2
+api_1-1   | 2025-07-27T21:44:32.230024Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: 4eab6e42-c537-4929-9dae-5e0e5e3b3de9
+api_1-1   | 2025-07-27T21:44:32.230057Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 34.98µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:32 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:32.230269Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: 4eab6e42-c537-4929-9dae-5e0e5e3b3de9
+worker-1  | 2025-07-27T21:44:32.230322Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: 4eab6e42-c537-4929-9dae-5e0e5e3b3de9
+api_0-1   | 2025-07-27T21:44:32.248287Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: 3da32746-3f49-4b86-afeb-e6df04536bd7
+api_0-1   | 2025-07-27T21:44:32.248308Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 21.637µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:32 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:32.248482Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: 3da32746-3f49-4b86-afeb-e6df04536bd7
+worker-1  | 2025-07-27T21:44:32.248559Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: 3da32746-3f49-4b86-afeb-e6df04536bd7
+api_1-1   | 2025-07-27T21:44:32.267731Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: d79bb720-7536-4d83-85ac-8d852202b36e
+api_1-1   | 2025-07-27T21:44:32.267752Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 22.612µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:32 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:32.268017Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: d79bb720-7536-4d83-85ac-8d852202b36e
+worker-1  | 2025-07-27T21:44:32.268094Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: d79bb720-7536-4d83-85ac-8d852202b36e
+api_0-1   | 2025-07-27T21:44:32.321328Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: 8c1eb7e8-eb33-41a5-ab05-56b2ad53dc53
+api_0-1   | 2025-07-27T21:44:32.321351Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 24.111µs
+worker-1  | 2025-07-27T21:44:32.321574Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: 8c1eb7e8-eb33-41a5-ab05-56b2ad53dc53
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:32 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:32.321708Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: 8c1eb7e8-eb33-41a5-ab05-56b2ad53dc53
+api_1-1   | 2025-07-27T21:44:32.326231Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: cee5db5b-5904-4d25-b77c-d9ff53f54687
+api_1-1   | 2025-07-27T21:44:32.326249Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 19.803µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:32 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:32.326393Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: cee5db5b-5904-4d25-b77c-d9ff53f54687
+worker-1  | 2025-07-27T21:44:32.326434Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: cee5db5b-5904-4d25-b77c-d9ff53f54687
+api_0-1   | 2025-07-27T21:44:32.339566Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: bfdde75b-19cf-4293-90e7-0f55285f9d60
+api_0-1   | 2025-07-27T21:44:32.339587Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 22.218µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:32 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:32.339748Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: bfdde75b-19cf-4293-90e7-0f55285f9d60
+worker-1  | 2025-07-27T21:44:32.339809Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: bfdde75b-19cf-4293-90e7-0f55285f9d60
+api_1-1   | 2025-07-27T21:44:32.359428Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: 353ff25f-3d26-4960-b49d-8affa74dc48b
+api_1-1   | 2025-07-27T21:44:32.359447Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 20.377µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:32 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:32.359631Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: 353ff25f-3d26-4960-b49d-8affa74dc48b
+worker-1  | 2025-07-27T21:44:32.359783Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: 353ff25f-3d26-4960-b49d-8affa74dc48b
+api_0-1   | 2025-07-27T21:44:32.376596Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: a17a0234-c4e7-45f0-9e00-4b3be1e33d40
+api_0-1   | 2025-07-27T21:44:32.376617Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 22.78µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:32 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:32.376792Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: a17a0234-c4e7-45f0-9e00-4b3be1e33d40
+worker-1  | 2025-07-27T21:44:32.376839Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: a17a0234-c4e7-45f0-9e00-4b3be1e33d40
+api_1-1   | 2025-07-27T21:44:32.412406Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: a5fe3be9-63b3-4e86-b678-ee9a1c620764
+api_1-1   | 2025-07-27T21:44:32.412425Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 21.431µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:32 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:32.412594Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: a5fe3be9-63b3-4e86-b678-ee9a1c620764
+worker-1  | 2025-07-27T21:44:32.412704Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: a5fe3be9-63b3-4e86-b678-ee9a1c620764
+api_0-1   | 2025-07-27T21:44:32.430871Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: 6889feea-6c05-45dc-9e13-19e1bdde44f0
+api_0-1   | 2025-07-27T21:44:32.430894Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 24.038µs
+worker-1  | 2025-07-27T21:44:32.431033Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: 6889feea-6c05-45dc-9e13-19e1bdde44f0
+worker-1  | 2025-07-27T21:44:32.431088Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: 6889feea-6c05-45dc-9e13-19e1bdde44f0
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:32 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+api_1-1   | 2025-07-27T21:44:32.450483Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: 5cbfe562-7ea9-4089-b97a-b135a0bb6a31
+api_1-1   | 2025-07-27T21:44:32.450516Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 34.586µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:32 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:32.450684Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: 5cbfe562-7ea9-4089-b97a-b135a0bb6a31
+worker-1  | 2025-07-27T21:44:32.450722Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: 5cbfe562-7ea9-4089-b97a-b135a0bb6a31
+api_0-1   | 2025-07-27T21:44:32.467821Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: 5de04445-71cc-4891-b426-46fb2bd7abf9
+api_0-1   | 2025-07-27T21:44:32.467842Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 22.455µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:32 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:32.468012Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: 5de04445-71cc-4891-b426-46fb2bd7abf9
+worker-1  | 2025-07-27T21:44:32.468108Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: 5de04445-71cc-4891-b426-46fb2bd7abf9
+api_1-1   | 2025-07-27T21:44:32.487219Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: e6747b32-3b2b-4dcc-98aa-6bfd0066f7c2
+api_1-1   | 2025-07-27T21:44:32.487239Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 21.187µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:32 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:32.487416Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: e6747b32-3b2b-4dcc-98aa-6bfd0066f7c2
+worker-1  | 2025-07-27T21:44:32.487653Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: e6747b32-3b2b-4dcc-98aa-6bfd0066f7c2
+api_0-1   | 2025-07-27T21:44:32.522313Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: 0a658cc6-b8ed-45fe-a346-79b5cf97b94d
+api_0-1   | 2025-07-27T21:44:32.522333Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 21.684µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:32 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:32.522497Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: 0a658cc6-b8ed-45fe-a346-79b5cf97b94d
+worker-1  | 2025-07-27T21:44:32.522535Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: 0a658cc6-b8ed-45fe-a346-79b5cf97b94d
+api_1-1   | 2025-07-27T21:44:32.540751Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: ef87e813-6312-44de-b5c3-a8d5f4581c06
+api_1-1   | 2025-07-27T21:44:32.540772Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 22.192µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:32 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:32.540980Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: ef87e813-6312-44de-b5c3-a8d5f4581c06
+worker-1  | 2025-07-27T21:44:32.541029Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: ef87e813-6312-44de-b5c3-a8d5f4581c06
+api_0-1   | 2025-07-27T21:44:32.557325Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: b147a6ba-c6e6-4b78-b0c2-f13b65e7f61c
+api_0-1   | 2025-07-27T21:44:32.557345Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 21.573µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:32 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:32.557517Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: b147a6ba-c6e6-4b78-b0c2-f13b65e7f61c
+worker-1  | 2025-07-27T21:44:32.557574Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: b147a6ba-c6e6-4b78-b0c2-f13b65e7f61c
+api_1-1   | 2025-07-27T21:44:32.576762Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: f6c6663e-07a0-43ae-b670-3e6ef1548297
+api_1-1   | 2025-07-27T21:44:32.576781Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 20.8µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:32 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:32.576932Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: f6c6663e-07a0-43ae-b670-3e6ef1548297
+worker-1  | 2025-07-27T21:44:32.577016Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: f6c6663e-07a0-43ae-b670-3e6ef1548297
+api_0-1   | 2025-07-27T21:44:32.594081Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: 720add39-5c1a-4e89-89e8-1b20284d841e
+api_0-1   | 2025-07-27T21:44:32.594102Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 23.226µs
+worker-1  | 2025-07-27T21:44:32.594256Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: 720add39-5c1a-4e89-89e8-1b20284d841e
+worker-1  | 2025-07-27T21:44:32.594312Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: 720add39-5c1a-4e89-89e8-1b20284d841e
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:32 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+api_1-1   | 2025-07-27T21:44:32.630737Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: da32eb69-81ac-4072-bab0-ac0941889636
+api_1-1   | 2025-07-27T21:44:32.630775Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 39.213µs
+worker-1  | 2025-07-27T21:44:32.630957Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: da32eb69-81ac-4072-bab0-ac0941889636
+worker-1  | 2025-07-27T21:44:32.631014Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: da32eb69-81ac-4072-bab0-ac0941889636
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:32 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+api_0-1   | 2025-07-27T21:44:32.649266Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: c4e46251-6328-4599-a5b1-7c43bdae4bb3
+api_0-1   | 2025-07-27T21:44:32.649286Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 21.315µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:32 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:32.649443Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: c4e46251-6328-4599-a5b1-7c43bdae4bb3
+worker-1  | 2025-07-27T21:44:32.649605Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: c4e46251-6328-4599-a5b1-7c43bdae4bb3
+api_1-1   | 2025-07-27T21:44:32.667587Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: 3103b6d0-290b-423f-b4dd-804e976d43ab
+api_1-1   | 2025-07-27T21:44:32.667608Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 22.356µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:32 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:32.667797Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: 3103b6d0-290b-423f-b4dd-804e976d43ab
+worker-1  | 2025-07-27T21:44:32.667834Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: 3103b6d0-290b-423f-b4dd-804e976d43ab
+api_0-1   | 2025-07-27T21:44:32.685868Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: 9e06d85a-a208-4ec6-9693-e82e0a1ee207
+api_0-1   | 2025-07-27T21:44:32.685887Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 20.922µs
+worker-1  | 2025-07-27T21:44:32.686043Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: 9e06d85a-a208-4ec6-9693-e82e0a1ee207
+worker-1  | 2025-07-27T21:44:32.686092Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: 9e06d85a-a208-4ec6-9693-e82e0a1ee207
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:32 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+api_1-1   | 2025-07-27T21:44:32.703445Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: 0cf0f3c0-731e-4239-ae47-c4cd9b9001c2
+api_1-1   | 2025-07-27T21:44:32.703464Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 20.111µs
+worker-1  | 2025-07-27T21:44:32.703699Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: 0cf0f3c0-731e-4239-ae47-c4cd9b9001c2
+worker-1  | 2025-07-27T21:44:32.703745Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: 0cf0f3c0-731e-4239-ae47-c4cd9b9001c2
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:32 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+api_0-1   | 2025-07-27T21:44:32.740008Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: 4413631d-3a5c-4eba-8db7-a0b6a30abfb3
+api_0-1   | 2025-07-27T21:44:32.740028Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 22.193µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:32 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:32.740207Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: 4413631d-3a5c-4eba-8db7-a0b6a30abfb3
+worker-1  | 2025-07-27T21:44:32.740256Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: 4413631d-3a5c-4eba-8db7-a0b6a30abfb3
+api_1-1   | 2025-07-27T21:44:32.758649Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: 321520c2-1285-4256-b59d-a2e8c03136f6
+api_1-1   | 2025-07-27T21:44:32.758670Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 22.796µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:32 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:32.758830Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: 321520c2-1285-4256-b59d-a2e8c03136f6
+worker-1  | 2025-07-27T21:44:32.758870Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: 321520c2-1285-4256-b59d-a2e8c03136f6
+api_0-1   | 2025-07-27T21:44:32.776030Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: cee84144-d2f8-4bb7-9788-98c818320c35
+api_0-1   | 2025-07-27T21:44:32.776063Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 34.915µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:32 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:32.776260Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: cee84144-d2f8-4bb7-9788-98c818320c35
+worker-1  | 2025-07-27T21:44:32.776366Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: cee84144-d2f8-4bb7-9788-98c818320c35
+api_1-1   | 2025-07-27T21:44:32.794300Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: 7a03bd12-cddf-420f-9c0f-1737074f26a9
+api_1-1   | 2025-07-27T21:44:32.794319Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 20.688µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:32 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:32.794501Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: 7a03bd12-cddf-420f-9c0f-1737074f26a9
+worker-1  | 2025-07-27T21:44:32.794640Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: 7a03bd12-cddf-420f-9c0f-1737074f26a9
+api_0-1   | 2025-07-27T21:44:32.814764Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: 4f03e60a-05b1-4890-99e6-d630dd437130
+api_0-1   | 2025-07-27T21:44:32.814789Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 26.61µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:32 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:32.814972Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: 4f03e60a-05b1-4890-99e6-d630dd437130
+worker-1  | 2025-07-27T21:44:32.815022Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: 4f03e60a-05b1-4890-99e6-d630dd437130
+api_1-1   | 2025-07-27T21:44:32.849997Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: 26862842-0ed2-44e0-a9f3-49e0531de2a8
+api_1-1   | 2025-07-27T21:44:32.850017Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 22.247µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:32 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:32.850359Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: 26862842-0ed2-44e0-a9f3-49e0531de2a8
+worker-1  | 2025-07-27T21:44:32.850508Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: 26862842-0ed2-44e0-a9f3-49e0531de2a8
+api_0-1   | 2025-07-27T21:44:32.868396Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: b7fa1655-6ca9-4a13-95a3-01dd5d6d5e79
+api_0-1   | 2025-07-27T21:44:32.868416Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 21.119µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:32 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:32.868583Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: b7fa1655-6ca9-4a13-95a3-01dd5d6d5e79
+worker-1  | 2025-07-27T21:44:32.868676Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: b7fa1655-6ca9-4a13-95a3-01dd5d6d5e79
+api_1-1   | 2025-07-27T21:44:32.884735Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: 89cf1d2f-d162-4961-8baa-36e713b78b87
+api_1-1   | 2025-07-27T21:44:32.884756Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 22.6µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:32 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:32.884923Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: 89cf1d2f-d162-4961-8baa-36e713b78b87
+worker-1  | 2025-07-27T21:44:32.885060Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: 89cf1d2f-d162-4961-8baa-36e713b78b87
+api_0-1   | 2025-07-27T21:44:32.903294Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: a4865fb0-c824-487d-bec1-5087d21a7124
+api_0-1   | 2025-07-27T21:44:32.903313Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 21.251µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:32 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:32.903487Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: a4865fb0-c824-487d-bec1-5087d21a7124
+worker-1  | 2025-07-27T21:44:32.903525Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: a4865fb0-c824-487d-bec1-5087d21a7124
+api_1-1   | 2025-07-27T21:44:32.924532Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: be41d078-b15f-42f8-ad58-bdd7b933c713
+api_1-1   | 2025-07-27T21:44:32.924555Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 24.55µs
+worker-1  | 2025-07-27T21:44:32.924782Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: be41d078-b15f-42f8-ad58-bdd7b933c713
+worker-1  | 2025-07-27T21:44:32.924840Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: be41d078-b15f-42f8-ad58-bdd7b933c713
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:32 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+api_0-1   | 2025-07-27T21:44:32.959620Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: 5a638011-f8ab-4224-8590-ec24a71f30ed
+api_0-1   | 2025-07-27T21:44:32.959645Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 26.866µs
+worker-1  | 2025-07-27T21:44:32.959806Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: 5a638011-f8ab-4224-8590-ec24a71f30ed
+worker-1  | 2025-07-27T21:44:32.959923Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: 5a638011-f8ab-4224-8590-ec24a71f30ed
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:32 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+api_1-1   | 2025-07-27T21:44:32.977215Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: ac742a7c-e972-4f60-88d7-98ffac9b2d9e
+api_1-1   | 2025-07-27T21:44:32.977236Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 22.417µs
+worker-1  | 2025-07-27T21:44:32.977427Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: ac742a7c-e972-4f60-88d7-98ffac9b2d9e
+worker-1  | 2025-07-27T21:44:32.977494Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: ac742a7c-e972-4f60-88d7-98ffac9b2d9e
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:32 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+api_0-1   | 2025-07-27T21:44:32.995678Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: 31d78f72-bef6-492d-b023-550b6d15e7ba
+api_0-1   | 2025-07-27T21:44:32.995700Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 23.573µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:32 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:32.995886Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: 31d78f72-bef6-492d-b023-550b6d15e7ba
+worker-1  | 2025-07-27T21:44:32.996095Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: 31d78f72-bef6-492d-b023-550b6d15e7ba
+api_0-1   | 2025-07-27T21:44:33.031274Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: 92dd8cb1-75b5-4523-a1e0-f65c7eb8ed0d
+api_0-1   | 2025-07-27T21:44:33.031291Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 18.987µs
+api_1-1   | 2025-07-27T21:44:33.031274Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: bd2041dc-056f-480b-9395-545e9e82d7a7
+api_1-1   | 2025-07-27T21:44:33.031296Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 23.094µs
+worker-1  | 2025-07-27T21:44:33.031435Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: bd2041dc-056f-480b-9395-545e9e82d7a7
+worker-1  | 2025-07-27T21:44:33.031521Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: 92dd8cb1-75b5-4523-a1e0-f65c7eb8ed0d
+worker-1  | 2025-07-27T21:44:33.031549Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: bd2041dc-056f-480b-9395-545e9e82d7a7
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:33 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:33 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:33.032678Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: 92dd8cb1-75b5-4523-a1e0-f65c7eb8ed0d
+api_1-1   | 2025-07-27T21:44:33.055370Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: ad458ff9-994a-4599-9309-4d98ece08c7e
+api_1-1   | 2025-07-27T21:44:33.055396Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 27.84µs
+worker-1  | 2025-07-27T21:44:33.055618Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: ad458ff9-994a-4599-9309-4d98ece08c7e
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:33 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:33.055700Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: ad458ff9-994a-4599-9309-4d98ece08c7e
+api_0-1   | 2025-07-27T21:44:33.068228Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: 454f99fd-5ff6-438d-af19-9b852b3097a1
+api_0-1   | 2025-07-27T21:44:33.068248Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 21.788µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:33 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:33.068433Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: 454f99fd-5ff6-438d-af19-9b852b3097a1
+worker-1  | 2025-07-27T21:44:33.068497Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: 454f99fd-5ff6-438d-af19-9b852b3097a1
+api_1-1   | 2025-07-27T21:44:33.086465Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: df72eac3-05ee-4a0c-8e6e-467b645c1de1
+api_1-1   | 2025-07-27T21:44:33.086533Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 69.101µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:33 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:33.086707Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: df72eac3-05ee-4a0c-8e6e-467b645c1de1
+worker-1  | 2025-07-27T21:44:33.086766Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: df72eac3-05ee-4a0c-8e6e-467b645c1de1
+api_0-1   | 2025-07-27T21:44:33.105346Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: 501b3800-fd9b-44ee-9ec0-025bceee3532
+api_0-1   | 2025-07-27T21:44:33.105366Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 21.474µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:33 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:33.105565Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: 501b3800-fd9b-44ee-9ec0-025bceee3532
+worker-1  | 2025-07-27T21:44:33.105614Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: 501b3800-fd9b-44ee-9ec0-025bceee3532
+api_1-1   | 2025-07-27T21:44:33.123662Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: d18a0327-b4d5-4ace-af65-f2979ad9a66d
+api_1-1   | 2025-07-27T21:44:33.123684Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 23.002µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:33 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:33.123885Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: d18a0327-b4d5-4ace-af65-f2979ad9a66d
+worker-1  | 2025-07-27T21:44:33.123938Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: d18a0327-b4d5-4ace-af65-f2979ad9a66d
+api_0-1   | 2025-07-27T21:44:33.141007Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: 9a59a780-71fa-485a-967b-afcb21c68ea8
+api_0-1   | 2025-07-27T21:44:33.141030Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 25.001µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:33 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:33.141219Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: 9a59a780-71fa-485a-967b-afcb21c68ea8
+worker-1  | 2025-07-27T21:44:33.141270Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: 9a59a780-71fa-485a-967b-afcb21c68ea8
+api_1-1   | 2025-07-27T21:44:33.158631Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: e1825f82-e5b1-4308-8a07-e9f87ba9e608
+api_1-1   | 2025-07-27T21:44:33.158656Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 26.327µs
+worker-1  | 2025-07-27T21:44:33.158852Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: e1825f82-e5b1-4308-8a07-e9f87ba9e608
+worker-1  | 2025-07-27T21:44:33.158902Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: e1825f82-e5b1-4308-8a07-e9f87ba9e608
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:33 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+api_0-1   | 2025-07-27T21:44:33.190563Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: 5638bce4-b58f-4930-a000-359744e9e814
+api_0-1   | 2025-07-27T21:44:33.190582Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 19.804µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:33 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:33.190743Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: 5638bce4-b58f-4930-a000-359744e9e814
+worker-1  | 2025-07-27T21:44:33.190786Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: 5638bce4-b58f-4930-a000-359744e9e814
+api_1-1   | 2025-07-27T21:44:33.195937Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: 06babc0e-137e-4047-ab8c-31edc2065cc2
+api_1-1   | 2025-07-27T21:44:33.195963Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 27.004µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:33 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:33.196161Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: 06babc0e-137e-4047-ab8c-31edc2065cc2
+worker-1  | 2025-07-27T21:44:33.196329Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: 06babc0e-137e-4047-ab8c-31edc2065cc2
+api_0-1   | 2025-07-27T21:44:33.213537Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: 88aa889c-d737-4e42-946d-fb502e360d3a
+api_0-1   | 2025-07-27T21:44:33.213559Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 23.028µs
+worker-1  | 2025-07-27T21:44:33.213753Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: 88aa889c-d737-4e42-946d-fb502e360d3a
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:33 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:33.213995Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: 88aa889c-d737-4e42-946d-fb502e360d3a
+api_1-1   | 2025-07-27T21:44:33.231861Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: e3012309-78e2-46cd-8e3b-16366fffd449
+api_1-1   | 2025-07-27T21:44:33.231883Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 23.68µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:33 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:33.232087Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: e3012309-78e2-46cd-8e3b-16366fffd449
+worker-1  | 2025-07-27T21:44:33.232128Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: e3012309-78e2-46cd-8e3b-16366fffd449
+api_0-1   | 2025-07-27T21:44:33.249556Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: 8927d8e8-7e6f-436a-ac98-6eb4e63469d7
+api_0-1   | 2025-07-27T21:44:33.249575Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 20.34µs
+worker-1  | 2025-07-27T21:44:33.249737Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: 8927d8e8-7e6f-436a-ac98-6eb4e63469d7
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:33 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:33.249920Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: 8927d8e8-7e6f-436a-ac98-6eb4e63469d7
+api_1-1   | 2025-07-27T21:44:33.269900Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: 16c27e36-3431-4638-857f-9670fbdc9f78
+api_1-1   | 2025-07-27T21:44:33.269920Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 21.247µs
+worker-1  | 2025-07-27T21:44:33.270133Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: 16c27e36-3431-4638-857f-9670fbdc9f78
+worker-1  | 2025-07-27T21:44:33.270183Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: 16c27e36-3431-4638-857f-9670fbdc9f78
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:33 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+api_0-1   | 2025-07-27T21:44:33.286548Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: 429ab6f1-f337-483e-837a-f903638335a4
+api_0-1   | 2025-07-27T21:44:33.286567Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 21.132µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:33 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:33.286722Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: 429ab6f1-f337-483e-837a-f903638335a4
+worker-1  | 2025-07-27T21:44:33.286774Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: 429ab6f1-f337-483e-837a-f903638335a4
+api_1-1   | 2025-07-27T21:44:33.323396Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: 44438069-e6ee-4377-b927-fdd9a349b236
+api_1-1   | 2025-07-27T21:44:33.323415Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 21.165µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:33 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:33.323572Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: 44438069-e6ee-4377-b927-fdd9a349b236
+worker-1  | 2025-07-27T21:44:33.323610Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: 44438069-e6ee-4377-b927-fdd9a349b236
+api_0-1   | 2025-07-27T21:44:33.327656Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: c16740af-c11b-4667-8737-e5650898b899
+api_0-1   | 2025-07-27T21:44:33.327673Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 18.017µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:33 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:33.327803Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: c16740af-c11b-4667-8737-e5650898b899
+worker-1  | 2025-07-27T21:44:33.327864Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: c16740af-c11b-4667-8737-e5650898b899
+api_1-1   | 2025-07-27T21:44:33.340957Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: dacb5137-51b2-4bf2-8980-1fb252d42eef
+api_1-1   | 2025-07-27T21:44:33.340980Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 26.013µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:33 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:33.341159Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: dacb5137-51b2-4bf2-8980-1fb252d42eef
+worker-1  | 2025-07-27T21:44:33.341214Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: dacb5137-51b2-4bf2-8980-1fb252d42eef
+api_0-1   | 2025-07-27T21:44:33.361650Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: 4bfbf751-44de-418e-8cf1-52a7069edc93
+api_0-1   | 2025-07-27T21:44:33.361670Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 21.956µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:33 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:33.361840Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: 4bfbf751-44de-418e-8cf1-52a7069edc93
+worker-1  | 2025-07-27T21:44:33.361898Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: 4bfbf751-44de-418e-8cf1-52a7069edc93
+api_1-1   | 2025-07-27T21:44:33.378207Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: d244cf60-5ab7-4685-8143-1e14b0428536
+api_1-1   | 2025-07-27T21:44:33.378228Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 22.758µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:33 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:33.378439Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: d244cf60-5ab7-4685-8143-1e14b0428536
+worker-1  | 2025-07-27T21:44:33.378501Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: d244cf60-5ab7-4685-8143-1e14b0428536
+api_0-1   | 2025-07-27T21:44:33.396044Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: 22787bbb-1c7c-44b4-9a49-075665f66a9b
+api_0-1   | 2025-07-27T21:44:33.396064Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 21.733µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:33 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:33.396215Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: 22787bbb-1c7c-44b4-9a49-075665f66a9b
+worker-1  | 2025-07-27T21:44:33.396260Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: 22787bbb-1c7c-44b4-9a49-075665f66a9b
+api_1-1   | 2025-07-27T21:44:33.414761Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: 3a69a6d1-14eb-440f-88b3-6501f8ec18a4
+api_1-1   | 2025-07-27T21:44:33.414783Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 24.264µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:33 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:33.414966Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: 3a69a6d1-14eb-440f-88b3-6501f8ec18a4
+worker-1  | 2025-07-27T21:44:33.415049Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: 3a69a6d1-14eb-440f-88b3-6501f8ec18a4
+api_0-1   | 2025-07-27T21:44:33.433108Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: 02cedb67-0849-43f1-8274-217f9d25d99b
+api_0-1   | 2025-07-27T21:44:33.433130Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 23.114µs
+worker-1  | 2025-07-27T21:44:33.433307Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: 02cedb67-0849-43f1-8274-217f9d25d99b
+worker-1  | 2025-07-27T21:44:33.433358Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: 02cedb67-0849-43f1-8274-217f9d25d99b
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:33 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+api_1-1   | 2025-07-27T21:44:33.452793Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: 56c80ffc-691f-4fa6-947c-74649c51c602
+api_1-1   | 2025-07-27T21:44:33.452818Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 26.228µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:33 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:33.453017Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: 56c80ffc-691f-4fa6-947c-74649c51c602
+worker-1  | 2025-07-27T21:44:33.453075Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: 56c80ffc-691f-4fa6-947c-74649c51c602
+api_0-1   | 2025-07-27T21:44:33.469183Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: f85f9a72-e1c8-4a8f-a9d7-44bececa870a
+api_0-1   | 2025-07-27T21:44:33.469208Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 26.813µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:33 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:33.469417Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: f85f9a72-e1c8-4a8f-a9d7-44bececa870a
+worker-1  | 2025-07-27T21:44:33.469463Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: f85f9a72-e1c8-4a8f-a9d7-44bececa870a
+api_1-1   | 2025-07-27T21:44:33.488405Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: 38a322f6-90a7-42d7-ba16-034b403c17fc
+api_1-1   | 2025-07-27T21:44:33.488425Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 22.242µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:33 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:33.488677Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: 38a322f6-90a7-42d7-ba16-034b403c17fc
+worker-1  | 2025-07-27T21:44:33.488815Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: 38a322f6-90a7-42d7-ba16-034b403c17fc
+api_0-1   | 2025-07-27T21:44:33.505372Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: d783af4a-42ba-443a-8fd2-0aa2fd103b17
+api_0-1   | 2025-07-27T21:44:33.505391Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 20.247µs
+worker-1  | 2025-07-27T21:44:33.505616Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: d783af4a-42ba-443a-8fd2-0aa2fd103b17
+worker-1  | 2025-07-27T21:44:33.505685Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: d783af4a-42ba-443a-8fd2-0aa2fd103b17
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:33 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+api_1-1   | 2025-07-27T21:44:33.524588Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: 633090f4-a7e8-463c-a6fe-82ec6c41b164
+api_1-1   | 2025-07-27T21:44:33.524607Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 20.723µs
+worker-1  | 2025-07-27T21:44:33.524783Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: 633090f4-a7e8-463c-a6fe-82ec6c41b164
+worker-1  | 2025-07-27T21:44:33.524820Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: 633090f4-a7e8-463c-a6fe-82ec6c41b164
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:33 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+api_0-1   | 2025-07-27T21:44:33.542961Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: b620f5f0-5c44-4cda-903b-d3f62d7f026e
+api_0-1   | 2025-07-27T21:44:33.542984Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 24.026µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:33 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:33.543167Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: b620f5f0-5c44-4cda-903b-d3f62d7f026e
+worker-1  | 2025-07-27T21:44:33.543213Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: b620f5f0-5c44-4cda-903b-d3f62d7f026e
+api_1-1   | 2025-07-27T21:44:33.558989Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: 18a8fc6d-624e-4721-9a7f-9a75b3b5243c
+api_1-1   | 2025-07-27T21:44:33.559017Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 29.45µs
+worker-1  | 2025-07-27T21:44:33.559377Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: 18a8fc6d-624e-4721-9a7f-9a75b3b5243c
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:33 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:33.559464Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: 18a8fc6d-624e-4721-9a7f-9a75b3b5243c
+api_0-1   | 2025-07-27T21:44:33.578825Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: fc655efb-cda7-492e-8d41-a5e10a56e119
+api_0-1   | 2025-07-27T21:44:33.578850Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 27.186µs
+worker-1  | 2025-07-27T21:44:33.579089Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: fc655efb-cda7-492e-8d41-a5e10a56e119
+worker-1  | 2025-07-27T21:44:33.579160Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: fc655efb-cda7-492e-8d41-a5e10a56e119
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:33 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+api_1-1   | 2025-07-27T21:44:33.595511Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: f542120a-4459-496c-976f-dda6af22c54a
+api_1-1   | 2025-07-27T21:44:33.595541Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 32.75µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:33 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:33.595809Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: f542120a-4459-496c-976f-dda6af22c54a
+worker-1  | 2025-07-27T21:44:33.595960Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: f542120a-4459-496c-976f-dda6af22c54a
+api_0-1   | 2025-07-27T21:44:33.614395Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: b0bb52a7-eaa4-4368-bdae-84784121c915
+api_0-1   | 2025-07-27T21:44:33.614415Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 22.23µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:33 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:33.614673Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: b0bb52a7-eaa4-4368-bdae-84784121c915
+worker-1  | 2025-07-27T21:44:33.614729Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: b0bb52a7-eaa4-4368-bdae-84784121c915
+api_1-1   | 2025-07-27T21:44:33.632750Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: 41cf872e-cc89-4cbb-8055-cc7b9f5f79ad
+api_1-1   | 2025-07-27T21:44:33.632772Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 24.234µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:33 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:33.633030Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: 41cf872e-cc89-4cbb-8055-cc7b9f5f79ad
+worker-1  | 2025-07-27T21:44:33.633194Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: 41cf872e-cc89-4cbb-8055-cc7b9f5f79ad
+api_0-1   | 2025-07-27T21:44:33.651213Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: 30f0d574-0ffd-49ee-89d0-0187182f5a0c
+api_0-1   | 2025-07-27T21:44:33.651233Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 21.598µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:33 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:33.651407Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: 30f0d574-0ffd-49ee-89d0-0187182f5a0c
+worker-1  | 2025-07-27T21:44:33.651454Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: 30f0d574-0ffd-49ee-89d0-0187182f5a0c
+api_1-1   | 2025-07-27T21:44:33.669718Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: 071c2a22-af6f-44d0-9394-f7aec2cf4651
+api_1-1   | 2025-07-27T21:44:33.669740Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 23.128µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:33 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:33.669976Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: 071c2a22-af6f-44d0-9394-f7aec2cf4651
+worker-1  | 2025-07-27T21:44:33.670103Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: 071c2a22-af6f-44d0-9394-f7aec2cf4651
+api_0-1   | 2025-07-27T21:44:33.688083Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: d237bc54-2a95-453e-8197-44ccf22e1a8c
+api_0-1   | 2025-07-27T21:44:33.688106Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 24.545µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:33 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:33.688348Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: d237bc54-2a95-453e-8197-44ccf22e1a8c
+worker-1  | 2025-07-27T21:44:33.688427Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: d237bc54-2a95-453e-8197-44ccf22e1a8c
+api_1-1   | 2025-07-27T21:44:33.704684Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: 08a5e594-d37f-40a2-8aaa-d16b89c09f0a
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:33 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+api_1-1   | 2025-07-27T21:44:33.704703Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 21.16µs
+worker-1  | 2025-07-27T21:44:33.704990Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: 08a5e594-d37f-40a2-8aaa-d16b89c09f0a
+worker-1  | 2025-07-27T21:44:33.705145Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: 08a5e594-d37f-40a2-8aaa-d16b89c09f0a
+api_0-1   | 2025-07-27T21:44:33.724433Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: b35b8dda-dbd7-4b76-9271-f6fc851060e9
+api_0-1   | 2025-07-27T21:44:33.724454Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 22.778µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:33 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:33.724653Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: b35b8dda-dbd7-4b76-9271-f6fc851060e9
+worker-1  | 2025-07-27T21:44:33.724706Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: b35b8dda-dbd7-4b76-9271-f6fc851060e9
+api_1-1   | 2025-07-27T21:44:33.741920Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: 0f6e1027-2fe3-4e71-b1fa-984f402e3ef9
+api_1-1   | 2025-07-27T21:44:33.741940Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 21.122µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:33 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:33.742199Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: 0f6e1027-2fe3-4e71-b1fa-984f402e3ef9
+worker-1  | 2025-07-27T21:44:33.742391Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: 0f6e1027-2fe3-4e71-b1fa-984f402e3ef9
+api_0-1   | 2025-07-27T21:44:33.760850Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: 1fb51d14-00a0-4852-93b3-244bf972400a
+api_0-1   | 2025-07-27T21:44:33.760874Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 25.169µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:33 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:33.761102Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: 1fb51d14-00a0-4852-93b3-244bf972400a
+worker-1  | 2025-07-27T21:44:33.761278Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: 1fb51d14-00a0-4852-93b3-244bf972400a
+api_1-1   | 2025-07-27T21:44:33.778533Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: 15809855-d24d-4ee6-97c1-34c072140478
+api_1-1   | 2025-07-27T21:44:33.778566Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 35.202µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:33 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:33.778802Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: 15809855-d24d-4ee6-97c1-34c072140478
+worker-1  | 2025-07-27T21:44:33.778911Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: 15809855-d24d-4ee6-97c1-34c072140478
+api_0-1   | 2025-07-27T21:44:33.795885Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: 5c0246f3-5c21-4af3-8791-79f5feff7fa1
+api_0-1   | 2025-07-27T21:44:33.795908Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 25.553µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:33 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:33.796102Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: 5c0246f3-5c21-4af3-8791-79f5feff7fa1
+worker-1  | 2025-07-27T21:44:33.796291Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: 5c0246f3-5c21-4af3-8791-79f5feff7fa1
+api_1-1   | 2025-07-27T21:44:33.816516Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: b08a1333-70a4-4dca-97ce-dfb1c24504a4
+api_1-1   | 2025-07-27T21:44:33.816550Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 37.087µs
+worker-1  | 2025-07-27T21:44:33.816799Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: b08a1333-70a4-4dca-97ce-dfb1c24504a4
+worker-1  | 2025-07-27T21:44:33.817000Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: b08a1333-70a4-4dca-97ce-dfb1c24504a4
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:33 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+api_0-1   | 2025-07-27T21:44:33.833496Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: d46b471c-871b-4d5e-8c16-bfab74d87f85
+api_0-1   | 2025-07-27T21:44:33.833518Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 24.188µs
+worker-1  | 2025-07-27T21:44:33.833709Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: d46b471c-871b-4d5e-8c16-bfab74d87f85
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:33 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:33.833908Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: d46b471c-871b-4d5e-8c16-bfab74d87f85
+api_1-1   | 2025-07-27T21:44:33.852206Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: f609b257-4d79-40e5-92ad-b8ca30fd4715
+api_1-1   | 2025-07-27T21:44:33.852227Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 22.181µs
+nginx-1   | 172.21.0.1 - - [27/Jul/2025:21:44:33 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
+worker-1  | 2025-07-27T21:44:33.852419Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: f609b257-4d79-40e5-92ad-b8ca30fd4715
+worker-1  | 2025-07-27T21:44:33.852657Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: f609b257-4d79-40e5-92ad-b8ca30fd4715
+api_0-1   | 2025-07-27T21:44:33.870740Z  INFO ThreadId(02) create: src/api/payment.rs:11: rpc_send: 7b43bff7-6606-4742-bad8-1511107c3e76
+api_0-1   | 2025-07-27T21:44:33.870766Z  INFO ThreadId(02) create: src/api/payment.rs:15: pp_payments_http_time: 27.698µs
+worker-1  | 2025-07-27T21:44:33.870963Z  INFO ThreadId(02) process: src/worker/rpc.rs:25: rpc_recv: 7b43bff7-6606-4742-bad8-1511107c3e76
+worker-1  | 2025-07-27T21:44:33.871140Z  INFO ThreadId(02) consumer: src/worker/mod.rs:79: mpsc_recv: 7b43bff7-6606-4742-bad8-1511107c3e76
+log truncated at line 1000
