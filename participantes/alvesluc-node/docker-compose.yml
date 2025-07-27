@@ -1,6 +1,7 @@
 services:
   nginx:
     image: nginx:1.29-alpine
+    platform: linux/amd64
     ports:
       - "9999:9999"
     networks:
@@ -18,7 +19,9 @@ services:
           memory: "35MB"
 
   srv1:
-    image: alvesluc/rinha-2025:latest
+    image: alvesluc/rinha-2025-node:latest
+    build: .
+    platform: linux/amd64
     networks:
       - backend
       - payment-processor
@@ -37,7 +40,9 @@ services:
           memory: "105MB"
 
   srv2:
-    image: alvesluc/rinha-2025:latest
+    image: alvesluc/rinha-2025-node:latest
+    build: .
+    platform: linux/amd64
     networks:
       - backend
       - payment-processor
@@ -57,6 +62,7 @@ services:
 
   redis:
     image: redis:8.0.3-alpine
+    platform: linux/amd64
     ports:
       - "6379:6379"
     networks:
