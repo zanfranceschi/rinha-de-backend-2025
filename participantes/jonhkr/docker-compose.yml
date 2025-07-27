@@ -1,4 +1,35 @@
+x-api: &api
+  image: jonhkr/rb2025:33f26b7
+  environment:
+    - WORKERS=2
+    - DATABASE_URL=postgres://r2025:passwd@db:5432/r2025?sslmode=disable
+    - PROCESSOR_DEFAULT_URL=http://payment-processor-default:8080
+    - PROCESSOR_FALLBACK_URL=http://payment-processor-fallback:8080
+  networks:
+    - backend
+    - payment-processor
+  depends_on:
+    db:
+      condition: service_healthy
+  deploy:
+    resources:
+      limits:
+        cpus: "0.25"
+        memory: "54MB"
 services:
+  api1:
+    <<: *api
+    hostname: api1
+  api2:
+    <<: *api
+    hostname: api2
+  api3:
+    <<: *api
+    hostname: api3
+  api4:
+    <<: *api
+    hostname: api4
+
   nginx:
     image: nginx:1.25-alpine
     container_name: rinha-nginx
@@ -7,6 +38,8 @@ services:
     depends_on:
       - api1
       - api2
+      - api3
+      - api4
     ports:
       - "9999:80"
     networks:
@@ -15,37 +48,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.15"
-          memory: "15MB"
-
-  api1: &api
-    image: jonhkr/rb2025:2f7b9a8
-    hostname: api1
-    environment:
-      - MASTER_NODE=true
-      - DATABASE_URL=postgres://r2025:passwd@db:5432/r2025?sslmode=disable
-      - PROCESSOR_DEFAULT_URL=http://payment-processor-default:8080
-      - PROCESSOR_FALLBACK_URL=http://payment-processor-fallback:8080
-    networks:
-      - backend
-      - payment-processor
-    depends_on:
-      db:
-        condition: service_healthy
-    deploy:
-      resources:
-        limits:
-          cpus: "0.55"
-          memory: "128MB"
-
-  api2:
-    <<: *api
-    hostname: api2
-    environment:
-      - MASTER_NODE=false
-      - DATABASE_URL=postgres://r2025:passwd@db:5432/r2025?sslmode=disable
-      - PROCESSOR_DEFAULT_URL=http://payment-processor-default:8080
-      - PROCESSOR_FALLBACK_URL=http://payment-processor-fallback:8080
+          cpus: "0.25"
+          memory: "35MB"
 
   db:
     image: postgres
