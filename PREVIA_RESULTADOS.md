@@ -1,6 +1,6 @@
 # Prévia do Resultados da Rinha de Backend 2025
-Atualizado em **Sun Jul 27 08:57:14 PM -03 2025**
-136 submissões / 114 resultados / 22 submissões com erro
+Atualizado em **Sun Jul 27 10:32:45 PM -03 2025**
+136 submissões / 113 resultados / 23 submissões com erro
 
 
 | participante | p99 | bônus por desempenho (%) | multa ($) | lucro | submissão |
@@ -102,7 +102,6 @@ Atualizado em **Sun Jul 27 08:57:14 PM -03 2025**
 |	ryangst-bun	|	648.26ms	|	0%	|	0	|	0	|	[ryangst-bun](https://github.com/zanfranceschi/rinha-de-backend-2025/tree/main/participantes/ryangst-bun)
 |	samypng-go	|	6.49ms	|	9%	|	0	|	339887.1245	|	[samypng-go](https://github.com/zanfranceschi/rinha-de-backend-2025/tree/main/participantes/samypng-go)
 |	santannaf	|	20.27ms	|	0%	|	0	|	315770.215	|	[santannaf](https://github.com/zanfranceschi/rinha-de-backend-2025/tree/main/participantes/santannaf)
-|	silvaangelo	|	28.08ms	|	0%	|	0	|	315941.355	|	[silvaangelo](https://github.com/zanfranceschi/rinha-de-backend-2025/tree/main/participantes/silvaangelo)
 |	suricat89-solucao1	|	3.68ms	|	15%	|	107575.1215	|	245885.992	|	[suricat89-solucao1](https://github.com/zanfranceschi/rinha-de-backend-2025/tree/main/participantes/suricat89-solucao1)
 |	svaan1-go	|	8.97ms	|	4%	|	109085.1335	|	215053.5489	|	[svaan1-go](https://github.com/zanfranceschi/rinha-de-backend-2025/tree/main/participantes/svaan1-go)
 |	vctrhugo-fastapi	|	998.61ms	|	0%	|	78914.1465	|	146554.8435	|	[vctrhugo-fastapi](https://github.com/zanfranceschi/rinha-de-backend-2025/tree/main/participantes/vctrhugo-fastapi)
