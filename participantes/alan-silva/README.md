@@ -6,7 +6,7 @@ Essa é a minha participação na lendária [**Rinha de Backend 2025**](https://
 
 * **Rust** 🦀 - Performance e segurança de outro nível!
 * **Actix Web** 🕸️ - Para APIs ridiculamente rápidas.
-* **Nginx** 🚦 - O porteiro mais confiável da web.
+* **HaProxy** 🚦 - O porteiro mais rápido da web.
 
 ## 🚀 Como Rodar
 
