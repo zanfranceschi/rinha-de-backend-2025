@@ -1,0 +1,107 @@
+services:
+  nginx:
+    image: nginx:alpine
+    container_name: rinha-nginx
+    ports:
+      - "9999:9999"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - api1
+      - api2
+    networks:
+      - rinha-network
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          cpus: '0.15'
+          memory: 50M
+
+  api1:
+    image: steixeira93/rinha-backend-2025:latest
+    container_name: rinha-api1
+    hostname: api1
+    environment:
+      - PORT=8080
+      - DATABASE_URL=postgres://rinhauser:rinhapass@db:5432/rinhadb?sslmode=disable
+      - DEFAULT_PROCESSOR_URL=http://payment-processor-default:8080
+      - FALLBACK_PROCESSOR_URL=http://payment-processor-fallback:8080
+      - DEFAULT_PROCESSOR_FEE=0.01
+      - FALLBACK_PROCESSOR_FEE=0.05
+      - HEALTH_CHECK_INTERVAL=10s
+      - HEALTH_CHECK_COOLDOWN=5s
+      - REDIS_ADDR=redis:6379
+    networks:
+      - rinha-network
+      - payment-processor
+    depends_on:
+      - db
+      - redis
+    deploy:
+      resources:
+        limits:
+          cpus: '0.675'
+          memory: 150M
+
+  api2:
+    image: steixeira93/rinha-backend-2025:latest
+    container_name: rinha-api2
+    hostname: api2
+    environment:
+      - PORT=8080
+      - DATABASE_URL=postgres://rinhauser:rinhapass@db:5432/rinhadb?sslmode=disable
+      - DEFAULT_PROCESSOR_URL=http://payment-processor-default:8080
+      - FALLBACK_PROCESSOR_URL=http://payment-processor-fallback:8080
+      - DEFAULT_PROCESSOR_FEE=0.01
+      - FALLBACK_PROCESSOR_FEE=0.05
+      - HEALTH_CHECK_INTERVAL=10s
+      - HEALTH_CHECK_COOLDOWN=5s
+      - REDIS_ADDR=redis:6379
+    networks:
+      - rinha-network
+      - payment-processor
+    depends_on:
+      - db
+      - redis
+    deploy:
+      resources:
+        limits:
+          cpus: '0.675'
+          memory: 150M
+
+  db:
+    image: postgres:alpine
+    container_name: rinha-db
+    environment:
+      - POSTGRES_USER=rinhauser
+      - POSTGRES_PASSWORD=rinhapass
+      - POSTGRES_DB=rinhadb
+    networks:
+      - rinha-network
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    command: postgres -c shared_buffers=128MB -c max_connections=200 -c effective_cache_size=256MB -c checkpoint_completion_target=0.9 -c wal_buffers=16MB -c synchronous_commit=off
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 280M
+
+  redis:
+    image: redis:alpine
+    container_name: rinha-redis
+    networks:
+      - rinha-network
+    command: redis-server --maxmemory 20mb --maxmemory-policy allkeys-lru --save "" --appendonly no
+    deploy:
+      resources:
+        limits:
+          cpus: '0.1'
+          memory: 20M
+
+networks:
+  rinha-network:
+    driver: bridge
+  payment-processor:
+    external: true
