@@ -1,13 +1,13 @@
 x-api-template: &api-template
-    image: pauloricardo45657/rinha-2025-api:v1.4
+    image: pauloricardo45657/rinha-2025-api:v1.5
     networks:
       - backend
       - payment-processor
     deploy:
       resources:
         limits:
-          cpus: "0.6"
-          memory: "150MB"
+          cpus: "0.55"
+          memory: "140MB"
 
 services:
   api1:
@@ -33,7 +33,7 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.1"
+          cpus: "0.05"
           memory: "10MB"
 
   redis:
@@ -43,8 +43,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.1"
-          memory: "30MB"
+          cpus: "0.2"
+          memory: "40MB"
 
   nginx:
     image: nginx:alpine
@@ -61,8 +61,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.1"
-          memory: "10MB"
+          cpus: "0.15"
+          memory: "20MB"
 
 networks:
   backend:
