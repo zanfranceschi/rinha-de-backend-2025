@@ -1,6 +1,7 @@
 x-service-templates:
   payment-processor: &payment-processor
     image: zanfranceschi/payment-processor:amd64-20250728111932
+    platform: linux/amd64
     networks:
       - payment-processor
       - payment-processor-db
@@ -17,6 +18,7 @@ x-service-templates:
 
   payment-processor-db: &payment-processor-db
     image: postgres:17-alpine
+    platform: linux/amd64
     command: postgres -c checkpoint_timeout=600 -c max_wal_size=4096 -c synchronous_commit=0 -c fsync=0 -c full_page_writes=0
     networks:
       - payment-processor-db
