@@ -1,6 +1,5 @@
 services:
   backend1:
-    build: .
     image: ronssm/copirinhago:latest
     environment:
       - REDIS_CONN=redis:6379
@@ -20,10 +19,9 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.4"
-          memory: "80MB"
+          cpus: "0.6"
+          memory: "120MB"
   backend2:
-    build: .
     image: ronssm/copirinhago:latest
     environment:
       - REDIS_CONN=redis:6379
@@ -43,8 +41,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.4"
-          memory: "80MB"
+          cpus: "0.6"
+          memory: "120MB"
   haproxy:
     image: haproxy:2.8-alpine
     depends_on:
