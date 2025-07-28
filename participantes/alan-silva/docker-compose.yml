@@ -1,23 +1,22 @@
 services:
-  nginx:
-    image: nginx:1.29.0-alpine
-    container_name: rinha-nginx
+  haproxy:
+    image: haproxy:3.2.3-alpine
     volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
       - sockets:/sockets:rw
-    ports:
-      - "9999:80"
-    networks:
-      - backend
-    depends_on:
-      - rinha-gateway-1
-      - rinha-gateway-2
-      - rinha-gateway-3
     deploy:
       resources:
         limits:
           cpus: "0.4"
           memory: "50MB"
+    networks:
+      - backend
+    ports:
+      - 9999:80
+    depends_on:
+      - rinha-gateway-1
+      - rinha-gateway-2
+      - rinha-gateway-3
 
   rinha-gateway-1:
     image: ghcr.io/alan-venv/rinha-gateway:6.3
