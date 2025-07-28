@@ -8,7 +8,7 @@ Repositório do projeto: [https://github.com/acslook/payment-proxy](https://gith
 
 - **Linguagem**: Go
 - **Loadbalancer**: Nginx
-- **Servidor HTTP**: [Echo](https://github.com/labstack/echo)
+- **Servidor HTTP**: [Fasthttp]
 - **Database**: PostgreSQL
 - **Stream e cache**: Redis
 - **Orquestração**: Docker + Docker Compose

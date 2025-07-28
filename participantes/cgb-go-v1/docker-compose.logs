@@ -3,116 +3,118 @@
  Network cgb-go-v1_backend  Created
  Container cgb-redis  Creating
  Container cgb-redis  Created
+ Container cgb-worker  Creating
  Container cgb-api2  Creating
  Container cgb-api1  Creating
- Container cgb-worker  Creating
- Container cgb-worker  Created
  Container cgb-api1  Created
  Container cgb-api2  Created
+ Container cgb-worker  Created
  Container cgb-nginx  Creating
  Container cgb-nginx  Created
 Attaching to cgb-api1, cgb-api2, cgb-nginx, cgb-redis, cgb-worker
 cgb-redis   | Starting Redis Server
-cgb-redis   | 1:C 26 Jul 2025 19:41:38.135 # WARNING Memory overcommit must be enabled! Without it, a background save or replication may fail under low memory condition. Being disabled, it can also cause failures without low memory condition, see https://github.com/jemalloc/jemalloc/issues/1328. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.
-cgb-redis   | 1:C 26 Jul 2025 19:41:38.135 * oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
-cgb-redis   | 1:C 26 Jul 2025 19:41:38.135 * Redis version=8.0.3, bits=64, commit=00000000, modified=1, pid=1, just started
-cgb-redis   | 1:C 26 Jul 2025 19:41:38.135 * Configuration loaded
-cgb-redis   | 1:M 26 Jul 2025 19:41:38.136 * monotonic clock: POSIX clock_gettime
-cgb-redis   | 1:M 26 Jul 2025 19:41:38.136 * Running mode=standalone, port=6379.
-cgb-redis   | 1:M 26 Jul 2025 19:41:38.137 * <bf> RedisBloom version 8.0.1 (Git=unknown)
-cgb-redis   | 1:M 26 Jul 2025 19:41:38.137 * <bf> Registering configuration options: [
-cgb-redis   | 1:M 26 Jul 2025 19:41:38.137 * <bf> 	{ bf-error-rate       :      0.01 }
-cgb-redis   | 1:M 26 Jul 2025 19:41:38.137 * <bf> 	{ bf-initial-size     :       100 }
-cgb-redis   | 1:M 26 Jul 2025 19:41:38.137 * <bf> 	{ bf-expansion-factor :         2 }
-cgb-redis   | 1:M 26 Jul 2025 19:41:38.137 * <bf> 	{ cf-bucket-size      :         2 }
-cgb-redis   | 1:M 26 Jul 2025 19:41:38.137 * <bf> 	{ cf-initial-size     :      1024 }
-cgb-redis   | 1:M 26 Jul 2025 19:41:38.137 * <bf> 	{ cf-max-iterations   :        20 }
-cgb-redis   | 1:M 26 Jul 2025 19:41:38.137 * <bf> 	{ cf-expansion-factor :         1 }
-cgb-redis   | 1:M 26 Jul 2025 19:41:38.137 * <bf> 	{ cf-max-expansions   :        32 }
-cgb-redis   | 1:M 26 Jul 2025 19:41:38.137 * <bf> ]
-cgb-redis   | 1:M 26 Jul 2025 19:41:38.137 * Module 'bf' loaded from /usr/local/lib/redis/modules//redisbloom.so
-cgb-redis   | 1:M 26 Jul 2025 19:41:38.184 * <search> Redis version found by RedisSearch : 8.0.3 - oss
-cgb-redis   | 1:M 26 Jul 2025 19:41:38.184 * <search> RediSearch version 8.0.1 (Git=5688fcc)
-cgb-redis   | 1:M 26 Jul 2025 19:41:38.184 * <search> Low level api version 1 initialized successfully
-cgb-redis   | 1:M 26 Jul 2025 19:41:38.184 * <search> gc: ON, prefix min length: 2, min word length to stem: 4, prefix max expansions: 200, query timeout (ms): 500, timeout policy: return, cursor read size: 1000, cursor max idle (ms): 300000, max doctable size: 1000000, max number of search results:  1000000, 
-cgb-redis   | 1:M 26 Jul 2025 19:41:38.184 * <search> Initialized thread pools!
-cgb-redis   | 1:M 26 Jul 2025 19:41:38.184 * <search> Disabled workers threadpool of size 0
-cgb-redis   | 1:M 26 Jul 2025 19:41:38.184 * <search> Subscribe to config changes
-cgb-redis   | 1:M 26 Jul 2025 19:41:38.184 * <search> Enabled role change notification
-cgb-redis   | 1:M 26 Jul 2025 19:41:38.185 * <search> Cluster configuration: AUTO partitions, type: 0, coordinator timeout: 0ms
-cgb-redis   | 1:M 26 Jul 2025 19:41:38.185 * <search> Register write commands
-cgb-redis   | 1:M 26 Jul 2025 19:41:38.186 * Module 'search' loaded from /usr/local/lib/redis/modules//redisearch.so
-cgb-redis   | 1:M 26 Jul 2025 19:41:38.186 * <timeseries> RedisTimeSeries version 80001, git_sha=577bfa8b5909e7ee572f0b651399be8303dc6641
-cgb-redis   | 1:M 26 Jul 2025 19:41:38.186 * <timeseries> Redis version found by RedisTimeSeries : 8.0.3 - oss
-cgb-redis   | 1:M 26 Jul 2025 19:41:38.186 * <timeseries> Registering configuration options: [
-cgb-redis   | 1:M 26 Jul 2025 19:41:38.186 * <timeseries> 	{ ts-compaction-policy   :              }
-cgb-redis   | 1:M 26 Jul 2025 19:41:38.186 * <timeseries> 	{ ts-num-threads         :            3 }
-cgb-redis   | 1:M 26 Jul 2025 19:41:38.186 * <timeseries> 	{ ts-retention-policy    :            0 }
-cgb-redis   | 1:M 26 Jul 2025 19:41:38.186 * <timeseries> 	{ ts-duplicate-policy    :        block }
-cgb-redis   | 1:M 26 Jul 2025 19:41:38.186 * <timeseries> 	{ ts-chunk-size-bytes    :         4096 }
-cgb-redis   | 1:M 26 Jul 2025 19:41:38.186 * <timeseries> 	{ ts-encoding            :   compressed }
-cgb-redis   | 1:M 26 Jul 2025 19:41:38.187 * <timeseries> 	{ ts-ignore-max-time-diff:            0 }
-cgb-redis   | 1:M 26 Jul 2025 19:41:38.187 * <timeseries> 	{ ts-ignore-max-val-diff :     0.000000 }
-cgb-redis   | 1:M 26 Jul 2025 19:41:38.187 * <timeseries> ]
-cgb-redis   | 1:M 26 Jul 2025 19:41:38.187 * <timeseries> Detected redis oss
-cgb-redis   | 1:M 26 Jul 2025 19:41:38.187 * Module 'timeseries' loaded from /usr/local/lib/redis/modules//redistimeseries.so
-cgb-redis   | 1:M 26 Jul 2025 19:41:38.188 * <ReJSON> Created new data type 'ReJSON-RL'
-cgb-redis   | 1:M 26 Jul 2025 19:41:38.189 * <ReJSON> version: 80001 git sha: unknown branch: unknown
-cgb-redis   | 1:M 26 Jul 2025 19:41:38.189 * <ReJSON> Exported RedisJSON_V1 API
-cgb-redis   | 1:M 26 Jul 2025 19:41:38.189 * <ReJSON> Exported RedisJSON_V2 API
-cgb-redis   | 1:M 26 Jul 2025 19:41:38.189 * <ReJSON> Exported RedisJSON_V3 API
-cgb-redis   | 1:M 26 Jul 2025 19:41:38.189 * <ReJSON> Exported RedisJSON_V4 API
-cgb-redis   | 1:M 26 Jul 2025 19:41:38.189 * <ReJSON> Exported RedisJSON_V5 API
-cgb-redis   | 1:M 26 Jul 2025 19:41:38.189 * <ReJSON> Enabled diskless replication
-cgb-redis   | 1:M 26 Jul 2025 19:41:38.189 * <ReJSON> Initialized shared string cache, thread safe: false.
-cgb-redis   | 1:M 26 Jul 2025 19:41:38.189 * Module 'ReJSON' loaded from /usr/local/lib/redis/modules//rejson.so
-cgb-redis   | 1:M 26 Jul 2025 19:41:38.189 * <search> Acquired RedisJSON_V5 API
-cgb-redis   | 1:M 26 Jul 2025 19:41:38.190 * Server initialized
-cgb-redis   | 1:M 26 Jul 2025 19:41:38.190 * Ready to accept connections tcp
-cgb-api1    | Rinha v1 - Performance Backend
-cgb-api1    | Performance Target: p99 < 11ms
-cgb-api1    | GOMAXPROCS: 2
-cgb-api1    | GOGC: 300
-cgb-api1    | GOMEMLIMIT: 250MiB
-cgb-api1    | Iniciando Rinha v1 API...
+cgb-redis   | 1:C 27 Jul 2025 04:09:25.664 # WARNING Memory overcommit must be enabled! Without it, a background save or replication may fail under low memory condition. Being disabled, it can also cause failures without low memory condition, see https://github.com/jemalloc/jemalloc/issues/1328. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.
+cgb-redis   | 1:C 27 Jul 2025 04:09:25.664 * oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+cgb-redis   | 1:C 27 Jul 2025 04:09:25.664 * Redis version=8.0.3, bits=64, commit=00000000, modified=1, pid=1, just started
+cgb-redis   | 1:C 27 Jul 2025 04:09:25.664 * Configuration loaded
+cgb-redis   | 1:M 27 Jul 2025 04:09:25.686 * monotonic clock: POSIX clock_gettime
+cgb-redis   | 1:M 27 Jul 2025 04:09:25.686 * Running mode=standalone, port=6379.
+cgb-redis   | 1:M 27 Jul 2025 04:09:25.687 * <bf> RedisBloom version 8.0.1 (Git=unknown)
+cgb-redis   | 1:M 27 Jul 2025 04:09:25.687 * <bf> Registering configuration options: [
+cgb-redis   | 1:M 27 Jul 2025 04:09:25.687 * <bf> 	{ bf-error-rate       :      0.01 }
+cgb-redis   | 1:M 27 Jul 2025 04:09:25.687 * <bf> 	{ bf-initial-size     :       100 }
+cgb-redis   | 1:M 27 Jul 2025 04:09:25.687 * <bf> 	{ bf-expansion-factor :         2 }
+cgb-redis   | 1:M 27 Jul 2025 04:09:25.687 * <bf> 	{ cf-bucket-size      :         2 }
+cgb-redis   | 1:M 27 Jul 2025 04:09:25.687 * <bf> 	{ cf-initial-size     :      1024 }
+cgb-redis   | 1:M 27 Jul 2025 04:09:25.687 * <bf> 	{ cf-max-iterations   :        20 }
+cgb-redis   | 1:M 27 Jul 2025 04:09:25.687 * <bf> 	{ cf-expansion-factor :         1 }
+cgb-redis   | 1:M 27 Jul 2025 04:09:25.687 * <bf> 	{ cf-max-expansions   :        32 }
+cgb-redis   | 1:M 27 Jul 2025 04:09:25.687 * <bf> ]
+cgb-redis   | 1:M 27 Jul 2025 04:09:25.687 * Module 'bf' loaded from /usr/local/lib/redis/modules//redisbloom.so
+cgb-redis   | 1:M 27 Jul 2025 04:09:25.688 * <search> Redis version found by RedisSearch : 8.0.3 - oss
+cgb-redis   | 1:M 27 Jul 2025 04:09:25.688 * <search> RediSearch version 8.0.1 (Git=5688fcc)
+cgb-redis   | 1:M 27 Jul 2025 04:09:25.688 * <search> Low level api version 1 initialized successfully
+cgb-redis   | 1:M 27 Jul 2025 04:09:25.688 * <search> gc: ON, prefix min length: 2, min word length to stem: 4, prefix max expansions: 200, query timeout (ms): 500, timeout policy: return, cursor read size: 1000, cursor max idle (ms): 300000, max doctable size: 1000000, max number of search results:  1000000, 
+cgb-redis   | 1:M 27 Jul 2025 04:09:25.689 * <search> Initialized thread pools!
+cgb-redis   | 1:M 27 Jul 2025 04:09:25.689 * <search> Disabled workers threadpool of size 0
+cgb-redis   | 1:M 27 Jul 2025 04:09:25.689 * <search> Subscribe to config changes
+cgb-redis   | 1:M 27 Jul 2025 04:09:25.689 * <search> Enabled role change notification
+cgb-redis   | 1:M 27 Jul 2025 04:09:25.689 * <search> Cluster configuration: AUTO partitions, type: 0, coordinator timeout: 0ms
+cgb-redis   | 1:M 27 Jul 2025 04:09:25.690 * <search> Register write commands
+cgb-redis   | 1:M 27 Jul 2025 04:09:25.690 * Module 'search' loaded from /usr/local/lib/redis/modules//redisearch.so
+cgb-redis   | 1:M 27 Jul 2025 04:09:25.694 * <timeseries> RedisTimeSeries version 80001, git_sha=577bfa8b5909e7ee572f0b651399be8303dc6641
+cgb-redis   | 1:M 27 Jul 2025 04:09:25.694 * <timeseries> Redis version found by RedisTimeSeries : 8.0.3 - oss
+cgb-redis   | 1:M 27 Jul 2025 04:09:25.695 * <timeseries> Registering configuration options: [
+cgb-redis   | 1:M 27 Jul 2025 04:09:25.695 * <timeseries> 	{ ts-compaction-policy   :              }
+cgb-redis   | 1:M 27 Jul 2025 04:09:25.695 * <timeseries> 	{ ts-num-threads         :            3 }
+cgb-redis   | 1:M 27 Jul 2025 04:09:25.695 * <timeseries> 	{ ts-retention-policy    :            0 }
+cgb-redis   | 1:M 27 Jul 2025 04:09:25.695 * <timeseries> 	{ ts-duplicate-policy    :        block }
+cgb-redis   | 1:M 27 Jul 2025 04:09:25.695 * <timeseries> 	{ ts-chunk-size-bytes    :         4096 }
+cgb-redis   | 1:M 27 Jul 2025 04:09:25.695 * <timeseries> 	{ ts-encoding            :   compressed }
+cgb-redis   | 1:M 27 Jul 2025 04:09:25.695 * <timeseries> 	{ ts-ignore-max-time-diff:            0 }
+cgb-redis   | 1:M 27 Jul 2025 04:09:25.695 * <timeseries> 	{ ts-ignore-max-val-diff :     0.000000 }
+cgb-redis   | 1:M 27 Jul 2025 04:09:25.695 * <timeseries> ]
+cgb-redis   | 1:M 27 Jul 2025 04:09:25.695 * <timeseries> Detected redis oss
+cgb-redis   | 1:M 27 Jul 2025 04:09:25.695 * Module 'timeseries' loaded from /usr/local/lib/redis/modules//redistimeseries.so
+cgb-redis   | 1:M 27 Jul 2025 04:09:25.708 * <ReJSON> Created new data type 'ReJSON-RL'
+cgb-redis   | 1:M 27 Jul 2025 04:09:25.711 * <ReJSON> version: 80001 git sha: unknown branch: unknown
+cgb-redis   | 1:M 27 Jul 2025 04:09:25.711 * <ReJSON> Exported RedisJSON_V1 API
+cgb-redis   | 1:M 27 Jul 2025 04:09:25.711 * <ReJSON> Exported RedisJSON_V2 API
+cgb-redis   | 1:M 27 Jul 2025 04:09:25.711 * <ReJSON> Exported RedisJSON_V3 API
+cgb-redis   | 1:M 27 Jul 2025 04:09:25.711 * <ReJSON> Exported RedisJSON_V4 API
+cgb-redis   | 1:M 27 Jul 2025 04:09:25.711 * <ReJSON> Exported RedisJSON_V5 API
+cgb-redis   | 1:M 27 Jul 2025 04:09:25.711 * <ReJSON> Enabled diskless replication
+cgb-redis   | 1:M 27 Jul 2025 04:09:25.711 * <ReJSON> Initialized shared string cache, thread safe: false.
+cgb-redis   | 1:M 27 Jul 2025 04:09:25.711 * Module 'ReJSON' loaded from /usr/local/lib/redis/modules//rejson.so
+cgb-redis   | 1:M 27 Jul 2025 04:09:25.711 * <search> Acquired RedisJSON_V5 API
+cgb-redis   | 1:M 27 Jul 2025 04:09:25.712 * Server initialized
+cgb-redis   | 1:M 27 Jul 2025 04:09:25.712 * Ready to accept connections tcp
 cgb-api2    | Rinha v1 - Performance Backend
 cgb-api2    | Performance Target: p99 < 11ms
 cgb-api2    | GOMAXPROCS: 2
 cgb-api2    | GOGC: 300
 cgb-api2    | GOMEMLIMIT: 250MiB
 cgb-api2    | Iniciando Rinha v1 API...
+cgb-api1    | Rinha v1 - Performance Backend
+cgb-api1    | Performance Target: p99 < 11ms
+cgb-api1    | GOMAXPROCS: 2
+cgb-api1    | GOGC: 300
+cgb-api1    | GOMEMLIMIT: 250MiB
+cgb-api1    | Iniciando Rinha v1 API...
 cgb-worker  | Rinha v1 - Performance Backend
 cgb-worker  | Performance Target: p99 < 11ms
 cgb-worker  | GOMAXPROCS: 2
 cgb-worker  | GOGC: 300
 cgb-worker  | GOMEMLIMIT: 250MiB
 cgb-worker  | Iniciando Rinha v1 API...
-cgb-worker  | 2025/07/26 19:41:39 Redis conectado com sucesso
-cgb-worker  | 2025/07/26 19:41:39 Iniciando modo Worker
 cgb-nginx   | /docker-entrypoint.sh: /docker-entrypoint.d/ is not empty, will attempt to perform configuration
 cgb-nginx   | /docker-entrypoint.sh: Looking for shell scripts in /docker-entrypoint.d/
 cgb-nginx   | /docker-entrypoint.sh: Launching /docker-entrypoint.d/10-listen-on-ipv6-by-default.sh
-cgb-api1    | 2025/07/26 19:41:39 Redis conectado com sucesso
-cgb-api1    | 2025/07/26 19:41:39 Iniciando modo API HÍBRIDO
-cgb-api1    | 2025/07/26 19:41:39 Servidor HTTP iniciado na porta 8080
 cgb-nginx   | 10-listen-on-ipv6-by-default.sh: info: Getting the checksum of /etc/nginx/conf.d/default.conf
 cgb-nginx   | 10-listen-on-ipv6-by-default.sh: info: Enabled listen on IPv6 in /etc/nginx/conf.d/default.conf
 cgb-nginx   | /docker-entrypoint.sh: Sourcing /docker-entrypoint.d/15-local-resolvers.envsh
 cgb-nginx   | /docker-entrypoint.sh: Launching /docker-entrypoint.d/20-envsubst-on-templates.sh
 cgb-nginx   | /docker-entrypoint.sh: Launching /docker-entrypoint.d/30-tune-worker-processes.sh
 cgb-nginx   | /docker-entrypoint.sh: Configuration complete; ready for start up
-cgb-api2    | 2025/07/26 19:41:39 Redis conectado com sucesso
-cgb-api2    | 2025/07/26 19:41:39 Iniciando modo API HÍBRIDO
-cgb-api2    | 2025/07/26 19:41:39 Servidor HTTP iniciado na porta 8080
-cgb-worker  | 2025/07/26 19:42:48 Sinal de encerramento recebido
+cgb-worker  | 2025/07/27 04:09:26 Redis conectado com sucesso
+cgb-worker  | 2025/07/27 04:09:26 Iniciando modo Worker
+cgb-api1    | 2025/07/27 04:09:26 Redis conectado com sucesso
+cgb-api1    | 2025/07/27 04:09:26 Iniciando modo API HÍBRIDO
+cgb-api1    | 2025/07/27 04:09:26 Servidor HTTP iniciado na porta 8080
+cgb-api2    | 2025/07/27 04:09:26 Redis conectado com sucesso
+cgb-api2    | 2025/07/27 04:09:26 Iniciando modo API HÍBRIDO
+cgb-api2    | 2025/07/27 04:09:26 Servidor HTTP iniciado na porta 8080
+cgb-worker  | 2025/07/27 04:10:35 Sinal de encerramento recebido
 [Kcgb-nginx exited with code 0
-cgb-api1    | 2025/07/26 19:42:49 Sinal de encerramento recebido
-cgb-api1    | 2025/07/26 19:42:49 Finalizando servidor HTTP
-cgb-api2    | 2025/07/26 19:42:49 Sinal de encerramento recebido
-cgb-api2    | 2025/07/26 19:42:49 Finalizando servidor HTTP
+cgb-api2    | 2025/07/27 04:10:36 Sinal de encerramento recebido
+cgb-api2    | 2025/07/27 04:10:36 Finalizando servidor HTTP
+cgb-api1    | 2025/07/27 04:10:36 Sinal de encerramento recebido
+cgb-api1    | 2025/07/27 04:10:36 Finalizando servidor HTTP
+[Kcgb-worker exited with code 0
+[Kcgb-api1 exited with code 0
 [Kcgb-api2 exited with code 0
-cgb-redis   | 1:signal-handler (1753558969) Received SIGTERM scheduling shutdown...
-cgb-redis   | 1:M 26 Jul 2025 19:42:49.816 * User requested shutdown...
-cgb-redis   | 1:M 26 Jul 2025 19:42:49.816 # Redis is now ready to exit, bye bye...
+cgb-redis   | 1:signal-handler (1753589437) Received SIGTERM scheduling shutdown...
+cgb-redis   | 1:M 27 Jul 2025 04:10:37.420 * User requested shutdown...
+cgb-redis   | 1:M 27 Jul 2025 04:10:37.420 # Redis is now ready to exit, bye bye...
 [Kcgb-redis exited with code 0
 log truncated at line 1000

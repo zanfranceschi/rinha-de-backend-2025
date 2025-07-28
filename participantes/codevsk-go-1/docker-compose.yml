@@ -1,0 +1,89 @@
+services:
+  nginx:
+    image: nginx:1.25-alpine
+    container_name: nginx
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - api01
+      - api02
+    ports:
+      - "9999:9999"
+    networks:
+      - backend
+    deploy:
+      resources:
+        limits:
+          cpus: "0.2"
+          memory: "60MB"
+  api01: &api
+    image: codevsk/codevsk-rinha-backend-2025-go-v1:1.0.0
+    hostname: api01
+    environment:
+      - REDIS_URL=redis:6379
+      - HTTP_PORT=8080
+      - DEFAULT_URL=http://payment-processor-default:8080
+      - FALLBACK_URL=http://payment-processor-fallback:8080
+      - PAYMENT_QUEUE_CHAN_SIZE=20000
+      - WORKERS_COUNT=27
+      - RETRY_DEFAULT=5
+      - RETRY_FALLBACK=1
+      - HTTP_DEFAULT_TIMEOUT=3
+      - HTTP_FALLBACK_TIMEOUT=2
+      - CONSECUTIVE_FAILURES_DEFAULT=1
+      - CONSECUTIVE_FAILURES_FALLBACK=1
+      - CIRCUIT_BREAKER_INTERVAL_DEFAULT=500
+      - CIRCUIT_BREAKER_INTERVAL_FALLBACK=500
+      - CIRCUIT_BREAKER_TIMEOUT_DEFAULT=800
+      - CIRCUIT_BREAKER_TIMEOUT_FALLBACK=800
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/payment-summary"]
+      interval: 2s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    networks:
+      - backend
+      - payment-processor-net
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: "120MB"
+    depends_on:
+      redis:
+        condition: service_healthy
+  api02:
+    <<: *api
+    hostname: api02
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: "120MB"
+  redis:
+    image: redis:7.2-alpine
+    container_name: redis
+    command: redis-server --save "" --appendonly no --maxclients 50000  --tcp-keepalive 60
+    networks:
+      - backend
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    ports:
+      - 6379:6379
+    deploy:
+      resources:
+        limits:
+          cpus: "0.3"
+          memory: "50MB"
+
+#--- NETWORKS ---
+networks:
+  backend:
+    driver: bridge
+  payment-processor-net:
+    name: payment-processor
+    external: true

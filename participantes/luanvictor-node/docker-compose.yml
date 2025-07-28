@@ -2,30 +2,6 @@ services:
   # -----
   # INFRA
   # -----
-  db:
-    image: postgres:16-alpine
-    hostname: db
-    environment:
-      - POSTGRES_PASSWORD=rinha
-      - POSTGRES_USER=rinha
-      - POSTGRES_DB=rinha
-    volumes:
-      - ./sql:/docker-entrypoint-initdb.d
-    command: postgres -c log_statement=none -c log_min_messages=panic -c max_connections=450 -c synchronous_commit=off -c fsync=off
-    networks:
-      - backend
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U rinha -d rinha"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-      start_period: 10s
-    deploy:
-      resources:
-        limits:
-          cpus: "0.30"
-          memory: "108MB"
-
   cache:
     image: redis:7.2-alpine
     hostname: cache
@@ -40,8 +16,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.10"
-          memory: "6MB"
+          cpus: "0.20"
+          memory: "50MB"
 
   # -------------
   # LOAD BALANCER
@@ -60,7 +36,7 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.1"
+          cpus: "0.10"
           memory: "16MB"
 
   # ---
@@ -75,16 +51,12 @@ services:
       - APP_PORT=9999
       - PAYMENT_PROCESSOR_URL_DEFAULT=http://payment-processor-default:8080
       - PAYMENT_PROCESSOR_URL_FALLBACK=http://payment-processor-fallback:8080
-      - DB_USER=rinha
-      - DB_PASSWORD=rinha
-      - DB_NAME=rinha
       - CACHE_HOST=cache
       - CACHE_PORT=6379
     networks:
       - backend
       - payment-processor
     depends_on:
-      db: { condition: service_healthy }
       cache: { condition: service_healthy }
     deploy:
       resources:
@@ -108,22 +80,18 @@ services:
       - APP_PORT=9999
       - PAYMENT_PROCESSOR_URL_DEFAULT=http://payment-processor-default:8080
       - PAYMENT_PROCESSOR_URL_FALLBACK=http://payment-processor-fallback:8080
-      - DB_USER=rinha
-      - DB_PASSWORD=rinha
-      - DB_NAME=rinha
       - CACHE_HOST=cache
       - CACHE_PORT=6379
     networks:
       - backend
       - payment-processor
     depends_on:
-      db: { condition: service_healthy }
       cache: { condition: service_healthy }
     deploy:
       resources:
         limits:
-          cpus: "0.40"
-          memory: "70MB"
+          cpus: "0.50"
+          memory: "102MB"
 
   worker2:
     <<: *worker

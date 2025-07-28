@@ -1,6 +1,6 @@
 services:
   api1: &api
-    image: lhuizf/rinha-de-backend-2025-bun:0.1.1
+    image: lhuizf/rinha-de-backend-2025-bun:0.2.0
     hostname: api1
     container_name: api1
     environment:
@@ -12,6 +12,7 @@ services:
       - DATABASE_PORT=5432
       - PROCESSOR_DEFAULT_URL=http://payment-processor-default:8080
       - PROCESSOR_FALLBACK_URL=http://payment-processor-fallback:8080
+      - QUEUE_CONCURRENCY=10
     networks:
       - backend
       - payment-processor
@@ -22,7 +23,7 @@ services:
       resources:
         limits:
           cpus: "0.40"
-          memory: "110MB"
+          memory: "120MB"
 
   api2:
     <<: *api
@@ -32,7 +33,20 @@ services:
   redis:
     image: redis:7.2-alpine
     container_name: redis
-    command: redis-server --save "" --appendonly no --maxclients 20000
+    command:
+      [
+        "redis-server",
+        "--save",
+        "",
+        "--appendonly",
+        "no",
+        "--maxclients",
+        "20000",
+        "--tcp-backlog",
+        "511",
+        "--dynamic-hz",
+        "yes",
+      ]
     networks:
       - backend
     ports:
@@ -66,7 +80,7 @@ services:
       resources:
         limits:
           cpus: "0.40"
-          memory: "80MB"
+          memory: "60MB"
 
   load-balancer:
     image: nginx:1.25.2-alpine

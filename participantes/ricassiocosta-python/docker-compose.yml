@@ -1,7 +1,7 @@
 services:
   nginx:
     image: nginx:alpine
-    hostname: rinha-nginx
+    container_name: rinha-nginx
     restart: unless-stopped
     ports:
       - "9999:80"
@@ -20,16 +20,17 @@ services:
           memory: "48MB"
 
   backend-api-1: &api
-    image: ricassiocosta/rinha-backend-2025-python:v0.9.0
-    hostname: rinha-backend-api-1
+    image: ricassiocosta/rinha-backend-2025-python:v0.10.1
+    container_name: rinha-api-1
     restart: unless-stopped
     environment:
       - PAYMENT_PROCESSOR_URL_DEFAULT=http://payment-processor-default:8080
       - PAYMENT_PROCESSOR_URL_FALLBACK=http://payment-processor-fallback:8080
-      - REDIS_URL=redis://redis:6379/0
       - MAX_PARALLELISM=8
     depends_on:
       - redis
+    volumes:
+      - redis-socket:/var/run/redis
     networks:
       - backend
       - payment-processor
@@ -43,52 +44,41 @@ services:
 
   backend-api-2:
     <<: *api
-    hostname: rinha-backend-api-2
-
-  health-check:
-    image: ricassiocosta/rinha-backend-2025-python:v0.9.0
-    hostname: rinha-health-check
-    command: ["python", "-m", "app.health_check"]
-    restart: unless-stopped
-    environment:
-      - PAYMENT_PROCESSOR_URL_DEFAULT=http://payment-processor-default:8080
-      - PAYMENT_PROCESSOR_URL_FALLBACK=http://payment-processor-fallback:8080
-      - REDIS_URL=redis://redis:6379/0
-    depends_on:
-      - redis
-    networks:
-      - backend
-      - payment-processor
-    deploy:
-      resources:
-        limits:
-          cpus: "0.05"
-          memory: "43MB"
+    container_name: rinha-api-2
 
   redis:
     image: redis:7-alpine
-    hostname: rinha-redis
+    container_name: rinha-redis
     restart: unless-stopped
-    command:
-      [
-        "redis-server",
-        "--save",
-        "",
-        "--appendonly",
-        "no",
-        "--maxclients",
-        "5000",
+    command: [
+        "sh",
+        "-c",
+        "mkdir -p /var/run/redis && \
+        redis-server \
+        --save '' \
+        --appendonly no \
+        --maxclients 5000 \
+        --unixsocket /var/run/redis/redis.sock \
+        --unixsocketperm 777 \
+        --port 0 \
+        --protected-mode no \
+        --hz 10",
       ]
     networks:
       - backend
+    volumes:
+      - redis-socket:/var/run/redis
     deploy:
       resources:
         limits:
-          cpus: "0.05"
-          memory: "43MB"
+          cpus: "0.1"
+          memory: "86MB"
 
 networks:
   backend:
     driver: bridge
   payment-processor:
     external: true
+
+volumes:
+  redis-socket:

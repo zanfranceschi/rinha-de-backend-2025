@@ -1,6 +1,6 @@
 x-service-templates:
   api: &api
-    image: leoralph/rinha-de-backend-2025-api:latest
+    image: ghcr.io/leoralph/rinha-de-backend-2025-api:v1.3.0
     depends_on:
       redis:
         condition: service_healthy
@@ -15,7 +15,7 @@ x-service-templates:
 
 services:
   nginx:
-    image: nginx:latest
+    image: nginx:alpine
     ports:
       - "9999:9999"
     volumes:
@@ -47,10 +47,10 @@ services:
           memory: "55M"
 
   payment-worker:
-    image: leoralph/rinha-de-backend-2025-worker:latest
+    image: ghcr.io/leoralph/rinha-de-backend-2025-worker:v1.3.0
     environment:
       - WORKER_TYPE=payment
-      - WORKER_COUNT=10
+      - WORKER_COUNT=5
     depends_on:
       redis:
         condition: service_healthy
@@ -64,7 +64,7 @@ services:
           memory: "15M"
 
   health-worker:
-    image: leoralph/rinha-de-backend-2025-worker:latest
+    image: ghcr.io/leoralph/rinha-de-backend-2025-worker:v1.3.0
     environment:
       - WORKER_TYPE=health
     depends_on:

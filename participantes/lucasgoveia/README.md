@@ -5,7 +5,6 @@ Esta é a minha submissão para a **Rinha de Backend 2025**, desenvolvida em **G
 ## Tecnologias Utilizadas:
 
 - **Go 1.24** ‑ concorrência nativa e binário enxuto
-- **Redis Streams** para enfileiramento dos pedidos de pagamento
 - **PostgreSQL** para persistência
 
 ## Topologia de Alto Nível (Processamento de pagamentos)
@@ -13,79 +12,79 @@ Esta é a minha submissão para a **Rinha de Backend 2025**, desenvolvida em **G
 ```mermaid
 flowchart LR
     subgraph Ingress
-        A1(API Pagamentos 1)
-        A2(API Pagamentos 2)
+        NGINX(NGINX Load Balancer)
     end
 
-    A1 -- HTTP --> R(["Redis Stream<br/>payments"])
-    A2 -- HTTP --> R
-    R -- " XREADGROUP<br/>(batch) " --> W(["Worker<br/>(balance &amp; fan-out)"])
-    W -- " HTTP 2xx/3xx " --> SB(["DbBatcher"])
-    W -- " HTTP 5xx/timeout " --> R
-%% serviços externos
-    W -- " ⇢ default " --> S1(["Serviço Default<br/>(externo)"])
-    W -- " ⇢ fallback " --> S2(["Serviço Fallback<br/>(externo)"])
-    S1 -- OK --> SB
-    S2 -- OK --> SB
-    S1 -- Erro --> R
-    S2 -- Erro --> R
-    SB -- " COPY / INSERT " --> PG[(PostgreSQL)]
+    subgraph "API Server 1"
+        A1(API Pagamentos 1)
+        W1(Worker 1..N)
+    end
+
+    subgraph "API Server 2"
+        A2(API Pagamentos 2)
+        W2(Worker 1..N)
+    end
+
+    NGINX --> A1
+    NGINX --> A2
+    
+    A1 --> W1
+    A2 --> W2
+    
+    W1 -- " ⇢ default " --> S1(["Serviço Default<br/>(externo)"])
+    W1 -- " ⇢ fallback " --> S2(["Serviço Fallback<br/>(externo)"])
+    W2 -- " ⇢ default " --> S1
+    W2 -- " ⇢ fallback " --> S2
+    
+    W1 --> PG[(PostgreSQL)]
+    W2 --> PG
 ```
 
-- **API Pagamentos** recebe a requisição, a serializa e faz `XADD` no stream.
-- **Worker** consome em lote, chama serviços externos de pagamento em paralelo e, ao final, envia os resultados
-  aprovados para o **DbBatcher**.
-- **DbBatcher** agrega várias confirmações e faz um `COPY … FROM STDIN` (ou lote de INSERTs) para o PostgreSQL,
-  reduzindo round-trips e aumentanto IOPS efetivos.
+- **NGINX** atua como load balancer, distribuindo as requisições entre os servidores de API.
+- Cada **API Pagamentos** possui seu próprio **Worker** que recebe requisições através de uma fila em memória.
+- O **Worker** determina qual serviço de pagamento utilizar (default ou fallback) com base na disponibilidade e desempenho.
+- Após o processamento bem-sucedido, o **Worker** envia o resultado para o **Storage**, que insere os pagamentos no PostgreSQL em lotes.
+- Em caso de falha, o **Worker** implementa uma estratégia de retry com backoff exponencial.
 
 ## Arquitetura Interna do Worker
 
-1. **Leitura em lote**
-    - Usa `XREADGROUP COUNT=N BLOCK=...` coletando até 200 mensagens ou até um intervalo de 5ms.
+1. **Múltiplos Workers por Servidor**
+    - Cada servidor API cria múltiplas goroutines de worker (baseado no número de CPUs disponíveis)
+    - Os workers processam as requisições de forma concorrente, maximizando o throughput
 
-2. **Cálculo do Work Factor**
-    - Invoca `ServiceMonitor.CalculateServiceRequests(total)`, retornando quantas mensagens devem ir para cada
-      processador (`default` x `fallback`) com objetivo de **maximizar lucro** (detalhes abaixo).
+2. **Fila em Memória**
+    - Os workers recebem requisições através de uma fila em memória de alta capacidade (32768 mensagens)
+    - O handler HTTP submete as requisições para a fila, permitindo resposta rápida ao cliente
 
-3. **Balanceador por Fator de Trabalho**
-    - Estrutura `workFactorBalancer` distribui as mensagens alternadamente até que cada quota seja atingida.
+3. **Determinação do Processador**
+    - O worker consulta o `ServiceMonitor` para determinar qual processador usar (default ou fallback)
+    - A escolha é baseada na disponibilidade e desempenho recente de cada processador
 
-4. **Fan-out paralelo**
-    - Para cada mensagem:
-        - Reserva vaga em um **semáforo** (com um máximo de 50 requests paralelas), garantindo que o host não sature CPU
-          ou banda.
-        - Chama o serviço HTTP adequado (`default` ou `fallback`) em _goroutine_.
-        - Os serviços de pagamento são chamados alternadamente para evitar saturação (a depender do workFactorBalancer).
-        - Em caso de falha o serviço utilizado é marcado como não disponível.
+4. **Processamento Paralelo**
+    - Para cada requisição:
+        - Chama o serviço HTTP adequado (`default` ou `fallback`) em _goroutine_
+        - Em caso de falha, o serviço utilizado é marcado como não disponível
 
-5. **Push para DbBatcher**
-    - Sucesso → envia struct pagamento para o dbBatcher.
-    - Falha transitória → reenvia mensagem para fila com um _exponential backoff_ de até 10s.
+5. **Persistência e Retry**
+    - Sucesso → envia o pagamento para o Storage, que utiliza um buffer em memória
+    - O Storage agrupa os pagamentos em lotes de até 100 registros para inserção eficiente no PostgreSQL
+    - Os lotes são enviados ao banco quando atingem o tamanho máximo ou após 2ms
+    - Falha transitória → implementa retry com _exponential backoff_ de até 2 segundos
 
-### Por que DbBatcher separado?
+## Monitoramento de Saúde dos Processadores
 
-Agregando confirmações em blocos conseguimos:
+O sistema utiliza um `ServiceMonitor` para monitorar continuamente a saúde dos processadores de pagamento:
 
-- Menos RTT (Round trip time)
-- Uso de `COPY` reduz overhead de parsing / planejamento.
-- Worker continua “livre” para I/O de rede enquanto o lote é gravado.
+- Verifica periodicamente a disponibilidade dos serviços de pagamento (default e fallback)
+- Mantém estatísticas de desempenho e disponibilidade
+- Determina qual processador usar com base nas condições atuais
+- Adapta-se automaticamente a falhas ou degradação de desempenho
 
-## Cálculo do Work Factor
+## Estratégia de Retry
 
-Objetivo: **maximizar lucro esperado** para `n` mensagens dadas as restrições de disponibilidade e taxa de cada serviço.
+Para garantir a resiliência do sistema:
 
-#### **Work Factor (W)**
-
-L = (1 - taxa) × 1000ms / (minResponseTime)
-
-      L_default = (1 - 0.05) × 1000ms / (Default_minResponseTime)
-      L_fallback = (1 - 0.15) × 1000ms / (Fallback_minResponseTime)
-      
-      z = L_default + L_fallback
-
-      W_default = round( (L_default / z) * n)
-      W_fallback = n - W_default
-      
-
-O **work factor** muda a cada lote, adaptando-se a oscilações de rede ou SLA externo, mantendo o ticket médio de lucro o mais alto possível.
-
+- Implementa retry com backoff exponencial (até 2 segundos)
+- Adiciona jitter para evitar thundering herd
+- Limita o número máximo de tentativas para evitar sobrecarga
+- Utiliza uma fila de prioridade para gerenciar os retries de forma eficiente

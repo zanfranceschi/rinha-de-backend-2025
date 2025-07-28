@@ -4,7 +4,7 @@ A Rinha de Backend é um desafio em que é necessário desenvolver uma solução
 
 **Importante!**: A data limite para submeter seu backend é **2025-08-17 até as 23:59:59**! A previsão para a divulgação dos resultados é para o dia **2025-08-20**.
 
-A Rinha já está rolando. Acompanhe a prévia dos resultados [aqui](./PREVIA_RESULTADOS.md) ou por este [fantástico site](https://rinhers.kauefraga.dev/) gentilmente desenvolvido pelo [Kauê Fraga](https://kauefraga.dev/), ou [este site](https://rinha2025.andersongomes.dev.br/) focado no ranking desenvolvido por Anderson Gomes.
+A Rinha já está rolando. Acompanhe a prévia dos resultados [aqui](./PREVIA_RESULTADOS.md) ou por este [fantástico site](https://rinhers.kauefraga.dev/) gentilmente desenvolvido pelo [Kauê Fraga](https://kauefraga.dev/), ou [este site](https://rinha2025.andersongomes.dev.br/) focado no ranking desenvolvido por [Anderson Gomes](https://andersongomes.dev.br/).
 
 ![galinha correndo](./misc/imgs/header.jpg)
 

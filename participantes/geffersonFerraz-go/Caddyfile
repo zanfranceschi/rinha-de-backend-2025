@@ -1,0 +1,19 @@
+:80 {
+
+    reverse_proxy /payments payment-processor:9099 {
+        #health_uri /health
+        #health_interval 15s
+    }
+    
+    reverse_proxy /payments-summary payment-summary:9099 {
+        #health_uri /health
+        #health_interval 30s
+    }
+    
+    encode gzip
+    
+    # Log apenas erros para economizar I/O
+    log {
+        level ERROR
+    }
+}

@@ -1,6 +1,6 @@
 services:
   api-1: &api
-    image: muaddib42/rinha-2025-api:latest
+    image: muaddib42/rinha-2025-api:0.0.5
     networks:
       - payment-processor
     depends_on:
@@ -26,12 +26,12 @@ services:
       - API_PATH=/tmp/api-2.sock
 
   rinha-db:
-    image: muaddib42/rinha-2025-db:latest
+    image: muaddib42/rinha-2025-db:0.0.5
     volumes:
       - ipc-socket:/tmp
 
   load_balancer:
-    image: muaddib42/rinha-2025-gateway:latest
+    image: muaddib42/rinha-2025-gateway:0.0.5
     ports:
       - "9999:9999"
     depends_on:

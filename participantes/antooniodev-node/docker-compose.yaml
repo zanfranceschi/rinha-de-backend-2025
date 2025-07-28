@@ -7,8 +7,6 @@ services:
       - backend
     ports:
       - "6379:6379"
-    volumes:
-      - ./data/redis:/data
     command: redis-server --save 20 1 --loglevel warning
     deploy: 
       resources:
@@ -20,7 +18,6 @@ services:
       interval: 1s
       timeout: 3s
       retries: 30
-    
   api01: &api01
     image: antoniocarvalhodev/rinha:1.0
     networks:

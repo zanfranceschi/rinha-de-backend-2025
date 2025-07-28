@@ -3,8 +3,8 @@
  Network libardi-dotnet_backend  Created
  Container payment-db  Creating
  Container payment-db  Created
- Container payment-api-2  Creating
  Container payment-api-1  Creating
+ Container payment-api-2  Creating
  Container payment-api-1  Created
  Container payment-api-2  Created
  Container payment-lb  Creating
@@ -28,7 +28,7 @@ payment-db     | selecting default time zone ... UTC
 payment-db     | creating configuration files ... ok
 payment-db     | running bootstrap script ... ok
 payment-db     | sh: locale: not found
-payment-db     | 2025-07-26 20:53:33.603 UTC [34] WARNING:  no usable system locales were found
+payment-db     | 2025-07-27 05:25:06.693 UTC [35] WARNING:  no usable system locales were found
 payment-db     | performing post-bootstrap initialization ... ok
 payment-db     | initdb: warning: enabling "trust" authentication for local connections
 payment-db     | initdb: hint: You can change this by editing pg_hba.conf or using the option -A, or --auth-local and --auth-host, the next time you run initdb.
@@ -39,50 +39,49 @@ payment-db     | Success. You can now start the database server using:
 payment-db     | 
 payment-db     |     pg_ctl -D /var/lib/postgresql/data -l logfile start
 payment-db     | 
-payment-db     | waiting for server to start....2025-07-26 20:53:35.799 UTC [40] LOG:  starting PostgreSQL 15.13 on x86_64-pc-linux-musl, compiled by gcc (Alpine 14.2.0) 14.2.0, 64-bit
-payment-db     | 2025-07-26 20:53:35.799 UTC [40] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
-payment-db     | 2025-07-26 20:53:35.801 UTC [43] LOG:  database system was shut down at 2025-07-26 20:53:35 UTC
-payment-db     | 2025-07-26 20:53:35.805 UTC [40] LOG:  database system is ready to accept connections
+payment-db     | waiting for server to start....2025-07-27 05:25:08.799 UTC [41] LOG:  starting PostgreSQL 15.13 on x86_64-pc-linux-musl, compiled by gcc (Alpine 14.2.0) 14.2.0, 64-bit
+payment-db     | 2025-07-27 05:25:08.799 UTC [41] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+payment-db     | 2025-07-27 05:25:08.801 UTC [44] LOG:  database system was shut down at 2025-07-27 05:25:08 UTC
+payment-db     | 2025-07-27 05:25:08.806 UTC [41] LOG:  database system is ready to accept connections
 payment-db     |  done
 payment-db     | server started
-payment-db     | 2025-07-26 20:53:35.910 UTC [49] LOG:  duration: 1.495 ms  statement: SELECT 1 FROM pg_database WHERE datname = 'PaymentsDB' ;
-payment-db     | 2025-07-26 20:53:36.185 UTC [51] LOG:  duration: 203.397 ms  statement: CREATE DATABASE "PaymentsDB" ;
+payment-db     | 2025-07-27 05:25:08.914 UTC [50] LOG:  duration: 1.654 ms  statement: SELECT 1 FROM pg_database WHERE datname = 'PaymentsDB' ;
+payment-db     | 2025-07-27 05:25:09.200 UTC [52] LOG:  duration: 215.585 ms  statement: CREATE DATABASE "PaymentsDB" ;
 payment-db     | CREATE DATABASE
 payment-db     | 
 payment-db     | 
 payment-db     | /usr/local/bin/docker-entrypoint.sh: running /docker-entrypoint-initdb.d/init.sql
-payment-db     | 2025-07-26 20:53:36.296 UTC [53] LOG:  duration: 7.925 ms  statement: CREATE UNLOGGED TABLE payments (
+payment-db     | 2025-07-27 05:25:09.288 UTC [54] LOG:  duration: 5.814 ms  statement: CREATE UNLOGGED TABLE payments (
 payment-db     | 	    correlation_id UUID PRIMARY KEY,
 payment-db     | 	    amount DECIMAL NOT NULL,
 payment-db     | 	    processed_by TEXT NOT NULL,
 payment-db     | 	    requested_at_utc TIMESTAMPTZ NOT NULL
 payment-db     | 	);
 payment-db     | CREATE TABLE
-payment-db     | 2025-07-26 20:53:36.299 UTC [53] LOG:  duration: 3.108 ms  statement: CREATE INDEX CONCURRENTLY idx_payments_requested_at_utc_processed_by 
+payment-db     | 2025-07-27 05:25:09.291 UTC [54] LOG:  duration: 3.015 ms  statement: CREATE INDEX CONCURRENTLY idx_payments_requested_at_utc_processed_by 
 payment-db     | 	ON payments(requested_at_utc, processed_by);
 payment-db     | CREATE INDEX
 payment-db     | 
 payment-db     | 
-payment-db     | waiting for server to shut down....2025-07-26 20:53:36.301 UTC [40] LOG:  received fast shutdown request
-payment-db     | 2025-07-26 20:53:36.301 UTC [40] LOG:  aborting any active transactions
-payment-db     | 2025-07-26 20:53:36.307 UTC [40] LOG:  background worker "logical replication launcher" (PID 46) exited with exit code 1
-payment-db     | 2025-07-26 20:53:36.307 UTC [41] LOG:  shutting down
-payment-db     | 2025-07-26 20:53:36.307 UTC [41] LOG:  checkpoint starting: shutdown immediate
-payment-db     | 2025-07-26 20:53:36.402 UTC [41] LOG:  checkpoint complete: wrote 922 buffers (1.4%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.096 s, sync=0.001 s, total=0.096 s; sync files=0, longest=0.000 s, average=0.000 s; distance=7393 kB, estimate=7393 kB
+payment-db     | waiting for server to shut down...2025-07-27 05:25:09.293 UTC [41] LOG:  received fast shutdown request
+payment-db     | .2025-07-27 05:25:09.293 UTC [41] LOG:  aborting any active transactions
+payment-db     | 2025-07-27 05:25:09.298 UTC [41] LOG:  background worker "logical replication launcher" (PID 47) exited with exit code 1
+payment-db     | 2025-07-27 05:25:09.298 UTC [42] LOG:  shutting down
+payment-db     | 2025-07-27 05:25:09.298 UTC [42] LOG:  checkpoint starting: shutdown immediate
+payment-db     | 2025-07-27 05:25:09.384 UTC [42] LOG:  checkpoint complete: wrote 922 buffers (1.4%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.086 s, sync=0.001 s, total=0.086 s; sync files=0, longest=0.000 s, average=0.000 s; distance=7393 kB, estimate=7393 kB
+payment-db     | 2025-07-27 05:25:09.485 UTC [41] LOG:  database system is shut down
 payment-db     |  done
 payment-db     | server stopped
 payment-db     | 
 payment-db     | PostgreSQL init process complete; ready for start up.
 payment-db     | 
-payment-db     | 2025-07-26 20:53:36.582 UTC [1] LOG:  starting PostgreSQL 15.13 on x86_64-pc-linux-musl, compiled by gcc (Alpine 14.2.0) 14.2.0, 64-bit
-payment-db     | 2025-07-26 20:53:36.583 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
-payment-db     | 2025-07-26 20:53:36.583 UTC [1] LOG:  listening on IPv6 address "::", port 5432
-payment-db     | 2025-07-26 20:53:36.583 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
-payment-db     | 2025-07-26 20:53:36.776 UTC [40] LOG:  database system is shut down
-payment-db     | 2025-07-26 20:53:36.808 UTC [64] LOG:  database system was shut down at 2025-07-26 20:53:36 UTC
-payment-db     | 2025-07-26 20:53:36.814 UTC [65] FATAL:  the database system is starting up
-payment-db     | 2025-07-26 20:53:36.869 UTC [1] LOG:  database system is ready to accept connections
-payment-db     | 2025-07-26 20:53:43.396 UTC [77] LOG:  duration: 102.994 ms  statement: SELECT version();
+payment-db     | 2025-07-27 05:25:09.605 UTC [1] LOG:  starting PostgreSQL 15.13 on x86_64-pc-linux-musl, compiled by gcc (Alpine 14.2.0) 14.2.0, 64-bit
+payment-db     | 2025-07-27 05:25:09.605 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+payment-db     | 2025-07-27 05:25:09.605 UTC [1] LOG:  listening on IPv6 address "::", port 5432
+payment-db     | 2025-07-27 05:25:09.605 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+payment-db     | 2025-07-27 05:25:09.608 UTC [65] LOG:  database system was shut down at 2025-07-27 05:25:09 UTC
+payment-db     | 2025-07-27 05:25:09.710 UTC [1] LOG:  database system is ready to accept connections
+payment-db     | 2025-07-27 05:25:16.002 UTC [77] LOG:  duration: 107.033 ms  statement: SELECT version();
 payment-db     | 	
 payment-db     | 	SELECT ns.nspname, t.oid, t.typname, t.typtype, t.typnotnull, t.elemtypoid
 payment-db     | 	FROM (
@@ -153,7 +152,7 @@ payment-db     | 	FROM pg_enum
 payment-db     | 	JOIN pg_type ON pg_type.oid=enumtypid
 payment-db     | 	ORDER BY oid, enumsortorder;
 payment-db     | 	
-payment-db     | 2025-07-26 20:53:43.399 UTC [83] LOG:  duration: 108.126 ms  statement: SELECT version();
+payment-db     | 2025-07-27 05:25:16.002 UTC [76] LOG:  duration: 107.345 ms  statement: SELECT version();
 payment-db     | 	
 payment-db     | 	SELECT ns.nspname, t.oid, t.typname, t.typtype, t.typnotnull, t.elemtypoid
 payment-db     | 	FROM (
@@ -224,184 +223,185 @@ payment-db     | 	FROM pg_enum
 payment-db     | 	JOIN pg_type ON pg_type.oid=enumtypid
 payment-db     | 	ORDER BY oid, enumsortorder;
 payment-db     | 	
-payment-db     | 2025-07-26 20:53:43.528 UTC [77] LOG:  duration: 3.441 ms  parse _auto0: 
+payment-db     | 2025-07-27 05:25:16.131 UTC [77] LOG:  duration: 3.722 ms  parse _auto0: 
 payment-db     | 	                SELECT processed_by AS ProcessedBy, COUNT(*) AS TotalRequests, SUM(amount) AS TotalAmount
 payment-db     | 	                FROM payments
 payment-db     | 	                WHERE ($1 IS NULL OR requested_at_utc >= $1)
 payment-db     | 	                  AND ($2 IS NULL OR requested_at_utc <= $2)
 payment-db     | 	                GROUP BY processed_by
-payment-db     | 2025-07-26 20:53:43.530 UTC [83] LOG:  duration: 1.356 ms  parse _auto0: 
+payment-db     | 2025-07-27 05:25:16.134 UTC [77] LOG:  duration: 3.010 ms  bind _auto0: 
 payment-db     | 	                SELECT processed_by AS ProcessedBy, COUNT(*) AS TotalRequests, SUM(amount) AS TotalAmount
 payment-db     | 	                FROM payments
 payment-db     | 	                WHERE ($1 IS NULL OR requested_at_utc >= $1)
 payment-db     | 	                  AND ($2 IS NULL OR requested_at_utc <= $2)
 payment-db     | 	                GROUP BY processed_by
-payment-db     | 2025-07-26 20:53:43.530 UTC [77] LOG:  duration: 2.645 ms  bind _auto0: 
+payment-db     | 2025-07-27 05:25:16.134 UTC [77] DETAIL:  parameters: $1 = NULL, $2 = NULL
+payment-db     | 2025-07-27 05:25:16.134 UTC [77] LOG:  duration: 0.010 ms  execute _auto0: 
 payment-db     | 	                SELECT processed_by AS ProcessedBy, COUNT(*) AS TotalRequests, SUM(amount) AS TotalAmount
 payment-db     | 	                FROM payments
 payment-db     | 	                WHERE ($1 IS NULL OR requested_at_utc >= $1)
 payment-db     | 	                  AND ($2 IS NULL OR requested_at_utc <= $2)
 payment-db     | 	                GROUP BY processed_by
-payment-db     | 2025-07-26 20:53:43.530 UTC [77] DETAIL:  parameters: $1 = NULL, $2 = NULL
-payment-db     | 2025-07-26 20:53:43.530 UTC [77] LOG:  duration: 0.009 ms  execute _auto0: 
+payment-db     | 2025-07-27 05:25:16.134 UTC [77] DETAIL:  parameters: $1 = NULL, $2 = NULL
+payment-db     | 2025-07-27 05:25:16.134 UTC [77] LOG:  duration: 0.075 ms  bind _auto0: 
 payment-db     | 	                SELECT processed_by AS ProcessedBy, COUNT(*) AS TotalRequests, SUM(amount) AS TotalAmount
 payment-db     | 	                FROM payments
 payment-db     | 	                WHERE ($1 IS NULL OR requested_at_utc >= $1)
 payment-db     | 	                  AND ($2 IS NULL OR requested_at_utc <= $2)
 payment-db     | 	                GROUP BY processed_by
-payment-db     | 2025-07-26 20:53:43.530 UTC [77] DETAIL:  parameters: $1 = NULL, $2 = NULL
-payment-db     | 2025-07-26 20:53:43.531 UTC [77] LOG:  duration: 0.071 ms  bind _auto0: 
+payment-db     | 2025-07-27 05:25:16.134 UTC [77] DETAIL:  parameters: $1 = NULL, $2 = NULL
+payment-db     | 2025-07-27 05:25:16.134 UTC [77] LOG:  duration: 0.007 ms  execute _auto0: 
 payment-db     | 	                SELECT processed_by AS ProcessedBy, COUNT(*) AS TotalRequests, SUM(amount) AS TotalAmount
 payment-db     | 	                FROM payments
 payment-db     | 	                WHERE ($1 IS NULL OR requested_at_utc >= $1)
 payment-db     | 	                  AND ($2 IS NULL OR requested_at_utc <= $2)
 payment-db     | 	                GROUP BY processed_by
-payment-db     | 2025-07-26 20:53:43.531 UTC [77] DETAIL:  parameters: $1 = NULL, $2 = NULL
-payment-db     | 2025-07-26 20:53:43.531 UTC [77] LOG:  duration: 0.005 ms  execute _auto0: 
+payment-db     | 2025-07-27 05:25:16.134 UTC [77] DETAIL:  parameters: $1 = NULL, $2 = NULL
+payment-db     | 2025-07-27 05:25:16.134 UTC [77] LOG:  duration: 0.056 ms  bind _auto0: 
 payment-db     | 	                SELECT processed_by AS ProcessedBy, COUNT(*) AS TotalRequests, SUM(amount) AS TotalAmount
 payment-db     | 	                FROM payments
 payment-db     | 	                WHERE ($1 IS NULL OR requested_at_utc >= $1)
 payment-db     | 	                  AND ($2 IS NULL OR requested_at_utc <= $2)
 payment-db     | 	                GROUP BY processed_by
-payment-db     | 2025-07-26 20:53:43.531 UTC [77] DETAIL:  parameters: $1 = NULL, $2 = NULL
-payment-db     | 2025-07-26 20:53:43.531 UTC [77] LOG:  duration: 0.070 ms  bind _auto0: 
+payment-db     | 2025-07-27 05:25:16.134 UTC [77] DETAIL:  parameters: $1 = NULL, $2 = NULL
+payment-db     | 2025-07-27 05:25:16.134 UTC [77] LOG:  duration: 0.006 ms  execute _auto0: 
 payment-db     | 	                SELECT processed_by AS ProcessedBy, COUNT(*) AS TotalRequests, SUM(amount) AS TotalAmount
 payment-db     | 	                FROM payments
 payment-db     | 	                WHERE ($1 IS NULL OR requested_at_utc >= $1)
 payment-db     | 	                  AND ($2 IS NULL OR requested_at_utc <= $2)
 payment-db     | 	                GROUP BY processed_by
-payment-db     | 2025-07-26 20:53:43.531 UTC [77] DETAIL:  parameters: $1 = NULL, $2 = NULL
-payment-db     | 2025-07-26 20:53:43.531 UTC [77] LOG:  duration: 0.005 ms  execute _auto0: 
+payment-db     | 2025-07-27 05:25:16.134 UTC [77] DETAIL:  parameters: $1 = NULL, $2 = NULL
+payment-db     | 2025-07-27 05:25:16.134 UTC [77] LOG:  duration: 0.051 ms  bind _auto0: 
 payment-db     | 	                SELECT processed_by AS ProcessedBy, COUNT(*) AS TotalRequests, SUM(amount) AS TotalAmount
 payment-db     | 	                FROM payments
 payment-db     | 	                WHERE ($1 IS NULL OR requested_at_utc >= $1)
 payment-db     | 	                  AND ($2 IS NULL OR requested_at_utc <= $2)
 payment-db     | 	                GROUP BY processed_by
-payment-db     | 2025-07-26 20:53:43.531 UTC [77] DETAIL:  parameters: $1 = NULL, $2 = NULL
-payment-db     | 2025-07-26 20:53:43.531 UTC [77] LOG:  duration: 0.053 ms  bind _auto0: 
+payment-db     | 2025-07-27 05:25:16.134 UTC [77] DETAIL:  parameters: $1 = NULL, $2 = NULL
+payment-db     | 2025-07-27 05:25:16.134 UTC [77] LOG:  duration: 0.005 ms  execute _auto0: 
 payment-db     | 	                SELECT processed_by AS ProcessedBy, COUNT(*) AS TotalRequests, SUM(amount) AS TotalAmount
 payment-db     | 	                FROM payments
 payment-db     | 	                WHERE ($1 IS NULL OR requested_at_utc >= $1)
 payment-db     | 	                  AND ($2 IS NULL OR requested_at_utc <= $2)
 payment-db     | 	                GROUP BY processed_by
-payment-db     | 2025-07-26 20:53:43.531 UTC [77] DETAIL:  parameters: $1 = NULL, $2 = NULL
-payment-db     | 2025-07-26 20:53:43.531 UTC [77] LOG:  duration: 0.007 ms  execute _auto0: 
+payment-db     | 2025-07-27 05:25:16.134 UTC [77] DETAIL:  parameters: $1 = NULL, $2 = NULL
+payment-db     | 2025-07-27 05:25:16.134 UTC [77] LOG:  duration: 0.042 ms  bind _auto0: 
 payment-db     | 	                SELECT processed_by AS ProcessedBy, COUNT(*) AS TotalRequests, SUM(amount) AS TotalAmount
 payment-db     | 	                FROM payments
 payment-db     | 	                WHERE ($1 IS NULL OR requested_at_utc >= $1)
 payment-db     | 	                  AND ($2 IS NULL OR requested_at_utc <= $2)
 payment-db     | 	                GROUP BY processed_by
-payment-db     | 2025-07-26 20:53:43.531 UTC [77] DETAIL:  parameters: $1 = NULL, $2 = NULL
-payment-db     | 2025-07-26 20:53:43.531 UTC [77] LOG:  duration: 0.050 ms  bind _auto0: 
+payment-db     | 2025-07-27 05:25:16.134 UTC [77] DETAIL:  parameters: $1 = NULL, $2 = NULL
+payment-db     | 2025-07-27 05:25:16.134 UTC [77] LOG:  duration: 0.005 ms  execute _auto0: 
 payment-db     | 	                SELECT processed_by AS ProcessedBy, COUNT(*) AS TotalRequests, SUM(amount) AS TotalAmount
 payment-db     | 	                FROM payments
 payment-db     | 	                WHERE ($1 IS NULL OR requested_at_utc >= $1)
 payment-db     | 	                  AND ($2 IS NULL OR requested_at_utc <= $2)
 payment-db     | 	                GROUP BY processed_by
-payment-db     | 2025-07-26 20:53:43.531 UTC [77] DETAIL:  parameters: $1 = NULL, $2 = NULL
-payment-db     | 2025-07-26 20:53:43.531 UTC [77] LOG:  duration: 0.004 ms  execute _auto0: 
+payment-db     | 2025-07-27 05:25:16.134 UTC [77] DETAIL:  parameters: $1 = NULL, $2 = NULL
+payment-db     | 2025-07-27 05:25:16.185 UTC [76] LOG:  duration: 1.528 ms  parse _auto0: 
 payment-db     | 	                SELECT processed_by AS ProcessedBy, COUNT(*) AS TotalRequests, SUM(amount) AS TotalAmount
 payment-db     | 	                FROM payments
 payment-db     | 	                WHERE ($1 IS NULL OR requested_at_utc >= $1)
 payment-db     | 	                  AND ($2 IS NULL OR requested_at_utc <= $2)
 payment-db     | 	                GROUP BY processed_by
-payment-db     | 2025-07-26 20:53:43.531 UTC [77] DETAIL:  parameters: $1 = NULL, $2 = NULL
-payment-db     | 2025-07-26 20:53:43.532 UTC [83] LOG:  duration: 1.957 ms  bind _auto0: 
+payment-db     | 2025-07-27 05:25:16.186 UTC [76] LOG:  duration: 1.032 ms  bind _auto0: 
 payment-db     | 	                SELECT processed_by AS ProcessedBy, COUNT(*) AS TotalRequests, SUM(amount) AS TotalAmount
 payment-db     | 	                FROM payments
 payment-db     | 	                WHERE ($1 IS NULL OR requested_at_utc >= $1)
 payment-db     | 	                  AND ($2 IS NULL OR requested_at_utc <= $2)
 payment-db     | 	                GROUP BY processed_by
-payment-db     | 2025-07-26 20:53:43.532 UTC [83] DETAIL:  parameters: $1 = NULL, $2 = NULL
-payment-db     | 2025-07-26 20:53:43.532 UTC [83] LOG:  duration: 0.008 ms  execute _auto0: 
+payment-db     | 2025-07-27 05:25:16.186 UTC [76] DETAIL:  parameters: $1 = NULL, $2 = NULL
+payment-db     | 2025-07-27 05:25:16.187 UTC [76] LOG:  duration: 0.013 ms  execute _auto0: 
 payment-db     | 	                SELECT processed_by AS ProcessedBy, COUNT(*) AS TotalRequests, SUM(amount) AS TotalAmount
 payment-db     | 	                FROM payments
 payment-db     | 	                WHERE ($1 IS NULL OR requested_at_utc >= $1)
 payment-db     | 	                  AND ($2 IS NULL OR requested_at_utc <= $2)
 payment-db     | 	                GROUP BY processed_by
-payment-db     | 2025-07-26 20:53:43.532 UTC [83] DETAIL:  parameters: $1 = NULL, $2 = NULL
-payment-db     | 2025-07-26 20:53:43.532 UTC [83] LOG:  duration: 0.059 ms  bind _auto0: 
+payment-db     | 2025-07-27 05:25:16.187 UTC [76] DETAIL:  parameters: $1 = NULL, $2 = NULL
+payment-db     | 2025-07-27 05:25:16.187 UTC [76] LOG:  duration: 0.058 ms  bind _auto0: 
 payment-db     | 	                SELECT processed_by AS ProcessedBy, COUNT(*) AS TotalRequests, SUM(amount) AS TotalAmount
 payment-db     | 	                FROM payments
 payment-db     | 	                WHERE ($1 IS NULL OR requested_at_utc >= $1)
 payment-db     | 	                  AND ($2 IS NULL OR requested_at_utc <= $2)
 payment-db     | 	                GROUP BY processed_by
-payment-db     | 2025-07-26 20:53:43.532 UTC [83] DETAIL:  parameters: $1 = NULL, $2 = NULL
-payment-db     | 2025-07-26 20:53:43.532 UTC [83] LOG:  duration: 0.006 ms  execute _auto0: 
+payment-db     | 2025-07-27 05:25:16.187 UTC [76] DETAIL:  parameters: $1 = NULL, $2 = NULL
+payment-db     | 2025-07-27 05:25:16.187 UTC [76] LOG:  duration: 0.004 ms  execute _auto0: 
 payment-db     | 	                SELECT processed_by AS ProcessedBy, COUNT(*) AS TotalRequests, SUM(amount) AS TotalAmount
 payment-db     | 	                FROM payments
 payment-db     | 	                WHERE ($1 IS NULL OR requested_at_utc >= $1)
 payment-db     | 	                  AND ($2 IS NULL OR requested_at_utc <= $2)
 payment-db     | 	                GROUP BY processed_by
-payment-db     | 2025-07-26 20:53:43.532 UTC [83] DETAIL:  parameters: $1 = NULL, $2 = NULL
-payment-db     | 2025-07-26 20:53:43.533 UTC [83] LOG:  duration: 0.051 ms  bind _auto0: 
+payment-db     | 2025-07-27 05:25:16.187 UTC [76] DETAIL:  parameters: $1 = NULL, $2 = NULL
+payment-db     | 2025-07-27 05:25:16.187 UTC [76] LOG:  duration: 0.035 ms  bind _auto0: 
 payment-db     | 	                SELECT processed_by AS ProcessedBy, COUNT(*) AS TotalRequests, SUM(amount) AS TotalAmount
 payment-db     | 	                FROM payments
 payment-db     | 	                WHERE ($1 IS NULL OR requested_at_utc >= $1)
 payment-db     | 	                  AND ($2 IS NULL OR requested_at_utc <= $2)
 payment-db     | 	                GROUP BY processed_by
-payment-db     | 2025-07-26 20:53:43.533 UTC [83] DETAIL:  parameters: $1 = NULL, $2 = NULL
-payment-db     | 2025-07-26 20:53:43.533 UTC [83] LOG:  duration: 0.006 ms  execute _auto0: 
+payment-db     | 2025-07-27 05:25:16.187 UTC [76] DETAIL:  parameters: $1 = NULL, $2 = NULL
+payment-db     | 2025-07-27 05:25:16.187 UTC [76] LOG:  duration: 0.004 ms  execute _auto0: 
 payment-db     | 	                SELECT processed_by AS ProcessedBy, COUNT(*) AS TotalRequests, SUM(amount) AS TotalAmount
 payment-db     | 	                FROM payments
 payment-db     | 	                WHERE ($1 IS NULL OR requested_at_utc >= $1)
 payment-db     | 	                  AND ($2 IS NULL OR requested_at_utc <= $2)
 payment-db     | 	                GROUP BY processed_by
-payment-db     | 2025-07-26 20:53:43.533 UTC [83] DETAIL:  parameters: $1 = NULL, $2 = NULL
-payment-db     | 2025-07-26 20:53:43.533 UTC [83] LOG:  duration: 0.051 ms  bind _auto0: 
+payment-db     | 2025-07-27 05:25:16.187 UTC [76] DETAIL:  parameters: $1 = NULL, $2 = NULL
+payment-db     | 2025-07-27 05:25:16.187 UTC [76] LOG:  duration: 0.032 ms  bind _auto0: 
 payment-db     | 	                SELECT processed_by AS ProcessedBy, COUNT(*) AS TotalRequests, SUM(amount) AS TotalAmount
 payment-db     | 	                FROM payments
 payment-db     | 	                WHERE ($1 IS NULL OR requested_at_utc >= $1)
 payment-db     | 	                  AND ($2 IS NULL OR requested_at_utc <= $2)
 payment-db     | 	                GROUP BY processed_by
-payment-db     | 2025-07-26 20:53:43.533 UTC [83] DETAIL:  parameters: $1 = NULL, $2 = NULL
-payment-db     | 2025-07-26 20:53:43.533 UTC [83] LOG:  duration: 0.006 ms  execute _auto0: 
+payment-db     | 2025-07-27 05:25:16.187 UTC [76] DETAIL:  parameters: $1 = NULL, $2 = NULL
+payment-db     | 2025-07-27 05:25:16.187 UTC [76] LOG:  duration: 0.003 ms  execute _auto0: 
 payment-db     | 	                SELECT processed_by AS ProcessedBy, COUNT(*) AS TotalRequests, SUM(amount) AS TotalAmount
 payment-db     | 	                FROM payments
 payment-db     | 	                WHERE ($1 IS NULL OR requested_at_utc >= $1)
 payment-db     | 	                  AND ($2 IS NULL OR requested_at_utc <= $2)
 payment-db     | 	                GROUP BY processed_by
-payment-db     | 2025-07-26 20:53:43.533 UTC [83] DETAIL:  parameters: $1 = NULL, $2 = NULL
-payment-db     | 2025-07-26 20:53:43.533 UTC [83] LOG:  duration: 0.052 ms  bind _auto0: 
+payment-db     | 2025-07-27 05:25:16.187 UTC [76] DETAIL:  parameters: $1 = NULL, $2 = NULL
+payment-db     | 2025-07-27 05:25:16.187 UTC [76] LOG:  duration: 0.030 ms  bind _auto0: 
 payment-db     | 	                SELECT processed_by AS ProcessedBy, COUNT(*) AS TotalRequests, SUM(amount) AS TotalAmount
 payment-db     | 	                FROM payments
 payment-db     | 	                WHERE ($1 IS NULL OR requested_at_utc >= $1)
 payment-db     | 	                  AND ($2 IS NULL OR requested_at_utc <= $2)
 payment-db     | 	                GROUP BY processed_by
-payment-db     | 2025-07-26 20:53:43.533 UTC [83] DETAIL:  parameters: $1 = NULL, $2 = NULL
-payment-db     | 2025-07-26 20:53:43.533 UTC [83] LOG:  duration: 0.006 ms  execute _auto0: 
+payment-db     | 2025-07-27 05:25:16.187 UTC [76] DETAIL:  parameters: $1 = NULL, $2 = NULL
+payment-db     | 2025-07-27 05:25:16.187 UTC [76] LOG:  duration: 0.004 ms  execute _auto0: 
 payment-db     | 	                SELECT processed_by AS ProcessedBy, COUNT(*) AS TotalRequests, SUM(amount) AS TotalAmount
 payment-db     | 	                FROM payments
 payment-db     | 	                WHERE ($1 IS NULL OR requested_at_utc >= $1)
 payment-db     | 	                  AND ($2 IS NULL OR requested_at_utc <= $2)
 payment-db     | 	                GROUP BY processed_by
-payment-db     | 2025-07-26 20:53:43.533 UTC [83] DETAIL:  parameters: $1 = NULL, $2 = NULL
-payment-api-2  | [INFO][07/26/2025 20:53:44.093Z][Thread 0009][remoting (akka://actorSystem)] Starting remoting
-payment-api-2  | [INFO][07/26/2025 20:53:44.319Z][Thread 0009][remoting (akka://actorSystem)] Remoting started; listening on addresses : [akka.tcp://actorSystem@payment-api-2:8110]
-payment-api-2  | [INFO][07/26/2025 20:53:44.320Z][Thread 0009][remoting (akka://actorSystem)] Remoting now listens on addresses: [akka.tcp://actorSystem@payment-api-2:8110]
-payment-api-2  | [INFO][07/26/2025 20:53:44.387Z][Thread 0009][Cluster (akka://actorSystem)] Cluster Node [akka.tcp://actorSystem@payment-api-2:8110] - Starting up...
-payment-api-2  | [INFO][07/26/2025 20:53:44.399Z][Thread 0009][Cluster (akka://actorSystem)] Cluster Node [akka.tcp://actorSystem@payment-api-2:8110] - Started up successfully
-payment-api-2  | [INFO][07/26/2025 20:53:44.501Z][Thread 0007][Cluster (akka://actorSystem)] Cluster Node [1.0.0] - Node [akka.tcp://actorSystem@payment-api-2:8110] is JOINING itself (with roles [actorSystem], version [1.0.0]) and forming a new cluster
-payment-api-2  | [INFO][07/26/2025 20:53:44.503Z][Thread 0007][Cluster (akka://actorSystem)] Cluster Node [akka.tcp://actorSystem@payment-api-2:8110] - is the new leader among reachable nodes (more leaders may exist)
-payment-api-2  | [INFO][07/26/2025 20:53:44.589Z][Thread 0007][Cluster (akka://actorSystem)] Cluster Node [akka.tcp://actorSystem@payment-api-2:8110] - Leader is moving node [akka.tcp://actorSystem@payment-api-2:8110] to [Up]
-payment-api-2  | [INFO][07/26/2025 20:53:44.821Z][Thread 0007][akka.tcp://actorSystem@payment-api-2:8110/system/cluster/core/daemon/downingProvider] This node is now the leader responsible for taking SBR decisions among the reachable nodes (more leaders may exist).
-payment-api-2  | [INFO][07/26/2025 20:53:44.905Z][Thread 0007][akka.tcp://actorSystem@payment-api-2:8110/user/health-monitor] Singleton manager started singleton actor [akka://actorSystem/user/health-monitor/health-monitor] 
-payment-api-2  | [INFO][07/26/2025 20:53:44.906Z][Thread 0007][akka.tcp://actorSystem@payment-api-2:8110/user/health-monitor] ClusterSingletonManager state change [Start -> Oldest] Akka.Cluster.Tools.Singleton.Uninitialized
-payment-api-2  | [WARNING][07/26/2025 20:53:44.942Z][Thread 0016][akka.tcp://actorSystem@payment-api-2:8110/user/health-monitor-proxy] ClusterSingletonProxy failed to find an associated singleton named [health-monitor] in role [actorSystem] after 30 seconds.
-payment-api-1  | [INFO][07/26/2025 20:53:45.011Z][Thread 0007][remoting (akka://actorSystem)] Starting remoting
-payment-api-2  | [INFO][07/26/2025 20:53:45.284Z][Thread 0019][akka.tcp://actorSystem@payment-api-2:8110/user/health-monitor-proxy] Singleton identified at [akka://actorSystem/user/health-monitor/health-monitor]
-payment-api-1  | [INFO][07/26/2025 20:53:45.303Z][Thread 0007][remoting (akka://actorSystem)] Remoting started; listening on addresses : [akka.tcp://actorSystem@payment-api-1:8110]
-payment-api-1  | [INFO][07/26/2025 20:53:45.304Z][Thread 0007][remoting (akka://actorSystem)] Remoting now listens on addresses: [akka.tcp://actorSystem@payment-api-1:8110]
-payment-api-1  | [INFO][07/26/2025 20:53:45.317Z][Thread 0007][Cluster (akka://actorSystem)] Cluster Node [akka.tcp://actorSystem@payment-api-1:8110] - Starting up...
-payment-api-1  | [INFO][07/26/2025 20:53:45.387Z][Thread 0007][Cluster (akka://actorSystem)] Cluster Node [akka.tcp://actorSystem@payment-api-1:8110] - Started up successfully
-payment-api-1  | [INFO][07/26/2025 20:53:45.582Z][Thread 0011][Cluster (akka://actorSystem)] Cluster Node [1.0.0] - Node [akka.tcp://actorSystem@payment-api-1:8110] is JOINING itself (with roles [actorSystem], version [1.0.0]) and forming a new cluster
-payment-api-1  | [INFO][07/26/2025 20:53:45.586Z][Thread 0011][Cluster (akka://actorSystem)] Cluster Node [akka.tcp://actorSystem@payment-api-1:8110] - is the new leader among reachable nodes (more leaders may exist)
-payment-api-1  | [INFO][07/26/2025 20:53:45.611Z][Thread 0011][Cluster (akka://actorSystem)] Cluster Node [akka.tcp://actorSystem@payment-api-1:8110] - Leader is moving node [akka.tcp://actorSystem@payment-api-1:8110] to [Up]
-payment-api-1  | [INFO][07/26/2025 20:53:45.707Z][Thread 0007][akka://actorSystem/system/healthcheck-readiness-cluster] Message [CurrentClusterState] from [akka://actorSystem/system/cluster/core/publisher#925284007] to [akka://actorSystem/system/healthcheck-readiness-cluster#2032431547] was unhandled. [1] dead letters encountered. This logging can be turned off or adjusted with configuration settings 'akka.log-dead-letters' and 'akka.log-dead-letters-during-shutdown'. Message content: Akka.Cluster.ClusterEvent+CurrentClusterState
-payment-api-1  | [INFO][07/26/2025 20:53:45.883Z][Thread 0007][akka.tcp://actorSystem@payment-api-1:8110/user/health-monitor] Singleton manager started singleton actor [akka://actorSystem/user/health-monitor/health-monitor] 
-payment-api-1  | [INFO][07/26/2025 20:53:45.884Z][Thread 0007][akka.tcp://actorSystem@payment-api-1:8110/user/health-monitor] ClusterSingletonManager state change [Start -> Oldest] Akka.Cluster.Tools.Singleton.Uninitialized
-payment-api-1  | [INFO][07/26/2025 20:53:46.011Z][Thread 0007][akka.tcp://actorSystem@payment-api-1:8110/system/cluster/core/daemon/downingProvider] This node is now the leader responsible for taking SBR decisions among the reachable nodes (more leaders may exist).
-payment-api-1  | [WARNING][07/26/2025 20:53:46.137Z][Thread 0017][akka.tcp://actorSystem@payment-api-1:8110/user/health-monitor-proxy] ClusterSingletonProxy failed to find an associated singleton named [health-monitor] in role [actorSystem] after 30 seconds.
+payment-db     | 2025-07-27 05:25:16.187 UTC [76] DETAIL:  parameters: $1 = NULL, $2 = NULL
+payment-api-2  | [INFO][07/27/2025 05:25:16.794Z][Thread 0009][remoting (akka://actorSystem)] Starting remoting
+payment-api-2  | [INFO][07/27/2025 05:25:17.009Z][Thread 0009][remoting (akka://actorSystem)] Remoting started; listening on addresses : [akka.tcp://actorSystem@payment-api-2:8110]
+payment-api-2  | [INFO][07/27/2025 05:25:17.010Z][Thread 0009][remoting (akka://actorSystem)] Remoting now listens on addresses: [akka.tcp://actorSystem@payment-api-2:8110]
+payment-api-2  | [INFO][07/27/2025 05:25:17.018Z][Thread 0009][Cluster (akka://actorSystem)] Cluster Node [akka.tcp://actorSystem@payment-api-2:8110] - Starting up...
+payment-api-2  | [INFO][07/27/2025 05:25:17.096Z][Thread 0009][Cluster (akka://actorSystem)] Cluster Node [akka.tcp://actorSystem@payment-api-2:8110] - Started up successfully
+payment-api-2  | [INFO][07/27/2025 05:25:17.197Z][Thread 0012][Cluster (akka://actorSystem)] Cluster Node [1.0.0] - Node [akka.tcp://actorSystem@payment-api-2:8110] is JOINING itself (with roles [actorSystem], version [1.0.0]) and forming a new cluster
+payment-api-2  | [INFO][07/27/2025 05:25:17.200Z][Thread 0012][Cluster (akka://actorSystem)] Cluster Node [akka.tcp://actorSystem@payment-api-2:8110] - is the new leader among reachable nodes (more leaders may exist)
+payment-api-2  | [INFO][07/27/2025 05:25:17.213Z][Thread 0012][Cluster (akka://actorSystem)] Cluster Node [akka.tcp://actorSystem@payment-api-2:8110] - Leader is moving node [akka.tcp://actorSystem@payment-api-2:8110] to [Up]
+payment-api-2  | [INFO][07/27/2025 05:25:17.396Z][Thread 0012][akka.tcp://actorSystem@payment-api-2:8110/system/cluster/core/daemon/downingProvider] This node is now the leader responsible for taking SBR decisions among the reachable nodes (more leaders may exist).
+payment-api-2  | [INFO][07/27/2025 05:25:17.692Z][Thread 0012][akka.tcp://actorSystem@payment-api-2:8110/user/health-monitor] Singleton manager started singleton actor [akka://actorSystem/user/health-monitor/health-monitor] 
+payment-api-2  | [INFO][07/27/2025 05:25:17.693Z][Thread 0012][akka.tcp://actorSystem@payment-api-2:8110/user/health-monitor] ClusterSingletonManager state change [Start -> Oldest] Akka.Cluster.Tools.Singleton.Uninitialized
+payment-api-1  | [INFO][07/27/2025 05:25:17.633Z][Thread 0011][remoting (akka://actorSystem)] Starting remoting
+payment-api-2  | [WARNING][07/27/2025 05:25:17.834Z][Thread 0012][akka.tcp://actorSystem@payment-api-2:8110/user/health-monitor-proxy] ClusterSingletonProxy failed to find an associated singleton named [health-monitor] in role [actorSystem] after 30 seconds.
+payment-api-1  | [INFO][07/27/2025 05:25:17.909Z][Thread 0011][remoting (akka://actorSystem)] Remoting started; listening on addresses : [akka.tcp://actorSystem@payment-api-1:8110]
+payment-api-1  | [INFO][07/27/2025 05:25:17.910Z][Thread 0011][remoting (akka://actorSystem)] Remoting now listens on addresses: [akka.tcp://actorSystem@payment-api-1:8110]
+payment-api-1  | [INFO][07/27/2025 05:25:17.922Z][Thread 0011][Cluster (akka://actorSystem)] Cluster Node [akka.tcp://actorSystem@payment-api-1:8110] - Starting up...
+payment-api-1  | [INFO][07/27/2025 05:25:17.997Z][Thread 0011][Cluster (akka://actorSystem)] Cluster Node [akka.tcp://actorSystem@payment-api-1:8110] - Started up successfully
+payment-api-2  | [INFO][07/27/2025 05:25:18.100Z][Thread 0017][akka.tcp://actorSystem@payment-api-2:8110/user/health-monitor-proxy] Singleton identified at [akka://actorSystem/user/health-monitor/health-monitor]
+payment-api-1  | [INFO][07/27/2025 05:25:18.183Z][Thread 0007][Cluster (akka://actorSystem)] Cluster Node [1.0.0] - Node [akka.tcp://actorSystem@payment-api-1:8110] is JOINING itself (with roles [actorSystem], version [1.0.0]) and forming a new cluster
+payment-api-1  | [INFO][07/27/2025 05:25:18.185Z][Thread 0007][Cluster (akka://actorSystem)] Cluster Node [akka.tcp://actorSystem@payment-api-1:8110] - is the new leader among reachable nodes (more leaders may exist)
+payment-api-1  | [INFO][07/27/2025 05:25:18.196Z][Thread 0007][Cluster (akka://actorSystem)] Cluster Node [akka.tcp://actorSystem@payment-api-1:8110] - Leader is moving node [akka.tcp://actorSystem@payment-api-1:8110] to [Up]
+payment-api-1  | [INFO][07/27/2025 05:25:18.303Z][Thread 0007][akka://actorSystem/system/healthcheck-readiness-cluster] Message [CurrentClusterState] from [akka://actorSystem/system/cluster/core/publisher#643062424] to [akka://actorSystem/system/healthcheck-readiness-cluster#1825389654] was unhandled. [1] dead letters encountered. This logging can be turned off or adjusted with configuration settings 'akka.log-dead-letters' and 'akka.log-dead-letters-during-shutdown'. Message content: Akka.Cluster.ClusterEvent+CurrentClusterState
+payment-api-1  | [INFO][07/27/2025 05:25:18.407Z][Thread 0007][akka.tcp://actorSystem@payment-api-1:8110/system/cluster/core/daemon/downingProvider] This node is now the leader responsible for taking SBR decisions among the reachable nodes (more leaders may exist).
+payment-api-1  | [INFO][07/27/2025 05:25:18.586Z][Thread 0016][akka.tcp://actorSystem@payment-api-1:8110/user/health-monitor] Singleton manager started singleton actor [akka://actorSystem/user/health-monitor/health-monitor] 
+payment-api-1  | [INFO][07/27/2025 05:25:18.589Z][Thread 0016][akka.tcp://actorSystem@payment-api-1:8110/user/health-monitor] ClusterSingletonManager state change [Start -> Oldest] Akka.Cluster.Tools.Singleton.Uninitialized
+payment-api-1  | [WARNING][07/27/2025 05:25:18.596Z][Thread 0016][akka.tcp://actorSystem@payment-api-1:8110/user/health-monitor-proxy] ClusterSingletonProxy failed to find an associated singleton named [health-monitor] in role [actorSystem] after 30 seconds.
+payment-api-1  | [INFO][07/27/2025 05:25:18.688Z][Thread 0016][akka.tcp://actorSystem@payment-api-1:8110/user/health-monitor-proxy] Singleton identified at [akka://actorSystem/user/health-monitor/health-monitor]
 payment-lb     | /docker-entrypoint.sh: /docker-entrypoint.d/ is not empty, will attempt to perform configuration
 payment-lb     | /docker-entrypoint.sh: Looking for shell scripts in /docker-entrypoint.d/
 payment-lb     | /docker-entrypoint.sh: Launching /docker-entrypoint.d/10-listen-on-ipv6-by-default.sh
@@ -411,591 +411,591 @@ payment-lb     | /docker-entrypoint.sh: Sourcing /docker-entrypoint.d/15-local-r
 payment-lb     | /docker-entrypoint.sh: Launching /docker-entrypoint.d/20-envsubst-on-templates.sh
 payment-lb     | /docker-entrypoint.sh: Launching /docker-entrypoint.d/30-tune-worker-processes.sh
 payment-lb     | /docker-entrypoint.sh: Configuration complete; ready for start up
-payment-db     | 2025-07-26 20:53:49.182 UTC [78] LOG:  duration: 1.768 ms  parse _auto0: 
+payment-db     | 2025-07-27 05:25:22.619 UTC [84] LOG:  duration: 2.442 ms  parse _auto0: 
 payment-db     | 	                SELECT processed_by AS ProcessedBy, COUNT(*) AS TotalRequests, SUM(amount) AS TotalAmount
 payment-db     | 	                FROM payments
 payment-db     | 	                WHERE ($1 IS NULL OR requested_at_utc >= $1)
 payment-db     | 	                  AND ($2 IS NULL OR requested_at_utc <= $2)
 payment-db     | 	                GROUP BY processed_by
-payment-db     | 2025-07-26 20:53:49.183 UTC [78] LOG:  duration: 1.241 ms  bind _auto0: 
+payment-db     | 2025-07-27 05:25:22.621 UTC [84] LOG:  duration: 1.529 ms  bind _auto0: 
 payment-db     | 	                SELECT processed_by AS ProcessedBy, COUNT(*) AS TotalRequests, SUM(amount) AS TotalAmount
 payment-db     | 	                FROM payments
 payment-db     | 	                WHERE ($1 IS NULL OR requested_at_utc >= $1)
 payment-db     | 	                  AND ($2 IS NULL OR requested_at_utc <= $2)
 payment-db     | 	                GROUP BY processed_by
-payment-db     | 2025-07-26 20:53:49.183 UTC [78] DETAIL:  parameters: $1 = NULL, $2 = NULL
-payment-db     | 2025-07-26 20:53:49.183 UTC [78] LOG:  duration: 0.011 ms  execute _auto0: 
+payment-db     | 2025-07-27 05:25:22.621 UTC [84] DETAIL:  parameters: $1 = NULL, $2 = NULL
+payment-db     | 2025-07-27 05:25:22.621 UTC [84] LOG:  duration: 0.016 ms  execute _auto0: 
 payment-db     | 	                SELECT processed_by AS ProcessedBy, COUNT(*) AS TotalRequests, SUM(amount) AS TotalAmount
 payment-db     | 	                FROM payments
 payment-db     | 	                WHERE ($1 IS NULL OR requested_at_utc >= $1)
 payment-db     | 	                  AND ($2 IS NULL OR requested_at_utc <= $2)
 payment-db     | 	                GROUP BY processed_by
-payment-db     | 2025-07-26 20:53:49.183 UTC [78] DETAIL:  parameters: $1 = NULL, $2 = NULL
-payment-api-1  | [INFO][07/26/2025 20:53:50.300Z][Thread 0023][akka.tcp://actorSystem@payment-api-1:8110/user/health-monitor-proxy] Singleton identified at [akka://actorSystem/user/health-monitor/health-monitor]
-payment-api-1  | [INFO][07/26/2025 20:53:50.301Z][Thread 0023][akka.tcp://actorSystem@payment-api-1:8110/user/health-monitor-proxy] Singleton identified at [akka://actorSystem/user/health-monitor/health-monitor]
-payment-api-1  | [INFO][07/26/2025 20:53:50.301Z][Thread 0023][akka.tcp://actorSystem@payment-api-1:8110/user/health-monitor-proxy] Singleton identified at [akka://actorSystem/user/health-monitor/health-monitor]
-payment-api-1  | [INFO][07/26/2025 20:53:50.301Z][Thread 0023][akka.tcp://actorSystem@payment-api-1:8110/user/health-monitor-proxy] Singleton identified at [akka://actorSystem/user/health-monitor/health-monitor]
-payment-api-1  | [INFO][07/26/2025 20:53:50.301Z][Thread 0023][akka.tcp://actorSystem@payment-api-1:8110/user/health-monitor-proxy] Singleton identified at [akka://actorSystem/user/health-monitor/health-monitor]
-payment-db     | 2025-07-26 20:53:55.208 UTC [84] LOG:  duration: 0.089 ms  parse _auto0: TRUNCATE TABLE payments
-payment-db     | 2025-07-26 20:53:55.208 UTC [84] LOG:  duration: 0.011 ms  bind _auto0: TRUNCATE TABLE payments
-payment-db     | 2025-07-26 20:53:55.213 UTC [84] LOG:  duration: 5.039 ms  execute _auto0: TRUNCATE TABLE payments
-payment-db     | 2025-07-26 20:53:55.241 UTC [76] LOG:  duration: 2.592 ms  parse _auto0: 
+payment-db     | 2025-07-27 05:25:22.621 UTC [84] DETAIL:  parameters: $1 = NULL, $2 = NULL
+payment-db     | 2025-07-27 05:25:28.593 UTC [83] LOG:  duration: 0.117 ms  parse _auto0: TRUNCATE TABLE payments
+payment-db     | 2025-07-27 05:25:28.593 UTC [83] LOG:  duration: 0.010 ms  bind _auto0: TRUNCATE TABLE payments
+payment-db     | 2025-07-27 05:25:28.599 UTC [83] LOG:  duration: 5.842 ms  execute _auto0: TRUNCATE TABLE payments
+payment-db     | 2025-07-27 05:25:28.654 UTC [80] LOG:  duration: 2.377 ms  parse _auto0: 
 payment-db     | 	                SELECT processed_by AS ProcessedBy, COUNT(*) AS TotalRequests, SUM(amount) AS TotalAmount
 payment-db     | 	                FROM payments
 payment-db     | 	                WHERE ($1 IS NULL OR requested_at_utc >= $1)
 payment-db     | 	                  AND ($2 IS NULL OR requested_at_utc <= $2)
 payment-db     | 	                GROUP BY processed_by
-payment-db     | 2025-07-26 20:53:55.243 UTC [76] LOG:  duration: 1.809 ms  bind _auto0: 
+payment-db     | 2025-07-27 05:25:28.662 UTC [80] LOG:  duration: 7.301 ms  bind _auto0: 
 payment-db     | 	                SELECT processed_by AS ProcessedBy, COUNT(*) AS TotalRequests, SUM(amount) AS TotalAmount
 payment-db     | 	                FROM payments
 payment-db     | 	                WHERE ($1 IS NULL OR requested_at_utc >= $1)
 payment-db     | 	                  AND ($2 IS NULL OR requested_at_utc <= $2)
 payment-db     | 	                GROUP BY processed_by
-payment-db     | 2025-07-26 20:53:55.243 UTC [76] DETAIL:  parameters: $1 = '2025-07-26 20:53:45.219+00', $2 = '2025-07-26 20:53:55.119+00'
-payment-db     | 2025-07-26 20:53:55.244 UTC [76] LOG:  duration: 0.070 ms  execute _auto0: 
+payment-db     | 2025-07-27 05:25:28.662 UTC [80] DETAIL:  parameters: $1 = '2025-07-27 05:25:18.604+00', $2 = '2025-07-27 05:25:28.504+00'
+payment-db     | 2025-07-27 05:25:28.662 UTC [80] LOG:  duration: 0.105 ms  execute _auto0: 
 payment-db     | 	                SELECT processed_by AS ProcessedBy, COUNT(*) AS TotalRequests, SUM(amount) AS TotalAmount
 payment-db     | 	                FROM payments
 payment-db     | 	                WHERE ($1 IS NULL OR requested_at_utc >= $1)
 payment-db     | 	                  AND ($2 IS NULL OR requested_at_utc <= $2)
 payment-db     | 	                GROUP BY processed_by
-payment-db     | 2025-07-26 20:53:55.244 UTC [76] DETAIL:  parameters: $1 = '2025-07-26 20:53:45.219+00', $2 = '2025-07-26 20:53:55.119+00'
-payment-db     | 2025-07-26 20:53:55.364 UTC [85] LOG:  duration: 22.280 ms  statement: 
+payment-db     | 2025-07-27 05:25:28.662 UTC [80] DETAIL:  parameters: $1 = '2025-07-27 05:25:18.604+00', $2 = '2025-07-27 05:25:28.504+00'
+payment-db     | 2025-07-27 05:25:28.791 UTC [82] LOG:  duration: 19.704 ms  statement: 
 payment-db     | 	                COPY payments (
 payment-db     | 	                    correlation_id,
 payment-db     | 	                    amount,
 payment-db     | 	                    processed_by,
 payment-db     | 	                    requested_at_utc)
 payment-db     | 	                FROM STDIN (FORMAT BINARY)
-payment-db     | 2025-07-26 20:53:55.512 UTC [80] LOG:  duration: 16.565 ms  statement: 
+payment-db     | 2025-07-27 05:25:28.800 UTC [78] LOG:  duration: 18.277 ms  statement: 
 payment-db     | 	                COPY payments (
 payment-db     | 	                    correlation_id,
 payment-db     | 	                    amount,
 payment-db     | 	                    processed_by,
 payment-db     | 	                    requested_at_utc)
 payment-db     | 	                FROM STDIN (FORMAT BINARY)
-payment-db     | 2025-07-26 20:53:55.555 UTC [81] LOG:  duration: 1.520 ms  statement: 
+payment-db     | 2025-07-27 05:25:28.830 UTC [85] LOG:  duration: 1.437 ms  statement: 
 payment-db     | 	                COPY payments (
 payment-db     | 	                    correlation_id,
 payment-db     | 	                    amount,
 payment-db     | 	                    processed_by,
 payment-db     | 	                    requested_at_utc)
 payment-db     | 	                FROM STDIN (FORMAT BINARY)
-payment-db     | 2025-07-26 20:53:55.669 UTC [82] LOG:  duration: 2.851 ms  statement: 
+payment-db     | 2025-07-27 05:25:28.959 UTC [79] LOG:  duration: 3.321 ms  statement: 
 payment-db     | 	                COPY payments (
 payment-db     | 	                    correlation_id,
 payment-db     | 	                    amount,
 payment-db     | 	                    processed_by,
 payment-db     | 	                    requested_at_utc)
 payment-db     | 	                FROM STDIN (FORMAT BINARY)
-payment-db     | 2025-07-26 20:53:55.777 UTC [83] LOG:  duration: 0.744 ms  statement: 
+payment-db     | 2025-07-27 05:25:29.049 UTC [76] LOG:  duration: 0.770 ms  statement: 
 payment-db     | 	                COPY payments (
 payment-db     | 	                    correlation_id,
 payment-db     | 	                    amount,
 payment-db     | 	                    processed_by,
 payment-db     | 	                    requested_at_utc)
 payment-db     | 	                FROM STDIN (FORMAT BINARY)
-payment-db     | 2025-07-26 20:53:55.890 UTC [79] LOG:  duration: 1.463 ms  statement: 
+payment-db     | 2025-07-27 05:25:29.158 UTC [81] LOG:  duration: 1.430 ms  statement: 
 payment-db     | 	                COPY payments (
 payment-db     | 	                    correlation_id,
 payment-db     | 	                    amount,
 payment-db     | 	                    processed_by,
 payment-db     | 	                    requested_at_utc)
 payment-db     | 	                FROM STDIN (FORMAT BINARY)
-payment-db     | 2025-07-26 20:53:55.997 UTC [78] LOG:  duration: 0.777 ms  statement: 
+payment-db     | 2025-07-27 05:25:29.289 UTC [84] LOG:  duration: 0.833 ms  statement: 
 payment-db     | 	                COPY payments (
 payment-db     | 	                    correlation_id,
 payment-db     | 	                    amount,
 payment-db     | 	                    processed_by,
 payment-db     | 	                    requested_at_utc)
 payment-db     | 	                FROM STDIN (FORMAT BINARY)
-payment-db     | 2025-07-26 20:53:56.107 UTC [77] LOG:  duration: 0.947 ms  statement: 
+payment-db     | 2025-07-27 05:25:29.377 UTC [77] LOG:  duration: 0.858 ms  statement: 
 payment-db     | 	                COPY payments (
 payment-db     | 	                    correlation_id,
 payment-db     | 	                    amount,
 payment-db     | 	                    processed_by,
 payment-db     | 	                    requested_at_utc)
 payment-db     | 	                FROM STDIN (FORMAT BINARY)
-payment-db     | 2025-07-26 20:53:56.217 UTC [84] LOG:  duration: 0.787 ms  statement: 
+payment-db     | 2025-07-27 05:25:29.489 UTC [83] LOG:  duration: 0.858 ms  statement: 
 payment-db     | 	                COPY payments (
 payment-db     | 	                    correlation_id,
 payment-db     | 	                    amount,
 payment-db     | 	                    processed_by,
 payment-db     | 	                    requested_at_utc)
 payment-db     | 	                FROM STDIN (FORMAT BINARY)
-payment-db     | 2025-07-26 20:53:56.248 UTC [76] LOG:  duration: 0.484 ms  statement: 
+payment-db     | 2025-07-27 05:25:29.597 UTC [80] LOG:  duration: 0.586 ms  statement: 
 payment-db     | 	                COPY payments (
 payment-db     | 	                    correlation_id,
 payment-db     | 	                    amount,
 payment-db     | 	                    processed_by,
 payment-db     | 	                    requested_at_utc)
 payment-db     | 	                FROM STDIN (FORMAT BINARY)
-payment-db     | 2025-07-26 20:53:56.317 UTC [85] LOG:  duration: 0.473 ms  statement: 
+payment-db     | 2025-07-27 05:25:29.669 UTC [82] LOG:  duration: 0.446 ms  statement: 
 payment-db     | 	                COPY payments (
 payment-db     | 	                    correlation_id,
 payment-db     | 	                    amount,
 payment-db     | 	                    processed_by,
 payment-db     | 	                    requested_at_utc)
 payment-db     | 	                FROM STDIN (FORMAT BINARY)
-payment-db     | 2025-07-26 20:53:56.348 UTC [80] LOG:  duration: 0.394 ms  statement: 
+payment-db     | 2025-07-27 05:25:29.709 UTC [85] LOG:  duration: 0.398 ms  statement: 
 payment-db     | 	                COPY payments (
 payment-db     | 	                    correlation_id,
 payment-db     | 	                    amount,
 payment-db     | 	                    processed_by,
 payment-db     | 	                    requested_at_utc)
 payment-db     | 	                FROM STDIN (FORMAT BINARY)
-payment-db     | 2025-07-26 20:53:56.436 UTC [81] LOG:  duration: 0.389 ms  statement: 
+payment-db     | 2025-07-27 05:25:29.737 UTC [78] LOG:  duration: 0.385 ms  statement: 
 payment-db     | 	                COPY payments (
 payment-db     | 	                    correlation_id,
 payment-db     | 	                    amount,
 payment-db     | 	                    processed_by,
 payment-db     | 	                    requested_at_utc)
 payment-db     | 	                FROM STDIN (FORMAT BINARY)
-payment-db     | 2025-07-26 20:53:56.469 UTC [82] LOG:  duration: 0.523 ms  statement: 
+payment-db     | 2025-07-27 05:25:29.837 UTC [79] LOG:  duration: 0.592 ms  statement: 
 payment-db     | 	                COPY payments (
 payment-db     | 	                    correlation_id,
 payment-db     | 	                    amount,
 payment-db     | 	                    processed_by,
 payment-db     | 	                    requested_at_utc)
 payment-db     | 	                FROM STDIN (FORMAT BINARY)
-payment-db     | 2025-07-26 20:53:56.537 UTC [83] LOG:  duration: 0.413 ms  statement: 
+payment-db     | 2025-07-27 05:25:29.882 UTC [76] LOG:  duration: 0.645 ms  statement: 
 payment-db     | 	                COPY payments (
 payment-db     | 	                    correlation_id,
 payment-db     | 	                    amount,
 payment-db     | 	                    processed_by,
 payment-db     | 	                    requested_at_utc)
 payment-db     | 	                FROM STDIN (FORMAT BINARY)
-payment-db     | 2025-07-26 20:53:56.569 UTC [79] LOG:  duration: 0.544 ms  statement: 
+payment-db     | 2025-07-27 05:25:29.929 UTC [84] LOG:  duration: 0.387 ms  statement: 
 payment-db     | 	                COPY payments (
 payment-db     | 	                    correlation_id,
 payment-db     | 	                    amount,
 payment-db     | 	                    processed_by,
 payment-db     | 	                    requested_at_utc)
 payment-db     | 	                FROM STDIN (FORMAT BINARY)
-payment-db     | 2025-07-26 20:53:56.657 UTC [78] LOG:  duration: 0.483 ms  statement: 
+payment-db     | 2025-07-27 05:25:29.957 UTC [81] LOG:  duration: 0.639 ms  statement: 
 payment-db     | 	                COPY payments (
 payment-db     | 	                    correlation_id,
 payment-db     | 	                    amount,
 payment-db     | 	                    processed_by,
 payment-db     | 	                    requested_at_utc)
 payment-db     | 	                FROM STDIN (FORMAT BINARY)
-payment-db     | 2025-07-26 20:53:56.669 UTC [77] LOG:  duration: 0.448 ms  statement: 
+payment-db     | 2025-07-27 05:25:30.049 UTC [83] LOG:  duration: 0.468 ms  statement: 
 payment-db     | 	                COPY payments (
 payment-db     | 	                    correlation_id,
 payment-db     | 	                    amount,
 payment-db     | 	                    processed_by,
 payment-db     | 	                    requested_at_utc)
 payment-db     | 	                FROM STDIN (FORMAT BINARY)
-payment-db     | 2025-07-26 20:53:56.756 UTC [84] LOG:  duration: 0.415 ms  statement: 
+payment-db     | 2025-07-27 05:25:30.054 UTC [77] LOG:  duration: 0.405 ms  statement: 
 payment-db     | 	                COPY payments (
 payment-db     | 	                    correlation_id,
 payment-db     | 	                    amount,
 payment-db     | 	                    processed_by,
 payment-db     | 	                    requested_at_utc)
 payment-db     | 	                FROM STDIN (FORMAT BINARY)
-payment-db     | 2025-07-26 20:53:56.789 UTC [76] LOG:  duration: 0.398 ms  statement: 
+payment-db     | 2025-07-27 05:25:30.148 UTC [82] LOG:  duration: 0.471 ms  statement: 
 payment-db     | 	                COPY payments (
 payment-db     | 	                    correlation_id,
 payment-db     | 	                    amount,
 payment-db     | 	                    processed_by,
 payment-db     | 	                    requested_at_utc)
 payment-db     | 	                FROM STDIN (FORMAT BINARY)
-payment-db     | 2025-07-26 20:53:56.866 UTC [80] LOG:  duration: 0.419 ms  statement: 
+payment-db     | 2025-07-27 05:25:30.177 UTC [80] LOG:  duration: 0.522 ms  statement: 
 payment-db     | 	                COPY payments (
 payment-db     | 	                    correlation_id,
 payment-db     | 	                    amount,
 payment-db     | 	                    processed_by,
 payment-db     | 	                    requested_at_utc)
 payment-db     | 	                FROM STDIN (FORMAT BINARY)
-payment-db     | 2025-07-26 20:53:56.897 UTC [85] LOG:  duration: 0.325 ms  statement: 
+payment-db     | 2025-07-27 05:25:30.249 UTC [85] LOG:  duration: 0.584 ms  statement: 
 payment-db     | 	                COPY payments (
 payment-db     | 	                    correlation_id,
 payment-db     | 	                    amount,
 payment-db     | 	                    processed_by,
 payment-db     | 	                    requested_at_utc)
 payment-db     | 	                FROM STDIN (FORMAT BINARY)
-payment-db     | 2025-07-26 20:53:56.974 UTC [81] LOG:  duration: 0.499 ms  statement: 
+payment-db     | 2025-07-27 05:25:30.277 UTC [78] LOG:  duration: 0.688 ms  statement: 
 payment-db     | 	                COPY payments (
 payment-db     | 	                    correlation_id,
 payment-db     | 	                    amount,
 payment-db     | 	                    processed_by,
 payment-db     | 	                    requested_at_utc)
 payment-db     | 	                FROM STDIN (FORMAT BINARY)
-payment-db     | 2025-07-26 20:53:57.009 UTC [82] LOG:  duration: 0.482 ms  statement: 
+payment-db     | 2025-07-27 05:25:30.369 UTC [76] LOG:  duration: 0.530 ms  statement: 
 payment-db     | 	                COPY payments (
 payment-db     | 	                    correlation_id,
 payment-db     | 	                    amount,
 payment-db     | 	                    processed_by,
 payment-db     | 	                    requested_at_utc)
 payment-db     | 	                FROM STDIN (FORMAT BINARY)
-payment-db     | 2025-07-26 20:53:57.089 UTC [79] LOG:  duration: 0.461 ms  statement: 
+payment-db     | 2025-07-27 05:25:30.376 UTC [79] LOG:  duration: 0.379 ms  statement: 
 payment-db     | 	                COPY payments (
 payment-db     | 	                    correlation_id,
 payment-db     | 	                    amount,
 payment-db     | 	                    processed_by,
 payment-db     | 	                    requested_at_utc)
 payment-db     | 	                FROM STDIN (FORMAT BINARY)
-payment-db     | 2025-07-26 20:53:57.117 UTC [83] LOG:  duration: 0.530 ms  statement: 
+payment-db     | 2025-07-27 05:25:30.467 UTC [81] LOG:  duration: 0.596 ms  statement: 
 payment-db     | 	                COPY payments (
 payment-db     | 	                    correlation_id,
 payment-db     | 	                    amount,
 payment-db     | 	                    processed_by,
 payment-db     | 	                    requested_at_utc)
 payment-db     | 	                FROM STDIN (FORMAT BINARY)
-payment-db     | 2025-07-26 20:53:57.217 UTC [78] LOG:  duration: 0.421 ms  statement: 
+payment-db     | 2025-07-27 05:25:30.489 UTC [84] LOG:  duration: 0.394 ms  statement: 
 payment-db     | 	                COPY payments (
 payment-db     | 	                    correlation_id,
 payment-db     | 	                    amount,
 payment-db     | 	                    processed_by,
 payment-db     | 	                    requested_at_utc)
 payment-db     | 	                FROM STDIN (FORMAT BINARY)
-payment-db     | 2025-07-26 20:53:57.229 UTC [77] LOG:  duration: 0.391 ms  statement: 
+payment-db     | 2025-07-27 05:25:30.588 UTC [83] LOG:  duration: 0.384 ms  statement: 
 payment-db     | 	                COPY payments (
 payment-db     | 	                    correlation_id,
 payment-db     | 	                    amount,
 payment-db     | 	                    processed_by,
 payment-db     | 	                    requested_at_utc)
 payment-db     | 	                FROM STDIN (FORMAT BINARY)
-payment-db     | 2025-07-26 20:53:57.257 UTC [84] LOG:  duration: 0.435 ms  statement: 
+payment-db     | 2025-07-27 05:25:30.597 UTC [77] LOG:  duration: 0.491 ms  statement: 
 payment-db     | 	                COPY payments (
 payment-db     | 	                    correlation_id,
 payment-db     | 	                    amount,
 payment-db     | 	                    processed_by,
 payment-db     | 	                    requested_at_utc)
 payment-db     | 	                FROM STDIN (FORMAT BINARY)
-payment-db     | 2025-07-26 20:53:57.306 UTC [76] LOG:  duration: 0.405 ms  statement: 
+payment-db     | 2025-07-27 05:25:30.656 UTC [80] LOG:  duration: 0.389 ms  statement: 
 payment-db     | 	                COPY payments (
 payment-db     | 	                    correlation_id,
 payment-db     | 	                    amount,
 payment-db     | 	                    processed_by,
 payment-db     | 	                    requested_at_utc)
 payment-db     | 	                FROM STDIN (FORMAT BINARY)
-payment-db     | 2025-07-26 20:53:57.326 UTC [80] LOG:  duration: 0.493 ms  statement: 
+payment-db     | 2025-07-27 05:25:30.689 UTC [82] LOG:  duration: 0.483 ms  statement: 
 payment-db     | 	                COPY payments (
 payment-db     | 	                    correlation_id,
 payment-db     | 	                    amount,
 payment-db     | 	                    processed_by,
 payment-db     | 	                    requested_at_utc)
 payment-db     | 	                FROM STDIN (FORMAT BINARY)
-payment-db     | 2025-07-26 20:53:57.356 UTC [85] LOG:  duration: 0.428 ms  statement: 
+payment-db     | 2025-07-27 05:25:30.706 UTC [85] LOG:  duration: 0.509 ms  statement: 
 payment-db     | 	                COPY payments (
 payment-db     | 	                    correlation_id,
 payment-db     | 	                    amount,
 payment-db     | 	                    processed_by,
 payment-db     | 	                    requested_at_utc)
 payment-db     | 	                FROM STDIN (FORMAT BINARY)
-payment-db     | 2025-07-26 20:53:57.428 UTC [82] LOG:  duration: 0.465 ms  statement: 
+payment-db     | 2025-07-27 05:25:30.747 UTC [78] LOG:  duration: 0.442 ms  statement: 
 payment-db     | 	                COPY payments (
 payment-db     | 	                    correlation_id,
 payment-db     | 	                    amount,
 payment-db     | 	                    processed_by,
 payment-db     | 	                    requested_at_utc)
 payment-db     | 	                FROM STDIN (FORMAT BINARY)
-payment-db     | 2025-07-26 20:53:57.437 UTC [81] LOG:  duration: 0.436 ms  statement: 
+payment-db     | 2025-07-27 05:25:30.797 UTC [79] LOG:  duration: 0.444 ms  statement: 
 payment-db     | 	                COPY payments (
 payment-db     | 	                    correlation_id,
 payment-db     | 	                    amount,
 payment-db     | 	                    processed_by,
 payment-db     | 	                    requested_at_utc)
 payment-db     | 	                FROM STDIN (FORMAT BINARY)
-payment-db     | 2025-07-26 20:53:57.482 UTC [83] LOG:  duration: 25.267 ms  statement: 
+payment-db     | 2025-07-27 05:25:30.828 UTC [76] LOG:  duration: 0.516 ms  statement: 
 payment-db     | 	                COPY payments (
 payment-db     | 	                    correlation_id,
 payment-db     | 	                    amount,
 payment-db     | 	                    processed_by,
 payment-db     | 	                    requested_at_utc)
 payment-db     | 	                FROM STDIN (FORMAT BINARY)
-payment-db     | 2025-07-26 20:53:57.528 UTC [79] LOG:  duration: 0.449 ms  statement: 
+payment-db     | 2025-07-27 05:25:30.882 UTC [81] LOG:  duration: 48.283 ms  statement: 
 payment-db     | 	                COPY payments (
 payment-db     | 	                    correlation_id,
 payment-db     | 	                    amount,
 payment-db     | 	                    processed_by,
 payment-db     | 	                    requested_at_utc)
 payment-db     | 	                FROM STDIN (FORMAT BINARY)
-payment-db     | 2025-07-26 20:53:57.549 UTC [77] LOG:  duration: 0.379 ms  statement: 
+payment-db     | 2025-07-27 05:25:30.908 UTC [84] LOG:  duration: 0.422 ms  statement: 
 payment-db     | 	                COPY payments (
 payment-db     | 	                    correlation_id,
 payment-db     | 	                    amount,
 payment-db     | 	                    processed_by,
 payment-db     | 	                    requested_at_utc)
 payment-db     | 	                FROM STDIN (FORMAT BINARY)
-payment-db     | 2025-07-26 20:53:57.595 UTC [78] LOG:  duration: 0.365 ms  statement: 
+payment-db     | 2025-07-27 05:25:30.929 UTC [83] LOG:  duration: 0.455 ms  statement: 
 payment-db     | 	                COPY payments (
 payment-db     | 	                    correlation_id,
 payment-db     | 	                    amount,
 payment-db     | 	                    processed_by,
 payment-db     | 	                    requested_at_utc)
 payment-db     | 	                FROM STDIN (FORMAT BINARY)
-payment-db     | 2025-07-26 20:53:57.634 UTC [84] LOG:  duration: 0.416 ms  statement: 
+payment-db     | 2025-07-27 05:25:30.997 UTC [77] LOG:  duration: 0.418 ms  statement: 
 payment-db     | 	                COPY payments (
 payment-db     | 	                    correlation_id,
 payment-db     | 	                    amount,
 payment-db     | 	                    processed_by,
 payment-db     | 	                    requested_at_utc)
 payment-db     | 	                FROM STDIN (FORMAT BINARY)
-payment-db     | 2025-07-26 20:53:57.648 UTC [76] LOG:  duration: 0.442 ms  statement: 
+payment-db     | 2025-07-27 05:25:31.016 UTC [80] LOG:  duration: 0.417 ms  statement: 
 payment-db     | 	                COPY payments (
 payment-db     | 	                    correlation_id,
 payment-db     | 	                    amount,
 payment-db     | 	                    processed_by,
 payment-db     | 	                    requested_at_utc)
 payment-db     | 	                FROM STDIN (FORMAT BINARY)
-payment-db     | 2025-07-26 20:53:57.676 UTC [85] LOG:  duration: 0.469 ms  statement: 
+payment-db     | 2025-07-27 05:25:31.046 UTC [82] LOG:  duration: 0.422 ms  statement: 
 payment-db     | 	                COPY payments (
 payment-db     | 	                    correlation_id,
 payment-db     | 	                    amount,
 payment-db     | 	                    processed_by,
 payment-db     | 	                    requested_at_utc)
 payment-db     | 	                FROM STDIN (FORMAT BINARY)
-payment-db     | 2025-07-26 20:53:57.746 UTC [80] LOG:  duration: 0.463 ms  statement: 
+payment-db     | 2025-07-27 05:25:31.056 UTC [78] LOG:  duration: 0.465 ms  statement: 
 payment-db     | 	                COPY payments (
 payment-db     | 	                    correlation_id,
 payment-db     | 	                    amount,
 payment-db     | 	                    processed_by,
 payment-db     | 	                    requested_at_utc)
 payment-db     | 	                FROM STDIN (FORMAT BINARY)
-payment-db     | 2025-07-26 20:53:57.769 UTC [82] LOG:  duration: 0.410 ms  statement: 
+payment-db     | 2025-07-27 05:25:31.126 UTC [85] LOG:  duration: 0.392 ms  statement: 
 payment-db     | 	                COPY payments (
 payment-db     | 	                    correlation_id,
 payment-db     | 	                    amount,
 payment-db     | 	                    processed_by,
 payment-db     | 	                    requested_at_utc)
 payment-db     | 	                FROM STDIN (FORMAT BINARY)
-payment-db     | 2025-07-26 20:53:57.777 UTC [81] LOG:  duration: 0.480 ms  statement: 
+payment-db     | 2025-07-27 05:25:31.177 UTC [79] LOG:  duration: 0.467 ms  statement: 
 payment-db     | 	                COPY payments (
 payment-db     | 	                    correlation_id,
 payment-db     | 	                    amount,
 payment-db     | 	                    processed_by,
 payment-db     | 	                    requested_at_utc)
 payment-db     | 	                FROM STDIN (FORMAT BINARY)
-payment-db     | 2025-07-26 20:53:57.857 UTC [83] LOG:  duration: 0.486 ms  statement: 
+payment-db     | 2025-07-27 05:25:31.207 UTC [76] LOG:  duration: 0.525 ms  statement: 
 payment-db     | 	                COPY payments (
 payment-db     | 	                    correlation_id,
 payment-db     | 	                    amount,
 payment-db     | 	                    processed_by,
 payment-db     | 	                    requested_at_utc)
 payment-db     | 	                FROM STDIN (FORMAT BINARY)
-payment-db     | 2025-07-26 20:53:57.868 UTC [79] LOG:  duration: 0.375 ms  statement: 
+payment-db     | 2025-07-27 05:25:31.234 UTC [81] LOG:  duration: 0.429 ms  statement: 
 payment-db     | 	                COPY payments (
 payment-db     | 	                    correlation_id,
 payment-db     | 	                    amount,
 payment-db     | 	                    processed_by,
 payment-db     | 	                    requested_at_utc)
 payment-db     | 	                FROM STDIN (FORMAT BINARY)
-payment-db     | 2025-07-26 20:53:57.889 UTC [77] LOG:  duration: 0.433 ms  statement: 
+payment-db     | 2025-07-27 05:25:31.257 UTC [77] LOG:  duration: 0.419 ms  statement: 
 payment-db     | 	                COPY payments (
 payment-db     | 	                    correlation_id,
 payment-db     | 	                    amount,
 payment-db     | 	                    processed_by,
 payment-db     | 	                    requested_at_utc)
 payment-db     | 	                FROM STDIN (FORMAT BINARY)
-payment-db     | 2025-07-26 20:53:57.977 UTC [78] LOG:  duration: 0.395 ms  statement: 
+payment-db     | 2025-07-27 05:25:31.307 UTC [84] LOG:  duration: 0.453 ms  statement: 
 payment-db     | 	                COPY payments (
 payment-db     | 	                    correlation_id,
 payment-db     | 	                    amount,
 payment-db     | 	                    processed_by,
 payment-db     | 	                    requested_at_utc)
 payment-db     | 	                FROM STDIN (FORMAT BINARY)
-payment-db     | 2025-07-26 20:53:57.986 UTC [76] LOG:  duration: 0.391 ms  statement: 
+payment-db     | 2025-07-27 05:25:31.346 UTC [83] LOG:  duration: 0.409 ms  statement: 
 payment-db     | 	                COPY payments (
 payment-db     | 	                    correlation_id,
 payment-db     | 	                    amount,
 payment-db     | 	                    processed_by,
 payment-db     | 	                    requested_at_utc)
 payment-db     | 	                FROM STDIN (FORMAT BINARY)
-payment-db     | 2025-07-26 20:53:57.998 UTC [84] LOG:  duration: 1.511 ms  statement: 
+payment-db     | 2025-07-27 05:25:31.374 UTC [80] LOG:  duration: 0.479 ms  statement: 
 payment-db     | 	                COPY payments (
 payment-db     | 	                    correlation_id,
 payment-db     | 	                    amount,
 payment-db     | 	                    processed_by,
 payment-db     | 	                    requested_at_utc)
 payment-db     | 	                FROM STDIN (FORMAT BINARY)
-payment-db     | 2025-07-26 20:53:58.074 UTC [85] LOG:  duration: 0.482 ms  statement: 
+payment-db     | 2025-07-27 05:25:31.387 UTC [82] LOG:  duration: 0.422 ms  statement: 
 payment-db     | 	                COPY payments (
 payment-db     | 	                    correlation_id,
 payment-db     | 	                    amount,
 payment-db     | 	                    processed_by,
 payment-db     | 	                    requested_at_utc)
 payment-db     | 	                FROM STDIN (FORMAT BINARY)
-payment-db     | 2025-07-26 20:53:58.089 UTC [80] LOG:  duration: 0.455 ms  statement: 
+payment-db     | 2025-07-27 05:25:31.456 UTC [78] LOG:  duration: 0.422 ms  statement: 
 payment-db     | 	                COPY payments (
 payment-db     | 	                    correlation_id,
 payment-db     | 	                    amount,
 payment-db     | 	                    processed_by,
 payment-db     | 	                    requested_at_utc)
 payment-db     | 	                FROM STDIN (FORMAT BINARY)
-payment-db     | 2025-07-26 20:53:58.109 UTC [82] LOG:  duration: 0.473 ms  statement: 
+payment-db     | 2025-07-27 05:25:31.487 UTC [85] LOG:  duration: 0.567 ms  statement: 
 payment-db     | 	                COPY payments (
 payment-db     | 	                    correlation_id,
 payment-db     | 	                    amount,
 payment-db     | 	                    processed_by,
 payment-db     | 	                    requested_at_utc)
 payment-db     | 	                FROM STDIN (FORMAT BINARY)
-payment-db     | 2025-07-26 20:53:58.177 UTC [81] LOG:  duration: 0.488 ms  statement: 
+payment-db     | 2025-07-27 05:25:31.497 UTC [79] LOG:  duration: 0.470 ms  statement: 
 payment-db     | 	                COPY payments (
 payment-db     | 	                    correlation_id,
 payment-db     | 	                    amount,
 payment-db     | 	                    processed_by,
 payment-db     | 	                    requested_at_utc)
 payment-db     | 	                FROM STDIN (FORMAT BINARY)
-payment-db     | 2025-07-26 20:53:58.209 UTC [79] LOG:  duration: 0.452 ms  statement: 
+payment-db     | 2025-07-27 05:25:31.567 UTC [81] LOG:  duration: 0.472 ms  statement: 
 payment-db     | 	                COPY payments (
 payment-db     | 	                    correlation_id,
 payment-db     | 	                    amount,
 payment-db     | 	                    processed_by,
 payment-db     | 	                    requested_at_utc)
 payment-db     | 	                FROM STDIN (FORMAT BINARY)
-payment-db     | 2025-07-26 20:53:58.217 UTC [83] LOG:  duration: 0.446 ms  statement: 
+payment-db     | 2025-07-27 05:25:31.607 UTC [76] LOG:  duration: 0.414 ms  statement: 
 payment-db     | 	                COPY payments (
 payment-db     | 	                    correlation_id,
 payment-db     | 	                    amount,
 payment-db     | 	                    processed_by,
 payment-db     | 	                    requested_at_utc)
 payment-db     | 	                FROM STDIN (FORMAT BINARY)
-payment-db     | 2025-07-26 20:53:58.269 UTC [77] LOG:  duration: 0.485 ms  statement: 
+payment-db     | 2025-07-27 05:25:31.677 UTC [77] LOG:  duration: 0.442 ms  statement: 
 payment-db     | 	                COPY payments (
 payment-db     | 	                    correlation_id,
 payment-db     | 	                    amount,
 payment-db     | 	                    processed_by,
 payment-db     | 	                    requested_at_utc)
 payment-db     | 	                FROM STDIN (FORMAT BINARY)
-payment-db     | 2025-07-26 20:53:58.297 UTC [78] LOG:  duration: 0.460 ms  statement: 
+payment-db     | 2025-07-27 05:25:31.687 UTC [84] LOG:  duration: 0.574 ms  statement: 
 payment-db     | 	                COPY payments (
 payment-db     | 	                    correlation_id,
 payment-db     | 	                    amount,
 payment-db     | 	                    processed_by,
 payment-db     | 	                    requested_at_utc)
 payment-db     | 	                FROM STDIN (FORMAT BINARY)
-payment-db     | 2025-07-26 20:53:58.306 UTC [76] LOG:  duration: 0.476 ms  statement: 
+payment-db     | 2025-07-27 05:25:31.696 UTC [80] LOG:  duration: 0.513 ms  statement: 
 payment-db     | 	                COPY payments (
 payment-db     | 	                    correlation_id,
 payment-db     | 	                    amount,
 payment-db     | 	                    processed_by,
 payment-db     | 	                    requested_at_utc)
 payment-db     | 	                FROM STDIN (FORMAT BINARY)
-payment-db     | 2025-07-26 20:53:58.337 UTC [84] LOG:  duration: 0.412 ms  statement: 
+payment-db     | 2025-07-27 05:25:31.717 UTC [78] LOG:  duration: 0.574 ms  statement: 
 payment-db     | 	                COPY payments (
 payment-db     | 	                    correlation_id,
 payment-db     | 	                    amount,
 payment-db     | 	                    processed_by,
 payment-db     | 	                    requested_at_utc)
 payment-db     | 	                FROM STDIN (FORMAT BINARY)
-payment-db     | 2025-07-26 20:53:58.349 UTC [80] LOG:  duration: 0.362 ms  statement: 
+payment-db     | 2025-07-27 05:25:31.746 UTC [83] LOG:  duration: 0.423 ms  statement: 
 payment-db     | 	                COPY payments (
 payment-db     | 	                    correlation_id,
 payment-db     | 	                    amount,
 payment-db     | 	                    processed_by,
 payment-db     | 	                    requested_at_utc)
 payment-db     | 	                FROM STDIN (FORMAT BINARY)
-payment-db     | 2025-07-26 20:53:58.394 UTC [85] LOG:  duration: 0.418 ms  statement: 
+payment-db     | 2025-07-27 05:25:31.786 UTC [82] LOG:  duration: 0.469 ms  statement: 
 payment-db     | 	                COPY payments (
 payment-db     | 	                    correlation_id,
 payment-db     | 	                    amount,
 payment-db     | 	                    processed_by,
 payment-db     | 	                    requested_at_utc)
 payment-db     | 	                FROM STDIN (FORMAT BINARY)
-payment-db     | 2025-07-26 20:53:58.430 UTC [82] LOG:  duration: 0.557 ms  statement: 
+payment-db     | 2025-07-27 05:25:31.797 UTC [79] LOG:  duration: 0.496 ms  statement: 
 payment-db     | 	                COPY payments (
 payment-db     | 	                    correlation_id,
 payment-db     | 	                    amount,
 payment-db     | 	                    processed_by,
 payment-db     | 	                    requested_at_utc)
 payment-db     | 	                FROM STDIN (FORMAT BINARY)
-payment-db     | 2025-07-26 20:53:58.437 UTC [81] LOG:  duration: 0.448 ms  statement: 
+payment-db     | 2025-07-27 05:25:31.816 UTC [81] LOG:  duration: 0.439 ms  statement: 
 payment-db     | 	                COPY payments (
 payment-db     | 	                    correlation_id,
 payment-db     | 	                    amount,
 payment-db     | 	                    processed_by,
 payment-db     | 	                    requested_at_utc)
 payment-db     | 	                FROM STDIN (FORMAT BINARY)
-payment-db     | 2025-07-26 20:53:58.487 UTC [79] LOG:  duration: 0.583 ms  statement: 
+payment-db     | 2025-07-27 05:25:31.847 UTC [85] LOG:  duration: 0.463 ms  statement: 
 payment-db     | 	                COPY payments (
 payment-db     | 	                    correlation_id,
 payment-db     | 	                    amount,
 payment-db     | 	                    processed_by,
 payment-db     | 	                    requested_at_utc)
 payment-db     | 	                FROM STDIN (FORMAT BINARY)
-payment-db     | 2025-07-26 20:53:58.517 UTC [83] LOG:  duration: 0.388 ms  statement: 
+payment-db     | 2025-07-27 05:25:31.907 UTC [76] LOG:  duration: 0.459 ms  statement: 
 payment-db     | 	                COPY payments (
 payment-db     | 	                    correlation_id,
 payment-db     | 	                    amount,
 payment-db     | 	                    processed_by,
 payment-db     | 	                    requested_at_utc)
 payment-db     | 	                FROM STDIN (FORMAT BINARY)
-payment-db     | 2025-07-26 20:53:58.527 UTC [77] LOG:  duration: 0.476 ms  statement: 
+payment-db     | 2025-07-27 05:25:31.914 UTC [77] LOG:  duration: 0.411 ms  statement: 
 payment-db     | 	                COPY payments (
 payment-db     | 	                    correlation_id,
 payment-db     | 	                    amount,
 payment-db     | 	                    processed_by,
 payment-db     | 	                    requested_at_utc)
 payment-db     | 	                FROM STDIN (FORMAT BINARY)
-payment-db     | 2025-07-26 20:53:58.557 UTC [78] LOG:  duration: 0.401 ms  statement: 
+payment-db     | 2025-07-27 05:25:31.937 UTC [80] LOG:  duration: 0.523 ms  statement: 
 payment-db     | 	                COPY payments (
 payment-db     | 	                    correlation_id,
 payment-db     | 	                    amount,
 payment-db     | 	                    processed_by,
 payment-db     | 	                    requested_at_utc)
 payment-db     | 	                FROM STDIN (FORMAT BINARY)
-payment-db     | 2025-07-26 20:53:58.607 UTC [76] LOG:  duration: 0.459 ms  statement: 
+payment-db     | 2025-07-27 05:25:31.947 UTC [84] LOG:  duration: 0.509 ms  statement: 
 payment-db     | 	                COPY payments (
 payment-db     | 	                    correlation_id,
 payment-db     | 	                    amount,
 payment-db     | 	                    processed_by,
 payment-db     | 	                    requested_at_utc)
 payment-db     | 	                FROM STDIN (FORMAT BINARY)
-payment-db     | 2025-07-26 20:53:58.616 UTC [84] LOG:  duration: 0.458 ms  statement: 
+payment-db     | 2025-07-27 05:25:32.017 UTC [78] LOG:  duration: 0.536 ms  statement: 
 payment-db     | 	                COPY payments (
 payment-db     | 	                    correlation_id,
 payment-db     | 	                    amount,
 payment-db     | 	                    processed_by,
 payment-db     | 	                    requested_at_utc)
 payment-db     | 	                FROM STDIN (FORMAT BINARY)
-payment-db     | 2025-07-26 20:53:58.635 UTC [85] LOG:  duration: 0.454 ms  statement: 
+payment-db     | 2025-07-27 05:25:32.026 UTC [83] LOG:  duration: 0.465 ms  statement: 
 payment-db     | 	                COPY payments (
 payment-db     | 	                    correlation_id,
 payment-db     | 	                    amount,
 payment-db     | 	                    processed_by,
 payment-db     | 	                    requested_at_utc)
 payment-db     | 	                FROM STDIN (FORMAT BINARY)
-payment-db     | 2025-07-26 20:53:58.666 UTC [80] LOG:  duration: 0.474 ms  statement: 
+payment-db     | 2025-07-27 05:25:32.047 UTC [82] LOG:  duration: 0.450 ms  statement: 
 payment-db     | 	                COPY payments (
 payment-db     | 	                    correlation_id,
 payment-db     | 	                    amount,
 payment-db     | 	                    processed_by,
 payment-db     | 	                    requested_at_utc)
 payment-db     | 	                FROM STDIN (FORMAT BINARY)
-payment-db     | 2025-07-26 20:53:58.674 UTC [81] LOG:  duration: 0.475 ms  statement: 
+payment-db     | 2025-07-27 05:25:32.057 UTC [79] LOG:  duration: 0.541 ms  statement: 
 payment-db     | 	                COPY payments (
 payment-db     | 	                    correlation_id,
 payment-db     | 	                    amount,
 payment-db     | 	                    processed_by,
 payment-db     | 	                    requested_at_utc)
 payment-db     | 	                FROM STDIN (FORMAT BINARY)
-payment-db     | 2025-07-26 20:53:58.727 UTC [82] LOG:  duration: 0.497 ms  statement: 
+payment-db     | 2025-07-27 05:25:32.106 UTC [85] LOG:  duration: 0.354 ms  statement: 
 payment-db     | 	                COPY payments (
 payment-db     | 	                    correlation_id,
 payment-db     | 	                    amount,
 payment-db     | 	                    processed_by,
 payment-db     | 	                    requested_at_utc)
 payment-db     | 	                FROM STDIN (FORMAT BINARY)
-payment-db     | 2025-07-26 20:53:58.747 UTC [79] LOG:  duration: 0.370 ms  statement: 
+payment-db     | 2025-07-27 05:25:32.137 UTC [81] LOG:  duration: 0.428 ms  statement: 
 payment-db     | 	                COPY payments (
 payment-db     | 	                    correlation_id,
 payment-db     | 	                    amount,
 payment-db     | 	                    processed_by,
 payment-db     | 	                    requested_at_utc)
 payment-db     | 	                FROM STDIN (FORMAT BINARY)
-payment-db     | 2025-07-26 20:53:58.777 UTC [83] LOG:  duration: 0.426 ms  statement: 
+payment-db     | 2025-07-27 05:25:32.177 UTC [77] LOG:  duration: 0.432 ms  statement: 
 payment-db     | 	                COPY payments (
 payment-db     | 	                    correlation_id,
 payment-db     | 	                    amount,
 payment-db     | 	                    processed_by,
 payment-db     | 	                    requested_at_utc)
 payment-db     | 	                FROM STDIN (FORMAT BINARY)
-payment-db     | 2025-07-26 20:53:58.787 UTC [77] LOG:  duration: 0.431 ms  statement: 
+payment-db     | 2025-07-27 05:25:32.186 UTC [76] LOG:  duration: 0.375 ms  statement: 
 payment-db     | 	                COPY payments (
 payment-db     | 	                    correlation_id,
 payment-db     | 	                    amount,
 payment-db     | 	                    processed_by,
 payment-db     | 	                    requested_at_utc)
 payment-db     | 	                FROM STDIN (FORMAT BINARY)
+payment-db     | 2025-07-27 05:25:32.217 UTC [80] LOG:  duration: 0.451 ms  statement: 
+payment-db     | 	                COPY payments (
+payment-db     | 	                    correlation_id,
+payment-db     | 	                    amount,
+payment-db     | 	                    processed_by,
 log truncated at line 1000

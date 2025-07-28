@@ -1,0 +1,97 @@
+x-service-templates:
+  app: &appImage
+    image: dbiagi/rinha-de-backend-2025-go:0.0.1
+    command: ["/app/bin/app", "serve"]
+    deploy:
+      resources:
+        limits:
+          cpus: "0.2"
+          memory: "70MB"
+    networks:
+      - default
+      - payment-processor
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+x-commom-envs: &commom-envs
+  PORT: 9999
+  DB_HOST: postgres
+  DB_PORT: 5432
+  DB_USER: rinha2025
+  DB_PASSWORD: 123456
+  DB_NAME: rinha2025
+  PROCESSOR_DEFAULT_HOST: "payment-processor-default:8080"
+  PROCESSOR_FALLBACK_HOST: "payment-processor-fallback:8080"
+  PROCESSOR_MAX_RESPONSE_TIME: 3000
+  DB_MAX_IDLE_CONNECTIONS: 40
+  DB_MAX_OPEN_CONNECTIONS: 50
+  MAX_PAYMENT_RETRIES: 999
+  RETRY_BACKOFF: 100
+  RETRY_WORKERS_COUNT: 100
+
+services:
+  nginx:
+    image: nginx:latest
+    ports:
+      - "9999:9999"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - app-1
+      - app-2
+    networks:
+      - default
+    deploy:
+      resources:
+        limits:
+          cpus: "0.1"
+          memory: "20MB"
+  postgres:
+    image: postgres:17.5-alpine3.22
+    environment:
+      POSTGRES_PASSWORD: 123456
+      POSTGRES_USER: rinha2025
+      POSTGRES_DB: rinha2025
+    volumes:
+      - ./postgres/init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - 5432:5432
+    networks:
+      - default
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U rinha2025 -d rinha2025"]
+      interval: 3s
+      timeout: 3s
+      retries: 5
+      start_period: 5s
+    deploy:
+      resources:
+        limits:
+          cpus: "0.99"
+          memory: "130MB"
+  app-1:
+    <<: *appImage
+    environment: 
+      <<: *commom-envs
+  app-2:
+    <<: *appImage
+    environment: 
+      <<: *commom-envs
+  worker:
+    <<: *appImage
+    command: ["/app/bin/app", "worker"]
+    environment:
+      <<: *commom-envs
+      DB_MAX_IDLE_CONNECTIONS: 3
+      DB_MAX_OPEN_CONNECTIONS: 3
+    deploy:
+      resources:
+        limits:
+          cpus: "0.01"
+          memory: "6MB"
+networks:
+  default:
+    driver: bridge
+  payment-processor:
+    external: true

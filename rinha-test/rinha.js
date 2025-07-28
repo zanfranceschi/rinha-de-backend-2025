@@ -130,7 +130,7 @@ export const options = {
 const transactionsSuccessCounter = new Counter("transactions_success");
 const transactionsFailureCounter = new Counter("transactions_failure");
 const totalTransactionsAmountCounter = new Counter("total_transactions_amount");
-const balanceInconsistencyCounter = new Counter("balance_inconsistency_amount");
+const paymentsInconsistencyCounter = new Counter("payments_inconsistency");
 
 const defaultTotalAmountCounter = new Counter("default_total_amount");
 const defaultTotalRequestsCounter = new Counter("default_total_requests");
@@ -224,43 +224,15 @@ export async function checkPaymentsConsistency() {
   ]);
 
   const inconsistencies =
-    new Big(backendPaymentsSummary.default.totalAmount)
-      .minus(defaultAdminPaymentsSummary.totalAmount)
-      .abs()
-      .plus(
-        new Big(backendPaymentsSummary.fallback.totalAmount)
-        .minus(fallbackAdminPaymentsSummary.totalAmount)
-        .abs()
+      Math.abs(
+        (backendPaymentsSummary.default.totalRequests - defaultAdminPaymentsSummary.totalRequests) +
+        (backendPaymentsSummary.fallback.totalRequests - fallbackAdminPaymentsSummary.totalRequests)
       );
 
-  balanceInconsistencyCounter.add(inconsistencies.toNumber());
+  paymentsInconsistencyCounter.add(inconsistencies);
 
   if (inconsistencies > 0) {
-    console.warn(
-      `Found ${inconsistencies} inconsistencies in payment processing`
-    );
-
-    console.info(`
-    ╔══════════════════ Inconsistency Report ══════════════════╗
-    ║ Detected Inconsistencies: ${inconsistencies}
-    ║
-    ║ Backend:
-    ║   Default Amount.....${backendPaymentsSummary.default.totalAmount}
-    ║   Default Requests...${backendPaymentsSummary.default.totalRequests}
-    ║   Fallback Amount....${backendPaymentsSummary.fallback.totalAmount}
-    ║   Fallback Requests..${backendPaymentsSummary.fallback.totalRequests}
-    ║
-    ║ Payment Processor:
-    ║   Default Amount.....${defaultAdminPaymentsSummary.totalAmount}
-    ║   Default Requests...${defaultAdminPaymentsSummary.totalRequests}
-    ║   Fallback Amount....${fallbackAdminPaymentsSummary.totalAmount}
-    ║   Fallback Requests..${fallbackAdminPaymentsSummary.totalRequests}
-    ║
-    ║ Time Range:
-    ║   From..${from}
-    ║   To....${to}
-    ║   Now...${now.toISOString()}
-    ╚═══════════════════════════════════════════════════════════`);
+    console.warn(`${inconsistencies} inconsistências encontradas.`);
   }
 
   sleep(10);
@@ -292,7 +264,7 @@ export function handleSummary(data) {
 
   const p_99 = new Big(data.metrics["http_req_duration{expected_response:true}"].values["p(99)"]).round(2).toNumber();
   const p_99_bonus = Math.max(new Big((11 - p_99) * 0.02).round(2).toNumber(), 0);
-  const contains_inconsistencies = data.metrics.balance_inconsistency_amount.values.count != 0;
+  const contains_inconsistencies = data.metrics.payments_inconsistency.values.count > 0;
   
   const inconsistencies_fine = contains_inconsistencies ? 0.35 : 0;
 
@@ -316,16 +288,16 @@ export function handleSummary(data) {
     descricao: "'total_liquido' é sua pontuação final. Equivale ao seu lucro. Fórmula: total_liquido + (total_liquido * p99.bonus) - (total_liquido * multa.porcentagem)",
     p99: {
       valor: `${p_99}ms`,
-      bonus: p_99_bonus,
+      bonus: `${new Big(p_99_bonus).times(100)}%`,
       max_requests: MAX_REQUESTS,
       descricao: "Fórmula para o bônus: max((11 - p99.valor) * 0.02, 0)",
     },
     multa: {
       porcentagem: inconsistencies_fine,
-      total: (liquid_partial_amount * inconsistencies_fine),
+      total: new Big(liquid_partial_amount).times(inconsistencies_fine).toNumber(),
       composicao: {
-        total_inconsistencias: data.metrics.balance_inconsistency_amount.values.count,
-        descricao: "Se 'total_inconsistencias' > 0, há multa de 35%.",
+        num_inconsistencias: data.metrics.payments_inconsistency.values.count,
+        descricao: "Se 'num_inconsistencias' > 0, há multa de 35%.",
       }
     },
     caixa_dois: {

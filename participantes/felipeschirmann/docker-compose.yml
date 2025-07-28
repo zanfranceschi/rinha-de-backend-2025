@@ -1,22 +1,20 @@
 services:
   api:
-    image: felipeschirmann/rinha-backend-2025:5.0.0
-    container_name: felipeschirmann-rinha-v5
+    image: felipeschirmann/rinha-backend-2025:9.0.0
+    container_name: felipeschirmann-rinha-v9
     environment:
       PAYMENT_PROCESSOR_DEFAULT_URL: "http://payment-processor-default:8080"
       PAYMENT_PROCESSOR_FALLBACK_URL: "http://payment-processor-fallback:8080"
-      APP_QUEUE_CAPACITY: 350210
-      APP_DRAIN_TIMEOUT_MS: 1000
-      APP_CONTENTION_THRESHOLD: 95
-      APP_HIGH_VALUE_THRESHOLD: 200.00
-      APP_CONNECT_TIMEOUT_MS: 500
-      APP_RESPONSE_TIMEOUT_MS: 500
-      APP_POOL_MAX_TOTAL: 500
-      APP_POOL_MAX_PER_ROUTE: 250
+      APP_CLIENT_RESPONSE_TIMEOUT: "3s"
+      APP_CLIENT_CONNECT_TIMEOUT: "1s"
+      APP_QUEUE_MAX_CAPACITY: "40000"
+      APP_QUEUE_BASE_CAPACITY: "20000"
+      APP_WORKER_BATCH_SIZE: "500"
+      SERVER_TOMCAT_THREADS_MAX: "800"
     sysctls:
       net.core.somaxconn: 4096
     ports:
-      - "9999:8080"
+      - "9999:9999"
     networks:
       - payment-processor
     deploy:

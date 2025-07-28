@@ -36,7 +36,7 @@ services:
           cpus: "0.3"
           memory: "100MB"
   api1:
-      image: acslook/payment-proxy:v2
+      image: acslook/payment-proxy:v3
       container_name: api1
       environment:
         - CONN_STRING=postgres://rinha25:rinha25@db:5432/payments_db?sslmode=disable
@@ -57,7 +57,7 @@ services:
         - db
         - redis
   api2:
-    image: acslook/payment-proxy:v2
+    image: acslook/payment-proxy:v3
     container_name: api2
     environment:
       - CONN_STRING=postgres://rinha25:rinha25@db:5432/payments_db?sslmode=disable
@@ -78,7 +78,7 @@ services:
       - db
       - redis
   worker:
-      image: acslook/payment-proxy:v2
+      image: acslook/payment-proxy:v3
       container_name: worker
       environment:
         - CONN_STRING=postgres://rinha25:rinha25@db:5432/payments_db?sslmode=disable

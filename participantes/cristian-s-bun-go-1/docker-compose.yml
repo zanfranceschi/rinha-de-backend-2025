@@ -1,0 +1,131 @@
+services:
+  haproxy:
+    image: haproxy:alpine
+    ports:
+      - "9999:80"
+    networks:
+      - backend
+    volumes:
+      - ./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
+    depends_on:
+      - rinha-de-backend-2025-1
+      - rinha-de-backend-2025-2
+    deploy:
+      resources:
+        limits:
+          cpus: '0.1'
+          memory: 35M
+
+  rinha-de-backend-2025-1:
+    image: chrisblood777/rinha-de-backend-2025
+    networks:
+      - backend
+      - payment-processor
+      - nats-network
+    environment:
+      - PAYMENT_PROCESSOR_URL_DEFAULT=http://payment-processor-default:8080
+      - PAYMENT_PROCESSOR_URL_FALLBACK=http://payment-processor-fallback:8080
+      - NATS_URL=nats://nats:4222
+      - REDIS_URL=redis://redis:6379
+      - DATABASE_URL=/app/data/sqlite.db
+      - PORT=9998
+    depends_on:
+      - nats
+      - redis
+    ports:
+      - "9998:9998"
+    volumes:
+      - sqlite-data:/app/data
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 100M
+
+  rinha-de-backend-2025-2:
+    image: chrisblood777/rinha-de-backend-2025
+    networks:
+      - backend
+      - payment-processor
+      - nats-network
+    environment:
+      - PAYMENT_PROCESSOR_URL_DEFAULT=http://payment-processor-default:8080
+      - PAYMENT_PROCESSOR_URL_FALLBACK=http://payment-processor-fallback:8080
+      - NATS_URL=nats://nats:4222
+      - REDIS_URL=redis://redis:6379
+      - DATABASE_URL=/app/data/sqlite.db
+      - PORT=9997
+    depends_on:
+      - nats
+      - redis
+    ports:
+      - "9997:9997"
+    volumes:
+      - sqlite-data:/app/data
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 100M
+
+  sqlite-writer-go:
+    image: chrisblood777/rinha_sql_writer_go
+    networks:
+      - nats-network
+    environment:
+      - NATS_URL=nats://nats:4222
+      - DATABASE_URL=/app/data/sqlite.db
+    depends_on:
+      - nats
+      - rinha-de-backend-2025-1
+      - rinha-de-backend-2025-2
+    volumes:
+      - sqlite-data:/app/data
+    deploy:
+      resources:
+        limits:
+          cpus: '0.2'
+          memory: 30M
+
+  nats:
+    image: nats:latest
+    ports:
+      - "4222:4222"
+      - "8222:8222"
+    networks:
+      - nats-network
+    command: [
+      "--jetstream", 
+      "--store_dir=/data",
+    ]
+    deploy:
+      resources:
+        limits:
+          cpus: '0.1'
+          memory: 30M
+
+  redis:
+    image: redis:latest
+    ports:
+      - "6379:6379"
+    networks:
+      - backend
+    volumes:
+      - redis-data:/data
+    deploy:
+      resources:
+        limits:
+          cpus: '0.1'
+          memory: 50M
+
+networks:
+  backend:
+    driver: bridge
+  payment-processor:
+    external: true
+  nats-network:
+    driver: bridge
+
+volumes:
+  redis-data:
+  sqlite-data:

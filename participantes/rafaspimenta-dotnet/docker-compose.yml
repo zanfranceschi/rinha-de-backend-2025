@@ -12,17 +12,12 @@ services:
       resources:
         limits:
           cpus: '0.6'
-          memory: '60MB'
+          memory: '100MB'
     environment:
       - DOTNET_ENVIRONMENT=Production
     networks:
       - payment-processor
       - app-network
-    ulimits:
-      nproc: 1000000
-      nofile:
-        soft: 1000000
-        hard: 1000000
 
   api02:
     <<: *api
@@ -36,7 +31,7 @@ services:
       - api01
       - api02
     ports:
-      - "9999:9999"
+      - "9999:8080"
     deploy:
       resources:
         limits:
@@ -60,7 +55,7 @@ services:
       resources:
         limits:
           cpus: '0.2'
-          memory: '180MB'
+          memory: '100MB'
     command: >
       postgres
       -c fsync=off

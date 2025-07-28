@@ -3,32 +3,21 @@
  Network davidalecrim1-go-1_app  Created
  Container redis-db  Creating
  Container redis-db  Created
- Container go-backend-1  Creating
  Container go-backend-2  Creating
+ Container go-backend-1  Creating
  Container go-backend-2  Created
  Container go-backend-1  Created
  Container load-balancer-nginx  Creating
  Container load-balancer-nginx  Created
 Attaching to go-backend-1, go-backend-2, load-balancer-nginx, redis-db
-redis-db             | 1:C 26 Jul 2025 19:50:06.753 # WARNING Memory overcommit must be enabled! Without it, a background save or replication may fail under low memory condition. Being disabled, it can also cause failures without low memory condition, see https://github.com/jemalloc/jemalloc/issues/1328. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.
-redis-db             | 1:C 26 Jul 2025 19:50:06.753 * oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
-redis-db             | 1:C 26 Jul 2025 19:50:06.753 * Redis version=7.2.10, bits=64, commit=00000000, modified=0, pid=1, just started
-redis-db             | 1:C 26 Jul 2025 19:50:06.753 * Configuration loaded
-redis-db             | 1:M 26 Jul 2025 19:50:06.753 * monotonic clock: POSIX clock_gettime
-redis-db             | 1:M 26 Jul 2025 19:50:06.754 * Running mode=standalone, port=6379.
-redis-db             | 1:M 26 Jul 2025 19:50:06.754 * Server initialized
-redis-db             | 1:M 26 Jul 2025 19:50:06.754 * Ready to accept connections tcp
-go-backend-1         | 
-go-backend-1         |  ┌───────────────────────────────────────────────────┐ 
-go-backend-1         |  │               High Performance API                │ 
-go-backend-1         |  │                   Fiber v2.52.8                   │ 
-go-backend-1         |  │                http://127.0.0.1:80                │ 
-go-backend-1         |  │        (bound on host 0.0.0.0 and port 80)        │ 
-go-backend-1         |  │                                                   │ 
-go-backend-1         |  │ Handlers ............. 4  Processes ........... 1 │ 
-go-backend-1         |  │ Prefork ....... Disabled  PID ................. 1 │ 
-go-backend-1         |  └───────────────────────────────────────────────────┘ 
-go-backend-1         | 
+redis-db             | 1:C 27 Jul 2025 04:18:01.940 # WARNING Memory overcommit must be enabled! Without it, a background save or replication may fail under low memory condition. Being disabled, it can also cause failures without low memory condition, see https://github.com/jemalloc/jemalloc/issues/1328. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.
+redis-db             | 1:C 27 Jul 2025 04:18:01.940 * oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+redis-db             | 1:C 27 Jul 2025 04:18:01.940 * Redis version=7.2.10, bits=64, commit=00000000, modified=0, pid=1, just started
+redis-db             | 1:C 27 Jul 2025 04:18:01.940 * Configuration loaded
+redis-db             | 1:M 27 Jul 2025 04:18:01.940 * monotonic clock: POSIX clock_gettime
+redis-db             | 1:M 27 Jul 2025 04:18:01.941 * Running mode=standalone, port=6379.
+redis-db             | 1:M 27 Jul 2025 04:18:01.941 * Server initialized
+redis-db             | 1:M 27 Jul 2025 04:18:01.941 * Ready to accept connections tcp
 go-backend-2         | 
 go-backend-2         |  ┌───────────────────────────────────────────────────┐ 
 go-backend-2         |  │               High Performance API                │ 
@@ -40,6 +29,17 @@ go-backend-2         |  │ Handlers ............. 4  Processes ........... 1 �
 go-backend-2         |  │ Prefork ....... Disabled  PID ................. 1 │ 
 go-backend-2         |  └───────────────────────────────────────────────────┘ 
 go-backend-2         | 
+go-backend-1         | 
+go-backend-1         |  ┌───────────────────────────────────────────────────┐ 
+go-backend-1         |  │               High Performance API                │ 
+go-backend-1         |  │                   Fiber v2.52.8                   │ 
+go-backend-1         |  │                http://127.0.0.1:80                │ 
+go-backend-1         |  │        (bound on host 0.0.0.0 and port 80)        │ 
+go-backend-1         |  │                                                   │ 
+go-backend-1         |  │ Handlers ............. 4  Processes ........... 1 │ 
+go-backend-1         |  │ Prefork ....... Disabled  PID ................. 1 │ 
+go-backend-1         |  └───────────────────────────────────────────────────┘ 
+go-backend-1         | 
 load-balancer-nginx  | /docker-entrypoint.sh: /docker-entrypoint.d/ is not empty, will attempt to perform configuration
 load-balancer-nginx  | /docker-entrypoint.sh: Looking for shell scripts in /docker-entrypoint.d/
 load-balancer-nginx  | /docker-entrypoint.sh: Launching /docker-entrypoint.d/10-listen-on-ipv6-by-default.sh
@@ -50,10 +50,9 @@ load-balancer-nginx  | /docker-entrypoint.sh: Launching /docker-entrypoint.d/20-
 load-balancer-nginx  | /docker-entrypoint.sh: Launching /docker-entrypoint.d/30-tune-worker-processes.sh
 load-balancer-nginx  | /docker-entrypoint.sh: Configuration complete; ready for start up
 [Kload-balancer-nginx exited with code 0
-[Kgo-backend-2 exited with code 2
 [Kgo-backend-1 exited with code 2
-redis-db             | 1:signal-handler (1753559477) Received SIGTERM scheduling shutdown...
-redis-db             | 1:M 26 Jul 2025 19:51:17.941 * User requested shutdown...
-redis-db             | 1:M 26 Jul 2025 19:51:17.941 # Redis is now ready to exit, bye bye...
+redis-db             | 1:signal-handler (1753589953) Received SIGTERM scheduling shutdown...
+redis-db             | 1:M 27 Jul 2025 04:19:13.124 * User requested shutdown...
+redis-db             | 1:M 27 Jul 2025 04:19:13.124 # Redis is now ready to exit, bye bye...
 [Kredis-db exited with code 0
 log truncated at line 1000

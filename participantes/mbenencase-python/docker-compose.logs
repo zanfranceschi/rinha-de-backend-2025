@@ -7,24 +7,21 @@
  Container mbenencase-python-db-1  Creating
  Container mbenencase-python-db-1  Created
  Container mbenencase-python-redis-1  Created
- Container mbenencase-python-api2-1  Creating
  Container mbenencase-python-api1-1  Creating
- Container mbenencase-python-api2-1  Created
+ Container mbenencase-python-api2-1  Creating
  Container mbenencase-python-api1-1  Created
+ Container mbenencase-python-api2-1  Created
  Container mbenencase-python-nginx-1  Creating
  Container mbenencase-python-nginx-1  Created
 Attaching to api1-1, api2-1, db-1, nginx-1, redis-1
-redis-1  | 1:C 26 Jul 2025 21:14:34.477 # WARNING Memory overcommit must be enabled! Without it, a background save or replication may fail under low memory condition. Being disabled, it can also cause failures without low memory condition, see https://github.com/jemalloc/jemalloc/issues/1328. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.
-redis-1  | 1:C 26 Jul 2025 21:14:34.477 * oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
-redis-1  | 1:C 26 Jul 2025 21:14:34.477 * Redis version=7.2.10, bits=64, commit=00000000, modified=0, pid=1, just started
-redis-1  | 1:C 26 Jul 2025 21:14:34.477 # Warning: no config file specified, using the default config. In order to specify a config file use redis-server /path/to/redis.conf
-redis-1  | 1:M 26 Jul 2025 21:14:34.477 * monotonic clock: POSIX clock_gettime
-redis-1  | 1:M 26 Jul 2025 21:14:34.478 * Running mode=standalone, port=6379.
-redis-1  | 1:M 26 Jul 2025 21:14:34.478 * Server initialized
-redis-1  | 1:M 26 Jul 2025 21:14:34.478 * Ready to accept connections tcp
 db-1     | The files belonging to this database system will be owned by user "postgres".
 db-1     | This user must also own the server process.
 db-1     | 
+redis-1  | 1:C 27 Jul 2025 05:47:33.193 # WARNING Memory overcommit must be enabled! Without it, a background save or replication may fail under low memory condition. Being disabled, it can also cause failures without low memory condition, see https://github.com/jemalloc/jemalloc/issues/1328. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.
+redis-1  | 1:C 27 Jul 2025 05:47:33.193 * oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+redis-1  | 1:C 27 Jul 2025 05:47:33.193 * Redis version=7.2.10, bits=64, commit=00000000, modified=0, pid=1, just started
+redis-1  | 1:C 27 Jul 2025 05:47:33.193 # Warning: no config file specified, using the default config. In order to specify a config file use redis-server /path/to/redis.conf
+redis-1  | 1:M 27 Jul 2025 05:47:33.193 * monotonic clock: POSIX clock_gettime
 db-1     | The database cluster will be initialized with locale "en_US.utf8".
 db-1     | The default database encoding has accordingly been set to "UTF8".
 db-1     | The default text search configuration will be set to "english".
@@ -32,6 +29,9 @@ db-1     |
 db-1     | Data page checksums are disabled.
 db-1     | 
 db-1     | fixing permissions on existing directory /var/lib/postgresql/data ... ok
+redis-1  | 1:M 27 Jul 2025 05:47:33.194 * Running mode=standalone, port=6379.
+redis-1  | 1:M 27 Jul 2025 05:47:33.195 * Server initialized
+redis-1  | 1:M 27 Jul 2025 05:47:33.195 * Ready to accept connections tcp
 db-1     | creating subdirectories ... ok
 db-1     | selecting dynamic shared memory implementation ... posix
 db-1     | selecting default max_connections ... 100
@@ -49,13 +49,13 @@ nginx-1  | /docker-entrypoint.sh: Launching /docker-entrypoint.d/20-envsubst-on-
 nginx-1  | /docker-entrypoint.sh: Launching /docker-entrypoint.d/30-tune-worker-processes.sh
 nginx-1  | /docker-entrypoint.sh: Configuration complete; ready for start up
 db-1     | sh: locale: not found
-db-1     | 2025-07-26 21:14:36.499 UTC [35] WARNING:  no usable system locales were found
-nginx-1  | 2025/07/26 21:14:37 [error] 30#30: *1 connect() failed (111: Connection refused) while connecting to upstream, client: 172.20.0.1, server: , request: "GET /payments-summary HTTP/1.1", upstream: "http://172.20.0.4:8000/payments-summary", host: "localhost:9999"
-nginx-1  | 2025/07/26 21:14:37 [error] 30#30: *1 connect() failed (111: Connection refused) while connecting to upstream, client: 172.20.0.1, server: , request: "GET /payments-summary HTTP/1.1", upstream: "http://172.20.0.5:8000/payments-summary", host: "localhost:9999"
-nginx-1  | 172.20.0.1 - - [26/Jul/2025:21:14:37 +0000] "GET /payments-summary HTTP/1.1" 502 157 "-" "curl/7.88.1"
+db-1     | 2025-07-27 05:47:35.092 UTC [36] WARNING:  no usable system locales were found
+nginx-1  | 172.20.0.1 - - [27/Jul/2025:05:47:36 +0000] "GET /payments-summary HTTP/1.1" 502 157 "-" "curl/7.88.1"
+nginx-1  | 2025/07/27 05:47:36 [error] 30#30: *1 connect() failed (111: Connection refused) while connecting to upstream, client: 172.20.0.1, server: , request: "GET /payments-summary HTTP/1.1", upstream: "http://172.20.0.4:8000/payments-summary", host: "localhost:9999"
+nginx-1  | 2025/07/27 05:47:36 [error] 30#30: *1 connect() failed (111: Connection refused) while connecting to upstream, client: 172.20.0.1, server: , request: "GET /payments-summary HTTP/1.1", upstream: "http://172.20.0.5:8000/payments-summary", host: "localhost:9999"
 db-1     | performing post-bootstrap initialization ... ok
-api2-1   | INFO:     Started server process [1]
-api2-1   | INFO:     Waiting for application startup.
+db-1     | initdb: warning: enabling "trust" authentication for local connections
+db-1     | initdb: hint: You can change this by editing pg_hba.conf or using the option -A, or --auth-local and --auth-host, the next time you run initdb.
 db-1     | syncing data to disk ... ok
 db-1     | 
 db-1     | 
@@ -63,8 +63,16 @@ db-1     | Success. You can now start the database server using:
 db-1     | 
 db-1     |     pg_ctl -D /var/lib/postgresql/data -l logfile start
 db-1     | 
-db-1     | initdb: warning: enabling "trust" authentication for local connections
-db-1     | initdb: hint: You can change this by editing pg_hba.conf or using the option -A, or --auth-local and --auth-host, the next time you run initdb.
+db-1     | waiting for server to start....2025-07-27 05:47:37.211 UTC [42] LOG:  starting PostgreSQL 16.9 on x86_64-pc-linux-musl, compiled by gcc (Alpine 14.2.0) 14.2.0, 64-bit
+db-1     | 2025-07-27 05:47:37.218 UTC [42] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+db-1     | 2025-07-27 05:47:37.240 UTC [45] LOG:  database system was shut down at 2025-07-27 05:47:36 UTC
+db-1     | 2025-07-27 05:47:37.252 UTC [42] LOG:  database system is ready to accept connections
+db-1     |  done
+db-1     | server started
+api2-1   | INFO:     Started server process [1]
+api2-1   | INFO:     Waiting for application startup.
+api1-1   | INFO:     Started server process [1]
+api1-1   | INFO:     Waiting for application startup.
 api2-1   | ERROR:    Traceback (most recent call last):
 api2-1   |   File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 694, in lifespan
 api2-1   |     async with self.lifespan_context(app) as maybe_state:
@@ -161,8 +169,6 @@ api2-1   |   File "uvloop/loop.pyx", line 2020, in uvloop.loop.Loop.create_conne
 api2-1   | ConnectionRefusedError: [Errno 111] Connection refused
 api2-1   | 
 api2-1   | ERROR:    Application startup failed. Exiting.
-api1-1   | INFO:     Started server process [1]
-api1-1   | INFO:     Waiting for application startup.
 api1-1   | ERROR:    Traceback (most recent call last):
 api1-1   |   File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 694, in lifespan
 api1-1   |     async with self.lifespan_context(app) as maybe_state:
@@ -259,86 +265,80 @@ api1-1   |   File "uvloop/loop.pyx", line 2020, in uvloop.loop.Loop.create_conne
 api1-1   | ConnectionRefusedError: [Errno 111] Connection refused
 api1-1   | 
 api1-1   | ERROR:    Application startup failed. Exiting.
-db-1     | waiting for server to start....2025-07-26 21:14:38.313 UTC [41] LOG:  starting PostgreSQL 16.9 on x86_64-pc-linux-musl, compiled by gcc (Alpine 14.2.0) 14.2.0, 64-bit
-db-1     | 2025-07-26 21:14:38.321 UTC [41] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
-db-1     | 2025-07-26 21:14:38.341 UTC [44] LOG:  database system was shut down at 2025-07-26 21:14:38 UTC
-db-1     | 2025-07-26 21:14:38.352 UTC [41] LOG:  database system is ready to accept connections
-db-1     |  done
-db-1     | server started
 db-1     | CREATE DATABASE
 db-1     | 
 db-1     | 
 db-1     | /usr/local/bin/docker-entrypoint.sh: ignoring /docker-entrypoint-initdb.d/*
 db-1     | 
-db-1     | waiting for server to shut down....2025-07-26 21:14:38.616 UTC [41] LOG:  received fast shutdown request
-db-1     | 2025-07-26 21:14:38.638 UTC [41] LOG:  aborting any active transactions
-db-1     | 2025-07-26 21:14:38.641 UTC [41] LOG:  background worker "logical replication launcher" (PID 47) exited with exit code 1
-db-1     | 2025-07-26 21:14:38.643 UTC [42] LOG:  shutting down
-db-1     | 2025-07-26 21:14:38.651 UTC [42] LOG:  checkpoint starting: shutdown immediate
-db-1     | 2025-07-26 21:14:38.873 UTC [42] LOG:  checkpoint complete: wrote 926 buffers (5.7%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.118 s, sync=0.048 s, total=0.231 s; sync files=301, longest=0.014 s, average=0.001 s; distance=4272 kB, estimate=4272 kB; lsn=0/191E918, redo lsn=0/191E918
-db-1     | 2025-07-26 21:14:38.880 UTC [41] LOG:  database system is shut down
+db-1     | waiting for server to shut down....2025-07-27 05:47:37.449 UTC [42] LOG:  received fast shutdown request
+db-1     | 2025-07-27 05:47:37.454 UTC [42] LOG:  aborting any active transactions
+db-1     | 2025-07-27 05:47:37.456 UTC [42] LOG:  background worker "logical replication launcher" (PID 48) exited with exit code 1
+db-1     | 2025-07-27 05:47:37.458 UTC [43] LOG:  shutting down
+db-1     | 2025-07-27 05:47:37.465 UTC [43] LOG:  checkpoint starting: shutdown immediate
+db-1     | 2025-07-27 05:47:37.622 UTC [43] LOG:  checkpoint complete: wrote 926 buffers (5.7%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.087 s, sync=0.046 s, total=0.165 s; sync files=301, longest=0.021 s, average=0.001 s; distance=4272 kB, estimate=4272 kB; lsn=0/191E918, redo lsn=0/191E918
+db-1     | 2025-07-27 05:47:37.630 UTC [42] LOG:  database system is shut down
 db-1     |  done
 db-1     | server stopped
 db-1     | 
 db-1     | PostgreSQL init process complete; ready for start up.
 db-1     | 
-db-1     | 2025-07-26 21:14:38.957 UTC [1] LOG:  starting PostgreSQL 16.9 on x86_64-pc-linux-musl, compiled by gcc (Alpine 14.2.0) 14.2.0, 64-bit
-db-1     | 2025-07-26 21:14:38.957 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
-db-1     | 2025-07-26 21:14:38.958 UTC [1] LOG:  listening on IPv6 address "::", port 5432
-db-1     | 2025-07-26 21:14:38.971 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
-db-1     | 2025-07-26 21:14:38.984 UTC [57] LOG:  database system was shut down at 2025-07-26 21:14:38 UTC
-db-1     | 2025-07-26 21:14:39.001 UTC [1] LOG:  database system is ready to accept connections
+db-1     | 2025-07-27 05:47:37.679 UTC [1] LOG:  starting PostgreSQL 16.9 on x86_64-pc-linux-musl, compiled by gcc (Alpine 14.2.0) 14.2.0, 64-bit
+db-1     | 2025-07-27 05:47:37.679 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+db-1     | 2025-07-27 05:47:37.679 UTC [1] LOG:  listening on IPv6 address "::", port 5432
+db-1     | 2025-07-27 05:47:37.691 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+db-1     | 2025-07-27 05:47:37.705 UTC [58] LOG:  database system was shut down at 2025-07-27 05:47:37 UTC
+db-1     | 2025-07-27 05:47:37.716 UTC [1] LOG:  database system is ready to accept connections
 [Kapi2-1 exited with code 3
 [Kapi1-1 exited with code 3
-nginx-1  | 172.20.0.1 - - [26/Jul/2025:21:14:42 +0000] "GET /payments-summary HTTP/1.1" 502 157 "-" "curl/7.88.1"
-nginx-1  | 2025/07/26 21:14:42 [error] 30#30: *4 no live upstreams while connecting to upstream, client: 172.20.0.1, server: , request: "GET /payments-summary HTTP/1.1", upstream: "http://backend/payments-summary", host: "localhost:9999"
-nginx-1  | 172.20.0.1 - - [26/Jul/2025:21:14:47 +0000] "GET /payments-summary HTTP/1.1" 502 157 "-" "curl/7.88.1"
-nginx-1  | 2025/07/26 21:14:47 [error] 30#30: *5 no live upstreams while connecting to upstream, client: 172.20.0.1, server: , request: "GET /payments-summary HTTP/1.1", upstream: "http://backend/payments-summary", host: "localhost:9999"
-nginx-1  | 2025/07/26 21:15:26 [error] 30#30: *6 connect() failed (113: Host is unreachable) while connecting to upstream, client: 172.20.0.1, server: , request: "GET /payments-summary HTTP/1.1", upstream: "http://172.20.0.5:8000/payments-summary", host: "localhost:9999"
-nginx-1  | 2025/07/26 21:15:45 [error] 30#30: *6 connect() failed (113: Host is unreachable) while connecting to upstream, client: 172.20.0.1, server: , request: "GET /payments-summary HTTP/1.1", upstream: "http://172.20.0.4:8000/payments-summary", host: "localhost:9999"
-nginx-1  | 172.20.0.1 - - [26/Jul/2025:21:15:45 +0000] "GET /payments-summary HTTP/1.1" 502 157 "-" "curl/7.88.1"
-nginx-1  | 172.20.0.1 - - [26/Jul/2025:21:15:53 +0000] "GET /payments-summary HTTP/1.1" 502 157 "-" "curl/7.88.1"
-nginx-1  | 2025/07/26 21:15:53 [error] 30#30: *9 connect() failed (113: Host is unreachable) while connecting to upstream, client: 172.20.0.1, server: , request: "GET /payments-summary HTTP/1.1", upstream: "http://172.20.0.5:8000/payments-summary", host: "localhost:9999"
-nginx-1  | 2025/07/26 21:15:53 [error] 30#30: *9 no live upstreams while connecting to upstream, client: 172.20.0.1, server: , request: "GET /payments-summary HTTP/1.1", upstream: "http://backend/payments-summary", host: "localhost:9999"
-nginx-1  | 2025/07/26 21:16:01 [error] 30#30: *11 connect() failed (113: Host is unreachable) while connecting to upstream, client: 172.20.0.1, server: , request: "GET /payments-summary HTTP/1.1", upstream: "http://172.20.0.4:8000/payments-summary", host: "localhost:9999"
-nginx-1  | 2025/07/26 21:16:01 [error] 30#30: *11 no live upstreams while connecting to upstream, client: 172.20.0.1, server: , request: "GET /payments-summary HTTP/1.1", upstream: "http://backend/payments-summary", host: "localhost:9999"
-nginx-1  | 172.20.0.1 - - [26/Jul/2025:21:16:01 +0000] "GET /payments-summary HTTP/1.1" 502 157 "-" "curl/7.88.1"
-nginx-1  | 2025/07/26 21:16:09 [error] 30#30: *13 connect() failed (113: Host is unreachable) while connecting to upstream, client: 172.20.0.1, server: , request: "GET /payments-summary HTTP/1.1", upstream: "http://172.20.0.5:8000/payments-summary", host: "localhost:9999"
-nginx-1  | 2025/07/26 21:16:09 [error] 30#30: *13 no live upstreams while connecting to upstream, client: 172.20.0.1, server: , request: "GET /payments-summary HTTP/1.1", upstream: "http://backend/payments-summary", host: "localhost:9999"
-nginx-1  | 172.20.0.1 - - [26/Jul/2025:21:16:09 +0000] "GET /payments-summary HTTP/1.1" 502 157 "-" "curl/7.88.1"
-nginx-1  | 172.20.0.1 - - [26/Jul/2025:21:16:17 +0000] "GET /payments-summary HTTP/1.1" 502 157 "-" "curl/7.88.1"
-nginx-1  | 2025/07/26 21:16:17 [error] 30#30: *15 connect() failed (113: Host is unreachable) while connecting to upstream, client: 172.20.0.1, server: , request: "GET /payments-summary HTTP/1.1", upstream: "http://172.20.0.4:8000/payments-summary", host: "localhost:9999"
-nginx-1  | 2025/07/26 21:16:17 [error] 30#30: *15 no live upstreams while connecting to upstream, client: 172.20.0.1, server: , request: "GET /payments-summary HTTP/1.1", upstream: "http://backend/payments-summary", host: "localhost:9999"
-nginx-1  | 172.20.0.1 - - [26/Jul/2025:21:16:25 +0000] "GET /payments-summary HTTP/1.1" 502 157 "-" "curl/7.88.1"
-nginx-1  | 2025/07/26 21:16:25 [error] 30#30: *17 connect() failed (113: Host is unreachable) while connecting to upstream, client: 172.20.0.1, server: , request: "GET /payments-summary HTTP/1.1", upstream: "http://172.20.0.5:8000/payments-summary", host: "localhost:9999"
-nginx-1  | 2025/07/26 21:16:25 [error] 30#30: *17 no live upstreams while connecting to upstream, client: 172.20.0.1, server: , request: "GET /payments-summary HTTP/1.1", upstream: "http://backend/payments-summary", host: "localhost:9999"
-nginx-1  | 2025/07/26 21:16:33 [error] 30#30: *19 connect() failed (113: Host is unreachable) while connecting to upstream, client: 172.20.0.1, server: , request: "GET /payments-summary HTTP/1.1", upstream: "http://172.20.0.4:8000/payments-summary", host: "localhost:9999"
-nginx-1  | 2025/07/26 21:16:33 [error] 30#30: *19 no live upstreams while connecting to upstream, client: 172.20.0.1, server: , request: "GET /payments-summary HTTP/1.1", upstream: "http://backend/payments-summary", host: "localhost:9999"
-nginx-1  | 172.20.0.1 - - [26/Jul/2025:21:16:33 +0000] "GET /payments-summary HTTP/1.1" 502 157 "-" "curl/7.88.1"
-nginx-1  | 172.20.0.1 - - [26/Jul/2025:21:16:41 +0000] "GET /payments-summary HTTP/1.1" 502 157 "-" "curl/7.88.1"
-nginx-1  | 2025/07/26 21:16:41 [error] 30#30: *21 connect() failed (113: Host is unreachable) while connecting to upstream, client: 172.20.0.1, server: , request: "GET /payments-summary HTTP/1.1", upstream: "http://172.20.0.5:8000/payments-summary", host: "localhost:9999"
-nginx-1  | 2025/07/26 21:16:41 [error] 30#30: *21 no live upstreams while connecting to upstream, client: 172.20.0.1, server: , request: "GET /payments-summary HTTP/1.1", upstream: "http://backend/payments-summary", host: "localhost:9999"
-nginx-1  | 2025/07/26 21:16:49 [error] 30#30: *23 connect() failed (113: Host is unreachable) while connecting to upstream, client: 172.20.0.1, server: , request: "GET /payments-summary HTTP/1.1", upstream: "http://172.20.0.4:8000/payments-summary", host: "localhost:9999"
-nginx-1  | 2025/07/26 21:16:49 [error] 30#30: *23 no live upstreams while connecting to upstream, client: 172.20.0.1, server: , request: "GET /payments-summary HTTP/1.1", upstream: "http://backend/payments-summary", host: "localhost:9999"
-nginx-1  | 172.20.0.1 - - [26/Jul/2025:21:16:49 +0000] "GET /payments-summary HTTP/1.1" 502 157 "-" "curl/7.88.1"
-nginx-1  | 2025/07/26 21:16:57 [error] 30#30: *25 connect() failed (113: Host is unreachable) while connecting to upstream, client: 172.20.0.1, server: , request: "GET /payments-summary HTTP/1.1", upstream: "http://172.20.0.5:8000/payments-summary", host: "localhost:9999"
-nginx-1  | 2025/07/26 21:16:57 [error] 30#30: *25 no live upstreams while connecting to upstream, client: 172.20.0.1, server: , request: "GET /payments-summary HTTP/1.1", upstream: "http://backend/payments-summary", host: "localhost:9999"
-nginx-1  | 172.20.0.1 - - [26/Jul/2025:21:16:57 +0000] "GET /payments-summary HTTP/1.1" 502 157 "-" "curl/7.88.1"
-nginx-1  | 2025/07/26 21:17:05 [error] 30#30: *27 connect() failed (113: Host is unreachable) while connecting to upstream, client: 172.20.0.1, server: , request: "GET /payments-summary HTTP/1.1", upstream: "http://172.20.0.4:8000/payments-summary", host: "localhost:9999"
-nginx-1  | 2025/07/26 21:17:05 [error] 30#30: *27 no live upstreams while connecting to upstream, client: 172.20.0.1, server: , request: "GET /payments-summary HTTP/1.1", upstream: "http://backend/payments-summary", host: "localhost:9999"
-nginx-1  | 172.20.0.1 - - [26/Jul/2025:21:17:05 +0000] "GET /payments-summary HTTP/1.1" 502 157 "-" "curl/7.88.1"
+nginx-1  | 2025/07/27 05:47:41 [error] 30#30: *4 no live upstreams while connecting to upstream, client: 172.20.0.1, server: , request: "GET /payments-summary HTTP/1.1", upstream: "http://backend/payments-summary", host: "localhost:9999"
+nginx-1  | 172.20.0.1 - - [27/Jul/2025:05:47:41 +0000] "GET /payments-summary HTTP/1.1" 502 157 "-" "curl/7.88.1"
+nginx-1  | 2025/07/27 05:47:46 [error] 30#30: *5 no live upstreams while connecting to upstream, client: 172.20.0.1, server: , request: "GET /payments-summary HTTP/1.1", upstream: "http://backend/payments-summary", host: "localhost:9999"
+nginx-1  | 172.20.0.1 - - [27/Jul/2025:05:47:46 +0000] "GET /payments-summary HTTP/1.1" 502 157 "-" "curl/7.88.1"
+nginx-1  | 2025/07/27 05:48:25 [error] 30#30: *6 connect() failed (113: Host is unreachable) while connecting to upstream, client: 172.20.0.1, server: , request: "GET /payments-summary HTTP/1.1", upstream: "http://172.20.0.5:8000/payments-summary", host: "localhost:9999"
+nginx-1  | 2025/07/27 05:48:44 [error] 30#30: *6 connect() failed (113: Host is unreachable) while connecting to upstream, client: 172.20.0.1, server: , request: "GET /payments-summary HTTP/1.1", upstream: "http://172.20.0.4:8000/payments-summary", host: "localhost:9999"
+nginx-1  | 172.20.0.1 - - [27/Jul/2025:05:48:44 +0000] "GET /payments-summary HTTP/1.1" 502 157 "-" "curl/7.88.1"
+nginx-1  | 2025/07/27 05:48:52 [error] 30#30: *9 connect() failed (113: Host is unreachable) while connecting to upstream, client: 172.20.0.1, server: , request: "GET /payments-summary HTTP/1.1", upstream: "http://172.20.0.5:8000/payments-summary", host: "localhost:9999"
+nginx-1  | 2025/07/27 05:48:52 [error] 30#30: *9 no live upstreams while connecting to upstream, client: 172.20.0.1, server: , request: "GET /payments-summary HTTP/1.1", upstream: "http://backend/payments-summary", host: "localhost:9999"
+nginx-1  | 172.20.0.1 - - [27/Jul/2025:05:48:52 +0000] "GET /payments-summary HTTP/1.1" 502 157 "-" "curl/7.88.1"
+nginx-1  | 2025/07/27 05:49:00 [error] 30#30: *11 connect() failed (113: Host is unreachable) while connecting to upstream, client: 172.20.0.1, server: , request: "GET /payments-summary HTTP/1.1", upstream: "http://172.20.0.4:8000/payments-summary", host: "localhost:9999"
+nginx-1  | 2025/07/27 05:49:00 [error] 30#30: *11 no live upstreams while connecting to upstream, client: 172.20.0.1, server: , request: "GET /payments-summary HTTP/1.1", upstream: "http://backend/payments-summary", host: "localhost:9999"
+nginx-1  | 172.20.0.1 - - [27/Jul/2025:05:49:00 +0000] "GET /payments-summary HTTP/1.1" 502 157 "-" "curl/7.88.1"
+nginx-1  | 2025/07/27 05:49:08 [error] 30#30: *13 connect() failed (113: Host is unreachable) while connecting to upstream, client: 172.20.0.1, server: , request: "GET /payments-summary HTTP/1.1", upstream: "http://172.20.0.5:8000/payments-summary", host: "localhost:9999"
+nginx-1  | 2025/07/27 05:49:08 [error] 30#30: *13 no live upstreams while connecting to upstream, client: 172.20.0.1, server: , request: "GET /payments-summary HTTP/1.1", upstream: "http://backend/payments-summary", host: "localhost:9999"
+nginx-1  | 172.20.0.1 - - [27/Jul/2025:05:49:08 +0000] "GET /payments-summary HTTP/1.1" 502 157 "-" "curl/7.88.1"
+nginx-1  | 172.20.0.1 - - [27/Jul/2025:05:49:16 +0000] "GET /payments-summary HTTP/1.1" 502 157 "-" "curl/7.88.1"
+nginx-1  | 2025/07/27 05:49:16 [error] 30#30: *15 connect() failed (113: Host is unreachable) while connecting to upstream, client: 172.20.0.1, server: , request: "GET /payments-summary HTTP/1.1", upstream: "http://172.20.0.4:8000/payments-summary", host: "localhost:9999"
+nginx-1  | 2025/07/27 05:49:16 [error] 30#30: *15 no live upstreams while connecting to upstream, client: 172.20.0.1, server: , request: "GET /payments-summary HTTP/1.1", upstream: "http://backend/payments-summary", host: "localhost:9999"
+nginx-1  | 2025/07/27 05:49:24 [error] 30#30: *17 connect() failed (113: Host is unreachable) while connecting to upstream, client: 172.20.0.1, server: , request: "GET /payments-summary HTTP/1.1", upstream: "http://172.20.0.5:8000/payments-summary", host: "localhost:9999"
+nginx-1  | 2025/07/27 05:49:24 [error] 30#30: *17 no live upstreams while connecting to upstream, client: 172.20.0.1, server: , request: "GET /payments-summary HTTP/1.1", upstream: "http://backend/payments-summary", host: "localhost:9999"
+nginx-1  | 172.20.0.1 - - [27/Jul/2025:05:49:24 +0000] "GET /payments-summary HTTP/1.1" 502 157 "-" "curl/7.88.1"
+nginx-1  | 2025/07/27 05:49:32 [error] 30#30: *19 connect() failed (113: Host is unreachable) while connecting to upstream, client: 172.20.0.1, server: , request: "GET /payments-summary HTTP/1.1", upstream: "http://172.20.0.4:8000/payments-summary", host: "localhost:9999"
+nginx-1  | 2025/07/27 05:49:32 [error] 30#30: *19 no live upstreams while connecting to upstream, client: 172.20.0.1, server: , request: "GET /payments-summary HTTP/1.1", upstream: "http://backend/payments-summary", host: "localhost:9999"
+nginx-1  | 172.20.0.1 - - [27/Jul/2025:05:49:32 +0000] "GET /payments-summary HTTP/1.1" 502 157 "-" "curl/7.88.1"
+nginx-1  | 172.20.0.1 - - [27/Jul/2025:05:49:40 +0000] "GET /payments-summary HTTP/1.1" 502 157 "-" "curl/7.88.1"
+nginx-1  | 2025/07/27 05:49:40 [error] 30#30: *21 connect() failed (113: Host is unreachable) while connecting to upstream, client: 172.20.0.1, server: , request: "GET /payments-summary HTTP/1.1", upstream: "http://172.20.0.5:8000/payments-summary", host: "localhost:9999"
+nginx-1  | 2025/07/27 05:49:40 [error] 30#30: *21 no live upstreams while connecting to upstream, client: 172.20.0.1, server: , request: "GET /payments-summary HTTP/1.1", upstream: "http://backend/payments-summary", host: "localhost:9999"
+nginx-1  | 172.20.0.1 - - [27/Jul/2025:05:49:48 +0000] "GET /payments-summary HTTP/1.1" 502 157 "-" "curl/7.88.1"
+nginx-1  | 2025/07/27 05:49:48 [error] 30#30: *23 connect() failed (113: Host is unreachable) while connecting to upstream, client: 172.20.0.1, server: , request: "GET /payments-summary HTTP/1.1", upstream: "http://172.20.0.4:8000/payments-summary", host: "localhost:9999"
+nginx-1  | 2025/07/27 05:49:48 [error] 30#30: *23 no live upstreams while connecting to upstream, client: 172.20.0.1, server: , request: "GET /payments-summary HTTP/1.1", upstream: "http://backend/payments-summary", host: "localhost:9999"
+nginx-1  | 2025/07/27 05:49:56 [error] 30#30: *25 connect() failed (113: Host is unreachable) while connecting to upstream, client: 172.20.0.1, server: , request: "GET /payments-summary HTTP/1.1", upstream: "http://172.20.0.5:8000/payments-summary", host: "localhost:9999"
+nginx-1  | 2025/07/27 05:49:56 [error] 30#30: *25 no live upstreams while connecting to upstream, client: 172.20.0.1, server: , request: "GET /payments-summary HTTP/1.1", upstream: "http://backend/payments-summary", host: "localhost:9999"
+nginx-1  | 172.20.0.1 - - [27/Jul/2025:05:49:56 +0000] "GET /payments-summary HTTP/1.1" 502 157 "-" "curl/7.88.1"
+nginx-1  | 2025/07/27 05:50:04 [error] 30#30: *27 connect() failed (113: Host is unreachable) while connecting to upstream, client: 172.20.0.1, server: , request: "GET /payments-summary HTTP/1.1", upstream: "http://172.20.0.4:8000/payments-summary", host: "localhost:9999"
+nginx-1  | 2025/07/27 05:50:04 [error] 30#30: *27 no live upstreams while connecting to upstream, client: 172.20.0.1, server: , request: "GET /payments-summary HTTP/1.1", upstream: "http://backend/payments-summary", host: "localhost:9999"
+nginx-1  | 172.20.0.1 - - [27/Jul/2025:05:50:04 +0000] "GET /payments-summary HTTP/1.1" 502 157 "-" "curl/7.88.1"
 [Knginx-1 exited with code 0
-db-1     | 2025-07-26 21:17:11.565 UTC [1] LOG:  received fast shutdown request
-redis-1  | 1:signal-handler (1753564631) Received SIGTERM scheduling shutdown...
-redis-1  | 1:M 26 Jul 2025 21:17:11.570 * User requested shutdown...
-redis-1  | 1:M 26 Jul 2025 21:17:11.570 * Saving the final RDB snapshot before exiting.
-db-1     | 2025-07-26 21:17:11.572 UTC [1] LOG:  aborting any active transactions
-db-1     | 2025-07-26 21:17:11.575 UTC [1] LOG:  background worker "logical replication launcher" (PID 60) exited with exit code 1
-db-1     | 2025-07-26 21:17:11.576 UTC [55] LOG:  shutting down
-db-1     | 2025-07-26 21:17:11.586 UTC [55] LOG:  checkpoint starting: shutdown immediate
-redis-1  | 1:M 26 Jul 2025 21:17:11.591 * DB saved on disk
-redis-1  | 1:M 26 Jul 2025 21:17:11.591 # Redis is now ready to exit, bye bye...
-db-1     | 2025-07-26 21:17:11.685 UTC [55] LOG:  checkpoint complete: wrote 40 buffers (0.2%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.030 s, sync=0.026 s, total=0.109 s; sync files=12, longest=0.019 s, average=0.003 s; distance=202 kB, estimate=202 kB; lsn=0/19513B0, redo lsn=0/19513B0
-db-1     | 2025-07-26 21:17:11.691 UTC [1] LOG:  database system is shut down
-[Kredis-1 exited with code 0
+db-1     | 2025-07-27 05:50:10.413 UTC [1] LOG:  received fast shutdown request
+redis-1  | 1:signal-handler (1753595410) Received SIGTERM scheduling shutdown...
+db-1     | 2025-07-27 05:50:10.421 UTC [1] LOG:  aborting any active transactions
+db-1     | 2025-07-27 05:50:10.424 UTC [1] LOG:  background worker "logical replication launcher" (PID 61) exited with exit code 1
+db-1     | 2025-07-27 05:50:10.426 UTC [56] LOG:  shutting down
+db-1     | 2025-07-27 05:50:10.436 UTC [56] LOG:  checkpoint starting: shutdown immediate
+redis-1  | 1:M 27 Jul 2025 05:50:10.490 * User requested shutdown...
+redis-1  | 1:M 27 Jul 2025 05:50:10.490 * Saving the final RDB snapshot before exiting.
+db-1     | 2025-07-27 05:50:10.510 UTC [56] LOG:  checkpoint complete: wrote 40 buffers (0.2%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.016 s, sync=0.020 s, total=0.084 s; sync files=12, longest=0.013 s, average=0.002 s; distance=202 kB, estimate=202 kB; lsn=0/19513B0, redo lsn=0/19513B0
+db-1     | 2025-07-27 05:50:10.515 UTC [1] LOG:  database system is shut down
+redis-1  | 1:M 27 Jul 2025 05:50:10.518 * DB saved on disk
+redis-1  | 1:M 27 Jul 2025 05:50:10.518 # Redis is now ready to exit, bye bye...
 [Kdb-1 exited with code 0
+[Kredis-1 exited with code 0

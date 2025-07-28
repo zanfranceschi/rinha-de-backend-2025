@@ -1,0 +1,123 @@
+services:
+  db-bolado:
+    image: gabxdevv/rinha-backend-2025-banco-bolado:1.0.0
+    networks:
+      - backend
+    environment:
+      JAVA_OPTS: >-
+        -server
+        -XX:+UseG1GC
+        -XX:+UseFastAccessorMethods
+        -Xlog:disable
+        -XX:-PrintGC
+        -XX:+UseStringCache
+        -XX:-PrintGCDetails
+        -XX:-FlightRecorder
+        -XX:+DisableExplicitGC
+    deploy:
+      resources:
+        limits:
+          cpus: '0.38'
+          memory: '190MB'
+
+  backend-1:
+    image: gabxdevv/rinha-backend-2025-javinha:1.0.0
+    environment:
+      RETRY_API_DEFAULT: 16
+      WORKER_POOL_SIZE: 21
+      HANDLER_UDP_POOL_SIZE: 6
+      URL_PROCESSOR_DEFAULT: http://payment-processor-default:8080/payments
+      URL_PROCESSOR_FALLBACK: http://payment-processor-fallback:8080/payments
+      DATABASE_HOST: db-bolado
+      LOG_LEVEL: off
+      SERVER_PORT: 8080
+      UDP_CHANNEL_PORT: 9001
+      JAVA_OPTS: >-
+        -server
+        -XX:+UseG1GC
+        -XX:+UseFastAccessorMethods
+        -Xlog:disable
+        -XX:-PrintGC
+        -XX:+UseStringCache
+        -XX:-PrintGCDetails
+        -XX:-FlightRecorder
+        -XX:+DisableExplicitGC
+    networks:
+      - backend
+      - payment-processor
+    depends_on:
+      - db-bolado
+    deploy:
+      resources:
+        limits:
+          cpus: '0.42'
+          memory: '45MB'
+
+  backend-2:
+    image: gabxdevv/rinha-backend-2025-javinha:1.0.0
+    restart: always
+    environment:
+      RETRY_API_DEFAULT: 16
+      WORKER_POOL_SIZE: 21
+      HANDLER_UDP_POOL_SIZE: 6
+      URL_PROCESSOR_DEFAULT: http://payment-processor-default:8080/payments
+      URL_PROCESSOR_FALLBACK: http://payment-processor-fallback:8080/payments
+      DATABASE_HOST: db-bolado
+      LOG_LEVEL: off
+      SERVER_PORT: 8080
+      UDP_CHANNEL_PORT: 9002
+      JAVA_OPTS: >-
+        -server
+        -XX:+UseG1GC
+        -XX:+UseFastAccessorMethods
+        -Xlog:disable
+        -XX:-PrintGC
+        -XX:+UseStringCache
+        -XX:-PrintGCDetails
+        -XX:-FlightRecorder
+        -XX:+DisableExplicitGC
+    networks:
+      - backend
+      - payment-processor
+    depends_on:
+      - db-bolado
+    deploy:
+      resources:
+        limits:
+          cpus: '0.42'
+          memory: '45MB'
+
+
+  load-balancer:
+    image: gabxdevv/loud-balance-diferenciado-bolado:1.0.0
+    restart: always
+    depends_on:
+      - backend-1
+      - backend-2
+    ports:
+      - "9999:9999"
+    networks:
+      - backend
+    deploy:
+      resources:
+        limits:
+          cpus: "0.28"
+          memory: "70MB"
+    environment:
+      BACK_END_1_URL: backend-1
+      BACK_END_2_URL: backend-2
+      JAVA_OPTS: >-
+        -server
+        -XX:+UseG1GC
+        -XX:+UseFastAccessorMethods
+        -Xlog:disable
+        -XX:-PrintGC
+        -XX:+UseStringCache
+        -XX:-PrintGCDetails
+        -XX:-FlightRecorder
+        -XX:+DisableExplicitGC
+networks:
+  backend:
+    driver: bridge
+  payment-processor:
+    external: true

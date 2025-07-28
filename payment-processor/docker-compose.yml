@@ -5,6 +5,11 @@ x-service-templates:
       - payment-processor
       - payment-processor-db
     deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 2s
+        max_attempts: 10
+        window: 5s
       resources:
         limits:
           cpus: "1.5"
@@ -12,6 +17,7 @@ x-service-templates:
 
   payment-processor-db: &payment-processor-db
     image: postgres:17-alpine
+    command: postgres -c checkpoint_timeout=600 -c max_wal_size=4096 -c synchronous_commit=0 -c fsync=0 -c full_page_writes=0
     networks:
       - payment-processor-db
     volumes:
@@ -21,6 +27,11 @@ x-service-templates:
       - POSTGRES_USER=postgres
       - POSTGRES_DB=rinha
     deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 2s
+        max_attempts: 10
+        window: 5s
       resources:
         limits:
           cpus: "1.5"

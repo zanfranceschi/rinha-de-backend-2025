@@ -1,13 +1,13 @@
 x-service-templates:
   backend: &backend
-    image: geazianc/rinha25:v2
+    image: geazianc/rinha25:v4
     env_file:
       - .env
     deploy:
       resources:
         limits:
           cpus: "0.65"
-          memory: "150MB"
+          memory: "160MB"
     depends_on:
       - valkey-server
     networks:
@@ -34,7 +34,7 @@ services:
       resources:
         limits:
           cpus: "0.10"
-          memory: "25MB"
+          memory: "15MB"
     networks:
       - backend
 
@@ -49,7 +49,7 @@ services:
       resources:
         limits:
           cpus: "0.10"
-          memory: "25MB"
+          memory: "15MB"
     depends_on:
       - api1
       - api2

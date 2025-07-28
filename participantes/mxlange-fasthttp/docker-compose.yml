@@ -12,20 +12,23 @@ services:
             - POSTGRES_DB=postgres
         ports:
             - "5432:5432"
-        command: postgres -c max_connections=450 -c shared_buffers=40MB -c effective_cache_size=120MB -c work_mem=4MB -c maintenance_work_mem=16MB -c synchronous_commit=off -c fsync=off
+        command: ["postgres", "-c", "config_file=/etc/postgresql.conf"]
+        volumes:
+            - ./pg.conf:/etc/postgresql.conf:ro
+            - ./sql:/docker-entrypoint-initdb.d
         networks:
             - payment-processor
         healthcheck:
             test: ["CMD-SHELL", "pg_isready -U postgres -d postgres"]
-            interval: 10s
+            interval: 5s
             timeout: 5s
             retries: 5
             start_period: 10s
         deploy:
             resources:
                 limits:
-                    cpus: "0.5"
-                    memory: "115MB"
+                    cpus: "0.3"
+                    memory: "150MB"
     locker:
         image: mxlange/locker:latest
         hostname: locker
@@ -36,8 +39,8 @@ services:
         deploy:
             resources:
                 limits:
-                    cpus: "0.2"
-                    memory: "50MB"
+                    cpus: "0.1"
+                    memory: "30MB"
     api1: &api
         image: mxlange/rinha-go-faster:latest
         hostname: api1
@@ -48,7 +51,7 @@ services:
             - POSTGRES_USER=postgres
             - POSTGRES_PASSWORD=postgres
             - POSTGRES_HOST=db
-            - WORKER_CONCURRENCY=100
+            - WORKER_CONCURRENCY=42
             - LOCKER_URL=locker:8080
         networks:
             - payment-processor
@@ -60,8 +63,8 @@ services:
         deploy:
             resources:
                 limits:
-                    cpus: "0.35"
-                    memory: "85MB"
+                    cpus: "0.40"
+                    memory: "70MB"
     api2:
         <<: *api
         hostname: api2
@@ -80,5 +83,5 @@ services:
         deploy:
             resources:
                 limits:
-                    cpus: "0.10"
-                    memory: "15MB"
+                    cpus: "0.3"
+                    memory: "30MB"

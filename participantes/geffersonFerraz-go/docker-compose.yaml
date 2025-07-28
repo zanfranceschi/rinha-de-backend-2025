@@ -1,0 +1,72 @@
+services:
+  keydb:
+    image: eqalpha/keydb:latest
+    ports:
+      - "6379:6379"
+    networks:
+      - backend
+    deploy:
+      resources:
+        limits:
+          cpus: "0.2"
+          memory: "140MB"
+
+  caddy:
+    image: caddy:latest
+    ports:
+      - "9999:80"
+    environment:
+      - GOMEMLIMIT=100MiB
+    networks:
+      - backend
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+    deploy:
+      resources:
+        limits:
+          cpus: "0.6"
+          memory: "100MB"      
+
+  payment-processor:
+    image: geffws/vibe-rinha-2025:latest
+    networks:
+      - backend
+      - payment-processor
+    ports:
+      - "9091:9099"
+    command: ./app/rinha pp
+    environment:
+      - GOMEMLIMIT=20MiB
+    deploy:
+      resources:
+        limits:
+          cpus: "0.45"
+          memory: "60MB"
+    depends_on:
+      - keydb
+      - caddy
+
+  payment-summary:
+    image: geffws/vibe-rinha-2025:latest
+    networks:
+      - backend
+      - payment-processor
+    command: ./app/rinha ps
+    environment:
+      - GOMEMLIMIT=30MiB
+    ports:
+      - "9092:9099"
+    deploy:
+      resources:
+        limits:
+          cpus: "0.25"
+          memory: "50MB"
+    depends_on:
+      - keydb
+      - caddy 
+
+networks:
+  backend:
+    driver: bridge
+  payment-processor:
+    external: true
