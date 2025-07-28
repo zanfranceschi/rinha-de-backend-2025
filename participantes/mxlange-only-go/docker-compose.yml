@@ -1,0 +1,52 @@
+networks:
+    payment-processor:
+        name: payment-processor
+        driver: bridge
+services:
+    api1:
+        image: mxlange/payment-api-only-go:latest
+        hostname: api1
+        environment:
+            - API_INSTANCES=http://api2:8080
+            - BASE_URL_DEFAULT=http://payment-processor-default:8080
+            - BASE_URL_FALLBACK=http://payment-processor-fallback:8080
+            - WORKERS=10
+        networks:
+            - payment-processor
+        deploy:
+            resources:
+                limits:
+                    cpus: "0.5"
+                    memory: "150MB"
+    api2:
+        image: mxlange/payment-api-only-go:latest
+        hostname: api2
+        environment:
+            - API_INSTANCES=http://api1:8080
+            - BASE_URL_DEFAULT=http://payment-processor-default:8080
+            - BASE_URL_FALLBACK=http://payment-processor-fallback:8080
+            - WORKERS=10
+        networks:
+            - payment-processor
+        deploy:
+            resources:
+                limits:
+                    cpus: "0.5"
+                    memory: "150MB"
+    nginx:
+        image: nginx:1.25-alpine
+        container_name: rinha-nginx
+        volumes:
+            - ./nginx.conf:/etc/nginx/nginx.conf:ro
+        depends_on:
+            - api1
+            - api2
+        ports:
+            - "9999:9999"
+        networks:
+            - payment-processor
+        deploy:
+            resources:
+                limits:
+                    cpus: "0.5"
+                    memory: "50MB"
