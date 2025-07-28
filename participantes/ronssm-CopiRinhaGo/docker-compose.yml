@@ -13,10 +13,10 @@ services:
         condition: service_healthy
     healthcheck:
       test: ["CMD", "sh", "/app/healthcheck.sh"]
-      interval: 10s
-      timeout: 3s
-      retries: 5
-      start_period: 15s
+      interval: 8s
+      timeout: 2s
+      retries: 3
+      start_period: 10s
     deploy:
       resources:
         limits:
@@ -36,10 +36,10 @@ services:
         condition: service_healthy
     healthcheck:
       test: ["CMD", "sh", "/app/healthcheck.sh"]
-      interval: 10s
-      timeout: 3s
-      retries: 5
-      start_period: 15s
+      interval: 8s
+      timeout: 2s
+      retries: 3
+      start_period: 10s
     deploy:
       resources:
         limits:
@@ -70,13 +70,13 @@ services:
       - "6379:6379"
     networks:
       - backend
-    command: redis-server --maxmemory 120mb --maxmemory-policy allkeys-lru --tcp-keepalive 60 --timeout 0
+    command: redis-server --maxmemory 120mb --maxmemory-policy allkeys-lru --tcp-keepalive 30 --timeout 0 --save "" --appendonly no --tcp-backlog 511
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]
-      interval: 5s
-      timeout: 3s
-      retries: 5
-      start_period: 5s
+      interval: 3s
+      timeout: 1s
+      retries: 3
+      start_period: 3s
     deploy:
       resources:
         limits:
