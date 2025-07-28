@@ -1,99 +1,61 @@
+x-template: &template
+  image: joelgarciajr84/rinha-backend-go:rinha-redis-galo-de-briga
+  environment:
+    PAYMENT_PROCESSOR_DEFAULT_URL: "http://payment-processor-default:8080"
+    PAYMENT_PROCESSOR_FALLBACK_URL: "http://payment-processor-fallback:8080"
+    REDIS_URL: "redis:6379"
+    PORT: 80
+  networks:
+    - backend
+    - payment-processor
+  deploy:
+    resources:
+      limits:
+        cpus: "0.5"
+        memory: "115MB"
 
 services:
-  financial-db:
-    image: postgres:alpine
-    hostname: financial-db
-    environment:
-      - POSTGRES_PASSWORD=root
-      - POSTGRES_USER=root
-      - POSTGRES_DB=transactions
-    ports:
-      - "5432:5432"
-    volumes:
-      - ./script.sql:/docker-entrypoint-initdb.d/script.sql
-    networks:
-      - transaction-network
-      - payment-processor
-    deploy:
-      resources:
-        limits:
-          cpus: "0.4"
-          memory: "173MB"
-    command: postgres -c 'max_connections=300' -c 'shared_buffers=64MB' -c 'effective_cache_size=100MB' -c 'maintenance_work_mem=16MB' -c 'checkpoint_completion_target=0.9' -c 'wal_buffers=8MB' -c 'default_statistics_target=100' -c 'random_page_cost=1.1' -c 'effective_io_concurrency=200'
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U root -d transactions"]
-      interval: 5s
-      timeout: 5s
-      retries: 5
-
-  transaction-api-01: &api
-    image: joelgarciajr84/rinha-backend-go:rinha-pg-galo
-    hostname: transaction-api-01
-    ports:
-      - "3001:8080"
+  galo01:
+    <<: *template
+    hostname: galo01
     depends_on:
-      financial-db:
-        condition: service_healthy
-    environment:
-      - DB_PASSWORD=root
-      - DB_USER=root
-      - DB_HOST=financial-db:5432
-      - DB_NAME=transactions
-      - PRIMARY_HOST=payment-processor-default:8080
-      - FALLBACK_HOST=payment-processor-fallback:8080
-      - PRIMARY_TIMEOUT_MS=220
-      - FALLBACK_TIMEOUT_MS=250
-      - MAX_RETRIES=0
-      - RETRY_DELAY_MS=25
-      - PORT=8080
-    ulimits:
-      nofile:
-        soft: 8192
-        hard: 8192
-    tmpfs:
-      - /tmp:noexec,nosuid,size=8m
-    networks:
-      - transaction-network
-      - payment-processor
-    deploy:
-      resources:
-        limits:
-          cpus: "0.45"
-          memory: "83MB"
-
-  transaction-api-02:
-    <<: *api
-    hostname: transaction-api-02
-    ports:
-      - "3002:8080"
-
-  nginx-lb:
-    image: nginx:1.27.0-alpine
+      - redis
+  galo02:
+    <<: *template
+    hostname: galo02
+    depends_on:
+      - redis
+  
+  nginx:
+    image: nginx
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf:ro
-    depends_on:
-      - transaction-api-01
-      - transaction-api-02
     ports:
-      - "9999:9999"
+      - "9999:80"
+    depends_on:
+      - galo01
+      - galo02
     networks:
-      - transaction-network
-      - payment-processor
+      - backend
     deploy:
       resources:
         limits:
           cpus: "0.2"
-          memory: "10MB"
-    ulimits:
-      nofile:
-        soft: 8192
-        hard: 8192
-
+          memory: "70MB"
+  redis:
+    image: redis:8.0.3-alpine
+    hostname: redis
+    networks:
+      - backend
+    ports:
+      - "6379:6379"
+    command: ["redis-server", "--appendonly", "yes", "--appendfsync", "everysec"]
+    deploy:
+      resources:
+        limits:
+          cpus: "0.3"
+          memory: "50MB"
 networks:
-  transaction-network:
-    driver: bridge
-    driver_opts:
-      com.docker.network.driver.mtu: 1500
-      com.docker.network.bridge.enable_ip_masquerade: 'false'
+  backend:
   payment-processor:
     external: true
