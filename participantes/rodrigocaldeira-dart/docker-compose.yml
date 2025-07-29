@@ -1,0 +1,121 @@
+services:
+  nginx:
+    image: nginx:1.27-alpine
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    ports:
+      - "9999:80"
+    depends_on:
+      - api01
+      - api02
+    networks:
+      - rinha
+    deploy:
+      resources:
+        limits:
+          cpus: "0.1"
+          memory: "50MB"
+
+  api01: &api
+    hostname: api01
+    image: rodscaldeira/rinha_backend_2025_dart:202507282116
+    ports:
+      - "8080:8080"
+    networks:
+      - rinha
+      - payment-processor
+    environment:
+      - PORT=8080
+      - DEFAULT_PROCESSOR=http://payment-processor-default:8080
+      - FALLBACK_PROCESSOR=http://payment-processor-fallback:8080
+      - DB_HOST=db
+      - DB_BASE=rinha
+      - DB_USER=postgres
+      - DB_PASSWORD=postgres
+      - REDIS_HOST=queue
+      - REDIS_PORT=6379
+      - REDIS_POOL=15
+    depends_on:
+      db:
+        condition: service_healthy
+      queue:
+        condition: service_started
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: "100MB"
+  
+  api02:
+    <<: *api
+    hostname: api02
+    ports:
+      - "8081:8081"
+    environment:
+      - PORT=8081
+      - DEFAULT_PROCESSOR=http://payment-processor-default:8080
+      - FALLBACK_PROCESSOR=http://payment-processor-fallback:8080
+      - DB_HOST=db
+      - DB_BASE=rinha
+      - DB_USER=postgres
+      - DB_PASSWORD=postgres
+      - REDIS_HOST=queue
+      - REDIS_PORT=6379
+      - REDIS_POOL=15
+
+  db:
+    container_name: db
+    image: postgres:17-alpine
+    ports:
+      - "5432:5432"
+    command: >
+      postgres -p 5432
+        -c max_connections=450
+        -c shared_buffers=32MB
+        -c effective_cache_size=96MB
+        -c work_mem=3MB
+        -c maintenance_work_mem=12MB
+        -c synchronous_commit=off
+        -c fsync=off
+        -c autovacuum=off
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - rinha
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=rinha
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    deploy:
+        resources:
+          limits:
+            cpus: "0.2"
+            memory: "50MB"
+
+  queue:
+    image: redis:latest
+    container_name: queue
+    hostname: queue
+    command: redis-server --save "" --appendonly no --maxclients 20000
+    ports:
+      - "6379:6379"
+    networks:
+      - rinha
+    deploy:
+      resources:
+        limits:
+          cpus: "0.2"
+          memory: "50MB"
+
+networks:
+  rinha:
+    name: rinha
+    driver: bridge
+  payment-processor:
+    external: true
