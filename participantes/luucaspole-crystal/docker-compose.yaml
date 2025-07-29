@@ -1,5 +1,5 @@
 x-enviromments: &x-enviromments
-  - AMQP_URL: "amqp://guest:guest@lavinmq:5672/"
+  - AMQP_URL: "amqp://guest:guest@lavinmq:5672/?tcp_nodelay=true"
   - PREFETCH_COUNT: "0"
   - SHARD_COUNT: "1"
   - PROCESSOR_URL: "http://payment-processor-default:8080"
@@ -8,7 +8,7 @@ x-enviromments: &x-enviromments
 version: '3.4'
 services:
   app1: &app
-    image: docker.io/lukas8219/rinha-de-backend-2025-app:main-bb47f5b9f-1753670815
+    image: docker.io/lukas8219/rinha-de-backend-2025-app:main-5538a05e7-1753756591
     user: "1001:1001"
     hostname: app1
     restart: unless-stopped
@@ -34,7 +34,7 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '0.20'
+          cpus: '0.1'
           memory: '40MB'
   app2:
     <<: *app
@@ -62,12 +62,12 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '1'
+          cpus: '0.9'
           memory: '150MB'
         reservations:
-          cpus: '1'
+          cpus: '0.9'
           memory: '150MB'
-    image: docker.io/lukas8219/rinha-de-backend-2025-worker:main-bb47f5b9f-1753670815
+      image: docker.io/lukas8219/rinha-de-backend-2025-worker:main-5538a05e7-1753756591
     depends_on:
       lavinmq:
         condition: service_healthy
@@ -90,10 +90,10 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '0.1'
+          cpus: '0.3'
           memory: '35MB'
         reservations:
-          cpus: '0.1'
+          cpus: '0.3'
           memory: '35MB'
   nginx:
     image: nginx:latest
