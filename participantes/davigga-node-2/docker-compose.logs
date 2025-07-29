@@ -1,0 +1,46 @@
+
+ Network davigga-node-2_app-network  Creating
+ Network davigga-node-2_app-network  Created
+ Container redis  Creating
+ Container redis  Created
+ Container app2  Creating
+ Container app1  Creating
+ Container app2  Created
+ Container app1  Created
+ Container nginx-lb  Creating
+ Container nginx-lb  Created
+Attaching to app1, app2, nginx-lb, redis
+redis     | 1:C 29 Jul 2025 23:57:55.809 # WARNING Memory overcommit must be enabled! Without it, a background save or replication may fail under low memory condition. Being disabled, it can also cause failures without low memory condition, see https://github.com/jemalloc/jemalloc/issues/1328. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.
+redis     | 1:C 29 Jul 2025 23:57:55.809 * oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+redis     | 1:C 29 Jul 2025 23:57:55.809 * Redis version=7.2.10, bits=64, commit=00000000, modified=0, pid=1, just started
+redis     | 1:C 29 Jul 2025 23:57:55.809 # Warning: no config file specified, using the default config. In order to specify a config file use redis-server /path/to/redis.conf
+redis     | 1:M 29 Jul 2025 23:57:55.809 * monotonic clock: POSIX clock_gettime
+redis     | 1:M 29 Jul 2025 23:57:55.810 * Running mode=standalone, port=6379.
+redis     | 1:M 29 Jul 2025 23:57:55.810 * Server initialized
+redis     | 1:M 29 Jul 2025 23:57:55.810 * Ready to accept connections tcp
+app1      | Server open on port 9999
+app2      | Server open on port 9999
+nginx-lb  | /docker-entrypoint.sh: /docker-entrypoint.d/ is not empty, will attempt to perform configuration
+nginx-lb  | /docker-entrypoint.sh: Looking for shell scripts in /docker-entrypoint.d/
+nginx-lb  | /docker-entrypoint.sh: Launching /docker-entrypoint.d/10-listen-on-ipv6-by-default.sh
+nginx-lb  | 10-listen-on-ipv6-by-default.sh: info: Getting the checksum of /etc/nginx/conf.d/default.conf
+nginx-lb  | 10-listen-on-ipv6-by-default.sh: info: Enabled listen on IPv6 in /etc/nginx/conf.d/default.conf
+nginx-lb  | /docker-entrypoint.sh: Sourcing /docker-entrypoint.d/15-local-resolvers.envsh
+nginx-lb  | /docker-entrypoint.sh: Launching /docker-entrypoint.d/20-envsubst-on-templates.sh
+nginx-lb  | /docker-entrypoint.sh: Launching /docker-entrypoint.d/30-tune-worker-processes.sh
+nginx-lb  | /docker-entrypoint.sh: Configuration complete; ready for start up
+redis     | 1:M 29 Jul 2025 23:58:56.005 * 10000 changes in 60 seconds. Saving...
+redis     | 1:M 29 Jul 2025 23:58:56.005 * Background saving started by pid 19
+redis     | 19:C 29 Jul 2025 23:58:59.002 * DB saved on disk
+redis     | 19:C 29 Jul 2025 23:58:59.002 * Fork CoW for RDB: current 4 MB, peak 4 MB, average 3 MB
+redis     | 1:M 29 Jul 2025 23:58:59.102 * Background saving terminated with success
+[Knginx-lb exited with code 0
+[Kapp2 exited with code 137
+[Kapp1 exited with code 137
+redis     | 1:signal-handler (1753833557) Received SIGTERM scheduling shutdown...
+redis     | 1:M 29 Jul 2025 23:59:17.527 * User requested shutdown...
+redis     | 1:M 29 Jul 2025 23:59:17.527 * Saving the final RDB snapshot before exiting.
+redis     | 1:M 29 Jul 2025 23:59:18.922 * DB saved on disk
+redis     | 1:M 29 Jul 2025 23:59:18.922 # Redis is now ready to exit, bye bye...
+[Kredis exited with code 0
+log truncated at line 1000
