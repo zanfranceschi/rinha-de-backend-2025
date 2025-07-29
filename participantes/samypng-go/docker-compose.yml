@@ -1,6 +1,6 @@
 x-service-templates:
   rinha-backend: &rinha-backend
-    image: samsam1997/rinha-backend-2025:lastest
+    image: samsam1997/rinha-backend-2025:latest
     pull_policy: always
     environment:
       - REDIS_ADDR=redis:6379
@@ -18,16 +18,16 @@ x-service-templates:
 
 services:
   redis:
-    image: redis:7-alpine
+    image: redis:8-alpine
     container_name: rinha-redis
-    command: redis-server --save "" --appendonly no --maxclients 20000 
+    command: redis-server --save "" --appendonly no
     networks:
       - rinha-network
     deploy:
       resources:
         limits:
           cpus: "0.30"
-          memory: "200MB"
+          memory: "100MB"
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]
       interval: 10s
@@ -45,7 +45,7 @@ services:
       resources:
         limits:
           cpus: "0.5"
-          memory: "50MB"
+          memory: "100MB"
 
   backend2:
     <<: *rinha-backend
@@ -58,7 +58,7 @@ services:
       resources:
         limits:
           cpus: "0.5"
-          memory: "50MB"
+          memory: "100MB"
 
   nginx:
     image: nginx:alpine
