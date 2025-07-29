@@ -91,13 +91,13 @@ services:
       - REDIS_HOST=redis
       - REDIS_PORT=6379
       - QUEUE_NAME=payment_queue
-      - WORKER_CONCURRENCY=8
+      - WORKER_CONCURRENCY=3
       - DATABASE_MAX_CONNECTIONS=25
       - HTTP_CLIENT_TIMEOUT_SECS=60
       - QUEUE_RECEIVE_TIMEOUT_SECS=60
       - POLL_SLEEP_MILLIS=10
       - ERROR_SLEEP_MILLIS=10
-      - PROCESS_SLEEP_MILLIS=2
+      - PROCESS_SLEEP_MILLIS=1
       # Health Checker Config (usado pelo payment-worker)
       - HEALTH_CHECK_CYCLE_INTERVAL_SECS=1
       - HTTP_TIMEOUT_SECS=10
@@ -108,6 +108,7 @@ services:
       - PERFORMANCE_THRESHOLD_MULTIPLIER=1.5
       - DEFAULT_PROCESSOR_URL=http://payment-processor-default:8080
       - FALLBACK_PROCESSOR_URL=http://payment-processor-fallback:8080
+      - RUST_LOG=off
     depends_on:
       postgres:
         condition: service_healthy
@@ -139,7 +140,7 @@ services:
       - RATE_LIMIT_TTL_SECS=5
       - FAILED_RESPONSE_TIME_VALUE=9999
       - PERFORMANCE_THRESHOLD_MULTIPLIER=1.5
-      - RUST_LOG=info
+      - RUST_LOG=off
     depends_on:
       redis:
         condition: service_healthy
