@@ -1,0 +1,94 @@
+x-service-templates:
+  api: &api
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: marcosmarcolin/rinhadebackend2025:latest
+    entrypoint: [ "php", "/opt/www/nano/public/index.php", 'start' ]
+    depends_on:
+      redis:
+        condition: service_healthy
+    networks:
+      - backend
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          cpus: "0.35"
+          memory: "80M"
+
+  worker-template: &worker
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: marcolindev/rinha-backend-2025-worker
+    depends_on:
+      redis:
+        condition: service_healthy
+    networks:
+      - backend
+      - payment-processor
+
+services:
+  worker-payments:
+    <<: *worker
+    entrypoint: [ "php", "/opt/www/nano/workers/payments.php", 'start' ]
+    deploy:
+      resources:
+        limits:
+          cpus: "0.2"
+          memory: "50M"
+
+  worker-health:
+    <<: *worker
+    entrypoint: [ "php", "/opt/www/nano/workers/health.php", 'start' ]
+    deploy:
+      resources:
+        limits:
+          cpus: "0.15"
+          memory: "40M"
+
+  nginx:
+    image: nginx:latest
+    ports:
+      - "9999:9999"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - api01
+      - api02
+    networks:
+      - backend
+    deploy:
+      resources:
+        limits:
+          cpus: "0.3"
+          memory: "70M"
+
+  redis:
+    image: redis:latest
+    networks:
+      - backend
+    command: [ "redis-server", "--save", "", "--appendonly", "no" ]
+    healthcheck:
+      test: [ "CMD", "redis-cli", "ping" ]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+    deploy:
+      resources:
+        limits:
+          cpus: "0.15"
+          memory: "30M"
+
+  api01:
+    <<: *api
+
+  api02:
+    <<: *api
+
+networks:
+  backend:
+    driver: bridge
+  payment-processor:
+    external: true
