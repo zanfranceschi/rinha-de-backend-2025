@@ -1,8 +1,8 @@
 services:
   backend:
-    image: felipeschirmann/rinha-backend-2025:11.0.0
-    #image: localhost/rinha-backend:latest
-    container_name: felipeschirmann-rinha-v11
+    image: felipeschirmann/rinha-backend-2025:12.0.0
+#    image: rinha-backend:latest
+    container_name: felipeschirmann-rinha-v12
     environment:
       # --- Performance Tuning: Reduced queue sizes to match limited CPU resources ---
       # This prevents the application from accepting too many requests too quickly,
@@ -21,6 +21,9 @@ services:
       APP_HEALTHCHECK_INITIAL_DELAY: "1s"
       APP_CLIENT_RESPONSE_TIMEOUT: "10s" # Slightly increased for more tolerance under load
       APP_CLIENT_CONNECT_TIMEOUT: "5s"
+      APP_WORKER_LOG_HTTP_FAILURES: "false"
+      APP_WORKER_LOG_NETWORK_FAILURES: "false"
+      APP_WORKER_LOG_SUCCESSFUL_PAYMENTS: "false"
     ports:
       - "9999:8080"
     networks:
