@@ -9,6 +9,6 @@ Obrigado por participar da Rinha de Backend!
 - [ ] Não estou incluindo arquivos desnecessários para a execução do teste no meu pull request tais como código fonte, scripts, e excesso de imagens.
 - [ ] Não estou alterando arquivos fora do ou dos meus diretórios de participação.
 - [ ] Testei pelo menos o funcionamento básico do `docker-compose.yml`, todos os serviços estão subindo e minha API respondendo na porta 9999.
-- [ ] Todas imagens contidas no `docker-compose.yml` funcionam na arquitetura linux/amd64.
+- [ ] Todas as imagens contidas no `docker-compose.yml` funcionam na arquitetura linux/amd64.
 
 *Obs.: Se for uma alteração da sua submissão, você pode remover os arquivos `docker-compose.logs`, `k6.logs` e `partial-results.json` para que seu backend seja testado novamente.*

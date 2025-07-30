@@ -29,7 +29,7 @@ Para facilitar sua vida e a verificação da disponibilidade dos Payment Process
 
 ## Pontuação
 
-O critério de pontução da Rinha de Backend será quanto de lucro seu backend conseguiu ter ao final do teste. Ou seja, quanto mais pagamentos você fizer com a menor taxa financeira, melhor. Lembre-se de que se houver inconsistências detectadas pelo Banco Central, você terá que pagar uma multa de 35% sobre o total de lucro.
+O critério de pontuação da Rinha de Backend será quanto de lucro seu backend conseguiu ter ao final do teste. Ou seja, quanto mais pagamentos você fizer com a menor taxa financeira, melhor. Lembre-se de que se houver inconsistências detectadas pelo Banco Central, você terá que pagar uma multa de 35% sobre o total de lucro.
 
 Existe um critério técnico para pontuação também. Se seu backend e os Payment Processors tiverem tempos de respostas muito rápidos, você poderá pontuar também. A métrica usada para performance será o p99 (pegaremos o 1% piores tempos de resposta - percentil 99). A partir de um p99 de 10ms para menos, você recebe um bônus sobre seu total lucro de 2% para cada 1ms abaixo de 11ms.
 
@@ -40,7 +40,6 @@ Exemplos:
 - p99 de 9ms = 4% de bônus
 - p99 de 5ms = 12% de bônus
 - p99 de 1ms = 20% de bônus
-
 
 *¹ O percentil será calculado em cima de todas as requisições HTTP feitas no teste e não apenas em cima das requisições feitas para o seu backend.*
 
@@ -69,15 +68,14 @@ services:
 
 Exemplos de `docker-compose.yml` [aqui](participantes/luizcordista-go/docker-compose.yml), [aqui](participantes/d4vz/docker-compose.yaml) e [aqui](participantes/willzada-aGOrinha/docker-compose.yml).
 
-
 **Porta 9999**: Seus endpoints deverão estar expostos na porta `9999` acessíveis via `http://localhost:9999` – exemplo [aqui](https://github.com/zanfranceschi/rinha-de-backend-2025/blob/c1fef63d23ee7cab54ebd1fd03cb20565536947c/participantes/luizcordista-go/docker-compose.yml#L11).
 
 ##### Outras restrições
+
 - As imagens devem ser compatíveis com linux-amd64.
 - O modo de rede deve ser **bridge** – o modo **host** não é permitido.
 - Não é permitido modo **privileged**.
 - Não é permitido uso de serviços [replicados](https://docs.docker.com/reference/compose-file/deploy/#replicas) – isso dificulta a verificação dos recursos usados.
-
 
 #### Submissão
 
@@ -116,13 +114,11 @@ Para ter seu backend testado oficialmente pela Rinha de Backend, ver os resultad
     |  |  ├─ README.md
     ```
 
-
 **Importante!**
 - Não incluir código fonte na submissão.
 - Não incluir logs na submissão.
 - Inclua APENAS o que for necessário para a execução dos testes.
 - Se atente às restrições de CPU e memória.
-
 
 ## E Como me Integro com os Payment Processors???
 
@@ -147,7 +143,6 @@ Esses dois endereços também estão acessíveis via host para que você consiga
 Sigas [estas instruções](rinha-test/README.md) para testar seu backend localmente.
 
 O [leonardosegfault](https://github.com/leonardosegfault) gentilmente elaborou um [mini-guia de setup](rinha-test/MINIGUIA.md) para ajudar na configuração local para rodar os testes.
-
 
 ## Detalhes dos Endpoints
 
@@ -247,7 +242,6 @@ HTTP 200 - Ok
 **resposta**
 - `failing` é um campo sempre presente do tipo booleano que indica se o endpoint **Payments** está disponível. Se não estiver, significa que requisições para o endpoint receberão erros `HTTP5XX`.
 - `minResponseTime` é um campo sempre presente do tipo inteiro indicando o melhor tempo de resposta possível para o endpoint **Payments**. Por exemplo, se o valor retornado for `100`, não haverá respostas mais rápidas do que 100ms.
-
 
 #### Payment Details
 Você não precisa se integrar com este endpoint. Ele serve para troubleshooting, caso queira/precise.
@@ -362,7 +356,6 @@ HTTP 200 - Ok
 **resposta**
 - `message` é um campo sempre presente do tipo texto.
 
-
 #### Resumo dos Endpoints
 
 As tabelas abaixo oferem um resumo para facilitar a visão geral da solução.
@@ -386,7 +379,6 @@ As tabelas abaixo oferem um resumo para facilitar a visão geral da solução.
 | PUT /admin/configurations/delay   | Configura o atraso no endpoint de pagamentos. |
 | PUT /admin/configurations/failure | Configura falha no endpoint de pagamentos. |
 | POST /admin/purge-payments        | Elimina todos os pagamentos da base de dados. Para desenvolvimento apenas. |
-
 
 ## Outras Informações
 
