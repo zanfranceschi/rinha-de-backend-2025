@@ -1,0 +1,100 @@
+services:
+  payment-api-1:
+    image: arthurseus/payment-api:1.0.0
+    ulimits:
+      nofile:
+        soft: 65535
+        hard: 65535
+    container_name: payment-api-1
+    depends_on:
+      - nats
+    environment:
+      NATS_URL: nats://nats:4222
+      GOGC: 200
+    deploy:
+      resources:
+        limits:
+          cpus: "0.21"
+          memory: "35MB"
+    networks:
+      - backend
+      - payment-processor
+
+  payment-api-2:
+    image: arthurseus/payment-api:1.0.0
+    ulimits:
+      nofile:
+        soft: 65535
+        hard: 65535
+    container_name: payment-api-2
+    depends_on:
+      - nats
+    environment:
+      NATS_URL: nats://nats:4222
+      GOGC: 200
+    deploy:
+      resources:
+        limits:
+          cpus: "0.22"
+          memory: "35MB"
+    networks:
+      - backend
+      - payment-processor
+
+  payment-worker:
+    image: arthurseus/payment-worker:1.0.0
+    container_name: payment-worker
+    depends_on:
+      - nats
+    environment:
+      NATS_URL: nats://nats:4222
+      NUM_WORKERS: 10
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: "50MB"
+    networks:
+      - backend
+      - payment-processor
+  
+  haproxy:
+    image: haproxy:2.9-alpine
+    container_name: haproxy
+    volumes:
+      - ./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
+    ports:
+      - "9999:8080"
+    deploy:
+      resources:
+        limits:
+          cpus: "0.32"
+          memory: "50MB"
+    depends_on:
+      - payment-api-1
+      - payment-api-2
+      - payment-worker
+    networks:
+      - backend
+      - payment-processor
+
+  nats:
+    image: nats:2.10-alpine
+    container_name: nats
+    ports:
+      - "4222:4222"
+    command: ["-js", "-m", "8222"]
+    deploy:
+      resources:
+        limits:
+          cpus: "0.25"
+          memory: "100MB"
+    networks:
+      - backend
+
+networks:
+  backend:
+    driver: bridge
+
+  payment-processor:
+    external: true
