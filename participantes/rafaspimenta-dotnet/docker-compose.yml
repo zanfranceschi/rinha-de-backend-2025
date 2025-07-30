@@ -1,6 +1,6 @@
 services:
   api01: &api
-    image: rafaspimenta/rinha-backend-csharp:prod
+    image: rafaspimenta/rinha-backend-csharp:prod_v2
     platform: linux/amd64
     hostname: api01
     depends_on:
@@ -12,17 +12,12 @@ services:
       resources:
         limits:
           cpus: '0.6'
-          memory: '60MB'
+          memory: '75MB'
     environment:
       - DOTNET_ENVIRONMENT=Production
     networks:
       - payment-processor
       - app-network
-    ulimits:
-      nproc: 1000000
-      nofile:
-        soft: 1000000
-        hard: 1000000
 
   api02:
     <<: *api
@@ -36,12 +31,12 @@ services:
       - api01
       - api02
     ports:
-      - "9999:9999"
+      - "9999:8080"
     deploy:
       resources:
         limits:
           cpus: '0.1'
-          memory: '50MB'
+          memory: '40MB'
     networks:
       - app-network
 
@@ -60,14 +55,14 @@ services:
       resources:
         limits:
           cpus: '0.2'
-          memory: '180MB'
+          memory: '160MB'
     command: >
       postgres
       -c fsync=off
-      -c work_mem=64MB
       -c synchronous_commit=off
       -c wal_level=minimal
       -c max_wal_senders=0
+      -c autovacuum=off
     networks:
       - app-network
     healthcheck:

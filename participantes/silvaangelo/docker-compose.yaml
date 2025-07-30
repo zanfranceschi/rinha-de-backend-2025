@@ -8,8 +8,6 @@ services:
       --appendonly no
       --maxclients 20000
       --hz 1000
-    tmpfs:
-      - /data
     networks:
       - rinha-net
       - payment-processor
@@ -22,12 +20,12 @@ services:
       resources:
         limits:
           cpus: "0.3"
-          memory: "50MB"
+          memory: "70MB"
 
   api01: &api
-    image: silvaangelolambda/rinha-api-2025:20250723-4
+    image: silvaangelolambda/rinha-api-2025:20250727
     command: >
-      bun --optimize-for-size --heap-limit=200 --gc-interval=1000 --gc-treshhold=0.7 /api/index.js
+      bun --optimize-for-size /api/index.js
     environment:
       - REDIS_URL=redis://redis:6379
       - PROCESSOR_DEFAULT_URL=http://payment-processor-default:8080
@@ -41,8 +39,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.5"
-          memory: "135MB"
+          cpus: "0.525"
+          memory: "125MB"
 
   api02:
     <<: *api

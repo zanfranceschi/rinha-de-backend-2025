@@ -1,0 +1,83 @@
+x-service-templates:
+  go-backend: &go-backend
+    image: davidalecrim1/rinha-with-go-2025:v0.9-redis-only-default
+    networks:
+      - app
+      - payment-processor
+    depends_on:
+      - redis
+
+services:
+  go-backend-1:
+    <<: *go-backend
+    container_name: go-backend-1
+    environment:
+      - PAYMENT_PROCESSOR_URL_DEFAULT=http://payment-processor-default:8080
+      - PAYMENT_PROCESSOR_URL_FALLBACK=http://payment-processor-fallback:8080
+      - PORT=80
+      - REDIS_ADDR=redis-db:6379
+      - MONITOR_HEALTH=true
+      - ENABLE_PROFILING=false
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: "100MB"
+
+  go-backend-2:
+    <<: *go-backend
+    container_name: go-backend-2
+    environment:
+      - PAYMENT_PROCESSOR_URL_DEFAULT=http://payment-processor-default:8080
+      - PAYMENT_PROCESSOR_URL_FALLBACK=http://payment-processor-fallback:8080
+      - PORT=80
+      - REDIS_ADDR=redis-db:6379
+      - MONITOR_HEALTH=false
+      - ENABLE_PROFILING=false
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: "100MB"
+
+  redis:
+    image: redis:8.0-alpine
+    container_name: redis-db
+    command: redis-server --save "" --appendonly no --maxclients 20000
+    networks:
+      - app
+      - payment-processor
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    deploy:
+      resources:
+        limits:
+          cpus: "0.3"
+          memory: "100MB"
+
+  load-balancer:
+    container_name: load-balancer-nginx
+    image: nginx:1.29-alpine
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - go-backend-1
+      - go-backend-2
+    ports:
+      - "9999:9999"
+    networks:
+      - app
+    deploy:
+      resources:
+        limits:
+          cpus: "0.2"
+          memory: "50MB"
+
+networks:
+  app:
+    driver: bridge
+  payment-processor:
+    external: true

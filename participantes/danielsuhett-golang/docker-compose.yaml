@@ -1,0 +1,96 @@
+services:
+  nginx:
+    image: nginx:1.25-alpine
+    container_name: go-rinha-nginx
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - api1
+      - api2
+    ports:
+      - "9999:9999"
+    networks:
+      - payment-processor
+      - backend
+    deploy:
+      resources:
+        limits:
+          cpus: "0.10"
+          memory: "35MB"
+
+  api1:
+    image: danielsuhett1999/rinha-backend-go:1.0.0
+    hostname: api1
+    environment:
+      - APP_PORT=8080
+      - APP_NAME=1
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - PROCESSOR_DEFAULT_URL=http://payment-processor-default:8080
+      - PROCESSOR_FALLBACK_URL=http://payment-processor-fallback:8080
+      - POOLING_INTERVAL=200
+      - HEALTH_TIMEOUT=1000
+      - HEALTH_INTERVAL=3000
+      - LATENCY_DIFF_TO_USE_FALLBACK=5000
+    networks:
+      - backend
+      - payment-processor
+    depends_on:
+      redis:
+        condition: service_healthy
+    deploy:
+      resources:
+        limits:
+          cpus: "0.65"
+          memory: "130MB"
+
+  api2:
+    image: danielsuhett1999/rinha-backend-go:1.0.0
+    hostname: api2
+    environment:
+      - APP_PORT=8081
+      - APP_NAME=2
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - PROCESSOR_DEFAULT_URL=http://payment-processor-default:8080
+      - PROCESSOR_FALLBACK_URL=http://payment-processor-fallback:8080
+      - POOLING_INTERVAL=200
+      - HEALTH_TIMEOUT=1000
+      - HEALTH_INTERVAL=3000
+      - LATENCY_DIFF_TO_USE_FALLBACK=5000
+    networks:
+      - backend
+      - payment-processor
+    depends_on:
+      redis:
+        condition: service_healthy
+    deploy:
+      resources:
+        limits:
+          cpus: "0.65"
+          memory: "130MB"
+
+  redis:
+    image: redis:7.2-alpine
+    container_name: go-rinha-redis
+    command: redis-server --save "" --appendonly no --maxmemory 40mb --maxmemory-policy allkeys-lru --tcp-keepalive 30 --timeout 0 --tcp-backlog 1024 --databases 1 --maxclients 5000 --rdbcompression no --rdbchecksum no
+    networks:
+      - backend
+    ports:
+      - 6380:6379
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    deploy:
+      resources:
+        limits:
+          cpus: "0.10"
+          memory: "50MB"
+
+networks:
+  backend:
+    driver: bridge
+  payment-processor:
+    external: true

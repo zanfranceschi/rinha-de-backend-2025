@@ -20,17 +20,24 @@ services:
           cpus: "0.2"
           memory: "50MB"
 
+  # 0.3 x 3 = 0.9 CPUs
+  # 50MB x 3 = 150MB memória
   payment-api-1: &api
-    image: libardi/rinha-2025-2:latest
+    image: libardi/rinha-2025-2:1
     container_name: payment-api-1
     hostname: payment-api-1
     environment:
       Logging__LogLevel__Default: Error
       Logging__LogLevel__Microsoft.AspNetCore: Error
       ASPNETCORE_ENVIRONMENT: Production
-      ConnectionStrings__Postgres: "server=payment-db; database=PaymentsDB; user id=user; password=password; pooling=true; maximum pool size=256; multiplexing=true; no reset on close=true; max auto prepare=50; auto prepare min usages=1;"
+      ConnectionStrings__Postgres: "server=payment-db; database=PaymentsDB; user id=user; password=password; pooling=true; maximum pool size=20; multiplexing=true; no reset on close=true; max auto prepare=20; auto prepare min usages=1;"
       PaymentProcessors__Default__BaseUrl: "http://payment-processor-default:8080"
       PaymentProcessors__Fallback__BaseUrl: "http://payment-processor-fallback:8080"
+      JobsConfig__ProcessingBatchSize: 100
+      JobsConfig__ProcessingParalellism: 10
+      JobsConfig__ProcessingWaitMs: 40
+      JobsConfig__PersistenceBatchSize: 200
+      JobsConfig__PersistenceWaitMs: 20
     depends_on:
       payment-db:
         condition: service_healthy
@@ -46,27 +53,34 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.5"
-          memory: "100MB"
+          cpus: "0.3"
+          memory: "50MB"
 
   payment-api-2:
     <<: *api
     container_name: payment-api-2
     hostname: payment-api-2
 
+  payment-api-3:
+    <<: *api
+    container_name: payment-api-3
+    hostname: payment-api-3
+
   payment-db:
     image: postgres:15-alpine
     container_name: payment-db
     hostname: payment-db
     command: >-
-      postgres -c max_connections=400
-               -c shared_buffers=512MB
+      postgres -c max_connections=40
+               -c shared_buffers=32MB 
+               -c work_mem=4MB
+               -c maintenance_work_mem=64MB
                -c synchronous_commit=off
                -c fsync=off
                -c full_page_writes=off
                -c wal_level=minimal
                -c max_wal_senders=0
-               -c max_wal_size=4GB
+               -c max_wal_size=1GB
                -c checkpoint_timeout=30min
                -c log_min_duration_statement=-1
     environment:
@@ -88,8 +102,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.3"
-          memory: "100MB"
+          cpus: "0.4"
+          memory: "150MB"
 
 networks:
   backend:

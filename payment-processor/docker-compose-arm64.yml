@@ -1,26 +1,35 @@
 x-service-templates:
   payment-processor: &payment-processor
-    image: zanfranceschi/payment-processor:arm64-20250707101540
+    image: zanfranceschi/payment-processor:arm64-20250728111932
     networks:
       - payment-processor
       - payment-processor-db
     deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 2s
+        max_attempts: 10
+        window: 5s
       resources:
         limits:
           cpus: "1.5"
           memory: "100MB"
-  
+
   payment-processor-db: &payment-processor-db
     image: postgres:17-alpine
+    command: postgres -c checkpoint_timeout=600 -c max_wal_size=4096 -c synchronous_commit=0 -c fsync=0 -c full_page_writes=0
     networks:
       - payment-processor-db
-    volumes:
-      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
     environment:
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_USER=postgres
       - POSTGRES_DB=rinha
     deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 2s
+        max_attempts: 10
+        window: 5s
       resources:
         limits:
           cpus: "1.5"
@@ -35,18 +44,21 @@ services:
       - TRANSACTION_FEE=0.05
       - RATE_LIMIT_SECONDS=5
       - INITIAL_TOKEN=123
-      - DB_CONNECTION_STRING=Host=payment-processor-default-db;Port=5432;Database=rinha;Username=postgres;Password=postgres;Minimum Pool Size=15;Maximum Pool Size=20;Connection Pruning Interval=3
+      - DB_CONNECTION_STRING=Host=/var/run/postgresql;Port=5432;Database=rinha;Username=postgres;Password=postgres;Minimum Pool Size=15;Maximum Pool Size=20;Connection Pruning Interval=3
     ports:
       - 8001:8080
+    volumes:
+      - postgres-socket-01:/var/run/postgresql
     depends_on:
       - payment-processor-db-1
-    
+
   payment-processor-db-1:
     <<: *payment-processor-db
     container_name: payment-processor-default-db
     hostname: payment-processor-default-db
-    ports:
-      - 54321:5432
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+      - postgres-socket-01:/var/run/postgresql
 
   payment-processor-2:
     <<: *payment-processor
@@ -56,18 +68,21 @@ services:
       - TRANSACTION_FEE=0.15
       - RATE_LIMIT_SECONDS=5
       - INITIAL_TOKEN=123
-      - DB_CONNECTION_STRING=Host=payment-processor-fallback-db;Port=5432;Database=rinha;Username=postgres;Password=postgres;Minimum Pool Size=15;Maximum Pool Size=20;Connection Pruning Interval=3
+      - DB_CONNECTION_STRING=Host=/var/run/postgresql;Port=5432;Database=rinha;Username=postgres;Password=postgres;Minimum Pool Size=15;Maximum Pool Size=20;Connection Pruning Interval=3
     ports:
       - 8002:8080
+    volumes:
+      - postgres-socket-02:/var/run/postgresql
     depends_on:
       - payment-processor-db-2
-  
+
   payment-processor-db-2:
     <<: *payment-processor-db
     container_name: payment-processor-fallback-db
     hostname: payment-processor-fallback-db
-    ports:
-      - 54322:5432
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+      - postgres-socket-02:/var/run/postgresql
 
 networks:
   payment-processor:
@@ -75,3 +90,7 @@ networks:
     driver: bridge
   payment-processor-db:
     driver: bridge
+
+volumes:
+  postgres-socket-01:
+  postgres-socket-02:

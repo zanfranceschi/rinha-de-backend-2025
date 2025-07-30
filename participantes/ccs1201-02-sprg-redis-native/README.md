@@ -7,7 +7,6 @@
 - **Redis**
 - **Nginx**
 - **Docker**
-- **Tunagem da JVM like Fast and Furious**
 
 ## Como rodar
 
@@ -18,16 +17,15 @@
    ```
 3. O backend ficará disponível na porta **9999**.
 
-## Abordagem KISS
+## Como foi implementado
 
 Receba o maior número de requisições possível e depois se vira maluco...
 
-Brincadeiras a parte foi utilizada uma estratégia realmente simples, recebo a requisição inicio o processamento
-numa nova Thread (Virtual), com um executor para coordenar e fazer o papel de fila interna, com isso liberando o servidor web
-para responder novas requisições, após confirmação do payment processor a transação é armazenada no redis. Um fallback com 
-re-enfileiramento e retry de 3x. Simples assim!
-A consistência eventual é garantida, mas isso não significa que você terá o saldo realtime rsrsrs. 
+Brincadeiras a parte foi utilizada uma estratégia de envio para uma fila no PaymentProcessorClient
+que conta com uma quantidade de workers configuráveis, após a resposta dos processadores o pagamento é adicionado
+a uma fila para persistência no Redis que igualmente conta com uma quantidade de workers configurável, tentando com isso
+manter todo o processo assíncrono e o mais eficiente possível.
 
 ## Repositório do código-fonte
 
-[GitHub /ccs1201](https://github.com/ccs1201/rinha-backend-2025)
+[GitHub /ccs1201](https://github.com/ccs1201/rinha-backend-2025-spring-redis)

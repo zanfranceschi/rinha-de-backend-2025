@@ -1,21 +1,22 @@
-# 🦀 Payment Processing System
+# 🦀 Sistema de Processamento de Pagamentos 💸
 
-Minha participação na [**Rinha de Backend 2025**](https://github.com/zanfranceschi/rinha-de-backend-2025)
+Essa é a minha participação na lendária [**Rinha de Backend 2025**](https://github.com/zanfranceschi/rinha-de-backend-2025)! 🥊
 
-## 🔨 Tecnologias Utilizadas
+## 🛠️ Tecnologias Utilizadas 👨‍💻
 
-- [Rust](https://www.rust-lang.org/)
-- [Actix Web](https://actix.rs/)
-- [Nginx](https://nginx.org/)
+* **Rust** 🦀 - Performance e segurança de outro nível!
+* **Actix Web** 🕸️ - Para APIs ridiculamente rápidas.
+* **HaProxy** 🚦 - O porteiro mais rápido da web.
 
-## 🚚 Repositório
-- [GitHub](https://github.com/alan-venv/rinha-de-backend-2025)
+## 🚀 Como Rodar
 
-## 🚀 Como rodar
-
+**Suba tudo com Docker!** 🐳
 ```bash
 git clone https://github.com/alan-venv/rinha-de-backend-2025
 cd rinha-de-backend-2025
-docker compose -f resources/payment-processor.yml up -d --build
 docker compose up -d --build
 ```
+
+## ✨ Repositório no GitHub
+
+Curtiu? Dê uma olhada no [código fonte](https://github.com/alan-venv/rinha-de-backend-2025) e deixe uma ⭐!

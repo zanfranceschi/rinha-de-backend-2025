@@ -1,111 +1,68 @@
 x-service-templates:
-  api: &api
-    image: lucasgoveia/rinha-2025-api
-    depends_on:
-      - postgres
-      - redis
+  server: &server
+    image: lucasgoveia/rinha-2025-api:ca8d8d87e0420f8
     restart: always
-    networks:
-      - app
-    deploy:
-      resources:
-        limits:
-          cpus: '0.2'
-          memory: '30M'
-
-  worker: &worker
-    image: lucasgoveia/rinha-2025-worker
     depends_on:
       - postgres
-      - redis
     networks:
-      - app
+      - backend
       - payment-processor
-    restart: always
     deploy:
       resources:
         limits:
-          cpus: '0.5'
+          cpus: '0.55'
           memory: '60M'
 
 services:
   nginx:
     image: nginx:alpine
     ports:
-      - "9999:9999"
+      - "9999:80"
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf:ro
     depends_on:
-      - api-1
-      - api-2
+      - server1
+      - server2
     networks:
-      - app
+      - backend
+      - payment-processor
     restart: always
+    ulimits:
+      nofile:
+        soft: 16384
+        hard: 16384
     deploy:
       resources:
         limits:
-          cpus: '0.2'
-          memory: '20M'
+          cpus: '0.25'
+          memory: '80M'
 
-  api-1:
-    <<: *api
-    container_name: rinhaapi-1
-    hostname: api1
+  server1:
+    <<: *server
+    container_name: server1
+    hostname: server1
     environment:
       - SERVER_HOST=0.0.0.0
       - SERVER_PORT=7118
-      - POSTGRES_URL=postgres://postgres:password@postgres:5432/rinha2025?pool_max_conns=5
-      - TELEMETRY_ENABLED=false
+      - POSTGRES_URL=postgres://postgres:password@postgres:5432/rinha2025?pool_max_conns=10&pool_min_conns=2&pool_max_conn_idle_time=30s&pool_max_conn_lifetime=5m&pool_health_check_period=30s
       - SERVICE_DEFAULT_URL=http://payment-processor-default:8080/payments
       - SERVICE_FALLBACK_URL=http://payment-processor-fallback:8080/payments
-      - REDIS_URL=redis://redis:6379
-      - REDIS_STREAM_NAME=payments
-      - REDIS_STREAM_GROUP=payments-group
+      - SERVICE_DEFAULT_HEALTH_URL=http://nginx:9000/default/payments/service-health
+      - SERVICE_FALLBACK_HEALTH_URL=http://nginx:9000/fallback/payments/service-health
 
-  api-2:
-    <<: *api
-    container_name: rinhaapi-2
-    hostname: api2
+
+  server2:
+    <<: *server
+    container_name: server2
+    hostname: server2
     environment:
       - SERVER_HOST=0.0.0.0
       - SERVER_PORT=7118
-      - POSTGRES_URL=postgres://postgres:password@postgres:5432/rinha2025?pool_max_conns=5
-      - TELEMETRY_ENABLED=false
+      - POSTGRES_URL=postgres://postgres:password@postgres:5432/rinha2025?pool_max_conns=10&pool_min_conns=2&pool_max_conn_idle_time=30s&pool_max_conn_lifetime=5m&pool_health_check_period=30s
       - SERVICE_DEFAULT_URL=http://payment-processor-default:8080/payments
       - SERVICE_FALLBACK_URL=http://payment-processor-fallback:8080/payments
-      - REDIS_URL=redis://redis:6379
-      - REDIS_STREAM_NAME=payments
-      - REDIS_STREAM_GROUP=payments-group
-
-  worker-1:
-    <<: *worker
-    container_name: worker-1
-    environment:
-      - SERVER_HOST=0.0.0.0
-      - SERVER_PORT=7118
-      - POSTGRES_URL=postgres://postgres:password@postgres:5432/rinha2025?pool_max_conns=3
-      - TELEMETRY_ENABLED=false
-      - SERVICE_DEFAULT_URL=http://payment-processor-default:8080/payments
-      - SERVICE_FALLBACK_URL=http://payment-processor-fallback:8080/payments
-      - REDIS_URL=redis://redis:6379
-      - REDIS_STREAM_NAME=payments
-      - REDIS_STREAM_GROUP=payments-group
-      - REDIS_CONSUMER_NAME=worker-1
-
-
-  redis:
-    image: redis:8-alpine
-    command: redis-server --save "" --appendonly no --maxclients 20000
-    ports:
-      - "63790:6379"
-    networks:
-      - app
-    deploy:
-      resources:
-        limits:
-          cpus: '0.2'
-          memory: '100M'
-    restart: unless-stopped
+      - SERVICE_DEFAULT_HEALTH_URL=http://nginx:9000/default/payments/service-health
+      - SERVICE_FALLBACK_HEALTH_URL=http://nginx:9000/fallback/payments/service-health
 
   postgres:
     image: postgres:17-alpine
@@ -113,26 +70,23 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=password
       - POSTGRES_DB=rinha2025
-    ports:
-      - "54320:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
     networks:
-      - app
+      - backend
     restart: always
     deploy:
       resources:
         limits:
-          cpus: '0.2'
-          memory: '100M'
-
+          cpus: '0.15'
+          memory: '128M'
 
 volumes:
   postgres_data:
 
 networks:
-  app:
+  backend:
     driver: bridge
   payment-processor:
     external: true

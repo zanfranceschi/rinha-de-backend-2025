@@ -1,99 +1,10 @@
 
- Network backend  Creating
- Network backend  Created
- Volume "jccl_pgdata"  Creating
- Volume "jccl_pgdata"  Created
- Container payment-db  Creating
- Container jccl-traefik  Creating
- Container jccl-traefik  Created
- Container payment-db  Created
- Container messaging  Creating
- Container messaging  Created
- Container processor-api-1  Creating
- Container processor-api-2  Creating
- Container processor-api-2  Created
- Container processor-api-1  Created
-Attaching to jccl-traefik, messaging, payment-db, processor-api-1, processor-api-2
-payment-db       | The files belonging to this database system will be owned by user "postgres".
-payment-db       | This user must also own the server process.
-payment-db       | 
-payment-db       | The database cluster will be initialized with locale "en_US.utf8".
-payment-db       | The default database encoding has accordingly been set to "UTF8".
-payment-db       | The default text search configuration will be set to "english".
-payment-db       | 
-payment-db       | Data page checksums are disabled.
-payment-db       | 
-payment-db       | fixing permissions on existing directory /var/lib/postgresql/data ... ok
-payment-db       | creating subdirectories ... ok
-payment-db       | selecting dynamic shared memory implementation ... posix
-payment-db       | selecting default "max_connections" ... 100
-payment-db       | selecting default "shared_buffers" ... 128MB
-payment-db       | selecting default time zone ... UTC
-payment-db       | creating configuration files ... ok
-payment-db       | running bootstrap script ... ok
-payment-db       | sh: locale: not found
-payment-db       | 2025-07-27 05:00:42.387 UTC [34] WARNING:  no usable system locales were found
-payment-db       | performing post-bootstrap initialization ... ok
-payment-db       | initdb: warning: enabling "trust" authentication for local connections
-payment-db       | initdb: hint: You can change this by editing pg_hba.conf or using the option -A, or --auth-local and --auth-host, the next time you run initdb.
-payment-db       | syncing data to disk ... ok
-payment-db       | 
-payment-db       | 
-payment-db       | Success. You can now start the database server using:
-payment-db       | 
-payment-db       |     pg_ctl -D /var/lib/postgresql/data -l logfile start
-payment-db       | 
-payment-db       | waiting for server to start....2025-07-27 05:00:44.384 UTC [40] LOG:  starting PostgreSQL 17.5 on x86_64-pc-linux-musl, compiled by gcc (Alpine 14.2.0) 14.2.0, 64-bit
-payment-db       | 2025-07-27 05:00:44.392 UTC [40] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
-payment-db       | 2025-07-27 05:00:44.414 UTC [43] LOG:  database system was shut down at 2025-07-27 05:00:44 UTC
-payment-db       | 2025-07-27 05:00:44.436 UTC [40] LOG:  database system is ready to accept connections
-payment-db       |  done
-payment-db       | server started
-payment-db       | 
-payment-db       | /usr/local/bin/docker-entrypoint.sh: ignoring /docker-entrypoint-initdb.d/*
-payment-db       | 
-payment-db       | waiting for server to shut down....2025-07-27 05:00:44.511 UTC [40] LOG:  received fast shutdown request
-payment-db       | 2025-07-27 05:00:44.527 UTC [40] LOG:  aborting any active transactions
-payment-db       | 2025-07-27 05:00:44.582 UTC [40] LOG:  background worker "logical replication launcher" (PID 46) exited with exit code 1
-payment-db       | 2025-07-27 05:00:44.582 UTC [41] LOG:  shutting down
-payment-db       | 2025-07-27 05:00:44.587 UTC [41] LOG:  checkpoint starting: shutdown immediate
-payment-db       | 2025-07-27 05:00:44.634 UTC [41] LOG:  checkpoint complete: wrote 3 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.017 s, sync=0.007 s, total=0.053 s; sync files=2, longest=0.004 s, average=0.004 s; distance=0 kB, estimate=0 kB; lsn=0/14ED278, redo lsn=0/14ED278
-payment-db       | 2025-07-27 05:00:44.640 UTC [40] LOG:  database system is shut down
-payment-db       |  done
-payment-db       | server stopped
-payment-db       | 
-payment-db       | PostgreSQL init process complete; ready for start up.
-payment-db       | 
-payment-db       | 2025-07-27 05:00:44.745 UTC [1] LOG:  starting PostgreSQL 17.5 on x86_64-pc-linux-musl, compiled by gcc (Alpine 14.2.0) 14.2.0, 64-bit
-payment-db       | 2025-07-27 05:00:44.745 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
-payment-db       | 2025-07-27 05:00:44.746 UTC [1] LOG:  listening on IPv6 address "::", port 5432
-payment-db       | 2025-07-27 05:00:44.757 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
-payment-db       | 2025-07-27 05:00:44.771 UTC [54] LOG:  database system was shut down at 2025-07-27 05:00:44 UTC
-payment-db       | 2025-07-27 05:00:44.781 UTC [1] LOG:  database system is ready to accept connections
-messaging        | started
-messaging        | Messaging on :4555
-messaging        | starting http server addr :5000
-processor-api-1  | starting server addr :4000
-processor-api-2  | starting server addr :4000
-payment-db       | 2025-07-27 05:00:48.812 UTC [65] ERROR:  invalid input syntax for type timestamp: ""
-payment-db       | 2025-07-27 05:00:48.812 UTC [65] CONTEXT:  unnamed portal parameter $1 = ''
-payment-db       | 2025-07-27 05:00:48.812 UTC [65] STATEMENT:  SELECT amount, origin FROM payments WHERE requested_at BETWEEN $1 AND $2 
-messaging        | 2025/07/27 05:00:48 Erro ao executar a query: pq: invalid input syntax for type timestamp: ""
-[Kprocessor-api-2 exited with code 2
-jccl-traefik     | [90m2025-07-27T05:01:56Z[0m [1m[31mERR[0m[0m [36merror=[0m[31m"accept tcp [::]:9999: use of closed network connection"[0m [36mentryPointName=[0mprocessor-api
-jccl-traefik     | [90m2025-07-27T05:01:56Z[0m [1m[31mERR[0m[0m [36merror=[0m[31m"accept tcp [::]:8080: use of closed network connection"[0m [36mentryPointName=[0mtraefik
-jccl-traefik     | [90m2025-07-27T05:01:56Z[0m [1m[31mERR[0m[0m Error while starting server [36merror=[0m[31m"accept tcp [::]:8080: use of closed network connection"[0m [36mentryPointName=[0mtraefik
-jccl-traefik     | [90m2025-07-27T05:01:56Z[0m [1m[31mERR[0m[0m Error while starting server [36merror=[0m[31m"accept tcp [::]:9999: use of closed network connection"[0m [36mentryPointName=[0mprocessor-api
-jccl-traefik     | [90m2025-07-27T05:01:56Z[0m [1m[31mERR[0m[0m [36merror=[0m[31m"accept tcp [::]:80: use of closed network connection"[0m [36mentryPointName=[0mweb
-jccl-traefik     | [90m2025-07-27T05:01:56Z[0m [1m[31mERR[0m[0m Error while starting server [36merror=[0m[31m"accept tcp [::]:80: use of closed network connection"[0m [36mentryPointName=[0mweb
-[Kmessaging exited with code 2
-payment-db       | 2025-07-27 05:01:57.251 UTC [1] LOG:  received fast shutdown request
-payment-db       | 2025-07-27 05:01:57.259 UTC [1] LOG:  aborting any active transactions
-payment-db       | 2025-07-27 05:01:57.262 UTC [1] LOG:  background worker "logical replication launcher" (PID 57) exited with exit code 1
-payment-db       | 2025-07-27 05:01:57.265 UTC [52] LOG:  shutting down
-payment-db       | 2025-07-27 05:01:57.270 UTC [52] LOG:  checkpoint starting: shutdown immediate
-payment-db       | 2025-07-27 05:01:57.344 UTC [52] LOG:  checkpoint complete: wrote 173 buffers (1.1%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.012 s, sync=0.027 s, total=0.080 s; sync files=52, longest=0.019 s, average=0.001 s; distance=1590 kB, estimate=1590 kB; lsn=0/167AB68, redo lsn=0/167AB68
-payment-db       | 2025-07-27 05:01:57.349 UTC [1] LOG:  database system is shut down
-[Kpayment-db exited with code 0
-[Kjccl-traefik exited with code 0
-log truncated at line 1000
+ messaging Pulling 
+ processor-api-1 Pulling 
+ processor-api-2 Pulling 
+ load-balancer Pulling 
+ load-balancer Error toomanyrequests: You have reached your unauthenticated pull rate limit. https://www.docker.com/increase-rate-limit
+ processor-api-2  Interrupted
+ processor-api-1  Interrupted
+ messaging  Interrupted
+Error response from daemon: toomanyrequests: You have reached your unauthenticated pull rate limit. https://www.docker.com/increase-rate-limit

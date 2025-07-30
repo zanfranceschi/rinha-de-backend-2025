@@ -1,0 +1,77 @@
+﻿services:
+  rinhabackend: &rinhabackend
+    networks:
+      - backend
+      - payment-processor
+    environment:
+      - PAYMENT_PROCESSOR_URL_DEFAULT=http://payment-processor-default:8080
+      - PAYMENT_PROCESSOR_URL_FALLBACK=http://payment-processor-fallback:8080
+      - DB_CONNECTION_STRING=Server=postgres;Port=5432;Database=payment;User Id=postgres;Password=Postgres2022!;
+    image: lbattochio/rinhabackend
+    hostname: rinhabackend
+    depends_on:
+      postgres:
+        condition: service_healthy
+    deploy:
+      resources:
+        limits:
+          cpus: "0.4"
+          memory: "120MB"
+  
+  rinhabackend-2:
+    <<: *rinhabackend
+    hostname: rinhabackend-2
+
+  postgres:
+    image: postgres:16-alpine
+    networks:
+      - backend
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d payment"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_DB: payment
+      POSTGRES_PASSWORD: "Postgres2022!"
+    command: postgres -c max_connections=450 -c shared_buffers=32MB -c effective_cache_size=96MB -c work_mem=3MB -c maintenance_work_mem=12MB -c synchronous_commit=off -c fsync=off
+    ports:
+      - "5432:5432"
+    deploy:
+      resources:
+        limits:
+          cpus: "0.4"
+          memory: "70MB"
+
+  load-balancer:
+    container_name: load-balancer
+    image: nginx:1.25-alpine
+    depends_on:
+      - rinhabackend
+      - rinhabackend-2
+    ports:
+      - "9999:9999"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    networks:
+      - backend
+    deploy:
+      resources:
+        limits:
+          cpus: "0.3"
+          memory: "40MB"
+
+
+
+networks:
+  backend:
+    name: backend
+    driver: bridge
+  payment-processor:
+    name: payment-processor
+    driver: bridge
+    external: true

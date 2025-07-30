@@ -2,7 +2,7 @@ version: '3.8'
 
 # Template base para as APIs
 x-api-template: &api-template
-  image: arthurisvi/api-rinha-backend:1.0
+  image: arthurisvi/api-rinha-backend:1.1
   environment:
     - APP_ENV=production
     - REDIS_HOST=redis
@@ -48,7 +48,7 @@ services:
 
   # Worker - Payment Processing
   worker_payments:
-    image: arthurisvi/worker-payments-rinha-backend:1.0
+    image: arthurisvi/worker-payments-rinha-backend:1.1
     environment:
       - APP_ENV=production
       - REDIS_HOST=redis
@@ -69,7 +69,7 @@ services:
 
   # Worker - Health Check
   worker_health:
-    image: arthurisvi/worker-health-rinha-backend:1.0
+    image: arthurisvi/worker-health-rinha-backend:1.1
     environment:
       - APP_ENV=production
       - REDIS_HOST=redis

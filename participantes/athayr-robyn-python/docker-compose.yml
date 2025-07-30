@@ -1,0 +1,92 @@
+services:
+  nginx:
+    image: nginx:1.25-alpine
+    container_name: nginx
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - api-1
+      - api-2
+      - worker
+    ports:
+      - "9999:9999"
+    networks:
+      - backend
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          cpus: "0.1"
+          memory: "35MB"
+
+  api-1: &api
+    image: athayr/rinha_2025_robyn:1.1.0
+    hostname: api-1
+    networks:
+      - backend
+      - payment-processor
+    environment:
+      - REDIS_URL=redis://redis:6379/0
+    depends_on:
+      - redis
+    deploy:
+      resources:
+        limits:
+          cpus: "0.4"
+          memory: "85MB"
+
+  api-2:
+    <<: *api
+    hostname: api-2
+
+  worker: &worker
+    image: athayr/rinha_2025_worker:1.0.1
+    hostname: worker
+    environment:
+      - URL_DEFAULT=http://payment-processor-default:8080/payments
+      - URL_FALLBACK=http://payment-processor-fallback:8080/payments
+      - REDIS_URL=redis://redis:6379/0
+    depends_on:
+      - redis
+    networks:
+      - backend
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: "75MB"
+
+  redis:
+    image: redis:7-alpine
+    container_name: redis-rinha
+    restart: unless-stopped
+    command: [
+      "sh", "-c",
+      "mkdir -p /var/run/redis && \
+      redis-server \
+      --save '' \
+      --appendonly no \
+      --maxclients 5000 \
+      --unixsocket /var/run/redis/redis.sock \
+      --unixsocketperm 777 \
+      --port 6379 \
+      --protected-mode no \
+      --hz 10 \
+      --maxmemory 70MB \
+      --maxmemory-policy allkeys-lru"
+    ]
+    networks:
+      - backend
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          cpus: "0.1"
+          memory: "70MB"
+
+networks:
+  backend:
+    driver: bridge
+  payment-processor:
+    external: true

@@ -1,0 +1,106 @@
+services:
+  nginx:
+    image: nginx:alpine
+    container_name: nginx-lb
+    platform: linux/amd64
+    ports:
+      - "9999:9999"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - api1
+      - api2
+    deploy:
+      resources:
+        limits:
+          cpus: "0.05"
+          memory: "10MB"
+    restart: unless-stopped
+    networks:
+      - backend
+      - payment-processor
+
+  api1:
+    image: ruanpcr/rinha-backend:latest
+    container_name: r-api-1
+    platform: linux/amd64
+    command: ["/app/wait-for-redis.sh"]
+    depends_on:
+      - redis
+    deploy:
+      resources:
+        limits:
+          cpus: "0.35"
+          memory: "68MB"
+    restart: unless-stopped
+    networks:
+      - backend
+
+  api2:
+    image: ruanpcr/rinha-backend:latest
+    container_name: r-api-2
+    platform: linux/amd64
+    command: ["/app/wait-for-redis.sh"]
+    depends_on:
+      - redis
+    deploy:
+      resources:
+        limits:
+          cpus: "0.35"
+          memory: "68MB"
+    restart: unless-stopped
+    networks:
+      - backend
+
+  redis:
+    image: redis:7-alpine
+    container_name: redis
+    platform: linux/amd64
+    deploy:
+      resources:
+        limits:
+          cpus: "0.15"
+          memory: "54MB"
+    restart: unless-stopped
+    networks:
+      - backend
+
+  worker1:
+    image: ruanpcr/rinha-backend:latest
+    container_name: r-worker-1
+    platform: linux/amd64
+    command: ["/app/start-worker.sh"]
+    depends_on:
+      - redis
+    deploy:
+      resources:
+        limits:
+          cpus: "0.325"
+          memory: "75MB"
+    restart: unless-stopped
+    networks:
+      - backend
+      - payment-processor
+
+  worker2:
+    image: ruanpcr/rinha-backend:latest
+    container_name: r-worker-2
+    platform: linux/amd64
+    command: ["/app/start-worker.sh"]
+    depends_on:
+      - redis
+    deploy:
+      resources:
+        limits:
+          cpus: "0.325"
+          memory: "75MB"
+    restart: unless-stopped
+    networks:
+      - backend
+      - payment-processor
+
+networks:
+  backend:
+    driver: bridge
+  payment-processor:
+    external: true

@@ -1,0 +1,86 @@
+x-service-templates:
+  api1: &api-processor
+    image: jjeanjacques/rinhabackend2025:graalvm-v1.0
+    networks:
+      - payment-processor
+    restart: on-failure
+    ulimits:
+      nofile:
+        soft: 1000000
+        hard: 1000000
+    depends_on:
+      - redis
+    deploy:
+      resources:
+        limits:
+          cpus: '0.6'
+          memory: '160MB'
+
+services:
+  api1:
+    <<: *api-processor
+    container_name: api1
+    hostname: api1
+    environment:
+      - APP_PORT=8080
+      - WORKER_ID=1
+      - PROCESSOR_DEFAULT_URL=http://payment-processor-default:8080
+      - PROCESSOR_FALLBACK_URL=http://payment-processor-fallback:8080
+      - REDIS_HOST=redis-rinha
+      - LOG_LEVEL=ERROR
+
+  api2:
+    <<: *api-processor
+    container_name: api2
+    hostname: api2
+    environment:
+      - APP_PORT=8080
+      - WORKER_ID=2
+      - PROCESSOR_DEFAULT_URL=http://payment-processor-default:8080
+      - PROCESSOR_FALLBACK_URL=http://payment-processor-fallback:8080
+      - REDIS_HOST=redis-rinha
+      - LOG_LEVEL=ERROR
+
+  nginx:
+    image: nginx:latest
+    deploy:
+      resources:
+        limits:
+          cpus: "0.10"
+          memory: "15MB"
+    ports:
+      - "9999:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - api1
+      - api2
+    networks:
+      - backend
+      - payment-processor
+
+  redis:
+    image: redis:7.2-alpine
+    container_name: redis-rinha
+    hostname: redis-rinha
+    command: redis-server --save "" --appendonly no --maxclients 20000
+    networks:
+      - payment-processor
+    ports:
+      - 6379:6379
+    healthcheck:
+      test: [ "CMD", "redis-cli", "ping" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    deploy:
+      resources:
+        limits:
+          cpus: "0.10"
+          memory: "15MB"
+
+networks:
+  backend:
+    driver: bridge
+  payment-processor:
+    external: true

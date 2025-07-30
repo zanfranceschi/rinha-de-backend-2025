@@ -20,7 +20,7 @@ Este projeto foi desenvolvido com uma **arquitetura minimalista** para fins de d
 
 ### Componentes Principais
 
-1. **API Gateway** (`cmd/api.php`) - Servidor web que expõe os endpoints
+1. **API Gateway** (`cmd/api.php`) - Servidor web com 40 workers FrankenPHP por instância
 2. **Payment Worker** (`cmd/payment-worker.php`) - Processador assíncrono de pagamentos
 3. **Health Worker** (`cmd/health-worker.php`) - Monitor de saúde dos processadores
 4. **Redis** - Cache e fila de jobs
@@ -120,7 +120,7 @@ docker-compose logs -f redis
 - **FrankenPHP** - Runtime PHP de alta performance
 - **PHP 8.4** - Linguagem principal
 - **Redis** - Cache e sistema de filas
-- **Nginx** - Load balancer e proxy reverso
+- **Nginx Alpine** - Load balancer otimizado e proxy reverso
 - **Docker** - Containerização
 
 ## 📊 Recursos e Limitações
@@ -151,26 +151,30 @@ O sistema implementa uma arquitetura com workers especializados:
 
 ### Payment Worker
 
-1. **Múltiplos Processos:** Gerenciador que mantém 10 workers concorrentes para alta throughput
+1. **Múltiplos Processos:** Gerenciador que mantém 5 workers concorrentes para alta throughput
 2. **Verificação de Saúde:** Consulta cache de status atualizado pelo Health Worker
 3. **Seleção Inteligente:**
    - Usa processador padrão se estável
    - Alterna para fallback se padrão estiver falhando
-   - Considera tempo de resposta na decisão (máximo 3x mais lento)
-4. **Retry Automático:** Tenta processador alternativo em caso de falha
-5. **Prevenção de Duplicatas:** Evita reprocessamento usando correlationId
-6. **Auto-restart:** Workers reiniciam automaticamente em caso de falha
+   - Considera tempo de resposta na decisão (máximo 2x mais lento)
+4. **Timeouts Otimizados:** Conexão em 1s, timeout total de 3s
+5. **Tratamento de Erros:** Detecta e trata códigos HTTP 422 (dados inválidos)
+6. **Prevenção de Duplicatas:** Evita reprocessamento usando correlationId
+7. **Auto-restart:** Workers reiniciam automaticamente em caso de falha
 
 ## 📈 Performance
 
 - **Processamento Assíncrono:** Desacopla recebimento de processamento
 - **Cache Inteligente:** Health-check cacheado para reduzir overhead
-- **Múltiplas Instâncias:** Load balancing entre APIs
-- **Workers Concorrentes:** 10 processos paralelos para pagamentos
+- **Múltiplas Instâncias:** Load balancing entre APIs com 40 workers FrankenPHP cada
+- **Workers Concorrentes:** 5 processos paralelos para pagamentos
 - **Workers Dedicados:** Processamento otimizado em background
 - **Scripts Lua:** Otimização Redis com script Lua para summaries
 - **Conexões Persistentes:** Reutilização de conexões curl e Redis
-- **Memoria Otimizada:** Payment worker usa apenas 15MB para 10 processos
+- **Memoria Otimizada:** Payment worker usa apenas 15MB para 5 processos
+- **Alta Concorrência:** Total de 80 workers na camada API (40 por instância)
+- **Timeouts Agressivos:** Conexões em 1s, timeout total de 3s para máxima responsividade
+- **Decisão Inteligente:** Processador escolhido com base em falhas e tempo de resposta (2x threshold)
 
 ## 🔍 Desenvolvimento e Debug
 

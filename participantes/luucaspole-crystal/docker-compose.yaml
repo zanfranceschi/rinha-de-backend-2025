@@ -1,5 +1,5 @@
 x-enviromments: &x-enviromments
-  - AMQP_URL: "amqp://guest:guest@lavinmq:5672/"
+  - AMQP_URL: "amqp://guest:guest@lavinmq:5672/?tcp_nodelay=true"
   - PREFETCH_COUNT: "0"
   - SHARD_COUNT: "1"
   - PROCESSOR_URL: "http://payment-processor-default:8080"
@@ -8,7 +8,7 @@ x-enviromments: &x-enviromments
 version: '3.4'
 services:
   app1: &app
-    image: docker.io/lukas8219/rinha-de-backend-2025-app:main-a52e7a23e-1753551398
+    image: docker.io/lukas8219/rinha-de-backend-2025-app:main-5538a05e7-1753756591
     user: "1001:1001"
     hostname: app1
     restart: unless-stopped
@@ -34,7 +34,7 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '0.20'
+          cpus: '0.1'
           memory: '40MB'
   app2:
     <<: *app
@@ -62,12 +62,12 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '1'
+          cpus: '0.9'
           memory: '150MB'
         reservations:
-          cpus: '1'
+          cpus: '0.9'
           memory: '150MB'
-    image: docker.io/lukas8219/rinha-de-backend-2025-worker:main-a52e7a23e-1753551398
+      image: docker.io/lukas8219/rinha-de-backend-2025-worker:main-5538a05e7-1753756591
     depends_on:
       lavinmq:
         condition: service_healthy
@@ -76,10 +76,12 @@ services:
     container_name: lavinmq
     healthcheck:
       test: ["CMD", "lavinmqctl", "status"]
-      interval: 5s
+      interval: 10s
       timeout: 10s
-      retries: 20
+      retries: 5
       start_period: 5s
+    volumes:
+      - ./lavinmq.ini:/etc/lavinmq/lavinmq.ini:ro
     ports:
       - "5672:5672"
       - "15672:15672"
@@ -88,17 +90,16 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '0.1'
+          cpus: '0.3'
           memory: '35MB'
         reservations:
-          cpus: '0.1'
+          cpus: '0.3'
           memory: '35MB'
-  pingora: # Pingora Load Balancer
-    image: docker.io/lukas8219/rinha-de-backend-2025-load-balancer-pingora:pingora-0b7f83e5a-1753557406
+  nginx:
+    image: nginx:latest
+    container_name: nginx
     user: "1001:1001"
     ipc: host
-    environment:
-      PORT: "9999"
     depends_on:
       - app1
       - app2
@@ -113,8 +114,6 @@ services:
         hard: 1000000
     networks:
       - backend
-    cpu_shares: 2048
-    cpuset: "2"
     deploy:
       resources:
         limits:
@@ -123,6 +122,30 @@ services:
         reservations:
           cpus: '0.1'
           memory: '55MB'
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - nginx_cache:/var/cache/nginx
+      - nginx_run:/var/run
+      - nginx_log:/var/log/nginx
+volumes:
+  nginx_cache:
+    driver: local
+    driver_opts:
+      type: tmpfs
+      device: tmpfs
+      o: "uid=1001,gid=1001,mode=0755"
+  nginx_run:
+    driver: local
+    driver_opts:
+      type: tmpfs
+      device: tmpfs
+      o: "uid=1001,gid=1001,mode=0755"
+  nginx_log:
+    driver: local
+    driver_opts:
+      type: tmpfs
+      device: tmpfs
+      o: "uid=1001,gid=1001,mode=0755"
 networks:
   backend:
     driver: bridge

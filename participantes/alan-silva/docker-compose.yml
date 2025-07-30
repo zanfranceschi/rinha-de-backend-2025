@@ -1,25 +1,26 @@
 services:
-  nginx:
-    image: nginx:1.29.0-alpine
-    container_name: rinha-nginx
+  rinha-haproxy:
+    image: haproxy:3.2.3-alpine
+    container_name: rinha-haproxy
     volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
       - sockets:/sockets:rw
-    ports:
-      - "9999:80"
-    networks:
-      - backend
-    depends_on:
-      - rinha-gateway-1
-      - rinha-gateway-2
     deploy:
       resources:
         limits:
-          cpus: "0.3"
-          memory: "50MB"
+          cpus: "0.4"
+          memory: "80MB"
+    networks:
+      - backend
+    ports:
+      - 9999:80
+    depends_on:
+      - rinha-gateway-1
+      - rinha-gateway-2
+      - rinha-gateway-3
 
   rinha-gateway-1:
-    image: ghcr.io/alan-venv/rinha-gateway:6.0
+    image: ghcr.io/alan-venv/rinha-gateway:6.3
     container_name: rinha-gateway-1
     volumes:
       - sockets:/sockets:rw
@@ -33,11 +34,11 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.5"
-          memory: "125MB"
+          cpus: "0.3"
+          memory: "70MB"
 
   rinha-gateway-2:
-    image: ghcr.io/alan-venv/rinha-gateway:6.0
+    image: ghcr.io/alan-venv/rinha-gateway:6.3
     container_name: rinha-gateway-2
     volumes:
       - sockets:/sockets:rw
@@ -51,16 +52,32 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.5"
-          memory: "125MB"
+          cpus: "0.3"
+          memory: "70MB"
 
-  rinha-db:
-    image: ghcr.io/alan-venv/rinha-database:6.0
-    container_name: rinha-db
+  rinha-gateway-3:
+    image: ghcr.io/alan-venv/rinha-gateway:6.3
+    container_name: rinha-gateway-3
     volumes:
       - sockets:/sockets:rw
     environment:
-      - SOCKET_PATH=/sockets/database.sock
+      - SOCKET_PATH=/sockets/actix.sock.3
+    networks:
+      - backend
+      - payment-processor
+    depends_on:
+      - rinha-db
+    deploy:
+      resources:
+        limits:
+          cpus: "0.3"
+          memory: "70MB"
+
+  rinha-db:
+    image: ghcr.io/alan-venv/rinha-database:6.3
+    container_name: rinha-db
+    volumes:
+      - sockets:/sockets:rw
     networks:
       - backend
       - payment-processor

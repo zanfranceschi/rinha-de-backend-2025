@@ -25,13 +25,12 @@ services:
     networks:
       - backend
       - payment-processor
-    volumes:
-      - redis-socket:/tmp
     environment:
       - LISTEN_ADDR=:8080
       - REDIS_URL=redis:6379
       - PROCESSOR_DEFAULT_URL=http://payment-processor-default:8080
       - PROCESSOR_FALLBACK_URL=http://payment-processor-fallback:8080
+      - APP_INSTANCE_ID=app1
     depends_on:
       redis:
         condition: service_healthy
@@ -43,14 +42,13 @@ services:
 
   backend-2:
     <<: *backend-template
+    environment:
+      - APP_INSTANCE_ID=app2
 
   redis:
     image: redis:7-alpine
     container_name: redis
     hostname: redis
-    volumes:
-      - redis-socket:/tmp
-    command: redis-server --unixsocket /tmp/redis.sock --unixsocketperm 777
     networks:
       - backend
     healthcheck:
@@ -70,5 +68,4 @@ networks:
   payment-processor:
     external: true
 
-volumes:
-  redis-socket:
+volumes: {}

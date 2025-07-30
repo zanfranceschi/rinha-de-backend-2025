@@ -1,0 +1,117 @@
+
+x-services-templates:
+  backend-app: &backend-app
+    image: emilemoraes/rinha-backend:latest
+    environment:
+      - PORT=8686
+      - PAYMENT_PROCESSOR_URL_DEFAULT=http://payment-processor-default:8080
+      - PAYMENT_PROCESSOR_URL_FALLBACK=http://payment-processor-fallback:8080
+      - DB_HOST=postgres
+      - BROKER_URL=redis
+      - CONSUMER_NAME=${container_name}
+      - JAVA_TOOL_OPTIONS=-XX:+UseSerialGC -Xmx75m -Xms32m -XX:MaxMetaspaceSize=128m
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - backend
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          cpus: "0.35"
+          memory: "125MB"
+
+services:
+  # Backend Instance 1
+  backend1:
+    <<: *backend-app
+    container_name: backend1
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8686/payments/health" ]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+  # Backend Instance 2
+  backend2:
+    <<: *backend-app
+    container_name: backend2
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8686/payments/health" ]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+  # PostgreSQL
+  postgres:
+    image: postgres:17-alpine
+    container_name: postgres
+    healthcheck:
+      test: ["CMD-SHELL", "sh -c 'pg_isready -U postgres -d rb2025'"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    environment:
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "postgres"
+      POSTGRES_DB: "rb2025"
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "5432:5432"
+    networks:
+      - backend
+    deploy:
+      resources:
+        limits:
+          cpus: "0.4"
+          memory: "60MB"
+
+  # Redis
+  redis:
+    image: redis:7.2-alpine
+    container_name: redis
+    hostname: redis
+    command: redis-server --save "" --appendonly no --maxclients 1000
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    ports:
+      - "6379:6379"
+    networks:
+      - backend
+    deploy:
+      resources:
+        limits:
+          cpus: "0.2"
+          memory: "30MB"
+
+  nginx:
+    image: nginx:alpine
+    container_name: nginx
+    ports:
+      - "9999:9999"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - backend1
+      - backend2
+    networks:
+      - backend
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          cpus: "0.2"
+          memory: "10MB"
+
+networks:
+  backend:
+    driver: bridge
+  payment-processor:
+    external: true

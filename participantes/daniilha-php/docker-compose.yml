@@ -1,0 +1,83 @@
+services:
+  nginx:
+    image: nginx:alpine
+    container_name: rinha-nginx
+    restart: unless-stopped
+    ports:
+      - "9999:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - backend-api-1
+      - backend-api-2
+    networks:
+      - backend
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          cpus: "0.2"
+          memory: "16MB"
+
+  backend-api-1:
+    image: onidael/rinha-2025-php-v3:latest
+    container_name: rinha-backend-api-1
+    restart: unless-stopped
+    environment:
+      - PAYMENT_PROCESSOR_URL_DEFAULT=http://payment-processor-default:8080
+      - PAYMENT_PROCESSOR_URL_FALLBACK=http://payment-processor-fallback:8080
+    depends_on:
+      - api-db
+    networks:
+      - backend
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: "128MB"
+
+  backend-api-2:
+    image: onidael/rinha-2025-php-v3:latest
+    container_name: rinha-backend-api-2
+    restart: unless-stopped
+    environment:
+      - PAYMENT_PROCESSOR_URL_DEFAULT=http://payment-processor-default:8080
+      - PAYMENT_PROCESSOR_URL_FALLBACK=http://payment-processor-fallback:8080
+    depends_on:
+      - api-db
+    networks:
+      - backend
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: "128MB"
+
+  api-db: 
+    image: postgres:17-alpine
+    container_name: api-db
+    hostname: api-db
+    ports:
+      - 15432:5432
+    networks:
+      - backend
+      - payment-processor
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=rinha
+    deploy:
+      resources:
+        limits:
+          cpus: "0.3"
+          memory: "78MB"
+
+networks:
+  backend:
+    driver: bridge
+  payment-processor:
+    external: true

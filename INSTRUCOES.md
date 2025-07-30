@@ -392,3 +392,4 @@ As tabelas abaixo oferem um resumo para facilitar a visão geral da solução.
 
 - As especificações sobre o servidor de testes podem ser encontradas [aqui](./SPECTESTENV.md).
 - O código fonte do **Payment Processor** está disponível [aqui](https://github.com/zanfranceschi/rinha-de-backend-2025-payment-processor).
+- Vídeo muito bom e didático sobre [como automatizar a publicação de imagens Docker com GitHub Actions](https://www.youtube.com/watch?v=u6dWrkJLYvY) feito pelo [Emilio Heinzmann](https://x.com/emiliosheinz).

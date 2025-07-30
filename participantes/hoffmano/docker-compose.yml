@@ -1,0 +1,68 @@
+services:
+
+  database:
+    image: postgres
+    restart: always
+    ports:
+      - "5432:5432"
+    networks:
+      - api
+    environment:
+        POSTGRES_PASSWORD: postgres
+    deploy:
+      resources:
+        limits:
+          cpus: "0.2"
+          memory: "125MB"
+
+  nginx:
+    image: nginx:stable-alpine
+    ports:
+      - "9999:9999"
+    volumes:
+        - ./nginx.conf:/etc/nginx/conf.d/default.conf
+    networks:
+      - api
+    depends_on:
+      - api-1
+      - api-2
+    deploy:
+      resources:
+        limits:
+          cpus: "0.2"
+          memory: "70MB"
+
+
+  api-1: &api
+    # build: ./api
+    image: hoffmano1/hoffmano-go
+    # command: go run main.go
+    hostname: api-1
+    ports:
+      - "3001:9999"
+    networks:
+      - api
+      - payment-processor
+    develop:
+      watch:
+        - action: sync+restart
+          path: ./api
+          target: ./app
+    deploy:
+      resources:
+        limits:
+          cpus: "0.55"
+          memory: "77.5MB"
+
+  api-2:
+    hostname: api-2
+    <<: *api
+    ports:
+      - "3002:9999"
+
+networks:
+  api:
+    driver: bridge
+  payment-processor:
+    external: true
+

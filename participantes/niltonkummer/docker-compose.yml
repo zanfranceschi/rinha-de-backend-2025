@@ -1,6 +1,9 @@
+x-image: &image
+  image: niltonkummer/rinha-backend-2025:1.0.2
+
 services:
   api1: &api
-    image: niltonkummer/rinha-backend-2025:latest
+    <<: *image
     command: [ "/bin/api", "api" ]
     hostname: api1
     networks:
@@ -19,7 +22,7 @@ services:
     hostname: api2
 
   consumer1: &consumer1
-    image: niltonkummer/rinha-backend-2025:latest
+    <<: *image
     command: [ "/bin/api", "consumer" ]
     hostname: consumer1
     networks:
@@ -34,7 +37,7 @@ services:
           memory: "80MB"
 
   cache:
-    image: niltonkummer/rinha-backend-2025:latest
+    <<: *image
     command: [ "/bin/api", "cache" ]
     hostname: cache
     networks:

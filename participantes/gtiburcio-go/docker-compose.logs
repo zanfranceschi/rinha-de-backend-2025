@@ -1,4 +1,37 @@
 
+ api02 Pulling 
+ api01 Pulling 
+ 9824c27679d3 Already exists 
+ ef1073cf5f47 Pulling fs layer 
+ b0d9a1cfd67e Pulling fs layer 
+ 9824c27679d3 Already exists 
+ ef1073cf5f47 Pulling fs layer 
+ b0d9a1cfd67e Pulling fs layer 
+ ef1073cf5f47 Verifying Checksum 
+ ef1073cf5f47 Download complete 
+ ef1073cf5f47 Downloading [==================================================>]      93B/93B
+ ef1073cf5f47 Verifying Checksum 
+ ef1073cf5f47 Download complete 
+ ef1073cf5f47 Extracting [==================================================>]      93B/93B
+ ef1073cf5f47 Extracting [==================================================>]      93B/93B
+ ef1073cf5f47 Extracting [==================================================>]      93B/93B
+ ef1073cf5f47 Extracting [==================================================>]      93B/93B
+ ef1073cf5f47 Pull complete 
+ ef1073cf5f47 Pull complete 
+ b0d9a1cfd67e Downloading [>                                                  ]  86.81kB/8.477MB
+ b0d9a1cfd67e Downloading [>                                                  ]  86.81kB/8.477MB
+ b0d9a1cfd67e Verifying Checksum 
+ b0d9a1cfd67e Download complete 
+ b0d9a1cfd67e Verifying Checksum 
+ b0d9a1cfd67e Download complete 
+ b0d9a1cfd67e Extracting [>                                                  ]   98.3kB/8.477MB
+ b0d9a1cfd67e Extracting [>                                                  ]   98.3kB/8.477MB
+ b0d9a1cfd67e Extracting [==================================================>]  8.477MB/8.477MB
+ b0d9a1cfd67e Extracting [==================================================>]  8.477MB/8.477MB
+ b0d9a1cfd67e Pull complete 
+ b0d9a1cfd67e Pull complete 
+ api01 Pulled 
+ api02 Pulled 
  Network gtiburcio-go_rinha-back  Creating
  Network gtiburcio-go_rinha-back  Created
  Container gtiburcio-go-db-1  Creating
@@ -37,12 +70,8 @@ nginx-1  | /docker-entrypoint.sh: Launching /docker-entrypoint.d/20-envsubst-on-
 nginx-1  | /docker-entrypoint.sh: Launching /docker-entrypoint.d/30-tune-worker-processes.sh
 nginx-1  | /docker-entrypoint.sh: Configuration complete; ready for start up
 db-1     | sh: locale: not found
-db-1     | 2025-07-27 04:49:11.605 UTC [35] WARNING:  no usable system locales were found
-nginx-1  | 2025/07/27 04:49:12 [error] 31#31: *1 connect() failed (111: Connection refused) while connecting to upstream, client: 172.20.0.1, server: , request: "GET /payments-summary HTTP/1.1", upstream: "http://172.20.0.3:3000/payments-summary", host: "localhost:9999"
-nginx-1  | 2025/07/27 04:49:12 [error] 31#31: *1 connect() failed (111: Connection refused) while connecting to upstream, client: 172.20.0.1, server: , request: "GET /payments-summary HTTP/1.1", upstream: "http://172.20.0.4:3000/payments-summary", host: "localhost:9999"
+db-1     | 2025-07-30 00:36:32.407 UTC [34] WARNING:  no usable system locales were found
 db-1     | performing post-bootstrap initialization ... ok
-db-1     | initdb: warning: enabling "trust" authentication for local connections
-db-1     | initdb: hint: You can change this by editing pg_hba.conf or using the option -A, or --auth-local and --auth-host, the next time you run initdb.
 db-1     | syncing data to disk ... ok
 db-1     | 
 db-1     | 
@@ -50,50 +79,63 @@ db-1     | Success. You can now start the database server using:
 db-1     | 
 db-1     |     pg_ctl -D /var/lib/postgresql/data -l logfile start
 db-1     | 
-db-1     | waiting for server to start....2025-07-27 04:49:13.312 UTC [41] LOG:  starting PostgreSQL 17.5 on x86_64-pc-linux-musl, compiled by gcc (Alpine 14.2.0) 14.2.0, 64-bit
-db-1     | 2025-07-27 04:49:13.317 UTC [41] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
-db-1     | 2025-07-27 04:49:13.342 UTC [44] LOG:  database system was shut down at 2025-07-27 04:49:13 UTC
-db-1     | 2025-07-27 04:49:13.351 UTC [41] LOG:  database system is ready to accept connections
+db-1     | initdb: warning: enabling "trust" authentication for local connections
+db-1     | initdb: hint: You can change this by editing pg_hba.conf or using the option -A, or --auth-local and --auth-host, the next time you run initdb.
+db-1     | waiting for server to start....2025-07-30 00:36:33.931 UTC [40] LOG:  starting PostgreSQL 17.5 on x86_64-pc-linux-musl, compiled by gcc (Alpine 14.2.0) 14.2.0, 64-bit
+db-1     | 2025-07-30 00:36:33.936 UTC [40] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+db-1     | 2025-07-30 00:36:33.955 UTC [43] LOG:  database system was shut down at 2025-07-30 00:36:33 UTC
+db-1     | 2025-07-30 00:36:33.966 UTC [40] LOG:  database system is ready to accept connections
 db-1     |  done
 db-1     | server started
+nginx-1  | 2025/07/30 00:36:34 [error] 32#32: *1 connect() failed (111: Connection refused) while connecting to upstream, client: 172.20.0.1, server: , request: "GET /payments-summary HTTP/1.1", upstream: "http://172.20.0.3:3000/payments-summary", host: "localhost:9999"
+nginx-1  | 2025/07/30 00:36:34 [error] 32#32: *1 connect() failed (111: Connection refused) while connecting to upstream, client: 172.20.0.1, server: , request: "GET /payments-summary HTTP/1.1", upstream: "http://172.20.0.4:3000/payments-summary", host: "localhost:9999"
 db-1     | CREATE DATABASE
 db-1     | 
 db-1     | 
 db-1     | /usr/local/bin/docker-entrypoint.sh: running /docker-entrypoint-initdb.d/script.sql
+db-1     | SET
 db-1     | SET
 db-1     | CREATE TYPE
 db-1     | CREATE TABLE
 db-1     | CREATE INDEX
 db-1     | 
 db-1     | 
-db-1     | waiting for server to shut down....2025-07-27 04:49:13.626 UTC [41] LOG:  received fast shutdown request
-db-1     | 2025-07-27 04:49:13.633 UTC [41] LOG:  aborting any active transactions
-db-1     | 2025-07-27 04:49:13.635 UTC [41] LOG:  background worker "logical replication launcher" (PID 47) exited with exit code 1
-db-1     | 2025-07-27 04:49:13.681 UTC [42] LOG:  shutting down
-db-1     | 2025-07-27 04:49:13.688 UTC [42] LOG:  checkpoint starting: shutdown immediate
-db-1     | 2025-07-27 04:49:13.894 UTC [42] LOG:  checkpoint complete: wrote 934 buffers (5.7%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.088 s, sync=0.090 s, total=0.213 s; sync files=311, longest=0.032 s, average=0.001 s; distance=4279 kB, estimate=4279 kB; lsn=0/191B138, redo lsn=0/191B138
-db-1     | 2025-07-27 04:49:13.901 UTC [41] LOG:  database system is shut down
+db-1     | waiting for server to shut down....2025-07-30 00:36:34.277 UTC [40] LOG:  received fast shutdown request
+db-1     | 2025-07-30 00:36:34.284 UTC [40] LOG:  aborting any active transactions
+db-1     | 2025-07-30 00:36:34.302 UTC [40] LOG:  background worker "logical replication launcher" (PID 46) exited with exit code 1
+db-1     | 2025-07-30 00:36:34.303 UTC [41] LOG:  shutting down
+db-1     | 2025-07-30 00:36:34.310 UTC [41] LOG:  checkpoint starting: shutdown immediate
+db-1     | 2025-07-30 00:36:34.499 UTC [41] LOG:  checkpoint complete: wrote 934 buffers (5.7%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.046 s, sync=0.115 s, total=0.196 s; sync files=311, longest=0.048 s, average=0.001 s; distance=4279 kB, estimate=4279 kB; lsn=0/191B138, redo lsn=0/191B138
+db-1     | 2025-07-30 00:36:34.506 UTC [40] LOG:  database system is shut down
 db-1     |  done
 db-1     | server stopped
 db-1     | 
 db-1     | PostgreSQL init process complete; ready for start up.
 db-1     | 
-db-1     | 2025-07-27 04:49:13.955 UTC [1] LOG:  starting PostgreSQL 17.5 on x86_64-pc-linux-musl, compiled by gcc (Alpine 14.2.0) 14.2.0, 64-bit
-db-1     | 2025-07-27 04:49:13.955 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
-db-1     | 2025-07-27 04:49:13.955 UTC [1] LOG:  listening on IPv6 address "::", port 5432
-db-1     | 2025-07-27 04:49:13.970 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
-db-1     | 2025-07-27 04:49:13.983 UTC [59] LOG:  database system was shut down at 2025-07-27 04:49:13 UTC
-db-1     | 2025-07-27 04:49:13.994 UTC [1] LOG:  database system is ready to accept connections
+db-1     | 2025-07-30 00:36:34.609 UTC [1] LOG:  starting PostgreSQL 17.5 on x86_64-pc-linux-musl, compiled by gcc (Alpine 14.2.0) 14.2.0, 64-bit
+db-1     | 2025-07-30 00:36:34.609 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+db-1     | 2025-07-30 00:36:34.609 UTC [1] LOG:  listening on IPv6 address "::", port 5432
+db-1     | 2025-07-30 00:36:34.624 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+db-1     | 2025-07-30 00:36:34.638 UTC [58] LOG:  database system was shut down at 2025-07-30 00:36:34 UTC
+db-1     | 2025-07-30 00:36:34.650 UTC [1] LOG:  database system is ready to accept connections
 api01-1  | Server starting on port 3000...
 api02-1  | Server starting on port 3000...
+nginx-1  | 2025/07/30 00:36:39 [error] 32#32: *4 no live upstreams while connecting to upstream, client: 172.20.0.1, server: , request: "GET /payments-summary HTTP/1.1", upstream: "http://api/payments-summary", host: "localhost:9999"
+db-1     | 2025-07-30 00:36:44.108 UTC [62] ERROR:  invalid input syntax for type timestamp: ""
+db-1     | 2025-07-30 00:36:44.108 UTC [62] CONTEXT:  unnamed portal parameter $1 = ''
+db-1     | 2025-07-30 00:36:44.108 UTC [62] STATEMENT:  select type, count(1) as "count", sum(amount) as "sum" from payment
+db-1     | 				 where requested_at between $1 and $2
+db-1     | 				 group by type;
+db-1     | 		
 [Knginx-1 exited with code 0
 [Kapi02-1 exited with code 2
 [Kapi01-1 exited with code 2
-db-1     | 2025-07-27 04:50:24.291 UTC [1] LOG:  received fast shutdown request
-db-1     | 2025-07-27 04:50:24.303 UTC [1] LOG:  aborting any active transactions
-db-1     | 2025-07-27 04:50:24.307 UTC [1] LOG:  background worker "logical replication launcher" (PID 62) exited with exit code 1
-db-1     | 2025-07-27 04:50:24.307 UTC [57] LOG:  shutting down
-db-1     | 2025-07-27 04:50:24.312 UTC [57] LOG:  checkpoint starting: shutdown immediate
-db-1     | 2025-07-27 04:50:24.392 UTC [57] LOG:  checkpoint complete: wrote 39 buffers (0.2%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.013 s, sync=0.030 s, total=0.085 s; sync files=13, longest=0.023 s, average=0.003 s; distance=172 kB, estimate=172 kB; lsn=0/1946528, redo lsn=0/1946528
-db-1     | 2025-07-27 04:50:24.397 UTC [1] LOG:  database system is shut down
+db-1     | 2025-07-30 00:37:52.968 UTC [1] LOG:  received fast shutdown request
+db-1     | 2025-07-30 00:37:52.977 UTC [1] LOG:  aborting any active transactions
+db-1     | 2025-07-30 00:37:52.980 UTC [1] LOG:  background worker "logical replication launcher" (PID 61) exited with exit code 1
+db-1     | 2025-07-30 00:37:52.981 UTC [56] LOG:  shutting down
+db-1     | 2025-07-30 00:37:52.992 UTC [56] LOG:  checkpoint starting: shutdown immediate
+db-1     | 2025-07-30 00:37:53.069 UTC [56] LOG:  checkpoint complete: wrote 325 buffers (2.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.017 s, sync=0.041 s, total=0.089 s; sync files=23, longest=0.034 s, average=0.002 s; distance=829 kB, estimate=829 kB; lsn=0/19EA620, redo lsn=0/19EA620
+db-1     | 2025-07-30 00:37:53.074 UTC [1] LOG:  database system is shut down
 [Kdb-1 exited with code 0
+log truncated at line 1000

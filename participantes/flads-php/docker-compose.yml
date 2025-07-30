@@ -1,0 +1,74 @@
+x-service-templates:
+  api: &api
+    image: flads/rinha25-php-api
+    networks:
+      - php-network
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          cpus: "0.25"
+          memory: "50MB"
+
+services:
+  api-1:
+    <<: *api
+    container_name: api-1
+
+  api-2:
+    <<: *api
+    container_name: api-2
+
+  worker:
+    image: flads/rinha25-php-worker
+    container_name: worker
+    networks:
+      - php-network
+      - payment-processor
+    depends_on:
+      redis:
+        condition: service_started
+    deploy:
+      resources:
+        limits:
+          cpus: "0.55"
+          memory: "205MB"
+
+  nginx:
+    image: nginx:latest
+    volumes:
+      - ./nginx:/var/www
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+    ports:
+      - "9999:9999"
+    networks:
+      - php-network
+    depends_on:
+      api-1:
+        condition: service_started
+      api-2:
+        condition: service_started
+    deploy:
+      resources:
+        limits:
+          cpus: "0.15"
+          memory: "15MB"
+
+  redis:
+    image: redis:latest
+    ports:
+      - '6379:6379'
+    networks:
+      - php-network
+    command: ["redis-server"]
+    deploy:
+      resources:
+        limits:
+          cpus: "0.30"
+          memory: "30MB"
+
+networks:
+  php-network:
+    driver: bridge
+  payment-processor:
+    external: true

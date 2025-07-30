@@ -19,7 +19,7 @@ services:
           memory: "55MB"
 
   api1:
-    image: danielsuhett1999/rinha-backend:1.0.3
+    image: danielsuhett1999/rinha-backend:1.0.4
     hostname: api1
     environment:
       - APP_PORT=8080
@@ -28,7 +28,12 @@ services:
       - REDIS_PORT=6379
       - PROCESSOR_DEFAULT_URL=http://payment-processor-default:8080
       - PROCESSOR_FALLBACK_URL=http://payment-processor-fallback:8080
+      - HEALTH_TIMEOUT=500
+      - HEALTH_INTERVAL=3000
+      - LATENCY_DIFF_TO_USE_FALLBACK=5000
       - LOG_LEVEL=ERROR
+      - NODE_ENV=production
+      - UV_THREADPOOL_SIZE=8
     networks:
       - backend
       - payment-processor
@@ -39,10 +44,10 @@ services:
       resources:
         limits:
           cpus: "0.65"
-          memory: "100MB"
+          memory: "80MB"
 
   api2:
-    image: danielsuhett1999/rinha-backend:1.0.3
+    image: danielsuhett1999/rinha-backend:1.0.4
     hostname: api2
     environment:
       - APP_PORT=8081
@@ -51,7 +56,12 @@ services:
       - REDIS_PORT=6379
       - PROCESSOR_DEFAULT_URL=http://payment-processor-default:8080
       - PROCESSOR_FALLBACK_URL=http://payment-processor-fallback:8080
+      - HEALTH_TIMEOUT=500
+      - HEALTH_INTERVAL=3000
+      - LATENCY_DIFF_TO_USE_FALLBACK=5000
       - LOG_LEVEL=ERROR
+      - NODE_ENV=production
+      - UV_THREADPOOL_SIZE=8
     networks:
       - backend
       - payment-processor
@@ -62,12 +72,12 @@ services:
       resources:
         limits:
           cpus: "0.65"
-          memory: "100MB"
+          memory: "80MB"
 
   redis:
     image: redis:7.2-alpine
     container_name: rinha-redis
-    command: redis-server --save "" --appendonly no --maxmemory 45mb --maxmemory-policy allkeys-lru --tcp-keepalive 30 --timeout 0 --tcp-backlog 1024 --databases 1 --maxclients 5000 --hz 10 --rdbcompression no --rdbchecksum no --io-threads 2 --io-threads-do-reads yes
+    command: redis-server --save "" --appendonly no --maxmemory 130mb --maxmemory-policy allkeys-lru --tcp-keepalive 30 --timeout 0 --tcp-backlog 1024 --databases 1 --maxclients 5000 --rdbcompression no --rdbchecksum no
     networks:
       - backend
     ports:
@@ -81,7 +91,7 @@ services:
       resources:
         limits:
           cpus: "0.10"
-          memory: "90MB"
+          memory: "130MB"
 
 networks:
   backend:

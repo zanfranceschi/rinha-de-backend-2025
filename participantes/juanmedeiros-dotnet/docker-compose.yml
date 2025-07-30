@@ -1,0 +1,70 @@
+services:
+  api1: 
+    image: juanormelli/rinha2025-jl:latest
+    hostname: api1
+    ulimits:
+      nofile:
+        soft: 1048576
+        hard: 1048576
+    networks:
+      - payment-processor
+    environment:
+      - ASPNETCORE_URLS=http://+:8080
+      - workerSync=http://api2:8081
+      - DOTNET_GCServer=1
+      - DOTNET_GCConcurrent=1
+      - DOTNET_ReadyToRun=1
+      - DOTNET_TC_QuickJitForLoops=1
+      - DOTNET_ThreadPool_ForceMinWorkerThreads=512
+      - DOTNET_ThreadPool_ForceMinIOThreads=256
+      - DOTNET_EnableDiagnostics=0
+    deploy:
+      resources:
+        limits:
+          cpus: "1"    
+          memory: "250MB" 
+  api2:
+    image: juanormelli/rinha2025-jl:latest
+    hostname: api2
+    networks:
+      - payment-processor
+    environment:
+      - ASPNETCORE_URLS=http://+:8081
+      - workerSync=http://api1:8080
+      - DOTNET_GCServer=1
+      - DOTNET_GCConcurrent=1
+      - DOTNET_ReadyToRun=1
+      - DOTNET_TC_QuickJitForLoops=1
+      - DOTNET_ThreadPool_ForceMinWorkerThreads=512
+      - DOTNET_ThreadPool_ForceMinIOThreads=256
+      - DOTNET_EnableDiagnostics=0
+    deploy:
+      resources:
+        limits:
+          cpus: "0.2"    
+          memory: "50MB" 
+  haproxy:
+    image: haproxytech/haproxy-alpine:2.9
+    container_name: haproxy_gateway
+    ports:
+      - "9999:9999"
+    volumes:
+      - ./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
+    depends_on:
+      - api1
+    ulimits:
+      nofile:
+        soft: 1048576
+        hard: 1048576
+    deploy:
+      resources:
+        limits:
+          cpus: "0.3"    
+          memory: "30MB" 
+    networks:
+     - payment-processor 
+
+networks:
+  payment-processor:
+    external: true
+    name: payment-processor

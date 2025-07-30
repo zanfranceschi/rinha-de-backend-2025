@@ -1,14 +1,19 @@
 services:
   backend-1:
-    image: gabxdevv/rinha-backend-2025-java-1:1.0.0
+    image: gabxdevv/rinha-backend-2025-java-puro:1.0.4
     environment:
-      RETRY_API_DEFAULT: 15
-      WORKER_POOL_SIZE: 25
-      PAYMENT_PROCESSOR_URL_DEFAULT: http://payment-processor-default:8080/payments
-      PAYMENT_PROCESSOR_URL_FALLBACK: http://payment-processor-fallback:8080/payments
+      RETRY_API_DEFAULT: 16
+      WORKER_POOL_SIZE: 21
+      URL_PROCESSOR_DEFAULT: http://payment-processor-default:8080/payments
+      URL_PROCESSOR_FALLBACK: http://payment-processor-fallback:8080/payments
       LOG_LEVEL: off
-      SERVER_PORT: 8080
       BACK_END_URL: http://backend-2:8080
+      SERVER_PORT: 8080
+      UDP_CHANNEL_PORT: 9001
+      UDP_CHANNEL_INTERNAL_PORT: 9003
+      EXTERNAL_UDP_HOST: backend-2
+      EXTERNAL_UDP_PORT: 9004
+      HANDLER_UDP_POOL_SIZE: 4
       JAVA_OPTS: >-
         -server
         -XX:+UseG1GC
@@ -25,20 +30,25 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '0.625'
-          memory: '140MB'
+          cpus: '0.60'
+          memory: '120MB'
 
   backend-2:
-    image: gabxdevv/rinha-backend-2025-java-1:1.0.0
+    image: gabxdevv/rinha-backend-2025-java-puro:1.0.4
     restart: always
     environment:
-      RETRY_API_DEFAULT: 15
-      WORKER_POOL_SIZE: 25
-      PAYMENT_PROCESSOR_URL_DEFAULT: http://payment-processor-default:8080/payments
-      PAYMENT_PROCESSOR_URL_FALLBACK: http://payment-processor-fallback:8080/payments
+      RETRY_API_DEFAULT: 16
+      WORKER_POOL_SIZE: 21
+      URL_PROCESSOR_DEFAULT: http://payment-processor-default:8080/payments
+      URL_PROCESSOR_FALLBACK: http://payment-processor-fallback:8080/payments
       LOG_LEVEL: off
-      SERVER_PORT: 8080
       BACK_END_URL: http://backend-1:8080
+      SERVER_PORT: 8080
+      UDP_CHANNEL_PORT: 9002
+      UDP_CHANNEL_INTERNAL_PORT: 9004
+      EXTERNAL_UDP_HOST: backend-1
+      EXTERNAL_UDP_PORT: 9003
+      HANDLER_UDP_POOL_SIZE: 4
       JAVA_OPTS: >-
         -server
         -XX:+UseG1GC
@@ -55,15 +65,12 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '0.625'
-          memory: '140MB'
+          cpus: '0.60'
+          memory: '120MB'
 
   load-balancer:
-    image: nginx:alpine
+    image: gabxdevv/loud-balance-diferenciado-puro:1.0.1
     restart: always
-    container_name: gabxdev-load-balancer
-    volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf:ro
     depends_on:
       - backend-1
       - backend-2
@@ -74,8 +81,21 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.25"
-          memory: "70MB"
+          cpus: "0.30"
+          memory: "110MB"
+    environment:
+      BACK_END_1_URL: backend-1
+      BACK_END_2_URL: backend-2
+      JAVA_OPTS: >-
+        -server
+        -XX:+UseG1GC
+        -XX:+UseFastAccessorMethods
+        -Xlog:disable
+        -XX:-PrintGC
+        -XX:+UseStringCache
+        -XX:-PrintGCDetails
+        -XX:-FlightRecorder
+        -XX:+DisableExplicitGC
 
 networks:
   backend:

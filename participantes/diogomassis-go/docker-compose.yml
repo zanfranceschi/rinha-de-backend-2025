@@ -1,0 +1,90 @@
+services:
+  load-balancer-nginx:
+    image: nginx:alpine
+    ports:
+      - "9999:9999"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - backend-1
+      - backend-2
+    networks:
+      - rinha-network
+    deploy:
+      resources:
+        limits:
+          cpus: "0.2"
+          memory: "40MB"
+
+  backend-1:
+    image: ghcr.io/diogomassis/rinha-2025:v1.0.4
+    environment:
+      - APP_PORT=8080
+      - INSTANCE_ID=backend-1
+      - REDIS_URL=redis-server:6379
+      - PROCESSOR_DEFAULT_URL=http://payment-processor-default:8080
+      - PROCESSOR_FALLBACK_URL=http://payment-processor-fallback:8080
+      - WORKER_CONCURRENCY=72
+    depends_on:
+      redis-server:
+        condition: service_healthy
+    networks:
+      - payment-processor
+      - rinha-network
+    deploy:
+      resources:
+        limits:
+          cpus: "0.6"
+          memory: "120MB"
+    restart: unless-stopped
+
+  backend-2:
+    image: ghcr.io/diogomassis/rinha-2025:v1.0.4
+    environment:
+      - APP_PORT=8080
+      - INSTANCE_ID=backend-2
+      - REDIS_URL=redis-server:6379
+      - PROCESSOR_DEFAULT_URL=http://payment-processor-default:8080
+      - PROCESSOR_FALLBACK_URL=http://payment-processor-fallback:8080
+      - WORKER_CONCURRENCY=72
+    depends_on:
+      redis-server:
+        condition: service_healthy
+    networks:
+      - payment-processor
+      - rinha-network
+    deploy:
+      resources:
+        limits:
+          cpus: "0.6"
+          memory: "120MB"
+    restart: unless-stopped
+
+  redis-server:
+    image: "redis:latest"
+    container_name: redis-server
+    networks:
+      - rinha-network
+    volumes:
+      - redis-data:/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 3s
+      timeout: 2s
+      retries: 10
+      start_period: 5s
+    deploy:
+      resources:
+        limits:
+          cpus: "0.1"
+          memory: "70MB"
+
+networks:
+  payment-processor:
+    external: true
+  rinha-network:
+    driver: bridge
+
+volumes:
+  redis-data:

@@ -1,9 +1,8 @@
 x-backend-templates:
   app: &app
-    image: csouzadocker/rinha-2025-redis-native:latest
+    image: csouzadocker/rinha-2025-redis-native:0.0.1
     depends_on:
-      redis:
-        condition: service_started
+      - redis
     networks:
       - backend
       - payment-processor
@@ -11,30 +10,48 @@ x-backend-templates:
       resources:
         limits:
           cpus: "0.65"
-          memory: "140MB"
+          memory: "100MB"
 
   app-env: &app-env
     ACTIVE_MONITOR: "false"
-    SERVER_PORT: "8080"
-    VIRTUAL_THREADS: "true"
-    THREAD_POOL_SIZE: "10"
-    QUEUE_SIZE: "5000"
+    server.port: "8080"
+    PAYMENT_QUEUE: "1000"
+    PAYMENT_PROCESSOR_MAX_RETRIES: "1"
+    PAYMENT_PROCESSOR_REQUEST_TIMEOUT: "10000"
+    PAYMENT_PROCESSOR_WORKERS: "12"
+    QUEUE_SIZE: "500"
     QUEUE_IS_FAIR: "true"
     REDIS_HOST: "redis"
+    REDIS_WORKERS: "18"
     REQUEST_CONNECTION_TIMEOUT: "50"
     REQUEST_READ_TIMEOUT: "3000"
+    THREAD_POOL_SIZE: "8"
+    VIRTUAL_THREADS: "true"
+    WEBCLIENT_MAX_CONNECTION: "200"
     payment-processor.default.url: "http://payment-processor-default:8080"
     payment-processor.fallback.url: "http://payment-processor-fallback:8080"
     SPRING_APPLICATION_JSON: >
       {
-        "spring.application.name": "ccs1201-rinha-backend-2025",
         "spring.threads.virtual.enabled": false,
         "server.servlet.session.persistent": false,
-        "server.servlet.session.tracking-modes": [],
         "server.servlet.session.timeout": 0,
-        "logging.level.root": "info",
+        "server.servlet.session.tracking-modes": [],
+        "spring.main.banner-mode": "off",
+        "spring.jmx.enabled": false,
+        "spring.application.admin.enabled": false,
+        "spring.mvc.async.request-timeout": -1,
+        "spring.mvc.dispatch-options-request": false,
+        "spring.mvc.dispatch-trace-request": false,
+        "spring.mvc.log-request-details": false,
         "server.undertow.threads.io": 2,
-        "server.undertow.threads.worker": 8
+        "server.undertow.threads.worker": 8,
+        "server.undertow.buffer-size": 1024,
+        "server.undertow.direct-buffers": true,
+        "server.undertow.max-http-post-size": "1KB",
+        "server.undertow.no-request-timeout": 2000,
+        "spring.mvc.log-resolved-exception": false,
+        "logging.level.root": "error",
+        "logging.level.br.com.ccs.rinha": "info"              
       }
 
 #####################################################
@@ -75,10 +92,17 @@ services:
       <<: *app-env
 
   redis:
-    image: redis:7-alpine
+    image: redis:8.0.3-alpine
     container_name: redis
     hostname: redis
-    command: redis-server --maxmemory 45mb --maxmemory-policy allkeys-lru --save "" --tcp-keepalive 60 --timeout 0
+    command: [
+      "redis-server",
+      "--save", "",
+      "--appendonly", "no",
+      "--maxmemory", "110mb",
+      "--maxmemory-policy", "noeviction",
+      "--timeout", "0"
+    ]
     ports:
       - "6379:6379"
     networks:
@@ -87,7 +111,7 @@ services:
       resources:
         limits:
           cpus: "0.1"
-          memory: "55MB"
+          memory: "135MB"
 
 networks:
   backend:

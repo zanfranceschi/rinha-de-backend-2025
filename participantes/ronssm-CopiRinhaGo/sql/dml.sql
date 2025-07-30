@@ -1,1 +1,0 @@
--- No initial data for payments table

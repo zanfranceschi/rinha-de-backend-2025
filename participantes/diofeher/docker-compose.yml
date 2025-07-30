@@ -1,0 +1,64 @@
+services:
+  nginx:
+    image: nginx:1.25-alpine
+    container_name: rinha-nginx
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - api1
+    ports:
+      - "9999:9999"
+    networks:
+      - backend
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          cpus: "0.15"
+          memory: "15MB"
+
+  api1:
+    image: diofeher/rinha-de-backend-diofeher:0.0.3
+    depends_on:
+      - redis
+    environment:
+      - PORT=8080
+      - REDIS_URL=redis:6379
+      - REDIS_DB=rinha
+      - PROCESSOR_DEFAULT_URL=http://payment-processor-default:8080
+      - PROCESSOR_FALLBACK_URL=http://payment-processor-fallback:8080
+    networks:
+      - backend
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          cpus: "0.15"
+          memory: "30MB"
+
+  redis:
+    image: redis:latest
+    container_name: redis
+    ports:
+      - "6379:6379"
+    networks:
+      - backend
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - REDIS_PASSWORD=
+      - REDIS_DB=rinha
+    deploy:
+      resources:
+        limits:
+          cpus: "1.15"
+          memory: "305MB"
+
+# cpus: nginx 0.15 apps 0.30 redis 1.15 = 1.5 total 
+# # memory: nginx 15MB apps 30MB redis 305MB = 350MB total 
+
+networks:
+  backend:
+    driver: bridge
+  payment-processor:
+    external: true

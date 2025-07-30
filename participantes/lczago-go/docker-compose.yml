@@ -3,7 +3,6 @@ x-common-api-env: &common-env
   REDIS_HOST: redis:6379
   PROCESSOR_DEFAULT_URL: http://payment-processor-default:8080
   PROCESSOR_FALLBACK_URL: http://payment-processor-fallback:8080
-  CONSUMER_LIMIT: 30
 
 x-service-templates:
   api: &api
@@ -14,7 +13,7 @@ x-service-templates:
     deploy:
       resources:
         limits:
-          cpus: '0.45'
+          cpus: '0.425'
           memory: '70MB'
     depends_on:
       nats:
@@ -37,7 +36,7 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '0.125'
+          cpus: '0.15'
           memory: '20MB'
 
   api01:
@@ -68,7 +67,7 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '0.125'
+          cpus: '0.15'
           memory: '40MB'
     healthcheck:
       test: [ "CMD", "wget", "-q", "--spider", "http://localhost:8222/healthz" ]

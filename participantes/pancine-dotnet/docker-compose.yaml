@@ -1,0 +1,80 @@
+name: rinha-de-backend-purchase-gateway
+
+x-services:
+  api: &api
+    image: pancine/rinha-de-backend-2025-purchase-gateway:1.0.0
+    environment:
+      - ConnectionStrings__Postgres=Host=postgres;Username=postgres;Password=pwd;Database=purchases
+      - PAYMENT_PROCESSOR_URL_DEFAULT=http://payment-processor-default:8080
+      - PAYMENT_PROCESSOR_URL_FALLBACK=http://payment-processor-fallback:8080
+      - PURCHASE_WORKERS=8
+    networks:
+      - payment-processor
+      - purchase-gateway
+    deploy:
+      resources:
+        limits:
+          cpus: "0.50"
+          memory: "115MB"
+    depends_on:
+      database: 
+        condition: service_healthy
+
+services:
+  load-balancer:
+    image: nginx:latest
+    container_name: load-balancer
+    ports:
+      - 9999:9999
+    networks:
+      - purchase-gateway
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    deploy:
+      resources:
+        limits:
+          cpus: "0.20"
+          memory: "20MB"
+    depends_on:
+      - api-1
+      - api-2
+
+  api-1:
+    <<: *api
+    container_name: api-1
+
+  api-2:
+    <<: *api
+    container_name: api-2
+
+  database:
+    image: postgres:17
+    container_name: postgres
+    restart: always
+    environment:
+      - POSTGRES_PASSWORD=pwd
+      - POSTGRES_DB=purchases
+    ports:
+      - 5432:5432
+    networks:
+      - purchase-gateway
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d purchases"]
+      interval: 1s
+      timeout: 5s
+      retries: 5
+    deploy:
+      resources:
+        limits:
+          cpus: "0.30"
+          memory: "100MB"
+
+networks:
+  payment-processor:
+    external: true
+
+  purchase-gateway:
+    name: purchase-gateway
+    driver: bridge
