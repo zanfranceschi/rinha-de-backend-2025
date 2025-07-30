@@ -1,0 +1,19 @@
+services:
+  api:
+    image: ghcr.io/railson-ferreira/rinha-de-backend-2025-dart:latest
+    environment:
+      - PAYMENT_PROCESSOR_DEFAULT_URL=http://payment-processor-default:8080
+      - PAYMENT_PROCESSOR_FALLBACK_URL=http://payment-processor-fallback:8080
+    ports:
+      - "9999:8080"
+    networks:
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          cpus: "1.5"
+          memory: "350MB"
+
+networks:
+  payment-processor:
+    external: true
