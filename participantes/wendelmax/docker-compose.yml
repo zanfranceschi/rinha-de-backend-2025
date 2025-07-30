@@ -1,0 +1,74 @@
+services:
+  postgres:
+    image: postgres:15-alpine
+    command: 'postgres -c max_connections=400 -c synchronous_commit=off -c fsync=off -c full_page_writes=off'
+    environment:
+      - POSTGRES_DB=rinha_backend
+      - POSTGRES_USER=rinha_user
+      - POSTGRES_PASSWORD=rinha_password
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - app
+    deploy:
+      resources:
+        limits:
+          cpus: "0.2"
+          memory: "128MB"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U rinha_user -d rinha_backend"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  rinha-backend:
+    image:  wendelmax/rinhabackend.net-backend:latest
+    expose:
+      - "8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ConnectionStrings__PostgresConnection=Host=postgres;Database=rinha_backend;Username=rinha_user;Password=rinha_password;Pooling=true;Maximum Pool Size=20;Multiplexing=false;Timeout=15;Command Timeout=15;Cancellation Timeout=-1;No Reset On Close=true;Max Auto Prepare=20;Auto Prepare Min Usages=1
+      - PaymentProcessorDefault__BaseUrl=http://payment-processor-default:8080
+      - PaymentProcessorFallback__BaseUrl=http://payment-processor-fallback:8080
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - app
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          cpus: "1.2"
+          memory: "200MB"
+    restart: unless-stopped
+
+  nginx:
+    image: nginx:1.25.2-alpine
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    ports:
+      - "9999:9999"
+    depends_on:
+      - rinha-backend
+    networks:
+      - app
+    deploy:
+      resources:
+        limits:
+          cpus: "0.1"
+          memory: "20MB"
+    restart: unless-stopped
+
+networks:
+  app:
+    driver: bridge
+  payment-processor:
+    external: true
+    name: payment-processor
+
+volumes:
+  postgres_data:
+    driver: local 

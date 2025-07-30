@@ -1,0 +1,25 @@
+services:
+  api: &api
+    image: ghcr.io/vitorvezani/rinha-de-backend-2025-go:latest
+    hostname: api
+    environment:
+      - APP_PORT=9999
+      - PROCESSOR_DEFAULT_URL=http://payment-processor-default:8080
+      - PROCESSOR_FALLBACK_URL=http://payment-processor-fallback:8080
+      - WORKER_CONCURRENCY=16
+    networks:
+      - backend
+      - payment-processor
+    ports:
+      - "9999:9999"
+    deploy:
+      resources:
+        limits:
+          cpus: "1.5"
+          memory: "350MB"
+
+networks:
+  backend:
+    driver: bridge
+  payment-processor:
+    external: true

@@ -1,0 +1,53 @@
+version: "3.5"
+services:
+  api1: &app
+    image: marcosisocram/daisy:1.0.0
+    networks:
+      - backend
+      - payment-processor
+    hostname: api1
+    ports:
+      - "9081:8080"
+    environment:
+      - URL_DEFAULT=http://payment-processor-default:8080/payments
+      - URL_FALLBACK=http://payment-processor-fallback:8080/payments
+      - JDBC=jdbc:sqlite:/app/data/rinha-daisy.db
+    volumes:
+      - sqlite-daisy-data:/app/data/
+    deploy:
+      resources:
+        limits:
+          cpus: "0.6"
+          memory: "140MB"
+
+  api2: # API - Instância 02
+    <<: *app
+    ports:
+      - "9082:8080"
+    hostname: api2
+
+  nginx-rinha: # Load Balancer
+    networks:
+      - backend
+    image: nginx:latest
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - api1
+      - api2
+    ports:
+      - "9999:9999"
+    deploy:
+      resources:
+        limits:
+          cpus: "0.3"
+          memory: "70MB"
+
+networks:
+  payment-processor:
+    external: true
+  backend:
+    driver: bridge
+
+volumes:
+  sqlite-daisy-data:

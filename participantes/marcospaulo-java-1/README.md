@@ -1,4 +1,3 @@
-# Rinha de Backend 2025
 
 ![A11pl3Z](images/logo-ai.webp)
 

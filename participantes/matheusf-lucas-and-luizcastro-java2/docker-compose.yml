@@ -1,0 +1,74 @@
+version: "3.8"
+
+x-backend-templates:
+  app: &backend-template
+    image: matheuslferreira/paymentgateway:latest
+    depends_on:
+      redis:
+        condition: service_started
+    environment:
+      redis-host: "redis"
+      QUEUE_BUFFER: 9000
+      LOG_LEVEL: off
+      SERVER_PORT: 8080
+      PAYMENT_PROCESSOR_URL_DEFAULT: http://payment-processor-default:8080
+      PAYMENT_PROCESSOR_URL_FALLBACK: http://payment-processor-fallback:8080
+      JAVA_OPTS: >-
+        -Xms32m -Xmx96m
+        -XX:MaxMetaspaceSize=40m
+        -Dio.netty.maxDirectMemory=12m
+        -XX:+UseG1GC
+        -XX:MaxGCPauseMillis=50
+        -XX:+AlwaysActAsServerClassMachine
+        -Xlog:disable
+    networks: [backend, payment-processor]
+    deploy:
+      resources:
+        limits:
+          cpus: "0.60"
+          memory: "135MB"
+
+services:
+  load-balancer:
+    image: nginx:alpine
+    container_name: nginx-rinha
+    restart: always
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    ports: [ "9999:80" ]
+    networks: [backend]
+    depends_on: [ backend-1, backend-2, redis ]
+    deploy:
+      resources:
+        limits:
+          cpus: "0.2"
+          memory: "30MB"
+
+  backend-1:
+    <<: *backend-template
+    container_name: backend-1
+    hostname: backend-1
+
+  backend-2:
+    <<: *backend-template
+    container_name: backend-2
+    hostname: backend-2
+
+  redis:
+    image: redis:7-alpine
+    container_name: redis
+    hostname: redis
+    command: redis-server --maxmemory 45mb --maxmemory-policy allkeys-lru --save "" --tcp-keepalive 60 --timeout 0
+    ports:
+      - "6379:6379"
+    networks:
+      - backend
+    deploy:
+      resources:
+        limits:
+          cpus: "0.1"
+          memory: "50MB"
+
+networks:
+  backend: { driver: bridge }
+  payment-processor: { external: true }

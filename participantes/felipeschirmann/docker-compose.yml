@@ -1,20 +1,28 @@
 services:
-  api:
-    image: felipeschirmann/rinha-backend-2025:9.0.0
-    container_name: felipeschirmann-rinha-v9
+  backend:
+    image: felipeschirmann/rinha-backend-2025:11.0.0
+    #image: localhost/rinha-backend:latest
+    container_name: felipeschirmann-rinha-v11
     environment:
+      # --- Performance Tuning: Reduced queue sizes to match limited CPU resources ---
+      # This prevents the application from accepting too many requests too quickly,
+      # which leads to resource starvation and timeouts.
+      APP_QUEUE_MAX_CAPACITY: "20000"
+      APP_QUEUE_BASE_CAPACITY: "40000"
+
+      # --- Performance Tuning: Reduced batch size ---
+      # Smaller batches require less CPU per processing cycle, keeping the application responsive.
+      APP_WORKER_BATCH_SIZE: "100"
+
+      # --- Client and Health Check Settings ---
       PAYMENT_PROCESSOR_DEFAULT_URL: "http://payment-processor-default:8080"
       PAYMENT_PROCESSOR_FALLBACK_URL: "http://payment-processor-fallback:8080"
-      APP_CLIENT_RESPONSE_TIMEOUT: "3s"
-      APP_CLIENT_CONNECT_TIMEOUT: "1s"
-      APP_QUEUE_MAX_CAPACITY: "40000"
-      APP_QUEUE_BASE_CAPACITY: "20000"
-      APP_WORKER_BATCH_SIZE: "500"
-      SERVER_TOMCAT_THREADS_MAX: "800"
-    sysctls:
-      net.core.somaxconn: 4096
+      APP_HEALTHCHECK_FIXED_DELAY: "5s"
+      APP_HEALTHCHECK_INITIAL_DELAY: "1s"
+      APP_CLIENT_RESPONSE_TIMEOUT: "10s" # Slightly increased for more tolerance under load
+      APP_CLIENT_CONNECT_TIMEOUT: "5s"
     ports:
-      - "9999:9999"
+      - "9999:8080"
     networks:
       - payment-processor
     deploy:
@@ -22,8 +30,8 @@ services:
         limits:
           cpus:  "1.5"
           memory: "350MB"
+
 networks:
-  backend:
-    driver: bridge
   payment-processor:
+    # This assumes the network is created externally by the payment-processor's docker-compose.
     external: true
