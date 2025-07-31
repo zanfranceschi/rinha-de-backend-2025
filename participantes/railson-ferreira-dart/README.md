@@ -4,6 +4,7 @@
 
 - **Linguagem:** Dart
 - **Banco de dados:** SQLite
+- **Load Balancer:** Pingora
 
 ## Sobre a solução
 
