@@ -18,17 +18,9 @@
 - **Controle de Concorrência**: Ajuste dinâmico baseado na latência
 - **Otimização de Memória**: Limite total de 350MB para todos os serviços
 
-## Estratégia de Performance
-
-- **Maximização de Lucro**: Prioriza processador default (5% taxa) sobre fallback (15% taxa)
-- **Processamento Concorrente**: Até 200 pagamentos simultâneos
-- **Retry Agressivo**: 5 tentativas no default antes do fallback
-- **Monitoramento em Tempo Real**: Health checks a cada 5 segundos
-- **Ajuste Dinâmico**: Concorrência adaptativa baseada na performance
-
 ## Limites de Recursos
 
-- **Backend**: 1.2 CPU, 200MB RAM
+- **Backend**: 1.0 CPU, 200MB RAM
 - **PostgreSQL**: 0.2 CPU, 128MB RAM  
 - **Nginx**: 0.1 CPU, 20MB RAM
 - **Total**: 1.5 CPU, 348MB RAM
