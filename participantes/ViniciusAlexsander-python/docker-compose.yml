@@ -17,8 +17,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.1"
-          memory: "20MB"
+          cpus: "0.2"
+          memory: "48MB"
 
   api-base: &api-base
     image: cacambito/rinha-backend-2025-python:latest
@@ -26,15 +26,15 @@ services:
       - payment-processor
     depends_on:
       - db
-    env_file:
-      - .env
+    environment:
+      DATABASE_URL: postgresql://postgres:postgres@rinha-db:5432/rinha
     volumes:
       - .:/app
     deploy:
       resources:
         limits:
-          cpus: "0.15"
-          memory: "42MB"
+          cpus: "0.6"
+          memory: "108MB"
 
   api-1:
     <<: *api-base
@@ -67,8 +67,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.2"
-          memory: "100MB"
+          cpus: "0.1"
+          memory: "86MB"
 
 networks:
   payment-processor:
