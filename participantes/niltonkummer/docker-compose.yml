@@ -1,73 +1,89 @@
-x-image: &image
-  image: niltonkummer/rinha-backend-2025:1.0.2
+x-build_template: &build
+  image: niltonkummer/rinha-backend-2025:1.0.3
+  networks:
+    - backend-network
+    - payment-processor
 
 services:
   api1: &api
-    <<: *image
+    <<: *build
     command: [ "/bin/api", "api" ]
     hostname: api1
-    networks:
-      - backend
-      - payment-processor
+    environment:
+      - API_NAME=api1
     depends_on:
       - cache
+    volumes:
+      - unix-sock:/unix-sock:rw
     deploy:
       resources:
         limits:
-          cpus: "0.25"
-          memory: "50MB"
+          cpus: "0.2"
+          memory: "36MB"
 
   api2:
     <<: *api
     hostname: api2
+    environment:
+      - API_NAME=api2
 
-  consumer1: &consumer1
-    <<: *image
+  api3:
+    <<: *api
+    hostname: api3
+    environment:
+      - API_NAME=api3
+
+  consumer1:
+    <<: *build
     command: [ "/bin/api", "consumer" ]
     hostname: consumer1
-    networks:
-      - backend
-      - payment-processor
+    volumes:
+      - unix-sock:/unix-sock:rw
     depends_on:
       - cache
     deploy:
       resources:
         limits:
-          cpus: "0.4"
-          memory: "80MB"
+          cpus: "0.3"
+          memory: "40MB"
 
   cache:
-    <<: *image
+    <<: *build
     command: [ "/bin/api", "cache" ]
     hostname: cache
-    networks:
-      - backend
+    volumes:
+      - unix-sock:/unix-sock:rw
     deploy:
       resources:
         limits:
-          cpus: "0.3"
-          memory: "100MB"
+          cpus: "0.2"
+          memory: "152MB"
 
   nginx:
-    image: nginx:1.25-alpine
-    container_name: rinha-nginx
+    image: nginx
+    container_name: nginx
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - unix-sock:/unix-sock:rw
     depends_on:
       - api1
       - api2
+      - api3
     ports:
       - "9999:9999"
     networks:
-      - backend
+      - backend-network
     deploy:
       resources:
         limits:
-          cpus: "0.3"
-          memory: "70MB"
+          cpus: "0.4"
+          memory: "50MB"
+
+volumes:
+  unix-sock:
 
 networks:
-  backend:
+  backend-network:
     driver: bridge
   payment-processor:
     external: true

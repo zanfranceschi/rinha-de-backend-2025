@@ -1,0 +1,78 @@
+version: "3.8"
+
+services:
+  nginx:
+    image: nginx:alpine
+    container_name: rinha-nginx
+    restart: unless-stopped
+    ports:
+      - "9999:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - api-1
+      - api-2
+    networks:
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          cpus: "0.2"
+          memory: "48MB"
+
+  api-base: &api-base
+    image: cacambito/rinha-backend-2025-python:latest
+    networks:
+      - payment-processor
+    depends_on:
+      - db
+    environment:
+      DATABASE_URL: postgresql://postgres:postgres@rinha-db:5432/rinha
+    volumes:
+      - .:/app
+    deploy:
+      resources:
+        limits:
+          cpus: "0.6"
+          memory: "108MB"
+
+  api-1:
+    <<: *api-base
+    container_name: rinha-api-1
+    ports:
+      - "8081:8080"
+      - "56781:5678"
+
+  api-2:
+    <<: *api-base
+    container_name: rinha-api-2
+    ports:
+      - "8082:8080"
+      - "56782:5678"
+
+  db:
+    image: postgres:16-alpine
+    container_name: rinha-db
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: rinha
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          cpus: "0.1"
+          memory: "86MB"
+
+networks:
+  payment-processor:
+    external: true
+
+volumes:
+  pgdata:

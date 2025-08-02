@@ -1,66 +1,85 @@
 services:
   payment-service-1:
-    image: tiagodolphine/rinha-2025-payment-service:0.0.2
+    image: tiagodolphine/payment-service-quarkus:0.0.2
     environment:
-      - PAYMENT_PROCESSOR_DEFAULT=http://payment-processor-default:8080
-      - PAYMENT_PROCESSOR_FALLBACK=http://payment-processor-fallback:8080
-      - POSTGRES_URL=postgres
-      - POSTGRES_PORT=5432
-      - POSTGRES_DB=payment_service
-      - POSTGRES_MAX=3
-      - POSTGRES_MIN=0
-      - LOGGING_LEVEL_ROOT=OFF
-      - LOGGING_LEVEL_COM_DOLPHS=OFF
-      - PROCESSOR_RETRY_MAX=1800
-      - CHUNK_SIZE=5
-      - SPRING_SERVER_NETTY_EVENT_LOOP_THREADS=4
-      - SPRING_SERVER_COMPRESSION_ENABLED=true
+      - PAYMENT_PROCESSOR_DEFAULT=payment-processor-default
+      - PAYMENT_PROCESSOR_DEFAULT_PORT=8080
+      - PAYMENT_PROCESSOR_FALLBACK=payment-processor-fallback
+      - PAYMENT_PROCESSOR_FALLBACK_PORT=8080
+      - CHUNK_SIZE=2
+      - POLL_INTERVAL=5
+      - PROCESSOR_RETRY_MAX=500
+      - REDIS_HOST=redis
+      - REDIS_MAX_POOL_SIZE=405
+      - QUARKUS_VERTX_EVENT_LOOPS_POOL_SIZE=2
+      - QUARKUS_HTTP_IO_THREADS=1
+      - QUARKUS_VERTX_INTERNAL_BLOCKING_POOL_SIZE=1
+      - QUARKUS_LOG_LEVEL=OFF
     networks:
       - backend
       - payment-processor
     deploy:
       resources:
         limits:
-          cpus: '0.45'
-          memory: "80MB"
+          cpus: '0.4'
+          memory: "120MB"
     depends_on:
-      postgres:
+      redis:
         condition: service_healthy
 
   payment-service-2:
-    image: tiagodolphine/rinha-2025-payment-service:0.0.2
+    image: tiagodolphine/payment-service-quarkus:0.0.2
     environment:
-      - PAYMENT_PROCESSOR_DEFAULT=http://payment-processor-default:8080
-      - PAYMENT_PROCESSOR_FALLBACK=http://payment-processor-fallback:8080
-      - SERVER_PORT=8080
-      - POSTGRES_URL=postgres
-      - POSTGRES_PORT=5432
-      - POSTGRES_DB=payment_service
-      - POSTGRES_MAX=3
-      - POSTGRES_MIN=0
-      - LOGGING_LEVEL_ROOT=OFF
-      - LOGGING_LEVEL_COM_DOLPHS=OFF
-      - PROCESSOR_RETRY_MAX=1800
-      - CHUNK_SIZE=5
-      - SPRING_SERVER_NETTY_EVENT_LOOP_THREADS=4
-      - SPRING_SERVER_COMPRESSION_ENABLED=true
+      - PAYMENT_PROCESSOR_DEFAULT=payment-processor-default
+      - PAYMENT_PROCESSOR_DEFAULT_PORT=8080
+      - PAYMENT_PROCESSOR_FALLBACK=payment-processor-fallback
+      - PAYMENT_PROCESSOR_FALLBACK_PORT=8080
+      - CHUNK_SIZE=2
+      - POLL_INTERVAL=5
+      - PROCESSOR_RETRY_MAX=500
+      - REDIS_HOST=redis
+      - REDIS_MAX_POOL_SIZE=405
+      - QUARKUS_VERTX_EVENT_LOOPS_POOL_SIZE=2
+      - QUARKUS_HTTP_IO_THREADS=1
+      - QUARKUS_VERTX_INTERNAL_BLOCKING_POOL_SIZE=1
+      - QUARKUS_LOG_LEVEL=OFF
     networks:
       - backend
       - payment-processor
     deploy:
       resources:
         limits:
-          cpus: '0.45'
-          memory: "80MB"
+          cpus: '0.4'
+          memory: "120MB"
     depends_on:
-      postgres:
+      redis:
         condition: service_healthy
 
-  caddy:
-    image: caddy:alpine
-    container_name: caddy-lb
+  redis:
+    image: redis:8.2-rc1-alpine
+    container_name: redis
+    command: ["redis-server", "--save", "", "--appendonly", "no", "--maxclients", "1000"]
+    ports:
+      - "6379:6379"
+    restart: unless-stopped
+    networks:
+      - backend
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: "70MB"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 2s
+      retries: 10
+
+  haproxy:
+    image: haproxy
+    container_name: haproxy-lb
     volumes:
-      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - ./haproxy:/usr/local/etc/haproxy:ro
     ports:
       - "9999:9999"
     depends_on:
@@ -70,57 +89,9 @@ services:
       resources:
         limits:
           cpus: '0.2'
-          memory: "50MB"
+          memory: "40MB"
     networks:
       - backend
-
-  postgres:
-    image: postgres:16-alpine
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: payment_service
-      POSTGRES_MAX_CONNECTIONS: 50
-    ports:
-      - "5432:5432"
-    command:
-      - postgres
-      - -c
-      - shared_buffers=8MB
-      - -c
-      - work_mem=512kB
-      - -c
-      - maintenance_work_mem=4MB
-      - -c
-      - effective_cache_size=64MB
-      - -c
-      - fsync=off
-      - -c
-      - synchronous_commit=off
-      - -c
-      - full_page_writes=off
-      - -c
-      - wal_level=minimal
-      - -c
-      - max_connections=50
-      - -c
-      - max_wal_senders=0
-    volumes:
-      - type: tmpfs
-        target: /var/lib/postgresql/data
-      - ./sql/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
-    deploy:
-      resources:
-        limits:
-          cpus: "0.4"
-          memory: 140MB
-    networks:
-      - backend
-    healthcheck:
-      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
-      interval: 2s
-      timeout: 20s
-      retries: 20
 
 networks:
   backend:

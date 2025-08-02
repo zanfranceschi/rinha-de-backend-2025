@@ -1,6 +1,6 @@
 services:
   backend:
-    image: felipeschirmann/rinha-backend-2025:12.1.0
+    image: felipeschirmann/rinha-backend-2025:13.1.0
 #    image: rinha-backend:latest
     container_name: felipeschirmann-rinha
     environment:
@@ -10,11 +10,7 @@ services:
       APP_QUEUE_MAX_CAPACITY: "20000"
       APP_QUEUE_BASE_CAPACITY: "10000"
 
-      # --- Performance Tuning: Reduced batch size ---
-      # Smaller batches require less CPU per processing cycle, keeping the application responsive.
-      APP_WORKER_BATCH_SIZE: "100"
-
-      # --- Client and Health Check Settings ---
+     # --- Client and Health Check Settings ---
       PAYMENT_PROCESSOR_DEFAULT_URL: "http://payment-processor-default:8080"
       PAYMENT_PROCESSOR_FALLBACK_URL: "http://payment-processor-fallback:8080"
       APP_HEALTHCHECK_FIXED_DELAY: "5s"
@@ -24,6 +20,8 @@ services:
       APP_WORKER_LOG_HTTP_FAILURES: "false"
       APP_WORKER_LOG_NETWORK_FAILURES: "false"
       APP_WORKER_LOG_SUCCESSFUL_PAYMENTS: "false"
+    sysctls:
+      net.core.somaxconn: 4096
     ports:
       - "9999:8080"
     networks:

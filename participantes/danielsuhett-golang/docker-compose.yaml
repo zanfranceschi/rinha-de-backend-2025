@@ -18,10 +18,7 @@ services:
           cpus: "0.20"
           memory: "40MB"
   api1:
-    # build:
-    #  context: .
-    #  dockerfile: Dockerfile
-    image: danielsuhett1999/rinha-backend-go:1.0.1
+    image: danielsuhett1999/rinha-backend-go:1.0.3
     hostname: api1
     environment:
       - APP_PORT=8080
@@ -38,7 +35,7 @@ services:
       - WORKER_POOL_SIZE=2
       - REQUEUE_POOL_SIZE=2
       - WORKER_CHAN_BUFFER=400
-      - REQUEUE_CHAN_BUFFER=3000
+      - REQUEUE_CHAN_BUFFER=6000
       - GOGC=1000
     networks:
       - backend
@@ -52,10 +49,7 @@ services:
           cpus: "0.60"
           memory: "130MB"
   api2:
-    # build:
-    #  context: .
-    #  dockerfile: Dockerfile
-    image: danielsuhett1999/rinha-backend-go:1.0.1
+    image: danielsuhett1999/rinha-backend-go:1.0.3
     hostname: api2
     environment:
       - APP_PORT=8081
@@ -72,7 +66,7 @@ services:
       - WORKER_POOL_SIZE=2
       - REQUEUE_POOL_SIZE=2
       - WORKER_CHAN_BUFFER=400
-      - REQUEUE_CHAN_BUFFER=3000
+      - REQUEUE_CHAN_BUFFER=6000
       - GOGC=1000
     networks:
       - backend

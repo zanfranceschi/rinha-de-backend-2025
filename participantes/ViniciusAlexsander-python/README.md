@@ -1,0 +1,2 @@
+- Feito com Python + PostgreSQL
+- [Repositorio](https://github.com/ViniciusAlexsander/rinha-de-backend-2025-python)

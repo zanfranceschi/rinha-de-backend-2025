@@ -7,7 +7,6 @@ PHP puro. Antes de tentar me aventurar em qualquer linguagem mais performática,
 #### Tecnologias utilizadas:
 
 * [PHP](https://www.php.net/releases/8.4/en.php) - Linguagem de programação.
-* [Revolt](https://revolt.run/) - Event loop projetado para aplicações PHP concorrentes.
 * [Redis](https://redis.io/) - Banco de dados em memória.
 * [Nginx](https://nginx.org/) - Servidor web HTTP e load balancer.
 

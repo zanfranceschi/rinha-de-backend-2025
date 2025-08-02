@@ -1,22 +1,64 @@
 services:
-  api: &api
+  api1: &api
     image: ghcr.io/vitorvezani/rinha-de-backend-2025-go:latest
     hostname: api
     environment:
-      - APP_PORT=9999
+      - APP_PORT=8080
       - PROCESSOR_DEFAULT_URL=http://payment-processor-default:8080
       - PROCESSOR_FALLBACK_URL=http://payment-processor-fallback:8080
       - WORKER_CONCURRENCY=16
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+    depends_on:
+      - redis
     networks:
       - backend
       - payment-processor
-    ports:
-      - "9999:9999"
     deploy:
       resources:
         limits:
-          cpus: "1.5"
-          memory: "350MB"
+          cpus: "0.55"
+          memory: "30MB"
+
+  api2:
+    <<: *api
+    hostname: api2
+
+  nginx:
+    image: nginx:1.25-alpine
+    container_name: rinha-nginx
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - api1
+      - api2
+    ports:
+      - "9999:9999"
+    networks:
+      - backend
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          cpus: "0.15"
+          memory: "64MB"
+
+  redis:
+    image: redis:7.2-alpine
+    container_name: rinha-redis
+    command: redis-server --save "" --appendonly no --maxclients 20000 --maxmemory 275mb --maxmemory-policy allkeys-lru
+    networks:
+      - backend
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    deploy:
+      resources:
+        limits:
+          cpus: "0.25"
+          memory: "275MB"
 
 networks:
   backend:

@@ -1,7 +1,12 @@
 services:
   redis:
-    image: redis:7.2-alpine
+    build:
+      context: .
+      dockerfile: ./Dockerfile-redis
     hostname: redis
+    volumes:
+      - ./redis.conf:/usr/local/etc/redis/redis.conf
+      - redis-socket:/var/run/redis
     command: >
       redis-server
       --save ""
@@ -12,7 +17,7 @@ services:
       - rinha-net
       - payment-processor
     healthcheck:
-      test: ["CMD-SHELL", "redis-cli -h 127.0.0.1 ping || exit 1"]
+      test: ["CMD-SHELL", "redis-cli", "-s", "/var/run/redis/redis.sock", "ping"]
       interval: 5s
       timeout: 5s
       retries: 5
@@ -20,16 +25,21 @@ services:
       resources:
         limits:
           cpus: "0.3"
-          memory: "70MB"
+          memory: "60MB"
 
   api01: &api
-    image: silvaangelolambda/rinha-api-2025:20250727
+    image: silvaangelolambda/rinha-api-2025:20250801-2
     command: >
       bun --optimize-for-size /api/index.js
     environment:
       - REDIS_URL=redis://redis:6379
       - PROCESSOR_DEFAULT_URL=http://payment-processor-default:8080
       - PROCESSOR_FALLBACK_URL=http://payment-processor-fallback:8080
+      - API_INSTANCE=api01
+    volumes:
+      - redis-socket:/var/run/redis
+      - rinha-api01:/var/run/rinha-api01:rw
+      - rinha-api02:/var/run/rinha-api02:rw
     networks:
       - payment-processor
       - rinha-net
@@ -39,28 +49,54 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.525"
-          memory: "125MB"
+          cpus: "0.3"
+          memory: "90MB"
 
   api02:
     <<: *api
+    environment:
+      - REDIS_URL=redis://redis:6379
+      - PROCESSOR_DEFAULT_URL=http://payment-processor-default:8080
+      - PROCESSOR_FALLBACK_URL=http://payment-processor-fallback:8080
+      - API_INSTANCE=api02
+    deploy:
+      resources:
+        limits:
+          cpus: "0.3"
+          memory: "90MB"
 
-  nginx:
-    image: nginx:1.27.0-alpine
+  worker01:
+    <<: *api
+    environment:
+      - REDIS_URL=redis://redis:6379
+      - PROCESSOR_DEFAULT_URL=http://payment-processor-default:8080
+      - PROCESSOR_FALLBACK_URL=http://payment-processor-fallback:8080
+      - WORKER_INSTANCE=worker_instance
+    deploy:
+      resources:
+        limits:
+          cpus: "0.3"
+          memory: "80MB"
+
+  haproxy:
+    image: haproxy:2.9-alpine
     volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
+      - rinha-api01:/var/run/rinha-api01:rw
+      - rinha-api02:/var/run/rinha-api02:rw
     ports:
-      - "9999:9999"
+      - "9999:80"
     networks:
       - payment-processor
       - rinha-net
     depends_on:
       - api01
       - api02
+      - worker01
     deploy:
       resources:
         limits:
-          cpus: "0.2"
+          cpus: "0.3"
           memory: "30MB"
 
 networks:
@@ -68,3 +104,8 @@ networks:
     external: true
   rinha-net:
     driver: bridge
+
+volumes:
+  redis-socket:
+  rinha-api01:
+  rinha-api02:

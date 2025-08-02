@@ -5,7 +5,7 @@
 ## Tecnologias utilizadas
 - **Linguagem:** Go
 - **Armazenamento/Fila:** Redis
-- **Balanceador:** Nginx
+- **Balanceador:** Haproxy
 - **Orquestração:** Docker Compose
 
 ## Como rodar
@@ -23,7 +23,7 @@ Esta é uma implementação para a Rinha de Backend 2025, focada em processament
 - **Streaming Architecture**: Processamento contínuo de transações em tempo real
 - **Worker Pools**: Grupos de workers dedicados para processamento paralelo de pagamentos
 - **Redis**: Utilizado tanto para filas de processamento quanto para cache de alta performance
-- **Nginx**: Load balancer configurado para distribuição inteligente entre duas instâncias da API
+- **Haproxy**: Load balancer configurado para distribuição inteligente entre duas instâncias da API
 - **Go**: Linguagem escolhida pela performance superior em cenários de alta concorrência
 
 O sistema foi projetado para suportar alto volume de transações simultâneas, implementando estratégias avançadas de retry, fallback e recuperação automática para garantir a confiabilidade do processamento de pagamentos mesmo sob carga extrema.

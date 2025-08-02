@@ -4,7 +4,7 @@
 Feito de forma duvidosa
 
 ## Repositório
-https://github.com/marcosisocram/A11pl3Z
+https://github.com/marcosisocram/daisy
 
 ## Tecnologias
 - **Linguagem:** Java 21

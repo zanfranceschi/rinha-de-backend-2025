@@ -1,0 +1,81 @@
+version: '3.8'
+
+services:
+  redis:
+    image: redis:7.2-alpine
+    container_name: rinha-redis
+    command: redis-server --save "" --appendonly no --maxclients 20000 --maxmemory-policy allkeys-lru
+    networks:
+      - backend
+      - payment-processor
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+    deploy:
+      resources:
+        limits:
+          cpus: "0.15"
+          memory: "50MB"
+
+  app:
+    image: rinha-backend-2025
+    environment:
+      - REDIS_URI=redis://rinha-redis:6379
+      - DEFAULT_PROCESSOR_URL=http://processador-docker:8001
+    depends_on:
+      - redis
+    networks:
+      - backend
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          cpus: "0.6"
+          memory: "125MB"
+
+  app2:
+    image: rinha-backend-2025
+    environment:
+      - REDIS_URI=redis://rinha-redis:6379
+      - DEFAULT_PROCESSOR_URL=http://processador-docker:8001
+    depends_on:
+      - redis
+    networks:
+      - backend
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          cpus: "0.6"
+          memory: "125MB"
+
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "9999:9999"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - app
+      - app2
+    networks:
+      - backend
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          cpus: "0.15"
+          memory: "50MB"
+
+# volumes:
+#   redis_data:
+
+networks:
+  backend:
+    driver: bridge
+  payment-processor:
+    external: true

@@ -3,21 +3,13 @@
 ## Tecnologias utilizadas
 - **Linguagem:** Go
 - **Armazenamento/Fila:** Redis
-- **Balanceador:** Nginx
+- **Balanceador:** Extreme
 - **Orquestração:** Docker Compose
 
-## Como rodar
-1. Suba o docker-compose dos Payment Processors primeiro (conforme instruções do repositório oficial).
-2. Depois, suba este compose:
-   ```sh
-   docker compose up --build
-   ```
-3. O backend ficará disponível na porta **9999**.
-
 ## Sobre a solução
-O backend foi desenvolvido em Go usando o web framework Fiber com Sonic para encoding/decoding de JSON com ultra velocidade. Ele realiza o processamento de cada requisição de forma assincrona em uma Goroutine. Caso o tempo de resposta esteja alto ou as APIs do Processor estejam indisponíveis, coloca para uma fila (Channel) de retry após um periodo apóx X milisegundos. O Redis é utilizado para armazenar/consultar o estado do último Health Check feito por uma Goroutine independente. Além de armazenar todas as transações que foram processadas pelo backend. No repositório abaixo tem mais detalhes da estratégia adotada.
+O backend foi desenvolvido em Go usando o web framework Fiber com Sonic para encoding/decoding de JSON com ultra velocidade. Ele tem um deployment independente para as APIs e outro para o worker processar pagamentos de forma assincrona. Os pagamentos são adicionados num Redis e processados pelo worker somente no endpoint default para minimizar os custos do fallback.
 
-Essa versão tem um algoritmo distinto das demais que realiza processamento apenas no endpoint default.
+Essa versão acompanha um Load Balancer customizado (chamado de Extreme) criado usando Go e Fast HTTP para substituir o Nginx e reduzir a latencia da API ao extremo.
 
 ## Repositório
-[https://github.com/davidalecrim1/rinha-with-go-2025/tree/feature/redis-only-default](https://github.com/davidalecrim1/rinha-with-go-2025/tree/feature/redis-only-default)
+[https://github.com/davidalecrim1/rinha-with-go-2025/tree/feature/redis-only-default](https://github.com/davidalecrim1/rinha-with-go-2025/tree/feature/redis-extreme)

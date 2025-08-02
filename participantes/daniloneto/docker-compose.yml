@@ -1,5 +1,5 @@
 x-api_template: &api_template
-  image: daniloneto/rinha-gateway:latest
+  image: daniloneto/rinha-gateway:1.2.0
   volumes:
     - sockets:/tmp:rw
     - sockets:/sockets:rw
@@ -9,8 +9,9 @@ x-api_template: &api_template
   deploy:
     resources:
       limits:
-        cpus: "0.5"
-        memory: "115MB"
+        cpus: "0.5"     
+        memory: "120MB" 
+
 services:
   nginx:
     image: nginx:1.29.0-alpine
@@ -21,15 +22,16 @@ services:
     ports:
       - "9999:80"
     networks:
-      - backend
+      - backend    
     depends_on:
       - rinha-gateway-1
       - rinha-gateway-2
     deploy:
       resources:
         limits:
-          cpus: "0.2"
-          memory: "60MB"
+          cpus: "0.25"  
+          memory: "70MB"
+
   rinha-gateway-1:
     <<: *api_template
     container_name: rinha-gateway-1
@@ -51,9 +53,9 @@ services:
       - "9002:9002"
     depends_on:
       - rinha-db
-      - rinha-gateway-1
+
   rinha-db:
-    image: daniloneto/rinha-database:latest
+    image: daniloneto/rinha-database:1.2.0
     container_name: rinha-db
     volumes:
       - sockets:/sockets:rw
@@ -64,8 +66,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.3"
-          memory: "60MB"
+          cpus: "0.25"  
+          memory: "40MB" 
 
 networks:
   backend:

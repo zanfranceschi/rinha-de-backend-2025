@@ -5,8 +5,9 @@ A backend project for the Rinha de Backend 2025 challenge.
 ## 🛠️ Stack
 
 - Java 21 (GraalVM) Native build
-- Spring Boot 3.5.3 (**Spring WebFlux / Reactive**)
-- PostgreSQL (Reactive Driver)
+- Quarkus 3.25.0 (**Reactive**)
+- Redis (Reactive Client)
+- HAProxy
 - Maven
 - Docker & Docker Compose
 

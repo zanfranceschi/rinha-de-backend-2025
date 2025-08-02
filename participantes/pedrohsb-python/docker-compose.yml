@@ -1,20 +1,6 @@
 services:
-  health-check:
-    image: pedrohsbarbosa99/rinha-fastapi-2025:0.1.0
-    command: python -m app.check
-    depends_on:
-      - redis
-    networks:
-      - backend
-      - payment-processor
-    deploy:
-      resources:
-        limits:
-          cpus: "0.1"
-          memory: "70M"
-
   api1:
-    image: pedrohsbarbosa99/rinha-fastapi-2025:0.1.0
+    image: pedrohsbarbosa99/rinha-fastapi-2025:0.2.0
     command: uvicorn app.apis.main:app --host 0.0.0.0 --port 9999 --workers 1 --loop uvloop --http httptools
     networks:
       - backend
@@ -26,7 +12,7 @@ services:
           memory: "70M"
 
   api2:
-    image: pedrohsbarbosa99/rinha-fastapi-2025:0.1.0
+    image: pedrohsbarbosa99/rinha-fastapi-2025:0.2.0
     command: uvicorn app.apis.main:app --host 0.0.0.0 --port 9999 --workers 1 --loop uvloop --http httptools
     networks:
       - backend
@@ -57,10 +43,11 @@ services:
 
   redis:
     image: redis:7-alpine
+    command: redis-server --save "" --appendonly no --maxmemory 60mb --maxmemory-policy allkeys-lru --io-threads 1 --io-threads-do-reads yes
     deploy:
       resources:
         limits:
-          cpus: "0.1"
+          cpus: "0.2"
           memory: "70M"
     networks:
       - backend

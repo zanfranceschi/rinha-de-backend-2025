@@ -2,7 +2,7 @@
 services:
   api1: &api1
     hostname: api1
-    image: rafaelpadovezi/rinha-2025-dotnet:1.1
+    image: rafaelpadovezi/rinha-2025-dotnet:1.2
     depends_on:
       redis:
         condition: service_healthy
@@ -16,7 +16,7 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.45"
+          cpus: "0.6"
           memory: "100MB"
   
   api2:
@@ -27,6 +27,7 @@ services:
     image: redis
     ports:
       - "6379:6379"
+    command: [ "redis-server", "--save", "", "--appendonly", "no" ]
     healthcheck:
       test: [ "CMD", "redis-cli", "ping" ]
       interval: 10s
@@ -38,7 +39,7 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.5"
+          cpus: "0.2"
           memory: "100MB"
   
   nginx:

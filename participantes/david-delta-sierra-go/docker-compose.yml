@@ -6,17 +6,18 @@ services:
       resources:
         limits:
           cpus: "0.2"
-          memory: 100M
+          memory: 50M
     image: nginx:stable-alpine
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - socket-volume:/socket
     ports:
       - "9999:9999"
     depends_on:
       - app-1
       - app-2
 
-  app-1:
+  app-1: &app-base
     networks:
       - backend
       - payment-processor
@@ -26,29 +27,19 @@ services:
           cpus: "0.55"
           memory: 50M
     image: daviddeltasierra/rinha-2025-go
+    volumes:
+      - socket-volume:/socket
     restart: always
     environment:
-      - MASTER=true
+      - SOCKET_PATH=/socket/app1.sock
     depends_on:
       postgres:
         condition: service_healthy
 
   app-2:
-    networks:
-      - backend
-      - payment-processor
-    deploy:
-      resources:
-        limits:
-          cpus: "0.55"
-          memory: 50M
-    image: daviddeltasierra/rinha-2025-go
-    restart: always
+    <<: *app-base
     environment:
-      - MASTER=false
-    depends_on:
-      postgres:
-        condition: service_healthy
+      - SOCKET_PATH=/socket/app2.sock
 
   postgres:
     networks:
@@ -57,7 +48,7 @@ services:
       resources:
         limits:
           cpus: "0.2"
-          memory: 150M
+          memory: 200M
     image: postgres:alpine
     user: postgres
     healthcheck:
@@ -65,10 +56,13 @@ services:
       interval: 5s
       retries: 6
     volumes:
-      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./scripts:/docker-entrypoint-initdb.d
     environment:
       - POSTGRES_PASSWORD=root
       - POSTGRES_DB=rinha
+
+volumes:
+  socket-volume:
 
 networks:
   backend:

@@ -1,0 +1,31 @@
+# Extreme Proxy Server Configuration
+
+# Server settings
+server:
+  listen_address: ":9999"
+  read_timeout: "2s"
+  write_timeout: "2s"
+  max_connections: 10000
+
+# Keep-alive settings
+# - enabled and client_timeout control TCP keep-alive for incoming connections
+# - backend_timeout controls idle timeout for backend connections
+keep_alive:
+  enabled: true
+  client_timeout: "60s"
+  backend_timeout: "60s"
+  max_requests_per_conn: 5000
+
+# Backend servers to forward requests to
+backends:
+  - "http://go-backend-1:80"
+  - "http://go-backend-2:80"
+
+# Connection pool settings for backend connections
+connection_pool:
+  max_conns_per_host: 1000
+
+# Logging configuration
+logging:
+  enabled: false
+  level: "error" # debug, info, warn, error

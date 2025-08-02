@@ -16,17 +16,17 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.2"
+          cpus: "0.15"
           memory: "48MB"
 
   backend-api-1: &api
-    image: ricassiocosta/rinha-backend-2025-node:v0.1.3
+    image: ricassiocosta/rinha-backend-2025-node:v0.1.6
     container_name: rinha-api-node-1
     restart: unless-stopped
     environment:
       - PAYMENT_PROCESSOR_URL_DEFAULT=http://payment-processor-default:8080
       - PAYMENT_PROCESSOR_URL_FALLBACK=http://payment-processor-fallback:8080
-      - MAX_PARALLELISM=4
+      - MAX_PARALLELISM=6
     depends_on:
       - redis
     volumes:
@@ -39,16 +39,12 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.4"
-          memory: "72MB"
+          cpus: "0.6"
+          memory: "108MB"
 
   backend-api-2:
     <<: *api
     container_name: rinha-api-node-2
-
-  backend-api-3:
-    <<: *api
-    container_name: rinha-api-node-3
 
   redis:
     image: redis:7-alpine
@@ -75,7 +71,7 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.1"
+          cpus: "0.15"
           memory: "86MB"
 
 networks:

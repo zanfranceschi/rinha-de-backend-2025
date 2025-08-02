@@ -4,8 +4,9 @@
 
 ## Tecnologias utilizadas
 - **Linguagem:** Go
-- **Armazenamento:** sqlite (inmemory)
+- **Armazenamento:** redis
 - **Orquestração:** Docker Compose
+- **Load Balancer:** Nginx
 
 ## Como rodar
 1. Suba o docker-compose dos Payment Processors primeiro (conforme instruções do repositório oficial).

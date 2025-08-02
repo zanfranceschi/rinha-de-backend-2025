@@ -1,5 +1,9 @@
 name : payment-proxy
 
+x-service-templates:
+  base: &apibase
+    image: acslook/payment-proxy:v3
+
 services:  
   redis:
     container_name: redis
@@ -33,10 +37,10 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.3"
-          memory: "100MB"
+          cpus: "0.4"
+          memory: "130MB"
   api1:
-      image: acslook/payment-proxy:v2
+      <<: *apibase
       container_name: api1
       environment:
         - CONN_STRING=postgres://rinha25:rinha25@db:5432/payments_db?sslmode=disable
@@ -51,13 +55,13 @@ services:
       deploy:
         resources:
           limits:
-            cpus: '0.2'
-            memory: "50MB"
+            cpus: '0.1'
+            memory: "30MB"
       depends_on:
         - db
         - redis
   api2:
-    image: acslook/payment-proxy:v2
+    <<: *apibase
     container_name: api2
     environment:
       - CONN_STRING=postgres://rinha25:rinha25@db:5432/payments_db?sslmode=disable
@@ -72,13 +76,13 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '0.2'
-          memory: "50MB"
+          cpus: '0.1'
+          memory: "30MB"
     depends_on:
       - db
       - redis
   worker:
-      image: acslook/payment-proxy:v2
+      <<: *apibase
       container_name: worker
       environment:
         - CONN_STRING=postgres://rinha25:rinha25@db:5432/payments_db?sslmode=disable
@@ -94,7 +98,7 @@ services:
         resources:
           limits:
             cpus: '0.6'
-            memory: "40MB"
+            memory: "30MB"
       depends_on:
         - db
         - redis
@@ -113,7 +117,7 @@ services:
       resources:
         limits:
           cpus: '0.2'
-          memory: "30MB"
+          memory: "50MB"
     networks:
       - backend
 networks:

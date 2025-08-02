@@ -24,11 +24,11 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.2"
-          memory: "100MB"
+          cpus: "0.6"
+          memory: "190MB"
 
   api01: &api
-    image: suntzu12/quarkus-payment-router:5.0.0
+    image: suntzu12/quarkus-payment-router:9.0.0
     container_name: api1
     hostname: api01
     ports:
@@ -37,16 +37,18 @@ services:
       postgres:
         condition: service_healthy
     environment:
-      THREAD_POOL: 10
+      PROCESS_THREAD_POOL: 15
+      SAVE_THREAD_POOL: 2
       QUARKUS_DATASOURCE_USERNAME: postgres
       QUARKUS_DATASOURCE_PASSWORD: postgres
       QUARKUS_DATASOURCE_JDBC_URL: jdbc:postgresql://postgres:5432/payment_db
       QUARKUS_REST_CLIENT_DEFAULT_API_URL: http://payment-processor-default:8080
+      QUARKUS_REST_CLIENT_FALLBACK_API_URL: http://payment-processor-fallback:8080
     deploy:
       resources:
         limits:
-          cpus: "0.4"
-          memory: "85MB"
+          cpus: "0.40"
+          memory: "70MB"
     networks:
       - payment-router
       - payment-processor
@@ -58,8 +60,10 @@ services:
       - "8082:8080"
 
   load_balancer:
-    image: suntzu12/lua-load-balancer:5.0.0
+    image: nginx:latest
     container_name: load_balancer
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
     depends_on:
       - api01
       - api02
@@ -68,8 +72,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.5"
-          memory: "80MB"
+          cpus: "0.1"
+          memory: "20MB"
     networks:
       - payment-router
 

@@ -91,9 +91,9 @@ Para executar:
 #### Publicação da imagem Docker com GraalVM
 
 Nome da imagem local: `docker.io/jjeanjacques10/rinhabackend2025:graalvm`
-Nome da imagem remota: `jjeanjacques/rinhabackend2025:graalvm`
+Nome da imagem remota: `jjeanjacques/rinhabackend2025:graalvm-v2.0`
 
 ```
-docker tag docker.io/jjeanjacques10/rinhabackend2025:graalvm jjeanjacques/rinhabackend2025:graalvm
-docker push jjeanjacques/rinhabackend2025:graalvm
+docker tag docker.io/jjeanjacques10/rinhabackend2025:graalvm jjeanjacques/rinhabackend2025:graalvm-v2.0
+docker push jjeanjacques/rinhabackend2025:graalvm-v2.0
 ```

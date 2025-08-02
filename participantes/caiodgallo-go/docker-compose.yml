@@ -1,0 +1,111 @@
+services:
+  app1: &app
+    image: caiogallo2401/onecent:latest
+    container_name: go-app-1
+    restart: unless-stopped
+    networks:
+      - backend
+      - payment-processor
+    depends_on:
+      postgres:
+        condition: service_healthy
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: 40M
+        reservations:
+          cpus: "0.4"
+          memory: 30M
+    environment:
+      - APP_ENV=production
+      - PORT=8080
+      - INSTANCE_ID=1
+      - DATABASE_URL=postgresql://dev:secret123@postgres:5432/onecent?sslmode=disable
+      - DEFAULT_PROCESSOR_ENDPOINT=http://payment-processor-default:8080
+      - FALLBACK_PROCESSOR_ENDPOINT=http://payment-processor-fallback:8080
+      - OTHER_INSTANCE_URL=http://app2:8080
+      - PAYMENT_POOL_SIZE=800
+      - RETRY_POOL_SIZE=500
+
+  app2:
+    <<: *app
+    container_name: go-app-2
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      - APP_ENV=production
+      - PORT=8080
+      - INSTANCE_ID=2
+      - DATABASE_URL=postgresql://dev:secret123@postgres:5432/onecent?sslmode=disable
+      - DEFAULT_PROCESSOR_ENDPOINT=http://payment-processor-default:8080
+      - FALLBACK_PROCESSOR_ENDPOINT=http://payment-processor-fallback:8080
+      - OTHER_INSTANCE_URL=http://app1:8080
+      - PAYMENT_POOL_SIZE=800
+      - RETRY_POOL_SIZE=500
+
+  haproxy:
+    image: haproxy:3.2-alpine
+    container_name: haproxy-lb
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: "0.20"
+          memory: 40M
+        reservations:
+          cpus: "0.15"
+          memory: 25M
+    sysctls:
+      - net.core.somaxconn=4096
+      - net.ipv4.tcp_tw_reuse=1
+    ports:
+      - "9999:80"
+    networks:
+      - backend
+      - payment-processor
+    volumes:
+      - ./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
+    depends_on:
+      - app1
+      - app2
+
+  postgres:
+    image: postgres:16-alpine
+    container_name: postgres_db
+    restart: unless-stopped
+    command: postgres -c config_file=/etc/postgresql/postgresql.conf
+    environment:
+      POSTGRES_DB: onecent
+      POSTGRES_USER: dev
+      POSTGRES_PASSWORD: secret123
+      PGDATA: /var/lib/postgresql/data/pgdata
+    ports:
+      - "5433:5432"
+    volumes:
+      - ./postgresql.conf:/etc/postgresql/postgresql.conf:ro
+    networks:
+      - backend
+      - payment-processor
+    shm_size: 64M
+    deploy:
+      resources:
+        limits:
+          cpus: "0.40"
+          memory: 230M
+        reservations:
+          cpus: "0.35"
+          memory: 200M
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U dev -d onecent"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+
+networks:
+  backend:
+    driver: bridge
+  payment-processor:
+    external: true

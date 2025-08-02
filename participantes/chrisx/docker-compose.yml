@@ -1,0 +1,89 @@
+services:
+  nginx:
+    image: nginx:1.25-alpine
+    container_name: rinha-nginx
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - app1
+      - app2
+    ports:
+      - "9999:9999"
+    networks:
+      - app-network
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          cpus: "0.15"
+          memory: "15MB"
+
+  app1:
+    image: chrisrp/myimage:v10
+    hostname: app1
+    environment:
+      DATABASE_URL: postgres://postgres:postgres@db-host:5432/richa_2025_prod
+      POOL_SIZE: 10
+      DEFAULT_PROVIDER_URL: http://payment-processor-default:8080
+      FALLBACK_PROVIDER_URL: http://payment-processor-fallback:8080
+      SECRET_KEY_BASE: 6bgvOMpuOOYAogQ5UcAEVvrgIvnGJT99aR1IyPBC8tnipb4JpJawXlkxqiuMmILq
+      PHX_SERVER: 1
+    restart: always
+    ports:
+      - "4001:4000"
+    networks:
+      - app-network
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          cpus: "0.425"
+          memory: "118MB"
+
+  app2:
+    image: chrisrp/myimage:v10
+    hostname: app2
+    environment:
+      DATABASE_URL: postgres://postgres:postgres@db-host:5432/richa_2025_prod
+      POOL_SIZE: 10
+      DEFAULT_PROVIDER_URL: http://payment-processor-default:8080
+      FALLBACK_PROVIDER_URL: http://payment-processor-fallback:8080
+      SECRET_KEY_BASE: 6bgvOMpuOOYAogQ5UcAEVvrgIvnGJT99aR1IyPBC8tnipb4JpJawXlkxqiuMmILq
+      PHX_SERVER: 1
+    restart: always
+    ports:
+      - "4002:4000"
+    networks:
+      - app-network
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          cpus: "0.425"
+          memory: "117MB"
+
+  richa-2025-db:
+    image: postgres:17
+    hostname: db-host
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: richa_2025_prod
+    restart: always
+    volumes:
+      - ./sql/structure.sql:/docker-entrypoint-initdb.d/structure.sql
+    ports:
+      - "15432:5432"
+    networks:
+      - app-network
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: "100MB"
+
+networks:
+  app-network:
+    driver: bridge
+  payment-processor:
+    external: true

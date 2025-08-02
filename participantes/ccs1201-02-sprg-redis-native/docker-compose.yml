@@ -1,6 +1,6 @@
 x-backend-templates:
   app: &app
-    image: csouzadocker/rinha-2025-redis-native:0.0.1
+    image: csouzadocker/rinha-2025-redis-native:0.0.2
     depends_on:
       - redis
     networks:
@@ -16,16 +16,16 @@ x-backend-templates:
     ACTIVE_MONITOR: "false"
     server.port: "8080"
     PAYMENT_QUEUE: "1000"
-    PAYMENT_PROCESSOR_MAX_RETRIES: "1"
+    PAYMENT_PROCESSOR_MAX_RETRIES: "5"
     PAYMENT_PROCESSOR_REQUEST_TIMEOUT: "10000"
-    PAYMENT_PROCESSOR_WORKERS: "12"
+    PAYMENT_PROCESSOR_WORKERS: "4"
     QUEUE_SIZE: "500"
     QUEUE_IS_FAIR: "true"
     REDIS_HOST: "redis"
-    REDIS_WORKERS: "18"
+    REDIS_WORKERS: "4"
     REQUEST_CONNECTION_TIMEOUT: "50"
     REQUEST_READ_TIMEOUT: "3000"
-    THREAD_POOL_SIZE: "8"
+    THREAD_POOL_SIZE: "10"
     VIRTUAL_THREADS: "true"
     WEBCLIENT_MAX_CONNECTION: "200"
     payment-processor.default.url: "http://payment-processor-default:8080"

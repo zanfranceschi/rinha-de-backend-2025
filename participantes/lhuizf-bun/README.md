@@ -3,7 +3,7 @@
 ## Tecnologias utilizadas
 
 - **Linguagem:** Bun e typescript
-- **Armazenamento:**: PostgreSQL
+- **Armazenamento:**: Redis
 - **Fila:** Redis
 - **Balanceador:** Nginx
 - **Orquestração:** Docker Compose
@@ -19,7 +19,7 @@
 
 ## Sobre a solução
 
-O backend foi desenvolvido em typescript com Elysia e bun. As requisições recebidas são enviado para uma fila no redis onde um worker é responsável por ler e encaminha para um processador que define qual payment processor vai ser usado no momento. Apos o processamento é salvo em uma tabela em um banco de dados PostgreSQL.
+O backend foi desenvolvido em typescript com Elysia e bun. As requisições recebidas são enviado para uma fila no redis onde um worker é responsável por ler e encaminha para um processador que define qual payment processor vai ser usado no momento. Após o processamento, os pagamentos são armazenados em um conjunto ordenado no Redis.
 
 ## Repositório do código-fonte
 

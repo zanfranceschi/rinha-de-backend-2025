@@ -1,0 +1,108 @@
+services:
+  keydb:
+    image: eqalpha/keydb
+    command: ["keydb-server", "/etc/keydb/keydb.conf", "--server-threads", "3"]
+    deploy:
+      resources:
+        limits:
+          cpus: "0.20"
+          memory: "70MB"
+    networks:
+      - default
+      - payment-processor
+    healthcheck:
+      test: ["CMD", "keydb-cli", "ping"]
+      interval: 5s
+      retries: 3
+
+  backend1:
+    image: lsfratel/rinha-2025-python:5
+    command: ["python", "-m", "backend"]
+    environment:
+      - KEYDB_URL=redis://keydb:6379
+      - DEFAULT_PAYMENT_URL=http://payment-processor-default:8080
+      - FALLBAK_PAYMENT_URL=http://payment-processor-fallback:8080
+    deploy:
+      resources:
+        limits:
+          cpus: "0.30"
+          memory: "60MB"
+    depends_on:
+      keydb:
+        condition: service_healthy
+    networks:
+      - default
+      - payment-processor
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://backend1:9999/payments-summary"]
+      interval: 5s
+      retries: 3
+
+  backend2:
+    image: lsfratel/rinha-2025-python:5
+    command: ["python", "-m", "backend"]
+    environment:
+      - KEYDB_URL=redis://keydb:6379
+      - DEFAULT_PAYMENT_URL=http://payment-processor-default:8080
+      - FALLBAK_PAYMENT_URL=http://payment-processor-fallback:8080
+    deploy:
+      resources:
+        limits:
+          cpus: "0.30"
+          memory: "60MB"
+    depends_on:
+      keydb:
+        condition: service_healthy
+    networks:
+      - default
+      - payment-processor
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://backend2:9999/payments-summary"]
+      interval: 5s
+      retries: 3
+
+  worker:
+    image: lsfratel/rinha-2025-python:5
+    command: ["python", "-m", "worker"]
+    environment:
+      - KEYDB_URL=redis://keydb:6379
+      - DEFAULT_PAYMENT_URL=http://payment-processor-default:8080
+      - FALLBAK_PAYMENT_URL=http://payment-processor-fallback:8080
+      - WORKER_POOL_SIZE=250
+    deploy:
+      resources:
+        limits:
+          cpus: "0.55"
+          memory: "120MB"
+    depends_on:
+      keydb:
+        condition: service_healthy
+    networks:
+      - default
+      - payment-processor
+
+  lighttpd:
+    image: jitesoft/lighttpd
+    volumes:
+      - ./lighttpd.conf:/etc/lighttpd/lighttpd.conf:ro
+    ports:
+      - "9999:9999"
+    depends_on:
+      backend1:
+        condition: service_healthy
+      backend2:
+        condition: service_healthy
+    networks:
+      - default
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          cpus: "0.15"
+          memory: "40MB"
+
+networks:
+  default:
+    driver: bridge
+  payment-processor:
+    external: true

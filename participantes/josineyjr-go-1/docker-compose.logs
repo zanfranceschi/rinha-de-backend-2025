@@ -1,60 +1,51 @@
 
  Network josineyjr-go-1_backend  Creating
  Network josineyjr-go-1_backend  Created
- Container redis-db  Creating
- Container redis-db  Created
+ Volume "josineyjr-go-1_sockets"  Creating
+ Volume "josineyjr-go-1_sockets"  Created
  Container worker1  Creating
  Container worker1  Created
- Container api3  Creating
+ Container api4  Creating
  Container api1  Creating
+ Container api5  Creating
  Container api2  Creating
+ Container api3  Creating
  Container api3  Created
+ Container api5  Created
  Container api1  Created
+ Container api4  Created
  Container api2  Created
  Container haproxy_lb  Creating
  Container haproxy_lb  Created
-Attaching to api1, api2, api3, haproxy_lb, redis-db, worker1
-redis-db    | 1:C 30 Jul 2025 23:49:19.398 # WARNING Memory overcommit must be enabled! Without it, a background save or replication may fail under low memory condition. Being disabled, it can also cause failures without low memory condition, see https://github.com/jemalloc/jemalloc/issues/1328. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.
-redis-db    | 1:C 30 Jul 2025 23:49:19.398 * oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
-redis-db    | 1:C 30 Jul 2025 23:49:19.398 * Redis version=7.2.10, bits=64, commit=00000000, modified=0, pid=1, just started
-redis-db    | 1:C 30 Jul 2025 23:49:19.398 * Configuration loaded
-redis-db    | 1:M 30 Jul 2025 23:49:19.399 * monotonic clock: POSIX clock_gettime
-redis-db    | 1:M 30 Jul 2025 23:49:19.399 * Running mode=standalone, port=6379.
-redis-db    | 1:M 30 Jul 2025 23:49:19.406 * <timeseries> RedisTimeSeries version 11017, git_sha=7b274da7d1f9055c16914520c938f2ad3546d0b7
-redis-db    | 1:M 30 Jul 2025 23:49:19.411 * <timeseries> Redis version found by RedisTimeSeries : 7.2.10 - oss
-redis-db    | 1:M 30 Jul 2025 23:49:19.411 * <timeseries> loaded default CHUNK_SIZE_BYTES policy: 4096
-redis-db    | 1:M 30 Jul 2025 23:49:19.411 * <timeseries> loaded server DUPLICATE_POLICY: block
-redis-db    | 1:M 30 Jul 2025 23:49:19.411 * <timeseries> Setting default series ENCODING to: compressed
-redis-db    | 1:M 30 Jul 2025 23:49:19.411 * <timeseries> Detected redis oss
-redis-db    | 1:M 30 Jul 2025 23:49:19.411 * Module 'timeseries' loaded from /opt/redis-stack/lib/redistimeseries.so
-redis-db    | 1:M 30 Jul 2025 23:49:19.412 * Server initialized
-redis-db    | 1:M 30 Jul 2025 23:49:19.412 * Ready to accept connections tcp
-worker1     | {"level":"info","time":"2025-07-30T23:49:20Z","message":"Worker starting..."}
-api2        | 2025/07/30 23:49:20 Gnet server starting on tcp://:9998
-api2        | [gnet] 2025-07-30T23:49:20.614537178Z	INFO	logging/logger.go:256	Launching gnet with 3 event-loops, listening on: tcp://:9998
-api2        | {"level":"info","time":"2025-07-30T23:49:20Z","message":"Gnet server started on port 9998"}
-api1        | 2025/07/30 23:49:20 Gnet server starting on tcp://:9997
-api1        | [gnet] 2025-07-30T23:49:20.742598326Z	INFO	logging/logger.go:256	Launching gnet with 3 event-loops, listening on: tcp://:9997
-api1        | {"level":"info","time":"2025-07-30T23:49:20Z","message":"Gnet server started on port 9997"}
-api3        | [gnet] 2025-07-30T23:49:20.776183812Z	INFO	logging/logger.go:256	Launching gnet with 3 event-loops, listening on: tcp://:9994
-api3        | {"level":"info","time":"2025-07-30T23:49:20Z","message":"Gnet server started on port 9994"}
-api3        | 2025/07/30 23:49:20 Gnet server starting on tcp://:9994
+Attaching to api1, api2, api3, api4, api5, haproxy_lb, worker1
+worker1     | {"level":"info","time":"2025-08-01T14:32:39Z","message":"Worker starting gnet HTTP server on unix:///sockets/worker_http.sock"}
+worker1     | [gnet] 2025-08-01T14:32:39.099218596Z	INFO	logging/logger.go:256	Launching gnet with 4 event-loops, listening on: unix:///sockets/worker_http.sock
+api1        | 2025/08/01 14:32:39 Gnet server starting on unix:///sockets/api1.sock
+api1        | [gnet] 2025-08-01T14:32:39.58883423Z	INFO	logging/logger.go:256	Launching gnet with 4 event-loops, listening on: unix:///sockets/api1.sock
+api1        | {"level":"info","time":"2025-08-01T14:32:39Z","message":"Gnet server started on port 9999"}
+api2        | 2025/08/01 14:32:39 Gnet server starting on unix:///sockets/api2.sock
+api2        | [gnet] 2025-08-01T14:32:39.839139483Z	INFO	logging/logger.go:256	Launching gnet with 4 event-loops, listening on: unix:///sockets/api2.sock
+api2        | {"level":"info","time":"2025-08-01T14:32:39Z","message":"Gnet server started on port 9999"}
+api4        | 2025/08/01 14:32:39 Gnet server starting on unix:///sockets/api4.sock
+api4        | [gnet] 2025-08-01T14:32:39.874037501Z	INFO	logging/logger.go:256	Launching gnet with 4 event-loops, listening on: unix:///sockets/api4.sock
+api4        | {"level":"info","time":"2025-08-01T14:32:39Z","message":"Gnet server started on port 9999"}
+api5        | 2025/08/01 14:32:39 Gnet server starting on unix:///sockets/api5.sock
+api5        | [gnet] 2025-08-01T14:32:39.942963228Z	INFO	logging/logger.go:256	Launching gnet with 4 event-loops, listening on: unix:///sockets/api5.sock
+api5        | {"level":"info","time":"2025-08-01T14:32:39Z","message":"Gnet server started on port 9999"}
+api3        | [gnet] 2025-08-01T14:32:39.983689323Z	INFO	logging/logger.go:256	Launching gnet with 4 event-loops, listening on: unix:///sockets/api3.sock
+api3        | {"level":"info","time":"2025-08-01T14:32:39Z","message":"Gnet server started on port 9999"}
+api3        | 2025/08/01 14:32:39 Gnet server starting on unix:///sockets/api3.sock
 haproxy_lb  | [NOTICE]   (1) : Initializing new worker (8)
 haproxy_lb  | [NOTICE]   (1) : Loading success.
 haproxy_lb  | [NOTICE]   (1) : haproxy version is 3.2.3-1844da7
 haproxy_lb  | [NOTICE]   (1) : path to executable is /usr/local/sbin/haproxy
 haproxy_lb  | [WARNING]  (1) : Exiting Master process...
-haproxy_lb  | [WARNING]  (8) : Proxy http-in stopped (cumulated conns: FE: 558, BE: 0).
-haproxy_lb  | [WARNING]  (8) : Proxy servers stopped (cumulated conns: FE: 0, BE: 16741).
+haproxy_lb  | [WARNING]  (8) : Proxy frontend stopped (cumulated conns: FE: 553, BE: 0).
+haproxy_lb  | [WARNING]  (8) : Proxy backend stopped (cumulated conns: FE: 0, BE: 16761).
 haproxy_lb  | [WARNING]  (1) : Current worker (8) exited with code 0 (Exit)
 haproxy_lb  | [WARNING]  (1) : All workers exited. Exiting... (0)
 [Khaproxy_lb exited with code 0
-[Kapi3 exited with code 2
-worker1     | {"level":"info","time":"2025-07-30T23:50:30Z","message":"Shutdown signal received. Gracefully stopping worker..."}
-worker1     | {"level":"info","time":"2025-07-30T23:50:30Z","message":"Worker stopped gracefully"}
+[Kapi5 exited with code 2
+worker1     | {"level":"info","time":"2025-08-01T14:33:50Z","message":"Worker stopped gracefully"}
 [Kworker1 exited with code 0
-redis-db    | 1:signal-handler (1753919431) Received SIGTERM scheduling shutdown...
-redis-db    | 1:M 30 Jul 2025 23:50:31.148 * User requested shutdown...
-redis-db    | 1:M 30 Jul 2025 23:50:31.148 # Redis is now ready to exit, bye bye...
-[Kredis-db exited with code 0
 log truncated at line 1000

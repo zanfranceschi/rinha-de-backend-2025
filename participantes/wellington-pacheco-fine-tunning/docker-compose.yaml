@@ -1,0 +1,80 @@
+x-service-templates:
+  api: &api
+    image: wellingtonbp/rinha_de_backend_ex:latest
+    pull_policy: always
+    environment:
+      DB_CONN_URL: ecto://rinha:rinha@rinha-db/db
+      PAYMENT_SERVICE_URL_DEFAULT: http://payment-processor-default:8080
+      PAYMENT_SERVICE_URL_FALLBACK: http://payment-processor-fallback:8080
+      WORKERS_COUNT: 5
+    networks:
+      - payment-processor
+      - rinha-backend-ex
+    deploy:
+      resources:
+        limits:
+          cpus: '0.57'
+          memory: '120MB'
+
+  db: &db
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_USER: rinha
+      POSTGRES_PASSWORD: rinha
+      POSTGRES_DB: db
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - rinha-backend-ex
+    command: 'postgres -c max_connections=10 -c synchronous_commit=off -c fsync=off -c full_page_writes=off'
+    deploy:
+      resources:
+        limits:
+          cpus: '0.20'
+          memory: '90MB'
+
+  server: &server
+    image: nginx:1.27.5-alpine
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    networks:
+      - rinha-backend-ex
+    ports:
+      - 9999:9999
+    deploy:
+      resources:
+        limits:
+          cpus: '0.16'
+          memory: '20MB'
+
+services:
+  db:
+    <<: *db
+    container_name: rinha-db
+    hostname: rinha-db
+
+  api1:
+    <<: *api
+    container_name: api-1
+    hostname: api-1
+    depends_on:
+      - db
+
+  api2:
+    <<: *api
+    container_name: api-2
+    hostname: api-2
+    depends_on:
+      - db
+
+  lb:
+    <<: *server
+    depends_on:
+      - api1
+      - api2
+
+networks:
+  payment-processor:
+    external: true
+  rinha-backend-ex:
+    driver: bridge

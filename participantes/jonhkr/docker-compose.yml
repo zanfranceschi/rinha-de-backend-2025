@@ -1,16 +1,15 @@
+x-component: &component
+  image: jonhkr/rb2025:9ccff3d
+  # build:
+  #   context: ./
+  volumes:
+    - sockets:/sockets:rw
 x-api: &api
-  image: jonhkr/rb2025:3246995
-  environment:
-    - WORKERS=5
-    - DATABASE_URL=postgres://r2025:passwd@db:5432/r2025?sslmode=disable
-    - PROCESSOR_DEFAULT_URL=http://payment-processor-default:8080
-    - PROCESSOR_FALLBACK_URL=http://payment-processor-fallback:8080
+  <<: *component
+  command: /api
   networks:
     - backend
     - payment-processor
-  depends_on:
-    db:
-      condition: service_healthy
   deploy:
     resources:
       limits:
@@ -20,15 +19,38 @@ services:
   api1:
     <<: *api
     hostname: api1
+    environment:
+      - GOMAXPROCS=1
+      - SOCKET_PATH=/sockets/api1.sock
+      - WORKERS=20
+      - PROCESSOR_DEFAULT_URL=http://payment-processor-default:8080
+      - PROCESSOR_FALLBACK_URL=http://payment-processor-fallback:8080
   api2:
     <<: *api
     hostname: api2
+    environment:
+      - GOMAXPROCS=1
+      - SOCKET_PATH=/sockets/api2.sock
+      - WORKERS=20
+      - PROCESSOR_DEFAULT_URL=http://payment-processor-default:8080
+      - PROCESSOR_FALLBACK_URL=http://payment-processor-fallback:8080
 
+  db:
+    <<: *component
+    command: /db
+    environment:
+      - GOMAXPROCS=1
+    deploy:
+      resources:
+        limits:
+          cpus: "0.45"
+          memory: "79MB"
   nginx:
     image: nginx:1.25-alpine
     container_name: rinha-nginx
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - sockets:/sockets:rw
     depends_on:
       - api1
       - api2
@@ -36,38 +58,14 @@ services:
       - "9999:80"
     networks:
       - backend
-      - payment-processor
     deploy:
       resources:
         limits:
           cpus: "0.25"
           memory: "35MB"
 
-  db:
-    image: postgres
-    restart: always
-    shm_size: 128mb
-    hostname: db
-    networks:
-      - backend
-    deploy:
-      resources:
-        limits:
-          cpus: "0.45"
-          memory: "79MB"
-    volumes:
-      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
-    ports:
-      - "5432:5432"
-    healthcheck:
-      test: [ "CMD-SHELL", "pg_isready -U r2025 -d r2025" ]
-      interval: 1s
-      retries: 10
-      start_period: 2s
-      timeout: 10s
-    environment:
-      POSTGRES_USER: r2025
-      POSTGRES_PASSWORD: passwd
+volumes:
+  sockets:
 
 networks:
   backend:

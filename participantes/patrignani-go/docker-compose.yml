@@ -1,0 +1,122 @@
+  services:
+    api1:
+      hostname: api1
+      container_name: api1
+      image: patrignani/rinha-2025:latest
+      ports:
+        - "8006:8080"
+      depends_on:
+        - db
+      environment:
+        DB_HOST: db
+        DB_USER: admin
+        DB_PASSWORD: admin
+        DB_NAME: rinha
+        REDIS: redis:6379
+        QUEUE_BUFFER: 50000
+        QUEUE_WORKERS: 15
+        DEFAULT_URL: payment-processor-default:8080
+        FALLBACK_URL: payment-processor-fallback:8080
+        ATTEMPS_RETRY: 3
+        TIME_ATTEMPS: 400ms
+      networks:
+        - rinha-back
+        - payment-processor
+      restart: unless-stopped
+      deploy:
+        resources:
+          limits:
+            memory: "100MB"
+            cpus: "0.5"
+
+    api2:
+      hostname: api2
+      container_name: api2
+      image: patrignani/rinha-2025:latest
+      ports:
+        - "8005:8080"
+      depends_on:
+        - db
+      environment:
+        DB_HOST: db
+        DB_USER: admin
+        DB_PASSWORD: admin
+        DB_NAME: rinha
+        REDIS: redis:6379
+        QUEUE_BUFFER: 50000
+        QUEUE_WORKERS: 15
+        DEFAULT_URL: payment-processor-default:8080
+        FALLBACK_URL: payment-processor-fallback:8080
+        ATTEMPS_RETRY: 3
+        TIME_ATTEMPS: 400ms
+      networks:
+        - rinha-back
+        - payment-processor
+      restart: unless-stopped
+      deploy:
+        resources:
+          limits:
+            memory: "100MB"
+            cpus: "0.5"     
+
+    db:
+      hostname: storage
+      image: postgres:17-alpine
+      environment:
+        POSTGRES_DB: rinha
+        POSTGRES_USER: admin
+        POSTGRES_PASSWORD: admin
+      volumes:
+        - ./payment.sql:/docker-entrypoint-initdb.d/payment.sql:ro
+        - pgdata:/var/lib/postgresql/data
+      networks:
+        - rinha-back
+        - payment-processor
+      ports:
+        - "5432:5432"
+      restart: unless-stopped
+      command: >
+        postgres
+        -c fsync=off
+        -c synchronous_commit=off
+        -c full_page_writes=off
+        -c shared_buffers=32MB
+        -c work_mem=3MB
+        -c max_connections=30
+        -c log_min_duration_statement=-1
+        -c logging_collector=off
+        -c effective_cache_size=96MB
+      deploy:
+        resources:
+          limits:
+            memory: "95MB"
+            cpus: "0.3"
+
+    haproxy:
+      image: haproxy:2.9-alpine
+      container_name: haproxy-lb
+      volumes:
+        - ./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
+      ports:
+        - "9999:9999"
+      depends_on:
+        - api1
+        - api2
+      deploy:
+        resources:
+          limits:
+            cpus: "0.2"
+            memory: "55MB"
+      networks:
+        - rinha-back
+        - payment-processor
+      restart: unless-stopped
+
+  volumes:
+    pgdata:
+
+  networks:
+    rinha-back:
+      driver: bridge
+    payment-processor:
+      external: true

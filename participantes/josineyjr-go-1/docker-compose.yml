@@ -1,12 +1,12 @@
 x-service-templates:
   base: &base
-    image: josiney/rdb25_02-amd64:66b68b63
+    image: josiney/rdb25_02-amd64:ae8517f3
+    volumes:
+      - sockets:/sockets
     networks:
       - backend
       - payment-processor
-    depends_on:
-      redis:
-        condition: service_healthy
+
 
 services:
   api1:
@@ -19,13 +19,13 @@ services:
           cpus: "0.1"
           memory: "30MB"
     environment:
-      - PORT=9997
-      - REDIS_URL=redis://redis-db:6379/0
+      - SOCKET_PATH=/sockets/api1.sock
+      - WORKER_SOCKET_PATH=/sockets/worker_http.sock
       - PAYMENTS_PROCESSOR_URL_DEFAULT=http://payment-processor-default:8080/payments
       - PAYMENTS_PROCESSOR_URL_FALLBACK=http://payment-processor-fallback:8080/payments
       - HEALTH_PROCESSOR_URL_DEFAULT=http://payment-processor-default:8080/payments/service-health
       - HEALTH_PROCESSOR_URL_FALLBACK=http://payment-processor-fallback:8080/payments/service-health
-    command: ./api
+    command: sh -c "umask 0 && ./api"
     depends_on:
       - worker1
 
@@ -39,13 +39,13 @@ services:
           cpus: "0.1"
           memory: "30MB"
     environment:
-      - PORT=9998
-      - REDIS_URL=redis://redis-db:6379/0
+      - SOCKET_PATH=/sockets/api2.sock
+      - WORKER_SOCKET_PATH=/sockets/worker_http.sock
       - PAYMENTS_PROCESSOR_URL_DEFAULT=http://payment-processor-default:8080/payments
       - PAYMENTS_PROCESSOR_URL_FALLBACK=http://payment-processor-fallback:8080/payments
       - HEALTH_PROCESSOR_URL_DEFAULT=http://payment-processor-default:8080/payments/service-health
       - HEALTH_PROCESSOR_URL_FALLBACK=http://payment-processor-fallback:8080/payments/service-health
-    command: ./api
+    command: sh -c "umask 0 && ./api"
     depends_on:
       - worker1
 
@@ -59,13 +59,53 @@ services:
           cpus: "0.1"
           memory: "30MB"
     environment:
-      - PORT=9994
-      - REDIS_URL=redis://redis-db:6379/0
+      - SOCKET_PATH=/sockets/api3.sock
+      - WORKER_SOCKET_PATH=/sockets/worker_http.sock
       - PAYMENTS_PROCESSOR_URL_DEFAULT=http://payment-processor-default:8080/payments
       - PAYMENTS_PROCESSOR_URL_FALLBACK=http://payment-processor-fallback:8080/payments
       - HEALTH_PROCESSOR_URL_DEFAULT=http://payment-processor-default:8080/payments/service-health
       - HEALTH_PROCESSOR_URL_FALLBACK=http://payment-processor-fallback:8080/payments/service-health
-    command: ./api
+    command: sh -c "umask 0 && ./api"
+    depends_on:
+      - worker1
+
+  api4:
+    <<: *base
+    container_name: api4
+    hostname: api4
+    deploy:
+      resources:
+        limits:
+          cpus: "0.1"
+          memory: "30MB"
+    environment:
+      - SOCKET_PATH=/sockets/api4.sock
+      - WORKER_SOCKET_PATH=/sockets/worker_http.sock
+      - PAYMENTS_PROCESSOR_URL_DEFAULT=http://payment-processor-default:8080/payments
+      - PAYMENTS_PROCESSOR_URL_FALLBACK=http://payment-processor-fallback:8080/payments
+      - HEALTH_PROCESSOR_URL_DEFAULT=http://payment-processor-default:8080/payments/service-health
+      - HEALTH_PROCESSOR_URL_FALLBACK=http://payment-processor-fallback:8080/payments/service-health
+    command: sh -c "umask 0 && ./api"
+    depends_on:
+      - worker1
+  
+  api5:
+    <<: *base
+    container_name: api5
+    hostname: api5
+    deploy:
+      resources:
+        limits:
+          cpus: "0.1"
+          memory: "30MB"
+    environment:
+      - SOCKET_PATH=/sockets/api5.sock
+      - WORKER_SOCKET_PATH=/sockets/worker_http.sock
+      - PAYMENTS_PROCESSOR_URL_DEFAULT=http://payment-processor-default:8080/payments
+      - PAYMENTS_PROCESSOR_URL_FALLBACK=http://payment-processor-fallback:8080/payments
+      - HEALTH_PROCESSOR_URL_DEFAULT=http://payment-processor-default:8080/payments/service-health
+      - HEALTH_PROCESSOR_URL_FALLBACK=http://payment-processor-fallback:8080/payments/service-health
+    command: sh -c "umask 0 && ./api"
     depends_on:
       - worker1
 
@@ -76,59 +116,40 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.4"
-          memory: "50MB"
+          cpus: "0.8"
+          memory: "150MB"
     environment:
-      - REDIS_URL=redis://redis-db:6379/0
+      - SOCKET_PATH=/sockets/worker_http.sock
       - PAYMENTS_PROCESSOR_URL_DEFAULT=http://payment-processor-default:8080/payments
       - PAYMENTS_PROCESSOR_URL_FALLBACK=http://payment-processor-fallback:8080/payments
       - HEALTH_PROCESSOR_URL_DEFAULT=http://payment-processor-default:8080/payments/service-health
       - HEALTH_PROCESSOR_URL_FALLBACK=http://payment-processor-fallback:8080/payments/service-health
-    command: ./worker
-
-  redis:
-    image: redis/redis-stack:7.2.0-v18
-    container_name: redis-db
-    healthcheck:
-      test: ["CMD", "redis-cli", "ping"]
-      interval: 250ms
-      timeout: 2s
-      retries: 10
-    command:
-      - redis-server
-      - --loadmodule /opt/redis-stack/lib/redistimeseries.so
-      - --appendonly no
-      - --maxmemory 50mb
-      - --save ""
-      - --protected-mode no
-    networks:
-      - backend
-    ports:
-      - "6379:6379"
-    deploy:
-      resources:
-        limits:
-          cpus: "0.3"
-          memory: "50MB"
+    command: sh -c "umask 0 && ./worker"
 
   lb:
     image: haproxy:latest
     container_name: haproxy_lb
     volumes:
+      - sockets:/sockets
       - ./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
     depends_on:
       - api1
       - api2
       - api3
+      - api4
+      - api5
     ports:
-      - "9999:9999"
+      - 9999:80
     networks:
       - backend
     deploy:
       resources:
         limits:
-          cpus: "0.3"
-          memory: "50MB"
+          cpus: "0.2"
+          memory: "30MB"
+
+volumes:
+  sockets:
 
 networks:
   backend:

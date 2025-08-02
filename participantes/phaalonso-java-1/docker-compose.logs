@@ -1,0 +1,60 @@
+
+ Network phaalonso-java-1_backend  Creating
+ Network phaalonso-java-1_backend  Created
+ Container api01  Creating
+ Container rinha-router-nginx  Creating
+ Container rinha-router-nginx  Created
+ Container api01  Created
+Attaching to api01, rinha-router-nginx
+rinha-router-nginx  | /docker-entrypoint.sh: /docker-entrypoint.d/ is not empty, will attempt to perform configuration
+rinha-router-nginx  | /docker-entrypoint.sh: Looking for shell scripts in /docker-entrypoint.d/
+rinha-router-nginx  | /docker-entrypoint.sh: Launching /docker-entrypoint.d/10-listen-on-ipv6-by-default.sh
+rinha-router-nginx  | 10-listen-on-ipv6-by-default.sh: info: Getting the checksum of /etc/nginx/conf.d/default.conf
+rinha-router-nginx  | 10-listen-on-ipv6-by-default.sh: info: Enabled listen on IPv6 in /etc/nginx/conf.d/default.conf
+rinha-router-nginx  | /docker-entrypoint.sh: Sourcing /docker-entrypoint.d/15-local-resolvers.envsh
+rinha-router-nginx  | /docker-entrypoint.sh: Launching /docker-entrypoint.d/20-envsubst-on-templates.sh
+rinha-router-nginx  | /docker-entrypoint.sh: Launching /docker-entrypoint.d/30-tune-worker-processes.sh
+rinha-router-nginx  | /docker-entrypoint.sh: Configuration complete; ready for start up
+api01               | 
+api01               |   .   ____          _            __ _ _
+api01               |  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+api01               | ( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+api01               |  \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+api01               |   '  |____| .__|_| |_|_| |_\__, | / / / /
+api01               |  =========|_|==============|___/=/_/_/_/
+api01               | 
+api01               |  :: Spring Boot ::                (v3.5.4)
+api01               | 
+api01               | 2025-07-31T08:59:03.919Z  INFO 1 --- [payment-gateway] [           main] c.a.p.p.PaymentGatewayApplication        : Starting PaymentGatewayApplication v0.0.1-SNAPSHOT using Java 21.0.7 with PID 1 (/app/app.jar started by root in /app)
+api01               | 2025-07-31T08:59:03.923Z  INFO 1 --- [payment-gateway] [           main] c.a.p.p.PaymentGatewayApplication        : No active profile set, falling back to 1 default profile: "default"
+rinha-router-nginx  | 2025/07/31 08:59:04 [error] 29#29: *1 connect() failed (111: Connection refused) while connecting to upstream, client: 172.18.0.1, server: , request: "GET /payments-summary HTTP/1.1", upstream: "http://172.18.0.4:8080/payments-summary", host: "localhost:9999"
+api01               | 2025-07-31T08:59:05.712Z  INFO 1 --- [payment-gateway] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+api01               | 2025-07-31T08:59:05.715Z  INFO 1 --- [payment-gateway] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+api01               | 2025-07-31T08:59:05.747Z  INFO 1 --- [payment-gateway] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 14 ms. Found 0 Redis repository interfaces.
+api01               | 2025-07-31T08:59:06.448Z  INFO 1 --- [payment-gateway] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+api01               | 2025-07-31T08:59:06.466Z  INFO 1 --- [payment-gateway] [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+api01               | 2025-07-31T08:59:06.466Z  INFO 1 --- [payment-gateway] [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.43]
+api01               | 2025-07-31T08:59:06.539Z  INFO 1 --- [payment-gateway] [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+api01               | 2025-07-31T08:59:06.540Z  INFO 1 --- [payment-gateway] [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2412 ms
+api01               | 2025-07-31T08:59:08.119Z  INFO 1 --- [payment-gateway] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+api01               | 2025-07-31T08:59:08.142Z  INFO 1 --- [payment-gateway] [           main] c.a.p.p.PaymentGatewayApplication        : Started PaymentGatewayApplication in 5.479 seconds (process running for 6.578)
+api01               | 2025-07-31T08:59:09.939Z  INFO 1 --- [payment-gateway] [omcat-handler-0] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+api01               | 2025-07-31T08:59:09.940Z  INFO 1 --- [payment-gateway] [omcat-handler-0] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+api01               | 2025-07-31T08:59:09.941Z  INFO 1 --- [payment-gateway] [omcat-handler-0] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+api01               | 2025-07-31T08:59:10.028Z  WARN 1 --- [payment-gateway] [omcat-handler-0] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required request parameter 'from' for method parameter type Instant is not present]
+api01               | 2025-07-31T08:59:15.173Z  WARN 1 --- [payment-gateway] [omcat-handler-1] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required request parameter 'from' for method parameter type Instant is not present]
+api01               | 2025-07-31T08:59:20.189Z  WARN 1 --- [payment-gateway] [omcat-handler-2] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required request parameter 'from' for method parameter type Instant is not present]
+api01               | 2025-07-31T08:59:25.203Z  WARN 1 --- [payment-gateway] [omcat-handler-3] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required request parameter 'from' for method parameter type Instant is not present]
+api01               | 2025-07-31T08:59:30.215Z  WARN 1 --- [payment-gateway] [omcat-handler-4] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required request parameter 'from' for method parameter type Instant is not present]
+api01               | 2025-07-31T08:59:35.228Z  WARN 1 --- [payment-gateway] [omcat-handler-5] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required request parameter 'from' for method parameter type Instant is not present]
+api01               | 2025-07-31T08:59:40.241Z  WARN 1 --- [payment-gateway] [omcat-handler-6] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required request parameter 'from' for method parameter type Instant is not present]
+api01               | 2025-07-31T08:59:45.254Z  WARN 1 --- [payment-gateway] [omcat-handler-7] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required request parameter 'from' for method parameter type Instant is not present]
+api01               | 2025-07-31T08:59:50.269Z  WARN 1 --- [payment-gateway] [omcat-handler-8] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required request parameter 'from' for method parameter type Instant is not present]
+api01               | 2025-07-31T08:59:55.283Z  WARN 1 --- [payment-gateway] [omcat-handler-9] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required request parameter 'from' for method parameter type Instant is not present]
+api01               | 2025-07-31T09:00:00.299Z  WARN 1 --- [payment-gateway] [mcat-handler-10] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required request parameter 'from' for method parameter type Instant is not present]
+api01               | 2025-07-31T09:00:05.316Z  WARN 1 --- [payment-gateway] [mcat-handler-11] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required request parameter 'from' for method parameter type Instant is not present]
+api01               | 2025-07-31T09:00:10.329Z  WARN 1 --- [payment-gateway] [mcat-handler-12] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required request parameter 'from' for method parameter type Instant is not present]
+api01               | 2025-07-31T09:00:15.469Z  INFO 1 --- [payment-gateway] [ionShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+api01               | 2025-07-31T09:00:15.474Z  INFO 1 --- [payment-gateway] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+[Kapi01 exited with code 143
+[Krinha-router-nginx exited with code 0

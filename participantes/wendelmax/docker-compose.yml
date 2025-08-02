@@ -14,7 +14,7 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.2"
+          cpus: "0.4"
           memory: "128MB"
     restart: unless-stopped
     healthcheck:
@@ -22,9 +22,8 @@ services:
       interval: 5s
       timeout: 5s
       retries: 5
-
   rinha-backend:
-    image:  wendelmax/rinhabackend.net-backend:latest
+    image: ghcr.io/wendelmax/rinhabackend.net:latest
     expose:
       - "8080"
     environment:
@@ -41,7 +40,7 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "1.2"
+          cpus: "1.0"
           memory: "200MB"
     restart: unless-stopped
 

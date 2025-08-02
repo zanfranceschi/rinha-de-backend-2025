@@ -1,0 +1,94 @@
+services:
+  backend1:
+    image: mathauscm/rinha_backend
+    ports:
+      - "10001:9999"
+    depends_on:
+      - redis
+    environment:
+      - NODE_ENV=production
+      - UV_THREADPOOL_SIZE=64
+    deploy:
+      resources:
+        limits:
+          cpus: "0.45"
+          memory: "80MB"
+    networks:
+      - payment-processor
+
+  backend2:
+    image: mathauscm/rinha_backend
+    ports:
+      - "10002:9999"
+    depends_on:
+      - redis
+    environment:
+      - NODE_ENV=production
+      - UV_THREADPOOL_SIZE=64
+    deploy:
+      resources:
+        limits:
+          cpus: "0.45"
+          memory: "80MB"
+    networks:
+      - payment-processor
+
+  backend3:
+    image: mathauscm/rinha_backend
+    ports:
+      - "10003:9999"
+    depends_on:
+      - redis
+    environment:
+      - NODE_ENV=production
+      - UV_THREADPOOL_SIZE=64
+    deploy:
+      resources:
+        limits:
+          cpus: "0.45"
+          memory: "80MB"
+    networks:
+      - payment-processor
+
+  redis:
+    image: redis:7-alpine
+    hostname: redis
+    command: [
+      "redis-server",
+      "--appendonly", "no",
+      "--save", "",
+      "--maxmemory", "80mb",
+      "--maxmemory-policy", "allkeys-lru",
+      "--tcp-keepalive", "60",
+      "--timeout", "0"
+    ]
+    deploy:
+      resources:
+        limits:
+          cpus: "0.05"
+          memory: "70MB"
+    networks:
+      - payment-processor
+
+  nginx:
+    image: nginx:stable-alpine
+    ports:
+      - "9999:9999"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - backend1
+      - backend2
+      - backend3
+    deploy:
+      resources:
+        limits:
+          cpus: "0.1"
+          memory: "60MB"
+    networks:
+      - payment-processor
+
+networks:
+  payment-processor:
+    external: true
+    driver: bridge

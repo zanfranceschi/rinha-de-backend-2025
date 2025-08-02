@@ -1,57 +1,18 @@
 services:
-  api-1:
-    image: gabxdevv/rinha-backend-2025-java-super-bolado-web-flux:1.0.0
-    container_name: gaxdev-backend-1
+  backend-1:
+    image: gabxdevv/rinha-backend-2025-java-super-bolado-arq:2.0.0
+    restart: always
     environment:
-      RETRY_API_DEFAULT: 14
+      RETRY_API_DEFAULT: 15
       WORKER_POOL_SIZE: 16
-      USER_SERVER: true
       URL_PROCESSOR_DEFAULT: http://payment-processor-default:8080/payments
       URL_PROCESSOR_FALLBACK: http://payment-processor-fallback:8080/payments
       BACK_END_URL: http://backend-2:8080
-      SERVER_PORT: 9999
       UDP_CHANNEL_PORT: 9001
       UDP_CHANNEL_INTERNAL_PORT: 9003
-      EXTERNAL_UDP_HOST: api-2
+      EXTERNAL_UDP_HOST: backend-2
       EXTERNAL_UDP_PORT: 9004
-      LOG_LEVEL: INFO
-      JAVA_OPTS: >-
-        -server
-        -XX:+UseG1GC
-        -XX:+UseFastAccessorMethods
-        -Xlog:disable
-        -XX:-PrintGC
-        -XX:+UseStringCache
-        -XX:-PrintGCDetails
-        -XX:-FlightRecorder
-        -XX:+DisableExplicitGC
-    networks:
-      - backend
-      - payment-processor
-    ports:
-      - "9999:9999"
-    deploy:
-      resources:
-        limits:
-          cpus: '0.9'
-          memory: '175MB'
-
-  api-2:
-    image: gabxdevv/rinha-backend-2025-java-super-bolado-web-flux:1.0.0
-    container_name: gaxdev-backend-2
-    restart: always
-    environment:
-      RETRY_API_DEFAULT: 14
-      WORKER_POOL_SIZE: 16
-      API_ROUTER_POOL_SIZE: 6
-      URL_PROCESSOR_DEFAULT: http://payment-processor-default:8080/payments
-      URL_PROCESSOR_FALLBACK: http://payment-processor-fallback:8080/payments
-      USER_SERVER: false
-      BACK_END_URL: http://backend-1:8080
-      UDP_CHANNEL_PORT: 9002
-      UDP_CHANNEL_INTERNAL_PORT: 9004
-      EXTERNAL_UDP_HOST: api-1
-      EXTERNAL_UDP_PORT: 9003
+      HANDLER_UDP_POOL_SIZE: 7
       JAVA_OPTS: >-
         -server
         -XX:+UseG1GC
@@ -69,7 +30,69 @@ services:
       resources:
         limits:
           cpus: '0.6'
-          memory: '175MB'
+          memory: '125MB'
+
+  backend-2:
+    image: gabxdevv/rinha-backend-2025-java-super-bolado-arq:2.0.0
+    restart: always
+    environment:
+      RETRY_API_DEFAULT: 15
+      WORKER_POOL_SIZE: 16
+      URL_PROCESSOR_DEFAULT: http://payment-processor-default:8080/payments
+      URL_PROCESSOR_FALLBACK: http://payment-processor-fallback:8080/payments
+      BACK_END_URL: http://backend-1:8080
+      UDP_CHANNEL_PORT: 9002
+      UDP_CHANNEL_INTERNAL_PORT: 9004
+      EXTERNAL_UDP_HOST: backend-1
+      EXTERNAL_UDP_PORT: 9003
+      HANDLER_UDP_POOL_SIZE: 7
+      JAVA_OPTS: >-
+        -server
+        -XX:+UseG1GC
+        -XX:+UseFastAccessorMethods
+        -Xlog:disable
+        -XX:-PrintGC
+        -XX:+UseStringCache
+        -XX:-PrintGCDetails
+        -XX:-FlightRecorder
+        -XX:+DisableExplicitGC
+    networks:
+      - backend
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          cpus: '0.6'
+          memory: '125MB'
+
+  load-balancer:
+    image: gabxdevv/loud-balance-diferenciado-native:2.0.0
+    restart: always
+    depends_on:
+      - backend-1
+      - backend-2
+    ports:
+      - "9999:9999"
+    networks:
+      - backend
+    deploy:
+      resources:
+        limits:
+          cpus: "0.30"
+          memory: "100MB"
+    environment:
+      BACK_END_1_URL: backend-1
+      BACK_END_2_URL: backend-2
+      JAVA_OPTS: >-
+        -server
+        -XX:+UseG1GC
+        -XX:+UseFastAccessorMethods
+        -Xlog:disable
+        -XX:-PrintGC
+        -XX:+UseStringCache
+        -XX:-PrintGCDetails
+        -XX:-FlightRecorder
+        -XX:+DisableExplicitGC
 
 networks:
   backend:

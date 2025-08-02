@@ -1,13 +1,13 @@
 x-service-templates:
-  backend: &backend
-    image: geazianc/rinha25:v3
+  backend: &backend #image: geazianc/rinha25:v3
+    image: geazianc/rinha25-backend:v1
     env_file:
       - .env
     deploy:
       resources:
         limits:
-          cpus: "0.65"
-          memory: "160MB"
+          cpus: "0.20"
+          memory: "100MB"
     depends_on:
       - valkey-server
     networks:
@@ -25,6 +25,21 @@ services:
     ports:
       - 8082:8080
 
+  worker:
+    image: geazianc/rinha25-worker:v1
+    env_file:
+      - .env
+    deploy:
+      resources:
+        limits:
+          cpus: "0.9"
+          memory: "100MB"
+    depends_on:
+      - valkey-server
+    networks:
+      - backend
+      - payment-processor
+
   valkey-server:
     image: valkey/valkey:8.1.3-alpine
     container_name: valkey-server
@@ -34,10 +49,9 @@ services:
       resources:
         limits:
           cpus: "0.10"
-          memory: "15MB"
+          memory: "25MB"
     networks:
       - backend
-
 
   nginx:
     image: nginx:alpine
@@ -49,7 +63,7 @@ services:
       resources:
         limits:
           cpus: "0.10"
-          memory: "15MB"
+          memory: "25MB"
     depends_on:
       - api1
       - api2

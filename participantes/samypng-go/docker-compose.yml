@@ -60,13 +60,13 @@ services:
           cpus: "0.5"
           memory: "50MB"
 
-  nginx:
-    image: nginx:alpine
-    container_name: rinha-nginx
+  haproxy:
+    image: haproxy:alpine
+    container_name: rinha-haproxy
     ports:
       - "9999:9999"
     volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+       - ./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
     depends_on:
       backend1:
         condition: service_started
@@ -79,6 +79,7 @@ services:
         limits:
           cpus: "0.2"
           memory: "50MB"
+  
 networks:
   rinha-network:
     driver: bridge
