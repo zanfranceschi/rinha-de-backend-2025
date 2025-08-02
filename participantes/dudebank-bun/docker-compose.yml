@@ -1,15 +1,15 @@
 services:
   api1: &api-service
-    image: eber404/dudebank:0.0.3
+    image: eber404/dudebank:0.0.4
     env_file:
       - .env
-    ports:
-      - '3001:8080'
+    environment:
+      - SERVER_SOCKET_PATH=/tmp/api1.sock
     networks:
       - backend
       - payment-processor
     volumes:
-      - memorydb_data:/app/data
+      - socket_data:/tmp
     depends_on:
       - memorydb
     deploy:
@@ -20,17 +20,15 @@ services:
 
   api2:
     <<: *api-service
-    ports:
-      - '3002:8080'
+    environment:
+      - SERVER_SOCKET_PATH=/tmp/api2.sock
 
   memorydb:
-    image: eber404/dudebank-db:0.0.3
+    image: eber404/dudebank-db:0.0.4
     volumes:
-      - memorydb_data:/app/data
+      - socket_data:/tmp
     networks:
       - backend
-    ports:
-      - '8081:8081'
     deploy:
       resources:
         limits:
