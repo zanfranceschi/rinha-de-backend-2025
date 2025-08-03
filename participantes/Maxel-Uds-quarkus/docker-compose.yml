@@ -15,8 +15,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.60"
-          memory: "150MB"
+          cpus: "0.50"
+          memory: "125MB"
     networks:
       - payment-router
       - payment-processor
@@ -32,16 +32,14 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.60"
-          memory: "150MB"
+          cpus: "0.50"
+          memory: "125MB"
     networks:
       - payment-router
 
   load_balancer:
-    image: nginx:latest
+    image: suntzu12/lua-nginx-loadbalancer:20250803010034
     container_name: load_balancer
-    volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf:ro
     depends_on:
       - api01
       - api02
@@ -50,8 +48,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.30"
-          memory: "50MB"
+          cpus: "0.50"
+          memory: "100MB"
     networks:
       - payment-router
 

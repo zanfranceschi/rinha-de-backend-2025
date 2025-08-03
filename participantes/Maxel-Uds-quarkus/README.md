@@ -15,3 +15,4 @@ Este projeto foi construído com foco em performance e resiliência.
 
 Conheça o router clicando [aqui](https://github.com/Maxel-Uds/payment-router)
 Conheça o storage clicando [aqui](https://github.com/Maxel-Uds/payment-storage)
+Conheça o proxy clicando [aqui](https://github.com/Maxel-Uds/lua-nginx-loadbalancer)
