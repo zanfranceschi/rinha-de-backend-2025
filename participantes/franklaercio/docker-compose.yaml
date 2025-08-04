@@ -67,12 +67,10 @@ services:
           cpus: "0.2"
           memory: "20MB"
 
-  api01:
+  api01: &api
     container_name: api01
     image: franklaercio/rinha-backend-2025:latest
     hostname: api01
-    ports:
-      - "8083:8080"
     depends_on:
       postgres:
         condition: service_healthy
@@ -89,55 +87,19 @@ services:
       REDIS_HOST: "redis"
       REDIS_PORT: "6379"
       HTTP_PORT: "8080"
-      PAYMENT_WORKERS: "40"
+      PAYMENT_WORKERS: "12"
       PAYMENT_URL_DEFAULT: "http://payment-processor-default:8080"
       PAYMENT_URL_FALLBACK: "http://payment-processor-fallback:8080"
     deploy:
-      restart_policy:
-        condition: on-failure
-        delay: 2s
-        max_attempts: 10
-        window: 5s
       resources:
         limits:
           cpus: "0.3"
           memory: "50M"
 
   api02:
+    <<: *api
     container_name: api02
-    image: franklaercio/rinha-backend-2025:latest
     hostname: api02
-    ports:
-      - "8082:8080"
-    depends_on:
-      postgres:
-        condition: service_healthy
-      redis:
-        condition: service_healthy
-    networks:
-      - backend
-      - payment-processor
-    environment:
-      DB_HOST: postgres
-      DB_USER: postgres
-      DB_PASSWORD: postgres
-      DB_NAME: rinha
-      REDIS_HOST: "redis"
-      REDIS_PORT: "6379"
-      HTTP_PORT: "8080"
-      PAYMENT_WORKERS: "40"
-      PAYMENT_URL_DEFAULT: "http://payment-processor-default:8080"
-      PAYMENT_URL_FALLBACK: "http://payment-processor-fallback:8080"
-    deploy:
-      restart_policy:
-        condition: on-failure
-        delay: 2s
-        max_attempts: 10
-        window: 5s
-      resources:
-        limits:
-          cpus: "0.3"
-          memory: "50M"
 
 volumes:
   postgres_data:
