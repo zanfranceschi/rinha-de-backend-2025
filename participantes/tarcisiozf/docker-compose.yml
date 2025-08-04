@@ -1,0 +1,23 @@
+services:
+  app:
+    networks:
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          cpus: "1.5"
+          memory: 300M
+    image: tarcisiozf/rinha-de-backend-2025:latest
+    ports:
+      - "9999:9999"
+    security_opt:
+      - seccomp:unconfined
+    environment:
+      HOST_DEFAULT: "payment-processor-default"
+      PORT_DEFAULT: "8080"
+      HOST_FALLBACK: "payment-processor-fallback"
+      PORT_FALLBACK: "8080"
+
+networks:
+  payment-processor:
+    external: true
