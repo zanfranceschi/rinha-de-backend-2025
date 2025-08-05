@@ -4,11 +4,6 @@ x-service-templates:
     hostname: api01
     networks:
       - payment-processor
-    deploy:
-      resources:
-        limits:
-          cpus: "1.4"
-          memory: "340MB"
 
 services:
   api01:
@@ -17,6 +12,15 @@ services:
     hostname: api01
     ports:
       - "8080:8080"
+    environment:
+      PAGAMENTOS_PROCESSOR_CONCURRENCY: 1000
+      JAVA_OPTS: >-
+        -XX:+UseZGC
+    deploy:
+      resources:
+        limits:
+          cpus: "1.3"
+          memory: "300MB"
 
   #  api02:
   #    <<: *payment-gateway
@@ -38,8 +42,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.1"
-          memory: "10MB"
+          cpus: "0.2"
+          memory: "50MB"
 
 networks:
   backend:
