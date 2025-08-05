@@ -7,7 +7,7 @@ services:
       - api
       - payment-processor
     ports:
-      - "8081:8080"
+      - "8081:8888"
     deploy:
       resources:
         limits:
@@ -19,7 +19,7 @@ services:
   api02:
     <<: *app
     ports:
-      - "8082:8080"
+      - "8082:8888"
 
   haproxy:
     image: haproxy:3.3-dev5-alpine3.22
@@ -33,7 +33,7 @@ services:
     networks:
       - api
     ports:
-      - "9999:8080"
+      - "9999:8888"
     depends_on:
       - api01
       - api02
