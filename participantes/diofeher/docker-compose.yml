@@ -1,7 +1,8 @@
 x-api_template: &api
-  image: ghcr.io/diofeher/rinha-de-backend-2025-diofeher:main-c82abf2
+  image: ghcr.io/diofeher/rinha-de-backend-2025-diofeher:main-8fc0bd0
   depends_on:
-    - redis
+    redis:
+      condition: service_healthy
   volumes:
     - socket_data:/tmp
   deploy:
@@ -41,7 +42,7 @@ services:
       - REDIS_DB=rinha
       - PROCESSOR_DEFAULT_URL=http://payment-processor-default:8080
       - PROCESSOR_FALLBACK_URL=http://payment-processor-fallback:8080
-      - QUEUE_BATCH_SIZE=1
+      - QUEUE_BATCH_SIZE=3
       - NUM_WORKERS=100
   api2:
     <<: *api
@@ -52,7 +53,7 @@ services:
       - REDIS_DB=rinha
       - PROCESSOR_DEFAULT_URL=http://payment-processor-default:8080
       - PROCESSOR_FALLBACK_URL=http://payment-processor-fallback:8080
-      - QUEUE_BATCH_SIZE=1
+      - QUEUE_BATCH_SIZE=3
       - NUM_WORKERS=100
   redis:
     image: redis:latest
@@ -69,7 +70,12 @@ services:
       - REDIS_PORT=6379
       - REDIS_PASSWORD=
       - REDIS_DB=rinha
-    command: [redis-server, /usr/local/etc/redis.conf]
+    command: bash -c "rm -rf /tmp/redis.sock && redis-server /usr/local/etc/redis.conf"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 1s
+      timeout: 3s
+      retries: 30
     deploy:
       resources:
         limits:
