@@ -1,6 +1,6 @@
 x-service-templates:
   base: &base
-    image: josiney/rdb25_02-amd64:f98b54f
+    image: josiney/rdb25_02-amd64:50cd7ee
     volumes:
       - sockets:/sockets
     networks:
@@ -21,11 +21,14 @@ services:
     environment:
       - LB=1
       - PORT=:80
+      - POOL_MAX_SIZE_FACTOR=5
+      - POOL_INIT_SIZE_FACTOR=2
       - SOCKET_PATH=/sockets/api1.sock
       - WORKER_SOCKET_PATH=/sockets/worker_http.sock
       - PAYMENTS_SOCKET_PATH=/sockets/payments.sock
       - SUMMARY_SOCKET_PATH=/sockets/summary.sock
       - PURGE_SOCKET_PATH=/sockets/purge.sock
+      - HEALTH_SOCKET_PATH=/sockets/health.sock
       - PAYMENTS_PROCESSOR_URL_DEFAULT=http://payment-processor-default:8080/payments
       - PAYMENTS_PROCESSOR_URL_FALLBACK=http://payment-processor-fallback:8080/payments
       - HEALTH_PROCESSOR_URL_DEFAULT=http://payment-processor-default:8080/payments/service-health
@@ -47,11 +50,14 @@ services:
           cpus: "0.25"
           memory: "30MB"
     environment:
+      - POOL_MAX_SIZE_FACTOR=5
+      - POOL_INIT_SIZE_FACTOR=2
       - SOCKET_PATH=/sockets/api2.sock
       - WORKER_SOCKET_PATH=/sockets/worker_http.sock
       - PAYMENTS_SOCKET_PATH=/sockets/payments.sock
       - SUMMARY_SOCKET_PATH=/sockets/summary.sock
       - PURGE_SOCKET_PATH=/sockets/purge.sock
+      - HEALTH_SOCKET_PATH=/sockets/health.sock
       - PAYMENTS_PROCESSOR_URL_DEFAULT=http://payment-processor-default:8080/payments
       - PAYMENTS_PROCESSOR_URL_FALLBACK=http://payment-processor-fallback:8080/payments
       - HEALTH_PROCESSOR_URL_DEFAULT=http://payment-processor-default:8080/payments/service-health
@@ -70,11 +76,14 @@ services:
           cpus: "0.25"
           memory: "30MB"
     environment:
+      - POOL_MAX_SIZE_FACTOR=5
+      - POOL_INIT_SIZE_FACTOR=2
       - SOCKET_PATH=/sockets/api3.sock
       - WORKER_SOCKET_PATH=/sockets/worker_http.sock
       - PAYMENTS_SOCKET_PATH=/sockets/payments.sock
       - SUMMARY_SOCKET_PATH=/sockets/summary.sock
       - PURGE_SOCKET_PATH=/sockets/purge.sock
+      - HEALTH_SOCKET_PATH=/sockets/health.sock
       - PAYMENTS_PROCESSOR_URL_DEFAULT=http://payment-processor-default:8080/payments
       - PAYMENTS_PROCESSOR_URL_FALLBACK=http://payment-processor-fallback:8080/payments
       - HEALTH_PROCESSOR_URL_DEFAULT=http://payment-processor-default:8080/payments/service-health
@@ -91,12 +100,15 @@ services:
       resources:
         limits:
           cpus: "0.75"
-          memory: "100MB"
+          memory: "150MB"
     environment:
+      - NUM_WORKERS=5
+      - NUM_PAYMENT_WORKERS=15
       - SOCKET_PATH=/sockets/worker_http.sock
       - PAYMENTS_SOCKET_PATH=/sockets/payments.sock
       - SUMMARY_SOCKET_PATH=/sockets/summary.sock
       - PURGE_SOCKET_PATH=/sockets/purge.sock
+      - HEALTH_SOCKET_PATH=/sockets/health.sock
       - PAYMENTS_PROCESSOR_URL_DEFAULT=http://payment-processor-default:8080/payments
       - PAYMENTS_PROCESSOR_URL_FALLBACK=http://payment-processor-fallback:8080/payments
       - HEALTH_PROCESSOR_URL_DEFAULT=http://payment-processor-default:8080/payments/service-health
