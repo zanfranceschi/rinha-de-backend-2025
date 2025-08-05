@@ -6,20 +6,16 @@ services:
     networks:
       - api
       - payment-processor
-    ports:
-      - "8081:8888"
     deploy:
       resources:
         limits:
           cpus: "0.50"
-          memory: "7MB"
+          memory: "50MB"
     volumes:
       - /dev/shm:/dev/shm
 
   api02:
     <<: *app
-    ports:
-      - "8082:8888"
 
   haproxy:
     image: haproxy:3.3-dev5-alpine3.22
@@ -33,7 +29,7 @@ services:
     networks:
       - api
     ports:
-      - "9999:8888"
+      - "9999:9999"
     depends_on:
       - api01
       - api02
