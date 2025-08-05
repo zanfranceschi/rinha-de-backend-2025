@@ -42,11 +42,10 @@ services:
           memory: 100M
   haproxy:
     image: haproxy:3.2.3-alpine
-    container_name: proxy
     ports:
       - 9999:80
     volumes:
-      - ./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
+      - ./proxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
     networks:
       - app
     depends_on:
