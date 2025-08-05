@@ -1,16 +1,16 @@
 services:
   rinha:
     platform: "linux/amd64"
-    image: "joaoprocopio/rinha:amd64-20250802001327"
+    image: "joaoprocopio/rinha:amd64-20250805024840"
     networks:
       - "payment-processor"
     environment:
       RINHA_HOST: "0.0.0.0"
       RINHA_PORT: "9999"
-      RINHA_DEFAULT_BACKEND_HOST: "host.docker.internal"
-      RINHA_DEFAULT_BACKEND_PORT: "8001"
-      RINHA_FALLBACK_BACKEND_HOST: "host.docker.internal"
-      RINHA_FALLBACK_BACKEND_PORT: "8002"
+      RINHA_DEFAULT_UPSTREAM_HOST: "host.docker.internal"
+      RINHA_DEFAULT_UPSTREAM_PORT: "8001"
+      RINHA_FALLBACK_UPSTREAM_HOST: "host.docker.internal"
+      RINHA_FALLBACK_UPSTREAM_PORT: "8002"
     extra_hosts:
       - "host.docker.internal:host-gateway"
     ports:
