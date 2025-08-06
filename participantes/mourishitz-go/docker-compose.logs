@@ -1,27 +1,61 @@
 
+ worker3 Pulling 
+ worker2 Pulling 
+ api1 Pulling 
+ worker1 Pulling 
+ api2 Pulling 
+ 9824c27679d3 Already exists 
+ 041d773fa349 Pulling fs layer 
+ 5144ebe744d6 Pulling fs layer 
+ 041d773fa349 Downloading [==================================================>]      92B/92B
+ 041d773fa349 Verifying Checksum 
+ 041d773fa349 Download complete 
+ 041d773fa349 Extracting [==================================================>]      92B/92B
+ 041d773fa349 Extracting [==================================================>]      92B/92B
+ 5144ebe744d6 Downloading [>                                                  ]  65.54kB/5.271MB
+ 041d773fa349 Pull complete 
+ 5144ebe744d6 Verifying Checksum 
+ 5144ebe744d6 Download complete 
+ 5144ebe744d6 Extracting [>                                                  ]  65.54kB/5.271MB
+ 9824c27679d3 Already exists 
+ 5144ebe744d6 Extracting [==============================================>    ]   4.85MB/5.271MB
+ 5144ebe744d6 Extracting [==================================================>]  5.271MB/5.271MB
+ 041d773fa349 Already exists 
+ 045f177927be Pulling fs layer 
+ 5144ebe744d6 Pull complete 
+ 045f177927be Downloading [>                                                  ]  54.84kB/5.381MB
+ 045f177927be Verifying Checksum 
+ 045f177927be Download complete 
+ 045f177927be Extracting [>                                                  ]  65.54kB/5.381MB
+ 045f177927be Extracting [==================================================>]  5.381MB/5.381MB
+ 045f177927be Pull complete 
+ api1 Pulled 
+ worker2 Pulled 
+ api2 Pulled 
+ worker1 Pulled 
+ worker3 Pulled 
  Network rinha-backend  Creating
  Network rinha-backend  Created
  Container keydb  Creating
  Container keydb  Created
- Container worker-2  Creating
- Container worker-3  Creating
- Container worker-1  Creating
  Container api-2  Creating
+ Container worker-2  Creating
+ Container worker-1  Creating
+ Container worker-3  Creating
  Container api-1  Creating
- Container api-1  Created
- Container worker-3  Created
  Container worker-2  Created
+ Container worker-3  Created
  Container worker-1  Created
+ Container api-1  Created
  Container api-2  Created
  Container rinha-nginx  Creating
  Container rinha-nginx  Created
 Attaching to api-1, api-2, keydb, rinha-nginx, worker-1, worker-2, worker-3
-keydb        | 7:7:C 05 Aug 2025 16:24:43.173 # oO0OoO0OoO0Oo KeyDB is starting oO0OoO0OoO0Oo
-keydb        | 7:7:C 05 Aug 2025 16:24:43.173 # KeyDB version=6.3.4, bits=64, commit=7e7e5e57, modified=1, pid=7, just started
-keydb        | 7:7:C 05 Aug 2025 16:24:43.173 # Configuration loaded
-keydb        | 7:7:C 05 Aug 2025 16:24:43.174 # WARNING overcommit_memory is set to 0! Background save may fail under low memory condition. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.
-keydb        | 7:7:M 05 Aug 2025 16:24:43.175 * monotonic clock: POSIX clock_gettime
-api-2        | 2025/08/05 16:24:43 Starting API Proxy on port 8080
+keydb        | 7:7:C 05 Aug 2025 23:17:36.465 # oO0OoO0OoO0Oo KeyDB is starting oO0OoO0OoO0Oo
+keydb        | 7:7:C 05 Aug 2025 23:17:36.465 # KeyDB version=6.3.4, bits=64, commit=7e7e5e57, modified=1, pid=7, just started
+keydb        | 7:7:C 05 Aug 2025 23:17:36.465 # Configuration loaded
+keydb        | 7:7:C 05 Aug 2025 23:17:36.465 # WARNING overcommit_memory is set to 0! Background save may fail under low memory condition. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.
+keydb        | 7:7:M 05 Aug 2025 23:17:36.467 * monotonic clock: POSIX clock_gettime
 keydb        |                                                                       
 keydb        |                   _                                                   
 keydb        |                _-(+)-_                                                
@@ -41,13 +75,14 @@ keydb        |             --_   |   _--
 keydb        |                 -(+)-        KeyDB has now joined Snap! See the announcement at:  https://docs.keydb.dev/news
 keydb        | 
 keydb        |                                                                      
-keydb        | 7:7:M 05 Aug 2025 16:24:43.458 # Server initialized
-keydb        | 7:21:M 05 Aug 2025 16:24:43.459 * Thread 0 alive.
-keydb        | 7:22:M 05 Aug 2025 16:24:43.460 * Thread 1 alive.
-api-1        | 2025/08/05 16:24:43 Starting API Proxy on port 8080
-worker-2     | 2025/08/05 16:24:43 [*] Consuming from payments stream using consumer group:  payments_group
-worker-1     | 2025/08/05 16:24:43 [*] Consuming from payments stream using consumer group:  payments_group
-worker-3     | 2025/08/05 16:24:43 [*] Consuming from payments stream using consumer group:  payments_group
+keydb        | 7:7:M 05 Aug 2025 23:17:36.716 # Server initialized
+keydb        | 7:21:M 05 Aug 2025 23:17:36.717 * Thread 0 alive.
+keydb        | 7:22:M 05 Aug 2025 23:17:36.717 * Thread 1 alive.
+api-1        | 2025/08/05 23:17:36 Starting API Proxy on port 8080
+worker-3     | 2025/08/05 23:17:36 [*] Consuming from payments queue
+worker-1     | 2025/08/05 23:17:36 [*] Consuming from payments queue
+worker-2     | 2025/08/05 23:17:37 [*] Consuming from payments queue
+api-2        | 2025/08/05 23:17:37 Starting API Proxy on port 8080
 rinha-nginx  | /docker-entrypoint.sh: /docker-entrypoint.d/ is not empty, will attempt to perform configuration
 rinha-nginx  | /docker-entrypoint.sh: Looking for shell scripts in /docker-entrypoint.d/
 rinha-nginx  | /docker-entrypoint.sh: Launching /docker-entrypoint.d/10-listen-on-ipv6-by-default.sh
@@ -57,73 +92,910 @@ rinha-nginx  | /docker-entrypoint.sh: Sourcing /docker-entrypoint.d/15-local-res
 rinha-nginx  | /docker-entrypoint.sh: Launching /docker-entrypoint.d/20-envsubst-on-templates.sh
 rinha-nginx  | /docker-entrypoint.sh: Launching /docker-entrypoint.d/30-tune-worker-processes.sh
 rinha-nginx  | /docker-entrypoint.sh: Configuration complete; ready for start up
-worker-1     | 2025/08/05 16:25:11 Received non-OK response from payments service: 500 Internal Server Error
-worker-1     | 2025/08/05 16:25:11 Payments status:  false
-worker-1     | 2025/08/05 16:25:11 Attempting to send payment request to fallback service
-worker-1     | 2025/08/05 16:25:11 Initializing last check time for default service
-worker-2     | 2025/08/05 16:25:11 Received non-OK response from payments service: 500 Internal Server Error
-worker-2     | 2025/08/05 16:25:11 Payments status:  false
-worker-2     | 2025/08/05 16:25:11 Attempting to send payment request to fallback service
-worker-3     | 2025/08/05 16:25:11 Received non-OK response from payments service: 500 Internal Server Error
-worker-3     | 2025/08/05 16:25:11 Payments status:  false
-worker-3     | 2025/08/05 16:25:11 Attempting to send payment request to fallback service
-worker-1     | 2025/08/05 16:25:16 Sending health check request to default service
-worker-3     | 2025/08/05 16:25:16 Sending health check request to default service
-worker-2     | 2025/08/05 16:25:16 Sending health check request to default service
-worker-2     | 2025/08/05 16:25:16 default service is failing
-worker-2     | 2025/08/05 16:25:16 Another check will be performed in 5 seconds
-worker-1     | 2025/08/05 16:25:21 default service is failing
-worker-1     | 2025/08/05 16:25:21 Another check will be performed in 5 seconds
-worker-2     | 2025/08/05 16:25:22 Received non-OK response from fallback service: 500 Internal Server Error
-worker-2     | 2025/08/05 16:25:22 Fallback status:  false
-worker-2     | 2025/08/05 16:25:22 Failed to send payment: fallback service returned non-OK status, requeuing message
-worker-2     | 2025/08/05 16:25:22 Sending health check request to default service
-worker-1     | 2025/08/05 16:25:22 Received non-OK response from fallback service: 500 Internal Server Error
-worker-1     | 2025/08/05 16:25:22 Fallback status:  false
-worker-1     | 2025/08/05 16:25:22 Failed to send payment: fallback service returned non-OK status, requeuing message
-worker-1     | 2025/08/05 16:25:22 Sending health check request to default service
-worker-1     | 2025/08/05 16:25:22 Failed to decode response from default: invalid character 'C' looking for beginning of value
-worker-1     | 2025/08/05 16:25:22 Sending health check request to fallback service
-worker-1     | 2025/08/05 16:25:22 fallback service is failing
-worker-1     | 2025/08/05 16:25:22 Another check will be performed in 5 seconds
-worker-1     | 2025/08/05 16:25:22 Sending health check request to default service
-worker-1     | 2025/08/05 16:25:22 Failed to decode response from default: invalid character 'C' looking for beginning of value
-worker-1     | 2025/08/05 16:25:22 Sending health check request to fallback service
-worker-3     | 2025/08/05 16:25:26 default service is failing
-worker-3     | 2025/08/05 16:25:26 Another check will be performed in 5 seconds
-worker-1     | 2025/08/05 16:25:27 fallback service is failing
-worker-1     | 2025/08/05 16:25:27 Another check will be performed in 5 seconds
-worker-1     | 2025/08/05 16:25:27 Sending health check request to default service
-worker-3     | 2025/08/05 16:25:27 Received non-OK response from fallback service: 500 Internal Server Error
-worker-3     | 2025/08/05 16:25:27 Fallback status:  false
-worker-3     | 2025/08/05 16:25:27 Failed to send payment: fallback service returned non-OK status, requeuing message
-worker-3     | 2025/08/05 16:25:27 Sending health check request to default service
-worker-3     | 2025/08/05 16:25:27 Failed to decode response from default: invalid character 'C' looking for beginning of value
-worker-3     | 2025/08/05 16:25:27 Sending health check request to fallback service
-worker-2     | 2025/08/05 16:25:32 default service is healthy
-worker-2     | 2025/08/05 16:25:32 Sending health check request to fallback service
-worker-3     | 2025/08/05 16:25:32 fallback service is healthy
-worker-1     | 2025/08/05 16:25:37 default service is healthy
-worker-1     | 2025/08/05 16:25:37 Sending health check request to fallback service
-worker-2     | 2025/08/05 16:25:37 fallback service is healthy
-worker-1     | 2025/08/05 16:25:43 fallback service is healthy
-keydb        | 7:21:M 05 Aug 2025 16:25:44.045 * 10000 changes in 60 seconds. Saving...
-keydb        | 7:21:M 05 Aug 2025 16:25:44.046 * Background saving started by pid 24
-keydb        | 7:21:M 05 Aug 2025 16:25:44.046 * Background saving started
-keydb        | 24:21:C 05 Aug 2025 16:25:44.113 * DB saved on disk
-keydb        | 24:21:C 05 Aug 2025 16:25:44.114 * RDB: 1 MB of memory used by copy-on-write
-keydb        | 7:21:M 05 Aug 2025 16:25:44.147 * Background saving terminated with success
-worker-3     | 2025/08/05 16:25:46 Sending health check request to default service
-worker-3     | 2025/08/05 16:25:46 default service is healthy
-worker-3     | 2025/08/05 16:25:46 Payments service is back up, retrying payment request
-[Krinha-nginx exited with code 0
-[Kapi-1 exited with code 2
-[Kapi-2 exited with code 2
-keydb        | 7:signal-handler (1754411154) Received SIGTERM scheduling shutdown...
-keydb        | 7:21:M 05 Aug 2025 16:25:54.244 # User requested shutdown...
-keydb        | 7:21:M 05 Aug 2025 16:25:54.244 * Saving the final RDB snapshot before exiting.
-keydb        | 7:21:M 05 Aug 2025 16:25:54.266 * DB saved on disk
-keydb        | 7:21:M 05 Aug 2025 16:25:54.266 * Removing the pid file.
-keydb        | 7:21:M 05 Aug 2025 16:25:54.267 # KeyDB is now ready to exit, bye bye...
-[Kkeydb exited with code 0
+worker-2     | 2025/08/05 23:18:03 Received non-OK response from payments service: 500 Internal Server Error
+worker-2     | 2025/08/05 23:18:03 Payments status:  false
+worker-2     | 2025/08/05 23:18:03 Attempting to send payment request to fallback service
+worker-2     | 2025/08/05 23:18:03 Initializing last check time for default service
+worker-1     | 2025/08/05 23:18:03 Received non-OK response from payments service: 500 Internal Server Error
+worker-1     | 2025/08/05 23:18:03 Payments status:  false
+worker-1     | 2025/08/05 23:18:03 Attempting to send payment request to fallback service
+worker-3     | 2025/08/05 23:18:03 Received non-OK response from payments service: 500 Internal Server Error
+worker-3     | 2025/08/05 23:18:03 Payments status:  false
+worker-3     | 2025/08/05 23:18:03 Attempting to send payment request to fallback service
+worker-3     | 2025/08/05 23:18:08 Sending health check request to default service
+worker-3     | 2025/08/05 23:18:08 default service is failing
+worker-1     | 2025/08/05 23:18:08 Sending health check request to default service
+worker-3     | 2025/08/05 23:18:08 Another check will be performed in 5 seconds
+worker-1     | 2025/08/05 23:18:13 default service is failing
+worker-1     | 2025/08/05 23:18:13 Another check will be performed in 5 seconds
+worker-3     | 2025/08/05 23:18:14 Received non-OK response from fallback service: 500 Internal Server Error
+worker-3     | 2025/08/05 23:18:14 Fallback status:  false
+worker-3     | 2025/08/05 23:18:14 SendPayment error: fallback service returned non-OK status, requeuing message
+worker-3     | 2025/08/05 23:18:14 Message not acknowledged. Requeuing...
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 Initializing last check time for fallback service
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 Received non-OK response from fallback service: 500 Internal Server Error
+worker-2     | 2025/08/05 23:18:14 Fallback status:  false
+worker-2     | 2025/08/05 23:18:14 SendPayment error: fallback service returned non-OK status, requeuing message
+worker-2     | 2025/08/05 23:18:14 Message not acknowledged. Requeuing...
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 Received non-OK response from fallback service: 500 Internal Server Error
+worker-1     | 2025/08/05 23:18:14 Fallback status:  false
+worker-1     | 2025/08/05 23:18:14 SendPayment error: fallback service returned non-OK status, requeuing message
+worker-1     | 2025/08/05 23:18:14 Message not acknowledged. Requeuing...
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-1     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-2     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
+worker-3     | 2025/08/05 23:18:14 All services are down. Requeuing and checking status.
 log truncated at line 1000

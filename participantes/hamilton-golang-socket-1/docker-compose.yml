@@ -1,7 +1,7 @@
 x-rinha-api-base: &rinha-api-base
-  image: jhamiltonjunior/rinha-go-socket:0.0.2
+  image: jhamiltonjunior/rinha-go-socket:0.0.3
   volumes:
-    - api-socketsv2:/var/run
+    - api-socketsv3:/var/run
   depends_on:
     - redis
   networks:
@@ -11,7 +11,7 @@ x-rinha-api-base: &rinha-api-base
     resources:
       limits:
         cpus: "0.18750"
-        memory: "30MB"
+        memory: "50MB"
 
   environment: &common-environment
     APP_PORT: 3000
@@ -29,7 +29,7 @@ services:
       - "9999:80"
     volumes:
       - ./config/nginx.conf:/etc/nginx/nginx.conf:ro
-      - api-socketsv2:/var/run:rw
+      - api-socketsv3:/var/run:rw
     depends_on:
       - rinha-api-1
       - rinha-api-2
@@ -100,4 +100,4 @@ networks:
 
 volumes:
   redis-data:
-  api-socketsv2:
+  api-socketsv3:

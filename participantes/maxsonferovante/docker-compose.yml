@@ -53,7 +53,7 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '0.2'
+          cpus: '0.3'
           memory: 60MB
 
   # Processador assíncrono de pagamentos - consome mensagens do Redis
@@ -79,32 +79,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '0.3'
-          memory: 60MB
-  async-worker-2:
-      image: docker.io/maxsonferovante/async-payment-processor:latest
-      pull_policy: always
-      environment:
-        REDIS_HOST: redis
-        REDIS_PORT: 6379
-        REDIS_TIMEOUT: 5000ms
-        REDIS_QUEUE_PAYMENTS_MAIN: rinha-payments-main-queue
-        PAYMENT_PROCESSOR_DEFAULT_URL: http://payment-processor-default:8080
-        PAYMENT_PROCESSOR_FALLBACK_URL: http://payment-processor-fallback:8080
-        WORKER_MAX_CONCURRENT_PAYMENTS: 70
-        WORKER_BATCH_SIZE: 75
-        WORKER_EXECUTION_DELAY: 200
-      depends_on:
-        redis:
-          condition: service_healthy
-      networks:
-        - backend
-        - payment-processor
-      deploy:
-        resources:
-          limits:
-            cpus: '0.2'
-            memory: 60MB
+          cpus: '0.4'
+          memory: 120MB
 
   nginx:
     image: nginx:alpine

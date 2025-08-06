@@ -1,12 +1,11 @@
 services:
   redis:
     image: redis:8-alpine
-    command: redis-server --save "" --appendonly no --maxmemory 60mb --maxmemory-policy allkeys-lru
     deploy:
       resources:
         limits:
-          cpus: "0.4"
-          memory: "30M"
+          cpus: "0.3"
+          memory: "40M"
     networks:
       - backend
 
@@ -56,7 +55,7 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.1"
+          cpus: "0.2"
           memory: 30M
 
 networks:

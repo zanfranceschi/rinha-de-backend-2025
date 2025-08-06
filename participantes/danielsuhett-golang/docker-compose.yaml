@@ -4,6 +4,7 @@ services:
     container_name: go-rinha-nginx
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - sockets:/var/run/sockets
     depends_on:
       - api1
       - api2
@@ -16,13 +17,15 @@ services:
       resources:
         limits:
           cpus: "0.20"
-          memory: "80MB"
+          memory: "100MB"
   api1:
-    image: danielsuhett1999/rinha-backend-go:1.0.5
+    image: danielsuhett1999/rinha-backend-go:1.0.6
     hostname: api1
+    volumes:
+      - sockets:/var/run/sockets
     environment:
-      - APP_PORT=8080
       - APP_NAME=1
+      - SOCKET_PATH=/var/run/sockets/app1.sock
       - REDIS_HOST=redis
       - REDIS_PORT=6379
       - PROCESSOR_DEFAULT_URL=http://payment-processor-default:8080
@@ -44,11 +47,14 @@ services:
           cpus: "0.60"
           memory: "100MB"
   api2:
-    image: danielsuhett1999/rinha-backend-go:1.0.5
+    image: danielsuhett1999/rinha-backend-go:1.0.6
+
     hostname: api2
+    volumes:
+      - sockets:/var/run/sockets
     environment:
-      - APP_PORT=8081
       - APP_NAME=2
+      - SOCKET_PATH=/var/run/sockets/app2.sock
       - REDIS_HOST=redis
       - REDIS_PORT=6379
       - PROCESSOR_DEFAULT_URL=http://payment-processor-default:8080
@@ -87,6 +93,9 @@ services:
         limits:
           cpus: "0.10"
           memory: "50MB"
+
+volumes:
+  sockets:
 
 networks:
   backend:

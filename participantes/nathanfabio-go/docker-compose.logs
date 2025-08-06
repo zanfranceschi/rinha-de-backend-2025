@@ -1,0 +1,92 @@
+
+ app2 Pulling 
+ app1 Pulling 
+ 9824c27679d3 Already exists 
+ 9503e371429d Pulling fs layer 
+ 61413a1f60e8 Pulling fs layer 
+ 9824c27679d3 Already exists 
+ 9503e371429d Pulling fs layer 
+ 61413a1f60e8 Pulling fs layer 
+ 9503e371429d Downloading [==================================================>]      93B/93B
+ 9503e371429d Verifying Checksum 
+ 9503e371429d Download complete 
+ 9503e371429d Extracting [==================================================>]      93B/93B
+ 9503e371429d Download complete 
+ 9503e371429d Extracting [==================================================>]      93B/93B
+ 9503e371429d Extracting [==================================================>]      93B/93B
+ 9503e371429d Extracting [==================================================>]      93B/93B
+ 61413a1f60e8 Downloading [>                                                  ]  64.05kB/6.307MB
+ 61413a1f60e8 Downloading [>                                                  ]  64.05kB/6.307MB
+ 9503e371429d Pull complete 
+ 9503e371429d Pull complete 
+ 61413a1f60e8 Verifying Checksum 
+ 61413a1f60e8 Verifying Checksum 
+ 61413a1f60e8 Download complete 
+ 61413a1f60e8 Download complete 
+ 61413a1f60e8 Extracting [>                                                  ]  65.54kB/6.307MB
+ 61413a1f60e8 Extracting [>                                                  ]  65.54kB/6.307MB
+ 61413a1f60e8 Extracting [==================================================>]  6.307MB/6.307MB
+ 61413a1f60e8 Extracting [==================================================>]  6.307MB/6.307MB
+ 61413a1f60e8 Pull complete 
+ 61413a1f60e8 Pull complete 
+ app2 Pulled 
+ app1 Pulled 
+ Network nathanfabio-go_backend  Creating
+ Network nathanfabio-go_backend  Created
+ Container nathanfabio-go-redis-1  Creating
+ Container nathanfabio-go-redis-1  Created
+ Container nathanfabio-go-app2-1  Creating
+ Container nathanfabio-go-app1-1  Creating
+ Container nathanfabio-go-app1-1  Created
+ Container nathanfabio-go-app2-1  Created
+ Container nathanfabio-go-nginx-1  Creating
+ Container nathanfabio-go-nginx-1  Created
+Attaching to app1-1, app2-1, nginx-1, redis-1
+redis-1  | 1:C 05 Aug 2025 22:58:16.581 # WARNING Memory overcommit must be enabled! Without it, a background save or replication may fail under low memory condition. Being disabled, it can also cause failures without low memory condition, see https://github.com/jemalloc/jemalloc/issues/1328. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.
+redis-1  | 1:C 05 Aug 2025 22:58:16.582 * oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+redis-1  | 1:C 05 Aug 2025 22:58:16.582 * Redis version=7.4.5, bits=64, commit=00000000, modified=0, pid=1, just started
+redis-1  | 1:C 05 Aug 2025 22:58:16.582 * Configuration loaded
+redis-1  | 1:M 05 Aug 2025 22:58:16.582 * monotonic clock: POSIX clock_gettime
+redis-1  | 1:M 05 Aug 2025 22:58:16.584 * Running mode=standalone, port=6379.
+redis-1  | 1:M 05 Aug 2025 22:58:16.584 * Server initialized
+redis-1  | 1:M 05 Aug 2025 22:58:16.584 * Ready to accept connections tcp
+app2-1   | 2025/08/05 22:58:16 INFO: worker pool started with 2 workers
+app2-1   | 2025/08/05 22:58:16 INFO: starting server on port: 7070
+app1-1   | 2025/08/05 22:58:16 INFO: worker pool started with 2 workers
+app1-1   | 2025/08/05 22:58:16 INFO: starting server on port: 7070
+nginx-1  | /docker-entrypoint.sh: /docker-entrypoint.d/ is not empty, will attempt to perform configuration
+nginx-1  | /docker-entrypoint.sh: Looking for shell scripts in /docker-entrypoint.d/
+nginx-1  | /docker-entrypoint.sh: Launching /docker-entrypoint.d/10-listen-on-ipv6-by-default.sh
+nginx-1  | 10-listen-on-ipv6-by-default.sh: info: Getting the checksum of /etc/nginx/conf.d/default.conf
+nginx-1  | 10-listen-on-ipv6-by-default.sh: info: Enabled listen on IPv6 in /etc/nginx/conf.d/default.conf
+nginx-1  | /docker-entrypoint.sh: Sourcing /docker-entrypoint.d/15-local-resolvers.envsh
+nginx-1  | /docker-entrypoint.sh: Launching /docker-entrypoint.d/20-envsubst-on-templates.sh
+nginx-1  | /docker-entrypoint.sh: Launching /docker-entrypoint.d/30-tune-worker-processes.sh
+nginx-1  | /docker-entrypoint.sh: Configuration complete; ready for start up
+nginx-1  | 172.20.0.1 - - [05/Aug/2025:22:58:17 +0000] "GET /payments-summary HTTP/1.1" 400 25 "-" "curl/7.88.1"
+nginx-1  | 172.20.0.1 - - [05/Aug/2025:22:58:22 +0000] "GET /payments-summary HTTP/1.1" 400 25 "-" "curl/7.88.1"
+nginx-1  | 172.20.0.1 - - [05/Aug/2025:22:58:27 +0000] "GET /payments-summary HTTP/1.1" 400 25 "-" "curl/7.88.1"
+nginx-1  | 172.20.0.1 - - [05/Aug/2025:22:58:32 +0000] "GET /payments-summary HTTP/1.1" 400 25 "-" "curl/7.88.1"
+nginx-1  | 172.20.0.1 - - [05/Aug/2025:22:58:37 +0000] "GET /payments-summary HTTP/1.1" 400 25 "-" "curl/7.88.1"
+nginx-1  | 172.20.0.1 - - [05/Aug/2025:22:58:42 +0000] "GET /payments-summary HTTP/1.1" 400 25 "-" "curl/7.88.1"
+nginx-1  | 172.20.0.1 - - [05/Aug/2025:22:58:47 +0000] "GET /payments-summary HTTP/1.1" 400 25 "-" "curl/7.88.1"
+nginx-1  | 172.20.0.1 - - [05/Aug/2025:22:58:52 +0000] "GET /payments-summary HTTP/1.1" 400 25 "-" "curl/7.88.1"
+nginx-1  | 172.20.0.1 - - [05/Aug/2025:22:58:57 +0000] "GET /payments-summary HTTP/1.1" 400 25 "-" "curl/7.88.1"
+nginx-1  | 172.20.0.1 - - [05/Aug/2025:22:59:02 +0000] "GET /payments-summary HTTP/1.1" 400 25 "-" "curl/7.88.1"
+nginx-1  | 172.20.0.1 - - [05/Aug/2025:22:59:07 +0000] "GET /payments-summary HTTP/1.1" 400 25 "-" "curl/7.88.1"
+nginx-1  | 172.20.0.1 - - [05/Aug/2025:22:59:12 +0000] "GET /payments-summary HTTP/1.1" 400 25 "-" "curl/7.88.1"
+nginx-1  | 172.20.0.1 - - [05/Aug/2025:22:59:17 +0000] "GET /payments-summary HTTP/1.1" 400 25 "-" "curl/7.88.1"
+nginx-1  | 172.20.0.1 - - [05/Aug/2025:22:59:22 +0000] "GET /payments-summary HTTP/1.1" 400 25 "-" "curl/7.88.1"
+[Knginx-1 exited with code 0
+app2-1   | 2025/08/05 22:59:28 Shutting down server
+app2-1   | 2025/08/05 22:59:28 INFO: worker pool ended
+app2-1   | 2025/08/05 22:59:28 server ended
+app1-1   | 2025/08/05 22:59:28 Shutting down server
+app1-1   | 2025/08/05 22:59:28 INFO: worker pool ended
+app1-1   | 2025/08/05 22:59:28 server ended
+[Kapp2-1 exited with code 0
+[Kapp1-1 exited with code 0
+redis-1  | 1:signal-handler (1754434769) Received SIGTERM scheduling shutdown...
+redis-1  | 1:M 05 Aug 2025 22:59:29.083 * User requested shutdown...
+redis-1  | 1:M 05 Aug 2025 22:59:29.083 # Redis is now ready to exit, bye bye...
+[Kredis-1 exited with code 0

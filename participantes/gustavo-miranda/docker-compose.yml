@@ -1,6 +1,6 @@
 services:
   api01: &api
-    image: gustmrg/rinha-backend-2025:latest
+    image: gustmrg/rinha-backend-2025
     container_name: rinha_api01
     hostname: api01
     environment:
@@ -10,13 +10,14 @@ services:
       - DB_USER=rinha
       - DB_PASSWORD=rinha
       - DB_NAME=rinha
-      - DB_MAX_POOL_SIZE=15
-      - DB_MIN_POOL_SIZE=2
-      - DB_CONNECTION_TIMEOUT=30
-      - DB_COMMAND_TIMEOUT=30
-      - DB_CONNECTION_IDLE_LIFETIME=300
+      - DB_MAX_POOL_SIZE=35
+      - DB_MIN_POOL_SIZE=15
+      - DB_CONNECTION_TIMEOUT=8
+      - DB_COMMAND_TIMEOUT=6
+      - DB_CONNECTION_IDLE_LIFETIME=120
       - PROCESSOR_DEFAULT_URL=http://payment-processor-default:8080
       - PROCESSOR_FALLBACK_URL=http://payment-processor-fallback:8080
+      - REDIS_CONNECTION_STRING=redis:6379
     networks:
       - rinha-network
       - payment-processor
@@ -26,8 +27,11 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.40"
+          cpus: "0.50"
           memory: "85MB"
+        reservations:
+          cpus: "0.35"
+          memory: "70MB"
 
   api02:
     <<: *api
@@ -46,8 +50,26 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
-    command: postgres -c max_connections=450 -c shared_buffers=32MB -c effective_cache_size=96MB -c work_mem=3MB -c maintenance_work_mem=12MB -c synchronous_commit=off -c fsync=off
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+    command: |
+      postgres 
+      -c max_connections=90           
+      -c shared_buffers=28MB          
+      -c effective_cache_size=85MB    
+      -c work_mem=600kB               
+      -c maintenance_work_mem=6MB     
+      -c synchronous_commit=off
+      -c max_wal_senders=0 
+      -c wal_level=minimal
+      -c checkpoint_completion_target=0.9
+      -c wal_buffers=4MB              
+      -c default_statistics_target=50 
+      -c random_page_cost=1.1
+      -c effective_io_concurrency=100 
+      -c autovacuum=off           
+      -c fsync=off
+      -c checkpoint_timeout=30min     
+      -c max_wal_size=256MB
     networks:
       - rinha-network
       - payment-processor
@@ -60,8 +82,46 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.45"
-          memory: "130MB"
+          cpus: "0.30"
+          memory: "110MB"
+        reservations:
+          cpus: "0.20"
+          memory: "85MB"
+
+  redis:
+    image: redis:7.4-alpine
+    container_name: rinha_redis
+    hostname: redis
+    restart: always
+    ports:
+      - "6379:6379"
+    command: |
+      redis-server
+      --maxmemory 55mb            
+      --maxmemory-policy allkeys-lru
+      --save ""
+      --appendonly no
+      --tcp-keepalive 60
+      --timeout 30
+      --tcp-backlog 511           
+      --databases 1
+    networks:
+      - rinha-network
+      - payment-processor
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    deploy:
+      resources:
+        limits:
+          cpus: "0.12"
+          memory: "60MB"
+        reservations:
+          cpus: "0.08"
+          memory: "50MB"
 
   nginx:
     image: nginx:1.27.0-alpine
@@ -79,8 +139,11 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.2"
-          memory: "15MB"
+          cpus: "0.08"
+          memory: "10MB"
+        reservations:
+          cpus: "0.04"
+          memory: "8MB"
 
 networks:
   payment-processor:

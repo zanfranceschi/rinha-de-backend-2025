@@ -1,0 +1,88 @@
+services:
+  payment-service-1:
+    image: tiagodolphine/payment-service-go:0.0.1
+    environment:
+      - PAYMENT_PROCESSOR_DEFAULT=http://payment-processor-default:8080
+      - PAYMENT_PROCESSOR_FALLBACK=http://payment-processor-fallback:8080
+      - POLL_INTERVAL=100
+      - REDIS_HOST=redis
+      - REDIS_MAX_POOL_SIZE=150
+      - WORKERS=60
+    networks:
+      - backend
+      - payment-processor
+    ports:
+      - "9998:8080"
+    deploy:
+      resources:
+        limits:
+          cpus: '0.45'
+          memory: "130MB"
+    depends_on:
+      redis:
+        condition: service_healthy
+
+  payment-service-2:
+    image: tiagodolphine/payment-service-go:0.0.1
+    environment:
+      - PAYMENT_PROCESSOR_DEFAULT=http://payment-processor-default:8080
+      - PAYMENT_PROCESSOR_FALLBACK=http://payment-processor-fallback:8080
+      - POLL_INTERVAL=100
+      - REDIS_HOST=redis
+      - REDIS_MAX_POOL_SIZE=150
+      - WORKERS=60
+    networks:
+      - backend
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          cpus: '0.45'
+          memory: "130MB"
+    depends_on:
+      redis:
+        condition: service_healthy
+
+  redis:
+    image: redis:8.2.0-alpine3.22
+    container_name: redis
+    command: [ "redis-server","--save", "" , "--appendonly", "no", "--maxmemory", "50mb", "--maxmemory-policy", "allkeys-lru" ]
+    ports:
+      - "6379:6379"
+    restart: always
+    networks:
+      - backend
+    deploy:
+      resources:
+        limits:
+          cpus: '0.4'
+          memory: "50MB"
+    healthcheck:
+      test: [ "CMD", "redis-cli", "ping" ]
+      interval: 5s
+      timeout: 2s
+      retries: 10
+
+  haproxy:
+    image: haproxy
+    container_name: haproxy-lb
+    volumes:
+      - ./haproxy:/usr/local/etc/haproxy:ro
+    ports:
+      - "9999:9999"
+    depends_on:
+      - payment-service-1
+      - payment-service-2
+    deploy:
+      resources:
+        limits:
+          cpus: '0.2'
+          memory: "40MB"
+    networks:
+      - backend
+
+networks:
+  backend:
+    driver: bridge
+  payment-processor:
+    external: true
