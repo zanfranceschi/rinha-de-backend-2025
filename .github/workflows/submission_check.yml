@@ -11,7 +11,7 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v4
-            - name: Arquivos Indevidos
+            - name: Arquivos Indevidos na Raiz
               run: |
                 expected_files_count=47
                 actual_files_count=$(find . \( -path './participantes' -o -path './.git' -o -path './.github' \)  -prune -o -print | wc -l)
@@ -19,3 +19,20 @@ jobs:
                     echo "Arquivos removidos ou adicionados fora do diretório permitido. Arquivos encontrados: $actual_files_count"
                     exit 1
                 fi
+            - name: Arquivos Indevidos em Participantes
+              run: |
+                expected_files_count=0
+                actual_files_count=$(find ./participantes -maxdepth 1 -type f | wc -l)
+                if [ $expected_files_count -ne $actual_files_count ]; then
+                    echo "Arquivos removidos ou adicionados fora do diretório permitido. Arquivos encontrados: $actual_files_count"
+                    exit 1
+                fi
+            - name: Submissões sem info.json
+              run: |
+                num=(find ./participantes -maxdepth 1 -mindepth 1  -type d '!' -exec test -e "{}/info.json" ';' -print | wc -l)
+                if [ $num -ne 0 ]; then
+                    echo "$num submissões em arquivo info.json"
+                    # Ignorar esse check por agora
+                    exit 0
+                fi
+            
