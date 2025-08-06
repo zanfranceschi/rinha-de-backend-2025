@@ -15,8 +15,8 @@ jobs:
               run: |
                 expected_files_count=47
                 actual_files_count=$(find . \( -path './participantes' -o -path './.git' -o -path './.github' \)  -prune -o -print | wc -l)
-                find . \( -path './participantes' -o -path './.git' -o -path './.github' \)  -prune -o -print
                 if [ $expected_files_count -ne $actual_files_count ]; then
+                    find . \( -path './participantes' -o -path './.git' -o -path './.github' \)  -prune -o -print
                     echo "Arquivos removidos ou adicionados fora do diretório permitido. Arquivos encontrados: $actual_files_count"
                     exit 1
                 fi
@@ -26,6 +26,7 @@ jobs:
                 actual_files_count=$(find ./participantes -maxdepth 1 -type f | wc -l)
                 if [ $expected_files_count -ne $actual_files_count ]; then
                     echo "Arquivos removidos ou adicionados fora do diretório permitido. Arquivos encontrados: $actual_files_count"
+                    find ./participantes -maxdepth 1 -type f
                     exit 1
                 fi
             - name: Submissões sem info.json
@@ -33,6 +34,7 @@ jobs:
                 num=(find ./participantes -maxdepth 1 -mindepth 1  -type d '!' -exec test -e "{}/info.json" ';' -print | wc -l)
                 if [ $num -ne 0 ]; then
                     echo "$num submissões em arquivo info.json"
+                    find ./participantes -maxdepth 1 -mindepth 1  -type d '!' -exec test -e "{}/info.json" ';' -print
                     # Ignorar esse check por agora
                     exit 0
                 fi
