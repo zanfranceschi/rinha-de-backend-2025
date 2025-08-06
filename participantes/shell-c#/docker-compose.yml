@@ -9,7 +9,7 @@ x-template-api:
       - FALLBACK_PAYMENT_PROCESSOR_URI=http://payment-processor-fallback:8080/payments
       - HEALTH_CHECK_PATH=/service-health
       - SOCK_PATH=/tmp/shell.sock
-      - BATCH_SIZE=30
+      - BATCH_SIZE=20
       - WOKERS_COUNT=1
     depends_on:
       - socket
@@ -28,7 +28,7 @@ x-template-api:
       resources:
         limits:
           cpus: '0.5'
-          memory: 75MB
+          memory: 100MB
 
 services:
   haproxy:
@@ -46,7 +46,7 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.35"
+          cpus: "0.3"
           memory: "50MB"
 
   api1:
@@ -70,8 +70,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '0.15'
-          memory: 50MB
+          cpus: '0.2'
+          memory: 100MB
 
 volumes:
   socket:

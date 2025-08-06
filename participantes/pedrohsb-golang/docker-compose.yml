@@ -4,13 +4,13 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.3"
+          cpus: "0.4"
           memory: "40M"
     networks:
       - backend
 
   app1:
-    image: pedrohsbarbosa99/rinha-golang-2025:0.1.5
+    image: pedrohsbarbosa99/rinha-golang-2025:0.1.4
     networks:
       - backend
       - payment-processor
@@ -25,7 +25,7 @@ services:
           memory: 140M
 
   app2:
-    image: pedrohsbarbosa99/rinha-golang-2025:0.1.5
+    image: pedrohsbarbosa99/rinha-golang-2025:0.1.4
     command: ["./main"]
     networks:
       - backend
@@ -55,7 +55,7 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.2"
+          cpus: "0.1"
           memory: 30M
 
 networks:
