@@ -3,7 +3,7 @@ x-service-templates:
     networks:
       - payment-processor
       - app
-    image: tarcisiozf/rinha-de-backend-2025-asm:latest
+    image: tarcisiozf/rinha-de-backend-2025-asm:v2
     security_opt:
       - seccomp:unconfined
     volumes:
@@ -23,7 +23,7 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.8"
+          cpus: "0.5"
           memory: 100M
   app-2:
     <<: *base-app
@@ -38,7 +38,7 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.40"
+          cpus: "0.5"
           memory: 100M
   haproxy:
     image: haproxy:3.2.3-alpine
@@ -54,7 +54,7 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.30"
+          cpus: "0.5"
           memory: "150MB"
 
 volumes:

@@ -1,0 +1,83 @@
+x-template-api:
+  base: &base
+    image: feusertuxx/rinha-backend-2025:shellapi
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_URLS=http://+:8080
+      - DOTNET_RUNNING_IN_CONTAINER=true
+      - DEFAULT_PAYMENT_PROCESSOR_URI=http://payment-processor-default:8080/payments
+      - FALLBACK_PAYMENT_PROCESSOR_URI=http://payment-processor-fallback:8080/payments
+      - HEALTH_CHECK_PATH=/service-health
+      - SOCK_PATH=/tmp/shell.sock
+      - BATCH_SIZE=20
+      - WOKERS_COUNT=1
+    depends_on:
+      - socket
+    volumes:
+      - socket:/tmp
+    networks:
+      - rinha
+      - payment-processor
+    healthcheck:
+      test: ["CMD", "curl", "--fail", "--silent", "--show-error", "http://localhost:8080/health"]
+      interval: 3s
+      timeout: 5s
+      retries: 3
+      start_period: 5s
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 100MB
+
+services:
+  haproxy:
+    image: haproxy:3.2.3-alpine
+    container_name: haproxy-lb
+    ports:
+      - 9999:80
+    volumes:
+      - ./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
+    networks:
+      - rinha
+    depends_on:
+      - api1
+      - api2
+    deploy:
+      resources:
+        limits:
+          cpus: "0.3"
+          memory: "50MB"
+
+  api1:
+    <<: *base
+    hostname: api1
+    container_name: api1    
+
+  api2:
+    <<: *base
+    hostname: api2
+    container_name: api2
+
+  socket:
+    image: feusertuxx/rinha-backend-2025:shellsocket
+    container_name: socket
+    hostname: socket
+    volumes:
+      - socket:/tmp
+    networks:
+      - rinha
+    deploy:
+      resources:
+        limits:
+          cpus: '0.2'
+          memory: 100MB
+
+volumes:
+  socket:
+
+networks:
+  rinha:
+    driver: bridge
+  payment-processor:
+    external: true

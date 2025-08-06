@@ -1,10 +1,58 @@
 
+ app-1 Pulling 
+ app-2 Pulling 
+ lb Pulling 
+ 9824c27679d3 Already exists 
+ cba8abde83f6 Already exists 
+ a3e4aa2eec44 Already exists 
+ 6d7cd9640707 Already exists 
+ 4f4fb700ef54 Already exists 
+ 834b6108eab8 Already exists 
+ 984b3b542db2 Pulling fs layer 
+ 9824c27679d3 Already exists 
+ cba8abde83f6 Already exists 
+ a3e4aa2eec44 Already exists 
+ 6d7cd9640707 Already exists 
+ 4f4fb700ef54 Already exists 
+ 834b6108eab8 Already exists 
+ 984b3b542db2 Pulling fs layer 
+ 984b3b542db2 Downloading [>                                                  ]  40.43kB/3.921MB
+ 9824c27679d3 Already exists 
+ 984b3b542db2 Downloading [>                                                  ]  40.43kB/3.921MB
+ cba8abde83f6 Already exists 
+ a3e4aa2eec44 Already exists 
+ 6d7cd9640707 Already exists 
+ 984b3b542db2 Verifying Checksum 
+ 984b3b542db2 Download complete 
+ 984b3b542db2 Verifying Checksum 
+ 984b3b542db2 Download complete 
+ 984b3b542db2 Extracting [>                                                  ]  65.54kB/3.921MB
+ 984b3b542db2 Extracting [>                                                  ]  65.54kB/3.921MB
+ 4f4fb700ef54 Already exists 
+ 834b6108eab8 Already exists 
+ 984b3b542db2 Pulling fs layer 
+ 984b3b542db2 Extracting [>                                                  ]  65.54kB/3.921MB
+ 984b3b542db2 Extracting [=====================================>             ]  2.949MB/3.921MB
+ 984b3b542db2 Extracting [=====================================>             ]  2.949MB/3.921MB
+ 984b3b542db2 Extracting [=====================================>             ]  2.949MB/3.921MB
+ 984b3b542db2 Extracting [==================================================>]  3.921MB/3.921MB
+ 984b3b542db2 Extracting [==================================================>]  3.921MB/3.921MB
+ 984b3b542db2 Extracting [==================================================>]  3.921MB/3.921MB
+ 984b3b542db2 Extracting [==================================================>]  3.921MB/3.921MB
+ 984b3b542db2 Extracting [==================================================>]  3.921MB/3.921MB
+ 984b3b542db2 Extracting [==================================================>]  3.921MB/3.921MB
+ 984b3b542db2 Pull complete 
+ 984b3b542db2 Pull complete 
+ 984b3b542db2 Pull complete 
+ app-2 Pulled 
+ app-1 Pulled 
+ lb Pulled 
  Network david-delta-sierra-go_backend  Creating
  Network david-delta-sierra-go_backend  Created
  Container david-delta-sierra-go-postgres-1  Creating
  Container david-delta-sierra-go-postgres-1  Created
- Container david-delta-sierra-go-app-2-1  Creating
  Container david-delta-sierra-go-app-1-1  Creating
+ Container david-delta-sierra-go-app-2-1  Creating
  Container david-delta-sierra-go-app-2-1  Created
  Container david-delta-sierra-go-app-1-1  Created
  Container david-delta-sierra-go-lb-1  Creating
@@ -24,18 +72,15 @@ postgres-1  | creating subdirectories ... ok
 postgres-1  | selecting dynamic shared memory implementation ... posix
 postgres-1  | selecting default "max_connections" ... 100
 postgres-1  | selecting default "shared_buffers" ... 128MB
-app-2-1     | init api
 postgres-1  | selecting default time zone ... UTC
 postgres-1  | creating configuration files ... ok
+app-2-1     | init api
 app-1-1     | init api
 lb-1        | init gateway
 postgres-1  | running bootstrap script ... ok
 postgres-1  | sh: locale: not found
-postgres-1  | 2025-08-06 03:25:18.411 UTC [22] WARNING:  no usable system locales were found
-lb-1        | Dialing socket: /tmp/app2/unix.sock
+postgres-1  | 2025-08-06 13:21:06.203 UTC [22] WARNING:  no usable system locales were found
 postgres-1  | performing post-bootstrap initialization ... ok
-postgres-1  | initdb: warning: enabling "trust" authentication for local connections
-postgres-1  | initdb: hint: You can change this by editing pg_hba.conf or using the option -A, or --auth-local and --auth-host, the next time you run initdb.
 postgres-1  | syncing data to disk ... ok
 postgres-1  | 
 postgres-1  | 
@@ -43,10 +88,12 @@ postgres-1  | Success. You can now start the database server using:
 postgres-1  | 
 postgres-1  |     pg_ctl -D /var/lib/postgresql/data -l logfile start
 postgres-1  | 
-postgres-1  | waiting for server to start....2025-08-06 03:25:20.423 UTC [28] LOG:  starting PostgreSQL 17.5 on x86_64-pc-linux-musl, compiled by gcc (Alpine 14.2.0) 14.2.0, 64-bit
-postgres-1  | 2025-08-06 03:25:20.428 UTC [28] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
-postgres-1  | 2025-08-06 03:25:20.447 UTC [31] LOG:  database system was shut down at 2025-08-06 03:25:20 UTC
-postgres-1  | 2025-08-06 03:25:20.456 UTC [28] LOG:  database system is ready to accept connections
+postgres-1  | initdb: warning: enabling "trust" authentication for local connections
+postgres-1  | initdb: hint: You can change this by editing pg_hba.conf or using the option -A, or --auth-local and --auth-host, the next time you run initdb.
+postgres-1  | waiting for server to start....2025-08-06 13:21:08.127 UTC [28] LOG:  starting PostgreSQL 17.5 on x86_64-pc-linux-musl, compiled by gcc (Alpine 14.2.0) 14.2.0, 64-bit
+postgres-1  | 2025-08-06 13:21:08.132 UTC [28] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+postgres-1  | 2025-08-06 13:21:08.149 UTC [31] LOG:  database system was shut down at 2025-08-06 13:21:07 UTC
+postgres-1  | 2025-08-06 13:21:08.160 UTC [28] LOG:  database system is ready to accept connections
 postgres-1  |  done
 postgres-1  | server started
 postgres-1  | CREATE DATABASE
@@ -66,35 +113,36 @@ postgres-1  | INSERT 0 2
 postgres-1  | CREATE INDEX
 postgres-1  | 
 postgres-1  | 
-postgres-1  | waiting for server to shut down....2025-08-06 03:25:20.907 UTC [28] LOG:  received fast shutdown request
-postgres-1  | 2025-08-06 03:25:20.912 UTC [28] LOG:  aborting any active transactions
-postgres-1  | 2025-08-06 03:25:20.915 UTC [28] LOG:  background worker "logical replication launcher" (PID 34) exited with exit code 1
-postgres-1  | 2025-08-06 03:25:20.917 UTC [29] LOG:  shutting down
-postgres-1  | 2025-08-06 03:25:20.924 UTC [29] LOG:  checkpoint starting: shutdown immediate
-postgres-1  | 2025-08-06 03:25:21.092 UTC [29] LOG:  checkpoint complete: wrote 933 buffers (5.7%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.027 s, sync=0.121 s, total=0.176 s; sync files=321, longest=0.041 s, average=0.001 s; distance=4290 kB, estimate=4290 kB; lsn=0/191DC50, redo lsn=0/191DC50
-postgres-1  | 2025-08-06 03:25:21.101 UTC [28] LOG:  database system is shut down
+postgres-1  | waiting for server to shut down....2025-08-06 13:21:08.557 UTC [28] LOG:  received fast shutdown request
+postgres-1  | 2025-08-06 13:21:08.562 UTC [28] LOG:  aborting any active transactions
+postgres-1  | 2025-08-06 13:21:08.565 UTC [28] LOG:  background worker "logical replication launcher" (PID 34) exited with exit code 1
+postgres-1  | 2025-08-06 13:21:08.603 UTC [29] LOG:  shutting down
+postgres-1  | 2025-08-06 13:21:08.608 UTC [29] LOG:  checkpoint starting: shutdown immediate
+postgres-1  | 2025-08-06 13:21:08.787 UTC [29] LOG:  checkpoint complete: wrote 933 buffers (5.7%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.027 s, sync=0.128 s, total=0.185 s; sync files=321, longest=0.023 s, average=0.001 s; distance=4290 kB, estimate=4290 kB; lsn=0/191DC50, redo lsn=0/191DC50
+postgres-1  | 2025-08-06 13:21:08.794 UTC [28] LOG:  database system is shut down
 postgres-1  |  done
 postgres-1  | server stopped
 postgres-1  | 
 postgres-1  | PostgreSQL init process complete; ready for start up.
 postgres-1  | 
-postgres-1  | 2025-08-06 03:25:21.128 UTC [1] LOG:  starting PostgreSQL 17.5 on x86_64-pc-linux-musl, compiled by gcc (Alpine 14.2.0) 14.2.0, 64-bit
-postgres-1  | 2025-08-06 03:25:21.128 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
-postgres-1  | 2025-08-06 03:25:21.128 UTC [1] LOG:  listening on IPv6 address "::", port 5432
-postgres-1  | 2025-08-06 03:25:21.128 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
-postgres-1  | 2025-08-06 03:25:21.131 UTC [46] LOG:  database system was shut down at 2025-08-06 03:25:21 UTC
-postgres-1  | 2025-08-06 03:25:21.203 UTC [1] LOG:  database system is ready to accept connections
+postgres-1  | 2025-08-06 13:21:08.878 UTC [1] LOG:  starting PostgreSQL 17.5 on x86_64-pc-linux-musl, compiled by gcc (Alpine 14.2.0) 14.2.0, 64-bit
+postgres-1  | 2025-08-06 13:21:08.878 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+postgres-1  | 2025-08-06 13:21:08.878 UTC [1] LOG:  listening on IPv6 address "::", port 5432
+postgres-1  | 2025-08-06 13:21:08.878 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+postgres-1  | 2025-08-06 13:21:08.880 UTC [46] LOG:  database system was shut down at 2025-08-06 13:21:08 UTC
+postgres-1  | 2025-08-06 13:21:08.884 UTC [1] LOG:  database system is ready to accept connections
+lb-1        | Dialing socket: /tmp/app2/unix.sock
 lb-1        | Dialing socket: /tmp/app1/unix.sock
 lb-1        | Dialing socket: /tmp/app1/unix.sock
 lb-1        | Dialing socket: /tmp/app2/unix.sock
 [Klb-1 exited with code 2
-[Kapp-2-1 exited with code 2
-postgres-1  | 2025-08-06 03:26:34.289 UTC [1] LOG:  received fast shutdown request
-postgres-1  | 2025-08-06 03:26:34.289 UTC [1] LOG:  aborting any active transactions
-postgres-1  | 2025-08-06 03:26:34.292 UTC [1] LOG:  background worker "logical replication launcher" (PID 49) exited with exit code 1
-postgres-1  | 2025-08-06 03:26:34.295 UTC [44] LOG:  shutting down
-postgres-1  | 2025-08-06 03:26:34.295 UTC [44] LOG:  checkpoint starting: shutdown immediate
-postgres-1  | 2025-08-06 03:26:34.298 UTC [44] LOG:  checkpoint complete: wrote 342 buffers (2.1%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.003 s, sync=0.001 s, total=0.003 s; sync files=0, longest=0.000 s, average=0.000 s; distance=734 kB, estimate=734 kB; lsn=0/19D56E8, redo lsn=0/19D56E8
-postgres-1  | 2025-08-06 03:26:34.305 UTC [1] LOG:  database system is shut down
+[Kapp-1-1 exited with code 2
+postgres-1  | 2025-08-06 13:22:19.667 UTC [1] LOG:  received fast shutdown request
+postgres-1  | 2025-08-06 13:22:19.667 UTC [1] LOG:  aborting any active transactions
+postgres-1  | 2025-08-06 13:22:19.670 UTC [1] LOG:  background worker "logical replication launcher" (PID 49) exited with exit code 1
+postgres-1  | 2025-08-06 13:22:19.673 UTC [44] LOG:  shutting down
+postgres-1  | 2025-08-06 13:22:19.673 UTC [44] LOG:  checkpoint starting: shutdown immediate
+postgres-1  | 2025-08-06 13:22:19.676 UTC [44] LOG:  checkpoint complete: wrote 342 buffers (2.1%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.002 s, sync=0.001 s, total=0.003 s; sync files=0, longest=0.000 s, average=0.000 s; distance=733 kB, estimate=733 kB; lsn=0/19D5388, redo lsn=0/19D5388
+postgres-1  | 2025-08-06 13:22:19.682 UTC [1] LOG:  database system is shut down
 [Kpostgres-1 exited with code 0
 log truncated at line 1000
