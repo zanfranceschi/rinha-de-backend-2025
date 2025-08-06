@@ -13,7 +13,7 @@ jobs:
             - uses: actions/checkout@v4
             - name: Arquivos Indevidos na Raiz
               run: |
-                expected_files_count=48
+                expected_files_count=47
                 actual_files_count=$(find . \( -path './participantes' -o -path './.git' -o -path './.github' \)  -prune -o -print | wc -l)
                 if [ $expected_files_count -ne $actual_files_count ]; then
                     echo "Arquivos removidos ou adicionados fora do diretório permitido. Arquivos encontrados: $actual_files_count"
