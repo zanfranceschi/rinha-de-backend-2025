@@ -10,13 +10,12 @@ jobs:
     bash-example:
         runs-on: ubuntu-latest
         steps:
-            - name: Teste 01
-              run: |
-                echo "01"
-                ls -lh
-                exit 0
             - name: Teste 02
               run: |
-                echo "Hello from GitHub Actions!"
-                ls -l
-                exit 1
+                expected_files_count=52
+                actual_files_count=$(find . \( -path './participantes' -o -path './.git' -o -path './.github' \)  -prune -o -print | wc -l)
+                if [ $expected_files_count -ne $actual_files_count ]; then
+                    echo "Arquivos removidos ou adicionados fora do diretório permitido."
+                    exit 1
+                fi
+                
