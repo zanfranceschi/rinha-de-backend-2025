@@ -15,7 +15,7 @@ jobs:
                 expected_files_count=51
                 actual_files_count=$(find . \( -path './participantes' -o -path './.git' -o -path './.github' \)  -prune -o -print | wc -l)
                 if [ $expected_files_count -ne $actual_files_count ]; then
-                    echo "Arquivos removidos ou adicionados fora do diretório permitido."
+                    echo "Arquivos removidos ou adicionados fora do diretório permitido. Arquivos encontrados: $actual_files_count"
                     exit 1
                 fi
-                
+            
