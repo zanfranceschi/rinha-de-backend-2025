@@ -2,7 +2,7 @@
 
 ## Tecnologias utilizadas
 
-- **Java 24 -  Native-Image**
+- **Java 21 -  Native-Image**
 - **postgres**
 - **Nginx**
 - **Docker**
