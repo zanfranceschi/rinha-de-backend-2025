@@ -1,0 +1,98 @@
+services:
+  openresty:
+    image: openresty/openresty:alpine
+    container_name: openresty
+    ports:
+      - "9999:9999"
+    volumes:
+      - ./nginx/lualib/http.lua:/usr/local/openresty/lualib/resty/http.lua
+      - ./nginx/lualib/http_headers.lua:/usr/local/openresty/lualib/resty/http_headers.lua
+      - ./nginx/lualib/http_connect.lua:/usr/local/openresty/lualib/resty/http_connect.lua
+      - ./nginx/nginx.conf:/usr/local/openresty/nginx/conf/nginx.conf
+      - ./nginx/lua:/usr/local/openresty/nginx/lua
+    depends_on:
+      - backend-01
+      - backend-02
+    networks:
+      - backend
+    deploy:
+      resources:
+        limits:
+          cpus: "0.3"
+          memory: "30MB"
+
+  backend-01: &backend
+    image: lecosas/rinha-backend-2025-java-spring:latest
+    container_name: backend-01
+    hostname: backend-01
+    networks:
+      - backend
+      - payment-processor
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+      - PAYMENT_BACKEND_MAIN_INSTANCE=true
+      - PAYMENT_BACKEND_WORKER_FALLBACK_DELAY=70
+      - PAYMENT_BACKEND_WORKER_THREAD_DELAY=0
+      - HTTPCLIENT_CONNECTION_TIMEOUT=5000
+      - HTTPCLIENT_READ_TIMEOUT=10000
+      - HTTPCLIENT_SOCKET_TIMEOUT=10000
+      - HTTPCLIENT_MAX_TOTAL_CONNECTIONS=1000
+      - HTTPCLIENT_MAX_PER_ROUTE_CONNECTIONS=1000
+      - HTTPCLIENT_MAX_IDLE_TIME=60000
+      - HTTPCLIENT_MAX_LIFE_TIME=60000
+      - PAYMENT_PROCESSOR_DEFAULT_URL=http://payment-processor-default:8080
+      - PAYMENT_PROCESSOR_FALLBACK_URL=http://payment-processor-fallback:8080
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+    depends_on:
+      redis:
+        condition: service_healthy
+    deploy:
+      resources:
+        limits:
+          cpus: "0.55"
+          memory: "140MB"
+
+  backend-02:
+    <<: *backend
+    container_name: backend-02
+    hostname: backend-02
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+      - PAYMENT_BACKEND_MAIN_INSTANCE=false
+      - PAYMENT_BACKEND_WORKER_FALLBACK_DELAY=70
+      - PAYMENT_BACKEND_WORKER_THREAD_DELAY=0
+      - HTTPCLIENT_CONNECTION_TIMEOUT=5000
+      - HTTPCLIENT_READ_TIMEOUT=10000
+      - HTTPCLIENT_SOCKET_TIMEOUT=10000
+      - HTTPCLIENT_MAX_TOTAL_CONNECTIONS=1000
+      - HTTPCLIENT_MAX_PER_ROUTE_CONNECTIONS=1000
+      - HTTPCLIENT_MAX_IDLE_TIME=60000
+      - HTTPCLIENT_MAX_LIFE_TIME=60000
+      - PAYMENT_PROCESSOR_DEFAULT_URL=http://payment-processor-default:8080
+      - PAYMENT_PROCESSOR_FALLBACK_URL=http://payment-processor-fallback:8080
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+
+  redis:
+    image: redis:7-alpine
+    container_name: redis
+    command: redis-server --save "" --appendonly no --maxmemory 30Mb --maxmemory-policy allkeys-lru --tcp-keepalive 60 --timeout 0
+    networks:
+      - backend
+    healthcheck:
+      test: [ "CMD", "redis-cli", "ping" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    deploy:
+      resources:
+        limits:
+          cpus: "0.1"
+          memory: "30MB" #Change in command line too.
+
+networks:
+  backend:
+    driver: bridge
+  payment-processor:
+    external: true
