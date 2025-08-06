@@ -31,7 +31,7 @@ jobs:
                 fi
             - name: Submissões sem info.json
               run: |
-                num=(find ./participantes -maxdepth 1 -mindepth 1  -type d '!' -exec test -e "{}/info.json" ';' -print | wc -l)
+                num=$(find ./participantes -maxdepth 1 -mindepth 1  -type d '!' -exec test -e "{}/info.json" ';' -print | wc -l)
                 if [ $num -ne 0 ]; then
                     echo "$num submissões em arquivo info.json"
                     find ./participantes -maxdepth 1 -mindepth 1  -type d '!' -exec test -e "{}/info.json" ';' -print
