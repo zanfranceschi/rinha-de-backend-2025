@@ -1,14 +1,14 @@
 x-service-templates:
   api: &api
-    image: gabrieleiro/rinha-de-backend-2025-api:4.0
+    image: gabrieleiro/rinha-de-backend-2025-api:5.0
     networks:
       - rinha-de-backend-2025
       - payment-processor
     deploy:
       resources:
         limits:
-          cpus: "0.5"
-          memory: "100MB"
+          cpus: "0.25"
+          memory: "50MB"
     depends_on:
       - tracker
 
@@ -16,29 +16,51 @@ services:
   api-1: 
     <<: *api
     hostname: api-1
+    expose:
+      - "9901/udp"
     ports:
-      - "8888:80"
+      - "9901:9901/udp"
     environment:
       DEFAULT_PROCESSOR_URL: "http://payment-processor-default:8080"
       FALLBACK_PROCESSOR_URL: "http://payment-processor-fallback:8080"
       TRACKER_URL: "tracker:1111"
-      PORT: "80"
-      ADDRESS: ":8888"
+      ADDRESS: ":9901"
 
   api-2:
     <<: *api
     hostname: api-2
     ports:
-      - "7777:80"
+      - "9902:9902/udp"
     environment:
       DEFAULT_PROCESSOR_URL: "http://payment-processor-default:8080"
       FALLBACK_PROCESSOR_URL: "http://payment-processor-fallback:8080"
       TRACKER_URL: "tracker:1111"
-      PORT: "80"
-      ADDRESS: ":7777"
+      ADDRESS: ":9902"
+
+  api-3:
+      <<: *api
+      hostname: api-3
+      ports:
+        - "9903:9903/udp"
+      environment:
+        DEFAULT_PROCESSOR_URL: "http://payment-processor-default:8080"
+        FALLBACK_PROCESSOR_URL: "http://payment-processor-fallback:8080"
+        TRACKER_URL: "tracker:1111"
+        ADDRESS: ":9903"
+
+  api-4:
+      <<: *api
+      hostname: api-4
+      ports:
+        - "9904:9904/udp"
+      environment:
+        DEFAULT_PROCESSOR_URL: "http://payment-processor-default:8080"
+        FALLBACK_PROCESSOR_URL: "http://payment-processor-fallback:8080"
+        TRACKER_URL: "tracker:1111"
+        ADDRESS: ":9904"
 
   load-balancer:
-    image: gabrieleiro/rinha-de-backend-2025-load-balancer:4.0
+    image: gabrieleiro/rinha-de-backend-2025-load-balancer:5.0
     networks:
       - rinha-de-backend-2025
     deploy:
@@ -50,10 +72,12 @@ services:
       - "9999:9999"
     environment:
       ADDRESS: ":9999"
-      SERVERS: "api-1:8888,api-2:7777"
+      SERVERS: "api-1:9901,api-2:9902,api-3:9903,api-4:9904"
     depends_on:
       - api-1
       - api-2
+      - api-3
+      - api-4
 
   tracker:
     hostname: tracker
