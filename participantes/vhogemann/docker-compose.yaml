@@ -1,25 +1,47 @@
 ﻿services:
   api1:
-    hostname: api1
-    image: vhogemann/rinha-de-backend-2025-fsharp:latest
+    image: vhogemann/rinha-de-backend-2025-fsharp:0.0.2
+    # build:
+    #   context: .
+    #   dockerfile: Api/Dockerfile
+    ports:
+        - "8081:8080"
     depends_on:
       - postgres
     networks:
       - backend
       - payment-processor
+    healthcheck:
+        test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+        interval: 30s
+        timeout: 10s
+        retries: 5
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
     deploy:
       resources:
         limits:
           cpus: "0.5"
           memory: "100MB"
   api2:
-    hostname: api2
-    image: vhogemann/rinha-de-backend-2025-fsharp:latest
+    image: vhogemann/rinha-de-backend-2025-fsharp:0.0.2
+    # build:
+    #   context: .
+    #   dockerfile: Api/Dockerfile
+    ports:
+        - "8082:8080"
     depends_on:
       - postgres
     networks:
       - backend
       - payment-processor
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8080/health" ]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
     deploy:
       resources:
         limits:
@@ -28,6 +50,7 @@
   postgres:
     # Banco de dados
     image: postgres
+    hostname: postgres
     restart: always
     environment:
       POSTGRES_PASSWORD: postgres
@@ -42,13 +65,13 @@
     expose:
       - "5432"
     ports:
-      - 9998:5432
+      - "5432:5432"
     volumes:
       - ./bootstrap.sql:/docker-entrypoint-initdb.d/bootstrap.sql
       - ./postgresql.conf:/etc/postgresql/postgresql.conf
     networks:
-        - backend
-        - payment-processor
+      - backend
+      - payment-processor
     deploy:
       resources:
         limits:

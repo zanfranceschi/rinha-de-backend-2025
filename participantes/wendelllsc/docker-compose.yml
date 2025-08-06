@@ -1,6 +1,6 @@
 x-app-template:
   api: &api
-    image: wendelllsc/rinha_backend_2025_01:latest
+    image: wendelllsc/rinha_backend_2025_01:1.0.0
     networks:
       - backend
       - payment-processor
@@ -13,7 +13,7 @@ x-app-template:
       resources:
         limits:
           cpus: "0.6"
-          memory: "125MB"
+          memory: "120MB"
 
   app-env: &app-env
     SERVER_PORT: "8080"
@@ -23,7 +23,7 @@ x-app-template:
     DB_URL: "jdbc:postgresql://postgres:5432/rinha"
     DB_USER: "rinha"
     DB_PASS: "rinha"
-    WORKER_POOL_SIZE: 35
+    WORKER_POOL_SIZE: 20
     CLIENT_MAX_CONNECTIONS: 200
     QUEUE_SIZE: 12000
     PROCESSOR_MAX_RETRIES: 10
@@ -53,11 +53,12 @@ services:
       retries: 10
     volumes:
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    restart: unless-stopped
     deploy:
       resources:
         limits:
           cpus: "0.1"
-          memory: "85MB"
+          memory: "90MB"
     networks:
       - backend
 
@@ -75,11 +76,12 @@ services:
     networks:
       - backend
       - payment-processor
+    restart: unless-stopped
     deploy:
       resources:
         limits:
           cpus: "0.2"
-          memory: "15MB"
+          memory: "20MB"
 
   api1:
     <<: *api

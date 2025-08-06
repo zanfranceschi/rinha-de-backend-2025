@@ -3,18 +3,21 @@ x-common-api-env: &common-env
   REDIS_HOST: redis:6379
   PROCESSOR_DEFAULT_URL: http://payment-processor-default:8080
   PROCESSOR_FALLBACK_URL: http://payment-processor-fallback:8080
+  NATS_MAX_ACK_PENDING: 4000
+  NATS_MAX_DELIVER: 3
+  REDIS_POOL_SIZE: 100
 
 x-service-templates:
   api: &api
-    image: lczago/rinha-25:latest
+    image: ghcr.io/lczago/rinha-25-go:v1.0.0
     networks:
       - rinha
       - payment-processor
     deploy:
       resources:
         limits:
-          cpus: '0.425'
-          memory: '70MB'
+          cpus: '0.45'
+          memory: '95MB'
     depends_on:
       nats:
         condition: service_healthy
@@ -80,12 +83,12 @@ services:
     hostname: redis
     networks:
       - rinha
-    command: [ "redis-server", "--save", "", "--appendonly", "no" ]
+    command: [ "redis-server", "--save", "", "--appendonly", "no", "--io-threads", "4" ]
     deploy:
       resources:
         limits:
-          cpus: "0.35"
-          memory: "150MB"
+          cpus: "0.3"
+          memory: "100MB"
     healthcheck:
       test: [ "CMD", "redis-cli", "ping" ]
       interval: 2s

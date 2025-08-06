@@ -3,7 +3,7 @@ services:
     image: nginx:1.25-alpine
     container_name: rinha-nginx
     volumes:
-      - ./docker/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
     depends_on:
       - api1
       - api2
@@ -18,7 +18,7 @@ services:
           memory: "15MB"
 
   api1: &api
-    image: ghcr.io/mourishitz/go-proxy:latest
+    image: ghcr.io/mourishitz/go-rinha-de-backend/go-proxy:latest
     container_name: api-1
     hostname: api1
     restart: always
@@ -62,7 +62,7 @@ services:
   worker1: &worker
     container_name: worker-1
     hostname: worker1
-    image: ghcr.io/mourishitz/go-worker:latest
+    image: ghcr.io/mourishitz/go-rinha-de-backend/go-worker:latest
     restart: always
     environment:
       - PAYMENT_PROCESSOR_DEFAULT_URL=http://payment-processor-default:8080

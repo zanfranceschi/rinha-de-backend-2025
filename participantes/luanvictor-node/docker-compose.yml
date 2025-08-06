@@ -5,19 +5,21 @@ services:
   cache:
     image: redis:7.2-alpine
     hostname: cache
-    command: redis-server --save "" --appendonly no --maxclients 20000 --maxmemory 40mb --maxmemory-policy allkeys-lru --tcp-keepalive 60
+    command: redis-server --save "" --appendonly no --maxclients 20000 --maxmemory 40mb --maxmemory-policy noeviction --tcp-keepalive 60
     networks:
       - backend
+    restart: unless-stopped
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]
       interval: 10s
       timeout: 5s
       retries: 5
+      start_period: 30s
     deploy:
       resources:
         limits:
           cpus: "0.1"
-          memory: "45MB"
+          memory: "40MB"
 
   # -------------
   # LOAD BALANCER
@@ -27,17 +29,20 @@ services:
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf:ro
     depends_on:
-      - api1
-      - api2
+      api1:
+        condition: service_started
+      api2:
+        condition: service_started
     ports:
       - "9999:9999"
     networks:
       - backend
+    restart: unless-stopped
     deploy:
       resources:
         limits:
           cpus: "0.1"
-          memory: "40MB"
+          memory: "35MB"
 
   # ---
   # API
@@ -58,7 +63,9 @@ services:
       - backend
       - payment-processor
     depends_on:
-      cache: { condition: service_healthy }
+      cache: 
+        condition: service_healthy
+    restart: unless-stopped
     deploy:
       resources:
         limits:
@@ -88,12 +95,14 @@ services:
       - backend
       - payment-processor
     depends_on:
-      cache: { condition: service_healthy }
+      cache: 
+        condition: service_healthy
+    restart: unless-stopped
     deploy:
       resources:
         limits:
           cpus: "1"
-          memory: "150MB"
+          memory: "145MB"
 
 networks:
   backend:

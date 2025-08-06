@@ -19,6 +19,7 @@ stopContainers() {
     pushd ../participantes/$1
         docker compose down -v --remove-orphans
         docker compose rm -s -v -f
+        find * ! -group $(whoami) | xargs sudo rm -rf
     popd > /dev/null
     pushd ../payment-processor > /dev/null
         docker compose down --volumes > /dev/null

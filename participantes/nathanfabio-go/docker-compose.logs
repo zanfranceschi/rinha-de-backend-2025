@@ -1,0 +1,1001 @@
+
+ app1 Pulling 
+ app2 Pulling 
+ 9824c27679d3 Already exists 
+ 9503e371429d Already exists 
+ 774c04324857 Pulling fs layer 
+ 9824c27679d3 Already exists 
+ 9503e371429d Already exists 
+ 774c04324857 Pulling fs layer 
+ 774c04324857 Downloading [>                                                  ]  63.13kB/6.309MB
+ 774c04324857 Downloading [>                                                  ]  63.13kB/6.309MB
+ 774c04324857 Verifying Checksum 
+ 774c04324857 Download complete 
+ 774c04324857 Download complete 
+ 774c04324857 Extracting [>                                                  ]  65.54kB/6.309MB
+ 774c04324857 Extracting [>                                                  ]  65.54kB/6.309MB
+ 774c04324857 Extracting [==================================================>]  6.309MB/6.309MB
+ 774c04324857 Extracting [==================================================>]  6.309MB/6.309MB
+ 774c04324857 Pull complete 
+ 774c04324857 Pull complete 
+ app2 Pulled 
+ app1 Pulled 
+ Network nathanfabio-go_backend  Creating
+ Network nathanfabio-go_backend  Created
+ Container nathanfabio-go-redis-1  Creating
+ Container nathanfabio-go-redis-1  Created
+ Container nathanfabio-go-app2-1  Creating
+ Container nathanfabio-go-app1-1  Creating
+ Container nathanfabio-go-app1-1  Created
+ Container nathanfabio-go-app2-1  Created
+ Container nathanfabio-go-nginx-1  Creating
+ Container nathanfabio-go-nginx-1  Created
+Attaching to app1-1, app2-1, nginx-1, redis-1
+redis-1  | 1:C 06 Aug 2025 12:51:11.978 # WARNING Memory overcommit must be enabled! Without it, a background save or replication may fail under low memory condition. Being disabled, it can also cause failures without low memory condition, see https://github.com/jemalloc/jemalloc/issues/1328. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.
+redis-1  | 1:C 06 Aug 2025 12:51:11.979 * oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+redis-1  | 1:C 06 Aug 2025 12:51:11.979 * Redis version=7.4.5, bits=64, commit=00000000, modified=0, pid=1, just started
+redis-1  | 1:C 06 Aug 2025 12:51:11.979 * Configuration loaded
+redis-1  | 1:M 06 Aug 2025 12:51:11.979 * monotonic clock: POSIX clock_gettime
+redis-1  | 1:M 06 Aug 2025 12:51:11.985 * Running mode=standalone, port=6379.
+redis-1  | 1:M 06 Aug 2025 12:51:11.985 * Server initialized
+redis-1  | 1:M 06 Aug 2025 12:51:11.986 * Ready to accept connections tcp
+app1-1   | 2025/08/06 12:51:12 INFO: worker pool started with 2 workers
+app1-1   | 2025/08/06 12:51:12 INFO: starting server on port: 7070
+app2-1   | 2025/08/06 12:51:12 INFO: worker pool started with 2 workers
+app2-1   | 2025/08/06 12:51:12 INFO: starting server on port: 7070
+nginx-1  | /docker-entrypoint.sh: /docker-entrypoint.d/ is not empty, will attempt to perform configuration
+nginx-1  | /docker-entrypoint.sh: Looking for shell scripts in /docker-entrypoint.d/
+nginx-1  | /docker-entrypoint.sh: Launching /docker-entrypoint.d/10-listen-on-ipv6-by-default.sh
+nginx-1  | 10-listen-on-ipv6-by-default.sh: info: Getting the checksum of /etc/nginx/conf.d/default.conf
+nginx-1  | 10-listen-on-ipv6-by-default.sh: info: Enabled listen on IPv6 in /etc/nginx/conf.d/default.conf
+nginx-1  | /docker-entrypoint.sh: Sourcing /docker-entrypoint.d/15-local-resolvers.envsh
+nginx-1  | /docker-entrypoint.sh: Launching /docker-entrypoint.d/20-envsubst-on-templates.sh
+nginx-1  | /docker-entrypoint.sh: Launching /docker-entrypoint.d/30-tune-worker-processes.sh
+nginx-1  | /docker-entrypoint.sh: Configuration complete; ready for start up
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:17 +0000] "GET /payments-summary HTTP/1.1" 200 95 "-" "curl/7.88.1"
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:23 +0000] "POST /purge-payments HTTP/1.1" 404 19 "-" "Grafana k6/1.1.0"
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:23 +0000] "GET /payments-summary?from=2025-08-06T12:51:08.064Z&to=2025-08-06T12:51:21.564Z HTTP/1.1" 200 95 "-" "Grafana k6/1.1.0"
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:23 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:23 INFO: Worker 1: Payment successufully processed with CorrelationID: 93e2d728-d48d-4fbd-aee7-7ee0e4b3e35c
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:23 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:23 INFO: Worker 1: Payment successufully processed with CorrelationID: 3395a092-c357-4209-84f7-98753b9e8ec0
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:23 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:23 INFO: Worker 2: Payment successufully processed with CorrelationID: 9ce95e87-e766-4728-a4f8-5ca9a41d93d1
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:23 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:23 INFO: Worker 2: Payment successufully processed with CorrelationID: 89a7be87-a2b9-4819-aff4-809e7ad3494c
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:23 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:23 INFO: Worker 1: Payment successufully processed with CorrelationID: f2493a75-8f74-44bd-a917-c80b5cba1f85
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:23 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:23 INFO: Worker 1: Payment successufully processed with CorrelationID: 90d73b24-ffb9-402b-892c-0fd109fac0ed
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:23 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:23 INFO: Worker 2: Payment successufully processed with CorrelationID: d8dac347-bd58-48b4-8fd6-a9129b7abc93
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:23 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:23 INFO: Worker 2: Payment successufully processed with CorrelationID: 3689e6ca-bfa9-4e32-ac8a-d7e541cbc79e
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:23 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:23 INFO: Worker 1: Payment successufully processed with CorrelationID: 4a19afe4-f44b-4539-a52a-554f506942e8
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:24 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:24 INFO: Worker 1: Payment successufully processed with CorrelationID: ab743b36-f648-477a-9a61-f256a1db4431
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:24 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:24 INFO: Worker 2: Payment successufully processed with CorrelationID: fc128b3e-522e-4438-9e00-76a5cf88c363
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:24 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:24 INFO: Worker 2: Payment successufully processed with CorrelationID: f3f5937f-31de-4584-b30d-118c1a3b6ed0
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:24 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:24 INFO: Worker 1: Payment successufully processed with CorrelationID: 01b10dab-1fec-4378-a7db-0ad625eaf521
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:24 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:24 INFO: Worker 1: Payment successufully processed with CorrelationID: 14244372-3e7c-4ffa-beb9-7133afae5d83
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:24 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:24 INFO: Worker 2: Payment successufully processed with CorrelationID: 0f2f9886-1b8e-4823-a3d0-ccaa8625fed6
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:24 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:24 INFO: Worker 2: Payment successufully processed with CorrelationID: deefdaa5-f796-4983-8e34-a9800b20f567
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:24 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:24 INFO: Worker 1: Payment successufully processed with CorrelationID: c79a8e88-a8e7-42b5-a368-ecc5eccc37e4
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:24 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:24 INFO: Worker 1: Payment successufully processed with CorrelationID: 73fbc7cc-37c2-4df0-9ca0-17eff6ad7ebf
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:24 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:24 INFO: Worker 2: Payment successufully processed with CorrelationID: 40a45443-4e7d-4134-9076-8e5ec39d8da8
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:24 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:24 INFO: Worker 2: Payment successufully processed with CorrelationID: ef094016-cd12-4894-8f12-d59d720a0c2f
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:24 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:24 INFO: Worker 1: Payment successufully processed with CorrelationID: 5ef0910f-ef82-44c5-bf77-230901aec4f2
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:24 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:24 INFO: Worker 1: Payment successufully processed with CorrelationID: ec4a82f5-852e-4a5b-acd6-468b63bdd33e
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:24 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:24 INFO: Worker 2: Payment successufully processed with CorrelationID: c56f0575-b3f5-49be-8230-c7b33026bcd5
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:24 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:24 INFO: Worker 2: Payment successufully processed with CorrelationID: 14faca86-afbb-40f3-9288-371b73e5d17e
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:24 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:24 INFO: Worker 1: Payment successufully processed with CorrelationID: 33d83bd3-9cc0-491b-97af-b689c8533456
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:24 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:24 INFO: Worker 1: Payment successufully processed with CorrelationID: 2b940c70-3863-43fa-85e2-7c21bc2b73e1
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:24 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:24 INFO: Worker 2: Payment successufully processed with CorrelationID: c4cff6d3-2690-4511-a9d9-cd7c5fc27a8f
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:25 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:25 INFO: Worker 2: Payment successufully processed with CorrelationID: a871e09a-5fb3-4c68-9d08-7754249d283d
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:25 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:25 INFO: Worker 1: Payment successufully processed with CorrelationID: f0e854a9-79d7-422b-9df1-0421234e1ce9
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:25 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:25 INFO: Worker 1: Payment successufully processed with CorrelationID: 01c1bb68-1fbd-4126-bbbe-375fa239f7cb
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:25 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:25 INFO: Worker 2: Payment successufully processed with CorrelationID: 4cd7fa18-e542-4db3-8560-0d6516ac7670
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:25 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:25 INFO: Worker 2: Payment successufully processed with CorrelationID: 1b41a89a-639b-4575-8036-5ea035c6d148
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:25 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:25 INFO: Worker 1: Payment successufully processed with CorrelationID: 07b87ff2-71d8-4e7a-8cb9-9b10781cc2b6
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:25 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:25 INFO: Worker 1: Payment successufully processed with CorrelationID: cc28cab2-60ad-4eaf-ae11-f50a36538a07
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:25 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:25 INFO: Worker 2: Payment successufully processed with CorrelationID: 0ad3c357-6302-4d01-8676-51705be7496e
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:25 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:25 INFO: Worker 2: Payment successufully processed with CorrelationID: bdeb5aee-4717-40f8-a4fd-0801490cfe9d
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:25 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:25 INFO: Worker 1: Payment successufully processed with CorrelationID: 323b4d28-7c85-46dc-8086-c689dbb9d505
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:25 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:25 INFO: Worker 1: Payment successufully processed with CorrelationID: d4747927-511c-47b4-acb5-65b1b6300b6f
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:25 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:25 INFO: Worker 2: Payment successufully processed with CorrelationID: b3c62490-7810-46d9-a5d6-63fb609f9215
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:25 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:25 INFO: Worker 2: Payment successufully processed with CorrelationID: c246e418-f1bd-4a94-81df-67747c235c0b
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:25 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:25 INFO: Worker 1: Payment successufully processed with CorrelationID: 7b6bb032-ffa5-4aab-8d8c-3753df4b0dcc
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:25 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:25 INFO: Worker 1: Payment successufully processed with CorrelationID: f66863eb-920b-455f-8b5c-c45383a29b7e
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:25 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:25 INFO: Worker 2: Payment successufully processed with CorrelationID: 1f78ac90-dfc7-4ff6-b2c1-9a324ddf1fd3
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:25 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:25 INFO: Worker 2: Payment successufully processed with CorrelationID: 927b1111-33d8-4a0a-b1b1-3f0de6f3849f
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:25 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:25 INFO: Worker 1: Payment successufully processed with CorrelationID: f72f0c6e-d2ce-487b-961c-068b524f198f
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:25 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:25 INFO: Worker 1: Payment successufully processed with CorrelationID: d00fafb7-1c64-404c-9743-df0b56be9ec5
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:25 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:25 INFO: Worker 2: Payment successufully processed with CorrelationID: 2cd37d64-960f-4c84-a604-c536ac7639c3
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:25 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:25 INFO: Worker 2: Payment successufully processed with CorrelationID: 561be745-5fe1-4d17-a660-3929824c6bdb
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:25 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:25 INFO: Worker 1: Payment successufully processed with CorrelationID: 58958ba7-42d4-4dcc-92e3-94492e2f3b7f
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:25 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:25 INFO: Worker 1: Payment successufully processed with CorrelationID: cd1a7f65-1131-458f-bca6-473d05a2bdd7
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:25 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:25 INFO: Worker 2: Payment successufully processed with CorrelationID: c1f3ab4f-18a2-4424-a680-cf6d91b95133
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:25 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:25 INFO: Worker 2: Payment successufully processed with CorrelationID: a5026bce-9d59-4aae-b036-864f841e844d
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:25 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:25 INFO: Worker 1: Payment successufully processed with CorrelationID: 2086eab2-6851-4ce4-a942-cd4b94247e9e
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:25 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:25 INFO: Worker 1: Payment successufully processed with CorrelationID: 01661a41-0b21-47a8-b32c-f8ff567da5c5
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:26 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:26 INFO: Worker 2: Payment successufully processed with CorrelationID: 91235baa-97e0-4f70-8cdf-dff81e5bf7a1
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:26 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:26 INFO: Worker 2: Payment successufully processed with CorrelationID: d407a1b2-c178-476b-b9a6-302f3b73d879
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:26 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:26 INFO: Worker 1: Payment successufully processed with CorrelationID: 7fc2fe20-b1e5-489d-b2fa-73c2fc38a294
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:26 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:26 INFO: Worker 1: Payment successufully processed with CorrelationID: e65b9e85-0ef2-4332-a5ef-3ddcac49e2cd
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:26 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:26 INFO: Worker 2: Payment successufully processed with CorrelationID: cb580071-1647-4b67-aa03-db8daeec9555
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:26 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:26 INFO: Worker 2: Payment successufully processed with CorrelationID: eeee9bfe-a0b3-48f4-bc5a-41b408944bd1
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:26 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:26 INFO: Worker 1: Payment successufully processed with CorrelationID: 4de32b72-1f43-47f9-9144-dc400e06dbbb
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:26 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:26 INFO: Worker 1: Payment successufully processed with CorrelationID: d14286c4-05a5-442d-ad68-f6a7032ca36f
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:26 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:26 INFO: Worker 2: Payment successufully processed with CorrelationID: 121525da-bd65-46db-aaaf-d1c0c6df03c6
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:26 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:26 INFO: Worker 2: Payment successufully processed with CorrelationID: 3a8425b2-673f-4442-8bf4-0fa6802e837a
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:26 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:26 INFO: Worker 1: Payment successufully processed with CorrelationID: f8d277f2-a633-4dab-9847-380939aacf60
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:26 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:26 INFO: Worker 1: Payment successufully processed with CorrelationID: 80b68eed-676d-4b65-8274-ef755c9e107e
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:26 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:26 INFO: Worker 2: Payment successufully processed with CorrelationID: 068f78f1-af2a-4c9a-a5a2-1f956dcc3f2f
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:26 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:26 INFO: Worker 2: Payment successufully processed with CorrelationID: 9a062f13-e9f3-453d-bcac-508fec7e3680
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:26 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:26 INFO: Worker 1: Payment successufully processed with CorrelationID: 1f7af001-a0fa-4cdc-acf1-4b27ddad3e65
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:26 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:26 INFO: Worker 1: Payment successufully processed with CorrelationID: 235ff3ac-6afc-4f52-b5ba-db00ffe378fe
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:26 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:26 INFO: Worker 2: Payment successufully processed with CorrelationID: d3e915f6-f174-4f3b-8097-16da8b8179ed
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:26 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:26 INFO: Worker 2: Payment successufully processed with CorrelationID: c61fe30b-4058-4581-a8b7-9f383c94ea83
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:26 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:26 INFO: Worker 1: Payment successufully processed with CorrelationID: 6c5e9bb6-7a93-4723-8317-1adacf03e1c0
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:26 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:26 INFO: Worker 1: Payment successufully processed with CorrelationID: fb392311-6621-4001-9534-9f0e61d5013c
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:26 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:26 INFO: Worker 2: Payment successufully processed with CorrelationID: dcb213cb-86ff-4e9e-a18e-b0f2b7172083
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:26 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:26 INFO: Worker 2: Payment successufully processed with CorrelationID: 1ee44e4b-9fb7-4c2f-9074-5e01a5b019ff
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:26 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:26 INFO: Worker 1: Payment successufully processed with CorrelationID: 84be5967-7885-468d-8811-f4ad65e19e96
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:26 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:26 INFO: Worker 1: Payment successufully processed with CorrelationID: 53d5a716-f18c-4aa3-9c9d-e60ad082a09f
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:26 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:26 INFO: Worker 2: Payment successufully processed with CorrelationID: d455f54a-f1c4-4b19-9b8d-51851ca6954c
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:26 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:26 INFO: Worker 2: Payment successufully processed with CorrelationID: c8bc89e5-b61f-4698-b39e-d04391d78887
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:26 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:26 INFO: Worker 1: Payment successufully processed with CorrelationID: 7e0f593b-7c9f-4f7c-87f4-790e94157e56
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:26 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:26 INFO: Worker 1: Payment successufully processed with CorrelationID: face081a-13ee-4da2-b10d-5cec09893e44
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:26 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:26 INFO: Worker 2: Payment successufully processed with CorrelationID: b51c0d26-714d-4f83-89c1-ecbd47a785a4
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:26 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:26 INFO: Worker 2: Payment successufully processed with CorrelationID: a9acfce3-017d-44fe-8cb0-7401caa77bba
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:26 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:26 INFO: Worker 1: Payment successufully processed with CorrelationID: 09ac3604-d5a6-4871-9e8d-e0f2a85f825e
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:26 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:26 INFO: Worker 1: Payment successufully processed with CorrelationID: 8ff9e75b-ab1b-48d5-942e-f6768015e2ad
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:26 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:26 INFO: Worker 2: Payment successufully processed with CorrelationID: 27daf8ce-ea2e-4abc-a923-4d2f303220d2
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:26 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:26 INFO: Worker 2: Payment successufully processed with CorrelationID: c9efa792-d259-4dd4-bdff-16931cf8ed8a
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:26 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:26 INFO: Worker 1: Payment successufully processed with CorrelationID: 38b127e6-f693-4f77-86c9-a2f8d91c3323
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:26 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:26 INFO: Worker 1: Payment successufully processed with CorrelationID: f6629de1-dd88-44ef-8b65-5ec20642dbb8
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:27 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:27 INFO: Worker 2: Payment successufully processed with CorrelationID: 883f0cb5-14a5-44f4-904b-6c1bfac93802
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:27 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:27 INFO: Worker 2: Payment successufully processed with CorrelationID: c03b7b98-0f1d-4f13-83e4-72f2bc7bd1ec
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:27 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:27 INFO: Worker 1: Payment successufully processed with CorrelationID: c5ed747c-9bdf-42c1-9afe-e997a613d67c
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:27 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:27 INFO: Worker 1: Payment successufully processed with CorrelationID: 1ce791f1-0c66-4ae1-8c31-1c361c423ef5
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:27 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:27 INFO: Worker 2: Payment successufully processed with CorrelationID: a7c474f0-a4cb-49aa-aed3-ce9574ba9e26
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:27 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:27 INFO: Worker 2: Payment successufully processed with CorrelationID: 9c81c068-c029-48a1-abc5-ed59fd480467
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:27 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:27 INFO: Worker 1: Payment successufully processed with CorrelationID: 3b4039f3-a650-44b6-afa4-48f5efa348e4
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:27 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:27 INFO: Worker 1: Payment successufully processed with CorrelationID: ee0cc28c-f36a-4627-aea7-6abc5a032968
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:27 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:27 INFO: Worker 2: Payment successufully processed with CorrelationID: 72845fe6-053b-4bf8-a151-1e328ea4052f
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:27 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:27 INFO: Worker 2: Payment successufully processed with CorrelationID: 3ce1ddc5-1186-4904-b070-0e7f746dba4f
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:27 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:27 INFO: Worker 1: Payment successufully processed with CorrelationID: da5eef70-c072-44a0-8797-70088ce715be
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:27 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:27 INFO: Worker 1: Payment successufully processed with CorrelationID: 97cae1a3-ba6a-4904-b4d2-de36e977a409
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:27 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:27 INFO: Worker 2: Payment successufully processed with CorrelationID: 37dbb96d-ab8e-42c3-9d5b-6f65f429bc3f
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:27 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:27 INFO: Worker 2: Payment successufully processed with CorrelationID: a4f78785-05d1-4e2d-82b2-93babe0986dc
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:27 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:27 INFO: Worker 1: Payment successufully processed with CorrelationID: 41ff18eb-de56-403f-b20d-4f75b5c03c14
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:27 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:27 INFO: Worker 1: Payment successufully processed with CorrelationID: ae529d88-33d4-4c37-9d11-799a59a637a6
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:27 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:27 INFO: Worker 2: Payment successufully processed with CorrelationID: 95e6435d-a422-48a3-9e07-acc8197b0f41
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:27 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:27 INFO: Worker 2: Payment successufully processed with CorrelationID: eaeebb87-0a97-4645-9f03-a6a89a4870cf
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:27 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:27 INFO: Worker 1: Payment successufully processed with CorrelationID: 1841a576-e0bc-4928-93f9-d858b553a087
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:27 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:27 INFO: Worker 1: Payment successufully processed with CorrelationID: e7f12858-db4e-4328-9586-bf304151e316
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:27 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:27 INFO: Worker 2: Payment successufully processed with CorrelationID: 0ff93cf8-8317-45ba-8e6e-c12fcae48360
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:27 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:27 INFO: Worker 2: Payment successufully processed with CorrelationID: 66ed7824-c6b8-4a8d-a37a-65f3799b5b0e
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:27 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:27 INFO: Worker 1: Payment successufully processed with CorrelationID: 2a043677-28dc-4874-9147-a30358ed44fd
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:27 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:27 INFO: Worker 1: Payment successufully processed with CorrelationID: 0a92fcf2-d33e-4499-968d-ecf2a50dc6ed
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:27 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:27 INFO: Worker 2: Payment successufully processed with CorrelationID: bc6bdf10-fb96-4f08-bf5a-170d8b677c4c
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:27 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:27 INFO: Worker 2: Payment successufully processed with CorrelationID: 87ddedec-5b4a-4f41-800e-c62c1499bb49
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:27 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:27 INFO: Worker 1: Payment successufully processed with CorrelationID: 76e3e736-e3a4-46fe-9904-b1636f724f17
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:27 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:27 INFO: Worker 1: Payment successufully processed with CorrelationID: ce68dbff-f308-451f-9ba4-4d87e3a0d86b
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:27 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:27 INFO: Worker 2: Payment successufully processed with CorrelationID: 79800b56-1d06-4e20-b6b8-29f7d48f6746
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:27 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:27 INFO: Worker 2: Payment successufully processed with CorrelationID: 377c249a-bfb7-4162-b55f-47ded0066119
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:27 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:27 INFO: Worker 1: Payment successufully processed with CorrelationID: aa26cba6-faf8-4038-bd5d-0ef4a7c58f07
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:27 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:27 INFO: Worker 1: Payment successufully processed with CorrelationID: 4b41892a-523e-4b31-94c3-ce925106f307
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:27 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:27 INFO: Worker 2: Payment successufully processed with CorrelationID: 490935b4-e033-4abb-ba6e-9e8f39dc7430
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:27 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:27 INFO: Worker 2: Payment successufully processed with CorrelationID: 47a22350-94a8-487e-baa2-06508d167e8b
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:27 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:27 INFO: Worker 1: Payment successufully processed with CorrelationID: 1611f26d-ed00-443f-8d71-2bc6d372ec90
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:27 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:27 INFO: Worker 1: Payment successufully processed with CorrelationID: 148586d9-2a64-48e9-80df-f098219503c4
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:27 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:27 INFO: Worker 2: Payment successufully processed with CorrelationID: 38e2bf7c-1d49-4f62-b124-e6e490868bb7
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:27 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:27 INFO: Worker 2: Payment successufully processed with CorrelationID: 2ecd567b-b24a-4aed-aaa1-d83b28927a13
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:27 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:27 INFO: Worker 1: Payment successufully processed with CorrelationID: df12ef0c-b9d4-4056-ade9-cb1b8c65cf29
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:27 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:27 INFO: Worker 1: Payment successufully processed with CorrelationID: bbd77ae1-2487-4a6e-964f-25d369491e14
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:27 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:27 INFO: Worker 2: Payment successufully processed with CorrelationID: eba8c44a-3a2d-4912-a31c-0294f0472b0d
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:27 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:27 INFO: Worker 2: Payment successufully processed with CorrelationID: cef1a124-86ec-4aa5-a615-43c665c23b30
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:27 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:27 INFO: Worker 1: Payment successufully processed with CorrelationID: c7d54a62-c90d-4331-b374-7e0b9fb38d75
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:27 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:27 INFO: Worker 1: Payment successufully processed with CorrelationID: fc24f3f6-f763-4040-bdf4-0b14c0a3a792
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:27 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:27 INFO: Worker 2: Payment successufully processed with CorrelationID: f9d47dac-83d2-41c3-9de1-1e4d22947674
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:27 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:27 INFO: Worker 2: Payment successufully processed with CorrelationID: a01d607b-c6eb-47a7-a0f1-60732a514b34
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:28 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:28 INFO: Worker 1: Payment successufully processed with CorrelationID: cf0ace6d-2f8d-4b18-a5b1-152ff15dce5d
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:28 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:28 INFO: Worker 1: Payment successufully processed with CorrelationID: 2d81802b-610b-496c-b69b-1fc616c0de3b
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:28 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:28 INFO: Worker 2: Payment successufully processed with CorrelationID: cce1d93c-7da0-4115-a0d0-5cb8571fdcd8
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:28 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:28 INFO: Worker 2: Payment successufully processed with CorrelationID: 96f7c953-f0b0-49f4-86b9-c5de04386a32
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:28 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:28 INFO: Worker 1: Payment successufully processed with CorrelationID: f4f96572-5fc4-4e79-a092-e32819c34e31
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:28 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:28 INFO: Worker 1: Payment successufully processed with CorrelationID: f6979a60-f012-4699-b3d9-d51ba653984c
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:28 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:28 INFO: Worker 2: Payment successufully processed with CorrelationID: aac729fa-312c-4424-8082-965804ad619f
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:28 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:28 INFO: Worker 2: Payment successufully processed with CorrelationID: 8abb1db7-7826-4a57-a157-17fd7be26dea
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:28 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:28 INFO: Worker 1: Payment successufully processed with CorrelationID: 00cd331e-020e-4334-8710-862c2e5e5b03
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:28 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:28 INFO: Worker 1: Payment successufully processed with CorrelationID: 0a53ac47-daf3-4584-887b-f15a5eb165b6
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:28 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:28 INFO: Worker 2: Payment successufully processed with CorrelationID: 816a1ccf-9ca1-4ff3-a902-3e9c5669f8ae
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:28 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:28 INFO: Worker 2: Payment successufully processed with CorrelationID: 15770704-c296-4e99-8fcb-a98a3f4ccddc
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:28 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:28 INFO: Worker 1: Payment successufully processed with CorrelationID: 5d4d1c18-123d-441e-8c7d-8916d44c5486
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:28 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:28 INFO: Worker 1: Payment successufully processed with CorrelationID: 03bbf34f-4de7-4740-9dd3-f7e844cc76d5
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:28 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:28 INFO: Worker 2: Payment successufully processed with CorrelationID: e87b2b87-bea9-4ff2-9192-3ab09d7b1647
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:28 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:28 INFO: Worker 2: Payment successufully processed with CorrelationID: d541daf4-9ad1-4a0f-bd26-f623d2d3a67c
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:28 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:28 INFO: Worker 1: Payment successufully processed with CorrelationID: 4439deff-b02e-4765-a37a-cffcfcae8689
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:28 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:28 INFO: Worker 1: Payment successufully processed with CorrelationID: 72740080-5b82-47e1-835e-f6f8ac7f2b4c
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:28 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:28 INFO: Worker 2: Payment successufully processed with CorrelationID: 8f2c7f1f-82ec-44ab-89c4-a8098ddf80ee
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:28 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:28 INFO: Worker 2: Payment successufully processed with CorrelationID: cdb92d4e-7fd5-4749-ae0f-9f7bc19a7f43
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:28 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:28 INFO: Worker 1: Payment successufully processed with CorrelationID: c12f7689-1b06-4a79-b000-305656fcc81d
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:28 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:28 INFO: Worker 1: Payment successufully processed with CorrelationID: c82d1652-604b-47bd-b418-eeaeaf682ffc
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:28 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:28 INFO: Worker 2: Payment successufully processed with CorrelationID: 691ac503-9f2c-4d58-994c-95d9dbab9e00
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:28 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:28 INFO: Worker 2: Payment successufully processed with CorrelationID: 142b47cf-36d2-45cb-a1cc-b587b10f446d
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:28 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:28 INFO: Worker 1: Payment successufully processed with CorrelationID: 6f3657fe-3201-40bf-b188-81fc4debff56
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:28 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:28 INFO: Worker 1: Payment successufully processed with CorrelationID: d4513b18-bfdc-4eb4-9f50-ece37462eee5
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:28 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:28 INFO: Worker 2: Payment successufully processed with CorrelationID: eca8096a-dc62-441b-bd1d-85827ae754db
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:28 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:28 INFO: Worker 2: Payment successufully processed with CorrelationID: c5e851b9-2d26-4eeb-b7c9-e67757e8006c
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:28 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:28 INFO: Worker 1: Payment successufully processed with CorrelationID: c73422be-7644-4c2a-8e8e-d5d012bc4f89
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:28 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:28 INFO: Worker 1: Payment successufully processed with CorrelationID: 297521be-0f4c-4fed-91c4-91c586352485
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:28 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:28 INFO: Worker 2: Payment successufully processed with CorrelationID: 223ca40e-aaaf-4721-b694-9da38b0aaaa1
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:28 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:28 INFO: Worker 2: Payment successufully processed with CorrelationID: 6c2b0bf1-638b-4624-96ff-36f7dc7b2c66
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:28 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:28 INFO: Worker 1: Payment successufully processed with CorrelationID: e53512f7-1cc4-4f68-9414-11c40700ecd1
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:28 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:28 INFO: Worker 1: Payment successufully processed with CorrelationID: a3651561-8778-4b1a-ab95-c4222d6a1749
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:28 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:28 INFO: Worker 2: Payment successufully processed with CorrelationID: e807f27b-064b-47e6-93ae-57fe47db158a
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:28 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:28 INFO: Worker 2: Payment successufully processed with CorrelationID: 5778ec92-1dfc-4778-aeaf-0b6d7caf84ce
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:28 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:28 INFO: Worker 1: Payment successufully processed with CorrelationID: 24a5fa65-596d-4575-babc-1e8d5852b095
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:28 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:28 INFO: Worker 1: Payment successufully processed with CorrelationID: 6a27f44f-0f42-4e9c-98fa-c8cb17ac0334
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:28 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:28 INFO: Worker 2: Payment successufully processed with CorrelationID: b01621d3-fae2-4134-bd6e-3034696e71d3
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:28 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:28 INFO: Worker 2: Payment successufully processed with CorrelationID: dcf20c00-0c38-4e37-9149-d1874eea6fb8
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:28 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:28 INFO: Worker 1: Payment successufully processed with CorrelationID: 7954a73f-18d2-4126-af87-337733f49b6e
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:28 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:28 INFO: Worker 1: Payment successufully processed with CorrelationID: cf58e35f-2b08-4296-807e-15fee2a7488c
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:28 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:28 INFO: Worker 2: Payment successufully processed with CorrelationID: e979e603-eadf-4324-9caa-2c80cb87b3a7
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:28 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:28 INFO: Worker 2: Payment successufully processed with CorrelationID: c772f985-7d68-4f5e-b357-89494351bd73
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:28 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:28 INFO: Worker 1: Payment successufully processed with CorrelationID: 04cd9ca1-faf8-4cf7-ba49-6dee3e4f8a8e
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:28 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:28 INFO: Worker 1: Payment successufully processed with CorrelationID: 9bb4b25d-8d8c-438e-8923-89a274183c77
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:28 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:28 INFO: Worker 2: Payment successufully processed with CorrelationID: ac9f974a-efcf-4956-9449-6da1f07317a7
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:28 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:28 INFO: Worker 2: Payment successufully processed with CorrelationID: ee1104f2-0433-4c43-ad60-94f0f8bf2959
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:28 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:28 INFO: Worker 1: Payment successufully processed with CorrelationID: 997028cf-7a8f-48f7-a236-0012958d119a
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:28 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:28 INFO: Worker 1: Payment successufully processed with CorrelationID: c60fe90c-6732-4a63-8842-d08c01af00aa
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:28 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:28 INFO: Worker 2: Payment successufully processed with CorrelationID: 46c5fc59-5c23-4b89-ad46-edf10ec3e651
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:28 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:28 INFO: Worker 2: Payment successufully processed with CorrelationID: e75cd38d-7419-4e2e-92e5-bd9fa7579d6b
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:28 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:28 INFO: Worker 1: Payment successufully processed with CorrelationID: bc7db8fd-7111-4fd1-a0de-f31b193712bc
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:28 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:28 INFO: Worker 1: Payment successufully processed with CorrelationID: c260a8a5-1844-434e-b360-40e72190d71c
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:28 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:28 INFO: Worker 2: Payment successufully processed with CorrelationID: 42579653-701c-4db6-8ebf-b5284d65d732
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:29 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:29 INFO: Worker 2: Payment successufully processed with CorrelationID: 0bf2a7c8-edda-437c-8771-92f06b341c56
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:29 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:29 INFO: Worker 1: Payment successufully processed with CorrelationID: 6b78df75-4a06-4b0a-8a06-17f9e03bdac0
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:29 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:29 INFO: Worker 1: Payment successufully processed with CorrelationID: afca30c5-3718-4f23-ac85-bbe55399ac46
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:29 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:29 INFO: Worker 2: Payment successufully processed with CorrelationID: f5d2ab44-8431-4dc1-a05f-3256a7efddce
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:29 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:29 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:29 INFO: Worker 2: Payment successufully processed with CorrelationID: 33faaa78-2b79-428f-8aff-f4ea46a346d0
+app2-1   | 2025/08/06 12:51:29 INFO: Worker 1: Payment successufully processed with CorrelationID: c98e4c4d-65a6-49dd-affa-b0374f2b7971
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:29 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:29 INFO: Worker 2: Payment successufully processed with CorrelationID: 01849106-a526-44b5-968c-04d0c582fb31
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:29 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:29 INFO: Worker 1: Payment successufully processed with CorrelationID: 112f8005-5d95-4df6-a65f-6bb4fc8f3de1
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:29 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:29 INFO: Worker 1: Payment successufully processed with CorrelationID: 01023846-5993-4c10-9317-f8defefd17ff
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:29 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:29 INFO: Worker 2: Payment successufully processed with CorrelationID: 5096b9ab-cf57-4310-9dff-adf94a2a7f91
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:29 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:29 INFO: Worker 2: Payment successufully processed with CorrelationID: 896f4eea-4d61-4125-9621-20841c4644e1
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:29 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:29 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:29 INFO: Worker 1: Payment successufully processed with CorrelationID: 79545dbd-3692-4131-8686-1e5875c04b43
+app2-1   | 2025/08/06 12:51:29 INFO: Worker 1: Payment successufully processed with CorrelationID: cbdbd9df-0103-4964-884b-182e0ecdeff5
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:29 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:29 INFO: Worker 2: Payment successufully processed with CorrelationID: 294c4e7e-fef2-42c6-a439-2d2175a32818
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:29 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:29 INFO: Worker 2: Payment successufully processed with CorrelationID: 6158a170-0d29-4ab2-8f2c-921cf3b4b500
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:29 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:29 INFO: Worker 1: Payment successufully processed with CorrelationID: 65fce7a0-1f66-4f7c-a744-09e0525c8029
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:29 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:29 INFO: Worker 1: Payment successufully processed with CorrelationID: a4d0e48e-9c9c-4970-9477-8193dd325f76
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:29 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:29 INFO: Worker 2: Payment successufully processed with CorrelationID: 12b27a98-a5fc-44a5-bbca-a14f00213869
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:29 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:29 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:29 INFO: Worker 1: Payment successufully processed with CorrelationID: b61de1df-29e6-4225-807c-380248f7f304
+app2-1   | 2025/08/06 12:51:29 INFO: Worker 2: Payment successufully processed with CorrelationID: 92667459-0bba-4511-b43a-49780e897c7e
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:29 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:29 INFO: Worker 2: Payment successufully processed with CorrelationID: 9263b961-28b3-428d-a343-9eb920fda10d
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:29 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:29 INFO: Worker 1: Payment successufully processed with CorrelationID: 1158ffaf-bd1b-4b77-8b02-c82c7419a8ee
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:29 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:29 INFO: Worker 1: Payment successufully processed with CorrelationID: e5ec4f40-8298-49d3-8ff8-3c363267fcb3
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:29 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:29 INFO: Worker 2: Payment successufully processed with CorrelationID: e165aa3f-f231-4f3e-ab74-36362cd0bb07
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:29 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:29 INFO: Worker 2: Payment successufully processed with CorrelationID: f0de8763-c5e0-4723-9747-47034eca7f17
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:29 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:29 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:29 INFO: Worker 1: Payment successufully processed with CorrelationID: eaf61f72-f181-4a66-bd48-abc5bc79d1b4
+app1-1   | 2025/08/06 12:51:29 INFO: Worker 1: Payment successufully processed with CorrelationID: 43a36c34-b366-4aa4-b9de-6df99dd8f4e5
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:29 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:29 INFO: Worker 2: Payment successufully processed with CorrelationID: 8c7abc4c-bcda-41e4-b140-ebc5b401a1dc
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:29 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:29 INFO: Worker 2: Payment successufully processed with CorrelationID: aa7b5339-c06a-4988-8c2a-8ef27b31980b
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:29 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:29 INFO: Worker 1: Payment successufully processed with CorrelationID: 38250b3a-69c6-4794-9b93-723e67d8f7d1
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:29 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:29 INFO: Worker 1: Payment successufully processed with CorrelationID: 6689d97b-a292-425e-9ed7-b2db73a55aa5
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:29 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:29 INFO: Worker 2: Payment successufully processed with CorrelationID: 2d88b478-dba7-48fe-854d-1d9da6b3c649
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:29 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:29 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:29 INFO: Worker 1: Payment successufully processed with CorrelationID: 239b95d2-864d-4149-b08d-a13d707faafb
+app1-1   | 2025/08/06 12:51:29 INFO: Worker 2: Payment successufully processed with CorrelationID: da1096a6-2c4e-4de8-8885-4489f68ca63d
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:29 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:29 INFO: Worker 2: Payment successufully processed with CorrelationID: b336eb6b-423c-4db4-8523-0a74002ee198
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:29 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:29 INFO: Worker 1: Payment successufully processed with CorrelationID: 52f2b6d9-df9d-4fc7-82d7-b382f082aad7
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:29 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:29 INFO: Worker 1: Payment successufully processed with CorrelationID: 4cca19ca-a1c6-40e8-9396-41e76b7676ab
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:29 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:29 INFO: Worker 2: Payment successufully processed with CorrelationID: c4560d98-7801-4df5-a470-9d1e6ff3a6ff
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:29 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:29 INFO: Worker 2: Payment successufully processed with CorrelationID: 60b1682d-cafa-45a1-a51b-31a94d8c2a27
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:29 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:29 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:29 INFO: Worker 1: Payment successufully processed with CorrelationID: cfedcf3a-40ab-4b7c-8be4-4dedb51f916c
+app2-1   | 2025/08/06 12:51:29 INFO: Worker 1: Payment successufully processed with CorrelationID: 3f8218e4-0779-4426-aab5-21615bc37a95
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:29 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:29 INFO: Worker 2: Payment successufully processed with CorrelationID: 1484c098-b222-406b-b85d-f1b09dec0b9c
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:29 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:29 INFO: Worker 2: Payment successufully processed with CorrelationID: c2aac059-874f-4a5c-a130-926a65218b94
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:29 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:29 INFO: Worker 1: Payment successufully processed with CorrelationID: 3edf7a7f-062d-4644-bec9-45edba3aea48
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:29 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:29 INFO: Worker 1: Payment successufully processed with CorrelationID: f445d518-ff59-4f60-ad04-732f1a1ead86
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:29 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:29 INFO: Worker 2: Payment successufully processed with CorrelationID: f31e12f4-e261-44a8-a675-4837bdede57f
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:29 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:29 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:29 INFO: Worker 2: Payment successufully processed with CorrelationID: 30423f95-7e04-45ea-bace-38bfab3c33ce
+app1-1   | 2025/08/06 12:51:29 INFO: Worker 1: Payment successufully processed with CorrelationID: 5f17ed00-a1d4-4fa9-9541-d67b108e8f2f
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:29 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:29 INFO: Worker 1: Payment successufully processed with CorrelationID: 320a506f-1200-41b0-a7b3-b5fc0c49b2ae
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:29 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:29 INFO: Worker 2: Payment successufully processed with CorrelationID: 1202b7da-ecf1-40b8-a3e8-22d0fbaead06
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:29 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:29 INFO: Worker 2: Payment successufully processed with CorrelationID: f664645d-d154-4fca-a4c1-51b93781d711
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:29 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:29 INFO: Worker 1: Payment successufully processed with CorrelationID: 6b78958d-a20b-48c5-9c6b-c8787a76d4a2
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:29 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:29 INFO: Worker 1: Payment successufully processed with CorrelationID: da409e3a-70a9-40ad-9c21-08f2884901d0
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:29 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:29 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:29 INFO: Worker 2: Payment successufully processed with CorrelationID: 3e42682e-43fb-41d1-bea1-18beec80ab6a
+app1-1   | 2025/08/06 12:51:29 INFO: Worker 2: Payment successufully processed with CorrelationID: 0ccca9cb-4e6f-4c5c-9621-a226238f47ce
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:29 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:29 INFO: Worker 1: Payment successufully processed with CorrelationID: a8bdb5a1-2d57-47ad-a27a-1ada2304f287
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:29 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:29 INFO: Worker 1: Payment successufully processed with CorrelationID: 95a2b881-73cf-40e3-afa1-92ec1c4eea38
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:29 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:29 INFO: Worker 2: Payment successufully processed with CorrelationID: 1e98830b-ecb7-4dd9-a927-5e0bd0326621
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:29 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:29 INFO: Worker 2: Payment successufully processed with CorrelationID: c959c5ec-8121-451a-b47e-7e8c3a686953
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:29 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:29 INFO: Worker 1: Payment successufully processed with CorrelationID: 24351f37-cfd1-4466-a9f1-40be7619e2f6
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:29 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:29 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:29 INFO: Worker 2: Payment successufully processed with CorrelationID: 377aba5f-ef99-4f21-8a75-59d1acd132b7
+app1-1   | 2025/08/06 12:51:29 INFO: Worker 1: Payment successufully processed with CorrelationID: b1faf60b-ee53-494c-ad1e-15088776aee3
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:29 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:29 INFO: Worker 1: Payment successufully processed with CorrelationID: fb484a3a-c72f-4a5f-8a35-d3fb99511ce4
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:29 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:29 INFO: Worker 2: Payment successufully processed with CorrelationID: 489f36e3-ff69-410f-bb5e-3d723fdba09f
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:30 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:30 INFO: Worker 2: Payment successufully processed with CorrelationID: 289f2187-d6fe-459a-b27a-05291c7e0162
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:30 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:30 INFO: Worker 1: Payment successufully processed with CorrelationID: 7b5847b3-3d1e-47f4-8d4a-2d5d9d8807f7
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:30 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:30 INFO: Worker 1: Payment successufully processed with CorrelationID: 5b2c1b8a-beac-4096-a4d7-a58fe2d3d009
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:30 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:30 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:30 INFO: Worker 2: Payment successufully processed with CorrelationID: 60496dd6-46de-429a-9be2-432573a90576
+app2-1   | 2025/08/06 12:51:30 INFO: Worker 2: Payment successufully processed with CorrelationID: 810b88c4-e8d2-4fcc-bd6e-ca94f8de0d36
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:30 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:30 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:30 INFO: Worker 1: Payment successufully processed with CorrelationID: f0518c3f-30ec-4935-b7fd-93f2ed32fd73
+app1-1   | 2025/08/06 12:51:30 INFO: Worker 1: Payment successufully processed with CorrelationID: 6077e01e-2380-4594-80d1-d1e55485fa81
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:30 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:30 INFO: Worker 2: Payment successufully processed with CorrelationID: 7391f8d7-41f8-4e4d-a4c7-b3601687d072
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:30 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:30 INFO: Worker 2: Payment successufully processed with CorrelationID: 26604319-5d76-4d70-8d4b-a610b82cbedf
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:30 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:30 INFO: Worker 1: Payment successufully processed with CorrelationID: 1eb881af-a7c8-44db-86f5-acfc3e17b0ea
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:30 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:30 INFO: Worker 1: Payment successufully processed with CorrelationID: 5dd9c652-de57-4871-bd29-20ba30e17c27
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:30 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:30 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:30 INFO: Worker 2: Payment successufully processed with CorrelationID: 487b0b28-dc3d-483f-8c33-85cf15aec07c
+app1-1   | 2025/08/06 12:51:30 INFO: Worker 2: Payment successufully processed with CorrelationID: 365c798c-9a03-4e73-9088-ac590fd4c2ee
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:30 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:30 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:30 INFO: Worker 1: Payment successufully processed with CorrelationID: 9edabc7c-4c59-41c9-ae6b-6da2392cef9a
+app1-1   | 2025/08/06 12:51:30 INFO: Worker 1: Payment successufully processed with CorrelationID: 50d44fc7-00e4-4288-a6cf-df3cc426bd65
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:30 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:30 INFO: Worker 2: Payment successufully processed with CorrelationID: 9c9465ab-4457-49e1-9bee-6fbad41eb47a
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:30 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:30 INFO: Worker 2: Payment successufully processed with CorrelationID: cedfbedf-0f35-4c18-92a5-93c163dfb411
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:30 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:30 INFO: Worker 1: Payment successufully processed with CorrelationID: d1e4ed10-7f7f-4104-9ea9-4fcaead4401c
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:30 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:30 INFO: Worker 1: Payment successufully processed with CorrelationID: d313c63a-5fa6-4869-bba6-2e5f9f12d014
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:30 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:30 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:30 INFO: Worker 2: Payment successufully processed with CorrelationID: 494b29d8-f0cf-4111-85b0-033fea645abe
+app2-1   | 2025/08/06 12:51:30 INFO: Worker 2: Payment successufully processed with CorrelationID: a53e3167-54b1-4cca-8d36-9e5a884212a5
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:30 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:30 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:30 INFO: Worker 1: Payment successufully processed with CorrelationID: 08396ee2-f9b8-411f-b826-4ea0b46645a2
+app2-1   | 2025/08/06 12:51:30 INFO: Worker 1: Payment successufully processed with CorrelationID: e76cb933-8048-452a-8f48-1850e3dfeaf9
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:30 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:30 INFO: Worker 2: Payment successufully processed with CorrelationID: 3761006b-244b-482b-87ba-e316a649b1d7
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:30 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:30 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:30 INFO: Worker 2: Payment successufully processed with CorrelationID: 97d0b800-f66e-452d-ac5f-43a8ab4d0e81
+app2-1   | 2025/08/06 12:51:30 INFO: Worker 1: Payment successufully processed with CorrelationID: 808ce51f-d6ee-4b88-90f0-58f8f171eee4
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:30 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:30 INFO: Worker 1: Payment successufully processed with CorrelationID: 6ebe319a-e1bc-4e59-844c-5fba6d3f7cd3
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:30 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:30 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:30 INFO: Worker 2: Payment successufully processed with CorrelationID: 06ed5751-aa58-415f-8c37-d246c835c750
+app1-1   | 2025/08/06 12:51:30 INFO: Worker 2: Payment successufully processed with CorrelationID: 9c556379-0840-46fc-baea-d29d134ea1de
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:30 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:30 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:30 INFO: Worker 1: Payment successufully processed with CorrelationID: 7d85a591-84fc-4955-8d13-be7b3dc732c3
+app1-1   | 2025/08/06 12:51:30 INFO: Worker 1: Payment successufully processed with CorrelationID: 3a04b2a2-7c9e-4c25-bf97-05d63a8fdafa
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:30 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:30 INFO: Worker 2: Payment successufully processed with CorrelationID: d0a6b3d0-cd96-4b28-a236-2a5996a37d88
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:30 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:30 INFO: Worker 2: Payment successufully processed with CorrelationID: c8026ca4-cdc0-4364-9b4c-1de5f48e329e
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:30 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:30 INFO: Worker 1: Payment successufully processed with CorrelationID: 40d8710e-6a94-482b-86e8-3ca4bec77022
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:30 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:30 INFO: Worker 1: Payment successufully processed with CorrelationID: 3f363c55-66e4-4927-9625-fca7d7811510
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:30 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:30 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:30 INFO: Worker 2: Payment successufully processed with CorrelationID: 52d4fff4-5310-4921-b9c8-5d84fd7a75f7
+app2-1   | 2025/08/06 12:51:30 INFO: Worker 2: Payment successufully processed with CorrelationID: d261c7ab-97c0-4a64-9c98-30e9299b8569
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:30 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:30 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:30 INFO: Worker 1: Payment successufully processed with CorrelationID: d2caf9ec-7154-41b5-9df7-51f77d660b00
+app2-1   | 2025/08/06 12:51:30 INFO: Worker 1: Payment successufully processed with CorrelationID: 7ce905a2-130c-47fe-b56e-14d5d0f0e4eb
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:30 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:30 INFO: Worker 2: Payment successufully processed with CorrelationID: 93bd0cd9-e9f2-4f84-8bd9-71c7684192ec
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:30 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:30 INFO: Worker 2: Payment successufully processed with CorrelationID: eb5504b0-30c8-4d3a-b0f1-86bd735f0b1c
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:30 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:30 INFO: Worker 1: Payment successufully processed with CorrelationID: 3d06bdf7-24ed-4de5-a14c-131dceb4e752
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:30 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:30 INFO: Worker 1: Payment successufully processed with CorrelationID: 28592f8b-fc81-4bac-8b0e-0fa713a24ff2
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:30 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:30 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:30 INFO: Worker 2: Payment successufully processed with CorrelationID: d73c82d4-96df-46cb-969f-9022ebb728ca
+app2-1   | 2025/08/06 12:51:30 INFO: Worker 2: Payment successufully processed with CorrelationID: 490d28b3-3f17-4564-bef0-dbb3cbc3db4c
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:30 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:30 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:30 INFO: Worker 1: Payment successufully processed with CorrelationID: 9ffee415-8dec-4e86-a52f-c6e837ef15b2
+app1-1   | 2025/08/06 12:51:30 INFO: Worker 1: Payment successufully processed with CorrelationID: d5ef1bae-d736-4277-8364-8c0a6d532a4e
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:30 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:30 INFO: Worker 2: Payment successufully processed with CorrelationID: edc57feb-034a-4352-bf56-ecd8d00633b9
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:30 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:30 INFO: Worker 2: Payment successufully processed with CorrelationID: bed73443-aada-4ba2-9426-8f0f4e8ea1ca
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:30 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:30 INFO: Worker 1: Payment successufully processed with CorrelationID: 4bb1c0ba-3fe0-4ffe-9455-17986592130f
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:30 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:30 INFO: Worker 1: Payment successufully processed with CorrelationID: 5189ae69-1165-4b60-83b4-58a89678d254
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:30 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:30 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:30 INFO: Worker 2: Payment successufully processed with CorrelationID: cdb4a3ab-17fb-46f6-aa66-e425c47196e9
+app2-1   | 2025/08/06 12:51:30 INFO: Worker 2: Payment successufully processed with CorrelationID: 4056fedd-5af5-4e6f-bbb5-7d86144cf867
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:30 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:30 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:30 INFO: Worker 1: Payment successufully processed with CorrelationID: de29934b-3536-4d7e-a094-df440a9309ec
+app1-1   | 2025/08/06 12:51:30 INFO: Worker 1: Payment successufully processed with CorrelationID: 4776c038-7416-4ff7-a754-4f1a4927c2be
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:30 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:30 INFO: Worker 2: Payment successufully processed with CorrelationID: 5f712cc4-5abf-4e1c-a996-ab82edd9d1eb
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:30 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:30 INFO: Worker 2: Payment successufully processed with CorrelationID: 1faa4243-4a18-432a-8cec-23c90afb75f7
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:30 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:30 INFO: Worker 1: Payment successufully processed with CorrelationID: 78c98c37-bcbb-46be-b900-634cb5eccbf7
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:30 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:30 INFO: Worker 1: Payment successufully processed with CorrelationID: 874362dd-dea9-45b5-8640-8bcc57602a03
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:30 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:30 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:30 INFO: Worker 2: Payment successufully processed with CorrelationID: 335bc06e-c3d0-4cd5-986a-6c8f6c02760d
+app2-1   | 2025/08/06 12:51:30 INFO: Worker 2: Payment successufully processed with CorrelationID: 9d29a5d8-fd43-4204-bba2-4dfc727f78f8
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:30 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:30 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:30 INFO: Worker 1: Payment successufully processed with CorrelationID: 40f413a1-6987-42ee-88b4-2dd4b6f1297b
+app2-1   | 2025/08/06 12:51:30 INFO: Worker 1: Payment successufully processed with CorrelationID: 6b1f3eb4-9d10-45c5-821f-90e7dbb0ba0c
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:30 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:30 INFO: Worker 2: Payment successufully processed with CorrelationID: b2e40a7f-9653-471d-b467-0afce12dbccf
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:30 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:30 INFO: Worker 2: Payment successufully processed with CorrelationID: 244ca8f3-e6bf-4327-ae65-c7124eaed39d
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:30 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:30 INFO: Worker 1: Payment successufully processed with CorrelationID: 788a029f-c10f-47c8-b454-640b4e78f658
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:30 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:30 INFO: Worker 1: Payment successufully processed with CorrelationID: fb6a5d17-ab6e-468f-9c04-983803adbe88
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:30 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:30 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:30 INFO: Worker 2: Payment successufully processed with CorrelationID: 3380bd16-8863-4ad6-bf42-d9276216c5ad
+app2-1   | 2025/08/06 12:51:30 INFO: Worker 2: Payment successufully processed with CorrelationID: 4c43e0b8-aeca-42f2-a5f3-7e578b50b907
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:30 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:30 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:30 INFO: Worker 1: Payment successufully processed with CorrelationID: a303958e-6d28-413d-83f3-834956c113e3
+app2-1   | 2025/08/06 12:51:30 INFO: Worker 1: Payment successufully processed with CorrelationID: fc09424f-5593-46eb-a90d-9eb556361975
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:30 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:30 INFO: Worker 2: Payment successufully processed with CorrelationID: d6c8fd02-159d-4e58-bf24-0c3be8446d7d
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:30 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:30 INFO: Worker 2: Payment successufully processed with CorrelationID: 891a3751-0a47-47d8-a690-b9618709197a
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:31 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:31 INFO: Worker 1: Payment successufully processed with CorrelationID: d8c0b52f-c93a-4e85-ba42-527f47cd70a8
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:31 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:31 INFO: Worker 1: Payment successufully processed with CorrelationID: 3e6d7243-6166-4628-b91f-10259d44c413
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:31 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:31 INFO: Worker 2: Payment successufully processed with CorrelationID: 38015867-0a64-4ede-9711-92436dffd10e
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:31 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:31 INFO: Worker 2: Payment successufully processed with CorrelationID: ed3bf544-7faf-449f-aad7-01e154e55435
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:31 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:31 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:31 INFO: Worker 1: Payment successufully processed with CorrelationID: ecb545e6-b244-46a0-8d14-d39c5f44aee7
+app2-1   | 2025/08/06 12:51:31 INFO: Worker 1: Payment successufully processed with CorrelationID: 65250402-5eb3-4be3-a19c-f4c3559ee6cd
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:31 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:31 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:31 INFO: Worker 2: Payment successufully processed with CorrelationID: d0d38d53-6d71-4bfe-906a-fdef9cb9d004
+app2-1   | 2025/08/06 12:51:31 INFO: Worker 2: Payment successufully processed with CorrelationID: ea1cb91d-06ee-488b-a3ed-facd750ea250
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:31 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:31 INFO: Worker 1: Payment successufully processed with CorrelationID: ae72a878-c259-4e97-aa1f-57c00d8631e2
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:31 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:31 INFO: Worker 1: Payment successufully processed with CorrelationID: 64730295-f47e-4247-9e4e-64d6d7bf618c
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:31 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:31 INFO: Worker 2: Payment successufully processed with CorrelationID: 896a3553-2978-4606-ad99-f5704463e19e
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:31 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:31 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:31 INFO: Worker 2: Payment successufully processed with CorrelationID: f20c9525-3ac7-4414-a474-4b991ce60f67
+app2-1   | 2025/08/06 12:51:31 INFO: Worker 1: Payment successufully processed with CorrelationID: 21365952-f336-4599-a29e-efee2b92d043
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:31 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:31 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:31 INFO: Worker 2: Payment successufully processed with CorrelationID: da32edae-1a6e-4216-a11b-a83fdfbfae10
+app1-1   | 2025/08/06 12:51:31 INFO: Worker 1: Payment successufully processed with CorrelationID: 3f5ac1f1-3dc0-4ba4-9b56-922441e1789b
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:31 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:31 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:31 INFO: Worker 2: Payment successufully processed with CorrelationID: d7a2498e-b4de-4fdd-b21f-6b3587c68d0f
+app2-1   | 2025/08/06 12:51:31 INFO: Worker 1: Payment successufully processed with CorrelationID: 333b0267-1b4a-47a1-824e-b529738a75a9
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:31 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:31 INFO: Worker 1: Payment successufully processed with CorrelationID: bf5d38c5-ce5f-4375-8562-cc34c1d431a7
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:31 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:31 INFO: Worker 2: Payment successufully processed with CorrelationID: 03553c1f-403c-4375-af8d-709c0ad94582
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:31 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:31 INFO: Worker 2: Payment successufully processed with CorrelationID: 164e993b-2a92-4c3c-bcc8-e7ebfe5f8e82
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:31 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:31 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:31 INFO: Worker 1: Payment successufully processed with CorrelationID: 700f6f47-a97b-4826-9c9d-14ade09f13a0
+app2-1   | 2025/08/06 12:51:31 INFO: Worker 1: Payment successufully processed with CorrelationID: 9ae535b8-64e7-4f2a-aa76-b1baaffe2907
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:31 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:31 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:31 INFO: Worker 2: Payment successufully processed with CorrelationID: ba2e1496-a4ed-4b84-8192-adaac8625a12
+app2-1   | 2025/08/06 12:51:31 INFO: Worker 2: Payment successufully processed with CorrelationID: 8e75f176-527e-43a7-9f3d-f342802f160b
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:31 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:31 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:31 INFO: Worker 1: Payment successufully processed with CorrelationID: c133e7fb-fe0f-4f85-8e9d-f5294d3b3253
+app2-1   | 2025/08/06 12:51:31 INFO: Worker 1: Payment successufully processed with CorrelationID: d4ac7b9f-fe4b-487f-b4ba-da739e6bda0a
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:31 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:31 INFO: Worker 2: Payment successufully processed with CorrelationID: 7bfa59a8-4af3-4fd0-8ea7-8c4df3cea50e
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:31 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:31 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:31 INFO: Worker 2: Payment successufully processed with CorrelationID: d250898f-cae4-4a0d-a5fb-5603bd24a05a
+app1-1   | 2025/08/06 12:51:31 INFO: Worker 1: Payment successufully processed with CorrelationID: af6a1a5b-e953-42a0-aa07-ad43b63d2a95
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:31 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:31 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:31 INFO: Worker 1: Payment successufully processed with CorrelationID: dc42a1f5-0f42-4331-b464-00b053a2f6b2
+app1-1   | 2025/08/06 12:51:31 INFO: Worker 2: Payment successufully processed with CorrelationID: 46e66e1b-b428-4e36-8580-79b2421295ac
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:31 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:31 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:31 INFO: Worker 2: Payment successufully processed with CorrelationID: bab33d99-0a38-43f9-b8d8-e9487b00cfcd
+app1-1   | 2025/08/06 12:51:31 INFO: Worker 1: Payment successufully processed with CorrelationID: ea1c96b3-ff04-483f-b9b9-a08260561c41
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:31 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:31 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:31 INFO: Worker 1: Payment successufully processed with CorrelationID: 65c497e4-87d0-49a0-8859-938a11f9b2df
+app1-1   | 2025/08/06 12:51:31 INFO: Worker 2: Payment successufully processed with CorrelationID: 18fb293a-c5ff-458a-939d-119780cb66de
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:31 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:31 INFO: Worker 1: Payment successufully processed with CorrelationID: 89147c5e-aed6-4490-be6d-a43a40e42de9
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:31 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:31 INFO: Worker 2: Payment successufully processed with CorrelationID: 424c17aa-8a05-40d0-b56c-9019b3b15e1d
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:31 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:31 INFO: Worker 2: Payment successufully processed with CorrelationID: fd10ad8c-61c0-43e3-a162-299eec66e8d7
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:31 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:31 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:31 INFO: Worker 1: Payment successufully processed with CorrelationID: 20b855e2-42c1-403f-a027-eae7b72c500b
+app1-1   | 2025/08/06 12:51:31 INFO: Worker 1: Payment successufully processed with CorrelationID: 66349bd5-82dc-4036-8eca-83d56a3f23ed
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:31 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:31 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:31 INFO: Worker 2: Payment successufully processed with CorrelationID: f45a4e0b-4ce8-418e-8255-6bfec09b9230
+app2-1   | 2025/08/06 12:51:31 INFO: Worker 2: Payment successufully processed with CorrelationID: 0d6649d6-83ba-4194-bbb8-3478220deaa4
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:31 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:31 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:31 INFO: Worker 1: Payment successufully processed with CorrelationID: 63a4f7f2-bcea-4d73-9074-1510c92547ad
+app2-1   | 2025/08/06 12:51:31 INFO: Worker 1: Payment successufully processed with CorrelationID: ef8cd744-98d9-4775-af7c-880bdca012c0
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:31 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:31 INFO: Worker 2: Payment successufully processed with CorrelationID: 82dfb927-9f3d-42ec-8c3f-075e2df57eed
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:31 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:31 INFO: Worker 2: Payment successufully processed with CorrelationID: 542cf63e-49fc-4162-a5cd-fd2dcd5d4321
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:31 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:31 INFO: Worker 1: Payment successufully processed with CorrelationID: f209a08d-1a2d-435e-ad1a-9e5f620123c5
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:31 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:31 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:31 INFO: Worker 2: Payment successufully processed with CorrelationID: d2e4fc65-e3a5-47a3-a903-6257fe00c185
+app1-1   | 2025/08/06 12:51:31 INFO: Worker 1: Payment successufully processed with CorrelationID: 277fd85d-b51d-4c38-a37a-ce3fdc46df5e
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:31 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:31 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:31 INFO: Worker 2: Payment successufully processed with CorrelationID: 21b5d4fb-ac23-4a86-bb4e-fe75d38a174d
+app2-1   | 2025/08/06 12:51:31 INFO: Worker 1: Payment successufully processed with CorrelationID: 89ec7b4d-2f0b-4565-bc53-53b487560b6c
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:31 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:31 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:31 INFO: Worker 1: Payment successufully processed with CorrelationID: 0b46dc99-ee23-4ae2-a47e-4306dd12df40
+app2-1   | 2025/08/06 12:51:31 INFO: Worker 2: Payment successufully processed with CorrelationID: 2077499f-4257-4cd0-96fa-13376a3ad5d3
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:31 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:31 INFO: Worker 2: Payment successufully processed with CorrelationID: a273e44e-8ab8-4d23-b060-47aa93bd4a9b
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:31 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:31 INFO: Worker 1: Payment successufully processed with CorrelationID: 5be39fd2-dfcf-420f-8cc3-183aa682b9f0
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:31 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:31 INFO: Worker 1: Payment successufully processed with CorrelationID: 975d7935-5a80-43db-9d6c-034b45051d4b
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:31 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:31 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:31 INFO: Worker 2: Payment successufully processed with CorrelationID: 4c410560-5550-46e4-9324-2aaf977e5d43
+app2-1   | 2025/08/06 12:51:31 INFO: Worker 2: Payment successufully processed with CorrelationID: be5afbeb-bc5a-464c-b4c9-38271dbda41d
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:31 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:31 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:31 INFO: Worker 1: Payment successufully processed with CorrelationID: de8b48be-9651-4b12-b878-5367576fc2f3
+app1-1   | 2025/08/06 12:51:31 INFO: Worker 1: Payment successufully processed with CorrelationID: c5d97819-94f3-4b81-a17a-cdf5e5d01d7d
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:31 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:31 INFO: Worker 2: Payment successufully processed with CorrelationID: 0e1355e6-e4d0-477f-9fdb-e6e41e5c94a1
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:31 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:31 INFO: Worker 2: Payment successufully processed with CorrelationID: 68a7bff0-0b92-4902-bf4f-d94e4f8bf2c3
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:31 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:31 INFO: Worker 1: Payment successufully processed with CorrelationID: cee5e40b-a3b5-4f0b-8c7c-45bf744509fd
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:31 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:31 INFO: Worker 1: Payment successufully processed with CorrelationID: 9be183de-5a44-4236-8c43-ea268019f884
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:31 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:31 INFO: Worker 2: Payment successufully processed with CorrelationID: bafc9a81-a4ee-461e-88db-d28e96b00132
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:31 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:31 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:31 INFO: Worker 1: Payment successufully processed with CorrelationID: fe557f87-1e68-4e83-969d-7949888d2711
+app1-1   | 2025/08/06 12:51:31 INFO: Worker 2: Payment successufully processed with CorrelationID: e965fd3b-804b-4919-b161-f594d873400d
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:31 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:31 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:31 INFO: Worker 1: Payment successufully processed with CorrelationID: 67f4999c-8338-4a0c-a23b-9913eeca6823
+app2-1   | 2025/08/06 12:51:31 INFO: Worker 2: Payment successufully processed with CorrelationID: 815de53e-9c56-4ec5-b885-c53082a972f7
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:31 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:31 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:31 INFO: Worker 1: Payment successufully processed with CorrelationID: 56f6f8fc-7804-46e5-81b0-94b04859ddbf
+app1-1   | 2025/08/06 12:51:31 INFO: Worker 2: Payment successufully processed with CorrelationID: 40d94cea-771d-4ff9-a138-3a6c2c61c577
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:31 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:31 INFO: Worker 2: Payment successufully processed with CorrelationID: ac2a7308-b13f-47c8-8d17-f4ebe5e86b6a
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:31 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:31 INFO: Worker 1: Payment successufully processed with CorrelationID: f7106be4-98a8-4b50-a361-00e3f6b086a6
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:31 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:31 INFO: Worker 1: Payment successufully processed with CorrelationID: f59aad16-5a0e-48e9-be52-b075a3beb42b
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:31 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:31 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:31 INFO: Worker 2: Payment successufully processed with CorrelationID: d67864f9-b465-4e82-b07f-3c2a541119cd
+app1-1   | 2025/08/06 12:51:31 INFO: Worker 2: Payment successufully processed with CorrelationID: cf55614a-2832-40f4-8ff9-8430f88d86f9
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:31 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:31 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:31 INFO: Worker 1: Payment successufully processed with CorrelationID: 6e267f59-3ee6-4736-a64d-bc5b0bdbc1a9
+app1-1   | 2025/08/06 12:51:31 INFO: Worker 1: Payment successufully processed with CorrelationID: e506fc69-db58-4f24-b5fa-04a14fc934c6
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:31 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:31 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:31 INFO: Worker 2: Payment successufully processed with CorrelationID: 3ca3592c-d91f-4da2-b006-df36500e0ff3
+app1-1   | 2025/08/06 12:51:31 INFO: Worker 2: Payment successufully processed with CorrelationID: 64a24c57-7064-41f2-a24f-05be69bb0e31
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:31 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:31 INFO: Worker 1: Payment successufully processed with CorrelationID: 110b45be-f90f-41b5-9649-3f1f7cee4327
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:31 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:31 INFO: Worker 1: Payment successufully processed with CorrelationID: 70990a22-fce5-4159-954a-72ad25d3d2d4
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:32 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:32 INFO: Worker 2: Payment successufully processed with CorrelationID: 63dfa1e8-f33d-4e33-8b3c-ae3eda571b5c
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:32 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:32 INFO: Worker 2: Payment successufully processed with CorrelationID: 61225ffe-20f4-4e8f-9b85-10452e86f515
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:32 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:32 INFO: Worker 1: Payment successufully processed with CorrelationID: 157b1827-0488-45ba-b677-aee16bf726d3
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:32 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:32 INFO: Worker 1: Payment successufully processed with CorrelationID: acd5518d-6d0e-4977-8457-27970bbcc5ca
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:32 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:32 INFO: Worker 2: Payment successufully processed with CorrelationID: beb16bf8-ab6c-4797-ab55-b4508ae51ae5
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:32 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:32 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:32 INFO: Worker 1: Payment successufully processed with CorrelationID: 7e6e5c96-356f-42bf-9e72-037668381a46
+app2-1   | 2025/08/06 12:51:32 INFO: Worker 2: Payment successufully processed with CorrelationID: 73ae4dde-c4bf-4534-9789-821c68e579b0
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:32 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:32 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:32 INFO: Worker 1: Payment successufully processed with CorrelationID: b475ca10-8b9b-4546-a733-a50963da0d87
+app1-1   | 2025/08/06 12:51:32 INFO: Worker 2: Payment successufully processed with CorrelationID: 0d91ae8d-09aa-4ffe-8aa1-a5af1ea99e54
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:32 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:32 INFO: Worker 2: Payment successufully processed with CorrelationID: 456301aa-015c-4019-b9b4-498e45786da9
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:32 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:32 INFO: Worker 1: Payment successufully processed with CorrelationID: 759a63ba-139a-49f4-8564-b3823db00b3f
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:32 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:32 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:32 INFO: Worker 1: Payment successufully processed with CorrelationID: 33ea502d-d333-4c86-b13c-33ca37ea4b6d
+app1-1   | 2025/08/06 12:51:32 INFO: Worker 2: Payment successufully processed with CorrelationID: 5a79a914-4ce3-429c-9f9e-cdc23cbdb05e
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:32 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:32 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:32 INFO: Worker 1: Payment successufully processed with CorrelationID: a539a0f0-09eb-45b0-8e96-7e85782f35fe
+app2-1   | 2025/08/06 12:51:32 INFO: Worker 2: Payment successufully processed with CorrelationID: 86367dfa-a772-4232-b2c7-afa149f49ff9
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:32 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:32 INFO: Worker 2: Payment successufully processed with CorrelationID: 2322d4dd-cca3-47d5-bafc-feedb82fc9ad
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:32 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:32 INFO: Worker 1: Payment successufully processed with CorrelationID: 745ab5d0-c624-4b14-bf7f-761d0a2bbab0
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:32 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:32 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:32 INFO: Worker 1: Payment successufully processed with CorrelationID: 8a920131-08b6-421a-874a-d7f6c83f6346
+app2-1   | 2025/08/06 12:51:32 INFO: Worker 2: Payment successufully processed with CorrelationID: af438f1a-fb03-404f-948e-b18a08b98a1e
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:32 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:32 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:32 INFO: Worker 1: Payment successufully processed with CorrelationID: 533e09fd-5715-4623-8dab-4dbdc9665994
+app1-1   | 2025/08/06 12:51:32 INFO: Worker 2: Payment successufully processed with CorrelationID: 4edc5256-aec5-47a4-829a-b3215471678e
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:32 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:32 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:32 INFO: Worker 2: Payment successufully processed with CorrelationID: 1bc38a3d-1ce3-4aab-82a5-ad17f09c8584
+app1-1   | 2025/08/06 12:51:32 INFO: Worker 1: Payment successufully processed with CorrelationID: 8040a744-d4cf-4dab-826f-310f5521d52f
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:32 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:32 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:32 INFO: Worker 2: Payment successufully processed with CorrelationID: 26228351-0284-4ce4-a62f-fbb1683bf55f
+app2-1   | 2025/08/06 12:51:32 INFO: Worker 1: Payment successufully processed with CorrelationID: 1c69f32d-7009-4906-b277-b91770d71382
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:32 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:32 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:32 INFO: Worker 2: Payment successufully processed with CorrelationID: f1cad7dc-a740-46a4-b910-e3c8d8908fbf
+app1-1   | 2025/08/06 12:51:32 INFO: Worker 1: Payment successufully processed with CorrelationID: 92bfa480-eff0-4fc1-91c1-d6e46a857f66
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:32 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:32 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:32 INFO: Worker 1: Payment successufully processed with CorrelationID: 289ef38f-1bdc-4da1-b3e4-c4452690b255
+app1-1   | 2025/08/06 12:51:32 INFO: Worker 2: Payment successufully processed with CorrelationID: 6797f749-1e17-4fc7-8ea9-05f884db51e5
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:32 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:32 INFO: Worker 1: Payment successufully processed with CorrelationID: 34400291-2a01-4b99-956a-344cf562c9b0
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:32 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:32 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:32 INFO: Worker 2: Payment successufully processed with CorrelationID: bf6da141-8745-457b-9d2c-fff5a8e6db7e
+app1-1   | 2025/08/06 12:51:32 INFO: Worker 2: Payment successufully processed with CorrelationID: cbeb52af-ddd4-4088-b93f-46c1e10f5fa4
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:32 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:32 INFO: Worker 1: Payment successufully processed with CorrelationID: d414a186-a516-4293-82a9-4e3ec25d3ff6
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:32 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:32 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:32 INFO: Worker 1: Payment successufully processed with CorrelationID: 2ad460d9-3c6d-4381-8811-5b0694254e98
+app1-1   | 2025/08/06 12:51:32 INFO: Worker 2: Payment successufully processed with CorrelationID: c252a825-576a-475c-aff9-8164e1addab3
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:32 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:32 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:32 INFO: Worker 1: Payment successufully processed with CorrelationID: 530890f5-9bae-4aa3-a550-e9a353d72723
+app2-1   | 2025/08/06 12:51:32 INFO: Worker 2: Payment successufully processed with CorrelationID: f73dcac7-a0d9-4e01-be9a-c6c5d74f1a13
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:32 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:32 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:32 INFO: Worker 1: Payment successufully processed with CorrelationID: 38f3cd14-5f68-4dd5-93cc-2ad4af946924
+app1-1   | 2025/08/06 12:51:32 INFO: Worker 2: Payment successufully processed with CorrelationID: 07cc5637-82ff-4fb3-b42e-071c84ab11aa
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:32 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:32 INFO: Worker 1: Payment successufully processed with CorrelationID: 4f754440-da05-41a4-a875-35544ea64080
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:32 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:32 INFO: Worker 2: Payment successufully processed with CorrelationID: 6b574300-0725-4507-b4d5-7ae200dbb339
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:32 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:32 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:32 INFO: Worker 2: Payment successufully processed with CorrelationID: 1f33e284-b78b-4950-8ff3-cbb45d4ea99b
+app2-1   | 2025/08/06 12:51:32 INFO: Worker 1: Payment successufully processed with CorrelationID: 8b2b1281-b5eb-49e4-91ef-c15cf5ef9ad3
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:32 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:32 INFO: Worker 1: Payment successufully processed with CorrelationID: 51674fe1-687f-4d4e-8720-d7332509d5e5
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:32 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:32 INFO: Worker 2: Payment successufully processed with CorrelationID: 28d44b34-8ff3-4d90-baec-771300d69a8b
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:32 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:32 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:32 INFO: Worker 1: Payment successufully processed with CorrelationID: d1e86fe8-14ac-44d4-a951-5f97f9afe614
+app1-1   | 2025/08/06 12:51:32 INFO: Worker 2: Payment successufully processed with CorrelationID: 22424ea9-769e-4333-b4fa-cb03452ca26c
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:32 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:32 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:32 INFO: Worker 1: Payment successufully processed with CorrelationID: e5421258-a7eb-4d72-871d-30d0ea13b572
+app2-1   | 2025/08/06 12:51:32 INFO: Worker 2: Payment successufully processed with CorrelationID: 94ee6825-f145-46b8-9153-e1edcad17294
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:32 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:32 INFO: Worker 2: Payment successufully processed with CorrelationID: 94db437f-2352-4139-98f5-71b71a589ea9
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:32 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:32 INFO: Worker 1: Payment successufully processed with CorrelationID: 20b0c3ed-3351-4a78-a419-b0369233e89f
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:32 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:32 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:32 INFO: Worker 2: Payment successufully processed with CorrelationID: 2090c2fc-b02a-4e5d-9780-8daad1a65709
+app1-1   | 2025/08/06 12:51:32 INFO: Worker 1: Payment successufully processed with CorrelationID: 7c6a685a-27b1-4fd9-b699-941b98b905ec
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:32 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:32 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:32 INFO: Worker 1: Payment successufully processed with CorrelationID: 21be0784-b5ce-4b0a-b8be-1827c35edc0f
+app1-1   | 2025/08/06 12:51:32 INFO: Worker 2: Payment successufully processed with CorrelationID: edf0b26e-21f9-4f5f-a533-a9338b90fa8b
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:32 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:32 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:32 INFO: Worker 2: Payment successufully processed with CorrelationID: 70dd341b-f751-40c5-b9e4-a02a945e32b3
+app1-1   | 2025/08/06 12:51:32 INFO: Worker 1: Payment successufully processed with CorrelationID: 40591802-2332-4194-9e56-f68f460d964b
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:32 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:32 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:32 INFO: Worker 1: Payment successufully processed with CorrelationID: ed978086-c7d0-4508-8846-c8ae8ac44307
+app1-1   | 2025/08/06 12:51:32 INFO: Worker 2: Payment successufully processed with CorrelationID: 3cb5b3aa-3ae1-4949-abca-65aa52b23f98
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:32 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app2-1   | 2025/08/06 12:51:32 INFO: Worker 2: Payment successufully processed with CorrelationID: 1d4d38b9-c18a-4840-b2e7-1951ea045314
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:32 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+app1-1   | 2025/08/06 12:51:32 INFO: Worker 1: Payment successufully processed with CorrelationID: a808a46b-b910-4bbf-b175-c5bceee40a62
+nginx-1  | 172.20.0.1 - - [06/Aug/2025:12:51:32 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+log truncated at line 1000

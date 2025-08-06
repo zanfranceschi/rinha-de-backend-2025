@@ -1,0 +1,1001 @@
+
+ jvpayments-2 Pulling 
+ jvpayments-1 Pulling 
+ 9824c27679d3 Already exists 
+ 4f4fb700ef54 Already exists 
+ b0f952213e90 Pulling fs layer 
+ 9824c27679d3 Already exists 
+ 4f4fb700ef54 Already exists 
+ b0f952213e90 Pulling fs layer 
+ b0f952213e90 Downloading [>                                                  ]  77.96kB/7.556MB
+ b0f952213e90 Downloading [>                                                  ]  77.96kB/7.556MB
+ b0f952213e90 Downloading [==>                                                ]  323.6kB/7.556MB
+ b0f952213e90 Downloading [==>                                                ]  323.6kB/7.556MB
+ b0f952213e90 Downloading [====>                                              ]  675.8kB/7.556MB
+ b0f952213e90 Downloading [====>                                              ]  675.8kB/7.556MB
+ b0f952213e90 Downloading [========>                                          ]  1.319MB/7.556MB
+ b0f952213e90 Downloading [========>                                          ]  1.319MB/7.556MB
+ b0f952213e90 Downloading [=============>                                     ]   2.06MB/7.556MB
+ b0f952213e90 Downloading [=============>                                     ]   2.06MB/7.556MB
+ b0f952213e90 Downloading [======================>                            ]  3.412MB/7.556MB
+ b0f952213e90 Downloading [======================>                            ]  3.412MB/7.556MB
+ b0f952213e90 Downloading [===================================>               ]  5.407MB/7.556MB
+ b0f952213e90 Downloading [===================================>               ]  5.407MB/7.556MB
+ b0f952213e90 Verifying Checksum 
+ b0f952213e90 Download complete 
+ b0f952213e90 Verifying Checksum 
+ b0f952213e90 Download complete 
+ b0f952213e90 Extracting [>                                                  ]   98.3kB/7.556MB
+ b0f952213e90 Extracting [>                                                  ]   98.3kB/7.556MB
+ b0f952213e90 Extracting [==============================================>    ]  7.078MB/7.556MB
+ b0f952213e90 Extracting [==============================================>    ]  7.078MB/7.556MB
+ b0f952213e90 Extracting [==================================================>]  7.556MB/7.556MB
+ b0f952213e90 Extracting [==================================================>]  7.556MB/7.556MB
+ b0f952213e90 Extracting [==================================================>]  7.556MB/7.556MB
+ b0f952213e90 Extracting [==================================================>]  7.556MB/7.556MB
+ b0f952213e90 Pull complete 
+ b0f952213e90 Pull complete 
+ jvpayments-1 Pulled 
+ jvpayments-2 Pulled 
+ Network jvcouto-go-2_app  Creating
+ Network jvcouto-go-2_app  Created
+ Volume "jvcouto-go-2_socket_data"  Creating
+ Volume "jvcouto-go-2_socket_data"  Created
+ Container jvcouto-go-2-redis-1  Creating
+ Container jvcouto-go-2-redis-1  Created
+ Container jvcouto-go-2-jvpayments-2-1  Creating
+ Container jvcouto-go-2-jvpayments-1-1  Creating
+ Container jvcouto-go-2-jvpayments-1-1  Created
+ Container jvcouto-go-2-jvpayments-2-1  Created
+ Container jvcouto-go-2-haproxy-1  Creating
+ Container jvcouto-go-2-haproxy-1  Created
+Attaching to haproxy-1, jvpayments-1-1, jvpayments-2-1, redis-1
+redis-1         | 1:C 05 Aug 2025 11:55:31.250 # WARNING Memory overcommit must be enabled! Without it, a background save or replication may fail under low memory condition. Being disabled, it can also cause failures without low memory condition, see https://github.com/jemalloc/jemalloc/issues/1328. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.
+redis-1         | 1:C 05 Aug 2025 11:55:31.250 * oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+redis-1         | 1:C 05 Aug 2025 11:55:31.250 * Redis version=7.4.5, bits=64, commit=00000000, modified=0, pid=1, just started
+redis-1         | 1:C 05 Aug 2025 11:55:31.250 * Configuration loaded
+redis-1         | 1:M 05 Aug 2025 11:55:31.251 * monotonic clock: POSIX clock_gettime
+redis-1         | 1:M 05 Aug 2025 11:55:31.252 * Running mode=standalone, port=6379.
+redis-1         | 1:M 05 Aug 2025 11:55:31.253 * Server initialized
+redis-1         | 1:M 05 Aug 2025 11:55:31.253 * Ready to accept connections tcp
+jvpayments-2-1  | 2025/08/05 11:55:37 Successfully connected to Redis
+jvpayments-2-1  | 2025/08/05 11:55:37 Server starting on Unix socket: /tmp/sockets/jvpayments-2.sock
+jvpayments-1-1  | 2025/08/05 11:55:37 Successfully connected to Redis
+jvpayments-1-1  | 2025/08/05 11:55:37 Server starting on Unix socket: /tmp/sockets/jvpayments-1.sock
+haproxy-1       | [NOTICE]   (1) : Initializing new worker (8)
+haproxy-1       | [NOTICE]   (1) : Loading success.
+haproxy-1       | 172.20.0.1:47526 [05/Aug/2025:11:55:40.749] http-in backend_servers/jvpayments-1 0/0/0/3/3 200 219 - - ---- 1/1/0/0/0 0/0 "GET /payments-summary HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:42 Processing heath check
+haproxy-1       | 172.20.0.1:35044 [05/Aug/2025:11:55:46.340] http-in backend_servers/jvpayments-2 0/0/0/2/2 200 158 - - ---- 1/1/0/0/0 0/0 "POST /purge-payments HTTP/1.1"
+haproxy-1       | 172.20.0.1:35048 [05/Aug/2025:11:55:46.344] http-in backend_servers/jvpayments-1 0/0/0/0/0 200 219 - - ---- 3/3/1/0/0 0/0 "GET /payments-summary?from=2025-08-05T11:55:31.343Z&to=2025-08-05T11:55:44.843Z HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:46 Starting processing payment
+haproxy-1       | 172.20.0.1:35062 [05/Aug/2025:11:55:46.347] http-in backend_servers/jvpayments-2 0/0/0/5/5 204 89 - - ---- 3/3/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:46 Starting processing payment
+haproxy-1       | 172.20.0.1:35074 [05/Aug/2025:11:55:46.454] http-in backend_servers/jvpayments-1 0/0/0/2/2 204 89 - - ---- 4/4/0/0/0 0/0 "POST /payments HTTP/1.1"
+haproxy-1       | 172.20.0.1:35080 [05/Aug/2025:11:55:46.562] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 5/5/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:46 Starting processing payment
+jvpayments-1-1  | 2025/08/05 11:55:46 Starting processing payment
+haproxy-1       | 172.20.0.1:35082 [05/Aug/2025:11:55:46.672] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 6/6/0/0/0 0/0 "POST /payments HTTP/1.1"
+haproxy-1       | 172.20.0.1:35084 [05/Aug/2025:11:55:46.781] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 7/7/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:46 Starting processing payment
+haproxy-1       | 172.20.0.1:35094 [05/Aug/2025:11:55:46.890] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 8/8/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:46 Starting processing payment
+jvpayments-2-1  | 2025/08/05 11:55:47 Starting processing payment
+haproxy-1       | 172.20.0.1:35108 [05/Aug/2025:11:55:47.000] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 9/9/0/0/0 0/0 "POST /payments HTTP/1.1"
+haproxy-1       | 172.20.0.1:35120 [05/Aug/2025:11:55:47.109] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 10/10/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:47 Starting processing payment
+jvpayments-2-1  | 2025/08/05 11:55:47 Processing heath check
+jvpayments-2-1  | 2025/08/05 11:55:47 Starting processing payment
+haproxy-1       | 172.20.0.1:35130 [05/Aug/2025:11:55:47.218] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 11/11/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:47 Starting processing payment
+haproxy-1       | 172.20.0.1:35144 [05/Aug/2025:11:55:47.327] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 12/12/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:47 Starting processing payment
+haproxy-1       | 172.20.0.1:35062 [05/Aug/2025:11:55:47.353] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 12/12/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:47 Starting processing payment
+haproxy-1       | 172.20.0.1:35156 [05/Aug/2025:11:55:47.437] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 13/13/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:47 Starting processing payment
+haproxy-1       | 172.20.0.1:35074 [05/Aug/2025:11:55:47.457] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 13/13/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:47 Starting processing payment
+haproxy-1       | 172.20.0.1:35166 [05/Aug/2025:11:55:47.546] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 14/14/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:47 Starting processing payment
+haproxy-1       | 172.20.0.1:35080 [05/Aug/2025:11:55:47.564] http-in backend_servers/jvpayments-2 0/0/0/1/1 204 89 - - ---- 14/14/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:47 Starting processing payment
+haproxy-1       | 172.20.0.1:35176 [05/Aug/2025:11:55:47.656] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 15/15/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:47 Starting processing payment
+haproxy-1       | 172.20.0.1:35082 [05/Aug/2025:11:55:47.672] http-in backend_servers/jvpayments-2 0/0/0/1/1 204 89 - - ---- 15/15/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:47 Starting processing payment
+haproxy-1       | 172.20.0.1:35190 [05/Aug/2025:11:55:47.765] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 16/16/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:47 Starting processing payment
+haproxy-1       | 172.20.0.1:35084 [05/Aug/2025:11:55:47.782] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 16/16/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:47 Starting processing payment
+haproxy-1       | 172.20.0.1:35194 [05/Aug/2025:11:55:47.873] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 17/17/0/0/0 0/0 "POST /payments HTTP/1.1"
+haproxy-1       | 172.20.0.1:35094 [05/Aug/2025:11:55:47.892] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 17/17/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:47 Starting processing payment
+jvpayments-1-1  | 2025/08/05 11:55:47 Starting processing payment
+haproxy-1       | 172.20.0.1:35206 [05/Aug/2025:11:55:47.983] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 18/18/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:48 Starting processing payment
+haproxy-1       | 172.20.0.1:35108 [05/Aug/2025:11:55:48.001] http-in backend_servers/jvpayments-2 0/0/0/1/1 204 89 - - ---- 18/18/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:48 Starting processing payment
+haproxy-1       | 172.20.0.1:35214 [05/Aug/2025:11:55:48.092] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 19/19/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:48 Starting processing payment
+haproxy-1       | 172.20.0.1:35120 [05/Aug/2025:11:55:48.110] http-in backend_servers/jvpayments-2 0/0/0/1/1 204 89 - - ---- 19/19/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:48 Starting processing payment
+haproxy-1       | 172.20.0.1:35228 [05/Aug/2025:11:55:48.202] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 20/20/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:48 Starting processing payment
+haproxy-1       | 172.20.0.1:35130 [05/Aug/2025:11:55:48.220] http-in backend_servers/jvpayments-2 0/0/0/1/1 204 89 - - ---- 20/20/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:48 Starting processing payment
+haproxy-1       | 172.20.0.1:35244 [05/Aug/2025:11:55:48.326] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 21/21/0/0/0 0/0 "POST /payments HTTP/1.1"
+haproxy-1       | 172.20.0.1:35144 [05/Aug/2025:11:55:48.329] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 21/21/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:48 Starting processing payment
+jvpayments-1-1  | 2025/08/05 11:55:48 Starting processing payment
+haproxy-1       | 172.20.0.1:35062 [05/Aug/2025:11:55:48.355] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 21/21/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:48 Starting processing payment
+haproxy-1       | 172.20.0.1:35248 [05/Aug/2025:11:55:48.420] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 22/22/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:48 Starting processing payment
+haproxy-1       | 172.20.0.1:35156 [05/Aug/2025:11:55:48.438] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 22/22/0/0/0 0/0 "POST /payments HTTP/1.1"
+haproxy-1       | 172.20.0.1:35074 [05/Aug/2025:11:55:48.459] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 22/22/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:48 Starting processing payment
+jvpayments-1-1  | 2025/08/05 11:55:48 Starting processing payment
+haproxy-1       | 172.20.0.1:35262 [05/Aug/2025:11:55:48.530] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 23/23/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:48 Starting processing payment
+haproxy-1       | 172.20.0.1:35166 [05/Aug/2025:11:55:48.548] http-in backend_servers/jvpayments-2 0/0/0/1/1 204 89 - - ---- 23/23/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:48 Starting processing payment
+haproxy-1       | 172.20.0.1:35080 [05/Aug/2025:11:55:48.566] http-in backend_servers/jvpayments-1 0/0/0/1/1 204 89 - - ---- 23/23/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:48 Starting processing payment
+haproxy-1       | 172.20.0.1:35264 [05/Aug/2025:11:55:48.638] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 24/24/0/0/0 0/0 "POST /payments HTTP/1.1"
+haproxy-1       | 172.20.0.1:35176 [05/Aug/2025:11:55:48.657] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 24/24/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:48 Starting processing payment
+jvpayments-2-1  | 2025/08/05 11:55:48 Starting processing payment
+haproxy-1       | 172.20.0.1:35082 [05/Aug/2025:11:55:48.674] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 24/24/0/0/0 0/0 "POST /payments HTTP/1.1"
+haproxy-1       | 172.20.0.1:35268 [05/Aug/2025:11:55:48.748] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 25/25/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:48 Starting processing payment
+jvpayments-2-1  | 2025/08/05 11:55:48 Starting processing payment
+haproxy-1       | 172.20.0.1:35190 [05/Aug/2025:11:55:48.766] http-in backend_servers/jvpayments-2 0/0/0/1/1 204 89 - - ---- 25/25/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:48 Starting processing payment
+haproxy-1       | 172.20.0.1:35084 [05/Aug/2025:11:55:48.784] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 25/25/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:48 Starting processing payment
+haproxy-1       | 172.20.0.1:35272 [05/Aug/2025:11:55:48.857] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 26/26/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:48 Starting processing payment
+haproxy-1       | 172.20.0.1:35194 [05/Aug/2025:11:55:48.875] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 26/26/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:48 Starting processing payment
+haproxy-1       | 172.20.0.1:35094 [05/Aug/2025:11:55:48.893] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 26/26/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:48 Starting processing payment
+haproxy-1       | 172.20.0.1:35280 [05/Aug/2025:11:55:48.966] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 27/27/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:48 Starting processing payment
+haproxy-1       | 172.20.0.1:35206 [05/Aug/2025:11:55:48.985] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 27/27/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:49 Starting processing payment
+haproxy-1       | 172.20.0.1:35108 [05/Aug/2025:11:55:49.003] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 27/27/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:49 Starting processing payment
+haproxy-1       | 172.20.0.1:35292 [05/Aug/2025:11:55:49.076] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 28/28/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:49 Starting processing payment
+haproxy-1       | 172.20.0.1:35214 [05/Aug/2025:11:55:49.094] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 28/28/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:49 Starting processing payment
+haproxy-1       | 172.20.0.1:35120 [05/Aug/2025:11:55:49.112] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 28/28/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:49 Starting processing payment
+haproxy-1       | 172.20.0.1:35300 [05/Aug/2025:11:55:49.185] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 29/29/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:49 Starting processing payment
+haproxy-1       | 172.20.0.1:35228 [05/Aug/2025:11:55:49.204] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 29/29/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:49 Starting processing payment
+haproxy-1       | 172.20.0.1:35130 [05/Aug/2025:11:55:49.222] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 29/29/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:49 Starting processing payment
+haproxy-1       | 172.20.0.1:35306 [05/Aug/2025:11:55:49.295] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 30/30/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:49 Starting processing payment
+haproxy-1       | 172.20.0.1:35244 [05/Aug/2025:11:55:49.327] http-in backend_servers/jvpayments-1 0/0/0/1/1 204 89 - - ---- 30/30/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:49 Starting processing payment
+haproxy-1       | 172.20.0.1:35144 [05/Aug/2025:11:55:49.330] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 30/30/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:49 Starting processing payment
+haproxy-1       | 172.20.0.1:35062 [05/Aug/2025:11:55:49.357] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 30/30/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:49 Starting processing payment
+haproxy-1       | 172.20.0.1:35312 [05/Aug/2025:11:55:49.404] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 31/31/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:49 Starting processing payment
+haproxy-1       | 172.20.0.1:35248 [05/Aug/2025:11:55:49.422] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 31/31/0/0/0 0/0 "POST /payments HTTP/1.1"
+haproxy-1       | 172.20.0.1:35156 [05/Aug/2025:11:55:49.440] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 31/31/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:49 Starting processing payment
+jvpayments-1-1  | 2025/08/05 11:55:49 Starting processing payment
+haproxy-1       | 172.20.0.1:35074 [05/Aug/2025:11:55:49.461] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 31/31/0/0/0 0/0 "POST /payments HTTP/1.1"
+haproxy-1       | 172.20.0.1:35326 [05/Aug/2025:11:55:49.514] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 32/32/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:49 Starting processing payment
+jvpayments-1-1  | 2025/08/05 11:55:49 Starting processing payment
+haproxy-1       | 172.20.0.1:35262 [05/Aug/2025:11:55:49.531] http-in backend_servers/jvpayments-1 0/0/0/1/1 204 89 - - ---- 32/32/0/0/0 0/0 "POST /payments HTTP/1.1"
+haproxy-1       | 172.20.0.1:35166 [05/Aug/2025:11:55:49.550] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 32/32/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:49 Starting processing payment
+jvpayments-1-1  | 2025/08/05 11:55:49 Starting processing payment
+haproxy-1       | 172.20.0.1:35080 [05/Aug/2025:11:55:49.568] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 32/32/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:49 Starting processing payment
+haproxy-1       | 172.20.0.1:35330 [05/Aug/2025:11:55:49.623] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 33/33/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:49 Starting processing payment
+haproxy-1       | 172.20.0.1:35264 [05/Aug/2025:11:55:49.639] http-in backend_servers/jvpayments-1 0/0/0/1/1 204 89 - - ---- 33/33/0/0/0 0/0 "POST /payments HTTP/1.1"
+haproxy-1       | 172.20.0.1:35176 [05/Aug/2025:11:55:49.658] http-in backend_servers/jvpayments-2 0/0/0/1/1 204 89 - - ---- 33/33/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:49 Starting processing payment
+jvpayments-1-1  | 2025/08/05 11:55:49 Starting processing payment
+haproxy-1       | 172.20.0.1:35082 [05/Aug/2025:11:55:49.675] http-in backend_servers/jvpayments-1 0/0/0/1/1 204 89 - - ---- 33/33/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:49 Starting processing payment
+haproxy-1       | 172.20.0.1:35346 [05/Aug/2025:11:55:49.732] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 34/34/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:49 Starting processing payment
+haproxy-1       | 172.20.0.1:35268 [05/Aug/2025:11:55:49.749] http-in backend_servers/jvpayments-1 0/0/0/1/1 204 89 - - ---- 34/34/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:49 Starting processing payment
+haproxy-1       | 172.20.0.1:35190 [05/Aug/2025:11:55:49.768] http-in backend_servers/jvpayments-2 0/0/0/1/1 204 89 - - ---- 34/34/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:49 Starting processing payment
+haproxy-1       | 172.20.0.1:35084 [05/Aug/2025:11:55:49.784] http-in backend_servers/jvpayments-1 0/0/0/1/1 204 89 - - ---- 34/34/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:49 Starting processing payment
+haproxy-1       | 172.20.0.1:35358 [05/Aug/2025:11:55:49.841] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 35/35/0/0/0 0/0 "POST /payments HTTP/1.1"
+haproxy-1       | 172.20.0.1:35272 [05/Aug/2025:11:55:49.858] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 35/35/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:49 Starting processing payment
+jvpayments-2-1  | 2025/08/05 11:55:49 Starting processing payment
+haproxy-1       | 172.20.0.1:35194 [05/Aug/2025:11:55:49.876] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 35/35/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:49 Starting processing payment
+haproxy-1       | 172.20.0.1:35094 [05/Aug/2025:11:55:49.895] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 35/35/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:49 Starting processing payment
+haproxy-1       | 172.20.0.1:35366 [05/Aug/2025:11:55:49.951] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 36/36/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:49 Starting processing payment
+haproxy-1       | 172.20.0.1:35280 [05/Aug/2025:11:55:49.968] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 36/36/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:49 Starting processing payment
+haproxy-1       | 172.20.0.1:35206 [05/Aug/2025:11:55:49.986] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 36/36/0/0/0 0/0 "POST /payments HTTP/1.1"
+haproxy-1       | 172.20.0.1:35108 [05/Aug/2025:11:55:50.005] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 36/36/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:50 Starting processing payment
+jvpayments-2-1  | 2025/08/05 11:55:50 Starting processing payment
+haproxy-1       | 172.20.0.1:35380 [05/Aug/2025:11:55:50.060] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 38/38/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:50 Starting processing payment
+haproxy-1       | 172.20.0.1:35292 [05/Aug/2025:11:55:50.078] http-in backend_servers/jvpayments-1 0/0/0/1/1 204 89 - - ---- 37/37/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:50 Starting processing payment
+haproxy-1       | 172.20.0.1:35214 [05/Aug/2025:11:55:50.094] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 37/37/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:50 Starting processing payment
+haproxy-1       | 172.20.0.1:35120 [05/Aug/2025:11:55:50.113] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 37/37/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:50 Starting processing payment
+haproxy-1       | 172.20.0.1:35382 [05/Aug/2025:11:55:50.169] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 38/38/0/0/0 0/0 "POST /payments HTTP/1.1"
+haproxy-1       | 172.20.0.1:35300 [05/Aug/2025:11:55:50.186] http-in backend_servers/jvpayments-1 0/0/0/1/1 204 89 - - ---- 38/38/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:50 Starting processing payment
+jvpayments-2-1  | 2025/08/05 11:55:50 Starting processing payment
+haproxy-1       | 172.20.0.1:35228 [05/Aug/2025:11:55:50.206] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 38/38/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:50 Starting processing payment
+haproxy-1       | 172.20.0.1:35130 [05/Aug/2025:11:55:50.223] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 38/38/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:50 Starting processing payment
+haproxy-1       | 172.20.0.1:35386 [05/Aug/2025:11:55:50.278] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 39/39/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:50 Starting processing payment
+haproxy-1       | 172.20.0.1:35306 [05/Aug/2025:11:55:50.296] http-in backend_servers/jvpayments-1 0/0/0/1/1 204 89 - - ---- 39/39/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:50 Starting processing payment
+haproxy-1       | 172.20.0.1:35244 [05/Aug/2025:11:55:50.329] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 39/39/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:50 Starting processing payment
+haproxy-1       | 172.20.0.1:35144 [05/Aug/2025:11:55:50.332] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 39/39/0/0/0 0/0 "POST /payments HTTP/1.1"
+haproxy-1       | 172.20.0.1:35062 [05/Aug/2025:11:55:50.359] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 39/39/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:50 Starting processing payment
+jvpayments-1-1  | 2025/08/05 11:55:50 Starting processing payment
+haproxy-1       | 172.20.0.1:35390 [05/Aug/2025:11:55:50.387] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 40/40/0/0/0 0/0 "POST /payments HTTP/1.1"
+haproxy-1       | 172.20.0.1:35312 [05/Aug/2025:11:55:50.405] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 40/40/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:50 Starting processing payment
+jvpayments-1-1  | 2025/08/05 11:55:50 Starting processing payment
+haproxy-1       | 172.20.0.1:35248 [05/Aug/2025:11:55:50.423] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 40/40/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:50 Starting processing payment
+haproxy-1       | 172.20.0.1:35156 [05/Aug/2025:11:55:50.442] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 40/40/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:50 Starting processing payment
+haproxy-1       | 172.20.0.1:35074 [05/Aug/2025:11:55:50.463] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 40/40/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:50 Starting processing payment
+haproxy-1       | 172.20.0.1:35392 [05/Aug/2025:11:55:50.497] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 41/41/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:50 Starting processing payment
+haproxy-1       | 172.20.0.1:35326 [05/Aug/2025:11:55:50.515] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 41/41/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:50 Starting processing payment
+haproxy-1       | 172.20.0.1:35262 [05/Aug/2025:11:55:50.533] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 41/41/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:50 Starting processing payment
+haproxy-1       | 172.20.0.1:35166 [05/Aug/2025:11:55:50.553] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 41/41/0/0/0 0/0 "POST /payments HTTP/1.1"
+haproxy-1       | 172.20.0.1:35080 [05/Aug/2025:11:55:50.569] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 41/41/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:50 Starting processing payment
+jvpayments-1-1  | 2025/08/05 11:55:50 Starting processing payment
+haproxy-1       | 172.20.0.1:35406 [05/Aug/2025:11:55:50.617] http-in backend_servers/jvpayments-1 0/0/0/1/1 204 89 - - ---- 42/42/0/0/0 0/0 "POST /payments HTTP/1.1"
+haproxy-1       | 172.20.0.1:35330 [05/Aug/2025:11:55:50.625] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 42/42/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:50 Starting processing payment
+jvpayments-1-1  | 2025/08/05 11:55:50 Starting processing payment
+haproxy-1       | 172.20.0.1:35264 [05/Aug/2025:11:55:50.641] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 42/42/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:50 Starting processing payment
+haproxy-1       | 172.20.0.1:35176 [05/Aug/2025:11:55:50.660] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 42/42/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:50 Starting processing payment
+haproxy-1       | 172.20.0.1:35082 [05/Aug/2025:11:55:50.677] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 42/42/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:50 Starting processing payment
+haproxy-1       | 172.20.0.1:35408 [05/Aug/2025:11:55:50.715] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 43/43/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:50 Starting processing payment
+haproxy-1       | 172.20.0.1:35346 [05/Aug/2025:11:55:50.732] http-in backend_servers/jvpayments-1 0/0/0/1/1 204 89 - - ---- 43/43/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:50 Starting processing payment
+haproxy-1       | 172.20.0.1:35268 [05/Aug/2025:11:55:50.751] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 43/43/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:50 Starting processing payment
+haproxy-1       | 172.20.0.1:35190 [05/Aug/2025:11:55:50.770] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 43/43/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:50 Starting processing payment
+haproxy-1       | 172.20.0.1:35084 [05/Aug/2025:11:55:50.787] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 43/43/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:50 Starting processing payment
+haproxy-1       | 172.20.0.1:35420 [05/Aug/2025:11:55:50.825] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 44/44/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:50 Starting processing payment
+haproxy-1       | 172.20.0.1:35358 [05/Aug/2025:11:55:50.843] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 44/44/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:50 Starting processing payment
+haproxy-1       | 172.20.0.1:35272 [05/Aug/2025:11:55:50.860] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 44/44/0/0/0 0/0 "POST /payments HTTP/1.1"
+haproxy-1       | 172.20.0.1:35194 [05/Aug/2025:11:55:50.877] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 44/44/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:50 Starting processing payment
+jvpayments-1-1  | 2025/08/05 11:55:50 Starting processing payment
+haproxy-1       | 172.20.0.1:35094 [05/Aug/2025:11:55:50.896] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 44/44/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:50 Starting processing payment
+haproxy-1       | 172.20.0.1:35426 [05/Aug/2025:11:55:50.934] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 45/45/0/0/0 0/0 "POST /payments HTTP/1.1"
+haproxy-1       | 172.20.0.1:35366 [05/Aug/2025:11:55:50.952] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 45/45/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:50 Starting processing payment
+jvpayments-2-1  | 2025/08/05 11:55:50 Starting processing payment
+haproxy-1       | 172.20.0.1:35280 [05/Aug/2025:11:55:50.968] http-in backend_servers/jvpayments-2 0/0/0/1/1 204 89 - - ---- 45/45/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:50 Starting processing payment
+haproxy-1       | 172.20.0.1:35206 [05/Aug/2025:11:55:50.987] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 45/45/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:51 Starting processing payment
+haproxy-1       | 172.20.0.1:35108 [05/Aug/2025:11:55:51.007] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 45/45/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:51 Starting processing payment
+haproxy-1       | 172.20.0.1:35430 [05/Aug/2025:11:55:51.043] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 46/46/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:51 Starting processing payment
+haproxy-1       | 172.20.0.1:35380 [05/Aug/2025:11:55:51.062] http-in backend_servers/jvpayments-2 0/0/0/1/1 204 89 - - ---- 46/46/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:51 Starting processing payment
+haproxy-1       | 172.20.0.1:35292 [05/Aug/2025:11:55:51.080] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 46/46/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:51 Starting processing payment
+haproxy-1       | 172.20.0.1:35214 [05/Aug/2025:11:55:51.096] http-in backend_servers/jvpayments-2 0/0/0/1/1 204 89 - - ---- 46/46/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:51 Starting processing payment
+haproxy-1       | 172.20.0.1:35120 [05/Aug/2025:11:55:51.114] http-in backend_servers/jvpayments-1 0/0/0/1/1 204 89 - - ---- 46/46/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:51 Starting processing payment
+haproxy-1       | 172.20.0.1:35438 [05/Aug/2025:11:55:51.152] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 48/48/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:51 Starting processing payment
+haproxy-1       | 172.20.0.1:35382 [05/Aug/2025:11:55:51.178] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 47/47/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:51 Starting processing payment
+haproxy-1       | 172.20.0.1:35300 [05/Aug/2025:11:55:51.188] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 47/47/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:51 Starting processing payment
+haproxy-1       | 172.20.0.1:35228 [05/Aug/2025:11:55:51.208] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 47/47/0/0/0 0/0 "POST /payments HTTP/1.1"
+haproxy-1       | 172.20.0.1:35130 [05/Aug/2025:11:55:51.225] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 47/47/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:51 Starting processing payment
+jvpayments-1-1  | 2025/08/05 11:55:51 Starting processing payment
+haproxy-1       | 172.20.0.1:35446 [05/Aug/2025:11:55:51.262] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 48/48/0/0/0 0/0 "POST /payments HTTP/1.1"
+haproxy-1       | 172.20.0.1:35386 [05/Aug/2025:11:55:51.280] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 48/48/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:51 Starting processing payment
+jvpayments-1-1  | 2025/08/05 11:55:51 Starting processing payment
+haproxy-1       | 172.20.0.1:35306 [05/Aug/2025:11:55:51.298] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 48/48/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:51 Starting processing payment
+haproxy-1       | 172.20.0.1:35244 [05/Aug/2025:11:55:51.331] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 48/48/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:51 Starting processing payment
+haproxy-1       | 172.20.0.1:35144 [05/Aug/2025:11:55:51.334] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 48/48/0/0/0 0/0 "POST /payments HTTP/1.1"
+haproxy-1       | 172.20.0.1:35062 [05/Aug/2025:11:55:51.360] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 46/46/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:51 Starting processing payment
+jvpayments-1-1  | 2025/08/05 11:55:51 Starting processing payment
+haproxy-1       | 172.20.0.1:35450 [05/Aug/2025:11:55:51.371] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 47/47/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:51 Starting processing payment
+haproxy-1       | 172.20.0.1:35390 [05/Aug/2025:11:55:51.388] http-in backend_servers/jvpayments-2 0/0/0/1/1 204 89 - - ---- 47/47/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:51 Starting processing payment
+haproxy-1       | 172.20.0.1:35312 [05/Aug/2025:11:55:51.407] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 47/47/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:51 Starting processing payment
+haproxy-1       | 172.20.0.1:35248 [05/Aug/2025:11:55:51.425] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 47/47/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:51 Starting processing payment
+haproxy-1       | 172.20.0.1:35156 [05/Aug/2025:11:55:51.442] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 47/47/0/0/0 0/0 "POST /payments HTTP/1.1"
+haproxy-1       | 172.20.0.1:35074 [05/Aug/2025:11:55:51.465] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 47/47/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:51 Starting processing payment
+jvpayments-1-1  | 2025/08/05 11:55:51 Starting processing payment
+haproxy-1       | 172.20.0.1:35452 [05/Aug/2025:11:55:51.481] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 48/48/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:51 Starting processing payment
+haproxy-1       | 172.20.0.1:35392 [05/Aug/2025:11:55:51.498] http-in backend_servers/jvpayments-2 0/0/0/1/1 204 89 - - ---- 48/48/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:51 Starting processing payment
+haproxy-1       | 172.20.0.1:35326 [05/Aug/2025:11:55:51.515] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 48/48/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:51 Starting processing payment
+haproxy-1       | 172.20.0.1:35262 [05/Aug/2025:11:55:51.535] http-in backend_servers/jvpayments-2 0/0/0/1/1 204 89 - - ---- 48/48/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:51 Starting processing payment
+haproxy-1       | 172.20.0.1:35166 [05/Aug/2025:11:55:51.554] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 48/48/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:51 Starting processing payment
+haproxy-1       | 172.20.0.1:35080 [05/Aug/2025:11:55:51.571] http-in backend_servers/jvpayments-2 0/0/0/1/1 204 89 - - ---- 48/48/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:51 Starting processing payment
+haproxy-1       | 172.20.0.1:35458 [05/Aug/2025:11:55:51.590] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 49/49/0/0/0 0/0 "POST /payments HTTP/1.1"
+haproxy-1       | 172.20.0.1:35406 [05/Aug/2025:11:55:51.618] http-in backend_servers/jvpayments-2 0/0/0/1/1 204 89 - - ---- 49/49/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:51 Starting processing payment
+jvpayments-1-1  | 2025/08/05 11:55:51 Starting processing payment
+haproxy-1       | 172.20.0.1:35330 [05/Aug/2025:11:55:51.626] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 49/49/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:51 Starting processing payment
+haproxy-1       | 172.20.0.1:35264 [05/Aug/2025:11:55:51.642] http-in backend_servers/jvpayments-2 0/0/0/1/1 204 89 - - ---- 49/49/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:51 Starting processing payment
+haproxy-1       | 172.20.0.1:35176 [05/Aug/2025:11:55:51.662] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 49/49/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:51 Starting processing payment
+haproxy-1       | 172.20.0.1:35082 [05/Aug/2025:11:55:51.679] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 49/49/0/0/0 0/0 "POST /payments HTTP/1.1"
+haproxy-1       | 172.20.0.1:35408 [05/Aug/2025:11:55:51.717] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 49/49/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:51 Starting processing payment
+jvpayments-2-1  | 2025/08/05 11:55:51 Starting processing payment
+haproxy-1       | 172.20.0.1:35474 [05/Aug/2025:11:55:51.726] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 50/50/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:51 Starting processing payment
+haproxy-1       | 172.20.0.1:35346 [05/Aug/2025:11:55:51.734] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 50/50/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:51 Starting processing payment
+haproxy-1       | 172.20.0.1:35268 [05/Aug/2025:11:55:51.753] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 50/50/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:51 Starting processing payment
+haproxy-1       | 172.20.0.1:35190 [05/Aug/2025:11:55:51.772] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 50/50/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:51 Starting processing payment
+haproxy-1       | 172.20.0.1:35084 [05/Aug/2025:11:55:51.788] http-in backend_servers/jvpayments-2 0/0/0/1/1 204 89 - - ---- 50/50/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:51 Starting processing payment
+haproxy-1       | 172.20.0.1:35480 [05/Aug/2025:11:55:51.808] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 51/51/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:51 Starting processing payment
+haproxy-1       | 172.20.0.1:35420 [05/Aug/2025:11:55:51.825] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 51/51/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:51 Starting processing payment
+haproxy-1       | 172.20.0.1:35358 [05/Aug/2025:11:55:51.844] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 51/51/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:51 Starting processing payment
+haproxy-1       | 172.20.0.1:35272 [05/Aug/2025:11:55:51.861] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 51/51/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:51 Starting processing payment
+haproxy-1       | 172.20.0.1:35194 [05/Aug/2025:11:55:51.879] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 51/51/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:51 Starting processing payment
+haproxy-1       | 172.20.0.1:35094 [05/Aug/2025:11:55:51.898] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 51/51/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:51 Starting processing payment
+haproxy-1       | 172.20.0.1:35490 [05/Aug/2025:11:55:51.918] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 52/52/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:51 Starting processing payment
+haproxy-1       | 172.20.0.1:35426 [05/Aug/2025:11:55:51.935] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 52/52/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:51 Starting processing payment
+haproxy-1       | 172.20.0.1:35366 [05/Aug/2025:11:55:51.954] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 52/52/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:51 Starting processing payment
+haproxy-1       | 172.20.0.1:35280 [05/Aug/2025:11:55:51.971] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 52/52/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:51 Starting processing payment
+haproxy-1       | 172.20.0.1:35206 [05/Aug/2025:11:55:51.989] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 52/52/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:52 Starting processing payment
+haproxy-1       | 172.20.0.1:35108 [05/Aug/2025:11:55:52.007] http-in backend_servers/jvpayments-2 0/0/0/1/1 204 89 - - ---- 52/52/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:52 Starting processing payment
+haproxy-1       | 172.20.0.1:35500 [05/Aug/2025:11:55:52.027] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 53/53/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:52 Starting processing payment
+haproxy-1       | 172.20.0.1:35430 [05/Aug/2025:11:55:52.044] http-in backend_servers/jvpayments-2 0/0/0/1/1 204 89 - - ---- 53/53/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:52 Starting processing payment
+haproxy-1       | 172.20.0.1:35380 [05/Aug/2025:11:55:52.063] http-in backend_servers/jvpayments-1 0/0/0/1/1 204 89 - - ---- 53/53/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:52 Starting processing payment
+haproxy-1       | 172.20.0.1:35292 [05/Aug/2025:11:55:52.081] http-in backend_servers/jvpayments-2 0/0/0/1/1 204 89 - - ---- 53/53/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:52 Starting processing payment
+haproxy-1       | 172.20.0.1:35214 [05/Aug/2025:11:55:52.098] http-in backend_servers/jvpayments-1 0/0/0/1/1 204 89 - - ---- 53/53/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:52 Starting processing payment
+haproxy-1       | 172.20.0.1:35120 [05/Aug/2025:11:55:52.116] http-in backend_servers/jvpayments-2 0/0/0/1/1 204 89 - - ---- 53/53/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:52 Processing heath check
+jvpayments-1-1  | 2025/08/05 11:55:52 Starting processing payment
+haproxy-1       | 172.20.0.1:35504 [05/Aug/2025:11:55:52.137] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 54/54/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:52 Starting processing payment
+haproxy-1       | 172.20.0.1:35438 [05/Aug/2025:11:55:52.154] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 54/54/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:52 Starting processing payment
+haproxy-1       | 172.20.0.1:35382 [05/Aug/2025:11:55:52.180] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 54/54/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:52 Starting processing payment
+haproxy-1       | 172.20.0.1:35300 [05/Aug/2025:11:55:52.190] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 54/54/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:52 Starting processing payment
+haproxy-1       | 172.20.0.1:35228 [05/Aug/2025:11:55:52.209] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 54/54/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:52 Starting processing payment
+haproxy-1       | 172.20.0.1:35130 [05/Aug/2025:11:55:52.226] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 54/54/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:52 Starting processing payment
+haproxy-1       | 172.20.0.1:35518 [05/Aug/2025:11:55:52.246] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 55/55/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:52 Starting processing payment
+haproxy-1       | 172.20.0.1:35446 [05/Aug/2025:11:55:52.263] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 55/55/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:52 Starting processing payment
+haproxy-1       | 172.20.0.1:35386 [05/Aug/2025:11:55:52.281] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 55/55/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:52 Starting processing payment
+haproxy-1       | 172.20.0.1:35306 [05/Aug/2025:11:55:52.300] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 55/55/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:52 Starting processing payment
+haproxy-1       | 172.20.0.1:35244 [05/Aug/2025:11:55:52.332] http-in backend_servers/jvpayments-1 0/0/0/1/1 204 89 - - ---- 55/55/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:52 Starting processing payment
+haproxy-1       | 172.20.0.1:35144 [05/Aug/2025:11:55:52.335] http-in backend_servers/jvpayments-2 0/0/0/1/1 204 89 - - ---- 55/55/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:52 Starting processing payment
+haproxy-1       | 172.20.0.1:35534 [05/Aug/2025:11:55:52.355] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 56/56/0/0/0 0/0 "POST /payments HTTP/1.1"
+haproxy-1       | 172.20.0.1:35062 [05/Aug/2025:11:55:52.362] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 56/56/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:52 Starting processing payment
+jvpayments-1-1  | 2025/08/05 11:55:52 Starting processing payment
+haproxy-1       | 172.20.0.1:35450 [05/Aug/2025:11:55:52.373] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 56/56/0/0/0 0/0 "POST /payments HTTP/1.1"
+haproxy-1       | 172.20.0.1:35390 [05/Aug/2025:11:55:52.390] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 56/56/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:52 Starting processing payment
+jvpayments-1-1  | 2025/08/05 11:55:52 Starting processing payment
+haproxy-1       | 172.20.0.1:35312 [05/Aug/2025:11:55:52.409] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 56/56/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:52 Starting processing payment
+haproxy-1       | 172.20.0.1:35248 [05/Aug/2025:11:55:52.427] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 56/56/0/0/0 0/0 "POST /payments HTTP/1.1"
+haproxy-1       | 172.20.0.1:35156 [05/Aug/2025:11:55:52.444] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 56/56/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:52 Starting processing payment
+jvpayments-2-1  | 2025/08/05 11:55:52 Starting processing payment
+haproxy-1       | 172.20.0.1:35540 [05/Aug/2025:11:55:52.464] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 57/57/0/0/0 0/0 "POST /payments HTTP/1.1"
+haproxy-1       | 172.20.0.1:35074 [05/Aug/2025:11:55:52.467] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 57/57/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:52 Starting processing payment
+jvpayments-2-1  | 2025/08/05 11:55:52 Starting processing payment
+haproxy-1       | 172.20.0.1:35452 [05/Aug/2025:11:55:52.481] http-in backend_servers/jvpayments-2 0/0/0/1/1 204 89 - - ---- 57/57/0/0/0 0/0 "POST /payments HTTP/1.1"
+haproxy-1       | 172.20.0.1:35392 [05/Aug/2025:11:55:52.500] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 57/57/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:52 Starting processing payment
+haproxy-1       | 172.20.0.1:35326 [05/Aug/2025:11:55:52.517] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 57/57/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:52 Starting processing payment
+jvpayments-1-1  | 2025/08/05 11:55:52 Starting processing payment
+haproxy-1       | 172.20.0.1:35262 [05/Aug/2025:11:55:52.537] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 57/57/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:52 Starting processing payment
+haproxy-1       | 172.20.0.1:35166 [05/Aug/2025:11:55:52.556] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 57/57/0/0/0 0/0 "POST /payments HTTP/1.1"
+haproxy-1       | 172.20.0.1:35080 [05/Aug/2025:11:55:52.573] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 60/60/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:52 Starting processing payment
+jvpayments-2-1  | 2025/08/05 11:55:52 Starting processing payment
+haproxy-1       | 172.20.0.1:35550 [05/Aug/2025:11:55:52.574] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 58/58/0/0/0 0/0 "POST /payments HTTP/1.1"
+haproxy-1       | 172.20.0.1:35458 [05/Aug/2025:11:55:52.591] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 58/58/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:52 Starting processing payment
+jvpayments-2-1  | 2025/08/05 11:55:52 Starting processing payment
+haproxy-1       | 172.20.0.1:35406 [05/Aug/2025:11:55:52.619] http-in backend_servers/jvpayments-2 0/0/0/1/1 204 89 - - ---- 58/58/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:52 Starting processing payment
+haproxy-1       | 172.20.0.1:35330 [05/Aug/2025:11:55:52.628] http-in backend_servers/jvpayments-1 0/0/0/1/1 204 89 - - ---- 58/58/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:52 Starting processing payment
+haproxy-1       | 172.20.0.1:35264 [05/Aug/2025:11:55:52.644] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 58/58/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:52 Starting processing payment
+haproxy-1       | 172.20.0.1:35176 [05/Aug/2025:11:55:52.664] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 58/58/0/0/0 0/0 "POST /payments HTTP/1.1"
+haproxy-1       | 172.20.0.1:35082 [05/Aug/2025:11:55:52.681] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 58/58/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:52 Starting processing payment
+jvpayments-1-1  | 2025/08/05 11:55:52 Starting processing payment
+haproxy-1       | 172.20.0.1:35556 [05/Aug/2025:11:55:52.682] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 59/59/0/0/0 0/0 "POST /payments HTTP/1.1"
+haproxy-1       | 172.20.0.1:35408 [05/Aug/2025:11:55:52.718] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 59/59/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:52 Starting processing payment
+jvpayments-1-1  | 2025/08/05 11:55:52 Starting processing payment
+haproxy-1       | 172.20.0.1:35474 [05/Aug/2025:11:55:52.727] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 59/59/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:52 Starting processing payment
+haproxy-1       | 172.20.0.1:35346 [05/Aug/2025:11:55:52.735] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 59/59/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:52 Starting processing payment
+haproxy-1       | 172.20.0.1:35268 [05/Aug/2025:11:55:52.755] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 59/59/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:52 Starting processing payment
+haproxy-1       | 172.20.0.1:35190 [05/Aug/2025:11:55:52.774] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 59/59/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:52 Starting processing payment
+haproxy-1       | 172.20.0.1:35084 [05/Aug/2025:11:55:52.790] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 59/59/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:52 Starting processing payment
+haproxy-1       | 172.20.0.1:35564 [05/Aug/2025:11:55:52.792] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 60/60/0/0/0 0/0 "POST /payments HTTP/1.1"
+haproxy-1       | 172.20.0.1:35480 [05/Aug/2025:11:55:52.810] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 60/60/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:52 Starting processing payment
+haproxy-1       | 172.20.0.1:35420 [05/Aug/2025:11:55:52.827] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 60/60/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:52 Starting processing payment
+jvpayments-1-1  | 2025/08/05 11:55:52 Starting processing payment
+haproxy-1       | 172.20.0.1:35358 [05/Aug/2025:11:55:52.845] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 60/60/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:52 Starting processing payment
+haproxy-1       | 172.20.0.1:35272 [05/Aug/2025:11:55:52.863] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 60/60/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:52 Starting processing payment
+haproxy-1       | 172.20.0.1:35194 [05/Aug/2025:11:55:52.881] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 60/60/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:52 Starting processing payment
+haproxy-1       | 172.20.0.1:35094 [05/Aug/2025:11:55:52.899] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 60/60/0/0/0 0/0 "POST /payments HTTP/1.1"
+haproxy-1       | 172.20.0.1:35580 [05/Aug/2025:11:55:52.901] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 61/61/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:52 Starting processing payment
+jvpayments-2-1  | 2025/08/05 11:55:52 Starting processing payment
+haproxy-1       | 172.20.0.1:35490 [05/Aug/2025:11:55:52.919] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 61/61/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:52 Starting processing payment
+haproxy-1       | 172.20.0.1:35426 [05/Aug/2025:11:55:52.937] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 61/61/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:52 Starting processing payment
+haproxy-1       | 172.20.0.1:35366 [05/Aug/2025:11:55:52.955] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 61/61/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:52 Starting processing payment
+haproxy-1       | 172.20.0.1:35280 [05/Aug/2025:11:55:52.972] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 61/61/0/0/0 0/0 "POST /payments HTTP/1.1"
+haproxy-1       | 172.20.0.1:35206 [05/Aug/2025:11:55:52.991] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 61/61/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:52 Starting processing payment
+jvpayments-1-1  | 2025/08/05 11:55:53 Starting processing payment
+haproxy-1       | 172.20.0.1:35108 [05/Aug/2025:11:55:53.009] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 61/61/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:53 Starting processing payment
+haproxy-1       | 172.20.0.1:35588 [05/Aug/2025:11:55:53.010] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 62/62/0/0/0 0/0 "POST /payments HTTP/1.1"
+haproxy-1       | 172.20.0.1:35500 [05/Aug/2025:11:55:53.028] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 62/62/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:53 Starting processing payment
+jvpayments-2-1  | 2025/08/05 11:55:53 Starting processing payment
+haproxy-1       | 172.20.0.1:35430 [05/Aug/2025:11:55:53.046] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 62/62/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:53 Starting processing payment
+haproxy-1       | 172.20.0.1:35380 [05/Aug/2025:11:55:53.065] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 62/62/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:53 Starting processing payment
+haproxy-1       | 172.20.0.1:35292 [05/Aug/2025:11:55:53.083] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 62/62/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:53 Starting processing payment
+haproxy-1       | 172.20.0.1:35214 [05/Aug/2025:11:55:53.100] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 62/62/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:53 Starting processing payment
+haproxy-1       | 172.20.0.1:35120 [05/Aug/2025:11:55:53.118] http-in backend_servers/jvpayments-2 0/0/0/1/1 204 89 - - ---- 63/63/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:53 Starting processing payment
+haproxy-1       | 172.20.0.1:35604 [05/Aug/2025:11:55:53.119] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 63/63/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:53 Starting processing payment
+haproxy-1       | 172.20.0.1:35504 [05/Aug/2025:11:55:53.137] http-in backend_servers/jvpayments-2 0/0/0/1/1 204 89 - - ---- 63/63/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:53 Starting processing payment
+haproxy-1       | 172.20.0.1:35438 [05/Aug/2025:11:55:53.155] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 63/63/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:53 Starting processing payment
+haproxy-1       | 172.20.0.1:35382 [05/Aug/2025:11:55:53.181] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 63/63/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:53 Starting processing payment
+haproxy-1       | 172.20.0.1:35300 [05/Aug/2025:11:55:53.192] http-in backend_servers/jvpayments-1 0/0/0/1/1 204 89 - - ---- 63/63/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:53 Starting processing payment
+haproxy-1       | 172.20.0.1:35228 [05/Aug/2025:11:55:53.211] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 63/63/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:53 Starting processing payment
+haproxy-1       | 172.20.0.1:35130 [05/Aug/2025:11:55:53.228] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 64/64/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:53 Starting processing payment
+haproxy-1       | 172.20.0.1:35614 [05/Aug/2025:11:55:53.229] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 64/64/0/0/0 0/0 "POST /payments HTTP/1.1"
+haproxy-1       | 172.20.0.1:35518 [05/Aug/2025:11:55:53.246] http-in backend_servers/jvpayments-1 0/0/0/1/1 204 89 - - ---- 64/64/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:53 Starting processing payment
+haproxy-1       | 172.20.0.1:35446 [05/Aug/2025:11:55:53.265] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 64/64/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:53 Starting processing payment
+jvpayments-1-1  | 2025/08/05 11:55:53 Starting processing payment
+haproxy-1       | 172.20.0.1:35386 [05/Aug/2025:11:55:53.283] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 64/64/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:53 Starting processing payment
+haproxy-1       | 172.20.0.1:35306 [05/Aug/2025:11:55:53.302] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 64/64/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:53 Starting processing payment
+haproxy-1       | 172.20.0.1:35244 [05/Aug/2025:11:55:53.334] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 64/64/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:53 Starting processing payment
+haproxy-1       | 172.20.0.1:35144 [05/Aug/2025:11:55:53.337] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 64/64/0/0/0 0/0 "POST /payments HTTP/1.1"
+haproxy-1       | 172.20.0.1:35628 [05/Aug/2025:11:55:53.338] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 65/65/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:53 Starting processing payment
+jvpayments-2-1  | 2025/08/05 11:55:53 Starting processing payment
+haproxy-1       | 172.20.0.1:35534 [05/Aug/2025:11:55:53.356] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 65/65/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:53 Starting processing payment
+haproxy-1       | 172.20.0.1:35062 [05/Aug/2025:11:55:53.364] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 65/65/0/0/0 0/0 "POST /payments HTTP/1.1"
+haproxy-1       | 172.20.0.1:35450 [05/Aug/2025:11:55:53.374] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 65/65/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:53 Starting processing payment
+jvpayments-1-1  | 2025/08/05 11:55:53 Starting processing payment
+haproxy-1       | 172.20.0.1:35390 [05/Aug/2025:11:55:53.391] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 65/65/0/0/0 0/0 "POST /payments HTTP/1.1"
+haproxy-1       | 172.20.0.1:35312 [05/Aug/2025:11:55:53.410] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 65/65/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:53 Starting processing payment
+haproxy-1       | 172.20.0.1:35248 [05/Aug/2025:11:55:53.428] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 65/65/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:53 Starting processing payment
+jvpayments-2-1  | 2025/08/05 11:55:53 Starting processing payment
+haproxy-1       | 172.20.0.1:35156 [05/Aug/2025:11:55:53.446] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 65/65/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:53 Starting processing payment
+haproxy-1       | 172.20.0.1:35634 [05/Aug/2025:11:55:53.447] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 66/66/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:53 Starting processing payment
+haproxy-1       | 172.20.0.1:35540 [05/Aug/2025:11:55:53.465] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 66/66/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:53 Starting processing payment
+haproxy-1       | 172.20.0.1:35074 [05/Aug/2025:11:55:53.468] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 66/66/0/0/0 0/0 "POST /payments HTTP/1.1"
+haproxy-1       | 172.20.0.1:35452 [05/Aug/2025:11:55:53.483] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 66/66/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:53 Starting processing payment
+jvpayments-1-1  | 2025/08/05 11:55:53 Starting processing payment
+haproxy-1       | 172.20.0.1:35392 [05/Aug/2025:11:55:53.502] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 66/66/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:53 Starting processing payment
+haproxy-1       | 172.20.0.1:35326 [05/Aug/2025:11:55:53.519] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 66/66/0/0/0 0/0 "POST /payments HTTP/1.1"
+haproxy-1       | 172.20.0.1:35262 [05/Aug/2025:11:55:53.538] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 66/66/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:53 Starting processing payment
+jvpayments-2-1  | 2025/08/05 11:55:53 Starting processing payment
+haproxy-1       | 172.20.0.1:35166 [05/Aug/2025:11:55:53.557] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 67/67/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:53 Starting processing payment
+haproxy-1       | 172.20.0.1:35650 [05/Aug/2025:11:55:53.557] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 67/67/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:53 Starting processing payment
+haproxy-1       | 172.20.0.1:35080 [05/Aug/2025:11:55:53.575] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 67/67/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:53 Starting processing payment
+jvpayments-2-1  | 2025/08/05 11:55:53 Starting processing payment
+haproxy-1       | 172.20.0.1:35458 [05/Aug/2025:11:55:53.593] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 67/67/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:53 Starting processing payment
+haproxy-1       | 172.20.0.1:35406 [05/Aug/2025:11:55:53.621] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 67/67/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:53 Starting processing payment
+haproxy-1       | 172.20.0.1:35330 [05/Aug/2025:11:55:53.630] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 67/67/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:53 Starting processing payment
+haproxy-1       | 172.20.0.1:35264 [05/Aug/2025:11:55:53.646] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 67/67/0/0/0 0/0 "POST /payments HTTP/1.1"
+haproxy-1       | 172.20.0.1:35176 [05/Aug/2025:11:55:53.665] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 67/67/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:53 Starting processing payment
+jvpayments-1-1  | 2025/08/05 11:55:53 Starting processing payment
+haproxy-1       | 172.20.0.1:35662 [05/Aug/2025:11:55:53.666] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 68/68/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:53 Starting processing payment
+haproxy-1       | 172.20.0.1:35082 [05/Aug/2025:11:55:53.682] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 68/68/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:53 Starting processing payment
+haproxy-1       | 172.20.0.1:35556 [05/Aug/2025:11:55:53.684] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 68/68/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:53 Starting processing payment
+haproxy-1       | 172.20.0.1:35408 [05/Aug/2025:11:55:53.720] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 68/68/0/0/0 0/0 "POST /payments HTTP/1.1"
+haproxy-1       | 172.20.0.1:35474 [05/Aug/2025:11:55:53.729] http-in backend_servers/jvpayments-1 0/0/0/1/1 204 89 - - ---- 68/68/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:53 Starting processing payment
+jvpayments-2-1  | 2025/08/05 11:55:53 Starting processing payment
+haproxy-1       | 172.20.0.1:35346 [05/Aug/2025:11:55:53.737] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 68/68/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:53 Starting processing payment
+haproxy-1       | 172.20.0.1:35268 [05/Aug/2025:11:55:53.755] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 68/68/0/0/0 0/0 "POST /payments HTTP/1.1"
+haproxy-1       | 172.20.0.1:35190 [05/Aug/2025:11:55:53.774] http-in backend_servers/jvpayments-2 0/0/0/1/1 204 89 - - ---- 71/71/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:53 Starting processing payment
+haproxy-1       | 172.20.0.1:34580 [05/Aug/2025:11:55:53.775] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 69/69/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:53 Starting processing payment
+jvpayments-2-1  | 2025/08/05 11:55:53 Starting processing payment
+haproxy-1       | 172.20.0.1:35084 [05/Aug/2025:11:55:53.792] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 69/69/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:53 Starting processing payment
+haproxy-1       | 172.20.0.1:35564 [05/Aug/2025:11:55:53.792] http-in backend_servers/jvpayments-1 0/0/0/1/1 204 89 - - ---- 69/69/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:53 Starting processing payment
+haproxy-1       | 172.20.0.1:35480 [05/Aug/2025:11:55:53.811] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 69/69/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:53 Starting processing payment
+haproxy-1       | 172.20.0.1:35420 [05/Aug/2025:11:55:53.827] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 69/69/0/0/0 0/0 "POST /payments HTTP/1.1"
+haproxy-1       | 172.20.0.1:35358 [05/Aug/2025:11:55:53.847] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 69/69/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:53 Starting processing payment
+jvpayments-1-1  | 2025/08/05 11:55:53 Starting processing payment
+haproxy-1       | 172.20.0.1:35272 [05/Aug/2025:11:55:53.864] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 69/69/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:53 Starting processing payment
+haproxy-1       | 172.20.0.1:35194 [05/Aug/2025:11:55:53.883] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 69/69/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:53 Starting processing payment
+haproxy-1       | 172.20.0.1:34588 [05/Aug/2025:11:55:53.885] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 70/70/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:53 Starting processing payment
+haproxy-1       | 172.20.0.1:35094 [05/Aug/2025:11:55:53.901] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 70/70/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:53 Starting processing payment
+haproxy-1       | 172.20.0.1:35580 [05/Aug/2025:11:55:53.902] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 70/70/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:53 Starting processing payment
+haproxy-1       | 172.20.0.1:35490 [05/Aug/2025:11:55:53.920] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 70/70/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:53 Starting processing payment
+haproxy-1       | 172.20.0.1:35426 [05/Aug/2025:11:55:53.937] http-in backend_servers/jvpayments-1 0/0/0/1/1 204 89 - - ---- 70/70/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:53 Starting processing payment
+haproxy-1       | 172.20.0.1:35366 [05/Aug/2025:11:55:53.957] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 70/70/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:53 Starting processing payment
+haproxy-1       | 172.20.0.1:35280 [05/Aug/2025:11:55:53.974] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 70/70/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:53 Starting processing payment
+haproxy-1       | 172.20.0.1:35206 [05/Aug/2025:11:55:53.992] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 70/70/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:53 Starting processing payment
+haproxy-1       | 172.20.0.1:34600 [05/Aug/2025:11:55:53.994] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 71/71/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:54 Starting processing payment
+haproxy-1       | 172.20.0.1:35108 [05/Aug/2025:11:55:54.010] http-in backend_servers/jvpayments-2 0/0/0/1/1 204 89 - - ---- 71/71/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:54 Starting processing payment
+haproxy-1       | 172.20.0.1:35588 [05/Aug/2025:11:55:54.012] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 71/71/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:54 Starting processing payment
+haproxy-1       | 172.20.0.1:35500 [05/Aug/2025:11:55:54.029] http-in backend_servers/jvpayments-2 0/0/0/1/1 204 89 - - ---- 71/71/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:54 Starting processing payment
+haproxy-1       | 172.20.0.1:35430 [05/Aug/2025:11:55:54.046] http-in backend_servers/jvpayments-1 0/0/0/1/1 204 89 - - ---- 71/71/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:54 Starting processing payment
+haproxy-1       | 172.20.0.1:35380 [05/Aug/2025:11:55:54.065] http-in backend_servers/jvpayments-2 0/0/0/1/1 204 89 - - ---- 71/71/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:54 Starting processing payment
+haproxy-1       | 172.20.0.1:35292 [05/Aug/2025:11:55:54.085] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 71/71/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:54 Starting processing payment
+haproxy-1       | 172.20.0.1:35214 [05/Aug/2025:11:55:54.102] http-in backend_servers/jvpayments-2 0/0/0/1/1 204 89 - - ---- 72/72/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:54 Starting processing payment
+haproxy-1       | 172.20.0.1:34614 [05/Aug/2025:11:55:54.103] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 72/72/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:54 Starting processing payment
+jvpayments-1-1  | 2025/08/05 11:55:54 Starting processing payment
+haproxy-1       | 172.20.0.1:35120 [05/Aug/2025:11:55:54.120] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 72/72/1/0/0 0/0 "POST /payments HTTP/1.1"
+haproxy-1       | 172.20.0.1:35604 [05/Aug/2025:11:55:54.121] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 72/72/0/0/0 0/0 "POST /payments HTTP/1.1"
+haproxy-1       | 172.20.0.1:35504 [05/Aug/2025:11:55:54.139] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 72/72/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:54 Starting processing payment
+jvpayments-1-1  | 2025/08/05 11:55:54 Starting processing payment
+haproxy-1       | 172.20.0.1:35438 [05/Aug/2025:11:55:54.157] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 72/72/0/0/0 0/0 "POST /payments HTTP/1.1"
+haproxy-1       | 172.20.0.1:35382 [05/Aug/2025:11:55:54.183] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 72/72/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:54 Starting processing payment
+haproxy-1       | 172.20.0.1:35300 [05/Aug/2025:11:55:54.194] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 72/72/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:54 Starting processing payment
+jvpayments-2-1  | 2025/08/05 11:55:54 Starting processing payment
+haproxy-1       | 172.20.0.1:35228 [05/Aug/2025:11:55:54.212] http-in backend_servers/jvpayments-2 0/0/0/1/1 204 89 - - ---- 73/73/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:54 Starting processing payment
+haproxy-1       | 172.20.0.1:34630 [05/Aug/2025:11:55:54.213] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 73/73/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:54 Starting processing payment
+haproxy-1       | 172.20.0.1:35130 [05/Aug/2025:11:55:54.230] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 73/73/1/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:54 Starting processing payment
+jvpayments-2-1  | 2025/08/05 11:55:54 Starting processing payment
+haproxy-1       | 172.20.0.1:35518 [05/Aug/2025:11:55:54.248] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 73/73/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:54 Starting processing payment
+haproxy-1       | 172.20.0.1:35446 [05/Aug/2025:11:55:54.266] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 73/73/0/0/0 0/0 "POST /payments HTTP/1.1"
+haproxy-1       | 172.20.0.1:35386 [05/Aug/2025:11:55:54.284] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 73/73/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:54 Starting processing payment
+jvpayments-1-1  | 2025/08/05 11:55:54 Starting processing payment
+haproxy-1       | 172.20.0.1:35306 [05/Aug/2025:11:55:54.303] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 73/73/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:54 Starting processing payment
+haproxy-1       | 172.20.0.1:34638 [05/Aug/2025:11:55:54.322] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 74/74/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:54 Starting processing payment
+haproxy-1       | 172.20.0.1:35244 [05/Aug/2025:11:55:54.335] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 74/74/0/0/0 0/0 "POST /payments HTTP/1.1"
+haproxy-1       | 172.20.0.1:35144 [05/Aug/2025:11:55:54.338] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 74/74/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:54 Starting processing payment
+jvpayments-1-1  | 2025/08/05 11:55:54 Starting processing payment
+haproxy-1       | 172.20.0.1:35628 [05/Aug/2025:11:55:54.338] http-in backend_servers/jvpayments-1 0/0/0/1/1 204 89 - - ---- 74/74/0/0/0 0/0 "POST /payments HTTP/1.1"
+haproxy-1       | 172.20.0.1:35534 [05/Aug/2025:11:55:54.357] http-in backend_servers/jvpayments-2 0/0/0/1/1 204 89 - - ---- 74/74/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:54 Starting processing payment
+jvpayments-1-1  | 2025/08/05 11:55:54 Starting processing payment
+haproxy-1       | 172.20.0.1:35062 [05/Aug/2025:11:55:54.365] http-in backend_servers/jvpayments-1 0/0/0/1/1 204 89 - - ---- 74/74/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:54 Starting processing payment
+haproxy-1       | 172.20.0.1:35450 [05/Aug/2025:11:55:54.376] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 74/74/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:54 Starting processing payment
+haproxy-1       | 172.20.0.1:35390 [05/Aug/2025:11:55:54.393] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 74/74/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:54 Starting processing payment
+haproxy-1       | 172.20.0.1:35312 [05/Aug/2025:11:55:54.412] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 74/74/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:54 Starting processing payment
+haproxy-1       | 172.20.0.1:35248 [05/Aug/2025:11:55:54.430] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 75/75/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:54 Starting processing payment
+haproxy-1       | 172.20.0.1:34648 [05/Aug/2025:11:55:54.431] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 75/75/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:54 Starting processing payment
+haproxy-1       | 172.20.0.1:35156 [05/Aug/2025:11:55:54.447] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 75/75/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:54 Starting processing payment
+haproxy-1       | 172.20.0.1:35634 [05/Aug/2025:11:55:54.449] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 75/75/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:54 Starting processing payment
+haproxy-1       | 172.20.0.1:35540 [05/Aug/2025:11:55:54.467] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 75/75/0/0/0 0/0 "POST /payments HTTP/1.1"
+haproxy-1       | 172.20.0.1:35074 [05/Aug/2025:11:55:54.470] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 75/75/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:54 Starting processing payment
+jvpayments-1-1  | 2025/08/05 11:55:54 Starting processing payment
+haproxy-1       | 172.20.0.1:35452 [05/Aug/2025:11:55:54.485] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 75/75/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:54 Starting processing payment
+haproxy-1       | 172.20.0.1:35392 [05/Aug/2025:11:55:54.503] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 75/75/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:54 Starting processing payment
+haproxy-1       | 172.20.0.1:35326 [05/Aug/2025:11:55:54.521] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 75/75/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:54 Starting processing payment
+jvpayments-1-1  | 2025/08/05 11:55:54 Starting processing payment
+haproxy-1       | 172.20.0.1:35262 [05/Aug/2025:11:55:54.539] http-in backend_servers/jvpayments-2 0/0/0/1/1 204 89 - - ---- 76/76/1/0/0 0/0 "POST /payments HTTP/1.1"
+haproxy-1       | 172.20.0.1:34650 [05/Aug/2025:11:55:54.540] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 76/76/0/0/0 0/0 "POST /payments HTTP/1.1"
+haproxy-1       | 172.20.0.1:35166 [05/Aug/2025:11:55:54.558] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 76/76/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:54 Starting processing payment
+haproxy-1       | 172.20.0.1:35650 [05/Aug/2025:11:55:54.559] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 76/76/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:54 Starting processing payment
+jvpayments-1-1  | 2025/08/05 11:55:54 Starting processing payment
+haproxy-1       | 172.20.0.1:35550 [05/Aug/2025:11:55:54.576] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 76/76/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:54 Starting processing payment
+haproxy-1       | 172.20.0.1:35080 [05/Aug/2025:11:55:54.576] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 76/76/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:54 Starting processing payment
+haproxy-1       | 172.20.0.1:35458 [05/Aug/2025:11:55:54.595] http-in backend_servers/jvpayments-2 0/0/0/1/1 204 89 - - ---- 76/76/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:54 Starting processing payment
+haproxy-1       | 172.20.0.1:35406 [05/Aug/2025:11:55:54.623] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 76/76/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:54 Starting processing payment
+haproxy-1       | 172.20.0.1:35330 [05/Aug/2025:11:55:54.633] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 76/76/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:54 Starting processing payment
+haproxy-1       | 172.20.0.1:35264 [05/Aug/2025:11:55:54.647] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 76/76/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:54 Starting processing payment
+haproxy-1       | 172.20.0.1:34664 [05/Aug/2025:11:55:54.650] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 77/77/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:54 Starting processing payment
+jvpayments-1-1  | 2025/08/05 11:55:54 Starting processing payment
+haproxy-1       | 172.20.0.1:35662 [05/Aug/2025:11:55:54.667] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 77/77/1/0/0 0/0 "POST /payments HTTP/1.1"
+haproxy-1       | 172.20.0.1:35176 [05/Aug/2025:11:55:54.667] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 77/77/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:54 Starting processing payment
+haproxy-1       | 172.20.0.1:35082 [05/Aug/2025:11:55:54.684] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 77/77/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:54 Starting processing payment
+haproxy-1       | 172.20.0.1:35556 [05/Aug/2025:11:55:54.687] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 77/77/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:54 Starting processing payment
+haproxy-1       | 172.20.0.1:35408 [05/Aug/2025:11:55:54.722] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 77/77/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:54 Starting processing payment
+haproxy-1       | 172.20.0.1:35474 [05/Aug/2025:11:55:54.731] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 77/77/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:54 Starting processing payment
+haproxy-1       | 172.20.0.1:35346 [05/Aug/2025:11:55:54.739] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 77/77/0/0/0 0/0 "POST /payments HTTP/1.1"
+haproxy-1       | 172.20.0.1:35268 [05/Aug/2025:11:55:54.757] http-in backend_servers/jvpayments-2 0/0/0/1/1 204 89 - - ---- 77/77/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:54 Starting processing payment
+jvpayments-1-1  | 2025/08/05 11:55:54 Starting processing payment
+haproxy-1       | 172.20.0.1:34674 [05/Aug/2025:11:55:54.759] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 78/78/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:54 Starting processing payment
+jvpayments-2-1  | 2025/08/05 11:55:54 Starting processing payment
+haproxy-1       | 172.20.0.1:34580 [05/Aug/2025:11:55:54.777] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 78/78/1/0/0 0/0 "POST /payments HTTP/1.1"
+haproxy-1       | 172.20.0.1:35190 [05/Aug/2025:11:55:54.776] http-in backend_servers/jvpayments-1 0/0/0/1/1 204 89 - - ---- 78/78/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:54 Starting processing payment
+jvpayments-1-1  | 2025/08/05 11:55:54 Starting processing payment
+haproxy-1       | 172.20.0.1:35564 [05/Aug/2025:11:55:54.793] http-in backend_servers/jvpayments-2 0/0/0/1/1 204 89 - - ---- 78/78/1/0/0 0/0 "POST /payments HTTP/1.1"
+haproxy-1       | 172.20.0.1:35084 [05/Aug/2025:11:55:54.793] http-in backend_servers/jvpayments-1 0/0/0/1/1 204 89 - - ---- 78/78/0/0/0 0/0 "POST /payments HTTP/1.1"
+haproxy-1       | 172.20.0.1:35480 [05/Aug/2025:11:55:54.813] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 78/78/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:54 Starting processing payment
+jvpayments-1-1  | 2025/08/05 11:55:54 Starting processing payment
+haproxy-1       | 172.20.0.1:35420 [05/Aug/2025:11:55:54.829] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 78/78/0/0/0 0/0 "POST /payments HTTP/1.1"
+haproxy-1       | 172.20.0.1:35358 [05/Aug/2025:11:55:54.849] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 78/78/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:54 Starting processing payment
+jvpayments-1-1  | 2025/08/05 11:55:54 Starting processing payment
+haproxy-1       | 172.20.0.1:35272 [05/Aug/2025:11:55:54.866] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 78/78/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:54 Starting processing payment
+haproxy-1       | 172.20.0.1:34684 [05/Aug/2025:11:55:54.869] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 79/79/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:54 Starting processing payment
+haproxy-1       | 172.20.0.1:35194 [05/Aug/2025:11:55:54.884] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 79/79/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:54 Starting processing payment
+haproxy-1       | 172.20.0.1:34588 [05/Aug/2025:11:55:54.886] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 79/79/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:54 Starting processing payment
+haproxy-1       | 172.20.0.1:35094 [05/Aug/2025:11:55:54.903] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 79/79/0/0/0 0/0 "POST /payments HTTP/1.1"
+haproxy-1       | 172.20.0.1:35580 [05/Aug/2025:11:55:54.902] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 79/79/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:54 Starting processing payment
+jvpayments-1-1  | 2025/08/05 11:55:54 Starting processing payment
+haproxy-1       | 172.20.0.1:35490 [05/Aug/2025:11:55:54.922] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 79/79/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:54 Starting processing payment
+haproxy-1       | 172.20.0.1:35426 [05/Aug/2025:11:55:54.939] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 79/79/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:54 Starting processing payment
+haproxy-1       | 172.20.0.1:35366 [05/Aug/2025:11:55:54.958] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 79/79/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:54 Starting processing payment
+haproxy-1       | 172.20.0.1:35280 [05/Aug/2025:11:55:54.976] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 79/79/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:54 Starting processing payment
+haproxy-1       | 172.20.0.1:34700 [05/Aug/2025:11:55:54.977] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 80/80/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:54 Starting processing payment
+jvpayments-1-1  | 2025/08/05 11:55:54 Starting processing payment
+haproxy-1       | 172.20.0.1:35206 [05/Aug/2025:11:55:54.994] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 80/80/1/0/0 0/0 "POST /payments HTTP/1.1"
+haproxy-1       | 172.20.0.1:34600 [05/Aug/2025:11:55:54.994] http-in backend_servers/jvpayments-1 0/0/0/1/1 204 89 - - ---- 80/80/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:55 Starting processing payment
+haproxy-1       | 172.20.0.1:35108 [05/Aug/2025:11:55:55.012] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 80/80/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:55 Starting processing payment
+haproxy-1       | 172.20.0.1:35588 [05/Aug/2025:11:55:55.013] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 80/80/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:55 Starting processing payment
+haproxy-1       | 172.20.0.1:35500 [05/Aug/2025:11:55:55.031] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 80/80/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:55 Starting processing payment
+haproxy-1       | 172.20.0.1:35430 [05/Aug/2025:11:55:55.047] http-in backend_servers/jvpayments-1 0/0/0/1/1 204 89 - - ---- 80/80/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:55 Starting processing payment
+haproxy-1       | 172.20.0.1:35380 [05/Aug/2025:11:55:55.067] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 80/80/0/0/0 0/0 "POST /payments HTTP/1.1"
+haproxy-1       | 172.20.0.1:35292 [05/Aug/2025:11:55:55.086] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 81/81/1/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:55 Starting processing payment
+jvpayments-1-1  | 2025/08/05 11:55:55 Starting processing payment
+haproxy-1       | 172.20.0.1:34714 [05/Aug/2025:11:55:55.087] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 81/81/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:55 Starting processing payment
+jvpayments-1-1  | 2025/08/05 11:55:55 Starting processing payment
+haproxy-1       | 172.20.0.1:35214 [05/Aug/2025:11:55:55.105] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 81/81/1/0/0 0/0 "POST /payments HTTP/1.1"
+haproxy-1       | 172.20.0.1:34614 [05/Aug/2025:11:55:55.105] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 81/81/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:55 Starting processing payment
+haproxy-1       | 172.20.0.1:35120 [05/Aug/2025:11:55:55.122] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 81/81/1/0/0 0/0 "POST /payments HTTP/1.1"
+haproxy-1       | 172.20.0.1:35604 [05/Aug/2025:11:55:55.122] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 81/81/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:55 Starting processing payment
+jvpayments-1-1  | 2025/08/05 11:55:55 Starting processing payment
+haproxy-1       | 172.20.0.1:35504 [05/Aug/2025:11:55:55.139] http-in backend_servers/jvpayments-1 0/0/0/1/1 204 89 - - ---- 81/81/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:55 Starting processing payment
+haproxy-1       | 172.20.0.1:35438 [05/Aug/2025:11:55:55.158] http-in backend_servers/jvpayments-2 0/0/0/1/1 204 89 - - ---- 81/81/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:55 Starting processing payment
+haproxy-1       | 172.20.0.1:35382 [05/Aug/2025:11:55:55.184] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 81/81/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:55 Starting processing payment
+haproxy-1       | 172.20.0.1:35300 [05/Aug/2025:11:55:55.195] http-in backend_servers/jvpayments-2 0/0/0/1/1 204 89 - - ---- 82/82/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:55 Starting processing payment
+haproxy-1       | 172.20.0.1:34722 [05/Aug/2025:11:55:55.196] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 82/82/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:55 Starting processing payment
+haproxy-1       | 172.20.0.1:34630 [05/Aug/2025:11:55:55.214] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 82/82/1/0/0 0/0 "POST /payments HTTP/1.1"
+haproxy-1       | 172.20.0.1:35228 [05/Aug/2025:11:55:55.214] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 82/82/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:55 Starting processing payment
+jvpayments-2-1  | 2025/08/05 11:55:55 Starting processing payment
+jvpayments-1-1  | 2025/08/05 11:55:55 Starting processing payment
+haproxy-1       | 172.20.0.1:35130 [05/Aug/2025:11:55:55.231] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 82/82/0/0/0 0/0 "POST /payments HTTP/1.1"
+haproxy-1       | 172.20.0.1:35614 [05/Aug/2025:11:55:55.231] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 82/82/0/0/0 0/0 "POST /payments HTTP/1.1"
+haproxy-1       | 172.20.0.1:35518 [05/Aug/2025:11:55:55.250] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 82/82/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:55 Starting processing payment
+jvpayments-1-1  | 2025/08/05 11:55:55 Starting processing payment
+haproxy-1       | 172.20.0.1:35446 [05/Aug/2025:11:55:55.268] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 82/82/0/0/0 0/0 "POST /payments HTTP/1.1"
+haproxy-1       | 172.20.0.1:35386 [05/Aug/2025:11:55:55.286] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 82/82/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:55 Starting processing payment
+jvpayments-1-1  | 2025/08/05 11:55:55 Starting processing payment
+haproxy-1       | 172.20.0.1:35306 [05/Aug/2025:11:55:55.304] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 83/83/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:55 Starting processing payment
+haproxy-1       | 172.20.0.1:34736 [05/Aug/2025:11:55:55.305] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 83/83/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:55 Starting processing payment
+haproxy-1       | 172.20.0.1:34638 [05/Aug/2025:11:55:55.323] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 83/83/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:55 Starting processing payment
+haproxy-1       | 172.20.0.1:35244 [05/Aug/2025:11:55:55.337] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 83/83/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:55 Starting processing payment
+jvpayments-2-1  | 2025/08/05 11:55:55 Starting processing payment
+haproxy-1       | 172.20.0.1:35144 [05/Aug/2025:11:55:55.340] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 83/83/1/0/0 0/0 "POST /payments HTTP/1.1"
+haproxy-1       | 172.20.0.1:35628 [05/Aug/2025:11:55:55.339] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 83/83/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:55 Starting processing payment
+haproxy-1       | 172.20.0.1:35534 [05/Aug/2025:11:55:55.359] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 83/83/0/0/0 0/0 "POST /payments HTTP/1.1"
+haproxy-1       | 172.20.0.1:35062 [05/Aug/2025:11:55:55.367] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 83/83/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:55 Starting processing payment
+jvpayments-1-1  | 2025/08/05 11:55:55 Starting processing payment
+haproxy-1       | 172.20.0.1:35450 [05/Aug/2025:11:55:55.377] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 83/83/0/0/0 0/0 "POST /payments HTTP/1.1"
+haproxy-1       | 172.20.0.1:35390 [05/Aug/2025:11:55:55.395] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 83/83/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:55 Starting processing payment
+haproxy-1       | 172.20.0.1:35312 [05/Aug/2025:11:55:55.414] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 83/83/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:55 Starting processing payment
+jvpayments-2-1  | 2025/08/05 11:55:55 Starting processing payment
+haproxy-1       | 172.20.0.1:34752 [05/Aug/2025:11:55:55.415] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 84/84/0/0/0 0/0 "POST /payments HTTP/1.1"
+haproxy-1       | 172.20.0.1:34648 [05/Aug/2025:11:55:55.432] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 84/84/0/0/0 0/0 "POST /payments HTTP/1.1"
+haproxy-1       | 172.20.0.1:35248 [05/Aug/2025:11:55:55.432] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 84/84/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:55 Starting processing payment
+jvpayments-1-1  | 2025/08/05 11:55:55 Starting processing payment
+jvpayments-1-1  | 2025/08/05 11:55:55 Starting processing payment
+haproxy-1       | 172.20.0.1:35156 [05/Aug/2025:11:55:55.448] http-in backend_servers/jvpayments-1 0/0/0/1/1 204 89 - - ---- 84/84/0/0/0 0/0 "POST /payments HTTP/1.1"
+haproxy-1       | 172.20.0.1:35634 [05/Aug/2025:11:55:55.451] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 84/84/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:55 Starting processing payment
+jvpayments-1-1  | 2025/08/05 11:55:55 Starting processing payment
+haproxy-1       | 172.20.0.1:35540 [05/Aug/2025:11:55:55.469] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 84/84/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:55 Starting processing payment
+haproxy-1       | 172.20.0.1:35074 [05/Aug/2025:11:55:55.471] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 84/84/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:55 Starting processing payment
+haproxy-1       | 172.20.0.1:35452 [05/Aug/2025:11:55:55.486] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 84/84/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:55 Starting processing payment
+haproxy-1       | 172.20.0.1:35392 [05/Aug/2025:11:55:55.505] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 84/84/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:55 Starting processing payment
+haproxy-1       | 172.20.0.1:35326 [05/Aug/2025:11:55:55.523] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 84/84/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:55 Starting processing payment
+jvpayments-2-1  | 2025/08/05 11:55:55 Starting processing payment
+haproxy-1       | 172.20.0.1:34650 [05/Aug/2025:11:55:55.540] http-in backend_servers/jvpayments-2 0/0/0/1/1 204 89 - - ---- 85/85/1/0/0 0/0 "POST /payments HTTP/1.1"
+haproxy-1       | 172.20.0.1:35262 [05/Aug/2025:11:55:55.541] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 85/85/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:55 Starting processing payment
+haproxy-1       | 172.20.0.1:35166 [05/Aug/2025:11:55:55.560] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 85/85/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:55 Starting processing payment
+haproxy-1       | 172.20.0.1:35650 [05/Aug/2025:11:55:55.561] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 85/85/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:55 Starting processing payment
+haproxy-1       | 172.20.0.1:34768 [05/Aug/2025:11:55:55.566] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 85/85/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:55 Starting processing payment
+haproxy-1       | 172.20.0.1:35550 [05/Aug/2025:11:55:55.577] http-in backend_servers/jvpayments-1 0/0/0/1/1 204 89 - - ---- 85/85/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:55 Starting processing payment
+jvpayments-1-1  | 2025/08/05 11:55:55 Starting processing payment
+haproxy-1       | 172.20.0.1:35458 [05/Aug/2025:11:55:55.597] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 85/85/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:55 Starting processing payment
+haproxy-1       | 172.20.0.1:35406 [05/Aug/2025:11:55:55.625] http-in backend_servers/jvpayments-2 0/0/0/1/1 204 89 - - ---- 85/85/0/0/0 0/0 "POST /payments HTTP/1.1"
+haproxy-1       | 172.20.0.1:34778 [05/Aug/2025:11:55:55.633] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 86/86/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:55 Starting processing payment
+jvpayments-2-1  | 2025/08/05 11:55:55 Starting processing payment
+haproxy-1       | 172.20.0.1:35330 [05/Aug/2025:11:55:55.634] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 86/86/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:55 Starting processing payment
+haproxy-1       | 172.20.0.1:35264 [05/Aug/2025:11:55:55.649] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 86/86/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:55 Starting processing payment
+haproxy-1       | 172.20.0.1:34664 [05/Aug/2025:11:55:55.651] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 86/86/0/0/0 0/0 "POST /payments HTTP/1.1"
+haproxy-1       | 172.20.0.1:35662 [05/Aug/2025:11:55:55.668] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 86/86/1/0/0 0/0 "POST /payments HTTP/1.1"
+haproxy-1       | 172.20.0.1:35176 [05/Aug/2025:11:55:55.668] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 86/86/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:55 Starting processing payment
+jvpayments-1-1  | 2025/08/05 11:55:55 Starting processing payment
+jvpayments-1-1  | 2025/08/05 11:55:55 Starting processing payment
+haproxy-1       | 172.20.0.1:35082 [05/Aug/2025:11:55:55.685] http-in backend_servers/jvpayments-1 0/0/0/1/1 204 89 - - ---- 86/86/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:55 Starting processing payment
+haproxy-1       | 172.20.0.1:35556 [05/Aug/2025:11:55:55.689] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 86/86/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:55 Starting processing payment
+haproxy-1       | 172.20.0.1:35408 [05/Aug/2025:11:55:55.723] http-in backend_servers/jvpayments-1 0/0/0/1/1 204 89 - - ---- 86/86/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:55 Starting processing payment
+haproxy-1       | 172.20.0.1:35474 [05/Aug/2025:11:55:55.733] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 86/86/0/0/0 0/0 "POST /payments HTTP/1.1"
+haproxy-1       | 172.20.0.1:35346 [05/Aug/2025:11:55:55.741] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 86/86/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:55 Starting processing payment
+haproxy-1       | 172.20.0.1:34784 [05/Aug/2025:11:55:55.742] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 87/87/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:55 Starting processing payment
+jvpayments-1-1  | 2025/08/05 11:55:55 Starting processing payment
+haproxy-1       | 172.20.0.1:35268 [05/Aug/2025:11:55:55.759] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 87/87/1/0/0 0/0 "POST /payments HTTP/1.1"
+haproxy-1       | 172.20.0.1:34674 [05/Aug/2025:11:55:55.759] http-in backend_servers/jvpayments-2 0/0/0/1/1 204 89 - - ---- 87/87/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:55 Starting processing payment
+jvpayments-1-1  | 2025/08/05 11:55:55 Starting processing payment
+jvpayments-2-1  | 2025/08/05 11:55:55 Starting processing payment
+haproxy-1       | 172.20.0.1:35190 [05/Aug/2025:11:55:55.779] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 87/87/1/0/0 0/0 "POST /payments HTTP/1.1"
+haproxy-1       | 172.20.0.1:34580 [05/Aug/2025:11:55:55.778] http-in backend_servers/jvpayments-1 0/0/0/1/1 204 89 - - ---- 87/87/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:55 Starting processing payment
+jvpayments-2-1  | 2025/08/05 11:55:55 Starting processing payment
+haproxy-1       | 172.20.0.1:35084 [05/Aug/2025:11:55:55.795] http-in backend_servers/jvpayments-1 0/0/0/1/1 204 89 - - ---- 87/87/1/0/0 0/0 "POST /payments HTTP/1.1"
+haproxy-1       | 172.20.0.1:35564 [05/Aug/2025:11:55:55.795] http-in backend_servers/jvpayments-2 0/0/0/1/1 204 89 - - ---- 87/87/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:55 Starting processing payment
+haproxy-1       | 172.20.0.1:35480 [05/Aug/2025:11:55:55.813] http-in backend_servers/jvpayments-1 0/0/0/1/1 204 89 - - ---- 87/87/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:55 Starting processing payment
+haproxy-1       | 172.20.0.1:35420 [05/Aug/2025:11:55:55.830] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 87/87/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:55 Starting processing payment
+haproxy-1       | 172.20.0.1:35358 [05/Aug/2025:11:55:55.850] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 87/87/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:55 Starting processing payment
+haproxy-1       | 172.20.0.1:34792 [05/Aug/2025:11:55:55.851] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 88/88/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:55 Starting processing payment
+haproxy-1       | 172.20.0.1:35272 [05/Aug/2025:11:55:55.867] http-in backend_servers/jvpayments-1 0/0/0/0/0 204 89 - - ---- 88/88/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-2-1  | 2025/08/05 11:55:55 Starting processing payment
+haproxy-1       | 172.20.0.1:34684 [05/Aug/2025:11:55:55.870] http-in backend_servers/jvpayments-2 0/0/0/0/0 204 89 - - ---- 88/88/0/0/0 0/0 "POST /payments HTTP/1.1"
+jvpayments-1-1  | 2025/08/05 11:55:55 Starting processing payment
+log truncated at line 1000

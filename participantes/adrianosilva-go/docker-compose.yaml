@@ -2,7 +2,7 @@ name : payment-proxy
 
 x-service-templates:
   base: &apibase
-    image: acslook/payment-proxy:v4
+    image: acslook/payment-proxy:v5
 
 services:  
   redis:
@@ -65,7 +65,7 @@ services:
       deploy:
         resources:
           limits:
-            cpus: '0.2'
+            cpus: '0.3'
             memory: "10MB"
       depends_on:
         - db
@@ -86,7 +86,7 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '0.2'
+          cpus: '0.3'
           memory: "10MB"
     depends_on:
       - db

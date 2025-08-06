@@ -1,0 +1,1001 @@
+
+ Volume "krymancer_rb2025"  Creating
+ Volume "krymancer_rb2025"  Created
+ Container api2  Creating
+ Container api1  Creating
+ Container api1  Created
+ Container api2  Created
+ Container nginx  Creating
+ Container nginx  Created
+Attaching to api1, api2, nginx
+api2   | Starting Rinha Backend 2025 - OCaml Edition
+api2   | Socket path: /tmp/api2.sock
+api2   | Foreign state: api1
+api2   | Fire mode: true
+api2   | 🚀 OCaml Payment Processing Server Started!
+api2   | 📡 Listening on Unix socket: /tmp/api2.sock
+api2   | 💳 Payment processor: Ready
+api2   | 📊 Storage system: Active
+api2   | ⚡ Queue worker: Running
+api2   | 
+api1   | Starting Rinha Backend 2025 - OCaml Edition
+api1   | Socket path: /tmp/api1.sock
+api1   | Foreign state: api2
+api1   | Fire mode: true
+api1   | 🚀 OCaml Payment Processing Server Started!
+api1   | 📡 Listening on Unix socket: /tmp/api1.sock
+api1   | 💳 Payment processor: Ready
+api1   | 📊 Storage system: Active
+api1   | ⚡ Queue worker: Running
+api1   | 
+nginx  | /docker-entrypoint.sh: /docker-entrypoint.d/ is not empty, will attempt to perform configuration
+nginx  | /docker-entrypoint.sh: Looking for shell scripts in /docker-entrypoint.d/
+nginx  | /docker-entrypoint.sh: Launching /docker-entrypoint.d/10-listen-on-ipv6-by-default.sh
+nginx  | 10-listen-on-ipv6-by-default.sh: info: Getting the checksum of /etc/nginx/conf.d/default.conf
+nginx  | 10-listen-on-ipv6-by-default.sh: info: Enabled listen on IPv6 in /etc/nginx/conf.d/default.conf
+nginx  | /docker-entrypoint.sh: Sourcing /docker-entrypoint.d/15-local-resolvers.envsh
+nginx  | /docker-entrypoint.sh: Launching /docker-entrypoint.d/20-envsubst-on-templates.sh
+nginx  | /docker-entrypoint.sh: Launching /docker-entrypoint.d/30-tune-worker-processes.sh
+nginx  | /docker-entrypoint.sh: Configuration complete; ready for start up
+api1   | Making request to: http://nginx:9999/api2/payments-summary?localOnly=true
+api1   | Response status: 200
+api1   | Response body: {"default":{"totalRequests":0,"totalAmount":0.0},"fallback":{"totalRequests":0,"totalAmount":0.0}}
+api1   | Making request to: http://nginx:9999/api2/payments-summary?localOnly=true&to=2025-08-06T10:26:30.962Z&from=2025-08-06T10:26:17.462Z
+api1   | Response status: 200
+api1   | Response body: {"default":{"totalRequests":0,"totalAmount":0.0},"fallback":{"totalRequests":0,"totalAmount":0.0}}
+api2   | Received payment (socket): amount=19.90, correlation_id='f979eef1-1975-4bb7-913a-6b4982c68ae8'
+api2   | Correlation ID length: 36, is empty: false
+api2   | Processing payment with correlation_id: f979eef1-1975-4bb7-913a-6b4982c68ae8
+api2   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='f979eef1-1975-4bb7-913a-6b4982c68ae8'
+api2   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"f979eef1-1975-4bb7-913a-6b4982c68ae8"}
+api1   | Received payment (socket): amount=19.90, correlation_id='4cd9df89-fddf-498d-80f2-6c286bf273fb'
+api1   | Correlation ID length: 36, is empty: false
+api1   | Processing payment with correlation_id: 4cd9df89-fddf-498d-80f2-6c286bf273fb
+api1   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='4cd9df89-fddf-498d-80f2-6c286bf273fb'
+api1   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"4cd9df89-fddf-498d-80f2-6c286bf273fb"}
+api2   | Received payment (socket): amount=19.90, correlation_id='711fd7b0-3979-4e6c-b18a-a34406b1555d'
+api2   | Correlation ID length: 36, is empty: false
+api2   | Processing payment with correlation_id: 711fd7b0-3979-4e6c-b18a-a34406b1555d
+api2   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='711fd7b0-3979-4e6c-b18a-a34406b1555d'
+api2   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"711fd7b0-3979-4e6c-b18a-a34406b1555d"}
+api1   | Received payment (socket): amount=19.90, correlation_id='83cd5a62-45d5-4469-afc4-ffbab76cabe5'
+api1   | Correlation ID length: 36, is empty: false
+api1   | Processing payment with correlation_id: 83cd5a62-45d5-4469-afc4-ffbab76cabe5
+api1   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='83cd5a62-45d5-4469-afc4-ffbab76cabe5'
+api1   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"83cd5a62-45d5-4469-afc4-ffbab76cabe5"}
+api2   | Received payment (socket): amount=19.90, correlation_id='ca80bf59-5e93-4333-98be-dcf7ea868393'
+api2   | Correlation ID length: 36, is empty: false
+api2   | Processing payment with correlation_id: ca80bf59-5e93-4333-98be-dcf7ea868393
+api2   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='ca80bf59-5e93-4333-98be-dcf7ea868393'
+api2   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"ca80bf59-5e93-4333-98be-dcf7ea868393"}
+api1   | Received payment (socket): amount=19.90, correlation_id='38dd795e-3631-4715-9600-48b24403ecb5'
+api1   | Correlation ID length: 36, is empty: false
+api1   | Processing payment with correlation_id: 38dd795e-3631-4715-9600-48b24403ecb5
+api1   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='38dd795e-3631-4715-9600-48b24403ecb5'
+api1   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"38dd795e-3631-4715-9600-48b24403ecb5"}
+api2   | Received payment (socket): amount=19.90, correlation_id='9c74ed04-4828-4f6a-8635-75b6dcd555b6'
+api2   | Correlation ID length: 36, is empty: false
+api2   | Processing payment with correlation_id: 9c74ed04-4828-4f6a-8635-75b6dcd555b6
+api2   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='9c74ed04-4828-4f6a-8635-75b6dcd555b6'
+api2   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"9c74ed04-4828-4f6a-8635-75b6dcd555b6"}
+api1   | Received payment (socket): amount=19.90, correlation_id='fb086aae-966d-45c7-971c-a923f17c5ece'
+api1   | Correlation ID length: 36, is empty: false
+api1   | Processing payment with correlation_id: fb086aae-966d-45c7-971c-a923f17c5ece
+api1   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='fb086aae-966d-45c7-971c-a923f17c5ece'
+api1   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"fb086aae-966d-45c7-971c-a923f17c5ece"}
+api2   | Received payment (socket): amount=19.90, correlation_id='9a7309dc-212a-4435-8e02-189489bb3b67'
+api2   | Correlation ID length: 36, is empty: false
+api2   | Processing payment with correlation_id: 9a7309dc-212a-4435-8e02-189489bb3b67
+api2   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='9a7309dc-212a-4435-8e02-189489bb3b67'
+api2   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"9a7309dc-212a-4435-8e02-189489bb3b67"}
+api1   | Received payment (socket): amount=19.90, correlation_id='e99bd4b1-e297-4c5b-8a8a-90a65ac1fe87'
+api1   | Correlation ID length: 36, is empty: false
+api1   | Processing payment with correlation_id: e99bd4b1-e297-4c5b-8a8a-90a65ac1fe87
+api1   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='e99bd4b1-e297-4c5b-8a8a-90a65ac1fe87'
+api1   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"e99bd4b1-e297-4c5b-8a8a-90a65ac1fe87"}
+api2   | Received payment (socket): amount=19.90, correlation_id='1a729598-f865-453b-9e8f-e7425e4ac27d'
+api2   | Correlation ID length: 36, is empty: false
+api2   | Processing payment with correlation_id: 1a729598-f865-453b-9e8f-e7425e4ac27d
+api2   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='1a729598-f865-453b-9e8f-e7425e4ac27d'
+api2   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"1a729598-f865-453b-9e8f-e7425e4ac27d"}
+api1   | Received payment (socket): amount=19.90, correlation_id='f50bd048-e0d6-4af2-a6e6-7122606645c7'
+api1   | Correlation ID length: 36, is empty: false
+api1   | Processing payment with correlation_id: f50bd048-e0d6-4af2-a6e6-7122606645c7
+api1   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='f50bd048-e0d6-4af2-a6e6-7122606645c7'
+api1   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"f50bd048-e0d6-4af2-a6e6-7122606645c7"}
+api2   | Received payment (socket): amount=19.90, correlation_id='c36bb966-b2da-499d-874f-669376c48473'
+api2   | Correlation ID length: 36, is empty: false
+api2   | Processing payment with correlation_id: c36bb966-b2da-499d-874f-669376c48473
+api2   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='c36bb966-b2da-499d-874f-669376c48473'
+api2   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"c36bb966-b2da-499d-874f-669376c48473"}
+api1   | Received payment (socket): amount=19.90, correlation_id='fb9b99ee-ec73-4a38-9de3-bf94924b906c'
+api1   | Correlation ID length: 36, is empty: false
+api1   | Processing payment with correlation_id: fb9b99ee-ec73-4a38-9de3-bf94924b906c
+api1   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='fb9b99ee-ec73-4a38-9de3-bf94924b906c'
+api1   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"fb9b99ee-ec73-4a38-9de3-bf94924b906c"}
+api2   | Received payment (socket): amount=19.90, correlation_id='d3674776-a629-4ce0-9bf8-47dd635c56a2'
+api2   | Correlation ID length: 36, is empty: false
+api2   | Processing payment with correlation_id: d3674776-a629-4ce0-9bf8-47dd635c56a2
+api2   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='d3674776-a629-4ce0-9bf8-47dd635c56a2'
+api2   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"d3674776-a629-4ce0-9bf8-47dd635c56a2"}
+api1   | Received payment (socket): amount=19.90, correlation_id='097f9e6b-90cb-4cf9-a8fb-7298908bd117'
+api1   | Correlation ID length: 36, is empty: false
+api1   | Processing payment with correlation_id: 097f9e6b-90cb-4cf9-a8fb-7298908bd117
+api1   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='097f9e6b-90cb-4cf9-a8fb-7298908bd117'
+api1   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"097f9e6b-90cb-4cf9-a8fb-7298908bd117"}
+api2   | Received payment (socket): amount=19.90, correlation_id='95387f18-3cb4-4390-be66-16259927d974'
+api2   | Correlation ID length: 36, is empty: false
+api2   | Processing payment with correlation_id: 95387f18-3cb4-4390-be66-16259927d974
+api2   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='95387f18-3cb4-4390-be66-16259927d974'
+api2   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"95387f18-3cb4-4390-be66-16259927d974"}
+api1   | Received payment (socket): amount=19.90, correlation_id='6cb64717-3c59-4a93-9327-593ed1650f1a'
+api1   | Correlation ID length: 36, is empty: false
+api1   | Processing payment with correlation_id: 6cb64717-3c59-4a93-9327-593ed1650f1a
+api1   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='6cb64717-3c59-4a93-9327-593ed1650f1a'
+api1   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"6cb64717-3c59-4a93-9327-593ed1650f1a"}
+api2   | Received payment (socket): amount=19.90, correlation_id='48ce21ec-da42-4502-a604-f4ca04b56eb2'
+api2   | Correlation ID length: 36, is empty: false
+api2   | Processing payment with correlation_id: 48ce21ec-da42-4502-a604-f4ca04b56eb2
+api2   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='48ce21ec-da42-4502-a604-f4ca04b56eb2'
+api2   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"48ce21ec-da42-4502-a604-f4ca04b56eb2"}
+api1   | Received payment (socket): amount=19.90, correlation_id='1051947d-49ec-4a21-89d2-366c97108bd3'
+api1   | Correlation ID length: 36, is empty: false
+api1   | Processing payment with correlation_id: 1051947d-49ec-4a21-89d2-366c97108bd3
+api1   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='1051947d-49ec-4a21-89d2-366c97108bd3'
+api1   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"1051947d-49ec-4a21-89d2-366c97108bd3"}
+api2   | Received payment (socket): amount=19.90, correlation_id='183f0819-4b8f-42ab-a0e3-9190cef30c0f'
+api2   | Correlation ID length: 36, is empty: false
+api2   | Processing payment with correlation_id: 183f0819-4b8f-42ab-a0e3-9190cef30c0f
+api2   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='183f0819-4b8f-42ab-a0e3-9190cef30c0f'
+api2   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"183f0819-4b8f-42ab-a0e3-9190cef30c0f"}
+api1   | Received payment (socket): amount=19.90, correlation_id='71814e94-5852-4755-b904-255e4620b124'
+api1   | Correlation ID length: 36, is empty: false
+api1   | Processing payment with correlation_id: 71814e94-5852-4755-b904-255e4620b124
+api1   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='71814e94-5852-4755-b904-255e4620b124'
+api1   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"71814e94-5852-4755-b904-255e4620b124"}
+api1   | Received payment (socket): amount=19.90, correlation_id='2da4f948-79d4-4f30-b754-7fc5af916982'
+api1   | Correlation ID length: 36, is empty: false
+api1   | Processing payment with correlation_id: 2da4f948-79d4-4f30-b754-7fc5af916982
+api1   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='2da4f948-79d4-4f30-b754-7fc5af916982'
+api1   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"2da4f948-79d4-4f30-b754-7fc5af916982"}
+api2   | Received payment (socket): amount=19.90, correlation_id='d9fb479b-9f88-42d8-8557-0529e6ca8a15'
+api2   | Correlation ID length: 36, is empty: false
+api2   | Processing payment with correlation_id: d9fb479b-9f88-42d8-8557-0529e6ca8a15
+api2   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='d9fb479b-9f88-42d8-8557-0529e6ca8a15'
+api2   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"d9fb479b-9f88-42d8-8557-0529e6ca8a15"}
+api2   | Received payment (socket): amount=19.90, correlation_id='64a5fbeb-c612-4a34-a0c1-36e6bfd38427'
+api2   | Correlation ID length: 36, is empty: false
+api2   | Processing payment with correlation_id: 64a5fbeb-c612-4a34-a0c1-36e6bfd38427
+api2   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='64a5fbeb-c612-4a34-a0c1-36e6bfd38427'
+api2   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"64a5fbeb-c612-4a34-a0c1-36e6bfd38427"}
+api1   | Received payment (socket): amount=19.90, correlation_id='e8187082-0e47-4b49-a9c8-d935009807ba'
+api1   | Correlation ID length: 36, is empty: false
+api1   | Processing payment with correlation_id: e8187082-0e47-4b49-a9c8-d935009807ba
+api1   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='e8187082-0e47-4b49-a9c8-d935009807ba'
+api1   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"e8187082-0e47-4b49-a9c8-d935009807ba"}
+api1   | Received payment (socket): amount=19.90, correlation_id='e98a9b15-a337-4419-a3e0-644b9e714c44'
+api1   | Correlation ID length: 36, is empty: false
+api1   | Processing payment with correlation_id: e98a9b15-a337-4419-a3e0-644b9e714c44
+api1   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='e98a9b15-a337-4419-a3e0-644b9e714c44'
+api1   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"e98a9b15-a337-4419-a3e0-644b9e714c44"}
+api2   | Received payment (socket): amount=19.90, correlation_id='e429f3be-d084-4b42-9bbd-149aa2a75eb7'
+api2   | Correlation ID length: 36, is empty: false
+api2   | Processing payment with correlation_id: e429f3be-d084-4b42-9bbd-149aa2a75eb7
+api2   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='e429f3be-d084-4b42-9bbd-149aa2a75eb7'
+api2   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"e429f3be-d084-4b42-9bbd-149aa2a75eb7"}
+api2   | Received payment (socket): amount=19.90, correlation_id='cb17323f-321d-4a0d-bdb8-0a54fc26cf97'
+api2   | Correlation ID length: 36, is empty: false
+api2   | Processing payment with correlation_id: cb17323f-321d-4a0d-bdb8-0a54fc26cf97
+api2   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='cb17323f-321d-4a0d-bdb8-0a54fc26cf97'
+api2   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"cb17323f-321d-4a0d-bdb8-0a54fc26cf97"}
+api1   | Received payment (socket): amount=19.90, correlation_id='ecf1b025-8814-4d10-aa9e-029c6e13e7af'
+api1   | Correlation ID length: 36, is empty: false
+api1   | Processing payment with correlation_id: ecf1b025-8814-4d10-aa9e-029c6e13e7af
+api1   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='ecf1b025-8814-4d10-aa9e-029c6e13e7af'
+api1   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"ecf1b025-8814-4d10-aa9e-029c6e13e7af"}
+api1   | Received payment (socket): amount=19.90, correlation_id='0b7aaaf6-ccf8-45f4-b87f-bf62fba1eb5e'
+api1   | Correlation ID length: 36, is empty: false
+api1   | Processing payment with correlation_id: 0b7aaaf6-ccf8-45f4-b87f-bf62fba1eb5e
+api1   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='0b7aaaf6-ccf8-45f4-b87f-bf62fba1eb5e'
+api1   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"0b7aaaf6-ccf8-45f4-b87f-bf62fba1eb5e"}
+api2   | Received payment (socket): amount=19.90, correlation_id='44376078-3240-49d9-93a3-c20d136803b7'
+api2   | Correlation ID length: 36, is empty: false
+api2   | Processing payment with correlation_id: 44376078-3240-49d9-93a3-c20d136803b7
+api2   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='44376078-3240-49d9-93a3-c20d136803b7'
+api2   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"44376078-3240-49d9-93a3-c20d136803b7"}
+api1   | Received payment (socket): amount=19.90, correlation_id='99fd2ff4-532f-4db2-aa6e-6ce1bef2c129'
+api1   | Correlation ID length: 36, is empty: false
+api1   | Processing payment with correlation_id: 99fd2ff4-532f-4db2-aa6e-6ce1bef2c129
+api1   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='99fd2ff4-532f-4db2-aa6e-6ce1bef2c129'
+api1   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"99fd2ff4-532f-4db2-aa6e-6ce1bef2c129"}
+api2   | Received payment (socket): amount=19.90, correlation_id='b828c60b-1908-4a23-bb78-9cf2251b0cf2'
+api2   | Correlation ID length: 36, is empty: false
+api2   | Processing payment with correlation_id: b828c60b-1908-4a23-bb78-9cf2251b0cf2
+api2   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='b828c60b-1908-4a23-bb78-9cf2251b0cf2'
+api2   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"b828c60b-1908-4a23-bb78-9cf2251b0cf2"}
+api2   | Received payment (socket): amount=19.90, correlation_id='b9bd2636-324c-4690-ad86-82ce2d2b02ad'
+api2   | Correlation ID length: 36, is empty: false
+api2   | Processing payment with correlation_id: b9bd2636-324c-4690-ad86-82ce2d2b02ad
+api2   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='b9bd2636-324c-4690-ad86-82ce2d2b02ad'
+api2   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"b9bd2636-324c-4690-ad86-82ce2d2b02ad"}
+api1   | Received payment (socket): amount=19.90, correlation_id='4ec9d521-f63b-4d64-8251-16857675adb2'
+api1   | Correlation ID length: 36, is empty: false
+api1   | Processing payment with correlation_id: 4ec9d521-f63b-4d64-8251-16857675adb2
+api1   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='4ec9d521-f63b-4d64-8251-16857675adb2'
+api1   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"4ec9d521-f63b-4d64-8251-16857675adb2"}
+api1   | Received payment (socket): amount=19.90, correlation_id='99f8f5ef-0b26-43d4-bbe0-fcb68c9f3397'
+api1   | Correlation ID length: 36, is empty: false
+api1   | Processing payment with correlation_id: 99f8f5ef-0b26-43d4-bbe0-fcb68c9f3397
+api1   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='99f8f5ef-0b26-43d4-bbe0-fcb68c9f3397'
+api1   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"99f8f5ef-0b26-43d4-bbe0-fcb68c9f3397"}
+api2   | Received payment (socket): amount=19.90, correlation_id='a786e562-496e-4d93-87a8-2be59e1a5d8b'
+api2   | Correlation ID length: 36, is empty: false
+api2   | Processing payment with correlation_id: a786e562-496e-4d93-87a8-2be59e1a5d8b
+api2   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='a786e562-496e-4d93-87a8-2be59e1a5d8b'
+api2   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"a786e562-496e-4d93-87a8-2be59e1a5d8b"}
+api1   | Received payment (socket): amount=19.90, correlation_id='374b70b3-84df-4543-b3d4-52ccf4988610'
+api1   | Correlation ID length: 36, is empty: false
+api1   | Processing payment with correlation_id: 374b70b3-84df-4543-b3d4-52ccf4988610
+api1   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='374b70b3-84df-4543-b3d4-52ccf4988610'
+api1   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"374b70b3-84df-4543-b3d4-52ccf4988610"}
+api2   | Received payment (socket): amount=19.90, correlation_id='f8dcc08b-1630-4e27-825d-c7cb99206bb2'
+api2   | Correlation ID length: 36, is empty: false
+api2   | Processing payment with correlation_id: f8dcc08b-1630-4e27-825d-c7cb99206bb2
+api2   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='f8dcc08b-1630-4e27-825d-c7cb99206bb2'
+api2   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"f8dcc08b-1630-4e27-825d-c7cb99206bb2"}
+api2   | Received payment (socket): amount=19.90, correlation_id='cfcd52ba-f09b-4370-83ec-4e5541932558'
+api2   | Correlation ID length: 36, is empty: false
+api2   | Processing payment with correlation_id: cfcd52ba-f09b-4370-83ec-4e5541932558
+api2   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='cfcd52ba-f09b-4370-83ec-4e5541932558'
+api2   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"cfcd52ba-f09b-4370-83ec-4e5541932558"}
+api1   | Received payment (socket): amount=19.90, correlation_id='95967664-93b8-4879-9a05-3685061b6578'
+api1   | Correlation ID length: 36, is empty: false
+api1   | Processing payment with correlation_id: 95967664-93b8-4879-9a05-3685061b6578
+api1   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='95967664-93b8-4879-9a05-3685061b6578'
+api1   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"95967664-93b8-4879-9a05-3685061b6578"}
+api1   | Received payment (socket): amount=19.90, correlation_id='b5d217ee-de73-472b-a13d-74a559bdec6d'
+api1   | Correlation ID length: 36, is empty: false
+api1   | Processing payment with correlation_id: b5d217ee-de73-472b-a13d-74a559bdec6d
+api1   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='b5d217ee-de73-472b-a13d-74a559bdec6d'
+api1   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"b5d217ee-de73-472b-a13d-74a559bdec6d"}
+api2   | Received payment (socket): amount=19.90, correlation_id='2d1ae3ae-dd7e-441a-ad7b-f5299328489a'
+api2   | Correlation ID length: 36, is empty: false
+api2   | Processing payment with correlation_id: 2d1ae3ae-dd7e-441a-ad7b-f5299328489a
+api2   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='2d1ae3ae-dd7e-441a-ad7b-f5299328489a'
+api2   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"2d1ae3ae-dd7e-441a-ad7b-f5299328489a"}
+api1   | Received payment (socket): amount=19.90, correlation_id='dd30224b-9363-4c0e-90c5-7078d4e97a2d'
+api1   | Correlation ID length: 36, is empty: false
+api1   | Processing payment with correlation_id: dd30224b-9363-4c0e-90c5-7078d4e97a2d
+api1   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='dd30224b-9363-4c0e-90c5-7078d4e97a2d'
+api1   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"dd30224b-9363-4c0e-90c5-7078d4e97a2d"}
+api2   | Received payment (socket): amount=19.90, correlation_id='38063569-c7ab-467a-9160-42b8e3e007d6'
+api2   | Correlation ID length: 36, is empty: false
+api2   | Processing payment with correlation_id: 38063569-c7ab-467a-9160-42b8e3e007d6
+api2   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='38063569-c7ab-467a-9160-42b8e3e007d6'
+api2   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"38063569-c7ab-467a-9160-42b8e3e007d6"}
+api1   | Received payment (socket): amount=19.90, correlation_id='b488fe5f-0184-4e01-8cce-bf18c5a540eb'
+api1   | Correlation ID length: 36, is empty: false
+api1   | Processing payment with correlation_id: b488fe5f-0184-4e01-8cce-bf18c5a540eb
+api1   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='b488fe5f-0184-4e01-8cce-bf18c5a540eb'
+api1   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"b488fe5f-0184-4e01-8cce-bf18c5a540eb"}
+api2   | Received payment (socket): amount=19.90, correlation_id='96c52fc2-5d53-4cd4-84d1-2035dfc2ef34'
+api2   | Correlation ID length: 36, is empty: false
+api2   | Processing payment with correlation_id: 96c52fc2-5d53-4cd4-84d1-2035dfc2ef34
+api2   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='96c52fc2-5d53-4cd4-84d1-2035dfc2ef34'
+api2   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"96c52fc2-5d53-4cd4-84d1-2035dfc2ef34"}
+api2   | Received payment (socket): amount=19.90, correlation_id='a014801f-6fe0-42b5-8de8-26308be64214'
+api2   | Correlation ID length: 36, is empty: false
+api2   | Processing payment with correlation_id: a014801f-6fe0-42b5-8de8-26308be64214
+api2   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='a014801f-6fe0-42b5-8de8-26308be64214'
+api2   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"a014801f-6fe0-42b5-8de8-26308be64214"}
+api1   | Received payment (socket): amount=19.90, correlation_id='adce1f93-9cef-4ad4-9829-229ee6e99daf'
+api1   | Correlation ID length: 36, is empty: false
+api1   | Processing payment with correlation_id: adce1f93-9cef-4ad4-9829-229ee6e99daf
+api1   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='adce1f93-9cef-4ad4-9829-229ee6e99daf'
+api1   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"adce1f93-9cef-4ad4-9829-229ee6e99daf"}
+api1   | Received payment (socket): amount=19.90, correlation_id='a3c94fc8-29a6-4872-9591-9d71256e6c3d'
+api1   | Correlation ID length: 36, is empty: false
+api1   | Processing payment with correlation_id: a3c94fc8-29a6-4872-9591-9d71256e6c3d
+api1   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='a3c94fc8-29a6-4872-9591-9d71256e6c3d'
+api1   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"a3c94fc8-29a6-4872-9591-9d71256e6c3d"}
+api2   | Received payment (socket): amount=19.90, correlation_id='31cc8f17-d016-4e6c-b7a3-28c78389db6c'
+api2   | Correlation ID length: 36, is empty: false
+api2   | Processing payment with correlation_id: 31cc8f17-d016-4e6c-b7a3-28c78389db6c
+api2   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='31cc8f17-d016-4e6c-b7a3-28c78389db6c'
+api2   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"31cc8f17-d016-4e6c-b7a3-28c78389db6c"}
+api1   | Received payment (socket): amount=19.90, correlation_id='ddaad8a2-2014-4bde-81e7-f6b82eb7d4d8'
+api1   | Correlation ID length: 36, is empty: false
+api1   | Processing payment with correlation_id: ddaad8a2-2014-4bde-81e7-f6b82eb7d4d8
+api1   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='ddaad8a2-2014-4bde-81e7-f6b82eb7d4d8'
+api1   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"ddaad8a2-2014-4bde-81e7-f6b82eb7d4d8"}
+api2   | Received payment (socket): amount=19.90, correlation_id='902c98be-3935-42b2-8653-85ab55e554ed'
+api2   | Correlation ID length: 36, is empty: false
+api2   | Processing payment with correlation_id: 902c98be-3935-42b2-8653-85ab55e554ed
+api2   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='902c98be-3935-42b2-8653-85ab55e554ed'
+api2   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"902c98be-3935-42b2-8653-85ab55e554ed"}
+api2   | Received payment (socket): amount=19.90, correlation_id='b918d868-2db1-4273-967a-19cd73f5b0e3'
+api2   | Correlation ID length: 36, is empty: false
+api2   | Processing payment with correlation_id: b918d868-2db1-4273-967a-19cd73f5b0e3
+api2   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='b918d868-2db1-4273-967a-19cd73f5b0e3'
+api2   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"b918d868-2db1-4273-967a-19cd73f5b0e3"}
+api1   | Received payment (socket): amount=19.90, correlation_id='8d411d17-75f4-4bc4-ba25-23b4f700b27b'
+api1   | Correlation ID length: 36, is empty: false
+api1   | Processing payment with correlation_id: 8d411d17-75f4-4bc4-ba25-23b4f700b27b
+api1   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='8d411d17-75f4-4bc4-ba25-23b4f700b27b'
+api1   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"8d411d17-75f4-4bc4-ba25-23b4f700b27b"}
+api1   | Received payment (socket): amount=19.90, correlation_id='ca0dfed6-856a-43a6-9a77-d2be911c1b18'
+api1   | Correlation ID length: 36, is empty: false
+api1   | Processing payment with correlation_id: ca0dfed6-856a-43a6-9a77-d2be911c1b18
+api1   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='ca0dfed6-856a-43a6-9a77-d2be911c1b18'
+api1   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"ca0dfed6-856a-43a6-9a77-d2be911c1b18"}
+api2   | Received payment (socket): amount=19.90, correlation_id='65a3a367-a1cc-4d35-8a25-0d50839475ac'
+api2   | Correlation ID length: 36, is empty: false
+api2   | Processing payment with correlation_id: 65a3a367-a1cc-4d35-8a25-0d50839475ac
+api2   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='65a3a367-a1cc-4d35-8a25-0d50839475ac'
+api2   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"65a3a367-a1cc-4d35-8a25-0d50839475ac"}
+api2   | Received payment (socket): amount=19.90, correlation_id='96573c5b-79d9-49f8-8393-4c1f7c5c85ee'
+api2   | Correlation ID length: 36, is empty: false
+api2   | Processing payment with correlation_id: 96573c5b-79d9-49f8-8393-4c1f7c5c85ee
+api2   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='96573c5b-79d9-49f8-8393-4c1f7c5c85ee'
+api2   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"96573c5b-79d9-49f8-8393-4c1f7c5c85ee"}
+api1   | Received payment (socket): amount=19.90, correlation_id='91747f8b-93c8-4748-8711-5dd45c5b543f'
+api1   | Correlation ID length: 36, is empty: false
+api1   | Processing payment with correlation_id: 91747f8b-93c8-4748-8711-5dd45c5b543f
+api1   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='91747f8b-93c8-4748-8711-5dd45c5b543f'
+api1   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"91747f8b-93c8-4748-8711-5dd45c5b543f"}
+api1   | Received payment (socket): amount=19.90, correlation_id='a5ab06aa-456e-4d0c-97f1-0bc53ebed090'
+api1   | Correlation ID length: 36, is empty: false
+api1   | Processing payment with correlation_id: a5ab06aa-456e-4d0c-97f1-0bc53ebed090
+api1   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='a5ab06aa-456e-4d0c-97f1-0bc53ebed090'
+api1   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"a5ab06aa-456e-4d0c-97f1-0bc53ebed090"}
+api2   | Received payment (socket): amount=19.90, correlation_id='add1bea6-8c01-4e88-810a-212706a7818e'
+api2   | Correlation ID length: 36, is empty: false
+api2   | Processing payment with correlation_id: add1bea6-8c01-4e88-810a-212706a7818e
+api2   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='add1bea6-8c01-4e88-810a-212706a7818e'
+api2   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"add1bea6-8c01-4e88-810a-212706a7818e"}
+api2   | Received payment (socket): amount=19.90, correlation_id='6da6a87b-0529-4fc5-b657-7208e9146931'
+api2   | Correlation ID length: 36, is empty: false
+api2   | Processing payment with correlation_id: 6da6a87b-0529-4fc5-b657-7208e9146931
+api2   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='6da6a87b-0529-4fc5-b657-7208e9146931'
+api2   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"6da6a87b-0529-4fc5-b657-7208e9146931"}
+api1   | Received payment (socket): amount=19.90, correlation_id='4f64f7dc-674d-43d4-8ea6-0a93e301c2a0'
+api1   | Correlation ID length: 36, is empty: false
+api1   | Processing payment with correlation_id: 4f64f7dc-674d-43d4-8ea6-0a93e301c2a0
+api1   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='4f64f7dc-674d-43d4-8ea6-0a93e301c2a0'
+api1   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"4f64f7dc-674d-43d4-8ea6-0a93e301c2a0"}
+api1   | Received payment (socket): amount=19.90, correlation_id='5caec5b6-4302-4d7e-a67c-5a62c53abf59'
+api1   | Correlation ID length: 36, is empty: false
+api1   | Processing payment with correlation_id: 5caec5b6-4302-4d7e-a67c-5a62c53abf59
+api1   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='5caec5b6-4302-4d7e-a67c-5a62c53abf59'
+api1   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"5caec5b6-4302-4d7e-a67c-5a62c53abf59"}
+api2   | Received payment (socket): amount=19.90, correlation_id='3e7d95a4-e706-4580-a4a4-9be00dbe7f90'
+api2   | Correlation ID length: 36, is empty: false
+api2   | Processing payment with correlation_id: 3e7d95a4-e706-4580-a4a4-9be00dbe7f90
+api2   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='3e7d95a4-e706-4580-a4a4-9be00dbe7f90'
+api2   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"3e7d95a4-e706-4580-a4a4-9be00dbe7f90"}
+api2   | Received payment (socket): amount=19.90, correlation_id='30ef7a07-1067-43e6-855b-560358c56371'
+api2   | Correlation ID length: 36, is empty: false
+api2   | Processing payment with correlation_id: 30ef7a07-1067-43e6-855b-560358c56371
+api2   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='30ef7a07-1067-43e6-855b-560358c56371'
+api2   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"30ef7a07-1067-43e6-855b-560358c56371"}
+api1   | Received payment (socket): amount=19.90, correlation_id='e6967684-ce79-466c-8b55-505c3cab6e08'
+api1   | Correlation ID length: 36, is empty: false
+api1   | Processing payment with correlation_id: e6967684-ce79-466c-8b55-505c3cab6e08
+api1   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='e6967684-ce79-466c-8b55-505c3cab6e08'
+api1   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"e6967684-ce79-466c-8b55-505c3cab6e08"}
+api1   | Received payment (socket): amount=19.90, correlation_id='96835aac-241d-4357-ba0a-9c52a34eca7f'
+api1   | Correlation ID length: 36, is empty: false
+api1   | Processing payment with correlation_id: 96835aac-241d-4357-ba0a-9c52a34eca7f
+api1   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='96835aac-241d-4357-ba0a-9c52a34eca7f'
+api1   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"96835aac-241d-4357-ba0a-9c52a34eca7f"}
+api2   | Received payment (socket): amount=19.90, correlation_id='93289d9a-87dd-48e8-9f24-66f0db66c853'
+api2   | Correlation ID length: 36, is empty: false
+api2   | Processing payment with correlation_id: 93289d9a-87dd-48e8-9f24-66f0db66c853
+api2   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='93289d9a-87dd-48e8-9f24-66f0db66c853'
+api2   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"93289d9a-87dd-48e8-9f24-66f0db66c853"}
+api2   | Received payment (socket): amount=19.90, correlation_id='6fd72127-bc6b-4adc-91e6-3a6a06b6853c'
+api2   | Correlation ID length: 36, is empty: false
+api2   | Processing payment with correlation_id: 6fd72127-bc6b-4adc-91e6-3a6a06b6853c
+api2   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='6fd72127-bc6b-4adc-91e6-3a6a06b6853c'
+api2   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"6fd72127-bc6b-4adc-91e6-3a6a06b6853c"}
+api2   | Received payment (socket): amount=19.90, correlation_id='26fa6816-7bcf-450d-b472-9aa46b9d54f9'
+api2   | Correlation ID length: 36, is empty: false
+api2   | Processing payment with correlation_id: 26fa6816-7bcf-450d-b472-9aa46b9d54f9
+api2   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='26fa6816-7bcf-450d-b472-9aa46b9d54f9'
+api2   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"26fa6816-7bcf-450d-b472-9aa46b9d54f9"}
+api1   | Received payment (socket): amount=19.90, correlation_id='27dbce42-55df-4694-a0b0-dfbca55ad5a4'
+api1   | Correlation ID length: 36, is empty: false
+api1   | Processing payment with correlation_id: 27dbce42-55df-4694-a0b0-dfbca55ad5a4
+api1   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='27dbce42-55df-4694-a0b0-dfbca55ad5a4'
+api1   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"27dbce42-55df-4694-a0b0-dfbca55ad5a4"}
+api2   | Received payment (socket): amount=19.90, correlation_id='195bef5d-2472-4809-a1b4-9725f83c703e'
+api2   | Correlation ID length: 36, is empty: false
+api2   | Processing payment with correlation_id: 195bef5d-2472-4809-a1b4-9725f83c703e
+api2   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='195bef5d-2472-4809-a1b4-9725f83c703e'
+api2   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"195bef5d-2472-4809-a1b4-9725f83c703e"}
+api1   | Received payment (socket): amount=19.90, correlation_id='2127d96f-cdf0-4a24-ab1a-d8649037b4e7'
+api1   | Correlation ID length: 36, is empty: false
+api1   | Processing payment with correlation_id: 2127d96f-cdf0-4a24-ab1a-d8649037b4e7
+api1   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='2127d96f-cdf0-4a24-ab1a-d8649037b4e7'
+api1   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"2127d96f-cdf0-4a24-ab1a-d8649037b4e7"}
+api1   | Received payment (socket): amount=19.90, correlation_id='60012d96-d4db-481c-9205-de286f173fd2'
+api1   | Correlation ID length: 36, is empty: false
+api1   | Processing payment with correlation_id: 60012d96-d4db-481c-9205-de286f173fd2
+api1   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='60012d96-d4db-481c-9205-de286f173fd2'
+api1   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"60012d96-d4db-481c-9205-de286f173fd2"}
+api1   | Received payment (socket): amount=19.90, correlation_id='5b16700f-c592-4331-a68a-69768266e9fb'
+api1   | Correlation ID length: 36, is empty: false
+api1   | Processing payment with correlation_id: 5b16700f-c592-4331-a68a-69768266e9fb
+api1   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='5b16700f-c592-4331-a68a-69768266e9fb'
+api1   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"5b16700f-c592-4331-a68a-69768266e9fb"}
+api2   | Received payment (socket): amount=19.90, correlation_id='e036d078-2fa9-439d-b120-8c86665432de'
+api2   | Correlation ID length: 36, is empty: false
+api2   | Processing payment with correlation_id: e036d078-2fa9-439d-b120-8c86665432de
+api2   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='e036d078-2fa9-439d-b120-8c86665432de'
+api2   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"e036d078-2fa9-439d-b120-8c86665432de"}
+api2   | Received payment (socket): amount=19.90, correlation_id='a3014e1e-a96f-4048-899f-c72af1ba5002'
+api2   | Correlation ID length: 36, is empty: false
+api2   | Processing payment with correlation_id: a3014e1e-a96f-4048-899f-c72af1ba5002
+api2   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='a3014e1e-a96f-4048-899f-c72af1ba5002'
+api2   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"a3014e1e-a96f-4048-899f-c72af1ba5002"}
+api2   | Received payment (socket): amount=19.90, correlation_id='1387aa9b-c790-4db6-91ab-d80fe332ca01'
+api2   | Correlation ID length: 36, is empty: false
+api2   | Processing payment with correlation_id: 1387aa9b-c790-4db6-91ab-d80fe332ca01
+api2   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='1387aa9b-c790-4db6-91ab-d80fe332ca01'
+api2   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"1387aa9b-c790-4db6-91ab-d80fe332ca01"}
+api1   | Received payment (socket): amount=19.90, correlation_id='db465f4f-9f5c-4929-9f39-560763e8c5f3'
+api1   | Correlation ID length: 36, is empty: false
+api1   | Processing payment with correlation_id: db465f4f-9f5c-4929-9f39-560763e8c5f3
+api1   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='db465f4f-9f5c-4929-9f39-560763e8c5f3'
+api1   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"db465f4f-9f5c-4929-9f39-560763e8c5f3"}
+api1   | Received payment (socket): amount=19.90, correlation_id='cfec0f02-dfd0-4e17-bb81-97fa71bf7176'
+api1   | Correlation ID length: 36, is empty: false
+api1   | Processing payment with correlation_id: cfec0f02-dfd0-4e17-bb81-97fa71bf7176
+api1   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='cfec0f02-dfd0-4e17-bb81-97fa71bf7176'
+api1   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"cfec0f02-dfd0-4e17-bb81-97fa71bf7176"}
+api1   | Received payment (socket): amount=19.90, correlation_id='153cea1a-f664-48af-8752-cfe214c544b7'
+api1   | Correlation ID length: 36, is empty: false
+api1   | Processing payment with correlation_id: 153cea1a-f664-48af-8752-cfe214c544b7
+api1   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='153cea1a-f664-48af-8752-cfe214c544b7'
+api1   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"153cea1a-f664-48af-8752-cfe214c544b7"}
+api2   | Received payment (socket): amount=19.90, correlation_id='15a1e497-9dbd-4309-889d-4873a38db3a5'
+api2   | Correlation ID length: 36, is empty: false
+api2   | Processing payment with correlation_id: 15a1e497-9dbd-4309-889d-4873a38db3a5
+api2   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='15a1e497-9dbd-4309-889d-4873a38db3a5'
+api2   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"15a1e497-9dbd-4309-889d-4873a38db3a5"}
+api1   | Received payment (socket): amount=19.90, correlation_id='b847b010-f002-48ff-8363-0415801e7c56'
+api1   | Correlation ID length: 36, is empty: false
+api1   | Processing payment with correlation_id: b847b010-f002-48ff-8363-0415801e7c56
+api1   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='b847b010-f002-48ff-8363-0415801e7c56'
+api1   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"b847b010-f002-48ff-8363-0415801e7c56"}
+api2   | Received payment (socket): amount=19.90, correlation_id='f6c0e758-727b-4969-a7d7-e39c4e5d8595'
+api2   | Correlation ID length: 36, is empty: false
+api2   | Processing payment with correlation_id: f6c0e758-727b-4969-a7d7-e39c4e5d8595
+api2   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='f6c0e758-727b-4969-a7d7-e39c4e5d8595'
+api2   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"f6c0e758-727b-4969-a7d7-e39c4e5d8595"}
+api2   | Received payment (socket): amount=19.90, correlation_id='298221bb-dd3a-4c1a-b38e-c67a52615abd'
+api2   | Correlation ID length: 36, is empty: false
+api2   | Processing payment with correlation_id: 298221bb-dd3a-4c1a-b38e-c67a52615abd
+api2   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='298221bb-dd3a-4c1a-b38e-c67a52615abd'
+api2   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"298221bb-dd3a-4c1a-b38e-c67a52615abd"}
+api2   | Received payment (socket): amount=19.90, correlation_id='edec57d5-f240-4060-92d9-d8e6c7331b91'
+api2   | Correlation ID length: 36, is empty: false
+api2   | Processing payment with correlation_id: edec57d5-f240-4060-92d9-d8e6c7331b91
+api2   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='edec57d5-f240-4060-92d9-d8e6c7331b91'
+api2   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"edec57d5-f240-4060-92d9-d8e6c7331b91"}
+api1   | Received payment (socket): amount=19.90, correlation_id='5dfb0595-bd09-4d97-8226-33d3bdb31ce7'
+api1   | Correlation ID length: 36, is empty: false
+api1   | Processing payment with correlation_id: 5dfb0595-bd09-4d97-8226-33d3bdb31ce7
+api1   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='5dfb0595-bd09-4d97-8226-33d3bdb31ce7'
+api1   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"5dfb0595-bd09-4d97-8226-33d3bdb31ce7"}
+api1   | Received payment (socket): amount=19.90, correlation_id='b056c86a-be1f-4842-8e01-8a37fe085f16'
+api1   | Correlation ID length: 36, is empty: false
+api1   | Processing payment with correlation_id: b056c86a-be1f-4842-8e01-8a37fe085f16
+api1   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='b056c86a-be1f-4842-8e01-8a37fe085f16'
+api1   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"b056c86a-be1f-4842-8e01-8a37fe085f16"}
+api1   | Received payment (socket): amount=19.90, correlation_id='052bdd6a-c1d5-4cea-ade4-c8c2c17fe083'
+api1   | Correlation ID length: 36, is empty: false
+api1   | Processing payment with correlation_id: 052bdd6a-c1d5-4cea-ade4-c8c2c17fe083
+api1   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='052bdd6a-c1d5-4cea-ade4-c8c2c17fe083'
+api1   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"052bdd6a-c1d5-4cea-ade4-c8c2c17fe083"}
+api2   | Received payment (socket): amount=19.90, correlation_id='482c74f9-2f16-47bd-ab93-509ddb8203c1'
+api2   | Correlation ID length: 36, is empty: false
+api2   | Processing payment with correlation_id: 482c74f9-2f16-47bd-ab93-509ddb8203c1
+api2   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='482c74f9-2f16-47bd-ab93-509ddb8203c1'
+api2   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"482c74f9-2f16-47bd-ab93-509ddb8203c1"}
+api2   | Received payment (socket): amount=19.90, correlation_id='bb1121cd-adbf-45a9-b054-ea91df78482e'
+api2   | Correlation ID length: 36, is empty: false
+api2   | Processing payment with correlation_id: bb1121cd-adbf-45a9-b054-ea91df78482e
+api2   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='bb1121cd-adbf-45a9-b054-ea91df78482e'
+api2   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"bb1121cd-adbf-45a9-b054-ea91df78482e"}
+api1   | Received payment (socket): amount=19.90, correlation_id='7ec224bf-c350-46a0-ad05-b4dbd331fcfb'
+api1   | Correlation ID length: 36, is empty: false
+api1   | Processing payment with correlation_id: 7ec224bf-c350-46a0-ad05-b4dbd331fcfb
+api1   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='7ec224bf-c350-46a0-ad05-b4dbd331fcfb'
+api1   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"7ec224bf-c350-46a0-ad05-b4dbd331fcfb"}
+api1   | Received payment (socket): amount=19.90, correlation_id='1da6ffb5-4178-4bc2-b00a-99c5f6e5b813'
+api1   | Correlation ID length: 36, is empty: false
+api1   | Processing payment with correlation_id: 1da6ffb5-4178-4bc2-b00a-99c5f6e5b813
+api1   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='1da6ffb5-4178-4bc2-b00a-99c5f6e5b813'
+api1   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"1da6ffb5-4178-4bc2-b00a-99c5f6e5b813"}
+api2   | Received payment (socket): amount=19.90, correlation_id='1dc3a8a1-a1ca-43e0-b300-90c1e06a4481'
+api2   | Correlation ID length: 36, is empty: false
+api2   | Processing payment with correlation_id: 1dc3a8a1-a1ca-43e0-b300-90c1e06a4481
+api2   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='1dc3a8a1-a1ca-43e0-b300-90c1e06a4481'
+api2   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"1dc3a8a1-a1ca-43e0-b300-90c1e06a4481"}
+api2   | Received payment (socket): amount=19.90, correlation_id='da2ece46-0b74-418c-885a-0c771a5345c3'
+api2   | Correlation ID length: 36, is empty: false
+api2   | Processing payment with correlation_id: da2ece46-0b74-418c-885a-0c771a5345c3
+api2   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='da2ece46-0b74-418c-885a-0c771a5345c3'
+api2   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"da2ece46-0b74-418c-885a-0c771a5345c3"}
+api1   | Received payment (socket): amount=19.90, correlation_id='58388d75-3695-451c-8370-077b88916b6a'
+api1   | Correlation ID length: 36, is empty: false
+api1   | Processing payment with correlation_id: 58388d75-3695-451c-8370-077b88916b6a
+api1   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='58388d75-3695-451c-8370-077b88916b6a'
+api1   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"58388d75-3695-451c-8370-077b88916b6a"}
+api2   | Received payment (socket): amount=19.90, correlation_id='261d2c4a-7c67-4c4a-a3ee-df7dc85dc2f5'
+api2   | Correlation ID length: 36, is empty: false
+api2   | Processing payment with correlation_id: 261d2c4a-7c67-4c4a-a3ee-df7dc85dc2f5
+api2   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='261d2c4a-7c67-4c4a-a3ee-df7dc85dc2f5'
+api2   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"261d2c4a-7c67-4c4a-a3ee-df7dc85dc2f5"}
+api1   | Received payment (socket): amount=19.90, correlation_id='d3c96458-7491-4c63-b215-f6ab5a908268'
+api1   | Correlation ID length: 36, is empty: false
+api1   | Processing payment with correlation_id: d3c96458-7491-4c63-b215-f6ab5a908268
+api1   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='d3c96458-7491-4c63-b215-f6ab5a908268'
+api1   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"d3c96458-7491-4c63-b215-f6ab5a908268"}
+api1   | Received payment (socket): amount=19.90, correlation_id='32f471b0-f9f8-4f24-907e-caa38f485ee0'
+api1   | Correlation ID length: 36, is empty: false
+api1   | Processing payment with correlation_id: 32f471b0-f9f8-4f24-907e-caa38f485ee0
+api1   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='32f471b0-f9f8-4f24-907e-caa38f485ee0'
+api1   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"32f471b0-f9f8-4f24-907e-caa38f485ee0"}
+api2   | Received payment (socket): amount=19.90, correlation_id='b04b4db0-0b82-4c81-ba6b-7c2a4b305655'
+api2   | Correlation ID length: 36, is empty: false
+api2   | Processing payment with correlation_id: b04b4db0-0b82-4c81-ba6b-7c2a4b305655
+api2   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='b04b4db0-0b82-4c81-ba6b-7c2a4b305655'
+api2   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"b04b4db0-0b82-4c81-ba6b-7c2a4b305655"}
+api1   | Received payment (socket): amount=19.90, correlation_id='9cc95e86-7732-48f6-9b73-ea6fa49b7b26'
+api1   | Correlation ID length: 36, is empty: false
+api1   | Processing payment with correlation_id: 9cc95e86-7732-48f6-9b73-ea6fa49b7b26
+api1   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='9cc95e86-7732-48f6-9b73-ea6fa49b7b26'
+api1   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"9cc95e86-7732-48f6-9b73-ea6fa49b7b26"}
+api2   | Received payment (socket): amount=19.90, correlation_id='7fb706be-f167-4827-8273-1b6dab6cd945'
+api2   | Correlation ID length: 36, is empty: false
+api2   | Processing payment with correlation_id: 7fb706be-f167-4827-8273-1b6dab6cd945
+api2   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='7fb706be-f167-4827-8273-1b6dab6cd945'
+api2   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"7fb706be-f167-4827-8273-1b6dab6cd945"}
+api1   | Received payment (socket): amount=19.90, correlation_id='291b3ba7-70e3-4838-ae5d-c406039a439c'
+api1   | Correlation ID length: 36, is empty: false
+api1   | Processing payment with correlation_id: 291b3ba7-70e3-4838-ae5d-c406039a439c
+api1   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='291b3ba7-70e3-4838-ae5d-c406039a439c'
+api1   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"291b3ba7-70e3-4838-ae5d-c406039a439c"}
+api2   | Received payment (socket): amount=19.90, correlation_id='2f7d2db7-891d-427a-8ad4-af43175b7d49'
+api2   | Correlation ID length: 36, is empty: false
+api2   | Processing payment with correlation_id: 2f7d2db7-891d-427a-8ad4-af43175b7d49
+api2   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='2f7d2db7-891d-427a-8ad4-af43175b7d49'
+api2   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"2f7d2db7-891d-427a-8ad4-af43175b7d49"}
+api2   | Received payment (socket): amount=19.90, correlation_id='d4ac431b-d09c-45fc-8829-209fe6bdbe90'
+api2   | Correlation ID length: 36, is empty: false
+api2   | Processing payment with correlation_id: d4ac431b-d09c-45fc-8829-209fe6bdbe90
+api2   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='d4ac431b-d09c-45fc-8829-209fe6bdbe90'
+api2   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"d4ac431b-d09c-45fc-8829-209fe6bdbe90"}
+api1   | Received payment (socket): amount=19.90, correlation_id='b1796f26-6917-4e40-879d-3090530847f3'
+api1   | Correlation ID length: 36, is empty: false
+api1   | Processing payment with correlation_id: b1796f26-6917-4e40-879d-3090530847f3
+api1   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='b1796f26-6917-4e40-879d-3090530847f3'
+api1   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"b1796f26-6917-4e40-879d-3090530847f3"}
+api2   | Received payment (socket): amount=19.90, correlation_id='07b63ebd-946f-436c-a572-2022986e03c7'
+api2   | Correlation ID length: 36, is empty: false
+api2   | Processing payment with correlation_id: 07b63ebd-946f-436c-a572-2022986e03c7
+api2   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='07b63ebd-946f-436c-a572-2022986e03c7'
+api2   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"07b63ebd-946f-436c-a572-2022986e03c7"}
+api1   | Received payment (socket): amount=19.90, correlation_id='3fc5c1eb-581c-4d79-aa0f-c0424f56fc0b'
+api1   | Correlation ID length: 36, is empty: false
+api1   | Processing payment with correlation_id: 3fc5c1eb-581c-4d79-aa0f-c0424f56fc0b
+api1   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='3fc5c1eb-581c-4d79-aa0f-c0424f56fc0b'
+api1   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"3fc5c1eb-581c-4d79-aa0f-c0424f56fc0b"}
+api1   | Received payment (socket): amount=19.90, correlation_id='0e3cb877-3295-4417-aaf4-72bceaa1bd6f'
+api1   | Correlation ID length: 36, is empty: false
+api1   | Processing payment with correlation_id: 0e3cb877-3295-4417-aaf4-72bceaa1bd6f
+api1   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='0e3cb877-3295-4417-aaf4-72bceaa1bd6f'
+api1   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"0e3cb877-3295-4417-aaf4-72bceaa1bd6f"}
+api2   | Received payment (socket): amount=19.90, correlation_id='71ddda96-31db-4699-9448-28c250452a4e'
+api2   | Correlation ID length: 36, is empty: false
+api2   | Processing payment with correlation_id: 71ddda96-31db-4699-9448-28c250452a4e
+api2   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='71ddda96-31db-4699-9448-28c250452a4e'
+api2   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"71ddda96-31db-4699-9448-28c250452a4e"}
+api2   | Received payment (socket): amount=19.90, correlation_id='c9b3801e-6529-487b-a205-8ab09f6aebc7'
+api2   | Correlation ID length: 36, is empty: false
+api2   | Processing payment with correlation_id: c9b3801e-6529-487b-a205-8ab09f6aebc7
+api2   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='c9b3801e-6529-487b-a205-8ab09f6aebc7'
+api2   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"c9b3801e-6529-487b-a205-8ab09f6aebc7"}
+api2   | Received payment (socket): amount=19.90, correlation_id='eb955307-b09e-4678-a149-8aec65bc8e3c'
+api2   | Correlation ID length: 36, is empty: false
+api2   | Processing payment with correlation_id: eb955307-b09e-4678-a149-8aec65bc8e3c
+api2   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='eb955307-b09e-4678-a149-8aec65bc8e3c'
+api2   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"eb955307-b09e-4678-a149-8aec65bc8e3c"}
+api1   | Received payment (socket): amount=19.90, correlation_id='288625fd-3e99-4f7b-b7aa-ed3b3fe8a7d0'
+api1   | Correlation ID length: 36, is empty: false
+api1   | Processing payment with correlation_id: 288625fd-3e99-4f7b-b7aa-ed3b3fe8a7d0
+api1   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='288625fd-3e99-4f7b-b7aa-ed3b3fe8a7d0'
+api1   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"288625fd-3e99-4f7b-b7aa-ed3b3fe8a7d0"}
+api1   | Received payment (socket): amount=19.90, correlation_id='d2f74a99-b904-44c4-a869-75c54023fa0f'
+api1   | Correlation ID length: 36, is empty: false
+api1   | Processing payment with correlation_id: d2f74a99-b904-44c4-a869-75c54023fa0f
+api1   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='d2f74a99-b904-44c4-a869-75c54023fa0f'
+api1   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"d2f74a99-b904-44c4-a869-75c54023fa0f"}
+api2   | Received payment (socket): amount=19.90, correlation_id='3abe475e-12e5-4ca8-90c2-019aeea85347'
+api2   | Correlation ID length: 36, is empty: false
+api2   | Processing payment with correlation_id: 3abe475e-12e5-4ca8-90c2-019aeea85347
+api2   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='3abe475e-12e5-4ca8-90c2-019aeea85347'
+api2   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"3abe475e-12e5-4ca8-90c2-019aeea85347"}
+api1   | Received payment (socket): amount=19.90, correlation_id='13659646-d39f-4c97-94a9-b0319008d481'
+api1   | Correlation ID length: 36, is empty: false
+api1   | Processing payment with correlation_id: 13659646-d39f-4c97-94a9-b0319008d481
+api1   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='13659646-d39f-4c97-94a9-b0319008d481'
+api1   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"13659646-d39f-4c97-94a9-b0319008d481"}
+api2   | Received payment (socket): amount=19.90, correlation_id='c87ed272-bc99-497b-9e92-4666c9f49c0a'
+api2   | Correlation ID length: 36, is empty: false
+api2   | Processing payment with correlation_id: c87ed272-bc99-497b-9e92-4666c9f49c0a
+api2   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='c87ed272-bc99-497b-9e92-4666c9f49c0a'
+api2   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"c87ed272-bc99-497b-9e92-4666c9f49c0a"}
+api1   | Received payment (socket): amount=19.90, correlation_id='7c0ce1ba-a3e7-4536-b18e-10eec9448eea'
+api1   | Correlation ID length: 36, is empty: false
+api1   | Processing payment with correlation_id: 7c0ce1ba-a3e7-4536-b18e-10eec9448eea
+api1   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='7c0ce1ba-a3e7-4536-b18e-10eec9448eea'
+api1   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"7c0ce1ba-a3e7-4536-b18e-10eec9448eea"}
+api1   | Received payment (socket): amount=19.90, correlation_id='48f3fe6f-e68b-45c7-81a4-e543511868a4'
+api1   | Correlation ID length: 36, is empty: false
+api1   | Processing payment with correlation_id: 48f3fe6f-e68b-45c7-81a4-e543511868a4
+api1   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='48f3fe6f-e68b-45c7-81a4-e543511868a4'
+api1   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"48f3fe6f-e68b-45c7-81a4-e543511868a4"}
+api2   | Received payment (socket): amount=19.90, correlation_id='873170dc-3f55-4691-8e9c-e1cbff8eecec'
+api2   | Correlation ID length: 36, is empty: false
+api2   | Processing payment with correlation_id: 873170dc-3f55-4691-8e9c-e1cbff8eecec
+api2   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='873170dc-3f55-4691-8e9c-e1cbff8eecec'
+api2   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"873170dc-3f55-4691-8e9c-e1cbff8eecec"}
+api2   | Received payment (socket): amount=19.90, correlation_id='96b9af71-5a63-4b01-9969-fb4fdb87afb3'
+api2   | Correlation ID length: 36, is empty: false
+api2   | Processing payment with correlation_id: 96b9af71-5a63-4b01-9969-fb4fdb87afb3
+api2   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='96b9af71-5a63-4b01-9969-fb4fdb87afb3'
+api2   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"96b9af71-5a63-4b01-9969-fb4fdb87afb3"}
+api1   | Received payment (socket): amount=19.90, correlation_id='4500e19b-8c60-4771-a355-7f811dfcc672'
+api1   | Correlation ID length: 36, is empty: false
+api1   | Processing payment with correlation_id: 4500e19b-8c60-4771-a355-7f811dfcc672
+api1   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='4500e19b-8c60-4771-a355-7f811dfcc672'
+api1   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"4500e19b-8c60-4771-a355-7f811dfcc672"}
+api2   | Received payment (socket): amount=19.90, correlation_id='6e26f55c-1538-481a-9b24-477a14a28757'
+api2   | Correlation ID length: 36, is empty: false
+api2   | Processing payment with correlation_id: 6e26f55c-1538-481a-9b24-477a14a28757
+api2   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='6e26f55c-1538-481a-9b24-477a14a28757'
+api2   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"6e26f55c-1538-481a-9b24-477a14a28757"}
+api1   | Received payment (socket): amount=19.90, correlation_id='ded80478-e2fa-47ff-864e-5ff1fe56f961'
+api1   | Correlation ID length: 36, is empty: false
+api1   | Processing payment with correlation_id: ded80478-e2fa-47ff-864e-5ff1fe56f961
+api1   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='ded80478-e2fa-47ff-864e-5ff1fe56f961'
+api1   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"ded80478-e2fa-47ff-864e-5ff1fe56f961"}
+api2   | Received payment (socket): amount=19.90, correlation_id='df5893e7-2a3e-4be8-bd5c-c2cdcda8020b'
+api2   | Correlation ID length: 36, is empty: false
+api2   | Processing payment with correlation_id: df5893e7-2a3e-4be8-bd5c-c2cdcda8020b
+api2   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='df5893e7-2a3e-4be8-bd5c-c2cdcda8020b'
+api2   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"df5893e7-2a3e-4be8-bd5c-c2cdcda8020b"}
+api2   | Received payment (socket): amount=19.90, correlation_id='942551bf-be84-4cbc-a123-0dc96efae5c6'
+api2   | Correlation ID length: 36, is empty: false
+api2   | Processing payment with correlation_id: 942551bf-be84-4cbc-a123-0dc96efae5c6
+api2   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='942551bf-be84-4cbc-a123-0dc96efae5c6'
+api2   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"942551bf-be84-4cbc-a123-0dc96efae5c6"}
+api1   | Received payment (socket): amount=19.90, correlation_id='66aba078-e8ac-41f4-b13b-cd565598d42f'
+api1   | Correlation ID length: 36, is empty: false
+api1   | Processing payment with correlation_id: 66aba078-e8ac-41f4-b13b-cd565598d42f
+api1   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='66aba078-e8ac-41f4-b13b-cd565598d42f'
+api1   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"66aba078-e8ac-41f4-b13b-cd565598d42f"}
+api1   | Received payment (socket): amount=19.90, correlation_id='83cf9134-f7d5-48cd-971d-68b0dfa3f08c'
+api1   | Correlation ID length: 36, is empty: false
+api1   | Processing payment with correlation_id: 83cf9134-f7d5-48cd-971d-68b0dfa3f08c
+api1   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='83cf9134-f7d5-48cd-971d-68b0dfa3f08c'
+api1   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"83cf9134-f7d5-48cd-971d-68b0dfa3f08c"}
+api1   | Received payment (socket): amount=19.90, correlation_id='63c04875-6862-4f44-927a-8c1514b3c6d8'
+api1   | Correlation ID length: 36, is empty: false
+api1   | Processing payment with correlation_id: 63c04875-6862-4f44-927a-8c1514b3c6d8
+api1   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='63c04875-6862-4f44-927a-8c1514b3c6d8'
+api1   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"63c04875-6862-4f44-927a-8c1514b3c6d8"}
+api2   | Received payment (socket): amount=19.90, correlation_id='1de2ed40-7423-465f-b073-e24720ee123b'
+api2   | Correlation ID length: 36, is empty: false
+api2   | Processing payment with correlation_id: 1de2ed40-7423-465f-b073-e24720ee123b
+api2   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='1de2ed40-7423-465f-b073-e24720ee123b'
+api2   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"1de2ed40-7423-465f-b073-e24720ee123b"}
+api2   | Received payment (socket): amount=19.90, correlation_id='725362c9-8392-4411-b6a1-3e16c2616c1c'
+api2   | Correlation ID length: 36, is empty: false
+api2   | Processing payment with correlation_id: 725362c9-8392-4411-b6a1-3e16c2616c1c
+api2   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='725362c9-8392-4411-b6a1-3e16c2616c1c'
+api2   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"725362c9-8392-4411-b6a1-3e16c2616c1c"}
+api1   | Received payment (socket): amount=19.90, correlation_id='393bcef7-c37e-4929-836c-b6fe85ae736b'
+api1   | Correlation ID length: 36, is empty: false
+api1   | Processing payment with correlation_id: 393bcef7-c37e-4929-836c-b6fe85ae736b
+api1   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='393bcef7-c37e-4929-836c-b6fe85ae736b'
+api1   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"393bcef7-c37e-4929-836c-b6fe85ae736b"}
+api2   | Received payment (socket): amount=19.90, correlation_id='20ff6401-14fc-4d93-931f-7e3c15afb7d1'
+api2   | Correlation ID length: 36, is empty: false
+api2   | Processing payment with correlation_id: 20ff6401-14fc-4d93-931f-7e3c15afb7d1
+api2   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='20ff6401-14fc-4d93-931f-7e3c15afb7d1'
+api2   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"20ff6401-14fc-4d93-931f-7e3c15afb7d1"}
+api1   | Received payment (socket): amount=19.90, correlation_id='6d908701-9fab-4a6b-9cfa-91631ac0f87f'
+api1   | Correlation ID length: 36, is empty: false
+api1   | Processing payment with correlation_id: 6d908701-9fab-4a6b-9cfa-91631ac0f87f
+api1   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='6d908701-9fab-4a6b-9cfa-91631ac0f87f'
+api1   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"6d908701-9fab-4a6b-9cfa-91631ac0f87f"}
+api2   | Received payment (socket): amount=19.90, correlation_id='3f7ca753-7d19-4ead-83af-60d0fff24f2d'
+api2   | Correlation ID length: 36, is empty: false
+api2   | Processing payment with correlation_id: 3f7ca753-7d19-4ead-83af-60d0fff24f2d
+api2   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='3f7ca753-7d19-4ead-83af-60d0fff24f2d'
+api2   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"3f7ca753-7d19-4ead-83af-60d0fff24f2d"}
+api2   | Received payment (socket): amount=19.90, correlation_id='1b540c2a-1275-4819-bf8e-30ccdc7c7b1a'
+api2   | Correlation ID length: 36, is empty: false
+api2   | Processing payment with correlation_id: 1b540c2a-1275-4819-bf8e-30ccdc7c7b1a
+api2   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='1b540c2a-1275-4819-bf8e-30ccdc7c7b1a'
+api2   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"1b540c2a-1275-4819-bf8e-30ccdc7c7b1a"}
+api1   | Received payment (socket): amount=19.90, correlation_id='9a2db1a1-f3bb-4791-8847-a2b7708e1885'
+api1   | Correlation ID length: 36, is empty: false
+api1   | Processing payment with correlation_id: 9a2db1a1-f3bb-4791-8847-a2b7708e1885
+api1   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='9a2db1a1-f3bb-4791-8847-a2b7708e1885'
+api1   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"9a2db1a1-f3bb-4791-8847-a2b7708e1885"}
+api1   | Received payment (socket): amount=19.90, correlation_id='39a4825a-4572-40b9-93dd-63f7155d26aa'
+api1   | Correlation ID length: 36, is empty: false
+api1   | Processing payment with correlation_id: 39a4825a-4572-40b9-93dd-63f7155d26aa
+api1   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='39a4825a-4572-40b9-93dd-63f7155d26aa'
+api1   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"39a4825a-4572-40b9-93dd-63f7155d26aa"}
+api2   | Received payment (socket): amount=19.90, correlation_id='fd66d4e0-be06-43f4-9922-3cde1ebb4690'
+api2   | Correlation ID length: 36, is empty: false
+api2   | Processing payment with correlation_id: fd66d4e0-be06-43f4-9922-3cde1ebb4690
+api2   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='fd66d4e0-be06-43f4-9922-3cde1ebb4690'
+api2   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"fd66d4e0-be06-43f4-9922-3cde1ebb4690"}
+api1   | Received payment (socket): amount=19.90, correlation_id='d7f88d81-0c91-49fb-a94a-a83b9faddc66'
+api1   | Correlation ID length: 36, is empty: false
+api1   | Processing payment with correlation_id: d7f88d81-0c91-49fb-a94a-a83b9faddc66
+api1   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='d7f88d81-0c91-49fb-a94a-a83b9faddc66'
+api1   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"d7f88d81-0c91-49fb-a94a-a83b9faddc66"}
+api2   | Received payment (socket): amount=19.90, correlation_id='154e5342-d832-45d3-8211-167170595327'
+api2   | Correlation ID length: 36, is empty: false
+api2   | Processing payment with correlation_id: 154e5342-d832-45d3-8211-167170595327
+api2   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='154e5342-d832-45d3-8211-167170595327'
+api2   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"154e5342-d832-45d3-8211-167170595327"}
+api2   | Received payment (socket): amount=19.90, correlation_id='f93a773c-2c5c-4598-b1c1-add9dd7cd5ee'
+api2   | Correlation ID length: 36, is empty: false
+api2   | Processing payment with correlation_id: f93a773c-2c5c-4598-b1c1-add9dd7cd5ee
+api2   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='f93a773c-2c5c-4598-b1c1-add9dd7cd5ee'
+api2   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"f93a773c-2c5c-4598-b1c1-add9dd7cd5ee"}
+api1   | Received payment (socket): amount=19.90, correlation_id='800fa90d-d57d-4c2d-873d-3eb25b44dbb5'
+api1   | Correlation ID length: 36, is empty: false
+api1   | Processing payment with correlation_id: 800fa90d-d57d-4c2d-873d-3eb25b44dbb5
+api1   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='800fa90d-d57d-4c2d-873d-3eb25b44dbb5'
+api1   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"800fa90d-d57d-4c2d-873d-3eb25b44dbb5"}
+api1   | Received payment (socket): amount=19.90, correlation_id='f8fc099e-8da6-40fb-95a9-40ed098f26d3'
+api1   | Correlation ID length: 36, is empty: false
+api1   | Processing payment with correlation_id: f8fc099e-8da6-40fb-95a9-40ed098f26d3
+api1   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='f8fc099e-8da6-40fb-95a9-40ed098f26d3'
+api1   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"f8fc099e-8da6-40fb-95a9-40ed098f26d3"}
+api2   | Received payment (socket): amount=19.90, correlation_id='013f16ec-13e3-4ba5-81fe-61b4265b9f29'
+api2   | Correlation ID length: 36, is empty: false
+api2   | Processing payment with correlation_id: 013f16ec-13e3-4ba5-81fe-61b4265b9f29
+api2   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='013f16ec-13e3-4ba5-81fe-61b4265b9f29'
+api2   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"013f16ec-13e3-4ba5-81fe-61b4265b9f29"}
+api1   | Received payment (socket): amount=19.90, correlation_id='29daf3d7-f085-4785-8ff4-74c36b404fc3'
+api1   | Correlation ID length: 36, is empty: false
+api1   | Processing payment with correlation_id: 29daf3d7-f085-4785-8ff4-74c36b404fc3
+api1   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='29daf3d7-f085-4785-8ff4-74c36b404fc3'
+api1   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"29daf3d7-f085-4785-8ff4-74c36b404fc3"}
+api2   | Received payment (socket): amount=19.90, correlation_id='e7b4b160-08e3-4045-a5f1-733b8e8e025b'
+api2   | Correlation ID length: 36, is empty: false
+api2   | Processing payment with correlation_id: e7b4b160-08e3-4045-a5f1-733b8e8e025b
+api2   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='e7b4b160-08e3-4045-a5f1-733b8e8e025b'
+api2   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"e7b4b160-08e3-4045-a5f1-733b8e8e025b"}
+api2   | Received payment (socket): amount=19.90, correlation_id='08e855fb-f7c2-4183-8a10-5d1dbb4a3642'
+api2   | Correlation ID length: 36, is empty: false
+api2   | Processing payment with correlation_id: 08e855fb-f7c2-4183-8a10-5d1dbb4a3642
+api2   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='08e855fb-f7c2-4183-8a10-5d1dbb4a3642'
+api2   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"08e855fb-f7c2-4183-8a10-5d1dbb4a3642"}
+api1   | Received payment (socket): amount=19.90, correlation_id='1f92fb82-cb00-417d-ba12-f07ee289412b'
+api1   | Correlation ID length: 36, is empty: false
+api1   | Processing payment with correlation_id: 1f92fb82-cb00-417d-ba12-f07ee289412b
+api1   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='1f92fb82-cb00-417d-ba12-f07ee289412b'
+api1   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"1f92fb82-cb00-417d-ba12-f07ee289412b"}
+api1   | Received payment (socket): amount=19.90, correlation_id='4a607f7f-c2a5-44d2-8d68-5c5b486fb67d'
+api1   | Correlation ID length: 36, is empty: false
+api1   | Processing payment with correlation_id: 4a607f7f-c2a5-44d2-8d68-5c5b486fb67d
+api1   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='4a607f7f-c2a5-44d2-8d68-5c5b486fb67d'
+api1   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"4a607f7f-c2a5-44d2-8d68-5c5b486fb67d"}
+api2   | Received payment (socket): amount=19.90, correlation_id='c9f470d6-5183-489f-b168-d8c428185abb'
+api2   | Correlation ID length: 36, is empty: false
+api2   | Processing payment with correlation_id: c9f470d6-5183-489f-b168-d8c428185abb
+api2   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='c9f470d6-5183-489f-b168-d8c428185abb'
+api2   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"c9f470d6-5183-489f-b168-d8c428185abb"}
+api1   | Received payment (socket): amount=19.90, correlation_id='1b42278e-2571-4ff5-a511-8bf045e44d2f'
+api1   | Correlation ID length: 36, is empty: false
+api1   | Processing payment with correlation_id: 1b42278e-2571-4ff5-a511-8bf045e44d2f
+api1   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='1b42278e-2571-4ff5-a511-8bf045e44d2f'
+api1   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"1b42278e-2571-4ff5-a511-8bf045e44d2f"}
+api2   | Received payment (socket): amount=19.90, correlation_id='6b0a7b72-9101-417c-b10b-180cdee5501b'
+api2   | Correlation ID length: 36, is empty: false
+api2   | Processing payment with correlation_id: 6b0a7b72-9101-417c-b10b-180cdee5501b
+api2   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='6b0a7b72-9101-417c-b10b-180cdee5501b'
+api2   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"6b0a7b72-9101-417c-b10b-180cdee5501b"}
+api2   | Received payment (socket): amount=19.90, correlation_id='9e2bf3cb-20c1-4da3-a5c5-3e7b85d07827'
+api2   | Correlation ID length: 36, is empty: false
+api2   | Processing payment with correlation_id: 9e2bf3cb-20c1-4da3-a5c5-3e7b85d07827
+api2   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='9e2bf3cb-20c1-4da3-a5c5-3e7b85d07827'
+api2   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"9e2bf3cb-20c1-4da3-a5c5-3e7b85d07827"}
+api1   | Received payment (socket): amount=19.90, correlation_id='7ba845a1-52a4-4cbe-9818-3390e6093eb5'
+api1   | Correlation ID length: 36, is empty: false
+api1   | Processing payment with correlation_id: 7ba845a1-52a4-4cbe-9818-3390e6093eb5
+api1   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='7ba845a1-52a4-4cbe-9818-3390e6093eb5'
+api1   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"7ba845a1-52a4-4cbe-9818-3390e6093eb5"}
+api1   | Received payment (socket): amount=19.90, correlation_id='f99f1a9b-784d-4255-903f-b1f9413a7da9'
+api1   | Correlation ID length: 36, is empty: false
+api1   | Processing payment with correlation_id: f99f1a9b-784d-4255-903f-b1f9413a7da9
+api1   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='f99f1a9b-784d-4255-903f-b1f9413a7da9'
+api1   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"f99f1a9b-784d-4255-903f-b1f9413a7da9"}
+api2   | Received payment (socket): amount=19.90, correlation_id='ec81a179-d5da-4975-bfeb-b9b3f296ac9e'
+api2   | Correlation ID length: 36, is empty: false
+api2   | Processing payment with correlation_id: ec81a179-d5da-4975-bfeb-b9b3f296ac9e
+api2   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='ec81a179-d5da-4975-bfeb-b9b3f296ac9e'
+api2   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"ec81a179-d5da-4975-bfeb-b9b3f296ac9e"}
+api2   | Received payment (socket): amount=19.90, correlation_id='3863fa8e-e6f4-47df-bca3-4e8642df8e8f'
+api2   | Correlation ID length: 36, is empty: false
+api2   | Processing payment with correlation_id: 3863fa8e-e6f4-47df-bca3-4e8642df8e8f
+api2   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='3863fa8e-e6f4-47df-bca3-4e8642df8e8f'
+api2   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"3863fa8e-e6f4-47df-bca3-4e8642df8e8f"}
+api1   | Received payment (socket): amount=19.90, correlation_id='83132efb-8772-444b-b93d-82ab38a32da2'
+api1   | Correlation ID length: 36, is empty: false
+api1   | Processing payment with correlation_id: 83132efb-8772-444b-b93d-82ab38a32da2
+api1   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='83132efb-8772-444b-b93d-82ab38a32da2'
+api1   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"83132efb-8772-444b-b93d-82ab38a32da2"}
+api2   | Received payment (socket): amount=19.90, correlation_id='2e4d22a6-b9ee-4fc8-bb27-5b00339460f2'
+api2   | Correlation ID length: 36, is empty: false
+api2   | Processing payment with correlation_id: 2e4d22a6-b9ee-4fc8-bb27-5b00339460f2
+api2   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='2e4d22a6-b9ee-4fc8-bb27-5b00339460f2'
+api2   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"2e4d22a6-b9ee-4fc8-bb27-5b00339460f2"}
+api2   | Received payment (socket): amount=19.90, correlation_id='5b2c7a31-7d90-4c22-90ff-68162091837b'
+api2   | Correlation ID length: 36, is empty: false
+api2   | Processing payment with correlation_id: 5b2c7a31-7d90-4c22-90ff-68162091837b
+api2   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='5b2c7a31-7d90-4c22-90ff-68162091837b'
+api2   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"5b2c7a31-7d90-4c22-90ff-68162091837b"}
+api1   | Received payment (socket): amount=19.90, correlation_id='8fc5c531-1377-43fd-8dc4-e2e729b19c61'
+api1   | Correlation ID length: 36, is empty: false
+api1   | Processing payment with correlation_id: 8fc5c531-1377-43fd-8dc4-e2e729b19c61
+api1   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='8fc5c531-1377-43fd-8dc4-e2e729b19c61'
+api1   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"8fc5c531-1377-43fd-8dc4-e2e729b19c61"}
+api2   | Received payment (socket): amount=19.90, correlation_id='7fa1ddd7-af49-4464-8604-8b7c77d75d29'
+api2   | Correlation ID length: 36, is empty: false
+api2   | Processing payment with correlation_id: 7fa1ddd7-af49-4464-8604-8b7c77d75d29
+api2   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='7fa1ddd7-af49-4464-8604-8b7c77d75d29'
+api2   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"7fa1ddd7-af49-4464-8604-8b7c77d75d29"}
+api1   | Received payment (socket): amount=19.90, correlation_id='7ef5122b-30a8-48d3-aaa2-a22b013953e8'
+api1   | Correlation ID length: 36, is empty: false
+api1   | Processing payment with correlation_id: 7ef5122b-30a8-48d3-aaa2-a22b013953e8
+api1   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='7ef5122b-30a8-48d3-aaa2-a22b013953e8'
+api1   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"7ef5122b-30a8-48d3-aaa2-a22b013953e8"}
+api1   | Received payment (socket): amount=19.90, correlation_id='74183e87-7616-4d03-bdd9-fa98271bdecf'
+api1   | Correlation ID length: 36, is empty: false
+api1   | Processing payment with correlation_id: 74183e87-7616-4d03-bdd9-fa98271bdecf
+api1   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='74183e87-7616-4d03-bdd9-fa98271bdecf'
+api1   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"74183e87-7616-4d03-bdd9-fa98271bdecf"}
+api2   | Received payment (socket): amount=19.90, correlation_id='4434325c-7639-4703-bd0d-8b909248bd00'
+api2   | Correlation ID length: 36, is empty: false
+api2   | Processing payment with correlation_id: 4434325c-7639-4703-bd0d-8b909248bd00
+api2   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='4434325c-7639-4703-bd0d-8b909248bd00'
+api2   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"4434325c-7639-4703-bd0d-8b909248bd00"}
+api1   | Received payment (socket): amount=19.90, correlation_id='5067fea2-4d18-41e6-930d-01e4226522d0'
+api1   | Correlation ID length: 36, is empty: false
+api1   | Processing payment with correlation_id: 5067fea2-4d18-41e6-930d-01e4226522d0
+api1   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='5067fea2-4d18-41e6-930d-01e4226522d0'
+api1   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"5067fea2-4d18-41e6-930d-01e4226522d0"}
+api1   | Received payment (socket): amount=19.90, correlation_id='35a82532-7fb3-4020-ad9e-f2681efd864e'
+api1   | Correlation ID length: 36, is empty: false
+api1   | Processing payment with correlation_id: 35a82532-7fb3-4020-ad9e-f2681efd864e
+api1   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='35a82532-7fb3-4020-ad9e-f2681efd864e'
+api1   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"35a82532-7fb3-4020-ad9e-f2681efd864e"}
+api2   | Received payment (socket): amount=19.90, correlation_id='21aac30e-f347-4fe8-a439-39aa258070e3'
+api2   | Correlation ID length: 36, is empty: false
+api2   | Processing payment with correlation_id: 21aac30e-f347-4fe8-a439-39aa258070e3
+api2   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='21aac30e-f347-4fe8-a439-39aa258070e3'
+api2   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"21aac30e-f347-4fe8-a439-39aa258070e3"}
+api2   | Received payment (socket): amount=19.90, correlation_id='d69e74b1-7de6-48e6-b66d-3691c3bb9692'
+api2   | Correlation ID length: 36, is empty: false
+api2   | Processing payment with correlation_id: d69e74b1-7de6-48e6-b66d-3691c3bb9692
+api2   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='d69e74b1-7de6-48e6-b66d-3691c3bb9692'
+api2   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"d69e74b1-7de6-48e6-b66d-3691c3bb9692"}
+api1   | Received payment (socket): amount=19.90, correlation_id='20702147-4d23-40cf-a951-fcfeb14ae5f5'
+api1   | Correlation ID length: 36, is empty: false
+api1   | Processing payment with correlation_id: 20702147-4d23-40cf-a951-fcfeb14ae5f5
+api1   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='20702147-4d23-40cf-a951-fcfeb14ae5f5'
+api1   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"20702147-4d23-40cf-a951-fcfeb14ae5f5"}
+api2   | Received payment (socket): amount=19.90, correlation_id='cdd8dcc5-9135-4bf9-ba53-8ef8bedc2794'
+api2   | Correlation ID length: 36, is empty: false
+api2   | Processing payment with correlation_id: cdd8dcc5-9135-4bf9-ba53-8ef8bedc2794
+api2   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='cdd8dcc5-9135-4bf9-ba53-8ef8bedc2794'
+api2   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"cdd8dcc5-9135-4bf9-ba53-8ef8bedc2794"}
+api2   | Received payment (socket): amount=19.90, correlation_id='36a8dd92-1fbf-4318-9dd3-f894ab50c291'
+api2   | Correlation ID length: 36, is empty: false
+api2   | Processing payment with correlation_id: 36a8dd92-1fbf-4318-9dd3-f894ab50c291
+api2   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='36a8dd92-1fbf-4318-9dd3-f894ab50c291'
+api2   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"36a8dd92-1fbf-4318-9dd3-f894ab50c291"}
+api1   | Received payment (socket): amount=19.90, correlation_id='886f9830-7354-442c-b775-7a042caab62d'
+api1   | Correlation ID length: 36, is empty: false
+api1   | Processing payment with correlation_id: 886f9830-7354-442c-b775-7a042caab62d
+api1   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='886f9830-7354-442c-b775-7a042caab62d'
+api1   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"886f9830-7354-442c-b775-7a042caab62d"}
+api1   | Received payment (socket): amount=19.90, correlation_id='0799c7d9-7daf-4ff1-bcbf-209ac2181bbb'
+api1   | Correlation ID length: 36, is empty: false
+api1   | Processing payment with correlation_id: 0799c7d9-7daf-4ff1-bcbf-209ac2181bbb
+api1   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='0799c7d9-7daf-4ff1-bcbf-209ac2181bbb'
+api1   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"0799c7d9-7daf-4ff1-bcbf-209ac2181bbb"}
+api1   | Received payment (socket): amount=19.90, correlation_id='bb2860c1-93cb-4957-8975-27a50edc87e9'
+api1   | Correlation ID length: 36, is empty: false
+api1   | Processing payment with correlation_id: bb2860c1-93cb-4957-8975-27a50edc87e9
+api1   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='bb2860c1-93cb-4957-8975-27a50edc87e9'
+api1   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"bb2860c1-93cb-4957-8975-27a50edc87e9"}
+api1   | Received payment (socket): amount=19.90, correlation_id='bbe8bf3d-1467-42cc-8c55-2fb0dd39450d'
+api1   | Correlation ID length: 36, is empty: false
+api1   | Processing payment with correlation_id: bbe8bf3d-1467-42cc-8c55-2fb0dd39450d
+api1   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='bbe8bf3d-1467-42cc-8c55-2fb0dd39450d'
+api1   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"bbe8bf3d-1467-42cc-8c55-2fb0dd39450d"}
+api2   | Received payment (socket): amount=19.90, correlation_id='ed97ae18-6c50-48d9-81ba-1ca5db950c88'
+api2   | Correlation ID length: 36, is empty: false
+api2   | Processing payment with correlation_id: ed97ae18-6c50-48d9-81ba-1ca5db950c88
+api2   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='ed97ae18-6c50-48d9-81ba-1ca5db950c88'
+api2   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"ed97ae18-6c50-48d9-81ba-1ca5db950c88"}
+api2   | Received payment (socket): amount=19.90, correlation_id='554c5df3-5c0e-43ce-ab0f-c60927945002'
+api2   | Correlation ID length: 36, is empty: false
+api2   | Processing payment with correlation_id: 554c5df3-5c0e-43ce-ab0f-c60927945002
+api2   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='554c5df3-5c0e-43ce-ab0f-c60927945002'
+api2   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"554c5df3-5c0e-43ce-ab0f-c60927945002"}
+api1   | Received payment (socket): amount=19.90, correlation_id='a3abe5ba-ccd8-442d-aae5-32fdaeefd044'
+api1   | Correlation ID length: 36, is empty: false
+api1   | Processing payment with correlation_id: a3abe5ba-ccd8-442d-aae5-32fdaeefd044
+api1   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='a3abe5ba-ccd8-442d-aae5-32fdaeefd044'
+api1   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"a3abe5ba-ccd8-442d-aae5-32fdaeefd044"}
+api2   | Received payment (socket): amount=19.90, correlation_id='dcfc2f11-9857-4108-928b-fbc4442a52ef'
+api2   | Correlation ID length: 36, is empty: false
+api2   | Processing payment with correlation_id: dcfc2f11-9857-4108-928b-fbc4442a52ef
+api2   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='dcfc2f11-9857-4108-928b-fbc4442a52ef'
+api2   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"dcfc2f11-9857-4108-928b-fbc4442a52ef"}
+api2   | Received payment (socket): amount=19.90, correlation_id='b91be611-5ea2-4a3a-953e-63e89064635a'
+api2   | Correlation ID length: 36, is empty: false
+api2   | Processing payment with correlation_id: b91be611-5ea2-4a3a-953e-63e89064635a
+api2   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='b91be611-5ea2-4a3a-953e-63e89064635a'
+api2   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"b91be611-5ea2-4a3a-953e-63e89064635a"}
+api1   | Received payment (socket): amount=19.90, correlation_id='842a9ee2-d054-4732-b79f-1c8ccfc64eab'
+api1   | Correlation ID length: 36, is empty: false
+api1   | Processing payment with correlation_id: 842a9ee2-d054-4732-b79f-1c8ccfc64eab
+api1   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='842a9ee2-d054-4732-b79f-1c8ccfc64eab'
+api1   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"842a9ee2-d054-4732-b79f-1c8ccfc64eab"}
+api2   | Received payment (socket): amount=19.90, correlation_id='1bc41711-5cd6-4683-b2bc-17b8504c95f2'
+api2   | Correlation ID length: 36, is empty: false
+api2   | Processing payment with correlation_id: 1bc41711-5cd6-4683-b2bc-17b8504c95f2
+api2   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='1bc41711-5cd6-4683-b2bc-17b8504c95f2'
+api2   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"1bc41711-5cd6-4683-b2bc-17b8504c95f2"}
+api2   | Received payment (socket): amount=19.90, correlation_id='9c8dd781-12c0-411c-8510-ac7cfbcebea7'
+api2   | Correlation ID length: 36, is empty: false
+api2   | Processing payment with correlation_id: 9c8dd781-12c0-411c-8510-ac7cfbcebea7
+api2   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='9c8dd781-12c0-411c-8510-ac7cfbcebea7'
+api2   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"9c8dd781-12c0-411c-8510-ac7cfbcebea7"}
+api1   | Received payment (socket): amount=19.90, correlation_id='c028f843-0965-42f9-8401-75248d996b0f'
+api1   | Correlation ID length: 36, is empty: false
+api1   | Processing payment with correlation_id: c028f843-0965-42f9-8401-75248d996b0f
+api1   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='c028f843-0965-42f9-8401-75248d996b0f'
+api1   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"c028f843-0965-42f9-8401-75248d996b0f"}
+api1   | Received payment (socket): amount=19.90, correlation_id='03a32436-4b32-4c92-a48f-590a21eb11b7'
+api1   | Correlation ID length: 36, is empty: false
+api1   | Processing payment with correlation_id: 03a32436-4b32-4c92-a48f-590a21eb11b7
+api1   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='03a32436-4b32-4c92-a48f-590a21eb11b7'
+api1   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"03a32436-4b32-4c92-a48f-590a21eb11b7"}
+api1   | Received payment (socket): amount=19.90, correlation_id='4f82a506-502d-4d06-93fa-6c7d27378031'
+api1   | Correlation ID length: 36, is empty: false
+api1   | Processing payment with correlation_id: 4f82a506-502d-4d06-93fa-6c7d27378031
+api1   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='4f82a506-502d-4d06-93fa-6c7d27378031'
+api1   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"4f82a506-502d-4d06-93fa-6c7d27378031"}
+api1   | Received payment (socket): amount=19.90, correlation_id='cb5257dc-ccb2-4f52-9072-288cb8d9e275'
+api1   | Correlation ID length: 36, is empty: false
+api1   | Processing payment with correlation_id: cb5257dc-ccb2-4f52-9072-288cb8d9e275
+api1   | Making payment request: url=http://payment-processor-default:8080, amount=19.90, correlation_id='cb5257dc-ccb2-4f52-9072-288cb8d9e275'
+api1   | Sending JSON body to payment processor: {"requested_at":"1970-01-01T00:00:00Z","amount":19.9,"correlationId":"cb5257dc-ccb2-4f52-9072-288cb8d9e275"}
+log truncated at line 1000

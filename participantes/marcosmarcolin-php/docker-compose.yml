@@ -1,6 +1,6 @@
 x-service-templates:
   api: &api
-    image: marcosmarcolin/rinhadebackend2025:2.4.0
+    image: marcosmarcolin/rinhadebackend2025:2.4.1
     entrypoint: [ "php", "/opt/www/app/public/index.php" ]
     depends_on:
       redis:
@@ -15,7 +15,7 @@ x-service-templates:
           memory: "80M"
 
   worker-template: &worker
-    image: marcosmarcolin/rinhadebackend2025:2.4.0
+    image: marcosmarcolin/rinhadebackend2025:2.4.1
     depends_on:
       redis:
         condition: service_healthy

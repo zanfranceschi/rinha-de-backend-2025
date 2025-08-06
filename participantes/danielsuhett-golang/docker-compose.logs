@@ -1,23 +1,27 @@
 
  Network danielsuhett-golang_backend  Creating
  Network danielsuhett-golang_backend  Created
+ Volume "danielsuhett-golang_sockets"  Creating
+ Volume "danielsuhett-golang_sockets"  Created
  Container go-rinha-redis  Creating
  Container go-rinha-redis  Created
- Container danielsuhett-golang-api2-1  Creating
  Container danielsuhett-golang-api1-1  Creating
- Container danielsuhett-golang-api2-1  Created
+ Container danielsuhett-golang-api2-1  Creating
  Container danielsuhett-golang-api1-1  Created
+ Container danielsuhett-golang-api2-1  Created
  Container go-rinha-nginx  Creating
  Container go-rinha-nginx  Created
 Attaching to api1-1, api2-1, go-rinha-nginx, go-rinha-redis
-go-rinha-redis  | 1:C 05 Aug 2025 01:44:22.657 # WARNING Memory overcommit must be enabled! Without it, a background save or replication may fail under low memory condition. Being disabled, it can also cause failures without low memory condition, see https://github.com/jemalloc/jemalloc/issues/1328. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.
-go-rinha-redis  | 1:C 05 Aug 2025 01:44:22.657 * oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
-go-rinha-redis  | 1:C 05 Aug 2025 01:44:22.657 * Redis version=7.2.10, bits=64, commit=00000000, modified=0, pid=1, just started
-go-rinha-redis  | 1:C 05 Aug 2025 01:44:22.658 * Configuration loaded
-go-rinha-redis  | 1:M 05 Aug 2025 01:44:22.702 * monotonic clock: POSIX clock_gettime
-go-rinha-redis  | 1:M 05 Aug 2025 01:44:22.702 * Running mode=standalone, port=6379.
-go-rinha-redis  | 1:M 05 Aug 2025 01:44:22.703 * Server initialized
-go-rinha-redis  | 1:M 05 Aug 2025 01:44:22.703 * Ready to accept connections tcp
+go-rinha-redis  | 1:C 06 Aug 2025 03:23:44.011 # WARNING Memory overcommit must be enabled! Without it, a background save or replication may fail under low memory condition. Being disabled, it can also cause failures without low memory condition, see https://github.com/jemalloc/jemalloc/issues/1328. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.
+go-rinha-redis  | 1:C 06 Aug 2025 03:23:44.011 * oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+go-rinha-redis  | 1:C 06 Aug 2025 03:23:44.011 * Redis version=7.2.10, bits=64, commit=00000000, modified=0, pid=1, just started
+go-rinha-redis  | 1:C 06 Aug 2025 03:23:44.011 * Configuration loaded
+go-rinha-redis  | 1:M 06 Aug 2025 03:23:44.011 * monotonic clock: POSIX clock_gettime
+go-rinha-redis  | 1:M 06 Aug 2025 03:23:44.012 * Running mode=standalone, port=6379.
+go-rinha-redis  | 1:M 06 Aug 2025 03:23:44.012 * Server initialized
+go-rinha-redis  | 1:M 06 Aug 2025 03:23:44.012 * Ready to accept connections tcp
+api1-1          | 2025/08/06 03:23:50 Server listening on Unix socket: /var/run/sockets/app1.sock
+api2-1          | 2025/08/06 03:23:50 Server listening on Unix socket: /var/run/sockets/app2.sock
 go-rinha-nginx  | /docker-entrypoint.sh: /docker-entrypoint.d/ is not empty, will attempt to perform configuration
 go-rinha-nginx  | /docker-entrypoint.sh: Looking for shell scripts in /docker-entrypoint.d/
 go-rinha-nginx  | /docker-entrypoint.sh: Launching /docker-entrypoint.d/10-listen-on-ipv6-by-default.sh
@@ -27,18 +31,26 @@ go-rinha-nginx  | /docker-entrypoint.sh: Sourcing /docker-entrypoint.d/15-local-
 go-rinha-nginx  | /docker-entrypoint.sh: Launching /docker-entrypoint.d/20-envsubst-on-templates.sh
 go-rinha-nginx  | /docker-entrypoint.sh: Launching /docker-entrypoint.d/30-tune-worker-processes.sh
 go-rinha-nginx  | /docker-entrypoint.sh: Configuration complete; ready for start up
-api2-1          | 2025/08/05 01:44:56 Signal failure for default
-api2-1          | 2025/08/05 01:44:56 Circuit breaker color changed from GREEN to RED
-api1-1          | 2025/08/05 01:44:56 Signal failure for default
-api1-1          | 2025/08/05 01:44:56 Circuit breaker color changed from GREEN to RED
-api2-1          | 2025/08/05 01:44:56 Received color change: RED
-api1-1          | 2025/08/05 01:45:20 Circuit breaker color changed from RED to GREEN
-api2-1          | 2025/08/05 01:45:20 Received color change: GREEN
+api1-1          | 2025/08/06 03:24:18 Payment processor error 500: 
+api1-1          | 2025/08/06 03:24:18 Non-success status 500 from processor default
+api2-1          | 2025/08/06 03:24:18 Payment processor error 500: 
+api2-1          | 2025/08/06 03:24:18 Non-success status 500 from processor default
+api2-1          | 2025/08/06 03:24:18 Signal failure for default
+api1-1          | 2025/08/06 03:24:18 Signal failure for default
+api2-1          | 2025/08/06 03:24:18 Circuit breaker color changed from GREEN to RED
+api1-1          | 2025/08/06 03:24:18 Circuit breaker color changed from GREEN to RED
+api2-1          | 2025/08/06 03:24:18 Received color change: RED
+api1-1          | 2025/08/06 03:24:42 Circuit breaker color changed from RED to GREEN
+api2-1          | 2025/08/06 03:24:42 Received color change: GREEN
 [Kgo-rinha-nginx exited with code 0
+api2-1          | 2025/08/06 03:25:00 Shutting down gracefully...
+api2-1          | 2025/08/06 03:25:00 Server stopped
+api1-1          | 2025/08/06 03:25:00 Shutting down gracefully...
+api1-1          | 2025/08/06 03:25:00 Server stopped
 [Kapi2-1 exited with code 0
 [Kapi1-1 exited with code 0
-go-rinha-redis  | 1:signal-handler (1754358339) Received SIGTERM scheduling shutdown...
-go-rinha-redis  | 1:M 05 Aug 2025 01:45:39.636 * User requested shutdown...
-go-rinha-redis  | 1:M 05 Aug 2025 01:45:39.636 # Redis is now ready to exit, bye bye...
+go-rinha-redis  | 1:signal-handler (1754450700) Received SIGTERM scheduling shutdown...
+go-rinha-redis  | 1:M 06 Aug 2025 03:25:00.715 * User requested shutdown...
+go-rinha-redis  | 1:M 06 Aug 2025 03:25:00.715 # Redis is now ready to exit, bye bye...
 [Kgo-rinha-redis exited with code 0
 log truncated at line 1000

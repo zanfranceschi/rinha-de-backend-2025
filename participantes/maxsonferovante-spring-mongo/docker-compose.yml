@@ -1,0 +1,108 @@
+services:
+  mongodb:
+    image: mongo:8.0
+    container_name: mongodb
+    command: >
+      --wiredTigerCollectionBlockCompressor snappy
+      --wiredTigerIndexPrefixCompression true
+      --setParameter enableLocalhostAuthBypass=false
+      --setParameter diagnosticDataCollectionEnabled=false
+      --setParameter logLevel=0
+      --quiet
+      --logpath /dev/null
+      --setParameter maxTransactionLockRequestTimeoutMillis=5000
+      --setParameter maxSessions=1000
+      --setParameter localLogicalSessionTimeoutMinutes=30
+    restart:
+      always
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+      - mongodb_config:/data/configdb
+    networks:
+      - backend
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: "130MB"
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "9999:80"
+    depends_on:
+      - api-payment-1
+      - api-payment-2
+    networks:
+      - backend
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    command: "nginx -c /etc/nginx/nginx.conf -g 'daemon off;'"
+    deploy:
+      resources:
+        limits:
+          cpus: "0.2"
+          memory: "50MB"
+
+  api-payment-1:
+    image: docker.io/maxsonferovante/api-payment-processor-threads
+    pull_policy: always
+    container_name: api-payment-1
+    environment:
+      MONGODB_URI: mongodb://mongodb:27017/rinha
+      PAYMENT_PROCESSOR_DEFAULT_URL: http://payment-processor-default:8080
+      PAYMENT_PROCESSOR_FALLBACK_URL: http://payment-processor-fallback:8080
+      PAYMENT_PROCESSOR_MAX_VIRTUAL_THREADS: 15
+      PAYMENT_PROCESSOR_MAX_RETRIES: 6
+    depends_on:
+      mongodb:
+        condition: service_healthy
+    networks:
+      - backend
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          cpus: "0.4"
+          memory: "80MB"
+
+  api-payment-2:
+    image: docker.io/maxsonferovante/api-payment-processor-threads
+    pull_policy: always
+    container_name: api-payment-2
+    environment:
+      MONGODB_URI: mongodb://mongodb:27017/rinha
+      PAYMENT_PROCESSOR_DEFAULT_URL: http://payment-processor-default:8080
+      PAYMENT_PROCESSOR_FALLBACK_URL: http://payment-processor-fallback:8080
+      PAYMENT_PROCESSOR_MAX_VIRTUAL_THREADS: 15
+      PAYMENT_PROCESSOR_MAX_RETRIES: 6
+    depends_on:
+      mongodb:
+        condition: service_healthy
+    networks:
+      - backend
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          cpus: "0.4"
+          memory: "90MB"
+
+networks:
+  backend:
+    driver: bridge
+  payment-processor:
+    external: true
+
+volumes:
+  mongodb_data:
+    driver: local
+  mongodb_config:
+    driver: local

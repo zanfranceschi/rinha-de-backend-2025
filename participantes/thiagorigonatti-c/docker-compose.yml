@@ -1,0 +1,41 @@
+services:
+  api01: &app
+    image: thiagorigonatti/rinha-2025:0.0.4
+    environment:
+      - PTHREADS=2
+    networks:
+      - api
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          cpus: "0.25"
+          memory: "80MB"
+    volumes:
+      - /dev/shm:/dev/shm
+
+  api02:
+    <<: *app
+
+  haproxy:
+    image: haproxy:3.3-dev5-alpine3.22
+    volumes:
+      - ./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
+    deploy:
+      resources:
+        limits:
+          cpus: "1.00"
+          memory: "120MB"
+    networks:
+      - api
+    ports:
+      - "9999:9999"
+    depends_on:
+      - api01
+      - api02
+
+networks:
+  api:
+    driver: bridge
+  payment-processor:
+    external: true

@@ -24,6 +24,7 @@ services:
       - REDIS_URL=6379
       - PROCESSOR_DEFAULT_URL=http://payment-processor-default:8080
       - PROCESSOR_FALLBACK_URL=http://payment-processor-fallback:8080
+      - API_NAME=1
     networks:
       - backend
       - payment-processor
@@ -34,7 +35,7 @@ services:
       resources:
         limits:
           cpus: "0.5"
-          memory: "100MB"
+          memory: "75MB"
   api2: 
     <<: *api
     hostname: api2
@@ -42,6 +43,12 @@ services:
       - REDIS_URL=6379
       - PROCESSOR_DEFAULT_URL=http://payment-processor-default:8080
       - PROCESSOR_FALLBACK_URL=http://payment-processor-fallback:8080
+      - API_NAME=2
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: "75MB"
 
   redis:
     image: redis:7.2-alpine 
@@ -58,7 +65,7 @@ services:
       resources:
         limits:
           cpus: "0.3"
-          memory: "100MB"
+          memory: "150MB"
 networks:
     backend:
       driver: bridge

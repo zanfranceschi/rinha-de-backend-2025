@@ -1,25 +1,26 @@
 x-service-templates:
   server: &server
-    image: lucasgoveia/rinha-2025-api:ac44608fb4f
+    image: lucasgoveia/rinha-2025-api:2d6ea0a732eea8
     user: "1000:1000"
     restart: always
     depends_on:
       - postgres
+      - worker
     networks:
       - backend
       - payment-processor
     deploy:
       resources:
         limits:
-          cpus: '0.55'
-          memory: '60M'
+          cpus: '0.3'
+          memory: '30M'
     volumes:
       - pg_socket:/var/run/postgresql
       - backend:/tmp/
 
 services:
   pingora:
-    image: lucasgoveia/rinha-2025-proxy:ac44608fb4f
+    image: lucasgoveia/rinha-2025-proxy:2d6ea0a732eea8
     user: "1000:1000"
     ports:
       - "9999:9999"
@@ -36,8 +37,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '0.25'
-          memory: '80M'
+          cpus: '0.35'
+          memory: '50M'
     volumes:
       - backend:/tmp/
 
@@ -49,7 +50,7 @@ services:
       - SERVER_SOCKET=/tmp/server1.sock
       - SERVER_HOST=0.0.0.0
       - SERVER_PORT=7118
-      - POSTGRES_URL=postgres://postgres:password@/rinha2025?host=/var/run/postgresql&pool_max_conns=10&pool_min_conns=2&pool_max_conn_idle_time=30s&pool_max_conn_lifetime=5m&pool_health_check_period=30s
+      - POSTGRES_URL=postgres://postgres:password@/rinha2025?host=/var/run/postgresql&pool_max_conns=3&pool_min_conns=2&pool_max_conn_idle_time=30s&pool_max_conn_lifetime=5m&pool_health_check_period=30s
       - SERVICE_DEFAULT_URL=http://payment-processor-default:8080/payments
       - SERVICE_FALLBACK_URL=http://payment-processor-fallback:8080/payments
       - SERVICE_DEFAULT_HEALTH_URL=http://nginx:9000/default/payments/service-health
@@ -63,11 +64,37 @@ services:
       - SERVER_SOCKET=/tmp/server2.sock
       - SERVER_HOST=0.0.0.0
       - SERVER_PORT=7118
-      - POSTGRES_URL=postgres://postgres:password@/rinha2025?host=/var/run/postgresql&pool_max_conns=10&pool_min_conns=2&pool_max_conn_idle_time=30s&pool_max_conn_lifetime=5m&pool_health_check_period=30s
+      - POSTGRES_URL=postgres://postgres:password@/rinha2025?host=/var/run/postgresql&pool_max_conns=3&pool_min_conns=2&pool_max_conn_idle_time=30s&pool_max_conn_lifetime=5m&pool_health_check_period=30s
       - SERVICE_DEFAULT_URL=http://payment-processor-default:8080/payments
       - SERVICE_FALLBACK_URL=http://payment-processor-fallback:8080/payments
       - SERVICE_DEFAULT_HEALTH_URL=http://nginx:9000/default/payments/service-health
       - SERVICE_FALLBACK_HEALTH_URL=http://nginx:9000/fallback/payments/service-health
+
+  worker:
+    image: lucasgoveia/rinha-2025-worker:2d6ea0a732eea8
+    user: "1000:1000"
+    restart: always
+    depends_on:
+      - postgres
+    networks:
+      - backend
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          cpus: '0.4'
+          memory: '60M'
+    volumes:
+      - pg_socket:/var/run/postgresql
+      - backend:/tmp/
+    container_name: worker
+    hostname: worker
+    environment:
+      - POSTGRES_URL=postgres://postgres:password@/rinha2025?host=/var/run/postgresql&pool_max_conns=3&pool_min_conns=2&pool_max_conn_idle_time=30s&pool_max_conn_lifetime=5m&pool_health_check_period=30s
+      - SERVICE_DEFAULT_URL=http://payment-processor-default:8080/payments
+      - SERVICE_FALLBACK_URL=http://payment-processor-fallback:8080/payments
+      - SERVICE_DEFAULT_HEALTH_URL=http://payment-processor-default:8080/payments/service-health
+      - SERVICE_FALLBACK_HEALTH_URL=http://payment-processor-fallback:8080/payments/service-health
 
   postgres:
     image: postgres:17-alpine

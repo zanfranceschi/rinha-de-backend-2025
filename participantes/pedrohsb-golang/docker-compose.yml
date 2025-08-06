@@ -1,17 +1,16 @@
 services:
   redis:
     image: redis:8-alpine
-    command: redis-server --save "" --appendonly no --maxmemory 60mb --maxmemory-policy allkeys-lru
     deploy:
       resources:
         limits:
           cpus: "0.4"
-          memory: "30M"
+          memory: "40M"
     networks:
       - backend
 
   app1:
-    image: pedrohsbarbosa99/rinha-golang-2025:0.1.3
+    image: pedrohsbarbosa99/rinha-golang-2025:0.1.4
     networks:
       - backend
       - payment-processor
@@ -26,7 +25,7 @@ services:
           memory: 140M
 
   app2:
-    image: pedrohsbarbosa99/rinha-golang-2025:0.1.3
+    image: pedrohsbarbosa99/rinha-golang-2025:0.1.4
     command: ["./main"]
     networks:
       - backend

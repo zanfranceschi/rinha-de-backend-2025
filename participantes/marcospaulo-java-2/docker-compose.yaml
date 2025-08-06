@@ -1,7 +1,7 @@
 version: "3.5"
 services:
   api1: &app
-    image: marcosisocram/daisy:1.0.7-tweaks
+    image: marcosisocram/daisy:1.0.8
     networks:
       - backend
       - payment-processor
@@ -12,7 +12,8 @@ services:
       - URL_DEFAULT=http://payment-processor-default:8080/payments
       - URL_FALLBACK=http://payment-processor-fallback:8080/payments
       - JDBC=jdbc:sqlite:/app/data/rinha-daisy.db
-      - BATCH_SLEEP_MS=5
+      - BATCH_SLEEP_MS=25
+      - CONSUMER_QTD=1
     volumes:
       - sqlite-daisy-data:/app/data/
     deploy:

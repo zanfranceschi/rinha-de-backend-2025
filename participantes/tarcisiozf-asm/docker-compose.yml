@@ -1,0 +1,69 @@
+x-service-templates:
+  base-app: &base-app
+    networks:
+      - payment-processor
+      - app
+    image: tarcisiozf/rinha-de-backend-2025-asm:latest
+    security_opt:
+      - seccomp:unconfined
+    volumes:
+      - app-data:/app/data
+
+services:
+  app-1:
+    <<: *base-app
+    hostname: app-one
+    environment:
+      APP_ID: "APP_1"
+      APP_PORT: "9001"
+      HOST_DEFAULT: "payment-processor-default"
+      PORT_DEFAULT: "8080"
+      HOST_FALLBACK: "payment-processor-fallback"
+      PORT_FALLBACK: "8080"
+    deploy:
+      resources:
+        limits:
+          cpus: "0.8"
+          memory: 100M
+  app-2:
+    <<: *base-app
+    hostname: app-two
+    environment:
+      APP_ID: "APP_2"
+      APP_PORT: "9002"
+      HOST_DEFAULT: "payment-processor-default"
+      PORT_DEFAULT: "8080"
+      HOST_FALLBACK: "payment-processor-fallback"
+      PORT_FALLBACK: "8080"
+    deploy:
+      resources:
+        limits:
+          cpus: "0.40"
+          memory: 100M
+  haproxy:
+    image: haproxy:3.2.3-alpine
+    ports:
+      - 9999:80
+    volumes:
+      - ./proxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
+    networks:
+      - app
+    depends_on:
+      - app-1
+      - app-2
+    deploy:
+      resources:
+        limits:
+          cpus: "0.30"
+          memory: "150MB"
+
+volumes:
+  app-data:
+    driver: local
+
+networks:
+  payment-processor:
+    external: true
+  app:
+    driver: bridge
+
