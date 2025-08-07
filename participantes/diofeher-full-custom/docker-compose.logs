@@ -1,0 +1,77 @@
+
+ api2 Pulling 
+ api1 Pulling 
+ 01d036902a3c Already exists 
+ 47fb8cf3f1f9 Pulling fs layer 
+ 01d036902a3c Already exists 
+ 47fb8cf3f1f9 Pulling fs layer 
+ 47fb8cf3f1f9 Downloading [>                                                  ]  31.85kB/3.067MB
+ 47fb8cf3f1f9 Downloading [>                                                  ]  31.85kB/3.067MB
+ 47fb8cf3f1f9 Downloading [======================================>            ]  2.391MB/3.067MB
+ 47fb8cf3f1f9 Downloading [======================================>            ]  2.391MB/3.067MB
+ 47fb8cf3f1f9 Verifying Checksum 
+ 47fb8cf3f1f9 Download complete 
+ 47fb8cf3f1f9 Download complete 
+ 47fb8cf3f1f9 Extracting [>                                                  ]  32.77kB/3.067MB
+ 47fb8cf3f1f9 Extracting [>                                                  ]  32.77kB/3.067MB
+ 47fb8cf3f1f9 Extracting [==================================================>]  3.067MB/3.067MB
+ 47fb8cf3f1f9 Extracting [==================================================>]  3.067MB/3.067MB
+ 47fb8cf3f1f9 Pull complete 
+ 47fb8cf3f1f9 Pull complete 
+ api1 Pulled 
+ api2 Pulled 
+ Network diofeher-full-custom_backend  Creating
+ Network diofeher-full-custom_backend  Created
+ Volume "diofeher-full-custom_socket_data"  Creating
+ Volume "diofeher-full-custom_socket_data"  Created
+ Container redis  Creating
+ Container redis  Created
+ Container diofeher-full-custom-api2-1  Creating
+ Container diofeher-full-custom-api1-1  Creating
+ Container diofeher-full-custom-api1-1  Created
+ Container diofeher-full-custom-api2-1  Created
+ Container haproxy  Creating
+ Container haproxy  Created
+Attaching to api1-1, api2-1, haproxy, redis
+redis    | 1:C 07 Aug 2025 10:57:29.708 # WARNING Memory overcommit must be enabled! Without it, a background save or replication may fail under low memory condition. Being disabled, it can also cause failures without low memory condition, see https://github.com/jemalloc/jemalloc/issues/1328. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.
+redis    | 1:C 07 Aug 2025 10:57:29.708 * oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+redis    | 1:C 07 Aug 2025 10:57:29.708 * Redis version=8.0.3, bits=64, commit=00000000, modified=1, pid=1, just started
+redis    | 1:C 07 Aug 2025 10:57:29.708 * Configuration loaded
+redis    | 1:M 07 Aug 2025 10:57:29.708 * monotonic clock: POSIX clock_gettime
+redis    | 1:M 07 Aug 2025 10:57:29.709 * Running mode=standalone, port=6379.
+redis    | 1:M 07 Aug 2025 10:57:29.802 * Server initialized
+redis    | 1:M 07 Aug 2025 10:57:29.802 * Ready to accept connections tcp
+redis    | 1:M 07 Aug 2025 10:57:29.802 * Ready to accept connections unix
+api2-1   | Starting 12 workers with immediate processing...
+api2-1   | Payment processor server starting on /tmp/api2.sock...
+api1-1   | Starting 12 workers with immediate processing...
+api1-1   | Payment processor server starting on /tmp/api1.sock...
+haproxy  | [NOTICE]   (1) : Initializing new worker (8)
+haproxy  | [NOTICE]   (1) : Loading success.
+haproxy  | [NOTICE]   (1) : haproxy version is 3.2.3-1844da7
+haproxy  | [NOTICE]   (1) : path to executable is /usr/local/sbin/haproxy
+haproxy  | [WARNING]  (1) : Exiting Master process...
+haproxy  | [WARNING]  (8) : Proxy frontend stopped (cumulated conns: FE: 553, BE: 1).
+haproxy  | [WARNING]  (8) : Proxy payment stopped (cumulated conns: FE: 0, BE: 16748).
+haproxy  | [WARNING]  (8) : Proxy summary stopped (cumulated conns: FE: 0, BE: 8).
+haproxy  | [WARNING]  (1) : Current worker (8) exited with code 0 (Exit)
+haproxy  | [WARNING]  (1) : All workers exited. Exiting... (0)
+[Khaproxy exited with code 0
+api1-1   | Received shutdown signal, starting graceful shutdown...
+api1-1   | 2025/08/07 10:58:43 Stopping orchestrator...
+api1-1   | 2025/08/07 10:58:43 Orchestrator stopped
+api2-1   | Received shutdown signal, starting graceful shutdown...
+api2-1   | 2025/08/07 10:58:43 Stopping orchestrator...
+api2-1   | 2025/08/07 10:58:43 Orchestrator stopped
+api1-1   | Graceful shutdown completed
+api1-1   | Unix socket removed. Adios!
+api2-1   | Graceful shutdown completed
+api2-1   | Unix socket removed. Adios!
+[Kapi1-1 exited with code 0
+[Kapi2-1 exited with code 0
+redis    | 1:signal-handler (1754564328) Received SIGTERM scheduling shutdown...
+redis    | 1:M 07 Aug 2025 10:58:48.709 * User requested shutdown...
+redis    | 1:M 07 Aug 2025 10:58:48.709 * Removing the unix socket file.
+redis    | 1:M 07 Aug 2025 10:58:48.709 # Redis is now ready to exit, bye bye...
+[Kredis exited with code 0
+log truncated at line 1000

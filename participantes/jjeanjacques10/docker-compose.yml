@@ -1,6 +1,6 @@
 x-service-templates:
   api1: &api-processor
-    image: jjeanjacques/rinhabackend2025:graalvm-v4.0
+    image: jjeanjacques/rinhabackend2025:graalvm-v5.0
     networks:
       - payment-processor
     restart: on-failure
@@ -43,11 +43,12 @@ services:
 
   nginx:
     image: nginx:latest
+    restart: on-failure
     deploy:
       resources:
         limits:
-          cpus: "0.10"
-          memory: "15MB"
+          cpus: "0.5"
+          memory: "10MB"
     ports:
       - "9999:80"
     volumes:
@@ -76,8 +77,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.10"
-          memory: "15MB"
+          cpus: "0.15"
+          memory: "20MB"
 
 networks:
   backend:

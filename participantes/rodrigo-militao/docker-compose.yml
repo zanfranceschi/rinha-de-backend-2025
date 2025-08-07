@@ -19,12 +19,14 @@ services:
           memory: '30MB'
 
   backend-1: &backend-template
-    image: rodrigomilitao/rinha-go:2025-v6
+    image: rodrigomilitao/rinha-go:2025-v10
     expose:
       - '8080'
     networks:
       - backend
       - payment-processor
+    volumes:
+      - redis-socket:/tmp
     depends_on:
       redis:
         condition: service_healthy
@@ -44,13 +46,15 @@ services:
     <<: *backend-template
 
   worker:
-    image: rodrigomilitao/rinha-go:2025-v6
+    image: rodrigomilitao/rinha-go:2025-v10
     environment:
       - LISTEN_ADDR=disabled
       - REDIS_URL=redis:6379
       - PROCESSOR_DEFAULT_URL=http://payment-processor-default:8080
       - PROCESSOR_FALLBACK_URL=http://payment-processor-fallback:8080
       - WORKERS=5
+    volumes:
+      - redis-socket:/tmp
     networks:
       - backend
       - payment-processor
@@ -67,6 +71,10 @@ services:
     image: redis:7-alpine
     container_name: redis
     hostname: redis
+    volumes:
+      - ./redis.conf:/usr/local/etc/redis/redis.conf
+      - redis-socket:/tmp
+    command: ["redis-server", "/usr/local/etc/redis/redis.conf"]
     networks:
       - backend
     healthcheck:
@@ -85,3 +93,6 @@ networks:
     driver: bridge
   payment-processor:
     external: true
+
+volumes:
+  redis-socket:

@@ -1,0 +1,97 @@
+x-api_template: &api
+  image: ghcr.io/diofeher/rinha-de-backend-2025-diofeher:main-872ab63
+  depends_on:
+    redis:
+      condition: service_healthy
+  volumes:
+    - socket_data:/tmp
+    - ./profile:/app/profile
+  deploy:
+    resources:
+      limits:
+        cpus: "0.5"
+        memory: "100MB"
+  networks:
+    - backend
+    - payment-processor
+
+services:
+  haproxy:
+    image: haproxy:latest
+    container_name: haproxy
+    ports:
+      - "9999:80"
+    networks:
+      - backend
+    depends_on:
+      - api1
+      - api2
+    deploy:
+      resources:
+        limits:
+          cpus: "0.45"
+          memory: "100MB"
+    volumes:
+      - ./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
+      - ./pre-processing.lua:/tmp/pre-processing.lua
+      - socket_data:/tmp
+    command: ["haproxy", "-f", "/usr/local/etc/haproxy/haproxy.cfg"]
+  api1:
+    <<: *api
+    environment:
+      # - CPU_PROFILE=/app/profile/diogenes.pprof
+      - SOCKET_PATH=/tmp/api1.sock
+      - DEBUG=false
+      - REDIS_URL=/tmp/redis.sock
+      - REDIS_DB=rinha
+      - PROCESSOR_DEFAULT_URL=http://payment-processor-default:8080
+      - PROCESSOR_FALLBACK_URL=http://payment-processor-fallback:8080
+      - NUM_WORKERS=12
+  api2:
+    <<: *api
+    environment:
+      - SOCKET_PATH=/tmp/api2.sock
+      - DEBUG=false
+      - REDIS_URL=/tmp/redis.sock
+      - REDIS_DB=rinha
+      - PROCESSOR_DEFAULT_URL=http://payment-processor-default:8080
+      - PROCESSOR_FALLBACK_URL=http://payment-processor-fallback:8080
+      - NUM_WORKERS=12
+  redis:
+    image: redis:latest
+    container_name: redis
+    volumes:
+      - ./redis.conf:/usr/local/etc/redis.conf
+      - socket_data:/tmp
+    ports:
+      - "6379:6379"
+    networks:
+      - backend
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - REDIS_PASSWORD=
+      - REDIS_DB=rinha
+    command: bash -c "rm -rf /tmp/redis.sock && redis-server /usr/local/etc/redis.conf"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 1s
+      timeout: 3s
+      retries: 30
+    deploy:
+      resources:
+        limits:
+          cpus: "0.05"
+          memory: "50MB"
+
+# cpus: nginx 0.15 apps 0.30 redis 1.15 = 1.5 total 
+# # memory: nginx 15MB apps 30MB redis 305MB = 350MB total 
+
+networks:
+  backend:
+    driver: bridge
+  payment-processor:
+    external: true
+
+volumes:
+  socket_data:

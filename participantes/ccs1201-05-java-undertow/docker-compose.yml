@@ -1,6 +1,6 @@
 x-backend-templates:
   app: &app
-    image: csouzadocker/rinha2025-java-undertow:v0.0.4
+    image: csouzadocker/rinha2025-java-undertow:i7-02
     depends_on:
       backend-db:
         condition: service_healthy
@@ -11,7 +11,7 @@ x-backend-templates:
       restart_policy:
         condition: on-failure
         delay: 2s
-        max_attempts: 1
+        max_attempts: 5
         window: 5s
       resources:
         limits:
@@ -32,7 +32,7 @@ x-backend-templates:
     PAYMENT_PROCESSOR_FALLBACK_URL: "http://payment-processor-fallback:8080"
     PAYMENT_PROCESSOR_WORKERS: "10"
     PAYMENT_PROCESSOR_REQUEST_TIMEOUT: "6000"
-    PAYMENT_PROCESSOR_CONNECTION_TIMEOUT: "200"
+    PAYMENT_PROCESSOR_CONNECTION_TIMEOUT: "5"
     SERVER_PORT: "8080"
     SERVER_IO_THREADS: "2"
     SERVER_WORKER_THREADS: "8"

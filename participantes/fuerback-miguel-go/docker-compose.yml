@@ -1,0 +1,125 @@
+version: '3.8'
+
+services:
+  app1: &app
+    image: ghcr.io/fuerback/rinha-2025-go:v1.2.0
+    hostname: app1
+    networks:
+      - backend
+      - payment-processor
+    ports:
+      - "8003:8080"
+    environment:
+      - PROCESSOR_DEFAULT_URL=http://payment-processor-default:8080
+      - PROCESSOR_FALLBACK_URL=http://payment-processor-fallback:8080
+      - DATABASE_URL=postgres://postgres:postgres@postgres:5432/postgres?sslmode=disable
+      - WORKERS=3
+      - CLIENT_TIMEOUT=500
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+      - rinha-store:/data
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health-check"]
+      interval: 3s
+      timeout: 5s
+      retries: 20
+    deploy:
+      resources:
+        limits:
+          cpus: "0.2"
+          memory: "40MB"
+
+  app2:
+    <<: *app
+    hostname: app2
+    ports:
+      - "8004:8080"
+    environment:
+      - PROCESSOR_DEFAULT_URL=http://payment-processor-default:8080
+      - PROCESSOR_FALLBACK_URL=http://payment-processor-fallback:8080
+      - DATABASE_URL=postgres://postgres:postgres@postgres:5432/postgres?sslmode=disable
+      - WORKERS=3
+      - CLIENT_TIMEOUT=500
+
+  app3:
+    <<: *app
+    hostname: app3
+    ports:
+      - "8005:8080"
+    environment:
+      - PROCESSOR_DEFAULT_URL=http://payment-processor-default:8080
+      - PROCESSOR_FALLBACK_URL=http://payment-processor-fallback:8080
+      - DATABASE_URL=postgres://postgres:postgres@postgres:5432/postgres?sslmode=disable
+      - WORKERS=3
+      - CLIENT_TIMEOUT=500
+
+  app4:
+    <<: *app
+    hostname: app4
+    ports:
+      - "8006:8080"
+    environment:
+      - PROCESSOR_DEFAULT_URL=http://payment-processor-default:8080
+      - PROCESSOR_FALLBACK_URL=http://payment-processor-fallback:8080
+      - DATABASE_URL=postgres://postgres:postgres@postgres:5432/postgres?sslmode=disable
+      - WORKERS=3
+      - CLIENT_TIMEOUT=500
+
+  nginx:
+    image: nginx:latest
+    ports:
+      - "9999:9999"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    networks:
+      - backend
+    depends_on:
+      app1:
+        condition: service_healthy
+      app2:
+        condition: service_healthy
+      app3:
+        condition: service_healthy
+      app4:
+        condition: service_healthy
+    deploy:
+      resources:
+        limits:
+          cpus: "0.20"
+          memory: "15MB"
+
+  postgres:
+    image: postgres:15-alpine
+    container_name: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=postgres
+    volumes:
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - backend
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    deploy:
+      resources:
+        limits:
+          cpus: "0.3"
+          memory: "148MB"
+
+volumes:
+  postgres_data:
+  rinha-store:
+
+networks:
+  backend:
+    driver: bridge
+  payment-processor:
+    external: true

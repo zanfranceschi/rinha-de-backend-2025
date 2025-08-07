@@ -1,6 +1,6 @@
 x-service-templates:
   base: &base
-    image: josiney/rdb25_02-amd64:92dab29
+    image: josiney/rdb25_02-amd64:fd73764
     volumes:
       - sockets:/sockets
     networks:
@@ -13,6 +13,7 @@ services:
     <<: *base
     container_name: lb
     hostname: lb
+    cpuset: "1"
     deploy:
       resources:
         limits:
@@ -41,6 +42,7 @@ services:
     <<: *base
     container_name: api1
     hostname: api1
+    cpuset: "2"
     deploy:
       resources:
         limits:
@@ -64,6 +66,7 @@ services:
     <<: *base
     container_name: api2
     hostname: api2
+    cpuset: "3"
     deploy:
       resources:
         limits:

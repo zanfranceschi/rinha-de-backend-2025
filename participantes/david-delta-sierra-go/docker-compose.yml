@@ -8,7 +8,7 @@ services:
         limits:
           cpus: "0.6"
           memory: 60M
-    image: daviddeltasierra/rinha-2025-go-2:1.10
+    image: daviddeltasierra/rinha-2025-go-2:1.18
     volumes:
       - /tmp:/tmp
     environment:
@@ -28,13 +28,13 @@ services:
         limits:
           cpus: "0.3"
           memory: 70M
-    image: daviddeltasierra/rinha-2025-go-2:1.10
+    image: daviddeltasierra/rinha-2025-go-2:1.18
     volumes:
       - /tmp/app1:/tmp/app1
     environment:
       - GATEWAY=false
       - SOCK=/tmp/app1/unix.sock
-      - WORKERS=14
+      - WORKERS=5
     depends_on:
       - postgres
 
@@ -47,13 +47,13 @@ services:
         limits:
           cpus: "0.3"
           memory: 70M
-    image: daviddeltasierra/rinha-2025-go-2:1.10
+    image: daviddeltasierra/rinha-2025-go-2:1.18
     volumes:
       - /tmp/app2:/tmp/app2
     environment:
       - GATEWAY=false
       - SOCK=/tmp/app2/unix.sock
-      - WORKERS=14
+      - WORKERS=5
     depends_on:
       - postgres
 

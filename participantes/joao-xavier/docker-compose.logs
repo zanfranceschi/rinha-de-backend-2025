@@ -1,4 +1,27 @@
 
+ lb Pulling 
+ api_1 Pulling 
+ worker Pulling 
+ api_0 Pulling 
+ 356d26ade73a Already exists 
+ 2d6e89201cf2 Pulling fs layer 
+ 6066caa922ad Pulling fs layer 
+ 2d6e89201cf2 Downloading [>                                                  ]  4.134kB/379.1kB
+ 2d6e89201cf2 Verifying Checksum 
+ 2d6e89201cf2 Download complete 
+ 2d6e89201cf2 Extracting [====>                                              ]  32.77kB/379.1kB
+ 2d6e89201cf2 Extracting [==================================================>]  379.1kB/379.1kB
+ 2d6e89201cf2 Extracting [==================================================>]  379.1kB/379.1kB
+ 2d6e89201cf2 Pull complete 
+ 6066caa922ad Downloading [>                                                  ]  20.51kB/1.975MB
+ 6066caa922ad Download complete 
+ 6066caa922ad Extracting [>                                                  ]  32.77kB/1.975MB
+ 6066caa922ad Extracting [==================================================>]  1.975MB/1.975MB
+ 6066caa922ad Pull complete 
+ worker Pulled 
+ lb Pulled 
+ api_1 Pulled 
+ api_0 Pulled 
  Network joao-xavier_default  Creating
  Network joao-xavier_default  Created
  Volume "joao-xavier_uds"  Creating
@@ -9,207 +32,173 @@
  Container joao-xavier-api_0-1  Creating
  Container joao-xavier-api_1-1  Created
  Container joao-xavier-api_0-1  Created
- Container joao-xavier-haproxy-1  Creating
- Container joao-xavier-haproxy-1  Created
-Attaching to api_0-1, api_1-1, haproxy-1, worker-1
-worker-1   | 2025-08-05T23:38:06.398024Z  INFO ThreadId(01) src/worker/mod.rs:24: starting worker
-worker-1   | 2025-08-05T23:38:06.398083Z  INFO ThreadId(01) src/worker/mod.rs:36: starting payment_req_consumer
-worker-1   | 2025-08-05T23:38:06.398304Z  INFO ThreadId(01) src/worker/mod.rs:74: listening on /var/run/rinha.sock
-api_1-1    | 2025-08-05T23:38:06.676752Z  INFO ThreadId(01) src/api/mod.rs:18: starting API
-api_1-1    | 2025-08-05T23:38:06.676867Z  INFO ThreadId(01) src/api/mod.rs:31: binded to unix socket on /var/run/api_1.sock
-api_0-1    | 2025-08-05T23:38:06.708117Z  INFO ThreadId(01) src/api/mod.rs:18: starting API
-api_0-1    | 2025-08-05T23:38:06.708237Z  INFO ThreadId(01) src/api/mod.rs:31: binded to unix socket on /var/run/api_0.sock
-haproxy-1  | Usage : haproxy [-f <cfgfile|cfgdir>]* [ -vdVD ] [ -n <maxconn> ] [ -N <maxpconn> ]
-haproxy-1  |         [ -p <pidfile> ] [ -m <max megs> ] [ -C <dir> ] [-- <cfgfile>*]
-haproxy-1  |         -v displays version ; -vv shows known build options.
-haproxy-1  |         -d enters debug mode ; -db only disables background mode.
-haproxy-1  |         -dM[<byte>,help,...] debug memory (default: poison with <byte>/0x50)
-haproxy-1  |         -dt activate traces on stderr
-haproxy-1  |         -V enters verbose mode (disables quiet mode)
-haproxy-1  |         -D goes daemon ; -C changes to <dir> before loading files.
-haproxy-1  |         -W master-worker mode.
-haproxy-1  |         -Ws master-worker mode with systemd notify support.
-haproxy-1  |         -q quiet mode : don't display messages
-haproxy-1  |         -c check mode : only check config files and exit
-haproxy-1  |         -cc check condition : evaluate a condition and exit
-haproxy-1  |         -4 force resolvers to consider IPv4 responses only
-haproxy-1  |         -n sets the maximum total # of connections (uses ulimit -n)
-haproxy-1  |         -m limits the usable amount of memory (in MB)
-haproxy-1  |         -N sets the default, per-proxy maximum # of connections (0)
-haproxy-1  |         -L set local peer name (default to hostname)
-haproxy-1  |         -p writes pids of all children to this file
-haproxy-1  |         -dC[[key],line] display the configuration file, if there is a key, the file will be anonymised
-haproxy-1  |         -de disables epoll() usage even when available
-haproxy-1  |         -dp disables poll() usage even when available
-haproxy-1  |         -dS disables splice usage (broken on old kernels)
-haproxy-1  |         -dG disables getaddrinfo() usage
-haproxy-1  |         -dR disables SO_REUSEPORT usage
-haproxy-1  |         -dL dumps loaded object files after config checks
-haproxy-1  |         -dc dumps the list of selected and evicted CPUs
-haproxy-1  |         -dK{class[,...]} dump registered keywords (use 'help' for list)
-haproxy-1  |         -dr ignores server address resolution failures
-haproxy-1  |         -dV disables SSL verify on servers side
-haproxy-1  |         -dW fails if any warning is emitted
-haproxy-1  |         -dD diagnostic mode : warn about suspicious configuration statements
-haproxy-1  |         -dF disable fast-forward
-haproxy-1  |         -dI enable insecure fork
-haproxy-1  |         -dZ disable zero-copy forwarding
-haproxy-1  |         -sf/-st [pid ]* finishes/terminates old pids.
-haproxy-1  |         -x <unix_socket> get listening sockets from a unix socket
-haproxy-1  |         -S <bind>[,<bind options>...] new master CLI
-haproxy-1  | 
-haproxy-1  | HAProxy version 3.2.3-1844da7 2025/07/09 - https://haproxy.org/
-haproxy-1  | Status: long-term supported branch - will stop receiving fixes around Q2 2030.
-haproxy-1  | Known bugs: http://www.haproxy.org/bugs/bugs-3.2.3.html
-haproxy-1  | Running on: Linux 6.1.0-37-amd64 #1 SMP PREEMPT_DYNAMIC Debian 6.1.140-1 (2025-05-22) x86_64
-[Khaproxy-1 exited with code 1
-worker-1   | =================================== Metrics ====================================
-worker-1   | 
-worker-1   | Key Kind      Value Units 𝚫 Delta | Description | Labels
-worker-1   | --------------------------------------------------------------------------------
-worker-1   | 
-worker-1   | ================================ After 10.000 s ================================
-worker-1   | 
-api_1-1    | =================================== Metrics ====================================
-api_1-1    | 
-api_1-1    | Key Kind      Value Units 𝚫 Delta | Description | Labels
-api_1-1    | --------------------------------------------------------------------------------
-api_1-1    | 
-api_1-1    | ================================ After 10.000 s ================================
-api_1-1    | 
-api_0-1    | =================================== Metrics ====================================
-api_0-1    | 
-api_0-1    | Key Kind      Value Units 𝚫 Delta | Description | Labels
-api_0-1    | --------------------------------------------------------------------------------
-api_0-1    | 
-api_0-1    | ================================ After 10.000 s ================================
-api_0-1    | 
-worker-1   | =================================== Metrics ====================================
-worker-1   | 
-worker-1   | Key Kind      Value Units 𝚫 Delta | Description | Labels
-worker-1   | --------------------------------------------------------------------------------
-worker-1   | 
-worker-1   | ================================ After 10.000 s ================================
-worker-1   | 
-api_1-1    | =================================== Metrics ====================================
-api_1-1    | 
-api_1-1    | Key Kind      Value Units 𝚫 Delta | Description | Labels
-api_1-1    | --------------------------------------------------------------------------------
-api_1-1    | 
-api_1-1    | ================================ After 10.000 s ================================
-api_1-1    | 
-api_0-1    | =================================== Metrics ====================================
-api_0-1    | 
-api_0-1    | Key Kind      Value Units 𝚫 Delta | Description | Labels
-api_0-1    | --------------------------------------------------------------------------------
-api_0-1    | 
-api_0-1    | ================================ After 10.000 s ================================
-api_0-1    | 
-worker-1   | =================================== Metrics ====================================
-worker-1   | 
-worker-1   | Key Kind      Value Units 𝚫 Delta | Description | Labels
-worker-1   | --------------------------------------------------------------------------------
-worker-1   | 
-worker-1   | ================================ After 10.000 s ================================
-worker-1   | 
-api_1-1    | =================================== Metrics ====================================
-api_1-1    | 
-api_1-1    | Key Kind      Value Units 𝚫 Delta | Description | Labels
-api_1-1    | --------------------------------------------------------------------------------
-api_1-1    | 
-api_1-1    | ================================ After 10.000 s ================================
-api_1-1    | 
-api_0-1    | =================================== Metrics ====================================
-api_0-1    | 
-api_0-1    | Key Kind      Value Units 𝚫 Delta | Description | Labels
-api_0-1    | --------------------------------------------------------------------------------
-api_0-1    | 
-api_0-1    | ================================ After 10.000 s ================================
-api_0-1    | 
-worker-1   | =================================== Metrics ====================================
-worker-1   | 
-worker-1   | Key Kind      Value Units 𝚫 Delta | Description | Labels
-worker-1   | --------------------------------------------------------------------------------
-worker-1   | 
-worker-1   | ================================ After 10.000 s ================================
-worker-1   | 
-api_1-1    | =================================== Metrics ====================================
-api_1-1    | 
-api_1-1    | Key Kind      Value Units 𝚫 Delta | Description | Labels
-api_1-1    | --------------------------------------------------------------------------------
-api_1-1    | 
-api_1-1    | ================================ After 10.000 s ================================
-api_1-1    | 
-api_0-1    | =================================== Metrics ====================================
-api_0-1    | 
-api_0-1    | Key Kind      Value Units 𝚫 Delta | Description | Labels
-api_0-1    | --------------------------------------------------------------------------------
-api_0-1    | 
-api_0-1    | ================================ After 10.000 s ================================
-api_0-1    | 
-worker-1   | =================================== Metrics ====================================
-worker-1   | 
-worker-1   | Key Kind      Value Units 𝚫 Delta | Description | Labels
-worker-1   | --------------------------------------------------------------------------------
-worker-1   | 
-worker-1   | ================================ After 10.000 s ================================
-worker-1   | 
-api_1-1    | =================================== Metrics ====================================
-api_1-1    | 
-api_1-1    | Key Kind      Value Units 𝚫 Delta | Description | Labels
-api_1-1    | --------------------------------------------------------------------------------
-api_1-1    | 
-api_1-1    | ================================ After 10.000 s ================================
-api_1-1    | 
-api_0-1    | =================================== Metrics ====================================
-api_0-1    | 
-api_0-1    | Key Kind      Value Units 𝚫 Delta | Description | Labels
-api_0-1    | --------------------------------------------------------------------------------
-api_0-1    | 
-api_0-1    | ================================ After 10.000 s ================================
-api_0-1    | 
-worker-1   | =================================== Metrics ====================================
-worker-1   | 
-worker-1   | Key Kind      Value Units 𝚫 Delta | Description | Labels
-worker-1   | --------------------------------------------------------------------------------
-worker-1   | 
-worker-1   | ================================ After 10.000 s ================================
-worker-1   | 
-api_1-1    | =================================== Metrics ====================================
-api_1-1    | 
-api_1-1    | Key Kind      Value Units 𝚫 Delta | Description | Labels
-api_1-1    | --------------------------------------------------------------------------------
-api_1-1    | 
-api_1-1    | ================================ After 10.000 s ================================
-api_1-1    | 
-api_0-1    | =================================== Metrics ====================================
-api_0-1    | 
-api_0-1    | Key Kind      Value Units 𝚫 Delta | Description | Labels
-api_0-1    | --------------------------------------------------------------------------------
-api_0-1    | 
-api_0-1    | ================================ After 10.000 s ================================
-api_0-1    | 
-worker-1   | =================================== Metrics ====================================
-worker-1   | 
-worker-1   | Key Kind      Value Units 𝚫 Delta | Description | Labels
-worker-1   | --------------------------------------------------------------------------------
-worker-1   | 
-worker-1   | ================================ After 10.000 s ================================
-worker-1   | 
-api_1-1    | =================================== Metrics ====================================
-api_1-1    | 
-api_1-1    | Key Kind      Value Units 𝚫 Delta | Description | Labels
-api_1-1    | --------------------------------------------------------------------------------
-api_1-1    | 
-api_1-1    | ================================ After 10.000 s ================================
-api_1-1    | 
-api_0-1    | =================================== Metrics ====================================
-api_0-1    | 
-api_0-1    | Key Kind      Value Units 𝚫 Delta | Description | Labels
-api_0-1    | --------------------------------------------------------------------------------
-api_0-1    | 
-api_0-1    | ================================ After 10.000 s ================================
-api_0-1    | 
+ Container joao-xavier-lb-1  Creating
+ Container joao-xavier-lb-1  Created
+Attaching to api_0-1, api_1-1, lb-1, worker-1
+worker-1  | 2025-08-07T01:46:42.632812Z  INFO ThreadId(01) src/worker/mod.rs:25: starting worker
+worker-1  | 2025-08-07T01:46:42.632837Z  INFO ThreadId(01) src/worker/mod.rs:37: starting payment_req_consumer
+worker-1  | 2025-08-07T01:46:42.633022Z  INFO ThreadId(01) src/worker/mod.rs:72: listening on /var/run/worker.socket
+api_0-1   | 2025-08-07T01:46:42.871779Z  INFO ThreadId(01) src/api/mod.rs:20: starting API
+api_0-1   | 2025-08-07T01:46:42.871925Z  INFO ThreadId(01) src/api/mod.rs:27: binded to unix socket on /var/run/api0.sock
+api_1-1   | 2025-08-07T01:46:42.899474Z  INFO ThreadId(01) src/api/mod.rs:20: starting API
+api_1-1   | 2025-08-07T01:46:42.899563Z  INFO ThreadId(01) src/api/mod.rs:27: binded to unix socket on /var/run/api1.sock
+lb-1      | 2025-08-07T01:46:43.142797Z  INFO ThreadId(01) src/lb.rs:40: starting lb on port 9999
+lb-1      | 2025-08-07T01:46:43.142839Z  INFO ThreadId(01) src/lb.rs:44: api instances ["/var/run/api0.sock", "/var/run/api1.sock"]
+lb-1      | 2025-08-07T01:46:43.142843Z  INFO ThreadId(01) src/lb.rs:48: allocating 1024 512B buffers
+worker-1  | 2025-08-07T01:46:49.954428Z  INFO ThreadId(03) src/worker/mod.rs:116: db purged
+worker-1  | =================================== Metrics ====================================
+worker-1  | 
+worker-1  | Key        Kind      Value                                                         Units 𝚫 Delta                                                             | Description                 | Labels
+worker-1  | --------------------------------------------------------------------------------
+worker-1  | db.insert  Histogram [p50=943.031812827257, p99=1960.0005253671684, max=23965]#310 ns    𝚫 [p50=+943.031812827257, p99=+1960.0005253671684, max=+23965]#+310 | db insert time              | 
+worker-1  | db.select  Histogram [p50=5248.5127175323205, p99=5248.5127175323205, max=6625]#2  ns    𝚫 [p50=+5248.5127175323205, p99=+5248.5127175323205, max=+6625]#+2  | db query time               | 
+worker-1  | pp_http    Histogram [p50=731.0632760749722, p99=958.0500471430477, max=11401]#310 μs    𝚫 [p50=+731.0632760749722, p99=+958.0500471430477, max=+11401]#+310 | payment processor http time | 
+worker-1  | uds.handle Histogram [p50=9.999149133010329, p99=36.999337498439296, max=3995]#314 μs    𝚫 [p50=+9.999149133010329, p99=+36.999337498439296, max=+3995]#+314 | http handler time           | 
+worker-1  | 
+worker-1  | ================================ After 15.000 s ================================
+worker-1  | 
+api_0-1   | =================================== Metrics ====================================
+api_0-1   | 
+api_0-1   | Key       Kind      Value Units 𝚫 Delta                | Description | Labels
+api_0-1   | --------------------------------------------------------------------------------
+api_0-1   | http.conn Counter   38    N/A   𝚫 2.5333216469516877/s | N/A         | 
+api_0-1   | http.req  Counter   164   N/A   𝚫 10.933282897370443/s | N/A         | 
+api_0-1   | 
+api_0-1   | ================================ After 15.000 s ================================
+api_0-1   | 
+api_1-1   | =================================== Metrics ====================================
+api_1-1   | 
+api_1-1   | Key       Kind      Value Units 𝚫 Delta                | Description | Labels
+api_1-1   | --------------------------------------------------------------------------------
+api_1-1   | http.conn Counter   38    N/A   𝚫 2.5333218507987123/s | N/A         | 
+api_1-1   | http.req  Counter   168   N/A   𝚫 11.199949235110097/s | N/A         | 
+api_1-1   | 
+api_1-1   | ================================ After 15.000 s ================================
+api_1-1   | 
+lb-1      | =================================== Metrics ====================================
+lb-1      | 
+lb-1      | Key       Kind      Value                                                      Units 𝚫 Delta                                                          | Description       | Labels
+lb-1      | --------------------------------------------------------------------------------
+lb-1      | http.get  Histogram [p50=3752.209038400884, p99=3752.209038400884, max=4330]#2 μs    𝚫 [p50=+3752.209038400884, p99=+3752.209038400884, max=+4330]#+2 | http handler time | 
+lb-1      | http.post Histogram [p50=40.9970456740797, p99=75.99746689756495, max=80]#349  μs    𝚫 [p50=+40.9970456740797, p99=+75.99746689756495, max=+80]#+349  | http handler time | 
+lb-1      | 
+lb-1      | ================================ After 15.000 s ================================
+lb-1      | 
+worker-1  | =================================== Metrics ====================================
+worker-1  | 
+worker-1  | Key        Kind      Value                                                           Units 𝚫 Delta                                                               | Description                 | Labels
+worker-1  | --------------------------------------------------------------------------------
+worker-1  | db.insert  Histogram [p50=1021.9828789194597, p99=1960.0005253671684, max=23965]#704 ns    𝚫 [p50=+78.95106609220272, p99=+0, max=+0]#+394                       | db insert time              | 
+worker-1  | db.select  Histogram [p50=4636.430327368401, p99=5248.5127175323205, max=6625]#4     ns    𝚫 [p50=-612.0823901639196, p99=+0, max=+0]#+2                         | db query time               | 
+worker-1  | pp_http    Histogram [p50=771.0089772645262, p99=101874.81488261373, max=103293]#758 μs    𝚫 [p50=+39.945701189553915, p99=+100916.76483547069, max=+91892]#+448 | payment processor http time | 
+worker-1  | uds.handle Histogram [p50=8.000467695685316, p99=33.99794245495759, max=3995]#2474   μs    𝚫 [p50=-1.998681437325013, p99=-3.0013950434817076, max=+0]#+2160     | http handler time           | 
+worker-1  | 
+worker-1  | ================================ After 15.000 s ================================
+worker-1  | 
+api_0-1   | =================================== Metrics ====================================
+api_0-1   | 
+api_0-1   | Key       Kind      Value Units 𝚫 Delta               | Description | Labels
+api_0-1   | --------------------------------------------------------------------------------
+api_0-1   | http.conn Counter   107   N/A   𝚫 4.599969977222617/s | N/A         | 
+api_0-1   | http.req  Counter   1258  N/A   𝚫 72.93285732002236/s | N/A         | 
+api_0-1   | 
+api_0-1   | ================================ After 15.000 s ================================
+api_0-1   | 
+api_1-1   | =================================== Metrics ====================================
+api_1-1   | 
+api_1-1   | Key       Kind      Value Units 𝚫 Delta               | Description | Labels
+api_1-1   | --------------------------------------------------------------------------------
+api_1-1   | http.conn Counter   106   N/A   𝚫 4.533324546843697/s | N/A         | 
+api_1-1   | http.req  Counter   1268  N/A   𝚫 73.33319119894215/s | N/A         | 
+api_1-1   | 
+api_1-1   | ================================ After 15.000 s ================================
+api_1-1   | 
+lb-1      | =================================== Metrics ====================================
+lb-1      | 
+lb-1      | Key       Kind      Value                                                        Units 𝚫 Delta                                                             | Description       | Labels
+lb-1      | --------------------------------------------------------------------------------
+lb-1      | http.get  Histogram [p50=3777.8110079911153, p99=3920.2081175214357, max=4330]#4 μs    𝚫 [p50=+25.60196959023142, p99=+167.99907912055187, max=+0]#+2      | http handler time | 
+lb-1      | http.post Histogram [p50=45.00168833801188, p99=98.99803587754256, max=662]#2577 μs    𝚫 [p50=+4.004642663932181, p99=+23.000568979977615, max=+582]#+2228 | http handler time | 
+lb-1      | 
+lb-1      | ================================ After 15.000 s ================================
+lb-1      | 
+worker-1  | =================================== Metrics ====================================
+worker-1  | 
+worker-1  | Key        Kind      Value                                                             Units 𝚫 Delta                                                                 | Description                 | Labels
+worker-1  | --------------------------------------------------------------------------------
+worker-1  | db.insert  Histogram [p50=1021.9828789194597, p99=1960.0005253671684, max=23965]#704   ns    𝚫 [p50=+0, p99=+0, max=+0]#+0                                           | db insert time              | 
+worker-1  | db.select  Histogram [p50=4946.8190031048825, p99=5248.5127175323205, max=6625]#5      ns    𝚫 [p50=+310.3886757364817, p99=+0, max=+0]#+1                           | db query time               | 
+worker-1  | pp_http    Histogram [p50=2851.7839406211247, p99=102078.76839859018, max=2000839]#912 μs    𝚫 [p50=+2080.7749633565986, p99=+203.95351597644913, max=+1897546]#+154 | payment processor http time | 
+worker-1  | uds.handle Histogram [p50=31.547678558095672, p99=32.99975069216289, max=22133]#6689   μs    𝚫 [p50=+23.547210862410356, p99=-0.998191762794697, max=+18138]#+4215   | http handler time           | 
+worker-1  | 
+worker-1  | ================================ After 15.000 s ================================
+worker-1  | 
+api_0-1   | =================================== Metrics ====================================
+api_0-1   | 
+api_0-1   | Key       Kind      Value Units 𝚫 Delta               | Description | Labels
+api_0-1   | --------------------------------------------------------------------------------
+api_0-1   | http.conn Counter   175   N/A   𝚫 4.533298309372815/s | N/A         | 
+api_0-1   | http.req  Counter   3375  N/A   𝚫 141.1322429550331/s | N/A         | 
+api_0-1   | 
+api_0-1   | ================================ After 15.000 s ================================
+api_0-1   | 
+api_1-1   | =================================== Metrics ====================================
+api_1-1   | 
+api_1-1   | Key       Kind      Value Units 𝚫 Delta                | Description | Labels
+api_1-1   | --------------------------------------------------------------------------------
+api_1-1   | http.conn Counter   175   N/A   𝚫 4.599979527331116/s  | N/A         | 
+api_1-1   | http.req  Counter   3396  N/A   𝚫 141.86603527769006/s | N/A         | 
+api_1-1   | 
+api_1-1   | ================================ After 15.000 s ================================
+api_1-1   | 
+lb-1      | =================================== Metrics ====================================
+lb-1      | 
+lb-1      | Key       Kind      Value                                                         Units 𝚫 Delta                                          | Description       | Labels
+lb-1      | --------------------------------------------------------------------------------
+lb-1      | http.get  Histogram [p50=3777.8110079911153, p99=3920.2081175214357, max=4330]#5  μs    𝚫 [p50=+0, p99=+0, max=+0]#+1                    | http handler time | 
+lb-1      | http.post Histogram [p50=45.00168833801188, p99=103.99054800886718, max=662]#6859 μs    𝚫 [p50=+0, p99=+4.992512131324617, max=+0]#+4282 | http handler time | 
+lb-1      | 
+lb-1      | ================================ After 15.000 s ================================
+lb-1      | 
+worker-1  | =================================== Metrics ====================================
+worker-1  | 
+worker-1  | Key        Kind      Value                                                               Units 𝚫 Delta                                                                | Description                 | Labels
+worker-1  | --------------------------------------------------------------------------------
+worker-1  | db.insert  Histogram [p50=488.9694512494956, p99=1719.003462841006, max=123749]#11246    ns    𝚫 [p50=-533.0134276699641, p99=-240.99706252616238, max=+99784]#+10542 | db insert time              | 
+worker-1  | db.select  Histogram [p50=4946.8190031048825, p99=5861.143639888846, max=6625]#7         ns    𝚫 [p50=+0, p99=+612.6309223565258, max=+0]#+2                          | db query time               | 
+worker-1  | pp_http    Histogram [p50=2852.3543544506315, p99=101042.85708649884, max=2001225]#11456 μs    𝚫 [p50=+0.5704138295068333, p99=-1035.911312091339, max=+386]#+10544   | payment processor http time | 
+worker-1  | uds.handle Histogram [p50=31.547678558095672, p99=85.0041441331074, max=22133]#12962     μs    𝚫 [p50=+0, p99=+52.00439344094451, max=+0]#+6273                       | http handler time           | 
+worker-1  | 
+worker-1  | ================================ After 15.000 s ================================
+worker-1  | 
+api_0-1   | =================================== Metrics ====================================
+api_0-1   | 
+api_0-1   | Key       Kind      Value Units 𝚫 Delta                | Description | Labels
+api_0-1   | --------------------------------------------------------------------------------
+api_0-1   | http.conn Counter   244   N/A   𝚫 4.599980261178034/s  | N/A         | 
+api_0-1   | http.req  Counter   6525  N/A   𝚫 209.99909887986678/s | N/A         | 
+api_0-1   | 
+api_0-1   | ================================ After 15.000 s ================================
+api_0-1   | 
+api_1-1   | =================================== Metrics ====================================
+api_1-1   | 
+api_1-1   | Key       Kind      Value Units 𝚫 Delta                | Description | Labels
+api_1-1   | --------------------------------------------------------------------------------
+api_1-1   | http.conn Counter   244   N/A   𝚫 4.599981175957032/s  | N/A         | 
+api_1-1   | http.req  Counter   6553  N/A   𝚫 210.46580539849782/s | N/A         | 
+api_1-1   | 
+api_1-1   | ================================ After 15.000 s ================================
+api_1-1   | 
+lb-1      | =================================== Metrics ====================================
+lb-1      | 
+lb-1      | Key       Kind      Value                                                           Units 𝚫 Delta                                                           | Description       | Labels
+lb-1      | --------------------------------------------------------------------------------
+lb-1      | http.get  Histogram [p50=3777.8110079911153, p99=3966.740575032245, max=4330]#7     μs    𝚫 [p50=+0, p99=+46.53245751080931, max=+0]#+2                     | http handler time | 
+lb-1      | http.post Histogram [p50=46.997763141040394, p99=162.99181942636315, max=662]#13200 μs    𝚫 [p50=+1.9960748030285131, p99=+59.00127141749597, max=+0]#+6341 | http handler time | 
+lb-1      | 
+lb-1      | ================================ After 15.000 s ================================
+lb-1      | 
+[Klb-1 exited with code 143
 [Kapi_0-1 exited with code 143
-[Kapi_1-1 exited with code 143
 [Kworker-1 exited with code 143
+log truncated at line 1000

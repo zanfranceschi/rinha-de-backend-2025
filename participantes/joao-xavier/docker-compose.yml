@@ -1,10 +1,12 @@
 x-api_template: &api
-  image: ghcr.io/lothyriel/rinha_2025:v0.2.1
+  image: ghcr.io/lothyriel/rinha_2025:v0.3.5
   volumes:
     - uds:/var/run
   command: ["-m", "api"]
   depends_on:
     - worker
+  environment:
+    RUST_LOG: "info"
   deploy:
     resources:
       limits:
@@ -12,48 +14,60 @@ x-api_template: &api
         memory: "80MB"
 
 services:
-  api_0:
-    <<: *api
-    environment:
-      NGINX_SOCKET: "/var/run/api_0.sock"
-      RUST_LOG: "info"
-
-  api_1:
-    <<: *api
-    environment:
-      NGINX_SOCKET: "/var/run/api_1.sock"
-      RUST_LOG: "info"
-
-  worker:
-    image: ghcr.io/lothyriel/rinha_2025:v0.2.1
-    networks:
-      - payment-processor
-    volumes:
-      - uds:/var/run
-    command: ["-m", "worker"]
-    environment:
-      RUST_LOG: "info"
-    deploy:
-      resources:
-        limits:
-          cpus: "0.2"
-          memory: "110MB"
-
-  haproxy:
-    image: haproxy:latest
+  lb:
+    image: ghcr.io/lothyriel/rinha_2025:v0.3.5
+    command: ["-m", "lb"]
     ports:
       - "9999:9999"
     volumes:
       - uds:/var/run
-      - ./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
+    # we need this cause io_uring syscall is disabled by default in docker
+    security_opt:
+      - seccomp=unconfined
     depends_on:
       - api_0
       - api_1
+    environment:
+      API_N: "2"
+    ulimits:
+      nofile:
+        soft: 2048
+        hard: 2048
     deploy:
       resources:
         limits:
-          cpus: "0.5"
+          cpus: "0.4"
           memory: "80MB"
+
+  api_0:
+    <<: *api
+    environment:
+      API_N: "0"
+      RUST_LOG: "info"
+      WORKER_SOCKET: "/var/run/worker.socket"
+
+  api_1:
+    <<: *api
+    environment:
+      API_N: "1"
+      RUST_LOG: "info"
+      WORKER_SOCKET: "/var/run/worker.socket"
+
+  worker:
+    image: ghcr.io/lothyriel/rinha_2025:v0.3.5
+    command: ["-m", "worker"]
+    networks:
+      - payment-processor
+    volumes:
+      - uds:/var/run
+    environment:
+      WORKER_SOCKET: "/var/run/worker.socket"
+      RUST_LOG: "info"
+    deploy:
+      resources:
+        limits:
+          cpus: "0.3"
+          memory: "110MB"
 
 volumes:
   uds:

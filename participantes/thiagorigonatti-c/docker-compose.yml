@@ -1,8 +1,9 @@
 services:
   api01: &app
-    image: thiagorigonatti/rinha-2025:0.0.2
+    image: thiagorigonatti/rinha-2025:0.0.9
     environment:
-      - PTHREADS=8
+      - PTHREADS=2
+      - SOCK_PATH=/dev/shm/server1.sock
     networks:
       - api
       - payment-processor
@@ -10,22 +11,25 @@ services:
       resources:
         limits:
           cpus: "0.50"
-          memory: "120MB"
+          memory: "30MB"
     volumes:
       - /dev/shm:/dev/shm
 
   api02:
     <<: *app
-
+    environment:
+      - PTHREADS=2
+      - SOCK_PATH=/dev/shm/server2.sock
   haproxy:
     image: haproxy:3.3-dev5-alpine3.22
     volumes:
+      - /dev/shm:/dev/shm
       - ./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
     deploy:
       resources:
         limits:
           cpus: "0.50"
-          memory: "110MB"
+          memory: "200MB"
     networks:
       - api
     ports:

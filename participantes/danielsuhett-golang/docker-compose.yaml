@@ -1,9 +1,9 @@
 services:
   nginx:
-    image: nginx:1.25-alpine
+    image: openresty/openresty:1.25.3.1-alpine
     container_name: go-rinha-nginx
     volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx.conf:/usr/local/openresty/nginx/conf/nginx.conf:ro
       - sockets:/var/run/sockets
     depends_on:
       - api1
@@ -19,7 +19,7 @@ services:
           cpus: "0.20"
           memory: "100MB"
   api1:
-    image: danielsuhett1999/rinha-backend-go:1.0.6
+    image: danielsuhett1999/rinha-backend-go:1.0.9
     hostname: api1
     volumes:
       - sockets:/var/run/sockets
@@ -35,7 +35,6 @@ services:
       - HEALTH_INTERVAL=3000
       - LATENCY_DIFF_TO_USE_FALLBACK=5000
       - BATCH_SIZE=100
-      - GOMAXPROCS=1
     networks:
       - backend
       - payment-processor
@@ -48,8 +47,7 @@ services:
           cpus: "0.60"
           memory: "100MB"
   api2:
-    image: danielsuhett1999/rinha-backend-go:1.0.6
-
+    image: danielsuhett1999/rinha-backend-go:1.0.9
     hostname: api2
     volumes:
       - sockets:/var/run/sockets
@@ -65,8 +63,6 @@ services:
       - HEALTH_INTERVAL=3000
       - LATENCY_DIFF_TO_USE_FALLBACK=5000
       - BATCH_SIZE=100
-      - GOMAXPROCS=1
-
     networks:
       - backend
       - payment-processor

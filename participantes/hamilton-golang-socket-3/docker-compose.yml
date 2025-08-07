@@ -1,7 +1,7 @@
 x-rinha-api-base: &rinha-api-base
-  image: jhamiltonjunior/rinha-go-socket:0.0.4
+  image: jhamiltonjunior/rinha-go-socket:0.0.7
   volumes:
-    - api-socketsv3:/var/run
+    - api-socketsv4:/var/run
   depends_on:
     - redis
   networks:
@@ -23,13 +23,16 @@ x-rinha-api-base: &rinha-api-base
 
 services:
   nginx:
-    image: nginx:1.25.3-alpine
+    image: openresty/openresty:bullseye
+    pull_policy: always
+    environment:
+      - EXTERNAL_HOSTS=/var/run/api_1.sock,/var/run/api_2.sock,/var/run/api_3.sock
     container_name: nginx_load_balancer
     ports:
       - "9999:80"
     volumes:
-      - ./config/nginx.conf:/etc/nginx/nginx.conf:ro
-      - api-socketsv3:/var/run:rw
+      - ./config/nginx.conf:/usr/local/openresty/nginx/conf/nginx.conf
+      - api-socketsv4:/var/run:rw
     depends_on:
       - rinha-api-1
       - rinha-api-2
@@ -100,4 +103,4 @@ networks:
 
 volumes:
   redis-data:
-  api-socketsv3:
+  api-socketsv4:

@@ -1,12 +1,12 @@
 CREATE UNLOGGED TABLE transactions (
-    "CorrelationId" UUID PRIMARY KEY,
-    "Amount" NUMERIC(18,2) NOT NULL,
-    "RequestedAt" TIMESTAMP WITHOUT TIME ZONE NOT NULL,
-    "Gateway" BOOLEAN NOT NULL DEFAULT TRUE,
-    "Status" BOOLEAN NOT NULL DEFAULT FALSE
+    "correlationId" UUID PRIMARY KEY,
+    amount NUMERIC(18,2) NOT NULL,
+    "requestedAt" TIMESTAMP WITHOUT TIME ZONE NOT NULL,
+    gateway BOOLEAN NOT NULL DEFAULT TRUE,
+    status BOOLEAN NOT NULL DEFAULT FALSE
 );
 
-CREATE INDEX idx_transactions ON transactions ("CorrelationId");
+CREATE INDEX idx_transactions ON transactions ("correlationId");
 --CREATE INDEX idx_transactions_search ON transactions ("Status", "Gateway", "RequestedAt");
 
 
@@ -15,13 +15,13 @@ RETURNS TRIGGER AS $trigger$
 DECLARE
   channel_name TEXT;
 BEGIN
-  IF NEW."Status" = TRUE THEN
+  IF NEW.status = TRUE THEN
     RETURN NEW;
   END IF;
 
   channel_name := 'payment_transaction_primary';
 
-  IF NEW."Gateway" = FALSE THEN
+  IF NEW.gateway = FALSE THEN
     channel_name := 'payment_transaction_fallback';
   END IF;
 

@@ -1,0 +1,50 @@
+
+ Container davi64lima-bun-cache-1  Creating
+ Container davi64lima-bun-cache-1  Created
+ Container davi64lima-bun-web1-1  Creating
+ Container davi64lima-bun-web2-1  Creating
+ Container davi64lima-bun-web2-1  Created
+ Container davi64lima-bun-web1-1  Created
+ Container davi64lima-bun-nginx-1  Creating
+ Container davi64lima-bun-nginx-1  Created
+Attaching to cache-1, nginx-1, web1-1, web2-1
+cache-1  | 1:C 06 Aug 2025 15:48:28.124 # WARNING Memory overcommit must be enabled! Without it, a background save or replication may fail under low memory condition. Being disabled, it can also cause failures without low memory condition, see https://github.com/jemalloc/jemalloc/issues/1328. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.
+cache-1  | 1:C 06 Aug 2025 15:48:28.124 * oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+cache-1  | 1:C 06 Aug 2025 15:48:28.124 * Redis version=7.2.10, bits=64, commit=00000000, modified=0, pid=1, just started
+cache-1  | 1:C 06 Aug 2025 15:48:28.124 * Configuration loaded
+cache-1  | 1:M 06 Aug 2025 15:48:28.124 * monotonic clock: POSIX clock_gettime
+cache-1  | 1:M 06 Aug 2025 15:48:28.125 * Running mode=standalone, port=6379.
+cache-1  | 1:M 06 Aug 2025 15:48:28.125 * Server initialized
+cache-1  | 1:M 06 Aug 2025 15:48:28.125 * Ready to accept connections tcp
+nginx-1  | /docker-entrypoint.sh: /docker-entrypoint.d/ is not empty, will attempt to perform configuration
+nginx-1  | /docker-entrypoint.sh: Looking for shell scripts in /docker-entrypoint.d/
+nginx-1  | /docker-entrypoint.sh: Launching /docker-entrypoint.d/10-listen-on-ipv6-by-default.sh
+nginx-1  | 10-listen-on-ipv6-by-default.sh: info: Getting the checksum of /etc/nginx/conf.d/default.conf
+nginx-1  | 10-listen-on-ipv6-by-default.sh: info: Enabled listen on IPv6 in /etc/nginx/conf.d/default.conf
+nginx-1  | /docker-entrypoint.sh: Sourcing /docker-entrypoint.d/15-local-resolvers.envsh
+nginx-1  | /docker-entrypoint.sh: Launching /docker-entrypoint.d/20-envsubst-on-templates.sh
+nginx-1  | /docker-entrypoint.sh: Launching /docker-entrypoint.d/30-tune-worker-processes.sh
+nginx-1  | /docker-entrypoint.sh: Configuration complete; ready for start up
+nginx-1  | 172.19.0.1 - - [06/Aug/2025:15:48:31 +0000] "GET /payments-summary HTTP/1.1" 400 22 "-" "curl/7.88.1"
+nginx-1  | 172.19.0.1 - - [06/Aug/2025:15:48:36 +0000] "GET /payments-summary HTTP/1.1" 400 22 "-" "curl/7.88.1"
+nginx-1  | 172.19.0.1 - - [06/Aug/2025:15:48:41 +0000] "GET /payments-summary HTTP/1.1" 400 22 "-" "curl/7.88.1"
+nginx-1  | 172.19.0.1 - - [06/Aug/2025:15:48:46 +0000] "GET /payments-summary HTTP/1.1" 400 22 "-" "curl/7.88.1"
+nginx-1  | 172.19.0.1 - - [06/Aug/2025:15:48:51 +0000] "GET /payments-summary HTTP/1.1" 400 22 "-" "curl/7.88.1"
+nginx-1  | 172.19.0.1 - - [06/Aug/2025:15:48:56 +0000] "GET /payments-summary HTTP/1.1" 400 22 "-" "curl/7.88.1"
+nginx-1  | 172.19.0.1 - - [06/Aug/2025:15:49:01 +0000] "GET /payments-summary HTTP/1.1" 400 22 "-" "curl/7.88.1"
+nginx-1  | 172.19.0.1 - - [06/Aug/2025:15:49:06 +0000] "GET /payments-summary HTTP/1.1" 400 22 "-" "curl/7.88.1"
+nginx-1  | 172.19.0.1 - - [06/Aug/2025:15:49:11 +0000] "GET /payments-summary HTTP/1.1" 400 22 "-" "curl/7.88.1"
+nginx-1  | 172.19.0.1 - - [06/Aug/2025:15:49:16 +0000] "GET /payments-summary HTTP/1.1" 400 22 "-" "curl/7.88.1"
+nginx-1  | 172.19.0.1 - - [06/Aug/2025:15:49:21 +0000] "GET /payments-summary HTTP/1.1" 400 22 "-" "curl/7.88.1"
+nginx-1  | 172.19.0.1 - - [06/Aug/2025:15:49:26 +0000] "GET /payments-summary HTTP/1.1" 400 22 "-" "curl/7.88.1"
+nginx-1  | 172.19.0.1 - - [06/Aug/2025:15:49:31 +0000] "GET /payments-summary HTTP/1.1" 400 22 "-" "curl/7.88.1"
+nginx-1  | 172.19.0.1 - - [06/Aug/2025:15:49:36 +0000] "GET /payments-summary HTTP/1.1" 400 22 "-" "curl/7.88.1"
+[Knginx-1 exited with code 0
+[Kweb2-1 exited with code 137
+[Kweb1-1 exited with code 137
+cache-1  | 1:signal-handler (1754495392) Received SIGTERM scheduling shutdown...
+cache-1  | 1:M 06 Aug 2025 15:49:53.026 * User requested shutdown...
+cache-1  | 1:M 06 Aug 2025 15:49:53.026 * Saving the final RDB snapshot before exiting.
+cache-1  | 1:M 06 Aug 2025 15:49:53.036 * DB saved on disk
+cache-1  | 1:M 06 Aug 2025 15:49:53.036 # Redis is now ready to exit, bye bye...
+[Kcache-1 exited with code 0

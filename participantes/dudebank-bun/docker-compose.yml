@@ -25,6 +25,8 @@ services:
 
   database:
     image: eber404/dudebank-db:0.0.8
+    env_file:
+      - .env
     volumes:
       - socket_data:/tmp
     networks:
@@ -33,24 +35,28 @@ services:
       resources:
         limits:
           cpus: '0.05'
-          memory: '15MB'
+          memory: '50MB'
 
-  load-balancer:
-    image: eber404/dudebank-balancer:0.0.1
+  balancer:
+    container_name: balancer
+    image: openresty/openresty:bullseye
+    env_file:
+      - .env
     volumes:
+      - ./nginx.conf:/usr/local/openresty/nginx/conf/nginx.conf
       - socket_data:/tmp
+    depends_on:
+      - api-1
+      - api-2
     networks:
       - backend
     ports:
       - '9999:80'
-    depends_on:
-      - api-1
-      - api-2
     deploy:
       resources:
         limits:
           cpus: '0.1'
-          memory: '65MB'
+          memory: '30MB'
 
 networks:
   backend:

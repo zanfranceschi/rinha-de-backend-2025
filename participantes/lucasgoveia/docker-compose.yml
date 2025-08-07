@@ -1,7 +1,12 @@
+x-default-user: &default-user "1000:1000"
+x-build-args: &build-args
+  APP_UID: "1000"
+  APP_GID: "1000"
+
 x-service-templates:
   server: &server
-    image: lucasgoveia/rinha-2025-api:2d6ea0a732eea8
-    user: "1000:1000"
+    image: lucasgoveia/rinha-2025-api:4351d8c426fc3
+    user: *default-user
     restart: always
     depends_on:
       - postgres
@@ -9,6 +14,10 @@ x-service-templates:
     networks:
       - backend
       - payment-processor
+    ulimits:
+      nofile:
+        soft: 16384
+        hard: 16384
     deploy:
       resources:
         limits:
@@ -16,12 +25,12 @@ x-service-templates:
           memory: '30M'
     volumes:
       - pg_socket:/var/run/postgresql
-      - backend:/tmp/
+      - tmp_sockets:/tmp
 
 services:
   pingora:
-    image: lucasgoveia/rinha-2025-proxy:2d6ea0a732eea8
-    user: "1000:1000"
+    image: lucasgoveia/rinha-2025-proxy:4351d8c426fc3
+    user: *default-user
     ports:
       - "9999:9999"
     depends_on:
@@ -32,15 +41,16 @@ services:
     restart: always
     ulimits:
       nofile:
-        soft: 16384
-        hard: 16384
+        soft: 65536
+        hard: 65536
     deploy:
       resources:
         limits:
           cpus: '0.35'
           memory: '50M'
     volumes:
-      - backend:/tmp/
+      - tmp_sockets:/tmp
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
 
   server1:
     <<: *server
@@ -71,14 +81,18 @@ services:
       - SERVICE_FALLBACK_HEALTH_URL=http://nginx:9000/fallback/payments/service-health
 
   worker:
-    image: lucasgoveia/rinha-2025-worker:2d6ea0a732eea8
-    user: "1000:1000"
+    image: lucasgoveia/rinha-2025-worker:4351d8c426fc3
+    user: *default-user
     restart: always
     depends_on:
       - postgres
     networks:
       - backend
       - payment-processor
+    ulimits:
+      nofile:
+        soft: 16384
+        hard: 16384
     deploy:
       resources:
         limits:
@@ -86,7 +100,7 @@ services:
           memory: '60M'
     volumes:
       - pg_socket:/var/run/postgresql
-      - backend:/tmp/
+      - tmp_sockets:/tmp
     container_name: worker
     hostname: worker
     environment:
@@ -117,8 +131,24 @@ services:
 
 volumes:
   postgres_data:
+    driver: local
+    driver_opts:
+      type: tmpfs
+      device: tmpfs
+      o: uid=70,gid=70
   pg_socket:
-  backend:
+    driver: local
+    driver_opts:
+      type: tmpfs
+      device: tmpfs
+      o: uid=1000,gid=1000
+  tmp_sockets:
+    driver: local
+    driver_opts:
+      type: tmpfs
+      device: tmpfs
+      o: uid=1000,gid=1000
+
 
 networks:
   backend:
