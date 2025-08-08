@@ -6,9 +6,9 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.7"
-          memory: 60M
-    image: daviddeltasierra/rinha-2025-go-2:1.19
+          cpus: "0.9"
+          memory: 100M
+    image: daviddeltasierra/rinha-2025-go-2:1.20
     volumes:
       - /tmp:/tmp
     environment:
@@ -27,16 +27,14 @@ services:
       resources:
         limits:
           cpus: "0.3"
-          memory: 70M
-    image: daviddeltasierra/rinha-2025-go-2:1.19
+          memory: 125M
+    image: daviddeltasierra/rinha-2025-go-2:1.20
     volumes:
       - /tmp/app1:/tmp/app1
     environment:
       - GATEWAY=false
       - SOCK=/tmp/app1/unix.sock
       - WORKERS=5
-    depends_on:
-      - postgres
 
   app-2:
     networks:
@@ -46,32 +44,14 @@ services:
       resources:
         limits:
           cpus: "0.3"
-          memory: 70M
-    image: daviddeltasierra/rinha-2025-go-2:1.19
+          memory: 125M
+    image: daviddeltasierra/rinha-2025-go-2:1.20
     volumes:
       - /tmp/app2:/tmp/app2
     environment:
       - GATEWAY=false
       - SOCK=/tmp/app2/unix.sock
       - WORKERS=5
-    depends_on:
-      - postgres
-
-  postgres:
-    networks:
-      - backend
-    deploy:
-      resources:
-        limits:
-          cpus: "0.2"
-          memory: 150M
-    image: postgres:alpine
-    user: postgres
-    volumes:
-      - ./scripts:/docker-entrypoint-initdb.d
-    environment:
-      - POSTGRES_PASSWORD=root
-      - POSTGRES_DB=rinha
 
 networks:
   backend:

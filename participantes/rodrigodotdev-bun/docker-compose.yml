@@ -1,0 +1,76 @@
+services:
+  nginx:
+    image: nginx:alpine
+    container_name: nginx
+    hostname: nginx
+    ports:
+      - 9999:9999
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    networks:
+      - backend
+    depends_on:
+      - app-1
+      - app-2
+    deploy:
+      resources:
+        limits:
+          cpus: "0.1"
+          memory: "30MB"
+
+  app-1:
+    image: rodrigodotdev/rinha-backend-2025-bun
+    container_name: app-1
+    hostname: app-1
+    environment:
+      - REDIS_URL=redis://redis:6379
+      - PROCESSOR_DEFAULT=http://payment-processor-default:8080
+      - PROCESSOR_FALLBACK=http://payment-processor-fallback:8080
+    networks:
+      - backend
+      - payment-processor
+    depends_on:
+      - redis
+    deploy:
+      resources:
+        limits:
+          cpus: "0.675"
+          memory: "135MB"
+
+  app-2:
+    image: rodrigodotdev/rinha-backend-2025-bun
+    container_name: app-2
+    hostname: app-2
+    environment:
+      - REDIS_URL=redis://redis:6379
+      - PROCESSOR_DEFAULT=http://payment-processor-default:8080
+      - PROCESSOR_FALLBACK=http://payment-processor-fallback:8080
+    networks:
+      - backend
+      - payment-processor
+    depends_on:
+      - redis
+    deploy:
+      resources:
+        limits:
+          cpus: "0.675"
+          memory: "135MB"
+
+  redis:
+    image: redis:7-alpine
+    container_name: redis
+    hostname: redis
+    networks:
+      - backend
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          cpus: "0.1"
+          memory: "50MB"
+
+networks:
+  backend:
+    driver: bridge
+  payment-processor:
+    external: true

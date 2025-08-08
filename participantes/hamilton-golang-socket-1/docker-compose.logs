@@ -9,26 +9,26 @@
  Volume "hamilton-golang-socket-1_redis-data"  Created
  Container redis_cache  Creating
  Container redis_cache  Created
- Container rinha-api-2  Creating
- Container rinha-api-1  Creating
  Container rinha-api-3  Creating
+ Container rinha-api-1  Creating
+ Container rinha-api-2  Creating
  Container rinha-api-2  Created
  Container rinha-api-1  Created
  Container rinha-api-3  Created
  Container nginx_load_balancer  Creating
  Container nginx_load_balancer  Created
 Attaching to nginx_load_balancer, redis_cache, rinha-api-1, rinha-api-2, rinha-api-3
-redis_cache          | 1:C 08 Aug 2025 00:24:26.768 # WARNING Memory overcommit must be enabled! Without it, a background save or replication may fail under low memory condition. Being disabled, it can also cause failures without low memory condition, see https://github.com/jemalloc/jemalloc/issues/1328. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.
-redis_cache          | 1:C 08 Aug 2025 00:24:26.768 * oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
-redis_cache          | 1:C 08 Aug 2025 00:24:26.768 * Redis version=7.2.4, bits=64, commit=00000000, modified=0, pid=1, just started
-redis_cache          | 1:C 08 Aug 2025 00:24:26.769 # Warning: no config file specified, using the default config. In order to specify a config file use redis-server /path/to/redis.conf
-redis_cache          | 1:M 08 Aug 2025 00:24:26.769 * monotonic clock: POSIX clock_gettime
-redis_cache          | 1:M 08 Aug 2025 00:24:26.770 * Running mode=standalone, port=6379.
-redis_cache          | 1:M 08 Aug 2025 00:24:26.771 * Server initialized
-redis_cache          | 1:M 08 Aug 2025 00:24:26.771 * Ready to accept connections tcp
-rinha-api-3          | UNIX SOCKET:/var/run/api_3.sock
-rinha-api-1          | UNIX SOCKET:/var/run/api_1.sock
+redis_cache          | 1:C 08 Aug 2025 00:59:52.030 # WARNING Memory overcommit must be enabled! Without it, a background save or replication may fail under low memory condition. Being disabled, it can also cause failures without low memory condition, see https://github.com/jemalloc/jemalloc/issues/1328. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.
+redis_cache          | 1:C 08 Aug 2025 00:59:52.030 * oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+redis_cache          | 1:C 08 Aug 2025 00:59:52.030 * Redis version=7.2.4, bits=64, commit=00000000, modified=0, pid=1, just started
+redis_cache          | 1:C 08 Aug 2025 00:59:52.030 # Warning: no config file specified, using the default config. In order to specify a config file use redis-server /path/to/redis.conf
+redis_cache          | 1:M 08 Aug 2025 00:59:52.030 * monotonic clock: POSIX clock_gettime
+redis_cache          | 1:M 08 Aug 2025 00:59:52.031 * Running mode=standalone, port=6379.
+redis_cache          | 1:M 08 Aug 2025 00:59:52.031 * Server initialized
+redis_cache          | 1:M 08 Aug 2025 00:59:52.031 * Ready to accept connections tcp
 rinha-api-2          | UNIX SOCKET:/var/run/api_2.sock
+rinha-api-1          | UNIX SOCKET:/var/run/api_1.sock
+rinha-api-3          | UNIX SOCKET:/var/run/api_3.sock
 nginx_load_balancer  | /docker-entrypoint.sh: /docker-entrypoint.d/ is not empty, will attempt to perform configuration
 nginx_load_balancer  | /docker-entrypoint.sh: Looking for shell scripts in /docker-entrypoint.d/
 nginx_load_balancer  | /docker-entrypoint.sh: Launching /docker-entrypoint.d/10-listen-on-ipv6-by-default.sh
@@ -42,17 +42,16 @@ rinha-api-2          | Histórico de pagamentos 'payment_history_1' limpo com su
 rinha-api-2          | Histórico de pagamentos 'payment_history_2' limpo com sucesso.
 rinha-api-2          | Histórico de pagamentos 'payment_history_3' limpo com sucesso.
 rinha-api-2          | Histórico de pagamentos 'payment_history_4' limpo com sucesso.
-redis_cache          | 1:M 08 Aug 2025 00:25:27.048 * 10000 changes in 60 seconds. Saving...
-redis_cache          | 1:M 08 Aug 2025 00:25:27.049 * Background saving started by pid 20
-redis_cache          | 20:C 08 Aug 2025 00:25:27.081 * DB saved on disk
-redis_cache          | 20:C 08 Aug 2025 00:25:27.082 * Fork CoW for RDB: current 0 MB, peak 0 MB, average 0 MB
-redis_cache          | 1:M 08 Aug 2025 00:25:27.150 * Background saving terminated with success
-[Knginx_load_balancer exited with code 0
+redis_cache          | 1:M 08 Aug 2025 01:00:53.025 * 10000 changes in 60 seconds. Saving...
+redis_cache          | 1:M 08 Aug 2025 01:00:53.025 * Background saving started by pid 20
+redis_cache          | 20:C 08 Aug 2025 01:00:53.048 * DB saved on disk
+redis_cache          | 20:C 08 Aug 2025 01:00:53.049 * Fork CoW for RDB: current 0 MB, peak 0 MB, average 0 MB
+redis_cache          | 1:M 08 Aug 2025 01:00:53.126 * Background saving terminated with success
 [Krinha-api-1 exited with code 2
-redis_cache          | 1:signal-handler (1754612737) Received SIGTERM scheduling shutdown...
-redis_cache          | 1:M 08 Aug 2025 00:25:38.011 * User requested shutdown...
-redis_cache          | 1:M 08 Aug 2025 00:25:38.011 * Saving the final RDB snapshot before exiting.
-redis_cache          | 1:M 08 Aug 2025 00:25:38.030 * DB saved on disk
-redis_cache          | 1:M 08 Aug 2025 00:25:38.030 # Redis is now ready to exit, bye bye...
+redis_cache          | 1:signal-handler (1754614864) Received SIGTERM scheduling shutdown...
+redis_cache          | 1:M 08 Aug 2025 01:01:04.289 * User requested shutdown...
+redis_cache          | 1:M 08 Aug 2025 01:01:04.289 * Saving the final RDB snapshot before exiting.
+redis_cache          | 1:M 08 Aug 2025 01:01:04.311 * DB saved on disk
+redis_cache          | 1:M 08 Aug 2025 01:01:04.311 # Redis is now ready to exit, bye bye...
 [Kredis_cache exited with code 0
 log truncated at line 1000

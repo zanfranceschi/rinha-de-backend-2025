@@ -12,14 +12,14 @@ x-service-templates:
     deploy:
       resources:
         limits:
-          cpus: "0.55"
+          cpus: "0.25"
           memory: 100M
 
 services:
   app-1:
     <<: *base-app
     hostname: app-one
-    cpuset: "0"
+#    cpuset: "0"
     environment:
       APP_ID: "APP_1"
       APP_PORT: "9001"
@@ -30,7 +30,7 @@ services:
   app-2:
     <<: *base-app
     hostname: app-two
-    cpuset: "1"
+#    cpuset: "1"
     environment:
       APP_ID: "APP_2"
       APP_PORT: "9002"
@@ -42,8 +42,8 @@ services:
   lb:
     networks:
       - app
-    cpuset: "2"
-    image: tarcisiozf/rinha-de-backend-2025-asm-lb:v2
+#    cpuset: "2"
+    image: tarcisiozf/rinha-de-backend-2025-asm-lb:v3
     security_opt:
       - seccomp:unconfined
     volumes:
@@ -53,7 +53,7 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.4"
+          cpus: "1.0"
           memory: 150M
 
 volumes:
