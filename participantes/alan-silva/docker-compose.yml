@@ -12,10 +12,11 @@ services:
     depends_on:
       - rinha-gateway-1
       - rinha-gateway-2
+      - rinha-gateway-3
     deploy:
       resources:
         limits:
-          cpus: "0.3"
+          cpus: "0.4"
           memory: "80MB"
 
   rinha-gateway-1:
@@ -35,7 +36,7 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.5"
+          cpus: "0.3"
           memory: "70MB"
 
   rinha-gateway-2:
@@ -55,7 +56,27 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.5"
+          cpus: "0.3"
+          memory: "70MB"
+
+  rinha-gateway-3:
+    image: ghcr.io/alan-venv/rinha-gateway:7.1-skylake
+    container_name: rinha-gateway-3
+    env_file:
+      - ./config/.env
+    environment:
+      - SOCKET=/sockets/actix.sock.3
+    volumes:
+      - sockets:/sockets:rw
+    networks:
+      - backend
+      - payment-processor
+    depends_on:
+      - rinha-database
+    deploy:
+      resources:
+        limits:
+          cpus: "0.3"
           memory: "70MB"
 
   rinha-database:
