@@ -6,5 +6,5 @@ CREATE TABLE IF NOT EXISTS payments (
     PRIMARY KEY (correlation_id)
     );
 
-CREATE INDEX IF NOT EXISTS idx_payments_requested_at_type
-    ON payments (requested_at, payment_processor_type);
+CREATE INDEX IF NOT EXISTS idx_payments_requested_at
+    ON payments (requested_at);
