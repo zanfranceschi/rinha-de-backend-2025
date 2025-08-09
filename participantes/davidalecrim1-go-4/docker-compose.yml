@@ -1,6 +1,6 @@
 x-service-templates:
   go-backend: &go-backend
-    image: davidalecrim1/rinha-with-go-2025:v2.0.0-api
+    image: davidalecrim1/rinha-with-go-2025:v2.0.1-api
     networks:
       - app
       - payment-processor
@@ -46,7 +46,7 @@ services:
           memory: "50MB"
 
   go-worker-1:
-    image: davidalecrim1/rinha-with-go-2025:v2.0.0-worker
+    image: davidalecrim1/rinha-with-go-2025:v2.0.1-worker
     container_name: go-worker-1
     networks:
       - payment-processor
@@ -62,7 +62,7 @@ services:
       - MONITOR_HEALTH=true
       - ENABLE_PROFILING=false
       - REDIS_ADDR=/var/run/redis.sock
-      - WORKERS=50
+      - WORKERS=25
       - LENGTH_PROCESSOR_BUFFER=10000
     deploy:
       resources:
