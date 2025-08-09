@@ -1,0 +1,106 @@
+version: '3.8'
+
+services:
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "9999:9999"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - app1
+      - app2
+    deploy:
+      resources:
+        limits:
+          cpus: '0.1'
+          memory: 20M
+
+  app1:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/rinha
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=postgres
+      - PAYMENT_PROCESSOR_DEFAULT_URL=http://payment-processor-default:8080
+      - PAYMENT_PROCESSOR_FALLBACK_URL=http://payment-processor-fallback:8080
+      - JAVA_OPTS=-Xmx110m -Xms50m
+    depends_on:
+      - db
+      - payment-processor-default
+      - payment-processor-fallback
+    deploy:
+      resources:
+        limits:
+          cpus: '0.6'
+          memory: 130M
+
+  app2:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/rinha
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=postgres
+      - PAYMENT_PROCESSOR_DEFAULT_URL=http://payment-processor-default:8080
+      - PAYMENT_PROCESSOR_FALLBACK_URL=http://payment-processor-fallback:8080
+      - JAVA_OPTS=-Xmx110m -Xms50m
+    depends_on:
+      - db
+      - payment-processor-default
+      - payment-processor-fallback
+    deploy:
+      resources:
+        limits:
+          cpus: '0.6'
+          memory: 130M
+
+  db:
+    image: postgres:15-alpine
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=rinha
+      - POSTGRES_SHARED_BUFFERS=16MB
+      - POSTGRES_EFFECTIVE_CACHE_SIZE=32MB
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    deploy:
+      resources:
+        limits:
+          cpus: '0.15'
+          memory: 40M
+
+  payment-processor-default:
+    build:
+      context: ./mock-payment-processor
+      dockerfile: Dockerfile
+    environment:
+      - PROCESSOR_TYPE=default
+      - PROCESSOR_INSTABILITY=0.1
+    deploy:
+      resources:
+        limits:
+          cpus: '0.025'
+          memory: 15M
+
+  payment-processor-fallback:
+    build:
+      context: ./mock-payment-processor
+      dockerfile: Dockerfile
+    environment:
+      - PROCESSOR_TYPE=fallback
+      - PROCESSOR_INSTABILITY=0.2
+    deploy:
+      resources:
+        limits:
+          cpus: '0.025'
+          memory: 15M
+
+volumes:
+  postgres_data:
