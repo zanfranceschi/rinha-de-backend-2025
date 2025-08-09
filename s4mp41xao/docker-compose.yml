@@ -17,9 +17,7 @@ services:
           memory: 20M
 
   app1:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: s4mp41xao/rinha-backend-2025:latest
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/rinha
       - SPRING_DATASOURCE_USERNAME=postgres
@@ -38,9 +36,7 @@ services:
           memory: 130M
 
   app2:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: s4mp41xao/rinha-backend-2025:latest
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/rinha
       - SPRING_DATASOURCE_USERNAME=postgres
@@ -77,9 +73,7 @@ services:
           memory: 40M
 
   payment-processor-default:
-    build:
-      context: ./mock-payment-processor
-      dockerfile: Dockerfile
+    image: s4mp41xao/mock-payment-processor:latest
     environment:
       - PROCESSOR_TYPE=default
       - PROCESSOR_INSTABILITY=0.1
@@ -90,9 +84,7 @@ services:
           memory: 15M
 
   payment-processor-fallback:
-    build:
-      context: ./mock-payment-processor
-      dockerfile: Dockerfile
+    image: s4mp41xao/mock-payment-processor:latest
     environment:
       - PROCESSOR_TYPE=fallback
       - PROCESSOR_INSTABILITY=0.2
