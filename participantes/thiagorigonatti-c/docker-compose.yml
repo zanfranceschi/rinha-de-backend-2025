@@ -1,11 +1,11 @@
 services:
 
   backend01: &backend
-    image: thiagorigonatti/rinha-2025:0.0.11
+    image: thiagorigonatti/rinha-2025-skylake:0.0.2
     container_name: backend01
     environment:
-      - HTTP_CLIENT_THREADS=3
-      - SOCKET_SERVER_THREADS=3
+      - HTTP_CLIENT_THREADS=6
+      - SOCKET_SERVER_THREADS=6
       - SHM_PATH=/shm_array
       - SOCKET_PATH=/dev/shm/server1.sock
     networks:
@@ -14,7 +14,7 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.45"
+          cpus: "0.50"
           memory: "50MB"
     ipc: container:shared-memory
     depends_on:
@@ -24,8 +24,8 @@ services:
     <<: *backend
     container_name: backend02
     environment:
-      - HTTP_CLIENT_THREADS=3
-      - SOCKET_SERVER_THREADS=3
+      - HTTP_CLIENT_THREADS=6
+      - SOCKET_SERVER_THREADS=6
       - SHM_PATH=/shm_array
       - SOCKET_PATH=/dev/shm/server2.sock
     ipc: container:shared-memory
@@ -34,13 +34,13 @@ services:
     image: alpine:latest
     command: tail -f /dev/null
     ipc: shareable
-    shm_size: 50mb
+    shm_size: 10mb
     container_name: shared-memory
     deploy:
       resources:
         limits:
-          cpus: "0.10"
-          memory: "50MB"
+          cpus: "0.01"
+          memory: "10MB"
 
   haproxy:
     image: haproxy:3.3-dev5-alpine3.22
@@ -53,7 +53,7 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.50"
+          cpus: "0.49"
           memory: "200MB"
     depends_on:
       - backend01
