@@ -1,0 +1,87 @@
+
+services:
+  api01: &api
+    image: fernando107/rinha-backen-2025-java:b6ef799
+    ports:
+      - "8080:8080"
+    networks:
+      - backend
+      - payment-processor
+    environment:
+      # - QUARKUS_MONGODB_CONNECTION_STRING=mongodb://${MONGO_INITDB_ROOT_USERNAME}:${MONGO_INITDB_ROOT_PASSWORD}@documentdb:27017/admin
+      - QUARKUS_MONGODB_CONNECTION_STRING=mongodb://documentdb:27017/admin
+      # - JAVA_TOOL_OPTIONS=-XX:MaxRAMPercentage=75 -XX:+UseSerialGC
+      # - QUARKUS_VERTX_EVENT_LOOPS_POOL_SIZE=10
+      # - QUARKUS_MONGODB_MAX_POOL_SIZE=200
+      - CRIA_INDICE=1
+      - BATCH_INTERVALO=12
+      # - QUARKUS_MONGODB_MIN_POOL_SIZE=50
+    depends_on:
+      - documentdb
+    deploy:
+      resources:
+        limits:
+          cpus: "1.0"
+          memory: "128MB"
+  
+  api02:
+    <<: *api
+    ports:
+      - "8081:8080"
+    depends_on:
+      - documentdb
+    environment:
+      - CRIA_INDICE=0
+      - QUARKUS_MONGODB_CONNECTION_STRING=mongodb://documentdb:27017/admin
+      - BATCH_INTERVALO=1
+      # - QUARKUS_MONGODB_MAX_POOL_SIZE=1
+      # - QUARKUS_MONGODB_MIN_POOL_SIZE=1
+    deploy:
+      resources:
+        limits:
+          cpus: "0.1"
+          memory: "6MB"
+
+  nginx:
+    image: nginx:1.29.0
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    ports:
+     - "9999:9999"
+    networks:
+      - backend
+      - payment-processor
+    depends_on:
+      - api01
+      - api02
+    deploy:
+      resources:
+        limits:
+          cpus: "0.15"
+          memory: "15MB"
+
+  documentdb:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_MAX_CONNS: 900
+      MONGO_MAX_CONCURRENT_OPS: 5000
+    networks:
+      - backend
+    volumes:
+      - documentdb_data:/data/db
+    deploy:
+      resources:
+        limits:
+          cpus: "0.25"
+          memory: "200MB"
+
+volumes:
+  documentdb_data:
+
+networks:
+  backend:
+    driver: bridge
+  payment-processor:
+    external: true
