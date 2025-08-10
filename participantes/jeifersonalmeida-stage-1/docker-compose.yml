@@ -1,0 +1,64 @@
+version: '3.8'
+
+services:
+  haproxy:
+    image: haproxy:2.6
+    container_name: haproxy
+    ports:
+      - "9999:9999"
+    volumes:
+      - ./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
+    depends_on:
+      - api-1
+      - api-2
+    networks:
+      - rinha-network
+    deploy:
+      resources:
+        limits:
+          cpus: "0.3"
+          memory: "90MB"
+
+  api-1:
+    image: jeiferson/rinha-backend-2025:latest-amd64
+    container_name: api-1
+    environment:
+      - MASTER=true
+      - NUM_WORKERS=20
+      - MAX_DEFAULT_LATENCY=30
+      - USE_FALLBACK=true
+      - MAX_FALLBACK_LATENCY=30
+      - SAMPLE_WINDOW=100
+      - TICK_INTERVAL_MS=500
+      - HEALTH_INTERVAL_MS=5500
+      - PRIMARY_FAILOVER_DELAY_SEC=25
+    networks:
+      - rinha-network
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          cpus: "0.6"
+          memory: "130MB"
+
+  api-2:
+    image: jeiferson/rinha-backend-2025:latest-amd64
+    container_name: api-2
+    environment:
+      - MASTER=false
+      - NUM_WORKERS=20
+    networks:
+      - rinha-network
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          cpus: "0.6"
+          memory: "130MB"
+
+networks:
+  rinha-network:
+    name: rinha-network
+    driver: bridge
+  payment-processor:
+    external: true
