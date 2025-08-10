@@ -1,0 +1,73 @@
+x-service-templates:
+  api: &api
+    image: asfernandes/rinhaback25:boost-lmdb
+    command: /app/bin/rinhaback25-boost-lmdb-api
+    volumes:
+      - ./data:/data
+    environment: &api-env
+      IO_WORKERS: 8
+      HANDLER_WORKERS: 8
+      PROCESSOR_WORKERS: 8
+      DATABASE: /data/database
+      DATABASE_SIZE: 41943040
+      LISTEN_ADDRESS: 0.0.0.0:8080
+      PROCESSOR_DEFAULT_ADDRESS: payment-processor-default:8080
+      PROCESSOR_FALLBACK_ADDRESS: payment-processor-fallback:8080
+    ulimits:
+      nofile:
+        soft: 1000000
+        hard: 1000000
+    deploy:
+      resources:
+        limits:
+          cpus: "0.4"
+          memory: "100MB"
+    networks:
+      - rinhaback-net
+      - payment-processor-net
+
+
+services:
+  api1:
+    <<: *api
+    ipc: shareable
+    environment:
+      <<: *api-env
+      COORDINATOR: "true"
+
+  api2:
+    <<: *api
+    pid: service:api1
+    ipc: service:api1
+    depends_on:
+      - api1
+
+  proxy:
+    image: asfernandes/rinhaback25:boost-lmdb
+    command: /app/bin/rinhaback25-boost-lmdb-proxy
+    environment:
+      IO_WORKERS: 8
+      LISTEN_ADDRESS: 0.0.0.0:9999
+      BACKEND_0_ADDRESS: api1:8080
+      BACKEND_1_ADDRESS: api2:8080
+    deploy:
+      resources:
+        limits:
+          cpus: "0.7"
+          memory: "150MB"
+    networks:
+      - rinhaback-net
+    ports:
+      - 9999:9999
+    depends_on:
+      - api1
+      - api2
+
+
+networks:
+  rinhaback-net:
+    driver: bridge
+
+  payment-processor-net:
+    name: payment-processor
+    external: true
