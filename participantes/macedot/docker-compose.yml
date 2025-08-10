@@ -1,7 +1,9 @@
 name: rinha-2025
 
 x-api_template: &api_template
-  image: macedot/rinha-2025:latest
+  image: docker.io/macedot/rinha-2025:latest
+  volumes:
+    - sockets:/sockets:rw
   env_file:
     - .env
   depends_on:
@@ -12,23 +14,28 @@ x-api_template: &api_template
   deploy:
     resources:
       limits:
-        cpus: "0.60"
+        cpus: "0.50"
         memory: "100MB"
 
 services:
   api01:
     <<: *api_template
     hostname: api01
+    environment:
+      - SERVER_SOCKET=/sockets/go.sock.1
 
   api02:
     <<: *api_template
     hostname: api02
+    environment:
+      - SERVER_SOCKET=/sockets/go.sock.2
 
   gateway:
     image: haproxy:3.2.3-alpine
     hostname: rinha-gateway
     volumes:
-      - ./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
+      - sockets:/sockets:rw
+      - ./haproxy-socket.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
     depends_on:
       - api01
       - api02
@@ -39,7 +46,7 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.10"
+          cpus: "0.20"
           memory: "75MB"
 
   redis:
@@ -53,8 +60,16 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.20"
+          cpus: "0.30"
           memory: "75MB"
+
+volumes:
+  sockets:
+    driver: local
+    driver_opts:
+      type: tmpfs
+      device: tmpfs
+      o: size=16m,mode=1777
 
 networks:
   backend:
