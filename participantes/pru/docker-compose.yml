@@ -1,0 +1,72 @@
+services:
+  api01: &api
+    image: leandronsp/pru
+    container_name: api01
+    hostname: api01
+    environment:
+      - REDIS_URL=redis://redis:6379/0
+    networks:
+      - payment-processor
+      - backend
+    deploy:
+      resources:
+        limits:
+          cpus: '0.4'
+          memory: '100MB'
+
+  api02: 
+    <<: *api
+    container_name: api02
+    hostname: api02
+
+  worker:
+    <<: *api
+    container_name: worker
+    hostname: worker
+    command: bundle exec sidekiq -r ./app/payment_job.rb -c 10
+    depends_on:
+      - redis
+    deploy:
+      resources:
+        limits:
+          cpus: '0.4'
+          memory: '100MB'
+
+  redis:
+    image: redis:7-alpine
+    container_name: redis
+    hostname: redis
+    ports:
+      - 6379:6379
+    networks:
+      - backend
+    deploy:
+      resources:
+        limits:
+          cpus: '0.2'
+          memory: '40MB'
+
+  nginx:
+    image: nginx 
+    container_name: nginx
+    volumes:
+      - ./config/nginx.conf:/etc/nginx/nginx.conf:ro
+    ports:
+      - 9999:9999
+    networks:
+      - backend
+    depends_on:
+      - redis
+      - api01
+      - api02
+      - worker
+    deploy:
+      resources:
+        limits:
+          cpus: '0.1'
+          memory: '10MB'
+
+networks:
+  payment-processor:
+    external: true
+  backend:
