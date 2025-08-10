@@ -12,4 +12,4 @@ O backend foi desenvolvido em Go usando o web framework Fiber com Sonic para enc
 Essa versão acompanha um Load Balancer customizado (chamado de Extreme) criado usando Go e Fast HTTP para substituir o Nginx e reduzir a latencia da API ao extremo.
 
 ## Repositório
-[https://github.com/davidalecrim1/rinha-with-go-2025/tree/feature/redis-only-default](https://github.com/davidalecrim1/rinha-with-go-2025/tree/feature/redis-extreme)
+[https://github.com/davidalecrim1/rinha-with-go-2025/tree/release/redis-fasthttp-nginx](https://github.com/davidalecrim1/rinha-with-go-2025/tree/release/redis-fasthttp-nginx)

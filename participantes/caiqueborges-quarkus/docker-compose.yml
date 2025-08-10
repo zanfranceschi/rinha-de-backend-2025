@@ -21,14 +21,14 @@ services:
       resources:
         limits:
           cpus:  "0.3"
-          memory: "111MB"
+          memory: "45MB"
     networks:
       - backend-rinha
   api1: &api
     image: caiqueborges/rinha-backend-2025:latest
     hostname: api1
     environment:
-      - PAYMENT_WORKERS_SIZE=10
+      - BACKEND_MODE=api
       - REDIS_HOST=redis://redis:6379
       - DEFAULT_PROCESSOR_URL=http://payment-processor-default:8080
       - FALLBACK_PROCESSOR_URL=http://payment-processor-fallback:8080
@@ -38,14 +38,28 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.5"
-          memory: "112MB"
+          cpus: "0.3"
+          memory: "95MB"
     networks:
       - backend-rinha
       - payment-processor
   api2:
     <<: *api
     hostname: api2
+  worker1:
+    <<: *api
+    hostname: worker1
+    environment:
+      - BACKEND_MODE=worker
+      - PAYMENT_WORKERS_SIZE=10
+      - REDIS_HOST=redis://redis:6379
+      - DEFAULT_PROCESSOR_URL=http://payment-processor-default:8080
+      - FALLBACK_PROCESSOR_URL=http://payment-processor-fallback:8080
+    deploy:
+      resources:
+        limits:
+          cpus: "0.4"
+          memory: "100MB"
   nginx:
     image: nginx:1.27.0-alpine
     volumes:
@@ -58,6 +72,7 @@ services:
     depends_on:
       - api1
       - api2
+      - worker1
       - redis
     deploy:
       resources:

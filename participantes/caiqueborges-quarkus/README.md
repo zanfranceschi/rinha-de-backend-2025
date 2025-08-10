@@ -9,25 +9,28 @@ Este projeto foi feito para participar da [Rinha de Backend 2025](https://github
 
 ## Arquitetura
 
-Sobre a arquitetura, inicialmente pensei em utilizar junto com um Postgres para persistir os pagamentos, mas decidi procurar sobre as possibilidades de manter absolutamente tudo no Redis para economizar CPU e RAM na arquitetura, e cheguei ao seguinte:
+Sobre a arquitetura, inicialmente pensei em utilizar junto com um Postgres para persistir os pagamentos, mas decidi procurar sobre as possibilidades de manter absolutamente tudo no Redis para economizar CPU e RAM na arquitetura após ver outros participantes comentando sobre, e cheguei ao seguinte:
 
 ```mermaid
 flowchart LR
     NGINX[NGINX<br>Load Balancer]
     API1[API Backend 1<br>REST API]
     API2[API Backend 2<br>REST API]
+    WORKER1[Worker Backend 1<br>Consumidor]
     REDIS[(Redis)]
     DEFAULT[API Default<br>Payment Processor]
     FALLBACK[API Fallback<br>Payment Processor]
 
     NGINX --> API1
     NGINX --> API2
-    API1 --> REDIS
-    API2 --> REDIS
-    API1 --> DEFAULT
-    API1 --> FALLBACK
-    API2 --> DEFAULT
-    API2 --> FALLBACK
+    API1 -->|enfileira| REDIS
+    API2 -->|enfileira| REDIS
+    WORKER1 -->|consome| REDIS
+    WORKER1 -->|envia| DEFAULT
+    WORKER1 -->|envia| FALLBACK
+    WORKER1 -->|envia| DEFAULT
+    WORKER1 -->|envia| FALLBACK
+
 ```
 
 ## Diagramas de sequência

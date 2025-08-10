@@ -1,5 +1,5 @@
 x-api_template: &api
-  image: ghcr.io/lothyriel/rinha_2025:v0.3.6
+  image: ghcr.io/lothyriel/rinha_2025:v0.4.3
   volumes:
     - uds:/var/run
   command: ["-m", "api"]
@@ -15,53 +15,44 @@ x-api_template: &api
 
 services:
   lb:
-    image: ghcr.io/lothyriel/rinha_2025:v0.3.6
-    command: ["-m", "lb"]
+    image: nginx:latest
     ports:
       - "9999:9999"
     volumes:
       - uds:/var/run
-    # we need this cause io_uring syscall is disabled by default in docker
-    security_opt:
-      - seccomp=unconfined
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
     depends_on:
-      - api_0
-      - api_1
-    environment:
-      API_N: "2"
-    ulimits:
-      nofile:
-        soft: 2048
-        hard: 2048
+      - api0
+      - api1
     deploy:
       resources:
         limits:
           cpus: "0.4"
           memory: "80MB"
 
-  api_0:
+  api0:
     <<: *api
     environment:
       API_N: "0"
       RUST_LOG: "info"
-      WORKER_SOCKET: "/var/run/worker.socket"
+      WORKER_SOCKET: "/var/run/worker.sock"
 
-  api_1:
+  api1:
     <<: *api
     environment:
       API_N: "1"
       RUST_LOG: "info"
-      WORKER_SOCKET: "/var/run/worker.socket"
+      WORKER_SOCKET: "/var/run/worker.sock"
 
   worker:
-    image: ghcr.io/lothyriel/rinha_2025:v0.3.6
+    image: ghcr.io/lothyriel/rinha_2025:v0.4.3
     command: ["-m", "worker"]
     networks:
       - payment-processor
     volumes:
       - uds:/var/run
     environment:
-      WORKER_SOCKET: "/var/run/worker.socket"
+      WORKER_SOCKET: "/var/run/worker.sock"
       RUST_LOG: "info"
     deploy:
       resources:

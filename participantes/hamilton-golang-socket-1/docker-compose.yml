@@ -1,7 +1,7 @@
 x-rinha-api-base: &rinha-api-base
-  image: jhamiltonjunior/rinha-go-socket:0.0.9
+  image: jhamiltonjunior/rinha-go-socket:0.1.0
   volumes:
-    - api-socketsv4:/var/run
+    - api-socketsv6:/var/run
   depends_on:
     - redis
   networks:
@@ -32,7 +32,7 @@ services:
       - "9999:80"
     volumes:
       - ./config/nginx.conf:/usr/local/openresty/nginx/conf/nginx.conf
-      - api-socketsv4:/var/run:rw
+      - api-socketsv6:/var/run:rw
     depends_on:
       - rinha-api-1
       - rinha-api-2
@@ -103,4 +103,8 @@ networks:
 
 volumes:
   redis-data:
-  api-socketsv4:
+  api-socketsv6:
+    driver_opts:
+      type: tmpfs
+      device: tmpfs
+      o: size=16m,mode=1777

@@ -8,6 +8,7 @@ services:
     depends_on:
       - api1
       - api2
+      - api3
     ports:
       - "9999:9999"
     networks:
@@ -16,13 +17,13 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.10"
-          memory: "100MB"
+          cpus: "0.30"
+          memory: "50MB"
   api1:
     #build:
     #  context: .
     #  dockerfile: Dockerfile
-    image: danielsuhett1999/rinha-backend-go:1.0.10
+    image: danielsuhett1999/rinha-backend-go:1.1.5
     hostname: api1
     volumes:
       - sockets:/var/run/sockets
@@ -33,12 +34,13 @@ services:
       - REDIS_PORT=6379
       - PROCESSOR_DEFAULT_URL=http://payment-processor-default:8080
       - PROCESSOR_FALLBACK_URL=http://payment-processor-fallback:8080
-      - POOLING_INTERVAL=1000
+      - POOLING_INTERVAL=100
       - HEALTH_TIMEOUT=1000
-      - HEALTH_INTERVAL=3000
+      - HEALTH_INTERVAL=6000
       - LATENCY_DIFF_TO_USE_FALLBACK=5000
-      - BATCH_SIZE=100
-      - CHEAT_MODE=1
+      - BATCH_SIZE=10
+      - WORKER_COUNT=2
+      - GOGC=off
     networks:
       - backend
       - payment-processor
@@ -48,13 +50,14 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.65"
-          memory: "100MB"
+          cpus: "0.30"
+          memory: "83MB"
   api2:
     #build:
     #  context: .
     #  dockerfile: Dockerfile
-    image: danielsuhett1999/rinha-backend-go:1.0.10
+    #image: danielsuhett1999/rinha-backend-go:1.0.10
+    image: danielsuhett1999/rinha-backend-go:1.1.5
     hostname: api2
     volumes:
       - sockets:/var/run/sockets
@@ -65,12 +68,13 @@ services:
       - REDIS_PORT=6379
       - PROCESSOR_DEFAULT_URL=http://payment-processor-default:8080
       - PROCESSOR_FALLBACK_URL=http://payment-processor-fallback:8080
-      - POOLING_INTERVAL=1000
+      - POOLING_INTERVAL=100
       - HEALTH_TIMEOUT=1000
       - HEALTH_INTERVAL=3000
       - LATENCY_DIFF_TO_USE_FALLBACK=5000
-      - BATCH_SIZE=100
-      - CHEAT_MODE=1
+      - BATCH_SIZE=10
+      - WORKER_COUNT=2
+      - GOGC=off
     networks:
       - backend
       - payment-processor
@@ -80,12 +84,45 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.65"
-          memory: "100MB"
+          cpus: "0.30"
+          memory: "83MB"
+  api3:
+    # build:
+    #  context: .
+    #  dockerfile: Dockerfile
+    image: danielsuhett1999/rinha-backend-go:1.1.5
+    hostname: api3
+    volumes:
+      - sockets:/var/run/sockets
+    environment:
+      - APP_NAME=3
+      - SOCKET_PATH=/var/run/sockets/app3.sock
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - PROCESSOR_DEFAULT_URL=http://payment-processor-default:8080
+      - PROCESSOR_FALLBACK_URL=http://payment-processor-fallback:8080
+      - POOLING_INTERVAL=100
+      - HEALTH_TIMEOUT=1000
+      - HEALTH_INTERVAL=3000
+      - LATENCY_DIFF_TO_USE_FALLBACK=5000
+      - BATCH_SIZE=10
+      - WORKER_COUNT=2
+      - GOGC=off
+    networks:
+      - backend
+      - payment-processor
+    depends_on:
+      redis:
+        condition: service_healthy
+    deploy:
+      resources:
+        limits:
+          cpus: "0.30"
+          memory: "83MB"
   redis:
-    image: redis:7.2-alpine
+    image: valkey/valkey:7.2-alpine
     container_name: go-rinha-redis
-    command: redis-server --save "" --appendonly no --maxmemory 40mb --maxmemory-policy allkeys-lru --tcp-keepalive 30 --timeout 0 --tcp-backlog 1024 --databases 1 --maxclients 5000 --rdbcompression no --rdbchecksum no
+    command: redis-server --save "" --appendonly no --maxmemory 40mb --maxmemory-policy allkeys-lru --tcp-keepalive 30 --timeout 0 --tcp-backlog 4096 --databases 1 --maxclients 5000 --rdbcompression no --rdbchecksum no --hz 100
     networks:
       - backend
     ports:
@@ -98,7 +135,7 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.10"
+          cpus: "0.30"
           memory: "50MB"
 
 volumes:

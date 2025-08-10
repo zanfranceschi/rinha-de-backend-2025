@@ -1,6 +1,6 @@
 x-service-templates:
   backend-service: &backend-service
-    image: ghcr.io/4emcos/rinha-backend-2025-bun:1.0.2
+    image: 4emcos/rinha-backend-2025-bun:1.0.4
     depends_on:
       - writer
     volumes:
@@ -12,7 +12,7 @@ x-service-templates:
       resources:
         limits:
           cpus: "0.45"
-          memory: "70MB"
+          memory: "90MB"
 
 services:
   backend-01:
@@ -39,7 +39,7 @@ services:
 
   writer:
     hostname: writer
-    image: ghcr.io/4emcos/writer:0.0.2
+    image: 4emcos/writer:0.0.4
     environment:
       - WRITER_SOCKET_PATH=/tmp/writer.sock
     volumes:

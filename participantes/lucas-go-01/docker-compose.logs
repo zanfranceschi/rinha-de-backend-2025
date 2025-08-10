@@ -1,54 +1,12 @@
 
- haproxy Pulling 
- 9824c27679d3 Already exists 
- 30ee98c44382 Pulling fs layer 
- c7ae30c542a9 Pulling fs layer 
- 7b1adda3059f Pulling fs layer 
- 907588963660 Pulling fs layer 
- 4f4fb700ef54 Pulling fs layer 
- 907588963660 Waiting 
- 4f4fb700ef54 Waiting 
- 30ee98c44382 Downloading [>                                                  ]   3.67kB/282.5kB
- 30ee98c44382 Downloading [==================================================>]  282.5kB/282.5kB
- 30ee98c44382 Verifying Checksum 
- 30ee98c44382 Download complete 
- 30ee98c44382 Extracting [=====>                                             ]  32.77kB/282.5kB
- 30ee98c44382 Extracting [==================================================>]  282.5kB/282.5kB
- 30ee98c44382 Extracting [==================================================>]  282.5kB/282.5kB
- 30ee98c44382 Pull complete 
- c7ae30c542a9 Downloading [==================================================>]     963B/963B
- c7ae30c542a9 Download complete 
- c7ae30c542a9 Extracting [==================================================>]     963B/963B
- c7ae30c542a9 Extracting [==================================================>]     963B/963B
- 7b1adda3059f Downloading [>                                                  ]  86.95kB/8.391MB
- c7ae30c542a9 Pull complete 
- 7b1adda3059f Downloading [==================================================>]  8.391MB/8.391MB
- 7b1adda3059f Verifying Checksum 
- 7b1adda3059f Download complete 
- 7b1adda3059f Extracting [>                                                  ]   98.3kB/8.391MB
- 7b1adda3059f Extracting [=========================================>         ]   6.98MB/8.391MB
- 7b1adda3059f Extracting [==================================================>]  8.391MB/8.391MB
- 7b1adda3059f Pull complete 
- 4f4fb700ef54 Downloading [==================================================>]      32B/32B
- 4f4fb700ef54 Verifying Checksum 
- 4f4fb700ef54 Download complete 
- 907588963660 Downloading [==================================================>]     442B/442B
- 907588963660 Download complete 
- 907588963660 Extracting [==================================================>]     442B/442B
- 907588963660 Extracting [==================================================>]     442B/442B
- 907588963660 Pull complete 
- 4f4fb700ef54 Extracting [==================================================>]      32B/32B
- 4f4fb700ef54 Extracting [==================================================>]      32B/32B
- 4f4fb700ef54 Pull complete 
- haproxy Pulled 
  Network lucas-go-01_rinha-network  Creating
  Network lucas-go-01_rinha-network  Created
  Volume "lucas-go-01_postgres_data"  Creating
  Volume "lucas-go-01_postgres_data"  Created
  Container rinha-postgres  Creating
  Container rinha-postgres  Created
- Container rinha-api-1  Creating
  Container rinha-api-2  Creating
+ Container rinha-api-1  Creating
  Container rinha-worker  Creating
  Container rinha-api-1  Created
  Container rinha-worker  Created
@@ -74,7 +32,7 @@ rinha-postgres  | selecting default time zone ... UTC
 rinha-postgres  | creating configuration files ... ok
 rinha-postgres  | running bootstrap script ... ok
 rinha-postgres  | sh: locale: not found
-rinha-postgres  | 2025-08-08 15:55:05.117 UTC [35] WARNING:  no usable system locales were found
+rinha-postgres  | 2025-08-09 16:35:59.522 UTC [35] WARNING:  no usable system locales were found
 rinha-postgres  | performing post-bootstrap initialization ... ok
 rinha-postgres  | syncing data to disk ... ok
 rinha-postgres  | 
@@ -85,10 +43,10 @@ rinha-postgres  |     pg_ctl -D /var/lib/postgresql/data -l logfile start
 rinha-postgres  | 
 rinha-postgres  | initdb: warning: enabling "trust" authentication for local connections
 rinha-postgres  | initdb: hint: You can change this by editing pg_hba.conf or using the option -A, or --auth-local and --auth-host, the next time you run initdb.
-rinha-postgres  | waiting for server to start....2025-08-08 15:55:07.222 UTC [41] LOG:  starting PostgreSQL 15.13 on x86_64-pc-linux-musl, compiled by gcc (Alpine 14.2.0) 14.2.0, 64-bit
-rinha-postgres  | 2025-08-08 15:55:07.222 UTC [41] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
-rinha-postgres  | 2025-08-08 15:55:07.224 UTC [44] LOG:  database system was shut down at 2025-08-08 15:55:06 UTC
-rinha-postgres  | 2025-08-08 15:55:07.299 UTC [41] LOG:  database system is ready to accept connections
+rinha-postgres  | waiting for server to start....2025-08-09 16:36:02.200 UTC [41] LOG:  starting PostgreSQL 15.13 on x86_64-pc-linux-musl, compiled by gcc (Alpine 14.2.0) 14.2.0, 64-bit
+rinha-postgres  | 2025-08-09 16:36:02.200 UTC [41] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+rinha-postgres  | 2025-08-09 16:36:02.203 UTC [44] LOG:  database system was shut down at 2025-08-09 16:36:01 UTC
+rinha-postgres  | 2025-08-09 16:36:02.209 UTC [41] LOG:  database system is ready to accept connections
 rinha-postgres  |  done
 rinha-postgres  | server started
 rinha-postgres  | CREATE DATABASE
@@ -110,43 +68,54 @@ rinha-postgres  | CREATE INDEX
 rinha-postgres  | CREATE INDEX
 rinha-postgres  | 
 rinha-postgres  | 
-rinha-postgres  | waiting for server to shut down...2025-08-08 15:55:07.710 UTC [41] LOG:  received fast shutdown request
-rinha-postgres  | .2025-08-08 15:55:07.710 UTC [41] LOG:  aborting any active transactions
-rinha-postgres  | 2025-08-08 15:55:07.713 UTC [41] LOG:  background worker "logical replication launcher" (PID 47) exited with exit code 1
-rinha-postgres  | 2025-08-08 15:55:07.799 UTC [42] LOG:  shutting down
-rinha-postgres  | 2025-08-08 15:55:07.799 UTC [42] LOG:  checkpoint starting: shutdown immediate
-rinha-postgres  | 2025-08-08 15:55:07.840 UTC [42] LOG:  checkpoint complete: wrote 928 buffers (11.3%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.041 s, sync=0.001 s, total=0.041 s; sync files=0, longest=0.000 s, average=0.000 s; distance=4267 kB, estimate=4267 kB
-rinha-postgres  | 2025-08-08 15:55:07.849 UTC [41] LOG:  database system is shut down
+rinha-postgres  | waiting for server to shut down....2025-08-09 16:36:02.807 UTC [41] LOG:  received fast shutdown request
+rinha-postgres  | 2025-08-09 16:36:02.807 UTC [41] LOG:  aborting any active transactions
+rinha-postgres  | 2025-08-09 16:36:02.810 UTC [41] LOG:  background worker "logical replication launcher" (PID 47) exited with exit code 1
+rinha-postgres  | 2025-08-09 16:36:02.903 UTC [42] LOG:  shutting down
+rinha-postgres  | 2025-08-09 16:36:02.903 UTC [42] LOG:  checkpoint starting: shutdown immediate
+rinha-postgres  | 2025-08-09 16:36:02.915 UTC [42] LOG:  checkpoint complete: wrote 928 buffers (11.3%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.011 s, sync=0.001 s, total=0.012 s; sync files=0, longest=0.000 s, average=0.000 s; distance=4267 kB, estimate=4267 kB
+rinha-postgres  | 2025-08-09 16:36:03.012 UTC [41] LOG:  database system is shut down
 rinha-postgres  |  done
 rinha-postgres  | server stopped
 rinha-postgres  | 
 rinha-postgres  | PostgreSQL init process complete; ready for start up.
 rinha-postgres  | 
-rinha-postgres  | 2025-08-08 15:55:08.010 UTC [1] LOG:  starting PostgreSQL 15.13 on x86_64-pc-linux-musl, compiled by gcc (Alpine 14.2.0) 14.2.0, 64-bit
-rinha-postgres  | 2025-08-08 15:55:08.010 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
-rinha-postgres  | 2025-08-08 15:55:08.010 UTC [1] LOG:  listening on IPv6 address "::", port 5432
-rinha-postgres  | 2025-08-08 15:55:08.010 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
-rinha-postgres  | 2025-08-08 15:55:08.013 UTC [65] LOG:  database system was shut down at 2025-08-08 15:55:07 UTC
-rinha-postgres  | 2025-08-08 15:55:08.099 UTC [66] FATAL:  the database system is starting up
-rinha-postgres  | 2025-08-08 15:55:08.102 UTC [1] LOG:  database system is ready to accept connections
+rinha-postgres  | 2025-08-09 16:36:03.161 UTC [1] LOG:  starting PostgreSQL 15.13 on x86_64-pc-linux-musl, compiled by gcc (Alpine 14.2.0) 14.2.0, 64-bit
+rinha-postgres  | 2025-08-09 16:36:03.161 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+rinha-postgres  | 2025-08-09 16:36:03.161 UTC [1] LOG:  listening on IPv6 address "::", port 5432
+rinha-postgres  | 2025-08-09 16:36:03.161 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+rinha-postgres  | 2025-08-09 16:36:03.200 UTC [64] LOG:  database system was shut down at 2025-08-09 16:36:02 UTC
+rinha-postgres  | 2025-08-09 16:36:03.205 UTC [1] LOG:  database system is ready to accept connections
+rinha-api-1     | API iniciada na porta 8080
+rinha-api-1     | Criando worker...
+rinha-api-1     | Testando conexão com banco...
+rinha-api-1     | Iniciando worker...
+rinha-api-1     | Iniciando servidor HTTP na porta 8080...
+rinha-api-2     | API iniciada na porta 8080
+rinha-api-2     | Criando worker...
+rinha-api-2     | Testando conexão com banco...
+rinha-api-2     | Iniciando worker...
+rinha-api-2     | Iniciando servidor HTTP na porta 8080...
+rinha-worker    | Iniciando worker...
+rinha-worker    | Worker iniciado com sucesso!
 rinha-haproxy   | [NOTICE]   (1) : New worker (8) forked
 rinha-haproxy   | [NOTICE]   (1) : Loading success.
 rinha-haproxy   | [NOTICE]   (1) : haproxy version is 2.8.15-a9aef56
 rinha-haproxy   | [WARNING]  (1) : Exiting Master process...
 rinha-haproxy   | [WARNING]  (8) : Proxy health stopped (cumulated conns: FE: 0, BE: 0).
-rinha-haproxy   | [WARNING]  (8) : Proxy http_front stopped (cumulated conns: FE: 8, BE: 0).
-rinha-haproxy   | [WARNING]  (8) : Proxy api_backend stopped (cumulated conns: FE: 0, BE: 8).
+rinha-haproxy   | [WARNING]  (8) : Proxy frontend stopped (cumulated conns: FE: 11, BE: 0).
+rinha-haproxy   | [WARNING]  (8) : Proxy backend stopped (cumulated conns: FE: 0, BE: 11).
 rinha-haproxy   | [WARNING]  (1) : Current worker (8) exited with code 0 (Exit)
 rinha-haproxy   | [WARNING]  (1) : All workers exited. Exiting... (0)
 [Krinha-haproxy exited with code 0
 [Krinha-worker exited with code 2
 [Krinha-api-1 exited with code 2
 [Krinha-api-2 exited with code 2
-rinha-postgres  | 2025-08-08 15:56:11.222 UTC [1] LOG:  received fast shutdown request
-rinha-postgres  | 2025-08-08 15:56:11.222 UTC [1] LOG:  aborting any active transactions
-rinha-postgres  | 2025-08-08 15:56:11.224 UTC [1] LOG:  background worker "logical replication launcher" (PID 69) exited with exit code 1
-rinha-postgres  | 2025-08-08 15:56:11.225 UTC [63] LOG:  shutting down
-rinha-postgres  | 2025-08-08 15:56:11.225 UTC [63] LOG:  checkpoint starting: shutdown immediate
-rinha-postgres  | 2025-08-08 15:56:11.226 UTC [63] LOG:  checkpoint complete: wrote 42 buffers (0.5%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.001 s, sync=0.001 s, total=0.002 s; sync files=0, longest=0.000 s, average=0.000 s; distance=72 kB, estimate=72 kB
-rinha-postgres  | 2025-08-08 15:56:11.233 UTC [1] LOG:  database system is shut down
+rinha-postgres  | 2025-08-09 16:37:12.941 UTC [1] LOG:  received fast shutdown request
+rinha-postgres  | 2025-08-09 16:37:12.942 UTC [1] LOG:  aborting any active transactions
+rinha-postgres  | 2025-08-09 16:37:12.945 UTC [1] LOG:  background worker "logical replication launcher" (PID 67) exited with exit code 1
+rinha-postgres  | 2025-08-09 16:37:12.945 UTC [62] LOG:  shutting down
+rinha-postgres  | 2025-08-09 16:37:12.945 UTC [62] LOG:  checkpoint starting: shutdown immediate
+rinha-postgres  | 2025-08-09 16:37:12.946 UTC [62] LOG:  checkpoint complete: wrote 42 buffers (0.5%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.001 s, sync=0.001 s, total=0.001 s; sync files=0, longest=0.000 s, average=0.000 s; distance=72 kB, estimate=72 kB
+rinha-postgres  | 2025-08-09 16:37:12.953 UTC [1] LOG:  database system is shut down
 [Krinha-postgres exited with code 0

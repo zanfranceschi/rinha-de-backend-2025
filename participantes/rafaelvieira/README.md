@@ -4,9 +4,7 @@
 
 Sou Rafael Vieira Ferreira, estudante de Sistemas de Informação e estagiário, e participei da Rinha de Backend 2025 com o objetivo principal de aprender e experimentar novas tecnologias.
 
-A ideia central foi construir um intermediador de pagamentos com um **load balancer próprio** escrito em Go, pensado para ser extremamente leve e focado no que precisava: garantir o maior *fire-and-forget* possível para reduzir o tempo médio de resposta.
-
-Nesta segunda submissão, optei por utilizar **apenas um processador**: o **default**, que cobra menos taxa. Isso simplificou a arquitetura e removeu a lógica de distribuição entre múltiplos processadores.
+A ideia central foi construir um intermediador de pagamentos com um **load balancer próprio** escrito em Go. O load balancer distribui requisições entre duas instâncias do backend. No melhor cenário, o pagamento é persistido diretamente; no pior, ele vai para uma **fila de retentativas** para ser processado assim que algum processador estiver disponível. Um **health checker** monitora os dois processadores para evitar o envio de requisições para instâncias indisponíveis.
 
 No backend, usei **programação reativa** e **virtual threads do Java 21** para otimizar consumo de recursos, além de **GraalVM** para gerar binários nativos. O **Redis** foi usado como armazenamento e também como mecanismo de mensageria, junto com **Kryo** para serialização e **ShedLock** para controlar tarefas agendadas.
 

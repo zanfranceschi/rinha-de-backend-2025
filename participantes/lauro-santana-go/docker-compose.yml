@@ -14,10 +14,10 @@ services:
       resources:
         limits:
           cpus: "0.2"
-          memory: "20MB"
+          memory: "15MB"
 
   app1: &app1
-    image: laurosantana/backend-rinha-2025:latest
+    image: laurosantana/backend-rinha-2025:0.1
     environment:
       - PAYMENT_PROCESSOR_URL_DEFAULT=http://payment-processor-default:8080
       - PAYMENT_PROCESSOR_URL_FALLBACK=http://payment-processor-fallback:8080
@@ -25,31 +25,45 @@ services:
       - POSTGRES_PORT=5432
       - POSTGRES_HOST=postgres
       - MIGRATE=1
+      - CONSUMER=0
     networks:
       - backend
-      - payment-processor
     depends_on:
       - rabbitmq
       - postgres
     deploy:
       resources:
         limits:
-          cpus: "0.4"
-          memory: "50MB"
+          cpus: "0.1"
+          memory: "20MB"
 
-  app2:
+  app2: 
     <<: *app1
     environment:
       - PAYMENT_PROCESSOR_URL_DEFAULT=http://payment-processor-default:8080
       - PAYMENT_PROCESSOR_URL_FALLBACK=http://payment-processor-fallback:8080
-      - SERVER_PORT=9091
+      - SERVER_PORT=9090
       - POSTGRES_PORT=5432
       - POSTGRES_HOST=postgres
+      - MIGRATE=0
+      - CONSUMER=0
+
+  app3:
+    <<: *app1
+    environment:
+      - PAYMENT_PROCESSOR_URL_DEFAULT=http://payment-processor-default:8080
+      - PAYMENT_PROCESSOR_URL_FALLBACK=http://payment-processor-fallback:8080
+      - POSTGRES_PORT=5432
+      - POSTGRES_HOST=postgres
+      - CONSUMER=1
+    networks:
+      - backend
+      - payment-processor
     deploy:
       resources:
         limits:
-          cpus: "0.4"
-          memory: "50MB"
+          cpus: "0.5"
+          memory: "40MB"
 
   rabbitmq:
     image: rabbitmq:3-alpine
@@ -71,8 +85,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.25"
-          memory: "160MB"
+          cpus: "0.4"
+          memory: "200MB"
 
   postgres:
     container_name: postgres
@@ -89,8 +103,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.25"
-          memory: "70MB"
+          cpus: "0.2"
+          memory: "55MB"
 
 networks:
   backend:

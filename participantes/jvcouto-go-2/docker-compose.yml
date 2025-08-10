@@ -1,5 +1,5 @@
 x-app-config: &app-config
-  image: jvcouto/jvpayments:2.0
+  image: jvcouto/jvpayments:3.0
   depends_on:
     redis:
       condition: service_healthy
@@ -38,12 +38,12 @@ services:
       - PAYMENT_API_FALLBACK_URL=http://payment-processor-fallback:8080
       - SOCKET_PATH=/tmp/sockets/jvpayments-2.sock
 
-  haproxy:
-    image: haproxy:alpine
+  nginx:
+    image: nginx:alpine
     ports:
       - "9999:80"
     volumes:
-      - ./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
       - socket_data:/tmp/sockets
     depends_on:
       - jvpayments-1

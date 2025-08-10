@@ -1,18 +1,12 @@
 services:
   load-balance:
-    image: lpj145/rinha-lb:1.10
+    image: lpj145/rinha-lb:1.15
     # build:
     #   context: .
     #   dockerfile: Dockerfile
     networks:
       - backend
       - payment-processor
-    security_opt:
-      - seccomp=unconfined
-    ulimits:
-      nofile:
-        soft: 2048
-        hard: 2048
     ports:
       - 9999:9999
     volumes:
@@ -22,12 +16,15 @@ services:
     depends_on:
       - api1
       - api2
-    cpuset: "0,1,2,3"
-    cpus: "1.3"
+    cpus: "1"
     mem_limit: "45MB"
+    # sysctls:
+    #   net.core.somaxconn: "65535"
+    #   net.ipv4.tcp_fastopen: "3"
+    #   net.ipv4.tcp_max_syn_backlog: "16384"
 
   api1: &api
-    image: lpj145/rinha-lb:1.10
+    image: lpj145/rinha-lb:1.15
     # build:
     #   context: .
     #   dockerfile: Dockerfile
@@ -40,11 +37,8 @@ services:
     networks:
       - backend
       - payment-processor
-    deploy:
-      resources:
-        limits:
-          cpus: "0.10"
-          memory: "150MB"
+    cpus: "0.10"
+    mem_limit: "150MB"
 
   api2:
     <<: *api

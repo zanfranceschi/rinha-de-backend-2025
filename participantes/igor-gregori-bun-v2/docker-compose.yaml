@@ -1,0 +1,64 @@
+services:
+  payment-proxy-leader:
+    image: igorgregori/payment-proxy:v2
+    hostname: payment-proxy-leader
+    networks:
+      - backend
+      - payment-processor
+    environment:
+      - INSTANCE_TYPE=LEADER
+      - PAYMENT_PROXY_FOLLOWER_URL=http://payment-proxy-follower:3000
+      - PAYMENT_PROCESSOR_URL_DEFAULT=http://payment-processor-default:8080
+      - PAYMENT_PROCESSOR_URL_FALLBACK=http://payment-processor-fallback:8080
+      - PROCESS_BATCH_INTERVAL=150
+      - MAX_BATCH_SIZE=100
+      - CHECK_PROCESSORS_STATUS_INTERVAL=5005
+    deploy:
+      resources:
+        limits:
+          cpus: "0.7"
+          memory: "125MB"
+    depends_on:
+      - payment-proxy-follower
+
+  payment-proxy-follower:
+    image: igorgregori/payment-proxy:v2
+    hostname: payment-proxy-follower
+    networks:
+      - backend
+      - payment-processor
+    environment:
+      - INSTANCE_TYPE=FOLLOWER
+      - PAYMENT_PROCESSOR_URL_DEFAULT=http://payment-processor-default:8080
+      - PAYMENT_PROCESSOR_URL_FALLBACK=http://payment-processor-fallback:8080
+      - PROCESS_BATCH_INTERVAL=150
+      - MAX_BATCH_SIZE=100
+      - CHECK_PROCESSORS_STATUS_INTERVAL=5005
+    deploy:
+      resources:
+        limits:
+          cpus: "0.7"
+          memory: "125MB"
+
+  nginx:
+    image: nginx:latest
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    ports:
+      - "9999:9999"
+    networks:
+      - backend
+    deploy:
+      resources:
+        limits:
+          cpus: "0.1"
+          memory: "100MB"
+    depends_on:
+      - payment-proxy-leader
+      - payment-proxy-follower
+
+networks:
+  backend:
+    driver: bridge
+  payment-processor:
+    external: true

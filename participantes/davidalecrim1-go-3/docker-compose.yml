@@ -1,6 +1,6 @@
 x-service-templates:
   go-backend: &go-backend
-    image: davidalecrim1/rinha-with-go-2025:v1.1.0-redis-extreme-api
+    image: davidalecrim1/rinha-with-go-2025:v1.3.0-redis-extreme-api
     networks:
       - app
       - payment-processor
@@ -23,7 +23,7 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.3"
+          cpus: "0.25"
           memory: "50MB"
   go-backend-2:
     <<: *go-backend
@@ -40,11 +40,11 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.3"
+          cpus: "0.25"
           memory: "50MB"
 
   go-worker-1:
-    image: davidalecrim1/rinha-with-go-2025:v1.1.0-redis-extreme-worker
+    image: davidalecrim1/rinha-with-go-2025:v1.3.0-redis-extreme-worker
     networks:
       - payment-processor
     depends_on:
@@ -70,11 +70,6 @@ services:
     networks:
       - app
       - payment-processor
-    healthcheck:
-      test: ["CMD", "redis-cli", "ping"]
-      interval: 5s
-      timeout: 5s
-      retries: 5
     deploy:
       resources:
         limits:
@@ -83,7 +78,8 @@ services:
 
   load-balancer:
     container_name: load-balancer-extreme-proxy
-    image: davidalecrim1/extreme-proxy:v0.4.0
+    image: davidalecrim1/extreme-proxy:v0.6.14
+    platform: linux/amd64
     volumes:
       - ./config.yaml:/app/config.yaml:ro
     depends_on:
@@ -96,7 +92,7 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.2"
+          cpus: "0.3"
           memory: "50MB"
 
 networks:

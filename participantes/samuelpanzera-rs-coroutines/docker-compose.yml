@@ -1,0 +1,66 @@
+#CPU_MAX = 1.5
+#MEMORY_MAX = 350MB 
+
+services: 
+  api1: &api-base
+    image: samuelpanzera/rinha-samuel-panzera:1.0
+    hostname: "api-1"
+    environment:
+      - SERVER_ID=api-1
+      - PORT=14 
+      - PAYMENT_PROCESSOR_URL_DEFAULT=http://payment-processor-default:8080
+      - PAYMENT_PROCESSOR_URL_FALLBACK=http://payment-processor-fallback:8080
+      - SHARED_MEMORY_PATH=/tmp/shared_memory
+    networks:
+     - backend-rs
+     - payment-processor
+    volumes:
+      - shared_memory:/tmp/shared_memory
+    ipc: shareable
+    deploy:
+      resources:
+        limits:
+          cpus: "0.65"
+          memory: "135M"
+  api2: 
+    <<: *api-base
+    hostname: "api-2"
+    environment:
+      - SERVER_ID=api-2
+      - PORT=14
+      - PAYMENT_PROCESSOR_URL_DEFAULT=http://payment-processor-default:8080
+      - PAYMENT_PROCESSOR_URL_FALLBACK=http://payment-processor-fallback:8080
+      - SHARED_MEMORY_PATH=/tmp/shared_memory
+    ipc: shareable
+  nginx:
+    image: nginx:1.27-alpine
+    ports:
+      - "9999:14"
+    depends_on:
+      api1:
+        condition: service_started
+      api2:
+        condition: service_started
+    networks:
+      - backend-rs
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    deploy:
+      resources:
+        limits:
+          cpus: "0.2"
+          memory: 70M
+
+volumes:
+  shared_memory:
+    driver: local
+    driver_opts:
+      type: tmpfs
+      device: tmpfs
+      o: size=10m,uid=1000,gid=1000
+
+networks:
+  backend-rs:
+    driver: bridge
+  payment-processor:
+    external: true

@@ -1,29 +1,32 @@
 services:
-  rinha-balancer:
-    image: ghcr.io/alan-venv/rinha-balancer:1.0-umbral-skylake
-    container_name: rinha-balancer
+  haproxy:
+    image: haproxy:3.2.3-alpine
+    container_name: rinha-haproxy
     ports:
-      - 9999:9999
+      - 9999:80
     volumes:
       - sockets:/sockets:rw
+      - ./config/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
     networks:
       - backend
     depends_on:
       - rinha-gateway-1
       - rinha-gateway-2
+      - rinha-gateway-3
     deploy:
       resources:
         limits:
-          cpus: "0.4"
-          memory: "50MB"
+          cpus: "0.3"
+          memory: "80MB"
 
   rinha-gateway-1:
-    image: ghcr.io/alan-venv/rinha-gateway:1.0-umbral-skylake
+    image: ghcr.io/alan-venv/rinha-gateway:latest
+    pull_policy: always
     container_name: rinha-gateway-1
     env_file:
       - ./config/.env
     environment:
-      - SOCKET=/sockets/actix.sock.1
+      - SOCKET=/sockets/gateway-1.sock
     volumes:
       - sockets:/sockets:rw
     networks:
@@ -34,16 +37,17 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.4"
-          memory: "70MB"
+          cpus: "0.3"
+          memory: "50MB"
 
   rinha-gateway-2:
-    image: ghcr.io/alan-venv/rinha-gateway:1.0-umbral-skylake
+    image: ghcr.io/alan-venv/rinha-gateway:latest
+    pull_policy: always
     container_name: rinha-gateway-2
     env_file:
       - ./config/.env
     environment:
-      - SOCKET=/sockets/actix.sock.2
+      - SOCKET=/sockets/gateway-2.sock
     volumes:
       - sockets:/sockets:rw
     networks:
@@ -54,11 +58,33 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.4"
-          memory: "70MB"
+          cpus: "0.3"
+          memory: "50MB"
+
+  rinha-gateway-3:
+    image: ghcr.io/alan-venv/rinha-gateway:latest
+    pull_policy: always
+    container_name: rinha-gateway-3
+    env_file:
+      - ./config/.env
+    environment:
+      - SOCKET=/sockets/gateway-3.sock
+    volumes:
+      - sockets:/sockets:rw
+    networks:
+      - backend
+      - payment-processor
+    depends_on:
+      - rinha-database
+    deploy:
+      resources:
+        limits:
+          cpus: "0.3"
+          memory: "50MB"
 
   rinha-database:
-    image: ghcr.io/alan-venv/rinha-database:1.0-umbral-skylake
+    image: ghcr.io/alan-venv/rinha-database:latest
+    pull_policy: always
     container_name: rinha-database
     volumes:
       - sockets:/sockets:rw
@@ -69,10 +95,15 @@ services:
       resources:
         limits:
           cpus: "0.2"
-          memory: "30MB"
+          memory: "50MB"
 
 volumes:
   sockets:
+    driver: local
+    driver_opts:
+      type: tmpfs
+      device: tmpfs
+      o: size=16m,mode=1777
 
 networks:
   backend:

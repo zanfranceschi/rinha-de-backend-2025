@@ -5,8 +5,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.4"
-          memory: 60M
+          cpus: "0.5"
+          memory: 90M
     image: nginx:stable-alpine
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf:ro
@@ -39,13 +39,14 @@ services:
       resources:
         limits:
           cpus: "0.4"
-          memory: 70M
-    image: daviddeltasierra/rinha-2025-go-2:1.23
+          memory: 90M
+    image: daviddeltasierra/rinha-2025-go-2:1.28
     volumes:
       - /tmp:/tmp
     environment:
       - SOCK=/tmp/unix-app1.sock
-      - WORKERS=5
+      - WORKERS=2
+      - GOMAXPROCS=3
     depends_on:
       - postgres
 
@@ -57,13 +58,14 @@ services:
       resources:
         limits:
           cpus: "0.4"
-          memory: 70M
-    image: daviddeltasierra/rinha-2025-go-2:1.23
+          memory: 90M
+    image: daviddeltasierra/rinha-2025-go-2:1.28
     volumes:
       - /tmp:/tmp
     environment:
       - SOCK=/tmp/unix-app2.sock
-      - WORKERS=5
+      - WORKERS=2
+      - GOMAXPROCS=3
     depends_on:
       - postgres
 
@@ -73,12 +75,13 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.3"
-          memory: 150M
+          cpus: "0.2"
+          memory: 80M
     image: postgres:alpine
     user: postgres
     volumes:
       - ./scripts:/docker-entrypoint-initdb.d
+      - /tmp:/var/run/postgresql
     environment:
       - POSTGRES_PASSWORD=root
       - POSTGRES_DB=rinha

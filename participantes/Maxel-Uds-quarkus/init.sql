@@ -1,8 +1,0 @@
-DROP TABLE IF EXISTS payments;
-
-CREATE TABLE payments (
-    correlationId VARCHAR(150) PRIMARY KEY NOT NULL UNIQUE,
-    amount DOUBLE PRECISION NOT NULL,
-    requestedAt TIMESTAMP,
-    provider VARCHAR(10) NOT NULL
-);

@@ -1,20 +1,21 @@
-# Extreme Proxy Server Configuration
+# Proxy Server Configuration
 
 # Server settings
 server:
   listen_address: ":9999"
   read_timeout: "2s"
   write_timeout: "2s"
-  max_connections: 10000
+  max_connections_per_ip: 2000
+  concurrency: 1000
 
 # Keep-alive settings
 # - enabled and client_timeout control TCP keep-alive for incoming connections
 # - backend_timeout controls idle timeout for backend connections
 keep_alive:
   enabled: true
-  client_timeout: "60s"
-  backend_timeout: "60s"
-  max_requests_per_conn: 5000
+  client_timeout: "30s"
+  backend_timeout: "30s"
+  max_requests_per_conn: 1000
 
 # Backend servers to forward requests to
 backends:
@@ -23,9 +24,13 @@ backends:
 
 # Connection pool settings for backend connections
 connection_pool:
-  max_conns_per_host: 1000
+  max_conns_per_host: 2000
 
 # Logging configuration
 logging:
-  enabled: false
-  level: "error" # debug, info, warn, error
+  enabled: true
+  level: "info" # debug, info, warn, error
+
+pre_warm:
+  enabled: true
+  requests_per_backend: 500

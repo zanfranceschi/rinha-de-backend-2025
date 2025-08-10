@@ -4,7 +4,7 @@
 
 - **Linguagem:** Bun e typescript
 - **Armazenamento:**: Redis
-- **Fila:** Redis
+- **Fila:** BullMQ
 - **Balanceador:** Nginx
 - **Orquestração:** Docker Compose
 

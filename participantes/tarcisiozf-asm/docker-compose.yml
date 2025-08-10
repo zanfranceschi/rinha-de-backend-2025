@@ -30,7 +30,7 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.9"
+          cpus: "0.3"
           memory: 100M
   app-2:
     <<: *base-app
@@ -46,7 +46,7 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.2"
+          cpus: "0.3"
           memory: 100M
 
 #  lb:
@@ -66,28 +66,55 @@ services:
 #          cpus: "0.5"
 #          memory: 150M
 
-  proxy:
-    image: haproxy:3.2.3-alpine
-#    cpuset: "2-3"
+#  proxy:
+#    image: haproxy:3.2.3-alpine
+##    cpuset: "2-3"
+#    ports:
+#      - 9999:80
+#    volumes:
+#      - sockets:/sockets:rw
+#      - ./proxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
+#    networks:
+#      - app
+#    depends_on:
+#      - app-1
+#      - app-2
+#    ulimits:
+#      nofile:
+#        soft: 200000
+#        hard: 200000
+#    deploy:
+#      resources:
+#        limits:
+#          cpus: "0.6"
+#          memory: "150MB"
+
+  nginx:
+    image: nginx:alpine
     ports:
-      - 9999:80
+      - "9999:80"
     volumes:
-      - sockets:/sockets:rw
-      - ./proxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
-    networks:
-      - app
-    depends_on:
-      - app-1
-      - app-2
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - sockets:/sockets
+    ulimits:
+      nofile:
+        soft: 200000
+        hard: 200000
     deploy:
       resources:
         limits:
-          cpus: "0.4"
+          cpus: "0.9"
           memory: "150MB"
+    command: [ "nginx", "-g", "daemon off;" ]
 
 volumes:
   app-data:
   sockets:
+    driver: local
+    driver_opts:
+      type: tmpfs
+      device: tmpfs
+      o: "size=32m,mode=1777"
 
 networks:
   payment-processor:

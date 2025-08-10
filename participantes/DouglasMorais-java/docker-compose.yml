@@ -1,0 +1,82 @@
+services:
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    ports:
+      - "9999:9999"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - api01
+      - api02
+    networks:
+      - backend
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          cpus: "0.10"
+          memory: "30mb"
+  api01:
+    image: dmorais15/rinha-2025-backend-native:1.0
+    container_name: api01
+    networks:
+      - backend
+      - payment-processor
+    environment:
+      - URL1=http://payment-processor-default:8080
+      - URL2=http://payment-processor-fallback:8080
+    deploy:
+      resources:
+        limits:
+          cpus: "0.6"
+          memory: "120MB"
+  api02:
+    image: dmorais15/rinha-2025-backend-native:1.0
+    container_name: api02
+    networks:
+      - backend
+      - payment-processor
+    environment:
+      - URL1=http://payment-processor-default:8080
+      - URL2=http://payment-processor-fallback:8080
+    deploy:
+      resources:
+        limits:
+          cpus: "0.6"
+          memory: "120MB"
+  redis:
+    image: redis:8-alpine
+    container_name: redis
+    restart: unless-stopped
+    command:
+      [
+        "redis-server",
+        "--appendonly", "no",
+        "--save", "",
+        "--maxmemory-policy", "noeviction",
+        "--tcp-keepalive", "60",
+        "--hz", "1000"
+      ]
+    ports:
+      - "6379:6379"
+    sysctls:
+      - net.core.somaxconn=65535
+    ulimits:
+      nofile:
+        soft: 65536
+        hard: 65536
+    networks:
+      - backend
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          cpus: "0.2"
+          memory: "80MB"
+
+networks:
+  backend:
+    driver: bridge
+  payment-processor:
+    external: true

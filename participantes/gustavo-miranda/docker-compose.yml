@@ -105,8 +105,13 @@ services:
       --timeout 30
       --tcp-backlog 511           
       --databases 1
-      --maxclientes 1000
+      --maxclients 1000
       --loglevel warning
+      --stop-writes-on-bgsave-error no
+      --rdbcompression no
+      --rdbchecksum no
+    sysctls:
+      - net.core.somaxconn=1024
     networks:
       - rinha-network
       - payment-processor

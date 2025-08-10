@@ -4,7 +4,6 @@ x-service-templates:
     volumes:
       - sockets:/sockets
     networks:
-      - backend
       - payment-processor
 
 
@@ -17,7 +16,7 @@ services:
       resources:
         limits:
           cpus: "0.25"
-          memory: "30MB"
+          memory: "50MB"
     environment:
       - LB=1
       - PORT=:80
@@ -91,7 +90,7 @@ services:
       resources:
         limits:
           cpus: "0.75"
-          memory: "100MB"
+          memory: "150MB"
     environment:
       - SOCKET_PATH=/sockets/worker_http.sock
       - PAYMENTS_SOCKET_PATH=/sockets/payments.sock
@@ -107,7 +106,5 @@ volumes:
   sockets:
 
 networks:
-  backend:
-    driver: bridge
   payment-processor:
     external: true

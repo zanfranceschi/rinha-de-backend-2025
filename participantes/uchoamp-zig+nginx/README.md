@@ -1,7 +1,7 @@
 # ZipPay Zig + Nginx
 
 O backend foi implementado todo usando apenas standard library de zig. 
-E o nosso querido nginx de load balancer, com a confiuguração que peguei emprestado do @luizcordista-go rs.
+E o nosso querido nginx de load balancer.
 
 De resto a aplicação funciona bem a não ser que vc mande 1 byte a mais no request.
 

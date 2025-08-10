@@ -1,14 +1,16 @@
 services:
   api1: &api
-    image: lhuizf/rinha-de-backend-2025-bun:0.5.0
+    image: lhuizf/rinha-de-backend-2025-bun:latest
     hostname: api1
     container_name: api1
     environment:
-      - PORT=3333
       - REDIS_URL=redis://redis:6379
       - PROCESSOR_DEFAULT_URL=http://payment-processor-default:8080
       - PROCESSOR_FALLBACK_URL=http://payment-processor-fallback:8080
       - QUEUE_CONCURRENCY=20
+      - SOCKET_PATH=/tmp/sockets/api1.sock
+    volumes:
+      - sockets:/tmp/sockets
     networks:
       - backend
       - payment-processor
@@ -18,13 +20,19 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.60"
+          cpus: "0.65"
           memory: "135MB"
 
   api2:
     <<: *api
     hostname: api2
     container_name: api2
+    environment:
+      - REDIS_URL=redis://redis:6379
+      - PROCESSOR_DEFAULT_URL=http://payment-processor-default:8080
+      - PROCESSOR_FALLBACK_URL=http://payment-processor-fallback:8080
+      - QUEUE_CONCURRENCY=20
+      - SOCKET_PATH=/tmp/sockets/api2.sock
 
   redis:
     image: redis:7.2-alpine
@@ -55,7 +63,7 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.20"
+          cpus: "0.10"
           memory: "65MB"
 
   load-balancer:
@@ -63,6 +71,7 @@ services:
     container_name: load-balancer
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - sockets:/tmp/sockets
     ports:
       - "9999:9999"
     networks:
@@ -82,3 +91,6 @@ networks:
     driver: bridge
   payment-processor:
     external: true
+
+volumes:
+  sockets:

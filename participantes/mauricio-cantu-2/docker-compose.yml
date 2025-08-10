@@ -1,0 +1,124 @@
+x-api: &payment-api-template
+  image: mauriciocantu/payment-api:latest
+  depends_on:
+    redis:
+      condition: service_healthy
+  networks:
+    - rinha-backend
+    - payment-processor
+
+x-worker: &payment-worker-template
+  image: mauriciocantu/payment-worker:latest
+  depends_on:
+    redis:
+      condition: service_healthy
+  environment:
+    - WORKER_CONCURRENCY=${WORKER_CONCURRENCY}
+    - PAYMENTS_QUEUE=${PAYMENTS_QUEUE}
+    - REDIS_URL=${REDIS_URL}
+    - PROCESS_PAYMENT_JOB_NAME=${PROCESS_PAYMENT_JOB_NAME}
+    - PAYMENT_PROCESSOR_URL_DEFAULT=${PAYMENT_PROCESSOR_URL_DEFAULT}
+    - PAYMENT_PROCESSOR_URL_FALLBACK=${PAYMENT_PROCESSOR_URL_FALLBACK}
+    - HTTP_CONNECTIONS_NUMBER=${HTTP_CONNECTIONS_NUMBER}
+  networks:
+    - rinha-backend
+    - payment-processor
+
+services:
+  nginx:
+    image: nginx:1.25-alpine
+    container_name: nginx
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - payment-api-01
+      - payment-api-02
+    ports:
+      - "9999:9999"
+    networks:
+      - rinha-backend
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          cpus: "0.2"
+          memory: "20MB"
+
+  payment-api-01:
+    <<: *payment-api-template
+    hostname: payment-api-01
+    container_name: payment-api-01
+    environment:
+      - PAYMENTS_QUEUE=${PAYMENTS_QUEUE}
+      - REDIS_URL=${REDIS_URL}
+      - PROCESS_PAYMENT_JOB_NAME=${PROCESS_PAYMENT_JOB_NAME}
+      - PAYMENT_PROCESSOR_URL_DEFAULT=${PAYMENT_PROCESSOR_URL_DEFAULT}
+      - PAYMENT_PROCESSOR_URL_FALLBACK=${PAYMENT_PROCESSOR_URL_FALLBACK}
+    deploy:
+      resources:
+        limits:
+          cpus: "0.2"
+          memory: "50MB"
+
+  payment-api-02:
+    <<: *payment-api-template
+    hostname: payment-api-02
+    container_name: payment-api-02
+    environment:
+      - PAYMENTS_QUEUE=${PAYMENTS_QUEUE}
+      - REDIS_URL=${REDIS_URL}
+      - PROCESS_PAYMENT_JOB_NAME=${PROCESS_PAYMENT_JOB_NAME}
+      - PAYMENT_PROCESSOR_URL_DEFAULT=${PAYMENT_PROCESSOR_URL_DEFAULT}
+      - PAYMENT_PROCESSOR_URL_FALLBACK=${PAYMENT_PROCESSOR_URL_FALLBACK}
+      - RUN_HEALTHCHECK=true
+      - HTTP_CONNECTIONS_NUMBER=1
+    deploy:
+      resources:
+        limits:
+          cpus: "0.2"
+          memory: "60MB"
+
+  payment-worker-01:
+    <<: *payment-worker-template
+    hostname: payment-worker-01
+    container_name: payment-worker-01
+    deploy:
+      resources:
+        limits:
+          cpus: "0.3"
+          memory: "75MB"
+
+  payment-worker-02:
+    <<: *payment-worker-template
+    hostname: payment-worker-02
+    container_name: payment-worker-02
+    deploy:
+      resources:
+        limits:
+          cpus: "0.3"
+          memory: "75MB"
+
+  redis:
+    image: redis:8.2-alpine
+    container_name: redis
+    hostname: redis
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 3
+    deploy:
+      resources:
+        limits:
+          cpus: "0.3"
+          memory: "70MB"
+    networks:
+      - rinha-backend
+
+networks:
+  rinha-backend:
+    driver: bridge
+  payment-processor:
+    external: true

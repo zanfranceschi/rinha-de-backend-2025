@@ -1,24 +1,9 @@
 services:
-  memdb:
-    image: pedrohsbarbosa99/rinha-golang-2025:0.1.9
-    command: ["./memdb"]
-    volumes:
-      - memsock:/tmp
-    networks:
-      - backend
-      - payment-processor
-    deploy:
-      resources:
-        limits:
-          cpus: "0.2"
-          memory: 60M
-    restart: unless-stopped
-
   app1:
-    image: pedrohsbarbosa99/rinha-golang-2025:0.1.9
+    image: pedrohsbarbosa99/rinha-golang-2025:0.2.3
     command: ["./main"]
     environment:
-      - MEMDB_SOCKET=/tmp/kvstore.sock
+      - SUMMARY_URL=http://app2:8080/internal/payments-summary
       - PROCESSOR_DEFAULT_URL=http://payment-processor-default:8080
       - PROCESSOR_FALLBACK_URL=http://payment-processor-fallback:8080
     volumes:
@@ -26,20 +11,18 @@ services:
     networks:
       - backend
       - payment-processor
-    depends_on:
-      - memdb
     deploy:
       resources:
         limits:
-          cpus: "0.5"
+          cpus: "0.6"
           memory: 70M
     restart: unless-stopped
 
   app2:
-    image: pedrohsbarbosa99/rinha-golang-2025:0.1.9
+    image: pedrohsbarbosa99/rinha-golang-2025:0.2.3
     command: ["./main"]
     environment:
-      - MEMDB_SOCKET=/tmp/kvstore.sock
+      - SUMMARY_URL=http://app1:8080/internal/payments-summary
       - PROCESSOR_DEFAULT_URL=http://payment-processor-default:8080
       - PROCESSOR_FALLBACK_URL=http://payment-processor-fallback:8080
     volumes:
@@ -47,12 +30,10 @@ services:
     networks:
       - backend
       - payment-processor
-    depends_on:
-      - memdb
     deploy:
       resources:
         limits:
-          cpus: "0.5"
+          cpus: "0.6"
           memory: 70M
     restart: unless-stopped
 

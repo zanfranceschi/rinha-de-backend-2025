@@ -1,7 +1,7 @@
 services:
   nginx:
     container_name: balance-zig-pay
-    image: nginx:1.25-alpine
+    image: nginx:1.28-alpine
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf:ro
     depends_on:
@@ -14,16 +14,16 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.40"
-          memory: "330MB"
+          cpus: "0.80"
+          memory: "10MB"
   zig1: &zig
     container_name: zig-pay-1
-    image: uchoamp/zigpay:1.01
+    image: uchoamp/zigpay:1.04
     environment:
       - SERVER_ENV=PROD
       - DEFAULT_HOST=payment-processor-default
       - DEFAULT_PORT=8080
-      - DEFAULT_POOL=50
+      - DEFAULT_POOL=20
       - FALLBACK_HOST=payment-processor-fallback
       - FALLBACK_PORT=8080
       - FALLBACK_POOL=0
@@ -35,16 +35,16 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.55"
+          cpus: "0.15"
           memory: "10MB"
-  zig2:
+  zig2: 
     <<: *zig
     container_name: zig-pay-2
     environment:
       - SERVER_ENV=PROD
       - DEFAULT_HOST=payment-processor-default
       - DEFAULT_PORT=8080
-      - DEFAULT_POOL=50
+      - DEFAULT_POOL=20
       - FALLBACK_HOST=payment-processor-fallback
       - FALLBACK_PORT=8080
       - FALLBACK_POOL=0
@@ -57,3 +57,4 @@ networks:
     driver: bridge
   payment-processor:
     external: true
+

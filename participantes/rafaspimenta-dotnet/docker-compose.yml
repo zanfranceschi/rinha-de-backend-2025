@@ -1,6 +1,6 @@
 services:
   api01: &api
-    image: rafaspimenta/rinha-backend-csharp:prod_v2
+    image: rafaspimenta/rinha-backend-csharp:v0.2.0
     platform: linux/amd64
     hostname: api01
     depends_on:
@@ -11,7 +11,7 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '0.6'
+          cpus: '0.55'
           memory: '75MB'
     environment:
       - DOTNET_ENVIRONMENT=Production
@@ -35,7 +35,7 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '0.1'
+          cpus: '0.2'
           memory: '40MB'
     networks:
       - app-network
@@ -63,6 +63,7 @@ services:
       -c wal_level=minimal
       -c max_wal_senders=0
       -c autovacuum=off
+      -c full_page_writes=off
     networks:
       - app-network
     healthcheck:

@@ -1,0 +1,124 @@
+x-service-templates:
+  base-app: &base-app
+    networks:
+      - payment-processor
+      - app
+    image: tarcisiozf/rinha-de-backend-2025-asm:v6
+    security_opt:
+      - seccomp:unconfined
+    volumes:
+      - app-data:/app/data
+      - sockets:/app/sockets:rw
+#    deploy:
+#      resources:
+#        limits:
+#          cpus: "0.5"
+#          memory: 100M
+
+services:
+  app-1:
+    <<: *base-app
+    hostname: app-one
+#    cpuset: "0"
+    environment:
+      APP_ID: "APP_1"
+      APP_PORT: "9001"
+      HOST_DEFAULT: "payment-processor-default"
+      PORT_DEFAULT: "8080"
+      HOST_FALLBACK: "payment-processor-fallback"
+      PORT_FALLBACK: "8080"
+    deploy:
+      resources:
+        limits:
+          cpus: "0.6"
+          memory: 100M
+  app-2:
+    <<: *base-app
+    hostname: app-two
+#    cpuset: "1"
+    environment:
+      APP_ID: "APP_2"
+      APP_PORT: "9002"
+      HOST_DEFAULT: "payment-processor-default"
+      PORT_DEFAULT: "8080"
+      HOST_FALLBACK: "payment-processor-fallback"
+      PORT_FALLBACK: "8080"
+    deploy:
+      resources:
+        limits:
+          cpus: "0.6"
+          memory: 100M
+
+#  lb:
+#    networks:
+#      - app
+##    cpuset: "2"
+#    image: tarcisiozf/rinha-de-backend-2025-asm-lb:v4
+#    security_opt:
+#      - seccomp:unconfined
+#    volumes:
+#      - sockets:/app/sockets:rw
+#    ports:
+#      - "9999:9999"
+#    deploy:
+#      resources:
+#        limits:
+#          cpus: "0.5"
+#          memory: 150M
+
+#  proxy:
+#    image: haproxy:3.2.3-alpine
+##    cpuset: "2-3"
+#    ports:
+#      - 9999:80
+#    volumes:
+#      - sockets:/sockets:rw
+#      - ./proxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
+#    networks:
+#      - app
+#    depends_on:
+#      - app-1
+#      - app-2
+#    ulimits:
+#      nofile:
+#        soft: 200000
+#        hard: 200000
+#    deploy:
+#      resources:
+#        limits:
+#          cpus: "0.6"
+#          memory: "150MB"
+
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "9999:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - sockets:/sockets
+    ulimits:
+      nofile:
+        soft: 200000
+        hard: 200000
+    deploy:
+      resources:
+        limits:
+          cpus: "0.3"
+          memory: "150MB"
+    command: [ "nginx", "-g", "daemon off;" ]
+
+volumes:
+  app-data:
+  sockets:
+    driver: local
+    driver_opts:
+      type: tmpfs
+      device: tmpfs
+      o: "size=32m,mode=1777"
+
+networks:
+  payment-processor:
+    external: true
+  app:
+    driver: bridge
+
