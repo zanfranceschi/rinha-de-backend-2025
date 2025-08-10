@@ -1,13 +1,12 @@
 services:
   backend:
-    image: felipeschirmann/rinha-backend-2025:15.0.2
+    image: felipeschirmann/rinha-backend-2025:15.0.3
     #    image: rinha-backend:latest
     container_name: felipeschirmann-rinha
     environment:
       # --- Client and Health Check Settings ---
       PAYMENT_PROCESSOR_DEFAULT_URL: "http://payment-processor-default:8080"
       PAYMENT_PROCESSOR_FALLBACK_URL: "http://payment-processor-fallback:8080"
-      RINHA_SCHEDULER_STRATEGY_DECISION_PERIOD_MS: 10000
     sysctls:
       net.core.somaxconn: 4096
     ports:
