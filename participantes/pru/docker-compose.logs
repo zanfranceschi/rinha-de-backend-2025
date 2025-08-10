@@ -1,0 +1,1001 @@
+
+ Network pru_backend  Creating
+ Network pru_backend  Created
+ Container api01  Creating
+ Container api02  Creating
+ Container redis  Creating
+ Container api02  Created
+ Container api01  Created
+ Container redis  Created
+ Container worker  Creating
+ Container worker  Created
+ Container nginx  Creating
+ Container nginx  Created
+Attaching to api01, api02, nginx, redis, worker
+redis   | 1:C 10 Aug 2025 21:50:51.311 # WARNING Memory overcommit must be enabled! Without it, a background save or replication may fail under low memory condition. Being disabled, it can also cause failures without low memory condition, see https://github.com/jemalloc/jemalloc/issues/1328. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.
+redis   | 1:C 10 Aug 2025 21:50:51.311 * oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+redis   | 1:C 10 Aug 2025 21:50:51.311 * Redis version=7.4.5, bits=64, commit=00000000, modified=0, pid=1, just started
+redis   | 1:C 10 Aug 2025 21:50:51.311 # Warning: no config file specified, using the default config. In order to specify a config file use redis-server /path/to/redis.conf
+redis   | 1:M 10 Aug 2025 21:50:51.312 * monotonic clock: POSIX clock_gettime
+redis   | 1:M 10 Aug 2025 21:50:51.312 * Running mode=standalone, port=6379.
+redis   | 1:M 10 Aug 2025 21:50:51.313 * Server initialized
+redis   | 1:M 10 Aug 2025 21:50:51.313 * Ready to accept connections tcp
+nginx   | /docker-entrypoint.sh: /docker-entrypoint.d/ is not empty, will attempt to perform configuration
+nginx   | /docker-entrypoint.sh: Looking for shell scripts in /docker-entrypoint.d/
+nginx   | /docker-entrypoint.sh: Launching /docker-entrypoint.d/10-listen-on-ipv6-by-default.sh
+nginx   | 10-listen-on-ipv6-by-default.sh: info: Getting the checksum of /etc/nginx/conf.d/default.conf
+nginx   | 10-listen-on-ipv6-by-default.sh: info: Enabled listen on IPv6 in /etc/nginx/conf.d/default.conf
+nginx   | /docker-entrypoint.sh: Sourcing /docker-entrypoint.d/15-local-resolvers.envsh
+nginx   | /docker-entrypoint.sh: Launching /docker-entrypoint.d/20-envsubst-on-templates.sh
+api01   | 🐦 Pru server starting on port 3000...
+api02   | 🐦 Pru server starting on port 3000...
+nginx   | /docker-entrypoint.sh: Launching /docker-entrypoint.d/30-tune-worker-processes.sh
+nginx   | /docker-entrypoint.sh: Configuration complete; ready for start up
+worker  | [1;34mINFO [0m 2025-08-10T21:50:53.114Z pid=1 tid=pt: Running in ruby 3.4.5 (2025-07-16 revision 20cda200d3) +YJIT +PRISM [x86_64-linux]
+worker  | [1;34mINFO [0m 2025-08-10T21:50:53.115Z pid=1 tid=pt: See LICENSE and the LGPL-3.0 for licensing details.
+worker  | [1;34mINFO [0m 2025-08-10T21:50:53.115Z pid=1 tid=pt: Upgrade to Sidekiq Pro for more features and support: https://sidekiq.org
+worker  | [1;34mINFO [0m 2025-08-10T21:50:53.115Z pid=1 tid=pt: Sidekiq 8.0.6 connecting to Redis with options {size: 10, pool_name: "internal", url: "redis://redis:6379/0"}
+worker  | [1;34mINFO [0m 2025-08-10T21:50:53.169Z pid=1 tid=pt: Sidekiq 8.0.6 connecting to Redis with options {size: 10, pool_name: "default", url: "redis://redis:6379/0"}
+api01   | 🐦 Received query params: from=, to=
+api01   | 🐦 Received query params: from=2025-08-10T21:50:46.054Z, to=2025-08-10T21:50:59.554Z
+api01   | [1;34mINFO [0m 2025-08-10T21:51:01.066Z pid=1 tid=ap: Sidekiq 8.0.6 connecting to Redis with options {size: 10, pool_name: "internal", url: "redis://redis:6379/0"}
+worker  | [1;34mINFO [0m 2025-08-10T21:51:01.073Z pid=1 tid=t5 jid=a041cd2f56acf81c5dc5d716 class=PaymentJob: start
+worker  | 🐦 Payment 9743d443-05d2-40bd-a852-03a7fa2da055 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:01.124Z pid=1 tid=t5 jid=a041cd2f56acf81c5dc5d716 class=PaymentJob elapsed=0.051: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:01.167Z pid=1 tid=tl jid=34abe8fd0d7e10e32344e869 class=PaymentJob: start
+worker  | 🐦 Payment e84f25a6-74fd-4763-8147-09b08c38c824 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:01.175Z pid=1 tid=tl jid=34abe8fd0d7e10e32344e869 class=PaymentJob elapsed=0.008: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:01.277Z pid=1 tid=tt jid=614bab268fc6ebb2cf754b3e class=PaymentJob: start
+worker  | 🐦 Payment 613cd444-a71e-4262-a23d-d84c5d7e4629 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:01.283Z pid=1 tid=tt jid=614bab268fc6ebb2cf754b3e class=PaymentJob elapsed=0.007: done
+api02   | [1;34mINFO [0m 2025-08-10T21:51:01.384Z pid=1 tid=a9: Sidekiq 8.0.6 connecting to Redis with options {size: 10, pool_name: "internal", url: "redis://redis:6379/0"}
+worker  | [1;34mINFO [0m 2025-08-10T21:51:01.388Z pid=1 tid=t5 jid=ad56453f547721ecf0863869 class=PaymentJob: start
+worker  | 🐦 Payment d6bee185-c36f-41f9-8577-1bc982785b17 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:01.394Z pid=1 tid=t5 jid=ad56453f547721ecf0863869 class=PaymentJob elapsed=0.007: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:01.493Z pid=1 tid=tl jid=93bb4b7787e3daae908d2d2e class=PaymentJob: start
+worker  | 🐦 Payment 9fe5fb1a-53b9-4023-bae9-a09f0601b164 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:01.500Z pid=1 tid=tl jid=93bb4b7787e3daae908d2d2e class=PaymentJob elapsed=0.007: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:01.604Z pid=1 tid=tt jid=864c98d4175afec24fdd1100 class=PaymentJob: start
+worker  | 🐦 Payment b588f85f-4ab1-4fe0-b5ed-6a8725540124 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:01.610Z pid=1 tid=tt jid=864c98d4175afec24fdd1100 class=PaymentJob elapsed=0.006: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:01.712Z pid=1 tid=u1 jid=7069fe1201908debc4af4ce7 class=PaymentJob: start
+worker  | 🐦 Payment e6497b26-995d-4021-b1a0-1bbb8aea4657 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:01.716Z pid=1 tid=u1 jid=7069fe1201908debc4af4ce7 class=PaymentJob elapsed=0.004: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:01.822Z pid=1 tid=u9 jid=b8f7e5f6e5216162febf7f44 class=PaymentJob: start
+worker  | 🐦 Payment 4571648a-2afe-4767-aeee-835bd949c9fc processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:01.827Z pid=1 tid=u9 jid=b8f7e5f6e5216162febf7f44 class=PaymentJob elapsed=0.006: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:01.931Z pid=1 tid=uh jid=969371367bc78609ecf9e2d6 class=PaymentJob: start
+worker  | 🐦 Payment 36bc6a3e-031b-489e-b040-b0eafa4ababd processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:01.937Z pid=1 tid=uh jid=969371367bc78609ecf9e2d6 class=PaymentJob elapsed=0.006: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:02.040Z pid=1 tid=up jid=3117bc6bfd61dc152d646d90 class=PaymentJob: start
+worker  | 🐦 Payment 8861ffb1-4773-4acc-bf2d-4124f7f9bc00 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:02.067Z pid=1 tid=up jid=3117bc6bfd61dc152d646d90 class=PaymentJob elapsed=0.025: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:02.075Z pid=1 tid=ux jid=2e3b30a5be71feab41213dff class=PaymentJob: start
+worker  | 🐦 Payment 56ef8551-c0f3-4ff4-a1d3-8917aecd78ce processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:02.081Z pid=1 tid=ux jid=2e3b30a5be71feab41213dff class=PaymentJob elapsed=0.006: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:02.150Z pid=1 tid=v5 jid=404307e11cc0a54a3d595c5a class=PaymentJob: start
+worker  | 🐦 Payment bdc5a822-ec33-4f6d-bd15-398b85833b00 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:02.153Z pid=1 tid=v5 jid=404307e11cc0a54a3d595c5a class=PaymentJob elapsed=0.004: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:02.169Z pid=1 tid=vd jid=d1068035781e25e835bcc23a class=PaymentJob: start
+worker  | 🐦 Payment f834c0b1-19f0-4cd7-8464-4174dac76b30 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:02.177Z pid=1 tid=vd jid=d1068035781e25e835bcc23a class=PaymentJob elapsed=0.009: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:02.258Z pid=1 tid=t5 jid=6734a32ab6e9909dad8bc055 class=PaymentJob: start
+worker  | 🐦 Payment 93527d56-fc0c-43b5-a25b-fad6ac4c8889 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:02.263Z pid=1 tid=t5 jid=6734a32ab6e9909dad8bc055 class=PaymentJob elapsed=0.005: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:02.280Z pid=1 tid=tl jid=7b8f9a7b3ad7e2220ca74a98 class=PaymentJob: start
+worker  | 🐦 Payment 524de669-5117-4a3d-b326-2ac46dc7295f processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:02.292Z pid=1 tid=tl jid=7b8f9a7b3ad7e2220ca74a98 class=PaymentJob elapsed=0.011: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:02.367Z pid=1 tid=tt jid=b2f5429c5a3cef94c1f3dada class=PaymentJob: start
+worker  | 🐦 Payment 15a84aa0-85a2-43eb-84d8-8d12c3f87107 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:02.376Z pid=1 tid=tt jid=b2f5429c5a3cef94c1f3dada class=PaymentJob elapsed=0.009: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:02.390Z pid=1 tid=u1 jid=6cdaeff8bfd6b0a499ab07ef class=PaymentJob: start
+worker  | 🐦 Payment ddbbfa08-a4f9-4488-8f6f-4c3bb68e4e8a processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:02.397Z pid=1 tid=u1 jid=6cdaeff8bfd6b0a499ab07ef class=PaymentJob elapsed=0.007: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:02.479Z pid=1 tid=u9 jid=cd334209c9ef16f4cca51e81 class=PaymentJob: start
+worker  | 🐦 Payment 6c0bc357-e4eb-483f-9bbb-71349098b6a2 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:02.483Z pid=1 tid=u9 jid=cd334209c9ef16f4cca51e81 class=PaymentJob elapsed=0.005: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:02.496Z pid=1 tid=uh jid=e774e7337a86eac825c35736 class=PaymentJob: start
+worker  | 🐦 Payment f8afcd65-57c8-41ad-be3e-1d32415c1ed7 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:02.501Z pid=1 tid=uh jid=e774e7337a86eac825c35736 class=PaymentJob elapsed=0.004: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:02.587Z pid=1 tid=up jid=53363c6208e993f10ecc1a18 class=PaymentJob: start
+worker  | 🐦 Payment b592a965-a591-453b-ade6-5a0637a8f389 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:02.594Z pid=1 tid=up jid=53363c6208e993f10ecc1a18 class=PaymentJob elapsed=0.007: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:02.608Z pid=1 tid=ux jid=0b423f1a5758af5df756ebe6 class=PaymentJob: start
+worker  | 🐦 Payment 5c4821df-5603-4b3b-9fff-e616f50ee8fc processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:02.627Z pid=1 tid=ux jid=0b423f1a5758af5df756ebe6 class=PaymentJob elapsed=0.019: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:02.697Z pid=1 tid=v5 jid=40fb3640e3e0d42f4ad231e6 class=PaymentJob: start
+worker  | 🐦 Payment e1d7ac0a-9ec7-4acd-b7be-04260b406258 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:02.704Z pid=1 tid=v5 jid=40fb3640e3e0d42f4ad231e6 class=PaymentJob elapsed=0.006: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:02.719Z pid=1 tid=vd jid=a7fed2a86651fba35fcb8dde class=PaymentJob: start
+worker  | 🐦 Payment 45083b74-62bb-4096-b72f-0097d56660e8 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:02.724Z pid=1 tid=vd jid=a7fed2a86651fba35fcb8dde class=PaymentJob elapsed=0.005: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:02.813Z pid=1 tid=t5 jid=134f5385594b8a6f79566e1f class=PaymentJob: start
+worker  | [1;34mINFO [0m 2025-08-10T21:51:02.825Z pid=1 tid=tl jid=3ee0b12f9b7b8f2626a0fd2b class=PaymentJob: start
+worker  | 🐦 Payment 1f453834-7c7c-4700-bdac-76007320aab9 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:02.831Z pid=1 tid=tl jid=3ee0b12f9b7b8f2626a0fd2b class=PaymentJob elapsed=0.006: done
+worker  | 🐦 Payment 3d53a37d-9fe4-46e8-b424-15cdd2eda36c processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:02.838Z pid=1 tid=t5 jid=134f5385594b8a6f79566e1f class=PaymentJob elapsed=0.025: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:02.917Z pid=1 tid=tt jid=48061650a1ee9f96a6ea2677 class=PaymentJob: start
+worker  | 🐦 Payment ef356599-e0b1-4ecf-ac12-0098d152e722 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:02.926Z pid=1 tid=tt jid=48061650a1ee9f96a6ea2677 class=PaymentJob elapsed=0.009: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:02.936Z pid=1 tid=u1 jid=f4ad7d5298df91082870b351 class=PaymentJob: start
+worker  | 🐦 Payment ad2918fd-2c58-4026-af0a-9dfb3c06298a processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:02.944Z pid=1 tid=u1 jid=f4ad7d5298df91082870b351 class=PaymentJob elapsed=0.008: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:03.026Z pid=1 tid=u9 jid=00cba792b7df7a384e82c04a class=PaymentJob: start
+worker  | 🐦 Payment d64070c4-9925-4190-984f-f73773e64e4b processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:03.041Z pid=1 tid=u9 jid=00cba792b7df7a384e82c04a class=PaymentJob elapsed=0.016: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:03.048Z pid=1 tid=uh jid=8a63fc306afaf1c7356125e4 class=PaymentJob: start
+worker  | 🐦 Payment eec6663c-a428-46a9-8a3c-d0e0c55e1658 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:03.055Z pid=1 tid=uh jid=8a63fc306afaf1c7356125e4 class=PaymentJob elapsed=0.008: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:03.083Z pid=1 tid=up jid=aa9000712aa0ef0adea5e570 class=PaymentJob: start
+worker  | [1;34mINFO [0m 2025-08-10T21:51:03.134Z pid=1 tid=ux jid=7225f00369b9eb06c481e2dc class=PaymentJob: start
+worker  | 🐦 Payment 976b227a-f4c9-430d-af58-2d94c1f52efd processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:03.145Z pid=1 tid=up jid=aa9000712aa0ef0adea5e570 class=PaymentJob elapsed=0.062: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:03.152Z pid=1 tid=v5 jid=b85ade749c1564c1ec8662d5 class=PaymentJob: start
+worker  | [1;34mINFO [0m 2025-08-10T21:51:03.199Z pid=1 tid=vd jid=af5f1df6636d0c0b3bfb2704 class=PaymentJob: start
+worker  | 🐦 Payment 42153d3d-833d-4efd-a36c-3d98279e9530 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:03.209Z pid=1 tid=v5 jid=b85ade749c1564c1ec8662d5 class=PaymentJob elapsed=0.056: done
+worker  | 🐦 Payment fa8d0c48-e72e-44e5-b351-86cb6c371fa7 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:03.216Z pid=1 tid=ux jid=7225f00369b9eb06c481e2dc class=PaymentJob elapsed=0.082: done
+worker  | 🐦 Payment c2f582b5-0215-4af3-a396-2531c9688063 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:03.219Z pid=1 tid=vd jid=af5f1df6636d0c0b3bfb2704 class=PaymentJob elapsed=0.02: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:03.244Z pid=1 tid=tl jid=9734e66b1ad1245003ccdae6 class=PaymentJob: start
+worker  | 🐦 Payment 1bb20034-d1f8-4d7d-a054-3fc2734ae9e3 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:03.250Z pid=1 tid=tl jid=9734e66b1ad1245003ccdae6 class=PaymentJob elapsed=0.006: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:03.262Z pid=1 tid=t5 jid=9f7099693a54fb41949121b2 class=PaymentJob: start
+worker  | 🐦 Payment dce129d8-99e4-477f-843d-e498d65e1cf1 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:03.271Z pid=1 tid=t5 jid=9f7099693a54fb41949121b2 class=PaymentJob elapsed=0.009: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:03.287Z pid=1 tid=tt jid=e231c88c56d08ea1be1d208c class=PaymentJob: start
+worker  | 🐦 Payment b4516650-f71e-4a03-8543-5391fdc8104a processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:03.293Z pid=1 tid=tt jid=e231c88c56d08ea1be1d208c class=PaymentJob elapsed=0.006: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:03.354Z pid=1 tid=u1 jid=9982fecfd810bc8f640206f8 class=PaymentJob: start
+worker  | 🐦 Payment 6280dbe9-e215-4413-9a18-12f8cef3f56c processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:03.365Z pid=1 tid=u1 jid=9982fecfd810bc8f640206f8 class=PaymentJob elapsed=0.011: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:03.370Z pid=1 tid=u9 jid=a84b92d56d956566f4713d3f class=PaymentJob: start
+worker  | 🐦 Payment 8f98715e-a392-4edf-bc08-ecb2b26fdd15 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:03.379Z pid=1 tid=u9 jid=a84b92d56d956566f4713d3f class=PaymentJob elapsed=0.008: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:03.395Z pid=1 tid=uh jid=331870a99cbae875125648e5 class=PaymentJob: start
+worker  | 🐦 Payment a90e9b50-50f8-4c82-b106-0cfe11e3f55a processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:03.401Z pid=1 tid=uh jid=331870a99cbae875125648e5 class=PaymentJob elapsed=0.006: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:03.460Z pid=1 tid=up jid=86738755f339c31c84f655c8 class=PaymentJob: start
+worker  | 🐦 Payment 7fa593d8-8543-4b1a-86f5-05fa47983dcc processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:03.464Z pid=1 tid=up jid=86738755f339c31c84f655c8 class=PaymentJob elapsed=0.004: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:03.483Z pid=1 tid=v5 jid=ca62bb1bc8490ec7da391a49 class=PaymentJob: start
+worker  | 🐦 Payment ac73cc5f-6323-454a-bcd1-341ab5417fdd processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:03.487Z pid=1 tid=v5 jid=ca62bb1bc8490ec7da391a49 class=PaymentJob elapsed=0.004: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:03.500Z pid=1 tid=ux jid=418179ead8ccbccb51dec9e4 class=PaymentJob: start
+worker  | 🐦 Payment 8a50a08a-4fb6-4f3d-980f-8dcf5afc2d18 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:03.503Z pid=1 tid=ux jid=418179ead8ccbccb51dec9e4 class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:03.570Z pid=1 tid=vd jid=d58a27081d694ef615e6ab11 class=PaymentJob: start
+worker  | 🐦 Payment 1c5ceba8-319f-45d1-8b55-3338990746aa processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:03.573Z pid=1 tid=vd jid=d58a27081d694ef615e6ab11 class=PaymentJob elapsed=0.004: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:03.594Z pid=1 tid=tl jid=ef9325a4c7322c0aabb45c06 class=PaymentJob: start
+worker  | 🐦 Payment 2e0ab16f-25dd-479f-8636-996a3b9aa2ce processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:03.598Z pid=1 tid=tl jid=ef9325a4c7322c0aabb45c06 class=PaymentJob elapsed=0.004: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:03.611Z pid=1 tid=t5 jid=7ff6d39ad778b34252a6db6a class=PaymentJob: start
+worker  | 🐦 Payment c86d8bdf-0e77-4805-baf7-27dbea63d939 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:03.616Z pid=1 tid=t5 jid=7ff6d39ad778b34252a6db6a class=PaymentJob elapsed=0.004: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:03.683Z pid=1 tid=tt jid=d6c50eecc72da4ad72f5dcd9 class=PaymentJob: start
+worker  | 🐦 Payment ddabcb36-dcf3-4a67-997f-4155f65bf2c3 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:03.687Z pid=1 tid=tt jid=d6c50eecc72da4ad72f5dcd9 class=PaymentJob elapsed=0.004: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:03.710Z pid=1 tid=u1 jid=c65263c257fba8ba8268cb72 class=PaymentJob: start
+worker  | 🐦 Payment cb3456e6-b882-4071-ad08-322c8754df3f processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:03.714Z pid=1 tid=u1 jid=c65263c257fba8ba8268cb72 class=PaymentJob elapsed=0.004: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:03.722Z pid=1 tid=u9 jid=73467870b6841321bb2db299 class=PaymentJob: start
+worker  | 🐦 Payment 55b1a47a-49e5-4804-ae4a-d01584e925b2 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:03.726Z pid=1 tid=u9 jid=73467870b6841321bb2db299 class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:03.789Z pid=1 tid=uh jid=6b6435329490af712d50059d class=PaymentJob: start
+worker  | 🐦 Payment dae771cd-975e-4c7c-b76d-4273e7a4f2cb processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:03.793Z pid=1 tid=uh jid=6b6435329490af712d50059d class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:03.821Z pid=1 tid=up jid=693f8bb56548d706781816de class=PaymentJob: start
+worker  | 🐦 Payment 488f380d-b8b6-4876-820d-ad44f5580cb5 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:03.824Z pid=1 tid=up jid=693f8bb56548d706781816de class=PaymentJob elapsed=0.004: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:03.828Z pid=1 tid=v5 jid=cd21627e13407de53ea120a8 class=PaymentJob: start
+worker  | 🐦 Payment ba6f72ec-5b9e-468d-b76a-5adb4d32e5ce processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:03.831Z pid=1 tid=v5 jid=cd21627e13407de53ea120a8 class=PaymentJob elapsed=0.004: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:03.925Z pid=1 tid=ux jid=66eba37520a0f4f281ccac2f class=PaymentJob: start
+worker  | 🐦 Payment 0ed89d1a-4894-4da4-975f-414d4b0c03f8 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:03.929Z pid=1 tid=ux jid=66eba37520a0f4f281ccac2f class=PaymentJob elapsed=0.004: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:03.940Z pid=1 tid=vd jid=b441cab1da6460f4ba5fa906 class=PaymentJob: start
+worker  | 🐦 Payment 81281049-3865-46ce-bc9d-7ec31600c3cc processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:03.943Z pid=1 tid=vd jid=b441cab1da6460f4ba5fa906 class=PaymentJob elapsed=0.004: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:04.000Z pid=1 tid=tl jid=4daf129ac5ed8bbb35e0f1bf class=PaymentJob: start
+worker  | 🐦 Payment 75f609b2-e28a-4079-8745-e88cb6f593c7 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:04.004Z pid=1 tid=tl jid=4daf129ac5ed8bbb35e0f1bf class=PaymentJob elapsed=0.004: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:04.008Z pid=1 tid=t5 jid=3ed8ca6c640e689caf479f1a class=PaymentJob: start
+worker  | 🐦 Payment 579314b2-d732-45cd-afc0-a92fcbcf573a processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:04.011Z pid=1 tid=t5 jid=3ed8ca6c640e689caf479f1a class=PaymentJob elapsed=0.004: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:04.029Z pid=1 tid=tt jid=7a45f1454f80fe1375c14f0e class=PaymentJob: start
+worker  | 🐦 Payment 1e586725-b38c-4a88-a7cf-433dc3fc517a processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:04.033Z pid=1 tid=tt jid=7a45f1454f80fe1375c14f0e class=PaymentJob elapsed=0.004: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:04.063Z pid=1 tid=u1 jid=cfd11d01a85bf8501c05423c class=PaymentJob: start
+worker  | 🐦 Payment c3498e34-89f4-44d6-9a39-605e763ee0b9 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:04.066Z pid=1 tid=u1 jid=cfd11d01a85bf8501c05423c class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:04.086Z pid=1 tid=u9 jid=c5b6db6b8479e58c3b9b9f71 class=PaymentJob: start
+worker  | 🐦 Payment 974afc87-0b95-479f-9aa4-b5fa418455d2 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:04.089Z pid=1 tid=u9 jid=c5b6db6b8479e58c3b9b9f71 class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:04.121Z pid=1 tid=uh jid=87638e20af18ae5f152b8b3a class=PaymentJob: start
+worker  | 🐦 Payment d4105a80-e0b6-4746-8f04-7c68364605f7 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:04.125Z pid=1 tid=uh jid=87638e20af18ae5f152b8b3a class=PaymentJob elapsed=0.004: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:04.154Z pid=1 tid=up jid=689db9e0b4f3b6d2dff2bc59 class=PaymentJob: start
+worker  | 🐦 Payment 8b012c5e-4c58-429b-8233-bb8c506440fd processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:04.158Z pid=1 tid=up jid=689db9e0b4f3b6d2dff2bc59 class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:04.170Z pid=1 tid=v5 jid=9f04532521e49026da7c9fae class=PaymentJob: start
+worker  | 🐦 Payment b42aa57b-4152-47d8-aacb-799f1e680b1f processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:04.173Z pid=1 tid=v5 jid=9f04532521e49026da7c9fae class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:04.175Z pid=1 tid=ux jid=75beb2bc710b5362bf19dd42 class=PaymentJob: start
+worker  | 🐦 Payment 5a56f56e-035b-45f5-8e88-e091c43b5c3c processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:04.179Z pid=1 tid=ux jid=75beb2bc710b5362bf19dd42 class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:04.225Z pid=1 tid=vd jid=f147dfa59dfe7bce49e155fb class=PaymentJob: start
+worker  | 🐦 Payment b4cb4eee-9a39-4bc7-854f-26cc3416a634 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:04.229Z pid=1 tid=vd jid=f147dfa59dfe7bce49e155fb class=PaymentJob elapsed=0.004: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:04.247Z pid=1 tid=tl jid=9dfcfffca1c9230605af2768 class=PaymentJob: start
+worker  | 🐦 Payment 74a62351-0c3c-400d-8657-b08a7ef461f1 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:04.250Z pid=1 tid=tl jid=9dfcfffca1c9230605af2768 class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:04.268Z pid=1 tid=t5 jid=d04529b2b730fd0bfe97df7a class=PaymentJob: start
+worker  | 🐦 Payment 8c79bf10-0cbd-45e0-804a-9d568129de7b processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:04.271Z pid=1 tid=t5 jid=d04529b2b730fd0bfe97df7a class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:04.291Z pid=1 tid=tt jid=673e97ff9885088c6da5de7a class=PaymentJob: start
+worker  | 🐦 Payment 3939c8d9-20c9-478d-83d7-2b02f409ebf4 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:04.294Z pid=1 tid=tt jid=673e97ff9885088c6da5de7a class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:04.335Z pid=1 tid=u1 jid=ee72cf3ed9a65d27dd547edb class=PaymentJob: start
+worker  | 🐦 Payment 527317d5-8212-40fe-875e-c8b1ab8a86ba processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:04.338Z pid=1 tid=u1 jid=ee72cf3ed9a65d27dd547edb class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:04.360Z pid=1 tid=u9 jid=df48170611c1503637e28982 class=PaymentJob: start
+worker  | 🐦 Payment dbeb01a1-ea68-4a20-888c-7b28ef19a77d processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:04.363Z pid=1 tid=u9 jid=df48170611c1503637e28982 class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:04.374Z pid=1 tid=uh jid=c6a57cc2bbf4db3af9ef80ac class=PaymentJob: start
+worker  | 🐦 Payment 7f861b2f-e702-40e8-b7ff-e05e50fcd7e2 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:04.377Z pid=1 tid=uh jid=c6a57cc2bbf4db3af9ef80ac class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:04.398Z pid=1 tid=up jid=0c41fa39ab2b64f95dd32790 class=PaymentJob: start
+worker  | 🐦 Payment f9c755bb-ee6e-4ca5-a3d3-d2d8ba39c1f0 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:04.402Z pid=1 tid=up jid=0c41fa39ab2b64f95dd32790 class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:04.444Z pid=1 tid=v5 jid=52396e9611659f13cbae38ec class=PaymentJob: start
+worker  | 🐦 Payment e5e0ed69-38df-4dd4-9bd6-b50d58a78ada processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:04.447Z pid=1 tid=v5 jid=52396e9611659f13cbae38ec class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:04.462Z pid=1 tid=ux jid=6dd14d21c3f23b890ea8905a class=PaymentJob: start
+worker  | 🐦 Payment b359e045-191c-4171-a217-a161459ebc16 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:04.466Z pid=1 tid=ux jid=6dd14d21c3f23b890ea8905a class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:04.485Z pid=1 tid=vd jid=6cac20665e3dcdbf688df211 class=PaymentJob: start
+worker  | 🐦 Payment 4af5e1fe-2d8d-4832-9b4c-5eaef3697f0a processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:04.488Z pid=1 tid=vd jid=6cac20665e3dcdbf688df211 class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:04.502Z pid=1 tid=tl jid=1938867dd9abda66db663758 class=PaymentJob: start
+worker  | 🐦 Payment 3604312e-1315-4344-91b1-87508a0f1d7d processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:04.505Z pid=1 tid=tl jid=1938867dd9abda66db663758 class=PaymentJob elapsed=0.004: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:04.554Z pid=1 tid=t5 jid=e912dc8f78e160cc07f46a56 class=PaymentJob: start
+worker  | 🐦 Payment 59ca315d-56b1-47de-9cf2-23c81006180a processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:04.557Z pid=1 tid=t5 jid=e912dc8f78e160cc07f46a56 class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:04.573Z pid=1 tid=tt jid=a39af0a614e0c577b203131b class=PaymentJob: start
+worker  | 🐦 Payment ae3a867d-7e8b-4883-b266-6c025b66ec8d processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:04.576Z pid=1 tid=tt jid=a39af0a614e0c577b203131b class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:04.597Z pid=1 tid=u1 jid=1d3501139d80267ce3157638 class=PaymentJob: start
+worker  | 🐦 Payment c9838ed2-bd88-4940-b27a-aa93c9bba8f9 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:04.600Z pid=1 tid=u1 jid=1d3501139d80267ce3157638 class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:04.613Z pid=1 tid=u9 jid=2d0cacc095ba345271e68813 class=PaymentJob: start
+worker  | 🐦 Payment 328dd8bd-e5d1-408f-b67c-889182d3b317 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:04.616Z pid=1 tid=u9 jid=2d0cacc095ba345271e68813 class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:04.663Z pid=1 tid=uh jid=d00e09d1a0e2cdc30a918040 class=PaymentJob: start
+worker  | 🐦 Payment a97b2ef2-ba7e-4c4e-97a6-b75495677000 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:04.666Z pid=1 tid=uh jid=d00e09d1a0e2cdc30a918040 class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:04.686Z pid=1 tid=up jid=84add6bb3185c63253f5c917 class=PaymentJob: start
+worker  | 🐦 Payment a4a4f417-8a0a-47db-a340-a46d09ab9cde processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:04.689Z pid=1 tid=up jid=84add6bb3185c63253f5c917 class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:04.712Z pid=1 tid=v5 jid=a92e3093fe14fda8cde7ec04 class=PaymentJob: start
+worker  | 🐦 Payment f5cabe3a-9497-4b20-92b3-95a7e8d93099 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:04.716Z pid=1 tid=v5 jid=a92e3093fe14fda8cde7ec04 class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:04.724Z pid=1 tid=ux jid=dbc00da09719f7fecabfa747 class=PaymentJob: start
+worker  | 🐦 Payment 17f7ed00-fb8b-41a3-bc10-ea33689524bd processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:04.727Z pid=1 tid=ux jid=dbc00da09719f7fecabfa747 class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:04.771Z pid=1 tid=vd jid=d55135564a05a1062e44d4a7 class=PaymentJob: start
+worker  | 🐦 Payment a607d847-20a0-4433-8d24-9228fbad6753 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:04.775Z pid=1 tid=vd jid=d55135564a05a1062e44d4a7 class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:04.792Z pid=1 tid=tl jid=5baef6983bb4fe3f4f912f90 class=PaymentJob: start
+worker  | 🐦 Payment 9d074ade-a8e9-40bd-b1f0-2798a87015a4 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:04.802Z pid=1 tid=tl jid=5baef6983bb4fe3f4f912f90 class=PaymentJob elapsed=0.01: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:04.823Z pid=1 tid=t5 jid=168eb4a7b25a6b3c71f749ee class=PaymentJob: start
+worker  | 🐦 Payment 07615f03-5571-4e00-9807-b4ad00a3fde8 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:04.827Z pid=1 tid=t5 jid=168eb4a7b25a6b3c71f749ee class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:04.830Z pid=1 tid=tt jid=ddb6101eff0de4ffedb88dba class=PaymentJob: start
+worker  | 🐦 Payment 6a89111c-8f5e-4241-b4b7-6c17a4f7cc7f processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:04.833Z pid=1 tid=tt jid=ddb6101eff0de4ffedb88dba class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:04.881Z pid=1 tid=u1 jid=c0ed7d8d778a1568e8e4b326 class=PaymentJob: start
+worker  | 🐦 Payment 891b4e15-5d38-43d5-9777-85da18924409 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:04.884Z pid=1 tid=u1 jid=c0ed7d8d778a1568e8e4b326 class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:04.934Z pid=1 tid=u9 jid=44fdd188dbde789ff029e917 class=PaymentJob: start
+worker  | 🐦 Payment fd50bfa0-26f6-498d-b945-ad49d3d064d7 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:04.938Z pid=1 tid=u9 jid=44fdd188dbde789ff029e917 class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:04.942Z pid=1 tid=uh jid=8f303e18a0167bd9e9b8a751 class=PaymentJob: start
+worker  | 🐦 Payment 66aa6ab7-cc92-441e-8ef7-f405c1026335 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:04.945Z pid=1 tid=uh jid=8f303e18a0167bd9e9b8a751 class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:04.990Z pid=1 tid=up jid=c6f98cdfaf66bb86a5b387f2 class=PaymentJob: start
+worker  | 🐦 Payment 615eea29-fc95-4be6-b16c-6b27add4b858 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:04.994Z pid=1 tid=up jid=c6f98cdfaf66bb86a5b387f2 class=PaymentJob elapsed=0.004: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:05.003Z pid=1 tid=v5 jid=f126a39953d02697cfe6c13e class=PaymentJob: start
+worker  | 🐦 Payment 95b82adc-a89c-446a-90af-d030368366e0 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:05.006Z pid=1 tid=v5 jid=f126a39953d02697cfe6c13e class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:05.010Z pid=1 tid=ux jid=5985a2ead9f34a7dbe720f0a class=PaymentJob: start
+worker  | 🐦 Payment ae3c45f9-a4a2-4866-8621-2dd7aa29b442 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:05.013Z pid=1 tid=ux jid=5985a2ead9f34a7dbe720f0a class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:05.032Z pid=1 tid=vd jid=f67714cd0e8bdbd7dd660f00 class=PaymentJob: start
+worker  | 🐦 Payment 09d863d2-cee7-4ddf-a623-25900ed8faca processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:05.035Z pid=1 tid=vd jid=f67714cd0e8bdbd7dd660f00 class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:05.065Z pid=1 tid=tl jid=690b7f7e319b25f6656145c7 class=PaymentJob: start
+worker  | 🐦 Payment 92dac2bb-de56-46af-9227-626ad37d6361 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:05.068Z pid=1 tid=tl jid=690b7f7e319b25f6656145c7 class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:05.089Z pid=1 tid=t5 jid=3f4a98b17b3ee92386046b49 class=PaymentJob: start
+worker  | 🐦 Payment 9865d4b0-8b93-457d-8e91-220aea49b1a4 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:05.092Z pid=1 tid=t5 jid=3f4a98b17b3ee92386046b49 class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:05.100Z pid=1 tid=tt jid=3845c493c539396b06c0bb62 class=PaymentJob: start
+worker  | 🐦 Payment 75813f8c-21f4-48e8-aeb0-dbe8885977b3 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:05.103Z pid=1 tid=tt jid=3845c493c539396b06c0bb62 class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:05.124Z pid=1 tid=u1 jid=08b13a9cea7632be5d89324d class=PaymentJob: start
+worker  | 🐦 Payment 500d66b0-cf9a-4aee-8f12-ce67ad9d592e processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:05.127Z pid=1 tid=u1 jid=08b13a9cea7632be5d89324d class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:05.156Z pid=1 tid=u9 jid=0270ba1d598fdbf00a564db1 class=PaymentJob: start
+worker  | 🐦 Payment 5d70d56c-a94c-4d9c-8c96-269f720a424a processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:05.161Z pid=1 tid=u9 jid=0270ba1d598fdbf00a564db1 class=PaymentJob elapsed=0.004: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:05.176Z pid=1 tid=uh jid=5d36cab4a5038d8e955df96f class=PaymentJob: start
+worker  | [1;34mINFO [0m 2025-08-10T21:51:05.177Z pid=1 tid=up jid=c1a17b9227853a7047c67afb class=PaymentJob: start
+worker  | 🐦 Payment 59847c2c-df6b-4f6a-82e7-12f87d3c8e06 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:05.181Z pid=1 tid=uh jid=5d36cab4a5038d8e955df96f class=PaymentJob elapsed=0.005: done
+worker  | 🐦 Payment 4be162c2-ebfe-45cd-a7f0-d4e2bdd0314a processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:05.181Z pid=1 tid=up jid=c1a17b9227853a7047c67afb class=PaymentJob elapsed=0.004: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:05.209Z pid=1 tid=v5 jid=94615a8cf1b50c3945cc448f class=PaymentJob: start
+worker  | 🐦 Payment f7165ac6-5483-4525-8acd-3fc45a78bfff processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:05.212Z pid=1 tid=v5 jid=94615a8cf1b50c3945cc448f class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:05.228Z pid=1 tid=ux jid=42f26c4a141b5f4fba32160f class=PaymentJob: start
+worker  | 🐦 Payment 8ede749b-6bb3-43a1-afed-357ed827220d processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:05.231Z pid=1 tid=ux jid=42f26c4a141b5f4fba32160f class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:05.249Z pid=1 tid=vd jid=e5623dcb71e80e93e6029745 class=PaymentJob: start
+worker  | 🐦 Payment 9ac0f76c-9dbf-402b-8571-cd0c63fa6daf processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:05.253Z pid=1 tid=vd jid=e5623dcb71e80e93e6029745 class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:05.270Z pid=1 tid=tl jid=80ddac0accac574a1ff1637a class=PaymentJob: start
+worker  | 🐦 Payment c7b1bcbe-5c82-45ca-ac3f-1c1b4d07e313 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:05.274Z pid=1 tid=tl jid=80ddac0accac574a1ff1637a class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:05.293Z pid=1 tid=t5 jid=4181e8bc7c137e0a5c194333 class=PaymentJob: start
+worker  | 🐦 Payment 56eb6c6a-e009-48e8-ab79-95f47aaaab7b processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:05.297Z pid=1 tid=t5 jid=4181e8bc7c137e0a5c194333 class=PaymentJob elapsed=0.004: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:05.338Z pid=1 tid=tt jid=d6104c7b0c0f07fd5bab4419 class=PaymentJob: start
+worker  | 🐦 Payment 78a92b9a-fcac-481c-b1ff-d39ab29713c5 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:05.341Z pid=1 tid=tt jid=d6104c7b0c0f07fd5bab4419 class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:05.343Z pid=1 tid=u1 jid=67a4f75a7073787fb99f3ae8 class=PaymentJob: start
+worker  | 🐦 Payment 694d2cc9-1df5-4dcd-93ba-37297bf86c71 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:05.347Z pid=1 tid=u1 jid=67a4f75a7073787fb99f3ae8 class=PaymentJob elapsed=0.004: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:05.362Z pid=1 tid=u9 jid=72d64b44efeed46096bcd49e class=PaymentJob: start
+worker  | 🐦 Payment bf7e0504-1130-4349-8e1d-bb00b53f9e72 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:05.366Z pid=1 tid=u9 jid=72d64b44efeed46096bcd49e class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:05.376Z pid=1 tid=uh jid=620c0484d8ba3e527f7e2515 class=PaymentJob: start
+worker  | 🐦 Payment 9787756f-45b3-44c7-98d3-2728a220d4c4 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:05.384Z pid=1 tid=uh jid=620c0484d8ba3e527f7e2515 class=PaymentJob elapsed=0.008: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:05.403Z pid=1 tid=up jid=52d8a905831bcc40565d434f class=PaymentJob: start
+worker  | 🐦 Payment 9d37fe08-1975-472b-9ab9-13e25fede9b7 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:05.407Z pid=1 tid=up jid=52d8a905831bcc40565d434f class=PaymentJob elapsed=0.004: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:05.427Z pid=1 tid=v5 jid=ec40a04387133d1364ba34c0 class=PaymentJob: start
+worker  | 🐦 Payment 7d154962-967a-4afa-9016-51c1bee97071 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:05.430Z pid=1 tid=v5 jid=ec40a04387133d1364ba34c0 class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:05.446Z pid=1 tid=ux jid=4a5f1e113c0b1f6e320faf7a class=PaymentJob: start
+worker  | 🐦 Payment 858f64e7-32b1-4f53-866b-f7d18e020715 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:05.449Z pid=1 tid=ux jid=4a5f1e113c0b1f6e320faf7a class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:05.464Z pid=1 tid=vd jid=9b323b366fd7306db4a7e90d class=PaymentJob: start
+worker  | 🐦 Payment ca55c738-0f1c-4f16-a784-763c2d847a2e processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:05.468Z pid=1 tid=vd jid=9b323b366fd7306db4a7e90d class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:05.487Z pid=1 tid=tl jid=626e7972288e04e6b6cf3767 class=PaymentJob: start
+worker  | 🐦 Payment 7cb8a26a-8e09-4e48-8279-2ae990ec5969 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:05.491Z pid=1 tid=tl jid=626e7972288e04e6b6cf3767 class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:05.504Z pid=1 tid=t5 jid=28beb9fcb30e3a2c6aa344b4 class=PaymentJob: start
+worker  | 🐦 Payment a956d7d0-459b-40f6-9803-4f4e08bf8064 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:05.508Z pid=1 tid=t5 jid=28beb9fcb30e3a2c6aa344b4 class=PaymentJob elapsed=0.004: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:05.537Z pid=1 tid=tt jid=c45f35b122cb6a26f949a51e class=PaymentJob: start
+worker  | 🐦 Payment 511f4f49-5228-4919-9505-22880ca3bd15 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:05.541Z pid=1 tid=tt jid=c45f35b122cb6a26f949a51e class=PaymentJob elapsed=0.004: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:05.556Z pid=1 tid=u1 jid=c5722436b228aa158ea72b62 class=PaymentJob: start
+worker  | 🐦 Payment 27b30fed-b8bc-4dba-96c3-a1338d4b4c50 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:05.560Z pid=1 tid=u1 jid=c5722436b228aa158ea72b62 class=PaymentJob elapsed=0.004: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:05.575Z pid=1 tid=u9 jid=0aeafcba61832bd05b558ff0 class=PaymentJob: start
+worker  | 🐦 Payment 5c5c01e9-9943-4952-950f-3cb1256b45b7 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:05.578Z pid=1 tid=u9 jid=0aeafcba61832bd05b558ff0 class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:05.599Z pid=1 tid=uh jid=7b37d06a69927acf6cb91ebf class=PaymentJob: start
+worker  | 🐦 Payment 981a27a1-af76-4b39-b86c-b673a2ff91c7 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:05.602Z pid=1 tid=uh jid=7b37d06a69927acf6cb91ebf class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:05.615Z pid=1 tid=up jid=b5b4f19b87f18e4f38df9596 class=PaymentJob: start
+worker  | 🐦 Payment d985f119-965e-45a9-864f-37cb7abda875 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:05.618Z pid=1 tid=up jid=b5b4f19b87f18e4f38df9596 class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:05.646Z pid=1 tid=v5 jid=25bb291acacba99509cabf5d class=PaymentJob: start
+worker  | 🐦 Payment 615fddc4-e4e7-4e5d-a655-5c1e9520d521 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:05.650Z pid=1 tid=v5 jid=25bb291acacba99509cabf5d class=PaymentJob elapsed=0.004: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:05.665Z pid=1 tid=ux jid=6af1b4f2a8d505b7a374bcc7 class=PaymentJob: start
+worker  | 🐦 Payment ab5d6d99-7993-4030-8bc8-2a9f5886d677 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:05.668Z pid=1 tid=ux jid=6af1b4f2a8d505b7a374bcc7 class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:05.688Z pid=1 tid=vd jid=f39c1f98210b7e986a126f71 class=PaymentJob: start
+worker  | 🐦 Payment e052eef7-d6fe-4985-bbea-ca96325a27ce processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:05.692Z pid=1 tid=vd jid=f39c1f98210b7e986a126f71 class=PaymentJob elapsed=0.004: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:05.714Z pid=1 tid=tl jid=fc80129f10464252c77444cc class=PaymentJob: start
+worker  | 🐦 Payment 83e5ea5f-d1b8-427f-86f5-129e8d85b1df processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:05.718Z pid=1 tid=tl jid=fc80129f10464252c77444cc class=PaymentJob elapsed=0.004: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:05.727Z pid=1 tid=t5 jid=07b4bebd8f62585db913a514 class=PaymentJob: start
+worker  | 🐦 Payment a681b418-040d-4985-9bc2-858aa47cc738 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:05.730Z pid=1 tid=t5 jid=07b4bebd8f62585db913a514 class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:05.756Z pid=1 tid=tt jid=1fa4924f62e0acd694773dd4 class=PaymentJob: start
+worker  | 🐦 Payment e7f37633-5dd8-4e68-96ee-302386a2e4e0 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:05.759Z pid=1 tid=tt jid=1fa4924f62e0acd694773dd4 class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:05.774Z pid=1 tid=u1 jid=d9e79b2e3622e44293326aa3 class=PaymentJob: start
+worker  | 🐦 Payment 2a505362-be70-4c67-a03c-846dd8cc76ba processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:05.777Z pid=1 tid=u1 jid=d9e79b2e3622e44293326aa3 class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:05.794Z pid=1 tid=u9 jid=82b7785c713bdd17d2d0e73a class=PaymentJob: start
+worker  | 🐦 Payment 739343d5-3538-4712-a488-9f012ad0591b processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:05.798Z pid=1 tid=u9 jid=82b7785c713bdd17d2d0e73a class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:05.825Z pid=1 tid=uh jid=f2af6a221abaef715ca6c3da class=PaymentJob: start
+worker  | 🐦 Payment 900e024e-3522-44ca-a8d1-be1c89396da3 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:05.828Z pid=1 tid=uh jid=f2af6a221abaef715ca6c3da class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:05.832Z pid=1 tid=up jid=3342c75250690a3ba526f8df class=PaymentJob: start
+worker  | 🐦 Payment bc10c293-79ed-4033-8903-8975c9281e3a processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:05.835Z pid=1 tid=up jid=3342c75250690a3ba526f8df class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:05.865Z pid=1 tid=v5 jid=a861eca3d7d403c5a7a00826 class=PaymentJob: start
+worker  | 🐦 Payment 989ff5b5-a954-4cdd-a901-df6e95af41ce processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:05.868Z pid=1 tid=v5 jid=a861eca3d7d403c5a7a00826 class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:05.883Z pid=1 tid=ux jid=f114fa9600f1d40afd47a8a7 class=PaymentJob: start
+worker  | 🐦 Payment ec64054f-8906-4593-9c1a-f16a67a64b9f processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:05.886Z pid=1 tid=ux jid=f114fa9600f1d40afd47a8a7 class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:05.936Z pid=1 tid=vd jid=33ec2207c863bbee93fa4740 class=PaymentJob: start
+worker  | 🐦 Payment ff8880df-87e7-458f-8cfd-f294baaa46e3 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:05.939Z pid=1 tid=vd jid=33ec2207c863bbee93fa4740 class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:05.943Z pid=1 tid=tl jid=889cf4ffed51e09dda4ec5dc class=PaymentJob: start
+worker  | 🐦 Payment aae30b7f-7650-4e9c-9761-ed4fd946153d processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:05.946Z pid=1 tid=tl jid=889cf4ffed51e09dda4ec5dc class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:05.974Z pid=1 tid=t5 jid=ffaa09d9e1ea63c92df2bec4 class=PaymentJob: start
+worker  | 🐦 Payment abe789ec-624f-45fa-afc1-cb3afa673cb1 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:05.977Z pid=1 tid=t5 jid=ffaa09d9e1ea63c92df2bec4 class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:05.992Z pid=1 tid=tt jid=73e368f88d0fe616dfd45da9 class=PaymentJob: start
+worker  | 🐦 Payment 632a53b8-48a7-485e-bfd1-c57567d7612d processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:05.995Z pid=1 tid=tt jid=73e368f88d0fe616dfd45da9 class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:06.005Z pid=1 tid=u1 jid=61e19438efc7eb2d96227eb9 class=PaymentJob: start
+worker  | 🐦 Payment 34ed79b5-e33f-41e0-b361-a8ec36207483 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:06.008Z pid=1 tid=u1 jid=61e19438efc7eb2d96227eb9 class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:06.012Z pid=1 tid=u9 jid=6333eab6626a0da7c5516e82 class=PaymentJob: start
+worker  | 🐦 Payment 0e239c60-9445-42da-a0ea-3f3d37b8a5db processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:06.015Z pid=1 tid=u9 jid=6333eab6626a0da7c5516e82 class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:06.034Z pid=1 tid=uh jid=d4f13c13f0a3a1e83f348f17 class=PaymentJob: start
+worker  | 🐦 Payment 9a7651b5-36df-477b-a545-17676172dfc6 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:06.038Z pid=1 tid=uh jid=d4f13c13f0a3a1e83f348f17 class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:06.067Z pid=1 tid=up jid=354a34dd5947df92be06863a class=PaymentJob: start
+worker  | 🐦 Payment f089884b-ac57-40ae-872f-4845489202c7 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:06.070Z pid=1 tid=up jid=354a34dd5947df92be06863a class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:06.083Z pid=1 tid=v5 jid=981d13b75727b803914ea85e class=PaymentJob: start
+worker  | 🐦 Payment 33343af5-0f30-4e95-a5aa-1401deecea9d processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:06.087Z pid=1 tid=v5 jid=981d13b75727b803914ea85e class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:06.091Z pid=1 tid=ux jid=8211edce2401dcb5d40091d2 class=PaymentJob: start
+worker  | 🐦 Payment 2a8b190f-d69e-463b-8309-404642029511 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:06.094Z pid=1 tid=ux jid=8211edce2401dcb5d40091d2 class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:06.102Z pid=1 tid=vd jid=f32e5187b898ee5c3df00ed2 class=PaymentJob: start
+worker  | 🐦 Payment 5627c257-1540-4ad8-9374-3d356861a8d8 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:06.106Z pid=1 tid=vd jid=f32e5187b898ee5c3df00ed2 class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:06.125Z pid=1 tid=tl jid=599514b29685832358e34754 class=PaymentJob: start
+worker  | 🐦 Payment e61bcee4-db7e-4183-907e-19a248fd76e1 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:06.128Z pid=1 tid=tl jid=599514b29685832358e34754 class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:06.159Z pid=1 tid=t5 jid=8ccde16aea927caac96e6813 class=PaymentJob: start
+worker  | 🐦 Payment 4462ad4f-fb96-414a-adda-2c4c078080de processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:06.162Z pid=1 tid=t5 jid=8ccde16aea927caac96e6813 class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:06.178Z pid=1 tid=tt jid=b9d87c29528b150375ed0a5c class=PaymentJob: start
+worker  | [1;34mINFO [0m 2025-08-10T21:51:06.179Z pid=1 tid=u1 jid=23aafd14807cdaf821cd3ec5 class=PaymentJob: start
+worker  | 🐦 Payment 5f4f4ffe-ad5f-45e8-81a3-d90d93e88215 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:06.182Z pid=1 tid=tt jid=b9d87c29528b150375ed0a5c class=PaymentJob elapsed=0.004: done
+worker  | 🐦 Payment 1fba725c-6d48-4ea6-8db7-8f669e20b55d processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:06.182Z pid=1 tid=u1 jid=23aafd14807cdaf821cd3ec5 class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:06.212Z pid=1 tid=u9 jid=26d233129238dd1e9c6e567f class=PaymentJob: start
+worker  | 🐦 Payment 1c1917d6-b31d-463e-a08f-47ae9b4bbc00 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:06.216Z pid=1 tid=u9 jid=26d233129238dd1e9c6e567f class=PaymentJob elapsed=0.004: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:06.224Z pid=1 tid=uh jid=8f649f1f04a177ef0e40a7c1 class=PaymentJob: start
+worker  | 🐦 Payment 76206978-d2af-44b0-aff9-14f16ba89139 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:06.228Z pid=1 tid=uh jid=8f649f1f04a177ef0e40a7c1 class=PaymentJob elapsed=0.004: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:06.230Z pid=1 tid=up jid=deab5a87e75b64f5cad6db18 class=PaymentJob: start
+worker  | 🐦 Payment 3894fedd-de7e-47c3-a769-cdc42bdfdd09 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:06.234Z pid=1 tid=up jid=deab5a87e75b64f5cad6db18 class=PaymentJob elapsed=0.004: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:06.251Z pid=1 tid=v5 jid=8820eb79db6582becefc80fe class=PaymentJob: start
+worker  | 🐦 Payment ed98ba48-e4f7-4669-9b8e-358876b608cb processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:06.254Z pid=1 tid=v5 jid=8820eb79db6582becefc80fe class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:06.272Z pid=1 tid=ux jid=b89a4646ec7522997c18ec37 class=PaymentJob: start
+worker  | 🐦 Payment 5d71d234-ddbb-4cfa-8d1a-febe55f2ee95 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:06.275Z pid=1 tid=ux jid=b89a4646ec7522997c18ec37 class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:06.295Z pid=1 tid=vd jid=e3a1c1b69f4f9723ade8f409 class=PaymentJob: start
+worker  | 🐦 Payment f790848c-b265-4a65-9946-03b464ae0a7e processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:06.298Z pid=1 tid=vd jid=e3a1c1b69f4f9723ade8f409 class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:06.302Z pid=1 tid=tl jid=866f384aceec09c9f3b950e2 class=PaymentJob: start
+worker  | 🐦 Payment 46f42306-503a-4e3f-9723-b1870595ae81 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:06.305Z pid=1 tid=tl jid=866f384aceec09c9f3b950e2 class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:06.340Z pid=1 tid=t5 jid=c5457c5983edca82d91d40d5 class=PaymentJob: start
+worker  | 🐦 Payment 29d25604-44b0-4d70-90ff-9d1613d1bcc2 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:06.343Z pid=1 tid=t5 jid=c5457c5983edca82d91d40d5 class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:06.346Z pid=1 tid=tt jid=71d1dc47f99d09e7c719ecf6 class=PaymentJob: start
+worker  | 🐦 Payment 51a9c6c9-1030-446f-ac7f-cf884dfe5b8f processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:06.349Z pid=1 tid=tt jid=71d1dc47f99d09e7c719ecf6 class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:06.365Z pid=1 tid=u1 jid=c51c315a6aa7d0c8c820b63c class=PaymentJob: start
+worker  | 🐦 Payment 11f1f497-bead-4af3-80bf-fcd3d8f7f999 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:06.368Z pid=1 tid=u1 jid=c51c315a6aa7d0c8c820b63c class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:06.379Z pid=1 tid=u9 jid=de6473a9b819aca7d2f659e2 class=PaymentJob: start
+worker  | 🐦 Payment d12b5297-579b-4108-97ec-7457b39d3c8e processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:06.382Z pid=1 tid=u9 jid=de6473a9b819aca7d2f659e2 class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:06.406Z pid=1 tid=uh jid=5a717210afdd4df3f9c4537a class=PaymentJob: start
+worker  | 🐦 Payment e9d00840-b6e2-4bcc-ae60-ecfda921861a processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:06.410Z pid=1 tid=uh jid=5a717210afdd4df3f9c4537a class=PaymentJob elapsed=0.004: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:06.411Z pid=1 tid=up jid=b33e6b31af4a5314d4999bfe class=PaymentJob: start
+worker  | 🐦 Payment 5726179f-61b0-4f6e-b657-cfc46c01b5dc processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:06.414Z pid=1 tid=up jid=b33e6b31af4a5314d4999bfe class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:06.430Z pid=1 tid=v5 jid=c2469a78ff57d9f38836c6f1 class=PaymentJob: start
+worker  | 🐦 Payment aff6686e-a30f-416d-83f7-f3bc59bce089 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:06.433Z pid=1 tid=v5 jid=c2469a78ff57d9f38836c6f1 class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:06.448Z pid=1 tid=ux jid=e30d53dbe127d6d19c24cf4e class=PaymentJob: start
+worker  | 🐦 Payment b454cc8f-4711-491e-b03c-c940da8bcce0 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:06.452Z pid=1 tid=ux jid=e30d53dbe127d6d19c24cf4e class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:06.467Z pid=1 tid=vd jid=c5665519258f996610158cb4 class=PaymentJob: start
+worker  | 🐦 Payment fe07229e-7d3f-4024-b791-91aa879e8ebc processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:06.470Z pid=1 tid=vd jid=c5665519258f996610158cb4 class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:06.490Z pid=1 tid=tl jid=7a593ee2a69ffabb7c6a98a5 class=PaymentJob: start
+worker  | 🐦 Payment 9a641de9-3b8f-42a7-9490-b19d25941134 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:06.493Z pid=1 tid=tl jid=7a593ee2a69ffabb7c6a98a5 class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:06.507Z pid=1 tid=t5 jid=26a7da3643c22bed06e82a18 class=PaymentJob: start
+worker  | 🐦 Payment 05e87f08-9f8e-478b-8ea4-8cb2d5b52a2f processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:06.510Z pid=1 tid=t5 jid=26a7da3643c22bed06e82a18 class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:06.521Z pid=1 tid=tt jid=88c258823c18666098da409a class=PaymentJob: start
+worker  | 🐦 Payment ce365bb5-3c1e-4c14-806f-881190fd1a44 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:06.526Z pid=1 tid=tt jid=88c258823c18666098da409a class=PaymentJob elapsed=0.005: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:06.539Z pid=1 tid=u1 jid=d3d7490a45dd65111182013c class=PaymentJob: start
+worker  | 🐦 Payment 1ff5b68e-b213-4b45-9517-37c0c07aa074 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:06.543Z pid=1 tid=u1 jid=d3d7490a45dd65111182013c class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:06.558Z pid=1 tid=u9 jid=ae8076c4a337923d017d9d35 class=PaymentJob: start
+worker  | 🐦 Payment dd477e6a-e17d-4533-b3df-9ed3544ef84e processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:06.561Z pid=1 tid=u9 jid=ae8076c4a337923d017d9d35 class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:06.577Z pid=1 tid=uh jid=33ef12170d9c790eae8b6329 class=PaymentJob: start
+worker  | 🐦 Payment 20ffd62c-88a7-4870-855e-fa2758cc2c71 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:06.580Z pid=1 tid=uh jid=33ef12170d9c790eae8b6329 class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:06.602Z pid=1 tid=up jid=10343386bb01c522d089f1bf class=PaymentJob: start
+worker  | 🐦 Payment c88777ee-d92f-4d3a-90b7-a8c838424151 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:06.605Z pid=1 tid=up jid=10343386bb01c522d089f1bf class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:06.617Z pid=1 tid=v5 jid=801d6cc70f2562c89ac3b2ec class=PaymentJob: start
+worker  | 🐦 Payment 3b033062-e83c-49f1-a683-78da52f8a0fe processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:06.621Z pid=1 tid=v5 jid=801d6cc70f2562c89ac3b2ec class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:06.630Z pid=1 tid=ux jid=30ee139bd0a5f0e9d18b5a7b class=PaymentJob: start
+worker  | 🐦 Payment 2276ec4f-1650-427b-8753-60594026f9a2 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:06.635Z pid=1 tid=ux jid=30ee139bd0a5f0e9d18b5a7b class=PaymentJob elapsed=0.005: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:06.648Z pid=1 tid=vd jid=44a07b9d0cac90d597011621 class=PaymentJob: start
+worker  | 🐦 Payment 0cde1bc3-8335-473e-86cd-ed3e41519613 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:06.652Z pid=1 tid=vd jid=44a07b9d0cac90d597011621 class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:06.668Z pid=1 tid=tl jid=e4604fb2aa03198562ed2371 class=PaymentJob: start
+worker  | 🐦 Payment 920989fa-46d1-4ea8-b3ae-cb6afbe16f79 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:06.671Z pid=1 tid=tl jid=e4604fb2aa03198562ed2371 class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:06.691Z pid=1 tid=t5 jid=8d75049d644e58747b2c992a class=PaymentJob: start
+worker  | 🐦 Payment 25076608-8e8b-42fe-90bb-c4af7ef1a157 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:06.694Z pid=1 tid=t5 jid=8d75049d644e58747b2c992a class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:06.717Z pid=1 tid=tt jid=b86a20e1ab34ea3d619b4d4f class=PaymentJob: start
+worker  | 🐦 Payment 71022015-cae9-4b4c-95a7-0d69d25de9dc processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:06.720Z pid=1 tid=tt jid=b86a20e1ab34ea3d619b4d4f class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:06.729Z pid=1 tid=u1 jid=4f92cfcbfe090b3326eb3b34 class=PaymentJob: start
+worker  | 🐦 Payment f3d8b9ec-25d4-4398-b8a3-32e2dd8e88e6 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:06.732Z pid=1 tid=u1 jid=4f92cfcbfe090b3326eb3b34 class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:06.739Z pid=1 tid=u9 jid=4d5138f108c6030d45090523 class=PaymentJob: start
+worker  | 🐦 Payment e69d80bb-f4b1-4ff5-9a13-7d16c574703c processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:06.742Z pid=1 tid=u9 jid=4d5138f108c6030d45090523 class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:06.758Z pid=1 tid=uh jid=74665dc2751f4085520ba92b class=PaymentJob: start
+worker  | 🐦 Payment 6dc7a41c-ceb2-4c5e-b9de-e79e8604d84a processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:06.761Z pid=1 tid=uh jid=74665dc2751f4085520ba92b class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:06.776Z pid=1 tid=up jid=8cd07c4a7d017a8807d3b7eb class=PaymentJob: start
+worker  | 🐦 Payment 9a717e53-b981-414c-a2e7-8454106ad992 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:06.780Z pid=1 tid=up jid=8cd07c4a7d017a8807d3b7eb class=PaymentJob elapsed=0.004: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:06.797Z pid=1 tid=v5 jid=649f31a3f6715b4e182d09f2 class=PaymentJob: start
+worker  | 🐦 Payment fd75e0d0-0ab1-4d3f-9ec8-f715caed4e50 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:06.800Z pid=1 tid=v5 jid=649f31a3f6715b4e182d09f2 class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:06.828Z pid=1 tid=ux jid=00e858812f78277cb85efedd class=PaymentJob: start
+worker  | 🐦 Payment 3c841266-34d0-4a37-9dda-0e1d0c25e4ff processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:06.831Z pid=1 tid=ux jid=00e858812f78277cb85efedd class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:06.834Z pid=1 tid=vd jid=6e7ae5e6cc4397e045e8b31b class=PaymentJob: start
+worker  | 🐦 Payment 39fdaac2-1dfa-44ee-bbe3-f404c2ea4e8d processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:06.837Z pid=1 tid=vd jid=6e7ae5e6cc4397e045e8b31b class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:06.849Z pid=1 tid=tl jid=d8e658d1309aa4b71050f0f4 class=PaymentJob: start
+worker  | 🐦 Payment d290972e-696f-4043-9d63-a1db3ff9ce90 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:06.852Z pid=1 tid=tl jid=d8e658d1309aa4b71050f0f4 class=PaymentJob elapsed=0.004: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:06.867Z pid=1 tid=t5 jid=21caba50218353e58e316fba class=PaymentJob: start
+worker  | 🐦 Payment 81fc7178-fd6a-47ea-8c0a-2d368a8c2712 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:06.870Z pid=1 tid=t5 jid=21caba50218353e58e316fba class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:06.886Z pid=1 tid=tt jid=28cb8e7a29772575f21987ef class=PaymentJob: start
+worker  | 🐦 Payment faad57e0-d2cd-44d0-8a65-140fd4c57618 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:06.889Z pid=1 tid=tt jid=28cb8e7a29772575f21987ef class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:06.939Z pid=1 tid=u1 jid=84c389d7df615fe0fb783743 class=PaymentJob: start
+worker  | 🐦 Payment 932178c0-2097-4592-ad07-43bbbff80ff6 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:06.942Z pid=1 tid=u1 jid=84c389d7df615fe0fb783743 class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:06.945Z pid=1 tid=u9 jid=9bf96c8137ce92685133b98b class=PaymentJob: start
+worker  | 🐦 Payment 4709f44c-c2d2-4e07-8bdb-9f9634cacfa7 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:06.948Z pid=1 tid=u9 jid=9bf96c8137ce92685133b98b class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:06.957Z pid=1 tid=uh jid=27d16f075edee4df721e110f class=PaymentJob: start
+worker  | 🐦 Payment 40f0a787-a51c-45fb-83f6-66ffbf443e91 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:06.961Z pid=1 tid=uh jid=27d16f075edee4df721e110f class=PaymentJob elapsed=0.004: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:06.976Z pid=1 tid=up jid=9228c951dcb3fc5139cf8ede class=PaymentJob: start
+worker  | 🐦 Payment 3d6089e7-1eac-418d-a725-befff1cc73b9 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:06.980Z pid=1 tid=up jid=9228c951dcb3fc5139cf8ede class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:06.995Z pid=1 tid=v5 jid=c235062467964bdf066cf2af class=PaymentJob: start
+worker  | 🐦 Payment b9a8627d-03d4-49b3-903c-dd156d0b6eed processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:06.998Z pid=1 tid=v5 jid=c235062467964bdf066cf2af class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.007Z pid=1 tid=ux jid=ecc48a28915bfb957275a178 class=PaymentJob: start
+worker  | 🐦 Payment f2f024ae-3ba7-4918-a8dc-258dab9f80d5 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.011Z pid=1 tid=ux jid=ecc48a28915bfb957275a178 class=PaymentJob elapsed=0.004: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.014Z pid=1 tid=vd jid=e73f109383a913c1680fad81 class=PaymentJob: start
+worker  | 🐦 Payment e769005c-d1a0-49a0-92a1-8f784c9b25ed processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.017Z pid=1 tid=vd jid=e73f109383a913c1680fad81 class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.037Z pid=1 tid=tl jid=4dbd7c9455f50e9978bd34a2 class=PaymentJob: start
+worker  | 🐦 Payment 4a294cf6-ea87-4dd6-b070-dac583230d07 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.040Z pid=1 tid=tl jid=4dbd7c9455f50e9978bd34a2 class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.067Z pid=1 tid=t5 jid=86e7c57970d7c4a27cbd128d class=PaymentJob: start
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.070Z pid=1 tid=tt jid=fbad62b5463a781f3c96b350 class=PaymentJob: start
+worker  | 🐦 Payment da45db56-cff9-433b-bff2-18a690e4f4e5 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.071Z pid=1 tid=t5 jid=86e7c57970d7c4a27cbd128d class=PaymentJob elapsed=0.003: done
+worker  | 🐦 Payment aa1044e7-c81a-42ec-ac5b-6158b9cbd6d0 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.073Z pid=1 tid=tt jid=fbad62b5463a781f3c96b350 class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.085Z pid=1 tid=u1 jid=7d4b5046ce725cc8668d0a2b class=PaymentJob: start
+worker  | 🐦 Payment 92199bf4-5e5b-4b26-b99e-60f6120d52d5 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.090Z pid=1 tid=u1 jid=7d4b5046ce725cc8668d0a2b class=PaymentJob elapsed=0.004: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.093Z pid=1 tid=u9 jid=c9327a0ff8906d5979f4422e class=PaymentJob: start
+worker  | 🐦 Payment ff4a381a-ba1e-4728-9012-da83302d681b processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.096Z pid=1 tid=u9 jid=c9327a0ff8906d5979f4422e class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.105Z pid=1 tid=uh jid=9181ce6e286245a5881c8fec class=PaymentJob: start
+worker  | 🐦 Payment 8830dd09-4479-44ee-bd6c-968742de91f2 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.108Z pid=1 tid=uh jid=9181ce6e286245a5881c8fec class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.133Z pid=1 tid=up jid=69874be19b6bdf09ef198f9d class=PaymentJob: start
+worker  | 🐦 Payment 04e1f4f9-0a37-4e63-96e7-5f44769f8f39 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.136Z pid=1 tid=up jid=69874be19b6bdf09ef198f9d class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.162Z pid=1 tid=v5 jid=57c485d3fa01ed5e04efda85 class=PaymentJob: start
+worker  | 🐦 Payment 82174a6f-dd8b-4238-aebb-89cdf9d67c21 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.165Z pid=1 tid=v5 jid=57c485d3fa01ed5e04efda85 class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.176Z pid=1 tid=ux jid=551b1c8fd02af344099e657c class=PaymentJob: start
+worker  | 🐦 Payment 42db4164-e6bc-4d22-9fc8-684eed830055 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.179Z pid=1 tid=ux jid=551b1c8fd02af344099e657c class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.180Z pid=1 tid=vd jid=dcd4bf7a22d483278f4602db class=PaymentJob: start
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.182Z pid=1 tid=tl jid=69e63eb69e5526762b621570 class=PaymentJob: start
+worker  | 🐦 Payment 989a9982-6ca5-49e1-ac1e-594719b2c47d processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.185Z pid=1 tid=vd jid=dcd4bf7a22d483278f4602db class=PaymentJob elapsed=0.004: done
+worker  | 🐦 Payment c1d95595-fa2b-4989-b863-6d0c7dbdf739 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.185Z pid=1 tid=tl jid=69e63eb69e5526762b621570 class=PaymentJob elapsed=0.004: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.214Z pid=1 tid=t5 jid=7770b954acf103ca4e232f92 class=PaymentJob: start
+worker  | 🐦 Payment 6569bfc2-ea77-452f-8e0a-514401e97672 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.218Z pid=1 tid=t5 jid=7770b954acf103ca4e232f92 class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.226Z pid=1 tid=tt jid=da212ad9662e8ffae6857f00 class=PaymentJob: start
+worker  | 🐦 Payment 42e65d23-aaa5-4029-bade-c2bfc5951fba processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.230Z pid=1 tid=tt jid=da212ad9662e8ffae6857f00 class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.233Z pid=1 tid=u1 jid=a1bb8f1ccf35208fcb6c7a75 class=PaymentJob: start
+worker  | 🐦 Payment 1d419f85-9e80-485e-aa2b-00607eb414df processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.236Z pid=1 tid=u1 jid=a1bb8f1ccf35208fcb6c7a75 class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.254Z pid=1 tid=u9 jid=fb8a585be2ddd11e45dbc9d0 class=PaymentJob: start
+worker  | 🐦 Payment 896bb8f6-be01-48ad-8b07-008d32207662 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.257Z pid=1 tid=u9 jid=fb8a585be2ddd11e45dbc9d0 class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.275Z pid=1 tid=uh jid=e04565f352cf56b44c90aa15 class=PaymentJob: start
+worker  | 🐦 Payment 3d26dfd3-fa01-496f-8bd0-409a9df7b414 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.279Z pid=1 tid=uh jid=e04565f352cf56b44c90aa15 class=PaymentJob elapsed=0.004: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.285Z pid=1 tid=up jid=6a5e05cb129061e717b5a4de class=PaymentJob: start
+worker  | 🐦 Payment 89426181-d8a4-407f-bd5b-43b24d8ce394 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.289Z pid=1 tid=up jid=6a5e05cb129061e717b5a4de class=PaymentJob elapsed=0.004: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.297Z pid=1 tid=v5 jid=64b5a88fedff3110bbdf520f class=PaymentJob: start
+worker  | 🐦 Payment 96693a9a-ab7a-40c8-9d35-50fcc9986825 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.300Z pid=1 tid=v5 jid=64b5a88fedff3110bbdf520f class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.304Z pid=1 tid=ux jid=8b0dd3513473cb6105669a2e class=PaymentJob: start
+worker  | 🐦 Payment 02e902c3-7f57-4ebf-b753-b772a6e297f0 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.307Z pid=1 tid=ux jid=8b0dd3513473cb6105669a2e class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.343Z pid=1 tid=vd jid=e32d12a0b9375dfc99b28cf8 class=PaymentJob: start
+worker  | 🐦 Payment c7222712-54e4-4d4e-9aa9-ba0f3bdfbd75 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.346Z pid=1 tid=vd jid=e32d12a0b9375dfc99b28cf8 class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.348Z pid=1 tid=tl jid=941df2f0ff36e0f929064463 class=PaymentJob: start
+worker  | 🐦 Payment 68556bc0-14d6-4dc4-bf39-fdc5af3ee0b9 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.352Z pid=1 tid=tl jid=941df2f0ff36e0f929064463 class=PaymentJob elapsed=0.004: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.367Z pid=1 tid=t5 jid=38253374c394c5dbc72a2267 class=PaymentJob: start
+worker  | 🐦 Payment 9c3958fc-0b55-491c-9a66-ec69f79e4f1a processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.370Z pid=1 tid=t5 jid=38253374c394c5dbc72a2267 class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.381Z pid=1 tid=tt jid=5c17145faa6d3f2b3689bf3f class=PaymentJob: start
+worker  | 🐦 Payment 10891b4c-c983-4acb-9367-6fd25c494087 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.385Z pid=1 tid=tt jid=5c17145faa6d3f2b3689bf3f class=PaymentJob elapsed=0.004: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.395Z pid=1 tid=u1 jid=771c20c292513389e5afb7c4 class=PaymentJob: start
+worker  | 🐦 Payment 7dc14942-77c6-47bf-b380-9870ac572e36 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.398Z pid=1 tid=u1 jid=771c20c292513389e5afb7c4 class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.408Z pid=1 tid=u9 jid=f84a57e3a112a4dce81b3cbf class=PaymentJob: start
+worker  | 🐦 Payment 9c68041d-f08d-43f3-9a79-1aaf7909542e processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.411Z pid=1 tid=u9 jid=f84a57e3a112a4dce81b3cbf class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.412Z pid=1 tid=uh jid=c1a730cfbd9a9460a0cecff3 class=PaymentJob: start
+worker  | 🐦 Payment 84135998-5b51-49c3-862f-9c701cddc390 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.415Z pid=1 tid=uh jid=c1a730cfbd9a9460a0cecff3 class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.432Z pid=1 tid=up jid=2f3785d0e77acf91714cd820 class=PaymentJob: start
+worker  | 🐦 Payment f6df06b5-b78e-4e46-8637-69695b9a29bc processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.436Z pid=1 tid=up jid=2f3785d0e77acf91714cd820 class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.451Z pid=1 tid=v5 jid=dc9f1e9b9f1cb73aed430ffe class=PaymentJob: start
+worker  | 🐦 Payment da0d3028-f350-4a19-b4f7-ce1bd1bd27c9 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.455Z pid=1 tid=v5 jid=dc9f1e9b9f1cb73aed430ffe class=PaymentJob elapsed=0.004: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.469Z pid=1 tid=ux jid=f2276da71d50aca320d4274c class=PaymentJob: start
+worker  | 🐦 Payment a25fd4f5-b3cf-47b0-a2fa-f4faba96450b processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.472Z pid=1 tid=ux jid=f2276da71d50aca320d4274c class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.492Z pid=1 tid=vd jid=029880b87ef4d91861761f7e class=PaymentJob: start
+worker  | 🐦 Payment 8e2f0e7e-9956-455a-8a18-31f7aeb83a97 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.495Z pid=1 tid=vd jid=029880b87ef4d91861761f7e class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.504Z pid=1 tid=tl jid=a466b3e5e9fc31b130817d1a class=PaymentJob: start
+worker  | 🐦 Payment 1d5b2cf1-cab0-4a7b-bc7f-08cff4709901 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.508Z pid=1 tid=tl jid=a466b3e5e9fc31b130817d1a class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.509Z pid=1 tid=t5 jid=6f6806842ae254db12d1ba1c class=PaymentJob: start
+worker  | 🐦 Payment 8db1b125-8022-4928-a89a-2a5482f9ea1a processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.512Z pid=1 tid=t5 jid=6f6806842ae254db12d1ba1c class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.523Z pid=1 tid=tt jid=86ee307c5ee269b80485edba class=PaymentJob: start
+worker  | 🐦 Payment d0bb2979-68eb-4c60-bb11-3ab7519d9181 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.526Z pid=1 tid=tt jid=86ee307c5ee269b80485edba class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.542Z pid=1 tid=u1 jid=f8488460a64a3b34b639ac0a class=PaymentJob: start
+worker  | 🐦 Payment 04236a01-bd3a-4628-ac3f-da134322e920 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.545Z pid=1 tid=u1 jid=f8488460a64a3b34b639ac0a class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.560Z pid=1 tid=u9 jid=9b70c05816171e409adda40a class=PaymentJob: start
+worker  | 🐦 Payment 9f6e5e29-fff2-4595-b121-4b80bd06769b processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.563Z pid=1 tid=u9 jid=9b70c05816171e409adda40a class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.579Z pid=1 tid=uh jid=fe33fa14c926419e4c9e811d class=PaymentJob: start
+worker  | 🐦 Payment e2a71a48-c6b2-4f4a-9047-e7db8fd35759 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.582Z pid=1 tid=uh jid=fe33fa14c926419e4c9e811d class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.604Z pid=1 tid=up jid=bb2eb5db70ff096f60ae4474 class=PaymentJob: start
+worker  | 🐦 Payment 16e283be-8f59-4db8-8ef9-49c3449f9397 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.607Z pid=1 tid=up jid=bb2eb5db70ff096f60ae4474 class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.613Z pid=1 tid=v5 jid=304002d5d9de801c9e58c371 class=PaymentJob: start
+worker  | 🐦 Payment 2757e041-439f-4b0c-98e4-1b0ba0c5cad5 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.616Z pid=1 tid=v5 jid=304002d5d9de801c9e58c371 class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.620Z pid=1 tid=ux jid=f99ed97af0f8107043dcda7d class=PaymentJob: start
+worker  | 🐦 Payment 635ea9e4-ce67-451b-9f7f-ec32fee3e451 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.623Z pid=1 tid=ux jid=f99ed97af0f8107043dcda7d class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.632Z pid=1 tid=vd jid=68c00a22b560eb2e87df1419 class=PaymentJob: start
+worker  | 🐦 Payment 310ebd2c-fdb3-46de-9122-b5b2a0a02510 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.635Z pid=1 tid=vd jid=68c00a22b560eb2e87df1419 class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.651Z pid=1 tid=tl jid=2a8062d3503bcfa8fe8afecc class=PaymentJob: start
+worker  | 🐦 Payment 405c1cc5-5e04-4518-9d4b-1fe438428b33 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.654Z pid=1 tid=tl jid=2a8062d3503bcfa8fe8afecc class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.670Z pid=1 tid=t5 jid=b21ea896fd94e5d9c67892c9 class=PaymentJob: start
+worker  | 🐦 Payment 59f4c899-d77a-4fde-887e-31898da1ce08 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.673Z pid=1 tid=t5 jid=b21ea896fd94e5d9c67892c9 class=PaymentJob elapsed=0.004: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.693Z pid=1 tid=tt jid=1bf6003d264399228da1e21b class=PaymentJob: start
+worker  | 🐦 Payment b649f700-07f7-40e0-94e0-cae08a7c9b7f processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.696Z pid=1 tid=tt jid=1bf6003d264399228da1e21b class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.719Z pid=1 tid=u1 jid=3f4cf9d57a618c3280914fd4 class=PaymentJob: start
+worker  | 🐦 Payment 8ab1606c-e52c-4b12-9339-b8790fb059ad processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.723Z pid=1 tid=u1 jid=3f4cf9d57a618c3280914fd4 class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.723Z pid=1 tid=u9 jid=97290466083267c773c9e196 class=PaymentJob: start
+worker  | 🐦 Payment ab39b364-385e-4f65-93c9-91c5939ef324 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.726Z pid=1 tid=u9 jid=97290466083267c773c9e196 class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.731Z pid=1 tid=uh jid=887d0158ee9ae1c339b8127a class=PaymentJob: start
+worker  | 🐦 Payment c51d4b42-9b37-4fbb-8cb2-115c749b300b processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.734Z pid=1 tid=uh jid=887d0158ee9ae1c339b8127a class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.741Z pid=1 tid=up jid=89054ac291ece78c7cca5c51 class=PaymentJob: start
+worker  | 🐦 Payment 4322d7b5-0ac8-424a-a147-492d946638ef processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.745Z pid=1 tid=up jid=89054ac291ece78c7cca5c51 class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.760Z pid=1 tid=v5 jid=60fe3de2d13a5fe8d65a6ad8 class=PaymentJob: start
+worker  | 🐦 Payment 61dce548-3e52-46bf-b7a8-16d45f316de4 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.763Z pid=1 tid=v5 jid=60fe3de2d13a5fe8d65a6ad8 class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.778Z pid=1 tid=ux jid=5e52648f2be81e708406fd4f class=PaymentJob: start
+worker  | 🐦 Payment 1804e646-7e3a-4271-ae07-052e6451bf75 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.781Z pid=1 tid=ux jid=5e52648f2be81e708406fd4f class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.799Z pid=1 tid=vd jid=0aa87285f247d641cd3cc202 class=PaymentJob: start
+worker  | 🐦 Payment b2245a64-f479-479d-a9f6-ee1810545c25 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.802Z pid=1 tid=vd jid=0aa87285f247d641cd3cc202 class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.831Z pid=1 tid=tl jid=f28e3330cf2adc7eeb51537a class=PaymentJob: start
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.832Z pid=1 tid=t5 jid=a362a41e7d4e5989eae276fb class=PaymentJob: start
+worker  | 🐦 Payment 10f69f9e-6d86-4463-8f43-1af49dc3795d processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.834Z pid=1 tid=tl jid=f28e3330cf2adc7eeb51537a class=PaymentJob elapsed=0.003: done
+worker  | 🐦 Payment 531528b4-853b-4ee7-bba5-d7141fdf2941 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.835Z pid=1 tid=t5 jid=a362a41e7d4e5989eae276fb class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.836Z pid=1 tid=tt jid=8b4600d5ee7480384bb99457 class=PaymentJob: start
+worker  | 🐦 Payment 5a2fb6e1-406d-462f-9668-e2b8b8a3bda4 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.839Z pid=1 tid=tt jid=8b4600d5ee7480384bb99457 class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.851Z pid=1 tid=u1 jid=36a1c1bd402e124b23283047 class=PaymentJob: start
+worker  | 🐦 Payment eef7c94c-0696-44ae-87c5-ec61b65bda2f processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.854Z pid=1 tid=u1 jid=36a1c1bd402e124b23283047 class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.869Z pid=1 tid=u9 jid=5c36849b590270ec27de4b47 class=PaymentJob: start
+worker  | 🐦 Payment 080441c0-a65c-4c32-9b86-f68206ba6664 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.874Z pid=1 tid=u9 jid=5c36849b590270ec27de4b47 class=PaymentJob elapsed=0.005: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.888Z pid=1 tid=uh jid=917a8a1288f09ffbd7b07c70 class=PaymentJob: start
+worker  | 🐦 Payment 17964b6b-38f2-472a-9d1b-5599bfcbed09 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.891Z pid=1 tid=uh jid=917a8a1288f09ffbd7b07c70 class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.941Z pid=1 tid=up jid=e4373dd0d7a1d7aa4c2e8d74 class=PaymentJob: start
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.942Z pid=1 tid=v5 jid=69716286e1ffbfc84be96431 class=PaymentJob: start
+worker  | 🐦 Payment 90befbd7-d845-4c7a-a491-7e8e783ef193 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.947Z pid=1 tid=up jid=e4373dd0d7a1d7aa4c2e8d74 class=PaymentJob elapsed=0.006: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.948Z pid=1 tid=ux jid=eba7bd8139eed8c7ca143ea7 class=PaymentJob: start
+worker  | 🐦 Payment 7951d966-fef1-443e-9988-41b95cbdae60 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.949Z pid=1 tid=v5 jid=69716286e1ffbfc84be96431 class=PaymentJob elapsed=0.007: done
+worker  | 🐦 Payment 9e8074da-b061-464c-b847-2c226423481f processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.951Z pid=1 tid=ux jid=eba7bd8139eed8c7ca143ea7 class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.959Z pid=1 tid=vd jid=0c8c816804bfd49deb84be02 class=PaymentJob: start
+worker  | 🐦 Payment 67ae0d89-7ee7-44c8-a7b1-be8012418668 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.963Z pid=1 tid=vd jid=0c8c816804bfd49deb84be02 class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.978Z pid=1 tid=tl jid=8f8f4a1c9eaecaa6d0f9156b class=PaymentJob: start
+worker  | 🐦 Payment eb205c9e-65dc-4d44-a225-5045e10e9276 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.982Z pid=1 tid=tl jid=8f8f4a1c9eaecaa6d0f9156b class=PaymentJob elapsed=0.004: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:07.997Z pid=1 tid=t5 jid=fb233cc29e61cfd0c554eac5 class=PaymentJob: start
+worker  | 🐦 Payment 1f0bfbd2-028e-4137-a8f6-3ae8a8854187 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.000Z pid=1 tid=t5 jid=fb233cc29e61cfd0c554eac5 class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.009Z pid=1 tid=tt jid=0beb1d6923bfe34f7199b7ca class=PaymentJob: start
+worker  | 🐦 Payment d79efd2f-e958-419b-b758-6e01919f66b1 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.012Z pid=1 tid=tt jid=0beb1d6923bfe34f7199b7ca class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.016Z pid=1 tid=u1 jid=95cd6cb075dd7df99bafb70c class=PaymentJob: start
+worker  | 🐦 Payment 19834d9e-8f08-4278-9382-db360e43583f processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.019Z pid=1 tid=u1 jid=95cd6cb075dd7df99bafb70c class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.039Z pid=1 tid=u9 jid=0167851606101083bc4d9f8d class=PaymentJob: start
+worker  | 🐦 Payment 3f3eb22e-c577-4d21-bd71-84872233034f processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.042Z pid=1 tid=u9 jid=0167851606101083bc4d9f8d class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.051Z pid=1 tid=uh jid=3d0c39330fcd391283e5537a class=PaymentJob: start
+worker  | 🐦 Payment 4e7137a5-09d9-4a14-9cba-19bf0b84102c processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.054Z pid=1 tid=uh jid=3d0c39330fcd391283e5537a class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.069Z pid=1 tid=up jid=862b9a761727f646bc36bb5a class=PaymentJob: start
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.071Z pid=1 tid=v5 jid=6cfae39e20e83089b2523b35 class=PaymentJob: start
+worker  | 🐦 Payment c4a92a76-d1f6-452f-8764-98139687d8fa processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.072Z pid=1 tid=up jid=862b9a761727f646bc36bb5a class=PaymentJob elapsed=0.004: done
+worker  | 🐦 Payment c204553f-3a26-46b7-b089-33bf459f48d0 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.075Z pid=1 tid=v5 jid=6cfae39e20e83089b2523b35 class=PaymentJob elapsed=0.004: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.089Z pid=1 tid=ux jid=ca4a9cb2efc04eddabac950b class=PaymentJob: start
+worker  | 🐦 Payment 7c22edf2-9fdc-4dea-bba1-59ef350b4cf7 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.092Z pid=1 tid=ux jid=ca4a9cb2efc04eddabac950b class=PaymentJob elapsed=0.004: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.095Z pid=1 tid=vd jid=ef1167c3b46a819c8214ffb0 class=PaymentJob: start
+worker  | 🐦 Payment 59cd3187-7918-4c4f-86d5-7bdbac4c1a92 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.098Z pid=1 tid=vd jid=ef1167c3b46a819c8214ffb0 class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.107Z pid=1 tid=tl jid=b77f3a52bfa50440eefcc3ce class=PaymentJob: start
+worker  | 🐦 Payment 05bfa252-3dde-4aa2-9ace-d87e4ace1073 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.110Z pid=1 tid=tl jid=b77f3a52bfa50440eefcc3ce class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.138Z pid=1 tid=t5 jid=b764fb166c67543429ba9c49 class=PaymentJob: start
+worker  | 🐦 Payment ba27e391-2243-4f67-b553-9e0ff807d4c0 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.141Z pid=1 tid=t5 jid=b764fb166c67543429ba9c49 class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.160Z pid=1 tid=tt jid=5dcc2d68230efe2844490265 class=PaymentJob: start
+worker  | 🐦 Payment 0e353750-5336-4a80-99cd-2f34323ff13b processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.163Z pid=1 tid=tt jid=5dcc2d68230efe2844490265 class=PaymentJob elapsed=0.004: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.164Z pid=1 tid=u1 jid=0e2146ec5af3cac128d0c087 class=PaymentJob: start
+worker  | 🐦 Payment df08a23a-e823-4db8-aa58-48284d24bc17 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.167Z pid=1 tid=u1 jid=0e2146ec5af3cac128d0c087 class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.178Z pid=1 tid=u9 jid=44ebd588e6d23802d185f1db class=PaymentJob: start
+worker  | 🐦 Payment 12210c8e-2e8d-40fb-8fac-040b3a17ff06 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.181Z pid=1 tid=u9 jid=44ebd588e6d23802d185f1db class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.182Z pid=1 tid=uh jid=02e2b92d100c5c998efd5a9a class=PaymentJob: start
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.184Z pid=1 tid=up jid=11c0b0b22c22468c04c0f35f class=PaymentJob: start
+worker  | 🐦 Payment 326c654b-4ed8-4c6a-83c9-71e1405e0639 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.186Z pid=1 tid=uh jid=02e2b92d100c5c998efd5a9a class=PaymentJob elapsed=0.004: done
+worker  | 🐦 Payment c115200b-cabd-45fc-94bd-7e97fbb6d1f9 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.186Z pid=1 tid=up jid=11c0b0b22c22468c04c0f35f class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.217Z pid=1 tid=v5 jid=721cb24e02241a29dc364a7d class=PaymentJob: start
+worker  | 🐦 Payment b2cc1cf6-abfe-46c2-a151-154c9dd0aba5 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.220Z pid=1 tid=v5 jid=721cb24e02241a29dc364a7d class=PaymentJob elapsed=0.004: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.228Z pid=1 tid=ux jid=71517a055d83405ef6d8d6bd class=PaymentJob: start
+worker  | 🐦 Payment 32e693e5-f50d-431d-b663-36a24309ea7e processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.232Z pid=1 tid=ux jid=71517a055d83405ef6d8d6bd class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.235Z pid=1 tid=vd jid=24f69f1c56795e7e1e41335c class=PaymentJob: start
+worker  | 🐦 Payment dae836b5-2ab8-4802-af7b-5dd14b997b27 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.238Z pid=1 tid=vd jid=24f69f1c56795e7e1e41335c class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.256Z pid=1 tid=tl jid=16684b1b3bf4ea0ef31ac146 class=PaymentJob: start
+worker  | 🐦 Payment 1927f2dc-9b98-4423-baec-5b6ba0557eab processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.259Z pid=1 tid=tl jid=16684b1b3bf4ea0ef31ac146 class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.269Z pid=1 tid=t5 jid=9085d3f9c9f76650058fa2d4 class=PaymentJob: start
+worker  | 🐦 Payment 9b1274b6-bbf5-483e-a5cd-22086a959e1e processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.273Z pid=1 tid=t5 jid=9085d3f9c9f76650058fa2d4 class=PaymentJob elapsed=0.004: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.277Z pid=1 tid=tt jid=ce01b63ace46eb76c35edba6 class=PaymentJob: start
+worker  | 🐦 Payment 6bb02b3e-263e-43e2-9b19-c369e6a2a28f processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.281Z pid=1 tid=tt jid=ce01b63ace46eb76c35edba6 class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.287Z pid=1 tid=u1 jid=04e2ab4fa50bdfcf5b082f6c class=PaymentJob: start
+worker  | 🐦 Payment ebe68826-3ed0-4f34-a405-7310f74b8543 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.290Z pid=1 tid=u1 jid=04e2ab4fa50bdfcf5b082f6c class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.299Z pid=1 tid=u9 jid=c04389b5b46ee8a45861f2ea class=PaymentJob: start
+worker  | 🐦 Payment 32802559-5aa0-419f-ac69-b8cdbc9b09a2 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.303Z pid=1 tid=u9 jid=c04389b5b46ee8a45861f2ea class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.306Z pid=1 tid=uh jid=8d711e0b5bd91ade01ddd518 class=PaymentJob: start
+worker  | 🐦 Payment c27ad27f-d517-4fd0-af31-ab48696893f8 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.310Z pid=1 tid=uh jid=8d711e0b5bd91ade01ddd518 class=PaymentJob elapsed=0.004: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.346Z pid=1 tid=up jid=56f0fb313f822c5bdd3f3ba1 class=PaymentJob: start
+worker  | 🐦 Payment 49905664-b2b2-4210-a24a-9adbf80763c3 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.350Z pid=1 tid=up jid=56f0fb313f822c5bdd3f3ba1 class=PaymentJob elapsed=0.004: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.351Z pid=1 tid=v5 jid=be1f001f6a1dfa494bab5efa class=PaymentJob: start
+worker  | 🐦 Payment 504e9559-490f-4df2-ac7c-f3139325a267 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.355Z pid=1 tid=v5 jid=be1f001f6a1dfa494bab5efa class=PaymentJob elapsed=0.004: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.369Z pid=1 tid=ux jid=a369fe0af222ce9c8788a584 class=PaymentJob: start
+worker  | 🐦 Payment 98dbce59-cb6f-45e9-b0e4-56c855d439c8 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.373Z pid=1 tid=ux jid=a369fe0af222ce9c8788a584 class=PaymentJob elapsed=0.004: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.378Z pid=1 tid=vd jid=a3672ee7d8c4cb74a9f1cbcb class=PaymentJob: start
+worker  | 🐦 Payment 8551171e-60bc-4bf3-8703-cf5183b508eb processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.382Z pid=1 tid=vd jid=a3672ee7d8c4cb74a9f1cbcb class=PaymentJob elapsed=0.004: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.383Z pid=1 tid=tl jid=7e388af4365fb337c3151468 class=PaymentJob: start
+worker  | 🐦 Payment ca5ceab2-6467-424f-b06d-11a809515a4e processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.387Z pid=1 tid=tl jid=7e388af4365fb337c3151468 class=PaymentJob elapsed=0.004: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.398Z pid=1 tid=t5 jid=e7a54237d617d6dbbf18352e class=PaymentJob: start
+worker  | 🐦 Payment 61bb5d57-eaa6-4963-93e9-d0817d554064 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.401Z pid=1 tid=t5 jid=e7a54237d617d6dbbf18352e class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.410Z pid=1 tid=tt jid=a9cde07cfcd451ea699f36df class=PaymentJob: start
+worker  | 🐦 Payment d0ea2069-2162-4aee-a221-dc4395e818cc processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.413Z pid=1 tid=tt jid=a9cde07cfcd451ea699f36df class=PaymentJob elapsed=0.004: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.415Z pid=1 tid=u1 jid=1dae314db4a43e105dcb4ca2 class=PaymentJob: start
+worker  | 🐦 Payment d5b4cec9-20fd-421e-80c2-b631d5453d90 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.418Z pid=1 tid=u1 jid=1dae314db4a43e105dcb4ca2 class=PaymentJob elapsed=0.004: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.435Z pid=1 tid=u9 jid=c02c1e456ef70a7c777f447f class=PaymentJob: start
+worker  | 🐦 Payment 1be96027-b9ae-4588-a8a9-d71b15b0584f processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.438Z pid=1 tid=u9 jid=c02c1e456ef70a7c777f447f class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.454Z pid=1 tid=uh jid=57e4d032380ceafe06bf07b8 class=PaymentJob: start
+worker  | 🐦 Payment 9d7235b8-78fc-4b2d-a18d-8010916a3bc3 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.457Z pid=1 tid=uh jid=57e4d032380ceafe06bf07b8 class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.471Z pid=1 tid=up jid=2db909dc546a17c2404f5140 class=PaymentJob: start
+worker  | 🐦 Payment 5ccf62bf-edc7-4648-b18b-e7c62b49914e processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.474Z pid=1 tid=up jid=2db909dc546a17c2404f5140 class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.488Z pid=1 tid=v5 jid=7a242a82022d563aba44a287 class=PaymentJob: start
+worker  | 🐦 Payment d258fc2b-101f-4f99-bdae-dccbd5e8adef processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.491Z pid=1 tid=v5 jid=7a242a82022d563aba44a287 class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.496Z pid=1 tid=ux jid=2fe0e785eff264ffa2ca46ec class=PaymentJob: start
+worker  | 🐦 Payment c4b4ddd5-9276-4524-868f-70e53e1d1f91 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.500Z pid=1 tid=ux jid=2fe0e785eff264ffa2ca46ec class=PaymentJob elapsed=0.004: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.507Z pid=1 tid=vd jid=282db61dd54173d5bf6a3551 class=PaymentJob: start
+worker  | 🐦 Payment 75ec4e0e-0078-45e0-9068-05d3664e8ae3 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.510Z pid=1 tid=vd jid=282db61dd54173d5bf6a3551 class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.511Z pid=1 tid=tl jid=9333aa2ec7b06acac7b79842 class=PaymentJob: start
+worker  | 🐦 Payment 2e8b15ad-b89a-47df-b052-7ec0f55d647b processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.515Z pid=1 tid=tl jid=9333aa2ec7b06acac7b79842 class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.525Z pid=1 tid=t5 jid=0b7fe371758545897239bb83 class=PaymentJob: start
+worker  | 🐦 Payment 25e50295-2557-42a6-9614-5282e7b7c556 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.528Z pid=1 tid=t5 jid=0b7fe371758545897239bb83 class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.544Z pid=1 tid=tt jid=37e3c133c927b1ca0a12a1ba class=PaymentJob: start
+worker  | 🐦 Payment 12a6670c-d64d-4712-896a-1675af76c4a4 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.547Z pid=1 tid=tt jid=37e3c133c927b1ca0a12a1ba class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.562Z pid=1 tid=u1 jid=b44027adebd05536b8293417 class=PaymentJob: start
+worker  | 🐦 Payment 5fb5b375-2266-430b-ab32-a59a6a3a2080 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.565Z pid=1 tid=u1 jid=b44027adebd05536b8293417 class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.581Z pid=1 tid=u9 jid=4a34e693837e4d67ccbc8bca class=PaymentJob: start
+worker  | 🐦 Payment 5f3fdb07-f49e-403d-ab38-4584cae23cfe processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.585Z pid=1 tid=u9 jid=4a34e693837e4d67ccbc8bca class=PaymentJob elapsed=0.004: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.597Z pid=1 tid=uh jid=8fc7f828a4b57708f02bbc5a class=PaymentJob: start
+worker  | 🐦 Payment 4722f4b1-24ca-4bb9-8077-11cdb94ba004 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.600Z pid=1 tid=uh jid=8fc7f828a4b57708f02bbc5a class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.606Z pid=1 tid=up jid=0c564d9ef32d55f8a15221dd class=PaymentJob: start
+worker  | 🐦 Payment 75643fc8-81e3-444f-b892-7acf9a77aa84 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.610Z pid=1 tid=up jid=0c564d9ef32d55f8a15221dd class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.615Z pid=1 tid=v5 jid=d90a2902fdc2928dbcdfe805 class=PaymentJob: start
+worker  | 🐦 Payment a712172e-0769-402e-ae32-1f76002521ef processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.618Z pid=1 tid=v5 jid=d90a2902fdc2928dbcdfe805 class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.622Z pid=1 tid=ux jid=ef5ed13b990dbb2aec855273 class=PaymentJob: start
+worker  | 🐦 Payment 75a76ee2-d7f9-4629-acd8-98247f700273 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.626Z pid=1 tid=ux jid=ef5ed13b990dbb2aec855273 class=PaymentJob elapsed=0.004: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.634Z pid=1 tid=vd jid=a47e4c0599fd637c44a7db76 class=PaymentJob: start
+worker  | 🐦 Payment d19c17de-271e-462b-9ac4-44493296ca40 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.638Z pid=1 tid=vd jid=a47e4c0599fd637c44a7db76 class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.653Z pid=1 tid=tl jid=9249bd3236ff9a7cdedb05aa class=PaymentJob: start
+worker  | 🐦 Payment 464c0557-1f7e-4d6c-b7c7-3c2b53427b5d processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.656Z pid=1 tid=tl jid=9249bd3236ff9a7cdedb05aa class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.672Z pid=1 tid=t5 jid=7afc1aacff39e6f5733aec74 class=PaymentJob: start
+worker  | 🐦 Payment 24a07a80-5af8-4017-bec9-354cba186fa3 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.675Z pid=1 tid=t5 jid=7afc1aacff39e6f5733aec74 class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.695Z pid=1 tid=tt jid=cb4df150c60e17ef34928040 class=PaymentJob: start
+worker  | 🐦 Payment 233370c6-ce9c-44c0-b58d-02d637d5a953 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.698Z pid=1 tid=tt jid=cb4df150c60e17ef34928040 class=PaymentJob elapsed=0.004: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.706Z pid=1 tid=u1 jid=aad5ed8f6b1f8427bf10fe9e class=PaymentJob: start
+worker  | 🐦 Payment 249d4eff-da15-4bd5-a9f2-f28ae9c04137 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.710Z pid=1 tid=u1 jid=aad5ed8f6b1f8427bf10fe9e class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.721Z pid=1 tid=u9 jid=9ae60750106add0a451bf94d class=PaymentJob: start
+worker  | 🐦 Payment 5d8d61ab-d768-405a-b4b4-8a4a8376eea9 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.725Z pid=1 tid=u9 jid=9ae60750106add0a451bf94d class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.725Z pid=1 tid=uh jid=6c97f18a58c3c3235aeea829 class=PaymentJob: start
+worker  | 🐦 Payment bc29c8a8-ef8b-49ca-aaf4-d9e7e23ff089 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.729Z pid=1 tid=uh jid=6c97f18a58c3c3235aeea829 class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.733Z pid=1 tid=up jid=7bb3df105cfe809d8955a4c3 class=PaymentJob: start
+worker  | 🐦 Payment bd1cdaa2-de87-43fd-abdf-254a6c12ba8d processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.737Z pid=1 tid=up jid=7bb3df105cfe809d8955a4c3 class=PaymentJob elapsed=0.004: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.743Z pid=1 tid=v5 jid=94b6c1f13a4c607fe2d96350 class=PaymentJob: start
+worker  | 🐦 Payment 34dc2ea6-2d39-444d-b07b-a4d37fb5c242 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.746Z pid=1 tid=v5 jid=94b6c1f13a4c607fe2d96350 class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.763Z pid=1 tid=ux jid=cee2c1878aa6f669c50996a6 class=PaymentJob: start
+worker  | 🐦 Payment dfc72e3f-3ad8-4583-8175-13da6868a900 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.766Z pid=1 tid=ux jid=cee2c1878aa6f669c50996a6 class=PaymentJob elapsed=0.004: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.780Z pid=1 tid=vd jid=fab83a1dc91458c4a37119e9 class=PaymentJob: start
+worker  | 🐦 Payment 32b10e9a-6782-4077-aa25-7b4f04891a79 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.784Z pid=1 tid=vd jid=fab83a1dc91458c4a37119e9 class=PaymentJob elapsed=0.004: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.801Z pid=1 tid=tl jid=1cb15c3a22c0f39e8dbc6cd5 class=PaymentJob: start
+worker  | 🐦 Payment 8e0cb64c-3b56-4b37-8860-de76e5c27789 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.804Z pid=1 tid=tl jid=1cb15c3a22c0f39e8dbc6cd5 class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.815Z pid=1 tid=t5 jid=97e7d7411101fa70dc9980f3 class=PaymentJob: start
+worker  | 🐦 Payment fd8600af-72e0-4a56-9ab3-a8dc054db5ec processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.819Z pid=1 tid=t5 jid=97e7d7411101fa70dc9980f3 class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.832Z pid=1 tid=tt jid=6478b481bf14452e3aba7e12 class=PaymentJob: start
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.833Z pid=1 tid=u1 jid=1676d734ff9b2301662e7deb class=PaymentJob: start
+worker  | 🐦 Payment a873b6fe-01fa-4010-8af3-d56187f364ef processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.836Z pid=1 tid=tt jid=6478b481bf14452e3aba7e12 class=PaymentJob elapsed=0.004: done
+worker  | 🐦 Payment add21bbc-9dc4-4030-ad56-1d8ee827671b processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.837Z pid=1 tid=u1 jid=1676d734ff9b2301662e7deb class=PaymentJob elapsed=0.004: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.838Z pid=1 tid=u9 jid=93b48974393ba94f0891c7b9 class=PaymentJob: start
+worker  | 🐦 Payment 55b1f58f-c763-4939-bcaa-a1df7a3747af processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.841Z pid=1 tid=u9 jid=93b48974393ba94f0891c7b9 class=PaymentJob elapsed=0.003: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.853Z pid=1 tid=uh jid=49be24a357a2ea969ad07ed2 class=PaymentJob: start
+worker  | 🐦 Payment 7b2a9dc0-ec14-441d-a07d-b56542523718 processed by default (attempt 1)
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.857Z pid=1 tid=uh jid=49be24a357a2ea969ad07ed2 class=PaymentJob elapsed=0.004: done
+worker  | [1;34mINFO [0m 2025-08-10T21:51:08.872Z pid=1 tid=up jid=584fa75f5682397e017bb93d class=PaymentJob: start
+log truncated at line 1000
