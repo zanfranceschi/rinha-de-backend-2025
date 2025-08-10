@@ -18,7 +18,7 @@ services:
           cpus: "0.10"
           memory: "30mb"
   api01:
-    image: dmorais15/rinha-2025-backend-native:1.0
+    image: dmorais15/rinha-2025-backend-native:2.0
     container_name: api01
     networks:
       - backend
@@ -32,7 +32,7 @@ services:
           cpus: "0.6"
           memory: "120MB"
   api02:
-    image: dmorais15/rinha-2025-backend-native:1.0
+    image: dmorais15/rinha-2025-backend-native:2.0
     container_name: api02
     networks:
       - backend
@@ -52,8 +52,8 @@ services:
     command:
       [
         "redis-server",
-        "--appendonly", "no",
-        "--save", "",
+        "--appendonly", "yes",
+        "--appendfsync", "everysec",
         "--maxmemory-policy", "noeviction",
         "--tcp-keepalive", "60",
         "--hz", "1000"
