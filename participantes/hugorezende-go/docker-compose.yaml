@@ -1,0 +1,48 @@
+version: "3.9"
+services:
+  app:
+    image: hugorezende88/rinha-2025:latest
+    container_name: rinha-backend-2025
+    ports:
+      - "9999:9999"
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+    restart: on-failure
+    networks:
+      - backend
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          cpus: "1"
+          memory: "150MB"
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    ports:
+      - 5672:5672
+      - 15672:15672
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+    healthcheck:
+      test: rabbitmq-diagnostics -q ping
+      interval: 2s
+      timeout: 10s
+      retries: 5
+    networks:
+      - backend
+    deploy:
+      resources:
+        limits:
+          cpus: ".5"
+          memory: "200MB"
+volumes:
+  rabbitmq_data:
+
+networks:
+  backend:
+    driver: bridge
+  payment-processor:
+    external: true
