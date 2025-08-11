@@ -72,8 +72,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.25"
-          memory: "25MB"
+          cpus: "0.1875"
+          memory: "18.75MB"
     networks:
       - rinha-backend
       - payment-processor
@@ -101,6 +101,18 @@ services:
       - PAYMENT_PROCESSOR_FALLBACK_URL=http://payment-processor-fallback:8080
       - KEYDB_SERVICE_URL=keydb:6379
       - INSTANCE_ID=worker-3
+    depends_on:
+      - keydb
+
+  worker4:
+    <<: *worker
+    container_name: worker-4
+    hostname: worker4
+    environment:
+      - PAYMENT_PROCESSOR_DEFAULT_URL=http://payment-processor-default:8080
+      - PAYMENT_PROCESSOR_FALLBACK_URL=http://payment-processor-fallback:8080
+      - KEYDB_SERVICE_URL=keydb:6379
+      - INSTANCE_ID=worker-4
     depends_on:
       - keydb
 

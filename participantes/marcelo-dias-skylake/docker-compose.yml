@@ -19,13 +19,14 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.5"
+          cpus: "0.4"
           memory: "112MB"
 
   app2:
     <<: *app
     hostname: app2
     environment:
+      - FALLBACK_ENABLED=false
       - PROCESSOR_URL=http://payment-processor-default:8080
       - FALLBACK_PROCESSOR_URL=http://payment-processor-fallback:8080
       - OTHER_INSTANCE_URL=http://app1:8080
@@ -37,7 +38,7 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.5"
+          cpus: "0.4"
           memory: "112MB"
 
   haproxy:
@@ -56,7 +57,7 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.5"
+          cpus: "0.4"
           memory: "124MB"
 volumes:
   sockets:

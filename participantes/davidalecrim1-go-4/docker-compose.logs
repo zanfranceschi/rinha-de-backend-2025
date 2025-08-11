@@ -1,0 +1,151 @@
+
+ go-worker-1 Pulling 
+ go-backend-1 Pulling 
+ go-backend-2 Pulling 
+ 01d036902a3c Already exists 
+ afa2b6c5e925 Already exists 
+ 5a2daa855dfa Pulling fs layer 
+ 01d036902a3c Already exists 
+ afa2b6c5e925 Already exists 
+ 10e9dee698c0 Pulling fs layer 
+ 01d036902a3c Already exists 
+ afa2b6c5e925 Already exists 
+ 10e9dee698c0 Pulling fs layer 
+ 5a2daa855dfa Downloading [>                                                  ]  41.84kB/4.11MB
+ 5a2daa855dfa Verifying Checksum 
+ 5a2daa855dfa Download complete 
+ 5a2daa855dfa Extracting [>                                                  ]  65.54kB/4.11MB
+ 10e9dee698c0 Downloading [>                                                  ]  43.84kB/4.269MB
+ 10e9dee698c0 Downloading [>                                                  ]  43.84kB/4.269MB
+ 10e9dee698c0 Verifying Checksum 
+ 10e9dee698c0 Download complete 
+ 10e9dee698c0 Download complete 
+ 10e9dee698c0 Extracting [>                                                  ]  65.54kB/4.269MB
+ 10e9dee698c0 Extracting [>                                                  ]  65.54kB/4.269MB
+ 5a2daa855dfa Extracting [==================================================>]   4.11MB/4.11MB
+ 5a2daa855dfa Extracting [==================================================>]   4.11MB/4.11MB
+ 5a2daa855dfa Pull complete 
+ 10e9dee698c0 Extracting [==================================================>]  4.269MB/4.269MB
+ 10e9dee698c0 Extracting [==================================================>]  4.269MB/4.269MB
+ 10e9dee698c0 Pull complete 
+ 10e9dee698c0 Pull complete 
+ go-backend-2 Pulled 
+ go-backend-1 Pulled 
+ go-worker-1 Pulled 
+ Network davidalecrim1-go-4_app  Creating
+ Network davidalecrim1-go-4_app  Created
+ Volume "davidalecrim1-go-4_api-sockets"  Creating
+ Volume "davidalecrim1-go-4_api-sockets"  Created
+ Container redis-db  Creating
+ Container redis-db  Created
+ Container go-backend-1  Creating
+ Container go-backend-2  Creating
+ Container go-backend-2  Created
+ Container go-backend-1  Created
+ Container go-worker-1  Creating
+ Container load-balancer-nginx  Creating
+ Container load-balancer-nginx  Created
+ Container go-worker-1  Created
+Attaching to go-backend-1, go-backend-2, go-worker-1, load-balancer-nginx, redis-db
+redis-db             | 1:C 11 Aug 2025 20:27:03.887 # WARNING Memory overcommit must be enabled! Without it, a background save or replication may fail under low memory condition. Being disabled, it can also cause failures without low memory condition, see https://github.com/jemalloc/jemalloc/issues/1328. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.
+redis-db             | 1:C 11 Aug 2025 20:27:03.887 * oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+redis-db             | 1:C 11 Aug 2025 20:27:03.887 * Redis version=8.0.3, bits=64, commit=00000000, modified=1, pid=1, just started
+redis-db             | 1:C 11 Aug 2025 20:27:03.887 * Configuration loaded
+redis-db             | 1:M 11 Aug 2025 20:27:03.889 * monotonic clock: POSIX clock_gettime
+redis-db             | 1:M 11 Aug 2025 20:27:03.892 * Running mode=standalone, port=6379.
+redis-db             | 1:M 11 Aug 2025 20:27:03.899 * Server initialized
+redis-db             | 1:M 11 Aug 2025 20:27:03.899 * Ready to accept connections tcp
+redis-db             | 1:M 11 Aug 2025 20:27:03.899 * Ready to accept connections unix
+go-backend-1         | 2025/08/11 20:27:04 INFO starting app on unix socket socketPath=/var/run/api_1.sock
+go-backend-2         | 2025/08/11 20:27:04 INFO starting app on unix socket socketPath=/var/run/api_2.sock
+load-balancer-nginx  | /docker-entrypoint.sh: /docker-entrypoint.d/ is not empty, will attempt to perform configuration
+load-balancer-nginx  | /docker-entrypoint.sh: Looking for shell scripts in /docker-entrypoint.d/
+load-balancer-nginx  | /docker-entrypoint.sh: Launching /docker-entrypoint.d/10-listen-on-ipv6-by-default.sh
+load-balancer-nginx  | 10-listen-on-ipv6-by-default.sh: info: Getting the checksum of /etc/nginx/conf.d/default.conf
+load-balancer-nginx  | 10-listen-on-ipv6-by-default.sh: info: Enabled listen on IPv6 in /etc/nginx/conf.d/default.conf
+load-balancer-nginx  | /docker-entrypoint.sh: Sourcing /docker-entrypoint.d/15-local-resolvers.envsh
+load-balancer-nginx  | /docker-entrypoint.sh: Launching /docker-entrypoint.d/20-envsubst-on-templates.sh
+load-balancer-nginx  | /docker-entrypoint.sh: Launching /docker-entrypoint.d/30-tune-worker-processes.sh
+load-balancer-nginx  | /docker-entrypoint.sh: Configuration complete; ready for start up
+go-worker-1          | 2025/08/11 20:27:05 INFO length of the queue redisQueueLength=0
+go-worker-1          | 2025/08/11 20:27:06 INFO length of the queue redisQueueLength=0
+go-worker-1          | 2025/08/11 20:27:07 INFO length of the queue redisQueueLength=0
+go-worker-1          | 2025/08/11 20:27:08 INFO length of the queue redisQueueLength=0
+go-worker-1          | 2025/08/11 20:27:09 INFO length of the queue redisQueueLength=0
+go-worker-1          | 2025/08/11 20:27:10 INFO length of the queue redisQueueLength=0
+go-worker-1          | 2025/08/11 20:27:11 INFO length of the queue redisQueueLength=0
+go-worker-1          | 2025/08/11 20:27:12 INFO length of the queue redisQueueLength=0
+go-worker-1          | 2025/08/11 20:27:13 INFO length of the queue redisQueueLength=0
+go-worker-1          | 2025/08/11 20:27:14 INFO length of the queue redisQueueLength=0
+go-worker-1          | 2025/08/11 20:27:15 INFO length of the queue redisQueueLength=0
+go-worker-1          | 2025/08/11 20:27:16 INFO length of the queue redisQueueLength=1
+go-worker-1          | 2025/08/11 20:27:17 INFO length of the queue redisQueueLength=0
+go-worker-1          | 2025/08/11 20:27:18 INFO length of the queue redisQueueLength=1
+go-worker-1          | 2025/08/11 20:27:19 INFO length of the queue redisQueueLength=1
+go-worker-1          | 2025/08/11 20:27:20 INFO length of the queue redisQueueLength=0
+go-worker-1          | 2025/08/11 20:27:21 INFO length of the queue redisQueueLength=0
+go-worker-1          | 2025/08/11 20:27:22 INFO length of the queue redisQueueLength=0
+go-worker-1          | 2025/08/11 20:27:23 INFO length of the queue redisQueueLength=0
+go-worker-1          | 2025/08/11 20:27:24 INFO length of the queue redisQueueLength=0
+go-worker-1          | 2025/08/11 20:27:25 INFO length of the queue redisQueueLength=0
+go-worker-1          | 2025/08/11 20:27:26 INFO length of the queue redisQueueLength=0
+go-worker-1          | 2025/08/11 20:27:27 INFO length of the queue redisQueueLength=0
+go-worker-1          | 2025/08/11 20:27:28 INFO length of the queue redisQueueLength=0
+go-worker-1          | 2025/08/11 20:27:29 INFO length of the queue redisQueueLength=6
+go-worker-1          | 2025/08/11 20:27:30 INFO length of the queue redisQueueLength=2
+go-worker-1          | 2025/08/11 20:27:31 INFO length of the queue redisQueueLength=2
+go-worker-1          | 2025/08/11 20:27:32 INFO length of the queue redisQueueLength=0
+go-worker-1          | 2025/08/11 20:27:33 INFO length of the queue redisQueueLength=0
+go-worker-1          | 2025/08/11 20:27:34 INFO length of the queue redisQueueLength=0
+go-worker-1          | 2025/08/11 20:27:35 INFO length of the queue redisQueueLength=5
+go-worker-1          | 2025/08/11 20:27:36 INFO length of the queue redisQueueLength=130
+go-worker-1          | 2025/08/11 20:27:37 INFO length of the queue redisQueueLength=336
+go-worker-1          | 2025/08/11 20:27:38 INFO length of the queue redisQueueLength=552
+go-worker-1          | 2025/08/11 20:27:39 INFO length of the queue redisQueueLength=777
+go-worker-1          | 2025/08/11 20:27:40 INFO length of the queue redisQueueLength=1011
+go-worker-1          | 2025/08/11 20:27:41 INFO length of the queue redisQueueLength=1253
+go-worker-1          | 2025/08/11 20:27:42 INFO length of the queue redisQueueLength=1505
+go-worker-1          | 2025/08/11 20:27:43 INFO length of the queue redisQueueLength=1767
+go-worker-1          | 2025/08/11 20:27:44 INFO length of the queue redisQueueLength=2036
+go-worker-1          | 2025/08/11 20:27:45 INFO length of the queue redisQueueLength=2316
+go-worker-1          | 2025/08/11 20:27:46 INFO length of the queue redisQueueLength=2605
+go-worker-1          | 2025/08/11 20:27:47 INFO length of the queue redisQueueLength=2903
+go-worker-1          | 2025/08/11 20:27:48 INFO length of the queue redisQueueLength=3211
+go-worker-1          | 2025/08/11 20:27:49 INFO length of the queue redisQueueLength=3528
+go-worker-1          | 2025/08/11 20:27:50 INFO length of the queue redisQueueLength=3853
+go-worker-1          | 2025/08/11 20:27:51 INFO length of the queue redisQueueLength=4188
+go-worker-1          | 2025/08/11 20:27:52 INFO length of the queue redisQueueLength=4532
+go-worker-1          | 2025/08/11 20:27:53 INFO length of the queue redisQueueLength=4885
+go-worker-1          | 2025/08/11 20:27:54 INFO length of the queue redisQueueLength=5247
+go-worker-1          | 2025/08/11 20:27:55 INFO length of the queue redisQueueLength=4680
+go-worker-1          | 2025/08/11 20:27:56 INFO length of the queue redisQueueLength=3398
+go-worker-1          | 2025/08/11 20:27:57 INFO length of the queue redisQueueLength=2097
+go-worker-1          | 2025/08/11 20:27:58 INFO length of the queue redisQueueLength=955
+go-worker-1          | 2025/08/11 20:27:59 INFO length of the queue redisQueueLength=3
+go-worker-1          | 2025/08/11 20:28:00 INFO length of the queue redisQueueLength=27
+go-worker-1          | 2025/08/11 20:28:01 INFO length of the queue redisQueueLength=0
+go-worker-1          | 2025/08/11 20:28:02 INFO length of the queue redisQueueLength=0
+go-worker-1          | 2025/08/11 20:28:03 INFO length of the queue redisQueueLength=0
+go-worker-1          | 2025/08/11 20:28:04 INFO length of the queue redisQueueLength=0
+go-worker-1          | 2025/08/11 20:28:05 INFO length of the queue redisQueueLength=0
+go-worker-1          | 2025/08/11 20:28:06 INFO length of the queue redisQueueLength=1
+go-worker-1          | 2025/08/11 20:28:07 INFO length of the queue redisQueueLength=1
+go-worker-1          | 2025/08/11 20:28:08 INFO length of the queue redisQueueLength=4
+go-worker-1          | 2025/08/11 20:28:09 INFO length of the queue redisQueueLength=2
+go-worker-1          | 2025/08/11 20:28:10 INFO length of the queue redisQueueLength=8
+go-worker-1          | 2025/08/11 20:28:11 INFO length of the queue redisQueueLength=389
+go-worker-1          | 2025/08/11 20:28:12 INFO length of the queue redisQueueLength=732
+go-worker-1          | 2025/08/11 20:28:13 INFO length of the queue redisQueueLength=1131
+go-worker-1          | 2025/08/11 20:28:14 INFO length of the queue redisQueueLength=1500
+go-worker-1          | 2025/08/11 20:28:15 INFO length of the queue redisQueueLength=1376
+go-worker-1          | 2025/08/11 20:28:16 INFO shutting down workers...
+[Kload-balancer-nginx exited with code 0
+[Kgo-worker-1 exited with code 0
+[Kgo-backend-1 exited with code 0
+[Kgo-backend-2 exited with code 0
+redis-db             | 1:signal-handler (1754944097) Received SIGTERM scheduling shutdown...
+redis-db             | 1:M 11 Aug 2025 20:28:17.609 * User requested shutdown...
+redis-db             | 1:M 11 Aug 2025 20:28:17.609 * Removing the unix socket file.
+redis-db             | 1:M 11 Aug 2025 20:28:17.609 # Redis is now ready to exit, bye bye...
+[Kredis-db exited with code 0
+log truncated at line 1000
