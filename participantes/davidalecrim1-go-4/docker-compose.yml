@@ -1,6 +1,6 @@
 x-service-templates:
   go-backend: &go-backend
-    image: davidalecrim1/rinha-with-go-2025:v2.0.2-api
+    image: davidalecrim1/rinha-with-go-2025:v2.0.3-api
     platform: linux/amd64
     networks:
       - app
@@ -47,7 +47,7 @@ services:
           memory: "50MB"
 
   go-worker-1:
-    image: davidalecrim1/rinha-with-go-2025:v2.0.2-worker
+    image: davidalecrim1/rinha-with-go-2025:v2.0.3-worker
     container_name: go-worker-1
     platform: linux/amd64
     networks:
@@ -64,7 +64,7 @@ services:
       - MONITOR_HEALTH=true
       - ENABLE_PROFILING=false
       - REDIS_ADDR=/var/run/redis.sock
-      - WORKERS=150
+      - WORKERS=200
     deploy:
       resources:
         limits:

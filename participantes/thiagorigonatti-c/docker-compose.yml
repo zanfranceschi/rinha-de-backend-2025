@@ -17,15 +17,11 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.30"
-          memory: "50MB"
+          cpus: "0.33"
+          memory: "60MB"
     ipc: container:shared-memory
     depends_on:
       - shared-memory
-    ulimits:
-      nofile:
-        soft: 65536
-        hard: 65536
 
   backend02:
     <<: *backend
@@ -70,17 +66,13 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.59"
-          memory: "150MB"
+          cpus: "0.50"
+          memory: "100MB"
     depends_on:
       - backend01
       - backend02
       - backend03
     ipc: container:shared-memory
-    ulimits:
-      nofile:
-        soft: 65536
-        hard: 65536
 
 networks:
   net:
