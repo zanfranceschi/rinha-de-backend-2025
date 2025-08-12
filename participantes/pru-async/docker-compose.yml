@@ -12,7 +12,7 @@ services:
       resources:
         limits:
           cpus: '0.5'
-          memory: '125MB'
+          memory: '115MB'
 
   api02:
     <<: *api
@@ -33,24 +33,25 @@ services:
          cpus: '0.2'
          memory: '40MB'
 
-  nginx:
-    image: nginx
-    container_name: nginx
-    volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+  traefik:
+    image: traefik:v3.1
+    container_name: traefik
+    command: --configFile=/etc/traefik/traefik.yml
     ports:
       - 9999:9999
+    volumes:
+      - ./traefik.yml:/etc/traefik/traefik.yml:ro
+      - ./http.yml:/etc/traefik/dynamic/http.yml:ro
     networks:
       - backend
     depends_on:
-      - redis
       - api01
       - api02
     deploy:
       resources:
         limits:
           cpus: '0.3'
-          memory: '40MB'
+          memory: '80MB'
 
 networks:
   payment-processor:

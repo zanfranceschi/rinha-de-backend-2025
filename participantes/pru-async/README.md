@@ -21,22 +21,43 @@ Resolvi testar as gem async para ver como performaria sem sidekiq
 
 * Ruby 3.4+ YJIT
 * Redis
-* NGINX
+* Traefik
 
 ## Estratégias
 
-* Load balancing com NGINX, utilizando a configuração com 256 conexões e keap-alive e proxy-timeout
-* HTTP do ASYNC-HTTP
-* JobQueue ASYNC com 200 workers em paralelo ao HTTP Server
-* Circuit Breaker de 5 segundos com falha em 5 segundos
-* Armazenamento do resumo de pagamentos no Redis utilizando Sorted Sets
-* Async Redis/Async HTTP
-* Sem utilização do healthcheck:
-    - 2 tentativas no default com intervalo de 2ms e timeout de 300ms
-    - 1 tentativa no fallback com timeout de 100ms
-    - 2 retries em progressão geometrica de 2
+Load balancing com Traefik
+- maxIdleConnsPerHost: 256, keep-alive habilitado
+- forwardingTimeouts: dialTimeout 200ms, responseHeaderTimeout 1s, idleConnTimeout 20s
+- healthCheck: interval 1s, timeout 300ms
+- sem retry no Traefik (middleware de retry desabilitado)
+
+Servidor HTTP com async-http (Async::HTTP::Server)
+
+JobQueue (producer/consumer) com Async
+- pool fixo de workers (configurável via QUEUE_CONCURRENCY, ex.: 200)
+- buffer/bounded queue com backpressure (capacidade padrão 2048)
+- executa no mesmo thread/reactor do HTTP (IO-bound e non-blocking)
+Circuit Breaker in-memory
+
+- janela: 5s; abre quando falhas na janela > 5 (threshold padrão 5)
+
+Armazenamento no Redis
+- resumo em Sorted Set (payments_log)
+- chave processed:<correlationId> para deduplicação de requisições
+Async Redis e Async HTTP (um cliente Redis compartilhado por processo)
+
+Estratégia de tentativas (no app, não no proxy)
+
+- default: 2 tentativas, intervalo ~1–2ms entre elas, timeout 200ms
+- fallback: 1 tentativa, timeout 80ms
+- em caso de falha total: até 2 novas tentativas com backoff linear (1s, 2s)
+
+## Curiosidade no repo
+
+Existe uma versão de Proxy puro em Async HTTP mas com traefik consegui um controle
+mais fino
 
 ----
 
-Repositório: [leandronsp/pru](https://github.com/renatovico/pru-async)
-Github: [leandronsp](https://github.com/renatovico)
+Repositório: [renatovico/pru-async](https://github.com/renatovico/pru-async)
+Github: [renatovico](https://github.com/renatovico)

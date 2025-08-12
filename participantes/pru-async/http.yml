@@ -1,0 +1,38 @@
+# Dynamic configuration
+http:
+  routers:
+    api:
+      rule: "PathPrefix(`/`)"
+      service: api-service
+      entryPoints:
+        - web
+      # middlewares:
+      #   - api-retry
+
+  services:
+    api-service:
+      loadBalancer:
+        passHostHeader: true
+        healthCheck:
+          path: /health
+          interval: 1s
+          timeout: 300ms
+        servers:
+          - url: "http://api01:3000"
+          - url: "http://api02:3000"
+        serversTransport: fast-transport
+
+  serversTransports:
+    fast-transport:
+      forwardingTimeouts:
+        dialTimeout: 200ms
+        responseHeaderTimeout: 1s
+        idleConnTimeout: 20s
+      maxIdleConnsPerHost: 256
+      insecureSkipVerify: true
+
+  # middlewares:
+  #   api-retry:
+  #     retry:
+  #       attempts: 0
+  #       initialInterval: 100ms
