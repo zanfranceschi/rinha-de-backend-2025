@@ -1,3 +1,21 @@
+x-rinhaquark2025: &rinhaquark2025
+  image: kauanmocelin/rinhaquark2025:1.0.20
+  environment:
+    - QUARKUS_PAYMENTS_BATCH_SIZE=300
+    - QUARKUS_PAYMENTS_BATCH_INTERVAL_MS=500
+    - QUARKUS_PAYMENTS_THREADS_NUMBER=20
+  depends_on:
+    postgres:
+      condition: service_healthy
+  networks:
+    - rinhaquark-rede
+    - payment-processor
+  deploy:
+    resources:
+      limits:
+        cpus: "0.55"
+        memory: "80MB"
+
 services:
 
   nginx:
@@ -15,32 +33,20 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.2"
+          cpus: "0.1"
           memory: "50MB"
 
-  rinhaquark2025-a: &rinhaquark2025
-    image: kauanmocelin/rinhaquark2025:1.0.17
+  rinhaquark2025-a:
+    <<: *rinhaquark2025
     container_name: rinhaquark2025-a
     environment:
-      - QUARKUS_MONGODB_CONNECTION_STRING=mongodb://mongo:27017
-      - QUARKUS_PAYMENTS_BATCH_SIZE=300
-      - QUARKUS_PAYMENTS_BATCH_INTERVAL_MS=500
-      - QUARKUS_PAYMENTS_THREADS_NUMBER=100
-    depends_on:
-      postgres:
-        condition: service_healthy
-    networks:
-      - rinhaquark-rede
-      - payment-processor
-    deploy:
-      resources:
-        limits:
-          cpus: "0.5"
-          memory: "80MB"
+      - INTERNAL_SYNC_PAYMENTS_API=http://rinhaquark2025-b:8080
 
   rinhaquark2025-b:
     <<: *rinhaquark2025
     container_name: rinhaquark2025-b
+    environment:
+      - INTERNAL_SYNC_PAYMENTS_API=http://rinhaquark2025-a:8080
 
   postgres:
     image: postgres:17-alpine

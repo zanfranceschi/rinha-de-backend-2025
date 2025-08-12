@@ -1,6 +1,6 @@
 CREATE UNLOGGED TABLE TB_METRICS(
 	metric_id SERIAL PRIMARY KEY NOT NULL,
-    correlation_id VARCHAR,
+	correlation_id VARCHAR NOT NULL,
 	amount DECIMAL NOT NULl,
 	processor VARCHAR NOT null,
  	requested_at TIMESTAMP NOT NULl

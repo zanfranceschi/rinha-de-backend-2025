@@ -1,0 +1,74 @@
+services:
+  app1:
+    image: ghcr.io/joojf/rinha-de-backend:latest
+    environment:
+      - BIND_ADDR=0.0.0.0:9999
+      - DEFAULT_URL=http://payment-processor-default:8080
+      - FALLBACK_URL=http://payment-processor-fallback:8080
+      - REDIS_URL=redis://redis:6379
+      - REQ_TIMEOUT_MS=1200
+      - WORKERS=32
+    depends_on:
+      - redis
+    networks:
+      - default
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          cpus: "0.6"
+          memory: "110MB"
+
+  app2:
+    image: ghcr.io/joojf/rinha-de-backend:latest
+    environment:
+      - BIND_ADDR=0.0.0.0:9999
+      - DEFAULT_URL=http://payment-processor-default:8080
+      - FALLBACK_URL=http://payment-processor-fallback:8080
+      - REDIS_URL=redis://redis:6379
+      - REQ_TIMEOUT_MS=1200
+      - WORKERS=32
+    depends_on:
+      - redis
+    networks:
+      - default
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          cpus: "0.6"
+          memory: "110MB"
+
+  nginx:
+    image: nginx:1.29-alpine
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - app1
+      - app2
+    ports:
+      - "9999:9999"
+    networks:
+      - default
+    deploy:
+      resources:
+        limits:
+          cpus: "0.1"
+          memory: "50MB"
+
+  redis:
+    image: redis:7.2-alpine
+    command: ["redis-server", "--appendonly", "no"]
+    networks:
+      - default
+    deploy:
+      resources:
+        limits:
+          cpus: "0.2"
+          memory: "80MB"
+
+networks:
+  default:
+    driver: bridge
+  payment-processor:
+    external: true

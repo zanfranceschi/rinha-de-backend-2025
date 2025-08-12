@@ -1,4 +1,5 @@
 x-api: &payment-api-template
+  # build: ./payment-api
   image: mauriciocantu/payment-api:latest
   depends_on:
     redis:
@@ -8,6 +9,7 @@ x-api: &payment-api-template
     - payment-processor
 
 x-worker: &payment-worker-template
+  # build: ./payment-worker
   image: mauriciocantu/payment-worker:latest
   depends_on:
     redis:
@@ -42,7 +44,7 @@ services:
       resources:
         limits:
           cpus: "0.2"
-          memory: "20MB"
+          memory: "10MB"
 
   payment-api-01:
     <<: *payment-api-template
@@ -57,7 +59,7 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.2"
+          cpus: "0.3"
           memory: "50MB"
 
   payment-api-02:
@@ -75,8 +77,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.2"
-          memory: "60MB"
+          cpus: "0.3"
+          memory: "90MB"
 
   payment-worker-01:
     <<: *payment-worker-template
@@ -86,7 +88,7 @@ services:
       resources:
         limits:
           cpus: "0.3"
-          memory: "75MB"
+          memory: "65MB"
 
   payment-worker-02:
     <<: *payment-worker-template
@@ -95,8 +97,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.3"
-          memory: "75MB"
+          cpus: "0.2"
+          memory: "65MB"
 
   redis:
     image: redis:8.2-alpine
@@ -112,7 +114,7 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.3"
+          cpus: "0.2"
           memory: "70MB"
     networks:
       - rinha-backend

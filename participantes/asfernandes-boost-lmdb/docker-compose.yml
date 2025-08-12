@@ -1,13 +1,12 @@
 x-service-templates:
   api: &api
-    image: asfernandes/rinhaback25:boost-lmdb
+    image: asfernandes/rinhaback25:boost-lmdb@sha256:f36d6ae3d69e5d2d8cdfc423ca69a42eb3cbdbd13cabaf3dbf928f7499261dbd
     command: /app/bin/rinhaback25-boost-lmdb-api
     volumes:
       - ./data:/data
     environment: &api-env
-      IO_WORKERS: 12
-      HANDLER_WORKERS: 12
-      PROCESSOR_WORKERS: 2
+      IO_WORKERS: 4
+      HANDLER_WORKERS: 6
       DATABASE: /data/database
       DATABASE_SIZE: 41943040
       LISTEN_ADDRESS: 0.0.0.0:8080
@@ -20,7 +19,7 @@ x-service-templates:
     deploy:
       resources:
         limits:
-          cpus: "0.5"
+          cpus: "0.4"
           memory: "100MB"
     networks:
       - rinhaback-net
@@ -43,17 +42,17 @@ services:
       - api1
 
   proxy:
-    image: asfernandes/rinhaback25:boost-lmdb
+    image: asfernandes/rinhaback25:boost-lmdb@sha256:f36d6ae3d69e5d2d8cdfc423ca69a42eb3cbdbd13cabaf3dbf928f7499261dbd
     command: /app/bin/rinhaback25-boost-lmdb-proxy
     environment:
-      IO_WORKERS: 12
+      IO_WORKERS: 4
       LISTEN_ADDRESS: 0.0.0.0:9999
       BACKEND_0_ADDRESS: api1:8080
       BACKEND_1_ADDRESS: api2:8080
     deploy:
       resources:
         limits:
-          cpus: "0.5"
+          cpus: "0.7"
           memory: "150MB"
     networks:
       - rinhaback-net

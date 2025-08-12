@@ -2,9 +2,10 @@ version: '3.9'
 
 services:
   app1: &app
-    image: maruero/rinha-de-backend-2025:socket-native-local-3
+    image: maruero/rinha-de-backend-2025:skylake-20250811-v1
     hostname: app1
     environment:
+      - FALLBACK_ENABLED=false
       - PROCESSOR_URL=http://payment-processor-default:8080
       - FALLBACK_PROCESSOR_URL=http://payment-processor-fallback:8080
       - OTHER_INSTANCE_URL=http://app2:8080
@@ -26,6 +27,7 @@ services:
     <<: *app
     hostname: app2
     environment:
+      - FALLBACK_ENABLED=false
       - PROCESSOR_URL=http://payment-processor-default:8080
       - FALLBACK_PROCESSOR_URL=http://payment-processor-fallback:8080
       - OTHER_INSTANCE_URL=http://app1:8080

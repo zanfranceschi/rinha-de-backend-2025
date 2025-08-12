@@ -2,15 +2,16 @@ version: '3.9'
 
 services:
   app1: &app
-    image: maruero/rinha-de-backend-2025:socket-native-local-3
+    image: maruero/rinha-de-backend-2025:skylake-20250811-v1
     hostname: app1
     environment:
+      - FALLBACK_ENABLED=false
       - PROCESSOR_URL=http://payment-processor-default:8080
       - FALLBACK_PROCESSOR_URL=http://payment-processor-fallback:8080
       - OTHER_INSTANCE_URL=http://app2:8080
       - SOCKET=/var/tmp/sockets/app1.sock
       - CONCURRENCY=2
-      - WORKER_COUNT=2
+      - WORKER_COUNT=3
     volumes:
       - sockets:/var/tmp/sockets
     networks:
@@ -19,25 +20,26 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.5"
+          cpus: "0.4"
           memory: "112MB"
 
   app2:
     <<: *app
     hostname: app2
     environment:
+      - FALLBACK_ENABLED=false
       - PROCESSOR_URL=http://payment-processor-default:8080
       - FALLBACK_PROCESSOR_URL=http://payment-processor-fallback:8080
       - OTHER_INSTANCE_URL=http://app1:8080
       - SOCKET=/var/tmp/sockets/app2.sock
       - CONCURRENCY=2
-      - WORKER_COUNT=2
+      - WORKER_COUNT=3
     volumes:
       - sockets:/var/tmp/sockets
     deploy:
       resources:
         limits:
-          cpus: "0.5"
+          cpus: "0.4"
           memory: "112MB"
 
   haproxy:
@@ -56,7 +58,7 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.5"
+          cpus: "0.7"
           memory: "124MB"
 volumes:
   sockets:

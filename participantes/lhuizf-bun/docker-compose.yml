@@ -1,10 +1,10 @@
 services:
   api1: &api
-    image: lhuizf/rinha-de-backend-2025-bun:latest
+    image: lhuizf/rinha-de-backend-2025-bun:1.6.0
     hostname: api1
     container_name: api1
     environment:
-      - REDIS_URL=redis://redis:6379
+      - REDIS_URL=/tmp/sockets/redis.sock
       - PROCESSOR_DEFAULT_URL=http://payment-processor-default:8080
       - PROCESSOR_FALLBACK_URL=http://payment-processor-fallback:8080
       - SOCKET_PATH=/tmp/sockets/api1.sock
@@ -27,7 +27,7 @@ services:
     hostname: api2
     container_name: api2
     environment:
-      - REDIS_URL=redis://redis:6379
+      - REDIS_URL=/tmp/sockets/redis.sock
       - PROCESSOR_DEFAULT_URL=http://payment-processor-default:8080
       - PROCESSOR_FALLBACK_URL=http://payment-processor-fallback:8080
       - SOCKET_PATH=/tmp/sockets/api2.sock
@@ -35,26 +35,25 @@ services:
   redis:
     image: redis:7.2-alpine
     container_name: redis
-    command:
-      [
-        "redis-server",
-        "--save",
-        "",
-        "--appendonly",
-        "no",
-        "--maxclients",
-        "20000",
-        "--tcp-backlog",
-        "511",
-        "--dynamic-hz",
-        "yes",
-      ]
+    command: >
+      sh -c "mkdir -p /tmp/sockets &&
+      chmod 777 /tmp/sockets &&
+      redis-server
+      --save ''
+      --appendonly no
+      --maxclients 20000
+      --tcp-backlog 511
+      --dynamic-hz yes
+      --unixsocket /tmp/sockets/redis.sock
+      --unixsocketperm 777"
     networks:
       - backend
     ports:
       - "6379:6379"
+    volumes:
+      - sockets:/tmp/sockets
     healthcheck:
-      test: ["CMD", "redis-cli", "ping"]
+      test: ["CMD", "redis-cli", "-s", "/tmp/sockets/redis.sock", "ping"]
       interval: 5s
       timeout: 5s
       retries: 5

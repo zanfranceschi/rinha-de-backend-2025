@@ -1,0 +1,1 @@
+Eu não tenho muita experiência com Rust, só queria experimentar um jeito novo (e overengineered) de resolver esse desafio.

@@ -1,10 +1,10 @@
 services:
 
   backend01: &backend
-    image: thiagorigonatti/rinha-2025-debian12:0.0.2
-    #    build:
-    #      context: .
-    #      dockerfile: scratch.Dockerfile
+    image: thiagorigonatti/rinha-2025-scratch:0.0.9
+#    build:
+#      context: .
+#      dockerfile: scratch.Dockerfile
     container_name: backend01
     environment:
       - HTTP_CLIENT_THREADS=1
@@ -17,11 +17,15 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.33"
-          memory: "60MB"
+          cpus: "0.20"
+          memory: "20MB"
     ipc: container:shared-memory
     depends_on:
       - shared-memory
+    ulimits:
+      nofile:
+        soft: 65536
+        hard: 65536
 
   backend02:
     <<: *backend
@@ -32,7 +36,6 @@ services:
       - SHM_PATH=/shm_array
       - SOCKET_PATH=/dev/shm/server2.sock
     ipc: container:shared-memory
-
   backend03:
     <<: *backend
     container_name: backend03
@@ -41,6 +44,34 @@ services:
       - SOCKET_SERVER_THREADS=1
       - SHM_PATH=/shm_array
       - SOCKET_PATH=/dev/shm/server3.sock
+    ipc: container:shared-memory
+  backend04:
+    <<: *backend
+    container_name: backend04
+    environment:
+      - HTTP_CLIENT_THREADS=1
+      - SOCKET_SERVER_THREADS=1
+      - SHM_PATH=/shm_array
+      - SOCKET_PATH=/dev/shm/server4.sock
+    ipc: container:shared-memory
+  backend05:
+    <<: *backend
+    container_name: backend05
+    environment:
+      - HTTP_CLIENT_THREADS=1
+      - SOCKET_SERVER_THREADS=1
+      - SHM_PATH=/shm_array
+      - SOCKET_PATH=/dev/shm/server5.sock
+    ipc: container:shared-memory
+
+  backend06:
+    <<: *backend
+    container_name: backend06
+    environment:
+      - HTTP_CLIENT_THREADS=1
+      - SOCKET_SERVER_THREADS=1
+      - SHM_PATH=/shm_array
+      - SOCKET_PATH=/dev/shm/server6.sock
     ipc: container:shared-memory
 
   shared-memory:
@@ -66,13 +97,17 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.50"
-          memory: "100MB"
+          cpus: "0.29"
+          memory: "180MB"
     depends_on:
       - backend01
       - backend02
       - backend03
     ipc: container:shared-memory
+    ulimits:
+      nofile:
+        soft: 65536
+        hard: 65536
 
 networks:
   net:

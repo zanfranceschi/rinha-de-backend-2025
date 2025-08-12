@@ -1,6 +1,6 @@
 services:
   api01: &api
-    image: distanteagle16/rinhabackend3-api:latest
+    image: distanteagle16/rinhabackend3-api:1.1.0
     restart: always
     hostname: api01
     networks:
@@ -12,12 +12,12 @@ services:
       postgres:
         condition: service_healthy
     environment:
-      HTTP_WORKERS: 400
+      HTTP_WORKERS: 340
       DATABASE_URL: postgresql://postgres:postgres@db:5432/db
     deploy:
       resources:
         limits:
-          cpus: "0.1"
+          cpus: "0.2"
           memory: "20MB"
     volumes:
       - sockets:/tmp/sockets
@@ -27,7 +27,7 @@ services:
     hostname: api02
 
   worker:
-    image: distanteagle16/rinhabackend3-worker:latest
+    image: distanteagle16/rinhabackend3-worker:1.1.0
     restart: always
     networks:
       - payment-processor
@@ -44,7 +44,7 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.5"
+          cpus: "0.3"
           memory: "60MB"
     volumes:
       - sockets:/tmp/sockets
@@ -64,7 +64,7 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '0.2'
+          cpus: '0.3'
           memory: '40MB'
 
   postgres:
@@ -91,7 +91,7 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '0.6'
+          cpus: '0.5'
           memory: '210MB'
 
 networks:

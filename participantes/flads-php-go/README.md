@@ -6,7 +6,7 @@
 
 * [PHP](https://www.php.net/releases/8.4/en.php) - Linguagem de programação.
 * [Go](https://go.dev/) - Linguagem de programação.
-* [Gin](https://gin-gonic.com/) - O framework web mais rápido e completo para Go.
+* [Fast HTTP](https://github.com/valyala/fasthttp) - Servidor HTTP de alto desempenho em Go.
 * [Redis](https://redis.io/) - Banco de dados em memória.
 * [HAProxy](https://www.haproxy.org/) - Proxy reverso e balanceador de carga de alto desempenho.
 

@@ -14,11 +14,11 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "1.10"
+          cpus: "1"
           memory: "50MB"
   zig1: &zig
     container_name: zig-pay-1
-    image: uchoamp/zigpay:1.06
+    image: uchoamp/zigpay:1.08
     environment:
       - SERVER_ENV=PROD
       - DEFAULT_HOST=payment-processor-default
@@ -35,7 +35,7 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.20"
+          cpus: "0.25"
           memory: "50MB"
   zig2: 
     <<: *zig

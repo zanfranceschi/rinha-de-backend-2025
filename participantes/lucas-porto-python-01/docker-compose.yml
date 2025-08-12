@@ -1,0 +1,136 @@
+x-worker-template: &worker-template
+  image: lucasportos/rinha-python-worker:latest
+  environment:
+    - REDIS_URL=redis://redis:6379
+    - PROCESSOR_DEFAULT_URL=http://payment-processor-default:8080
+    - PROCESSOR_FALLBACK_URL=http://payment-processor-fallback:8080
+    - PROCESSOR_DEFAULT_HEALTH_URL=http://payment-processor-default:8080/payments/service-health
+    - PROCESSOR_FALLBACK_HEALTH_URL=http://payment-processor-fallback:8080/payments/service-health
+  depends_on:
+    redis:
+      condition: service_healthy
+  deploy:
+    resources:
+      limits:
+        cpus: '0.3'
+        memory: 60M
+      reservations:
+        cpus: '0.1'
+        memory: 30M
+  restart: unless-stopped
+  networks:
+    - rinha-network
+    - payment-processor
+  healthcheck:
+    test: ["CMD", "python", "-c", "import asyncio; from app.database.redis_pool import redis_client; asyncio.run(redis_client.ping())"]
+    interval: 10s
+    timeout: 5s
+    retries: 3
+    start_period: 15s
+
+services:
+  haproxy:
+    image: haproxy:2.8-alpine
+    container_name: rinha-haproxy-py
+    ports:
+      - "9999:9999"
+    volumes:
+      - ./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
+    depends_on:
+      app:
+        condition: service_healthy
+      worker1:
+        condition: service_healthy
+      worker2:
+        condition: service_healthy
+    deploy:
+      resources:
+        limits:
+          cpus: '0.2'
+          memory: 50M
+        reservations:
+          cpus: '0.05'
+          memory: 20M
+    restart: unless-stopped
+    networks:
+      - rinha-network
+      - payment-processor
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9999/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 15s
+
+  app:
+    image: lucasportos/rinha-python-app:latest
+    container_name: rinha-python-app
+    expose:
+      - "9999"
+    environment:
+      - REDIS_URL=redis://redis:6379
+      - PROCESSOR_DEFAULT_URL=http://payment-processor-default:8080
+      - PROCESSOR_FALLBACK_URL=http://payment-processor-fallback:8080
+      - PROCESSOR_DEFAULT_HEALTH_URL=http://payment-processor-default:8080/payments/service-health
+      - PROCESSOR_FALLBACK_HEALTH_URL=http://payment-processor-fallback:8080/payments/service-health
+    depends_on:
+      redis:
+        condition: service_healthy
+    deploy:
+      resources:
+        limits:
+          cpus: '0.4'
+          memory: 120M
+        reservations:
+          cpus: '0.1'
+          memory: 30M
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9999/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 15s
+    networks:
+      - rinha-network
+      - payment-processor
+
+  worker1:
+    <<: *worker-template
+    container_name: rinha-python-worker1
+    command: python -m app.worker.setup
+
+  worker2:
+    <<: *worker-template
+    container_name: rinha-python-worker2
+    command: python -m app.worker.setup
+
+  redis:
+    image: redis:7-alpine
+    container_name: rinha-redis
+    ports:
+      - "6379:6379"
+    command: redis-server --maxmemory 60mb --maxmemory-policy allkeys-lru --save "" --appendonly no
+    deploy:
+      resources:
+        limits:
+          cpus: '0.3'
+          memory: 60M
+        reservations:
+          cpus: '0.05'
+          memory: 20M
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+    networks:
+      - rinha-network
+
+networks:
+  rinha-network:
+    driver: bridge
+  payment-processor:
+    external: true

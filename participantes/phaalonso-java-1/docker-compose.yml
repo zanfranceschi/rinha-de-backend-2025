@@ -1,6 +1,6 @@
 x-service-templates:
   payment-gateway: &payment-gateway
-    image: docker.io/phaalonso/rinha-backend-2025-java:0.0.4
+    image: docker.io/phaalonso/rinha-backend-2025-java:0.0.5
     hostname: api01
     depends_on:
       db:
@@ -47,7 +47,7 @@ services:
     #command: postgres -c config-file=/etc/postgres.conf
     volumes:
       - ./init.sql:/docker-entrypoint-initdb.d/script.sql:ro
-      - ./postgres.conf:/etc/postgres.conf
+#      - ./postgres.conf:/etc/postgres.conf
     ports:
       - "5432:5432"
     environment:
