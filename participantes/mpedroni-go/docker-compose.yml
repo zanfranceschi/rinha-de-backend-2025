@@ -15,7 +15,7 @@ services:
       resources:
         limits:
           cpus: "0.2"
-          memory: "38MB"
+          memory: "46MB"
 
   db:
     image: postgres:17-alpine
@@ -28,6 +28,8 @@ services:
       - "5432:5432"
     volumes:
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+      - type: tmpfs
+        target: /var/lib/postgresql/data
     networks:
       - api-network
     healthcheck:
@@ -40,10 +42,10 @@ services:
       resources:
         limits:
           cpus: "0.3"
-          memory: "120MB"
+          memory: "184MB"
 
   api1: &api
-    image: ghcr.io/mpedroni/rinha-de-backend-2025:v1.0.0
+    image: ghcr.io/mpedroni/rinha-de-backend-2025:v1.1.0
     hostname: api1
     environment:
       - SERVICE_NAME=api-1
@@ -63,7 +65,7 @@ services:
       resources:
         limits:
           cpus: "0.5"
-          memory: "96MB"
+          memory: "60MB"
 
   api2:
     <<: *api

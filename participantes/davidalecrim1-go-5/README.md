@@ -8,7 +8,7 @@
 
 ## Sobre a solução
 Essa versão foi adaptada para:
-- Usar Unix Sockets entre o Extreme (custom load balancer em Go) e as APIs de backend (4 instancias.)
+- Usar Unix Sockets entre o Extreme (custom load balancer em Go) e as APIs de backend (4 instancias).
 - A API salva os bytes numa fila do Redis.
 - Um Worker processa as mensagens no endpoint do Processor Default caso esteja disponivel.
 - Os retries voltam para a fila do Redis.

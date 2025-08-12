@@ -1,0 +1,107 @@
+
+services:
+
+  redis:
+    hostname: redis
+    container_name: redis
+
+    image: bitnami/redis:latest
+
+    environment:
+      - REDIS_PASSWORD=rinha-backend-2025
+
+    ports:
+      - "6379:6379"
+
+    networks:
+      - rinha-network
+
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: "50MB"
+  
+  worker01: &worker
+    hostname: worker01
+    container_name: worker01
+
+    image: edmarsousa/rinha-backend-2025
+
+    depends_on:
+      - redis
+    
+    networks:
+      - rinha-network
+      - payment-processor
+
+    command: php src/worker.php
+
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - REDIS_PASSWORD=rinha-backend-2025
+      - REDIS_POOL_SIZE=5
+      - API_PAYMENT_DEFAULT=payment-processor-default
+      - API_PAYMENT_FALLBACK=payment-processor-fallback
+
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: "100MB"
+
+  rinha-api-01: &api
+    hostname: rinha-api-01
+    container_name: rinha-api-01
+
+    image: edmarsousa/rinha-backend-2025
+
+    networks:
+      - rinha-network
+      - payment-processor
+
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - REDIS_PASSWORD=rinha-backend-2025
+
+    deploy:
+      resources:
+        limits:
+          cpus: "0.15"
+          memory: "90MB"
+
+  rinha-api-02:
+    <<: *api
+    hostname: rinha-api-02
+    container_name: rinha-api-02
+
+  nginx:
+    image: nginx:latest
+    container_name: nginx-rinha-2024
+
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+
+    networks:
+      - rinha-network
+
+    depends_on:
+      - rinha-api-01
+      - rinha-api-02
+
+    ports:
+      - "9999:9999"
+
+    deploy:
+      resources:
+        limits:
+          cpus: "0.2"
+          memory: "20MB"
+
+networks:
+  rinha-network:
+    driver: bridge
+  payment-processor:
+    external: true
