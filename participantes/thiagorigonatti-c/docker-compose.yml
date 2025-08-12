@@ -1,7 +1,7 @@
 services:
 
   backend01: &backend
-    image: thiagorigonatti/rinha-2025-scratch:0.0.11
+    image: thiagorigonatti/rinha-2025-scratch:0.0.12
 #    build:
 #      context: .
 #      dockerfile: scratch.Dockerfile
@@ -17,8 +17,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.10"
-          memory: "6MB"
+          cpus: "0.50"
+          memory: "50MB"
     ipc: container:shared-memory
     depends_on:
       - shared-memory
@@ -44,7 +44,7 @@ services:
       resources:
         limits:
           cpus: "0.01"
-          memory: "6MB"
+          memory: "8MB"
 
 
   haproxy:
@@ -58,8 +58,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.29"
-          memory: "32MB"
+          cpus: "0.49"
+          memory: "100MB"
     depends_on:
       - backend01
       - backend02
