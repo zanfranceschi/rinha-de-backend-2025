@@ -1,0 +1,79 @@
+x-service-templates:
+  backend-service: &backend-service
+    image: 4emcos/rinha-backend-2025-bun:1.0.7
+    depends_on:
+      - writer
+    volumes:
+      - socket_data:/tmp
+    networks:
+      - payment-processor
+      - backend
+    deploy:
+      resources:
+        limits:
+          cpus: "0.35"
+          memory: "45MB"
+
+services:
+  backend-01:
+    <<: *backend-service
+    container_name: backend-01
+    hostname: backend-01
+    environment:
+      APP_PORT: 5000
+      PAYMENT_PROCESSOR_FALLBACK: http://payment-processor-fallback:8080
+      PAYMENT_PROCESSOR_DEFAULT: http://payment-processor-default:8080
+      WRITER_SOCKET_PATH: /tmp/writer.sock
+      SERVICE_SOCKET_PATH: /tmp/backend_1.sock
+
+  backend-02:
+    <<: *backend-service
+    container_name: backend-02
+    hostname: backend-02
+    environment:
+      APP_PORT: 5000
+      PAYMENT_PROCESSOR_FALLBACK: http://payment-processor-fallback:8080
+      PAYMENT_PROCESSOR_DEFAULT: http://payment-processor-default:8080
+      WRITER_SOCKET_PATH: /tmp/writer.sock
+      SERVICE_SOCKET_PATH: /tmp/backend_2.sock
+
+  writer:
+    hostname: writer
+    image: 4emcos/writer:1.0.7
+    environment:
+      - WRITER_SOCKET_PATH=/tmp/writer.sock
+    volumes:
+      - socket_data:/tmp
+    deploy:
+      resources:
+        limits:
+          cpus: "0.30"
+          memory: "150MB"
+
+  load-balance:
+    image: openresty/openresty:bullseye
+    volumes:
+      - ./devops/nginx.conf:/usr/local/openresty/nginx/conf/nginx.conf
+      - ./devops/handle_requests.lua:/usr/local/openresty/nginx/lua/handle_requests.lua:ro
+      - socket_data:/tmp
+    depends_on:
+      - backend-01
+      - backend-02
+    networks:
+      - backend
+    ports:
+      - '9999:80'
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: "75MB"
+          
+volumes:
+  socket_data:
+
+networks:
+  backend:
+    driver: bridge
+  payment-processor:
+    external: true
