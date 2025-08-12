@@ -7,8 +7,8 @@ services:
 #      dockerfile: scratch.Dockerfile
     container_name: backend01
     environment:
-      - HTTP_CLIENT_THREADS=2
-      - SOCKET_SERVER_THREADS=2
+      - HTTP_CLIENT_THREADS=3
+      - SOCKET_SERVER_THREADS=3
       - SHM_PATH=/shm_array
       - SOCKET_PATH=/dev/shm/server1.sock
     networks:
@@ -28,8 +28,8 @@ services:
     <<: *backend
     container_name: backend02
     environment:
-      - HTTP_CLIENT_THREADS=2
-      - SOCKET_SERVER_THREADS=2
+      - HTTP_CLIENT_THREADS=3
+      - SOCKET_SERVER_THREADS=3
       - SHM_PATH=/shm_array
       - SOCKET_PATH=/dev/shm/server2.sock
 
