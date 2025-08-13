@@ -112,12 +112,13 @@ services:
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf:ro
     ports:
-      - "9999:80"
+      - "9999:9999"
     networks:
       - default
     depends_on:
       - api-1
       - api-2
+      - api-3
     deploy:
       resources:
         limits:
