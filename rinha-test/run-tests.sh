@@ -19,7 +19,7 @@ stopContainers() {
     pushd ../participantes/$1
         docker compose down -v --remove-orphans
         docker compose rm -s -v -f
-        #find * ! -group $(whoami) | xargs sudo rm -rf
+        sudo find * -group root | xargs sudo rm -rf
     popd > /dev/null
     pushd ../payment-processor > /dev/null
         docker compose down --volumes > /dev/null
@@ -36,7 +36,9 @@ while true; do
     (
         git pull
         participant=$(echo $directory | sed -e 's/..\/participantes\///g' -e 's/\///g')
-        echo "========================================"
+        echo ""
+	echo ""
+	echo "========================================"
         echo "  Participant $participant starting..."
         echo "========================================"
 
@@ -47,7 +49,7 @@ while true; do
             echo "executing test for $participant..."
             stopContainers $participant
             startContainers $participant
-            
+
             success=1
             max_attempts=15
             attempt=1
