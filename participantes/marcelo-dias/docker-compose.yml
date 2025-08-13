@@ -2,15 +2,16 @@ version: '3.9'
 
 services:
   app1: &app
-    image: maruero/rinha-de-backend-2025:rinha-de-backend-2025:20250812_v3
+    image: maruero/rinha-de-backend-2025:rinha-de-backend-2025:20250813_zn
     hostname: app1
     environment:
-      - FALLBACK_ENABLED=false
+      - FALLBACK_ENABLED=0
+      - INTER_INTERVAL=2500
       - PROCESSOR_URL=http://payment-processor-default:8080
       - FALLBACK_PROCESSOR_URL=http://payment-processor-fallback:8080
       - OTHER_INSTANCE_URL=http://app2:8080
       - SOCKET=/var/tmp/sockets/app1.sock
-      - CONCURRENCY=2
+      - CONCURRENCY=1
       - WORKER_COUNT=2
     volumes:
       - sockets:/var/tmp/sockets
@@ -21,18 +22,19 @@ services:
       resources:
         limits:
           cpus: "0.5"
-          memory: "112MB"
+          memory: "64MB"
 
   app2:
     <<: *app
     hostname: app2
     environment:
-      - FALLBACK_ENABLED=false
+      - FALLBACK_ENABLED=0
+      - INTER_INTERVAL=2500
       - PROCESSOR_URL=http://payment-processor-default:8080
       - FALLBACK_PROCESSOR_URL=http://payment-processor-fallback:8080
       - OTHER_INSTANCE_URL=http://app1:8080
       - SOCKET=/var/tmp/sockets/app2.sock
-      - CONCURRENCY=2
+      - CONCURRENCY=1
       - WORKER_COUNT=2
     volumes:
       - sockets:/var/tmp/sockets
@@ -40,7 +42,7 @@ services:
       resources:
         limits:
           cpus: "0.5"
-          memory: "112MB"
+          memory: "64MB"
 
   haproxy:
     image: haproxy:alpine
@@ -59,7 +61,7 @@ services:
       resources:
         limits:
           cpus: "0.5"
-          memory: "124MB"
+          memory: "222MB"
 volumes:
   sockets:
 
