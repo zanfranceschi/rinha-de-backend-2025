@@ -1,6 +1,6 @@
 x-worker-templates:
   worker-backend: &worker-backend
-    image: passosmatheus/python-backend-rinha-api-worker:teste-latency-9
+    image: passosmatheus/python-backend-rinha-api-worker:teste-latency-10
     environment:
       - REDIS_HOST=redis-db
       - REDIS_PORT=6379
@@ -9,8 +9,8 @@ x-worker-templates:
     deploy:
       resources:
         limits:
-          cpus: '0.6'
-          memory: '110MB'
+          cpus: '0.4'
+          memory: '72MB'
     sysctls:
       - net.core.somaxconn=65535
       - net.ipv4.tcp_tw_reuse=1
@@ -57,6 +57,15 @@ services:
   worker-2:
     <<: *worker-backend
     container_name: worker-2
+    networks:
+      - app
+      - payment-processor
+    depends_on:
+      - redis
+
+  worker-3:
+    <<: *worker-backend
+    container_name: worker-3
     networks:
       - app
       - payment-processor
