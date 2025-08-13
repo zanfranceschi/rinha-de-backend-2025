@@ -1,5 +1,5 @@
 x-api: &payment-api-template
-  image: mauriciocantu/payment-api:latest
+  image: mauriciocantu/payment-api:v1
   depends_on:
     redis:
       condition: service_healthy
@@ -12,7 +12,7 @@ x-api: &payment-api-template
     - payment-processor
 
 x-worker: &payment-worker-template
-  image: mauriciocantu/payment-worker:latest
+  image: mauriciocantu/payment-worker:v1
   depends_on:
     redis:
       condition: service_healthy
@@ -89,7 +89,7 @@ services:
           memory: "65MB"
 
   healthcheck-worker:
-    image: mauriciocantu/healthcheck-worker:latest
+    image: mauriciocantu/healthcheck-worker:v1
     hostname: healthcheck-worker
     container_name: healthcheck-worker
     depends_on:
