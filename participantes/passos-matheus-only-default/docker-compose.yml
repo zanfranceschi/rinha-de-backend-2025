@@ -9,8 +9,8 @@ x-worker-templates:
     deploy:
       resources:
         limits:
-          cpus: '0.3'
-          memory: '52MB'
+          cpus: '0.4'
+          memory: '70MB'
     sysctls:
       - net.core.somaxconn=65535
       - net.ipv4.tcp_tw_reuse=1
@@ -66,15 +66,6 @@ services:
   worker-3:
     <<: *worker-backend
     container_name: worker-3
-    networks:
-      - app
-      - payment-processor
-    depends_on:
-      - redis
-
-  worker-4:
-    <<: *worker-backend
-    container_name: worker-4
     networks:
       - app
       - payment-processor
