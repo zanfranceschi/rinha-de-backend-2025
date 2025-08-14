@@ -11,7 +11,7 @@ x-base: &node
     - backend
     - payment-processor
   volumes:
-    - socks:/var/sockets
+    - socks:/tmp/sockets
 
 services:
   node1:
@@ -20,7 +20,7 @@ services:
     environment:
       <<: *env
       WORKERS: 1
-      UNIX_SOCK: "/var/sockets/node1.sock"
+      UNIX_SOCK: "/tmp/sockets/node1.sock"
     deploy:
       resources:
         limits:
@@ -33,7 +33,7 @@ services:
     environment:
       <<: *env
       WORKERS: 1
-      UNIX_SOCK: "/var/sockets/node2.sock"
+      UNIX_SOCK: "/tmp/sockets/node2.sock"
     deploy:
       resources:
         limits:
@@ -66,7 +66,7 @@ services:
       - "9999:80"
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf:ro
-      - socks:/var/sockets
+      - socks:/tmp/sockets
     networks:
       - backend
 
