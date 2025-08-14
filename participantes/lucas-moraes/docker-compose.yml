@@ -7,18 +7,19 @@ networks:
 services:
   postgres:
     image: postgres:17-alpine
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U user -d rinha"]
-      interval: 5s
-      timeout: 3s
-      retries: 5
-    restart: unless-stopped
+
     ports:
       - '5432:5432'
     environment:
       POSTGRES_USER: user
       POSTGRES_PASSWORD: pass
       POSTGRES_DB: rinha
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+    restart: unless-stopped
     tmpfs:
       - /var/lib/postgresql/data
     networks:
@@ -52,8 +53,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus:   '0.33'
-          memory: '54M'
+          cpus:   '1.2'
+          memory: '170M'
 
   api-2:
     image: 881029/rinha-backend-2025:2.3.3
@@ -78,34 +79,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus:   '0.33'
-          memory: '54M'
-
-  api-3:
-    image: 881029/rinha-backend-2025:2.3.3
-    # build:
-    #    context: .
-    #    dockerfile: ./Dockerfile
-    environment:
-      HOST: 0.0.0.0
-      PORT: 9999
-      DB_HOST: postgres
-      DB_PORT: 5432
-      DB_USER: user
-      DB_PASS: pass
-      DB_NAME: rinha
-      PROCESSOR_DEFAULT:  "http://payment-processor-default:8080"
-      PROCESSOR_FALLBACK: "http://payment-processor-fallback:8080"
-    expose:
-      - "9999"
-    depends_on:
-      postgres:
-        condition: service_healthy
-    deploy:
-      resources:
-        limits:
-          cpus:   '0.33'
-          memory: '54M'
+          cpus:   '1.2'
+          memory: '160M'
  
   lb:
     image: nginx:alpine
@@ -118,9 +93,8 @@ services:
     depends_on:
       - api-1
       - api-2
-      - api-3
     deploy:
       resources:
         limits:
-          cpus:   '0.35'
-          memory: '50M'
+          cpus:   '0.10'
+          memory: '10M'
