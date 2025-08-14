@@ -1,6 +1,6 @@
 # Prévia do Resultados da Rinha de Backend 2025
-Atualizado em **Thu Aug 14 11:20:41 UTC 2025**
-355 submissões / 294 resultados / 61 submissões com erro
+Atualizado em **Thu Aug 14 11:31:13 UTC 2025**
+352 submissões / 291 resultados / 61 submissões com erro
 
 
 | participante | p99 | bônus por desempenho (%) | multa ($) | lucro | submissão |
@@ -140,7 +140,7 @@ Atualizado em **Thu Aug 14 11:20:41 UTC 2025**
 |	jaofreire-e-isaias-dotnet	|	44.9ms	|	0%	|	92759.1735	|	172267.0365	|	[jaofreire-e-isaias-dotnet](https://github.com/zanfranceschi/rinha-de-backend-2025/tree/main/participantes/jaofreire-e-isaias-dotnet)
 |	jccl	|	4.74ms	|	13%	|	0	|	334549.21815	|	[jccl](https://github.com/zanfranceschi/rinha-de-backend-2025/tree/main/participantes/jccl)
 |	jeffersonaguiar-nodejs	|	4.41ms	|	13%	|	0	|	349512.06795	|	[jeffersonaguiar-nodejs](https://github.com/zanfranceschi/rinha-de-backend-2025/tree/main/participantes/jeffersonaguiar-nodejs)
-|	jeifersonalmeida-stage-1	|	4.7ms	|	13%	|	74008.34874999335	|	164932.89149998518	|	[jeifersonalmeida-stage-1](https://github.com/zanfranceschi/rinha-de-backend-2025/tree/main/participantes/jeifersonalmeida-stage-1)
+|	jeifersonalmeida-stage-1	|	2.06ms	|	18%	|	101103.93999998542	|	239760.77199996542	|	[jeifersonalmeida-stage-1](https://github.com/zanfranceschi/rinha-de-backend-2025/tree/main/participantes/jeifersonalmeida-stage-1)
 |	jjeanjacques10	|	5.03ms	|	12%	|	78481.27175	|	172658.79785	|	[jjeanjacques10](https://github.com/zanfranceschi/rinha-de-backend-2025/tree/main/participantes/jjeanjacques10)
 |	joao-xavier	|	1.46ms	|	19%	|	0	|	376958.8942	|	[joao-xavier](https://github.com/zanfranceschi/rinha-de-backend-2025/tree/main/participantes/joao-xavier)
 |	joaocrulhas-nestjs-ts	|	92.67ms	|	0%	|	0	|	0	|	[joaocrulhas-nestjs-ts](https://github.com/zanfranceschi/rinha-de-backend-2025/tree/main/participantes/joaocrulhas-nestjs-ts)
@@ -179,7 +179,6 @@ Atualizado em **Thu Aug 14 11:20:41 UTC 2025**
 |	lecosas-java-spring-graalvm	|	2.72ms	|	17%	|	0	|	369412.7346	|	[lecosas-java-spring-graalvm](https://github.com/zanfranceschi/rinha-de-backend-2025/tree/main/participantes/lecosas-java-spring-graalvm)
 |	leonardotomas-cs	|	51.38ms	|	0%	|	109386.36975	|	203146.11525	|	[leonardotomas-cs](https://github.com/zanfranceschi/rinha-de-backend-2025/tree/main/participantes/leonardotomas-cs)
 |	leoralph	|	16.02ms	|	0%	|	0	|	316450.795	|	[leoralph](https://github.com/zanfranceschi/rinha-de-backend-2025/tree/main/participantes/leoralph)
-|	leorcvargas-debian-otp28	|	1.93ms	|	18%	|	0	|	373701.9408	|	[leorcvargas-debian-otp28](https://github.com/zanfranceschi/rinha-de-backend-2025/tree/main/participantes/leorcvargas-debian-otp28)
 |	leorcvargas	|	1.69ms	|	19%	|	0	|	376868.9064	|	[leorcvargas](https://github.com/zanfranceschi/rinha-de-backend-2025/tree/main/participantes/leorcvargas)
 |	lhuizf-bun	|	75.11ms	|	0%	|	0	|	308574.375	|	[lhuizf-bun](https://github.com/zanfranceschi/rinha-de-backend-2025/tree/main/participantes/lhuizf-bun)
 |	libardi-dotnet-2	|	2.28ms	|	17%	|	110784.94175	|	259553.2921	|	[libardi-dotnet-2](https://github.com/zanfranceschi/rinha-de-backend-2025/tree/main/participantes/libardi-dotnet-2)
@@ -214,8 +213,6 @@ Atualizado em **Thu Aug 14 11:20:41 UTC 2025**
 |	micheloliveira-com-dotnet-csharp-redis	|	3.06ms	|	16%	|	0	|	367236.4308	|	[micheloliveira-com-dotnet-csharp-redis](https://github.com/zanfranceschi/rinha-de-backend-2025/tree/main/participantes/micheloliveira-com-dotnet-csharp-redis)
 |	mourishitz-go	|	2.66ms	|	17%	|	0	|	214141.90004998486	|	[mourishitz-go](https://github.com/zanfranceschi/rinha-de-backend-2025/tree/main/participantes/mourishitz-go)
 |	mpedroni-go	|	19.86ms	|	0%	|	0	|	316280.65	|	[mpedroni-go](https://github.com/zanfranceschi/rinha-de-backend-2025/tree/main/participantes/mpedroni-go)
-|	murilo-guedes-toloni-undertow	|	1.48ms	|	19%	|	110248.2885	|	264595.8924	|	[murilo-guedes-toloni-undertow](https://github.com/zanfranceschi/rinha-de-backend-2025/tree/main/participantes/murilo-guedes-toloni-undertow)
-|	murilo-guedes-toloni	|	1.99ms	|	18%	|	110804.0955	|	262763.9979	|	[murilo-guedes-toloni](https://github.com/zanfranceschi/rinha-de-backend-2025/tree/main/participantes/murilo-guedes-toloni)
 |	mxlange-cpp	|	4ms	|	14%	|	0	|	360775.458	|	[mxlange-cpp](https://github.com/zanfranceschi/rinha-de-backend-2025/tree/main/participantes/mxlange-cpp)
 |	mxlange-fasthttp	|	3.64ms	|	15%	|	0	|	110446.44275000517	|	[mxlange-fasthttp](https://github.com/zanfranceschi/rinha-de-backend-2025/tree/main/participantes/mxlange-fasthttp)
 |	mxlange-only-go	|	2.81ms	|	16%	|	110606.986	|	255976.1676	|	[mxlange-only-go](https://github.com/zanfranceschi/rinha-de-backend-2025/tree/main/participantes/mxlange-only-go)
@@ -272,7 +269,7 @@ Atualizado em **Thu Aug 14 11:20:41 UTC 2025**
 |	tarcisiozf-asm-2	|	1.09ms	|	20%	|	0	|	0	|	[tarcisiozf-asm-2](https://github.com/zanfranceschi/rinha-de-backend-2025/tree/main/participantes/tarcisiozf-asm-2)
 |	tarcisiozf-asm-3	|	0.97ms	|	20%	|	0	|	0	|	[tarcisiozf-asm-3](https://github.com/zanfranceschi/rinha-de-backend-2025/tree/main/participantes/tarcisiozf-asm-3)
 |	tarcisiozf-asm	|	1.61ms	|	19%	|	0	|	0	|	[tarcisiozf-asm](https://github.com/zanfranceschi/rinha-de-backend-2025/tree/main/participantes/tarcisiozf-asm)
-|	thiagorigonatti-c	|	1.45ms	|	19%	|	0	|	376913.9003	|	[thiagorigonatti-c](https://github.com/zanfranceschi/rinha-de-backend-2025/tree/main/participantes/thiagorigonatti-c)
+|	thiagorigonatti-c	|	1.5ms	|	19%	|	0	|	376913.9003	|	[thiagorigonatti-c](https://github.com/zanfranceschi/rinha-de-backend-2025/tree/main/participantes/thiagorigonatti-c)
 |	thiagorigonatti2-c	|	1.25ms	|	20%	|	0	|	380058.558	|	[thiagorigonatti2-c](https://github.com/zanfranceschi/rinha-de-backend-2025/tree/main/participantes/thiagorigonatti2-c)
 |	thomaz-golang-2	|	4.05ms	|	14%	|	0	|	353341.2558	|	[thomaz-golang-2](https://github.com/zanfranceschi/rinha-de-backend-2025/tree/main/participantes/thomaz-golang-2)
 |	thomaz-maldonado-go-1	|	4.57ms	|	13%	|	0	|	247373.86525	|	[thomaz-maldonado-go-1](https://github.com/zanfranceschi/rinha-de-backend-2025/tree/main/participantes/thomaz-maldonado-go-1)
