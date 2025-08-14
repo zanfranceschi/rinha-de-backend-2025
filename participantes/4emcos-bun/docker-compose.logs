@@ -1,0 +1,118 @@
+
+ writer Pulling 
+ backend-01 Pulling 
+ backend-02 Pulling 
+ a3be5d4ce401 Already exists 
+ 09b3af3c9d76 Already exists 
+ 01dc2b9b9974 Already exists 
+ 61d8100e0bd1 Already exists 
+ a3be5d4ce401 Already exists 
+ ffa520d9363b Pulling fs layer 
+ 4f4fb700ef54 Pulling fs layer 
+ 09b3af3c9d76 Already exists 
+ 01dc2b9b9974 Already exists 
+ 61d8100e0bd1 Already exists 
+ ffa520d9363b Pulling fs layer 
+ 4f4fb700ef54 Pulling fs layer 
+ 4f4fb700ef54 Download complete 
+ 4f4fb700ef54 Download complete 
+ 78cac1605cba Pulling fs layer 
+ b2025a698577 Pulling fs layer 
+ 78cac1605cba Downloading [==================================================>]     129B/129B
+ 78cac1605cba Verifying Checksum 
+ 78cac1605cba Download complete 
+ 78cac1605cba Extracting [==================================================>]     129B/129B
+ 78cac1605cba Extracting [==================================================>]     129B/129B
+ 78cac1605cba Pull complete 
+ ffa520d9363b Downloading [>                                                  ]  411.2kB/39.96MB
+ ffa520d9363b Downloading [>                                                  ]  411.2kB/39.96MB
+ b2025a698577 Downloading [>                                                  ]  33.31kB/2.456MB
+ b2025a698577 Downloading [==================================================>]  2.456MB/2.456MB
+ b2025a698577 Download complete 
+ b2025a698577 Extracting [>                                                  ]  32.77kB/2.456MB
+ ffa520d9363b Downloading [===================>                               ]  15.76MB/39.96MB
+ ffa520d9363b Downloading [===================>                               ]  15.76MB/39.96MB
+ b2025a698577 Extracting [==================================================>]  2.456MB/2.456MB
+ b2025a698577 Extracting [==================================================>]  2.456MB/2.456MB
+ b2025a698577 Pull complete 
+ writer Pulled 
+ ffa520d9363b Downloading [======================>                            ]   17.8MB/39.96MB
+ ffa520d9363b Downloading [======================>                            ]   17.8MB/39.96MB
+ ffa520d9363b Downloading [==========================================>        ]  33.72MB/39.96MB
+ ffa520d9363b Downloading [==========================================>        ]  33.72MB/39.96MB
+ ffa520d9363b Downloading [===============================================>   ]  38.23MB/39.96MB
+ ffa520d9363b Downloading [===============================================>   ]  38.23MB/39.96MB
+ ffa520d9363b Verifying Checksum 
+ ffa520d9363b Download complete 
+ ffa520d9363b Verifying Checksum 
+ ffa520d9363b Download complete 
+ ffa520d9363b Extracting [>                                                  ]    426kB/39.96MB
+ ffa520d9363b Extracting [>                                                  ]    426kB/39.96MB
+ ffa520d9363b Extracting [============>                                      ]  9.798MB/39.96MB
+ ffa520d9363b Extracting [============>                                      ]  9.798MB/39.96MB
+ ffa520d9363b Extracting [=====================>                             ]  17.47MB/39.96MB
+ ffa520d9363b Extracting [=====================>                             ]  17.47MB/39.96MB
+ ffa520d9363b Extracting [===============================>                   ]  25.56MB/39.96MB
+ ffa520d9363b Extracting [===============================>                   ]  25.56MB/39.96MB
+ ffa520d9363b Extracting [==========================================>        ]  33.65MB/39.96MB
+ ffa520d9363b Extracting [==========================================>        ]  33.65MB/39.96MB
+ ffa520d9363b Extracting [==================================================>]  39.96MB/39.96MB
+ ffa520d9363b Extracting [==================================================>]  39.96MB/39.96MB
+ ffa520d9363b Pull complete 
+ ffa520d9363b Pull complete 
+ 4f4fb700ef54 Extracting [==================================================>]      32B/32B
+ 4f4fb700ef54 Extracting [==================================================>]      32B/32B
+ 4f4fb700ef54 Extracting [==================================================>]      32B/32B
+ 4f4fb700ef54 Extracting [==================================================>]      32B/32B
+ 4f4fb700ef54 Pull complete 
+ 4f4fb700ef54 Pull complete 
+ backend-01 Pulled 
+ backend-02 Pulled 
+ Network 4emcos-bun_backend  Creating
+ Network 4emcos-bun_backend  Created
+ Network 4emcos-bun_default  Creating
+ Network 4emcos-bun_default  Created
+ Volume "4emcos-bun_socket_data"  Creating
+ Volume "4emcos-bun_socket_data"  Created
+ Container 4emcos-bun-writer-1  Creating
+ Container 4emcos-bun-writer-1  Created
+ Container backend-02  Creating
+ Container backend-01  Creating
+ Container backend-02  Created
+ Container backend-01  Created
+ Container 4emcos-bun-load-balance-1  Creating
+ Container 4emcos-bun-load-balance-1  Created
+Attaching to load-balance-1, writer-1, backend-01, backend-02
+writer-1  | 2025/08/14 17:50:34 Server running on unix socket: /tmp/writer.sock
+load-balance-1  | 2025/08/14 17:50:34 [alert] 7#7: setpriority(-5) failed (13: Permission denied)
+load-balance-1  | 2025/08/14 17:50:34 [alert] 8#8: setpriority(-5) failed (13: Permission denied)
+load-balance-1  | 2025/08/14 17:50:34 [alert] 9#9: setpriority(-5) failed (13: Permission denied)
+load-balance-1  | 2025/08/14 17:50:34 [alert] 10#10: setpriority(-5) failed (13: Permission denied)
+writer-1        | 2025/08/14 17:50:36 from: null, to: null
+backend-01      | Failed to get all payments via UDS client: 2 | import{request as E}from"undici";var{serve:z}=globalThis.Bun;class Y{socketPath;constructor(j){this.socketPath=j}async storePayment(j){return await fetch("http://localhost/store",{method:"POST",body:JSON.stringify({payment:j}),unix:this.socketPath,headers:{Connection:"keep-alive"}})}async getAllPayments(){try{return await(await fetch("http://localhost/getAll",{method:"GET",unix:this.socketPath,headers:{Connection:"keep-alive"}})).json()}catch(j){return console.error("Failed to get all payments via UDS client:",j),[]}}async getPaymentsByRange(j,P){try{return await(await fetch(`http://localhost/getByRange?from=${j}&to=${P}`,{method:"GET",unix:this.socketPath,headers:{Connection:"keep-alive"}})).json()}catch(k){return console.error("Failed to get all payments via UDS client:",k),""}}}var J={BATCH_SIZE:100,MIN_WAIT_TIME:1,MAX_WAIT_TIME:10,MAX_RETRY_DELAY:1,CONCURRENT_REQUESTS:25,QUEUE_DRAIN_THRESHOLD:100,MAX_QUEUE_SIZE:15000,BASE_RETRY_DELAY:50,RETRY_BACKOFF_MULTIPLIER:1.2},H=0,f=new Y(Bun.env.WRITER_SOCKET_PATH)
+backend-01      | 
+backend-01      | SyntaxError: Failed to parse JSON
+backend-01      |       at getPaymentsByRange (/$bunfs/root/app-binary:2:707)
+backend-01      | 
+writer-1        | 2025/08/14 17:50:41 from: 2025-08-14T17:50:26.882Z, to: 2025-08-14T17:50:40.382Z
+writer-1        | 2025/08/14 17:50:41 response: {Default:{TotalRequests:0 TotalAmount:0} Fallback:{TotalRequests:0 TotalAmount:0}}
+writer-1        | 2025/08/14 17:50:51 from: 2025-08-14T17:50:36.889Z, to: 2025-08-14T17:50:50.389Z
+writer-1        | 2025/08/14 17:50:51 response: {Default:{TotalRequests:375 TotalAmount:7462.499999999952} Fallback:{TotalRequests:0 TotalAmount:0}}
+writer-1        | 2025/08/14 17:51:01 from: 2025-08-14T17:50:46.892Z, to: 2025-08-14T17:51:00.392Z
+writer-1        | 2025/08/14 17:51:01 response: {Default:{TotalRequests:1511 TotalAmount:30068.90000000079} Fallback:{TotalRequests:0 TotalAmount:0}}
+writer-1        | 2025/08/14 17:51:11 from: 2025-08-14T17:50:56.897Z, to: 2025-08-14T17:51:10.397Z
+writer-1        | 2025/08/14 17:51:11 response: {Default:{TotalRequests:802 TotalAmount:15959.799999999797} Fallback:{TotalRequests:0 TotalAmount:0}}
+writer-1        | 2025/08/14 17:51:21 from: 2025-08-14T17:51:06.901Z, to: 2025-08-14T17:51:20.401Z
+writer-1        | 2025/08/14 17:51:21 response: {Default:{TotalRequests:0 TotalAmount:0} Fallback:{TotalRequests:0 TotalAmount:0}}
+writer-1        | 2025/08/14 17:51:31 from: 2025-08-14T17:51:16.905Z, to: 2025-08-14T17:51:30.405Z
+writer-1        | 2025/08/14 17:51:31 response: {Default:{TotalRequests:9088 TotalAmount:180851.19999996966} Fallback:{TotalRequests:0 TotalAmount:0}}
+writer-1        | 2025/08/14 17:51:42 from: 2025-08-14T17:50:32.882Z, to: 2025-08-14T17:51:42.882Z
+writer-1        | 2025/08/14 17:51:42 response: {Default:{TotalRequests:16754 TotalAmount:333404.60000002926} Fallback:{TotalRequests:0 TotalAmount:0}}
+[Kload-balance-1 exited with code 0
+backend-02      | Shutting down gracefully...
+backend-02      | Shutdown complete
+backend-01      | Shutting down gracefully...
+backend-01      | Shutdown complete
+[Kbackend-01 exited with code 0
+[Kbackend-02 exited with code 0
+log truncated at line 1000
