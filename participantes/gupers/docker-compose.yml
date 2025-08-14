@@ -31,9 +31,6 @@ services:
       - "9999:10000"
     volumes:
       - ./envoy/envoy.yaml:/etc/envoy/envoy.yaml:ro
-    depends_on:
-      - payment-gateway-1
-      - payment-gateway-2
     networks:
       - backend
     deploy:
@@ -58,8 +55,6 @@ services:
       - PAYMENT_NUM_WORKERS=64
     depends_on:
       - payment-gateway-db
-      - payment-processor-1
-      - payment-processor-2
     networks:
       - backend
       - payment-processor
@@ -85,8 +80,6 @@ services:
       - PAYMENT_NUM_WORKERS=64
     depends_on:
       - payment-gateway-db
-      - payment-processor-1
-      - payment-processor-2
     networks:
       - backend
       - payment-processor
