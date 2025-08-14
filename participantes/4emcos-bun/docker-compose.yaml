@@ -1,6 +1,6 @@
 x-service-templates:
   backend-service: &backend-service
-    image: 4emcos/rinha-backend-2025-bun:1.0.9
+    image: 4emcos/rinha-backend-2025-bun:1.0.11
     depends_on:
       - writer
     volumes:
@@ -12,7 +12,7 @@ x-service-templates:
       resources:
         limits:
           cpus: "0.35"
-          memory: "60MB"
+          memory: "55MB"
 
 services:
   backend-01:
@@ -39,9 +39,11 @@ services:
 
   writer:
     hostname: writer
-    image: 4emcos/writer:1.0.8
+    image: 4emcos/writer:2.0.0
     environment:
       - WRITER_SOCKET_PATH=/tmp/writer.sock
+      - GOGC=100
+      - GOMEMLIMIT=60MiB
     volumes:
       - socket_data:/tmp
     deploy:
