@@ -3,6 +3,7 @@ version: "3.8"
 services:
   app1:
     build: .
+    image: guianacleto/rinha-backend-2025:1.0
     networks:
       - backend
       - payment-processor
@@ -12,11 +13,11 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.65"
-          memory: "125MB"
+          cpus: "0.70"
+          memory: "162MB"
 
   app2:
-    build: .
+    image: guianacleto/rinha-backend-2025:1.0  # usa a mesma imagem já buildada pelo app1
     networks:
       - backend
       - payment-processor
@@ -26,8 +27,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.65"
-          memory: "125MB"
+          cpus: "0.70"
+          memory: "162MB"
 
   nginx:
     image: nginx:alpine
@@ -41,7 +42,7 @@ services:
       resources:
         limits:
           cpus: "0.1"
-          memory: "50MB"
+          memory: "25MB"
 
 networks:
   backend:
