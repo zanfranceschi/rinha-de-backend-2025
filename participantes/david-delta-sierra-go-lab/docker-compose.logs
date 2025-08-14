@@ -1,0 +1,167 @@
+
+ app-2 Pulling 
+ app-1 Pulling 
+ 9824c27679d3 Already exists 
+ 9824c27679d3 Already exists 
+ cba8abde83f6 Already exists 
+ cba8abde83f6 Already exists 
+ a3e4aa2eec44 Already exists 
+ a3e4aa2eec44 Already exists 
+ 6d7cd9640707 Already exists 
+ 6d7cd9640707 Already exists 
+ 4f4fb700ef54 Already exists 
+ 4f4fb700ef54 Already exists 
+ 834b6108eab8 Already exists 
+ 834b6108eab8 Already exists 
+ dbd1f398ad5b Pulling fs layer 
+ dbd1f398ad5b Pulling fs layer 
+ dbd1f398ad5b Downloading [>                                                  ]  50.72kB/3.914MB
+ dbd1f398ad5b Downloading [>                                                  ]  50.72kB/3.914MB
+ dbd1f398ad5b Verifying Checksum 
+ dbd1f398ad5b Download complete 
+ dbd1f398ad5b Verifying Checksum 
+ dbd1f398ad5b Download complete 
+ dbd1f398ad5b Extracting [>                                                  ]  65.54kB/3.914MB
+ dbd1f398ad5b Extracting [>                                                  ]  65.54kB/3.914MB
+ dbd1f398ad5b Extracting [==================================================>]  3.914MB/3.914MB
+ dbd1f398ad5b Extracting [==================================================>]  3.914MB/3.914MB
+ dbd1f398ad5b Extracting [==================================================>]  3.914MB/3.914MB
+ dbd1f398ad5b Extracting [==================================================>]  3.914MB/3.914MB
+ dbd1f398ad5b Pull complete 
+ dbd1f398ad5b Pull complete 
+ app-2 Pulled 
+ app-1 Pulled 
+ Network david-delta-sierra-go-lab_backend  Creating
+ Network david-delta-sierra-go-lab_backend  Created
+ Volume "david-delta-sierra-go-lab_tmp-sockets"  Creating
+ Volume "david-delta-sierra-go-lab_tmp-sockets"  Created
+ Container david-delta-sierra-go-lab-postgres-1  Creating
+ Container david-delta-sierra-go-lab-postgres-1  Created
+ Container david-delta-sierra-go-lab-app-1-1  Creating
+ Container david-delta-sierra-go-lab-app-2-1  Creating
+ Container david-delta-sierra-go-lab-app-2-1  Created
+ Container david-delta-sierra-go-lab-app-1-1  Created
+ Container david-delta-sierra-go-lab-lb-1  Creating
+ Container david-delta-sierra-go-lab-lb-1  Created
+Attaching to app-1-1, app-2-1, lb-1, postgres-1
+postgres-1  | chmod: /var/run/postgresql: Operation not permitted
+postgres-1  | The files belonging to this database system will be owned by user "postgres".
+postgres-1  | This user must also own the server process.
+postgres-1  | 
+postgres-1  | The database cluster will be initialized with locale "en_US.utf8".
+postgres-1  | The default database encoding has accordingly been set to "UTF8".
+postgres-1  | The default text search configuration will be set to "english".
+postgres-1  | 
+postgres-1  | Data page checksums are disabled.
+postgres-1  | 
+postgres-1  | fixing permissions on existing directory /var/lib/postgresql/data ... ok
+postgres-1  | creating subdirectories ... ok
+postgres-1  | selecting dynamic shared memory implementation ... posix
+postgres-1  | selecting default "max_connections" ... 100
+postgres-1  | selecting default "shared_buffers" ... 128MB
+app-1-1     | init api
+app-2-1     | init api
+postgres-1  | selecting default time zone ... UTC
+postgres-1  | creating configuration files ... ok
+lb-1        | Await app1 and app2...
+lb-1        | All ready! init NGINX...
+postgres-1  | running bootstrap script ... ok
+postgres-1  | sh: locale: not found
+postgres-1  | 2025-08-14 17:08:59.195 UTC [22] WARNING:  no usable system locales were found
+postgres-1  | performing post-bootstrap initialization ... ok
+postgres-1  | initdb: warning: enabling "trust" authentication for local connections
+postgres-1  | initdb: hint: You can change this by editing pg_hba.conf or using the option -A, or --auth-local and --auth-host, the next time you run initdb.
+postgres-1  | syncing data to disk ... ok
+postgres-1  | 
+postgres-1  | 
+postgres-1  | Success. You can now start the database server using:
+postgres-1  | 
+postgres-1  |     pg_ctl -D /var/lib/postgresql/data -l logfile start
+postgres-1  | 
+postgres-1  | waiting for server to start....2025-08-14 17:09:00.502 UTC [28] LOG:  starting PostgreSQL 17.5 on x86_64-pc-linux-musl, compiled by gcc (Alpine 14.2.0) 14.2.0, 64-bit
+postgres-1  | 2025-08-14 17:09:00.502 UTC [28] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+postgres-1  | 2025-08-14 17:09:00.513 UTC [31] LOG:  database system was shut down at 2025-08-14 17:09:00 UTC
+postgres-1  | 2025-08-14 17:09:00.521 UTC [28] LOG:  database system is ready to accept connections
+postgres-1  |  done
+postgres-1  | server started
+postgres-1  | CREATE DATABASE
+postgres-1  | 
+postgres-1  | 
+postgres-1  | /usr/local/bin/docker-entrypoint.sh: running /docker-entrypoint-initdb.d/init.sql
+postgres-1  | ALTER DATABASE
+postgres-1  | ALTER SYSTEM
+postgres-1  | ALTER SYSTEM
+postgres-1  | ALTER SYSTEM
+postgres-1  | ALTER SYSTEM
+postgres-1  | ALTER SYSTEM
+postgres-1  | ALTER SYSTEM
+postgres-1  | CREATE TABLE
+postgres-1  | 
+postgres-1  | 
+postgres-1  | waiting for server to shut down....2025-08-14 17:09:00.821 UTC [28] LOG:  received fast shutdown request
+postgres-1  | 2025-08-14 17:09:00.824 UTC [28] LOG:  aborting any active transactions
+postgres-1  | 2025-08-14 17:09:00.832 UTC [28] LOG:  background worker "logical replication launcher" (PID 34) exited with exit code 1
+postgres-1  | 2025-08-14 17:09:00.833 UTC [29] LOG:  shutting down
+postgres-1  | 2025-08-14 17:09:00.836 UTC [29] LOG:  checkpoint starting: shutdown immediate
+postgres-1  | 2025-08-14 17:09:00.919 UTC [29] LOG:  checkpoint complete: wrote 930 buffers (5.7%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.056 s, sync=0.019 s, total=0.087 s; sync files=311, longest=0.003 s, average=0.001 s; distance=4274 kB, estimate=4274 kB; lsn=0/1919C78, redo lsn=0/1919C78
+postgres-1  | 2025-08-14 17:09:00.928 UTC [28] LOG:  database system is shut down
+postgres-1  |  done
+postgres-1  | server stopped
+postgres-1  | 
+postgres-1  | PostgreSQL init process complete; ready for start up.
+postgres-1  | 
+postgres-1  | 2025-08-14 17:09:01.044 UTC [1] LOG:  starting PostgreSQL 17.5 on x86_64-pc-linux-musl, compiled by gcc (Alpine 14.2.0) 14.2.0, 64-bit
+postgres-1  | 2025-08-14 17:09:01.044 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+postgres-1  | 2025-08-14 17:09:01.044 UTC [1] LOG:  listening on IPv6 address "::", port 5432
+postgres-1  | 2025-08-14 17:09:01.044 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+postgres-1  | 2025-08-14 17:09:01.047 UTC [46] LOG:  database system was shut down at 2025-08-14 17:09:00 UTC
+postgres-1  | 2025-08-14 17:09:01.051 UTC [47] FATAL:  the database system is starting up
+postgres-1  | 2025-08-14 17:09:01.052 UTC [48] FATAL:  the database system is starting up
+postgres-1  | 2025-08-14 17:09:01.053 UTC [1] LOG:  database system is ready to accept connections
+postgres-1  | 2025-08-14 17:09:01.384 UTC [58] LOG:  could not send data to client: Broken pipe
+postgres-1  | 2025-08-14 17:09:01.384 UTC [58] FATAL:  connection to client lost
+postgres-1  | 2025-08-14 17:09:01.476 UTC [64] LOG:  could not send data to client: Broken pipe
+postgres-1  | 2025-08-14 17:09:01.477 UTC [52] LOG:  could not send data to client: Broken pipe
+postgres-1  | 2025-08-14 17:09:01.477 UTC [52] FATAL:  connection to client lost
+postgres-1  | 2025-08-14 17:09:01.478 UTC [64] FATAL:  connection to client lost
+postgres-1  | 2025-08-14 17:09:01.480 UTC [63] LOG:  could not send data to client: Broken pipe
+postgres-1  | 2025-08-14 17:09:01.481 UTC [63] FATAL:  connection to client lost
+postgres-1  | 2025-08-14 17:09:01.484 UTC [69] LOG:  could not send data to client: Broken pipe
+postgres-1  | 2025-08-14 17:09:01.484 UTC [69] FATAL:  connection to client lost
+postgres-1  | 2025-08-14 17:09:01.487 UTC [61] LOG:  could not send data to client: Broken pipe
+postgres-1  | 2025-08-14 17:09:01.487 UTC [61] FATAL:  connection to client lost
+postgres-1  | 2025-08-14 17:09:01.578 UTC [62] LOG:  could not send data to client: Broken pipe
+postgres-1  | 2025-08-14 17:09:01.582 UTC [67] LOG:  could not send data to client: Broken pipe
+postgres-1  | 2025-08-14 17:09:01.582 UTC [67] FATAL:  connection to client lost
+postgres-1  | 2025-08-14 17:09:01.583 UTC [62] FATAL:  connection to client lost
+postgres-1  | 2025-08-14 17:09:01.678 UTC [68] LOG:  could not send data to client: Broken pipe
+postgres-1  | 2025-08-14 17:09:01.678 UTC [68] FATAL:  connection to client lost
+postgres-1  | 2025-08-14 17:09:01.678 UTC [54] LOG:  could not send data to client: Broken pipe
+postgres-1  | 2025-08-14 17:09:01.678 UTC [54] FATAL:  connection to client lost
+postgres-1  | 2025-08-14 17:09:01.684 UTC [65] LOG:  could not send data to client: Broken pipe
+postgres-1  | 2025-08-14 17:09:01.684 UTC [65] FATAL:  connection to client lost
+postgres-1  | 2025-08-14 17:09:01.781 UTC [53] LOG:  could not send data to client: Broken pipe
+postgres-1  | 2025-08-14 17:09:01.781 UTC [53] FATAL:  connection to client lost
+postgres-1  | 2025-08-14 17:09:01.783 UTC [57] LOG:  could not send data to client: Broken pipe
+postgres-1  | 2025-08-14 17:09:01.783 UTC [57] FATAL:  connection to client lost
+postgres-1  | 2025-08-14 17:09:01.785 UTC [56] LOG:  could not send data to client: Broken pipe
+postgres-1  | 2025-08-14 17:09:01.785 UTC [56] FATAL:  connection to client lost
+postgres-1  | 2025-08-14 17:09:01.787 UTC [59] LOG:  could not send data to client: Broken pipe
+postgres-1  | 2025-08-14 17:09:01.787 UTC [59] FATAL:  connection to client lost
+postgres-1  | 2025-08-14 17:09:01.788 UTC [55] LOG:  could not send data to client: Broken pipe
+postgres-1  | 2025-08-14 17:09:01.788 UTC [55] FATAL:  connection to client lost
+postgres-1  | 2025-08-14 17:09:01.877 UTC [66] LOG:  could not send data to client: Broken pipe
+postgres-1  | 2025-08-14 17:09:01.877 UTC [66] FATAL:  connection to client lost
+postgres-1  | 2025-08-14 17:09:01.879 UTC [60] LOG:  could not send data to client: Broken pipe
+postgres-1  | 2025-08-14 17:09:01.879 UTC [60] FATAL:  connection to client lost
+[Klb-1 exited with code 137
+[Kapp-2-1 exited with code 2
+[Kapp-1-1 exited with code 2
+postgres-1  | 2025-08-14 17:10:23.379 UTC [1] LOG:  received fast shutdown request
+postgres-1  | 2025-08-14 17:10:23.379 UTC [1] LOG:  aborting any active transactions
+postgres-1  | 2025-08-14 17:10:23.383 UTC [1] LOG:  background worker "logical replication launcher" (PID 51) exited with exit code 1
+postgres-1  | 2025-08-14 17:10:23.480 UTC [44] LOG:  shutting down
+postgres-1  | 2025-08-14 17:10:23.481 UTC [44] LOG:  checkpoint starting: shutdown immediate
+postgres-1  | 2025-08-14 17:10:23.484 UTC [44] LOG:  checkpoint complete: wrote 258 buffers (1.6%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.003 s, sync=0.001 s, total=0.004 s; sync files=0, longest=0.000 s, average=0.000 s; distance=692 kB, estimate=692 kB; lsn=0/19C6FC0, redo lsn=0/19C6FC0
+postgres-1  | 2025-08-14 17:10:23.492 UTC [1] LOG:  database system is shut down
+log truncated at line 1000
