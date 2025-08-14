@@ -1,0 +1,1001 @@
+
+ Network mr_robot  Creating
+ Network mr_robot  Created
+ Volume "mr_robot_sockets"  Creating
+ Volume "mr_robot_sockets"  Created
+ Volume "mr_robot_db"  Creating
+ Volume "mr_robot_db"  Created
+ Container mr_robot_db  Creating
+ Container mr_robot_db  Created
+ Container mr_robot1  Creating
+ Container mr_robot1  Created
+ Container mr_robot2  Creating
+ Container mr_robot2  Created
+ Container mr_robot_lb  Creating
+ Container mr_robot_lb  Created
+Attaching to mr_robot1, mr_robot2, mr_robot_db, mr_robot_lb
+mr_robot_db  | The files belonging to this database system will be owned by user "postgres".
+mr_robot_db  | This user must also own the server process.
+mr_robot_db  | 
+mr_robot_db  | The database cluster will be initialized with locale "en_US.utf8".
+mr_robot_db  | The default database encoding has accordingly been set to "UTF8".
+mr_robot_db  | The default text search configuration will be set to "english".
+mr_robot_db  | 
+mr_robot_db  | Data page checksums are disabled.
+mr_robot_db  | 
+mr_robot_db  | fixing permissions on existing directory /var/lib/postgresql/data ... ok
+mr_robot_db  | creating subdirectories ... ok
+mr_robot_db  | selecting dynamic shared memory implementation ... posix
+mr_robot_db  | selecting default "max_connections" ... 100
+mr_robot_db  | selecting default "shared_buffers" ... 128MB
+mr_robot_db  | selecting default time zone ... America/Sao_Paulo
+mr_robot_db  | creating configuration files ... ok
+mr_robot_db  | running bootstrap script ... ok
+mr_robot_db  | sh: locale: not found
+mr_robot_db  | 2025-08-14 14:54:58.036 -03 [35] WARNING:  no usable system locales were found
+mr_robot_db  | performing post-bootstrap initialization ... ok
+mr_robot_db  | syncing data to disk ... ok
+mr_robot_db  | 
+mr_robot_db  | 
+mr_robot_db  | Success. You can now start the database server using:
+mr_robot_db  | 
+mr_robot_db  |     pg_ctl -D /var/lib/postgresql/data -l logfile start
+mr_robot_db  | 
+mr_robot_db  | initdb: warning: enabling "trust" authentication for local connections
+mr_robot_db  | initdb: hint: You can change this by editing pg_hba.conf or using the option -A, or --auth-local and --auth-host, the next time you run initdb.
+mr_robot_db  | waiting for server to start....2025-08-14 17:54:58.739 GMT [41] LOG:  starting PostgreSQL 17.5 on x86_64-pc-linux-musl, compiled by gcc (Alpine 14.2.0) 14.2.0, 64-bit
+mr_robot_db  | 2025-08-14 17:54:58.742 GMT [41] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+mr_robot_db  | 2025-08-14 17:54:58.753 GMT [44] LOG:  database system was shut down at 2025-08-14 17:54:58 GMT
+mr_robot_db  | 2025-08-14 17:54:58.765 GMT [41] LOG:  database system is ready to accept connections
+mr_robot_db  |  done
+mr_robot_db  | server started
+mr_robot_db  | CREATE DATABASE
+mr_robot_db  | 
+mr_robot_db  | 
+mr_robot_db  | /usr/local/bin/docker-entrypoint.sh: ignoring /docker-entrypoint-initdb.d/*
+mr_robot_db  | 
+mr_robot_db  | waiting for server to shut down....2025-08-14 17:54:58.895 GMT [41] LOG:  received fast shutdown request
+mr_robot_db  | 2025-08-14 17:54:58.899 GMT [41] LOG:  aborting any active transactions
+mr_robot_db  | 2025-08-14 17:54:58.902 GMT [41] LOG:  background worker "logical replication launcher" (PID 47) exited with exit code 1
+mr_robot_db  | 2025-08-14 17:54:58.903 GMT [42] LOG:  shutting down
+mr_robot_db  | 2025-08-14 17:54:58.905 GMT [42] LOG:  checkpoint starting: shutdown immediate
+mr_robot_db  | 2025-08-14 17:54:58.954 GMT [42] LOG:  checkpoint complete: wrote 925 buffers (5.6%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.033 s, sync=0.008 s, total=0.052 s; sync files=301, longest=0.003 s, average=0.001 s; distance=4255 kB, estimate=4255 kB; lsn=0/1915108, redo lsn=0/1915108
+mr_robot_db  | 2025-08-14 17:54:58.964 GMT [41] LOG:  database system is shut down
+mr_robot_db  |  done
+mr_robot_db  | server stopped
+mr_robot_db  | 
+mr_robot_db  | PostgreSQL init process complete; ready for start up.
+mr_robot_db  | 
+mr_robot_db  | 2025-08-14 17:54:59.026 GMT [1] LOG:  starting PostgreSQL 17.5 on x86_64-pc-linux-musl, compiled by gcc (Alpine 14.2.0) 14.2.0, 64-bit
+mr_robot_db  | 2025-08-14 17:54:59.026 GMT [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+mr_robot_db  | 2025-08-14 17:54:59.026 GMT [1] LOG:  listening on IPv6 address "::", port 5432
+mr_robot_db  | 2025-08-14 17:54:59.032 GMT [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+mr_robot_db  | 2025-08-14 17:54:59.040 GMT [57] LOG:  database system was shut down at 2025-08-14 17:54:58 GMT
+mr_robot_db  | 2025-08-14 17:54:59.048 GMT [1] LOG:  database system is ready to accept connections
+mr_robot1    | 2025/08/14 17:55:03 Payments table created successfully
+mr_robot1    | 2025/08/14 17:55:03 Database migrations completed successfully
+mr_robot1    | 2025/08/14 17:55:03 Application container initialized successfully
+mr_robot1    | 2025/08/14 17:55:03 Starting HTTP server on Unix socket: /var/run/mr_robot/mr_robot1.sock
+mr_robot2    | 2025/08/14 17:55:08 Payments table already exists, skipping migration
+mr_robot2    | 2025/08/14 17:55:08 Database migrations completed successfully
+mr_robot2    | 2025/08/14 17:55:08 Application container initialized successfully
+mr_robot2    | 2025/08/14 17:55:08 Starting HTTP server on Unix socket: /var/run/mr_robot/mr_robot2.sock
+mr_robot_lb  | [NOTICE]   (1) : Initializing new worker (9)
+mr_robot_lb  | [NOTICE]   (9) : haproxy version is 3.1.8-4391242
+mr_robot_lb  | [WARNING]  (9) : log format ignored for frontend 'stats' since it has no log address.
+mr_robot_lb  | [WARNING]  (9) : log format ignored for frontend 'mr_robot_frontend' since it has no log address.
+mr_robot_lb  | [NOTICE]   (1) : Loading success.
+mr_robot1    | 2025/08/14 17:55:15 GET /health 937.322µs
+mr_robot1    | 2025/08/14 17:55:16 GET /payments-summary 3.278403ms
+mr_robot2    | 2025/08/14 17:55:22 POST /purge-payments 15.971µs
+mr_robot2    | 2025/08/14 17:55:22 POST /payments 110.404µs
+mr_robot2    | 2025/08/14 17:55:22 [Worker 1] Processing job cfa24c44-29f8-4199-9644-b0cc7cd303af (attempt 3) - timestamp: 1755194122203300836
+mr_robot1    | 2025/08/14 17:55:22 GET /payments-summary 2.786886ms
+mr_robot2    | 2025/08/14 17:55:22 [Worker 1] Successfully processed job cfa24c44-29f8-4199-9644-b0cc7cd303af in 6.937169ms - timestamp: 1755194122210155082
+mr_robot1    | 2025/08/14 17:55:22 POST /payments 116.204µs
+mr_robot1    | 2025/08/14 17:55:22 [Worker 1] Processing job b3ecf1cd-4a5e-4923-aa07-3b39d5c368d6 (attempt 3) - timestamp: 1755194122309862405
+mr_robot1    | 2025/08/14 17:55:22 [Worker 1] Successfully processed job b3ecf1cd-4a5e-4923-aa07-3b39d5c368d6 in 4.027199ms - timestamp: 1755194122313863223
+mr_robot2    | 2025/08/14 17:55:22 POST /payments 72.682µs
+mr_robot2    | 2025/08/14 17:55:22 [Worker 0] Processing job 324e20ec-b0cf-4e2e-9dc0-25e3face7de7 (attempt 3) - timestamp: 1755194122419827710
+mr_robot2    | 2025/08/14 17:55:22 [Worker 0] Successfully processed job 324e20ec-b0cf-4e2e-9dc0-25e3face7de7 in 3.223611ms - timestamp: 1755194122423026330
+mr_robot1    | 2025/08/14 17:55:22 POST /payments 63.953µs
+mr_robot1    | 2025/08/14 17:55:22 [Worker 0] Processing job 632fe8a4-fbce-40b4-911b-89a0ff5daa2f (attempt 3) - timestamp: 1755194122529107602
+mr_robot1    | 2025/08/14 17:55:22 [Worker 0] Successfully processed job 632fe8a4-fbce-40b4-911b-89a0ff5daa2f in 3.063125ms - timestamp: 1755194122532148977
+mr_robot2    | 2025/08/14 17:55:22 POST /payments 62.242µs
+mr_robot2    | 2025/08/14 17:55:22 [Worker 2] Processing job 37539a92-137f-402b-b97d-ad2b6386d699 (attempt 3) - timestamp: 1755194122638027141
+mr_robot2    | 2025/08/14 17:55:22 [Worker 2] Successfully processed job 37539a92-137f-402b-b97d-ad2b6386d699 in 3.065935ms - timestamp: 1755194122641068885
+mr_robot1    | 2025/08/14 17:55:22 POST /payments 67.422µs
+mr_robot1    | 2025/08/14 17:55:22 [Worker 2] Processing job 1115a484-a56d-4957-a8f4-976df5ca3175 (attempt 3) - timestamp: 1755194122747141749
+mr_robot1    | 2025/08/14 17:55:22 [Worker 2] Successfully processed job 1115a484-a56d-4957-a8f4-976df5ca3175 in 3.21876ms - timestamp: 1755194122750322198
+mr_robot2    | 2025/08/14 17:55:22 POST /payments 59.312µs
+mr_robot2    | 2025/08/14 17:55:22 [Worker 3] Processing job 7e2e34ff-2d50-4e1c-862a-423dc087a1b9 (attempt 3) - timestamp: 1755194122856218611
+mr_robot2    | 2025/08/14 17:55:22 [Worker 3] Successfully processed job 7e2e34ff-2d50-4e1c-862a-423dc087a1b9 in 3.288313ms - timestamp: 1755194122859482794
+mr_robot1    | 2025/08/14 17:55:22 POST /payments 60.742µs
+mr_robot1    | 2025/08/14 17:55:22 [Worker 3] Processing job d9753d19-a9bc-4047-9863-149e0e33ab70 (attempt 3) - timestamp: 1755194122966313442
+mr_robot1    | 2025/08/14 17:55:22 [Worker 3] Successfully processed job d9753d19-a9bc-4047-9863-149e0e33ab70 in 3.002993ms - timestamp: 1755194122969287864
+mr_robot2    | 2025/08/14 17:55:23 POST /payments 64.212µs
+mr_robot2    | 2025/08/14 17:55:23 [Worker 4] Processing job 8f1d351b-c3a2-4f36-9e04-10a36ab7335b (attempt 3) - timestamp: 1755194123075552592
+mr_robot2    | 2025/08/14 17:55:23 [Worker 4] Successfully processed job 8f1d351b-c3a2-4f36-9e04-10a36ab7335b in 3.215201ms - timestamp: 1755194123078747052
+mr_robot1    | 2025/08/14 17:55:23 POST /payments 65.592µs
+mr_robot1    | 2025/08/14 17:55:23 [Worker 4] Processing job 6fc1705e-6fae-4fab-af89-3388dc6e4e45 (attempt 3) - timestamp: 1755194123184824053
+mr_robot1    | 2025/08/14 17:55:23 [Worker 4] Successfully processed job 6fc1705e-6fae-4fab-af89-3388dc6e4e45 in 3.324605ms - timestamp: 1755194123188064175
+mr_robot2    | 2025/08/14 17:55:23 POST /payments 61.602µs
+mr_robot2    | 2025/08/14 17:55:23 [Worker 1] Processing job 892070a1-c7a1-42ee-a2ed-5fbcb41718e8 (attempt 3) - timestamp: 1755194123204945716
+mr_robot2    | 2025/08/14 17:55:23 [Worker 1] Successfully processed job 892070a1-c7a1-42ee-a2ed-5fbcb41718e8 in 3.21956ms - timestamp: 1755194123208136995
+mr_robot1    | 2025/08/14 17:55:23 POST /payments 75.162µs
+mr_robot1    | 2025/08/14 17:55:23 [Worker 1] Processing job a35e7453-ab25-42df-87ee-06e8491b5452 (attempt 3) - timestamp: 1755194123294382234
+mr_robot1    | 2025/08/14 17:55:23 [Worker 1] Successfully processed job a35e7453-ab25-42df-87ee-06e8491b5452 in 3.400337ms - timestamp: 1755194123297752300
+mr_robot2    | 2025/08/14 17:55:23 POST /payments 52.712µs
+mr_robot2    | 2025/08/14 17:55:23 [Worker 0] Processing job 4129ef08-9d9b-45ed-be53-471623e36cb0 (attempt 3) - timestamp: 1755194123311570346
+mr_robot2    | 2025/08/14 17:55:23 [Worker 0] Successfully processed job 4129ef08-9d9b-45ed-be53-471623e36cb0 in 3.064095ms - timestamp: 1755194123314615421
+mr_robot1    | 2025/08/14 17:55:23 POST /payments 57.211µs
+mr_robot1    | 2025/08/14 17:55:23 [Worker 0] Processing job 591d2b45-d068-4567-9902-32b83c741e45 (attempt 3) - timestamp: 1755194123402756465
+mr_robot1    | 2025/08/14 17:55:23 [Worker 0] Successfully processed job 591d2b45-d068-4567-9902-32b83c741e45 in 3.015614ms - timestamp: 1755194123405749908
+mr_robot2    | 2025/08/14 17:55:23 POST /payments 44.872µs
+mr_robot2    | 2025/08/14 17:55:23 [Worker 2] Processing job 9119dc5e-f128-4e39-a91e-a35124664cc1 (attempt 3) - timestamp: 1755194123421928195
+mr_robot2    | 2025/08/14 17:55:23 [Worker 2] Successfully processed job 9119dc5e-f128-4e39-a91e-a35124664cc1 in 3.354896ms - timestamp: 1755194123425218278
+mr_robot1    | 2025/08/14 17:55:23 POST /payments 64.352µs
+mr_robot1    | 2025/08/14 17:55:23 [Worker 2] Processing job 8166d75e-051c-4c0d-8866-6bca93f02acf (attempt 3) - timestamp: 1755194123511934953
+mr_robot1    | 2025/08/14 17:55:23 [Worker 2] Successfully processed job 8166d75e-051c-4c0d-8866-6bca93f02acf in 3.093227ms - timestamp: 1755194123515007269
+mr_robot2    | 2025/08/14 17:55:23 POST /payments 36.732µs
+mr_robot2    | 2025/08/14 17:55:23 [Worker 3] Processing job 32672cf9-d007-46f6-935f-8dadabcaa9f6 (attempt 3) - timestamp: 1755194123530259033
+mr_robot2    | 2025/08/14 17:55:23 [Worker 3] Successfully processed job 32672cf9-d007-46f6-935f-8dadabcaa9f6 in 2.841107ms - timestamp: 1755194123533075640
+mr_robot1    | 2025/08/14 17:55:23 POST /payments 62.613µs
+mr_robot1    | 2025/08/14 17:55:23 [Worker 3] Processing job 3a5c49fb-90d6-4a3e-abdf-8e8ed8458d10 (attempt 3) - timestamp: 1755194123622045073
+mr_robot1    | 2025/08/14 17:55:23 [Worker 3] Successfully processed job 3a5c49fb-90d6-4a3e-abdf-8e8ed8458d10 in 3.149159ms - timestamp: 1755194123625173171
+mr_robot2    | 2025/08/14 17:55:23 POST /payments 36.332µs
+mr_robot2    | 2025/08/14 17:55:23 [Worker 4] Processing job 17a79c4a-e858-4f16-a9c1-2e07eed0b50c (attempt 3) - timestamp: 1755194123639245255
+mr_robot2    | 2025/08/14 17:55:23 [Worker 4] Successfully processed job 17a79c4a-e858-4f16-a9c1-2e07eed0b50c in 2.814407ms - timestamp: 1755194123642035241
+mr_robot1    | 2025/08/14 17:55:23 POST /payments 62.962µs
+mr_robot1    | 2025/08/14 17:55:23 [Worker 4] Processing job c3c5229b-b608-46f1-a6d9-9362940123f5 (attempt 3) - timestamp: 1755194123731418209
+mr_robot1    | 2025/08/14 17:55:23 [Worker 4] Successfully processed job c3c5229b-b608-46f1-a6d9-9362940123f5 in 3.084206ms - timestamp: 1755194123734486014
+mr_robot2    | 2025/08/14 17:55:23 POST /payments 34.831µs
+mr_robot2    | 2025/08/14 17:55:23 [Worker 1] Processing job 85ff7f01-9b2b-4f43-ae20-fc86b90eafc2 (attempt 3) - timestamp: 1755194123748500656
+mr_robot2    | 2025/08/14 17:55:23 [Worker 1] Successfully processed job 85ff7f01-9b2b-4f43-ae20-fc86b90eafc2 in 2.878369ms - timestamp: 1755194123751331104
+mr_robot1    | 2025/08/14 17:55:23 POST /payments 44.932µs
+mr_robot1    | 2025/08/14 17:55:23 [Worker 1] Processing job f1e5333b-84ce-41f8-b296-9a2ca669a7af (attempt 3) - timestamp: 1755194123839586711
+mr_robot1    | 2025/08/14 17:55:23 [Worker 1] Successfully processed job f1e5333b-84ce-41f8-b296-9a2ca669a7af in 3.029964ms - timestamp: 1755194123842602305
+mr_robot2    | 2025/08/14 17:55:23 POST /payments 38.742µs
+mr_robot2    | 2025/08/14 17:55:23 [Worker 0] Processing job a3d6d59c-7090-49b0-b141-b01ff1385043 (attempt 3) - timestamp: 1755194123857609133
+mr_robot2    | 2025/08/14 17:55:23 [Worker 0] Successfully processed job a3d6d59c-7090-49b0-b141-b01ff1385043 in 6.748502ms - timestamp: 1755194123864302103
+mr_robot1    | 2025/08/14 17:55:23 POST /payments 68.593µs
+mr_robot1    | 2025/08/14 17:55:23 [Worker 0] Processing job cb42202f-dcc1-4651-a405-2076bc64e63c (attempt 3) - timestamp: 1755194123950050704
+mr_robot1    | 2025/08/14 17:55:23 [Worker 0] Successfully processed job cb42202f-dcc1-4651-a405-2076bc64e63c in 2.981112ms - timestamp: 1755194123952995415
+mr_robot2    | 2025/08/14 17:55:23 POST /payments 32.161µs
+mr_robot2    | 2025/08/14 17:55:23 [Worker 2] Processing job 6714f875-bd1c-4c78-9180-f1c7bd45819f (attempt 3) - timestamp: 1755194123968042663
+mr_robot2    | 2025/08/14 17:55:23 [Worker 2] Successfully processed job 6714f875-bd1c-4c78-9180-f1c7bd45819f in 2.977853ms - timestamp: 1755194123970970724
+mr_robot1    | 2025/08/14 17:55:24 POST /payments 60.202µs
+mr_robot1    | 2025/08/14 17:55:24 [Worker 2] Processing job 647764d2-0ed3-4244-89e8-7b06602c5622 (attempt 3) - timestamp: 1755194124058947412
+mr_robot1    | 2025/08/14 17:55:24 [Worker 2] Successfully processed job 647764d2-0ed3-4244-89e8-7b06602c5622 in 2.88585ms - timestamp: 1755194124061815121
+mr_robot2    | 2025/08/14 17:55:24 POST /payments 34.402µs
+mr_robot2    | 2025/08/14 17:55:24 [Worker 3] Processing job 16cf8370-1cd3-4fb4-b1b2-b53909b155a1 (attempt 3) - timestamp: 1755194124077319924
+mr_robot2    | 2025/08/14 17:55:24 [Worker 3] Successfully processed job 16cf8370-1cd3-4fb4-b1b2-b53909b155a1 in 2.960121ms - timestamp: 1755194124080230414
+mr_robot1    | 2025/08/14 17:55:24 POST /payments 57.722µs
+mr_robot1    | 2025/08/14 17:55:24 [Worker 3] Processing job 98360a73-d879-4964-b78d-75ec01c4b382 (attempt 3) - timestamp: 1755194124175032108
+mr_robot1    | 2025/08/14 17:55:24 [Worker 3] Successfully processed job 98360a73-d879-4964-b78d-75ec01c4b382 in 3.049575ms - timestamp: 1755194124178026631
+mr_robot2    | 2025/08/14 17:55:24 POST /payments 36.842µs
+mr_robot2    | 2025/08/14 17:55:24 [Worker 4] Processing job d3090fac-c2da-40fe-be4c-daaa4a3daac5 (attempt 3) - timestamp: 1755194124185951454
+mr_robot2    | 2025/08/14 17:55:24 [Worker 4] Successfully processed job d3090fac-c2da-40fe-be4c-daaa4a3daac5 in 2.807186ms - timestamp: 1755194124188732659
+mr_robot1    | 2025/08/14 17:55:24 POST /payments 29.841µs
+mr_robot1    | 2025/08/14 17:55:24 [Worker 4] Processing job d345ae00-05c7-4f9e-8b3a-1c6c134d3a20 (attempt 3) - timestamp: 1755194124206271833
+mr_robot1    | 2025/08/14 17:55:24 [Worker 4] Successfully processed job d345ae00-05c7-4f9e-8b3a-1c6c134d3a20 in 2.772976ms - timestamp: 1755194124208991237
+mr_robot2    | 2025/08/14 17:55:24 POST /payments 57.812µs
+mr_robot2    | 2025/08/14 17:55:24 [Worker 1] Processing job cedc6eec-24ea-4883-aef4-b3142db2b07b (attempt 3) - timestamp: 1755194124277124903
+mr_robot2    | 2025/08/14 17:55:24 [Worker 1] Successfully processed job cedc6eec-24ea-4883-aef4-b3142db2b07b in 3.21158ms - timestamp: 1755194124280309022
+mr_robot1    | 2025/08/14 17:55:24 POST /payments 42.712µs
+mr_robot1    | 2025/08/14 17:55:24 [Worker 1] Processing job c5e7ff5a-64a1-4b8e-bb12-a974a981b323 (attempt 3) - timestamp: 1755194124296151177
+mr_robot1    | 2025/08/14 17:55:24 [Worker 1] Successfully processed job c5e7ff5a-64a1-4b8e-bb12-a974a981b323 in 2.810547ms - timestamp: 1755194124298907302
+mr_robot2    | 2025/08/14 17:55:24 POST /payments 41.172µs
+mr_robot2    | 2025/08/14 17:55:24 [Worker 0] Processing job 7a2e75cd-ffc4-49dc-b301-5726f75fe01c (attempt 3) - timestamp: 1755194124313210764
+mr_robot2    | 2025/08/14 17:55:24 [Worker 0] Successfully processed job 7a2e75cd-ffc4-49dc-b301-5726f75fe01c in 2.835218ms - timestamp: 1755194124316023951
+mr_robot1    | 2025/08/14 17:55:24 POST /payments 59.732µs
+mr_robot1    | 2025/08/14 17:55:24 [Worker 0] Processing job 728cb2c3-936f-4266-937b-600f014ed1e4 (attempt 3) - timestamp: 1755194124386215727
+mr_robot1    | 2025/08/14 17:55:24 [Worker 0] Successfully processed job 728cb2c3-936f-4266-937b-600f014ed1e4 in 2.901799ms - timestamp: 1755194124389096126
+mr_robot2    | 2025/08/14 17:55:24 POST /payments 39.571µs
+mr_robot2    | 2025/08/14 17:55:24 [Worker 2] Processing job fd03503a-b7c6-4add-b2ed-5e0c7c49d79b (attempt 3) - timestamp: 1755194124404342381
+mr_robot2    | 2025/08/14 17:55:24 [Worker 2] Successfully processed job fd03503a-b7c6-4add-b2ed-5e0c7c49d79b in 2.934941ms - timestamp: 1755194124407247911
+mr_robot1    | 2025/08/14 17:55:24 POST /payments 28.841µs
+mr_robot1    | 2025/08/14 17:55:24 [Worker 2] Processing job 6e62edd2-ae37-47dd-b122-f73186d25cfb (attempt 3) - timestamp: 1755194124423515651
+mr_robot1    | 2025/08/14 17:55:24 [Worker 2] Successfully processed job 6e62edd2-ae37-47dd-b122-f73186d25cfb in 2.850628ms - timestamp: 1755194124426305337
+mr_robot2    | 2025/08/14 17:55:24 POST /payments 61.482µs
+mr_robot2    | 2025/08/14 17:55:24 [Worker 3] Processing job eec06390-3ef3-4062-ae96-c8bac319a113 (attempt 3) - timestamp: 1755194124496216294
+mr_robot2    | 2025/08/14 17:55:24 [Worker 3] Successfully processed job eec06390-3ef3-4062-ae96-c8bac319a113 in 3.041354ms - timestamp: 1755194124499252738
+mr_robot1    | 2025/08/14 17:55:24 POST /payments 31.731µs
+mr_robot1    | 2025/08/14 17:55:24 [Worker 3] Processing job f0c77e4b-6f9b-4df1-b7a9-14cf51747ce5 (attempt 3) - timestamp: 1755194124513367345
+mr_robot1    | 2025/08/14 17:55:24 [Worker 3] Successfully processed job f0c77e4b-6f9b-4df1-b7a9-14cf51747ce5 in 2.930171ms - timestamp: 1755194124516241414
+mr_robot2    | 2025/08/14 17:55:24 POST /payments 32.561µs
+mr_robot2    | 2025/08/14 17:55:24 [Worker 4] Processing job 816f1040-8384-4b79-b94b-0e43757924a9 (attempt 3) - timestamp: 1755194124531564311
+mr_robot2    | 2025/08/14 17:55:24 [Worker 4] Successfully processed job 816f1040-8384-4b79-b94b-0e43757924a9 in 2.695582ms - timestamp: 1755194124534231582
+mr_robot1    | 2025/08/14 17:55:24 POST /payments 69.643µs
+mr_robot1    | 2025/08/14 17:55:24 [Worker 4] Processing job bb828c41-8f94-4a9a-98fa-a4802b186dd4 (attempt 3) - timestamp: 1755194124605341280
+mr_robot1    | 2025/08/14 17:55:24 [Worker 4] Successfully processed job bb828c41-8f94-4a9a-98fa-a4802b186dd4 in 2.979023ms - timestamp: 1755194124608299142
+mr_robot2    | 2025/08/14 17:55:24 POST /payments 40.061µs
+mr_robot2    | 2025/08/14 17:55:24 [Worker 1] Processing job aebb9800-aae5-421f-b28a-26d47247bcec (attempt 3) - timestamp: 1755194124623603119
+mr_robot2    | 2025/08/14 17:55:24 [Worker 1] Successfully processed job aebb9800-aae5-421f-b28a-26d47247bcec in 2.993323ms - timestamp: 1755194124626539630
+mr_robot1    | 2025/08/14 17:55:24 POST /payments 32.992µs
+mr_robot1    | 2025/08/14 17:55:24 [Worker 1] Processing job 024f9163-7b11-4bcd-9f41-2dadc7d79a5a (attempt 3) - timestamp: 1755194124640723388
+mr_robot1    | 2025/08/14 17:55:24 [Worker 1] Successfully processed job 024f9163-7b11-4bcd-9f41-2dadc7d79a5a in 3.070675ms - timestamp: 1755194124643768533
+mr_robot2    | 2025/08/14 17:55:24 [Worker 0] Processing job 004d95f3-aa6f-4fe4-8812-ae7028b37edb (attempt 3) - timestamp: 1755194124714641383
+mr_robot2    | 2025/08/14 17:55:24 POST /payments 98.814µs
+mr_robot2    | 2025/08/14 17:55:24 [Worker 0] Successfully processed job 004d95f3-aa6f-4fe4-8812-ae7028b37edb in 2.90836ms - timestamp: 1755194124717524772
+mr_robot1    | 2025/08/14 17:55:24 POST /payments 48.011µs
+mr_robot1    | 2025/08/14 17:55:24 [Worker 0] Processing job d8091aa2-462e-48ff-af3e-baf64551d829 (attempt 3) - timestamp: 1755194124732960613
+mr_robot1    | 2025/08/14 17:55:24 [Worker 0] Successfully processed job d8091aa2-462e-48ff-af3e-baf64551d829 in 2.933051ms - timestamp: 1755194124735862763
+mr_robot2    | 2025/08/14 17:55:24 POST /payments 42.902µs
+mr_robot2    | 2025/08/14 17:55:24 [Worker 2] Processing job 69b8fc92-f837-4508-adbe-882facd53f19 (attempt 3) - timestamp: 1755194124749988730
+mr_robot2    | 2025/08/14 17:55:24 [Worker 2] Successfully processed job 69b8fc92-f837-4508-adbe-882facd53f19 in 2.975632ms - timestamp: 1755194124752907320
+mr_robot1    | 2025/08/14 17:55:24 POST /payments 67.072µs
+mr_robot1    | 2025/08/14 17:55:24 [Worker 2] Processing job d3721bc7-5495-42c3-93cd-7e2e15ea5a52 (attempt 3) - timestamp: 1755194124824042029
+mr_robot1    | 2025/08/14 17:55:24 [Worker 2] Successfully processed job d3721bc7-5495-42c3-93cd-7e2e15ea5a52 in 2.970302ms - timestamp: 1755194124826991641
+mr_robot2    | 2025/08/14 17:55:24 POST /payments 34.661µs
+mr_robot2    | 2025/08/14 17:55:24 [Worker 3] Processing job f9557d76-b718-42c8-8199-e9bdb5f4b2fa (attempt 3) - timestamp: 1755194124841022264
+mr_robot2    | 2025/08/14 17:55:24 [Worker 3] Successfully processed job f9557d76-b718-42c8-8199-e9bdb5f4b2fa in 2.886669ms - timestamp: 1755194124843886752
+mr_robot1    | 2025/08/14 17:55:24 POST /payments 41.091µs
+mr_robot1    | 2025/08/14 17:55:24 [Worker 3] Processing job 8d6ad17a-e194-4075-8128-df3c237f7a0f (attempt 3) - timestamp: 1755194124859083345
+mr_robot1    | 2025/08/14 17:55:24 [Worker 3] Successfully processed job 8d6ad17a-e194-4075-8128-df3c237f7a0f in 2.872149ms - timestamp: 1755194124861906222
+mr_robot2    | 2025/08/14 17:55:24 POST /payments 61.513µs
+mr_robot2    | 2025/08/14 17:55:24 [Worker 4] Processing job 4eda8215-246d-4a4d-8370-d8c8c075020a (attempt 3) - timestamp: 1755194124933137764
+mr_robot2    | 2025/08/14 17:55:24 [Worker 4] Successfully processed job 4eda8215-246d-4a4d-8370-d8c8c075020a in 2.911831ms - timestamp: 1755194124936031224
+mr_robot1    | 2025/08/14 17:55:24 POST /payments 38.511µs
+mr_robot1    | 2025/08/14 17:55:24 [Worker 4] Processing job 79fc7134-e8da-4c23-9f1a-339bba73fb64 (attempt 3) - timestamp: 1755194124951208836
+mr_robot1    | 2025/08/14 17:55:24 [Worker 4] Successfully processed job 79fc7134-e8da-4c23-9f1a-339bba73fb64 in 3.009414ms - timestamp: 1755194124954157478
+mr_robot2    | 2025/08/14 17:55:24 POST /payments 63.142µs
+mr_robot2    | 2025/08/14 17:55:24 [Worker 1] Processing job 1d0bb979-e810-425f-a63d-9a62661b9e87 (attempt 3) - timestamp: 1755194124969611780
+mr_robot2    | 2025/08/14 17:55:24 [Worker 1] Successfully processed job 1d0bb979-e810-425f-a63d-9a62661b9e87 in 3.655646ms - timestamp: 1755194124973157522
+mr_robot1    | 2025/08/14 17:55:25 POST /payments 80.863µs
+mr_robot1    | 2025/08/14 17:55:25 [Worker 1] Processing job 585b84e3-84fe-436b-845d-548ccd4ecba0 (attempt 3) - timestamp: 1755194125054880585
+mr_robot1    | 2025/08/14 17:55:25 [Worker 1] Successfully processed job 585b84e3-84fe-436b-845d-548ccd4ecba0 in 3.679807ms - timestamp: 1755194125058520241
+mr_robot2    | 2025/08/14 17:55:25 POST /payments 42.461µs
+mr_robot2    | 2025/08/14 17:55:25 [Worker 0] Processing job fad23697-80fe-4696-8218-82bccb70abda (attempt 3) - timestamp: 1755194125060018762
+mr_robot2    | 2025/08/14 17:55:25 [Worker 0] Successfully processed job fad23697-80fe-4696-8218-82bccb70abda in 3.386257ms - timestamp: 1755194125063323936
+mr_robot1    | 2025/08/14 17:55:25 POST /payments 41.161µs
+mr_robot1    | 2025/08/14 17:55:25 [Worker 0] Processing job 29044c78-f7b8-4505-85a0-2973874ff82b (attempt 3) - timestamp: 1755194125078479177
+mr_robot1    | 2025/08/14 17:55:25 [Worker 0] Successfully processed job 29044c78-f7b8-4505-85a0-2973874ff82b in 3.372296ms - timestamp: 1755194125081790031
+mr_robot2    | 2025/08/14 17:55:25 POST /payments 73.082µs
+mr_robot2    | 2025/08/14 17:55:25 [Worker 2] Processing job a0e66f51-e1f6-4b2c-94c1-67ca87ca2088 (attempt 3) - timestamp: 1755194125154776354
+mr_robot2    | 2025/08/14 17:55:25 [Worker 2] Successfully processed job a0e66f51-e1f6-4b2c-94c1-67ca87ca2088 in 3.396147ms - timestamp: 1755194125158155280
+mr_robot1    | 2025/08/14 17:55:25 POST /payments 47.302µs
+mr_robot1    | 2025/08/14 17:55:25 [Worker 2] Processing job 42862681-4495-41cf-9f19-0133f4e30b71 (attempt 3) - timestamp: 1755194125176269993
+mr_robot1    | 2025/08/14 17:55:25 [Worker 2] Successfully processed job 42862681-4495-41cf-9f19-0133f4e30b71 in 3.111037ms - timestamp: 1755194125179356999
+mr_robot2    | 2025/08/14 17:55:25 POST /payments 32.341µs
+mr_robot2    | 2025/08/14 17:55:25 [Worker 3] Processing job 567d291f-de22-4ab2-82f0-9b7ac61a13c8 (attempt 3) - timestamp: 1755194125187346594
+mr_robot2    | 2025/08/14 17:55:25 [Worker 3] Successfully processed job 567d291f-de22-4ab2-82f0-9b7ac61a13c8 in 2.868819ms - timestamp: 1755194125190166162
+mr_robot1    | 2025/08/14 17:55:25 POST /payments 44.732µs
+mr_robot1    | 2025/08/14 17:55:25 [Worker 3] Processing job 429092f0-437d-4fcd-88ce-88c6dc95a023 (attempt 3) - timestamp: 1755194125207345154
+mr_robot1    | 2025/08/14 17:55:25 [Worker 3] Successfully processed job 429092f0-437d-4fcd-88ce-88c6dc95a023 in 2.831167ms - timestamp: 1755194125210161541
+mr_robot2    | 2025/08/14 17:55:25 POST /payments 59.622µs
+mr_robot2    | 2025/08/14 17:55:25 [Worker 4] Processing job 0471c3d0-59b7-4f73-b8b0-8a647da4e8c9 (attempt 3) - timestamp: 1755194125261218838
+mr_robot2    | 2025/08/14 17:55:25 [Worker 4] Successfully processed job 0471c3d0-59b7-4f73-b8b0-8a647da4e8c9 in 2.952512ms - timestamp: 1755194125264153159
+mr_robot1    | 2025/08/14 17:55:25 POST /payments 45.452µs
+mr_robot1    | 2025/08/14 17:55:25 [Worker 4] Processing job d824da1d-28c8-470f-b75d-4276e3179d2b (attempt 3) - timestamp: 1755194125278513813
+mr_robot1    | 2025/08/14 17:55:25 [Worker 4] Successfully processed job d824da1d-28c8-470f-b75d-4276e3179d2b in 2.848628ms - timestamp: 1755194125281341320
+mr_robot2    | 2025/08/14 17:55:25 POST /payments 33.841µs
+mr_robot2    | 2025/08/14 17:55:25 [Worker 1] Processing job f635b901-1e4b-4abd-8b3a-f295c9e3c2e6 (attempt 3) - timestamp: 1755194125297481016
+mr_robot2    | 2025/08/14 17:55:25 [Worker 1] Successfully processed job f635b901-1e4b-4abd-8b3a-f295c9e3c2e6 in 2.91154ms - timestamp: 1755194125300365865
+mr_robot1    | 2025/08/14 17:55:25 POST /payments 32.431µs
+mr_robot1    | 2025/08/14 17:55:25 [Worker 1] Processing job c2aad84e-f6e8-442d-8190-bf2510406580 (attempt 3) - timestamp: 1755194125314486661
+mr_robot1    | 2025/08/14 17:55:25 [Worker 1] Successfully processed job c2aad84e-f6e8-442d-8190-bf2510406580 in 2.926041ms - timestamp: 1755194125317389431
+mr_robot2    | 2025/08/14 17:55:25 POST /payments 53.822µs
+mr_robot2    | 2025/08/14 17:55:25 [Worker 0] Processing job 6c0575aa-6ab3-4825-a619-b35472655201 (attempt 3) - timestamp: 1755194125370344104
+mr_robot2    | 2025/08/14 17:55:25 [Worker 0] Successfully processed job 6c0575aa-6ab3-4825-a619-b35472655201 in 3.021864ms - timestamp: 1755194125373339107
+mr_robot1    | 2025/08/14 17:55:25 POST /payments 32.211µs
+mr_robot1    | 2025/08/14 17:55:25 [Worker 0] Processing job cb71983b-636e-4ce1-916b-2d108c593e14 (attempt 3) - timestamp: 1755194125387576517
+mr_robot1    | 2025/08/14 17:55:25 [Worker 0] Successfully processed job cb71983b-636e-4ce1-916b-2d108c593e14 in 2.713734ms - timestamp: 1755194125390266540
+mr_robot2    | 2025/08/14 17:55:25 POST /payments 38.801µs
+mr_robot2    | 2025/08/14 17:55:25 [Worker 2] Processing job 67778648-9a5b-4af0-80cf-a12732b9dfdb (attempt 3) - timestamp: 1755194125405669670
+mr_robot2    | 2025/08/14 17:55:25 [Worker 2] Successfully processed job 67778648-9a5b-4af0-80cf-a12732b9dfdb in 2.981643ms - timestamp: 1755194125408579790
+mr_robot1    | 2025/08/14 17:55:25 POST /payments 32.001µs
+mr_robot1    | 2025/08/14 17:55:25 [Worker 2] Processing job 2b3bbbd5-51f8-4688-9cd4-8790cd645d2c (attempt 3) - timestamp: 1755194125424904622
+mr_robot1    | 2025/08/14 17:55:25 [Worker 2] Successfully processed job 2b3bbbd5-51f8-4688-9cd4-8790cd645d2c in 2.794006ms - timestamp: 1755194125427654456
+mr_robot2    | 2025/08/14 17:55:25 POST /payments 67.353µs
+mr_robot2    | 2025/08/14 17:55:25 [Worker 3] Processing job 58a53e3f-e9f9-4b93-9214-9423539cb811 (attempt 3) - timestamp: 1755194125479962397
+mr_robot2    | 2025/08/14 17:55:25 [Worker 3] Successfully processed job 58a53e3f-e9f9-4b93-9214-9423539cb811 in 3.012074ms - timestamp: 1755194125482956100
+mr_robot1    | 2025/08/14 17:55:25 POST /payments 42.431µs
+mr_robot1    | 2025/08/14 17:55:25 [Worker 3] Processing job f966aed5-eb7a-41d0-9a28-3e96de5ef61c (attempt 3) - timestamp: 1755194125498036399
+mr_robot1    | 2025/08/14 17:55:25 [Worker 3] Successfully processed job f966aed5-eb7a-41d0-9a28-3e96de5ef61c in 2.813627ms - timestamp: 1755194125500821845
+mr_robot2    | 2025/08/14 17:55:25 POST /payments 34.261µs
+mr_robot2    | 2025/08/14 17:55:25 [Worker 4] Processing job e0e0311a-6729-49fb-8082-9ddf0429b331 (attempt 3) - timestamp: 1755194125515158949
+mr_robot2    | 2025/08/14 17:55:25 [Worker 4] Successfully processed job e0e0311a-6729-49fb-8082-9ddf0429b331 in 2.90332ms - timestamp: 1755194125518046238
+mr_robot1    | 2025/08/14 17:55:25 POST /payments 35.261µs
+mr_robot1    | 2025/08/14 17:55:25 [Worker 4] Processing job 34b1bf93-c777-46c0-b8ab-9e2d33f507ad (attempt 3) - timestamp: 1755194125532612800
+mr_robot1    | 2025/08/14 17:55:25 [Worker 4] Successfully processed job 34b1bf93-c777-46c0-b8ab-9e2d33f507ad in 2.971902ms - timestamp: 1755194125535559321
+mr_robot2    | 2025/08/14 17:55:25 POST /payments 63.032µs
+mr_robot2    | 2025/08/14 17:55:25 [Worker 1] Processing job aaf19ef4-4416-4cbb-80ce-2df5fd82d438 (attempt 3) - timestamp: 1755194125588519224
+mr_robot2    | 2025/08/14 17:55:25 [Worker 1] Successfully processed job aaf19ef4-4416-4cbb-80ce-2df5fd82d438 in 2.923881ms - timestamp: 1755194125591418704
+mr_robot1    | 2025/08/14 17:55:25 POST /payments 38.082µs
+mr_robot1    | 2025/08/14 17:55:25 [Worker 1] Processing job e449541e-b073-4115-904a-5a44c558197d (attempt 3) - timestamp: 1755194125606647688
+mr_robot1    | 2025/08/14 17:55:25 [Worker 1] Successfully processed job e449541e-b073-4115-904a-5a44c558197d in 2.891339ms - timestamp: 1755194125609497056
+mr_robot2    | 2025/08/14 17:55:25 POST /payments 36.091µs
+mr_robot2    | 2025/08/14 17:55:25 [Worker 0] Processing job c6098eee-7148-44ab-8f7e-5f59722dab20 (attempt 3) - timestamp: 1755194125624791213
+mr_robot2    | 2025/08/14 17:55:25 [Worker 0] Successfully processed job c6098eee-7148-44ab-8f7e-5f59722dab20 in 2.951061ms - timestamp: 1755194125627717003
+mr_robot1    | 2025/08/14 17:55:25 POST /payments 48.382µs
+mr_robot1    | 2025/08/14 17:55:25 [Worker 0] Processing job eb1536b5-6f00-4b77-a290-03f1577348cf (attempt 3) - timestamp: 1755194125642046087
+mr_robot1    | 2025/08/14 17:55:25 [Worker 0] Successfully processed job eb1536b5-6f00-4b77-a290-03f1577348cf in 2.92143ms - timestamp: 1755194125644944616
+mr_robot2    | 2025/08/14 17:55:25 POST /payments 44.222µs
+mr_robot2    | 2025/08/14 17:55:25 [Worker 2] Processing job b048862f-2853-4619-b0cc-b68102a129e7 (attempt 3) - timestamp: 1755194125697815027
+mr_robot2    | 2025/08/14 17:55:25 [Worker 2] Successfully processed job b048862f-2853-4619-b0cc-b68102a129e7 in 3.031504ms - timestamp: 1755194125700823010
+mr_robot1    | 2025/08/14 17:55:25 POST /payments 43.101µs
+mr_robot1    | 2025/08/14 17:55:25 [Worker 2] Processing job 3c14ba5f-aa10-4ce4-a592-72e4fd63728b (attempt 3) - timestamp: 1755194125715716043
+mr_robot1    | 2025/08/14 17:55:25 [Worker 2] Successfully processed job 3c14ba5f-aa10-4ce4-a592-72e4fd63728b in 3.2015ms - timestamp: 1755194125718896192
+mr_robot2    | 2025/08/14 17:55:25 POST /payments 38.622µs
+mr_robot2    | 2025/08/14 17:55:25 [Worker 3] Processing job 1379af78-64d8-41dc-bd34-f96a2e988531 (attempt 3) - timestamp: 1755194125733998462
+mr_robot2    | 2025/08/14 17:55:25 [Worker 3] Successfully processed job 1379af78-64d8-41dc-bd34-f96a2e988531 in 2.88997ms - timestamp: 1755194125736865111
+mr_robot1    | 2025/08/14 17:55:25 POST /payments 38.181µs
+mr_robot1    | 2025/08/14 17:55:25 [Worker 3] Processing job 9fc46c6f-dcf0-4616-aa5d-43427273be34 (attempt 3) - timestamp: 1755194125750982217
+mr_robot1    | 2025/08/14 17:55:25 [Worker 3] Successfully processed job 9fc46c6f-dcf0-4616-aa5d-43427273be34 in 2.91194ms - timestamp: 1755194125753875076
+mr_robot2    | 2025/08/14 17:55:25 POST /payments 71.183µs
+mr_robot2    | 2025/08/14 17:55:25 [Worker 4] Processing job 784184ad-7caa-4ad0-8459-8b3e4b91e70c (attempt 3) - timestamp: 1755194125812929299
+mr_robot2    | 2025/08/14 17:55:25 [Worker 4] Successfully processed job 784184ad-7caa-4ad0-8459-8b3e4b91e70c in 2.977672ms - timestamp: 1755194125815890101
+mr_robot1    | 2025/08/14 17:55:25 POST /payments 38.091µs
+mr_robot1    | 2025/08/14 17:55:25 [Worker 4] Processing job 982e9a3c-f79c-4b68-89ef-85b75c076a88 (attempt 3) - timestamp: 1755194125825134360
+mr_robot1    | 2025/08/14 17:55:25 [Worker 4] Successfully processed job 982e9a3c-f79c-4b68-89ef-85b75c076a88 in 2.809077ms - timestamp: 1755194125827888475
+mr_robot2    | 2025/08/14 17:55:25 POST /payments 22.311µs
+mr_robot2    | 2025/08/14 17:55:25 [Worker 1] Processing job 1a8d23df-42f4-4da4-bfc4-557fa0a9ed4d (attempt 3) - timestamp: 1755194125842141325
+mr_robot2    | 2025/08/14 17:55:25 [Worker 1] Successfully processed job 1a8d23df-42f4-4da4-bfc4-557fa0a9ed4d in 2.850498ms - timestamp: 1755194125844934401
+mr_robot1    | 2025/08/14 17:55:25 POST /payments 32.261µs
+mr_robot1    | 2025/08/14 17:55:25 [Worker 1] Processing job 618d4c8f-89e9-4b9a-b9f7-fad7826c3df1 (attempt 3) - timestamp: 1755194125860192047
+mr_robot1    | 2025/08/14 17:55:25 [Worker 1] Successfully processed job 618d4c8f-89e9-4b9a-b9f7-fad7826c3df1 in 3.009113ms - timestamp: 1755194125863172669
+mr_robot2    | 2025/08/14 17:55:25 POST /payments 60.132µs
+mr_robot2    | 2025/08/14 17:55:25 [Worker 0] Processing job a742b3ff-0a53-4b6c-9184-ff8b73ca44be (attempt 3) - timestamp: 1755194125916898298
+mr_robot2    | 2025/08/14 17:55:25 [Worker 0] Successfully processed job a742b3ff-0a53-4b6c-9184-ff8b73ca44be in 2.957051ms - timestamp: 1755194125919810948
+mr_robot1    | 2025/08/14 17:55:25 POST /payments 29.861µs
+mr_robot1    | 2025/08/14 17:55:25 [Worker 0] Processing job a11e4f25-6ea7-489e-852e-fd52ceb3cc55 (attempt 3) - timestamp: 1755194125935072204
+mr_robot1    | 2025/08/14 17:55:25 [Worker 0] Successfully processed job a11e4f25-6ea7-489e-852e-fd52ceb3cc55 in 3.113787ms - timestamp: 1755194125938167500
+mr_robot2    | 2025/08/14 17:55:25 POST /payments 43.642µs
+mr_robot2    | 2025/08/14 17:55:25 [Worker 2] Processing job e3578f70-9462-4a8a-a8b3-18b241478949 (attempt 3) - timestamp: 1755194125953160446
+mr_robot2    | 2025/08/14 17:55:25 [Worker 2] Successfully processed job e3578f70-9462-4a8a-a8b3-18b241478949 in 2.999333ms - timestamp: 1755194125956142909
+mr_robot1    | 2025/08/14 17:55:25 POST /payments 35.951µs
+mr_robot1    | 2025/08/14 17:55:25 [Worker 2] Processing job 2ac0ea54-d645-4d06-a770-675909bbcab0 (attempt 3) - timestamp: 1755194125971203437
+mr_robot1    | 2025/08/14 17:55:25 [Worker 2] Successfully processed job 2ac0ea54-d645-4d06-a770-675909bbcab0 in 2.976042ms - timestamp: 1755194125974161509
+mr_robot2    | 2025/08/14 17:55:26 POST /payments 62.812µs
+mr_robot2    | 2025/08/14 17:55:26 [Worker 3] Processing job 9b7c170c-d014-4e71-b2ba-f959f3cb74ea (attempt 3) - timestamp: 1755194126026191660
+mr_robot2    | 2025/08/14 17:55:26 [Worker 3] Successfully processed job 9b7c170c-d014-4e71-b2ba-f959f3cb74ea in 3.270182ms - timestamp: 1755194126029440792
+mr_robot1    | 2025/08/14 17:55:26 POST /payments 36.721µs
+mr_robot1    | 2025/08/14 17:55:26 [Worker 3] Processing job face2f88-98d1-4406-a038-493d8743a067 (attempt 3) - timestamp: 1755194126056198713
+mr_robot1    | 2025/08/14 17:55:26 [Worker 3] Successfully processed job face2f88-98d1-4406-a038-493d8743a067 in 3.015594ms - timestamp: 1755194126059169516
+mr_robot2    | 2025/08/14 17:55:26 POST /payments 33.441µs
+mr_robot2    | 2025/08/14 17:55:26 [Worker 4] Processing job 78a5fdbc-44b5-4926-8546-9d2ed716af54 (attempt 3) - timestamp: 1755194126061169794
+mr_robot2    | 2025/08/14 17:55:26 [Worker 4] Successfully processed job 78a5fdbc-44b5-4926-8546-9d2ed716af54 in 3.20391ms - timestamp: 1755194126064355554
+mr_robot1    | 2025/08/14 17:55:26 POST /payments 34.921µs
+mr_robot1    | 2025/08/14 17:55:26 [Worker 4] Processing job 9ff307f2-bb71-4763-bc03-cdd9404b5f4f (attempt 3) - timestamp: 1755194126080452138
+mr_robot1    | 2025/08/14 17:55:26 [Worker 4] Successfully processed job 9ff307f2-bb71-4763-bc03-cdd9404b5f4f in 3.043285ms - timestamp: 1755194126083468502
+mr_robot2    | 2025/08/14 17:55:26 POST /payments 60.552µs
+mr_robot2    | 2025/08/14 17:55:26 [Worker 1] Processing job d9399e67-225f-4b86-931f-009f86f1c1e0 (attempt 3) - timestamp: 1755194126135560915
+mr_robot2    | 2025/08/14 17:55:26 [Worker 1] Successfully processed job d9399e67-225f-4b86-931f-009f86f1c1e0 in 3.953616ms - timestamp: 1755194126139492980
+mr_robot1    | 2025/08/14 17:55:26 POST /payments 39.761µs
+mr_robot1    | 2025/08/14 17:55:26 [Worker 1] Processing job d582839f-5e5d-4e37-b2f4-9a36a5de4caa (attempt 3) - timestamp: 1755194126156571968
+mr_robot1    | 2025/08/14 17:55:26 [Worker 1] Successfully processed job d582839f-5e5d-4e37-b2f4-9a36a5de4caa in 2.927211ms - timestamp: 1755194126159482579
+mr_robot2    | 2025/08/14 17:55:26 POST /payments 37.401µs
+mr_robot2    | 2025/08/14 17:55:26 [Worker 0] Processing job d0dd6c19-2e51-40f8-bfb1-7d3f79b29ebf (attempt 3) - timestamp: 1755194126177968756
+mr_robot2    | 2025/08/14 17:55:26 [Worker 0] Successfully processed job d0dd6c19-2e51-40f8-bfb1-7d3f79b29ebf in 2.828917ms - timestamp: 1755194126180773142
+mr_robot1    | 2025/08/14 17:55:26 POST /payments 37.111µs
+mr_robot1    | 2025/08/14 17:55:26 [Worker 0] Processing job 0730beea-3629-440b-a4a4-4595820b3e28 (attempt 3) - timestamp: 1755194126188942853
+mr_robot1    | 2025/08/14 17:55:26 [Worker 0] Successfully processed job 0730beea-3629-440b-a4a4-4595820b3e28 in 3.119567ms - timestamp: 1755194126192045930
+mr_robot2    | 2025/08/14 17:55:26 POST /payments 32.981µs
+mr_robot2    | 2025/08/14 17:55:26 [Worker 2] Processing job 9e108fab-561c-423d-806e-7041878848c6 (attempt 3) - timestamp: 1755194126208897200
+mr_robot2    | 2025/08/14 17:55:26 [Worker 2] Successfully processed job 9e108fab-561c-423d-806e-7041878848c6 in 3.46799ms - timestamp: 1755194126212290857
+mr_robot1    | 2025/08/14 17:55:26 POST /payments 66.072µs
+mr_robot1    | 2025/08/14 17:55:26 [Worker 2] Processing job c89a2ede-e575-45e3-91ff-7a33e728c96c (attempt 3) - timestamp: 1755194126244785225
+mr_robot1    | 2025/08/14 17:55:26 [Worker 2] Successfully processed job c89a2ede-e575-45e3-91ff-7a33e728c96c in 3.023224ms - timestamp: 1755194126247793428
+mr_robot2    | 2025/08/14 17:55:26 POST /payments 39.521µs
+mr_robot2    | 2025/08/14 17:55:26 [Worker 3] Processing job cb629f1f-a0b3-403d-be79-e9f6705ea13a (attempt 3) - timestamp: 1755194126262881438
+mr_robot2    | 2025/08/14 17:55:26 [Worker 3] Successfully processed job cb629f1f-a0b3-403d-be79-e9f6705ea13a in 2.872409ms - timestamp: 1755194126265702645
+mr_robot1    | 2025/08/14 17:55:26 POST /payments 41.941µs
+mr_robot1    | 2025/08/14 17:55:26 [Worker 3] Processing job 2d280df1-ea32-4e0c-95c6-10b8972a1f0e (attempt 3) - timestamp: 1755194126280114011
+mr_robot1    | 2025/08/14 17:55:26 [Worker 3] Successfully processed job 2d280df1-ea32-4e0c-95c6-10b8972a1f0e in 2.803417ms - timestamp: 1755194126282891907
+mr_robot2    | 2025/08/14 17:55:26 POST /payments 31.111µs
+mr_robot2    | 2025/08/14 17:55:26 [Worker 4] Processing job 1cd9a87b-0217-4a27-ad40-23f1c4cef74d (attempt 3) - timestamp: 1755194126299185418
+mr_robot2    | 2025/08/14 17:55:26 [Worker 4] Successfully processed job 1cd9a87b-0217-4a27-ad40-23f1c4cef74d in 2.91601ms - timestamp: 1755194126302075457
+mr_robot1    | 2025/08/14 17:55:26 POST /payments 41.981µs
+mr_robot1    | 2025/08/14 17:55:26 [Worker 4] Processing job 3e13e7e3-c856-4a31-b2a2-6ba8f09fe7b6 (attempt 3) - timestamp: 1755194126316176704
+mr_robot1    | 2025/08/14 17:55:26 [Worker 4] Successfully processed job 3e13e7e3-c856-4a31-b2a2-6ba8f09fe7b6 in 2.91906ms - timestamp: 1755194126319047532
+mr_robot2    | 2025/08/14 17:55:26 POST /payments 57.372µs
+mr_robot2    | 2025/08/14 17:55:26 [Worker 1] Processing job c00e8143-80ed-4d64-bb70-84ac26e8d98c (attempt 3) - timestamp: 1755194126353909472
+mr_robot2    | 2025/08/14 17:55:26 [Worker 1] Successfully processed job c00e8143-80ed-4d64-bb70-84ac26e8d98c in 3.040884ms - timestamp: 1755194126356941646
+mr_robot1    | 2025/08/14 17:55:26 POST /payments 31.151µs
+mr_robot1    | 2025/08/14 17:55:26 [Worker 1] Processing job 7c9a7fa6-afb6-4db4-b166-b2f345ff2c62 (attempt 3) - timestamp: 1755194126371992454
+mr_robot1    | 2025/08/14 17:55:26 [Worker 1] Successfully processed job 7c9a7fa6-afb6-4db4-b166-b2f345ff2c62 in 3.136178ms - timestamp: 1755194126375074670
+mr_robot2    | 2025/08/14 17:55:26 POST /payments 33.151µs
+mr_robot2    | 2025/08/14 17:55:26 [Worker 0] Processing job 08b597d0-cfd4-417a-8fd8-9be2061dc96a (attempt 3) - timestamp: 1755194126389157915
+mr_robot2    | 2025/08/14 17:55:26 [Worker 0] Successfully processed job 08b597d0-cfd4-417a-8fd8-9be2061dc96a in 2.783476ms - timestamp: 1755194126391918800
+mr_robot1    | 2025/08/14 17:55:26 POST /payments 40.522µs
+mr_robot1    | 2025/08/14 17:55:26 [Worker 0] Processing job 95799566-c7dd-4c68-a211-b330cb46962e (attempt 3) - timestamp: 1755194126407160165
+mr_robot1    | 2025/08/14 17:55:26 [Worker 0] Successfully processed job 95799566-c7dd-4c68-a211-b330cb46962e in 2.847738ms - timestamp: 1755194126409958872
+mr_robot2    | 2025/08/14 17:55:26 POST /payments 32.341µs
+mr_robot2    | 2025/08/14 17:55:26 [Worker 2] Processing job c3cd0355-eb61-41f0-8cb5-0a0f2196de3a (attempt 3) - timestamp: 1755194126426391817
+mr_robot2    | 2025/08/14 17:55:26 [Worker 2] Successfully processed job c3cd0355-eb61-41f0-8cb5-0a0f2196de3a in 2.872209ms - timestamp: 1755194126429241265
+mr_robot1    | 2025/08/14 17:55:26 POST /payments 62.972µs
+mr_robot1    | 2025/08/14 17:55:26 [Worker 2] Processing job 703bde00-094b-460b-aec2-30474c67f958 (attempt 3) - timestamp: 1755194126475965463
+mr_robot1    | 2025/08/14 17:55:26 [Worker 2] Successfully processed job 703bde00-094b-460b-aec2-30474c67f958 in 3.027214ms - timestamp: 1755194126478965686
+mr_robot2    | 2025/08/14 17:55:26 POST /payments 36.901µs
+mr_robot2    | 2025/08/14 17:55:26 [Worker 3] Processing job d47c3a04-9062-4d4f-835f-b51a45ec96ce (attempt 3) - timestamp: 1755194126482066313
+mr_robot2    | 2025/08/14 17:55:26 [Worker 3] Successfully processed job d47c3a04-9062-4d4f-835f-b51a45ec96ce in 2.998173ms - timestamp: 1755194126485006334
+mr_robot1    | 2025/08/14 17:55:26 POST /payments 30.872µs
+mr_robot1    | 2025/08/14 17:55:26 [Worker 3] Processing job 67dbe09a-362b-4509-843a-67d9b8558524 (attempt 3) - timestamp: 1755194126500087743
+mr_robot1    | 2025/08/14 17:55:26 [Worker 3] Successfully processed job 67dbe09a-362b-4509-843a-67d9b8558524 in 2.722824ms - timestamp: 1755194126502762525
+mr_robot2    | 2025/08/14 17:55:26 POST /payments 35.641µs
+mr_robot2    | 2025/08/14 17:55:26 [Worker 4] Processing job 707e7181-c0d4-4437-ad19-b86609b8043a (attempt 3) - timestamp: 1755194126517162421
+mr_robot2    | 2025/08/14 17:55:26 [Worker 4] Successfully processed job 707e7181-c0d4-4437-ad19-b86609b8043a in 2.728064ms - timestamp: 1755194126519871804
+mr_robot1    | 2025/08/14 17:55:26 POST /payments 32.681µs
+mr_robot1    | 2025/08/14 17:55:26 [Worker 4] Processing job d5cd4878-5856-4c84-995a-03d142cbd4fe (attempt 3) - timestamp: 1755194126534343082
+mr_robot1    | 2025/08/14 17:55:26 [Worker 4] Successfully processed job d5cd4878-5856-4c84-995a-03d142cbd4fe in 2.833437ms - timestamp: 1755194126537154429
+mr_robot2    | 2025/08/14 17:55:26 POST /payments 53.382µs
+mr_robot2    | 2025/08/14 17:55:26 [Worker 1] Processing job 847ac495-4acc-4292-b93b-fc28f494219b (attempt 3) - timestamp: 1755194126571861034
+mr_robot2    | 2025/08/14 17:55:26 [Worker 1] Successfully processed job 847ac495-4acc-4292-b93b-fc28f494219b in 2.951741ms - timestamp: 1755194126574790475
+mr_robot1    | 2025/08/14 17:55:26 POST /payments 31.561µs
+mr_robot1    | 2025/08/14 17:55:26 [Worker 1] Processing job 7f91ce60-0e63-4b01-93f9-84232adc0623 (attempt 3) - timestamp: 1755194126590089631
+mr_robot1    | 2025/08/14 17:55:26 [Worker 1] Successfully processed job 7f91ce60-0e63-4b01-93f9-84232adc0623 in 2.952151ms - timestamp: 1755194126592988991
+mr_robot2    | 2025/08/14 17:55:26 POST /payments 33.071µs
+mr_robot2    | 2025/08/14 17:55:26 [Worker 0] Processing job f49da396-724d-4b5f-aefd-1862f8776877 (attempt 3) - timestamp: 1755194126608078000
+mr_robot2    | 2025/08/14 17:55:26 [Worker 0] Successfully processed job f49da396-724d-4b5f-aefd-1862f8776877 in 2.972612ms - timestamp: 1755194126611031632
+mr_robot1    | 2025/08/14 17:55:26 POST /payments 30.051µs
+mr_robot1    | 2025/08/14 17:55:26 [Worker 0] Processing job cfea8ab1-dce8-4965-bc5f-8aa0d7889fe4 (attempt 3) - timestamp: 1755194126626173303
+mr_robot1    | 2025/08/14 17:55:26 [Worker 0] Successfully processed job cfea8ab1-dce8-4965-bc5f-8aa0d7889fe4 in 2.881529ms - timestamp: 1755194126629027441
+mr_robot2    | 2025/08/14 17:55:26 POST /payments 37.522µs
+mr_robot2    | 2025/08/14 17:55:26 [Worker 2] Processing job e9bcebeb-4c81-4842-8714-d7edf58887cb (attempt 3) - timestamp: 1755194126643164048
+mr_robot2    | 2025/08/14 17:55:26 [Worker 2] Successfully processed job e9bcebeb-4c81-4842-8714-d7edf58887cb in 2.853528ms - timestamp: 1755194126645999766
+mr_robot1    | 2025/08/14 17:55:26 POST /payments 56.692µs
+mr_robot1    | 2025/08/14 17:55:26 [Worker 2] Processing job 120ab55e-a2a5-44b6-bda2-6c16e7908073 (attempt 3) - timestamp: 1755194126682147520
+mr_robot1    | 2025/08/14 17:55:26 [Worker 2] Successfully processed job 120ab55e-a2a5-44b6-bda2-6c16e7908073 in 2.941881ms - timestamp: 1755194126685075801
+mr_robot2    | 2025/08/14 17:55:26 POST /payments 31.591µs
+mr_robot2    | 2025/08/14 17:55:26 [Worker 3] Processing job f8e4c06b-9b9a-4bf7-8bd5-63c0969b7bf2 (attempt 3) - timestamp: 1755194126699133345
+mr_robot2    | 2025/08/14 17:55:26 [Worker 3] Successfully processed job f8e4c06b-9b9a-4bf7-8bd5-63c0969b7bf2 in 2.886569ms - timestamp: 1755194126701969913
+mr_robot1    | 2025/08/14 17:55:26 POST /payments 48.262µs
+mr_robot1    | 2025/08/14 17:55:26 [Worker 3] Processing job faaff581-d27a-4441-a34c-8f68e7f10ed1 (attempt 3) - timestamp: 1755194126717205667
+mr_robot1    | 2025/08/14 17:55:26 [Worker 3] Successfully processed job faaff581-d27a-4441-a34c-8f68e7f10ed1 in 2.91385ms - timestamp: 1755194126720089766
+mr_robot2    | 2025/08/14 17:55:26 POST /payments 34.752µs
+mr_robot2    | 2025/08/14 17:55:26 [Worker 4] Processing job 85599563-fcbc-48cf-bd3a-4d6a2281d403 (attempt 3) - timestamp: 1755194126735570589
+mr_robot2    | 2025/08/14 17:55:26 [Worker 4] Successfully processed job 85599563-fcbc-48cf-bd3a-4d6a2281d403 in 2.934421ms - timestamp: 1755194126738484779
+mr_robot1    | 2025/08/14 17:55:26 POST /payments 31.771µs
+mr_robot1    | 2025/08/14 17:55:26 [Worker 4] Processing job 09d8e60f-518a-4d05-bda8-dccbffdad611 (attempt 3) - timestamp: 1755194126752599685
+mr_robot1    | 2025/08/14 17:55:26 [Worker 4] Successfully processed job 09d8e60f-518a-4d05-bda8-dccbffdad611 in 3.104517ms - timestamp: 1755194126755649780
+mr_robot2    | 2025/08/14 17:55:26 POST /payments 57.082µs
+mr_robot2    | 2025/08/14 17:55:26 [Worker 1] Processing job ef81042f-421f-4524-8f67-3e8508495bf8 (attempt 3) - timestamp: 1755194126791461173
+mr_robot2    | 2025/08/14 17:55:26 [Worker 1] Successfully processed job ef81042f-421f-4524-8f67-3e8508495bf8 in 2.91455ms - timestamp: 1755194126794360793
+mr_robot1    | 2025/08/14 17:55:26 POST /payments 34.961µs
+mr_robot1    | 2025/08/14 17:55:26 [Worker 1] Processing job cf2a9a4a-51a3-4126-97d1-f196867d97f1 (attempt 3) - timestamp: 1755194126814436274
+mr_robot1    | 2025/08/14 17:55:26 [Worker 1] Successfully processed job cf2a9a4a-51a3-4126-97d1-f196867d97f1 in 2.949962ms - timestamp: 1755194126817363585
+mr_robot2    | 2025/08/14 17:55:26 POST /payments 34.322µs
+mr_robot2    | 2025/08/14 17:55:26 [Worker 0] Processing job 5022a505-6532-4694-a68b-56c7db8500a2 (attempt 3) - timestamp: 1755194126826470068
+mr_robot2    | 2025/08/14 17:55:26 [Worker 0] Successfully processed job 5022a505-6532-4694-a68b-56c7db8500a2 in 2.928061ms - timestamp: 1755194126829379958
+mr_robot1    | 2025/08/14 17:55:26 POST /payments 33.791µs
+mr_robot1    | 2025/08/14 17:55:26 [Worker 0] Processing job 886bc8d2-44ee-463c-886f-f08e24573896 (attempt 3) - timestamp: 1755194126843507285
+mr_robot1    | 2025/08/14 17:55:26 [Worker 0] Successfully processed job 886bc8d2-44ee-463c-886f-f08e24573896 in 2.748424ms - timestamp: 1755194126846230998
+mr_robot2    | 2025/08/14 17:55:26 POST /payments 38.091µs
+mr_robot2    | 2025/08/14 17:55:26 [Worker 2] Processing job 2023cf64-f0e5-49f7-af41-c2f4bcdd52e4 (attempt 3) - timestamp: 1755194126861599167
+mr_robot2    | 2025/08/14 17:55:26 [Worker 2] Successfully processed job 2023cf64-f0e5-49f7-af41-c2f4bcdd52e4 in 2.784676ms - timestamp: 1755194126864369263
+mr_robot1    | 2025/08/14 17:55:26 POST /payments 61.002µs
+mr_robot1    | 2025/08/14 17:55:26 [Worker 2] Processing job 19a2db95-e654-4697-bbb0-dd36d6921580 (attempt 3) - timestamp: 1755194126900524727
+mr_robot1    | 2025/08/14 17:55:26 [Worker 2] Successfully processed job 19a2db95-e654-4697-bbb0-dd36d6921580 in 2.969462ms - timestamp: 1755194126903474709
+mr_robot2    | 2025/08/14 17:55:26 POST /payments 44.272µs
+mr_robot2    | 2025/08/14 17:55:26 [Worker 3] Processing job 4e4c4303-8bcb-4f3a-88da-19f91fee48b2 (attempt 3) - timestamp: 1755194126918643562
+mr_robot2    | 2025/08/14 17:55:26 [Worker 3] Successfully processed job 4e4c4303-8bcb-4f3a-88da-19f91fee48b2 in 2.792476ms - timestamp: 1755194126921386427
+mr_robot1    | 2025/08/14 17:55:26 POST /payments 29.921µs
+mr_robot1    | 2025/08/14 17:55:26 [Worker 3] Processing job 18005ac4-68d1-400a-9086-9d6cce6baf46 (attempt 3) - timestamp: 1755194126936799467
+mr_robot1    | 2025/08/14 17:55:26 [Worker 3] Successfully processed job 18005ac4-68d1-400a-9086-9d6cce6baf46 in 2.636551ms - timestamp: 1755194126939410937
+mr_robot2    | 2025/08/14 17:55:26 POST /payments 34.361µs
+mr_robot2    | 2025/08/14 17:55:26 [Worker 4] Processing job 9722edef-02f4-4d55-9eeb-ba752c23dfe7 (attempt 3) - timestamp: 1755194126954764315
+mr_robot2    | 2025/08/14 17:55:26 [Worker 4] Successfully processed job 9722edef-02f4-4d55-9eeb-ba752c23dfe7 in 2.813427ms - timestamp: 1755194126957555071
+mr_robot1    | 2025/08/14 17:55:26 POST /payments 30.661µs
+mr_robot1    | 2025/08/14 17:55:26 [Worker 4] Processing job 35e7e3c0-4283-43a5-96fd-0fd857aa7eaa (attempt 3) - timestamp: 1755194126972779785
+mr_robot1    | 2025/08/14 17:55:26 [Worker 4] Successfully processed job 35e7e3c0-4283-43a5-96fd-0fd857aa7eaa in 3.104667ms - timestamp: 1755194126975865821
+mr_robot2    | 2025/08/14 17:55:27 POST /payments 58.052µs
+mr_robot2    | 2025/08/14 17:55:27 [Worker 1] Processing job a8fa3282-e6ff-4f23-8c95-b9078bf1fc3b (attempt 3) - timestamp: 1755194127009304732
+mr_robot2    | 2025/08/14 17:55:27 [Worker 1] Successfully processed job a8fa3282-e6ff-4f23-8c95-b9078bf1fc3b in 2.90573ms - timestamp: 1755194127012196221
+mr_robot1    | 2025/08/14 17:55:27 POST /payments 71.112µs
+mr_robot1    | 2025/08/14 17:55:27 [Worker 1] Processing job 6cc4b369-b6ec-4c45-83f7-201502beee66 (attempt 3) - timestamp: 1755194127027694115
+mr_robot1    | 2025/08/14 17:55:27 [Worker 1] Successfully processed job 6cc4b369-b6ec-4c45-83f7-201502beee66 in 2.863969ms - timestamp: 1755194127030545323
+mr_robot2    | 2025/08/14 17:55:27 POST /payments 36.171µs
+mr_robot2    | 2025/08/14 17:55:27 [Worker 0] Processing job eac809a2-c603-4f14-a677-5ca63dad2191 (attempt 3) - timestamp: 1755194127057829973
+mr_robot2    | 2025/08/14 17:55:27 [Worker 0] Successfully processed job eac809a2-c603-4f14-a677-5ca63dad2191 in 2.786796ms - timestamp: 1755194127060563187
+mr_robot1    | 2025/08/14 17:55:27 POST /payments 35.871µs
+mr_robot1    | 2025/08/14 17:55:27 [Worker 0] Processing job a6303f45-8a40-4724-8d5a-331dc7ac8afd (attempt 3) - timestamp: 1755194127062816504
+mr_robot1    | 2025/08/14 17:55:27 [Worker 0] Successfully processed job a6303f45-8a40-4724-8d5a-331dc7ac8afd in 2.859028ms - timestamp: 1755194127065613250
+mr_robot2    | 2025/08/14 17:55:27 POST /payments 40.432µs
+mr_robot2    | 2025/08/14 17:55:27 [Worker 2] Processing job 6edb626c-ca27-4533-acbc-094721b83a83 (attempt 3) - timestamp: 1755194127081946082
+mr_robot2    | 2025/08/14 17:55:27 [Worker 2] Successfully processed job 6edb626c-ca27-4533-acbc-094721b83a83 in 2.869388ms - timestamp: 1755194127084791480
+mr_robot1    | 2025/08/14 17:55:27 POST /payments 44.022µs
+mr_robot1    | 2025/08/14 17:55:27 [Worker 2] Processing job b3e59bfb-f6d6-4085-8a78-31944f0e3748 (attempt 3) - timestamp: 1755194127118588864
+mr_robot1    | 2025/08/14 17:55:27 [Worker 2] Successfully processed job b3e59bfb-f6d6-4085-8a78-31944f0e3748 in 2.89059ms - timestamp: 1755194127121462663
+mr_robot2    | 2025/08/14 17:55:27 POST /payments 37.171µs
+mr_robot2    | 2025/08/14 17:55:27 [Worker 3] Processing job e8399444-d836-4fe9-bc72-4c91f2be70be (attempt 3) - timestamp: 1755194127136883383
+mr_robot2    | 2025/08/14 17:55:27 [Worker 3] Successfully processed job e8399444-d836-4fe9-bc72-4c91f2be70be in 3.050705ms - timestamp: 1755194127139873366
+mr_robot1    | 2025/08/14 17:55:27 POST /payments 35.401µs
+mr_robot1    | 2025/08/14 17:55:27 [Worker 3] Processing job bb73e560-c392-4ac2-ba4c-56eae7f06949 (attempt 3) - timestamp: 1755194127157992130
+mr_robot1    | 2025/08/14 17:55:27 [Worker 3] Successfully processed job bb73e560-c392-4ac2-ba4c-56eae7f06949 in 2.988903ms - timestamp: 1755194127160921181
+mr_robot2    | 2025/08/14 17:55:27 POST /payments 29.831µs
+mr_robot2    | 2025/08/14 17:55:27 [Worker 4] Processing job 926d33f8-36a6-4c82-a371-a8b7377982d5 (attempt 3) - timestamp: 1755194127179184010
+mr_robot2    | 2025/08/14 17:55:27 [Worker 4] Successfully processed job 926d33f8-36a6-4c82-a371-a8b7377982d5 in 2.809896ms - timestamp: 1755194127181963025
+mr_robot1    | 2025/08/14 17:55:27 POST /payments 37.852µs
+mr_robot1    | 2025/08/14 17:55:27 [Worker 4] Processing job 2fe4cbfb-39e3-4c5d-a9d8-510a88ea29e0 (attempt 3) - timestamp: 1755194127190216169
+mr_robot1    | 2025/08/14 17:55:27 [Worker 4] Successfully processed job 2fe4cbfb-39e3-4c5d-a9d8-510a88ea29e0 in 2.800717ms - timestamp: 1755194127192990065
+mr_robot2    | 2025/08/14 17:55:27 POST /payments 59.842µs
+mr_robot2    | 2025/08/14 17:55:27 [Worker 1] Processing job 547dc03c-d38e-4666-b87d-016c6912ac43 (attempt 3) - timestamp: 1755194127210326822
+mr_robot2    | 2025/08/14 17:55:27 [Worker 1] Successfully processed job 547dc03c-d38e-4666-b87d-016c6912ac43 in 2.814117ms - timestamp: 1755194127213119228
+mr_robot1    | 2025/08/14 17:55:27 POST /payments 49.872µs
+mr_robot1    | 2025/08/14 17:55:27 [Worker 1] Processing job 6042abac-42d1-4e8b-8704-f533e63478e4 (attempt 3) - timestamp: 1755194127228185626
+mr_robot1    | 2025/08/14 17:55:27 [Worker 1] Successfully processed job 6042abac-42d1-4e8b-8704-f533e63478e4 in 2.848808ms - timestamp: 1755194127231015484
+mr_robot2    | 2025/08/14 17:55:27 POST /payments 36.082µs
+mr_robot2    | 2025/08/14 17:55:27 [Worker 0] Processing job 8d191d4b-62de-4eca-8cab-84394592de25 (attempt 3) - timestamp: 1755194127246223047
+mr_robot2    | 2025/08/14 17:55:27 [Worker 0] Successfully processed job 8d191d4b-62de-4eca-8cab-84394592de25 in 2.863389ms - timestamp: 1755194127249058945
+mr_robot1    | 2025/08/14 17:55:27 POST /payments 33.542µs
+mr_robot1    | 2025/08/14 17:55:27 [Worker 0] Processing job 25545250-12b5-4013-98c6-255eca583e1f (attempt 3) - timestamp: 1755194127264289890
+mr_robot1    | 2025/08/14 17:55:27 [Worker 0] Successfully processed job 25545250-12b5-4013-98c6-255eca583e1f in 2.921891ms - timestamp: 1755194127267197190
+mr_robot2    | 2025/08/14 17:55:27 POST /payments 39.921µs
+mr_robot2    | 2025/08/14 17:55:27 [Worker 2] Processing job 40d47472-5d9d-42af-92bc-88230ac5000e (attempt 3) - timestamp: 1755194127281465141
+mr_robot2    | 2025/08/14 17:55:27 [Worker 2] Successfully processed job 40d47472-5d9d-42af-92bc-88230ac5000e in 2.999823ms - timestamp: 1755194127284406402
+mr_robot1    | 2025/08/14 17:55:27 POST /payments 25.331µs
+mr_robot1    | 2025/08/14 17:55:27 [Worker 2] Processing job 53b42431-d052-4825-a350-da886900f9d0 (attempt 3) - timestamp: 1755194127300539067
+mr_robot1    | 2025/08/14 17:55:27 [Worker 2] Successfully processed job 53b42431-d052-4825-a350-da886900f9d0 in 2.959882ms - timestamp: 1755194127303446527
+mr_robot2    | 2025/08/14 17:55:27 POST /payments 32.951µs
+mr_robot2    | 2025/08/14 17:55:27 [Worker 3] Processing job ec6db72e-3a99-489b-a421-137bed510b46 (attempt 3) - timestamp: 1755194127317526292
+mr_robot2    | 2025/08/14 17:55:27 [Worker 3] Successfully processed job ec6db72e-3a99-489b-a421-137bed510b46 in 2.837428ms - timestamp: 1755194127320345709
+mr_robot1    | 2025/08/14 17:55:27 POST /payments 61.332µs
+mr_robot1    | 2025/08/14 17:55:27 [Worker 3] Processing job b0886347-a63a-416b-8ed5-466ef12faefa (attempt 3) - timestamp: 1755194127346337484
+mr_robot1    | 2025/08/14 17:55:27 [Worker 3] Successfully processed job b0886347-a63a-416b-8ed5-466ef12faefa in 2.92064ms - timestamp: 1755194127349237583
+mr_robot2    | 2025/08/14 17:55:27 POST /payments 31.901µs
+mr_robot2    | 2025/08/14 17:55:27 [Worker 4] Processing job ebc25863-038a-4ab7-adbf-f6a30595a692 (attempt 3) - timestamp: 1755194127355230030
+mr_robot2    | 2025/08/14 17:55:27 [Worker 4] Successfully processed job ebc25863-038a-4ab7-adbf-f6a30595a692 in 2.816357ms - timestamp: 1755194127358033126
+mr_robot1    | 2025/08/14 17:55:27 POST /payments 33.311µs
+mr_robot1    | 2025/08/14 17:55:27 [Worker 4] Processing job 3a9b07e7-c189-4873-8759-61f699cca094 (attempt 3) - timestamp: 1755194127373204498
+mr_robot1    | 2025/08/14 17:55:27 [Worker 4] Successfully processed job 3a9b07e7-c189-4873-8759-61f699cca094 in 2.922311ms - timestamp: 1755194127376098228
+mr_robot2    | 2025/08/14 17:55:27 POST /payments 33.921µs
+mr_robot2    | 2025/08/14 17:55:27 [Worker 1] Processing job b2878f27-840d-413d-bbb9-08c7c3cf68bf (attempt 3) - timestamp: 1755194127390135051
+mr_robot2    | 2025/08/14 17:55:27 [Worker 1] Successfully processed job b2878f27-840d-413d-bbb9-08c7c3cf68bf in 2.835927ms - timestamp: 1755194127392952768
+mr_robot1    | 2025/08/14 17:55:27 [Worker 1] Processing job 57d6eb68-ab58-4650-a183-467689f68bd4 (attempt 3) - timestamp: 1755194127408158352
+mr_robot1    | 2025/08/14 17:55:27 POST /payments 78.423µs
+mr_robot1    | 2025/08/14 17:55:27 [Worker 1] Successfully processed job 57d6eb68-ab58-4650-a183-467689f68bd4 in 2.823397ms - timestamp: 1755194127410969778
+mr_robot2    | 2025/08/14 17:55:27 POST /payments 43.501µs
+mr_robot2    | 2025/08/14 17:55:27 [Worker 0] Processing job de2ccfa8-9874-40af-889e-c3b966113f6d (attempt 3) - timestamp: 1755194127427607771
+mr_robot2    | 2025/08/14 17:55:27 [Worker 0] Successfully processed job de2ccfa8-9874-40af-889e-c3b966113f6d in 2.812837ms - timestamp: 1755194127430389257
+mr_robot1    | 2025/08/14 17:55:27 POST /payments 57.172µs
+mr_robot1    | 2025/08/14 17:55:27 [Worker 0] Processing job ce92bc8a-e9af-4566-b85a-c67590343a24 (attempt 3) - timestamp: 1755194127447109862
+mr_robot1    | 2025/08/14 17:55:27 [Worker 0] Successfully processed job ce92bc8a-e9af-4566-b85a-c67590343a24 in 2.806936ms - timestamp: 1755194127449899008
+mr_robot2    | 2025/08/14 17:55:27 POST /payments 36.741µs
+mr_robot2    | 2025/08/14 17:55:27 [Worker 2] Processing job fc1a23b1-6453-4d3b-83a3-c8440845ea8e (attempt 3) - timestamp: 1755194127477393526
+mr_robot2    | 2025/08/14 17:55:27 [Worker 2] Successfully processed job fc1a23b1-6453-4d3b-83a3-c8440845ea8e in 2.891739ms - timestamp: 1755194127480220243
+mr_robot1    | 2025/08/14 17:55:27 POST /payments 29.691µs
+mr_robot1    | 2025/08/14 17:55:27 [Worker 2] Processing job 47d56c1a-59c0-44ce-b56a-cec84747a8cd (attempt 3) - timestamp: 1755194127483377972
+mr_robot1    | 2025/08/14 17:55:27 [Worker 2] Successfully processed job 47d56c1a-59c0-44ce-b56a-cec84747a8cd in 2.776546ms - timestamp: 1755194127486106556
+mr_robot2    | 2025/08/14 17:55:27 POST /payments 28.771µs
+mr_robot2    | 2025/08/14 17:55:27 [Worker 3] Processing job 3eaaad65-7443-4fdd-ba14-1aa8131bca8b (attempt 3) - timestamp: 1755194127501426693
+mr_robot2    | 2025/08/14 17:55:27 [Worker 3] Successfully processed job 3eaaad65-7443-4fdd-ba14-1aa8131bca8b in 2.712583ms - timestamp: 1755194127504112635
+mr_robot1    | 2025/08/14 17:55:27 POST /payments 29.761µs
+mr_robot1    | 2025/08/14 17:55:27 [Worker 3] Processing job 7a166e29-68c8-4b21-b3b9-7e4bc7aec8a9 (attempt 3) - timestamp: 1755194127518527151
+mr_robot1    | 2025/08/14 17:55:27 [Worker 3] Successfully processed job 7a166e29-68c8-4b21-b3b9-7e4bc7aec8a9 in 2.880829ms - timestamp: 1755194127521381429
+mr_robot2    | 2025/08/14 17:55:27 POST /payments 36.602µs
+mr_robot2    | 2025/08/14 17:55:27 [Worker 4] Processing job 7d2a2eb8-f246-4903-8680-41bd38161d24 (attempt 3) - timestamp: 1755194127535787855
+mr_robot2    | 2025/08/14 17:55:27 [Worker 4] Successfully processed job 7d2a2eb8-f246-4903-8680-41bd38161d24 in 2.753555ms - timestamp: 1755194127538525219
+mr_robot1    | 2025/08/14 17:55:27 POST /payments 52.732µs
+mr_robot1    | 2025/08/14 17:55:27 [Worker 4] Processing job 89ada31c-716f-4515-bd42-9fc34210aa4d (attempt 3) - timestamp: 1755194127556280050
+mr_robot1    | 2025/08/14 17:55:27 [Worker 4] Successfully processed job 89ada31c-716f-4515-bd42-9fc34210aa4d in 2.843718ms - timestamp: 1755194127559107398
+mr_robot2    | 2025/08/14 17:55:27 POST /payments 40.981µs
+mr_robot2    | 2025/08/14 17:55:27 [Worker 1] Processing job fa0dc12f-ac18-4276-b15c-589f761eb81d (attempt 3) - timestamp: 1755194127573358528
+mr_robot2    | 2025/08/14 17:55:27 [Worker 1] Successfully processed job fa0dc12f-ac18-4276-b15c-589f761eb81d in 2.996954ms - timestamp: 1755194127576336981
+mr_robot1    | 2025/08/14 17:55:27 POST /payments 39.191µs
+mr_robot1    | 2025/08/14 17:55:27 [Worker 1] Processing job ed5178a0-250b-4461-9105-1fdc7e8c2e31 (attempt 3) - timestamp: 1755194127591317776
+mr_robot1    | 2025/08/14 17:55:27 [Worker 1] Successfully processed job ed5178a0-250b-4461-9105-1fdc7e8c2e31 in 2.941902ms - timestamp: 1755194127594202246
+mr_robot2    | 2025/08/14 17:55:27 POST /payments 31.581µs
+mr_robot2    | 2025/08/14 17:55:27 [Worker 0] Processing job 7fc04b8d-0843-4a75-9fa6-6bf6e6508d96 (attempt 3) - timestamp: 1755194127609407569
+mr_robot2    | 2025/08/14 17:55:27 [Worker 0] Successfully processed job 7fc04b8d-0843-4a75-9fa6-6bf6e6508d96 in 2.865779ms - timestamp: 1755194127612218986
+mr_robot1    | 2025/08/14 17:55:27 POST /payments 31.972µs
+mr_robot1    | 2025/08/14 17:55:27 [Worker 0] Processing job 1f07c572-0f33-4a70-ae01-d17f8685a03f (attempt 3) - timestamp: 1755194127627481771
+mr_robot1    | 2025/08/14 17:55:27 [Worker 0] Successfully processed job 1f07c572-0f33-4a70-ae01-d17f8685a03f in 2.858839ms - timestamp: 1755194127630320649
+mr_robot2    | 2025/08/14 17:55:27 POST /payments 33.461µs
+mr_robot2    | 2025/08/14 17:55:27 [Worker 2] Processing job cd4e86d2-fefc-4be7-b6f1-56c7f0ca4e1b (attempt 3) - timestamp: 1755194127644462246
+mr_robot2    | 2025/08/14 17:55:27 [Worker 2] Successfully processed job cd4e86d2-fefc-4be7-b6f1-56c7f0ca4e1b in 2.967812ms - timestamp: 1755194127647410027
+mr_robot1    | 2025/08/14 17:55:27 POST /payments 60.392µs
+mr_robot1    | 2025/08/14 17:55:27 [Worker 2] Processing job 260a2b4e-9470-479c-85bd-ef71191f3cfa (attempt 3) - timestamp: 1755194127665026403
+mr_robot1    | 2025/08/14 17:55:27 [Worker 2] Successfully processed job 260a2b4e-9470-479c-85bd-ef71191f3cfa in 2.801536ms - timestamp: 1755194127667809729
+mr_robot2    | 2025/08/14 17:55:27 POST /payments 36.261µs
+mr_robot2    | 2025/08/14 17:55:27 [Worker 3] Processing job 5024a52e-c257-469b-8e72-0dd905e95efe (attempt 3) - timestamp: 1755194127683264932
+mr_robot2    | 2025/08/14 17:55:27 [Worker 3] Successfully processed job 5024a52e-c257-469b-8e72-0dd905e95efe in 2.828048ms - timestamp: 1755194127686068989
+mr_robot1    | 2025/08/14 17:55:27 POST /payments 34.312µs
+mr_robot1    | 2025/08/14 17:55:27 [Worker 3] Processing job 7d515605-4004-417b-a612-edff164457d6 (attempt 3) - timestamp: 1755194127700277877
+mr_robot1    | 2025/08/14 17:55:27 [Worker 3] Successfully processed job 7d515605-4004-417b-a612-edff164457d6 in 2.896779ms - timestamp: 1755194127703150616
+mr_robot2    | 2025/08/14 17:55:27 POST /payments 29.991µs
+mr_robot2    | 2025/08/14 17:55:27 [Worker 4] Processing job 33e31e06-3762-45f1-921b-2930a870e725 (attempt 3) - timestamp: 1755194127718140842
+mr_robot2    | 2025/08/14 17:55:27 [Worker 4] Successfully processed job 33e31e06-3762-45f1-921b-2930a870e725 in 2.804516ms - timestamp: 1755194127720919697
+mr_robot1    | 2025/08/14 17:55:27 POST /payments 44.031µs
+mr_robot1    | 2025/08/14 17:55:27 [Worker 4] Processing job d4e8b092-f993-4039-b73d-5c032a18722f (attempt 3) - timestamp: 1755194127737272120
+mr_robot1    | 2025/08/14 17:55:27 [Worker 4] Successfully processed job d4e8b092-f993-4039-b73d-5c032a18722f in 2.835728ms - timestamp: 1755194127740074567
+mr_robot2    | 2025/08/14 17:55:27 POST /payments 30.541µs
+mr_robot2    | 2025/08/14 17:55:27 [Worker 1] Processing job c23cb2d5-13eb-4380-952a-aec7f33331f2 (attempt 3) - timestamp: 1755194127754400840
+mr_robot2    | 2025/08/14 17:55:27 [Worker 1] Successfully processed job c23cb2d5-13eb-4380-952a-aec7f33331f2 in 2.745385ms - timestamp: 1755194127757125924
+mr_robot1    | 2025/08/14 17:55:27 POST /payments 66.232µs
+mr_robot1    | 2025/08/14 17:55:27 [Worker 1] Processing job 8b1631e3-be33-49ff-a7ff-7198d4d86748 (attempt 3) - timestamp: 1755194127774997639
+mr_robot1    | 2025/08/14 17:55:27 [Worker 1] Successfully processed job 8b1631e3-be33-49ff-a7ff-7198d4d86748 in 2.920331ms - timestamp: 1755194127777893999
+mr_robot2    | 2025/08/14 17:55:27 POST /payments 29.871µs
+mr_robot2    | 2025/08/14 17:55:27 [Worker 0] Processing job 5515586d-5b33-4bd1-a466-29ca3933fafc (attempt 3) - timestamp: 1755194127793118963
+mr_robot2    | 2025/08/14 17:55:27 [Worker 0] Successfully processed job 5515586d-5b33-4bd1-a466-29ca3933fafc in 2.737224ms - timestamp: 1755194127795794175
+mr_robot1    | 2025/08/14 17:55:27 POST /payments 35.621µs
+mr_robot1    | 2025/08/14 17:55:27 [Worker 0] Processing job 39685521-79b4-4720-931f-4fffa2594b8d (attempt 3) - timestamp: 1755194127816003991
+mr_robot1    | 2025/08/14 17:55:27 [Worker 0] Successfully processed job 39685521-79b4-4720-931f-4fffa2594b8d in 2.92119ms - timestamp: 1755194127818906021
+mr_robot2    | 2025/08/14 17:55:27 POST /payments 29.941µs
+mr_robot2    | 2025/08/14 17:55:27 [Worker 2] Processing job 0c41f10d-33b6-485f-a31a-04634c43e5e9 (attempt 3) - timestamp: 1755194127828331055
+mr_robot2    | 2025/08/14 17:55:27 [Worker 2] Successfully processed job 0c41f10d-33b6-485f-a31a-04634c43e5e9 in 5.281111ms - timestamp: 1755194127833557685
+mr_robot1    | 2025/08/14 17:55:27 POST /payments 45.801µs
+mr_robot1    | 2025/08/14 17:55:27 [Worker 2] Processing job d3f3203e-ed7e-4399-b8b1-4b9089a3ac03 (attempt 3) - timestamp: 1755194127845325080
+mr_robot1    | 2025/08/14 17:55:27 [Worker 2] Successfully processed job d3f3203e-ed7e-4399-b8b1-4b9089a3ac03 in 4.227525ms - timestamp: 1755194127849522754
+mr_robot2    | 2025/08/14 17:55:27 POST /payments 29.431µs
+mr_robot2    | 2025/08/14 17:55:27 [Worker 3] Processing job 67521462-3937-4dbb-a5c2-62a33d759475 (attempt 3) - timestamp: 1755194127863363791
+mr_robot2    | 2025/08/14 17:55:27 [Worker 3] Successfully processed job 67521462-3937-4dbb-a5c2-62a33d759475 in 2.661751ms - timestamp: 1755194127865999501
+mr_robot1    | 2025/08/14 17:55:27 POST /payments 60.732µs
+mr_robot1    | 2025/08/14 17:55:27 [Worker 3] Processing job 8a50913b-5ab3-4aa2-a71e-7f0a5927db24 (attempt 3) - timestamp: 1755194127884156597
+mr_robot1    | 2025/08/14 17:55:27 [Worker 3] Successfully processed job 8a50913b-5ab3-4aa2-a71e-7f0a5927db24 in 2.696093ms - timestamp: 1755194127886846660
+mr_robot2    | 2025/08/14 17:55:27 POST /payments 34.721µs
+mr_robot2    | 2025/08/14 17:55:27 [Worker 4] Processing job f7638297-9031-458c-aa5f-89ed930bfef4 (attempt 3) - timestamp: 1755194127902191918
+mr_robot2    | 2025/08/14 17:55:27 [Worker 4] Successfully processed job f7638297-9031-458c-aa5f-89ed930bfef4 in 2.691402ms - timestamp: 1755194127904855799
+mr_robot1    | 2025/08/14 17:55:27 POST /payments 40.431µs
+mr_robot1    | 2025/08/14 17:55:27 [Worker 4] Processing job a4b2719e-1062-482d-baf2-bd778aa7697c (attempt 3) - timestamp: 1755194127920436655
+mr_robot1    | 2025/08/14 17:55:27 [Worker 4] Successfully processed job a4b2719e-1062-482d-baf2-bd778aa7697c in 3.341445ms - timestamp: 1755194127923756940
+mr_robot2    | 2025/08/14 17:55:27 POST /payments 46.292µs
+mr_robot2    | 2025/08/14 17:55:27 [Worker 1] Processing job 3244bc2f-fac5-47c6-b646-a7d2b35a9539 (attempt 3) - timestamp: 1755194127937852965
+mr_robot2    | 2025/08/14 17:55:27 [Worker 1] Successfully processed job 3244bc2f-fac5-47c6-b646-a7d2b35a9539 in 3.46676ms - timestamp: 1755194127941281703
+mr_robot1    | 2025/08/14 17:55:27 POST /payments 40.662µs
+mr_robot1    | 2025/08/14 17:55:27 [Worker 1] Processing job ba44cb58-971c-43fe-b448-6ce04350b1a6 (attempt 3) - timestamp: 1755194127956034930
+mr_robot1    | 2025/08/14 17:55:27 [Worker 1] Successfully processed job ba44cb58-971c-43fe-b448-6ce04350b1a6 in 3.147478ms - timestamp: 1755194127959124887
+mr_robot2    | 2025/08/14 17:55:27 POST /payments 36.831µs
+mr_robot2    | 2025/08/14 17:55:27 [Worker 0] Processing job afa9f027-81c7-4f4f-84b9-9a4f69ed2ac7 (attempt 3) - timestamp: 1755194127974103823
+mr_robot2    | 2025/08/14 17:55:27 [Worker 0] Successfully processed job afa9f027-81c7-4f4f-84b9-9a4f69ed2ac7 in 2.779136ms - timestamp: 1755194127976863458
+mr_robot1    | 2025/08/14 17:55:27 POST /payments 61.412µs
+mr_robot1    | 2025/08/14 17:55:27 [Worker 0] Processing job 723e272c-2807-406c-b161-a27d1dde21ec (attempt 3) - timestamp: 1755194127993265022
+mr_robot1    | 2025/08/14 17:55:27 [Worker 0] Successfully processed job 723e272c-2807-406c-b161-a27d1dde21ec in 2.851378ms - timestamp: 1755194127996111110
+mr_robot2    | 2025/08/14 17:55:28 POST /payments 36.531µs
+mr_robot2    | 2025/08/14 17:55:28 [Worker 2] Processing job bfe5d374-e163-4c97-b9bb-b55e14bbbaf8 (attempt 3) - timestamp: 1755194128010277508
+mr_robot2    | 2025/08/14 17:55:28 [Worker 2] Successfully processed job bfe5d374-e163-4c97-b9bb-b55e14bbbaf8 in 2.798747ms - timestamp: 1755194128013056764
+mr_robot1    | 2025/08/14 17:55:28 POST /payments 31.791µs
+mr_robot1    | 2025/08/14 17:55:28 [Worker 2] Processing job bcd43cdf-965b-485e-bf90-d72a4fa310ff (attempt 3) - timestamp: 1755194128029488699
+mr_robot1    | 2025/08/14 17:55:28 [Worker 2] Successfully processed job bcd43cdf-965b-485e-bf90-d72a4fa310ff in 2.823387ms - timestamp: 1755194128032288295
+mr_robot2    | 2025/08/14 17:55:28 POST /payments 32.561µs
+mr_robot2    | 2025/08/14 17:55:28 [Worker 3] Processing job ef9d9be1-a538-4842-bbdb-4c73f0633cae (attempt 3) - timestamp: 1755194128059495223
+mr_robot2    | 2025/08/14 17:55:28 [Worker 3] Successfully processed job ef9d9be1-a538-4842-bbdb-4c73f0633cae in 2.91184ms - timestamp: 1755194128062384502
+mr_robot1    | 2025/08/14 17:55:28 POST /payments 32.301µs
+mr_robot1    | 2025/08/14 17:55:28 [Worker 3] Processing job b9bf8708-4a4d-4c40-aebc-6542d492b166 (attempt 3) - timestamp: 1755194128064415442
+mr_robot1    | 2025/08/14 17:55:28 [Worker 3] Successfully processed job b9bf8708-4a4d-4c40-aebc-6542d492b166 in 2.678632ms - timestamp: 1755194128067078333
+mr_robot2    | 2025/08/14 17:55:28 POST /payments 29.081µs
+mr_robot2    | 2025/08/14 17:55:28 [Worker 4] Processing job 899b55ea-0dfa-46e2-b0e1-a62cc688d438 (attempt 3) - timestamp: 1755194128083811809
+mr_robot2    | 2025/08/14 17:55:28 [Worker 4] Successfully processed job 899b55ea-0dfa-46e2-b0e1-a62cc688d438 in 2.814676ms - timestamp: 1755194128086555983
+mr_robot1    | 2025/08/14 17:55:28 POST /payments 51.792µs
+mr_robot1    | 2025/08/14 17:55:28 [Worker 4] Processing job 72748cff-cc77-43a7-a823-7c2f3ecc4792 (attempt 3) - timestamp: 1755194128102241033
+mr_robot1    | 2025/08/14 17:55:28 [Worker 4] Successfully processed job 72748cff-cc77-43a7-a823-7c2f3ecc4792 in 2.767675ms - timestamp: 1755194128104992228
+mr_robot2    | 2025/08/14 17:55:28 POST /payments 31.331µs
+mr_robot2    | 2025/08/14 17:55:28 [Worker 1] Processing job d7179d69-9b23-4c5e-b9cb-5e78ebd20765 (attempt 3) - timestamp: 1755194128120329966
+mr_robot2    | 2025/08/14 17:55:28 [Worker 1] Successfully processed job d7179d69-9b23-4c5e-b9cb-5e78ebd20765 in 2.842688ms - timestamp: 1755194128123108422
+mr_robot1    | 2025/08/14 17:55:28 POST /payments 40.192µs
+mr_robot1    | 2025/08/14 17:55:28 [Worker 1] Processing job 3acfff55-7754-4693-a971-91c4d8a7b4e3 (attempt 3) - timestamp: 1755194128138519022
+mr_robot1    | 2025/08/14 17:55:28 [Worker 1] Successfully processed job 3acfff55-7754-4693-a971-91c4d8a7b4e3 in 2.932721ms - timestamp: 1755194128141427412
+mr_robot2    | 2025/08/14 17:55:28 POST /payments 37.651µs
+mr_robot2    | 2025/08/14 17:55:28 [Worker 0] Processing job 662da993-5ec2-42be-850e-bc298a6c9505 (attempt 3) - timestamp: 1755194128159531826
+mr_robot2    | 2025/08/14 17:55:28 [Worker 0] Successfully processed job 662da993-5ec2-42be-850e-bc298a6c9505 in 2.819817ms - timestamp: 1755194128162334922
+mr_robot1    | 2025/08/14 17:55:28 POST /payments 45.852µs
+mr_robot1    | 2025/08/14 17:55:28 [Worker 0] Processing job 1d73e911-674a-44ba-91dc-98ae0ebd7bf9 (attempt 3) - timestamp: 1755194128180705335
+mr_robot1    | 2025/08/14 17:55:28 [Worker 0] Successfully processed job 1d73e911-674a-44ba-91dc-98ae0ebd7bf9 in 2.804147ms - timestamp: 1755194128183490641
+mr_robot2    | 2025/08/14 17:55:28 POST /payments 33.891µs
+mr_robot2    | 2025/08/14 17:55:28 [Worker 2] Processing job 8e8458d9-95fb-4a24-8b26-6c27e4767649 (attempt 3) - timestamp: 1755194128191709883
+mr_robot2    | 2025/08/14 17:55:28 [Worker 2] Successfully processed job 8e8458d9-95fb-4a24-8b26-6c27e4767649 in 2.777965ms - timestamp: 1755194128194468468
+mr_robot2    | 2025/08/14 17:55:28 POST /payments 39.322µs
+mr_robot2    | 2025/08/14 17:55:28 [Worker 3] Processing job f78350f0-b17a-443d-88b6-4b5c58d97d01 (attempt 3) - timestamp: 1755194128211308308
+mr_robot1    | 2025/08/14 17:55:28 POST /payments 190.157µs
+mr_robot1    | 2025/08/14 17:55:28 [Worker 2] Processing job 54cebe42-c8d9-4968-bd74-2634d32b6e39 (attempt 3) - timestamp: 1755194128211539926
+mr_robot1    | 2025/08/14 17:55:28 [Worker 2] Successfully processed job 54cebe42-c8d9-4968-bd74-2634d32b6e39 in 3.301013ms - timestamp: 1755194128214806648
+mr_robot2    | 2025/08/14 17:55:28 [Worker 3] Successfully processed job f78350f0-b17a-443d-88b6-4b5c58d97d01 in 7.151357ms - timestamp: 1755194128218447534
+mr_robot1    | 2025/08/14 17:55:28 POST /payments 38.681µs
+mr_robot1    | 2025/08/14 17:55:28 [Worker 3] Processing job 8925f78a-3fed-4bc6-9366-9b851806654b (attempt 3) - timestamp: 1755194128229845056
+mr_robot1    | 2025/08/14 17:55:28 [Worker 3] Successfully processed job 8925f78a-3fed-4bc6-9366-9b851806654b in 3.113987ms - timestamp: 1755194128232908891
+mr_robot2    | 2025/08/14 17:55:28 POST /payments 37.441µs
+mr_robot2    | 2025/08/14 17:55:28 [Worker 4] Processing job c5b4f56a-02dc-4bbe-9b64-3f851ba3efd6 (attempt 3) - timestamp: 1755194128247804225
+mr_robot2    | 2025/08/14 17:55:28 [Worker 4] Successfully processed job c5b4f56a-02dc-4bbe-9b64-3f851ba3efd6 in 2.942581ms - timestamp: 1755194128250723175
+mr_robot1    | 2025/08/14 17:55:28 POST /payments 31.691µs
+mr_robot1    | 2025/08/14 17:55:28 [Worker 4] Processing job 176781b9-9387-45c8-beda-9c66b6c01f83 (attempt 3) - timestamp: 1755194128265759523
+mr_robot1    | 2025/08/14 17:55:28 [Worker 4] Successfully processed job 176781b9-9387-45c8-beda-9c66b6c01f83 in 2.91224ms - timestamp: 1755194128268646722
+mr_robot2    | 2025/08/14 17:55:28 POST /payments 35.381µs
+mr_robot2    | 2025/08/14 17:55:28 [Worker 1] Processing job c0966979-9e2a-4936-a6ca-95c503af245e (attempt 3) - timestamp: 1755194128283106229
+mr_robot2    | 2025/08/14 17:55:28 [Worker 1] Successfully processed job c0966979-9e2a-4936-a6ca-95c503af245e in 2.972563ms - timestamp: 1755194128286015700
+mr_robot1    | 2025/08/14 17:55:28 POST /payments 30.211µs
+mr_robot1    | 2025/08/14 17:55:28 [Worker 1] Processing job 3b23d386-2232-4631-aeb3-9c01410d1001 (attempt 3) - timestamp: 1755194128302090703
+mr_robot1    | 2025/08/14 17:55:28 [Worker 1] Successfully processed job 3b23d386-2232-4631-aeb3-9c01410d1001 in 2.791146ms - timestamp: 1755194128304861128
+mr_robot2    | 2025/08/14 17:55:28 POST /payments 29.031µs
+mr_robot2    | 2025/08/14 17:55:28 [Worker 0] Processing job f63da454-8e63-47ad-9aed-605eec347c8e (attempt 3) - timestamp: 1755194128319148560
+mr_robot1    | 2025/08/14 17:55:28 POST /payments 59.452µs
+mr_robot1    | 2025/08/14 17:55:28 [Worker 0] Processing job 09c8be53-84fc-4916-acf2-e8310608d241 (attempt 3) - timestamp: 1755194128320577079
+mr_robot2    | 2025/08/14 17:55:28 [Worker 0] Successfully processed job f63da454-8e63-47ad-9aed-605eec347c8e in 3.122418ms - timestamp: 1755194128322219746
+mr_robot1    | 2025/08/14 17:55:28 [Worker 0] Successfully processed job 09c8be53-84fc-4916-acf2-e8310608d241 in 2.948592ms - timestamp: 1755194128323507190
+mr_robot2    | 2025/08/14 17:55:28 POST /payments 32.661µs
+mr_robot2    | 2025/08/14 17:55:28 [Worker 2] Processing job 5fdeee09-b5ea-4f17-8019-188054677e54 (attempt 3) - timestamp: 1755194128347838317
+mr_robot2    | 2025/08/14 17:55:28 [Worker 2] Successfully processed job 5fdeee09-b5ea-4f17-8019-188054677e54 in 2.895209ms - timestamp: 1755194128350709566
+mr_robot1    | 2025/08/14 17:55:28 POST /payments 37.291µs
+mr_robot1    | 2025/08/14 17:55:28 [Worker 2] Processing job 7abe05c4-c658-457d-93c0-751dcdcb123c (attempt 3) - timestamp: 1755194128356741464
+mr_robot1    | 2025/08/14 17:55:28 [Worker 2] Successfully processed job 7abe05c4-c658-457d-93c0-751dcdcb123c in 2.874299ms - timestamp: 1755194128359588262
+mr_robot2    | 2025/08/14 17:55:28 POST /payments 23.6µs
+mr_robot2    | 2025/08/14 17:55:28 [Worker 3] Processing job 91403e6b-74a1-4369-8b57-35f9a6701178 (attempt 3) - timestamp: 1755194128375048364
+mr_robot2    | 2025/08/14 17:55:28 [Worker 3] Successfully processed job 91403e6b-74a1-4369-8b57-35f9a6701178 in 3.048395ms - timestamp: 1755194128378040297
+mr_robot1    | 2025/08/14 17:55:28 POST /payments 34.691µs
+mr_robot1    | 2025/08/14 17:55:28 [Worker 3] Processing job 0aebf680-2b18-4969-a5b6-fed7274cb67c (attempt 3) - timestamp: 1755194128391954456
+mr_robot1    | 2025/08/14 17:55:28 [Worker 3] Successfully processed job 0aebf680-2b18-4969-a5b6-fed7274cb67c in 2.724253ms - timestamp: 1755194128394665469
+mr_robot2    | 2025/08/14 17:55:28 POST /payments 41.291µs
+mr_robot2    | 2025/08/14 17:55:28 [Worker 4] Processing job aa99b23c-c000-46a0-b6be-5ff4619f8d57 (attempt 3) - timestamp: 1755194128409948516
+mr_robot2    | 2025/08/14 17:55:28 [Worker 4] Successfully processed job aa99b23c-c000-46a0-b6be-5ff4619f8d57 in 2.854898ms - timestamp: 1755194128412783653
+mr_robot1    | 2025/08/14 17:55:28 POST /payments 33.061µs
+mr_robot1    | 2025/08/14 17:55:28 [Worker 4] Processing job 13eaddf8-3ef9-4021-8e78-b5c00d405549 (attempt 3) - timestamp: 1755194128429326012
+mr_robot2    | 2025/08/14 17:55:28 POST /payments 53.672µs
+mr_robot2    | 2025/08/14 17:55:28 [Worker 1] Processing job 5e849f3f-1e0a-4fbf-bd5c-1dd072f6d8e8 (attempt 3) - timestamp: 1755194128430044887
+mr_robot1    | 2025/08/14 17:55:28 [Worker 4] Successfully processed job 13eaddf8-3ef9-4021-8e78-b5c00d405549 in 3.709558ms - timestamp: 1755194128432973548
+mr_robot2    | 2025/08/14 17:55:28 [Worker 1] Successfully processed job 5e849f3f-1e0a-4fbf-bd5c-1dd072f6d8e8 in 4.003587ms - timestamp: 1755194128434028704
+mr_robot1    | 2025/08/14 17:55:28 POST /payments 28.091µs
+mr_robot1    | 2025/08/14 17:55:28 [Worker 1] Processing job a3bb03ee-1e23-4667-83f1-8bed11175bf1 (attempt 3) - timestamp: 1755194128449194537
+mr_robot1    | 2025/08/14 17:55:28 [Worker 1] Successfully processed job a3bb03ee-1e23-4667-83f1-8bed11175bf1 in 2.90681ms - timestamp: 1755194128452046125
+mr_robot2    | 2025/08/14 17:55:28 POST /payments 31.701µs
+mr_robot2    | 2025/08/14 17:55:28 [Worker 0] Processing job 0395476d-2c58-4dd1-923b-5e8c1a323ed2 (attempt 3) - timestamp: 1755194128478283828
+mr_robot2    | 2025/08/14 17:55:28 [Worker 0] Successfully processed job 0395476d-2c58-4dd1-923b-5e8c1a323ed2 in 3.016264ms - timestamp: 1755194128481281211
+mr_robot1    | 2025/08/14 17:55:28 POST /payments 30.281µs
+mr_robot1    | 2025/08/14 17:55:28 [Worker 0] Processing job 26c8ef06-e714-4bde-a00b-6c750999df96 (attempt 3) - timestamp: 1755194128484169840
+mr_robot1    | 2025/08/14 17:55:28 [Worker 0] Successfully processed job 26c8ef06-e714-4bde-a00b-6c750999df96 in 2.92921ms - timestamp: 1755194128487050299
+mr_robot2    | 2025/08/14 17:55:28 POST /payments 40.032µs
+mr_robot2    | 2025/08/14 17:55:28 [Worker 2] Processing job 4d7b158e-97c4-44b8-b11d-23106406e008 (attempt 3) - timestamp: 1755194128503149954
+mr_robot2    | 2025/08/14 17:55:28 [Worker 2] Successfully processed job 4d7b158e-97c4-44b8-b11d-23106406e008 in 2.848938ms - timestamp: 1755194128505985341
+mr_robot1    | 2025/08/14 17:55:28 POST /payments 34.981µs
+mr_robot1    | 2025/08/14 17:55:28 [Worker 2] Processing job 94e7eba9-d18b-4120-af73-42bc465b3da7 (attempt 3) - timestamp: 1755194128520271633
+mr_robot1    | 2025/08/14 17:55:28 [Worker 2] Successfully processed job 94e7eba9-d18b-4120-af73-42bc465b3da7 in 2.879059ms - timestamp: 1755194128523130431
+mr_robot2    | 2025/08/14 17:55:28 POST /payments 33.111µs
+mr_robot2    | 2025/08/14 17:55:28 [Worker 3] Processing job e2d67275-515f-46a0-9ab2-47f9ed586ae6 (attempt 3) - timestamp: 1755194128537401093
+mr_robot1    | 2025/08/14 17:55:28 POST /payments 52.122µs
+mr_robot1    | 2025/08/14 17:55:28 [Worker 3] Processing job e8335112-f16f-48b0-8f16-0a2bc512574b (attempt 3) - timestamp: 1755194128539977021
+mr_robot2    | 2025/08/14 17:55:28 [Worker 3] Successfully processed job e2d67275-515f-46a0-9ab2-47f9ed586ae6 in 2.882739ms - timestamp: 1755194128540255261
+mr_robot1    | 2025/08/14 17:55:28 [Worker 3] Successfully processed job e8335112-f16f-48b0-8f16-0a2bc512574b in 2.845368ms - timestamp: 1755194128542796208
+mr_robot2    | 2025/08/14 17:55:28 POST /payments 42.092µs
+mr_robot2    | 2025/08/14 17:55:28 [Worker 4] Processing job 106b76b6-560c-40e2-87da-e0db1c30741a (attempt 3) - timestamp: 1755194128558042803
+mr_robot2    | 2025/08/14 17:55:28 [Worker 4] Successfully processed job 106b76b6-560c-40e2-87da-e0db1c30741a in 2.839108ms - timestamp: 1755194128560855060
+mr_robot1    | 2025/08/14 17:55:28 POST /payments 28.361µs
+mr_robot1    | 2025/08/14 17:55:28 [Worker 4] Processing job db9e3ec9-f651-4d74-be6f-7adcf1c461f1 (attempt 3) - timestamp: 1755194128574272892
+mr_robot1    | 2025/08/14 17:55:28 [Worker 4] Successfully processed job db9e3ec9-f651-4d74-be6f-7adcf1c461f1 in 2.860888ms - timestamp: 1755194128577073688
+mr_robot2    | 2025/08/14 17:55:28 POST /payments 36.171µs
+mr_robot2    | 2025/08/14 17:55:28 [Worker 1] Processing job a9fab13e-24b3-4f6a-8de5-f00ca5d6bd6f (attempt 3) - timestamp: 1755194128593285906
+mr_robot2    | 2025/08/14 17:55:28 [Worker 1] Successfully processed job a9fab13e-24b3-4f6a-8de5-f00ca5d6bd6f in 2.91654ms - timestamp: 1755194128596182716
+mr_robot1    | 2025/08/14 17:55:28 POST /payments 38.902µs
+mr_robot1    | 2025/08/14 17:55:28 [Worker 1] Processing job caf08370-b616-470c-ac9b-9bbff93a5565 (attempt 3) - timestamp: 1755194128611351458
+mr_robot1    | 2025/08/14 17:55:28 [Worker 1] Successfully processed job caf08370-b616-470c-ac9b-9bbff93a5565 in 2.730424ms - timestamp: 1755194128614063972
+mr_robot2    | 2025/08/14 17:55:28 POST /payments 30.451µs
+mr_robot2    | 2025/08/14 17:55:28 [Worker 0] Processing job 1b6a8172-5e20-4f58-81eb-b888f818c581 (attempt 3) - timestamp: 1755194128628599012
+mr_robot2    | 2025/08/14 17:55:28 [Worker 0] Successfully processed job 1b6a8172-5e20-4f58-81eb-b888f818c581 in 3.098927ms - timestamp: 1755194128631678458
+mr_robot1    | 2025/08/14 17:55:28 POST /payments 33.911µs
+mr_robot1    | 2025/08/14 17:55:28 [Worker 0] Processing job f4addec8-57e0-4b89-93c0-8889282a5bb6 (attempt 3) - timestamp: 1755194128645793934
+mr_robot1    | 2025/08/14 17:55:28 [Worker 0] Successfully processed job f4addec8-57e0-4b89-93c0-8889282a5bb6 in 2.92069ms - timestamp: 1755194128648672713
+mr_robot2    | 2025/08/14 17:55:28 POST /payments 53.882µs
+mr_robot2    | 2025/08/14 17:55:28 [Worker 2] Processing job 7ced00ad-9381-41e0-bb62-6a82ccbfec0b (attempt 3) - timestamp: 1755194128649329326
+mr_robot2    | 2025/08/14 17:55:28 [Worker 2] Successfully processed job 7ced00ad-9381-41e0-bb62-6a82ccbfec0b in 2.930711ms - timestamp: 1755194128652234456
+mr_robot1    | 2025/08/14 17:55:28 POST /payments 34.941µs
+mr_robot1    | 2025/08/14 17:55:28 [Worker 2] Processing job 6ca61db2-1d5c-4714-8aff-1ca793e254ce (attempt 3) - timestamp: 1755194128666338471
+mr_robot1    | 2025/08/14 17:55:28 [Worker 2] Successfully processed job 6ca61db2-1d5c-4714-8aff-1ca793e254ce in 2.90674ms - timestamp: 1755194128669189899
+mr_robot2    | 2025/08/14 17:55:28 POST /payments 43.192µs
+mr_robot2    | 2025/08/14 17:55:28 [Worker 3] Processing job 42c06227-35a3-41e4-a86c-77cfcbf3a7c7 (attempt 3) - timestamp: 1755194128684477915
+mr_robot2    | 2025/08/14 17:55:28 [Worker 3] Successfully processed job 42c06227-35a3-41e4-a86c-77cfcbf3a7c7 in 2.89865ms - timestamp: 1755194128687353134
+mr_robot1    | 2025/08/14 17:55:28 POST /payments 33.722µs
+mr_robot1    | 2025/08/14 17:55:28 [Worker 3] Processing job 692859ca-67b7-4b8d-8bca-fd8bcde9b195 (attempt 3) - timestamp: 1755194128701564233
+mr_robot1    | 2025/08/14 17:55:28 [Worker 3] Successfully processed job 692859ca-67b7-4b8d-8bca-fd8bcde9b195 in 2.707614ms - timestamp: 1755194128704245926
+mr_robot2    | 2025/08/14 17:55:28 POST /payments 22.48µs
+mr_robot2    | 2025/08/14 17:55:28 [Worker 4] Processing job d9b3d505-8379-4bda-bd15-18a6a81ef276 (attempt 3) - timestamp: 1755194128719810041
+mr_robot2    | 2025/08/14 17:55:28 [Worker 4] Successfully processed job d9b3d505-8379-4bda-bd15-18a6a81ef276 in 2.953792ms - timestamp: 1755194128722698531
+mr_robot1    | 2025/08/14 17:55:28 POST /payments 31.251µs
+mr_robot1    | 2025/08/14 17:55:28 [Worker 4] Processing job 17eec077-2023-4e8d-ae76-a8410a2cb54b (attempt 3) - timestamp: 1755194128738907549
+mr_robot1    | 2025/08/14 17:55:28 [Worker 4] Successfully processed job 17eec077-2023-4e8d-ae76-a8410a2cb54b in 2.859769ms - timestamp: 1755194128741753597
+mr_robot2    | 2025/08/14 17:55:28 POST /payments 32.411µs
+mr_robot2    | 2025/08/14 17:55:28 [Worker 1] Processing job 0d63a7fa-307f-4dc1-b2bc-b5dab3e7c8d5 (attempt 3) - timestamp: 1755194128755869913
+mr_robot1    | 2025/08/14 17:55:28 POST /payments 51.421µs
+mr_robot1    | 2025/08/14 17:55:28 [Worker 1] Processing job 975f11fa-b7f3-4707-8288-b52569bdb4dd (attempt 3) - timestamp: 1755194128758406310
+mr_robot2    | 2025/08/14 17:55:28 [Worker 1] Successfully processed job 0d63a7fa-307f-4dc1-b2bc-b5dab3e7c8d5 in 3.072956ms - timestamp: 1755194128758910218
+mr_robot1    | 2025/08/14 17:55:28 [Worker 1] Successfully processed job 975f11fa-b7f3-4707-8288-b52569bdb4dd in 2.90084ms - timestamp: 1755194128761281119
+mr_robot2    | 2025/08/14 17:55:28 POST /payments 35.412µs
+mr_robot2    | 2025/08/14 17:55:28 [Worker 0] Processing job 068c1ce8-b064-4662-9c8a-7fd2aae955dd (attempt 3) - timestamp: 1755194128776709060
+mr_robot2    | 2025/08/14 17:55:28 [Worker 0] Successfully processed job 068c1ce8-b064-4662-9c8a-7fd2aae955dd in 2.881739ms - timestamp: 1755194128779572139
+mr_robot1    | 2025/08/14 17:55:28 POST /payments 30.661µs
+mr_robot1    | 2025/08/14 17:55:28 [Worker 0] Processing job 6e9c8035-6400-42a4-8a7b-7e0829140f6c (attempt 3) - timestamp: 1755194128794728600
+mr_robot1    | 2025/08/14 17:55:28 [Worker 0] Successfully processed job 6e9c8035-6400-42a4-8a7b-7e0829140f6c in 3.192909ms - timestamp: 1755194128797899149
+mr_robot2    | 2025/08/14 17:55:28 POST /payments 39.212µs
+mr_robot2    | 2025/08/14 17:55:28 [Worker 2] Processing job 1f7ac5a7-a52f-4b98-8b99-e8e55d473500 (attempt 3) - timestamp: 1755194128817707191
+mr_robot2    | 2025/08/14 17:55:28 [Worker 2] Successfully processed job 1f7ac5a7-a52f-4b98-8b99-e8e55d473500 in 2.853908ms - timestamp: 1755194128820538709
+mr_robot1    | 2025/08/14 17:55:28 POST /payments 30.021µs
+mr_robot1    | 2025/08/14 17:55:28 [Worker 2] Processing job 99f1729c-5d74-4f83-8fc3-c2943647deb8 (attempt 3) - timestamp: 1755194128829929262
+mr_robot1    | 2025/08/14 17:55:28 [Worker 2] Successfully processed job 99f1729c-5d74-4f83-8fc3-c2943647deb8 in 3.011274ms - timestamp: 1755194128832914685
+mr_robot2    | 2025/08/14 17:55:28 POST /payments 30.781µs
+mr_robot2    | 2025/08/14 17:55:28 [Worker 3] Processing job d4b65aca-7c00-498a-b053-87be67e4d16a (attempt 3) - timestamp: 1755194128846934868
+mr_robot2    | 2025/08/14 17:55:28 [Worker 3] Successfully processed job d4b65aca-7c00-498a-b053-87be67e4d16a in 2.793036ms - timestamp: 1755194128849703283
+mr_robot1    | 2025/08/14 17:55:28 POST /payments 36.831µs
+mr_robot1    | 2025/08/14 17:55:28 [Worker 3] Processing job 933b9820-2587-4bd1-8c37-bdf238a625ce (attempt 3) - timestamp: 1755194128865009130
+mr_robot2    | 2025/08/14 17:55:28 POST /payments 53.192µs
+mr_robot2    | 2025/08/14 17:55:28 [Worker 4] Processing job 3a5e13fe-b973-4bf3-99c8-b3c4c5091af5 (attempt 3) - timestamp: 1755194128867511756
+mr_robot1    | 2025/08/14 17:55:28 [Worker 3] Successfully processed job 933b9820-2587-4bd1-8c37-bdf238a625ce in 3.18975ms - timestamp: 1755194128868120197
+mr_robot2    | 2025/08/14 17:55:28 [Worker 4] Successfully processed job 3a5e13fe-b973-4bf3-99c8-b3c4c5091af5 in 2.964182ms - timestamp: 1755194128870455477
+mr_robot1    | 2025/08/14 17:55:28 POST /payments 35.111µs
+mr_robot1    | 2025/08/14 17:55:28 [Worker 4] Processing job 6996f54d-89bd-4e06-87b8-343663a1640f (attempt 3) - timestamp: 1755194128886138128
+mr_robot1    | 2025/08/14 17:55:28 [Worker 4] Successfully processed job 6996f54d-89bd-4e06-87b8-343663a1640f in 2.877859ms - timestamp: 1755194128888998276
+mr_robot2    | 2025/08/14 17:55:28 POST /payments 34.741µs
+mr_robot2    | 2025/08/14 17:55:28 [Worker 1] Processing job f38e24ad-d2ec-43f0-bdd1-76bb783bb072 (attempt 3) - timestamp: 1755194128904118916
+mr_robot2    | 2025/08/14 17:55:28 [Worker 1] Successfully processed job f38e24ad-d2ec-43f0-bdd1-76bb783bb072 in 3.360075ms - timestamp: 1755194128907462931
+mr_robot1    | 2025/08/14 17:55:28 POST /payments 31.851µs
+mr_robot1    | 2025/08/14 17:55:28 [Worker 1] Processing job 503346ce-6b46-4758-9772-986d2fde4478 (attempt 3) - timestamp: 1755194128922121046
+mr_robot1    | 2025/08/14 17:55:28 [Worker 1] Successfully processed job 503346ce-6b46-4758-9772-986d2fde4478 in 2.873439ms - timestamp: 1755194128924966484
+mr_robot2    | 2025/08/14 17:55:28 POST /payments 35.991µs
+mr_robot2    | 2025/08/14 17:55:28 [Worker 0] Processing job f0ff73a9-a515-43df-b8c3-2f715e9aaae0 (attempt 3) - timestamp: 1755194128939403800
+mr_robot2    | 2025/08/14 17:55:28 [Worker 0] Successfully processed job f0ff73a9-a515-43df-b8c3-2f715e9aaae0 in 2.838048ms - timestamp: 1755194128942223408
+mr_robot1    | 2025/08/14 17:55:28 POST /payments 38.471µs
+mr_robot1    | 2025/08/14 17:55:28 [Worker 0] Processing job a76ddfb0-e2af-4794-9419-e49ab3ffe385 (attempt 3) - timestamp: 1755194128957447872
+mr_robot1    | 2025/08/14 17:55:28 [Worker 0] Successfully processed job a76ddfb0-e2af-4794-9419-e49ab3ffe385 in 2.870069ms - timestamp: 1755194128960268709
+mr_robot2    | 2025/08/14 17:55:28 POST /payments 91.363µs
+mr_robot2    | 2025/08/14 17:55:28 [Worker 2] Processing job f8b8b6c2-09a5-40f3-a074-d0a41ba39d75 (attempt 3) - timestamp: 1755194128976002530
+mr_robot1    | 2025/08/14 17:55:28 POST /payments 75.292µs
+mr_robot1    | 2025/08/14 17:55:28 [Worker 2] Processing job 0112f281-faaf-4456-ad2f-6b338d1d5139 (attempt 3) - timestamp: 1755194128976806288
+mr_robot1    | 2025/08/14 17:55:28 [Worker 2] Successfully processed job 0112f281-faaf-4456-ad2f-6b338d1d5139 in 3.377726ms - timestamp: 1755194128980161973
+mr_robot2    | 2025/08/14 17:55:28 [Worker 2] Successfully processed job f8b8b6c2-09a5-40f3-a074-d0a41ba39d75 in 5.262941ms - timestamp: 1755194128981194089
+mr_robot2    | 2025/08/14 17:55:28 POST /payments 38.741µs
+mr_robot2    | 2025/08/14 17:55:28 [Worker 3] Processing job e320a1cc-54de-4fab-a7d0-dc938136481d (attempt 3) - timestamp: 1755194128995332196
+mr_robot2    | 2025/08/14 17:55:28 [Worker 3] Successfully processed job e320a1cc-54de-4fab-a7d0-dc938136481d in 3.681357ms - timestamp: 1755194128998845177
+mr_robot1    | 2025/08/14 17:55:29 POST /payments 54.012µs
+mr_robot1    | 2025/08/14 17:55:29 [Worker 3] Processing job cd840e67-cd29-4e5a-9a5a-b3615af1fb24 (attempt 3) - timestamp: 1755194129012521347
+mr_robot1    | 2025/08/14 17:55:29 [Worker 3] Successfully processed job cd840e67-cd29-4e5a-9a5a-b3615af1fb24 in 3.468809ms - timestamp: 1755194129015829651
+mr_robot2    | 2025/08/14 17:55:29 POST /payments 35.321µs
+mr_robot2    | 2025/08/14 17:55:29 [Worker 4] Processing job 17bd4ee8-f62f-4ce2-b646-be0bf6392f77 (attempt 3) - timestamp: 1755194129030651091
+mr_robot2    | 2025/08/14 17:55:29 [Worker 4] Successfully processed job 17bd4ee8-f62f-4ce2-b646-be0bf6392f77 in 2.837118ms - timestamp: 1755194129033444798
+mr_robot1    | 2025/08/14 17:55:29 POST /payments 44.242µs
+mr_robot1    | 2025/08/14 17:55:29 [Worker 4] Processing job 510f7622-20d9-44da-bac3-e55d97cb2a2f (attempt 3) - timestamp: 1755194129060805729
+mr_robot1    | 2025/08/14 17:55:29 [Worker 4] Successfully processed job 510f7622-20d9-44da-bac3-e55d97cb2a2f in 3.365206ms - timestamp: 1755194129064153885
+mr_robot2    | 2025/08/14 17:55:29 POST /payments 43.691µs
+mr_robot2    | 2025/08/14 17:55:29 [Worker 1] Processing job cd024a81-7d24-404b-a7e1-ca1e03dc4e75 (attempt 3) - timestamp: 1755194129065922556
+mr_robot2    | 2025/08/14 17:55:29 [Worker 1] Successfully processed job cd024a81-7d24-404b-a7e1-ca1e03dc4e75 in 3.19638ms - timestamp: 1755194129069051523
+mr_robot1    | 2025/08/14 17:55:29 POST /payments 127.824µs
+mr_robot1    | 2025/08/14 17:55:29 [Worker 1] Processing job 26ac306a-3572-4a93-8560-5d6a23d2cdfe (attempt 3) - timestamp: 1755194129085340554
+mr_robot2    | 2025/08/14 17:55:29 POST /payments 67.972µs
+mr_robot2    | 2025/08/14 17:55:29 [Worker 0] Processing job 2b5c7ff9-7a5e-45e6-ae60-a482cf610857 (attempt 3) - timestamp: 1755194129086093310
+mr_robot1    | 2025/08/14 17:55:29 [Worker 1] Successfully processed job 26ac306a-3572-4a93-8560-5d6a23d2cdfe in 3.931625ms - timestamp: 1755194129089217437
+mr_robot2    | 2025/08/14 17:55:29 [Worker 0] Successfully processed job 2b5c7ff9-7a5e-45e6-ae60-a482cf610857 in 4.183834ms - timestamp: 1755194129090193701
+mr_robot1    | 2025/08/14 17:55:29 POST /payments 41.241µs
+mr_robot1    | 2025/08/14 17:55:29 [Worker 0] Processing job 9c957148-bf22-4783-bf2f-2785af962e01 (attempt 3) - timestamp: 1755194129104161512
+mr_robot1    | 2025/08/14 17:55:29 [Worker 0] Successfully processed job 9c957148-bf22-4783-bf2f-2785af962e01 in 2.782646ms - timestamp: 1755194129106921737
+mr_robot2    | 2025/08/14 17:55:29 POST /payments 33.801µs
+mr_robot2    | 2025/08/14 17:55:29 [Worker 2] Processing job d9db3942-285c-4aa4-8e5f-297f289243d0 (attempt 3) - timestamp: 1755194129122203713
+mr_robot2    | 2025/08/14 17:55:29 [Worker 2] Successfully processed job d9db3942-285c-4aa4-8e5f-297f289243d0 in 2.775476ms - timestamp: 1755194129124961288
+mr_robot1    | 2025/08/14 17:55:29 POST /payments 30.411µs
+mr_robot1    | 2025/08/14 17:55:29 [Worker 2] Processing job 54c5f683-cc45-4ea4-98b2-6b948c4e169e (attempt 3) - timestamp: 1755194129140265635
+mr_robot1    | 2025/08/14 17:55:29 [Worker 2] Successfully processed job 54c5f683-cc45-4ea4-98b2-6b948c4e169e in 2.759335ms - timestamp: 1755194129143000559
+mr_robot2    | 2025/08/14 17:55:29 POST /payments 30.791µs
+mr_robot2    | 2025/08/14 17:55:29 [Worker 3] Processing job 98a25f4a-59ac-4cd5-8b2e-943d75669528 (attempt 3) - timestamp: 1755194129161217346
+mr_robot2    | 2025/08/14 17:55:29 [Worker 3] Successfully processed job 98a25f4a-59ac-4cd5-8b2e-943d75669528 in 2.794816ms - timestamp: 1755194129163990561
+mr_robot1    | 2025/08/14 17:55:29 POST /payments 28.751µs
+mr_robot1    | 2025/08/14 17:55:29 [Worker 3] Processing job 0236a0eb-9bb8-4523-8e53-7f9093bf36b9 (attempt 3) - timestamp: 1755194129182447637
+mr_robot1    | 2025/08/14 17:55:29 [Worker 3] Successfully processed job 0236a0eb-9bb8-4523-8e53-7f9093bf36b9 in 2.893819ms - timestamp: 1755194129185286054
+mr_robot2    | 2025/08/14 17:55:29 POST /payments 41.922µs
+mr_robot2    | 2025/08/14 17:55:29 [Worker 4] Processing job 82ee717c-a551-4695-b097-8aebb387a820 (attempt 3) - timestamp: 1755194129193460016
+mr_robot1    | 2025/08/14 17:55:29 POST /payments 38.612µs
+mr_robot1    | 2025/08/14 17:55:29 [Worker 4] Processing job 85e68648-1169-4ee1-9875-df2a65149a72 (attempt 3) - timestamp: 1755194129194987228
+mr_robot2    | 2025/08/14 17:55:29 [Worker 4] Successfully processed job 82ee717c-a551-4695-b097-8aebb387a820 in 2.8938ms - timestamp: 1755194129196338045
+mr_robot1    | 2025/08/14 17:55:29 [Worker 4] Successfully processed job 85e68648-1169-4ee1-9875-df2a65149a72 in 2.90523ms - timestamp: 1755194129197840656
+mr_robot2    | 2025/08/14 17:55:29 POST /payments 47.802µs
+mr_robot2    | 2025/08/14 17:55:29 [Worker 1] Processing job 1298dba1-6a51-445b-93dc-fd870be05213 (attempt 3) - timestamp: 1755194129213189465
+mr_robot1    | 2025/08/14 17:55:29 POST /payments 32.041µs
+mr_robot1    | 2025/08/14 17:55:29 [Worker 1] Processing job 743879e4-c61e-4089-8786-318b95b2775c (attempt 3) - timestamp: 1755194129213237197
+mr_robot1    | 2025/08/14 17:55:29 [Worker 1] Successfully processed job 743879e4-c61e-4089-8786-318b95b2775c in 3.138258ms - timestamp: 1755194129216307842
+mr_robot2    | 2025/08/14 17:55:29 [Worker 1] Successfully processed job 1298dba1-6a51-445b-93dc-fd870be05213 in 4.202215ms - timestamp: 1755194129217372539
+mr_robot2    | 2025/08/14 17:55:29 POST /payments 36.211µs
+mr_robot2    | 2025/08/14 17:55:29 [Worker 0] Processing job a1a53749-7449-4b75-b3ab-e6c11c128190 (attempt 3) - timestamp: 1755194129231662401
+mr_robot2    | 2025/08/14 17:55:29 [Worker 0] Successfully processed job a1a53749-7449-4b75-b3ab-e6c11c128190 in 2.812337ms - timestamp: 1755194129234424916
+mr_robot1    | 2025/08/14 17:55:29 POST /payments 37.061µs
+mr_robot1    | 2025/08/14 17:55:29 [Worker 0] Processing job 8bd01246-376e-4f64-9ec1-940390af2d34 (attempt 3) - timestamp: 1755194129249766104
+mr_robot1    | 2025/08/14 17:55:29 [Worker 0] Successfully processed job 8bd01246-376e-4f64-9ec1-940390af2d34 in 2.855098ms - timestamp: 1755194129252563810
+mr_robot2    | 2025/08/14 17:55:29 POST /payments 60.602µs
+mr_robot2    | 2025/08/14 17:55:29 [Worker 2] Processing job b408e0a9-4772-4dc8-a373-a277c6ebdd30 (attempt 3) - timestamp: 1755194129267731482
+mr_robot2    | 2025/08/14 17:55:29 [Worker 2] Successfully processed job b408e0a9-4772-4dc8-a373-a277c6ebdd30 in 3.003994ms - timestamp: 1755194129270674254
+mr_robot1    | 2025/08/14 17:55:29 POST /payments 29.381µs
+mr_robot1    | 2025/08/14 17:55:29 [Worker 2] Processing job 89bd4a6a-3d8a-4393-b6b7-f000a087ab92 (attempt 3) - timestamp: 1755194129283954581
+mr_robot1    | 2025/08/14 17:55:29 [Worker 2] Successfully processed job 89bd4a6a-3d8a-4393-b6b7-f000a087ab92 in 2.88918ms - timestamp: 1755194129286821930
+mr_robot2    | 2025/08/14 17:55:29 POST /payments 40.841µs
+mr_robot2    | 2025/08/14 17:55:29 [Worker 3] Processing job 0f927294-34b0-4bda-be62-2e0dddb0942c (attempt 3) - timestamp: 1755194129303983220
+mr_robot1    | 2025/08/14 17:55:29 POST /payments 51.352µs
+mr_robot1    | 2025/08/14 17:55:29 [Worker 3] Processing job 670c83dd-d34f-4a90-85b2-16806f62f4c1 (attempt 3) - timestamp: 1755194129304690095
+mr_robot2    | 2025/08/14 17:55:29 [Worker 3] Successfully processed job 0f927294-34b0-4bda-be62-2e0dddb0942c in 3.575263ms - timestamp: 1755194129307547913
+mr_robot1    | 2025/08/14 17:55:29 [Worker 3] Successfully processed job 670c83dd-d34f-4a90-85b2-16806f62f4c1 in 3.866753ms - timestamp: 1755194129308473685
+mr_robot2    | 2025/08/14 17:55:29 POST /payments 32.431µs
+mr_robot2    | 2025/08/14 17:55:29 [Worker 4] Processing job 5904fde9-1c60-4d02-a0c5-0c69582df693 (attempt 3) - timestamp: 1755194129320797279
+mr_robot1    | 2025/08/14 17:55:29 POST /payments 30.491µs
+mr_robot1    | 2025/08/14 17:55:29 [Worker 4] Processing job 66d2df48-f9f3-440e-81ba-c74214e2687f (attempt 3) - timestamp: 1755194129322780707
+mr_robot2    | 2025/08/14 17:55:29 [Worker 4] Successfully processed job 5904fde9-1c60-4d02-a0c5-0c69582df693 in 3.037094ms - timestamp: 1755194129323815583
+mr_robot1    | 2025/08/14 17:55:29 [Worker 4] Successfully processed job 66d2df48-f9f3-440e-81ba-c74214e2687f in 2.855859ms - timestamp: 1755194129325570004
+mr_robot2    | 2025/08/14 17:55:29 POST /payments 54.191µs
+mr_robot2    | 2025/08/14 17:55:29 [Worker 1] Processing job 63aee57c-0a35-4d14-85e6-8766e0334560 (attempt 3) - timestamp: 1755194129348938768
+mr_robot2    | 2025/08/14 17:55:29 [Worker 1] Successfully processed job 63aee57c-0a35-4d14-85e6-8766e0334560 in 2.948902ms - timestamp: 1755194129351833278
+mr_robot1    | 2025/08/14 17:55:29 POST /payments 28.381µs
+mr_robot1    | 2025/08/14 17:55:29 [Worker 1] Processing job c7f793b7-fe5f-420e-ab77-89f98130f13f (attempt 3) - timestamp: 1755194129357810753
+mr_robot1    | 2025/08/14 17:55:29 [Worker 1] Successfully processed job c7f793b7-fe5f-420e-ab77-89f98130f13f in 2.841837ms - timestamp: 1755194129360598809
+mr_robot2    | 2025/08/14 17:55:29 POST /payments 31.702µs
+mr_robot2    | 2025/08/14 17:55:29 [Worker 0] Processing job 078ffee1-096a-4614-908c-24d1f039f337 (attempt 3) - timestamp: 1755194129376135314
+mr_robot2    | 2025/08/14 17:55:29 [Worker 0] Successfully processed job 078ffee1-096a-4614-908c-24d1f039f337 in 2.786096ms - timestamp: 1755194129378902919
+mr_robot1    | 2025/08/14 17:55:29 POST /payments 30.671µs
+mr_robot1    | 2025/08/14 17:55:29 [Worker 0] Processing job 955b6654-6016-48bc-bb71-cdca7a285e88 (attempt 3) - timestamp: 1755194129393347547
+mr_robot1    | 2025/08/14 17:55:29 [Worker 0] Successfully processed job 955b6654-6016-48bc-bb71-cdca7a285e88 in 2.91528ms - timestamp: 1755194129396241856
+mr_robot2    | 2025/08/14 17:55:29 POST /payments 31.391µs
+mr_robot2    | 2025/08/14 17:55:29 [Worker 2] Processing job 58030691-b7ec-405e-8767-45f03eeb20f6 (attempt 3) - timestamp: 1755194129411366207
+mr_robot1    | 2025/08/14 17:55:29 POST /payments 56.672µs
+mr_robot1    | 2025/08/14 17:55:29 [Worker 2] Processing job c83490ab-4fd3-48b5-823f-86953615cbbc (attempt 3) - timestamp: 1755194129413901124
+mr_robot2    | 2025/08/14 17:55:29 [Worker 2] Successfully processed job 58030691-b7ec-405e-8767-45f03eeb20f6 in 2.995233ms - timestamp: 1755194129414343559
+mr_robot1    | 2025/08/14 17:55:29 [Worker 2] Successfully processed job c83490ab-4fd3-48b5-823f-86953615cbbc in 3.101097ms - timestamp: 1755194129416978950
+mr_robot2    | 2025/08/14 17:55:29 POST /payments 30.452µs
+mr_robot2    | 2025/08/14 17:55:29 [Worker 3] Processing job c028df8f-02fb-4f02-9958-19bc1badc4df (attempt 3) - timestamp: 1755194129430330489
+mr_robot1    | 2025/08/14 17:55:29 POST /payments 33.321µs
+mr_robot1    | 2025/08/14 17:55:29 [Worker 3] Processing job 3516e259-b428-4450-89b1-eecea3880a20 (attempt 3) - timestamp: 1755194129431224730
+mr_robot2    | 2025/08/14 17:55:29 [Worker 3] Successfully processed job c028df8f-02fb-4f02-9958-19bc1badc4df in 3.438119ms - timestamp: 1755194129433708826
+mr_robot1    | 2025/08/14 17:55:29 [Worker 3] Successfully processed job 3516e259-b428-4450-89b1-eecea3880a20 in 3.470249ms - timestamp: 1755194129434683549
+mr_robot2    | 2025/08/14 17:55:29 POST /payments 33.802µs
+mr_robot2    | 2025/08/14 17:55:29 [Worker 4] Processing job f937d47a-2816-408b-a9b0-1934c3486949 (attempt 3) - timestamp: 1755194129450254355
+mr_robot2    | 2025/08/14 17:55:29 [Worker 4] Successfully processed job f937d47a-2816-408b-a9b0-1934c3486949 in 2.796706ms - timestamp: 1755194129453026071
+mr_robot1    | 2025/08/14 17:55:29 POST /payments 32.691µs
+mr_robot1    | 2025/08/14 17:55:29 [Worker 4] Processing job 8a4150e2-a77c-46ab-9d67-5aaa70ae40c4 (attempt 3) - timestamp: 1755194129479731710
+mr_robot1    | 2025/08/14 17:55:29 [Worker 4] Successfully processed job 8a4150e2-a77c-46ab-9d67-5aaa70ae40c4 in 2.950212ms - timestamp: 1755194129482661031
+mr_robot2    | 2025/08/14 17:55:29 POST /payments 42.032µs
+mr_robot2    | 2025/08/14 17:55:29 [Worker 1] Processing job e94b0d89-85be-42a5-9e55-6463f44be3f1 (attempt 3) - timestamp: 1755194129485729267
+mr_robot2    | 2025/08/14 17:55:29 [Worker 1] Successfully processed job e94b0d89-85be-42a5-9e55-6463f44be3f1 in 2.813646ms - timestamp: 1755194129488513412
+mr_robot1    | 2025/08/14 17:55:29 POST /payments 55.011µs
+mr_robot1    | 2025/08/14 17:55:29 [Worker 1] Processing job 69c27b2b-0917-401b-b85a-3b3a2c8e8d1b (attempt 3) - timestamp: 1755194129504715600
+mr_robot1    | 2025/08/14 17:55:29 [Worker 1] Successfully processed job 69c27b2b-0917-401b-b85a-3b3a2c8e8d1b in 2.934351ms - timestamp: 1755194129507599339
+mr_robot2    | 2025/08/14 17:55:29 POST /payments 71.122µs
+mr_robot2    | 2025/08/14 17:55:29 [Worker 0] Processing job a5f4b0b5-f67c-44d6-864f-91940112288d (attempt 3) - timestamp: 1755194129521719665
+mr_robot1    | 2025/08/14 17:55:29 POST /payments 37.451µs
+mr_robot1    | 2025/08/14 17:55:29 [Worker 0] Processing job 146d80d6-fe6d-4116-8b38-dc4af3d004e7 (attempt 3) - timestamp: 1755194129523434624
+mr_robot2    | 2025/08/14 17:55:29 [Worker 0] Successfully processed job a5f4b0b5-f67c-44d6-864f-91940112288d in 2.987453ms - timestamp: 1755194129524674937
+mr_robot1    | 2025/08/14 17:55:29 [Worker 0] Successfully processed job 146d80d6-fe6d-4116-8b38-dc4af3d004e7 in 3.052275ms - timestamp: 1755194129526413447
+mr_robot2    | 2025/08/14 17:55:29 POST /payments 30.071µs
+mr_robot2    | 2025/08/14 17:55:29 [Worker 2] Processing job b710b86f-640a-46ee-b70d-6fa8c4ed72fc (attempt 3) - timestamp: 1755194129538594246
+mr_robot2    | 2025/08/14 17:55:29 [Worker 2] Successfully processed job b710b86f-640a-46ee-b70d-6fa8c4ed72fc in 2.846748ms - timestamp: 1755194129541384862
+mr_robot1    | 2025/08/14 17:55:29 POST /payments 42.201µs
+mr_robot1    | 2025/08/14 17:55:29 [Worker 2] Processing job 8b6f0bb4-aba0-4106-9161-92ee979c7deb (attempt 3) - timestamp: 1755194129541655662
+mr_robot1    | 2025/08/14 17:55:29 [Worker 2] Successfully processed job 8b6f0bb4-aba0-4106-9161-92ee979c7deb in 2.935121ms - timestamp: 1755194129544515070
+mr_robot2    | 2025/08/14 17:55:29 POST /payments 29.961µs
+mr_robot2    | 2025/08/14 17:55:29 [Worker 3] Processing job afde255a-ee4b-4d53-aea3-9920411970c3 (attempt 3) - timestamp: 1755194129559582519
+mr_robot2    | 2025/08/14 17:55:29 [Worker 3] Successfully processed job afde255a-ee4b-4d53-aea3-9920411970c3 in 2.999743ms - timestamp: 1755194129562501099
+mr_robot1    | 2025/08/14 17:55:29 POST /payments 31.311µs
+mr_robot1    | 2025/08/14 17:55:29 [Worker 3] Processing job b4001076-3918-405d-b01e-0333dda90094 (attempt 3) - timestamp: 1755194129575968593
+mr_robot1    | 2025/08/14 17:55:29 [Worker 3] Successfully processed job b4001076-3918-405d-b01e-0333dda90094 in 2.725114ms - timestamp: 1755194129578648305
+mr_robot2    | 2025/08/14 17:55:29 POST /payments 30.691µs
+mr_robot2    | 2025/08/14 17:55:29 [Worker 4] Processing job 90cb3a44-c418-4685-9045-f528e7414a66 (attempt 3) - timestamp: 1755194129595065380
+mr_robot2    | 2025/08/14 17:55:29 [Worker 4] Successfully processed job 90cb3a44-c418-4685-9045-f528e7414a66 in 2.867769ms - timestamp: 1755194129597904918
+mr_robot1    | 2025/08/14 17:55:29 POST /payments 28.061µs
+mr_robot1    | 2025/08/14 17:55:29 [Worker 4] Processing job 0422b749-e969-4091-af68-47ec4ad093d7 (attempt 3) - timestamp: 1755194129613226826
+mr_robot1    | 2025/08/14 17:55:29 [Worker 4] Successfully processed job 0422b749-e969-4091-af68-47ec4ad093d7 in 2.888439ms - timestamp: 1755194129616063963
+mr_robot2    | 2025/08/14 17:55:29 POST /payments 37.402µs
+mr_robot2    | 2025/08/14 17:55:29 [Worker 1] Processing job 543e51ef-3c23-4491-87f0-0732cfd10c01 (attempt 3) - timestamp: 1755194129630499070
+mr_robot1    | 2025/08/14 17:55:29 POST /payments 82.893µs
+mr_robot1    | 2025/08/14 17:55:29 [Worker 1] Processing job 47ca2f0d-c0ef-4a41-a3cb-4cb52a275810 (attempt 3) - timestamp: 1755194129632943724
+mr_robot2    | 2025/08/14 17:55:29 [Worker 1] Successfully processed job 543e51ef-3c23-4491-87f0-0732cfd10c01 in 3.435999ms - timestamp: 1755194129633917098
+mr_robot1    | 2025/08/14 17:55:29 [Worker 1] Successfully processed job 47ca2f0d-c0ef-4a41-a3cb-4cb52a275810 in 3.235261ms - timestamp: 1755194129636162725
+mr_robot2    | 2025/08/14 17:55:29 POST /payments 33.121µs
+mr_robot2    | 2025/08/14 17:55:29 [Worker 0] Processing job ef948656-f5ff-438b-a676-224566eb63ed (attempt 3) - timestamp: 1755194129646976087
+mr_robot2    | 2025/08/14 17:55:29 [Worker 0] Successfully processed job ef948656-f5ff-438b-a676-224566eb63ed in 2.993623ms - timestamp: 1755194129649916758
+mr_robot1    | 2025/08/14 17:55:29 POST /payments 34.381µs
+mr_robot1    | 2025/08/14 17:55:29 [Worker 0] Processing job 32a146cb-f602-4cd7-bded-8b9959b29a0d (attempt 3) - timestamp: 1755194129651014706
+mr_robot1    | 2025/08/14 17:55:29 [Worker 0] Successfully processed job 32a146cb-f602-4cd7-bded-8b9959b29a0d in 2.778725ms - timestamp: 1755194129653776821
+mr_robot2    | 2025/08/14 17:55:29 POST /payments 32.721µs
+mr_robot2    | 2025/08/14 17:55:29 [Worker 2] Processing job 1d71dc10-8907-49e0-8af4-3521ba48d87c (attempt 3) - timestamp: 1755194129668061983
+mr_robot2    | 2025/08/14 17:55:29 [Worker 2] Successfully processed job 1d71dc10-8907-49e0-8af4-3521ba48d87c in 2.808707ms - timestamp: 1755194129670847589
+mr_robot1    | 2025/08/14 17:55:29 POST /payments 39.511µs
+mr_robot1    | 2025/08/14 17:55:29 [Worker 2] Processing job 761672d9-5191-499f-8a90-e441f3d55ca9 (attempt 3) - timestamp: 1755194129686328352
+mr_robot1    | 2025/08/14 17:55:29 [Worker 2] Successfully processed job 761672d9-5191-499f-8a90-e441f3d55ca9 in 2.843598ms - timestamp: 1755194129689114688
+mr_robot2    | 2025/08/14 17:55:29 POST /payments 30.331µs
+mr_robot2    | 2025/08/14 17:55:29 [Worker 3] Processing job 52ded06c-5afc-4e82-83d6-222a1afdc6e1 (attempt 3) - timestamp: 1755194129703374999
+mr_robot2    | 2025/08/14 17:55:29 [Worker 3] Successfully processed job 52ded06c-5afc-4e82-83d6-222a1afdc6e1 in 2.814056ms - timestamp: 1755194129706132413
+mr_robot1    | 2025/08/14 17:55:29 POST /payments 29.931µs
+mr_robot1    | 2025/08/14 17:55:29 [Worker 3] Processing job 385622b5-7a00-4173-82c2-4f31d941f8d4 (attempt 3) - timestamp: 1755194129721310226
+mr_robot1    | 2025/08/14 17:55:29 [Worker 3] Successfully processed job 385622b5-7a00-4173-82c2-4f31d941f8d4 in 2.761915ms - timestamp: 1755194129724045760
+mr_robot2    | 2025/08/14 17:55:29 POST /payments 41.121µs
+mr_robot2    | 2025/08/14 17:55:29 [Worker 4] Processing job 95b0511a-67e3-49f3-b796-618ac12d7c6b (attempt 3) - timestamp: 1755194129740564979
+mr_robot1    | 2025/08/14 17:55:29 POST /payments 47.232µs
+mr_robot1    | 2025/08/14 17:55:29 [Worker 4] Processing job d7594f22-a2f1-4a1f-bfc5-9bba12d05c6a (attempt 3) - timestamp: 1755194129741595624
+mr_robot2    | 2025/08/14 17:55:29 [Worker 4] Successfully processed job 95b0511a-67e3-49f3-b796-618ac12d7c6b in 3.759219ms - timestamp: 1755194129744264516
+mr_robot1    | 2025/08/14 17:55:29 [Worker 4] Successfully processed job d7594f22-a2f1-4a1f-bfc5-9bba12d05c6a in 3.717698ms - timestamp: 1755194129745291642
+mr_robot2    | 2025/08/14 17:55:29 POST /payments 32.721µs
+mr_robot2    | 2025/08/14 17:55:29 [Worker 1] Processing job d0467145-7be6-4ad5-8e0a-c8f7ead39719 (attempt 3) - timestamp: 1755194129757582784
+mr_robot1    | 2025/08/14 17:55:29 POST /payments 29.101µs
+mr_robot1    | 2025/08/14 17:55:29 [Worker 1] Processing job c1e0415d-c0a8-4c1e-8503-d483eb165226 (attempt 3) - timestamp: 1755194129759541242
+mr_robot2    | 2025/08/14 17:55:29 [Worker 1] Successfully processed job d0467145-7be6-4ad5-8e0a-c8f7ead39719 in 2.806356ms - timestamp: 1755194129760368710
+mr_robot1    | 2025/08/14 17:55:29 [Worker 1] Successfully processed job c1e0415d-c0a8-4c1e-8503-d483eb165226 in 2.90781ms - timestamp: 1755194129762430491
+mr_robot2    | 2025/08/14 17:55:29 POST /payments 34.382µs
+mr_robot2    | 2025/08/14 17:55:29 [Worker 0] Processing job 78f30039-ad5f-4169-af78-f2c7517ab293 (attempt 3) - timestamp: 1755194129777913945
+mr_robot2    | 2025/08/14 17:55:29 [Worker 0] Successfully processed job 78f30039-ad5f-4169-af78-f2c7517ab293 in 2.857709ms - timestamp: 1755194129780740792
+log truncated at line 1000
