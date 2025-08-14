@@ -2,7 +2,7 @@ version: '3.9'
 
 services:
   app1: &app
-    image: maruero/rinha-de-backend-2025:20250814_native_v1
+    image: maruero/rinha-de-backend-2025:20250814_v3
     hostname: app1
     environment:
       - FALLBACK_ENABLED=0
@@ -13,6 +13,7 @@ services:
       - SOCKET=/var/tmp/sockets/app1.sock
       - CONCURRENCY=1
       - WORKER_COUNT=2
+    cpuset: "0,2"
     volumes:
       - sockets:/var/tmp/sockets
     networks:
@@ -36,6 +37,7 @@ services:
       - SOCKET=/var/tmp/sockets/app2.sock
       - CONCURRENCY=1
       - WORKER_COUNT=2
+    cpuset: "1,3"
     volumes:
       - sockets:/var/tmp/sockets
     deploy:
