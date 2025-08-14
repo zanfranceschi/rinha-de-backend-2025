@@ -1,0 +1,62 @@
+
+ backend2 Pulling 
+ backend1 Pulling 
+ backend2 Pulled 
+ backend1 Pulled 
+ Network samypng-go-2_rinha-network  Creating
+ Network samypng-go-2_rinha-network  Created
+ Volume "samypng-go-2_sockets"  Creating
+ Volume "samypng-go-2_sockets"  Created
+ Container rinha-redis  Creating
+ Container rinha-redis  Created
+ Container rinha-backend-1  Creating
+ Container rinha-backend-2  Creating
+ Container rinha-backend-1  Created
+ Container rinha-backend-2  Created
+ Container rinha-haproxy  Creating
+ Container rinha-haproxy  Created
+Attaching to rinha-backend-1, rinha-backend-2, rinha-haproxy, rinha-redis
+rinha-redis  | 1:C 14 Aug 2025 16:19:56.190 # WARNING Memory overcommit must be enabled! Without it, a background save or replication may fail under low memory condition. Being disabled, it can also cause failures without low memory condition, see https://github.com/jemalloc/jemalloc/issues/1328. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.
+rinha-redis  | 1:C 14 Aug 2025 16:19:56.192 * oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+rinha-redis  | 1:C 14 Aug 2025 16:19:56.192 * Redis version=8.2.0, bits=64, commit=00000000, modified=1, pid=1, just started
+rinha-redis  | 1:C 14 Aug 2025 16:19:56.192 * Configuration loaded
+rinha-redis  | 1:M 14 Aug 2025 16:19:56.193 * monotonic clock: POSIX clock_gettime
+rinha-redis  | 1:M 14 Aug 2025 16:19:56.198 * Running mode=standalone, port=6379.
+rinha-redis  | 1:M 14 Aug 2025 16:19:56.198 # WARNING: The TCP backlog setting of 8192 cannot be enforced because /proc/sys/net/core/somaxconn is set to the lower value of 4096.
+rinha-redis  | 1:M 14 Aug 2025 16:19:56.201 * Server initialized
+rinha-redis  | 1:M 14 Aug 2025 16:19:56.201 * Ready to accept connections tcp
+rinha-redis  | 1:M 14 Aug 2025 16:19:56.201 * Ready to accept connections unix
+rinha-backend-1  | 
+rinha-backend-1  |  ┌───────────────────────────────────────────────────┐ 
+rinha-backend-1  |  │                   Fiber v2.52.8                   │ 
+rinha-backend-1  |  │           http:///sockets/actix.sock.2:           │ 
+rinha-backend-1  |  │                                                   │ 
+rinha-backend-1  |  │ Handlers ............. 4  Processes ........... 1 │ 
+rinha-backend-2  | 
+rinha-backend-2  |  ┌───────────────────────────────────────────────────┐ 
+rinha-backend-2  |  │                   Fiber v2.52.8                   │ 
+rinha-backend-2  |  │           http:///sockets/actix.sock.1:           │ 
+rinha-backend-1  |  │ Prefork ....... Disabled  PID ................. 1 │ 
+rinha-backend-1  |  └───────────────────────────────────────────────────┘ 
+rinha-backend-1  | 
+rinha-backend-2  |  │                                                   │ 
+rinha-backend-2  |  │ Handlers ............. 4  Processes ........... 1 │ 
+rinha-backend-2  |  │ Prefork ....... Disabled  PID ................. 1 │ 
+rinha-backend-2  |  └───────────────────────────────────────────────────┘ 
+rinha-backend-2  | 
+rinha-haproxy    | [NOTICE]   (1) : Initializing new worker (8)
+rinha-haproxy    | [NOTICE]   (1) : Loading success.
+rinha-haproxy    | [NOTICE]   (1) : haproxy version is 3.2.3-1844da7
+rinha-haproxy    | [WARNING]  (1) : Exiting Master process...
+rinha-haproxy    | [WARNING]  (8) : Proxy http-in stopped (cumulated conns: FE: 553, BE: 0).
+rinha-haproxy    | [WARNING]  (8) : Proxy backend_servers stopped (cumulated conns: FE: 0, BE: 553).
+rinha-haproxy    | [WARNING]  (1) : Current worker (8) exited with code 0 (Exit)
+rinha-haproxy    | [WARNING]  (1) : All workers exited. Exiting... (0)
+[Krinha-haproxy exited with code 0
+[Krinha-backend-1 exited with code 0
+[Krinha-backend-2 exited with code 0
+rinha-redis      | 1:signal-handler (1755188477) Received SIGTERM scheduling shutdown...
+rinha-redis      | 1:M 14 Aug 2025 16:21:17.628 * User requested shutdown...
+rinha-redis      | 1:M 14 Aug 2025 16:21:17.628 * Removing the unix socket file.
+rinha-redis      | 1:M 14 Aug 2025 16:21:17.628 # Redis is now ready to exit, bye bye...
+log truncated at line 1000
