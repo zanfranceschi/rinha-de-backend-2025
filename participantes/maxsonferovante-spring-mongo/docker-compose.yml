@@ -3,16 +3,9 @@ services:
     image: mongo:8.0
     container_name: mongodb
     command: >
-      --wiredTigerCollectionBlockCompressor snappy
-      --wiredTigerIndexPrefixCompression true
-      --setParameter enableLocalhostAuthBypass=false
-      --setParameter diagnosticDataCollectionEnabled=false
       --setParameter logLevel=0
       --quiet
       --logpath /dev/null
-      --setParameter maxTransactionLockRequestTimeoutMillis=5000
-      --setParameter maxSessions=1000
-      --setParameter localLogicalSessionTimeoutMinutes=30
     restart:
       always
     healthcheck:
