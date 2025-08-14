@@ -24,14 +24,13 @@ services:
     image: eddiendulo/monitor-app1
     environment:
       - NODE_ENV=production
-      - PORT=3000
       - DATABASE_URL=postgres://user:password@db:5432/rinha
       - PAYMENT_PROCESSOR_URL_DEFAULT=http://payment-processor-default:8080
       - PAYMENT_PROCESSOR_URL_FALLBACK=http://payment-processor-fallback:8080
       - WORKERS=${WORKERS:-8}
       - QUEUE_SIZE=${QUEUE_SIZE:-2000}
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:3000/health"]
+      test: ["CMD", "curl", "-f", "http://localhost:9999/health"]
       interval: 10s
       timeout: 3s
       retries: 3
@@ -45,14 +44,13 @@ services:
     image: eddiendulo/monitor-app2
     environment:
       - NODE_ENV=production
-      - PORT=3000
       - DATABASE_URL=postgres://user:password@db:5432/rinha
       - PAYMENT_PROCESSOR_URL_DEFAULT=http://payment-processor-default:8080
       - PAYMENT_PROCESSOR_URL_FALLBACK=http://payment-processor-fallback:8080
       - WORKERS=${WORKERS:-8}
       - QUEUE_SIZE=${QUEUE_SIZE:-2000}
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:3000/health"]
+      test: ["CMD", "curl", "-f", "http://localhost:9999/health"]
       interval: 10s
       timeout: 3s
       retries: 3
