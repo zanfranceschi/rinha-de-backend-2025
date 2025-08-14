@@ -25,7 +25,7 @@ services:
     environment:
       - PAYMENT_PROCESSOR_URL_DEFAULT=http://payment-processor-default:8080
       - PAYMENT_PROCESSOR_URL_FALLBACK=http://payment-processor-fallback:8080
-      - SOCKET_PATH=/tmp/memorydb.sock
+      - SOCKET_PATH=/var/run/memorydb.sock
       - ZEROMQ_SUFFIXS=1
       - SOCKET_PATH_SERVER=/var/run/server1.sock
       - NODE_ENV=production
@@ -48,7 +48,7 @@ services:
     environment:
       - PAYMENT_PROCESSOR_URL_DEFAULT=http://payment-processor-default:8080
       - PAYMENT_PROCESSOR_URL_FALLBACK=http://payment-processor-fallback:8080
-      - SOCKET_PATH=/tmp/memorydb.sock
+      - SOCKET_PATH=/var/run/memorydb.sock
       - ZEROMQ_SUFFIXS=2
       - SOCKET_PATH_SERVER=/var/run/server2.sock
       - NODE_ENV=production
@@ -71,10 +71,11 @@ services:
     environment:
       - PAYMENT_PROCESSOR_URL_DEFAULT=http://payment-processor-default:8080
       - PAYMENT_PROCESSOR_URL_FALLBACK=http://payment-processor-fallback:8080
-      - SOCKET_PATH=/tmp/memorydb.sock
+      - SOCKET_PATH=/var/run/memorydb.sock
       - ZEROMQ_SUFFIXS=1,2
     volumes:
       - socket_volume:/tmp
+      - socket_volume:/var/run
     deploy:
       resources:
         limits:
