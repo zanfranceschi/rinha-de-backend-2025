@@ -1,7 +1,7 @@
 services:
 
   backend01: &backend
-    image: thiagorigonatti/rinha-2025-scratch:0.0.27
+    image: thiagorigonatti/rinha-2025-scratch:0.0.31
 #    build: .
     container_name: backend01
     environment:
@@ -15,7 +15,7 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.40"
+          cpus: "0.60"
           memory: "100MB"
     ipc: container:shared-memory
     depends_on:
@@ -41,7 +41,7 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.20"
+          cpus: "0.01"
           memory: "50MB"
 
 
@@ -57,7 +57,7 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.50"
+          cpus: "0.29"
           memory: "100MB"
     depends_on:
       - backend01
