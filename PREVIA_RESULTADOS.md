@@ -1,6 +1,6 @@
 # Prévia do Resultados da Rinha de Backend 2025
-Atualizado em **Thu Aug 14 13:07:51 UTC 2025**
-358 submissões / 297 resultados / 61 submissões com erro
+Atualizado em **Thu Aug 14 13:15:06 UTC 2025**
+359 submissões / 297 resultados / 62 submissões com erro
 
 
 | participante | p99 | bônus por desempenho (%) | multa ($) | lucro | submissão |
@@ -325,6 +325,7 @@ Atualizado em **Thu Aug 14 13:07:51 UTC 2025**
 | g4brielV-java1 | [logs](https://github.com/zanfranceschi/rinha-de-backend-2025/tree/main/participantes/g4brielV-java1) |
 | gabriel-nardelli-perl-mojolicious | [logs](https://github.com/zanfranceschi/rinha-de-backend-2025/tree/main/participantes/gabriel-nardelli-perl-mojolicious) |
 | githiago-f | [logs](https://github.com/zanfranceschi/rinha-de-backend-2025/tree/main/participantes/githiago-f) |
+| gui-anacleto-python-0001 | [logs](https://github.com/zanfranceschi/rinha-de-backend-2025/tree/main/participantes/gui-anacleto-python-0001) |
 | guidugaich-node | [logs](https://github.com/zanfranceschi/rinha-de-backend-2025/tree/main/participantes/guidugaich-node) |
 | guilhermegules-payflow-node | [logs](https://github.com/zanfranceschi/rinha-de-backend-2025/tree/main/participantes/guilhermegules-payflow-node) |
 | guilhermesouza-nodejs | [logs](https://github.com/zanfranceschi/rinha-de-backend-2025/tree/main/participantes/guilhermesouza-nodejs) |
