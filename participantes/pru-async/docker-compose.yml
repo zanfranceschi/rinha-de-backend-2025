@@ -1,13 +1,15 @@
 services:
   api01: &api
-    image: renatoelias/pru-async:latest
+    image: renatoelias/pru-async:v2
     container_name: api01
     hostname: api01
     environment:
       - REDIS_URL=redis://redis:6379/0
+    depends_on:
+      - redis
     networks:
       - payment-processor
-      - backend
+      - net
     deploy:
       resources:
         limits:
@@ -27,34 +29,34 @@ services:
     ports:
       - 6379:6379
     networks:
-      - backend
+      - net
     deploy:
       resources:
         limits:
          cpus: '0.1'
          memory: '20MB'
 
-  traefik:
-    image: traefik:v3.1
-    container_name: traefik
-    command: --configFile=/etc/traefik/traefik.yml
+  nginx:
+    image: nginx
+    container_name: nginx
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
     ports:
       - 9999:9999
-    volumes:
-      - ./traefik.yml:/etc/traefik/traefik.yml:ro
-      - ./http.yml:/etc/traefik/dynamic/http.yml:ro
     networks:
-      - backend
+      - net
     depends_on:
+      - redis
       - api01
       - api02
     deploy:
       resources:
         limits:
-          cpus: '0.4'
-          memory: '100MB'
-
+          cpus: '0.2'
+          memory: '20MB'
+  
 networks:
   payment-processor:
     external: true
-  backend:
+  net:
+    driver: bridge
