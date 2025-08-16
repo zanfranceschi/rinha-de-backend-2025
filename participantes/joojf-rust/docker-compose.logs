@@ -1,0 +1,1001 @@
+
+ Network joojf-rust_default  Creating
+ Network joojf-rust_default  Created
+ Volume "joojf-rust_redis-sock"  Creating
+ Volume "joojf-rust_redis-sock"  Created
+ Container joojf-rust-redis-1  Creating
+ Container joojf-rust-redis-1  Created
+ Container joojf-rust-app1-1  Creating
+ Container joojf-rust-app2-1  Creating
+ Container joojf-rust-app2-1  Created
+ Container joojf-rust-app1-1  Created
+ Container joojf-rust-nginx-1  Creating
+ Container joojf-rust-nginx-1  Created
+Attaching to app1-1, app2-1, nginx-1, redis-1
+redis-1  | 1:C 16 Aug 2025 23:37:06.358 # WARNING Memory overcommit must be enabled! Without it, a background save or replication may fail under low memory condition. Being disabled, it can also cause failures without low memory condition, see https://github.com/jemalloc/jemalloc/issues/1328. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.
+redis-1  | 1:C 16 Aug 2025 23:37:06.358 * oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+redis-1  | 1:C 16 Aug 2025 23:37:06.358 * Redis version=7.2.10, bits=64, commit=00000000, modified=0, pid=1, just started
+redis-1  | 1:C 16 Aug 2025 23:37:06.358 * Configuration loaded
+redis-1  | 1:M 16 Aug 2025 23:37:06.359 * monotonic clock: POSIX clock_gettime
+redis-1  | 1:M 16 Aug 2025 23:37:06.359 * Running mode=standalone, port=0.
+redis-1  | 1:M 16 Aug 2025 23:37:06.360 * Server initialized
+redis-1  | 1:M 16 Aug 2025 23:37:06.360 * Ready to accept connections unix
+app1-1   | listening on 0.0.0.0:9999
+app2-1   | listening on 0.0.0.0:9999
+nginx-1  | /docker-entrypoint.sh: /docker-entrypoint.d/ is not empty, will attempt to perform configuration
+nginx-1  | /docker-entrypoint.sh: Looking for shell scripts in /docker-entrypoint.d/
+nginx-1  | /docker-entrypoint.sh: Launching /docker-entrypoint.d/10-listen-on-ipv6-by-default.sh
+nginx-1  | 10-listen-on-ipv6-by-default.sh: info: Getting the checksum of /etc/nginx/conf.d/default.conf
+nginx-1  | 10-listen-on-ipv6-by-default.sh: info: Enabled listen on IPv6 in /etc/nginx/conf.d/default.conf
+nginx-1  | /docker-entrypoint.sh: Sourcing /docker-entrypoint.d/15-local-resolvers.envsh
+nginx-1  | /docker-entrypoint.sh: Launching /docker-entrypoint.d/20-envsubst-on-templates.sh
+nginx-1  | /docker-entrypoint.sh: Launching /docker-entrypoint.d/30-tune-worker-processes.sh
+nginx-1  | /docker-entrypoint.sh: Configuration complete; ready for start up
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:10 +0000] "GET /payments-summary HTTP/1.1" 200 98 "-" "curl/8.5.0"
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:16 +0000] "POST /purge-payments HTTP/1.1" 404 0 "-" "Grafana k6/1.1.0"
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:16 +0000] "GET /payments-summary?from=2025-08-16T23:37:01.198Z&to=2025-08-16T23:37:14.698Z HTTP/1.1" 200 98 "-" "Grafana k6/1.1.0"
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:16 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 521ms proc=default corr=59bacb50-fc57-4adf-9ccb-e58534d0ae22 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:16 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 627ms proc=default corr=de0ef579-415c-42c5-a2a9-02749169704c attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:16 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 736ms proc=default corr=427cc093-2a43-4b58-965c-d8887533e0c2 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:16 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 845ms proc=default corr=454284ed-d2cb-496a-821e-98a1241b2ae1 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:16 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 854ms proc=default corr=bf6a77de-d99d-44f0-949c-d5cc097250eb attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:16 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 964ms proc=default corr=03021271-e3b8-4bde-992a-b35dcc9b8c4c attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:16 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 651ms proc=default corr=9b3c06aa-02b8-4508-9816-589f2daece41 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:16 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 654ms proc=default corr=02929557-e47e-44fe-8c94-1e5775166b7d attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:17 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 656ms proc=default corr=3f72c3b8-db92-43a9-9f16-57809fb20b00 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:17 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 656ms proc=default corr=fc79262b-16b7-4b4f-8aaa-72b0215e291b attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:17 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 568ms proc=default corr=a74bdfda-15d3-4c44-aa42-57fc609637c8 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:17 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 546ms proc=default corr=76d707d1-771e-4a4b-a937-b3913f6039aa attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:17 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 522ms proc=default corr=f88d78f3-22c8-4d20-a37d-644593815175 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:17 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 613ms proc=default corr=fa54d895-dff8-412e-b72a-ae0cd4794065 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:17 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 564ms proc=default corr=f83eb4c6-f7a7-40b5-8514-62d007ba94f7 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:17 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 546ms proc=default corr=fb64776d-f76e-4a16-859b-2f703cce2c0b attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:17 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 454ms proc=default corr=199618d7-9b83-48b8-9690-1a4535970319 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:17 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 437ms proc=default corr=3fa471ab-7501-445a-8eb5-8e0be46a28a9 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:17 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 433ms proc=default corr=b16c5ca0-0a44-4c1c-b93c-bae3fea294bb attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:17 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 436ms proc=default corr=c9a529e2-3406-48c5-bba2-61df65081521 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:17 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 436ms proc=default corr=297d5aa2-84ed-4a00-bcb1-5598763e9ecc attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:17 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 436ms proc=default corr=4eaedaa6-2f07-43e2-9ff0-5a9e7a7589c2 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:17 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 436ms proc=default corr=a747c4e3-31d3-4da7-98e0-737985228adb attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:17 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 437ms proc=default corr=eeefb9e3-c882-44d9-8557-5007c93562cf attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:17 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 436ms proc=default corr=8028be56-6d30-4123-8045-9378e4e61d34 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:18 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 436ms proc=default corr=f7bd1af0-d5a4-4706-a9e7-f537370a3862 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:18 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 437ms proc=default corr=99789be0-09e1-49c8-bff4-6738881c998c attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:18 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 442ms proc=default corr=9f5fe8c1-ff2a-4f10-a3d8-6f6fd78934bd attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:18 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 436ms proc=default corr=ef97de40-ebc9-49a5-9314-9db4726e4eec attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:18 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 367ms proc=default corr=1b187bdd-25ff-4da4-9076-54a0fe623514 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:18 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 419ms proc=default corr=c549bb5e-cb0a-40fb-993c-24796e0a18a2 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:18 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 345ms proc=default corr=8bcf493e-f8a5-4f82-b5f7-12c261c2b601 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:18 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 347ms proc=default corr=796d6d9d-1f11-4d4e-b537-3d31805d17ed attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:18 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 328ms proc=default corr=74f0ad05-0a3b-484c-b40a-5d99a81d79e7 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:18 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 327ms proc=default corr=67d16bfd-8c0d-4bc7-9aee-dce3b5377c57 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:18 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 249ms proc=default corr=a6c90949-02c0-427d-806f-b504e6244b19 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:18 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 309ms proc=default corr=f70d8898-2333-4cf6-b3cf-addd3158a587 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:18 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 306ms proc=default corr=823bb38b-40c7-4348-b203-537e65ff7815 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:18 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 254ms proc=default corr=a7345b38-5d69-4ad1-8fd7-64c922b41aa2 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:18 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 313ms proc=default corr=a0b7a9c4-d911-4344-bdc2-1ba4ded137bd attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:18 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 310ms proc=default corr=282fb946-0aa2-4f6d-82e3-8fda021146e3 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:18 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 254ms proc=default corr=6a1c4083-8899-4fbf-87bb-2a7349ca5c8a attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:18 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 310ms proc=default corr=302ba35f-c76e-4166-890d-d2f43937619e attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:18 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 310ms proc=default corr=c87809f0-fdae-490b-9ddb-8f62ed457ed9 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:18 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 254ms proc=default corr=a262e07d-55c6-4583-8d6c-03b60f5ff875 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:18 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 310ms proc=default corr=1f79e601-a651-40b2-97a2-31104749eb7c attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:18 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 309ms proc=default corr=68c303d6-fc15-452b-827e-df9342cf7923 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:18 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 250ms proc=default corr=cfb058ab-28b5-417d-8547-6b73514c16ea attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:18 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 308ms proc=default corr=e5873740-1c09-48bd-97fb-128274015249 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:18 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 309ms proc=default corr=792452fb-d85a-4e5a-87b6-03315d77e870 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:18 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 253ms proc=default corr=d00f09cc-5347-4036-827c-f1cf81d877bd attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:19 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 309ms proc=default corr=cfdd4623-5a37-4937-a212-7cf9ef6bad82 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:19 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 309ms proc=default corr=536d2e32-866d-49e0-9622-89f38aaa538b attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:19 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 254ms proc=default corr=cb70e3ec-bb4c-4f19-ac24-ddb1e41c4cdf attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:19 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 310ms proc=default corr=d0e1d59d-c136-4da1-9f98-e9182ab220c1 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:19 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 315ms proc=default corr=6a4195fb-9c26-4795-a74f-98a44b16d4b6 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:19 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 254ms proc=default corr=ab80a274-7ee1-414f-bb6b-feacc3245462 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:19 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 258ms proc=default corr=9e2105d5-98e8-42b4-add7-03f039019a25 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:19 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 293ms proc=default corr=29f0fdc7-92b5-4a72-975f-8ce6dc1f9305 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:19 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 237ms proc=default corr=bded23d8-05b6-4a92-a647-2184031ff86c attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:19 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 236ms proc=default corr=b30ced47-0c8f-4be9-9dbb-b37302f170f9 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:19 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 237ms proc=default corr=dd2c97b6-0033-4390-894a-70cfb3422413 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:19 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 218ms proc=default corr=39e6911e-113a-470b-b4b9-2dbbade01b86 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:19 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 214ms proc=default corr=f4b11e86-c3a2-42b4-9eab-e38728847ebb attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:19 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 218ms proc=default corr=76c611c7-e788-4c83-b268-4afa7480c62c attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:19 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 213ms proc=default corr=b8878510-391b-4914-9285-a754d9d74517 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:19 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 217ms proc=default corr=9113f74d-20f4-41ee-8f07-a8a8b110a95d attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:19 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 218ms proc=default corr=a538ae11-ef7d-44db-a188-0b7a6b1438e8 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:19 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 219ms proc=default corr=c6afe155-8402-433c-9be1-c939c5a3617a attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:19 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 218ms proc=default corr=9519c3d9-299a-42b3-8883-789b30a37125 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:19 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 218ms proc=default corr=8b2d8752-c65b-4383-ad61-86cedc63bdd2 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:19 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 217ms proc=default corr=59867b7c-2516-43fc-b0d4-187b09b1314f attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:19 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 219ms proc=default corr=b03a9756-b778-4da1-8439-6dc1c9c2d27f attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:19 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 219ms proc=default corr=d8a51d94-5440-42c4-9149-8374f1913af5 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:19 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 219ms proc=default corr=e41c1e31-5fef-45ae-be54-1062f197cccd attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:19 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 219ms proc=default corr=ad1bcbd7-fede-4d85-8090-ab257119a3ee attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:19 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 219ms proc=default corr=4375d23d-9aad-467d-9540-09255de25b60 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:19 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 217ms proc=default corr=dad1b3f7-55e6-4115-9f0f-1446daa1e9c8 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:19 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 218ms proc=default corr=54504ea0-5f97-48e8-ae2d-83d48f568675 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:19 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 218ms proc=default corr=f9e53faf-9f62-4bc1-82fb-13e6525ee6c9 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:19 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 217ms proc=default corr=0aea1441-8468-4161-8746-3d79edf18201 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:19 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 218ms proc=default corr=2486cc06-664c-4da4-ba60-8b629f85670a attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:19 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 218ms proc=default corr=94d5ae6c-9796-4610-9522-5b46e62da0b2 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:19 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 218ms proc=default corr=e7bc5676-7d28-49fb-97f3-4fbaa05fed23 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:19 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 218ms proc=default corr=33615c69-20a4-42e7-837f-89e51e6d19c4 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:19 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 218ms proc=default corr=89047966-6f83-4376-a629-4b249303cb30 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:20 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 218ms proc=default corr=7ea15102-9095-425d-adf8-52bfd7614bfa attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:20 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 218ms proc=default corr=700d6724-917f-478c-ad59-c7e7d5287a06 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:20 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 219ms proc=default corr=8d858cac-65f9-4503-b575-37c29f17585e attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:20 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 218ms proc=default corr=7aeaf09c-7dcc-4df4-bfa1-e05e404107d7 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:20 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 218ms proc=default corr=ef9ebc5c-922b-496e-afa1-ba0e9374e173 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:20 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 217ms proc=default corr=caa8c821-bab2-41d4-9ba7-967c9c367439 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:20 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 222ms proc=default corr=bb2ca817-435c-461b-904a-ea682aeb7f3f attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:20 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 219ms proc=default corr=0db579cc-2943-4ac2-b135-82e0d15a3c7a attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:20 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 185ms proc=default corr=c4b77405-7ad9-476b-8ad6-b54b2f9b0075 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:20 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 200ms proc=default corr=374fd769-4d9c-4147-b37d-5c23392f2577 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:20 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 201ms proc=default corr=bd2a1819-ae94-47c7-bfa9-bb37c88dcf03 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:20 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 201ms proc=default corr=7d94968c-cf06-42f1-853f-d33785e19df7 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:20 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 162ms proc=default corr=e1cc0b47-13fc-49dc-8d94-cd046adcfd3d attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:20 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 163ms proc=default corr=bd5afc6a-f1c7-471d-88cd-6746a3132108 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:20 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 178ms proc=default corr=4ed2766f-cabf-4e44-930c-edb9b2668a76 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:20 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 182ms proc=default corr=c8cd4c0c-ca22-41fd-8487-8663238f8240 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:20 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 178ms proc=default corr=391387af-ff92-4e37-8371-28d52ed2441d attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:20 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 163ms proc=default corr=f6aac79c-563f-4352-b0d3-d8f68dcd3f81 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:20 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 161ms proc=default corr=f9b50499-3465-42c6-8eba-14408519c20b attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:20 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 185ms proc=default corr=308384d7-6ba0-4a21-bca5-965f9b577e3f attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:20 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 182ms proc=default corr=74d95de3-1d8e-4403-b6bd-39d138eba504 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:20 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 182ms proc=default corr=08b9db08-063b-4a26-878a-27aef25fc766 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:20 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 163ms proc=default corr=e5324689-bdba-4926-b457-a7fd6b406181 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:20 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 163ms proc=default corr=67d046b4-d616-4c99-956a-bcf48901ced2 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:20 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 182ms proc=default corr=075ea665-a6bd-4f46-bd90-f4023299ef78 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:20 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 182ms proc=default corr=4f4d70f0-1f02-4f17-9012-f8ea079bd137 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:20 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 183ms proc=default corr=ce283117-7173-48ae-a9c6-d2418e7db181 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:20 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 160ms proc=default corr=f7d22f4e-0f36-49b4-9596-93fdb2c38cf3 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:20 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 163ms proc=default corr=b01212b3-b716-48fd-b2b0-bcdf09468d85 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:20 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 182ms proc=default corr=93cdfdd8-52b1-4e89-ae10-05b254982d38 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:20 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 182ms proc=default corr=d1ba9787-f067-40f7-9ec2-ab19c468c621 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:20 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 182ms proc=default corr=2fa12832-7d73-4419-99e1-2f1e61d84909 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:20 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 164ms proc=default corr=105de522-c7f0-45fc-976b-d013c7d88b74 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:20 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 163ms proc=default corr=3c4673bc-c8dc-446d-add6-725387f798bc attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:20 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 183ms proc=default corr=e7b0d0e9-826b-4508-b5d8-cc48ea0cf637 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:20 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 181ms proc=default corr=7a9e8f30-fca7-41f5-9a37-b72576092a99 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:20 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 182ms proc=default corr=bb8ebed2-b45b-4f48-8d67-1935ffbb9f12 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:20 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 162ms proc=default corr=72a29f4b-6cc2-467d-bcd6-9082feb81532 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:20 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 162ms proc=default corr=c4aaff09-8185-4ac9-a63f-68df8d8e5ac9 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:20 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 181ms proc=default corr=f9b35eec-7342-40c2-8cf7-e82c25f3573c attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:20 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 181ms proc=default corr=687b50a7-9419-4026-b9fc-faede3864da8 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:20 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 182ms proc=default corr=d5d75854-7199-4ba9-a237-e9e1e7b1d5c1 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:20 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 163ms proc=default corr=968c0a46-3590-4f13-8e08-9e968a85e3c8 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:20 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 162ms proc=default corr=c3d4671c-bf6c-4e3f-aad8-151bc3732ef1 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:21 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 182ms proc=default corr=5cef009e-f377-4d6d-b94f-3865e0181840 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:21 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 182ms proc=default corr=6d06688f-9fa8-495e-b785-ce86ec0002b4 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:21 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 182ms proc=default corr=b75ea7db-edef-4326-b841-94e6e0f68055 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:21 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 163ms proc=default corr=465dba29-b968-4119-b874-e2eea81fbfdc attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:21 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 163ms proc=default corr=5c6e9e67-9357-4bdd-b4e3-163bd26f4df3 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:21 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 182ms proc=default corr=cfe8ee52-f47e-4423-b4fa-2348b415037a attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:21 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 183ms proc=default corr=16383003-0f3c-4436-99ff-ccc15fc586c6 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:21 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 182ms proc=default corr=e2746747-93ef-409f-83e9-377293f1df6b attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:21 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 167ms proc=default corr=65758f57-904f-4642-b7f3-4700efb03b5b attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:21 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 163ms proc=default corr=88af6c3f-889b-4c27-ba00-a5cfd0eafbab attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:21 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 167ms proc=default corr=f8bb365a-9546-4395-9459-400ca5b3d774 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:21 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 164ms proc=default corr=58cea78c-4863-4894-b4bc-6e47192ba35e attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:21 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 164ms proc=default corr=b9614ed3-82a5-4fd4-b2ae-dd55c5717469 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:21 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 145ms proc=default corr=e1debed6-0b3a-4054-9ec4-3b83b1077bb6 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:21 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 145ms proc=default corr=73a67e1f-3acd-42a0-bf76-0c5229d3face attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:21 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 146ms proc=default corr=59687cca-b68e-4da1-b5a5-f644bc446927 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:21 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 141ms proc=default corr=526d7319-bd95-4007-bad9-0561984d385d attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:21 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 146ms proc=default corr=92b7db78-6406-4dd5-a3fb-f0f7f45e1f1a attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:21 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 143ms proc=default corr=365230c4-9a50-4a83-8e96-bb07ddd32093 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:21 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 145ms proc=default corr=62719d5e-f3da-4d1c-8b4f-db185d6e20b8 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:21 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 145ms proc=default corr=340ae7a9-76a6-4a5c-b829-1b9c16589d25 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:21 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 144ms proc=default corr=6b7b562d-15a1-431a-8ba8-ac8d0ab91648 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:21 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 142ms proc=default corr=3c953bfa-03b8-4b98-8b36-584f60918c58 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:21 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 146ms proc=default corr=020ef5b4-4739-421b-977f-c33fd6ecf95a attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:21 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 149ms proc=default corr=4196da21-d51f-4358-9dc5-8b68a8e7702e attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:21 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 145ms proc=default corr=61251071-4588-4305-a3c5-9f61fe17075e attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:21 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 144ms proc=default corr=71ba3087-a9db-4e68-80db-4c2cb09c44a4 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:21 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 145ms proc=default corr=187d4a37-417e-486d-a586-27d9fac0288f attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:21 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 146ms proc=default corr=064bf20e-d465-43ab-822c-9029a83e5a64 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:21 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 153ms proc=default corr=5524a9b9-d056-4291-9cd6-848fd9361400 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:21 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 147ms proc=default corr=5be07a80-ae5e-417e-918a-a651fb0b9a86 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:21 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 144ms proc=default corr=b1276085-e720-41f2-ab7c-dae7b001013a attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:21 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 141ms proc=default corr=ac1bf847-8a7a-468c-9322-7dfac24bc9eb attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:21 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 146ms proc=default corr=be77bfe5-f9d2-431d-bb97-f9526406760c attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:21 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 144ms proc=default corr=6f3fb391-d3fe-4ff7-9373-c01ea6659613 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:21 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 146ms proc=default corr=6df9421d-bdd5-48bc-979d-ad34bb250f49 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:21 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 146ms proc=default corr=a925131b-88bb-42f5-9846-679fbbc8bee4 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:21 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 139ms proc=default corr=e6423e17-edee-4cf3-afab-cd0c6a12cb7d attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:21 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 146ms proc=default corr=c173ad64-8243-4790-af57-0d7e279a2a99 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:21 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 146ms proc=default corr=af6c5e8f-07d9-404c-bf74-d41a8e4b68af attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:21 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 145ms proc=default corr=5001f4cc-0444-4732-892b-3d8de9576440 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:21 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 146ms proc=default corr=04ea99d5-7153-4550-9bf2-c73692e2fc1f attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:21 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 147ms proc=default corr=742888fd-a335-4018-94c0-683db5b1acc5 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:21 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 144ms proc=default corr=e7a4efbd-de13-461e-a0ad-4395ed124ed6 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:21 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 144ms proc=default corr=4305b5d0-92fd-4076-8f1d-cd2834fa58b0 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:21 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 144ms proc=default corr=64beef8d-53de-427a-b707-f783f280efcb attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:21 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 144ms proc=default corr=633d62fa-1cc2-430f-813e-ce932121da4e attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:21 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 145ms proc=default corr=ebc7ad62-89a3-48e9-9346-0811433e2780 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:21 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 147ms proc=default corr=5f38a1ed-0f87-4ce2-9abd-1a91b4dae40f attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:21 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 145ms proc=default corr=a074a7a7-25cb-43de-9dcb-ab840a91c58f attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:21 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 144ms proc=default corr=10acd7a6-fa68-4771-8e28-17b4f7380c50 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:21 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 144ms proc=default corr=51254fd7-bab3-4a10-8e1a-74c9ae234f40 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:21 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 144ms proc=default corr=10fc1ec8-bc1d-49cf-b4a9-51f4dadff5cf attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:21 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 146ms proc=default corr=d64cd49e-da93-4228-a65a-29d3fc5cc7f5 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:22 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 147ms proc=default corr=6f211e99-43a9-4a99-827f-5d11dfee2ac9 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:22 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 145ms proc=default corr=5165c2fa-2c94-4bbd-af3f-14d62b6dac21 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:22 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 144ms proc=default corr=5ad75747-fc06-4330-a145-7cbbd0f0ad40 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:22 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 145ms proc=default corr=f4327d7f-bcde-454f-88e4-83c98588ac59 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:22 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 146ms proc=default corr=a38db0b6-90a8-4270-91ad-b9c7c9b87eae attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:22 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 147ms proc=default corr=9d6d81c4-6b46-48ed-bea3-1acd503678fc attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:22 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 146ms proc=default corr=d567a58b-38f2-44c8-b866-004df74a048a attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:22 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 145ms proc=default corr=da797cf5-6225-4e37-8b50-7f8bc364c05e attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:22 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 143ms proc=default corr=a5c2eb10-45aa-40c4-89dc-5fbe520c8a83 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:22 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 149ms proc=default corr=e31fc58e-6d13-4811-bd53-b21ce47a5423 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:22 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 145ms proc=default corr=a7bb68e8-b9b1-40a7-8f75-407389bdf7a1 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:22 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 146ms proc=default corr=ac11bb06-5841-43c6-9fe1-5f289b6a27c1 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:22 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 130ms proc=default corr=95e1e324-9853-4d1f-9d5c-683095906b59 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:22 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 127ms proc=default corr=37244fd5-8fb5-4015-bd41-9d94686224d8 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:22 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 127ms proc=default corr=19171fbb-6262-4c5a-af9d-e2e0d3a7b24e attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:22 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 127ms proc=default corr=d9f53b04-185e-49e3-8bb5-ca666b7f676b attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:22 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 128ms proc=default corr=429c4720-bd6b-467a-9afd-2e37bc9e19fe attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:22 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 122ms proc=default corr=7b4f273a-1b13-4d0e-8081-e8539bb5eaaf attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:22 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:22 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 127ms proc=default corr=c748d71b-5b8e-44b2-bbfe-bcf9b972f1e4 attempts=0 already_processed=false
+app2-1   | SLOW worker 108ms proc=default corr=7d19e316-cf89-4f70-ae17-eaa0d3d02f49 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:22 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 125ms proc=default corr=1e82efae-38e9-4209-be58-697bd5627da4 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:22 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 127ms proc=default corr=5526d66f-b104-44c4-a277-93a067250bcf attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:22 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 127ms proc=default corr=a008f871-0ac9-4591-8f70-dcbf834410e9 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:22 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 125ms proc=default corr=7c81e10b-e9d4-47db-9afd-ebd4c739ef63 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:22 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 125ms proc=default corr=56a8b9eb-e1fe-40be-a576-3e38bfd858b9 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:22 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 125ms proc=default corr=12115af9-0abe-4442-82c5-378ad25dcd07 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:22 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 110ms proc=default corr=6afea5cf-d35d-45a0-8c5c-454b025670d4 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:22 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 126ms proc=default corr=75dbf332-1c7b-4067-8c73-7a0cbb5a487a attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:22 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 130ms proc=default corr=ac7145a0-17d8-4fdf-bf07-0cad0a93e0d8 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:22 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 125ms proc=default corr=42eb9b83-aecc-42d5-8f2a-225ada2693ef attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:22 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 126ms proc=default corr=bd030cdf-0e29-4e0a-9e88-176c3e95b57b attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:22 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 128ms proc=default corr=980e0d7a-e39d-4722-9498-5068895d9cd8 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:22 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:22 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 128ms proc=default corr=19e77395-1bee-441c-9c40-2adfd2a67633 attempts=0 already_processed=false
+app1-1   | SLOW worker 112ms proc=default corr=86490633-d516-4b35-bfec-30ad55920b4f attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:22 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 132ms proc=default corr=ff251237-4b1c-489b-9dad-eb084b828335 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:22 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 126ms proc=default corr=5987122c-62c5-49a3-a7e8-167effabb004 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:22 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 123ms proc=default corr=3a2dac2e-e4a5-423e-8b42-7ee06b8430d2 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:22 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 127ms proc=default corr=ad48788a-8286-4dbf-86a8-e5dc323f55a9 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:22 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 128ms proc=default corr=eea29d04-f073-49d9-905e-5956f95b113c attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:22 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 126ms proc=default corr=5d0e1d68-2c8a-4108-9ccd-bfd4e6943405 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:22 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 109ms proc=default corr=fb6981a0-e724-48a5-950a-85bc12fc8db2 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:22 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 127ms proc=default corr=99815ac4-80b4-4967-b8b1-c51f7df75c1f attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:22 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 121ms proc=default corr=44c4e8fc-86ff-4f9e-b923-aa50ed1b4233 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:22 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 128ms proc=default corr=d6116ffb-0ff5-43ba-afbe-e10116eca413 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:22 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 128ms proc=default corr=365285d2-e029-458a-814c-b43ea3f63c17 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:22 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 128ms proc=default corr=438a3b63-8a17-4021-9f96-9606e76a6475 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:22 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 125ms proc=default corr=3d403f46-9369-4ab0-9b0c-c08c4c57b1ca attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:22 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 111ms proc=default corr=4841a68b-24e0-4a3b-b83a-a4cb6ae79601 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:22 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 127ms proc=default corr=ac42449a-cfa3-4d54-bfa5-9a1c970270ef attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:22 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 127ms proc=default corr=30dca798-165f-4692-bb24-574d5d008ecf attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:22 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 126ms proc=default corr=1a2bf489-b9eb-4b50-b130-bceea825f565 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:22 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 127ms proc=default corr=43683c29-0f3e-41ba-85fb-6e70aad4ed66 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:22 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 126ms proc=default corr=fa6a6dd8-44f4-469a-a462-24825584d3c8 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:22 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 125ms proc=default corr=9a63fb7f-fbba-40ab-ab64-acb5e0880b17 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:22 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 111ms proc=default corr=16ab6585-aa60-4e55-9c47-74b6eb92c2c1 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:22 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 126ms proc=default corr=84e32ee4-ccae-4089-a9d5-620d0d5d9dae attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:22 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 127ms proc=default corr=23b545d9-9b05-4e7d-a7f1-180e3393cafe attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:22 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 126ms proc=default corr=9b809832-8dc5-41f8-a8c0-e875ede85938 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:22 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 126ms proc=default corr=1ee4173f-332a-4df7-af54-a82f2769e54f attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:22 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 125ms proc=default corr=ced3eaa2-4620-4758-ad4a-c92de7aa166e attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:22 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 126ms proc=default corr=d8de4a24-6263-43cf-a4ba-9e4fb16ee281 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:22 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 110ms proc=default corr=83a6e24f-ad46-482e-afce-b95ebf2112d7 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:22 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 127ms proc=default corr=7a70ea1e-2301-4083-a19b-404ff54c07c1 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:23 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 127ms proc=default corr=1e212a69-aec9-45d0-8503-e1e0a1b3f8b5 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:23 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 127ms proc=default corr=8dc65232-b024-48b5-95fb-ac9c2baa5569 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:23 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 127ms proc=default corr=fec3049e-7631-48f6-b7df-efe7321a9778 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:23 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 129ms proc=default corr=ad6d2938-e421-4073-88c1-92c414ec1f53 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:23 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:23 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 129ms proc=default corr=a1c3b403-a3c6-4235-a4f9-b70c51a96ca5 attempts=0 already_processed=false
+app2-1   | SLOW worker 111ms proc=default corr=c387ebc5-88d4-4cfd-8b0c-db7d530e7cc5 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:23 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 127ms proc=default corr=7ad40f63-9599-438b-be1e-9b6fb39e17b0 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:23 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 126ms proc=default corr=d8b6b133-552d-4982-909e-ee3c4012654b attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:23 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 127ms proc=default corr=abf7ea06-1d28-4c84-8276-b363a5e04d19 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:23 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 126ms proc=default corr=a73214b6-aaaf-410f-a1d0-797a51975a4e attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:23 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 131ms proc=default corr=ba4f81aa-9651-483c-82e0-7f2a458a6941 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:23 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:23 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 127ms proc=default corr=523f0f0e-166b-4cd1-93dc-7a0b7919e57b attempts=0 already_processed=false
+app2-1   | SLOW worker 113ms proc=default corr=d08c185f-ed23-4793-a4ad-eb86f769836f attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:23 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 128ms proc=default corr=86b94861-710b-4e11-89ab-766614ff95d9 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:23 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 111ms proc=default corr=fa1e0585-8c88-4330-9eb9-841a89f0ab7e attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:23 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 109ms proc=default corr=a18ebac4-581c-46d7-9275-fed26a58d83b attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:23 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 108ms proc=default corr=0d384ef0-bea5-4b56-8869-c33fa59eb4dc attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:23 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 111ms proc=default corr=1d93ffe6-ea33-4fee-a5db-d1b65bce5281 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:23 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 105ms proc=default corr=42d03c2f-c76a-4790-8ffa-e7d8aa5faf7f attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:23 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 107ms proc=default corr=2dc8c098-ed22-4986-b5fb-c1aace9967a2 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:23 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 105ms proc=default corr=1c2992f6-3a17-4774-b449-45c4b4841882 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:23 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:23 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 106ms proc=default corr=d4c0e0c4-b895-4228-8766-4ba78c2f7c89 attempts=0 already_processed=false
+app2-1   | SLOW worker 107ms proc=default corr=8e0c9071-651e-416b-afbc-f38bc0d594d2 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:23 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 109ms proc=default corr=27523c52-1c2e-4b5c-a232-c903e1815578 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:23 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 110ms proc=default corr=18dfac20-e66f-434d-aa9a-2b7e141008b6 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:23 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 107ms proc=default corr=4dc142fc-b564-4a95-9264-16d25fa1b7a6 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:23 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 108ms proc=default corr=cd7ef740-d5c0-4779-96bc-27edd63044a4 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:23 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 109ms proc=default corr=b2e1fbcd-a0f0-47b4-8baf-0e3d7bbd7813 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:23 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 108ms proc=default corr=1ffdf440-5294-4a81-a1ac-a115fea118ab attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:23 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 106ms proc=default corr=3ca11867-c127-4091-b74e-0645920ea981 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:23 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 109ms proc=default corr=2193905d-5419-4622-aecf-e7067312358f attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:23 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 108ms proc=default corr=b65b43e7-f2ed-4103-b633-1b230fd2b8d3 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:23 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 111ms proc=default corr=1459c95c-9b29-41f2-ab43-b936a64a1a81 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:23 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 108ms proc=default corr=9691b570-68fc-4534-9d08-a3b9a3314db7 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:23 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 109ms proc=default corr=c1cd0775-409d-4481-a72e-1efd05e4fcb2 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:23 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:23 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 111ms proc=default corr=ad7a6e44-3c0f-46bd-9467-9a52b3778bac attempts=0 already_processed=false
+app2-1   | SLOW worker 108ms proc=default corr=d5044a59-909b-4661-a5e2-5770f3e3e052 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:23 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 111ms proc=default corr=fc79e66d-2249-4074-9f6f-740fe3b59860 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:23 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 109ms proc=default corr=a9a7905e-fb2d-4cec-a39c-c70b84cad0f4 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:23 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 116ms proc=default corr=57a06dd1-a333-40d2-b703-fe565f58cc9b attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:23 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 105ms proc=default corr=660e69fd-9286-4eda-8493-b1570e53e965 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:23 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 109ms proc=default corr=a1146d88-2df6-424e-bfcd-a748a9d02b33 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:23 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 109ms proc=default corr=38c4c03b-4875-4c38-bdaf-36744ec12d1f attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:23 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:23 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 109ms proc=default corr=aa0415be-d0af-4d6e-ae21-448ae6ce10fd attempts=0 already_processed=false
+app2-1   | SLOW worker 109ms proc=default corr=dfa6fe1b-f346-4a25-87de-726b082b36ca attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:23 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 108ms proc=default corr=41ff7124-b5d1-48f5-93bb-fdeaef9d8619 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:23 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 108ms proc=default corr=923d917e-817f-4ec7-8c55-6714e2a27333 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:23 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 104ms proc=default corr=f57f8c82-5b42-4f9a-857b-f85f52e36ced attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:23 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 111ms proc=default corr=50244e61-75cf-477b-824f-8f61f4e3e5b4 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:23 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 111ms proc=default corr=7f66cdb9-aa18-46d9-ab7a-2979438d4cfd attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:23 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 110ms proc=default corr=657b914f-6ad8-4994-81ad-62ab411f2316 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:23 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:23 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 110ms proc=default corr=39bb2dd1-ee3d-412c-b753-bf94aa6d6da6 attempts=0 already_processed=false
+app2-1   | SLOW worker 110ms proc=default corr=4a909246-8fcf-4400-9328-093b9c736d03 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:23 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 109ms proc=default corr=535d5b62-8153-4eb6-a53c-32c86b32bc55 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:23 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 109ms proc=default corr=646d5caa-46f8-4c20-9ffc-e8f24ea82c1b attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:23 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 108ms proc=default corr=e410de17-be16-45e0-bb20-51f4ba0c91e3 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:23 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 108ms proc=default corr=2239fd50-3f1f-4b11-9e0c-df927092c315 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:23 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 108ms proc=default corr=f469d3e8-64f9-4524-b07c-035c07af7aa1 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:23 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 109ms proc=default corr=b1e582bd-73fb-4555-9326-b6a88baa2072 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:23 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 107ms proc=default corr=6bf66472-2089-4ff2-9c6d-00d3b0d2e8e8 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:23 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 108ms proc=default corr=81658de5-417e-4cd3-b349-d14279c4e8ca attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:23 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 109ms proc=default corr=ba565342-c9e4-4cea-9eac-3d1cba3fbd86 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:23 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 109ms proc=default corr=0448eeea-aa93-433f-8e08-69b1650b84ad attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:23 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 109ms proc=default corr=771f1006-8208-45dd-b0f0-ffd775270ed7 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:23 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 108ms proc=default corr=c1e6a49f-2ad0-4e26-8c60-f8d7db29ab7b attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:23 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 109ms proc=default corr=d46fe248-f85f-4d26-91be-82f979bbde3c attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:23 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 107ms proc=default corr=d3cc3542-38bc-413a-ad95-cedab795483b attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:23 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 108ms proc=default corr=5a04cf48-836d-443e-8712-86124fd034db attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:23 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 109ms proc=default corr=f6224a6b-8dfe-46a6-95c2-c25b996ee4db attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:23 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 109ms proc=default corr=c2d4e6d6-1e8a-4c11-8a18-170af524cf0b attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:23 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 109ms proc=default corr=9b8536ad-5ddd-4f7b-8659-d4cd24d6cd89 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:23 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 109ms proc=default corr=9bccde5c-f536-47d8-a323-7fa771c17426 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:24 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 109ms proc=default corr=ad96d04f-cfbe-4609-bf66-a3e3aae6b37e attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:24 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 109ms proc=default corr=d008c23b-7d0f-40ba-833d-2d0332d5bbee attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:24 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 110ms proc=default corr=20148f3c-992e-4cc3-bd13-c8ca0d2a69d6 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:24 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:24 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 110ms proc=default corr=9240a24e-f9d6-48e9-b159-4cc3bc180333 attempts=0 already_processed=false
+app2-1   | SLOW worker 108ms proc=default corr=cf3363ef-c13e-48ed-ac1c-32fb58ffa89c attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:24 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:24 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 110ms proc=default corr=37154c1f-2bd0-4f18-8f5e-886cc080fd94 attempts=0 already_processed=false
+app2-1   | SLOW worker 109ms proc=default corr=dbb4db37-b4ff-4c0f-94bb-0cb515033ddf attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:24 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 109ms proc=default corr=9c1bfd14-6de7-4cad-8570-e2f49327cd4d attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:24 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 109ms proc=default corr=f9073cc4-c1b2-44ce-8fc1-0773d91449af attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:24 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 109ms proc=default corr=b13782e4-ef18-40a8-8a03-4481b93f82b0 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:24 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 108ms proc=default corr=5e2bee50-6ab2-4fac-ae6c-61df4e23f52d attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:24 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 110ms proc=default corr=e6f6a484-77f3-4f93-aecc-6278f48dc373 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:24 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 112ms proc=default corr=581ed705-1f0a-4361-ac90-00b67168f0b6 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:24 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:24 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 109ms proc=default corr=7e0e623c-6b60-4e6c-825e-33b8d3fcd2b5 attempts=0 already_processed=false
+app2-1   | SLOW worker 108ms proc=default corr=49d372e1-c6a7-442b-92ec-91fae93bcd95 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:24 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 109ms proc=default corr=c9f2fa46-7894-4e8b-84a6-1129721af8f4 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:24 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 92ms proc=default corr=f3a43d4b-cbbe-47a4-92c6-d157de9227d9 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:24 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 90ms proc=default corr=11641e5d-cd5d-49b5-bf35-7a796bfc90de attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:24 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 90ms proc=default corr=41a4a314-76e2-4d7b-a1a5-48766bc9959f attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:24 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 90ms proc=default corr=58d6c0de-8159-427f-9109-eba2b7f2d0b1 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:24 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 104ms proc=default corr=7f4d7a09-4ff4-48e3-9005-30bce878fe37 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:24 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 91ms proc=default corr=93bf9923-2ae4-4740-84ac-853c4c6902d8 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:24 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 107ms proc=default corr=99d0916f-73e7-4664-b69b-142ded4118be attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:24 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 90ms proc=default corr=9e59e934-caca-4986-ada8-48d0ef255f98 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:24 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:24 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 91ms proc=default corr=6ef65e27-4002-4dd4-8aa2-c65422a36e11 attempts=0 already_processed=false
+app1-1   | SLOW worker 108ms proc=default corr=2efe203c-2b84-4bbf-a8d6-645e0c6d2de8 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:24 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 92ms proc=default corr=ac8aaafd-e7a3-471d-9fbd-605c47248bdc attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:24 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 91ms proc=default corr=e1d3f6a9-a19c-4596-a622-ccf596713f02 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:24 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 90ms proc=default corr=111aee12-fa64-4df8-b482-eafd4eeeaffd attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:24 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 106ms proc=default corr=c9ec2cb8-d385-496f-8c25-d71c9276f30b attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:24 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 93ms proc=default corr=c6a59664-df40-477d-902e-4241289de504 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:24 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 106ms proc=default corr=f5acec30-d6e8-43bd-bbe9-985449acd2d8 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:24 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 91ms proc=default corr=fe004bb7-111f-4faa-8f1c-dcdbc0d8ff70 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:24 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 106ms proc=default corr=80dc8651-f8e0-4ce0-bf2f-9226025a26b7 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:24 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 91ms proc=default corr=be2cc3ba-77c2-4063-b3ec-e0ad4bee21dc attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:24 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 89ms proc=default corr=58fd8ce8-0f4d-4926-9fd2-ce4316385b2b attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:24 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 95ms proc=default corr=d2dd6c4f-580d-4db0-87e9-1d50eb25c724 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:24 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 92ms proc=default corr=b4dc3369-8098-47c9-80b3-b4a4d4aa72a6 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:24 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 107ms proc=default corr=d97d2baa-f412-4df0-a791-c4f6e3fe6418 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:24 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 94ms proc=default corr=87f407f3-85fd-4beb-9913-8e1705dcd650 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:24 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:24 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 108ms proc=default corr=786fabb9-89b4-4841-93da-62fe0649e453 attempts=0 already_processed=false
+app1-1   | SLOW worker 93ms proc=default corr=cb9a7637-17e8-4eb0-8eac-031fc48a6f67 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:24 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:24 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 108ms proc=default corr=38d3fee3-3827-4181-a417-e3b824a6e9d2 attempts=0 already_processed=false
+app2-1   | SLOW worker 91ms proc=default corr=67412541-47be-439c-905c-999c516bb96b attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:24 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 93ms proc=default corr=f70fb965-b3bf-4f87-a360-fc9808b60027 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:24 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 90ms proc=default corr=13d784cd-b7b6-4b90-80c9-0c1c40ea06fe attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:24 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 90ms proc=default corr=ad58f688-27c0-4602-8bcc-e11e383d59fe attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:24 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 106ms proc=default corr=0d5cea69-d598-41b9-aa57-91035293f5c7 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:24 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 91ms proc=default corr=6bfe2bb2-52e3-4e1b-88e2-c4c8b19109b0 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:24 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:24 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 108ms proc=default corr=7754ec79-8693-498e-b74d-72d42357734b attempts=0 already_processed=false
+app1-1   | SLOW worker 91ms proc=default corr=2c990980-e15a-489d-bbcf-6cc4ebed34ad attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:24 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 107ms proc=default corr=f4f5c7ad-0b82-4aae-a391-580984a7f98e attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:24 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 84ms proc=default corr=619da63e-95c4-462b-98d6-772779ef65c1 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:24 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 93ms proc=default corr=99e0cdd8-3044-4f18-9562-34d7924596b9 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:24 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 92ms proc=default corr=ed19b8a9-b772-4023-b70f-6246134ffcc9 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:24 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 92ms proc=default corr=f762689d-6115-49e4-985d-542c37c4da58 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:24 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:24 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 108ms proc=default corr=ecb494c8-82e9-4da5-81ec-1a15aba119ac attempts=0 already_processed=false
+app1-1   | SLOW worker 92ms proc=default corr=75e169bf-8e2a-49c1-90c0-b4bf8c7e7700 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:24 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:24 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 110ms proc=default corr=3f015d07-ffa6-44ac-9671-af3c173a10fc attempts=0 already_processed=false
+app2-1   | SLOW worker 94ms proc=default corr=fa0be30e-d40a-4a37-b7e5-7666950f3ffe attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:24 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 107ms proc=default corr=ed0fa0dc-d559-4847-a022-697b928cccec attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:24 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 89ms proc=default corr=e9914c5c-0611-435d-b923-8ce89651e9ae attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:24 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 89ms proc=default corr=2c02f5e1-9f8f-4b0b-bb48-17972ae7d5d0 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:24 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 91ms proc=default corr=7f0b9f5d-7cc0-4852-ac2b-2f49d3872d86 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:24 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 89ms proc=default corr=f0c174ca-5ac0-4598-879e-a76e05bf0b22 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:24 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 108ms proc=default corr=7ae0a59b-4937-4514-aff3-78b8322495a4 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:24 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 90ms proc=default corr=c7104a04-37bb-48ab-a0da-4b3f4f8835e4 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:24 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 107ms proc=default corr=bcbfbac2-79a9-4139-8625-f4ccd63aabb9 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:24 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 93ms proc=default corr=9ce7063e-fd19-4cc8-bd0a-8684f6969dba attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:24 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 107ms proc=default corr=17afce72-59d7-43a6-8474-e4cb391431a3 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:24 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 91ms proc=default corr=92555473-5ab6-47f8-8158-97826677843c attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:24 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 90ms proc=default corr=6529a622-6866-49bc-8202-609939f70bde attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:24 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 91ms proc=default corr=53675e85-df22-4616-b8f2-e50175055df6 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:24 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 90ms proc=default corr=c95a9cdb-5054-4569-b6cb-36da884db2cf attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:24 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 107ms proc=default corr=6b3f4f6a-34b1-41f8-b0ec-bc661c96f2df attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:24 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 92ms proc=default corr=c9f2b4c3-6947-4c10-8512-2d2f3ed4b055 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:24 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 107ms proc=default corr=4109b8ff-edc2-4193-afd7-7cbfccffb19d attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:24 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 93ms proc=default corr=6154f524-3476-4f45-84fd-0700eb63e129 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:24 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 107ms proc=default corr=5aef0d42-6630-4fce-8577-8984220a4079 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:24 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 90ms proc=default corr=6c2b8fe7-04f3-4227-b9fe-77fea931ee83 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:24 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 91ms proc=default corr=c724f26e-35a2-47e6-b812-c2bf7f71ae0c attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:25 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 91ms proc=default corr=0ee6ece6-2ac0-4371-a649-9f31924cf23c attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:25 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 92ms proc=default corr=de353c39-68a1-4d8f-9aeb-76274f91c3c5 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:25 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 107ms proc=default corr=55d58c21-b630-4f2d-81b8-676419e88638 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:25 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 93ms proc=default corr=8bfa1232-5026-4174-883f-119b715ab719 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:25 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:25 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 108ms proc=default corr=a2e124d6-b443-4fc1-9c1c-47e7c385fa86 attempts=0 already_processed=false
+app2-1   | SLOW worker 93ms proc=default corr=97bfe758-24bc-4478-9d6d-a8a277f5611f attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:25 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 108ms proc=default corr=c88a3775-f96d-47cf-932b-1fa8de0eab7f attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:25 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 91ms proc=default corr=60b9c616-5f99-4fab-b4e7-dc5cd5edd8f7 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:25 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 90ms proc=default corr=e575efcf-313a-4a8e-a862-36c874eebabf attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:25 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 90ms proc=default corr=bd5efbce-bf7d-4a37-8219-86370073592f attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:25 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 91ms proc=default corr=f43a800c-0a3b-47d3-a514-84d31fbbd6d9 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:25 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 107ms proc=default corr=95d31385-1c87-418a-8ba1-b5d3ed8c1f08 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:25 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 92ms proc=default corr=b74cf933-719d-4566-a1b9-8686602d36d8 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:25 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 110ms proc=default corr=43a38b6d-474b-42ae-a8d6-483297d83250 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:25 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 95ms proc=default corr=41bb8c4a-0b4a-4483-a611-fb406f6cbae3 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:25 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:25 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 109ms proc=default corr=60c31228-b0f9-4d5d-b890-aa37691bc789 attempts=0 already_processed=false
+app1-1   | SLOW worker 91ms proc=default corr=f0cd1f76-bf3b-438f-beaa-4a9146943c8b attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:25 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:25 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 74ms proc=default corr=f8e56e1c-0bdb-4051-9db3-e6527ea11343 attempts=0 already_processed=false
+app2-1   | SLOW worker 92ms proc=default corr=ef1ee6dd-8ab3-4c9e-a792-9f6658dc7860 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:25 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 73ms proc=default corr=6136d562-3fed-4819-999d-1f26ce402066 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:25 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 88ms proc=default corr=ce45113b-4de9-4c71-9bbd-cbf81741090c attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:25 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:25 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 90ms proc=default corr=555c2b3b-7a92-444d-9cff-9175960252f8 attempts=0 already_processed=false
+app1-1   | SLOW worker 87ms proc=default corr=4089ecc1-817d-4acf-a0b3-d84ac443cabf attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:25 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 90ms proc=default corr=82c8c375-f570-470c-9796-f294f79a5ac5 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:25 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 90ms proc=default corr=f308b321-690c-463e-8734-b932e007f0b2 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:25 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 87ms proc=default corr=9d0454ef-d955-443f-ac73-316685e852bf attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:25 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 89ms proc=default corr=8283c93a-1c59-4fcf-bac0-fbaee2d04ae2 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:25 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:25 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 74ms proc=default corr=d552ed15-81be-4456-a8c1-72164b3f4d47 attempts=0 already_processed=false
+app2-1   | SLOW worker 91ms proc=default corr=74efb5b0-9d4c-41fc-8e18-61b0bdfde4f6 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:25 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 71ms proc=default corr=0f08f853-29a7-4de3-87ed-eb95ea0da21d attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:25 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 90ms proc=default corr=314b5f9a-5bdb-4fe4-9530-c08aa9df8987 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:25 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 90ms proc=default corr=642d0893-ea76-40d3-b11f-a9e96729a6f0 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:25 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 97ms proc=default corr=8e81f416-c2e7-4a70-9d54-b94bf523caa6 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:25 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 90ms proc=default corr=273952d1-6ff9-4c21-8079-dfc938b338db attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:25 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 92ms proc=default corr=2e7ab945-d9ba-4d49-a051-ef2c04e45a3f attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:25 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 89ms proc=default corr=166072a1-5eb6-41e3-8df0-21f48d7cf03b attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:25 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 92ms proc=default corr=42f366c6-bfbf-4bf0-ac3d-23198e728e87 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:25 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 89ms proc=default corr=39229e3b-b811-4d7a-9f67-d55f78ab76b1 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:25 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 72ms proc=default corr=2f6d2ccb-1260-43d7-b702-c9c6298f160a attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:25 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 74ms proc=default corr=e4f48acb-bb74-4115-bd5b-186b58f15686 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:25 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 88ms proc=default corr=ca06b5fc-e84e-416c-82d8-f5b75d61ac36 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:25 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 92ms proc=default corr=6ae4c199-28b1-4d1c-8a88-32e81be36374 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:25 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 91ms proc=default corr=71dbe458-9667-4558-a363-b573e546c6a6 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:25 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 92ms proc=default corr=1b94789f-8a93-4bad-8ab2-70e069caab5d attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:25 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 91ms proc=default corr=cb35690d-2c53-49f4-8a45-b8a3b7d7c1dd attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:25 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:25 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 93ms proc=default corr=23fd3fad-1182-4fea-b612-3095e9f72f90 attempts=0 already_processed=false
+app1-1   | SLOW worker 90ms proc=default corr=9a0c3a41-5acb-4e76-a0f2-8832b85e9816 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:25 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:25 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 69ms proc=default corr=c2131357-687b-4c1b-a442-a88b599f1f0b attempts=0 already_processed=false
+app1-1   | SLOW worker 91ms proc=default corr=e031aff1-86b2-4ba1-9a2f-983a55951436 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:25 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 78ms proc=default corr=6e88b5c5-bb1d-4cab-b32a-72ae4464de2b attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:25 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 87ms proc=default corr=82ebde29-8500-4a02-92f7-9c540dc0c507 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:25 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 90ms proc=default corr=067a2a0a-0aa9-47ba-8a4b-75122b8b6fd8 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:25 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 90ms proc=default corr=eef23660-2cd2-4d9e-911f-82a65b350e68 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:25 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 89ms proc=default corr=aaa2d1f4-f85e-4f44-aacb-de00af18d2f6 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:25 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 91ms proc=default corr=653fa390-743d-4b41-8cba-6ff0eb9d54ce attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:25 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:25 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 91ms proc=default corr=d330097c-0018-459a-a82f-f77bb3adb023 attempts=0 already_processed=false
+app1-1   | SLOW worker 91ms proc=default corr=c1bbf061-24ee-4c49-bf59-50123b98586e attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:25 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 82ms proc=default corr=6ca9cccb-d610-481b-b697-fd416418f266 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:25 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 73ms proc=default corr=3cca338b-45b9-4b53-a5bb-ec585ab15b8f attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:25 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 76ms proc=default corr=ed59042c-7776-441a-8245-232fb7a7fcbd attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:25 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 90ms proc=default corr=1f240c9c-228a-4734-a472-f9b08845b901 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:25 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:25 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 93ms proc=default corr=cd9072a8-4056-4350-abd1-148c15b61361 attempts=0 already_processed=false
+app2-1   | SLOW worker 91ms proc=default corr=271821c4-64a5-4c82-a0da-1a1924e50ab3 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:25 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:25 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 91ms proc=default corr=61a8c4f9-f4f5-42df-b492-17f347d1d9ca attempts=0 already_processed=false
+app1-1   | SLOW worker 91ms proc=default corr=459ffdec-9b9b-4216-bede-ebe33c339746 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:25 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:25 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 94ms proc=default corr=a95d6453-0edb-4125-ab04-fb634b4fcde0 attempts=0 already_processed=false
+app2-1   | SLOW worker 92ms proc=default corr=ae789cf5-b20d-4c79-953e-ec64e17c6988 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:25 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 86ms proc=default corr=63438644-c437-47b7-b14b-9b926e2a9d2f attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:25 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 72ms proc=default corr=71be0fd5-1c69-4433-898d-76ea71c4ff7b attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:25 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 71ms proc=default corr=f152186b-8fa8-4e5d-952a-a9668079fd9e attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:25 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 90ms proc=default corr=49cb86a5-6f18-4d1d-9a81-3f148be6a82a attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:25 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 90ms proc=default corr=d119dfc1-3441-46e6-b396-fdc37c028eb4 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:25 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 91ms proc=default corr=5915040a-b79d-42b8-a415-fde278f88a81 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:25 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 90ms proc=default corr=b64717f4-2670-4fb8-bf14-877bed5da8fc attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:25 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 90ms proc=default corr=e34f39a7-216b-42dc-8174-3faaf8f3362a attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:25 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:25 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 93ms proc=default corr=2a6be8ce-5626-4ad5-b60c-aa0392fab5b7 attempts=0 already_processed=false
+app2-1   | SLOW worker 91ms proc=default corr=b83c3e50-781e-45db-b73b-a05349deb347 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:25 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 89ms proc=default corr=4fed5a54-377a-4fe0-a794-69ef1c06057e attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:25 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app2-1   | SLOW worker 71ms proc=default corr=b7efdf7a-84fa-472b-99e0-b346b99112b3 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:25 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 72ms proc=default corr=e7694919-c8da-4f52-b3d2-3de43bc03ab9 attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:25 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 89ms proc=default corr=d5cd3971-f5bf-4d4d-94d1-bdcc79c8783c attempts=0 already_processed=false
+nginx-1  | 172.20.0.1 - - [16/Aug/2025:23:37:25 +0000] "POST /payments HTTP/1.1" 202 10 "-" "Grafana k6/1.1.0"
+app1-1   | SLOW worker 90ms proc=default corr=49f6171c-b80c-4964-9367-4680e0e3e045 attempts=0 already_processed=false
+log truncated at line 1000
