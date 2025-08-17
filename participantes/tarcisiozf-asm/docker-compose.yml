@@ -29,7 +29,7 @@ services:
       HOST_FALLBACK: "payment-processor-fallback"
       PORT_FALLBACK: "8080"
       APP_SOCK_PATH: "sockets/one.sock"
-      SCHED_BENCH_SIZE: "4"
+      SCHED_BENCH_SIZE: "1"
     deploy:
       resources:
         limits:
@@ -47,7 +47,7 @@ services:
       HOST_FALLBACK: "payment-processor-fallback"
       PORT_FALLBACK: "8080"
       APP_SOCK_PATH: "sockets/two.sock"
-      SCHED_BENCH_SIZE: "4"
+      SCHED_BENCH_SIZE: "1"
     deploy:
       resources:
         limits:
@@ -71,6 +71,7 @@ services:
       nofile:
         soft: 200000
         hard: 200000
+      memlock: -1
     deploy:
       resources:
         limits:
