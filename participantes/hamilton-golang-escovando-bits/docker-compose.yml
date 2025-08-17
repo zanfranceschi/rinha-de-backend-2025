@@ -14,8 +14,18 @@ x-rinha-api-base: &rinha-api-base
         memory: "100MB"
   ulimits:
     nofile:
-      soft: 65535
-      hard: 65535
+      soft: 65536
+      hard: 65536
+  sysctls:
+    net.core.somaxconn: 16384
+    net.ipv4.tcp_max_syn_backlog: 16384
+    net.ipv4.tcp_fin_timeout: 15
+    net.ipv4.tcp_keepalive_time: 300
+    net.ipv4.tcp_keepalive_intvl: 10
+    net.ipv4.tcp_keepalive_probes: 5
+    net.ipv4.tcp_max_tw_buckets: 65536
+    net.ipv4.ip_local_port_range: 1024 65535
+    net.ipv4.tcp_tw_reuse: 1
 
   environment: &common-environment
     # GOGC: 500
@@ -50,8 +60,18 @@ services:
           memory: "60MB"
     ulimits:
       nofile:
-        soft: 65535
-        hard: 65535
+        soft: 65536
+        hard: 65536
+    sysctls:
+      net.core.somaxconn: 16384
+      net.ipv4.tcp_max_syn_backlog: 16384
+      net.ipv4.tcp_fin_timeout: 15
+      net.ipv4.tcp_keepalive_time: 300
+      net.ipv4.tcp_keepalive_intvl: 10
+      net.ipv4.tcp_keepalive_probes: 5
+      net.ipv4.tcp_max_tw_buckets: 65536
+      net.ipv4.ip_local_port_range: 1024 65535
+      net.ipv4.tcp_tw_reuse: 1
 
   rinha-api-1:
     <<: *rinha-api-base
@@ -98,8 +118,18 @@ services:
           memory: "40MB"
     ulimits:
       nofile:
-        soft: 65535
-        hard: 65535
+        soft: 65536
+        hard: 65536
+    sysctls:
+      net.core.somaxconn: 16384
+      net.ipv4.tcp_max_syn_backlog: 16384
+      net.ipv4.tcp_fin_timeout: 15
+      net.ipv4.tcp_keepalive_time: 300
+      net.ipv4.tcp_keepalive_intvl: 10
+      net.ipv4.tcp_keepalive_probes: 5
+      net.ipv4.tcp_max_tw_buckets: 65536
+      net.ipv4.ip_local_port_range: 1024 65535
+      net.ipv4.tcp_tw_reuse: 1
 
   nats:
     image: nats:2.10.14-alpine
