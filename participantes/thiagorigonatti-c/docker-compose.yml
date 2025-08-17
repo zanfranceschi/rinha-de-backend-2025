@@ -21,7 +21,10 @@ services:
     ipc: container:shared-memory
     depends_on:
       - shared-memory
-    cpuset: "0,2"
+    cpuset: "1,3"
+    ulimits:
+      memlock: -1
+      nofile: 65535
 
   backend02:
     <<: *backend
@@ -32,7 +35,7 @@ services:
       - SHM_PATH=/shm_array
       - SOCKET_PATH=/dev/shm/server2.sock
       - INDEX=1
-    cpuset: "1,3"
+    cpuset: "0,2"
 
 
   shared-memory:
