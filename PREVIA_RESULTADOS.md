@@ -1,5 +1,5 @@
 # Prévia do Resultados da Rinha de Backend 2025
-Atualizado em **Dom 17 Ago 2025 15:55:59 CEST**
+Atualizado em **Dom 17 Ago 2025 16:00:13 CEST**
      428 submissões /        0 resultados /       58 submissões com erro
 
 
@@ -103,7 +103,7 @@ Atualizado em **Dom 17 Ago 2025 15:55:59 CEST**
 |	DouglasMorais-java	|	2.24ms	|	18%	|	0	|	368410.2721	|	[DouglasMorais-java](https://github.com/zanfranceschi/rinha-de-backend-2025/tree/main/participantes/DouglasMorais-java)
 |	edmar-sousa	|	85.35ms	|	0%	|	0	|	0	|	[edmar-sousa](https://github.com/zanfranceschi/rinha-de-backend-2025/tree/main/participantes/edmar-sousa)
 |	eduardofp17-node	|	58.58ms	|	0%	|	0	|	271755.395	|	[eduardofp17-node](https://github.com/zanfranceschi/rinha-de-backend-2025/tree/main/participantes/eduardofp17-node)
-|	eduardompinto-ktor-1	|	49.94ms	|	0%	|	0	|	0	|	[eduardompinto-ktor-1](https://github.com/zanfranceschi/rinha-de-backend-2025/tree/main/participantes/eduardompinto-ktor-1)
+|	eduardompinto-ktor-1	|	41.32ms	|	0%	|	0	|	0	|	[eduardompinto-ktor-1](https://github.com/zanfranceschi/rinha-de-backend-2025/tree/main/participantes/eduardompinto-ktor-1)
 |	el_yawd-crab	|	1.44ms	|	19%	|	110763.3502500094	|	265832.04060002253	|	[el_yawd-crab](https://github.com/zanfranceschi/rinha-de-backend-2025/tree/main/participantes/el_yawd-crab)
 |	emiliosheinz-go	|	5.27ms	|	11%	|	0	|	223504.23315	|	[emiliosheinz-go](https://github.com/zanfranceschi/rinha-de-backend-2025/tree/main/participantes/emiliosheinz-go)
 |	fabianoflorentino	|	34.38ms	|	0%	|	104758.4755	|	194551.4545	|	[fabianoflorentino](https://github.com/zanfranceschi/rinha-de-backend-2025/tree/main/participantes/fabianoflorentino)
