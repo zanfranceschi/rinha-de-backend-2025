@@ -17,3 +17,5 @@ Essa versão foi adaptada para:
 
 ## Repositório
 [https://github.com/davidalecrim1/rinha-with-go-2025/tree/release/redis-fasthttp-extreme-v3](https://github.com/davidalecrim1/rinha-with-go-2025/tree/release/redis-fasthttp-extreme-v3)
+
+[Repositório do Load balancer customizado](https://github.com/davidalecrim1/extreme). Ele NÃO realiza early return das requisições, apenas faz o reverse proxy para as instancias do backend.
