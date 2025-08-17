@@ -1,6 +1,6 @@
 services:
   api1:
-    image: &image ghcr.io/vimsos/rinha-de-pagamento-25@sha256:2fce721f73e5167ca367b2aef0aec07b7b052bcdf7eee4db875663ab968413c7
+    image: &image ghcr.io/vimsos/rinha-de-pagamento-25@sha256:cf024b6a3dacba8baf0a61f838c801d8c052567b8d28bc8d35155511c3b0de35
     hostname: api1
     environment:
       APP_CONFIG: &app_config >
@@ -8,7 +8,9 @@ services:
           "database_url": "postgres://pg:pg@pg:5432/rinha",
           "log_level": "Error",
           "listen_port": 8000,
-          "processors": [
+          "max_in_flight": 256,
+          "max_wait_millis": 5,
+          "external_processors": [
             {
               "name": "default",
               "endpoint": "http://payment-processor-default:8080/payments"
@@ -29,8 +31,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: &api_cpu_limit "0.35"
-          memory: &api_memory_limit "65MB"
+          cpus: &api_cpu_limit "0.2"
+          memory: &api_memory_limit "25MB"
 
   api2:
     image: *image 
@@ -64,8 +66,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.20"
-          memory: "20MB"
+          cpus: "0.1"
+          memory: "25MB"
 
   pg:
     image: postgres:17
@@ -83,8 +85,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.60"
-          memory: "200MB"
+          cpus: "1.0"
+          memory: "275MB"
 
 networks:
   internal-network:
