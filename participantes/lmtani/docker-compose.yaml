@@ -1,0 +1,106 @@
+services:
+  nginx:
+    image: nginx:1.25-alpine
+    container_name: rinha-nginx
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - api1
+      - api2
+    ports:
+      - "9999:9999"
+    networks:
+      - backend
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          cpus: "0.15"
+          memory: "15MB"
+
+  api1: &api
+    image: docker.io/taniguti/rinha-de-backend-2025:latest
+    # build:
+    #   context: .
+    #   dockerfile: Dockerfile
+    hostname: api1
+    environment:
+      - APP_PORT=8080
+      - REDIS_URL=redis://redis:6379/0
+      - DATABASE_URL=postgres://postgres:postgres@postgres:5432/payments
+      - PROCESSOR_DEFAULT_URL=http://payment-processor-default:8080
+      - PROCESSOR_FALLBACK_URL=http://payment-processor-fallback:8080
+      - INSTANCE_ID=API-1
+      - WORKER_CONCURRENCY=16
+    networks:
+      - backend
+      - payment-processor
+    depends_on:
+      redis:
+        condition: service_healthy
+      postgres:
+        condition: service_healthy
+    deploy:
+      resources:
+        limits:
+          cpus: "0.45"
+          memory: "30MB"
+
+  api2:
+    <<: *api
+    hostname: api2
+    environment:
+      - APP_PORT=8080
+      - REDIS_URL=redis://redis:6379/0
+      - DATABASE_URL=postgres://postgres:postgres@postgres:5432/payments
+      - PROCESSOR_DEFAULT_URL=http://payment-processor-default:8080
+      - PROCESSOR_FALLBACK_URL=http://payment-processor-fallback:8080
+      - INSTANCE_ID=API-2
+      - WORKER_CONCURRENCY=4
+
+  redis:
+    image: redis:7.2-alpine
+    container_name: rinha-redis
+    command: redis-server --save "" --appendonly no --maxclients 20000
+    networks:
+      - backend
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    deploy:
+      resources:
+        limits:
+          cpus: "0.20"
+          memory: "125MB"
+          
+  postgres:
+    image: postgres:16-alpine
+    container_name: rinha-postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: payments
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./docker/postgres/init:/docker-entrypoint-initdb.d
+    networks:
+      - backend
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    deploy:
+      resources:
+        limits:
+          cpus: "0.25"
+          memory: "150MB"
+
+networks:
+  backend:
+    driver: bridge
+  payment-processor:
+    external: true

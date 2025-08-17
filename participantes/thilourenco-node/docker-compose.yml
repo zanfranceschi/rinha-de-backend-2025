@@ -14,7 +14,7 @@ services:
       resources:
         limits:
           cpus: "0.20"
-          memory: "30MB"
+          memory: "40MB"
     networks:
       - backend
       - payment-processor
@@ -84,14 +84,15 @@ services:
         "",
         "--maxclients",
         "20000",
+        "--maxmemory-policy", "allkeys-lru",
         "--maxmemory",
-        "80mb",
+        "70mb",
       ]
     deploy:
       resources:
         limits:
           cpus: "0.20"
-          memory: "80MB"
+          memory: "70MB"
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]
       interval: 5s

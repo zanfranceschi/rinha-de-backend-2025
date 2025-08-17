@@ -1,7 +1,7 @@
 x-service-templates:
   backend: &backend
     image: ghcr.io/igorlucasassuncao/rinha-backend:latest
-    # build: .
+   # build: .
     depends_on:
       - rinha-db
     deploy:
@@ -23,14 +23,9 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
       - SOCKET_PATH=/tmp/backend_1.sock
+      - ConnectionStrings__default=http://payment-processor-default:8080
+      - ConnectionStrings__fallback=http://payment-processor-fallback:8080
       - ConnectionStrings__postgres=Host=rinha-db;Port=5432;Database=rinha;Username=postgres;Password=postgres;Pooling=true;Minimum Pool Size=10;Maximum Pool Size=50;Connection Lifetime=300;Connection Idle Lifetime=60;Command Timeout=30;Cancellation Timeout=30;No Reset On Close=true;Max Auto Prepare=20;Auto Prepare Min Usages=1;Read Buffer Size=8192;Write Buffer Size=8192;Socket Receive Buffer Size=8192;Socket Send Buffer Size=8192
-    healthcheck:
-      test: ["CMD-SHELL", "test -S /tmp/backend_2.sock"]
-      interval: 5s
-      timeout: 3s
-      retries: 3
-      start_period: 30s
-
   backend-2:
     <<: *backend
     container_name: backend-2
@@ -38,25 +33,18 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
       - SOCKET_PATH=/tmp/backend_2.sock
+      - ConnectionStrings__default=http://payment-processor-default:8080
+      - ConnectionStrings__fallback=http://payment-processor-fallback:8080
       - ConnectionStrings__postgres=Host=rinha-db;Port=5432;Database=rinha;Username=postgres;Password=postgres;Pooling=true;Minimum Pool Size=10;Maximum Pool Size=50;Connection Lifetime=300;Connection Idle Lifetime=60;Command Timeout=30;Cancellation Timeout=30;No Reset On Close=true;Max Auto Prepare=20;Auto Prepare Min Usages=1;Read Buffer Size=8192;Write Buffer Size=8192;Socket Receive Buffer Size=8192;Socket Send Buffer Size=8192
-    healthcheck:
-      test: ["CMD-SHELL", "test -S /tmp/backend_2.sock"]
-      interval: 5s
-      timeout: 3s
-      retries: 3
-      start_period: 30s
-
+  
   nginx:
     image: nginx:alpine
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf:ro
       - socket_data:/tmp
     depends_on:
-      api-1:
-        condition: service_healthy  
-      api-2:
-        condition: service_healthy  
-
+      - backend-1
+      - backend-2
     ports:
       - "9999:8080"
     networks:
@@ -131,7 +119,7 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '0.1'
+          cpus: '0.2'
           memory: '30MB'
 
 volumes:

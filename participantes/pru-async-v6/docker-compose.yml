@@ -1,0 +1,129 @@
+services:
+  api01: &api
+    image: renatoelias/pru-async:v9
+    container_name: api01
+    hostname: api01
+    environment:
+      - REDIS_URL=redis://redis:6379/0
+      - RUBY_GC_HEAP_INIT_SLOTS=30000
+      - RUBY_GC_HEAP_FREE_SLOTS=8000
+      - RUBY_GC_HEAP_GROWTH_FACTOR=1.1
+      - RUBY_GC_HEAP_GROWTH_MAX_SLOTS=20000
+      - CONSOLE_LEVEL=info
+      - JOB_CONCURRENCY=1
+      - JOB_CONCURRENCY_RETRY=1
+      - JOB_CONCURRENCY_DEAD=1
+      - ASYNC_REQUEST_TIMEOUT=4
+      - ASYNC_CONCURRENCY=20
+      - JOB_MAX_ATTEMPTS=60
+    command: bundle exec falcon --bind http://0.0.0.0:3000 -n 1 --no-restart -t 5 --preload server.rb
+    depends_on:
+      - redis
+    networks:
+      - payment-processor
+      - net
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: '135MB'
+    ulimits:
+      nofile:
+        soft: 65536
+        hard: 65536
+    sysctls:
+      net.core.somaxconn: 16384
+      net.ipv4.tcp_max_syn_backlog: 16384
+      net.ipv4.tcp_fin_timeout: 15
+      net.ipv4.tcp_keepalive_time: 300
+      net.ipv4.tcp_keepalive_intvl: 10
+      net.ipv4.tcp_keepalive_probes: 5
+      net.ipv4.tcp_max_tw_buckets: 65536
+      net.ipv4.ip_local_port_range: 1024 65535
+      net.ipv4.tcp_tw_reuse: 1
+      net.ipv4.tcp_fastopen: 3
+      net.ipv4.tcp_syncookies: 1
+      net.ipv4.tcp_synack_retries: 2
+      net.ipv4.tcp_congestion_control: bbr
+  api02:
+    <<: *api
+    container_name: api02
+    hostname: api02
+
+  redis:
+    image: redis:7-alpine
+    container_name: redis
+    hostname: redis
+    ports:
+      - 6379:6379
+    networks:
+      - net
+    deploy:
+      resources:
+        limits:
+         cpus: '0.1'
+         memory: '35MB'
+    volumes:
+      - ./redis.conf:/usr/local/etc/redis/redis.conf:ro
+    command: ["redis-server", "/usr/local/etc/redis/redis.conf"]
+    ulimits:
+      nofile:
+        soft: 65536
+        hard: 65536
+    sysctls:
+      net.core.somaxconn: 16384
+      net.ipv4.tcp_max_syn_backlog: 16384
+      net.ipv4.tcp_fin_timeout: 15
+      net.ipv4.tcp_keepalive_time: 300
+      net.ipv4.tcp_keepalive_intvl: 10
+      net.ipv4.tcp_keepalive_probes: 5
+      net.ipv4.tcp_max_tw_buckets: 65536
+      net.ipv4.ip_local_port_range: 1024 65535
+      net.ipv4.tcp_tw_reuse: 1
+      net.ipv4.tcp_fastopen: 3
+      net.ipv4.tcp_syncookies: 1
+      net.ipv4.tcp_synack_retries: 2
+      net.ipv4.tcp_congestion_control: bbr
+
+  nginx:
+    image: nginx:alpine
+    container_name: nginx
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    ports:
+      - 9999:9999
+    networks:
+      - net
+    depends_on:
+      - redis
+      - api01
+      - api02
+    deploy:
+      resources:
+        limits:
+          cpus: '0.4'
+          memory: '45MB'
+    ulimits:
+      nofile:
+        soft: 65536
+        hard: 65536
+    sysctls:
+      net.core.somaxconn: 16384
+      net.ipv4.tcp_max_syn_backlog: 16384
+      net.ipv4.tcp_fin_timeout: 15
+      net.ipv4.tcp_keepalive_time: 300
+      net.ipv4.tcp_keepalive_intvl: 10
+      net.ipv4.tcp_keepalive_probes: 5
+      net.ipv4.tcp_max_tw_buckets: 65536
+      net.ipv4.ip_local_port_range: 1024 65535
+      net.ipv4.tcp_tw_reuse: 1
+      net.ipv4.tcp_fastopen: 3
+      net.ipv4.tcp_syncookies: 1
+      net.ipv4.tcp_synack_retries: 2
+      net.ipv4.tcp_congestion_control: bbr
+
+networks:
+  payment-processor:
+    external: true
+  net:
+    driver: bridge

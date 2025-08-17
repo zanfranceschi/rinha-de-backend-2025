@@ -1,7 +1,7 @@
 services:
   app1:
     # build: .
-    image: ghcr.io/joojf/rinha-de-backend:latest
+    image: ghcr.io/joojf/rinha-de-backend:1.2.6
     environment:
       - BIND_ADDR=0.0.0.0:9999
       - DEFAULT_URL=http://payment-processor-default:8080
@@ -26,12 +26,12 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.62"
+          cpus: "0.65"
           memory: "140MB"
 
   app2:
     # build: .
-    image: ghcr.io/joojf/rinha-de-backend:latest
+    image: ghcr.io/joojf/rinha-de-backend:1.2.6
     environment:
       - BIND_ADDR=0.0.0.0:9999
       - DEFAULT_URL=http://payment-processor-default:8080
@@ -56,7 +56,7 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.62"
+          cpus: "0.65"
           memory: "140MB"
 
   nginx:
@@ -77,8 +77,7 @@ services:
           memory: "40MB"
 
   memstore:
-    build: .
-    command: ["/usr/local/bin/memstore"]
+    image: ghcr.io/joojf/rinha-de-backend-memstore:1.2.6
     volumes:
       - shared-sock:/tmp
     deploy:

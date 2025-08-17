@@ -25,10 +25,11 @@ services:
     networks:
       - backend-rinha
   api1: &api1
-    image: feykke/rinha-backend-2025:1.0.1
+    image: feykke/rinha-backend-2025:1.0.3
     hostname: api1
     environment:
       - BACKEND_TYPE=api
+      - QUARKUS_PROFILE=api
       - REDIS_HOST=redis://redis:6379
       - DEFAULT_PROCESSOR_URL=http://payment-processor-default:8080
       - FALLBACK_PROCESSOR_URL=http://payment-processor-fallback:8080
@@ -50,8 +51,9 @@ services:
     <<: *api1
     hostname: worker1
     environment:
+      - QUARKUS_PROFILE=worker
       - BACKEND_TYPE=worker
-      - PAYMENT_WORKERS_QTT=6
+      - PAYMENT_WORKERS_QTT=20
       - REDIS_HOST=redis://redis:6379
       - DEFAULT_PROCESSOR_URL=http://payment-processor-default:8080
       - FALLBACK_PROCESSOR_URL=http://payment-processor-fallback:8080

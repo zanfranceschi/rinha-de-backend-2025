@@ -1,0 +1,91 @@
+admin:
+  address:
+    socket_address:
+      protocol: TCP
+      address: 0.0.0.0
+      port_value: 9901
+
+static_resources:
+  listeners:
+  - name: listener_0
+    address:
+      socket_address:
+        protocol: TCP
+        address: 0.0.0.0
+        port_value: 10000
+    filter_chains:
+    - filters:
+      - name: envoy.filters.network.http_connection_manager
+        typed_config:
+          "@type": type.googleapis.com/envoy.extensions.filters.network.http_connection_manager.v3.HttpConnectionManager
+          stat_prefix: ingress_http
+          access_log:
+          - name: envoy.access_loggers.stdout
+            typed_config:
+              "@type": type.googleapis.com/envoy.extensions.access_loggers.stream.v3.StdoutAccessLog
+          http_filters:
+          - name: envoy.filters.http.router
+            typed_config:
+              "@type": type.googleapis.com/envoy.extensions.filters.http.router.v3.Router
+          route_config:
+            name: local_route
+            virtual_hosts:
+            - name: local_service
+              domains: ["*"]
+              routes:
+              - match:
+                  prefix: "/health"
+                route:
+                  cluster: payment_gateway_cluster
+                  timeout: 5s
+              - match:
+                  prefix: "/payments-summary"
+                route:
+                  cluster: payment_gateway_cluster
+                  timeout: 10s
+              - match:
+                  prefix: "/payments"
+                route:
+                  cluster: payment_gateway_cluster
+                  timeout: 10s
+              - match:
+                  prefix: "/"
+                direct_response:
+                  status: 404
+                  body:
+                    inline_string: "Not Found"
+
+  clusters:
+  - name: payment_gateway_cluster
+    connect_timeout: 2s
+    type: STRICT_DNS
+    dns_lookup_family: V4_ONLY
+    lb_policy: LEAST_REQUEST
+    load_assignment:
+      cluster_name: payment_gateway_cluster
+      endpoints:
+      - lb_endpoints:
+        - endpoint:
+            address:
+              socket_address:
+                address: payment-gateway-1
+                port_value: 8080
+        - endpoint:
+            address:
+              socket_address:
+                address: payment-gateway-2
+                port_value: 8080
+    # Circuit breaker settings
+    circuit_breakers:
+      thresholds:
+      - priority: DEFAULT
+        max_connections: 1000
+        max_pending_requests: 100
+        max_requests: 1000
+        max_retries: 3
+    # Connection pool settings
+    upstream_connection_options:
+      tcp_keepalive:
+        keepalive_probes: 3
+        keepalive_time: 30
+        keepalive_interval: 5

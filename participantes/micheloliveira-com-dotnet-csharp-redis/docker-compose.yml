@@ -1,6 +1,6 @@
 services:
   backend-1:
-    image: ghcr.io/micheloliveira-com/rinha-de-backend-2025-dotnet-csharp-redis:20250813173339
+    image: ghcr.io/micheloliveira-com/rinha-de-backend-2025-dotnet-csharp-redis:20250817150225
     hostname: backend-1
     networks:
       - backend
@@ -9,6 +9,7 @@ services:
       - ASPNETCORE_ENVIRONMENT=Production
       - WORKER_SIZE=10
       - BATCH_SIZE=100
+      - DEFAULT_PROCESSOR_CIRCUIT_ERROR_THRESHOLD_SECONDS=20
       - ConnectionStrings__default=http://payment-processor-default:8080
       - ConnectionStrings__fallback=http://payment-processor-fallback:8080
       - ConnectionStrings__redis=redis:6379
@@ -30,7 +31,7 @@ services:
           cpus: "0.65"
           memory: "135MB"
   backend-2:
-    image: ghcr.io/micheloliveira-com/rinha-de-backend-2025-dotnet-csharp-redis:20250813173339
+    image: ghcr.io/micheloliveira-com/rinha-de-backend-2025-dotnet-csharp-redis:20250817150225
     hostname: backend-2
     networks:
       - backend
@@ -39,6 +40,7 @@ services:
       - ASPNETCORE_ENVIRONMENT=Production
       - WORKER_SIZE=10
       - BATCH_SIZE=100
+      - DEFAULT_PROCESSOR_CIRCUIT_ERROR_THRESHOLD_SECONDS=20
       - ConnectionStrings__default=http://payment-processor-default:8080
       - ConnectionStrings__fallback=http://payment-processor-fallback:8080
       - ConnectionStrings__redis=redis:6379

@@ -20,13 +20,13 @@ services:
       - rinha
 
   eliot1:
-    image: fabianoflorentino/eliot:v0.0.1
+    image: fabianoflorentino/eliot:v0.0.2
     container_name: eliot-1
     hostname: eliot-1
     environment:
       HTTP_ADDR: ":8080"
       REDIS_ADDR: "redis:6379"
-      REDIS_POOL: "200"
+      REDIS_POOL: "250"
       PROCESSOR_DEFAULT_URL: "http://payment-processor-default:8080"
       PROCESSOR_FALLBACK_URL: "http://payment-processor-fallback:8080"
       TIMEOUT_MS: "120"
@@ -43,13 +43,13 @@ services:
       - rinha
 
   eliot2:
-    image: fabianoflorentino/eliot:v0.0.1
+    image: fabianoflorentino/eliot:v0.0.2
     container_name: eliot-2
     hostname: eliot-2
     environment:
       HTTP_ADDR: ":8080"
       REDIS_ADDR: "redis:6379"
-      REDIS_POOL: "200"
+      REDIS_POOL: "250"
       PROCESSOR_DEFAULT_URL: "http://payment-processor-default:8080"
       PROCESSOR_FALLBACK_URL: "http://payment-processor-fallback:8080"
       TIMEOUT_MS: "120"

@@ -41,7 +41,9 @@ services:
           memory: "164MB"
 
   redis:
-    image: redis:8-alpine
+    build:
+      context: .
+      dockerfile: Dockerfile.redis
     container_name: rinha-redis
     command: ["redis-server", "/usr/local/etc/redis/redis.conf"]
     deploy:

@@ -18,17 +18,20 @@ services:
           memory: "50MB"
 
   api1: &api
-    image: diogoloff/api-delphi-rinha2025:v1.03
+    image: diogoloff/api-delphi-rinha2025:v1.06   # v1.03
     hostname: api1
     environment:
       - DEFAULT_URL=http://payment-processor-default:8080
       - FALLBACK_URL=http://payment-processor-fallback:8080
       - CON_TIME_OUT=5000
       - READ_TIME_OUT=200
-      - NUM_WORKERS=16
-      - LISTEM_QUEUE=32
-      - NUM_TENTATIVAS_DEFAULT=10 # 5
-      - TEMPO_FILA=100
+      - NUM_WORKERS=16 # 16
+      - LISTEM_QUEUE=32 # 32
+      - NUM_TENTATIVAS_DEFAULT=10
+      - TEMPO_FILA=50
+      - NATIVO=N
+      - KEEP_ALIVE=S
+      - MAX_CONNECTIONS=1024
       - DEBUG=N
     volumes:
       - dev-shm:/dev/shm
