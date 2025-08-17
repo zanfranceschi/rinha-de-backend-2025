@@ -64,6 +64,7 @@ services:
       RUN_VERIFY_PAYMENT_SERVICE: "true"
       UNIX_SOCKET: /tmp/api_1.sock
     command: ./main -socket /tmp/api_1.sock
+    cpuset: "1,3"
 
   rinha-api-2:
     <<: *rinha-api-base
@@ -72,6 +73,7 @@ services:
       <<: *common-environment
       UNIX_SOCKET: /tmp/api_2.sock
     command: ./main -socket /tmp/api_2.sock
+    cpuset: "0,2"
 
   redis:
     image: redis:7.2.4-alpine
