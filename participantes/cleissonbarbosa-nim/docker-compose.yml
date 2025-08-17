@@ -1,0 +1,79 @@
+x-api_template: &api
+  image: cleissonb/rinha-backend-nim:latest
+  volumes:
+    - uds:/var/run
+  command: ["--mode=api"]
+  init: true
+  depends_on:
+    - worker
+  environment:
+    LOG_LEVEL: "info"
+    RINHA_LOGLEVEL: "warn"
+  deploy:
+    resources:
+      limits:
+        cpus: "0.4"
+        memory: "60MB"
+
+services:
+  lb:
+    image: nginx:latest
+    ports:
+      - "9999:9999"
+    volumes:
+      - uds:/var/run
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - api0
+      - api1
+    environment:
+      RINHA_LOGLEVEL: "warn"
+    deploy:
+      resources:
+        limits:
+          cpus: "0.4"
+          memory: "60MB"
+
+  api0:
+    <<: *api
+    environment:
+      API_N: "0"
+      LOG_LEVEL: "info"
+      RINHA_LOGLEVEL: "warn"
+      WORKER_SOCKET: "/var/run/worker.sock"
+    container_name: api0
+
+  api1:
+    <<: *api
+    environment:
+      API_N: "1"
+      LOG_LEVEL: "info"
+      RINHA_LOGLEVEL: "warn"
+      WORKER_SOCKET: "/var/run/worker.sock"
+    container_name: api1
+
+  worker:
+    image: cleissonb/rinha-backend-nim:latest
+    command: ["--mode=worker"]
+    init: true
+    networks:
+      - payment-processor
+    volumes:
+      - uds:/var/run
+    environment:
+      WORKER_SOCKET: "/var/run/worker.sock"
+      LOG_LEVEL: "info"
+      RINHA_LOGLEVEL: "warn"
+    restart: always
+    deploy:
+      resources:
+        limits:
+          cpus: "0.3"
+          memory: "170MB"
+
+volumes:
+  uds:
+
+networks:
+  payment-processor:
+    external: true
