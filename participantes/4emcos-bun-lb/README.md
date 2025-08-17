@@ -1,7 +1,7 @@
 # Rinha de Backend 2025
 
-Implementação do desafio da **Rinha de Backend 2025** utilizando **bun**.
+Implementation of the **Rinha de Backend 2025** challenge using **Bun**.
 
-Repositório do projeto: https://github.com/4emcos/rinha-de-backend-2025-bun
-Load balance usado: https://github.com/4emcos/load-balance
-
+- Project repository: [rinha-de-backend-2025-bun](https://github.com/4emcos/rinha-de-backend-2025-bun)  
+- Load balancer: [load-balance](https://github.com/4emcos/load-balance)  
+- In-memory database: [writer-go](https://github.com/4emcos/writer-go)  
