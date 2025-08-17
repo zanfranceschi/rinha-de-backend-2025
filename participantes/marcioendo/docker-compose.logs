@@ -1,0 +1,78 @@
+
+ back0 Pulling 
+ front Pulling 
+ back1 Pulling 
+ af7c915c8849 Already exists 
+ af7c915c8849 Already exists 
+ 37c574a82922 Pulling fs layer 
+ 37c574a82922 Pulling fs layer 
+ af7c915c8849 Already exists 
+ 5526a3a9e6a5 Pulling fs layer 
+ 5526a3a9e6a5 Downloading [>                                                  ]  65.54kB/6.39MB
+ 37c574a82922 Downloading [>                                                  ]  63.26kB/6.225MB
+ 37c574a82922 Downloading [>                                                  ]  63.26kB/6.225MB
+ 5526a3a9e6a5 Verifying Checksum 
+ 5526a3a9e6a5 Download complete 
+ 5526a3a9e6a5 Extracting [>                                                  ]  65.54kB/6.39MB
+ 37c574a82922 Verifying Checksum 
+ 37c574a82922 Download complete 
+ 37c574a82922 Downloading [==================================================>]  6.225MB/6.225MB
+ 37c574a82922 Verifying Checksum 
+ 37c574a82922 Download complete 
+ 37c574a82922 Extracting [>                                                  ]  65.54kB/6.225MB
+ 37c574a82922 Extracting [>                                                  ]  65.54kB/6.225MB
+ 5526a3a9e6a5 Extracting [============================>                      ]   3.67MB/6.39MB
+ 37c574a82922 Extracting [=========================>                         ]  3.146MB/6.225MB
+ 37c574a82922 Extracting [=========================>                         ]  3.146MB/6.225MB
+ 5526a3a9e6a5 Extracting [==================================================>]   6.39MB/6.39MB
+ 37c574a82922 Extracting [==================================================>]  6.225MB/6.225MB
+ 37c574a82922 Extracting [==================================================>]  6.225MB/6.225MB
+ 37c574a82922 Extracting [==================================================>]  6.225MB/6.225MB
+ 37c574a82922 Extracting [==================================================>]  6.225MB/6.225MB
+ 5526a3a9e6a5 Pull complete 
+ 37c574a82922 Pull complete 
+ 37c574a82922 Pull complete 
+ front Pulled 
+ back1 Pulled 
+ back0 Pulled 
+ Network marcioendo_backend  Creating
+ Network marcioendo_backend  Created
+ Container back0  Creating
+ Container back1  Creating
+ Container back0  Created
+ Container back1  Created
+ Container front  Creating
+ Container front  Created
+Attaching to back0, back1, front
+back0  | Back
+back0  | Connect ok=payment-processor-default/172.19.0.2:8080
+back0  | Connect ok=payment-processor-fallback/172.19.0.3:8080
+back1  | Back
+back1  | Connect ok=payment-processor-default/172.19.0.2:8080
+back1  | Connect ok=payment-processor-fallback/172.19.0.3:8080
+front  | Front
+front  | Connect failed=back0/172.20.0.2:8080
+front  | Failed to init back addresses
+front  | java.io.IOException: Failed to find IP address of back0
+front  | 	at demo.rinha@008/demo.rinha.Shared.addr(Shared.java:201)
+front  | 	at demo.rinha@008/demo.rinha.Front$Adapter.back0(Front.java:49)
+front  | 	at demo.rinha@008/demo.rinha.Front.boot(Front.java:173)
+front  | 	at demo.rinha@008/demo.rinha.Front.main(Front.java:123)
+front  | 	at java.base@24.0.2/java.lang.invoke.LambdaForm$DMH/sa346b79c.invokeStaticInit(LambdaForm$DMH)
+[Kfront exited with code 0
+back0  | Exception in thread "main" java.lang.NullPointerException
+back0  | 	at java.base@24.0.2/java.util.Objects.requireNonNull(Objects.java:220)
+back0  | 	at java.base@24.0.2/java.lang.ThreadBuilders$VirtualThreadFactory.newThread(ThreadBuilders.java:385)
+back0  | 	at demo.rinha@008/demo.rinha.Back.server(Back.java:199)
+back0  | 	at demo.rinha@008/demo.rinha.Back.main(Back.java:117)
+back0  | 	at java.base@24.0.2/java.lang.invoke.LambdaForm$DMH/sa346b79c.invokeStaticInit(LambdaForm$DMH)
+back0  | Failed to accept client conn
+back0  | java.nio.channels.AsynchronousCloseException
+back0  | 	at java.base@24.0.2/java.nio.channels.spi.AbstractInterruptibleChannel.end(AbstractInterruptibleChannel.java:218)
+back0  | 	at java.base@24.0.2/sun.nio.ch.ServerSocketChannelImpl.end(ServerSocketChannelImpl.java:374)
+back0  | 	at java.base@24.0.2/sun.nio.ch.ServerSocketChannelImpl.accept(ServerSocketChannelImpl.java:399)
+back0  | 	at demo.rinha@008/demo.rinha.Back.serverListen(Back.java:217)
+back0  | 	at demo.rinha@008/demo.rinha.Back.server(Back.java:196)
+back0  | 	at demo.rinha@008/demo.rinha.Back.main(Back.java:117)
+back0  | 	at java.base@24.0.2/java.lang.invoke.LambdaForm$DMH/sa346b79c.invokeStaticInit(LambdaForm$DMH)
+[Kback0 exited with code 143
