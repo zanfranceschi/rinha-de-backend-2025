@@ -1,0 +1,47 @@
+x-api: &api
+  image: ghcr.io/ptronico/rinha25-starlette:latest
+  command: uvicorn src:app --host 0.0.0.0 --port 8000 --no-access-log --workers 1 --loop uvloop --http httptools
+  environment:
+    - SEMAPHORE=6
+    - PROCESSOR_DEFAULT_URL=http://payment-processor-default:8080
+    - PROCESSOR_FALLBACK_URL=http://payment-processor-fallback:8080
+  networks:
+    - backend
+    - payment-processor
+  deploy:
+    resources:
+      limits:
+        cpus: "0.6"
+        memory: "125MB"
+
+services:
+  api1:
+    <<: *api
+    hostname: api1
+  api2:
+    <<: *api
+    hostname: api2
+  nginx:
+    image: nginx:1.29-alpine
+    container_name: rinha-nginx
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - api1
+      - api2
+    ports:
+      - "9999:9999"
+    networks:
+      - backend
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          cpus: "0.3"
+          memory: "100MB"
+
+networks:
+  backend:
+    driver: bridge
+  payment-processor:
+    external: true
