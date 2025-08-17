@@ -20,9 +20,6 @@ services:
 
   api1: &api
     image: docker.io/taniguti/rinha-de-backend-2025:latest
-    # build:
-    #   context: .
-    #   dockerfile: Dockerfile
     hostname: api1
     environment:
       - APP_PORT=8080
@@ -31,7 +28,7 @@ services:
       - PROCESSOR_DEFAULT_URL=http://payment-processor-default:8080
       - PROCESSOR_FALLBACK_URL=http://payment-processor-fallback:8080
       - INSTANCE_ID=API-1
-      - WORKER_CONCURRENCY=16
+      - WORKER_CONCURRENCY=4
     networks:
       - backend
       - payment-processor
