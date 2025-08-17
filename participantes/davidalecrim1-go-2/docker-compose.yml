@@ -1,13 +1,13 @@
 x-service-templates:
   go-backend: &go-backend
-    image: davidalecrim1/rinha-with-go-2025:v0.11.1-mongodb
+    image: davidalecrim1/rinha-with-go-2025:v0.12-mongodb
     networks:
       - app
       - payment-processor
     depends_on:
       - redis
       - mongodb
-    restart: unless-stopped
+    restart: on-failure
 
 services:
   go-backend-1:
@@ -22,6 +22,8 @@ services:
       - ENABLE_PROFILING=false
       - MONGO_ENDPOINT=mongodb://mongodb:27017
       - MONGO_DATABASE=payments-db
+      - WORKERS=100
+      - RETRY_QUEUE_SIZE=6000
     networks:
       - app
       - payment-processor
@@ -43,6 +45,8 @@ services:
       - ENABLE_PROFILING=false
       - MONGO_ENDPOINT=mongodb://mongodb:27017
       - MONGO_DATABASE=payments-db
+      - WORKERS=100
+      - RETRY_QUEUE_SIZE=6000
     networks:
       - app
       - payment-processor
@@ -68,7 +72,7 @@ services:
   mongodb:
     container_name: mongodb
     image: mongo:8.0.11
-    restart: unless-stopped
+    restart: on
     networks:
       - app
       - payment-processor
