@@ -1,108 +1,87 @@
 services:
-  nginx:
-    image: nginx:1.27-alpine
-    ports:
-      - "9999:9999"
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: rinha
     volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf:ro
-    depends_on:
-      - app-1
-      - app-2
-    deploy:
-      resources:
-        limits:
-          cpus: "0.10"
-          memory: "20MB"
-    restart: always
-    networks:
-      - rinha-net
+      - pgdata:/var/lib/postgresql/data
+      - ./sql/schema.sql:/docker-entrypoint-initdb.d/0-schema.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U admin -d rinha"]
+      interval: 2s
+      timeout: 1s
+      retries: 30
+    networks: [rinha-net]
+
+  redis:
+    image: redis:7-alpine
+    command: ["redis-server","--appendonly","no","--maxmemory-policy","allkeys-lru"]
+    healthcheck:
+      test: ["CMD","redis-cli","ping"]
+      interval: 2s
+      timeout: 1s
+      retries: 30
+    sysctls:
+      net.core.somaxconn: 65535
+    networks: [rinha-net]
 
   app-1:
     image: samuka7abrr/my-rinha-backend:latest
     environment:
-      - DB_HOST=postgres
-      - DB_PORT=5432
-      - DB_USER=admin
-      - DB_PASSWORD=123
-      - DB_NAME=rinha
-      - REDIS_ADDR=redis:6379
-      - PAYMENT_PROCESSOR_DEFAULT_URL=http://payment-processor-default:8080
-      - PAYMENT_PROCESSOR_FALLBACK_URL=http://payment-processor-fallback:8080
-    expose:
-      - "8080"
+      APP_PORT: "8080"
+      REDIS_ADDR: "redis:6379"
+      POSTGRES_DSN: "postgres://admin:admin@postgres:5432/rinha?sslmode=disable"
+      WINDOW_SECONDS: "600"     
+      QUEUE_SIZE: "200000"      
+      BATCH_SIZE: "2000"        
+      BATCH_MAX_MS: "50"        
+      REDIS_TTL_SEC: "180"      
+      GOGC: "200"
+      GOMEMLIMIT: "512MiB"
     depends_on:
-      - postgres
-      - redis
-    deploy:
-      resources:
-        limits:
-          cpus: '0.4'
-          memory: 64M
-    restart: always
-    networks:
-      - rinha-net
-      - payment-processor
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks: [rinha-net]
 
   app-2:
     image: samuka7abrr/my-rinha-backend:latest
     environment:
-      - DB_HOST=postgres
-      - DB_PORT=5432
-      - DB_USER=admin
-      - DB_PASSWORD=123
-      - DB_NAME=rinha
-      - REDIS_ADDR=redis:6379
-      - PAYMENT_PROCESSOR_DEFAULT_URL=http://payment-processor-default:8080
-      - PAYMENT_PROCESSOR_FALLBACK_URL=http://payment-processor-fallback:8080
-    expose:
-      - "8080"
+      APP_PORT: "8080"
+      REDIS_ADDR: "redis:6379"
+      POSTGRES_DSN: "postgres://admin:admin@postgres:5432/rinha?sslmode=disable"
+      WINDOW_SECONDS: "600"
+      QUEUE_SIZE: "200000"
+      BATCH_SIZE: "2000"
+      BATCH_MAX_MS: "50"
+      REDIS_TTL_SEC: "180"
+      GOGC: "200"
+      GOMEMLIMIT: "512MiB"
     depends_on:
-      - postgres
-      - redis
-    deploy:
-      resources:
-        limits:
-          cpus: '0.4'
-          memory: 64M
-    restart: always
-    networks:
-      - rinha-net
-      - payment-processor
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks: [rinha-net]
 
-  postgres:
-    image: postgres:16-alpine
-    environment:
-      - POSTGRES_USER=admin
-      - POSTGRES_PASSWORD=123
-      - POSTGRES_DB=rinha
+  nginx:
+    image: nginx:1.25-alpine
+    ports:
+      - "9999:80"
     volumes:
-      - pgdata:/var/lib/postgresql/data
-      - ./sql/schema.sql:/docker-entrypoint-initdb.d/schema.sql
-    deploy:
-      resources:
-        limits:
-          cpus: "0.20"
-          memory: "50MB"
-    restart: always
-    networks:
-      - rinha-net
-
-  redis:
-    image: redis:7.2-alpine
-    deploy:
-      resources:
-        limits:
-          cpus: "0.10"
-          memory: "20MB"
-    restart: always
-    networks:
-      - rinha-net
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      app-1:
+        condition: service_started
+      app-2:
+        condition: service_started
+    networks: [rinha-net]
 
 volumes:
   pgdata:
 
 networks:
   rinha-net:
-    driver: bridge
-  payment-processor:
-    external: true
