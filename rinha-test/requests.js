@@ -24,7 +24,6 @@ const paymentProcessorFallbacktHttp = new Httpx({
 
 const backendHttp = new Httpx({
     baseURL: "http://localhost:9999",
-    // baseURL: "http://172.20.19.248:9999",
     //baseURL: "http://localhost:5123",
     headers: {
         "Content-Type": "application/json",
