@@ -8,7 +8,7 @@ Stack:
 - <img src="https://devblogs.microsoft.com/wp-content/uploads/sites/9/2021/05/vcpkg-product-mark.png" alt="logo vcpkg" width="150" height="auto" valign="middle"> `vcpkg` como gerenciador de pacotes
 - <img src="https://cdn.icon-icons.com/icons2/2699/PNG/512/haproxy_logo_icon_171017.png" alt="logo haproxy" width="150" height="auto" valign="middle"> `haproxy` como load balancer
 - <img src="https://dbdb.io/media/logos/lmdb.png" alt="logo lmdb" width="150" height="auto" valign="middle"> `lmdb` como banco de dados
-- <img src="https://www.boost.org/static/img/Boost_Symbol_Transparent.svg" alt="logo boost" width="150" height="auto" valign="middle"> `boost.interprocess` como gerenciador de memória compartilhada
+- <img src="https://www.boost.org/doc/contributor-guide/_images/boost-logo.png" alt="logo boost" width="150" height="auto" valign="middle"> `boost.interprocess` como gerenciador de memória compartilhada
 
 [Implementação](https://github.com/asfernandes/rinhaback25/tree/main/c%2B%2B-haproxy-mongoose-lmdb)
 

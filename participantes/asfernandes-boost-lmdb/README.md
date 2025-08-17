@@ -4,7 +4,7 @@
 
 Stack:
 - <img src="https://www.ics.com/sites/default/files/styles/blog_detail/public/images/cpp-w-23.jpg?itok=pR6VPZzy" alt="logo C++23" width="150" height="auto" valign="middle"> `C++23` como linguagem de programação, usando coroutines
-- <img src="https://upload.wikimedia.org/wikipedia/commons/c/c8/Mongoose_Web_Server.svg" alt="logo boost" width="150" height="auto" valign="middle"> `boost` (`asio`, `beast`, `interprocess`, `json`, `url`)
+- <img src="https://www.boost.org/doc/contributor-guide/_images/boost-logo.png" alt="logo boost" width="150" height="auto" valign="middle"> `boost` (`asio`, `beast`, `interprocess`, `json`, `url`)
 - <img src="https://devblogs.microsoft.com/wp-content/uploads/sites/9/2021/05/vcpkg-product-mark.png" alt="logo vcpkg" width="150" height="auto" valign="middle"> `vcpkg` como gerenciador de pacotes
 - <img src="https://dbdb.io/media/logos/lmdb.png" alt="logo lmdb" width="150" height="auto" valign="middle"> `lmdb` como banco de dados
 
