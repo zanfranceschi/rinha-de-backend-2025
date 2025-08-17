@@ -1,6 +1,6 @@
 services:
   api01: &api
-    image: ghcr.io/lpicanco/backend-dogfight-rust-25:95Tg48
+    image: ghcr.io/lpicanco/backend-dogfight-rust-25:95Tg49
     hostname: api01
     restart: unless-stopped
     environment:
@@ -88,7 +88,7 @@ configs:
         tcp_nodelay on;
         
         upstream api {
-          keepalive 500;
+          keepalive 600;
 
           server unix:/var/run/uds01.sock;
           server unix:/var/run/uds02.sock;
