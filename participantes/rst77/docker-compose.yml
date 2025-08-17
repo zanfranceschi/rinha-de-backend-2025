@@ -1,6 +1,6 @@
 x-backend-templates:
   app: &app
-    image: ghcr.io/rst77/app:10
+    image: ghcr.io/rst77/app:11
     networks:
       - payment-processor
       - rinha-net
@@ -14,7 +14,9 @@ x-backend-templates:
     PAYMENT_PROCESSORS: "2"
     CONN_TO: "60"
     REQ_TO: "15"
-    SUMM_DELAY: "1200"
+    SUMM_DELAY: "1000"
+    #PAYMENT_PROCESSOR_FALLBACK: http://lb:9999/pf
+    #PAYMENT_PROCESSOR_DEFAULT: http://lb:9999/pd
     PAYMENT_PROCESSOR_FALLBACK: http://payment-processor-fallback:8080
     PAYMENT_PROCESSOR_DEFAULT: http://payment-processor-default:8080
 
