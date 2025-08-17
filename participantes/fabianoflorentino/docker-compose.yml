@@ -13,30 +13,31 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.15"
+          cpus: "0.30"
           memory: "40MB"
     networks:
       - payment-processor
       - rinha
 
   eliot1:
+    build: .
     image: fabianoflorentino/eliot:v0.0.2
     container_name: eliot-1
     hostname: eliot-1
     environment:
       HTTP_ADDR: ":8080"
       REDIS_ADDR: "redis:6379"
-      REDIS_POOL: "250"
+      REDIS_POOL: "200"
       PROCESSOR_DEFAULT_URL: "http://payment-processor-default:8080"
       PROCESSOR_FALLBACK_URL: "http://payment-processor-fallback:8080"
       TIMEOUT_MS: "120"
-      HEDGE_MS: "40"
+      HEDGE_MS: "35"
     depends_on:
       - redis
     deploy:
       resources:
         limits:
-          cpus: "0.6"
+          cpus: "0.35"
           memory: "120MB"
     networks:
       - payment-processor
@@ -49,7 +50,7 @@ services:
     environment:
       HTTP_ADDR: ":8080"
       REDIS_ADDR: "redis:6379"
-      REDIS_POOL: "250"
+      REDIS_POOL: "200"
       PROCESSOR_DEFAULT_URL: "http://payment-processor-default:8080"
       PROCESSOR_FALLBACK_URL: "http://payment-processor-fallback:8080"
       TIMEOUT_MS: "120"
@@ -59,7 +60,7 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.6"
+          cpus: "0.35"
           memory: "120MB"
     networks:
       - payment-processor
@@ -73,7 +74,7 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.15"
+          cpus: "0.50"
           memory: "70MB"
     networks:
       - rinha
