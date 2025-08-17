@@ -1,80 +1,110 @@
-x-service-templates:
-  backend-service: &backend-service
-    image: 4emcos/rinha-backend-2025-bun:1.0.15
-    depends_on:
-      - writer
-    volumes:
-      - socket_data:/tmp
-    networks:
-      - payment-processor
-      - backend
-    deploy:
-      resources:
-        limits:
-          cpus: "0.4"
-          memory: "55MB"
+version: "3.9"
 
 services:
-  backend-01:
-    <<: *backend-service
-    container_name: backend-01
-    hostname: backend-01
+  db:
+    image: mariadb:11.3
+    hostname: db
     environment:
-      APP_PORT: 5000
-      PAYMENT_PROCESSOR_FALLBACK: http://payment-processor-fallback:8080
-      PAYMENT_PROCESSOR_DEFAULT: http://payment-processor-default:8080
-      WRITER_SOCKET_PATH: /tmp/writer.sock
-      SERVICE_SOCKET_PATH: /tmp/backend_1.sock
-
-  backend-02:
-    <<: *backend-service
-    container_name: backend-02
-    hostname: backend-02
-    environment:
-      APP_PORT: 5000
-      PAYMENT_PROCESSOR_FALLBACK: http://payment-processor-fallback:8080
-      PAYMENT_PROCESSOR_DEFAULT: http://payment-processor-default:8080
-      WRITER_SOCKET_PATH: /tmp/writer.sock
-      SERVICE_SOCKET_PATH: /tmp/backend_2.sock
-
-  writer:
-    hostname: writer
-    image: 4emcos/writer:2.0.3
-    environment:
-      - DATABASE_SOCKET_PATH=/tmp/writer.sock
-      - GOGC=100
-      - GOMAXPROCS=1
-      - GODEBUG=gctrace=0
-    volumes:
-      - socket_data:/tmp
-    deploy:
-      resources:
-        limits:
-          cpus: "0.35"
-          memory: "100MB"
-
-  load-balance:
-    image: 4emcos/load-balance:1.0.1
-    volumes:
-      - socket_data:/tmp
-    depends_on:
-      - backend-01
-      - backend-02
-    networks:
-      - backend
+      - MARIADB_ROOT_PASSWORD=rinha
+      - MARIADB_USER=rinha
+      - MARIADB_PASSWORD=rinha
+      - MARIADB_DATABASE=rinha
     ports:
-      - '9999:9999'
+      - "3307:3306"
+    command: --max_connections=450 --key_buffer_size=32M --query_cache_size=0 --innodb_buffer_pool_size=96M --innodb_log_file_size=12M --innodb_flush_log_at_trx_commit=0 --sync_binlog=0
+    networks:
+      - rinha-net
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h localhost -u rinha -prinha"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
     deploy:
       resources:
         limits:
-          cpus: "0.35"
-          memory: "75MB"
-          
-volumes:
-  socket_data:
+          cpus: "0.30"
+          memory: "80MB"
+
+  api01: &api
+    image: ghcr.io/eigr/rinha-2025:0.0.1
+    hostname: api01
+    environment:
+      - MIX_ENV=dev
+      - PROXY_ACTOR_SYSTEM_NAME=rinha-system
+      - PROXY_CLUSTER_STRATEGY=gossip
+      #- SPAWN_SUPERVISORS_STATE_HANDOFF_CONTROLLER=db
+      - SPAWN_DISABLE_METRICS=true
+      - PROXY_DATABASE_TYPE=mariadb
+      - PROXY_DATABASE_HOST=db
+      - PROXY_DATABASE_NAME=rinha
+      - PROXY_DATABASE_PORT=3306
+      - PROXY_DATABASE_POOL_SIZE=40
+      - PROXY_DATABASE_USERNAME=rinha
+      - PROXY_DATABASE_SECRET=rinha
+      - SPAWN_STATESTORE_KEY=3Jnb0hZiHIzHTOih7t2cTEPEpY98Tu1wvQkPfq/XwqE=
+      - PROXY_GRPC_PORT=8080
+      - HTTP_PORT=8081
+      - PROCESSOR_DEFAULT_URL=http://payment-processor-default:8080
+      - PROCESSOR_FALLBACK_URL=http://payment-processor-fallback:8080
+    networks:
+      - payment-processor
+      - rinha-net
+    depends_on:
+      - db
+    # deploy:
+    #   resources:
+    #     limits:
+    #       cpus: "0.45"
+    #       memory: "110MB"
+
+  api02:
+    <<: *api
+    hostname: api02
+    environment:
+      - MIX_ENV=dev
+      - PROXY_ACTOR_SYSTEM_NAME=rinha-system
+      - PROXY_CLUSTER_STRATEGY=gossip
+      - SPAWN_SUPERVISORS_STATE_HANDOFF_CONTROLLER=db
+      - SPAWN_DISABLE_METRICS=true
+      - PROXY_DATABASE_TYPE=mariadb
+      - PROXY_DATABASE_HOST=db
+      - PROXY_DATABASE_NAME=rinha
+      - PROXY_DATABASE_PORT=3306
+      - PROXY_DATABASE_POOL_SIZE=40
+      - PROXY_DATABASE_USERNAME=rinha
+      - PROXY_DATABASE_SECRET=rinha
+      - SPAWN_STATESTORE_KEY=3Jnb0hZiHIzHTOih7t2cTEPEpY98Tu1wvQkPfq/XwqE=
+      - PROXY_GRPC_PORT=8080
+      - HTTP_PORT=8082
+      - PROCESSOR_DEFAULT_URL=http://payment-processor-default:8080
+      - PROCESSOR_FALLBACK_URL=http://payment-processor-fallback:8080
+    # deploy:
+    #   resources:
+    #     limits:
+    #       cpus: "0.45"
+    #       memory: "110MB"
+
+  lb:
+    image: nginx:1.27.0-alpine
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    ports:
+      - "9999:9999"
+    networks:
+      - payment-processor
+      - rinha-net
+    depends_on:
+      - api01
+      - api02
+    deploy:
+      resources:
+        limits:
+          cpus: "0.10"
+          memory: "50MB"
 
 networks:
-  backend:
-    driver: bridge
   payment-processor:
     external: true
+  rinha-net:
+    driver: bridge
