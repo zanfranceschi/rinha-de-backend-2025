@@ -1,0 +1,104 @@
+services:
+  valkey:
+    image: valkey/valkey:7.2-alpine
+    container_name: valkey
+    command: valkey-server --maxmemory 40M --maxmemory-policy noeviction --save 5 1
+    ports:
+      - "6379:6379"
+    volumes:
+      - valkey-data:/data
+    networks:
+      - internal-network
+    deploy:
+      resources:
+        limits:
+          cpus: '0.4'
+          memory: 40M
+
+  load-balancer:
+    image: fabriciojuliatto/rinha_2025-load-balancer:v.0.1.1
+    container_name: load-balancer
+    ports:
+      - "9999:9999"
+    environment:
+      - LB_LISTEN_ADDRESS=0.0.0.0:9999
+      - LB_UPSTREAM_ADDRESSES=gateway-1:9000,gateway-2:9001
+      - LB_CONNECTIONS_PER_UPSTREAM=600
+    networks:
+      - internal-network
+    depends_on:
+      - gateway-1
+      - gateway-2
+    ulimits:
+      nofile:
+        soft: 65535
+        hard: 65535
+    deploy:
+      resources:
+        limits:
+          cpus: '0.2'
+          memory: 170M
+
+  gateway-1: &gateway
+    image: fabriciojuliatto/rinha_2025-gateway:v.0.1.0
+    hostname: gateway-1
+    environment: &gateway-environment
+      - GATEWAY_LISTEN_ADDRESS=0.0.0.0:9000
+      - GATEWAY_VALKEY_URL=redis://valkey:6379
+      - GATEWAY_VALKEY_QUEUE_NAME=payments
+      - GATEWAY_RESULT_DIRECTORY=/data/results
+    volumes:
+      - payment-results:/data/results
+    networks:
+      - internal-network
+    depends_on:
+      - valkey
+    deploy:
+      resources:
+        limits:
+          cpus: '0.1'
+          memory: 40M
+
+  gateway-2:
+    <<: *gateway
+    hostname: gateway-2
+    environment:
+      - GATEWAY_LISTEN_ADDRESS=0.0.0.0:9001
+      - GATEWAY_VALKEY_URL=redis://valkey:6379
+      - GATEWAY_VALKEY_QUEUE_NAME=payments
+      - GATEWAY_RESULT_DIRECTORY=/data/results
+
+  worker:
+    image: fabriciojuliatto/rinha_2025-worker:v.0.1.0
+    container_name: worker
+    environment:
+      - WORKER_VALKEY_URL=redis://valkey:6379
+      - WORKER_VALKEY_QUEUE_NAME=payments
+      - WORKER_DEFAULT_PROVIDER_URL=http://payment-processor-default:8080
+      - WORKER_FALLBACK_PROVIDER_URL=http://payment-processor-fallback:8080
+      - WORKER_STRATEGY=greedy
+      - WORKER_WORKER_COUNT=4
+      - WORKER_PROVIDER_TIMEOUT_MS=5000
+      - WORKER_RESULT_DIRECTORY=/data/results
+    volumes:
+      - payment-results:/data/results
+    networks:
+      - internal-network
+      - payment-processor
+    depends_on:
+      - valkey
+    deploy:
+      resources:
+        limits:
+          cpus: '0.7'
+          memory: 60M
+
+networks:
+  internal-network:
+    driver: bridge
+  payment-processor:
+    external: true
+
+volumes:
+  valkey-data:
+  payment-results:

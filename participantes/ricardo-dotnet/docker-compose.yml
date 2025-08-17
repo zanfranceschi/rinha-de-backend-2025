@@ -1,0 +1,92 @@
+services:
+    nginx:
+        image: nginx:1.25-alpine
+        container_name: rinha-nginx
+        volumes:
+          - ./nginx.conf:/etc/nginx/nginx.conf:ro
+        depends_on:
+          - backend1
+          - backend2
+        ports:
+          - "9999:9999"
+        networks:
+            - backend
+            - payment-processor
+        deploy:
+            resources:
+                limits:
+                    cpus: "0.20"
+                    memory: "20MB" 
+    redis:
+        container_name: cache
+        hostname: redis
+        image: redis:latest
+        ports:
+          - "6379:6379"          
+        networks:
+          - backend
+        restart: always
+        deploy:
+          resources:
+            limits:
+              cpus: "0.20"
+              memory: "20MB"                    
+    backend1:
+        image: 'rnakatan/rinha2025api:latest'
+        container_name: backend1
+        networks:
+            - backend
+            - payment-processor 
+        environment:      
+          - PROCESSOR_DEFAULT_URL_BASE=http://payment-processor-default:8080
+          - PROCESSOR_FALLBACK_URL_BASE=http://payment-processor-fallback:8080    
+          - REDIS_URL=redis:6379,abortConnect=false,allowAdmin=true
+        depends_on:
+          - redis   
+        deploy:
+            resources:
+                limits:
+                    cpus: "0.15"
+                    memory: "50MB"       
+    backend2:
+        image: 'rnakatan/rinha2025api:latest'
+        container_name: backend2
+        networks:
+            - backend
+            - payment-processor
+        environment:      
+          - PROCESSOR_DEFAULT_URL_BASE=http://payment-processor-default:8080
+          - PROCESSOR_FALLBACK_URL_BASE=http://payment-processor-fallback:8080  
+          - REDIS_URL=redis:6379,abortConnect=false,allowAdmin=true
+        depends_on:
+          - redis   
+        deploy:
+            resources:
+                limits:
+                    cpus: "0.15"
+                    memory: "50MB"      
+    worker:
+        image: 'rnakatan/rinha2025worker:latest'
+        container_name: worker
+        networks:
+            - backend
+            - payment-processor
+        environment:      
+          - PROCESSOR_DEFAULT_URL_BASE=http://payment-processor-default:8080
+          - PROCESSOR_FALLBACK_URL_BASE=http://payment-processor-fallback:8080
+          - REDIS_HOST=redis
+          - REDIS_PORT=6379
+        depends_on:
+          - backend1
+          - backend2
+        deploy:
+            resources:
+                limits:
+                    cpus: "0.80"
+                    memory: "210MB"                    
+networks:
+  backend:
+    driver: bridge
+  payment-processor:
+    external: true        
+    

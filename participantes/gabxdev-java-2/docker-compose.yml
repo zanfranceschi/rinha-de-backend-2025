@@ -1,33 +1,21 @@
 services:
   backend-1:
-    image: gabxdevv/rinha-backend-2025-java-gabxdev-unix:2.0.2
+    image: gabxdevv/rinha-backend-2025-java-gabxdev-nginx-final:1.0.1
     restart: always
-    volumes:
-      - /tmp:/tmp
     environment:
-      RETRY_API_DEFAULT: 15
+      RETRY_API_DEFAULT: 8
       WORKER_POOL_SIZE: 16
+      WORKERS_THREAD_POOL_SIZE: 10
+      IO_THREAD_POOL_SIZE: 8
+      TIMEOUT_PROFESSOR_DEFAULT: 1100
+      TIMEOUT_PROFESSOR_FALLBACK: 1100
       URL_PROCESSOR_DEFAULT: http://payment-processor-default:8080/payments
       URL_PROCESSOR_FALLBACK: http://payment-processor-fallback:8080/payments
       UDP_CHANNEL_INTERNAL_PORT: 9003
       EXTERNAL_UDP_HOST: backend-2
+      SERVER_PORT: 8080
       EXTERNAL_UDP_PORT: 9004
-      API_UDP_PORT: 9095
-      API_MASTER: true
-      LB_UDP_HOST: load-balancer
       CLIENT_BACKOFF: 250
-      SOCKET_PATH: /tmp/api1-1.sock
-      SOCKET_PATH_2: /tmp/api1-2.sock
-      JAVA_OPTS: >-
-        -server
-        -XX:+UseG1GC
-        -XX:+UseFastAccessorMethods
-        -Xlog:disable
-        -XX:-PrintGC
-        -XX:+UseStringCache
-        -XX:-PrintGCDetails
-        -XX:-FlightRecorder
-        -XX:+DisableExplicitGC
     networks:
       - backend
       - payment-processor
@@ -35,34 +23,24 @@ services:
       resources:
         limits:
           cpus: '0.6'
-          memory: '125MB'
+          memory: '145MB'
 
   backend-2:
-    image: gabxdevv/rinha-backend-2025-java-gabxdev-unix:2.0.2
+    image: gabxdevv/rinha-backend-2025-java-gabxdev-nginx-final:1.0.1
     restart: always
-    volumes:
-      - /tmp:/tmp
     environment:
-      RETRY_API_DEFAULT: 15
+      RETRY_API_DEFAULT: 8
       WORKER_POOL_SIZE: 16
+      WORKERS_THREAD_POOL_SIZE: 10
+      IO_THREAD_POOL_SIZE: 8
+      TIMEOUT_PROFESSOR_DEFAULT: 1100
+      TIMEOUT_PROFESSOR_FALLBACK: 1100
       URL_PROCESSOR_DEFAULT: http://payment-processor-default:8080/payments
       URL_PROCESSOR_FALLBACK: http://payment-processor-fallback:8080/payments
       UDP_CHANNEL_INTERNAL_PORT: 9004
       EXTERNAL_UDP_HOST: backend-1
       EXTERNAL_UDP_PORT: 9003
-      CLIENT_BACKOFF: 250
-      SOCKET_PATH: /tmp/api2-1.sock
-      SOCKET_PATH_2: /tmp/api2-2.sock
-      JAVA_OPTS: >-
-        -server
-        -XX:+UseG1GC
-        -XX:+UseFastAccessorMethods
-        -Xlog:disable
-        -XX:-PrintGC
-        -XX:+UseStringCache
-        -XX:-PrintGCDetails
-        -XX:-FlightRecorder
-        -XX:+DisableExplicitGC
+      SERVER_PORT: 8080
     networks:
       - backend
       - payment-processor
@@ -70,13 +48,13 @@ services:
       resources:
         limits:
           cpus: '0.6'
-          memory: '125MB'
+          memory: '145MB'
 
   load-balancer:
-    image: gabxdevv/loud-balance-java-gabxv-unix:2.0.1
+    image: nginx:1.28-alpine
     restart: always
     volumes:
-      - /tmp:/tmp
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
     depends_on:
       - backend-1
       - backend-2
@@ -87,21 +65,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.30"
-          memory: "100MB"
-    environment:
-      BACK_END_1_URL: backend-1
-      BACK_END_2_PORT: 9095
-      JAVA_OPTS: >-
-        -server
-        -XX:+UseG1GC
-        -XX:+UseFastAccessorMethods
-        -Xlog:disable
-        -XX:-PrintGC
-        -XX:+UseStringCache
-        -XX:-PrintGCDetails
-        -XX:-FlightRecorder
-        -XX:+DisableExplicitGC
+          cpus: "0.3"
+          memory: "60MB"
 
 networks:
   backend:

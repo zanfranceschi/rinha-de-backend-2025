@@ -1,6 +1,6 @@
 x-service-templates:
   backend-service: &backend-service
-    image: 4emcos/rinha-backend-2025-bun:1.0.8
+    image: 4emcos/rinha-backend-2025-bun:1.0.15
     depends_on:
       - writer
     volumes:
@@ -11,8 +11,8 @@ x-service-templates:
     deploy:
       resources:
         limits:
-          cpus: "0.35"
-          memory: "35MB"
+          cpus: "0.4"
+          memory: "55MB"
 
 services:
   backend-01:
@@ -39,19 +39,22 @@ services:
 
   writer:
     hostname: writer
-    image: 4emcos/writer:1.0.8
+    image: 4emcos/writer:2.0.3
     environment:
-      - WRITER_SOCKET_PATH=/tmp/writer.sock
+      - DATABASE_SOCKET_PATH=/tmp/writer.sock
+      - GOGC=100
+      - GOMAXPROCS=1
+      - GODEBUG=gctrace=0
     volumes:
       - socket_data:/tmp
     deploy:
       resources:
         limits:
-          cpus: "0.30"
-          memory: "90MB"
+          cpus: "0.35"
+          memory: "100MB"
 
   load-balance:
-    image: 4emcos/load-balance:1.0.0
+    image: 4emcos/load-balance:1.0.1
     volumes:
       - socket_data:/tmp
     depends_on:
@@ -64,7 +67,7 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.5"
+          cpus: "0.35"
           memory: "75MB"
           
 volumes:

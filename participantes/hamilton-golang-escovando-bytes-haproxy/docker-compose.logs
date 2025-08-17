@@ -1,0 +1,65 @@
+
+ Network hamilton-golang-escovando-bytes-haproxy_app-network  Creating
+ Network hamilton-golang-escovando-bytes-haproxy_app-network  Created
+ Volume "hamilton-golang-escovando-bytes-haproxy_redis-data"  Creating
+ Volume "hamilton-golang-escovando-bytes-haproxy_redis-data"  Created
+ Volume "hamilton-golang-escovando-bytes-haproxy_api-socketsv1"  Creating
+ Volume "hamilton-golang-escovando-bytes-haproxy_api-socketsv1"  Created
+ Container nats_server  Creating
+ Container redis_cache  Creating
+ Container nats_server  Created
+ Container redis_cache  Created
+ Container rinha-api-2  Creating
+ Container rinha-api-1  Creating
+ Container rinha-api-1  Created
+ Container rinha-api-2  Created
+ Container nginx_load_balancer  Creating
+ Container nginx_load_balancer  Created
+Attaching to nats_server, nginx_load_balancer, redis_cache, rinha-api-1, rinha-api-2
+redis_cache  | 1:C 17 Aug 2025 18:16:19.471 # WARNING Memory overcommit must be enabled! Without it, a background save or replication may fail under low memory condition. Being disabled, it can also cause failures without low memory condition, see https://github.com/jemalloc/jemalloc/issues/1328. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.
+redis_cache  | 1:C 17 Aug 2025 18:16:19.471 * oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+redis_cache  | 1:C 17 Aug 2025 18:16:19.471 * Redis version=7.2.4, bits=64, commit=00000000, modified=0, pid=1, just started
+redis_cache  | 1:C 17 Aug 2025 18:16:19.471 # Warning: no config file specified, using the default config. In order to specify a config file use redis-server /path/to/redis.conf
+redis_cache  | 1:M 17 Aug 2025 18:16:19.472 * monotonic clock: POSIX clock_gettime
+redis_cache  | 1:M 17 Aug 2025 18:16:19.473 * Running mode=standalone, port=6379.
+redis_cache  | 1:M 17 Aug 2025 18:16:19.473 * Server initialized
+redis_cache  | 1:M 17 Aug 2025 18:16:19.474 * Ready to accept connections tcp
+nats_server  | [1] 2025/08/17 18:16:19.619736 [INF] Starting nats-server
+nats_server  | [1] 2025/08/17 18:16:19.619911 [INF]   Version:  2.10.14
+nats_server  | [1] 2025/08/17 18:16:19.619915 [INF]   Git:      [31af767]
+nats_server  | [1] 2025/08/17 18:16:19.619917 [INF]   Cluster:  my_cluster
+nats_server  | [1] 2025/08/17 18:16:19.619920 [INF]   Name:     NATT52SFF4MWRFHZJWLBMXH76NLCNLRPEVWXH74G5RK6USFLDMRKPBDM
+nats_server  | [1] 2025/08/17 18:16:19.619927 [INF]   ID:       NATT52SFF4MWRFHZJWLBMXH76NLCNLRPEVWXH74G5RK6USFLDMRKPBDM
+nats_server  | [1] 2025/08/17 18:16:19.620009 [INF] Using configuration file: /etc/nats/nats-server.conf
+nats_server  | [1] 2025/08/17 18:16:19.621616 [INF] Starting http monitor on 0.0.0.0:8222
+nats_server  | [1] 2025/08/17 18:16:19.621845 [INF] Listening for client connections on 0.0.0.0:4222
+nats_server  | [1] 2025/08/17 18:16:19.622181 [INF] Server is ready
+nats_server  | [1] 2025/08/17 18:16:19.622367 [INF] Cluster name is my_cluster
+nats_server  | [1] 2025/08/17 18:16:19.622408 [INF] Listening for route connections on 0.0.0.0:6222
+rinha-api-1  | 2025/08/17 18:16:19 Connected to NATS server
+rinha-api-2  | 2025/08/17 18:16:19 Connected to NATS server
+nginx_load_balancer  | [NOTICE]   (1) : Initializing new worker (8)
+nginx_load_balancer  | [NOTICE]   (1) : Loading success.
+redis_cache          | 1:M 17 Aug 2025 18:17:20.003 * 10000 changes in 60 seconds. Saving...
+redis_cache          | 1:M 17 Aug 2025 18:17:20.003 * Background saving started by pid 20
+redis_cache          | 20:C 17 Aug 2025 18:17:20.012 * DB saved on disk
+redis_cache          | 20:C 17 Aug 2025 18:17:20.013 * Fork CoW for RDB: current 0 MB, peak 0 MB, average 0 MB
+redis_cache          | 1:M 17 Aug 2025 18:17:20.104 * Background saving terminated with success
+nginx_load_balancer  | [NOTICE]   (1) : haproxy version is 3.2.3-1844da7
+nginx_load_balancer  | [WARNING]  (1) : Exiting Master process...
+nginx_load_balancer  | [WARNING]  (8) : Proxy frontend stopped (cumulated conns: FE: 553, BE: 0).
+nginx_load_balancer  | [WARNING]  (8) : Proxy backend stopped (cumulated conns: FE: 0, BE: 16763).
+nats_server          | [1] 2025/08/17 18:17:39.501170 [INF] Initiating Shutdown...
+nats_server          | [1] 2025/08/17 18:17:39.502655 [INF] Server Exiting..
+nginx_load_balancer  | [WARNING]  (1) : Current worker (8) exited with code 0 (Exit)
+nginx_load_balancer  | [WARNING]  (1) : All workers exited. Exiting... (0)
+[Knats_server exited with code 1
+[Knginx_load_balancer exited with code 0
+[Krinha-api-1 exited with code 2
+[Krinha-api-2 exited with code 2
+redis_cache          | 1:signal-handler (1755454660) Received SIGTERM scheduling shutdown...
+redis_cache          | 1:M 17 Aug 2025 18:17:40.094 * User requested shutdown...
+redis_cache          | 1:M 17 Aug 2025 18:17:40.094 * Saving the final RDB snapshot before exiting.
+redis_cache          | 1:M 17 Aug 2025 18:17:40.102 * DB saved on disk
+redis_cache          | 1:M 17 Aug 2025 18:17:40.102 # Redis is now ready to exit, bye bye...
+log truncated at line 1000

@@ -1,28 +1,27 @@
 services:
-  nginx:
-    image: nginx:latest
-    container_name: nginx-lb
-    hostname: nginx-lb
+  haproxy:
+    image: haproxy:latest
+    container_name: haproxy-lb
     ports:
-      - 9999:80
+      - "9999:80"
     volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
       - memsock:/tmp
-    networks:
-      - backend
-      - payment-processor
     depends_on:
       - backend-1
       - backend-2
+    networks:
+      - backend
+      - payment-processor
     deploy:
       resources:
         limits:
-          cpus: '0.2'
-          memory: '210M'
+          cpus: "0.3"
+          memory: 210M
     restart: unless-stopped
 
   backend-1: &backend-template
-    image: rodrigomilitao/rinha-go-in-memory:2025-v1
+    image: rodrigomilitao/rinha-go-in-memory:2025-v4
     ports:
       - "6061:6060"
     expose:
@@ -33,8 +32,8 @@ services:
     volumes:
       - memsock:/tmp
     environment:
-      - PROCESSOR_DEFAULT_URL=http://payment-processor-default:8080
-      - PROCESSOR_FALLBACK_URL=http://payment-processor-fallback:8080
+      - PROCESSOR_DEFAULT_URL=http://payment-processor-default:8080/payments
+      - PROCESSOR_FALLBACK_URL=http://payment-processor-fallback:8080/payments
       - SOCKET_PATH=/tmp/api1.sock
       - OTHER_SOCKET_PATH=/tmp/api2.sock
       - SUMMARY_URL=http://app2:8080/internal/payments-summary
@@ -49,8 +48,6 @@ services:
     ports:
       - "6062:6060"
     environment:
-      - PROCESSOR_DEFAULT_URL=http://payment-processor-default:8080
-      - PROCESSOR_FALLBACK_URL=http://payment-processor-fallback:8080
       - SOCKET_PATH=/tmp/api2.sock
       - OTHER_SOCKET_PATH=/tmp/api1.sock  
       - SUMMARY_URL=http://app1:8080/internal/payments-summary

@@ -1,43 +1,63 @@
 services:
   app1:
-    image: ghcr.io/joojf/rinha-de-backend:latest
+    # build: .
+    image: ghcr.io/joojf/rinha-de-backend:1.2.6
     environment:
       - BIND_ADDR=0.0.0.0:9999
       - DEFAULT_URL=http://payment-processor-default:8080
       - FALLBACK_URL=http://payment-processor-fallback:8080
-      - REDIS_URL=redis://redis:6379
-      - REQ_TIMEOUT_MS=1200
-      - WORKERS=32
+      - MEMSTORE_SOCKET=/shared/memstore.sock
+      - REQ_TIMEOUT_MS=50
+      - WORKERS=4
+      - PROC_CONCURRENCY=8
+      - RETRY_BACKOFF_MS=10
+      - CB_FAIL_THRESHOLD=2
+      - CB_OPEN_MS=500
+      - TIMEOUT_MARGIN_MS=2
+      - MAX_RETRIES=2
+      - TRACE_SLOW_MS=10
     depends_on:
-      - redis
+      - memstore
     networks:
       - default
       - payment-processor
+    volumes:
+      - shared-sock:/shared
     deploy:
       resources:
         limits:
-          cpus: "0.6"
-          memory: "110MB"
+          cpus: "0.65"
+          memory: "140MB"
 
   app2:
-    image: ghcr.io/joojf/rinha-de-backend:latest
+    # build: .
+    image: ghcr.io/joojf/rinha-de-backend:1.2.6
     environment:
       - BIND_ADDR=0.0.0.0:9999
       - DEFAULT_URL=http://payment-processor-default:8080
       - FALLBACK_URL=http://payment-processor-fallback:8080
-      - REDIS_URL=redis://redis:6379
-      - REQ_TIMEOUT_MS=1200
-      - WORKERS=32
+      - MEMSTORE_SOCKET=/shared/memstore.sock
+      - REQ_TIMEOUT_MS=50
+      - WORKERS=4
+      - PROC_CONCURRENCY=8
+      - RETRY_BACKOFF_MS=10
+      - CB_FAIL_THRESHOLD=2
+      - CB_OPEN_MS=500
+      - TIMEOUT_MARGIN_MS=2
+      - MAX_RETRIES=2
+      - TRACE_SLOW_MS=10
     depends_on:
-      - redis
+      - memstore
     networks:
       - default
       - payment-processor
+    volumes:
+      - shared-sock:/shared
     deploy:
       resources:
         limits:
-          cpus: "0.6"
-          memory: "110MB"
+          cpus: "0.65"
+          memory: "140MB"
 
   nginx:
     image: nginx:1.29-alpine
@@ -54,21 +74,23 @@ services:
       resources:
         limits:
           cpus: "0.1"
-          memory: "50MB"
+          memory: "40MB"
 
-  redis:
-    image: redis:7.2-alpine
-    command: ["redis-server", "--appendonly", "no"]
-    networks:
-      - default
+  memstore:
+    image: ghcr.io/joojf/rinha-de-backend-memstore:1.2.6
+    volumes:
+      - shared-sock:/tmp
     deploy:
       resources:
         limits:
-          cpus: "0.2"
-          memory: "80MB"
+          cpus: "0.1"
+          memory: "30MB"
 
 networks:
   default:
     driver: bridge
   payment-processor:
     external: true
+
+volumes:
+  shared-sock:

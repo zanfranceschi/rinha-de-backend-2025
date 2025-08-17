@@ -6,14 +6,18 @@ services:
       --setParameter logLevel=0
       --quiet
       --logpath /dev/null
+      --setParameter enableLocalhostAuthBypass=false
+      --syncdelay 0
+      --setParameter diagnosticDataCollectionEnabled=false
+      --setParameter enableFlowControl=false
     restart:
       always
     healthcheck:
       test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
-      interval: 30s
-      timeout: 10s
-      retries: 5
-      start_period: 60s
+      interval: 2s
+      timeout: 2s
+      retries: 3
+      start_period: 20s
     ports:
       - "27017:27017"
     volumes:
@@ -24,8 +28,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.5"
-          memory: "130MB"
+          cpus: "0.7"
+          memory: "160MB"
   nginx:
     image: nginx:alpine
     ports:
@@ -63,8 +67,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.4"
-          memory: "80MB"
+          cpus: "0.3"
+          memory: "70MB"
 
   api-payment-2:
     image: docker.io/maxsonferovante/api-payment-processor-threads
@@ -85,15 +89,14 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.4"
-          memory: "90MB"
+          cpus: "0.3"
+          memory: "70MB"
 
 networks:
   backend:
     driver: bridge
   payment-processor:
     external: true
-
 volumes:
   mongodb_data:
     driver: local

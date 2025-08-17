@@ -1,0 +1,85 @@
+services:
+  nginx:
+    image: nginx:latest
+    hostname: nginx
+    container_name: nginx
+    command: [ "nginx", "-g", "daemon off;" ]
+    networks:
+      - backend
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - api01
+      - api02
+    ports:
+      - "9999:9999"
+    deploy:
+      resources:
+        limits:
+          cpus: "0.20"
+          memory: 47MB
+  redis:
+    image: redis:7.2-alpine
+    container_name: redis
+    hostname: redis
+    ports:
+      - "6379:6379"
+    command: [ "redis-server", "--appendonly", "no", "--save", "" ]
+    networks:
+      - backend
+    deploy:
+      resources:
+        limits:
+          cpus: "0.20"
+          memory: 47MB
+
+  api01: &api
+    image: thalessantanna/payments-the-revolts:0.0.2
+    hostname: api01
+    container_name: api01
+    pull_policy: always
+    environment:
+      - HOST_PROCESSOR_DEFAULT=http://payment-processor-default:8080
+      - HOST_PROCESSOR_FALLBACK=http://payment-processor-fallback:8080
+      - REDIS_HOST=redis
+      - NUM_WORKERS_READ=10
+      - NUM_WORKERS_WRITE=10
+      - NUM_WORKERS=15
+      - NUM_BACK_OFF=5
+      - FAILS_TO_PAUSE=1
+      - NUM_RETRY=15
+    networks:
+      - backend
+      - payment-processor
+    ports:
+      - "30001:8080"
+    depends_on:
+      - redis
+    deploy:
+      resources:
+        limits:
+          cpus: "0.55"
+          memory: 128MB
+  api02:
+    <<: *api
+    hostname: api02
+    container_name: api02
+    ports:
+      - "30002:8080"
+    environment:
+      - HOST_PROCESSOR_DEFAULT=http://payment-processor-default:8080
+      - HOST_PROCESSOR_FALLBACK=http://payment-processor-fallback:8080
+      - REDIS_HOST=redis
+      - NUM_WORKERS_READ=10
+      - NUM_WORKERS_WRITE=10
+      - NUM_WORKERS=15
+      - NUM_BACK_OFF=5
+      - FAILS_TO_PAUSE=1
+      - NUM_RETRY=15
+
+networks:
+  backend:
+    name: backend
+    driver: bridge
+  payment-processor:
+    external: true

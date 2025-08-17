@@ -1,6 +1,6 @@
 services:
   lb:
-    image: uchoamp/zigpay:1.09-metrics
+    image: uchoamp/zigpay:1.10
     environment:
       - PORT=9999
       - SERVER_ENV=PROD
@@ -23,7 +23,7 @@ services:
           memory: "250MB"
   zig1: &zig
     container_name: zig-pay-1
-    image: uchoamp/zigpay:1.09-metrics
+    image: uchoamp/zigpay:1.10
     environment:
       - SERVER_ENV=PROD
       - DEFAULT_HOST=payment-processor-default
@@ -40,7 +40,7 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.20"
+          cpus: "0.30"
           memory: "50MB"
   zig2: 
     <<: *zig

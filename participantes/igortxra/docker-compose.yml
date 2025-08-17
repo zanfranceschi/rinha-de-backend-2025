@@ -1,0 +1,108 @@
+version: "2.4"
+
+services:
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "9999:9999"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    networks:
+      - backend
+    depends_on:
+      backend-1:
+        condition: service_healthy
+      backend-2: 
+        condition: service_healthy
+    deploy:
+      resources:
+        limits:
+          cpus: '0.25'
+          memory: '15MB'
+    ulimits:
+      nofile:
+        soft: 100000
+        hard: 100000
+
+  backend-1:
+    image: igortxra/rinha25-api:latest
+    networks:
+      - backend
+      - payment-processor
+    environment:
+      - REDIS_URL=redis://redis:6379
+    deploy:
+      resources:
+        limits:
+          cpus: "0.2"
+          memory: "140MB"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://backend-1:9999/health"]
+      start_period: 40s
+      timeout: 1s
+      interval: 10m
+      retries: 3
+    depends_on:
+      - redis
+      - worker
+
+  backend-2: 
+    image: igortxra/rinha25-api:latest
+    networks:
+      - backend
+      - payment-processor
+    environment:
+      - REDIS_URL=redis://redis:6379
+    deploy:
+      resources:
+        limits:
+          cpus: "0.2"
+          memory: "140MB"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://backend-2:9999/health"]
+      start_period: 40s
+      timeout: 1s
+      interval: 10m
+      retries: 3
+    depends_on:
+      - redis
+      - worker
+
+  redis:
+    image: redis:alpine
+    ports:
+      - "6379:6379"
+    networks:
+      - backend
+      - payment-processor
+    command: redis-server --maxmemory 10mb --maxmemory-policy allkeys-lru --save ""
+    deploy:
+      resources:
+        limits:
+          cpus: '0.1'
+          memory: '10MB'
+
+  worker:
+    image: igortxra/rinha25-worker:latest
+    networks:
+      - backend
+      - payment-processor
+    environment:
+      - PAYMENT_PROCESSOR_URL_DEFAULT=http://payment-processor-default:8080
+      - PAYMENT_PROCESSOR_URL_FALLBACK=http://payment-processor-fallback:8080
+      - DEFAULT_WORKERS=20
+      - FALLBACK_WORKERS=15
+      - REDIS_URL=redis://redis:6379
+    deploy:
+      resources:
+        limits:
+          cpus: "0.75"
+          memory: "45MB"
+    depends_on:
+      - redis
+
+networks:
+  backend:
+    driver: bridge
+  payment-processor:
+    external: true 

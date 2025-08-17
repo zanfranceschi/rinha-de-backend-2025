@@ -1,8 +1,8 @@
 x-rinhaquark2025: &rinhaquark2025
-  image: kauanmocelin/rinhaquark2025:1.0.22
+  image: kauanmocelin/rinhaquark2025:1.0.25
   environment:
-    - QUARKUS_PAYMENTS_BATCH_SIZE=300
-    - QUARKUS_PAYMENTS_BATCH_INTERVAL_MS=500
+    - QUARKUS_PAYMENTS_BATCH_SIZE=500
+    - QUARKUS_PAYMENTS_BATCH_INTERVAL_MS=50
     - QUARKUS_PAYMENTS_THREADS_NUMBER=20
   depends_on:
     postgres:
@@ -13,7 +13,7 @@ x-rinhaquark2025: &rinhaquark2025
   deploy:
     resources:
       limits:
-        cpus: "0.55"
+        cpus: "0.6"
         memory: "80MB"
 
 services:
@@ -66,7 +66,7 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.3"
+          cpus: "0.2"
           memory: "140MB"
     healthcheck:
       test: [ "CMD-SHELL", "pg_isready -U postgres -d payments_db" ]

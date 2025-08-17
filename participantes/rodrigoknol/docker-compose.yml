@@ -3,7 +3,7 @@ x-api_template: &api_template
   restart: unless-stopped
   environment:
     PORT: 3000
-    BACKGROUND_WORKERS_COUNT: 3
+    BACKGROUND_WORKERS_COUNT: 2
     DB_PATH: "db/"
     VERBOSE: "false"
   networks:
@@ -14,8 +14,8 @@ x-api_template: &api_template
   deploy:
     resources:
       limits:
-        cpus: "0.40"
-        memory: "95MB"
+        cpus: "0.60"
+        memory: "145MB"
 
 services:
   api01:
@@ -24,9 +24,6 @@ services:
   api02:
     <<: *api_template
     hostname: api02
-  api03:
-    <<: *api_template
-    hostname: api03
   nginx:
     image: nginx
     volumes:
@@ -36,14 +33,13 @@ services:
     depends_on:
       - api01
       - api02
-      - api03
     networks:
       - payment-processor-server-network
     deploy:
       resources:
         limits:
           cpus: "0.3"
-          memory: "65MB"
+          memory: "60MB"
 
 networks:
   payment-processor-server-network:

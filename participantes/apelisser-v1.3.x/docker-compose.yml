@@ -1,0 +1,179 @@
+name: rinha-2025
+
+# max
+#   cpu=1.5
+#   mem=350MB
+
+x-service-templates:
+  x-database: &database
+    image: postgres:17.5-alpine3.22
+    networks:
+      - rinha-net
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    environment:
+      - TZ=UTC
+      - POSTGRES_DB=rinha_2025
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d rinha_2025"]
+      interval: 2s
+      timeout: 5s
+      retries: 4
+      start_period: 10s
+
+  x-env-backend: &env-backend
+    SERVER_PORT: "8080"
+    JETTY_SERVER_UNIX_SOCKET_ACCEPT_QUEUE_SIZE: "128"
+    JETTY_SERVER_UNIX_SOCKET_IDLE_TIMEOUT: "30000"
+
+    LOGGING_LEVEL: OFF
+    PAYMENT_API_SUMMARY_DELAY: "50"
+    PAYMENT_API_ASYNC_INPUT: "true"
+    PAYMENT_API_ASYNC_THREAD_TYPE: platform
+    PAYMENT_API_ASYNC_INPUT_POOL_SIZE: "6"
+
+    JACKSON_INSTALL_AFTERBURNER: "true"
+    JACKSON_DISABLE_DEFAULT_FEATURES: "true"
+
+    DEFAULT_PAYMENT_PROCESSOR_URL: http://payment-processor-default:8080
+    DEFAULT_PAYMENT_PROCESSOR_READ_TIMEOUT: 30000
+
+    FALLBACK_PAYMENT_PROCESSOR_URL: http://payment-processor-fallback:8080
+    FALLBACK_PAYMENT_PROCESSOR_READ_TIMEOUT: 30000
+
+    DB_URL: jdbc:postgresql://backend-database:5432/rinha_2025
+    DB_USERNAME: postgres
+    DB_PASSWORD: postgres
+
+    DB_POOL_MINIMUM_SIZE: "8"
+    DB_POOL_MAXIMUM_SIZE: "12"
+    DB_POOL_IDLE_TIMEOUT: "30000"
+
+    # health check
+    HEALTH_CHECK_EXECUTION_SCHEDULER_INTERVAL: "500"
+    HEALTH_CHECK_CACHE_SCHEDULER_INTERVAL: "500"
+
+    # payment processor selection
+    PAYMENT_PROCESSOR_SELECTION_SCHEDULER_INTERVAL: "200"
+    PAYMENT_PROCESSOR_SELECTION_FALLBACK_ENABLED: "true"
+    PAYMENT_PROCESSOR_SELECTION_DEFAULT_ADVANTAGE_THRESHOLD: "450"
+    PAYMENT_PROCESSOR_SELECTION_DEFAULT_ADVANTAGE: "0.8"
+    PAYMENT_PROCESSOR_SELECTION_USE_DEFAULT_WHEN_LESS: "450"
+
+    # payment processor
+    PAYMENT_PROCESSOR_WORKER: "1"
+    PAYMENT_PROCESSOR_WORKER_INTERVAL: "1"
+    PAYMENT_PROCESSOR_QUEUE_LENGTH: "100000"
+    PAYMENT_PROCESSOR_MAX_DEQUEUE: "3"
+    PAYMENT_PROCESSOR_SEMAPHORE_MAX_CONCURRENCY: "15"
+    PAYMENT_PROCESSOR_MAX_RETRIES: "6"
+    PAYMENT_PROCESSOR_MAX_QUANTITY_REDUCTION_PERCENTAGE: "0.90"
+    PAYMENT_PROCESSOR_EXTRA_WORKER_INTERVAL: "100"
+
+    # payment processed
+    PAYMENT_PROCESSED_WORKER: "1"
+    PAYMENT_PROCESSED_WORKER_INTERVAL: "150"
+    PAYMENT_PROCESSED_QUEUE_LENGTH: "100000"
+    PAYMENT_PROCESSED_MAX_DEQUEUE: "1000"
+    PAYMENT_PROCESSED_MAX_RETRIES: "3"
+
+    # payment persistence
+    PAYMENT_PERSISTENCE_INDIVIDUAL_THRESHOLD: "5"
+    PAYMENT_PERSISTENCE_COPY_THRESHOLD: "400"
+
+  x-backend-application: &backend-application
+    image: apelisser/rinha-backend-2025:1.3.0
+    environment:
+      <<: *env-backend
+    networks:
+      - rinha-net
+      - payment-processor
+    volumes:
+      - sockets-volume:/var/run
+    ulimits:
+      nofile:
+        soft: 65535
+        hard: 65535
+    depends_on:
+      database:
+        condition: service_healthy
+
+services:
+  database:
+    <<: *database
+    container_name: rinha-backend-db
+    hostname: backend-database
+    deploy:
+      resources:
+        limits:
+          cpus: "0.3"
+          memory: "130MB"
+
+  load-balancer:
+    image: haproxy:3.2-alpine
+    container_name: load-balancer
+    user: "root"
+    volumes:
+      - type: bind
+        source: ./haproxy.cfg
+        target: /usr/local/etc/haproxy/haproxy.cfg
+        read_only: true
+      - sockets-volume:/var/run
+    ports:
+      - "9999:9999"
+    networks:
+      - rinha-net
+      - payment-processor
+    depends_on:
+      - backend01
+      - backend02
+    deploy:
+      resources:
+        limits:
+          cpus: "0.2"
+          memory: "20MB"
+
+  backend01:
+    <<: *backend-application
+    hostname: backend-instance-01
+    container_name: backend-instance-01
+    user: "root"
+    ports:
+      - "8081:8080"
+    environment:
+      <<: *env-backend
+      JETTY_SERVER_UNIX_SOCKET_PATH: /var/run/backend01.sock
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: "100MB"
+
+  backend02:
+    <<: *backend-application
+    hostname: backend-instance-02
+    container_name: backend-instance-02
+    user: "root"
+    ports:
+      - "8082:8080"
+    environment:
+      <<: *env-backend
+      JETTY_SERVER_UNIX_SOCKET_PATH: /var/run/backend02.sock
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: "100MB"
+
+networks:
+  rinha-net:
+    driver: bridge
+  payment-processor:
+    external: true
+
+volumes:
+  sockets-volume:

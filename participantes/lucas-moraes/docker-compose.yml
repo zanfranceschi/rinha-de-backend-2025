@@ -14,87 +14,106 @@ services:
       POSTGRES_USER: user
       POSTGRES_PASSWORD: pass
       POSTGRES_DB: rinha
+    command: >
+      postgres
+      -c shared_buffers=32MB
+      -c max_connections=40
+      -c effective_io_concurrency=1
+      -c wal_level=minimal
+      -c max_wal_senders=0
+      -c max_replication_slots=0
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
-      interval: 5s
-      timeout: 3s
-      retries: 5
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB} || exit 1"]
+      interval: 2s
+      timeout: 2s
+      retries: 30
+      start_period: 30s
     restart: unless-stopped
     tmpfs:
       - /var/lib/postgresql/data
     networks:
-        - default
-    deploy:
-      resources:
-        limits:
-          cpus:   '0.10'
-          memory: '128M'
-  
+      - default
+    cpus: "0.25"
+    mem_limit: "110m"
+
   api-1:
-    image: 881029/rinha-backend-2025:2.3.3
+    cpus: "0.60"
+    mem_limit: "100m"
+    image: 881029/rinha-backend-2025:2.3.6
     # build:
-    #   context: .
-    #   dockerfile: ./Dockerfile
+      # context: .
+      # dockerfile: ./Dockerfile
     environment:
       HOST: 0.0.0.0
-      PORT: 9999
+      PORT: 3000
       DB_HOST: postgres
       DB_PORT: 5432
       DB_USER: user
       DB_PASS: pass
       DB_NAME: rinha
+      RUN_MIGRATIONS: true
+      NODE_ENV: production
       PROCESSOR_DEFAULT:  "http://payment-processor-default:8080"
       PROCESSOR_FALLBACK: "http://payment-processor-fallback:8080"
+      NODE_OPTIONS: "--max-old-space-size=96 --max-semi-space-size=8"
     expose:
-      - "9999"
+      - "3000"
     depends_on:
       postgres:
         condition: service_healthy
-    deploy:
-      resources:
-        limits:
-          cpus:   '1.2'
-          memory: '170M'
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://localhost:9999/health-check || exit 1"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
 
   api-2:
-    image: 881029/rinha-backend-2025:2.3.3
+    cpus: "0.55"
+    mem_limit: "90m"
+    image: 881029/rinha-backend-2025:2.3.6
     # build:
-    #    context: .
-    #    dockerfile: ./Dockerfile
+      # context: .
+      # dockerfile: ./Dockerfile
     environment:
       HOST: 0.0.0.0
-      PORT: 9999
+      PORT: 3000
       DB_HOST: postgres
       DB_PORT: 5432
       DB_USER: user
       DB_PASS: pass
       DB_NAME: rinha
+      RUN_MIGRATIONS: false
+      NODE_ENV: production
       PROCESSOR_DEFAULT:  "http://payment-processor-default:8080"
       PROCESSOR_FALLBACK: "http://payment-processor-fallback:8080"
+      NODE_OPTIONS: "--max-old-space-size=96 --max-semi-space-size=8"
     expose:
-      - "9999"
+      - "3000"
     depends_on:
       postgres:
         condition: service_healthy
-    deploy:
-      resources:
-        limits:
-          cpus:   '1.2'
-          memory: '160M'
- 
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://localhost:9999/health-check || exit 1"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
   lb:
     image: nginx:alpine
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf:ro
     ports:
       - "9999:9999"
-    networks:
-      - default
     depends_on:
       - api-1
       - api-2
-    deploy:
-      resources:
-        limits:
-          cpus:   '0.10'
-          memory: '10M'
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://localhost:9999/health-check || exit 1"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    cpus: "0.05"
+    mem_limit: "20m"
+    restart: unless-stopped

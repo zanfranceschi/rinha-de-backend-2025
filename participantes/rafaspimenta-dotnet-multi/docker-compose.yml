@@ -1,0 +1,79 @@
+services:
+  api01: &api
+    image: rafaspimenta/rinha-backend-csharp:v0.3.0
+    platform: linux/amd64
+    hostname: api01
+    depends_on:
+      postgres:
+        condition: service_healthy
+    expose:
+      - "8080"
+    deploy:
+      resources:
+        limits:
+          cpus: '0.55'
+          memory: '75MB'
+    environment:
+      - DOTNET_ENVIRONMENT=Production
+    networks:
+      - payment-processor
+      - app-network
+
+  api02:
+    <<: *api
+    hostname: api02
+
+  nginx:
+    image: nginx:latest
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - api01
+      - api02
+    ports:
+      - "9999:8080"
+    deploy:
+      resources:
+        limits:
+          cpus: '0.2'
+          memory: '40MB'
+    networks:
+      - app-network
+
+  postgres:
+    image: postgres:16.1-alpine
+    hostname: postgres
+    environment:
+      - POSTGRES_DB=rinha
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    deploy:
+      resources:
+        limits:
+          cpus: '0.2'
+          memory: '160MB'
+    command: >
+      postgres
+      -c fsync=off
+      -c synchronous_commit=off
+      -c wal_level=minimal
+      -c max_wal_senders=0
+      -c autovacuum=off
+      -c full_page_writes=off
+    networks:
+      - app-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d rinha"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+networks:
+  app-network:
+    driver: bridge
+  payment-processor:
+    external: true

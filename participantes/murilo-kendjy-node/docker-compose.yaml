@@ -1,6 +1,6 @@
 x-service-templates:
   api: &api
-    image: mkonita/rinha2025-node:latest
+    image: mkonita/rinha2025-node:1.0.3
     networks:
       - internal
       - payment-processor
@@ -11,12 +11,14 @@ x-service-templates:
       KEYDB_HOST: 'keydb'
       QUEUE_SIZE: 200
       CONCURRENCY: 25
+      CONNECTIONS: 1
+      PIPELINING: 16
       PAYMENT_URL_DEFAULT: http://payment-processor-default:8080
       PAYMENT_URL_FALLBACK: http://payment-processor-fallback:8080
     deploy:
       resources:
         limits:
-          cpus: "0.65"
+          cpus: "0.6"
           memory: "130MB"
 
 services:
@@ -44,8 +46,9 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.1"
-          memory: "40MB"
+          cpus: "0.2"
+          memory: "30MB"
+
   keydb:
     image: eqalpha/keydb:latest
     container_name: keydb
@@ -57,7 +60,7 @@ services:
       keydb-server /etc/keydb/keydb.conf
       --save ""                     
       --appendonly no               
-      --maxmemory 45mb              
+      --maxmemory 55mb              
       --maxmemory-policy allkeys-lru 
       --tcp-backlog 128             
       --timeout 0                   
@@ -65,7 +68,7 @@ services:
       resources:
         limits:
           cpus: "0.1"
-          memory: "50MB"
+          memory: "60MB"
 
 networks:
   internal:

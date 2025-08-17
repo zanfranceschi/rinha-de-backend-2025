@@ -14,7 +14,7 @@ x-worker-template: &worker-template
     resources:
       limits:
         cpus: '0.25'
-        memory: 50M
+        memory: 60M
       reservations:
         cpus: '0.1'
         memory: 25M
@@ -48,7 +48,7 @@ services:
       resources:
         limits:
           cpus: '0.15'
-          memory: 50M
+          memory: 55M
         reservations:
           cpus: '0.05'
           memory: 20M
@@ -82,7 +82,7 @@ services:
       resources:
         limits:
           cpus: '0.35'
-          memory: 100M
+          memory: 60M
         reservations:
           cpus: '0.1'
           memory: 30M
@@ -119,12 +119,12 @@ services:
       - "6379:6379"
     environment:
       - TZ=UTC
-    command: redis-server --maxmemory 60mb --maxmemory-policy allkeys-lru --save "" --appendonly no
+    command: redis-server --maxmemory 55mb --maxmemory-policy allkeys-lru --save "" --appendonly no
     deploy:
       resources:
         limits:
           cpus: '0.25'
-          memory: 50M
+          memory: 55M
         reservations:
           cpus: '0.05'
           memory: 20M

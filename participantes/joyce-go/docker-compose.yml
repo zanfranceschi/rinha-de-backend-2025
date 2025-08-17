@@ -68,8 +68,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.45"
-          memory: "100MB"
+          cpus: "0.42"
+          memory: "90MB"
 
   database:
     image: joycegodinhoo/database:v0.0.6
@@ -84,8 +84,22 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.15"
+          cpus: "0.13"
           memory: "80MB"
+
+  warm-up:
+    image: joycegodinhoo/warm-up:latest
+    volumes:
+      - ./:/wu/
+    networks:
+      - backend
+    depends_on:
+      - load-balancer-backend
+    deploy:
+      resources:
+        limits:
+          cpus: "0.05"
+          memory: "10MB"
 
 networks:
   backend:

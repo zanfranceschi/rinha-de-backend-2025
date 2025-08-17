@@ -2,7 +2,7 @@ version: '3.8'
 
 # Template base para as APIs
 x-api-template: &api-template
-  image: arthurisvi/api-php-swoole:1.0
+  image: arthurisvi/api-php-swoole:1.1
   environment:
     - APP_ENV=production
     - REDIS_HOST=redis
@@ -31,7 +31,6 @@ services:
       - api_2
     networks:
       - rinha-network
-      - payment-processor
     deploy:
       resources:
         limits:
@@ -48,7 +47,7 @@ services:
 
   # Worker - Payment Processing
   worker_payments:
-    image: arthurisvi/worker-payments-php-swoole:1.0
+    image: arthurisvi/worker-payments-php-swoole:1.1
     environment:
       - APP_ENV=production
       - REDIS_HOST=redis
@@ -70,7 +69,12 @@ services:
   # Redis
   redis:
     image: redis:alpine
-    command: redis-server --appendonly no --maxmemory 100mb --maxmemory-policy allkeys-lru
+    command: >
+      redis-server
+      --appendonly no
+      --save ""
+      --loglevel warning
+      --logfile /dev/null
     networks:
       - rinha-network
     deploy:

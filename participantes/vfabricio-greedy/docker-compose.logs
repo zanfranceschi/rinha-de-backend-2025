@@ -1,0 +1,757 @@
+
+ load-balancer Pulling 
+ 44cf07d57ee4 Already exists 
+ 76df7f364f39 Already exists 
+ bd191d83447f Pulling fs layer 
+ bd191d83447f Downloading [>                                                  ]  16.38kB/1.389MB
+ bd191d83447f Verifying Checksum 
+ bd191d83447f Download complete 
+ bd191d83447f Extracting [=>                                                 ]  32.77kB/1.389MB
+ bd191d83447f Extracting [==================================================>]  1.389MB/1.389MB
+ bd191d83447f Pull complete 
+ load-balancer Pulled 
+ Network vfabricio-greedy_internal-network  Creating
+ Network vfabricio-greedy_internal-network  Created
+ Volume "vfabricio-greedy_payment-results"  Creating
+ Volume "vfabricio-greedy_payment-results"  Created
+ Volume "vfabricio-greedy_valkey-data"  Creating
+ Volume "vfabricio-greedy_valkey-data"  Created
+ Container valkey  Creating
+ Container valkey  Created
+ Container worker  Creating
+ Container vfabricio-greedy-gateway-1-1  Creating
+ Container vfabricio-greedy-gateway-2-1  Creating
+ Container vfabricio-greedy-gateway-1-1  Created
+ Container vfabricio-greedy-gateway-2-1  Created
+ Container worker  Created
+ Container load-balancer  Creating
+ Container load-balancer  Created
+Attaching to load-balancer, valkey, gateway-1-1, gateway-2-1, worker
+valkey  | 1:C 16 Aug 2025 03:46:40.176 # WARNING Memory overcommit must be enabled! Without it, a background save or replication may fail under low memory condition. Being disabled, it can also cause failures without low memory condition, see https://github.com/jemalloc/jemalloc/issues/1328. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.
+valkey  | 1:C 16 Aug 2025 03:46:40.176 * oO0OoO0OoO0Oo Valkey is starting oO0OoO0OoO0Oo
+valkey  | 1:C 16 Aug 2025 03:46:40.176 * Valkey version=7.2.10, bits=64, commit=00000000, modified=0, pid=1, just started
+valkey  | 1:C 16 Aug 2025 03:46:40.176 * Configuration loaded
+valkey  | 1:M 16 Aug 2025 03:46:40.177 * monotonic clock: POSIX clock_gettime
+valkey  | 1:M 16 Aug 2025 03:46:40.178 * Running mode=standalone, port=6379.
+valkey  | 1:M 16 Aug 2025 03:46:40.178 * Server initialized
+valkey  | 1:M 16 Aug 2025 03:46:40.178 * Ready to accept connections tcp
+worker  | Starting 4 payment workers
+worker  | Worker 3 started
+worker  | Worker started with Greedy strategy
+worker  | Worker 1 started
+worker  | Worker started with Greedy strategy
+worker  | Worker 2 started
+worker  | Worker started with Greedy strategy
+worker  | Queue size: 0
+worker  | Worker 0 started
+worker  | Worker started with Greedy strategy
+gateway-1-1  | Gateway listening on 0.0.0.0:9000
+gateway-2-1  | Gateway listening on 0.0.0.0:9001
+load-balancer  | Config: 
+load-balancer  | listener: 
+load-balancer  | gateway-1:9000
+load-balancer  | gateway-2:9001
+load-balancer  | resolved: 
+worker         | Queue size: 0
+worker         | Queue size: 0
+worker         | Queue size: 0
+load-balancer  | ZC: Ok((93, 206))
+worker         | Queue size: 0
+worker         | Queue size: 0
+worker         | Queue size: 0
+worker         | Queue size: 0
+worker         | Queue size: 0
+worker         | Queue size: 0
+valkey         | 1:M 16 Aug 2025 03:46:49.504 * 1 changes in 5 seconds. Saving...
+valkey         | 1:M 16 Aug 2025 03:46:49.505 * Background saving started by pid 16
+valkey         | 16:C 16 Aug 2025 03:46:49.512 * DB saved on disk
+valkey         | 16:C 16 Aug 2025 03:46:49.512 * Fork CoW for RDB: current 0 MB, peak 0 MB, average 0 MB
+valkey         | 1:M 16 Aug 2025 03:46:49.606 * Background saving terminated with success
+worker         | Queue size: 0
+worker         | Queue size: 0
+worker         | Queue size: 0
+worker         | Queue size: 0
+worker         | Queue size: 0
+valkey         | 1:M 16 Aug 2025 03:46:55.043 * 1 changes in 5 seconds. Saving...
+valkey         | 1:M 16 Aug 2025 03:46:55.043 * Background saving started by pid 17
+valkey         | 17:C 16 Aug 2025 03:46:55.049 * DB saved on disk
+valkey         | 17:C 16 Aug 2025 03:46:55.050 * Fork CoW for RDB: current 0 MB, peak 0 MB, average 0 MB
+valkey         | 1:M 16 Aug 2025 03:46:55.144 * Background saving terminated with success
+worker         | Queue size: 0
+worker         | Queue size: 0
+worker         | Queue size: 0
+worker         | Queue size: 0
+worker         | Queue size: 0
+worker         | Queue size: 56
+valkey         | 1:M 16 Aug 2025 03:47:01.078 * 1 changes in 5 seconds. Saving...
+valkey         | 1:M 16 Aug 2025 03:47:01.079 * Background saving started by pid 18
+valkey         | 18:C 16 Aug 2025 03:47:01.086 * DB saved on disk
+valkey         | 18:C 16 Aug 2025 03:47:01.086 * Fork CoW for RDB: current 0 MB, peak 0 MB, average 0 MB
+valkey         | 1:M 16 Aug 2025 03:47:01.179 * Background saving terminated with success
+worker         | Queue size: 127
+worker         | Queue size: 206
+worker         | Queue size: 296
+worker         | Queue size: 393
+worker         | Queue size: 499
+worker         | Queue size: 615
+valkey         | 1:M 16 Aug 2025 03:47:07.014 * 1 changes in 5 seconds. Saving...
+valkey         | 1:M 16 Aug 2025 03:47:07.015 * Background saving started by pid 19
+valkey         | 19:C 16 Aug 2025 03:47:07.022 * DB saved on disk
+valkey         | 19:C 16 Aug 2025 03:47:07.022 * Fork CoW for RDB: current 0 MB, peak 0 MB, average 0 MB
+valkey         | 1:M 16 Aug 2025 03:47:07.115 * Background saving terminated with success
+worker         | Queue size: 740
+worker         | Queue size: 874
+worker         | Queue size: 1017
+worker         | Queue size: 1209
+worker         | Queue size: 1410
+worker         | Queue size: 1621
+valkey         | 1:M 16 Aug 2025 03:47:13.054 * 1 changes in 5 seconds. Saving...
+valkey         | 1:M 16 Aug 2025 03:47:13.055 * Background saving started by pid 20
+valkey         | 20:C 16 Aug 2025 03:47:13.064 * DB saved on disk
+valkey         | 20:C 16 Aug 2025 03:47:13.065 * Fork CoW for RDB: current 0 MB, peak 0 MB, average 0 MB
+valkey         | 1:M 16 Aug 2025 03:47:13.155 * Background saving terminated with success
+worker         | Queue size: 1841
+worker         | Queue size: 2070
+worker         | Queue size: 2308
+worker         | Queue size: 2555
+worker         | Queue size: 2811
+worker         | Queue size: 3077
+valkey         | 1:M 16 Aug 2025 03:47:19.095 * 1 changes in 5 seconds. Saving...
+valkey         | 1:M 16 Aug 2025 03:47:19.096 * Background saving started by pid 21
+valkey         | 21:C 16 Aug 2025 03:47:19.104 * DB saved on disk
+valkey         | 21:C 16 Aug 2025 03:47:19.105 * Fork CoW for RDB: current 0 MB, peak 0 MB, average 0 MB
+valkey         | 1:M 16 Aug 2025 03:47:19.197 * Background saving terminated with success
+worker         | Queue size: 3352
+worker         | Queue size: 3636
+worker         | Queue size: 3929
+worker         | Queue size: 4231
+worker         | Queue size: 4542
+worker         | Queue size: 4863
+valkey         | 1:M 16 Aug 2025 03:47:25.036 * 1 changes in 5 seconds. Saving...
+valkey         | 1:M 16 Aug 2025 03:47:25.037 * Background saving started by pid 22
+valkey         | 22:C 16 Aug 2025 03:47:25.047 * DB saved on disk
+valkey         | 22:C 16 Aug 2025 03:47:25.047 * Fork CoW for RDB: current 0 MB, peak 0 MB, average 0 MB
+valkey         | 1:M 16 Aug 2025 03:47:25.138 * Background saving terminated with success
+worker         | Queue size: 5193
+worker         | Queue size: 5532
+worker         | Queue size: 5880
+worker         | Queue size: 6237
+worker         | Queue size: 6603
+worker         | Queue size: 6809
+valkey         | 1:M 16 Aug 2025 03:47:31.072 * 1 changes in 5 seconds. Saving...
+valkey         | 1:M 16 Aug 2025 03:47:31.073 * Background saving started by pid 23
+valkey         | 23:C 16 Aug 2025 03:47:31.084 * DB saved on disk
+valkey         | 23:C 16 Aug 2025 03:47:31.084 * Fork CoW for RDB: current 0 MB, peak 0 MB, average 0 MB
+valkey         | 1:M 16 Aug 2025 03:47:31.173 * Background saving terminated with success
+worker         | Queue size: 7002
+worker         | Queue size: 7202
+worker         | Queue size: 7413
+worker         | Queue size: 7630
+worker         | Queue size: 7859
+worker         | Queue size: 8097
+valkey         | 1:M 16 Aug 2025 03:47:37.007 * 1 changes in 5 seconds. Saving...
+valkey         | 1:M 16 Aug 2025 03:47:37.008 * Background saving started by pid 24
+valkey         | 24:C 16 Aug 2025 03:47:37.020 * DB saved on disk
+valkey         | 24:C 16 Aug 2025 03:47:37.021 * Fork CoW for RDB: current 0 MB, peak 0 MB, average 0 MB
+valkey         | 1:M 16 Aug 2025 03:47:37.108 * Background saving terminated with success
+worker         | Queue size: 8345
+worker         | Queue size: 8605
+worker         | Queue size: 8871
+worker         | Queue size: 4704
+worker         | Queue size: 159
+worker         | Queue size: 0
+valkey         | 1:M 16 Aug 2025 03:47:43.035 * 1 changes in 5 seconds. Saving...
+valkey         | 1:M 16 Aug 2025 03:47:43.035 * Background saving started by pid 25
+valkey         | 25:C 16 Aug 2025 03:47:43.042 * DB saved on disk
+valkey         | 25:C 16 Aug 2025 03:47:43.043 * Fork CoW for RDB: current 0 MB, peak 0 MB, average 0 MB
+valkey         | 1:M 16 Aug 2025 03:47:43.136 * Background saving terminated with success
+worker         | Queue size: 0
+worker         | Queue size: 0
+worker         | Queue size: 0
+worker         | Queue size: 0
+worker         | Queue size: 0
+worker         | Queue size: 0
+valkey         | 1:M 16 Aug 2025 03:47:49.066 * 1 changes in 5 seconds. Saving...
+valkey         | 1:M 16 Aug 2025 03:47:49.067 * Background saving started by pid 26
+valkey         | 26:C 16 Aug 2025 03:47:49.073 * DB saved on disk
+valkey         | 26:C 16 Aug 2025 03:47:49.073 * Fork CoW for RDB: current 0 MB, peak 0 MB, average 0 MB
+valkey         | 1:M 16 Aug 2025 03:47:49.167 * Background saving terminated with success
+worker         | Queue size: 0
+worker         | Queue size: 0
+load-balancer  | ZC: Ok((201, 81))
+load-balancer  | ZC: Ok((201, 81))
+load-balancer  | ZC: Ok((201, 81))
+load-balancer  | ZC: Ok((201, 81))
+load-balancer  | ZC: Ok((176, 216))
+load-balancer  | ZC: Ok((201, 81))
+load-balancer  | ZC: Ok((201, 81))
+load-balancer  | ZC: Ok((804, 324))
+load-balancer  | ZC: Ok((1206, 486))
+load-balancer  | ZC: Ok((603, 243))
+load-balancer  | ZC: Ok((804, 324))
+load-balancer  | ZC: Ok((603, 243))
+load-balancer  | ZC: Ok((603, 243))
+load-balancer  | ZC: Ok((603, 243))
+load-balancer  | ZC: Ok((603, 243))
+load-balancer  | ZC: Ok((603, 243))
+load-balancer  | ZC: Ok((603, 243))
+load-balancer  | ZC: Ok((402, 162))
+load-balancer  | ZC: Ok((1206, 486))
+load-balancer  | ZC: Ok((402, 162))
+load-balancer  | ZC: Ok((1206, 486))
+load-balancer  | ZC: Ok((402, 162))
+load-balancer  | ZC: Ok((402, 162))
+load-balancer  | ZC: Ok((402, 162))
+load-balancer  | ZC: Ok((402, 162))
+load-balancer  | ZC: Ok((1005, 405))
+load-balancer  | ZC: Ok((402, 162))
+load-balancer  | ZC: Ok((402, 162))
+load-balancer  | ZC: Ok((1005, 405))
+load-balancer  | ZC: Ok((402, 162))
+load-balancer  | ZC: Ok((1005, 405))
+load-balancer  | ZC: Ok((1005, 405))
+load-balancer  | ZC: Ok((201, 81))
+load-balancer  | ZC: Ok((1005, 405))
+load-balancer  | ZC: Ok((201, 81))
+load-balancer  | ZC: Ok((1206, 486))
+load-balancer  | ZC: Ok((201, 81))
+load-balancer  | ZC: Ok((1809, 729))
+load-balancer  | ZC: Ok((1005, 405))
+load-balancer  | ZC: Ok((1206, 486))
+load-balancer  | ZC: Ok((1608, 648))
+load-balancer  | ZC: Ok((1608, 648))
+load-balancer  | ZC: Ok((1407, 567))
+load-balancer  | ZC: Ok((1608, 648))
+load-balancer  | ZC: Ok((1005, 405))
+load-balancer  | ZC: Ok((1809, 729))
+load-balancer  | ZC: Ok((1608, 648))
+load-balancer  | ZC: Ok((1005, 405))
+load-balancer  | ZC: Ok((1608, 648))
+load-balancer  | ZC: Ok((1608, 648))
+load-balancer  | ZC: Ok((1206, 486))
+load-balancer  | ZC: Ok((1005, 405))
+load-balancer  | ZC: Ok((1608, 648))
+load-balancer  | ZC: Ok((1407, 567))
+load-balancer  | ZC: Ok((804, 324))
+load-balancer  | ZC: Ok((1407, 567))
+load-balancer  | ZC: Ok((1809, 729))
+load-balancer  | ZC: Ok((804, 324))
+load-balancer  | ZC: Ok((1407, 567))
+load-balancer  | ZC: Ok((1608, 648))
+load-balancer  | ZC: Ok((804, 324))
+load-balancer  | ZC: Ok((2412, 972))
+load-balancer  | ZC: Ok((1407, 567))
+load-balancer  | ZC: Ok((2412, 972))
+load-balancer  | ZC: Ok((1608, 648))
+load-balancer  | ZC: Ok((2412, 972))
+load-balancer  | ZC: Ok((804, 324))
+load-balancer  | ZC: Ok((2412, 972))
+load-balancer  | ZC: Ok((1407, 567))
+load-balancer  | ZC: Ok((2211, 891))
+load-balancer  | ZC: Ok((804, 324))
+load-balancer  | ZC: Ok((1809, 729))
+load-balancer  | ZC: Ok((1407, 567))
+load-balancer  | ZC: Ok((2211, 891))
+load-balancer  | ZC: Ok((2211, 891))
+load-balancer  | ZC: Ok((2211, 891))
+load-balancer  | ZC: Ok((3216, 1296))
+load-balancer  | ZC: Ok((4623, 1863))
+load-balancer  | ZC: Ok((804, 324))
+load-balancer  | ZC: Ok((603, 243))
+load-balancer  | ZC: Ok((804, 324))
+load-balancer  | ZC: Ok((4623, 1863))
+load-balancer  | ZC: Ok((603, 243))
+load-balancer  | ZC: Ok((2814, 1134))
+load-balancer  | ZC: Ok((4623, 1863))
+load-balancer  | ZC: Ok((5025, 2025))
+load-balancer  | ZC: Ok((2613, 1053))
+load-balancer  | ZC: Ok((4824, 1944))
+load-balancer  | ZC: Ok((2814, 1134))
+load-balancer  | ZC: Ok((4824, 1944))
+load-balancer  | ZC: Ok((4824, 1944))
+load-balancer  | ZC: Ok((2613, 1053))
+load-balancer  | ZC: Ok((2613, 1053))
+load-balancer  | ZC: Ok((4824, 1944))
+load-balancer  | ZC: Ok((2613, 1053))
+load-balancer  | ZC: Ok((4824, 1944))
+load-balancer  | ZC: Ok((4020, 1620))
+load-balancer  | ZC: Ok((2613, 1053))
+load-balancer  | ZC: Ok((4824, 1944))
+load-balancer  | ZC: Ok((2613, 1053))
+load-balancer  | ZC: Ok((5025, 2025))
+load-balancer  | ZC: Ok((2613, 1053))
+load-balancer  | ZC: Ok((5025, 2025))
+load-balancer  | ZC: Ok((5025, 2025))
+load-balancer  | ZC: Ok((2613, 1053))
+load-balancer  | ZC: Ok((5025, 2025))
+load-balancer  | ZC: Ok((5025, 2025))
+load-balancer  | ZC: Ok((5025, 2025))
+load-balancer  | ZC: Ok((2814, 1134))
+load-balancer  | ZC: Ok((4422, 1782))
+load-balancer  | ZC: Ok((12060, 4860))
+load-balancer  | ZC: Ok((5427, 2187))
+load-balancer  | ZC: Ok((5025, 2025))
+load-balancer  | ZC: Ok((5025, 2025))
+load-balancer  | ZC: Ok((7437, 2997))
+load-balancer  | ZC: Ok((7236, 2916))
+load-balancer  | ZC: Ok((6432, 2592))
+load-balancer  | ZC: Ok((7236, 2916))
+load-balancer  | ZC: Ok((4623, 1863))
+load-balancer  | ZC: Ok((4422, 1782))
+load-balancer  | ZC: Ok((1809, 729))
+load-balancer  | ZC: Ok((6432, 2592))
+load-balancer  | ZC: Ok((1809, 729))
+load-balancer  | ZC: Ok((11457, 4617))
+load-balancer  | ZC: Ok((5025, 2025))
+load-balancer  | ZC: Ok((8040, 3240))
+load-balancer  | ZC: Ok((2814, 1134))
+load-balancer  | ZC: Ok((8040, 3240))
+load-balancer  | ZC: Ok((8040, 3240))
+load-balancer  | ZC: Ok((3015, 1215))
+load-balancer  | ZC: Ok((8040, 3240))
+load-balancer  | ZC: Ok((3015, 1215))
+load-balancer  | ZC: Ok((5226, 2106))
+load-balancer  | ZC: Ok((3015, 1215))
+load-balancer  | ZC: Ok((8040, 3240))
+load-balancer  | ZC: Ok((3015, 1215))
+load-balancer  | ZC: Ok((7839, 3159))
+load-balancer  | ZC: Ok((3015, 1215))
+load-balancer  | ZC: Ok((3216, 1296))
+load-balancer  | ZC: Ok((7839, 3159))
+load-balancer  | ZC: Ok((3015, 1215))
+load-balancer  | ZC: Ok((8040, 3240))
+load-balancer  | ZC: Ok((3015, 1215))
+load-balancer  | ZC: Ok((7839, 3159))
+load-balancer  | ZC: Ok((3015, 1215))
+load-balancer  | ZC: Ok((1809, 729))
+load-balancer  | ZC: Ok((8040, 3240))
+load-balancer  | ZC: Ok((3216, 1296))
+load-balancer  | ZC: Ok((7839, 3159))
+load-balancer  | ZC: Ok((3015, 1215))
+load-balancer  | ZC: Ok((7839, 3159))
+load-balancer  | ZC: Ok((3216, 1296))
+load-balancer  | ZC: Ok((7839, 3159))
+load-balancer  | ZC: Ok((7839, 3159))
+load-balancer  | ZC: Ok((1407, 567))
+load-balancer  | ZC: Ok((3216, 1296))
+load-balancer  | ZC: Ok((3216, 1296))
+load-balancer  | ZC: Ok((10452, 4212))
+load-balancer  | ZC: Ok((3216, 1296))
+load-balancer  | ZC: Ok((10452, 4212))
+load-balancer  | ZC: Ok((3216, 1296))
+load-balancer  | ZC: Ok((10452, 4212))
+load-balancer  | ZC: Ok((2211, 891))
+load-balancer  | ZC: Ok((5628, 2268))
+load-balancer  | ZC: Ok((10452, 4212))
+load-balancer  | ZC: Ok((2814, 1134))
+load-balancer  | ZC: Ok((10251, 4131))
+load-balancer  | ZC: Ok((3417, 1377))
+load-balancer  | ZC: Ok((10452, 4212))
+load-balancer  | ZC: Ok((3417, 1377))
+load-balancer  | ZC: Ok((10251, 4131))
+load-balancer  | ZC: Ok((3417, 1377))
+load-balancer  | ZC: Ok((10653, 4293))
+load-balancer  | ZC: Ok((10653, 4293))
+load-balancer  | ZC: Ok((3417, 1377))
+load-balancer  | ZC: Ok((10653, 4293))
+load-balancer  | ZC: Ok((3417, 1377))
+load-balancer  | ZC: Ok((10653, 4293))
+load-balancer  | ZC: Ok((3417, 1377))
+load-balancer  | ZC: Ok((10653, 4293))
+load-balancer  | ZC: Ok((10653, 4293))
+load-balancer  | ZC: Ok((3618, 1458))
+load-balancer  | ZC: Ok((10653, 4293))
+load-balancer  | ZC: Ok((3618, 1458))
+load-balancer  | ZC: Ok((3618, 1458))
+load-balancer  | ZC: Ok((3618, 1458))
+load-balancer  | ZC: Ok((3417, 1377))
+load-balancer  | ZC: Ok((3417, 1377))
+load-balancer  | ZC: Ok((3819, 1539))
+load-balancer  | ZC: Ok((3819, 1539))
+load-balancer  | ZC: Ok((3819, 1539))
+load-balancer  | ZC: Ok((3618, 1458))
+load-balancer  | ZC: Ok((1809, 729))
+load-balancer  | ZC: Ok((3618, 1458))
+load-balancer  | ZC: Ok((3618, 1458))
+load-balancer  | ZC: Ok((3618, 1458))
+load-balancer  | ZC: Ok((10653, 4293))
+load-balancer  | ZC: Ok((3618, 1458))
+load-balancer  | ZC: Ok((4020, 1620))
+load-balancer  | ZC: Ok((4020, 1620))
+load-balancer  | ZC: Ok((11256, 4536))
+load-balancer  | ZC: Ok((4020, 1620))
+load-balancer  | ZC: Ok((11256, 4536))
+load-balancer  | ZC: Ok((3819, 1539))
+load-balancer  | ZC: Ok((11256, 4536))
+load-balancer  | ZC: Ok((4020, 1620))
+load-balancer  | ZC: Ok((11256, 4536))
+load-balancer  | ZC: Ok((3819, 1539))
+load-balancer  | ZC: Ok((11256, 4536))
+load-balancer  | ZC: Ok((1206, 486))
+load-balancer  | ZC: Ok((4020, 1620))
+load-balancer  | ZC: Ok((3819, 1539))
+load-balancer  | ZC: Ok((4020, 1620))
+load-balancer  | ZC: Ok((11256, 4536))
+load-balancer  | ZC: Ok((5427, 2187))
+load-balancer  | ZC: Ok((3819, 1539))
+load-balancer  | ZC: Ok((11256, 4536))
+load-balancer  | ZC: Ok((4020, 1620))
+load-balancer  | ZC: Ok((3819, 1539))
+load-balancer  | ZC: Ok((11055, 4455))
+load-balancer  | ZC: Ok((3819, 1539))
+load-balancer  | ZC: Ok((11055, 4455))
+load-balancer  | ZC: Ok((4221, 1701))
+load-balancer  | ZC: Ok((3819, 1539))
+load-balancer  | ZC: Ok((11055, 4455))
+load-balancer  | ZC: Ok((4221, 1701))
+load-balancer  | ZC: Ok((1407, 567))
+load-balancer  | ZC: Ok((4221, 1701))
+load-balancer  | ZC: Ok((4221, 1701))
+load-balancer  | ZC: Ok((4221, 1701))
+load-balancer  | ZC: Ok((1809, 729))
+load-balancer  | ZC: Ok((4221, 1701))
+load-balancer  | ZC: Ok((4020, 1620))
+load-balancer  | ZC: Ok((11055, 4455))
+load-balancer  | ZC: Ok((1206, 486))
+load-balancer  | ZC: Ok((4422, 1782))
+load-balancer  | ZC: Ok((4422, 1782))
+load-balancer  | ZC: Ok((10653, 4293))
+load-balancer  | ZC: Ok((1407, 567))
+load-balancer  | ZC: Ok((4221, 1701))
+load-balancer  | ZC: Ok((12060, 4860))
+load-balancer  | ZC: Ok((4422, 1782))
+load-balancer  | ZC: Ok((11055, 4455))
+load-balancer  | ZC: Ok((1206, 486))
+load-balancer  | ZC: Ok((4221, 1701))
+load-balancer  | ZC: Ok((11055, 4455))
+load-balancer  | ZC: Ok((4221, 1701))
+load-balancer  | ZC: Ok((2010, 810))
+load-balancer  | ZC: Ok((4422, 1782))
+load-balancer  | ZC: Ok((11055, 4455))
+load-balancer  | ZC: Ok((4422, 1782))
+load-balancer  | ZC: Ok((2010, 810))
+load-balancer  | ZC: Ok((3417, 1377))
+load-balancer  | ZC: Ok((6432, 2592))
+load-balancer  | ZC: Ok((1056, 1249))
+load-balancer  | ZC: Ok((11055, 4455))
+load-balancer  | ZC: Ok((2010, 810))
+load-balancer  | ZC: Ok((3216, 1296))
+load-balancer  | ZC: Ok((12060, 4860))
+load-balancer  | ZC: Ok((12060, 4860))
+load-balancer  | ZC: Ok((12060, 4860))
+load-balancer  | ZC: Ok((2010, 810))
+load-balancer  | ZC: Ok((4422, 1782))
+load-balancer  | ZC: Ok((12060, 4860))
+load-balancer  | ZC: Ok((2010, 810))
+load-balancer  | ZC: Ok((136, 91))
+load-balancer  | ZC: Ok((4623, 1863))
+load-balancer  | ZC: Ok((12060, 4860))
+load-balancer  | ZC: Ok((4623, 1863))
+load-balancer  | ZC: Ok((11658, 4698))
+load-balancer  | ZC: Ok((4422, 1782))
+load-balancer  | ZC: Ok((12060, 4860))
+load-balancer  | ZC: Ok((12060, 4860))
+load-balancer  | ZC: Ok((4623, 1863))
+load-balancer  | ZC: Ok((2010, 810))
+load-balancer  | ZC: Ok((11859, 4779))
+load-balancer  | ZC: Ok((2010, 810))
+load-balancer  | ZC: Ok((11859, 4779))
+load-balancer  | ZC: Ok((2010, 810))
+load-balancer  | ZC: Ok((11859, 4779))
+load-balancer  | ZC: Ok((2010, 810))
+load-balancer  | ZC: Ok((7035, 2835))
+load-balancer  | ZC: Ok((11859, 4779))
+load-balancer  | ZC: Ok((11859, 4779))
+load-balancer  | ZC: Ok((2211, 891))
+load-balancer  | ZC: Ok((11859, 4779))
+load-balancer  | ZC: Ok((11859, 4779))
+load-balancer  | ZC: Ok((11859, 4779))
+load-balancer  | ZC: Ok((10854, 4374))
+load-balancer  | ZC: Ok((2613, 1053))
+load-balancer  | ZC: Ok((5427, 2187))
+load-balancer  | ZC: Ok((11859, 4779))
+load-balancer  | ZC: Ok((11055, 4455))
+load-balancer  | ZC: Ok((2412, 972))
+load-balancer  | ZC: Ok((6834, 2754))
+load-balancer  | ZC: Ok((11658, 4698))
+load-balancer  | ZC: Ok((10854, 4374))
+load-balancer  | ZC: Ok((10854, 4374))
+load-balancer  | ZC: Ok((11658, 4698))
+load-balancer  | ZC: Ok((2412, 972))
+load-balancer  | ZC: Ok((11658, 4698))
+load-balancer  | ZC: Ok((10854, 4374))
+load-balancer  | ZC: Ok((5427, 2187))
+load-balancer  | ZC: Ok((11658, 4698))
+load-balancer  | ZC: Ok((11457, 4617))
+load-balancer  | ZC: Ok((11658, 4698))
+load-balancer  | ZC: Ok((11658, 4698))
+load-balancer  | ZC: Ok((5226, 2106))
+load-balancer  | ZC: Ok((11658, 4698))
+load-balancer  | ZC: Ok((11658, 4698))
+load-balancer  | ZC: Ok((11457, 4617))
+load-balancer  | ZC: Ok((2412, 972))
+load-balancer  | ZC: Ok((11457, 4617))
+load-balancer  | ZC: Ok((5226, 2106))
+load-balancer  | ZC: Ok((11457, 4617))
+load-balancer  | ZC: Ok((2412, 972))
+load-balancer  | ZC: Ok((11457, 4617))
+load-balancer  | ZC: Ok((5226, 2106))
+load-balancer  | ZC: Ok((2412, 972))
+load-balancer  | ZC: Ok((11457, 4617))
+load-balancer  | ZC: Ok((11256, 4536))
+load-balancer  | ZC: Ok((11457, 4617))
+load-balancer  | ZC: Ok((11457, 4617))
+load-balancer  | ZC: Ok((5226, 2106))
+load-balancer  | ZC: Ok((11256, 4536))
+load-balancer  | ZC: Ok((11256, 4536))
+load-balancer  | ZC: Ok((10854, 4374))
+load-balancer  | ZC: Ok((5226, 2106))
+load-balancer  | ZC: Ok((10854, 4374))
+load-balancer  | ZC: Ok((7437, 2997))
+load-balancer  | ZC: Ok((10854, 4374))
+load-balancer  | ZC: Ok((10854, 4374))
+load-balancer  | ZC: Ok((10854, 4374))
+load-balancer  | ZC: Ok((5226, 2106))
+load-balancer  | ZC: Ok((10251, 4131))
+load-balancer  | ZC: Ok((5226, 2106))
+load-balancer  | ZC: Ok((5829, 2349))
+load-balancer  | ZC: Ok((5829, 2349))
+load-balancer  | ZC: Ok((5829, 2349))
+load-balancer  | ZC: Ok((5628, 2268))
+load-balancer  | ZC: Ok((5628, 2268))
+load-balancer  | ZC: Ok((5628, 2268))
+load-balancer  | ZC: Ok((5628, 2268))
+load-balancer  | ZC: Ok((5628, 2268))
+load-balancer  | ZC: Ok((2211, 891))
+load-balancer  | ZC: Ok((5628, 2268))
+load-balancer  | ZC: Ok((5628, 2268))
+load-balancer  | ZC: Ok((5628, 2268))
+load-balancer  | ZC: Ok((4623, 1863))
+load-balancer  | ZC: Ok((5427, 2187))
+load-balancer  | ZC: Ok((6030, 2430))
+load-balancer  | ZC: Ok((2814, 1134))
+load-balancer  | ZC: Ok((5427, 2187))
+load-balancer  | ZC: Ok((6030, 2430))
+load-balancer  | ZC: Ok((5427, 2187))
+load-balancer  | ZC: Ok((6030, 2430))
+load-balancer  | ZC: Ok((5427, 2187))
+load-balancer  | ZC: Ok((6030, 2430))
+load-balancer  | ZC: Ok((5427, 2187))
+load-balancer  | ZC: Ok((6030, 2430))
+load-balancer  | ZC: Ok((6030, 2430))
+load-balancer  | ZC: Ok((6231, 2511))
+load-balancer  | ZC: Ok((2814, 1134))
+load-balancer  | ZC: Ok((9447, 3807))
+load-balancer  | ZC: Ok((6030, 2430))
+load-balancer  | ZC: Ok((6231, 2511))
+load-balancer  | ZC: Ok((6030, 2430))
+load-balancer  | ZC: Ok((6231, 2511))
+load-balancer  | ZC: Ok((6030, 2430))
+load-balancer  | ZC: Ok((6231, 2511))
+load-balancer  | ZC: Ok((5829, 2349))
+load-balancer  | ZC: Ok((6231, 2511))
+load-balancer  | ZC: Ok((2211, 891))
+load-balancer  | ZC: Ok((5829, 2349))
+load-balancer  | ZC: Ok((5829, 2349))
+load-balancer  | ZC: Ok((5829, 2349))
+load-balancer  | ZC: Ok((6432, 2592))
+load-balancer  | ZC: Ok((5829, 2349))
+load-balancer  | ZC: Ok((6231, 2511))
+load-balancer  | ZC: Ok((5829, 2349))
+load-balancer  | ZC: Ok((6231, 2511))
+load-balancer  | ZC: Ok((6432, 2592))
+load-balancer  | ZC: Ok((6231, 2511))
+load-balancer  | ZC: Ok((6432, 2592))
+load-balancer  | ZC: Ok((6231, 2511))
+load-balancer  | ZC: Ok((6432, 2592))
+load-balancer  | ZC: Ok((6231, 2511))
+load-balancer  | ZC: Ok((6633, 2673))
+load-balancer  | ZC: Ok((6633, 2673))
+load-balancer  | ZC: Ok((6633, 2673))
+load-balancer  | ZC: Ok((6432, 2592))
+load-balancer  | ZC: Ok((6432, 2592))
+load-balancer  | ZC: Ok((6633, 2673))
+load-balancer  | ZC: Ok((6633, 2673))
+load-balancer  | ZC: Ok((6834, 2754))
+load-balancer  | ZC: Ok((2814, 1134))
+load-balancer  | ZC: Ok((8844, 3564))
+load-balancer  | ZC: Ok((6633, 2673))
+load-balancer  | ZC: Ok((6633, 2673))
+load-balancer  | ZC: Ok((6633, 2673))
+load-balancer  | ZC: Ok((6834, 2754))
+load-balancer  | ZC: Ok((6633, 2673))
+load-balancer  | ZC: Ok((7035, 2835))
+load-balancer  | ZC: Ok((8844, 3564))
+load-balancer  | ZC: Ok((6834, 2754))
+load-balancer  | ZC: Ok((6834, 2754))
+load-balancer  | ZC: Ok((6834, 2754))
+load-balancer  | ZC: Ok((6834, 2754))
+load-balancer  | ZC: Ok((6834, 2754))
+load-balancer  | ZC: Ok((6834, 2754))
+load-balancer  | ZC: Ok((7236, 2916))
+load-balancer  | ZC: Ok((7236, 2916))
+load-balancer  | ZC: Ok((7236, 2916))
+load-balancer  | ZC: Ok((7236, 2916))
+load-balancer  | ZC: Ok((7236, 2916))
+load-balancer  | ZC: Ok((4623, 1863))
+load-balancer  | ZC: Ok((7035, 2835))
+load-balancer  | ZC: Ok((7035, 2835))
+load-balancer  | ZC: Ok((7035, 2835))
+load-balancer  | ZC: Ok((7035, 2835))
+load-balancer  | ZC: Ok((7035, 2835))
+load-balancer  | ZC: Ok((5226, 2106))
+load-balancer  | ZC: Ok((7437, 2997))
+load-balancer  | ZC: Ok((7035, 2835))
+load-balancer  | ZC: Ok((7035, 2835))
+load-balancer  | ZC: Ok((7437, 2997))
+load-balancer  | ZC: Ok((7236, 2916))
+load-balancer  | ZC: Ok((2211, 891))
+load-balancer  | ZC: Ok((7437, 2997))
+load-balancer  | ZC: Ok((7437, 2997))
+load-balancer  | ZC: Ok((8241, 3321))
+load-balancer  | ZC: Ok((4824, 1944))
+load-balancer  | ZC: Ok((7437, 2997))
+load-balancer  | ZC: Ok((7236, 2916))
+load-balancer  | ZC: Ok((10050, 4050))
+load-balancer  | ZC: Ok((7839, 3159))
+load-balancer  | ZC: Ok((7839, 3159))
+load-balancer  | ZC: Ok((7638, 3078))
+load-balancer  | ZC: Ok((7638, 3078))
+load-balancer  | ZC: Ok((9045, 3645))
+load-balancer  | ZC: Ok((9045, 3645))
+load-balancer  | ZC: Ok((9045, 3645))
+load-balancer  | ZC: Ok((9246, 3726))
+load-balancer  | ZC: Ok((9045, 3645))
+load-balancer  | ZC: Ok((9246, 3726))
+load-balancer  | ZC: Ok((9045, 3645))
+load-balancer  | ZC: Ok((4824, 1944))
+load-balancer  | ZC: Ok((9045, 3645))
+load-balancer  | ZC: Ok((9045, 3645))
+load-balancer  | ZC: Ok((9045, 3645))
+load-balancer  | ZC: Ok((9045, 3645))
+load-balancer  | ZC: Ok((9246, 3726))
+load-balancer  | ZC: Ok((9246, 3726))
+load-balancer  | ZC: Ok((9246, 3726))
+load-balancer  | ZC: Ok((9246, 3726))
+load-balancer  | ZC: Ok((2814, 1134))
+load-balancer  | ZC: Ok((9447, 3807))
+load-balancer  | ZC: Ok((9246, 3726))
+load-balancer  | ZC: Ok((9447, 3807))
+load-balancer  | ZC: Ok((9246, 3726))
+load-balancer  | ZC: Ok((9447, 3807))
+load-balancer  | ZC: Ok((9246, 3726))
+load-balancer  | ZC: Ok((9648, 3888))
+load-balancer  | ZC: Ok((9447, 3807))
+load-balancer  | ZC: Ok((9849, 3969))
+load-balancer  | ZC: Ok((9648, 3888))
+load-balancer  | ZC: Ok((9447, 3807))
+load-balancer  | ZC: Ok((9648, 3888))
+load-balancer  | ZC: Ok((9447, 3807))
+load-balancer  | ZC: Ok((9648, 3888))
+load-balancer  | ZC: Ok((9447, 3807))
+load-balancer  | ZC: Ok((9648, 3888))
+load-balancer  | ZC: Ok((9447, 3807))
+load-balancer  | ZC: Ok((4824, 1944))
+load-balancer  | ZC: Ok((9648, 3888))
+load-balancer  | ZC: Ok((9648, 3888))
+load-balancer  | ZC: Ok((8643, 3483))
+load-balancer  | ZC: Ok((2613, 1053))
+load-balancer  | ZC: Ok((9648, 3888))
+load-balancer  | ZC: Ok((8844, 3564))
+load-balancer  | ZC: Ok((8442, 3402))
+load-balancer  | ZC: Ok((8040, 3240))
+load-balancer  | ZC: Ok((8442, 3402))
+load-balancer  | ZC: Ok((8844, 3564))
+load-balancer  | ZC: Ok((8442, 3402))
+load-balancer  | ZC: Ok((8844, 3564))
+load-balancer  | ZC: Ok((8844, 3564))
+load-balancer  | ZC: Ok((8442, 3402))
+load-balancer  | ZC: Ok((8442, 3402))
+load-balancer  | ZC: Ok((8844, 3564))
+load-balancer  | ZC: Ok((8844, 3564))
+load-balancer  | ZC: Ok((8442, 3402))
+load-balancer  | ZC: Ok((8442, 3402))
+load-balancer  | ZC: Ok((8844, 3564))
+load-balancer  | ZC: Ok((8442, 3402))
+load-balancer  | ZC: Ok((8844, 3564))
+load-balancer  | ZC: Ok((8643, 3483))
+load-balancer  | ZC: Ok((8442, 3402))
+load-balancer  | ZC: Ok((8241, 3321))
+load-balancer  | ZC: Ok((8643, 3483))
+load-balancer  | ZC: Ok((8241, 3321))
+load-balancer  | ZC: Ok((8643, 3483))
+load-balancer  | ZC: Ok((8241, 3321))
+load-balancer  | ZC: Ok((8643, 3483))
+load-balancer  | ZC: Ok((8241, 3321))
+load-balancer  | ZC: Ok((8643, 3483))
+load-balancer  | ZC: Ok((8241, 3321))
+load-balancer  | ZC: Ok((8643, 3483))
+load-balancer  | ZC: Ok((8241, 3321))
+load-balancer  | ZC: Ok((8643, 3483))
+load-balancer  | ZC: Ok((8241, 3321))
+load-balancer  | ZC: Ok((8643, 3483))
+load-balancer  | ZC: Ok((8241, 3321))
+load-balancer  | ZC: Ok((10251, 4131))
+load-balancer  | ZC: Ok((10251, 4131))
+load-balancer  | ZC: Ok((8040, 3240))
+load-balancer  | ZC: Ok((10050, 4050))
+load-balancer  | ZC: Ok((10251, 4131))
+load-balancer  | ZC: Ok((10050, 4050))
+load-balancer  | ZC: Ok((10050, 4050))
+load-balancer  | ZC: Ok((10251, 4131))
+load-balancer  | ZC: Ok((10050, 4050))
+load-balancer  | ZC: Ok((10251, 4131))
+load-balancer  | ZC: Ok((10050, 4050))
+load-balancer  | ZC: Ok((10251, 4131))
+load-balancer  | ZC: Ok((10050, 4050))
+load-balancer  | ZC: Ok((10050, 4050))
+load-balancer  | ZC: Ok((10050, 4050))
+load-balancer  | ZC: Ok((7638, 3078))
+load-balancer  | ZC: Ok((7638, 3078))
+load-balancer  | ZC: Ok((9849, 3969))
+load-balancer  | ZC: Ok((7638, 3078))
+load-balancer  | ZC: Ok((9849, 3969))
+load-balancer  | ZC: Ok((10050, 4050))
+load-balancer  | ZC: Ok((7638, 3078))
+load-balancer  | ZC: Ok((7638, 3078))
+load-balancer  | ZC: Ok((9849, 3969))
+load-balancer  | ZC: Ok((7638, 3078))
+load-balancer  | ZC: Ok((7638, 3078))
+load-balancer  | ZC: Ok((9849, 3969))
+load-balancer  | ZC: Ok((7437, 2997))
+load-balancer  | ZC: Ok((7437, 2997))
+load-balancer  | ZC: Ok((7437, 2997))
+load-balancer  | ZC: Ok((9849, 3969))
+load-balancer  | ZC: Ok((9849, 3969))
+load-balancer  | ZC: Ok((9849, 3969))
+load-balancer  | ZC: Ok((10452, 4212))
+load-balancer  | ZC: Ok((9849, 3969))
+load-balancer  | ZC: Ok((10452, 4212))
+load-balancer  | ZC: Ok((9648, 3888))
+load-balancer  | ZC: Ok((10452, 4212))
+load-balancer  | ZC: Ok((10452, 4212))
+worker         | Queue size: 0
+worker         | Queue size: 0
+worker         | Queue size: 0
+worker         | Queue size: 0
+valkey         | 1:M 16 Aug 2025 03:47:55.083 * 1 changes in 5 seconds. Saving...
+valkey         | 1:M 16 Aug 2025 03:47:55.083 * Background saving started by pid 27
+valkey         | 27:C 16 Aug 2025 03:47:55.089 * DB saved on disk
+valkey         | 27:C 16 Aug 2025 03:47:55.090 * Fork CoW for RDB: current 0 MB, peak 0 MB, average 0 MB
+valkey         | 1:M 16 Aug 2025 03:47:55.184 * Background saving terminated with success
+worker         | Queue size: 0
+worker         | Queue size: 0
+worker         | Queue size: 0
+worker         | Queue size: 0
+worker         | Queue size: 0
+worker         | Queue size: 0
+[Kload-balancer exited with code 137
+[Kworker exited with code 137
+[Kgateway-2-1 exited with code 137
+[Kgateway-1-1 exited with code 137
+valkey         | 1:signal-handler (1755316091) Received SIGTERM scheduling shutdown...
+valkey         | 1:M 16 Aug 2025 03:48:11.221 * User requested shutdown...
+valkey         | 1:M 16 Aug 2025 03:48:11.221 * Saving the final RDB snapshot before exiting.
+valkey         | 1:M 16 Aug 2025 03:48:11.227 * DB saved on disk
+valkey         | 1:M 16 Aug 2025 03:48:11.227 # Valkey is now ready to exit, bye bye...
+log truncated at line 1000

@@ -40,12 +40,12 @@ services:
         limits:
           cpus: "0.4"
           memory: 70M
-    image: daviddeltasierra/rinha-2025-go-2:1.33
+    image: daviddeltasierra/rinha-2025-go-2:1.40
     volumes:
       - /tmp:/tmp
     environment:
       - SOCK=/tmp/unix-app1.sock
-      - WORKERS=1
+      - WORKERS=50
       - GOMAXPROCS=3
     depends_on:
       - postgres
@@ -59,12 +59,12 @@ services:
         limits:
           cpus: "0.4"
           memory: 70M
-    image: daviddeltasierra/rinha-2025-go-2:1.33
+    image: daviddeltasierra/rinha-2025-go-2:1.40
     volumes:
       - /tmp:/tmp
     environment:
       - SOCK=/tmp/unix-app2.sock
-      - WORKERS=1
+      - WORKERS=50
       - GOMAXPROCS=3
     depends_on:
       - postgres

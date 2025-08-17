@@ -1,0 +1,85 @@
+services:
+
+  backend01: &backend
+    image: thiagorigonatti/rinha-2025-scratch:0.0.89
+#    build: .
+    container_name: backend01
+    environment:
+      - HTTP_CLIENT_THREADS=1
+      - HTTP_SERVER_THREADS=1
+      - SHM_PATH=/shm_array
+      - SOCKET_PATH=/dev/shm/server1.sock
+      - INDEX=0
+    networks:
+      - net
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          cpus: "0.50"
+          memory: "16MB"
+    ipc: container:shared-memory
+    depends_on:
+      - shared-memory
+    cpuset: "0,2"
+    ulimits:
+      memlock: -1
+      nofile: 65535
+
+
+  backend02:
+    <<: *backend
+    container_name: backend02
+    environment:
+      - HTTP_CLIENT_THREADS=1
+      - HTTP_SERVER_THREADS=1
+      - SHM_PATH=/shm_array
+      - SOCKET_PATH=/dev/shm/server2.sock
+      - INDEX=1
+    cpuset: "1,3"
+
+
+  shared-memory:
+    image: alpine:3.22
+    command: tail -f /dev/null
+    ipc: shareable
+    shm_size: 2mb
+    container_name: shared-memory
+    deploy:
+      resources:
+        limits:
+          cpus: "0.01"
+          memory: "8MB"
+    ulimits:
+      memlock: -1
+      nofile: 65535
+
+
+  haproxy:
+    image: haproxy:lts-alpine3.22
+    container_name: haproxy
+    volumes:
+      - ./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
+    networks:
+      - net
+    ports:
+      - "9999:9999"
+    deploy:
+      resources:
+        limits:
+          cpus: "0.49"
+          memory: "100MB"
+    depends_on:
+      - backend01
+      - backend02
+    ipc: container:shared-memory
+    ulimits:
+      memlock: -1
+      nofile: 65535
+
+
+networks:
+  net:
+    driver: bridge
+  payment-processor:
+    external: true

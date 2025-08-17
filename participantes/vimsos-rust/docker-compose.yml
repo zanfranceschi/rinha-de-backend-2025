@@ -1,6 +1,6 @@
 services:
   api1:
-    image: &image ghcr.io/vimsos/rinha-de-pagamento-25:main@sha256:13b11ece434c76aab40bc2f8b5949f344cc0584f2665b1676c858598a696ab2b
+    image: &image ghcr.io/vimsos/rinha-de-pagamento-25@sha256:2fce721f73e5167ca367b2aef0aec07b7b052bcdf7eee4db875663ab968413c7
     hostname: api1
     environment:
       APP_CONFIG: &app_config >
@@ -29,8 +29,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: &api_cpu_limit "0.125"
-          memory: &api_memory_limit "10MB"
+          cpus: &api_cpu_limit "0.35"
+          memory: &api_memory_limit "65MB"
 
   api2:
     image: *image 
@@ -64,8 +64,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.25"
-          memory: "40MB"
+          cpus: "0.20"
+          memory: "20MB"
 
   pg:
     image: postgres:17
@@ -83,8 +83,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "1.0"
-          memory: "290MB"
+          cpus: "0.60"
+          memory: "200MB"
 
 networks:
   internal-network:

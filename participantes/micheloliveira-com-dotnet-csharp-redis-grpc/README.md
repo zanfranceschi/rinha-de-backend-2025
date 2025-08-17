@@ -1,13 +1,12 @@
-# Rinha de Backend 2025 – API em .NET 9 (AOT) - Michel Oliveira
+# Rinha de Backend 2025 – API em .NET 10 (AOT) - Michel Oliveira
 
-API de pagamentos para o desafio Rinha de Backend 2025, focada em alta performance e concorrência eficiente, usando .NET 9 em AOT.
+API de pagamentos para o desafio Rinha de Backend 2025, focada em alta performance e concorrência eficiente, usando .NET 10 em AOT.
 
 ## Stack
 
-- .NET 9 (AOT)  
-- Redis (fila atômica)
-- Grpc (comunicação entre serviços, lock distribuído)
-- Dapper
+- .NET 10 (AOT)  
+- Redis (fila atômica, lock distribuído)
+- Grpc (comunicação entre serviços)
 - Nginx  
 - Docker Compose
 

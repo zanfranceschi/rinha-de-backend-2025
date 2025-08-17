@@ -1,10 +1,15 @@
 services:
   api01: &api
-    image: renatoelias/pru-async:v3
+    image: renatoelias/pru-async:v7
     container_name: api01
     hostname: api01
     environment:
       - REDIS_URL=redis://redis:6379/0
+      - RUBY_GC_HEAP_INIT_SLOTS=20000
+      - RUBY_GC_HEAP_FREE_SLOTS=4096
+      - RUBY_GC_HEAP_GROWTH_FACTOR=1.2
+      - RUBY_GC_HEAP_GROWTH_MAX_SLOTS=30000
+    command: bundle exec falcon --bind http://0.0.0.0:3000  -n 1 --no-restart  -t 20
     depends_on:
       - redis
     networks:
@@ -13,14 +18,13 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '0.5'
-          memory: '155MB'
+          cpus: '0.6'
+          memory: '140MB'
 
   api02:
     <<: *api
     container_name: api02
     hostname: api02
-
 
   redis:
     image: redis:7-alpine
@@ -34,10 +38,13 @@ services:
       resources:
         limits:
          cpus: '0.1'
-         memory: '20MB'
+         memory: '30MB'
+    volumes:
+      - ./redis.conf:/usr/local/etc/redis/redis.conf:ro
+    command: ["redis-server", "/usr/local/etc/redis/redis.conf"]
 
   nginx:
-    image: nginx
+    image: nginx:alpine
     container_name: nginx
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf:ro
@@ -53,7 +60,7 @@ services:
       resources:
         limits:
           cpus: '0.2'
-          memory: '20MB'
+          memory: '40MB'
 
 networks:
   payment-processor:

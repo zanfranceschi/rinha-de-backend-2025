@@ -15,8 +15,7 @@ Este projeto implementa uma API de processamento de pagamentos com arquitetura d
 
 O sistema é composto por múltiplos containers que trabalham em conjunto:
 
-- **2 instâncias da API** (api, api2): Para alta disponibilidade
-- **1 Worker**: Para processamento assíncrono de pagamentos
+- **3 instâncias da API** (api, api2, api3): Para alta disponibilidade
 - **Nginx**: Load balancer entre as instâncias da API
 - **Redis**: Message broker e bando de dados
 
@@ -32,11 +31,11 @@ O sistema é composto por múltiplos containers que trabalham em conjunto:
 
 | Container | CPU (cores) | Memória (MB) | Imagem | Função |
 |-----------|-------------|--------------|---------|---------|
-| **api** | 0.4 | 85 | Custom Build | API Principal |
-| **api2** | 0.4 | 85 | Custom Build | API Secundária |
-| **worker** | 0.3 | 90 | Custom Build | Worker Celery |
-| **nginx** | 0.2 | 30 | nginx:latest | Load Balancer |
-| **redis** | 0.2 | 60 | redis:8.0.3 | Cache/Message Broker |
+| **api** | 0.4 | 80 | Custom Build | API 1ª instância |
+| **api2** | 0.4 | 80 | Custom Build | API 2ª instância |
+| **api3** | 0.4 | 80 | Custom Build | API 3ª instância |
+| **nginx** | 0.1 | 50 | nginx:alpine | Load Balancer |
+| **redis** | 0.2 | 60 | redis | Cache/Message Broker |
 
 ### **Total de Recursos**
 - **CPU Total**: 1.50 cores
@@ -53,7 +52,7 @@ O sistema é composto por múltiplos containers que trabalham em conjunto:
 
 1. **Clone o repositório**
 ```bash
-git clone "https://github.com/Juanlimalf/payment_processor-rinha_backend_2025"
+git clone "https://github.com/Juanlimalf/payment_processor-rinha_backend_2025.git"
 cd payment-processor-rinha-backend
 ```
 

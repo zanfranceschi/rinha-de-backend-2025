@@ -1,24 +1,8 @@
 
- load-balance Pulling 
- 9824c27679d3 Already exists 
- 9a99746712ff Pulling fs layer 
- 0abe2af4c6b5 Pulling fs layer 
- 9a99746712ff Downloading [==================================================>]     127B/127B
- 9a99746712ff Download complete 
- 9a99746712ff Extracting [==================================================>]     127B/127B
- 9a99746712ff Extracting [==================================================>]     127B/127B
- 9a99746712ff Pull complete 
- 0abe2af4c6b5 Downloading [>                                                  ]  51.74kB/5.073MB
- 0abe2af4c6b5 Verifying Checksum 
- 0abe2af4c6b5 Download complete 
- 0abe2af4c6b5 Extracting [>                                                  ]  65.54kB/5.073MB
- 0abe2af4c6b5 Extracting [==================================================>]  5.073MB/5.073MB
- 0abe2af4c6b5 Pull complete 
- load-balance Pulled 
- Network 4emcos-bun-lb_backend  Creating
- Network 4emcos-bun-lb_backend  Created
  Network 4emcos-bun-lb_default  Creating
  Network 4emcos-bun-lb_default  Created
+ Network 4emcos-bun-lb_backend  Creating
+ Network 4emcos-bun-lb_backend  Created
  Volume "4emcos-bun-lb_socket_data"  Creating
  Volume "4emcos-bun-lb_socket_data"  Created
  Container 4emcos-bun-lb-writer-1  Creating
@@ -30,28 +14,18 @@
  Container 4emcos-bun-lb-load-balance-1  Creating
  Container 4emcos-bun-lb-load-balance-1  Created
 Attaching to load-balance-1, writer-1, backend-01, backend-02
-backend-02  | High-throughput server running on unix socket: /tmp/backend_2.sock
-backend-02  | Configuration: batch_size=100, concurrent_requests=25
-backend-02  | Infinite retry mode: will keep trying payment requests until success
-backend-01  | High-throughput server running on unix socket: /tmp/backend_1.sock
-backend-01  | Configuration: batch_size=100, concurrent_requests=25
-backend-01  | Infinite retry mode: will keep trying payment requests until success
-writer-1    | running on unix socket: /tmp/writer.sock
-load-balance-1  | 2025/08/13 16:46:19 Load balancer ouvindo em :9999
-backend-02      | Queue stats: {"queued":1,"dropped":0,"processed":14,"waitingResolvers":6}
-backend-01      | Queue stats: {"queued":0,"dropped":0,"processed":137,"waitingResolvers":7}
-backend-02      | Queue stats: {"queued":9,"dropped":0,"processed":831,"waitingResolvers":0}
-backend-01      | Queue stats: {"queued":5,"dropped":0,"processed":4964,"waitingResolvers":0}
-backend-01      | Queue stats: {"queued":1,"dropped":0,"processed":5985,"waitingResolvers":0}
-backend-01      | Queue stats: {"queued":0,"dropped":0,"processed":6010,"waitingResolvers":0}
-backend-01      | Queue stats: {"queued":1,"dropped":0,"processed":7661,"waitingResolvers":0}
-backend-02      | Queue stats: {"queued":0,"dropped":0,"processed":8083,"waitingResolvers":0}
-backend-01      | Queue stats: {"queued":2,"dropped":0,"processed":8279,"waitingResolvers":0}
+writer-1  | 2025/08/17 00:43:37 Server running on unix socket: /tmp/writer.sock
+load-balance-1  | 2025/08/17 00:43:37 High-performance load balancer listening on :9999
+backend-02      | Failed to get all payments via UDS client: 2 | import{request as E}from"undici";var{serve:R}=globalThis.Bun;class M{socketPath;constructor(g){this.socketPath=g}async storePayment(g){fetch("http://localhost/store",{method:"POST",body:JSON.stringify({payment:g}),unix:this.socketPath,headers:{Connection:"keep-alive"}}).catch((j)=>{console.error("Store payment error:",j)})}async getAllPayments(){try{return await(await fetch("http://localhost/getAll",{method:"GET",unix:this.socketPath,headers:{Connection:"keep-alive"}})).json()}catch(g){return console.error("Failed to get all payments via UDS client:",g),[]}}async getPaymentsByRange(g,j){try{return await(await fetch(`http://localhost/getByRange?from=${g}&to=${j}`,{method:"GET",unix:this.socketPath,headers:{Connection:"keep-alive"}})).json()}catch(A){return console.error("Failed to get all payments via UDS client:",A),""}}}var J={BATCH_SIZE:50,MIN_WAIT_TIME:1,MAX_WAIT_TIME:10,MAX_RETRY_DELAY:1,CONCURRENT_REQUESTS:100,QUEUE_DRAIN_THRESHOLD:50,MAX_QUEUE_SIZE:20000,RETRY_BACKOFF_MULTIPLIER:1.2},z=0,Y=new M(Bun.env
+backend-02      | 
+backend-02      | SyntaxError: Failed to parse JSON
+backend-02      |       at getPaymentsByRange (/$bunfs/root/app-binary:2:748)
+backend-02      | 
 [Kload-balance-1 exited with code 2
 backend-02      | Shutting down gracefully...
-backend-02      | Shutdown complete
 backend-01      | Shutting down gracefully...
+backend-02      | Shutdown complete
 backend-01      | Shutdown complete
-[Kbackend-02 exited with code 0
 [Kbackend-01 exited with code 0
+[Kbackend-02 exited with code 0
 log truncated at line 1000

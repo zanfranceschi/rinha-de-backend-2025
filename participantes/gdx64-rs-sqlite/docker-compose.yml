@@ -1,6 +1,6 @@
 services:
   db-api:
-    image: gdx64/rinha2025-clb
+    image: gdx64/rinha-clb
     hostname: db-api
     environment:
       - IS_DB_SERVICE=true
@@ -15,12 +15,17 @@ services:
         limits:
           cpus: "0.5"
           memory: "50MB"
+    volumes:
+      - uds:/tmp/
 
   api1: &api
-    image: gdx64/rinha2025-clb
+    volumes:
+      - uds:/tmp/
+    image: gdx64/rinha-clb
     hostname: api1
     environment:
       - DB_URL=db-api:8080
+      - SOCKET_PATH=/tmp/api1.sock
     networks:
       - backend
       - payment-processor
@@ -38,6 +43,9 @@ services:
     hostname: api2
     depends_on:
       - db-api
+    environment:
+      - DB_URL=db-api:8080
+      - SOCKET_PATH=/tmp/api2.sock
     deploy:
       resources:
         limits:
@@ -55,7 +63,7 @@ services:
       - payment-processor
     environment:
       - LISTEN_ADDR=0.0.0.0:9999
-      - TARGET_ADDRS=api1:8080,api2:8080
+      - TARGET_ADDRS=/tmp/api1.sock,/tmp/api2.sock
     ports:
       - "9999:9999"
     command: ["/redirect"]
@@ -64,9 +72,15 @@ services:
           limits:
             cpus: "0.2"
             memory: "50MB"
+    volumes:
+      - uds:/tmp/
 
 networks:
   backend:
     driver: bridge
   payment-processor:
     external: true
+
+volumes:
+  uds:
+    driver: local

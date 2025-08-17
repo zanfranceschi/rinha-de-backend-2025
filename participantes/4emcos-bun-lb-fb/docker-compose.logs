@@ -1,0 +1,31 @@
+
+ Network 4emcos-bun-lb-fb_default  Creating
+ Network 4emcos-bun-lb-fb_default  Created
+ Network 4emcos-bun-lb-fb_backend  Creating
+ Network 4emcos-bun-lb-fb_backend  Created
+ Volume "4emcos-bun-lb-fb_socket_data"  Creating
+ Volume "4emcos-bun-lb-fb_socket_data"  Created
+ Container 4emcos-bun-lb-fb-writer-1  Creating
+ Container 4emcos-bun-lb-fb-writer-1  Created
+ Container backend-02  Creating
+ Container backend-01  Creating
+ Container backend-01  Created
+ Container backend-02  Created
+ Container 4emcos-bun-lb-fb-load-balance-1  Creating
+ Container 4emcos-bun-lb-fb-load-balance-1  Created
+Attaching to load-balance-1, writer-1, backend-01, backend-02
+writer-1  | 2025/08/17 03:00:30 Server running on unix socket: /tmp/writer.sock
+load-balance-1  | 2025/08/17 03:00:31 High-performance load balancer listening on :9999
+backend-02      | Failed to get all payments via UDS client: 2 | import{request as Z}from"undici";var{serve:L}=globalThis.Bun;class Y{socketPath;constructor(x){this.socketPath=x}async storePayment(x){fetch("http://localhost/store",{method:"POST",body:JSON.stringify({payment:x}),unix:this.socketPath,headers:{Connection:"keep-alive"}}).catch((g)=>{console.error("Store payment error:",g)})}async getPaymentsByRange(x,g){try{return await(await fetch(`http://localhost/getByRange?from=${x}&to=${g}`,{method:"GET",unix:this.socketPath,headers:{Connection:"keep-alive"}})).json()}catch(J){return console.error("Failed to get all payments via UDS client:",J),""}}}var K={BATCH_SIZE:50,MIN_WAIT_TIME:1,MAX_WAIT_TIME:10,MAX_RETRY_DELAY:1,CONCURRENT_REQUESTS:100,QUEUE_DRAIN_THRESHOLD:50,MAX_QUEUE_SIZE:20000,RETRY_BACKOFF_MULTIPLIER:1.2},P=0,k=new Y(Bun.env.WRITER_SOCKET_PATH);class A{queue=[];waitingResolvers=[];droppedCount=0;processedCount=0;get length(){return this.queue.length}push(x){if(this.queue.length>=K.MAX_QUEUE_SIZE)return this.droppedCount++,!1;this.queue.push(x);let g=this.wait
+backend-02      | 
+backend-02      | SyntaxError: Failed to parse JSON
+backend-02      |       at getPaymentsByRange (/$bunfs/root/app-binary:2:509)
+backend-02      | 
+[Kload-balance-1 exited with code 2
+backend-01      | Shutting down gracefully...
+backend-02      | Shutting down gracefully...
+backend-01      | Shutdown complete
+backend-02      | Shutdown complete
+[Kbackend-02 exited with code 0
+[Kbackend-01 exited with code 0
+log truncated at line 1000

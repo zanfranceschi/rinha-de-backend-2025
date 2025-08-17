@@ -11,66 +11,47 @@ services:
       - "9999:9999"
     networks:
       - backend-rinha
-      - payment-processor
     deploy:
       resources:
-        limits:
-          cpus: "0.20"
+       limits:
+          cpus: "0.15"
           memory: "50MB"
 
   api1: &api
-    image: diogoloff/api-rinha2025:latest
-    depends_on:
-      - persistencia
+    image: diogoloff/api-delphi-rinha2025:v1.06   # v1.03
     hostname: api1
     environment:
       - DEFAULT_URL=http://payment-processor-default:8080
       - FALLBACK_URL=http://payment-processor-fallback:8080
-      - CONSOLIDA_URL=http://persistencia:9090
-      - NUM_WORKERS=6
-      - NUM_TENTATIVAS_DEFAULT=3
-      - TEMPO_FILA=1000
+      - CON_TIME_OUT=5000
+      - READ_TIME_OUT=200
+      - NUM_WORKERS=16 # 16
+      - LISTEM_QUEUE=32 # 32
+      - NUM_TENTATIVAS_DEFAULT=10
+      - TEMPO_FILA=50
+      - NATIVO=N
+      - KEEP_ALIVE=S
+      - MAX_CONNECTIONS=1024
       - DEBUG=N
     volumes:
-      - transacoes:/opt/rinha/transacoes/
-      #- ./Logs/:/opt/rinha/Logs/  #somente se debug ativo
+      - dev-shm:/dev/shm
     networks:
       - backend-rinha
       - payment-processor
     deploy:
       resources:
         limits:
-          cpus: "0.55"
-          memory: "100MB"
+          cpus: "0.675"
+          memory: "150MB"
 
   api2:
     <<: *api
     hostname: api2
     volumes:
-      - transacoes2:/opt/rinha/transacoes/
-      #- ./Logs2/:/opt/rinha/Logs/ #somente se debug ativo
-
-  persistencia: 
-    image: diogoloff/persistencia-rinha2025:latest
-    hostname: persistencia
-    environment:
-      - TEMPO_FILA=5
-      - DEBUG=N
-    volumes:
-      - transacoes:/opt/rinha/transacoes/
-      - transacoes2:/opt/rinha/transacoes2/
-      #- ./LogsP/:/opt/rinha/Logs/  #somente se debug ativo
-    networks:
-      - backend-rinha
-    deploy:
-      resources:
-        limits:
-          cpus: "0.20"
-          memory: "100MB"
-
+      - dev-shm:/dev/shm
+      
 volumes:
-  transacoes:
-  transacoes2:
+  dev-shm:
 
 networks:
   backend-rinha:

@@ -1,46 +1,63 @@
 services:
-  app1:
-    image: pedrohsbarbosa99/rinha-golang-2025:0.3.2
-    command: ["./main"]
+  memdb:
+    image: pedrohsbarbosa99/rinha-golang-2025:0.3.7
+    command: ["./memdb"]
     volumes:
-      - sockmem:/tmp
+      - memsock:/tmp
     networks:
       - backend
       - payment-processor
     environment:
-      - SOCKET_PATH=/tmp/api1.sock
-      - OTHER_SOCKET_PATH=/tmp/api2.sock
-      - SUMMARY_URL=http://app2:8080/internal/payments-summary
-      - PROCESSOR_DEFAULT_URL=http://payment-processor-default:8080/payments
-      - PROCESSOR_FALLBACK_URL=http://payment-processor-fallback:8080/payments
-      - GOMAXPROCS=3
+      - MEMDB_SOCKET=/tmp/kvstore.sock
+      - PROCESSOR_DEFAULT_URL=http://payment-processor-default:8080
+      - PROCESSOR_FALLBACK_URL=http://payment-processor-fallback:8080
     deploy:
       resources:
         limits:
-          cpus: "0.6"
-          memory: 70M
+          cpus: "0.4"
+          memory: 100M
+    restart: unless-stopped
+
+  app1:
+    image: pedrohsbarbosa99/rinha-golang-2025:0.3.7
+    command: ["./main"]
+    volumes:
+      - memsock:/tmp
+    networks:
+      - backend
+      - payment-processor
+    environment:
+      - MEMDB_SOCKET=/tmp/kvstore.sock
+      - PROCESSOR_DEFAULT_URL=http://payment-processor-default:8080
+      - PROCESSOR_FALLBACK_URL=http://payment-processor-fallback:8080
+    depends_on:
+      - memdb
+    deploy:
+      resources:
+        limits:
+          cpus: "0.4"
+          memory: 50M
     restart: unless-stopped
 
   app2:
-    image: pedrohsbarbosa99/rinha-golang-2025:0.3.2
+    image: pedrohsbarbosa99/rinha-golang-2025:0.3.7
     command: ["./main"]
     volumes:
-      - sockmem:/tmp
+      - memsock:/tmp
     networks:
       - backend
       - payment-processor
     environment:
-      - SOCKET_PATH=/tmp/api2.sock
-      - OTHER_SOCKET_PATH=/tmp/api1.sock
-      - SUMMARY_URL=http://app1:8080/internal/payments-summary
-      - PROCESSOR_DEFAULT_URL=http://payment-processor-default:8080/payments
-      - PROCESSOR_FALLBACK_URL=http://payment-processor-fallback:8080/payments
-      - GOMAXPROCS=3
+      - MEMDB_SOCKET=/tmp/kvstore.sock
+      - PROCESSOR_DEFAULT_URL=http://payment-processor-default:8080
+      - PROCESSOR_FALLBACK_URL=http://payment-processor-fallback:8080
+    depends_on:
+      - memdb
     deploy:
       resources:
         limits:
-          cpus: "0.6"
-          memory: 70M
+          cpus: "0.4"
+          memory: 50M
     restart: unless-stopped
 
   nginx:
@@ -50,7 +67,6 @@ services:
       - "9999:80"
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf:ro
-      - sockmem:/tmp
     depends_on:
       - app1
       - app2
@@ -61,19 +77,15 @@ services:
       resources:
         limits:
           cpus: "0.3"
-          memory: 210M
+          memory: 100M
     restart: unless-stopped
 
 volumes:
-  sockmem:
-    driver: local
-    driver_opts:
-      type: tmpfs
-      device: tmpfs
-      o: size=4m
+  memsock:
 
 networks:
   backend:
     driver: bridge
   payment-processor:
     external: true
+

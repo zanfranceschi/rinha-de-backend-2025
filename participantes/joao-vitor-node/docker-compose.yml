@@ -1,0 +1,134 @@
+services:
+  haproxy:
+    image: haproxy
+    container_name: haproxy
+    ports:
+      - "9999:9999"
+    volumes:
+      - ./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
+    depends_on:
+      - api1
+      - api2
+    networks:
+      - rinha-network
+    deploy:
+      resources:
+        limits:
+          cpus: '0.07'
+          memory: 30M
+
+  redis:
+    image: redis:alpine
+    command: redis-server --save "" --appendonly no --maxmemory 10mb 
+    networks:
+      - rinha-network
+    deploy:
+      resources:
+        limits:
+          cpus: "0.07"
+          memory: "10MB"
+
+  db_postgres:
+    image: postgres:16-alpine
+    container_name: db_postgres
+    command: postgres -c max_wal_size=4096 -c synchronous_commit=0 -c fsync=0 -c full_page_writes=0
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=rinha
+    volumes:
+      - ./createDb.sql:/docker-entrypoint-initdb.d/createDb.sql
+    networks:
+      - rinha-network
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 2s
+        max_attempts: 10
+        window: 5s
+      resources:
+        limits:
+          cpus: "0.14"
+          memory: "100MB"
+
+  apiworker1: &apiworker
+    # build: ./rinha-back-end-2025-worker
+    image: joaovitorgirardiii/rinha-back-end-2025-worker:1.0.0
+    hostname: apiworker
+    depends_on:
+      - redis
+    networks:
+      - rinha-network
+      - payment-processor
+    environment:
+      - DB_USER=postgres
+      - DB_HOST=db_postgres
+      - DB_DATABASE=rinha
+      - DB_PASSWORD=postgres
+      - DB_PORT=5432
+      - BASE_URL_DEFAULT=http://payment-processor-default:8080
+      - BASE_URL_FALLBACK=http://payment-processor-fallback:8080
+      - HEALTH_CHECK=1
+      - NODE_ENV=production 
+    deploy:
+      resources:
+        limits:
+          cpus: "0.09"
+          memory: "23MB"
+
+  apiworker2: &workers
+    <<: *apiworker
+    environment: 
+      - DB_USER=postgres
+      - DB_HOST=db_postgres
+      - DB_DATABASE=rinha
+      - DB_PASSWORD=postgres
+      - DB_PORT=5432
+      - BASE_URL_DEFAULT=http://payment-processor-default:8080
+      - BASE_URL_FALLBACK=http://payment-processor-fallback:8080
+      - HEALTH_CHECK=0
+      - NODE_ENV=production 
+
+  apiworker3: 
+    <<: *workers
+
+  apiworker4: 
+    <<: *workers
+
+  apiworker5: 
+    <<: *workers
+    
+  apiworker6: 
+    <<: *workers
+
+  api1: &api
+    # build: ./rinha-back-end-2025
+    image:  joaovitorgirardiii/rinha-back-end-2025:1.0.0
+    hostname: api1
+    environment:
+      - DB_USER=postgres
+      - DB_HOST=db_postgres
+      - DB_DATABASE=rinha
+      - DB_PASSWORD=postgres
+      - DB_PORT=5432
+      - PORT=3000
+      - NODE_ENV=production 
+    depends_on:
+      - db_postgres
+      - redis
+    networks:
+      - rinha-network
+    deploy:
+      resources:
+        limits:
+          cpus: "0.30"
+          memory: "35MB"
+  api2:
+    <<: *api
+    hostname: api2
+
+networks:
+  rinha-network:
+    driver: bridge
+  payment-processor:
+    external: true

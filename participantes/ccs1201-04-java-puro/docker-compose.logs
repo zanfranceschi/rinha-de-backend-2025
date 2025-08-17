@@ -1,48 +1,4 @@
 
- app1 Pulling 
- app2 Pulling 
- a3be5d4ce401 Already exists 
- d6a978d13d47 Pulling fs layer 
- 6d551fe8524d Pulling fs layer 
- d6a978d13d47 Downloading [==================================================>]      92B/92B
- d6a978d13d47 Verifying Checksum 
- d6a978d13d47 Download complete 
- a3be5d4ce401 Already exists 
- d6a978d13d47 Extracting [==================================================>]      92B/92B
- d6a978d13d47 Extracting [==================================================>]      92B/92B
- d6a978d13d47 Pulling fs layer 
- 6d551fe8524d Pulling fs layer 
- d6a978d13d47 Extracting [==================================================>]      92B/92B
- d6a978d13d47 Pull complete 
- d6a978d13d47 Pull complete 
- 6d551fe8524d Downloading [>                                                  ]  312.7kB/31.2MB
- 6d551fe8524d Downloading [>                                                  ]  312.7kB/31.2MB
- 6d551fe8524d Downloading [=======>                                           ]  4.471MB/31.2MB
- 6d551fe8524d Downloading [=======>                                           ]  4.471MB/31.2MB
- 6d551fe8524d Downloading [=========================>                         ]  15.68MB/31.2MB
- 6d551fe8524d Downloading [=========================>                         ]  15.68MB/31.2MB
- 6d551fe8524d Downloading [============================>                      ]  17.93MB/31.2MB
- 6d551fe8524d Downloading [============================>                      ]  17.93MB/31.2MB
- 6d551fe8524d Downloading [===========================================>       ]  26.88MB/31.2MB
- 6d551fe8524d Downloading [===========================================>       ]  26.88MB/31.2MB
- 6d551fe8524d Verifying Checksum 
- 6d551fe8524d Download complete 
- 6d551fe8524d Verifying Checksum 
- 6d551fe8524d Download complete 
- 6d551fe8524d Extracting [>                                                  ]  327.7kB/31.2MB
- 6d551fe8524d Extracting [>                                                  ]  327.7kB/31.2MB
- 6d551fe8524d Extracting [============>                                      ]  7.864MB/31.2MB
- 6d551fe8524d Extracting [============>                                      ]  7.864MB/31.2MB
- 6d551fe8524d Extracting [=========================>                         ]  15.73MB/31.2MB
- 6d551fe8524d Extracting [=========================>                         ]  15.73MB/31.2MB
- 6d551fe8524d Extracting [======================================>            ]  24.25MB/31.2MB
- 6d551fe8524d Extracting [======================================>            ]  24.25MB/31.2MB
- 6d551fe8524d Extracting [==================================================>]   31.2MB/31.2MB
- 6d551fe8524d Extracting [==================================================>]   31.2MB/31.2MB
- 6d551fe8524d Pull complete 
- 6d551fe8524d Pull complete 
- app2 Pulled 
- app1 Pulled 
  Network ccs1201-04-java-puro_backend  Creating
  Network ccs1201-04-java-puro_backend  Created
  Container backend-db  Creating
@@ -72,8 +28,10 @@ backend-db  | selecting default time zone ... UTC
 backend-db  | creating configuration files ... ok
 backend-db  | running bootstrap script ... ok
 backend-db  | sh: locale: not found
-backend-db  | 2025-08-13 14:49:39.733 UTC [35] WARNING:  no usable system locales were found
+backend-db  | 2025-08-17 16:43:31.801 UTC [36] WARNING:  no usable system locales were found
 backend-db  | performing post-bootstrap initialization ... ok
+backend-db  | initdb: warning: enabling "trust" authentication for local connections
+backend-db  | initdb: hint: You can change this by editing pg_hba.conf or using the option -A, or --auth-local and --auth-host, the next time you run initdb.
 backend-db  | syncing data to disk ... ok
 backend-db  | 
 backend-db  | 
@@ -81,12 +39,10 @@ backend-db  | Success. You can now start the database server using:
 backend-db  | 
 backend-db  |     pg_ctl -D /var/lib/postgresql/data -l logfile start
 backend-db  | 
-backend-db  | initdb: warning: enabling "trust" authentication for local connections
-backend-db  | initdb: hint: You can change this by editing pg_hba.conf or using the option -A, or --auth-local and --auth-host, the next time you run initdb.
-backend-db  | waiting for server to start....2025-08-13 14:49:42.453 UTC [53] LOG:  starting PostgreSQL 17.5 on x86_64-pc-linux-musl, compiled by gcc (Alpine 14.2.0) 14.2.0, 64-bit
-backend-db  | 2025-08-13 14:49:42.456 UTC [53] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
-backend-db  | 2025-08-13 14:49:42.531 UTC [56] LOG:  database system was shut down at 2025-08-13 14:49:42 UTC
-backend-db  | 2025-08-13 14:49:42.538 UTC [53] LOG:  database system is ready to accept connections
+backend-db  | waiting for server to start....2025-08-17 16:43:34.789 UTC [54] LOG:  starting PostgreSQL 17.5 on x86_64-pc-linux-musl, compiled by gcc (Alpine 14.2.0) 14.2.0, 64-bit
+backend-db  | 2025-08-17 16:43:34.793 UTC [54] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+backend-db  | 2025-08-17 16:43:34.804 UTC [57] LOG:  database system was shut down at 2025-08-17 16:43:34 UTC
+backend-db  | 2025-08-17 16:43:34.812 UTC [54] LOG:  database system is ready to accept connections
 backend-db  |  done
 backend-db  | server started
 backend-db  | CREATE DATABASE
@@ -100,82 +56,82 @@ backend-db  |
 backend-db  | 
 backend-db  | /usr/local/bin/docker-entrypoint.sh: ignoring /docker-entrypoint-initdb.d/postgresql.conf
 backend-db  | 
-backend-db  | waiting for server to shut down....2025-08-13 14:49:43.543 UTC [53] LOG:  received fast shutdown request
-backend-db  | 2025-08-13 14:49:43.548 UTC [53] LOG:  aborting any active transactions
-backend-db  | 2025-08-13 14:49:43.629 UTC [53] LOG:  background worker "logical replication launcher" (PID 59) exited with exit code 1
-backend-db  | 2025-08-13 14:49:43.630 UTC [54] LOG:  shutting down
-backend-db  | 2025-08-13 14:49:43.633 UTC [54] LOG:  checkpoint starting: shutdown immediate
-backend-db  | 2025-08-13 14:49:43.752 UTC [54] LOG:  checkpoint complete: wrote 1094 buffers (6.7%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.104 s, sync=0.004 s, total=0.122 s; sync files=306, longest=0.004 s, average=0.001 s; distance=4266 kB, estimate=4266 kB; lsn=0/1917B38, redo lsn=0/1917B38
-backend-db  | 2025-08-13 14:49:43.827 UTC [53] LOG:  database system is shut down
+backend-db  | waiting for server to shut down....2025-08-17 16:43:35.899 UTC [54] LOG:  received fast shutdown request
+backend-db  | 2025-08-17 16:43:35.902 UTC [54] LOG:  aborting any active transactions
+backend-db  | 2025-08-17 16:43:35.987 UTC [54] LOG:  background worker "logical replication launcher" (PID 60) exited with exit code 1
+backend-db  | 2025-08-17 16:43:35.988 UTC [55] LOG:  shutting down
+backend-db  | 2025-08-17 16:43:35.991 UTC [55] LOG:  checkpoint starting: shutdown immediate
+backend-db  | 2025-08-17 16:43:36.118 UTC [55] LOG:  checkpoint complete: wrote 1094 buffers (6.7%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.104 s, sync=0.013 s, total=0.130 s; sync files=306, longest=0.004 s, average=0.001 s; distance=4266 kB, estimate=4266 kB; lsn=0/1917B38, redo lsn=0/1917B38
+backend-db  | 2025-08-17 16:43:36.129 UTC [54] LOG:  database system is shut down
 backend-db  |  done
 backend-db  | server stopped
 backend-db  | 
 backend-db  | PostgreSQL init process complete; ready for start up.
 backend-db  | 
-backend-db  | 2025-08-13 14:49:43.930 UTC [1] LOG:  starting PostgreSQL 17.5 on x86_64-pc-linux-musl, compiled by gcc (Alpine 14.2.0) 14.2.0, 64-bit
-backend-db  | 2025-08-13 14:49:43.931 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
-backend-db  | 2025-08-13 14:49:43.931 UTC [1] LOG:  listening on IPv6 address "::", port 5432
-backend-db  | 2025-08-13 14:49:43.937 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
-backend-db  | 2025-08-13 14:49:43.945 UTC [71] LOG:  database system was shut down at 2025-08-13 14:49:43 UTC
-backend-db  | 2025-08-13 14:49:43.953 UTC [1] LOG:  database system is ready to accept connections
-backend-api2  | 14:49:46.180 [main] INFO br.com.ccs.rinha.RinhaApp -- Starting server on port: 8080
-backend-api2  | 14:49:46.181 [main] INFO br.com.ccs.rinha.config.ExecutorConfig -- Thread pool size: 10
-backend-api2  | 14:49:46.181 [main] INFO br.com.ccs.rinha.config.ExecutorConfig -- Thread pool Queue size 1000
-backend-api2  | 14:49:46.181 [main] INFO br.com.ccs.rinha.config.DataSourceFactory -- Data Source URL: jdbc:postgresql://postgres:5432/rinha
-backend-api2  | 14:49:46.181 [main] INFO br.com.ccs.rinha.config.DataSourceFactory -- Data Source Username: rinha
-backend-api2  | 14:49:46.181 [main] INFO br.com.ccs.rinha.config.DataSourceFactory -- Data Source Password: rinha
-backend-api2  | 14:49:46.181 [main] INFO br.com.ccs.rinha.config.DataSourceFactory -- Data Source Timeout: 20000
-backend-api2  | 14:49:46.181 [main] INFO br.com.ccs.rinha.config.DataSourceFactory -- Data Source Minimum Idle: 3
-backend-api2  | 14:49:46.181 [main] INFO br.com.ccs.rinha.config.DataSourceFactory -- Data Source Maximum Pool Size: 3
-backend-api2  | 14:49:46.181 [main] INFO br.com.ccs.rinha.config.DataSourceFactory -- Data Source Configured com.zaxxer.hikari.HikariConfig@521ff6f0
-backend-api2  | 14:49:46.182 [main] INFO com.zaxxer.hikari.HikariDataSource -- HikariPool-1 - Starting...
-backend-api2  | 14:49:46.200 [main] INFO com.zaxxer.hikari.pool.HikariPool -- HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@4c03dccf
-backend-api2  | 14:49:46.200 [main] INFO com.zaxxer.hikari.HikariDataSource -- HikariPool-1 - Start completed.
-backend-api2  | 14:49:46.200 [main] INFO br.com.ccs.rinha.repository.JdbcPaymentRepository -- JdbcPaymentRepository workers started
-backend-api2  | 14:49:46.201 [main] INFO br.com.ccs.rinha.service.PaymentProcessorClient -- Default service URL: http://payment-processor-default:8080/payments 
-backend-api2  | 14:49:46.202 [main] INFO br.com.ccs.rinha.service.PaymentProcessorClient -- Fallback fallback URL: http://payment-processor-fallback:8080/payments
-backend-api2  | 14:49:46.202 [main] INFO br.com.ccs.rinha.service.PaymentProcessorClient -- Timeout: PT6S
-backend-api2  | 14:49:46.202 [payment-processor-1] INFO br.com.ccs.rinha.workers.PaymentProcessorWorker -- Payment processor worker started: 1
-backend-api2  | 14:49:46.202 [payment-processor-0] INFO br.com.ccs.rinha.workers.PaymentProcessorWorker -- Payment processor worker started: 0
-backend-api2  | 14:49:46.202 [payment-processor-2] INFO br.com.ccs.rinha.workers.PaymentProcessorWorker -- Payment processor worker started: 2
-backend-api2  | 14:49:46.202 [payment-processor-3] INFO br.com.ccs.rinha.workers.PaymentProcessorWorker -- Payment processor worker started: 3
-backend-api2  | 14:49:46.202 [payment-processor-4] INFO br.com.ccs.rinha.workers.PaymentProcessorWorker -- Payment processor worker started: 4
-backend-api2  | 14:49:46.202 [main] INFO br.com.ccs.rinha.workers.PaymentProcessorWorker -- Payment processor workers: {}10
-backend-api2  | 14:49:46.202 [payment-processor-5] INFO br.com.ccs.rinha.workers.PaymentProcessorWorker -- Payment processor worker started: 5
-backend-api2  | 14:49:46.202 [main] INFO br.com.ccs.rinha.RinhaApp -- Servidor iniciado na porta: 8080 
-backend-api2  | 14:49:46.202 [payment-processor-6] INFO br.com.ccs.rinha.workers.PaymentProcessorWorker -- Payment processor worker started: 6
-backend-api2  | 14:49:46.202 [payment-processor-7] INFO br.com.ccs.rinha.workers.PaymentProcessorWorker -- Payment processor worker started: 7
-backend-api2  | 14:49:46.202 [payment-processor-8] INFO br.com.ccs.rinha.workers.PaymentProcessorWorker -- Payment processor worker started: 8
-backend-api2  | 14:49:46.202 [payment-processor-9] INFO br.com.ccs.rinha.workers.PaymentProcessorWorker -- Payment processor worker started: 9
-backend-api1  | 14:49:46.380 [main] INFO br.com.ccs.rinha.RinhaApp -- Starting server on port: 8080
-backend-api1  | 14:49:46.380 [main] INFO br.com.ccs.rinha.config.ExecutorConfig -- Thread pool size: 10
-backend-api1  | 14:49:46.380 [main] INFO br.com.ccs.rinha.config.ExecutorConfig -- Thread pool Queue size 1000
-backend-api1  | 14:49:46.381 [main] INFO br.com.ccs.rinha.config.DataSourceFactory -- Data Source URL: jdbc:postgresql://postgres:5432/rinha
-backend-api1  | 14:49:46.381 [main] INFO br.com.ccs.rinha.config.DataSourceFactory -- Data Source Username: rinha
-backend-api1  | 14:49:46.381 [main] INFO br.com.ccs.rinha.config.DataSourceFactory -- Data Source Password: rinha
-backend-api1  | 14:49:46.381 [main] INFO br.com.ccs.rinha.config.DataSourceFactory -- Data Source Timeout: 20000
-backend-api1  | 14:49:46.381 [main] INFO br.com.ccs.rinha.config.DataSourceFactory -- Data Source Minimum Idle: 3
-backend-api1  | 14:49:46.381 [main] INFO br.com.ccs.rinha.config.DataSourceFactory -- Data Source Maximum Pool Size: 3
-backend-api1  | 14:49:46.381 [main] INFO br.com.ccs.rinha.config.DataSourceFactory -- Data Source Configured com.zaxxer.hikari.HikariConfig@22fdac59
-backend-api1  | 14:49:46.381 [main] INFO com.zaxxer.hikari.HikariDataSource -- HikariPool-1 - Starting...
-backend-api1  | 14:49:46.396 [main] INFO com.zaxxer.hikari.pool.HikariPool -- HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@6a9137
-backend-api1  | 14:49:46.396 [main] INFO com.zaxxer.hikari.HikariDataSource -- HikariPool-1 - Start completed.
-backend-api1  | 14:49:46.396 [main] INFO br.com.ccs.rinha.repository.JdbcPaymentRepository -- JdbcPaymentRepository workers started
-backend-api1  | 14:49:46.397 [main] INFO br.com.ccs.rinha.service.PaymentProcessorClient -- Default service URL: http://payment-processor-default:8080/payments 
-backend-api1  | 14:49:46.397 [main] INFO br.com.ccs.rinha.service.PaymentProcessorClient -- Fallback fallback URL: http://payment-processor-fallback:8080/payments
-backend-api1  | 14:49:46.397 [main] INFO br.com.ccs.rinha.service.PaymentProcessorClient -- Timeout: PT6S
-backend-api1  | 14:49:46.397 [main] INFO br.com.ccs.rinha.workers.PaymentProcessorWorker -- Payment processor workers: {}10
-backend-api1  | 14:49:46.397 [payment-processor-1] INFO br.com.ccs.rinha.workers.PaymentProcessorWorker -- Payment processor worker started: 1
-backend-api1  | 14:49:46.397 [payment-processor-2] INFO br.com.ccs.rinha.workers.PaymentProcessorWorker -- Payment processor worker started: 2
-backend-api1  | 14:49:46.397 [payment-processor-3] INFO br.com.ccs.rinha.workers.PaymentProcessorWorker -- Payment processor worker started: 3
-backend-api1  | 14:49:46.397 [payment-processor-4] INFO br.com.ccs.rinha.workers.PaymentProcessorWorker -- Payment processor worker started: 4
-backend-api1  | 14:49:46.397 [payment-processor-5] INFO br.com.ccs.rinha.workers.PaymentProcessorWorker -- Payment processor worker started: 5
-backend-api1  | 14:49:46.397 [payment-processor-6] INFO br.com.ccs.rinha.workers.PaymentProcessorWorker -- Payment processor worker started: 6
-backend-api1  | 14:49:46.397 [payment-processor-7] INFO br.com.ccs.rinha.workers.PaymentProcessorWorker -- Payment processor worker started: 7
-backend-api1  | 14:49:46.397 [payment-processor-8] INFO br.com.ccs.rinha.workers.PaymentProcessorWorker -- Payment processor worker started: 8
-backend-api1  | 14:49:46.397 [payment-processor-9] INFO br.com.ccs.rinha.workers.PaymentProcessorWorker -- Payment processor worker started: 9
-backend-api1  | 14:49:46.397 [payment-processor-0] INFO br.com.ccs.rinha.workers.PaymentProcessorWorker -- Payment processor worker started: 0
-backend-api1  | 14:49:46.397 [main] INFO br.com.ccs.rinha.RinhaApp -- Servidor iniciado na porta: 8080 
+backend-db  | 2025-08-17 16:43:36.290 UTC [1] LOG:  starting PostgreSQL 17.5 on x86_64-pc-linux-musl, compiled by gcc (Alpine 14.2.0) 14.2.0, 64-bit
+backend-db  | 2025-08-17 16:43:36.290 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+backend-db  | 2025-08-17 16:43:36.290 UTC [1] LOG:  listening on IPv6 address "::", port 5432
+backend-db  | 2025-08-17 16:43:36.297 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+backend-db  | 2025-08-17 16:43:36.305 UTC [72] LOG:  database system was shut down at 2025-08-17 16:43:36 UTC
+backend-db  | 2025-08-17 16:43:36.314 UTC [1] LOG:  database system is ready to accept connections
+backend-api2  | 16:43:38.195 [main] INFO br.com.ccs.rinha.RinhaApp -- Starting server on port: 8080
+backend-api1  | 16:43:38.195 [main] INFO br.com.ccs.rinha.RinhaApp -- Starting server on port: 8080
+backend-api1  | 16:43:38.216 [main] INFO br.com.ccs.rinha.config.ExecutorConfig -- Thread pool size: 10
+backend-api1  | 16:43:38.216 [main] INFO br.com.ccs.rinha.config.ExecutorConfig -- Thread pool Queue size 1000
+backend-api2  | 16:43:38.216 [main] INFO br.com.ccs.rinha.config.ExecutorConfig -- Thread pool size: 10
+backend-api2  | 16:43:38.216 [main] INFO br.com.ccs.rinha.config.ExecutorConfig -- Thread pool Queue size 1000
+backend-api2  | 16:43:38.216 [main] INFO br.com.ccs.rinha.config.DataSourceFactory -- Data Source URL: jdbc:postgresql://postgres:5432/rinha
+backend-api1  | 16:43:38.216 [main] INFO br.com.ccs.rinha.config.DataSourceFactory -- Data Source URL: jdbc:postgresql://postgres:5432/rinha
+backend-api1  | 16:43:38.216 [main] INFO br.com.ccs.rinha.config.DataSourceFactory -- Data Source Username: rinha
+backend-api1  | 16:43:38.216 [main] INFO br.com.ccs.rinha.config.DataSourceFactory -- Data Source Password: rinha
+backend-api1  | 16:43:38.216 [main] INFO br.com.ccs.rinha.config.DataSourceFactory -- Data Source Timeout: 20000
+backend-api2  | 16:43:38.216 [main] INFO br.com.ccs.rinha.config.DataSourceFactory -- Data Source Username: rinha
+backend-api2  | 16:43:38.216 [main] INFO br.com.ccs.rinha.config.DataSourceFactory -- Data Source Password: rinha
+backend-api2  | 16:43:38.216 [main] INFO br.com.ccs.rinha.config.DataSourceFactory -- Data Source Timeout: 20000
+backend-api2  | 16:43:38.216 [main] INFO br.com.ccs.rinha.config.DataSourceFactory -- Data Source Minimum Idle: 3
+backend-api2  | 16:43:38.216 [main] INFO br.com.ccs.rinha.config.DataSourceFactory -- Data Source Maximum Pool Size: 3
+backend-api1  | 16:43:38.216 [main] INFO br.com.ccs.rinha.config.DataSourceFactory -- Data Source Minimum Idle: 3
+backend-api1  | 16:43:38.217 [main] INFO br.com.ccs.rinha.config.DataSourceFactory -- Data Source Maximum Pool Size: 3
+backend-api1  | 16:43:38.219 [main] INFO br.com.ccs.rinha.config.DataSourceFactory -- Data Source Configured com.zaxxer.hikari.HikariConfig@10b07773
+backend-api2  | 16:43:38.219 [main] INFO br.com.ccs.rinha.config.DataSourceFactory -- Data Source Configured com.zaxxer.hikari.HikariConfig@1d11b9b1
+backend-api1  | 16:43:38.227 [main] INFO com.zaxxer.hikari.HikariDataSource -- HikariPool-1 - Starting...
+backend-api2  | 16:43:38.227 [main] INFO com.zaxxer.hikari.HikariDataSource -- HikariPool-1 - Starting...
+backend-api1  | 16:43:38.317 [main] INFO com.zaxxer.hikari.pool.HikariPool -- HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@73b61398
+backend-api2  | 16:43:38.317 [main] INFO com.zaxxer.hikari.pool.HikariPool -- HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@abcb9c0
+backend-api1  | 16:43:38.318 [main] INFO com.zaxxer.hikari.HikariDataSource -- HikariPool-1 - Start completed.
+backend-api2  | 16:43:38.318 [main] INFO com.zaxxer.hikari.HikariDataSource -- HikariPool-1 - Start completed.
+backend-api1  | 16:43:38.319 [main] INFO br.com.ccs.rinha.repository.JdbcPaymentRepository -- JdbcPaymentRepository workers started
+backend-api2  | 16:43:38.319 [main] INFO br.com.ccs.rinha.repository.JdbcPaymentRepository -- JdbcPaymentRepository workers started
+backend-api1  | 16:43:38.352 [main] INFO br.com.ccs.rinha.service.PaymentProcessorClient -- Default service URL: http://payment-processor-default:8080/payments 
+backend-api2  | 16:43:38.352 [main] INFO br.com.ccs.rinha.service.PaymentProcessorClient -- Default service URL: http://payment-processor-default:8080/payments 
+backend-api2  | 16:43:38.352 [main] INFO br.com.ccs.rinha.service.PaymentProcessorClient -- Fallback fallback URL: http://payment-processor-fallback:8080/payments
+backend-api2  | 16:43:38.352 [main] INFO br.com.ccs.rinha.service.PaymentProcessorClient -- Timeout: PT6S
+backend-api2  | 16:43:38.352 [main] INFO br.com.ccs.rinha.workers.PaymentProcessorWorker -- Payment processor workers: {}10
+backend-api2  | 16:43:38.352 [payment-processor-0] INFO br.com.ccs.rinha.workers.PaymentProcessorWorker -- Payment processor worker started: 0
+backend-api2  | 16:43:38.352 [payment-processor-2] INFO br.com.ccs.rinha.workers.PaymentProcessorWorker -- Payment processor worker started: 2
+backend-api2  | 16:43:38.352 [payment-processor-3] INFO br.com.ccs.rinha.workers.PaymentProcessorWorker -- Payment processor worker started: 3
+backend-api2  | 16:43:38.352 [payment-processor-4] INFO br.com.ccs.rinha.workers.PaymentProcessorWorker -- Payment processor worker started: 4
+backend-api2  | 16:43:38.352 [payment-processor-5] INFO br.com.ccs.rinha.workers.PaymentProcessorWorker -- Payment processor worker started: 5
+backend-api2  | 16:43:38.352 [payment-processor-6] INFO br.com.ccs.rinha.workers.PaymentProcessorWorker -- Payment processor worker started: 6
+backend-api2  | 16:43:38.352 [payment-processor-7] INFO br.com.ccs.rinha.workers.PaymentProcessorWorker -- Payment processor worker started: 7
+backend-api2  | 16:43:38.352 [payment-processor-9] INFO br.com.ccs.rinha.workers.PaymentProcessorWorker -- Payment processor worker started: 9
+backend-api2  | 16:43:38.352 [payment-processor-1] INFO br.com.ccs.rinha.workers.PaymentProcessorWorker -- Payment processor worker started: 1
+backend-api2  | 16:43:38.352 [payment-processor-8] INFO br.com.ccs.rinha.workers.PaymentProcessorWorker -- Payment processor worker started: 8
+backend-api1  | 16:43:38.352 [main] INFO br.com.ccs.rinha.service.PaymentProcessorClient -- Fallback fallback URL: http://payment-processor-fallback:8080/payments
+backend-api1  | 16:43:38.352 [main] INFO br.com.ccs.rinha.service.PaymentProcessorClient -- Timeout: PT6S
+backend-api1  | 16:43:38.352 [payment-processor-0] INFO br.com.ccs.rinha.workers.PaymentProcessorWorker -- Payment processor worker started: 0
+backend-api1  | 16:43:38.352 [payment-processor-1] INFO br.com.ccs.rinha.workers.PaymentProcessorWorker -- Payment processor worker started: 1
+backend-api1  | 16:43:38.352 [payment-processor-2] INFO br.com.ccs.rinha.workers.PaymentProcessorWorker -- Payment processor worker started: 2
+backend-api1  | 16:43:38.353 [main] INFO br.com.ccs.rinha.workers.PaymentProcessorWorker -- Payment processor workers: {}10
+backend-api1  | 16:43:38.353 [payment-processor-4] INFO br.com.ccs.rinha.workers.PaymentProcessorWorker -- Payment processor worker started: 4
+backend-api1  | 16:43:38.353 [payment-processor-5] INFO br.com.ccs.rinha.workers.PaymentProcessorWorker -- Payment processor worker started: 5
+backend-api1  | 16:43:38.353 [payment-processor-6] INFO br.com.ccs.rinha.workers.PaymentProcessorWorker -- Payment processor worker started: 6
+backend-api1  | 16:43:38.353 [payment-processor-7] INFO br.com.ccs.rinha.workers.PaymentProcessorWorker -- Payment processor worker started: 7
+backend-api1  | 16:43:38.353 [payment-processor-9] INFO br.com.ccs.rinha.workers.PaymentProcessorWorker -- Payment processor worker started: 9
+backend-api1  | 16:43:38.353 [payment-processor-8] INFO br.com.ccs.rinha.workers.PaymentProcessorWorker -- Payment processor worker started: 8
+backend-api1  | 16:43:38.353 [payment-processor-3] INFO br.com.ccs.rinha.workers.PaymentProcessorWorker -- Payment processor worker started: 3
+backend-api2  | 16:43:38.353 [main] INFO br.com.ccs.rinha.RinhaApp -- Servidor iniciado na porta: 8080 
+backend-api1  | 16:43:38.353 [main] INFO br.com.ccs.rinha.RinhaApp -- Servidor iniciado na porta: 8080 
 backend-nginx  | /docker-entrypoint.sh: /docker-entrypoint.d/ is not empty, will attempt to perform configuration
 backend-nginx  | /docker-entrypoint.sh: Looking for shell scripts in /docker-entrypoint.d/
 backend-nginx  | /docker-entrypoint.sh: Launching /docker-entrypoint.d/10-listen-on-ipv6-by-default.sh
@@ -188,11 +144,11 @@ backend-nginx  | /docker-entrypoint.sh: Configuration complete; ready for start 
 [Kbackend-nginx exited with code 0
 [Kbackend-api2 exited with code 137
 [Kbackend-api1 exited with code 137
-backend-db     | 2025-08-13 14:51:04.923 UTC [1] LOG:  received fast shutdown request
-backend-db     | 2025-08-13 14:51:04.926 UTC [1] LOG:  aborting any active transactions
-backend-db     | 2025-08-13 14:51:04.930 UTC [1] LOG:  background worker "logical replication launcher" (PID 74) exited with exit code 1
-backend-db     | 2025-08-13 14:51:04.930 UTC [69] LOG:  shutting down
-backend-db     | 2025-08-13 14:51:04.933 UTC [69] LOG:  checkpoint starting: shutdown immediate
-backend-db     | 2025-08-13 14:51:04.956 UTC [69] LOG:  checkpoint complete: wrote 272 buffers (1.7%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.008 s, sync=0.004 s, total=0.027 s; sync files=20, longest=0.002 s, average=0.001 s; distance=790 kB, estimate=790 kB; lsn=0/19DD648, redo lsn=0/19DD648
-backend-db     | 2025-08-13 14:51:05.028 UTC [1] LOG:  database system is shut down
+backend-db     | 2025-08-17 16:44:59.417 UTC [1] LOG:  received fast shutdown request
+backend-db     | 2025-08-17 16:44:59.420 UTC [1] LOG:  aborting any active transactions
+backend-db     | 2025-08-17 16:44:59.424 UTC [1] LOG:  background worker "logical replication launcher" (PID 75) exited with exit code 1
+backend-db     | 2025-08-17 16:44:59.424 UTC [70] LOG:  shutting down
+backend-db     | 2025-08-17 16:44:59.427 UTC [70] LOG:  checkpoint starting: shutdown immediate
+backend-db     | 2025-08-17 16:44:59.451 UTC [70] LOG:  checkpoint complete: wrote 273 buffers (1.7%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.008 s, sync=0.005 s, total=0.027 s; sync files=20, longest=0.003 s, average=0.001 s; distance=796 kB, estimate=796 kB; lsn=0/19DEC38, redo lsn=0/19DEC38
+backend-db     | 2025-08-17 16:44:59.488 UTC [1] LOG:  database system is shut down
 log truncated at line 1000

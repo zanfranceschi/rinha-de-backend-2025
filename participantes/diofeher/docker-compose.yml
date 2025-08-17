@@ -1,6 +1,8 @@
 x-api_template: &api
-  image: ghcr.io/diofeher/rinha-de-backend-2025-diofeher:main-2eea43c
+  image: ghcr.io/diofeher/rinha-de-backend-2025-diofeher:main-25d8525
   depends_on:
+    # influxdb:
+      # condition: service_healthy
     redis:
       condition: service_healthy
   volumes:
@@ -16,9 +18,8 @@ x-api_template: &api
     - payment-processor
 
 services:
-  haproxy:
-    image: haproxy:latest
-    container_name: haproxy
+  nginx:
+    image: nginx:latest
     ports:
       - "9999:80"
     networks:
@@ -30,22 +31,22 @@ services:
       resources:
         limits:
           cpus: "0.45"
-          memory: "100MB"
+          memory: "70MB"
     volumes:
-      - ./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
       - socket_data:/tmp
-    command: ["haproxy", "-f", "/usr/local/etc/haproxy/haproxy.cfg"]
   api1:
     <<: *api
     environment:
-      # - CPU_PROFILE=/app/profile/diogenes.pprof
+      # - CPU_PROFILE=/app/profile/diogenes6.pprof
+      # - TRACE_PROFILE=/app/profile/trace6.pprof
       - SOCKET_PATH=/tmp/api1.sock
       - DEBUG=false
       - REDIS_URL=/tmp/redis.sock
       - REDIS_DB=rinha
       - PROCESSOR_DEFAULT_URL=http://payment-processor-default:8080
       - PROCESSOR_FALLBACK_URL=http://payment-processor-fallback:8080
-      - NUM_WORKERS=10
+      - NUM_WORKERS=6
   api2:
     <<: *api
     environment:
@@ -55,7 +56,7 @@ services:
       - REDIS_DB=rinha
       - PROCESSOR_DEFAULT_URL=http://payment-processor-default:8080
       - PROCESSOR_FALLBACK_URL=http://payment-processor-fallback:8080
-      - NUM_WORKERS=10
+      - NUM_WORKERS=6
   redis:
     image: redis:latest
     container_name: redis
@@ -82,6 +83,34 @@ services:
         limits:
           cpus: "0.05"
           memory: "50MB"
+  # influxdb:
+  #   image: influxdb:3.0.3-core
+  #   container_name: influxdb
+  #   volumes:
+  #     - influxdb_data:/var/lib/influxdb2
+  #     - socket_data:/tmp
+  #   networks:
+  #     - backend
+  #   environment:
+  #     - INFLUXDB3_OBJECT_STORE=memory
+  #     - INFLUXDB3_AUTH_TOKEN=_admin
+  #     # TODO: change to error
+  #     - INFLUXDB3_LOG_FILTER=info
+  #     - INFLUXDB3_NODE_IDENTIFIER_PREFIX=rinha
+  #     - INFLUXDB3_HTTP_BIND_ADDR=influxdb:8181
+  #     - INFLUXDB3_START_WITHOUT_AUTH=true
+  #   ports:
+  #     - "8181:8181"
+  #   healthcheck:
+  #     test: "curl -f http://influxdb:8181/ping"
+  #     interval: 5s
+  #     timeout: 5s
+  #     retries: 2
+  #   deploy:
+  #     resources:
+  #       limits:
+  #         cpus: "0.5"
+  #         memory: "150MB"
 
 # cpus: nginx 0.15 apps 0.30 redis 1.15 = 1.5 total 
 # # memory: nginx 15MB apps 30MB redis 305MB = 350MB total 

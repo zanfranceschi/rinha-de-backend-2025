@@ -8,7 +8,7 @@ Stack:
 - <img src="https://devblogs.microsoft.com/wp-content/uploads/sites/9/2021/05/vcpkg-product-mark.png" alt="logo vcpkg" width="150" height="auto" valign="middle"> `vcpkg` como gerenciador de pacotes
 - <img src="https://dbdb.io/media/logos/lmdb.png" alt="logo lmdb" width="150" height="auto" valign="middle"> `lmdb` como banco de dados
 
-[Implementação](https://github.com/asfernandes/rinhaback25-boost-lmdb)
+[Implementação](https://github.com/asfernandes/rinhaback25/tree/main/c%2B%2B-boost-lmdb)
 
 [Repositório da rinha](https://github.com/zanfranceschi/rinha-de-backend-2025/tree/main)
 

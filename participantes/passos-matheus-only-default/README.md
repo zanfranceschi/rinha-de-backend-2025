@@ -1,1 +1,1 @@
-Ativando timeout adaptativo, na minha máquina não era suportado, então verificando se o servidor de testes aguenta.
+Essa versão processa todos os payments no processor default, ficando ocioso em momentos em que ele cai aguardando ele retornar.

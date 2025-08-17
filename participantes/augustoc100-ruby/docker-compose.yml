@@ -1,0 +1,90 @@
+version: '3.8'
+
+x-service-templates:
+  app-base: &app-base
+    image: caugustoc100/rinha-2025-api:rinha-2025-ruby
+    networks:
+      - backend
+      - payment-db
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          cpus: "0.45"
+          memory: "90MB"
+    depends_on:
+      - db
+      - redis
+services:
+  redis:
+    image: redis:7
+    ports:
+      - "6379:6379"
+    deploy:
+      resources:
+        limits:
+          cpus: "0.20"
+          memory: "60MB"
+    networks:
+      - backend
+  backend1:
+    <<: *app-base
+    environment:
+      APP_INSTANCE: "backend1"
+      DATABASE_URL: "postgresql://postgres:postgres@db:5432/backend"
+      REDIS_URL: "redis://redis:6379/0"
+      PROCESSOR_DEFAULT_URL: http://payment-processor-default:8080
+      PROCESSOR_FALLBACK_URL: http://payment-processor-fallback:8080
+  backend2:
+    <<: *app-base
+    environment:
+      APP_INSTANCE: "backend2"
+      REDIS_URL: "redis://redis:6379/0"
+      DATABASE_URL: "postgresql://postgres:postgres@db:5432/backend"
+      PROCESSOR_DEFAULT_URL: http://payment-processor-default:8080
+      PROCESSOR_FALLBACK_URL: http://payment-processor-fallback:8080
+  nginx:
+    image: nginx:1.25
+    ports:
+      - "9999:9999"
+    volumes:
+      - ./nginx.config:/etc/nginx/nginx.conf:ro
+    networks:
+      - backend
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          cpus: "0.20"
+          memory: "20MB"
+    depends_on:
+      - backend1
+      - backend2
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: backend
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./sql/ddl.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    networks:
+      - payment-db
+    deploy:
+      resources:
+        limits:
+          cpus: "0.20"
+          memory: "90MB"
+volumes:
+  pgdata:
+
+networks:
+  backend:
+    driver: bridge
+  payment-db:
+    driver: bridge
+  payment-processor:
+    external: true

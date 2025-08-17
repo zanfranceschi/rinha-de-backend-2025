@@ -1,0 +1,1001 @@
+
+ Network alansouls-dotnet-aot_backend  Creating
+ Network alansouls-dotnet-aot_backend  Created
+ Network alansouls-dotnet-aot_frontdoor  Creating
+ Network alansouls-dotnet-aot_frontdoor  Created
+ Container alansouls-dotnet-aot-rinhabackend.worker-1  Creating
+ Container alansouls-dotnet-aot-rinhabackend.api1-1  Creating
+ Container alansouls-dotnet-aot-rinhabackend.api2-1  Creating
+ Container alansouls-dotnet-aot-rinhabackend.worker-1  Created
+ Container alansouls-dotnet-aot-rinhabackend.api1-1  Created
+ Container alansouls-dotnet-aot-rinhabackend.api2-1  Created
+ Container alansouls-dotnet-aot-nginx-1  Creating
+ Container alansouls-dotnet-aot-nginx-1  Created
+Attaching to nginx-1, rinhabackend.api1-1, rinhabackend.api2-1, rinhabackend.worker-1
+rinhabackend.api2-1  | info: RinhaBackend.Api.DbUpdater[0]
+rinhabackend.api2-1  |       Worker running at: 08/15/2025 23:46:54 +00:00
+rinhabackend.api2-1  | info: Microsoft.Hosting.Lifetime[14]
+rinhabackend.api2-1  |       Now listening on: http://[::]:8080
+rinhabackend.api2-1  | info: Microsoft.Hosting.Lifetime[0]
+rinhabackend.api2-1  |       Application started. Press Ctrl+C to shut down.
+rinhabackend.api2-1  | info: Microsoft.Hosting.Lifetime[0]
+rinhabackend.api2-1  |       Hosting environment: Production
+rinhabackend.api2-1  | info: Microsoft.Hosting.Lifetime[0]
+rinhabackend.api2-1  |       Content root path: /app
+rinhabackend.api1-1  | info: RinhaBackend.Api.DbUpdater[0]
+rinhabackend.api1-1  |       Worker running at: 08/15/2025 23:46:54 +00:00
+rinhabackend.api1-1  | info: Microsoft.Hosting.Lifetime[14]
+rinhabackend.api1-1  |       Now listening on: http://[::]:8080
+rinhabackend.api1-1  | info: Microsoft.Hosting.Lifetime[0]
+rinhabackend.api1-1  |       Application started. Press Ctrl+C to shut down.
+rinhabackend.api1-1  | info: Microsoft.Hosting.Lifetime[0]
+rinhabackend.api1-1  |       Hosting environment: Production
+rinhabackend.api1-1  | info: Microsoft.Hosting.Lifetime[0]
+rinhabackend.api1-1  |       Content root path: /app
+rinhabackend.worker-1  | info: Microsoft.Hosting.Lifetime[0]
+rinhabackend.worker-1  |       Application started. Press Ctrl+C to shut down.
+rinhabackend.worker-1  | info: Microsoft.Hosting.Lifetime[0]
+rinhabackend.worker-1  |       Hosting environment: Production
+rinhabackend.worker-1  | info: Microsoft.Hosting.Lifetime[0]
+rinhabackend.worker-1  |       Content root path: /app
+nginx-1                | /docker-entrypoint.sh: /docker-entrypoint.d/ is not empty, will attempt to perform configuration
+nginx-1                | /docker-entrypoint.sh: Looking for shell scripts in /docker-entrypoint.d/
+nginx-1                | /docker-entrypoint.sh: Launching /docker-entrypoint.d/10-listen-on-ipv6-by-default.sh
+nginx-1                | 10-listen-on-ipv6-by-default.sh: info: Getting the checksum of /etc/nginx/conf.d/default.conf
+nginx-1                | 10-listen-on-ipv6-by-default.sh: info: Enabled listen on IPv6 in /etc/nginx/conf.d/default.conf
+nginx-1                | /docker-entrypoint.sh: Sourcing /docker-entrypoint.d/15-local-resolvers.envsh
+nginx-1                | /docker-entrypoint.sh: Launching /docker-entrypoint.d/20-envsubst-on-templates.sh
+nginx-1                | /docker-entrypoint.sh: Launching /docker-entrypoint.d/30-tune-worker-processes.sh
+nginx-1                | /docker-entrypoint.sh: Configuration complete; ready for start up
+nginx-1                | 172.20.0.1 - - [15/Aug/2025:23:46:58 +0000] "GET /payments-summary HTTP/1.1" 200 105 "-" "curl/8.5.0" "-"
+nginx-1                | 172.20.0.1 - - [15/Aug/2025:23:47:04 +0000] "POST /purge-payments HTTP/1.1" 404 0 "-" "Grafana k6/1.1.0" "-"
+nginx-1                | 172.20.0.1 - - [15/Aug/2025:23:47:04 +0000] "GET /payments-summary?from=2025-08-15T23:46:49.249Z&to=2025-08-15T23:47:02.749Z HTTP/1.1" 200 105 "-" "Grafana k6/1.1.0" "-"
+nginx-1                | 172.20.0.1 - - [15/Aug/2025:23:47:04 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0" "-"
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[100]
+rinhabackend.worker-1  |       Start processing HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[100]
+rinhabackend.worker-1  |       Sending HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[101]
+rinhabackend.worker-1  |       Received HTTP response headers after 1.871ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[101]
+rinhabackend.worker-1  |       End processing HTTP request after 2.0515ms - 200
+nginx-1                | 172.20.0.1 - - [15/Aug/2025:23:47:04 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0" "-"
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[100]
+rinhabackend.worker-1  |       Start processing HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[100]
+rinhabackend.worker-1  |       Sending HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[101]
+rinhabackend.worker-1  |       Received HTTP response headers after 0.8662ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[101]
+rinhabackend.worker-1  |       End processing HTTP request after 0.9622ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[100]
+rinhabackend.worker-1  |       Start processing HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[100]
+rinhabackend.worker-1  |       Sending HTTP request POST http://payment-processor-default:8080/payments
+nginx-1                | 172.20.0.1 - - [15/Aug/2025:23:47:04 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0" "-"
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[101]
+rinhabackend.worker-1  |       Received HTTP response headers after 0.78ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[101]
+rinhabackend.worker-1  |       End processing HTTP request after 0.8345ms - 200
+nginx-1                | 172.20.0.1 - - [15/Aug/2025:23:47:04 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0" "-"
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[100]
+rinhabackend.worker-1  |       Start processing HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[100]
+rinhabackend.worker-1  |       Sending HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[101]
+rinhabackend.worker-1  |       Received HTTP response headers after 0.8556ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[101]
+rinhabackend.worker-1  |       End processing HTTP request after 0.9048ms - 200
+nginx-1                | 172.20.0.1 - - [15/Aug/2025:23:47:04 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0" "-"
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[100]
+rinhabackend.worker-1  |       Start processing HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[100]
+rinhabackend.worker-1  |       Sending HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[101]
+rinhabackend.worker-1  |       Received HTTP response headers after 0.9518ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[101]
+rinhabackend.worker-1  |       End processing HTTP request after 0.9998ms - 200
+nginx-1                | 172.20.0.1 - - [15/Aug/2025:23:47:04 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0" "-"
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[100]
+rinhabackend.worker-1  |       Start processing HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[100]
+rinhabackend.worker-1  |       Sending HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[101]
+rinhabackend.worker-1  |       Received HTTP response headers after 0.7488ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[101]
+rinhabackend.worker-1  |       End processing HTTP request after 0.7867ms - 200
+nginx-1                | 172.20.0.1 - - [15/Aug/2025:23:47:04 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0" "-"
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[100]
+rinhabackend.worker-1  |       Start processing HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[100]
+rinhabackend.worker-1  |       Sending HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[101]
+rinhabackend.worker-1  |       Received HTTP response headers after 0.8056ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[101]
+rinhabackend.worker-1  |       End processing HTTP request after 0.8478ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[100]
+rinhabackend.worker-1  |       Start processing HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[100]
+rinhabackend.worker-1  |       Sending HTTP request POST http://payment-processor-default:8080/payments
+nginx-1                | 172.20.0.1 - - [15/Aug/2025:23:47:05 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0" "-"
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[101]
+rinhabackend.worker-1  |       Received HTTP response headers after 0.8345ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[101]
+rinhabackend.worker-1  |       End processing HTTP request after 0.8779ms - 200
+nginx-1                | 172.20.0.1 - - [15/Aug/2025:23:47:05 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0" "-"
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[100]
+rinhabackend.worker-1  |       Start processing HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[100]
+rinhabackend.worker-1  |       Sending HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[101]
+rinhabackend.worker-1  |       Received HTTP response headers after 0.8608ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[101]
+rinhabackend.worker-1  |       End processing HTTP request after 0.9022ms - 200
+nginx-1                | 172.20.0.1 - - [15/Aug/2025:23:47:05 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0" "-"
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[100]
+rinhabackend.worker-1  |       Start processing HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[100]
+rinhabackend.worker-1  |       Sending HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[101]
+rinhabackend.worker-1  |       Received HTTP response headers after 0.918ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[101]
+rinhabackend.worker-1  |       End processing HTTP request after 0.9621ms - 200
+nginx-1                | 172.20.0.1 - - [15/Aug/2025:23:47:05 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0" "-"
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[100]
+rinhabackend.worker-1  |       Start processing HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[100]
+rinhabackend.worker-1  |       Sending HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[101]
+rinhabackend.worker-1  |       Received HTTP response headers after 0.8182ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[101]
+rinhabackend.worker-1  |       End processing HTTP request after 0.8847ms - 200
+nginx-1                | 172.20.0.1 - - [15/Aug/2025:23:47:05 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0" "-"
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[100]
+rinhabackend.worker-1  |       Start processing HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[100]
+rinhabackend.worker-1  |       Sending HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[101]
+rinhabackend.worker-1  |       Received HTTP response headers after 0.8365ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[101]
+rinhabackend.worker-1  |       End processing HTTP request after 0.8736ms - 200
+nginx-1                | 172.20.0.1 - - [15/Aug/2025:23:47:05 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0" "-"
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[100]
+rinhabackend.worker-1  |       Start processing HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[100]
+rinhabackend.worker-1  |       Sending HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[101]
+rinhabackend.worker-1  |       Received HTTP response headers after 0.5959ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[101]
+rinhabackend.worker-1  |       End processing HTTP request after 0.6317ms - 200
+nginx-1                | 172.20.0.1 - - [15/Aug/2025:23:47:05 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0" "-"
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[100]
+rinhabackend.worker-1  |       Start processing HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[100]
+rinhabackend.worker-1  |       Sending HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[101]
+rinhabackend.worker-1  |       Received HTTP response headers after 0.7088ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[101]
+rinhabackend.worker-1  |       End processing HTTP request after 0.759ms - 200
+nginx-1                | 172.20.0.1 - - [15/Aug/2025:23:47:05 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0" "-"
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[100]
+rinhabackend.worker-1  |       Start processing HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[100]
+rinhabackend.worker-1  |       Sending HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[101]
+rinhabackend.worker-1  |       Received HTTP response headers after 0.7374ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[101]
+rinhabackend.worker-1  |       End processing HTTP request after 0.784ms - 200
+nginx-1                | 172.20.0.1 - - [15/Aug/2025:23:47:05 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0" "-"
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[100]
+rinhabackend.worker-1  |       Start processing HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[100]
+rinhabackend.worker-1  |       Sending HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[101]
+rinhabackend.worker-1  |       Received HTTP response headers after 0.9476ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[101]
+rinhabackend.worker-1  |       End processing HTTP request after 1.0055ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[100]
+rinhabackend.worker-1  |       Start processing HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[100]
+rinhabackend.worker-1  |       Sending HTTP request POST http://payment-processor-default:8080/payments
+nginx-1                | 172.20.0.1 - - [15/Aug/2025:23:47:05 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0" "-"
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[101]
+rinhabackend.worker-1  |       Received HTTP response headers after 0.6718ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[101]
+rinhabackend.worker-1  |       End processing HTTP request after 0.7219ms - 200
+nginx-1                | 172.20.0.1 - - [15/Aug/2025:23:47:05 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0" "-"
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[100]
+rinhabackend.worker-1  |       Start processing HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[100]
+rinhabackend.worker-1  |       Sending HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[101]
+rinhabackend.worker-1  |       Received HTTP response headers after 0.8443ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[101]
+rinhabackend.worker-1  |       End processing HTTP request after 0.9953ms - 200
+nginx-1                | 172.20.0.1 - - [15/Aug/2025:23:47:05 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0" "-"
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[100]
+rinhabackend.worker-1  |       Start processing HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[100]
+rinhabackend.worker-1  |       Sending HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[101]
+rinhabackend.worker-1  |       Received HTTP response headers after 0.7464ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[101]
+rinhabackend.worker-1  |       End processing HTTP request after 0.783ms - 200
+nginx-1                | 172.20.0.1 - - [15/Aug/2025:23:47:05 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0" "-"
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[100]
+rinhabackend.worker-1  |       Start processing HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[100]
+rinhabackend.worker-1  |       Sending HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[101]
+rinhabackend.worker-1  |       Received HTTP response headers after 0.983ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[101]
+rinhabackend.worker-1  |       End processing HTTP request after 1.0236ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[100]
+rinhabackend.worker-1  |       Start processing HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[100]
+rinhabackend.worker-1  |       Sending HTTP request POST http://payment-processor-default:8080/payments
+nginx-1                | 172.20.0.1 - - [15/Aug/2025:23:47:05 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0" "-"
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[101]
+rinhabackend.worker-1  |       Received HTTP response headers after 0.6398ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[101]
+rinhabackend.worker-1  |       End processing HTTP request after 0.6775ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[100]
+rinhabackend.worker-1  |       Start processing HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[100]
+rinhabackend.worker-1  |       Sending HTTP request POST http://payment-processor-default:8080/payments
+nginx-1                | 172.20.0.1 - - [15/Aug/2025:23:47:05 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0" "-"
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[101]
+rinhabackend.worker-1  |       Received HTTP response headers after 0.826ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[101]
+rinhabackend.worker-1  |       End processing HTTP request after 0.8736ms - 200
+nginx-1                | 172.20.0.1 - - [15/Aug/2025:23:47:05 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0" "-"
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[100]
+rinhabackend.worker-1  |       Start processing HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[100]
+rinhabackend.worker-1  |       Sending HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[101]
+rinhabackend.worker-1  |       Received HTTP response headers after 0.7329ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[101]
+rinhabackend.worker-1  |       End processing HTTP request after 0.7694ms - 200
+nginx-1                | 172.20.0.1 - - [15/Aug/2025:23:47:05 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0" "-"
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[100]
+rinhabackend.worker-1  |       Start processing HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[100]
+rinhabackend.worker-1  |       Sending HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[101]
+rinhabackend.worker-1  |       Received HTTP response headers after 0.8404ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[101]
+rinhabackend.worker-1  |       End processing HTTP request after 0.8787ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[100]
+rinhabackend.worker-1  |       Start processing HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[100]
+rinhabackend.worker-1  |       Sending HTTP request POST http://payment-processor-default:8080/payments
+nginx-1                | 172.20.0.1 - - [15/Aug/2025:23:47:06 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0" "-"
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[101]
+rinhabackend.worker-1  |       Received HTTP response headers after 0.582ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[101]
+rinhabackend.worker-1  |       End processing HTTP request after 0.6409ms - 200
+nginx-1                | 172.20.0.1 - - [15/Aug/2025:23:47:06 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0" "-"
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[100]
+rinhabackend.worker-1  |       Start processing HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[100]
+rinhabackend.worker-1  |       Sending HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[101]
+rinhabackend.worker-1  |       Received HTTP response headers after 0.8102ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[101]
+rinhabackend.worker-1  |       End processing HTTP request after 0.8574ms - 200
+nginx-1                | 172.20.0.1 - - [15/Aug/2025:23:47:06 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0" "-"
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[100]
+rinhabackend.worker-1  |       Start processing HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[100]
+rinhabackend.worker-1  |       Sending HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[101]
+rinhabackend.worker-1  |       Received HTTP response headers after 0.5911ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[101]
+rinhabackend.worker-1  |       End processing HTTP request after 0.6336ms - 200
+nginx-1                | 172.20.0.1 - - [15/Aug/2025:23:47:06 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0" "-"
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[100]
+rinhabackend.worker-1  |       Start processing HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[100]
+rinhabackend.worker-1  |       Sending HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[101]
+rinhabackend.worker-1  |       Received HTTP response headers after 0.8981ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[101]
+rinhabackend.worker-1  |       End processing HTTP request after 0.9491ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[100]
+rinhabackend.worker-1  |       Start processing HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[100]
+rinhabackend.worker-1  |       Sending HTTP request POST http://payment-processor-default:8080/payments
+nginx-1                | 172.20.0.1 - - [15/Aug/2025:23:47:06 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0" "-"
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[101]
+rinhabackend.worker-1  |       Received HTTP response headers after 0.6226ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[101]
+rinhabackend.worker-1  |       End processing HTTP request after 0.6564ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[100]
+rinhabackend.worker-1  |       Start processing HTTP request POST http://payment-processor-default:8080/payments
+nginx-1                | 172.20.0.1 - - [15/Aug/2025:23:47:06 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0" "-"
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[100]
+rinhabackend.worker-1  |       Sending HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[101]
+rinhabackend.worker-1  |       Received HTTP response headers after 0.6063ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[101]
+rinhabackend.worker-1  |       End processing HTTP request after 0.6441ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[100]
+rinhabackend.worker-1  |       Start processing HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[100]
+rinhabackend.worker-1  |       Sending HTTP request POST http://payment-processor-default:8080/payments
+nginx-1                | 172.20.0.1 - - [15/Aug/2025:23:47:06 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0" "-"
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[101]
+rinhabackend.worker-1  |       Received HTTP response headers after 0.7953ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[101]
+rinhabackend.worker-1  |       End processing HTTP request after 0.8335ms - 200
+nginx-1                | 172.20.0.1 - - [15/Aug/2025:23:47:06 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0" "-"
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[100]
+rinhabackend.worker-1  |       Start processing HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[100]
+rinhabackend.worker-1  |       Sending HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[101]
+rinhabackend.worker-1  |       Received HTTP response headers after 0.7684ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[101]
+rinhabackend.worker-1  |       End processing HTTP request after 0.8046ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[100]
+rinhabackend.worker-1  |       Start processing HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[100]
+rinhabackend.worker-1  |       Sending HTTP request POST http://payment-processor-default:8080/payments
+nginx-1                | 172.20.0.1 - - [15/Aug/2025:23:47:06 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0" "-"
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[101]
+rinhabackend.worker-1  |       Received HTTP response headers after 0.7887ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[101]
+rinhabackend.worker-1  |       End processing HTTP request after 0.826ms - 200
+nginx-1                | 172.20.0.1 - - [15/Aug/2025:23:47:06 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0" "-"
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[100]
+rinhabackend.worker-1  |       Start processing HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[100]
+rinhabackend.worker-1  |       Sending HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[101]
+rinhabackend.worker-1  |       Received HTTP response headers after 0.813ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[101]
+rinhabackend.worker-1  |       End processing HTTP request after 0.8526ms - 200
+nginx-1                | 172.20.0.1 - - [15/Aug/2025:23:47:06 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0" "-"
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[100]
+rinhabackend.worker-1  |       Start processing HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[100]
+rinhabackend.worker-1  |       Sending HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[101]
+rinhabackend.worker-1  |       Received HTTP response headers after 0.8215ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[101]
+rinhabackend.worker-1  |       End processing HTTP request after 0.8582ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[100]
+rinhabackend.worker-1  |       Start processing HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[100]
+rinhabackend.worker-1  |       Sending HTTP request POST http://payment-processor-default:8080/payments
+nginx-1                | 172.20.0.1 - - [15/Aug/2025:23:47:06 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0" "-"
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[101]
+rinhabackend.worker-1  |       Received HTTP response headers after 4.5337ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[101]
+rinhabackend.worker-1  |       End processing HTTP request after 4.5898ms - 200
+nginx-1                | 172.20.0.1 - - [15/Aug/2025:23:47:06 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0" "-"
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[100]
+rinhabackend.worker-1  |       Start processing HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[100]
+rinhabackend.worker-1  |       Sending HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[101]
+rinhabackend.worker-1  |       Received HTTP response headers after 0.8786ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[101]
+rinhabackend.worker-1  |       End processing HTTP request after 0.9203ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[100]
+rinhabackend.worker-1  |       Start processing HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[100]
+rinhabackend.worker-1  |       Sending HTTP request POST http://payment-processor-default:8080/payments
+nginx-1                | 172.20.0.1 - - [15/Aug/2025:23:47:06 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0" "-"
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[101]
+rinhabackend.worker-1  |       Received HTTP response headers after 0.7935ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[101]
+rinhabackend.worker-1  |       End processing HTTP request after 0.8356ms - 200
+nginx-1                | 172.20.0.1 - - [15/Aug/2025:23:47:06 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0" "-"
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[100]
+rinhabackend.worker-1  |       Start processing HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[100]
+rinhabackend.worker-1  |       Sending HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[101]
+rinhabackend.worker-1  |       Received HTTP response headers after 0.6514ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[101]
+rinhabackend.worker-1  |       End processing HTTP request after 0.6836ms - 200
+nginx-1                | 172.20.0.1 - - [15/Aug/2025:23:47:06 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0" "-"
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[100]
+rinhabackend.worker-1  |       Start processing HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[100]
+rinhabackend.worker-1  |       Sending HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[101]
+rinhabackend.worker-1  |       Received HTTP response headers after 0.7226ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[101]
+rinhabackend.worker-1  |       End processing HTTP request after 0.7644ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[100]
+rinhabackend.worker-1  |       Start processing HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[100]
+rinhabackend.worker-1  |       Sending HTTP request POST http://payment-processor-default:8080/payments
+nginx-1                | 172.20.0.1 - - [15/Aug/2025:23:47:06 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0" "-"
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[101]
+rinhabackend.worker-1  |       Received HTTP response headers after 0.72ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[101]
+rinhabackend.worker-1  |       End processing HTTP request after 0.754ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[100]
+rinhabackend.worker-1  |       Start processing HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[100]
+rinhabackend.worker-1  |       Sending HTTP request POST http://payment-processor-default:8080/payments
+nginx-1                | 172.20.0.1 - - [15/Aug/2025:23:47:06 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0" "-"
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[101]
+rinhabackend.worker-1  |       Received HTTP response headers after 0.7334ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[101]
+rinhabackend.worker-1  |       End processing HTTP request after 0.7711ms - 200
+nginx-1                | 172.20.0.1 - - [15/Aug/2025:23:47:06 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0" "-"
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[100]
+rinhabackend.worker-1  |       Start processing HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[100]
+rinhabackend.worker-1  |       Sending HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[101]
+rinhabackend.worker-1  |       Received HTTP response headers after 0.7921ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[101]
+rinhabackend.worker-1  |       End processing HTTP request after 0.8303ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[100]
+rinhabackend.worker-1  |       Start processing HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[100]
+rinhabackend.worker-1  |       Sending HTTP request POST http://payment-processor-default:8080/payments
+nginx-1                | 172.20.0.1 - - [15/Aug/2025:23:47:06 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0" "-"
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[101]
+rinhabackend.worker-1  |       Received HTTP response headers after 0.7393ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[101]
+rinhabackend.worker-1  |       End processing HTTP request after 0.776ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[100]
+rinhabackend.worker-1  |       Start processing HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[100]
+rinhabackend.worker-1  |       Sending HTTP request POST http://payment-processor-default:8080/payments
+nginx-1                | 172.20.0.1 - - [15/Aug/2025:23:47:06 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0" "-"
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[101]
+rinhabackend.worker-1  |       Received HTTP response headers after 0.6434ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[101]
+rinhabackend.worker-1  |       End processing HTTP request after 0.6844ms - 200
+nginx-1                | 172.20.0.1 - - [15/Aug/2025:23:47:06 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0" "-"
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[100]
+rinhabackend.worker-1  |       Start processing HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[100]
+rinhabackend.worker-1  |       Sending HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[101]
+rinhabackend.worker-1  |       Received HTTP response headers after 0.7576ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[101]
+rinhabackend.worker-1  |       End processing HTTP request after 0.8008ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[100]
+rinhabackend.worker-1  |       Start processing HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[100]
+rinhabackend.worker-1  |       Sending HTTP request POST http://payment-processor-default:8080/payments
+nginx-1                | 172.20.0.1 - - [15/Aug/2025:23:47:06 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0" "-"
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[101]
+rinhabackend.worker-1  |       Received HTTP response headers after 0.6819ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[101]
+rinhabackend.worker-1  |       End processing HTTP request after 0.7236ms - 200
+nginx-1                | 172.20.0.1 - - [15/Aug/2025:23:47:06 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0" "-"
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[100]
+rinhabackend.worker-1  |       Start processing HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[100]
+rinhabackend.worker-1  |       Sending HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[101]
+rinhabackend.worker-1  |       Received HTTP response headers after 0.7277ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[101]
+rinhabackend.worker-1  |       End processing HTTP request after 0.7583ms - 200
+nginx-1                | 172.20.0.1 - - [15/Aug/2025:23:47:06 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0" "-"
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[100]
+rinhabackend.worker-1  |       Start processing HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[100]
+rinhabackend.worker-1  |       Sending HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[101]
+rinhabackend.worker-1  |       Received HTTP response headers after 0.6346ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[101]
+rinhabackend.worker-1  |       End processing HTTP request after 0.6729ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[100]
+rinhabackend.worker-1  |       Start processing HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[100]
+rinhabackend.worker-1  |       Sending HTTP request POST http://payment-processor-default:8080/payments
+nginx-1                | 172.20.0.1 - - [15/Aug/2025:23:47:07 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0" "-"
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[101]
+rinhabackend.worker-1  |       Received HTTP response headers after 0.658ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[101]
+rinhabackend.worker-1  |       End processing HTTP request after 0.7139ms - 200
+nginx-1                | 172.20.0.1 - - [15/Aug/2025:23:47:07 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0" "-"
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[100]
+rinhabackend.worker-1  |       Start processing HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[100]
+rinhabackend.worker-1  |       Sending HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[101]
+rinhabackend.worker-1  |       Received HTTP response headers after 0.7008ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[101]
+rinhabackend.worker-1  |       End processing HTTP request after 0.7419ms - 200
+nginx-1                | 172.20.0.1 - - [15/Aug/2025:23:47:07 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0" "-"
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[100]
+rinhabackend.worker-1  |       Start processing HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[100]
+rinhabackend.worker-1  |       Sending HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[101]
+rinhabackend.worker-1  |       Received HTTP response headers after 0.964ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[101]
+rinhabackend.worker-1  |       End processing HTTP request after 1.0102ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[100]
+rinhabackend.worker-1  |       Start processing HTTP request POST http://payment-processor-default:8080/payments
+nginx-1                | 172.20.0.1 - - [15/Aug/2025:23:47:07 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0" "-"
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[100]
+rinhabackend.worker-1  |       Sending HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[101]
+rinhabackend.worker-1  |       Received HTTP response headers after 0.6421ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[101]
+rinhabackend.worker-1  |       End processing HTTP request after 0.6792ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[100]
+rinhabackend.worker-1  |       Start processing HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[100]
+rinhabackend.worker-1  |       Sending HTTP request POST http://payment-processor-default:8080/payments
+nginx-1                | 172.20.0.1 - - [15/Aug/2025:23:47:07 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0" "-"
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[101]
+rinhabackend.worker-1  |       Received HTTP response headers after 0.7074ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[101]
+rinhabackend.worker-1  |       End processing HTTP request after 0.7423ms - 200
+nginx-1                | 172.20.0.1 - - [15/Aug/2025:23:47:07 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0" "-"
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[100]
+rinhabackend.worker-1  |       Start processing HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[100]
+rinhabackend.worker-1  |       Sending HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[101]
+rinhabackend.worker-1  |       Received HTTP response headers after 0.6063ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[101]
+rinhabackend.worker-1  |       End processing HTTP request after 0.6447ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[100]
+rinhabackend.worker-1  |       Start processing HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[100]
+rinhabackend.worker-1  |       Sending HTTP request POST http://payment-processor-default:8080/payments
+nginx-1                | 172.20.0.1 - - [15/Aug/2025:23:47:07 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0" "-"
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[101]
+rinhabackend.worker-1  |       Received HTTP response headers after 0.7788ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[101]
+rinhabackend.worker-1  |       End processing HTTP request after 0.8233ms - 200
+nginx-1                | 172.20.0.1 - - [15/Aug/2025:23:47:07 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0" "-"
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[100]
+rinhabackend.worker-1  |       Start processing HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[100]
+rinhabackend.worker-1  |       Sending HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[101]
+rinhabackend.worker-1  |       Received HTTP response headers after 0.6495ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[101]
+rinhabackend.worker-1  |       End processing HTTP request after 0.6893ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[100]
+rinhabackend.worker-1  |       Start processing HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[100]
+rinhabackend.worker-1  |       Sending HTTP request POST http://payment-processor-default:8080/payments
+nginx-1                | 172.20.0.1 - - [15/Aug/2025:23:47:07 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0" "-"
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[101]
+rinhabackend.worker-1  |       Received HTTP response headers after 0.5175ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[101]
+rinhabackend.worker-1  |       End processing HTTP request after 0.5558ms - 200
+nginx-1                | 172.20.0.1 - - [15/Aug/2025:23:47:07 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0" "-"
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[100]
+rinhabackend.worker-1  |       Start processing HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[100]
+rinhabackend.worker-1  |       Sending HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[101]
+rinhabackend.worker-1  |       Received HTTP response headers after 0.7153ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[101]
+rinhabackend.worker-1  |       End processing HTTP request after 0.7871ms - 200
+nginx-1                | 172.20.0.1 - - [15/Aug/2025:23:47:07 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0" "-"
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[100]
+rinhabackend.worker-1  |       Start processing HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[100]
+rinhabackend.worker-1  |       Sending HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[101]
+rinhabackend.worker-1  |       Received HTTP response headers after 0.7033ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[101]
+rinhabackend.worker-1  |       End processing HTTP request after 0.7314ms - 200
+nginx-1                | 172.20.0.1 - - [15/Aug/2025:23:47:07 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0" "-"
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[100]
+rinhabackend.worker-1  |       Start processing HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[100]
+rinhabackend.worker-1  |       Sending HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[101]
+rinhabackend.worker-1  |       Received HTTP response headers after 0.8069ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[101]
+rinhabackend.worker-1  |       End processing HTTP request after 0.8748ms - 200
+nginx-1                | 172.20.0.1 - - [15/Aug/2025:23:47:07 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0" "-"
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[100]
+rinhabackend.worker-1  |       Start processing HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[100]
+rinhabackend.worker-1  |       Sending HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[101]
+rinhabackend.worker-1  |       Received HTTP response headers after 0.5675ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[101]
+rinhabackend.worker-1  |       End processing HTTP request after 0.6103ms - 200
+nginx-1                | 172.20.0.1 - - [15/Aug/2025:23:47:07 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0" "-"
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[100]
+rinhabackend.worker-1  |       Start processing HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[100]
+rinhabackend.worker-1  |       Sending HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[101]
+rinhabackend.worker-1  |       Received HTTP response headers after 0.7919ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[101]
+rinhabackend.worker-1  |       End processing HTTP request after 0.8312ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[100]
+rinhabackend.worker-1  |       Start processing HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[100]
+rinhabackend.worker-1  |       Sending HTTP request POST http://payment-processor-default:8080/payments
+nginx-1                | 172.20.0.1 - - [15/Aug/2025:23:47:07 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0" "-"
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[101]
+rinhabackend.worker-1  |       Received HTTP response headers after 0.744ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[101]
+rinhabackend.worker-1  |       End processing HTTP request after 0.7744ms - 200
+nginx-1                | 172.20.0.1 - - [15/Aug/2025:23:47:07 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0" "-"
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[100]
+rinhabackend.worker-1  |       Start processing HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[100]
+rinhabackend.worker-1  |       Sending HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[101]
+rinhabackend.worker-1  |       Received HTTP response headers after 0.6164ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[101]
+rinhabackend.worker-1  |       End processing HTTP request after 0.6859ms - 200
+nginx-1                | 172.20.0.1 - - [15/Aug/2025:23:47:07 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0" "-"
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[100]
+rinhabackend.worker-1  |       Start processing HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[100]
+rinhabackend.worker-1  |       Sending HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[101]
+rinhabackend.worker-1  |       Received HTTP response headers after 0.6678ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[101]
+rinhabackend.worker-1  |       End processing HTTP request after 0.7098ms - 200
+nginx-1                | 172.20.0.1 - - [15/Aug/2025:23:47:07 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0" "-"
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[100]
+rinhabackend.worker-1  |       Start processing HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[100]
+rinhabackend.worker-1  |       Sending HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[101]
+rinhabackend.worker-1  |       Received HTTP response headers after 0.7917ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[101]
+rinhabackend.worker-1  |       End processing HTTP request after 0.8282ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[100]
+rinhabackend.worker-1  |       Start processing HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[100]
+rinhabackend.worker-1  |       Sending HTTP request POST http://payment-processor-default:8080/payments
+nginx-1                | 172.20.0.1 - - [15/Aug/2025:23:47:07 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0" "-"
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[101]
+rinhabackend.worker-1  |       Received HTTP response headers after 0.6507ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[101]
+rinhabackend.worker-1  |       End processing HTTP request after 0.6882ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[100]
+rinhabackend.worker-1  |       Start processing HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[100]
+rinhabackend.worker-1  |       Sending HTTP request POST http://payment-processor-default:8080/payments
+nginx-1                | 172.20.0.1 - - [15/Aug/2025:23:47:07 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0" "-"
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[101]
+rinhabackend.worker-1  |       Received HTTP response headers after 0.5596ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[101]
+rinhabackend.worker-1  |       End processing HTTP request after 0.5985ms - 200
+nginx-1                | 172.20.0.1 - - [15/Aug/2025:23:47:07 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0" "-"
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[100]
+rinhabackend.worker-1  |       Start processing HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[100]
+rinhabackend.worker-1  |       Sending HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[101]
+rinhabackend.worker-1  |       Received HTTP response headers after 0.5955ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[101]
+rinhabackend.worker-1  |       End processing HTTP request after 0.6283ms - 200
+nginx-1                | 172.20.0.1 - - [15/Aug/2025:23:47:07 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0" "-"
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[100]
+rinhabackend.worker-1  |       Start processing HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[100]
+rinhabackend.worker-1  |       Sending HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[101]
+rinhabackend.worker-1  |       Received HTTP response headers after 0.7299ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[101]
+rinhabackend.worker-1  |       End processing HTTP request after 0.7711ms - 200
+nginx-1                | 172.20.0.1 - - [15/Aug/2025:23:47:07 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0" "-"
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[100]
+rinhabackend.worker-1  |       Start processing HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[100]
+rinhabackend.worker-1  |       Sending HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[101]
+rinhabackend.worker-1  |       Received HTTP response headers after 0.6017ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[101]
+rinhabackend.worker-1  |       End processing HTTP request after 0.6394ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[100]
+rinhabackend.worker-1  |       Start processing HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[100]
+rinhabackend.worker-1  |       Sending HTTP request POST http://payment-processor-default:8080/payments
+nginx-1                | 172.20.0.1 - - [15/Aug/2025:23:47:07 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0" "-"
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[101]
+rinhabackend.worker-1  |       Received HTTP response headers after 0.7353ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[101]
+rinhabackend.worker-1  |       End processing HTTP request after 0.7676ms - 200
+nginx-1                | 172.20.0.1 - - [15/Aug/2025:23:47:07 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0" "-"
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[100]
+rinhabackend.worker-1  |       Start processing HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[100]
+rinhabackend.worker-1  |       Sending HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[101]
+rinhabackend.worker-1  |       Received HTTP response headers after 0.6421ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[101]
+rinhabackend.worker-1  |       End processing HTTP request after 0.6751ms - 200
+nginx-1                | 172.20.0.1 - - [15/Aug/2025:23:47:07 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0" "-"
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[100]
+rinhabackend.worker-1  |       Start processing HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[100]
+rinhabackend.worker-1  |       Sending HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[101]
+rinhabackend.worker-1  |       Received HTTP response headers after 0.791ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[101]
+rinhabackend.worker-1  |       End processing HTTP request after 0.8288ms - 200
+nginx-1                | 172.20.0.1 - - [15/Aug/2025:23:47:07 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0" "-"
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[100]
+rinhabackend.worker-1  |       Start processing HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[100]
+rinhabackend.worker-1  |       Sending HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[101]
+rinhabackend.worker-1  |       Received HTTP response headers after 0.6572ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[101]
+rinhabackend.worker-1  |       End processing HTTP request after 0.6921ms - 200
+nginx-1                | 172.20.0.1 - - [15/Aug/2025:23:47:07 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0" "-"
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[100]
+rinhabackend.worker-1  |       Start processing HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[100]
+rinhabackend.worker-1  |       Sending HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[101]
+rinhabackend.worker-1  |       Received HTTP response headers after 0.5116ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[101]
+rinhabackend.worker-1  |       End processing HTTP request after 0.5476ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[100]
+rinhabackend.worker-1  |       Start processing HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[100]
+rinhabackend.worker-1  |       Sending HTTP request POST http://payment-processor-default:8080/payments
+nginx-1                | 172.20.0.1 - - [15/Aug/2025:23:47:07 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0" "-"
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[101]
+rinhabackend.worker-1  |       Received HTTP response headers after 0.7716ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[101]
+rinhabackend.worker-1  |       End processing HTTP request after 0.8061ms - 200
+nginx-1                | 172.20.0.1 - - [15/Aug/2025:23:47:07 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0" "-"
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[100]
+rinhabackend.worker-1  |       Start processing HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[100]
+rinhabackend.worker-1  |       Sending HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[101]
+rinhabackend.worker-1  |       Received HTTP response headers after 0.582ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[101]
+rinhabackend.worker-1  |       End processing HTTP request after 0.6432ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[100]
+rinhabackend.worker-1  |       Start processing HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[100]
+rinhabackend.worker-1  |       Sending HTTP request POST http://payment-processor-default:8080/payments
+nginx-1                | 172.20.0.1 - - [15/Aug/2025:23:47:07 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0" "-"
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[101]
+rinhabackend.worker-1  |       Received HTTP response headers after 0.8014ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[101]
+rinhabackend.worker-1  |       End processing HTTP request after 0.8381ms - 200
+nginx-1                | 172.20.0.1 - - [15/Aug/2025:23:47:07 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0" "-"
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[100]
+rinhabackend.worker-1  |       Start processing HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[100]
+rinhabackend.worker-1  |       Sending HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[101]
+rinhabackend.worker-1  |       Received HTTP response headers after 0.7253ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[101]
+rinhabackend.worker-1  |       End processing HTTP request after 0.7586ms - 200
+nginx-1                | 172.20.0.1 - - [15/Aug/2025:23:47:07 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0" "-"
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[100]
+rinhabackend.worker-1  |       Start processing HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[100]
+rinhabackend.worker-1  |       Sending HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[101]
+rinhabackend.worker-1  |       Received HTTP response headers after 0.6064ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[101]
+rinhabackend.worker-1  |       End processing HTTP request after 0.6778ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[100]
+rinhabackend.worker-1  |       Start processing HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[100]
+rinhabackend.worker-1  |       Sending HTTP request POST http://payment-processor-default:8080/payments
+nginx-1                | 172.20.0.1 - - [15/Aug/2025:23:47:07 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0" "-"
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[101]
+rinhabackend.worker-1  |       Received HTTP response headers after 0.7358ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[101]
+rinhabackend.worker-1  |       End processing HTTP request after 0.7816ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[100]
+rinhabackend.worker-1  |       Start processing HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[100]
+rinhabackend.worker-1  |       Sending HTTP request POST http://payment-processor-default:8080/payments
+nginx-1                | 172.20.0.1 - - [15/Aug/2025:23:47:07 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0" "-"
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[101]
+rinhabackend.worker-1  |       Received HTTP response headers after 0.7006ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[101]
+rinhabackend.worker-1  |       End processing HTTP request after 0.7388ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[100]
+rinhabackend.worker-1  |       Start processing HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[100]
+rinhabackend.worker-1  |       Sending HTTP request POST http://payment-processor-default:8080/payments
+nginx-1                | 172.20.0.1 - - [15/Aug/2025:23:47:08 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0" "-"
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[101]
+rinhabackend.worker-1  |       Received HTTP response headers after 0.727ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[101]
+rinhabackend.worker-1  |       End processing HTTP request after 0.7618ms - 200
+nginx-1                | 172.20.0.1 - - [15/Aug/2025:23:47:08 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0" "-"
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[100]
+rinhabackend.worker-1  |       Start processing HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[100]
+rinhabackend.worker-1  |       Sending HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[101]
+rinhabackend.worker-1  |       Received HTTP response headers after 0.6359ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[101]
+rinhabackend.worker-1  |       End processing HTTP request after 0.6695ms - 200
+nginx-1                | 172.20.0.1 - - [15/Aug/2025:23:47:08 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0" "-"
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[100]
+rinhabackend.worker-1  |       Start processing HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[100]
+rinhabackend.worker-1  |       Sending HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[101]
+rinhabackend.worker-1  |       Received HTTP response headers after 0.7309ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[101]
+rinhabackend.worker-1  |       End processing HTTP request after 0.776ms - 200
+nginx-1                | 172.20.0.1 - - [15/Aug/2025:23:47:08 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0" "-"
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[100]
+rinhabackend.worker-1  |       Start processing HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[100]
+rinhabackend.worker-1  |       Sending HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[101]
+rinhabackend.worker-1  |       Received HTTP response headers after 0.609ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[101]
+rinhabackend.worker-1  |       End processing HTTP request after 1.1965ms - 200
+nginx-1                | 172.20.0.1 - - [15/Aug/2025:23:47:08 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0" "-"
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[100]
+rinhabackend.worker-1  |       Start processing HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[100]
+rinhabackend.worker-1  |       Sending HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[101]
+rinhabackend.worker-1  |       Received HTTP response headers after 0.6782ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[101]
+rinhabackend.worker-1  |       End processing HTTP request after 0.7177ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[100]
+rinhabackend.worker-1  |       Start processing HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[100]
+nginx-1                | 172.20.0.1 - - [15/Aug/2025:23:47:08 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0" "-"
+rinhabackend.worker-1  |       Sending HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[101]
+rinhabackend.worker-1  |       Received HTTP response headers after 0.6868ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[101]
+rinhabackend.worker-1  |       End processing HTTP request after 0.7314ms - 200
+nginx-1                | 172.20.0.1 - - [15/Aug/2025:23:47:08 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0" "-"
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[100]
+rinhabackend.worker-1  |       Start processing HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[100]
+rinhabackend.worker-1  |       Sending HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[101]
+rinhabackend.worker-1  |       Received HTTP response headers after 0.8269ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[101]
+rinhabackend.worker-1  |       End processing HTTP request after 0.8716ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[100]
+rinhabackend.worker-1  |       Start processing HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[100]
+rinhabackend.worker-1  |       Sending HTTP request POST http://payment-processor-default:8080/payments
+nginx-1                | 172.20.0.1 - - [15/Aug/2025:23:47:08 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0" "-"
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[101]
+rinhabackend.worker-1  |       Received HTTP response headers after 0.592ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[101]
+rinhabackend.worker-1  |       End processing HTTP request after 0.6307ms - 200
+nginx-1                | 172.20.0.1 - - [15/Aug/2025:23:47:08 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0" "-"
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[100]
+rinhabackend.worker-1  |       Start processing HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[100]
+rinhabackend.worker-1  |       Sending HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[101]
+rinhabackend.worker-1  |       Received HTTP response headers after 0.5719ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[101]
+rinhabackend.worker-1  |       End processing HTTP request after 0.6054ms - 200
+nginx-1                | 172.20.0.1 - - [15/Aug/2025:23:47:08 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0" "-"
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[100]
+rinhabackend.worker-1  |       Start processing HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[100]
+rinhabackend.worker-1  |       Sending HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[101]
+rinhabackend.worker-1  |       Received HTTP response headers after 0.6521ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[101]
+rinhabackend.worker-1  |       End processing HTTP request after 0.6858ms - 200
+nginx-1                | 172.20.0.1 - - [15/Aug/2025:23:47:08 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0" "-"
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[100]
+rinhabackend.worker-1  |       Start processing HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[100]
+rinhabackend.worker-1  |       Sending HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[101]
+rinhabackend.worker-1  |       Received HTTP response headers after 0.7812ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[101]
+rinhabackend.worker-1  |       End processing HTTP request after 0.8246ms - 200
+nginx-1                | 172.20.0.1 - - [15/Aug/2025:23:47:08 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0" "-"
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[100]
+rinhabackend.worker-1  |       Start processing HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[100]
+rinhabackend.worker-1  |       Sending HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[101]
+rinhabackend.worker-1  |       Received HTTP response headers after 0.7594ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[101]
+rinhabackend.worker-1  |       End processing HTTP request after 0.7936ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[100]
+rinhabackend.worker-1  |       Start processing HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[100]
+rinhabackend.worker-1  |       Sending HTTP request POST http://payment-processor-default:8080/payments
+nginx-1                | 172.20.0.1 - - [15/Aug/2025:23:47:08 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0" "-"
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[101]
+rinhabackend.worker-1  |       Received HTTP response headers after 0.6024ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[101]
+rinhabackend.worker-1  |       End processing HTTP request after 0.6376ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[100]
+rinhabackend.worker-1  |       Start processing HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[100]
+rinhabackend.worker-1  |       Sending HTTP request POST http://payment-processor-default:8080/payments
+nginx-1                | 172.20.0.1 - - [15/Aug/2025:23:47:08 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0" "-"
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[101]
+rinhabackend.worker-1  |       Received HTTP response headers after 0.5631ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[101]
+rinhabackend.worker-1  |       End processing HTTP request after 0.5988ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[100]
+rinhabackend.worker-1  |       Start processing HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[100]
+rinhabackend.worker-1  |       Sending HTTP request POST http://payment-processor-default:8080/payments
+nginx-1                | 172.20.0.1 - - [15/Aug/2025:23:47:08 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0" "-"
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[101]
+rinhabackend.worker-1  |       Received HTTP response headers after 0.7125ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[101]
+rinhabackend.worker-1  |       End processing HTTP request after 0.7454ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[100]
+rinhabackend.worker-1  |       Start processing HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[100]
+rinhabackend.worker-1  |       Sending HTTP request POST http://payment-processor-default:8080/payments
+nginx-1                | 172.20.0.1 - - [15/Aug/2025:23:47:08 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0" "-"
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[101]
+rinhabackend.worker-1  |       Received HTTP response headers after 0.6118ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[101]
+rinhabackend.worker-1  |       End processing HTTP request after 0.6483ms - 200
+nginx-1                | 172.20.0.1 - - [15/Aug/2025:23:47:08 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0" "-"
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[100]
+rinhabackend.worker-1  |       Start processing HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[100]
+rinhabackend.worker-1  |       Sending HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[101]
+rinhabackend.worker-1  |       Received HTTP response headers after 0.738ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[101]
+rinhabackend.worker-1  |       End processing HTTP request after 0.7725ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[100]
+rinhabackend.worker-1  |       Start processing HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[100]
+rinhabackend.worker-1  |       Sending HTTP request POST http://payment-processor-default:8080/payments
+nginx-1                | 172.20.0.1 - - [15/Aug/2025:23:47:08 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0" "-"
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[101]
+rinhabackend.worker-1  |       Received HTTP response headers after 0.8122ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[101]
+rinhabackend.worker-1  |       End processing HTTP request after 0.8556ms - 200
+nginx-1                | 172.20.0.1 - - [15/Aug/2025:23:47:08 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0" "-"
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[100]
+rinhabackend.worker-1  |       Start processing HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[100]
+rinhabackend.worker-1  |       Sending HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[101]
+rinhabackend.worker-1  |       Received HTTP response headers after 0.6053ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[101]
+rinhabackend.worker-1  |       End processing HTTP request after 0.6372ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[100]
+rinhabackend.worker-1  |       Start processing HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[100]
+rinhabackend.worker-1  |       Sending HTTP request POST http://payment-processor-default:8080/payments
+nginx-1                | 172.20.0.1 - - [15/Aug/2025:23:47:08 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0" "-"
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[101]
+rinhabackend.worker-1  |       Received HTTP response headers after 0.729ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[101]
+rinhabackend.worker-1  |       End processing HTTP request after 0.7731ms - 200
+nginx-1                | 172.20.0.1 - - [15/Aug/2025:23:47:08 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0" "-"
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[100]
+rinhabackend.worker-1  |       Start processing HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[100]
+rinhabackend.worker-1  |       Sending HTTP request POST http://payment-processor-default:8080/payments
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.ClientHandler[101]
+rinhabackend.worker-1  |       Received HTTP response headers after 0.7199ms - 200
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[101]
+rinhabackend.worker-1  |       End processing HTTP request after 0.7608ms - 200
+nginx-1                | 172.20.0.1 - - [15/Aug/2025:23:47:08 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0" "-"
+rinhabackend.worker-1  | info: System.Net.Http.HttpClient.PaymentDefault.LogicalHandler[100]
+rinhabackend.worker-1  |       Start processing HTTP request POST http://payment-processor-default:8080/payments
+log truncated at line 1000

@@ -5,8 +5,8 @@ x-service-templates:
     volumes:
       - ./data:/data
     environment: &api-env
-      IO_WORKERS: 4
-      HANDLER_WORKERS: 6
+      IO_WORKERS: 12
+      HANDLER_WORKERS: 12
       DATABASE: /data/database
       DATABASE_SIZE: 41943040
       LISTEN_ADDRESS: 0.0.0.0:8080
@@ -45,7 +45,7 @@ services:
     image: asfernandes/rinhaback25:boost-lmdb@sha256:86368e26481a44bee301a5632bfbc0ae3caead1f122b568209c5f8369410a1f9
     command: /app/bin/rinhaback25-boost-lmdb-proxy
     environment:
-      IO_WORKERS: 4
+      IO_WORKERS: 12
       LISTEN_ADDRESS: 0.0.0.0:9999
       BACKEND_0_ADDRESS: api1:8080
       BACKEND_1_ADDRESS: api2:8080

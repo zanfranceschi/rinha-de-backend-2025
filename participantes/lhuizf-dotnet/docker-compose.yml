@@ -1,49 +1,83 @@
 services:
   api1: &api
-    image: lhuizf/rinha-de-backend-2025-dotnet:latest
+    image: lhuizf/rinha-de-backend-2025-dotnet:1.0.0
     hostname: api1
     container_name: api1
     environment:
-      ASPNETCORE_URLS: http://+:8080
-      ASPNETCORE_ENVIRONMENT: Development
-      MAX_CONCURRENT_PROCESSES: 10
+      ASPNETCORE_ENVIRONMENT: Production
+      PAYMENT_PROCESSOR_DEFAULT_URL: http://payment-processor-default:8080
+      PAYMENT_PROCESSOR_FALLBACK_URL: http://payment-processor-fallback:8080
+      MAX_CONCURRENT_PROCESSES: 20
       REDIS_CONNECTION: redis:6379,abortConnect=false,allowAdmin=true
+      SOCKET_PATH: /tmp/sockets/api1.sock
     networks:
       - backend
       - payment-processor
     depends_on:
       - redis
+    volumes:
+      - sockets:/tmp/sockets
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "curl -f --unix-socket /tmp/sockets/api1.sock http://localhost/health || exit 1",
+        ]
+      interval: 1m30s
+      timeout: 30s
+      retries: 5
+      start_period: 30s
     deploy:
       resources:
         limits:
-          cpus: "0.65"
-          memory: "140MB"
+          cpus: "0.63"
+          memory: "145MB"
 
   api2:
     <<: *api
     hostname: api2
     container_name: api2
+    environment:
+      ASPNETCORE_ENVIRONMENT: Production
+      PAYMENT_PROCESSOR_DEFAULT_URL: http://payment-processor-default:8080
+      PAYMENT_PROCESSOR_FALLBACK_URL: http://payment-processor-fallback:8080
+      MAX_CONCURRENT_PROCESSES: 20
+      REDIS_CONNECTION: redis:6379,abortConnect=false,allowAdmin=true
+      SOCKET_PATH: /tmp/sockets/api2.sock
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "curl -f --unix-socket /tmp/sockets/api2.sock http://localhost/health || exit 1",
+        ]
+      interval: 1m30s
+      timeout: 30s
+      retries: 5
+      start_period: 30s
 
   load-balancer:
     image: nginx:1.25.2-alpine
     container_name: load-balancer
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - sockets:/tmp/sockets
     ports:
       - "9999:9999"
     networks:
       - backend
     depends_on:
-      - api1
-      - api2
+      api1:
+        condition: service_healthy
+      api2:
+        condition: service_healthy
     deploy:
       resources:
         limits:
-          cpus: "0.10"
-          memory: "20MB"
+          cpus: "0.14"
+          memory: "10MB"
 
   redis:
-    image: redis:7-alpine
+    image: redis:7.2-alpine
     container_name: redis
     command:
       [
@@ -80,3 +114,7 @@ networks:
     driver: bridge
   payment-processor:
     external: true
+
+volumes:
+  sockets:
+    name: sockets_volume

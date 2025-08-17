@@ -23,7 +23,9 @@ services:
       REDIS_HOST: redis
       REDIS_PORT: 6379
       REDIS_TIMEOUT: 5000ms
-      REDIS_QUEUE_PAYMENTS_MAIN: rinha-payments-main-queue      
+      REDIS_QUEUE_PAYMENTS_MAIN: rinha-payments-main-queue
+      # Flags de JVM otimizadas para recursos limitados
+      JAVA_OPTS: "-Xmx40m -Xms20m -XX:+UseG1GC -XX:MaxGCPauseMillis=200 -XX:+UseStringDeduplication -XX:+OptimizeStringConcat -Djava.security.egd=file:/dev/./urandom"
     depends_on:
       redis:
         condition: service_healthy
@@ -43,7 +45,9 @@ services:
       REDIS_HOST: redis
       REDIS_PORT: 6379
       REDIS_TIMEOUT: 5000ms
-      REDIS_QUEUE_PAYMENTS_MAIN: rinha-payments-main-queue      
+      REDIS_QUEUE_PAYMENTS_MAIN: rinha-payments-main-queue
+      # Flags de JVM otimizadas para recursos limitados
+      JAVA_OPTS: "-Xmx40m -Xms20m -XX:+UseG1GC -XX:MaxGCPauseMillis=200 -XX:+UseStringDeduplication -XX:+OptimizeStringConcat -Djava.security.egd=file:/dev/./urandom"
     depends_on:
       redis:
         condition: service_healthy
@@ -70,6 +74,8 @@ services:
       WORKER_MAX_CONCURRENT_PAYMENTS: 80
       WORKER_BATCH_SIZE: 100
       WORKER_EXECUTION_DELAY: 100
+      # Flags de JVM otimizadas para recursos limitados
+      JAVA_OPTS: "-Xmx80m -Xms40m -XX:+UseG1GC -XX:MaxGCPauseMillis=200 -XX:+UseStringDeduplication -XX:+OptimizeStringConcat -Djava.security.egd=file:/dev/./urandom"
     depends_on:
       redis:
         condition: service_healthy

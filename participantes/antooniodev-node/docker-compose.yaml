@@ -19,7 +19,7 @@ services:
       timeout: 3s
       retries: 30
   api01: &api01
-    image: antoniocarvalhodev/rinha:1.1
+    image: antoniocarvalhodev/rinha:1.3
     networks:
       - backend
       - payment-processor
@@ -28,7 +28,7 @@ services:
       - PAYMENT_PROCESSOR_URL_FALLBACK=http://payment-processor-fallback:8080
       - REDIS_URL=redis://redis:6379
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:9999/health"]
+      test: ["CMD", "curl", "-f", "http://localhost:3333/health"]
       interval: 2s
       timeout: 3s
       retries: 15

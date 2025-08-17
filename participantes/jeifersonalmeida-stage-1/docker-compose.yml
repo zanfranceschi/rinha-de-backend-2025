@@ -11,13 +11,14 @@ services:
     depends_on:
       - api-1
       - api-2
+      - api-3
     networks:
       - rinha-network
     deploy:
       resources:
         limits:
           cpus: "0.3"
-          memory: "90MB"
+          memory: "80MB"
 
   api-1:
     image: jeiferson/rinha-backend-2025:latest-amd64
@@ -25,7 +26,7 @@ services:
     pull_policy: always
     environment:
       - MASTER=true
-      - NUM_WORKERS=10
+      - NUM_WORKERS=15
       - MAX_DEFAULT_LATENCY=30
       - USE_FALLBACK=true
       - MAX_FALLBACK_LATENCY=30
@@ -39,8 +40,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.6"
-          memory: "130MB"
+          cpus: "0.4"
+          memory: "90MB"
 
   api-2:
     image: jeiferson/rinha-backend-2025:latest-amd64
@@ -48,15 +49,31 @@ services:
     pull_policy: always
     environment:
       - MASTER=false
-      - NUM_WORKERS=10
+      - NUM_WORKERS=15
     networks:
       - rinha-network
       - payment-processor
     deploy:
       resources:
         limits:
-          cpus: "0.6"
-          memory: "130MB"
+          cpus: "0.4"
+          memory: "90MB"
+  
+  api-3:
+    image: jeiferson/rinha-backend-2025:latest-amd64
+    container_name: api-3
+    pull_policy: always
+    environment:
+      - MASTER=false
+      - NUM_WORKERS=15
+    networks:
+      - rinha-network
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          cpus: "0.4"
+          memory: "90MB"
 
 networks:
   rinha-network:

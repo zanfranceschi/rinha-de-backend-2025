@@ -1,6 +1,6 @@
 x-service-templates:
   base: &base
-    image: ghcr.io/leorcvargas/rinha-de-backend-2025-elixir-api:stable-7307e38
+    image: ghcr.io/leorcvargas/rinha-de-backend-2025-elixir-api:stable-d2df820
     volumes:
       - sockets:/tmp/rinhex/:rw
     networks:
@@ -34,7 +34,7 @@ services:
       resources:
         limits:
           cpus: "0.35"
-          memory: "114MB"
+          memory: "104MB"
     environment:
       APPLICATION_MODE: "api"
       ERL_MAX_PORTS: 1024
@@ -50,7 +50,7 @@ services:
       resources:
         limits:
           cpus: "0.35"
-          memory: "114MB"
+          memory: "104MB"
     environment:
       APPLICATION_MODE: "api"
       ERL_MAX_PORTS: 1024
@@ -61,13 +61,13 @@ services:
 
   worker:
     <<: *base
-    image: ghcr.io/leorcvargas/rinha-de-backend-2025-elixir-worker:stable-7307e38
+    image: ghcr.io/leorcvargas/rinha-de-backend-2025-elixir-worker:stable-d2df820
     hostname: worker
     deploy:
       resources:
         limits:
           cpus: "0.4"
-          memory: "95MB"
+          memory: "115MB"
     environment:
       APPLICATION_MODE: "worker"
       ERL_MAX_PORTS: 2048
