@@ -1,0 +1,87 @@
+﻿version: '3.8'
+
+services:
+  api1:
+    image: arthurandrade1/rinhabackend:v1
+    container_name: api1
+    depends_on:
+      - redis
+    environment:
+      - REDIS_CONNECTION=redis:6379,abortConnect=false
+      - ASPNETCORE_URLS=http://+:9999
+    networks:
+      - backend
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 100M
+        reservations:
+          cpus: '0.3'
+          memory: 80M
+
+  api2:
+    image: arthurandrade1/rinhabackend:v1    
+    container_name: api2
+    depends_on:
+      - redis
+    environment:
+      - REDIS_CONNECTION=redis:6379,abortConnect=false
+      - ASPNETCORE_URLS=http://+:9999
+    networks:
+      - backend
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 100M
+        reservations:
+          cpus: '0.3'
+          memory: 80M
+
+  redis:
+    image: redis:7.2-alpine
+    container_name: redis
+    networks:
+      - backend
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          cpus: '0.25'
+          memory: 80M
+        reservations:
+          cpus: '0.1'
+          memory: 60M
+
+  nginx:
+    image: nginx:latest
+    container_name: nginx-loadbalancer
+    ports:
+      - "9999:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - api1
+      - api2
+    networks:
+      - backend
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          cpus: '0.25'
+          memory: 50M
+        reservations:
+          cpus: '0.1'
+          memory: 40M
+
+networks:
+  backend:
+    driver: bridge
+  payment-processor:
+    name: payment-processor
+    driver: bridge
+    external: true
