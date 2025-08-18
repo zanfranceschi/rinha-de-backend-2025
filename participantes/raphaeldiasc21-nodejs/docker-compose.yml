@@ -1,0 +1,72 @@
+version: "3.8"
+services:
+  nginx:
+    image: nginx:latest
+    ports:
+      - "9999:9999"
+      - "443:443" # For HTTPS
+    volumes:
+      - ./default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - app1
+      - app2
+    networks:
+      - backend
+  app1:
+    image: raphaeldiasc/rinha-2025-payment-processor:latest
+    networks:
+      - backend
+      - payment-processor
+    ports:
+     - 9991:9999
+    depends_on:
+      - mongodb
+    deploy:
+      resources:
+        limits:
+          cpus: "0.15"
+          memory: "42MB"
+  app2:
+    image: raphaeldiasc/rinha-2025-payment-processor:latest
+    networks:
+      - backend
+      - payment-processor
+    ports:
+     - 9992:9999
+    depends_on:
+      - mongodb
+    deploy:
+      resources:
+        limits:
+          cpus: "0.15"
+          memory: "42MB"
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb_container
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: password
+    networks:
+      - backend
+  redis:
+    image: redis
+    command: redis-server --requirepass Redis2019!
+    ports:
+      - "6379:6379"
+    networks:
+      - backend
+
+networks:
+  backend:
+    driver: bridge
+  payment-processor:
+    external: true
+
+volumes:
+  postgres-socket-01:
+  postgres-socket-02:
+  mongodb_data:
