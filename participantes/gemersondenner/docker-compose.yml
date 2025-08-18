@@ -1,0 +1,102 @@
+networks:
+  default:
+    driver: bridge
+  payment-processor:
+    external: true
+
+services:
+
+  memcached:
+    image: memcached:latest
+    container_name: memcached
+    ports:
+      - "11211:11211"
+    networks:
+      - default
+    deploy:
+      resources:
+        limits:
+          cpus: "0.3"
+          memory: "80MB"
+    healthcheck:
+      test: ["CMD", "nc", "-vz", "localhost", "11211"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  api1:
+    build:
+      context: ./MinimalAPI
+      dockerfile: Dockerfile
+    container_name: api1
+    depends_on:
+      - memcached
+    ports:
+      - "5001:8080"
+    networks:
+      - default
+      - payment-processor
+    environment:
+      - DEFAULT_BASE_URL=http://payment-processor-default:8080
+      - FALLBACK_BASE_URL=http://payment-processor-fallback:8080
+      - MEMCACHED_PORT=11211
+      - MEMCACHED_HOST=memcached
+    deploy:
+      resources:
+        limits:
+          cpus: "0.4"
+          memory: "95MB"
+    healthcheck:
+      test: ["CMD-SHELL", "curl --fail http://localhost:5001/health || exit 1"]
+      interval: 10s
+      timeout: 10s
+      retries: 5
+      start_period: 5s
+
+  api2:
+    build:
+      context: ./MinimalAPI
+      dockerfile: Dockerfile
+    container_name: api2
+    depends_on:
+      - memcached
+    ports:
+      - "5002:8080"
+    networks:
+      - default
+      - payment-processor
+    environment:
+      - DEFAULT_BASE_URL=http://payment-processor-default:8080
+      - FALLBACK_BASE_URL=http://payment-processor-fallback:8080
+      - MEMCACHED_PORT=11211
+      - MEMCACHED_HOST=memcached
+    deploy:
+      resources:
+        limits:
+          cpus: "0.4"
+          memory: "95MB"
+    healthcheck:
+      test: ["CMD-SHELL", "curl --fail http://localhost:5002/health || exit 1"]
+      interval: 10s
+      timeout: 10s
+      retries: 5
+      start_period: 15s
+
+  haproxy:
+    image: haproxy:lts-alpine3.22
+    container_name: haproxy
+    ports:
+      - "9999:9999"
+    volumes:
+      - ./config/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
+    depends_on:
+      - api1
+      - api2
+    networks:
+      - default
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          cpus: "0.4"
+          memory: "100MB"
