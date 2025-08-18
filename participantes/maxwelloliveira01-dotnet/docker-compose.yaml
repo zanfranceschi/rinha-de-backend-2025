@@ -1,0 +1,69 @@
+﻿services:
+  nginx:
+    image: nginx:1.25-alpine
+    container_name: rinha-nginx
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - api1
+      - api2
+    ports:
+      - "9999:9999"
+    networks:
+      - backend
+      - payment-processor
+    deploy:
+        resources:
+            limits:
+              cpus: "0.1"
+              memory: "15MB"
+  api1:
+    image: maxwelloliveira01/rinha:latest
+    hostname: api
+    environment:
+      - PROCESSOR_DEFAULT_URL=http://payment-processor-default:8080
+      - PROCESSOR_FALLBACK_URL=http://payment-processor-fallback:8080
+      - REDIS_URL=redis:6379
+      - WORKERS_COUNT=8
+    networks:
+      - backend
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: "100MB"
+  api2:
+    image: maxwelloliveira01/rinha:latest
+    hostname: api2
+    environment:
+      - PROCESSOR_DEFAULT_URL=http://payment-processor-fallback:8080
+      - PROCESSOR_FALLBACK_URL=http://payment-processor-default:8080
+      - REDIS_URL=redis:6379
+      - WORKERS_COUNT=8
+    networks:
+        - backend
+        - payment-processor
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: "100MB"
+
+  redis:
+    image: redis:7.2-alpine
+    container_name: rinha-redis
+    command: redis-server --save "" --appendonly no --maxclients 20000
+    networks:
+      - backend
+    deploy:
+      resources:
+        limits:
+          cpus: "0.4"
+          memory: "135MB"
+        
+networks:
+  backend:
+    driver: bridge
+  payment-processor:
+    external: true
