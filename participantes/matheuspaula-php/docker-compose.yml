@@ -1,0 +1,88 @@
+x-service-templates:
+  &app
+  image: imatheuspaula/rinha-2025-php:1.0.0
+  depends_on:
+    - redis
+
+services:
+  app-1:
+    <<: *app
+    hostname: app-1
+    command: php server.php
+    networks:
+      - backend
+    deploy:
+      resources:
+        limits:
+          cpus: "0.25"
+          memory: "50MB"
+
+  app-2:
+    <<: *app
+    hostname: app-2
+    command: php server.php
+    networks:
+      - backend
+    deploy:
+      resources:
+        limits:
+          cpus: "0.25"
+          memory: "50MB"
+
+  payment-worker:
+    <<: *app
+    command: php gateway.php
+    networks:
+      - backend
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: "120MB"
+
+  health-worker:
+    <<: *app
+    command: php health.php
+    networks:
+      - backend
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          cpus: "0.1"
+          memory: "30MB"
+
+  redis:
+    image: redis:alpine
+    networks:
+      - backend
+    deploy:
+      resources:
+        limits:
+          cpus: "0.2"
+          memory: "50MB"
+
+  web:
+    image: nginx:alpine
+    ports:
+      - "9999:9999"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    networks:
+      - backend
+    depends_on:
+      - app-1
+      - app-2
+    deploy:
+      resources:
+        limits:
+          cpus: "0.2"
+          memory: "50MB"
+
+networks:
+  backend:
+    driver: bridge
+
+  payment-processor:
+    external: true
