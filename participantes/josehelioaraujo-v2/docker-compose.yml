@@ -1,0 +1,49 @@
+version: '3.8'
+
+services:
+  api1:
+    image: rinhabackend2025_api2:latest
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_URLS=http://+:8080
+    networks:
+      - rinha-network
+    deploy:
+      resources:
+        limits:
+          cpus: '0.6'
+          memory: 200M
+
+  api2:
+    image: rinhabackend2025_api2:latest
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_URLS=http://+:8080
+    networks:
+      - rinha-network
+    deploy:
+      resources:
+        limits:
+          cpus: '0.6'
+          memory: 200M
+
+  nginx:
+    image: nginx:latest
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - api1
+      - api2
+    ports:
+      - "9999:9999"
+    networks:
+      - rinha-network
+    deploy:
+      resources:
+        limits:
+          cpus: '0.3'
+          memory: 150M
+
+networks:
+  rinha-network:
+    driver: bridge
