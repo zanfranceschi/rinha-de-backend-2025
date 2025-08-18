@@ -2,7 +2,7 @@
 	
 # 💸 Rinha de Backend 2025 - Processador de Pagamentos
 
-[Código Fonte do Projeto](https://github.com/josehelioaraujo/rinha-backend-2025-dotnet-v2.git)
+[Código Fonte Projeto](https://github.com/josehelioaraujo/rinha-backend-2025-dotnet-v2.git)
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 ![.NET 8.0](https://img.shields.io/badge/.NET-8.0-512BD4)
