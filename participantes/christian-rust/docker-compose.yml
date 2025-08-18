@@ -1,0 +1,53 @@
+version: '3.8'
+
+services:
+  haproxy:
+    image: haproxy:2.8
+    ports:
+      - "9999:80"
+    volumes:
+      - ./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
+    depends_on:
+      - app1
+      - app2
+    networks:
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: "50MB"
+
+  app1:
+    build: .
+    environment:
+      - TOKEN=123
+      - RUST_LOG=info
+      - DEFAULT_PROCESSOR_URL=http://payment-processor-default:8080
+      - FALLBACK_PROCESSOR_URL=http://payment-processor-fallback:8080
+    networks:
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: "150MB"
+
+  app2:
+    build: .
+    environment:
+      - TOKEN=123
+      - RUST_LOG=info
+      - DEFAULT_PROCESSOR_URL=http://payment-processor-default:8080
+      - FALLBACK_PROCESSOR_URL=http://payment-processor-fallback:8080
+    networks:
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: "150MB"
+
+networks:
+  payment-processor:
+    external: true
