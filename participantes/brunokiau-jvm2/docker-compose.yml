@@ -1,0 +1,93 @@
+x-backend-templates:
+  backend-app: &backend
+    image: brunomad/rb25-backend:latest
+    deploy:
+      resources:
+        limits: { cpus: '0.5', memory: 115M }
+
+
+services:
+  # Backend 1
+  backendA:
+    <<: *backend
+    networks:
+      backend_net:
+        ipv4_address: 172.20.0.100
+      payment-processor: {}
+    volumes:
+      - sockets:/sockets        
+    environment:
+      - BACKEND_LISTEN=unix:///sockets/backendA.sock
+      - NODE=A
+      - PAYMENT_PROCESSOR_DEFAULT=http://payment-processor-default:8080
+      - PAYMENT_PROCESSOR_FALLBACK=http://payment-processor-fallback:8080
+      - PAYMENT_PROCESSOR_TIMEOUT=6000
+      - PAYMENT_PROCESSOR_MAX_ERRORS=2
+      - THREAD_COUNT=2
+      - USE_VIRTUAL_THREADS=true
+      - MAX_ATTEMPS=3
+      - BACKOFF=0
+      - FALLBACK=true
+      - JAVA_OPTIONS=-server -XX:+TieredCompilation -XX:CompileThreshold=1000 -XX:+UseG1GC -Xmx64m -Xms64m -XX:MaxDirectMemorySize=10M -XX:MaxHeapFreeRatio=10 -XX:MinHeapFreeRatio=5 -XX:+AlwaysPreTouch -XX:+PerfDisableSharedMem -XX:+DisableExplicitGC -XX:InitialCodeCacheSize=4m -XX:ReservedCodeCacheSize=8m -Xlog:disable
+      #- JAVA_OPTIONS=-XX:+UseG1GC -Xms64m -Xmx64m -XX:MaxDirectMemorySize=64m -XX:+AlwaysPreTouch -XX:+DisableExplicitGC -XX:+PerfDisableSharedMem -XX:InitialCodeCacheSize=4m -XX:ReservedCodeCacheSize=8m
+  # Backend 2
+  backendB:
+    <<: *backend
+    networks:
+      backend_net:
+        ipv4_address: 172.20.0.101
+      payment-processor: {}
+    volumes:
+      - sockets:/sockets          
+    environment:
+      - BACKEND_LISTEN=unix:///sockets/backendB.sock
+      - NODE=B
+      - PAYMENT_PROCESSOR_DEFAULT=http://payment-processor-default:8080
+      - PAYMENT_PROCESSOR_FALLBACK=http://payment-processor-fallback:8080
+      - PAYMENT_PROCESSOR_TIMEOUT=6000
+      - PAYMENT_PROCESSOR_MAX_ERRORS=2
+      - THREAD_COUNT=2
+      - USE_VIRTUAL_THREADS=true
+      - MAX_ATTEMPS=3
+      - BACKOFF=0
+      - FALLBACK=true
+      - JAVA_OPTIONS=-server -XX:+TieredCompilation -XX:CompileThreshold=1000 -XX:+UseG1GC -Xmx64m -Xms64m -XX:MaxDirectMemorySize=10M -XX:MaxHeapFreeRatio=10 -XX:MinHeapFreeRatio=5 -XX:+AlwaysPreTouch -XX:+PerfDisableSharedMem -XX:+DisableExplicitGC -XX:InitialCodeCacheSize=4m -XX:ReservedCodeCacheSize=8m -Xlog:disable
+      
+      
+  # Load balancer    
+  lb:
+    image: brunomad/rb25-lb:latest
+    environment:
+      - LB_PORT=9999
+      - BACKEND_A=unix:///sockets/backendA.sock
+      - BACKEND_B=unix:///sockets/backendB.sock
+      - FORCE_TCP=false
+      - SO_RCVBUF=262144
+      - SO_SNDBUF=262144
+    ports: ["9999:9999"]
+    depends_on: [backendA, backendB]
+    volumes:
+      - sockets:/sockets
+    networks:
+      backend_net:
+        ipv4_address: 172.20.0.99
+    deploy:
+      resources:
+        limits: { cpus: '0.5', memory: 120M }      
+  
+        
+networks:
+  backend_net:
+    name: backend_net
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/24
+    driver_opts:
+          com.docker.network.driver.mtu: 1500 #9000
+  payment-processor:
+    external: true
+    
+    
+volumes:
+  sockets:
