@@ -5,30 +5,19 @@
  Container rinha-db  Created
  Container rinha-srv-two  Creating
  Container rinha-srv-one  Creating
- Container rinha-srv-one  Created
  Container rinha-srv-two  Created
+ Container rinha-srv-one  Created
  Container nginx-proxy  Creating
  Container nginx-proxy  Created
 Attaching to nginx-proxy, rinha-db, rinha-srv-one, rinha-srv-two
-rinha-db  | 1:M 18 Aug 2025 21:17:15.930 # WARNING Memory overcommit must be enabled! Without it, a background save or replication may fail under low memory condition. Being disabled, it can also cause failures without low memory condition, see https://github.com/jemalloc/jemalloc/issues/1328. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.
-rinha-db  | 1:M 18 Aug 2025 21:17:15.930 * oO0OoO0OoO0Oo Valkey is starting oO0OoO0OoO0Oo
-rinha-db  | 1:M 18 Aug 2025 21:17:15.930 * Valkey version=8.1.3, bits=64, commit=00000000, modified=0, pid=1, just started
-rinha-db  | 1:M 18 Aug 2025 21:17:15.930 # Warning: no config file specified, using the default config. In order to specify a config file use valkey-server /path/to/valkey.conf
-rinha-db  | 1:M 18 Aug 2025 21:17:15.931 * monotonic clock: POSIX clock_gettime
-rinha-db  | 1:M 18 Aug 2025 21:17:15.932 * Running mode=standalone, port=6379.
-rinha-db  | 1:M 18 Aug 2025 21:17:15.933 * Server initialized
-rinha-db  | 1:M 18 Aug 2025 21:17:15.933 * Ready to accept connections tcp
-rinha-srv-one  | Server running on 0.0.0.0:8000
-rinha-srv-one  | 
-rinha-srv-one  |  ┌───────────────────────────────────────────────────┐ 
-rinha-srv-one  |  │                   Fiber v2.52.9                   │ 
-rinha-srv-one  |  │               http://127.0.0.1:8000               │ 
-rinha-srv-one  |  │       (bound on host 0.0.0.0 and port 8000)       │ 
-rinha-srv-one  |  │                                                   │ 
-rinha-srv-one  |  │ Handlers ............. 4  Processes ........... 1 │ 
-rinha-srv-one  |  │ Prefork ....... Disabled  PID ................. 1 │ 
-rinha-srv-one  |  └───────────────────────────────────────────────────┘ 
-rinha-srv-one  | 
+rinha-db  | 1:M 18 Aug 2025 21:21:16.715 # WARNING Memory overcommit must be enabled! Without it, a background save or replication may fail under low memory condition. Being disabled, it can also cause failures without low memory condition, see https://github.com/jemalloc/jemalloc/issues/1328. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.
+rinha-db  | 1:M 18 Aug 2025 21:21:16.715 * oO0OoO0OoO0Oo Valkey is starting oO0OoO0OoO0Oo
+rinha-db  | 1:M 18 Aug 2025 21:21:16.715 * Valkey version=8.1.3, bits=64, commit=00000000, modified=0, pid=1, just started
+rinha-db  | 1:M 18 Aug 2025 21:21:16.715 # Warning: no config file specified, using the default config. In order to specify a config file use valkey-server /path/to/valkey.conf
+rinha-db  | 1:M 18 Aug 2025 21:21:16.716 * monotonic clock: POSIX clock_gettime
+rinha-db  | 1:M 18 Aug 2025 21:21:16.717 * Running mode=standalone, port=6379.
+rinha-db  | 1:M 18 Aug 2025 21:21:16.718 * Server initialized
+rinha-db  | 1:M 18 Aug 2025 21:21:16.718 * Ready to accept connections tcp
 rinha-srv-two  | Server running on 0.0.0.0:8000
 rinha-srv-two  | 
 rinha-srv-two  |  ┌───────────────────────────────────────────────────┐ 
@@ -40,6 +29,17 @@ rinha-srv-two  |  │ Handlers ............. 4  Processes ........... 1 │
 rinha-srv-two  |  │ Prefork ....... Disabled  PID ................. 1 │ 
 rinha-srv-two  |  └───────────────────────────────────────────────────┘ 
 rinha-srv-two  | 
+rinha-srv-one  | Server running on 0.0.0.0:8000
+rinha-srv-one  | 
+rinha-srv-one  |  ┌───────────────────────────────────────────────────┐ 
+rinha-srv-one  |  │                   Fiber v2.52.9                   │ 
+rinha-srv-one  |  │               http://127.0.0.1:8000               │ 
+rinha-srv-one  |  │       (bound on host 0.0.0.0 and port 8000)       │ 
+rinha-srv-one  |  │                                                   │ 
+rinha-srv-one  |  │ Handlers ............. 4  Processes ........... 1 │ 
+rinha-srv-one  |  │ Prefork ....... Disabled  PID ................. 1 │ 
+rinha-srv-one  |  └───────────────────────────────────────────────────┘ 
+rinha-srv-one  | 
 nginx-proxy    | /docker-entrypoint.sh: /docker-entrypoint.d/ is not empty, will attempt to perform configuration
 nginx-proxy    | /docker-entrypoint.sh: Looking for shell scripts in /docker-entrypoint.d/
 nginx-proxy    | /docker-entrypoint.sh: Launching /docker-entrypoint.d/10-listen-on-ipv6-by-default.sh
@@ -49,12 +49,17 @@ nginx-proxy    | /docker-entrypoint.sh: Sourcing /docker-entrypoint.d/15-local-r
 nginx-proxy    | /docker-entrypoint.sh: Launching /docker-entrypoint.d/20-envsubst-on-templates.sh
 nginx-proxy    | /docker-entrypoint.sh: Launching /docker-entrypoint.d/30-tune-worker-processes.sh
 nginx-proxy    | /docker-entrypoint.sh: Configuration complete; ready for start up
+rinha-db       | 1:M 18 Aug 2025 21:22:29.190 * 10000 changes in 60 seconds. Saving...
+rinha-db       | 1:M 18 Aug 2025 21:22:29.191 * Background saving started by pid 99
+rinha-db       | 99:C 18 Aug 2025 21:22:29.208 * DB saved on disk
+rinha-db       | 99:C 18 Aug 2025 21:22:29.209 * Fork CoW for RDB: current 0 MB, peak 0 MB, average 0 MB
+rinha-db       | 1:M 18 Aug 2025 21:22:29.292 * Background saving terminated with success
 [Knginx-proxy exited with code 0
 [Krinha-srv-two exited with code 2
 [Krinha-srv-one exited with code 2
-rinha-db       | 1:signal-handler (1755551909) Received SIGTERM scheduling shutdown...
-rinha-db       | 1:M 18 Aug 2025 21:18:30.033 * User requested shutdown...
-rinha-db       | 1:M 18 Aug 2025 21:18:30.033 * Saving the final RDB snapshot before exiting.
-rinha-db       | 1:M 18 Aug 2025 21:18:30.046 * DB saved on disk
-rinha-db       | 1:M 18 Aug 2025 21:18:30.046 # Valkey is now ready to exit, bye bye...
+rinha-db       | 1:signal-handler (1755552151) Received SIGTERM scheduling shutdown...
+rinha-db       | 1:M 18 Aug 2025 21:22:31.309 * User requested shutdown...
+rinha-db       | 1:M 18 Aug 2025 21:22:31.309 * Saving the final RDB snapshot before exiting.
+rinha-db       | 1:M 18 Aug 2025 21:22:31.324 * DB saved on disk
+rinha-db       | 1:M 18 Aug 2025 21:22:31.324 # Valkey is now ready to exit, bye bye...
 log truncated at line 1000
