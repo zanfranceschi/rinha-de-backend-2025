@@ -15,7 +15,7 @@ graph TD
     end
 
     subgraph "Sua Aplicação"
-        B(Nginx Load Balancer)
+        B(HaProxy Load Balancer)
         C1[App Go 1]
         C2[App Go 2]
         E1["Worker Pool<br/>(Goroutines - App 1)"]
@@ -48,11 +48,11 @@ graph TD
     E2 -- Salva --> H
 ``` 
 
-A solução utiliza um sistema de workers assíncronos para processar os pagamentos. Um Nginx atua como load balancer para duas instâncias da aplicação Go. As requisições são enfileiradas no Redis (usando Listas como fila de trabalho) e consumidas por um pool de goroutines. A idempotência e o estado final são gerenciados pelo PostgreSQL / Redis (adapte conforme sua escolha final). O sistema também implementa um Circuit Breaker com health checks para lidar com a instabilidade dos processadores de pagamento.
+A solução utiliza um sistema de workers assíncronos para processar os pagamentos. Um HaProxy atua como load balancer para duas instâncias da aplicação Go. As requisições são enfileiradas no Redis (usando Listas como fila de trabalho) e consumidas por um pool de goroutines. A idempotência e o estado final são gerenciados pelo PostgreSQL / Redis (adapte conforme sua escolha final). O sistema também implementa um Circuit Breaker com health checks para lidar com a instabilidade dos processadores de pagamento.
 
 ## Stack de Tecnologias
 
 - **Linguagem:** Go
 - **Banco de Dados:** Redis
 - **Fila/Mensageria:** Redis
-- **Load Balancer:** Nginx
+- **Load Balancer:** HaProxy
