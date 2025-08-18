@@ -1,0 +1,85 @@
+services:
+  api1:
+    image: jrblatt/rinha-de-backend-2025-rust:1.0.0
+    container_name: api1
+    hostname: api1
+    environment:
+      - MODE=💩
+      - WORKERS=1
+      - FALLBACK_INTERVAL=5
+    volumes:
+      - rb2025:/tmp/
+    networks:
+      - payment-processor
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: "0.45"
+          memory: 145MB
+
+  api2:
+    image: jrblatt/rinha-de-backend-2025-rust:1.0.0
+    container_name: api2
+    hostname: api2
+    environment:
+      - MODE=💩
+      - WORKERS=1
+      - FALLBACK_INTERVAL=5
+    volumes:
+      - rb2025:/tmp/
+    networks:
+      - payment-processor
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: "0.45"
+          memory: 145MB
+
+  beercache:
+    image: jrblatt/beercache:1.0.0
+    container_name: beercache
+    volumes:
+      - rb2025:/tmp/
+    networks:
+      - payment-processor
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: "0.2"
+          memory: 20MB
+
+  uxlb:
+    image: jrblatt/uxlb
+    container_name: uxlb
+    ports:
+      - "9999:9999"
+    environment:
+      - LB_UPSTREAMS=/tmp/api1.sock,/tmp/api2.sock
+      - LB_PORT=9999
+      - LB_FAF=POST:/payments:200
+      - LB_WORKERS=1
+    volumes:
+      - rb2025:/tmp/
+    depends_on:
+      - api1
+      - api2
+    networks:
+      - payment-processor
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: "0.4"
+          memory: 40MB
+
+volumes:
+  rb2025:
+    driver: local
+
+networks:
+  payment-processor:
+    external: true
+    driver: bridge

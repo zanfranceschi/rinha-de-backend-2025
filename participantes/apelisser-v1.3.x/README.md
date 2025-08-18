@@ -7,7 +7,7 @@ Este projeto é uma implementação para o desafio **Rinha de Backend 2025**
 - **Linguagem:** Java 21
 - **Framework:** Spring Boot 3
 - **Banco de Dados:** PostgreSQL
-- **Servidor Web:** Undertow
+- **Servidor Web:** Jetty
 - **Build:** Maven
 - **Virtualização:** Docker
 - **Load Balancer:** HAProxy
@@ -21,7 +21,7 @@ A arquitetura da aplicação foi projetada para ser resiliente, escalável e de 
 - **Backend (Spring Boot):** A aplicação principal, responsável por receber as requisições de pagamento e orquestrar o processamento assíncrono. O `docker-compose.yml` está configurado para executar duas instâncias da aplicação para alta disponibilidade.
 - **PostgreSQL:** O banco de dados utilizado para persistir os dados da aplicação, com otimizações para alta performance.
 - **GraalVM:** O projeto está configurado para compilar uma imagem nativa, o que resulta em um tempo de inicialização mais rápido e menor consumo de memória.
-- **Undertow:** Servidor web de alta performance, utilizado no lugar do Tomcat padrão do Spring Boot.
+- **Jetty:** Servidor web de alta performance configurado para comunicação via Unix Domain Sockets (UDS). Isso otimiza a comunicação com o HAProxy quando ambos rodam no mesmo host, eliminando o overhead da camada TCP/IP.
 
 ### ✨ Padrões e Funcionalidades
 

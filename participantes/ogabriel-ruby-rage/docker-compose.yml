@@ -1,0 +1,76 @@
+services:
+  haproxy:
+    image: haproxy:3.1.8-alpine3.22
+    volumes:
+      - ./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
+    ports:
+      - 9999:9999
+    networks:
+      - backend
+    depends_on:
+      - app1
+      - app2
+    deploy:
+      resources:
+        limits:
+          cpus: '0.1'
+          memory: '30MB'
+    ulimits:
+      nofile:
+        soft: 16384
+        hard: 16384
+
+  app1: &app1
+    image: ogabriel/rinha-de-backend-2025:ruby-rage
+    environment: &env_app1
+      BUNDLE_WITHOUT: "development test"
+      BUNDLE_DEPLOYMENT: "1"
+      RUBYOPT: --yjit --yjit-mem-size=150
+      SECRET_KEY_BASE: xUZ2aYKI10TzUGY4juCkDIpip9LaDi8KOj0emd8HOHiFZh2zKT5sLXg+0/wzHfnw
+      WEB_CONCURRENCY: 1
+      PORT: 9999
+      OTHER_APP: app2:9999
+      PAYMENT_PROCESSOR_DEFAULT_HOST: http://payment-processor-default:8080
+      PAYMENT_PROCESSOR_FALLBACK_HOST: http://payment-processor-fallback:8080
+    command: ["app1"]
+    deploy:
+      resources:
+        limits:
+          cpus: '0.68'
+          memory: '150MB'
+    networks:
+      - backend
+      - payment-processor
+    ulimits:
+      nofile:
+        soft: 8192
+        hard: 8192
+
+  app2:
+    <<: *app1
+    environment:
+      <<: *env_app1
+      OTHER_APP: app1:9999
+    command: ["app2"]
+
+  cron:
+    <<: *app1
+    environment:
+      <<: *env_app1
+      APP1_HOST: http://app1:9999
+      APP2_HOST: http://app2:9999
+    depends_on:
+      - app1
+      - app2
+    command: ["cron"]
+    deploy:
+      resources:
+        limits:
+          cpus: '0.04'
+          memory: '20MB'
+
+networks:
+  backend:
+    driver: bridge
+  payment-processor:
+    external: true

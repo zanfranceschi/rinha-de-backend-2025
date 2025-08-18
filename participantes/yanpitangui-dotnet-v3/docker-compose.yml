@@ -101,7 +101,7 @@ services:
           memory: "20MB"
   
   rinha-db:
-    image: postgres:17-alpine
+    image: postgres:latest
     networks:
       - payment-processor
     volumes:
@@ -115,7 +115,7 @@ services:
       - "5432:5432"
     healthcheck:
       test: [ "CMD-SHELL", "pg_isready -U postgres -d rinha" ]
-      interval: 2s
+      interval: 5s
       timeout: 20s
       retries: 15
     deploy:

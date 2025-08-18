@@ -1,0 +1,119 @@
+services:
+  nginx:
+    image: nginx:1.25
+    container_name: rdb-2025-nginx
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    ports:
+      - "9999:9999"
+    depends_on:
+      api1:
+        condition: service_healthy
+      api2:
+        condition: service_healthy
+    networks:
+      - backend
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          cpus: "0.03"
+          memory: "15MB"
+
+  api1:
+    image: ghcr.io/rolesosi/rdb-2025-try-api:latest
+    container_name: rdb-2025-api1
+    environment:
+      - INSTANCE=1
+      - REDIS_URL=redis://redis:6379/0  
+      - BATCH_SIZE=500
+      - LOG_LEVEL=DEBUG
+    networks:
+      - backend
+      - payment-processor      
+    depends_on:
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "python -c \"import urllib.request; urllib.request.urlopen('http://localhost:8080/health')\""]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+      start_period: 5s
+    deploy:
+      resources:
+        limits:
+          cpus: "0.45"
+          memory: "95MB"
+
+  api2:
+    image: ghcr.io/rolesosi/rdb-2025-try-api:latest
+    container_name: rdb-2025-api2
+    environment:
+      - INSTANCE=2
+      - REDIS_URL=redis://redis:6379/0  
+      - BATCH_SIZE=500
+      - LOG_LEVEL=DEBUG
+    networks:
+      - backend
+      - payment-processor      
+    depends_on:
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "python -c \"import urllib.request; urllib.request.urlopen('http://localhost:8080/health')\""]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+      start_period: 5s
+    deploy:
+      resources:
+        limits:
+          cpus: "0.45"
+          memory: "95MB"
+
+  worker:
+    image: ghcr.io/rolesosi/rdb-2025-try-worker:latest
+    container_name: rdb-2025-worker
+    environment:
+      - DEFAULT_PROCESSOR_URL=http://payment-processor-default:8080
+      - FALLBACK_PROCESSOR_URL=http://payment-processor-fallback:8080
+      - REDIS_URL=redis://redis:6379/0
+      - BATCH_SIZE=100
+      - MAX_RETRIES=3
+      - HTTP_TIMEOUT=2.5
+    depends_on:
+      redis:
+        condition: service_healthy
+    networks:
+      - backend
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          cpus: "0.45"
+          memory: "105MB"
+
+  redis:
+    image: redis:7-alpine
+    container_name: rdb-2025-redis
+    command: ["redis-server", "--save", "", "--appendonly", "no", "--timeout", "0", "--port", "6379", "--maxmemory", "40mb", "--maxmemory-policy", "allkeys-lru"]
+    networks:
+      - backend
+      - payment-processor
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 5      
+    deploy:
+      resources:
+        limits:
+          cpus: "0.12"
+          memory: "40MB"
+
+networks:
+  backend:
+    driver: bridge
+  payment-processor:
+    external: true          

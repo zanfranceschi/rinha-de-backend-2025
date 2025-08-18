@@ -1,0 +1,58 @@
+version: "3.8"
+
+services:
+  api1:
+    image: jorgedevsoftware/jorge-rinha:10.0-bytes-15f
+    container_name: api1
+    environment:
+     - URL_INSTANCE=http://api2:8080/payments-summary/internal
+    ports:
+      - "8081:8080"
+    networks:
+      - backend
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          cpus: "0.65"
+          memory: "150MB"
+
+  api2:
+    image: jorgedevsoftware/jorge-rinha:10.0-bytes-15f
+    container_name: api2
+    environment:
+     - URL_INSTANCE=http://api1:8080/payments-summary/internal
+    ports:
+      - "8082:8080"
+    networks:
+      - backend
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          cpus: "0.65"
+          memory: "150MB"
+
+  haproxy:
+    image: haproxy:latest
+    container_name: haproxy
+    volumes:
+      - ./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
+    ports:
+      - "9999:80"
+    depends_on:
+      - api1
+      - api2
+    networks:
+      - backend
+    deploy:
+      resources:
+        limits:
+          cpus: "0.2"
+          memory: "40MB"
+          
+networks:
+  backend:
+    driver: bridge
+  payment-processor:
+    external: true

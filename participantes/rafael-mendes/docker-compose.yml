@@ -1,0 +1,118 @@
+# Total resources:
+# cpu: 1.5 vCPU
+# memory: 350MB
+
+x-service-templates:
+  api: &api
+    image: mendes11/rinha25:latest
+    environment:
+      - PROCESSOR_URL=http://payment-processor-default:8080
+      - FALLBACK_PROCESSOR_URL=http://payment-processor-fallback:8080
+      - DB_USER=postgres
+      - DB_PASSWORD=postgres
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_NAME=postgres
+      - N_WORKERS=1
+    networks:
+      - backend
+      - db
+      - payment-processor
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - db-socket:/var/run/postgresql
+      - tmp:/tmp
+    deploy:
+      resources:
+        limits:
+          cpus: "0.4"
+          memory: "70MB"
+
+services:
+  api1:
+    <<: *api
+    environment:
+      - PROCESSOR_URL=http://payment-processor-default:8080
+      - FALLBACK_PROCESSOR_URL=http://payment-processor-fallback:8080
+      - DB_USER=postgres
+      - DB_PASSWORD=postgres
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_NAME=postgres
+      - N_WORKERS=1
+      - GOMAXPROCS=3
+      - SOCKET_NAME=api1.sock
+    expose:
+      - 8000
+
+  api2:
+    <<: *api
+    environment:
+      - PROCESSOR_URL=http://payment-processor-default:8080
+      - FALLBACK_PROCESSOR_URL=http://payment-processor-fallback:8080
+      - DB_USER=postgres
+      - DB_PASSWORD=postgres
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_NAME=postgres
+      - N_WORKERS=1
+      - GOMAXPROCS=3
+      - SOCKET_NAME=api2.sock
+    expose:
+      - 8000
+
+  nginx:
+    image: nginx:1.27-alpine
+    ports:
+      - 9999:9999
+    volumes:
+      - tmp:/tmp
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    networks:
+      - backend
+    depends_on:
+      - api1
+      - api2
+    deploy:
+      resources:
+        limits:
+          cpus: "0.4"
+          memory: "70MB"
+
+  db:
+    image: postgres:17-alpine
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+    networks:
+      - db
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    volumes:
+      - db-socket:/var/run/postgresql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    deploy:
+      resources:
+        limits:
+          cpus: "0.3"
+          memory: "140MB"
+
+networks:
+  backend:
+    driver: bridge
+  db:
+  payment-processor:
+    external: true
+
+volumes:
+  db-socket:
+

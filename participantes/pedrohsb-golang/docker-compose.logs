@@ -1,21 +1,87 @@
 
+ app2 Pulling 
+ memdb Pulling 
+ app1 Pulling 
+ 9824c27679d3 Already exists 
+ aba465d72fe4 Already exists 
+ 8a983b513258 Already exists 
+ 086ee7769090 Pulling fs layer 
+ 086ee7769090 Downloading [>                                                  ]  122.1kB/11.43MB
+ 086ee7769090 Verifying Checksum 
+ 086ee7769090 Download complete 
+ 086ee7769090 Extracting [>                                                  ]  131.1kB/11.43MB
+ 086ee7769090 Extracting [====================================>              ]  8.389MB/11.43MB
+ 086ee7769090 Extracting [==================================================>]  11.43MB/11.43MB
+ 086ee7769090 Pull complete 
+ app2 Pulled 
+ app1 Pulled 
+ memdb Pulled 
  Network pedrohsb-golang_backend  Creating
  Network pedrohsb-golang_backend  Created
+ Volume "pedrohsb-golang_memsock"  Creating
+ Volume "pedrohsb-golang_memsock"  Created
+ Container pedrohsb-golang-memdb-1  Creating
+ Container pedrohsb-golang-memdb-1  Created
  Container pedrohsb-golang-app1-1  Creating
  Container pedrohsb-golang-app2-1  Creating
- Container pedrohsb-golang-app1-1  Created
  Container pedrohsb-golang-app2-1  Created
- Container haproxy-1  Creating
- Container haproxy-1  Created
-Attaching to haproxy-1, app1-1, app2-1
-haproxy-1  | [NOTICE]   (1) : Initializing new worker (8)
-haproxy-1  | [NOTICE]   (1) : Loading success.
-haproxy-1  | [NOTICE]   (1) : haproxy version is 3.2.3-1844da7
-haproxy-1  | [NOTICE]   (1) : path to executable is /usr/local/sbin/haproxy
-haproxy-1  | [WARNING]  (1) : Exiting Master process...
-haproxy-1  | [WARNING]  (8) : Proxy fe_tcp stopped (cumulated conns: FE: 558, BE: 0).
-haproxy-1  | [WARNING]  (8) : Proxy be_tcp stopped (cumulated conns: FE: 0, BE: 558).
-haproxy-1  | [WARNING]  (1) : Current worker (8) exited with code 0 (Exit)
-haproxy-1  | [WARNING]  (1) : All workers exited. Exiting... (0)
-[Khaproxy-1 exited with code 0
+ Container pedrohsb-golang-app1-1  Created
+ Container nginx-1  Creating
+ Container nginx-1  Created
+Attaching to nginx-1, app1-1, app2-1, memdb-1
+memdb-1  | 2025/08/16 21:49:39 Server listening on /tmp/kvstore.sock
+memdb-1  | 2025/08/16 21:49:39 Client connected: @
+memdb-1  | 2025/08/16 21:49:39 Client connected: @
+nginx-1  | /docker-entrypoint.sh: /docker-entrypoint.d/ is not empty, will attempt to perform configuration
+nginx-1  | /docker-entrypoint.sh: Looking for shell scripts in /docker-entrypoint.d/
+nginx-1  | /docker-entrypoint.sh: Launching /docker-entrypoint.d/10-listen-on-ipv6-by-default.sh
+nginx-1  | 10-listen-on-ipv6-by-default.sh: info: Getting the checksum of /etc/nginx/conf.d/default.conf
+nginx-1  | 10-listen-on-ipv6-by-default.sh: info: Enabled listen on IPv6 in /etc/nginx/conf.d/default.conf
+nginx-1  | /docker-entrypoint.sh: Sourcing /docker-entrypoint.d/15-local-resolvers.envsh
+nginx-1  | /docker-entrypoint.sh: Launching /docker-entrypoint.d/20-envsubst-on-templates.sh
+nginx-1  | /docker-entrypoint.sh: Launching /docker-entrypoint.d/30-tune-worker-processes.sh
+nginx-1  | /docker-entrypoint.sh: Configuration complete; ready for start up
+memdb-1  | {false 0 http://payment-processor-default:8080 }
+memdb-1  | {false 0 http://payment-processor-default:8080 }
+memdb-1  | {false 0 http://payment-processor-default:8080 }
+memdb-1  | {false 0 http://payment-processor-default:8080 }
+memdb-1  | {false 0 http://payment-processor-default:8080 }
+memdb-1  | {false 0 http://payment-processor-default:8080 }
+memdb-1  | {false 0 http://payment-processor-default:8080 }
+memdb-1  | {false 0 http://payment-processor-default:8080 }
+memdb-1  | {false 0 http://payment-processor-fallback:8080 }
+memdb-1  | {false 0 http://payment-processor-default:8080 }
+memdb-1  | {false 0 http://payment-processor-fallback:8080 }
+memdb-1  | {false 0 http://payment-processor-default:8080 }
+memdb-1  | {true 1000 http://payment-processor-fallback:8080 }
+memdb-1  | {false 0 http://payment-processor-default:8080 }
+memdb-1  | {true 1000 http://payment-processor-fallback:8080 }
+memdb-1  | {false 0 http://payment-processor-default:8080 }
+memdb-1  | {false 20 http://payment-processor-fallback:8080 }
+memdb-1  | {false 0 http://payment-processor-default:8080 }
+memdb-1  | {false 20 http://payment-processor-fallback:8080 }
+memdb-1  | {false 0 http://payment-processor-default:8080 }
+memdb-1  | {false 20 http://payment-processor-default:8080 }
+memdb-1  | {false 0 http://payment-processor-default:8080 }
+memdb-1  | {false 20 http://payment-processor-default:8080 }
+memdb-1  | {false 0 http://payment-processor-default:8080 }
+[Knginx-1 exited with code 0
+memdb-1  | 2025/08/16 21:50:49 Client disconnected: @
+memdb-1  | 2025/08/16 21:50:49 Client disconnected: @
+[Kapp1-1 exited with code 2
+[Kapp2-1 exited with code 2
+memdb-1  | 2025/08/16 21:50:50 Shutting down server...
+memdb-1  | 2025/08/16 21:50:50 Accept error: accept unix /tmp/kvstore.sock: use of closed network connection
+memdb-1  | 2025/08/16 21:50:50 Accept error: accept unix /tmp/kvstore.sock: use of closed network connection
+memdb-1  | 2025/08/16 21:50:50 Accept error: accept unix /tmp/kvstore.sock: use of closed network connection
+memdb-1  | 2025/08/16 21:50:50 Accept error: accept unix /tmp/kvstore.sock: use of closed network connection
+memdb-1  | 2025/08/16 21:50:50 Accept error: accept unix /tmp/kvstore.sock: use of closed network connection
+memdb-1  | 2025/08/16 21:50:50 Accept error: accept unix /tmp/kvstore.sock: use of closed network connection
+memdb-1  | 2025/08/16 21:50:50 Accept error: accept unix /tmp/kvstore.sock: use of closed network connection
+memdb-1  | 2025/08/16 21:50:50 Accept error: accept unix /tmp/kvstore.sock: use of closed network connection
+memdb-1  | 2025/08/16 21:50:50 Accept error: accept unix /tmp/kvstore.sock: use of closed network connection
+memdb-1  | 2025/08/16 21:50:50 Accept error: accept unix /tmp/kvstore.sock: use of closed network connection
+memdb-1  | 2025/08/16 21:50:50 Accept error: accept unix /tmp/kvstore.sock: use of closed network connection
+memdb-1  | 2025/08/16 21:50:50 Accept error: accept unix /tmp/kvstore.sock: use of closed network connection
+memdb-1  | 2025/08/16 21:50:50 Accept error: accept unix /tmp/kvstore.sock: use of closed network connection
 log truncated at line 1000

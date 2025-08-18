@@ -1,0 +1,51 @@
+services:
+  haproxy:
+    image: haproxy:3.1.8-alpine3.22
+    volumes:
+      - ./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
+    ports:
+      - 9999:9999
+    networks:
+      - backend
+    depends_on:
+      - app1
+      - app2
+    deploy:
+      resources:
+        limits:
+          cpus: '0.1'
+          memory: '30MB'
+
+  app1: &app1
+    image: ogabriel/rinha-de-backend-2025:elixir
+    environment: &env_app1
+      MIX_ENV: prod
+      ERL_MAX_PORTS: 4096
+      RELEASE_DISTRIBUTION: name
+      RELEASE_NODE: app@app1.com
+      RELEASE_COOKIE: rinha
+      CONNECT_TO_NODE: app@app2.com
+    hostname: app1.com
+    networks:
+      - backend
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          cpus: '0.7'
+          memory: '160MB'
+
+  app2:
+    <<: *app1
+    depends_on:
+      - app1
+    environment:
+      <<: *env_app1
+      RELEASE_NODE: app@app2.com
+    hostname: app2.com
+
+networks:
+  backend:
+    driver: bridge
+  payment-processor:
+    external: true

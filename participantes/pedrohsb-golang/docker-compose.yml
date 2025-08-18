@@ -1,6 +1,6 @@
 services:
   memdb:
-    image: pedrohsbarbosa99/rinha-golang-2025:0.3.6
+    image: pedrohsbarbosa99/rinha-golang-2025:0.3.7
     command: ["./memdb"]
     volumes:
       - memsock:/tmp
@@ -14,12 +14,12 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.2"
+          cpus: "0.4"
           memory: 100M
     restart: unless-stopped
 
   app1:
-    image: pedrohsbarbosa99/rinha-golang-2025:0.3.6
+    image: pedrohsbarbosa99/rinha-golang-2025:0.3.7
     command: ["./main"]
     volumes:
       - memsock:/tmp
@@ -35,12 +35,12 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.55"
+          cpus: "0.4"
           memory: 50M
     restart: unless-stopped
 
   app2:
-    image: pedrohsbarbosa99/rinha-golang-2025:0.3.6
+    image: pedrohsbarbosa99/rinha-golang-2025:0.3.7
     command: ["./main"]
     volumes:
       - memsock:/tmp
@@ -56,7 +56,7 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.55"
+          cpus: "0.4"
           memory: 50M
     restart: unless-stopped
 
@@ -76,8 +76,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.2"
-          memory: 50M
+          cpus: "0.3"
+          memory: 100M
     restart: unless-stopped
 
 volumes:

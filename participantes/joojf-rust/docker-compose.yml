@@ -1,11 +1,12 @@
 services:
   app1:
-    image: ghcr.io/joojf/rinha-de-backend:latest
+    # build: .
+    image: ghcr.io/joojf/rinha-de-backend:1.2.6
     environment:
       - BIND_ADDR=0.0.0.0:9999
       - DEFAULT_URL=http://payment-processor-default:8080
       - FALLBACK_URL=http://payment-processor-fallback:8080
-      - REDIS_SOCKET=/socket/redis.sock
+      - MEMSTORE_SOCKET=/shared/memstore.sock
       - REQ_TIMEOUT_MS=50
       - WORKERS=4
       - PROC_CONCURRENCY=8
@@ -16,25 +17,26 @@ services:
       - MAX_RETRIES=2
       - TRACE_SLOW_MS=10
     depends_on:
-      - redis
+      - memstore
     networks:
       - default
       - payment-processor
     volumes:
-      - redis-sock:/socket
+      - shared-sock:/shared
     deploy:
       resources:
         limits:
-          cpus: "0.55"
-          memory: "120MB"
+          cpus: "0.65"
+          memory: "140MB"
 
   app2:
-    image: ghcr.io/joojf/rinha-de-backend:latest
+    # build: .
+    image: ghcr.io/joojf/rinha-de-backend:1.2.6
     environment:
       - BIND_ADDR=0.0.0.0:9999
       - DEFAULT_URL=http://payment-processor-default:8080
       - FALLBACK_URL=http://payment-processor-fallback:8080
-      - REDIS_SOCKET=/socket/redis.sock
+      - MEMSTORE_SOCKET=/shared/memstore.sock
       - REQ_TIMEOUT_MS=50
       - WORKERS=4
       - PROC_CONCURRENCY=8
@@ -45,17 +47,17 @@ services:
       - MAX_RETRIES=2
       - TRACE_SLOW_MS=10
     depends_on:
-      - redis
+      - memstore
     networks:
       - default
       - payment-processor
     volumes:
-      - redis-sock:/socket
+      - shared-sock:/shared
     deploy:
       resources:
         limits:
-          cpus: "0.55"
-          memory: "120MB"
+          cpus: "0.65"
+          memory: "140MB"
 
   nginx:
     image: nginx:1.29-alpine
@@ -74,22 +76,15 @@ services:
           cpus: "0.1"
           memory: "40MB"
 
-  redis:
-    image: redis:7.2-alpine
-    command: >-
-      sh -c "mkdir -p /socket && chown -R redis:redis /socket && \
-      exec redis-server --appendonly no --save '' --port 0 \
-      --unixsocket /socket/redis.sock --unixsocketperm 777 \
-      --maxmemory-policy allkeys-lru --tcp-keepalive 60"
-    networks:
-      - default
+  memstore:
+    image: ghcr.io/joojf/rinha-de-backend-memstore:1.2.6
     volumes:
-      - redis-sock:/socket
+      - shared-sock:/tmp
     deploy:
       resources:
         limits:
-          cpus: "0.3"
-          memory: "70MB"
+          cpus: "0.1"
+          memory: "30MB"
 
 networks:
   default:
@@ -98,4 +93,4 @@ networks:
     external: true
 
 volumes:
-  redis-sock:
+  shared-sock:

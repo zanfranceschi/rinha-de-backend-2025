@@ -27,14 +27,14 @@ x-service-templates:
 
   x-env-backend: &env-backend
     SERVER_PORT: "8080"
-    JETTY_SERVER_UNIX_SOCKET_ACCEPT_QUEUE_SIZE: "256"
+    JETTY_SERVER_UNIX_SOCKET_ACCEPT_QUEUE_SIZE: "128"
     JETTY_SERVER_UNIX_SOCKET_IDLE_TIMEOUT: "30000"
 
     LOGGING_LEVEL: OFF
     PAYMENT_API_SUMMARY_DELAY: "50"
     PAYMENT_API_ASYNC_INPUT: "true"
     PAYMENT_API_ASYNC_THREAD_TYPE: platform
-    PAYMENT_API_ASYNC_INPUT_POOL_SIZE: "8"
+    PAYMENT_API_ASYNC_INPUT_POOL_SIZE: "6"
 
     JACKSON_INSTALL_AFTERBURNER: "true"
     JACKSON_DISABLE_DEFAULT_FEATURES: "true"
@@ -50,7 +50,7 @@ x-service-templates:
     DB_PASSWORD: postgres
 
     DB_POOL_MINIMUM_SIZE: "8"
-    DB_POOL_MAXIMUM_SIZE: "15"
+    DB_POOL_MAXIMUM_SIZE: "12"
     DB_POOL_IDLE_TIMEOUT: "30000"
 
     # health check
@@ -68,7 +68,7 @@ x-service-templates:
     PAYMENT_PROCESSOR_WORKER: "1"
     PAYMENT_PROCESSOR_WORKER_INTERVAL: "1"
     PAYMENT_PROCESSOR_QUEUE_LENGTH: "100000"
-    PAYMENT_PROCESSOR_MAX_DEQUEUE: "2"
+    PAYMENT_PROCESSOR_MAX_DEQUEUE: "3"
     PAYMENT_PROCESSOR_SEMAPHORE_MAX_CONCURRENCY: "15"
     PAYMENT_PROCESSOR_MAX_RETRIES: "6"
     PAYMENT_PROCESSOR_MAX_QUANTITY_REDUCTION_PERCENTAGE: "0.90"
@@ -76,7 +76,7 @@ x-service-templates:
 
     # payment processed
     PAYMENT_PROCESSED_WORKER: "1"
-    PAYMENT_PROCESSED_WORKER_INTERVAL: "100"
+    PAYMENT_PROCESSED_WORKER_INTERVAL: "150"
     PAYMENT_PROCESSED_QUEUE_LENGTH: "100000"
     PAYMENT_PROCESSED_MAX_DEQUEUE: "1000"
     PAYMENT_PROCESSED_MAX_RETRIES: "3"
@@ -110,8 +110,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.31"
-          memory: "125MB"
+          cpus: "0.3"
+          memory: "130MB"
 
   load-balancer:
     image: haproxy:3.2-alpine
@@ -134,8 +134,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.15"
-          memory: "15MB"
+          cpus: "0.2"
+          memory: "20MB"
 
   backend01:
     <<: *backend-application
@@ -150,8 +150,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.52"
-          memory: "105MB"
+          cpus: "0.5"
+          memory: "100MB"
 
   backend02:
     <<: *backend-application
@@ -166,8 +166,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.52"
-          memory: "105MB"
+          cpus: "0.5"
+          memory: "100MB"
 
 networks:
   rinha-net:

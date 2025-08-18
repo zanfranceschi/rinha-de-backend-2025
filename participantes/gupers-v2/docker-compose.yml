@@ -1,0 +1,100 @@
+x-service-templates:
+  payment-gateway-db: &payment-gateway-db
+    image: postgres:17-alpine
+    networks:
+      - backend
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    environment:
+      - POSTGRES_PASSWORD=gateway
+      - POSTGRES_USER=gateway
+      - POSTGRES_DB=gateway
+          
+services:
+  # Payment Gateway Database
+  payment-gateway-db:
+    <<: *payment-gateway-db
+    container_name: payment-gateway-db
+    hostname: payment-gateway-db
+    deploy:
+      resources:
+        limits:
+          cpus: "0.3"
+          memory: "120MB"
+
+  #Load Balancer (Envoy)
+  envoy:
+    image: envoyproxy/envoy:v1.28-latest
+    container_name: payment-gateway-envoy
+    hostname: payment-gateway-envoy
+    ports:
+      - "9999:10000"
+    volumes:
+      - ./envoy/envoy.yaml:/etc/envoy/envoy.yaml:ro
+    networks:
+      - backend
+    deploy:
+      resources:
+        limits:
+          cpus: "0.4"
+          memory: "50MB"
+
+  # Payment Gateway Instance 1
+  payment-gateway-1:
+    image: gupers.azurecr.io/guper-fast:v1
+    container_name: payment-gateway-1
+    hostname: payment-gateway-1
+    environment:
+      - PORT=8080
+      - DATABASE_URL=postgres://gateway:gateway@payment-gateway-db:5432/gateway?sslmode=disable
+      - PRIMARY_PAYMENT_PROCESSOR_URL=http://payment-processor-default:8080/payments
+      - PRIMARY_PAYMENT_PROCESSOR_HEALTH_URL=http://payment-processor-default:8080/payments/service-health
+      - FALLBACK_PAYMENT_PROCESSOR_URL=http://payment-processor-fallback:8080/payments
+      - FALLBACK_PAYMENT_PROCESSOR_HEALTH_URL=http://payment-processor-fallback:8080/payments/service-health
+      - PAYMENT_CHANNEL_LEN=10000
+      - PAYMENT_NUM_WORKERS=64
+      - GOMAXPROCS=4
+      - GOGC=1000
+    depends_on:
+      - payment-gateway-db
+    networks:
+      - backend
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          cpus: "0.4"
+          memory: "90MB"
+
+  # Payment Gateway Instance 2
+  payment-gateway-2:
+    image: gupers.azurecr.io/guper-fast:v1
+    container_name: payment-gateway-2
+    hostname: payment-gateway-2
+    environment:
+      - PORT=8080
+      - DATABASE_URL=postgres://gateway:gateway@payment-gateway-db:5432/gateway?sslmode=disable
+      - PRIMARY_PAYMENT_PROCESSOR_URL=http://payment-processor-default:8080/payments
+      - PRIMARY_PAYMENT_PROCESSOR_HEALTH_URL=http://payment-processor-default:8080/payments/service-health
+      - FALLBACK_PAYMENT_PROCESSOR_URL=http://payment-processor-fallback:8080/payments
+      - FALLBACK_PAYMENT_PROCESSOR_HEALTH_URL=http://payment-processor-fallback:8080/payments/service-health
+      - PAYMENT_CHANNEL_LEN=10000
+      - PAYMENT_NUM_WORKERS=64
+      - GOMAXPROCS=4
+      - GOGC=1000
+    depends_on:
+      - payment-gateway-db
+    networks:
+      - backend
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          cpus: "0.4"
+          memory: "90MB"
+          
+networks:
+  backend:
+    driver: bridge
+  payment-processor:
+    external: true

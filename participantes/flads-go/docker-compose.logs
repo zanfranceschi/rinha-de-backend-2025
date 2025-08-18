@@ -1,0 +1,1001 @@
+
+ Network flads-go_main-network  Creating
+ Network flads-go_main-network  Created
+ Volume "flads-go_sockets"  Creating
+ Volume "flads-go_sockets"  Created
+ Container flads-go-redis-1  Creating
+ Container database  Creating
+ Container api-2  Creating
+ Container api-1  Creating
+ Container api-1  Created
+ Container database  Created
+ Container api-2  Created
+ Container flads-go-nginx-1  Creating
+ Container flads-go-redis-1  Created
+ Container worker-2  Creating
+ Container worker-1  Creating
+ Container worker-2  Created
+ Container flads-go-nginx-1  Created
+ Container worker-1  Created
+Attaching to api-1, api-2, database, nginx-1, redis-1, worker-1, worker-2
+database  | 2025/08/17 21:06:57 API rodando em :8081
+redis-1   | 1:M 17 Aug 2025 21:06:58.061 # WARNING Memory overcommit must be enabled! Without it, a background save or replication may fail under low memory condition. Being disabled, it can also cause failures without low memory condition, see https://github.com/jemalloc/jemalloc/issues/1328. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.
+redis-1   | 1:M 17 Aug 2025 21:06:58.061 * oO0OoO0OoO0Oo Valkey is starting oO0OoO0OoO0Oo
+redis-1   | 1:M 17 Aug 2025 21:06:58.061 * Valkey version=8.1.3, bits=64, commit=00000000, modified=0, pid=1, just started
+redis-1   | 1:M 17 Aug 2025 21:06:58.061 * Configuration loaded
+redis-1   | 1:M 17 Aug 2025 21:06:58.062 * monotonic clock: POSIX clock_gettime
+redis-1   | 1:M 17 Aug 2025 21:06:58.063 * Running mode=standalone, port=6379.
+redis-1   | 1:M 17 Aug 2025 21:06:58.063 # WARNING: The TCP backlog setting of 65535 cannot be enforced because /proc/sys/net/core/somaxconn is set to the lower value of 4096.
+redis-1   | 1:M 17 Aug 2025 21:06:58.064 * Server initialized
+redis-1   | 1:M 17 Aug 2025 21:06:58.065 * Ready to accept connections tcp
+nginx-1   | /docker-entrypoint.sh: /docker-entrypoint.d/ is not empty, will attempt to perform configuration
+nginx-1   | /docker-entrypoint.sh: Looking for shell scripts in /docker-entrypoint.d/
+nginx-1   | /docker-entrypoint.sh: Launching /docker-entrypoint.d/10-listen-on-ipv6-by-default.sh
+nginx-1   | 10-listen-on-ipv6-by-default.sh: info: can not modify /etc/nginx/conf.d/default.conf (read-only file system?)
+nginx-1   | /docker-entrypoint.sh: Sourcing /docker-entrypoint.d/15-local-resolvers.envsh
+nginx-1   | /docker-entrypoint.sh: Launching /docker-entrypoint.d/20-envsubst-on-templates.sh
+nginx-1   | /docker-entrypoint.sh: Launching /docker-entrypoint.d/30-tune-worker-processes.sh
+nginx-1   | /docker-entrypoint.sh: Configuration complete; ready for start up
+database  | 2025/08/17 21:07:02 Calculating summary from 0 to 1755464822004260
+database  | 2025/08/17 21:07:02 Total requests: 0
+database  | 2025/08/17 21:07:02 Total requests: []
+database  | 2025/08/17 21:07:02 Calculating summary from 0 to 1755464822004260
+database  | 2025/08/17 21:07:02 Total requests: 0
+database  | 2025/08/17 21:07:02 Total requests: []
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:02 +0000] "GET /payments-summary HTTP/1.1" 200 95 "-" "curl/8.5.0"
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:07 +0000] "POST /purge-payments HTTP/1.1" 404 9 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:07 Calculating summary from 1755464812578000 to 1755464826078000
+database  | 2025/08/17 21:07:07 Total requests: 0
+database  | 2025/08/17 21:07:07 Total requests: []
+database  | 2025/08/17 21:07:07 Calculating summary from 1755464812578000 to 1755464826078000
+database  | 2025/08/17 21:07:07 Total requests: 0
+database  | 2025/08/17 21:07:07 Total requests: []
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:07 +0000] "GET /payments-summary?from=2025-08-17T21:06:52.578Z&to=2025-08-17T21:07:06.078Z HTTP/1.1" 200 95 "-" "Grafana k6/1.1.0"
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:07 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:07 Received default payment (converted): {Timestamp:1755464827581000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:07 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:07 Received default payment (converted): {Timestamp:1755464827689000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:07 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:07 Received default payment (converted): {Timestamp:1755464827798000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:07 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:07 Received default payment (converted): {Timestamp:1755464827908000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:08 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:08 Received default payment (converted): {Timestamp:1755464828017000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:08 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:08 Received default payment (converted): {Timestamp:1755464828126000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:08 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:08 Received default payment (converted): {Timestamp:1755464828235000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:08 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:08 Received default payment (converted): {Timestamp:1755464828345000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:08 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:08 Received default payment (converted): {Timestamp:1755464828454000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:08 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:08 Received default payment (converted): {Timestamp:1755464828563000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:08 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:08 Received default payment (converted): {Timestamp:1755464828584000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:08 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:08 Received default payment (converted): {Timestamp:1755464828672000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:08 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:08 Received default payment (converted): {Timestamp:1755464828690000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:08 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:08 Received default payment (converted): {Timestamp:1755464828781000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:08 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:08 Received default payment (converted): {Timestamp:1755464828799000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:08 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:08 Received default payment (converted): {Timestamp:1755464828891000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:08 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:08 Received default payment (converted): {Timestamp:1755464828909000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:09 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:09 Received default payment (converted): {Timestamp:1755464829000000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:09 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:09 Received default payment (converted): {Timestamp:1755464829018000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:09 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:09 Received default payment (converted): {Timestamp:1755464829109000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:09 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:09 Received default payment (converted): {Timestamp:1755464829127000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:09 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:09 Received default payment (converted): {Timestamp:1755464829219000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:09 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:09 Received default payment (converted): {Timestamp:1755464829236000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:09 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:09 Received default payment (converted): {Timestamp:1755464829328000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:09 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:09 Received default payment (converted): {Timestamp:1755464829346000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:09 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:09 Received default payment (converted): {Timestamp:1755464829437000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:09 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:09 Received default payment (converted): {Timestamp:1755464829455000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:09 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:09 Received default payment (converted): {Timestamp:1755464829547000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:09 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:09 Received default payment (converted): {Timestamp:1755464829564000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:09 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:09 Received default payment (converted): {Timestamp:1755464829585000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:09 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:09 Received default payment (converted): {Timestamp:1755464829656000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:09 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:09 Received default payment (converted): {Timestamp:1755464829674000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:09 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:09 Received default payment (converted): {Timestamp:1755464829692000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:09 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:09 Received default payment (converted): {Timestamp:1755464829765000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:09 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:09 Received default payment (converted): {Timestamp:1755464829782000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:09 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:09 Received default payment (converted): {Timestamp:1755464829800000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:09 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:09 Received default payment (converted): {Timestamp:1755464829874000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:09 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:09 Received default payment (converted): {Timestamp:1755464829892000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:09 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:09 Received default payment (converted): {Timestamp:1755464829910000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:09 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:09 Received default payment (converted): {Timestamp:1755464829984000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:10 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:10 Received default payment (converted): {Timestamp:1755464830002000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:10 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:10 Received default payment (converted): {Timestamp:1755464830020000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:10 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:10 Received default payment (converted): {Timestamp:1755464830093000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:10 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:10 Received default payment (converted): {Timestamp:1755464830111000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:10 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:10 Received default payment (converted): {Timestamp:1755464830129000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:10 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:10 Received default payment (converted): {Timestamp:1755464830202000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:10 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:10 Received default payment (converted): {Timestamp:1755464830220000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:10 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:10 Received default payment (converted): {Timestamp:1755464830237000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:10 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:10 Received default payment (converted): {Timestamp:1755464830311000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:10 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:10 Received default payment (converted): {Timestamp:1755464830329000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:10 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:10 Received default payment (converted): {Timestamp:1755464830347000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:10 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:10 Received default payment (converted): {Timestamp:1755464830421000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:10 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:10 Received default payment (converted): {Timestamp:1755464830439000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:10 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:10 Received default payment (converted): {Timestamp:1755464830457000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:10 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:10 Received default payment (converted): {Timestamp:1755464830531000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:10 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:10 Received default payment (converted): {Timestamp:1755464830548000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:10 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:10 Received default payment (converted): {Timestamp:1755464830565000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:10 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:10 Received default payment (converted): {Timestamp:1755464830587000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:10 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:10 Received default payment (converted): {Timestamp:1755464830640000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:10 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:10 Received default payment (converted): {Timestamp:1755464830656000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:10 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:10 Received default payment (converted): {Timestamp:1755464830675000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:10 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:10 Received default payment (converted): {Timestamp:1755464830693000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:10 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:10 Received default payment (converted): {Timestamp:1755464830749000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:10 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:10 Received default payment (converted): {Timestamp:1755464830766000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:10 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:10 Received default payment (converted): {Timestamp:1755464830784000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:10 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:10 Received default payment (converted): {Timestamp:1755464830802000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:10 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:10 Received default payment (converted): {Timestamp:1755464830858000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:10 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:10 Received default payment (converted): {Timestamp:1755464830876000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:10 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:10 Received default payment (converted): {Timestamp:1755464830893000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:10 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:10 Received default payment (converted): {Timestamp:1755464830911000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:10 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:10 Received default payment (converted): {Timestamp:1755464830967000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:10 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:10 Received default payment (converted): {Timestamp:1755464830985000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:11 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:11 Received default payment (converted): {Timestamp:1755464831003000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:11 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:11 Received default payment (converted): {Timestamp:1755464831021000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:11 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:11 Received default payment (converted): {Timestamp:1755464831077000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:11 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:11 Received default payment (converted): {Timestamp:1755464831094000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:11 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:11 Received default payment (converted): {Timestamp:1755464831112000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:11 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:11 Received default payment (converted): {Timestamp:1755464831130000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:11 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:11 Received default payment (converted): {Timestamp:1755464831186000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:11 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:11 Received default payment (converted): {Timestamp:1755464831204000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:11 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:11 Received default payment (converted): {Timestamp:1755464831222000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:11 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:11 Received default payment (converted): {Timestamp:1755464831239000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:11 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:11 Received default payment (converted): {Timestamp:1755464831295000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:11 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:11 Received default payment (converted): {Timestamp:1755464831313000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:11 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:11 Received default payment (converted): {Timestamp:1755464831331000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:11 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:11 Received default payment (converted): {Timestamp:1755464831349000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:11 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:11 Received default payment (converted): {Timestamp:1755464831405000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:11 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:11 Received default payment (converted): {Timestamp:1755464831423000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:11 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:11 Received default payment (converted): {Timestamp:1755464831440000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:11 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:11 Received default payment (converted): {Timestamp:1755464831458000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:11 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:11 Received default payment (converted): {Timestamp:1755464831514000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:11 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:11 Received default payment (converted): {Timestamp:1755464831532000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:11 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:11 Received default payment (converted): {Timestamp:1755464831549000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:11 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:11 Received default payment (converted): {Timestamp:1755464831567000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:11 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:11 Received default payment (converted): {Timestamp:1755464831588000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:11 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:11 Received default payment (converted): {Timestamp:1755464831623000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:11 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:11 Received default payment (converted): {Timestamp:1755464831641000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:11 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:11 Received default payment (converted): {Timestamp:1755464831658000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:11 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:11 Received default payment (converted): {Timestamp:1755464831676000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:11 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:11 Received default payment (converted): {Timestamp:1755464831693000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:11 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:11 Received default payment (converted): {Timestamp:1755464831732000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:11 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:11 Received default payment (converted): {Timestamp:1755464831750000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:11 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:11 Received default payment (converted): {Timestamp:1755464831768000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:11 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:11 Received default payment (converted): {Timestamp:1755464831785000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:11 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:11 Received default payment (converted): {Timestamp:1755464831803000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:11 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:11 Received default payment (converted): {Timestamp:1755464831846000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:11 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:11 Received default payment (converted): {Timestamp:1755464831859000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:11 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:11 Received default payment (converted): {Timestamp:1755464831877000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:11 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:11 Received default payment (converted): {Timestamp:1755464831895000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:11 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:11 Received default payment (converted): {Timestamp:1755464831912000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:11 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:11 Received default payment (converted): {Timestamp:1755464831951000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:11 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:11 Received default payment (converted): {Timestamp:1755464831969000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:11 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:11 Received default payment (converted): {Timestamp:1755464831987000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:12 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:12 Received default payment (converted): {Timestamp:1755464832005000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:12 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:12 Received default payment (converted): {Timestamp:1755464832023000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:12 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:12 Received default payment (converted): {Timestamp:1755464832060000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:12 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:12 Received default payment (converted): {Timestamp:1755464832079000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:12 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:12 Received default payment (converted): {Timestamp:1755464832095000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:12 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:12 Received default payment (converted): {Timestamp:1755464832113000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:12 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:12 Received default payment (converted): {Timestamp:1755464832132000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:12 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:12 Received default payment (converted): {Timestamp:1755464832169000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:12 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:12 Received default payment (converted): {Timestamp:1755464832188000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:12 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:12 Received default payment (converted): {Timestamp:1755464832206000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:12 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:12 Received default payment (converted): {Timestamp:1755464832223000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:12 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:12 Received default payment (converted): {Timestamp:1755464832240000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:12 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:12 Received default payment (converted): {Timestamp:1755464832279000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:12 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:12 Received default payment (converted): {Timestamp:1755464832296000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:12 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:12 Received default payment (converted): {Timestamp:1755464832314000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:12 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:12 Received default payment (converted): {Timestamp:1755464832332000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:12 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:12 Received default payment (converted): {Timestamp:1755464832350000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:12 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:12 Received default payment (converted): {Timestamp:1755464832388000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:12 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:12 Received default payment (converted): {Timestamp:1755464832406000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:12 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:12 Received default payment (converted): {Timestamp:1755464832424000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:12 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:12 Received default payment (converted): {Timestamp:1755464832441000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:12 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:12 Received default payment (converted): {Timestamp:1755464832460000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:12 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:12 Received default payment (converted): {Timestamp:1755464832497000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:12 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:12 Received default payment (converted): {Timestamp:1755464832516000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:12 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:12 Received default payment (converted): {Timestamp:1755464832534000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:12 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:12 Received default payment (converted): {Timestamp:1755464832551000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:12 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:12 Received default payment (converted): {Timestamp:1755464832569000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:12 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:12 Received default payment (converted): {Timestamp:1755464832590000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:12 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:12 Received default payment (converted): {Timestamp:1755464832607000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:12 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:12 Received default payment (converted): {Timestamp:1755464832624000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:12 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:12 Received default payment (converted): {Timestamp:1755464832642000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:12 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:12 Received default payment (converted): {Timestamp:1755464832659000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:12 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:12 Received default payment (converted): {Timestamp:1755464832677000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:12 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:12 Received default payment (converted): {Timestamp:1755464832695000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:12 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:12 Received default payment (converted): {Timestamp:1755464832721000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:12 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:12 Received default payment (converted): {Timestamp:1755464832734000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:12 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:12 Received default payment (converted): {Timestamp:1755464832751000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:12 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:12 Received default payment (converted): {Timestamp:1755464832769000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:12 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:12 Received default payment (converted): {Timestamp:1755464832786000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:12 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:12 Received default payment (converted): {Timestamp:1755464832805000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:12 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:12 Received default payment (converted): {Timestamp:1755464832825000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:12 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:12 Received default payment (converted): {Timestamp:1755464832848000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:12 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:12 Received default payment (converted): {Timestamp:1755464832861000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:12 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:12 Received default payment (converted): {Timestamp:1755464832879000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:12 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:12 Received default payment (converted): {Timestamp:1755464832897000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:12 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:12 Received default payment (converted): {Timestamp:1755464832914000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:12 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:12 Received default payment (converted): {Timestamp:1755464832934000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:12 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:12 Received default payment (converted): {Timestamp:1755464832952000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:12 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:12 Received default payment (converted): {Timestamp:1755464832970000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:12 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:12 Received default payment (converted): {Timestamp:1755464832988000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:13 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:13 Received default payment (converted): {Timestamp:1755464833006000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:13 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:13 Received default payment (converted): {Timestamp:1755464833024000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:13 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:13 Received default payment (converted): {Timestamp:1755464833044000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:13 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:13 Received default payment (converted): {Timestamp:1755464833062000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:13 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:13 Received default payment (converted): {Timestamp:1755464833080000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:13 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:13 Received default payment (converted): {Timestamp:1755464833097000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:13 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:13 Received default payment (converted): {Timestamp:1755464833114000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:13 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:13 Received default payment (converted): {Timestamp:1755464833132000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:13 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:13 Received default payment (converted): {Timestamp:1755464833153000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:13 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:13 Received default payment (converted): {Timestamp:1755464833171000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:13 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:13 Received default payment (converted): {Timestamp:1755464833189000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:13 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:13 Received default payment (converted): {Timestamp:1755464833207000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:13 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:13 Received default payment (converted): {Timestamp:1755464833225000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:13 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:13 Received default payment (converted): {Timestamp:1755464833241000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:13 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:13 Received default payment (converted): {Timestamp:1755464833262000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:13 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:13 Received default payment (converted): {Timestamp:1755464833280000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:13 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:13 Received default payment (converted): {Timestamp:1755464833298000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:13 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:13 Received default payment (converted): {Timestamp:1755464833316000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:13 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:13 Received default payment (converted): {Timestamp:1755464833334000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:13 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:13 Received default payment (converted): {Timestamp:1755464833352000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:13 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:13 Received default payment (converted): {Timestamp:1755464833371000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:13 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:13 Received default payment (converted): {Timestamp:1755464833390000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:13 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:13 Received default payment (converted): {Timestamp:1755464833408000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:13 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:13 Received default payment (converted): {Timestamp:1755464833426000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:13 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:13 Received default payment (converted): {Timestamp:1755464833443000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:13 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:13 Received default payment (converted): {Timestamp:1755464833461000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:13 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:13 Received default payment (converted): {Timestamp:1755464833481000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:13 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:13 Received default payment (converted): {Timestamp:1755464833499000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:13 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:13 Received default payment (converted): {Timestamp:1755464833517000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:13 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:13 Received default payment (converted): {Timestamp:1755464833535000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:13 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:13 Received default payment (converted): {Timestamp:1755464833552000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:13 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:13 Received default payment (converted): {Timestamp:1755464833570000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:13 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:13 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:13 Received default payment (converted): {Timestamp:1755464833590000 Amount:19.9}
+database  | 2025/08/17 21:07:13 Received default payment (converted): {Timestamp:1755464833590000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:13 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:13 Received default payment (converted): {Timestamp:1755464833608000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:13 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:13 Received default payment (converted): {Timestamp:1755464833626000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:13 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:13 Received default payment (converted): {Timestamp:1755464833643000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:13 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:13 Received default payment (converted): {Timestamp:1755464833661000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:13 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:13 Received default payment (converted): {Timestamp:1755464833679000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:13 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:13 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:13 Received default payment (converted): {Timestamp:1755464833697000 Amount:19.9}
+database  | 2025/08/17 21:07:13 Received default payment (converted): {Timestamp:1755464833699000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:13 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:13 Received default payment (converted): {Timestamp:1755464833722000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:13 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:13 Received default payment (converted): {Timestamp:1755464833735000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:13 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:13 Received default payment (converted): {Timestamp:1755464833753000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:13 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:13 Received default payment (converted): {Timestamp:1755464833771000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:13 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:13 Received default payment (converted): {Timestamp:1755464833788000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:13 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:13 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:13 Received default payment (converted): {Timestamp:1755464833806000 Amount:19.9}
+database  | 2025/08/17 21:07:13 Received default payment (converted): {Timestamp:1755464833809000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:13 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:13 Received default payment (converted): {Timestamp:1755464833827000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:13 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:13 Received default payment (converted): {Timestamp:1755464833850000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:13 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:13 Received default payment (converted): {Timestamp:1755464833862000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:13 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:13 Received default payment (converted): {Timestamp:1755464833880000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:13 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:13 Received default payment (converted): {Timestamp:1755464833898000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:13 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:13 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:13 Received default payment (converted): {Timestamp:1755464833915000 Amount:19.9}
+database  | 2025/08/17 21:07:13 Received default payment (converted): {Timestamp:1755464833918000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:13 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:13 Received default payment (converted): {Timestamp:1755464833936000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:13 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:13 Received default payment (converted): {Timestamp:1755464833953000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:13 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:13 Received default payment (converted): {Timestamp:1755464833972000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:13 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:13 Received default payment (converted): {Timestamp:1755464833989000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:14 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:14 Received default payment (converted): {Timestamp:1755464834007000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:14 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:14 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:14 Received default payment (converted): {Timestamp:1755464834026000 Amount:19.9}
+database  | 2025/08/17 21:07:14 Received default payment (converted): {Timestamp:1755464834027000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:14 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:14 Received default payment (converted): {Timestamp:1755464834045000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:14 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:14 Received default payment (converted): {Timestamp:1755464834063000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:14 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:14 Received default payment (converted): {Timestamp:1755464834081000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:14 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:14 Received default payment (converted): {Timestamp:1755464834098000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:14 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:14 Received default payment (converted): {Timestamp:1755464834116000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:14 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:14 Received default payment (converted): {Timestamp:1755464834134000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:14 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:14 Received default payment (converted): {Timestamp:1755464834136000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:14 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:14 Received default payment (converted): {Timestamp:1755464834154000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:14 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:14 Received default payment (converted): {Timestamp:1755464834172000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:14 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:14 Received default payment (converted): {Timestamp:1755464834191000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:14 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:14 Received default payment (converted): {Timestamp:1755464834209000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:14 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:14 Received default payment (converted): {Timestamp:1755464834226000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:14 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:14 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:14 Received default payment (converted): {Timestamp:1755464834243000 Amount:19.9}
+database  | 2025/08/17 21:07:14 Received default payment (converted): {Timestamp:1755464834246000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:14 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:14 Received default payment (converted): {Timestamp:1755464834263000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:14 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:14 Received default payment (converted): {Timestamp:1755464834281000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:14 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:14 Received default payment (converted): {Timestamp:1755464834299000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:14 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:14 Received default payment (converted): {Timestamp:1755464834317000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:14 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:14 Received default payment (converted): {Timestamp:1755464834335000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:14 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:14 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:14 Received default payment (converted): {Timestamp:1755464834353000 Amount:19.9}
+database  | 2025/08/17 21:07:14 Received default payment (converted): {Timestamp:1755464834355000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:14 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:14 Received default payment (converted): {Timestamp:1755464834372000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:14 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:14 Received default payment (converted): {Timestamp:1755464834391000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:14 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:14 Received default payment (converted): {Timestamp:1755464834409000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:14 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:14 Received default payment (converted): {Timestamp:1755464834427000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:14 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:14 Received default payment (converted): {Timestamp:1755464834444000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:14 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:14 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:14 Received default payment (converted): {Timestamp:1755464834463000 Amount:19.9}
+database  | 2025/08/17 21:07:14 Received default payment (converted): {Timestamp:1755464834464000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:14 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:14 Received default payment (converted): {Timestamp:1755464834482000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:14 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:14 Received default payment (converted): {Timestamp:1755464834500000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:14 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:14 Received default payment (converted): {Timestamp:1755464834518000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:14 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:14 Received default payment (converted): {Timestamp:1755464834536000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:14 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:14 Received default payment (converted): {Timestamp:1755464834554000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:14 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:14 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:14 Received default payment (converted): {Timestamp:1755464834572000 Amount:19.9}
+database  | 2025/08/17 21:07:14 Received default payment (converted): {Timestamp:1755464834574000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:14 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:14 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:14 Received default payment (converted): {Timestamp:1755464834592000 Amount:19.9}
+database  | 2025/08/17 21:07:14 Received default payment (converted): {Timestamp:1755464834592000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:14 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:14 Received default payment (converted): {Timestamp:1755464834610000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:14 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:14 Received default payment (converted): {Timestamp:1755464834627000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:14 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:14 Received default payment (converted): {Timestamp:1755464834645000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:14 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:14 Received default payment (converted): {Timestamp:1755464834662000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:14 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:14 Received default payment (converted): {Timestamp:1755464834680000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:14 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:14 Received default payment (converted): {Timestamp:1755464834683000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:14 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:14 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:14 Received default payment (converted): {Timestamp:1755464834698000 Amount:19.9}
+database  | 2025/08/17 21:07:14 Received default payment (converted): {Timestamp:1755464834700000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:14 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:14 Received default payment (converted): {Timestamp:1755464834724000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:14 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:14 Received default payment (converted): {Timestamp:1755464834736000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:14 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:14 Received default payment (converted): {Timestamp:1755464834754000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:14 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:14 Received default payment (converted): {Timestamp:1755464834772000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:14 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:14 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:14 Received default payment (converted): {Timestamp:1755464834789000 Amount:19.9}
+database  | 2025/08/17 21:07:14 Received default payment (converted): {Timestamp:1755464834792000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:14 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:14 Received default payment (converted): {Timestamp:1755464834807000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:14 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:14 Received default payment (converted): {Timestamp:1755464834811000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:14 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:14 Received default payment (converted): {Timestamp:1755464834829000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:14 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:14 Received default payment (converted): {Timestamp:1755464834851000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:14 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:14 Received default payment (converted): {Timestamp:1755464834863000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:14 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:14 Received default payment (converted): {Timestamp:1755464834881000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:14 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:14 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:14 Received default payment (converted): {Timestamp:1755464834899000 Amount:19.9}
+database  | 2025/08/17 21:07:14 Received default payment (converted): {Timestamp:1755464834902000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:14 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:14 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:14 Received default payment (converted): {Timestamp:1755464834917000 Amount:19.9}
+database  | 2025/08/17 21:07:14 Received default payment (converted): {Timestamp:1755464834918000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:14 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:14 Received default payment (converted): {Timestamp:1755464834936000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:14 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:14 Received default payment (converted): {Timestamp:1755464834954000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:14 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:14 Received default payment (converted): {Timestamp:1755464834972000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:14 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:14 Received default payment (converted): {Timestamp:1755464834991000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:15 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:15 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:15 Received default payment (converted): {Timestamp:1755464835008000 Amount:19.9}
+database  | 2025/08/17 21:07:15 Received default payment (converted): {Timestamp:1755464835010000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:15 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:15 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:15 Received default payment (converted): {Timestamp:1755464835028000 Amount:19.9}
+database  | 2025/08/17 21:07:15 Received default payment (converted): {Timestamp:1755464835028000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:15 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:15 Received default payment (converted): {Timestamp:1755464835046000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:15 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:15 Received default payment (converted): {Timestamp:1755464835064000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:15 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:15 Received default payment (converted): {Timestamp:1755464835082000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:15 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:15 Received default payment (converted): {Timestamp:1755464835100000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:15 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:15 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:15 Received default payment (converted): {Timestamp:1755464835116000 Amount:19.9}
+database  | 2025/08/17 21:07:15 Received default payment (converted): {Timestamp:1755464835120000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:15 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:15 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:15 Received default payment (converted): {Timestamp:1755464835135000 Amount:19.9}
+database  | 2025/08/17 21:07:15 Received default payment (converted): {Timestamp:1755464835138000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:15 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:15 Received default payment (converted): {Timestamp:1755464835156000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:15 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:15 Received default payment (converted): {Timestamp:1755464835174000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:15 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:15 Received default payment (converted): {Timestamp:1755464835193000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:15 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:15 Received default payment (converted): {Timestamp:1755464835210000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:15 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:15 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:15 Received default payment (converted): {Timestamp:1755464835228000 Amount:19.9}
+database  | 2025/08/17 21:07:15 Received default payment (converted): {Timestamp:1755464835229000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:15 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:15 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:15 Received default payment (converted): {Timestamp:1755464835244000 Amount:19.9}
+database  | 2025/08/17 21:07:15 Received default payment (converted): {Timestamp:1755464835248000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:15 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:15 Received default payment (converted): {Timestamp:1755464835265000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:15 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:15 Received default payment (converted): {Timestamp:1755464835283000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:15 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:15 Received default payment (converted): {Timestamp:1755464835301000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:15 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:15 Received default payment (converted): {Timestamp:1755464835318000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:15 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:15 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:15 Received default payment (converted): {Timestamp:1755464835336000 Amount:19.9}
+database  | 2025/08/17 21:07:15 Received default payment (converted): {Timestamp:1755464835339000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:15 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:15 Received default payment (converted): {Timestamp:1755464835355000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:15 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:15 Received default payment (converted): {Timestamp:1755464835356000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:15 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:15 Received default payment (converted): {Timestamp:1755464835374000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:15 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:15 Received default payment (converted): {Timestamp:1755464835393000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:15 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:15 Received default payment (converted): {Timestamp:1755464835410000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:15 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:15 Received default payment (converted): {Timestamp:1755464835429000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:15 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:15 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:15 Received default payment (converted): {Timestamp:1755464835446000 Amount:19.9}
+database  | 2025/08/17 21:07:15 Received default payment (converted): {Timestamp:1755464835448000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:15 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:15 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:15 Received default payment (converted): {Timestamp:1755464835465000 Amount:19.9}
+database  | 2025/08/17 21:07:15 Received default payment (converted): {Timestamp:1755464835465000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:15 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:15 Received default payment (converted): {Timestamp:1755464835484000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:15 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:15 Received default payment (converted): {Timestamp:1755464835502000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:15 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:15 Received default payment (converted): {Timestamp:1755464835520000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:15 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:15 Received default payment (converted): {Timestamp:1755464835538000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:15 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:15 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:15 Received default payment (converted): {Timestamp:1755464835555000 Amount:19.9}
+database  | 2025/08/17 21:07:15 Received default payment (converted): {Timestamp:1755464835558000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:15 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:15 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:15 Received default payment (converted): {Timestamp:1755464835574000 Amount:19.9}
+database  | 2025/08/17 21:07:15 Received default payment (converted): {Timestamp:1755464835575000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:15 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:15 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:15 Received default payment (converted): {Timestamp:1755464835593000 Amount:19.9}
+database  | 2025/08/17 21:07:15 Received default payment (converted): {Timestamp:1755464835594000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:15 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:15 Received default payment (converted): {Timestamp:1755464835611000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:15 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:15 Received default payment (converted): {Timestamp:1755464835629000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:15 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:15 Received default payment (converted): {Timestamp:1755464835646000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:15 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:15 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:15 Received default payment (converted): {Timestamp:1755464835663000 Amount:19.9}
+database  | 2025/08/17 21:07:15 Received default payment (converted): {Timestamp:1755464835666000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:15 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:15 Received default payment (converted): {Timestamp:1755464835682000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:15 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:15 Received default payment (converted): {Timestamp:1755464835685000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:15 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:15 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:15 Received default payment (converted): {Timestamp:1755464835700000 Amount:19.9}
+database  | 2025/08/17 21:07:15 Received default payment (converted): {Timestamp:1755464835701000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:15 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:15 Received default payment (converted): {Timestamp:1755464835726000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:15 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:15 Received default payment (converted): {Timestamp:1755464835737000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:15 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:15 Received default payment (converted): {Timestamp:1755464835755000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:15 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:15 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:15 Received default payment (converted): {Timestamp:1755464835773000 Amount:19.9}
+database  | 2025/08/17 21:07:15 Received default payment (converted): {Timestamp:1755464835776000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:15 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:15 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:15 Received default payment (converted): {Timestamp:1755464835790000 Amount:19.9}
+database  | 2025/08/17 21:07:15 Received default payment (converted): {Timestamp:1755464835793000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:15 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:15 Received default payment (converted): {Timestamp:1755464835808000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:15 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:15 Received default payment (converted): {Timestamp:1755464835812000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:15 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:15 Received default payment (converted): {Timestamp:1755464835830000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:15 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:15 Received default payment (converted): {Timestamp:1755464835852000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:15 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:15 Received default payment (converted): {Timestamp:1755464835864000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:15 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:15 Received default payment (converted): {Timestamp:1755464835882000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:15 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:15 Received default payment (converted): {Timestamp:1755464835885000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:15 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:15 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:15 Received default payment (converted): {Timestamp:1755464835901000 Amount:19.9}
+database  | 2025/08/17 21:07:15 Received default payment (converted): {Timestamp:1755464835903000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:15 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:15 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:15 Received default payment (converted): {Timestamp:1755464835918000 Amount:19.9}
+database  | 2025/08/17 21:07:15 Received default payment (converted): {Timestamp:1755464835920000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:15 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:15 Received default payment (converted): {Timestamp:1755464835938000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:15 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:15 Received default payment (converted): {Timestamp:1755464835956000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:15 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:15 Received default payment (converted): {Timestamp:1755464835974000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:15 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:15 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:15 Received default payment (converted): {Timestamp:1755464835992000 Amount:19.9}
+database  | 2025/08/17 21:07:16 Received default payment (converted): {Timestamp:1755464835995000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:16 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:16 Received default payment (converted): {Timestamp:1755464836010000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:16 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:16 Received default payment (converted): {Timestamp:1755464836011000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:16 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:16 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:16 Received default payment (converted): {Timestamp:1755464836030000 Amount:19.9}
+database  | 2025/08/17 21:07:16 Received default payment (converted): {Timestamp:1755464836030000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:16 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:16 Received default payment (converted): {Timestamp:1755464836048000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:16 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:16 Received default payment (converted): {Timestamp:1755464836065000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:16 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:16 Received default payment (converted): {Timestamp:1755464836083000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:16 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:16 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:16 Received default payment (converted): {Timestamp:1755464836101000 Amount:19.9}
+database  | 2025/08/17 21:07:16 Received default payment (converted): {Timestamp:1755464836104000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:16 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:16 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:16 Received default payment (converted): {Timestamp:1755464836118000 Amount:19.9}
+database  | 2025/08/17 21:07:16 Received default payment (converted): {Timestamp:1755464836121000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:16 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:16 Received default payment (converted): {Timestamp:1755464836136000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:16 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:16 Received default payment (converted): {Timestamp:1755464836139000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:16 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:16 Received default payment (converted): {Timestamp:1755464836157000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:16 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:16 Received default payment (converted): {Timestamp:1755464836175000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:16 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:16 Received default payment (converted): {Timestamp:1755464836194000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:16 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:16 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:16 Received default payment (converted): {Timestamp:1755464836211000 Amount:19.9}
+database  | 2025/08/17 21:07:16 Received default payment (converted): {Timestamp:1755464836213000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:16 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:16 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:16 Received default payment (converted): {Timestamp:1755464836229000 Amount:19.9}
+database  | 2025/08/17 21:07:16 Received default payment (converted): {Timestamp:1755464836231000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:16 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:16 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:16 Received default payment (converted): {Timestamp:1755464836246000 Amount:19.9}
+database  | 2025/08/17 21:07:16 Received default payment (converted): {Timestamp:1755464836250000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:16 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:16 Received default payment (converted): {Timestamp:1755464836266000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:16 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:16 Received default payment (converted): {Timestamp:1755464836285000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:16 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:16 Received default payment (converted): {Timestamp:1755464836302000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:16 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:16 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:16 Received default payment (converted): {Timestamp:1755464836320000 Amount:19.9}
+database  | 2025/08/17 21:07:16 Received default payment (converted): {Timestamp:1755464836322000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:16 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:16 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:16 Received default payment (converted): {Timestamp:1755464836337000 Amount:19.9}
+database  | 2025/08/17 21:07:16 Received default payment (converted): {Timestamp:1755464836340000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:16 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:16 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:16 Received default payment (converted): {Timestamp:1755464836356000 Amount:19.9}
+database  | 2025/08/17 21:07:16 Received default payment (converted): {Timestamp:1755464836358000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:16 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:16 Received default payment (converted): {Timestamp:1755464836375000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:16 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:16 Received default payment (converted): {Timestamp:1755464836394000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:16 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:16 Received default payment (converted): {Timestamp:1755464836412000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:16 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:16 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:16 Received default payment (converted): {Timestamp:1755464836430000 Amount:19.9}
+database  | 2025/08/17 21:07:16 Received default payment (converted): {Timestamp:1755464836432000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:16 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:16 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:16 Received default payment (converted): {Timestamp:1755464836447000 Amount:19.9}
+database  | 2025/08/17 21:07:16 Received default payment (converted): {Timestamp:1755464836449000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:16 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:16 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:16 Received default payment (converted): {Timestamp:1755464836466000 Amount:19.9}
+database  | 2025/08/17 21:07:16 Received default payment (converted): {Timestamp:1755464836466000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:16 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:16 Received default payment (converted): {Timestamp:1755464836485000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:16 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:16 Received default payment (converted): {Timestamp:1755464836503000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:16 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:16 Received default payment (converted): {Timestamp:1755464836521000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:16 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:16 Received default payment (converted): {Timestamp:1755464836539000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:16 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:16 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:16 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:16 Received default payment (converted): {Timestamp:1755464836552000 Amount:19.9}
+database  | 2025/08/17 21:07:16 Received default payment (converted): {Timestamp:1755464836556000 Amount:19.9}
+database  | 2025/08/17 21:07:16 Received default payment (converted): {Timestamp:1755464836559000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:16 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:16 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:16 Received default payment (converted): {Timestamp:1755464836575000 Amount:19.9}
+database  | 2025/08/17 21:07:16 Received default payment (converted): {Timestamp:1755464836576000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:16 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:16 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:16 Received default payment (converted): {Timestamp:1755464836595000 Amount:19.9}
+database  | 2025/08/17 21:07:16 Received default payment (converted): {Timestamp:1755464836595000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:16 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:16 Received default payment (converted): {Timestamp:1755464836613000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:16 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:16 Received default payment (converted): {Timestamp:1755464836630000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:16 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:16 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:16 Received default payment (converted): {Timestamp:1755464836647000 Amount:19.9}
+database  | 2025/08/17 21:07:16 Received default payment (converted): {Timestamp:1755464836650000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:16 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:16 Received default payment (converted): {Timestamp:1755464836664000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:16 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:16 Received default payment (converted): {Timestamp:1755464836667000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:16 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:16 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:16 Received default payment (converted): {Timestamp:1755464836683000 Amount:19.9}
+database  | 2025/08/17 21:07:16 Received default payment (converted): {Timestamp:1755464836686000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:16 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:16 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:16 Received default payment (converted): {Timestamp:1755464836701000 Amount:19.9}
+database  | 2025/08/17 21:07:16 Received default payment (converted): {Timestamp:1755464836703000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:16 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:16 Received default payment (converted): {Timestamp:1755464836727000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:16 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:16 Received default payment (converted): {Timestamp:1755464836739000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:16 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:16 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:16 Received default payment (converted): {Timestamp:1755464836757000 Amount:19.9}
+database  | 2025/08/17 21:07:16 Received default payment (converted): {Timestamp:1755464836760000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:16 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:16 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:16 Received default payment (converted): {Timestamp:1755464836775000 Amount:19.9}
+database  | 2025/08/17 21:07:16 Received default payment (converted): {Timestamp:1755464836777000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:16 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:16 Received default payment (converted): {Timestamp:1755464836790000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:16 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:16 Received default payment (converted): {Timestamp:1755464836794000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:16 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:16 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:16 Received default payment (converted): {Timestamp:1755464836809000 Amount:19.9}
+database  | 2025/08/17 21:07:16 Received default payment (converted): {Timestamp:1755464836813000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:16 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:16 Received default payment (converted): {Timestamp:1755464836831000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:16 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:16 Received default payment (converted): {Timestamp:1755464836853000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:16 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:16 Received default payment (converted): {Timestamp:1755464836865000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:16 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:16 Received default payment (converted): {Timestamp:1755464836869000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:16 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:16 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:16 Received default payment (converted): {Timestamp:1755464836884000 Amount:19.9}
+database  | 2025/08/17 21:07:16 Received default payment (converted): {Timestamp:1755464836887000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:16 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:16 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:16 Received default payment (converted): {Timestamp:1755464836902000 Amount:19.9}
+database  | 2025/08/17 21:07:16 Received default payment (converted): {Timestamp:1755464836904000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:16 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:16 Received default payment (converted): {Timestamp:1755464836919000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:16 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:16 Received default payment (converted): {Timestamp:1755464836921000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:16 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:16 Received default payment (converted): {Timestamp:1755464836939000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:16 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:16 Received default payment (converted): {Timestamp:1755464836957000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:16 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:16 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:16 Received default payment (converted): {Timestamp:1755464836975000 Amount:19.9}
+database  | 2025/08/17 21:07:16 Received default payment (converted): {Timestamp:1755464836977000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:16 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:16 Received default payment (converted): {Timestamp:1755464836993000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:16 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:17 Received default payment (converted): {Timestamp:1755464836996000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:17 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:17 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:17 Received default payment (converted): {Timestamp:1755464837011000 Amount:19.9}
+database  | 2025/08/17 21:07:17 Received default payment (converted): {Timestamp:1755464837013000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:17 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:17 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:17 Received default payment (converted): {Timestamp:1755464837031000 Amount:19.9}
+database  | 2025/08/17 21:07:17 Received default payment (converted): {Timestamp:1755464837031000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:17 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:17 Received default payment (converted): {Timestamp:1755464837049000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:17 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:17 Received default payment (converted): {Timestamp:1755464837067000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:17 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:17 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:17 Received default payment (converted): {Timestamp:1755464837085000 Amount:19.9}
+database  | 2025/08/17 21:07:17 Received default payment (converted): {Timestamp:1755464837087000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:17 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:17 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:17 Received default payment (converted): {Timestamp:1755464837103000 Amount:19.9}
+database  | 2025/08/17 21:07:17 Received default payment (converted): {Timestamp:1755464837106000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:17 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:17 Received default payment (converted): {Timestamp:1755464837119000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:17 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:17 Received default payment (converted): {Timestamp:1755464837122000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:17 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:17 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:17 Received default payment (converted): {Timestamp:1755464837137000 Amount:19.9}
+database  | 2025/08/17 21:07:17 Received default payment (converted): {Timestamp:1755464837140000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:17 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:17 Received default payment (converted): {Timestamp:1755464837158000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:17 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:17 Received default payment (converted): {Timestamp:1755464837176000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:17 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:17 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+database  | 2025/08/17 21:07:17 Received default payment (converted): {Timestamp:1755464837195000 Amount:19.9}
+database  | 2025/08/17 21:07:17 Received default payment (converted): {Timestamp:1755464837196000 Amount:19.9}
+nginx-1   | 172.20.0.1 - - [17/Aug/2025:21:07:17 +0000] "POST /payments HTTP/1.1" 204 0 "-" "Grafana k6/1.1.0"
+log truncated at line 1000

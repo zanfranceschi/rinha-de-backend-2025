@@ -1,6 +1,6 @@
 services:
   backend-1:
-    image: ghcr.io/micheloliveira-com/rinha-de-backend-2025-dotnet-csharp-redis-grpc:20250816132156
+    image: ghcr.io/micheloliveira-com/rinha-de-backend-2025-dotnet-csharp-redis-grpc:20250817134311
     hostname: backend-1
     networks:
       - backend
@@ -9,6 +9,7 @@ services:
       - ASPNETCORE_ENVIRONMENT=Production
       - WORKER_SIZE=25
       - BATCH_SIZE=100
+      - DEFAULT_PROCESSOR_CIRCUIT_ERROR_THRESHOLD_SECONDS=20
       - ConnectionStrings__rpc_local_server=http://backend-1:8081
       - ConnectionStrings__rpc_replica_server=http://backend-2:8081
       - ConnectionStrings__default=http://payment-processor-default:8080
@@ -32,7 +33,7 @@ services:
           cpus: "0.6"
           memory: "145MB"
   backend-2:
-    image: ghcr.io/micheloliveira-com/rinha-de-backend-2025-dotnet-csharp-redis-grpc:20250816132156
+    image: ghcr.io/micheloliveira-com/rinha-de-backend-2025-dotnet-csharp-redis-grpc:20250817134311
     hostname: backend-2
     networks:
       - backend
@@ -41,6 +42,7 @@ services:
       - ASPNETCORE_ENVIRONMENT=Production
       - WORKER_SIZE=25
       - BATCH_SIZE=100
+      - DEFAULT_PROCESSOR_CIRCUIT_ERROR_THRESHOLD_SECONDS=20
       - ConnectionStrings__rpc_local_server=http://backend-2:8081
       - ConnectionStrings__rpc_replica_server=http://backend-1:8081
       - ConnectionStrings__default=http://payment-processor-default:8080

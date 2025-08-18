@@ -1,6 +1,6 @@
 x-service-templates:
   backend: &backend
-    image: ghcr.io/yanpitangui/rinha-2025-01-api:20250803-1659
+    image: ghcr.io/yanpitangui/rinha-2025-01-api:20250814-2021
     deploy:
       resources:
         limits:
@@ -33,7 +33,7 @@ services:
     hostname: backend-2
     
   worker: 
-    image: ghcr.io/yanpitangui/rinha-2025-01-worker:20250803-1659
+    image: ghcr.io/yanpitangui/rinha-2025-01-worker:20250814-2021
     environment:
       - DOTNETCORE_ENVIRONMENT=Production
       - ASPNETCORE_ENVIRONMENT=Production
@@ -102,6 +102,7 @@ services:
   
   rinha-db:
     image: postgres:17-alpine
+    command: 'postgres -c max_connections=100 -c synchronous_commit=off -c fsync=off -c full_page_writes=off'
     networks:
       - payment-processor
     volumes:
@@ -111,12 +112,19 @@ services:
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_USER=postgres
       - POSTGRES_DB=rinha
+    ports:
+      - "5432:5432"
     healthcheck:
       test: [ "CMD-SHELL", "pg_isready -U postgres -d rinha" ]
-      interval: 2s
-      timeout: 15s
-      retries: 10
+      interval: 1s
+      timeout: 5s
+      retries: 50
     deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 2s
+        max_attempts: 10
+        window: 5s
       resources:
         limits:
           cpus: "0.1"

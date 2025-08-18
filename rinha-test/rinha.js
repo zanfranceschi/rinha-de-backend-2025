@@ -281,6 +281,7 @@ export function handleSummary(data) {
   const name = __ENV.PARTICIPANT ?? "anonymous";
 
   const custom_data = {
+    timestamp: new Date().toISOString(),
     participante: name,
     total_liquido: liquid_amount,
     total_bruto: actual_total_amount,

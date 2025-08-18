@@ -1,0 +1,101 @@
+services:
+  api01: &api
+    image: leandronsp/dinossauro-api:latest
+    container_name: api01
+    hostname: api01
+    networks:
+      payment-processor:
+      backend:
+        ipv4_address: 172.20.0.3
+    deploy:
+      resources:
+        limits:
+          cpus: '0.3'
+          memory: 80MB
+    depends_on:
+      redis:
+        condition: service_healthy
+      worker:
+        condition: service_started
+
+  api02: 
+    <<: *api
+    container_name: api02
+    hostname: api02
+    networks:
+      payment-processor:
+      backend:
+        ipv4_address: 172.20.0.4
+
+  worker:
+    image: leandronsp/dinossauro-worker:latest
+    container_name: worker
+    hostname: worker
+    networks:
+      payment-processor:
+      backend:
+        ipv4_address: 172.20.0.5
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 100MB
+    depends_on:
+      redis:
+        condition: service_healthy
+    environment:
+      - WORKER_REDIS_POOL_SIZE=20
+      - WORKER_POOL_SIZE=20
+      - WORKER_JOB_CHANNEL_SIZE=500
+      - WORKER_DEFAULT_TIMEOUT_MS=3500
+      - WORKER_FALLBACK_TIMEOUT_MS=5500
+      - WORKER_MAX_RETRIES=5
+
+  redis:
+    image: redis:7-alpine
+    container_name: redis
+    hostname: redis
+    networks:
+      backend:
+        ipv4_address: 172.20.0.2
+    deploy:
+      resources:
+        limits:
+          cpus: '0.2'
+          memory: 50MB
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 1s
+      timeout: 3s
+      retries: 30
+
+  nginx:
+    image: nginx:alpine
+    container_name: nginx
+    volumes:
+      - ./config/nginx.conf:/etc/nginx/nginx.conf:ro
+    ports:
+      - 9999:9999
+    networks:
+      backend:
+        ipv4_address: 172.20.0.6
+    deploy:
+      resources:
+        limits:
+          cpus: '0.2'
+          memory: 40MB
+    depends_on:
+      - redis
+      - api01
+      - api02
+      - worker
+
+networks:
+  payment-processor:
+    external: true
+  backend:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
+          gateway: 172.20.0.1

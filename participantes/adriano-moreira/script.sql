@@ -6,4 +6,5 @@ CREATE UNLOGGED TABLE payments (
     processor     SMALLINT
 );
 
-CREATE INDEX payments_requested_at ON payments (requested_at);
+CREATE INDEX requested_at_idx ON payments (requested_at);
+CREATE INDEX status_idx ON payments (status);

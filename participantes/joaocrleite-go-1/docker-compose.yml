@@ -1,0 +1,107 @@
+services:
+
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "9999:9999"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - bifrost01
+      - bifrost02
+    networks:
+      - payment-processor
+    ulimits:
+      nofile:
+        soft: 65535
+        hard: 65535
+    deploy:
+      resources:
+        reservations:
+          cpus: "0.05"
+          memory: "16MB"
+        limits:
+          cpus: "0.15"
+          memory: "24MB"
+
+  bifrost01:
+    image: joaocrleite/heimdall:latest
+    command: ./bifrost-watch
+    depends_on:
+      - heimdall
+    networks:
+      - payment-processor
+    environment:
+      GOMEMLIMIT: "88MiB"
+      GOGC: "100"
+      GOMAXPROCS: "1"
+      GODEBUG: "madvdontneed=1"
+    ulimits:
+      nofile:
+        soft: 65535
+        hard: 65535
+    deploy:
+      resources:
+        reservations:
+          cpus: "0.25"
+          memory: "64MB"
+        limits:
+          cpus: "0.35"
+          memory: "96MB"
+
+  bifrost02:
+    image: joaocrleite/heimdall:latest
+    command: ./bifrost-watch
+    depends_on:
+      - heimdall
+    networks:
+      - payment-processor
+    environment:
+      GOMEMLIMIT: "88MiB"
+      GOGC: "100"
+      GOMAXPROCS: "1"
+      GODEBUG: "madvdontneed=1"
+    ulimits:
+      nofile:
+        soft: 65535
+        hard: 65535
+    deploy:
+      resources:
+        reservations:
+          cpus: "0.25"
+          memory: "64MB"
+        limits:
+          cpus: "0.35"
+          memory: "96MB"
+
+  heimdall:
+    image: joaocrleite/heimdall:latest
+    command: ./heimdall-battle
+    ports:
+      - "50051:50051"
+    networks:
+      - payment-processor
+    environment:
+      GOMEMLIMIT: "120MiB"
+      GOGC: "100"
+      GOMAXPROCS: "2"
+      GODEBUG: "madvdontneed=1"
+    ulimits:
+      nofile:
+        soft: 65535
+        hard: 65535
+    deploy:
+      resources:
+        reservations:
+          cpus: "0.45"
+          memory: "96MB"
+        limits:
+          cpus: "0.65"
+          memory: "128MB"
+
+    
+
+networks:
+  payment-processor:
+    external: true
+    

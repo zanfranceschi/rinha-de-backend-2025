@@ -1,0 +1,152 @@
+services: 
+  redis:
+    image: redis:7-alpine
+    container_name: redis
+    ports:
+      - "6379:6379"
+    networks:
+      - backend
+    deploy:
+      resources:
+        limits:
+          cpus: "0.10"
+          memory: 20m
+
+  app1:
+    image: lpoltergeist/gabriel-rinha-backend:api
+    depends_on:
+      - redis
+    environment:
+      - REDIS_HOST=redis
+    networks:
+      - backend
+      - payment-processor
+    container_name: app1
+    hostname: app1
+    expose: 
+      - "8080"
+    restart: always
+    deploy:
+      resources:
+        limits:
+          cpus: "0.10"
+          memory: 20m
+
+  app2:
+    image: lpoltergeist/gabriel-rinha-backend:api
+    depends_on:
+      - redis
+    environment:
+      - REDIS_HOST=redis
+    networks:
+      - backend
+      - payment-processor
+    container_name: app2
+    hostname: app2
+    expose: 
+      - "8080"
+    restart: always
+    deploy:
+      resources:
+        limits:
+          cpus: "0.10"
+          memory: 20m
+
+  app3:
+    image: lpoltergeist/gabriel-rinha-backend:api
+    depends_on:
+      - redis
+    environment:
+      - REDIS_HOST=redis
+    networks:
+      - backend
+      - payment-processor
+    container_name: app3
+    hostname: app3
+    expose: 
+      - "8080"
+    restart: always
+    deploy:
+      resources:
+        limits:
+          cpus: "0.10"
+          memory: 20m
+
+  worker1:
+    image: lpoltergeist/gabriel-rinha-backend:worker
+    depends_on:
+      - redis
+    environment:
+      - REDIS_HOST=redis
+    networks:
+      - backend
+      - payment-processor
+    container_name: worker1
+    hostname: worker1
+    restart: always
+    deploy:
+      resources:
+        limits:
+          cpus: "0.20"
+          memory: 40m
+
+  worker2:
+    image: lpoltergeist/gabriel-rinha-backend:worker
+    depends_on:
+      - redis
+    environment:
+      - REDIS_HOST=redis
+    networks:
+      - backend
+      - payment-processor
+    container_name: worker2
+    hostname: worker2
+    restart: always
+    deploy:
+      resources:
+        limits:
+          cpus: "0.20"
+          memory: 40m
+
+  worker3:
+    image: lpoltergeist/gabriel-rinha-backend:worker
+    depends_on:
+      - redis
+    environment:
+      - REDIS_HOST=redis
+    networks:
+      - backend
+      - payment-processor
+    container_name: worker3
+    hostname: worker3
+    restart: always
+    deploy:
+      resources:
+        limits:
+          cpus: "0.20"
+          memory: 40m
+          
+  nginx:
+    image: nginx:alpine
+    container_name: nginx
+    networks:
+      - backend
+    ports:
+      - "9999:80"
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - app1
+      - app2
+      - app3
+    deploy:
+      resources:
+        limits:
+          cpus: "0.40"
+          memory: 80m
+
+networks:
+  backend:
+    driver: bridge
+  payment-processor:
+    external: true

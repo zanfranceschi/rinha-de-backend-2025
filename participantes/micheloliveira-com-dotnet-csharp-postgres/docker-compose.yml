@@ -1,6 +1,6 @@
 services:
   backend-1:
-    image: ghcr.io/micheloliveira-com/rinha-de-backend-2025-dotnet-csharp-postgres:20250813173442
+    image: ghcr.io/micheloliveira-com/rinha-de-backend-2025-dotnet-csharp-postgres:20250817144353
     hostname: backend-1
     networks:
       - backend
@@ -9,6 +9,7 @@ services:
       - ASPNETCORE_ENVIRONMENT=Production
       - WORKER_SIZE=10
       - BATCH_SIZE=100
+      - DEFAULT_PROCESSOR_CIRCUIT_ERROR_THRESHOLD_SECONDS=20
       - ConnectionStrings__default=http://payment-processor-default:8080
       - ConnectionStrings__fallback=http://payment-processor-fallback:8080
       - ConnectionStrings__postgres=Host=backend-db;Port=5432;Database=backend-db;Username=postgres;Password=postgres;Pooling=true;Maximum Pool Size=200;Multiplexing=true;Timeout=15;Command Timeout=15;Cancellation Timeout=-1;No Reset On Close=true;Max Auto Prepare=20;Auto Prepare Min Usages=1;
@@ -31,7 +32,7 @@ services:
           cpus: "0.5"
           memory: "80MB"
   backend-2:
-    image: ghcr.io/micheloliveira-com/rinha-de-backend-2025-dotnet-csharp-postgres:20250813173442
+    image: ghcr.io/micheloliveira-com/rinha-de-backend-2025-dotnet-csharp-postgres:20250817144353
     hostname: backend-2
     networks:
       - backend
@@ -40,6 +41,7 @@ services:
       - ASPNETCORE_ENVIRONMENT=Production
       - WORKER_SIZE=10
       - BATCH_SIZE=100
+      - DEFAULT_PROCESSOR_CIRCUIT_ERROR_THRESHOLD_SECONDS=20
       - ConnectionStrings__default=http://payment-processor-default:8080
       - ConnectionStrings__fallback=http://payment-processor-fallback:8080
       - ConnectionStrings__postgres=Host=backend-db;Port=5432;Database=backend-db;Username=postgres;Password=postgres;Pooling=true;Maximum Pool Size=200;Multiplexing=true;Timeout=15;Command Timeout=15;Cancellation Timeout=-1;No Reset On Close=true;Max Auto Prepare=20;Auto Prepare Min Usages=1;
@@ -63,7 +65,6 @@ services:
           memory: "80MB"
   redis:
     image: redis:8-alpine
-    container_name: redis
     command: >
       redis-server
       --save ""

@@ -1,7 +1,7 @@
 services:
   nginx:
     image: nginx:alpine
-    container_name: teste-nginx-lb
+    container_name: nginx-lb
     platform: linux/amd64
     ports:
       - "9999:9999"
@@ -10,80 +10,64 @@ services:
     depends_on:
       - api1
       - api2
+      - api3
     deploy:
       resources:
         limits:
-          cpus: "0.1"
-          memory: "10MB"
+          cpus: "0.2"
+          memory: 20M
     restart: unless-stopped
     networks:
       - backend
       - payment-processor
 
-  api1:
-    image: ruanpcr/rinha-api:latest
-    container_name: teste-r-api-1
+  api1: &api-template
+    image: ruanpcr/rinha-backend
+    container_name: dotnet-api-1
     platform: linux/amd64
-    command: ["/app/wait-for-redis.sh"]
     depends_on:
       - redis
+    environment:
+      - REDIS_HOST=redis:6379
+      - IS_HEALTH_CHECK_MASTER=true
     deploy:
       resources:
         limits:
-          cpus: "0.55"
-          memory: "105MB"
+          cpus: "0.4" 
+          memory: 96M
     restart: unless-stopped
     networks:
       - backend
       - payment-processor
 
   api2:
-    image: ruanpcr/rinha-api:latest
-    container_name: teste-r-api-2
-    platform: linux/amd64
-    command: ["/app/wait-for-redis.sh"]
-    depends_on:
-      - redis
-    deploy:
-      resources:
-        limits:
-          cpus: "0.55"
-          memory: "105MB"
-    restart: unless-stopped
-    networks:
-      - backend
-      - payment-processor
+    <<: *api-template
+    container_name: dotnet-api-2
+    image: ruanpcr/rinha-backend
+    environment:
+      - REDIS_HOST=redis:6379
+      - IS_HEALTH_CHECK_MASTER=false
+    
+  api3:
+    <<: *api-template
+    container_name: dotnet-api-3
+    image: ruanpcr/rinha-backend
+    environment:
+      - REDIS_HOST=redis:6379
+      - IS_HEALTH_CHECK_MASTER=false
 
   redis:
     image: redis:7-alpine
-    container_name: teste-redis
+    container_name: redis
     platform: linux/amd64
     deploy:
       resources:
         limits:
           cpus: "0.1"
-          memory: "40MB"
+          memory: 40M
     restart: unless-stopped
     networks:
       - backend
-
-  worker:
-    image: ruanpcr/rinha-worker:latest
-    container_name: teste-worker
-    platform: linux/amd64
-    depends_on:
-      - redis
-    environment:
-      - REDIS_HOST=redis:6379
-    deploy:
-      resources:
-        limits:
-          cpus: "0.2"
-          memory: "90MB"
-    restart: unless-stopped
-    networks:
-      - backend
-      - payment-processor
 
 networks:
   backend:

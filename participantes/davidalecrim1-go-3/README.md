@@ -13,3 +13,5 @@ Essa versão acompanha um Load Balancer customizado (chamado de Extreme) criado 
 
 ## Repositório
 [https://github.com/davidalecrim1/rinha-with-go-2025/tree/release/redis-fasthttp-nginx](https://github.com/davidalecrim1/rinha-with-go-2025/tree/release/redis-fasthttp-nginx)
+
+[Repositório do Load balancer customizado](https://github.com/davidalecrim1/extreme). Ele NÃO realiza early return das requisições, apenas faz o reverse proxy para as instancias do backend.

@@ -1,0 +1,127 @@
+x-base-app: &base-app
+  image: ghcr.io/wesleymatosdev/rinha-rust-warp:latest
+  env_file: ".env"
+  volumes:
+    - .:/usr/src/app
+    - sockets:/var
+  networks:
+    - backend
+    - payment-processor
+  depends_on:
+    - nats
+    - postgres
+
+x-api-template: &api-template
+  <<: *base-app
+  command: ["./server"]
+  deploy:
+    resources:
+      limits:
+        cpus: '0.15'
+        memory: '20MB'
+
+x-worker-template: &worker-template
+  <<: *base-app
+  command: ["./worker"]
+  deploy:
+    resources:
+      limits:
+        cpus: '0.18'
+        memory: '70MB'
+
+services:
+  api01:
+    <<: *api-template
+    environment:
+      - UNIX_SOCKET_PATH=/var/rinha01.sock
+
+  api02:
+    <<: *api-template
+    environment:
+      - UNIX_SOCKET_PATH=/var/rinha02.sock
+
+  uxlb:
+    image: jrblatt/uxlb
+    ports:
+      - "9999:9999"
+    environment:
+      - LB_UPSTREAMS=/var/rinha01.sock,/var/rinha02.sock
+      - LB_WORKERS=1
+    volumes:
+      - sockets:/var
+    depends_on:
+      - api01
+      - api02
+    networks:
+      - payment-processor
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: "0.39"
+          memory: 40MB
+
+  # Payment processing workers
+  worker01:
+    <<: *worker-template
+
+  worker02:
+    <<: *worker-template
+
+  nats:
+    image: nats:2.10.16-alpine3.19
+    command: -js -sd /data -m 8222
+    ports:
+      - "4222:4222"
+      - "8222:8222"
+    healthcheck:
+      test: wget http://localhost:8222/healthz -q -S -O -
+      start_period: 0s
+      retries: 3
+      timeout: 3s
+      interval: 14s
+    volumes:
+      - nats_data:/data
+    networks:
+      - backend
+    deploy:
+      resources:
+        limits:
+          cpus: '0.2'
+          memory: '30MB'
+
+  postgres:
+    image: postgres:17.5-alpine
+    restart: always
+    environment:
+      POSTGRES_DB: payments
+      POSTGRES_USER: myuser
+      POSTGRES_PASSWORD: mypassword
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - backend
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U myuser -d payments"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    deploy:
+      resources:
+        limits:
+          cpus: '0.25'
+          memory: '100MB'
+
+networks:
+  backend:
+    driver: bridge
+  payment-processor:
+    external: true
+
+volumes:
+  sockets:
+  postgres_data:
+  nats_data:

@@ -14,13 +14,11 @@ services:
     deploy:
       resources:
        limits:
-          cpus: "0.20"
+          cpus: "0.15" 
           memory: "50MB"
 
   api1: &api
-    image: diogoloff/api-fpc-rinha2025:latest
-    depends_on:
-      - persistencia
+    image: diogoloff/api-fpc-rinha2025:v1.02
     hostname: api1
     environment:
       - DEFAULT_URL=http://payment-processor-default:8080
@@ -31,31 +29,26 @@ services:
       - NUM_WORKERS=16
       - NUM_WORKERS_SOCKET=32
       - NUM_TENTATIVAS_DEFAULT=10
-      - TEMPO_FILA=100
+      - TEMPO_FILA=50
+    volumes:
+      - dev-shm:/dev/shm
     networks:
       - backend-rinha
       - payment-processor
     deploy:
       resources:
         limits:
-          cpus: "0.375"
-          memory: "50MB"
+          cpus: "0.675"
+          memory: "150MB"
     
   api2:
     <<: *api
     hostname: api2
-  persistencia: 
-    image: diogoloff/persistencia-fpc-rinha2025:latest
-    hostname: persistencia
-    environment:
-      - NUM_WORKERS_SOCKET=32
-    networks:
-      - backend-rinha
-    deploy:
-      resources:
-        limits:
-          cpus: "0.55"
-          memory: "200MB"
+    volumes:
+      - dev-shm:/dev/shm
+
+volumes:
+  dev-shm:
 
 networks:
   backend-rinha:

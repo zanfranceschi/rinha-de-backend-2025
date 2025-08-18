@@ -1,14 +1,37 @@
+x-backend-templates:
+  app: &app
+    image: ghcr.io/rst77/app:11
+    networks:
+      - payment-processor
+      - rinha-net
+    deploy:
+      resources:
+        limits:
+          cpus: "0.65"
+          memory: "170MB"
+
+  app-env: &app-env    
+    PAYMENT_PROCESSORS: "2"
+    CONN_TO: "60"
+    REQ_TO: "15"
+    SUMM_DELAY: "1000"
+    #PAYMENT_PROCESSOR_FALLBACK: http://lb:9999/pf
+    #PAYMENT_PROCESSOR_DEFAULT: http://lb:9999/pd
+    PAYMENT_PROCESSOR_FALLBACK: http://payment-processor-fallback:8080
+    PAYMENT_PROCESSOR_DEFAULT: http://payment-processor-default:8080
+
 services:
   nginx:
     image: nginx:1.25-alpine
+    hostname: lb
     container_name: rinha-nginx
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf:ro
-    depends_on:
-      - node01
-      - node02
     ports:
       - "9999:9999"
+    depends_on:
+      - node01
+      - node02      
     networks:
       - rinha-net
       - payment-processor
@@ -19,39 +42,26 @@ services:
           memory: "10MB"
   
   node01: 
-    image: ghcr.io/rst77/app:8
+    <<: *app
+    container_name: node01
     hostname: node01
     environment:
-          PAYMENT_PROCESSOR_FALLBACK: http://payment-processor-fallback:8080
-          PAYMENT_PROCESSOR_DEFAULT: http://payment-processor-default:8080    
+          <<: *app-env
           NODE_ID: node01
-    networks:
-      - payment-processor
-      - rinha-net
-    deploy:
-      resources:
-        limits:
-          cpus: "0.65"
-          memory: "170MB"
 
   node02: 
-    image: ghcr.io/rst77/app:8
+    <<: *app
+    image: ghcr.io/rst77/app:10
+    container_name: node02
     hostname: node02
     environment:
-          PAYMENT_PROCESSOR_FALLBACK: http://payment-processor-fallback:8080
-          PAYMENT_PROCESSOR_DEFAULT: http://payment-processor-default:8080    
+          <<: *app-env
           NODE_ID: node02
-    networks:
-      - payment-processor
-      - rinha-net
-    deploy:
-      resources:
-        limits:
-          cpus: "0.65"
-          memory: "170MB"
+
 
 networks:
   payment-processor:
     external: true
   rinha-net:
     driver: bridge
+

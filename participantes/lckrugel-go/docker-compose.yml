@@ -1,0 +1,79 @@
+# YAML anchors for reusable configurations
+x-api: &api
+  image: lckrugel98/rinha-backend-2025-go:v1.0.0
+  depends_on:
+    - redis
+  networks:
+    - payment-processor
+    - backend  
+
+  x-api-env: &api-env
+    N_WORKERS: "10"
+    DEFAULT_API_BIAS: "6"
+    LOG_LEVEL: "WARN"
+    REDIS_HOST: "redis"
+    REDIS_PASSWORD: "123456"
+
+services:
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "9999:9999"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - api1
+      - api2
+    networks:
+      - payment-processor
+      - backend
+    deploy:
+      resources:
+        limits:
+          cpus: "0.1"
+          memory: "32MB"
+
+  api1:
+    <<: *api
+    environment:
+      <<: *api-env
+      CONSUMER_ID: consumer-0
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: "128MB"
+
+  api2:
+    <<: *api
+    environment:
+      <<: *api-env
+      CONSUMER_ID: consumer-1
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: "128MB"
+
+  redis:
+    image: redis:alpine
+    volumes:
+      - redis_data:/data
+    networks:
+      - backend
+    deploy:
+      resources:
+        limits:
+          cpus: "0.4"
+          memory: "62MB"
+volumes:
+  redis_data:
+
+networks:
+  backend:
+    driver: bridge
+    internal: false
+  payment-processor:
+    external: true
+  
+    

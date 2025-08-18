@@ -1,0 +1,123 @@
+services:
+  backend-1:
+    image: ghcr.io/micheloliveira-com/rinha-de-backend-2025-dotnet-csharp-postgres:20250817144353
+    hostname: backend-1
+    networks:
+      - backend
+      - payment-processor
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - WORKER_SIZE=10
+      - BATCH_SIZE=100
+      - DEFAULT_PROCESSOR_CIRCUIT_ERROR_THRESHOLD_SECONDS=20
+      - ConnectionStrings__default=http://payment-processor-default:8080
+      - ConnectionStrings__fallback=http://payment-processor-fallback:8080
+      - ConnectionStrings__postgres=Host=backend-db;Port=5432;Database=backend-db;Username=postgres;Password=postgres;Pooling=true;Maximum Pool Size=200;Multiplexing=true;Timeout=15;Command Timeout=15;Cancellation Timeout=-1;No Reset On Close=true;Max Auto Prepare=20;Auto Prepare Min Usages=1;
+      - ConnectionStrings__redis=redis:6379
+    healthcheck:
+      test: >
+        for i in $(seq 1 60); do
+          wget -q --tries=1 --spider http://localhost:8080/ && break
+          sleep 1
+        done
+      interval: 1h
+      timeout: 70s
+      retries: 0
+      start_period: 1s
+    ports:
+      - "8080"
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: "80MB"
+  backend-2:
+    image: ghcr.io/micheloliveira-com/rinha-de-backend-2025-dotnet-csharp-postgres:20250817144353
+    hostname: backend-2
+    networks:
+      - backend
+      - payment-processor
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - WORKER_SIZE=10
+      - BATCH_SIZE=100
+      - DEFAULT_PROCESSOR_CIRCUIT_ERROR_THRESHOLD_SECONDS=20
+      - ConnectionStrings__default=http://payment-processor-default:8080
+      - ConnectionStrings__fallback=http://payment-processor-fallback:8080
+      - ConnectionStrings__postgres=Host=backend-db;Port=5432;Database=backend-db;Username=postgres;Password=postgres;Pooling=true;Maximum Pool Size=200;Multiplexing=true;Timeout=15;Command Timeout=15;Cancellation Timeout=-1;No Reset On Close=true;Max Auto Prepare=20;Auto Prepare Min Usages=1;
+      - ConnectionStrings__redis=redis:6379
+    healthcheck:
+      test: >
+        for i in $(seq 1 60); do
+          wget -q --tries=1 --spider http://localhost:8080/ && break
+          sleep 1
+        done
+      interval: 1h
+      timeout: 70s
+      retries: 0
+      start_period: 1s
+    ports:
+      - "8080"
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: "80MB"
+  redis:
+    image: redis:8-alpine
+    command: >
+      redis-server
+      --save ""
+      --appendonly no
+      --maxmemory 10mb
+      --maxmemory-policy allkeys-lru
+    networks:
+      - backend
+    ports:
+      - "6379"
+    deploy:
+      resources:
+        limits:
+          cpus: "0.1"
+          memory: "10MB"
+  backend-db:
+    image: postgres:17-alpine
+    command: 'postgres -c max_connections=400 -c synchronous_commit=off -c fsync=off -c full_page_writes=off'
+    networks:
+      - backend
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=backend-db
+    ports:
+      - "5432" 
+    deploy:
+      resources:
+        limits:
+          cpus: "0.2"
+          memory: "130MB"
+  load-balancer:
+    image: haproxy:3.2.4-alpine
+    volumes:
+      - ./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
+    depends_on:
+      backend-1:
+        condition: service_healthy
+      backend-2:
+        condition: service_healthy
+    ports:
+      - "9999:9999"
+    networks:
+      - backend
+    deploy:
+      resources:
+        limits:
+          cpus: "0.2"
+          memory: "50MB"
+networks:
+  backend:
+    driver: bridge
+  payment-processor:
+    external: true

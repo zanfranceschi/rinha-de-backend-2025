@@ -1,0 +1,71 @@
+services:
+  postgres:
+    image: postgres
+    environment:
+      POSTGRES_USER: rinha
+      POSTGRES_PASSWORD: rinha
+    ports:
+      - "5432:5432"
+    networks:
+      - rinha-net
+    volumes:
+      - ./initdb:/docker-entrypoint-initdb.d
+      - ./initdb/postgresql.conf:/etc/postgresql/postgresql.conf
+    healthcheck: 
+      test: ["CMD-SHELL", "pg_isready -U rinha -d rinha"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    deploy:
+      resources:
+        limits:
+          cpus: "0.9"
+          memory: "250MB"
+
+  api01: &api
+    image: jtsutsui/rinha-2025-payment-processor
+    hostname: api01
+    networks:
+      - payment-processor
+      - rinha-net
+    ports:
+      - "9001:8080"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    deploy:
+      resources:
+        limits:
+          cpus: "0.2"
+          memory: "40MB"
+
+  api02:
+    <<: *api
+    ports:
+      - "9002:8080"
+    hostname: api02
+
+  nginx:
+    image: nginx
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    ports:
+      - "9999:9999"
+    networks:
+      - payment-processor
+      - rinha-net
+    depends_on:
+      - api01
+      - api02
+    deploy:
+      resources:
+        limits:
+          cpus: "0.2"
+          memory: "15MB"
+
+networks:
+  payment-processor:
+    external: true
+  rinha-net:
+    driver: bridge

@@ -3,7 +3,7 @@ x-api_template: &api_template
   restart: unless-stopped
   environment:
     PORT: 3000
-    BACKGROUND_WORKERS_COUNT: 5
+    BACKGROUND_WORKERS_COUNT: 2
     DB_PATH: "db/"
     VERBOSE: "false"
   networks:
@@ -14,7 +14,7 @@ x-api_template: &api_template
   deploy:
     resources:
       limits:
-        cpus: "0.60"
+        cpus: "0.30"
         memory: "145MB"
 
 services:

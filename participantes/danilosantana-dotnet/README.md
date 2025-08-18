@@ -8,6 +8,7 @@ Colocando em prática uma forma de processar pagamentos com recursos limitados e
 
 - .NET Core
 - PostgreSQL
+- Redis
 - Nginx
 - Docker
 - Docker Compose

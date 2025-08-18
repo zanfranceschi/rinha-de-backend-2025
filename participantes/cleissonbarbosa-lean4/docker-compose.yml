@@ -1,0 +1,86 @@
+networks:
+  default:
+    driver: bridge
+  payment-processor:
+    external: true
+
+services:
+  in-memory-db:
+    image: alpine:3.22.1
+    command: tail -f /dev/null
+    ipc: shareable
+    shm_size: 4mb
+    container_name: rinha-in-memory-db
+    deploy:
+      resources:
+        limits:
+          cpus: "0.1"
+          memory: "30MB"
+
+  app1:
+    image: cleissonb/rinha-backend-lean4:20250817-154930
+    platform: linux/amd64
+    environment:
+      - SERVER_THREADS=2
+      - CLIENT_THREADS=4
+      - SHM_DIR=/rinha_payments
+      - INDEX=0
+      - SOCKET_PATH=/dev/shm/server1.sock
+      - PROC_DEFAULT_HOST=payment-processor-default
+      - PROC_FALLBACK_HOST=payment-processor-fallback
+      - PROC_PORT=8080
+      - CONNECT_TIMEOUT_MS=200
+    networks:
+      - default
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: "110MB"
+    ipc: container:rinha-in-memory-db
+    depends_on:
+      - in-memory-db
+
+  app2:
+    image: cleissonb/rinha-backend-lean4:20250817-154930
+    platform: linux/amd64
+    environment:
+      - SERVER_THREADS=2
+      - CLIENT_THREADS=4
+      - SHM_DIR=/rinha_payments
+      - INDEX=1
+      - SOCKET_PATH=/dev/shm/server2.sock
+      - PROC_DEFAULT_HOST=payment-processor-default
+      - PROC_FALLBACK_HOST=payment-processor-fallback
+      - PROC_PORT=8080
+      - CONNECT_TIMEOUT_MS=200
+    networks:
+      - default
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: "110MB"
+    ipc: container:rinha-in-memory-db
+    depends_on:
+      - in-memory-db
+
+  lb-haproxy:
+    image: haproxy:lts-alpine3.22
+    depends_on:
+      - app1
+      - app2
+    ports:
+      - "9999:9999"
+    volumes:
+      - ./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
+    networks:
+      - default
+    deploy:
+      resources:
+        limits:
+          cpus: "0.4"
+          memory: "100MB"
+    ipc: container:rinha-in-memory-db
