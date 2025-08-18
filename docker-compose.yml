@@ -5,7 +5,7 @@ services:
       POSTGRES_PASSWORD: postgres
       POSTGRES_USER: postgres
       POSTGRES_DB: rinha
-    command: postgres -c checkpoint_timeout=600 -c max_wal_size=4096 -c synchronous_commit=0 -c fsync=0 -c full_page_writes=0
+    command: postgres -c shared_buffers=25MB -c max_connections=150 -c checkpoint_timeout=600 -c max_wal_size=2GB -c synchronous_commit=0 -c fsync=0 -c full_page_writes=0 -c wal_buffers=1MB -c work_mem=512kB -c effective_cache_size=50MB
     networks:
       - backend-db
       - payment-processor
@@ -17,8 +17,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.2"
-          memory: "40MB"
+          cpus: "0.25"
+          memory: "80MB"
 
   redis:
     image: redis:7-alpine
@@ -27,8 +27,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.1"
-          memory: "20MB"
+          cpus: "0.07"
+          memory: "10MB"
 
   backend-1:
     image: oornnery/rinha-backend-2025-python:latest
@@ -53,8 +53,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.6"
-          memory: "140MB"
+          cpus: "0.55"
+          memory: "125MB"
 
   backend-2:
     image: oornnery/rinha-backend-2025-python:latest
@@ -79,8 +79,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.6"
-          memory: "140MB"
+          cpus: "0.55"
+          memory: "125MB"
 
   nginx:
     image: nginx:alpine
