@@ -33,7 +33,7 @@ alta performance para processamento de pagamentos.
 ## 📁 Estrutura do Projeto
 
 | Caminho                          | Descrição                                                     |
-|----------------------------------|---------------------------------------------------------------|
+| -------------------------------- | ------------------------------------------------------------- |
 | `app/`                           | Código-fonte principal (Spring Boot)                          |
 | ├── `Dockerfile`                 | Build da imagem da aplicação                                  |
 | ├── `src/main/kotlin/...`        | Código-fonte Kotlin                                           |
