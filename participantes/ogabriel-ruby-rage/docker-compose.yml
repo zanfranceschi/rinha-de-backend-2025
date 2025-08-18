@@ -13,8 +13,12 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '0.07'
+          cpus: '0.1'
           memory: '30MB'
+    ulimits:
+      nofile:
+        soft: 16384
+        hard: 16384
 
   app1: &app1
     image: ogabriel/rinha-de-backend-2025:ruby-rage
@@ -32,7 +36,7 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '0.7'
+          cpus: '0.68'
           memory: '150MB'
     networks:
       - backend
@@ -62,7 +66,7 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '0.03'
+          cpus: '0.04'
           memory: '20MB'
 
 networks:

@@ -5,55 +5,27 @@ services:
     environment:
       - DEFAULT_PAYMENT_PROCESSOR_URL=http://payment-processor-default:8080
       - FALLBACK_PAYMENT_PROCESSOR_URL=http://payment-processor-fallback:8080
-      - CONNECTION_STRING_POSTGRES=postgres://postgres:postgres@db:5432/rinhadb
-      - CONNECTION_STRING_REDIS=redis://redis:6379/0
-      - WORKER_COUNT=8
+      - CONNECTION_STRING_REDIS=redis://rinha-redis:6379/0
+      - WORKER_COUNT=18
     networks:
       - backend
       - payment-processor
     depends_on:
-      db:
+      rinha-redis:
         condition: service_healthy
-      redis:
-        condition: service_healthy
-      checker:
-        condition: service_started
-    volumes:
-      - rinha-store:/data
     deploy:
       resources:
         limits:
-          cpus: "0.3"
-          memory: "55MB"
+          cpus: "0.4"
+          memory: "90MB"
 
   api2:
     <<: *same
     hostname: api2
 
-  checker:
-    image: arthurqueiroz04/go-rinha2025-checker
-    hostname: checker
-    environment:
-      - DEFAULT_PAYMENT_PROCESSOR_URL=http://payment-processor-default:8080
-      - FALLBACK_PAYMENT_PROCESSOR_URL=http://payment-processor-fallback:8080
-      - CONNECTION_STRING_REDIS=redis://redis:6379/0
-    networks:
-      - backend
-      - payment-processor
-    volumes:
-      - rinha-store:/data
-    depends_on:
-      redis:
-        condition: service_healthy
-    deploy:
-      resources:
-        limits:
-          cpus: "0.1"
-          memory: "15MB"
-
-  redis:
+  rinha-redis:
     image: redis:7.2-alpine
-    container_name: redis
+    container_name: rinha-redis
     command: redis-server --save "" --appendonly no --maxclients 20000
     volumes:
       - redis-data:/data
@@ -67,34 +39,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.2"
-          memory: "40MB"
-
-  db:
-    container_name: db
-    image: postgres
-    command: postgres -c checkpoint_timeout=600 -c max_wal_size=4096 -c synchronous_commit=0 -c fsync=0 -c full_page_writes=0 -c max_connections=200
-    environment:
-      POSTGRES_DB: rinhadb
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-    ports:
-      - "5432:5432"
-    networks:
-      - backend
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-    volumes:
-      - postgres-data:/var/lib/postgresql/data
-      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
-    deploy:
-      resources:
-        limits:
-          cpus: "0.5"
-          memory: "130MB"
+          cpus: "0.6"
+          memory: "115MB"
 
   nginx:
     image: nginx:latest
@@ -120,7 +66,5 @@ networks:
     external: true
 
 volumes:
-  rinha-store:
-  postgres-data:
   redis-data:
 

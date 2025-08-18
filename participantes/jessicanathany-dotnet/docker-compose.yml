@@ -1,0 +1,94 @@
+x-service-templates:
+  backend-api-base: &backend-api-base
+    image: jnathany/rinha-backend-2025:latest  
+    networks:
+      - backend_network
+      - payment-processor
+    restart: unless-stopped
+    depends_on:
+      - backend_database
+    deploy:
+      resources:
+        limits:
+          cpus: "0.6"
+          memory: "130MB"
+
+#####################################################################################
+services:
+  backend-api-1:
+    <<: *backend-api-base
+    container_name: backend-api-1
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - DB_CONNECTION_STRING=Host=backend_database;Port=5432;Database=rinha_db;Username=mtagAPP;Password=Plarfgyrex;MinPoolSize=15;MaxPoolSize=100
+      - PAYMENT_PROCESSOR_DEFAULT=http://payment-processor-default:8080/payments
+      - PAYMENT_PROCESSOR_FALLBACK=http://payment-processor-fallback:8080/payments
+      - INSTANCE_NAME=backend-api-1
+      - Logging__LogLevel__Default=Error
+      - Logging__LogLevel__Microsoft=Error
+      - Logging__LogLevel__Microsoft.AspNetCore=Error
+      - Logging__LogLevel__System=Error
+
+  backend-api-2:
+    <<: *backend-api-base
+    container_name: backend-api-2
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - DB_CONNECTION_STRING=Host=backend_database;Port=5432;Database=rinha_db;Username=mtagAPP;Password=Plarfgyrex;MinPoolSize=15;MaxPoolSize=100
+      - PAYMENT_PROCESSOR_DEFAULT=http://payment-processor-default:8080/payments
+      - PAYMENT_PROCESSOR_FALLBACK=http://payment-processor-fallback:8080/payments
+      - INSTANCE_NAME=backend-api-2
+      - Logging__LogLevel__Default=Error
+      - Logging__LogLevel__Microsoft=Error
+      - Logging__LogLevel__Microsoft.AspNetCore=Error
+      - Logging__LogLevel__System=Error
+
+  backend_database:
+    image: postgres:17-alpine
+    container_name: backend_database
+    restart: on-failure
+    environment:
+      POSTGRES_PASSWORD: "Plarfgyrex"
+      POSTGRES_USER: "mtagAPP"
+      POSTGRES_DB: rinha_db
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U mtagAPP -d rinha_db" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    ports:
+      - "5432:5432"
+    networks:
+      - backend_network
+    volumes:
+      - ./postgres-init:/docker-entrypoint-initdb.d
+    deploy:
+      resources:
+        limits:
+          cpus: "0.2"
+          memory: "60MB"
+
+  load_balancer:
+    image: nginx:alpine
+    container_name: load_balancer
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    ports:
+      - "9999:9999"
+    depends_on:
+      - backend-api-1
+      - backend-api-2
+    networks:
+      - backend_network
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          cpus: "0.1"
+          memory: "30MB"
+    
+networks:
+  backend_network:
+    driver: bridge
+  payment-processor:
+    external: true

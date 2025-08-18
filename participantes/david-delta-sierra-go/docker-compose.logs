@@ -9,34 +9,35 @@
  9824c27679d3 Already exists 
  834b6108eab8 Already exists 
  cba8abde83f6 Already exists 
- beba46623240 Pulling fs layer 
+ 189ba5e3fd4a Pulling fs layer 
  a3e4aa2eec44 Already exists 
  6d7cd9640707 Already exists 
  4f4fb700ef54 Already exists 
  834b6108eab8 Already exists 
- beba46623240 Pulling fs layer 
- beba46623240 Downloading [>                                                  ]   50.7kB/3.915MB
- beba46623240 Downloading [>                                                  ]   50.7kB/3.915MB
- beba46623240 Downloading [==================================================>]  3.915MB/3.915MB
- beba46623240 Verifying Checksum 
- beba46623240 Download complete 
- beba46623240 Download complete 
- beba46623240 Extracting [>                                                  ]  65.54kB/3.915MB
- beba46623240 Extracting [>                                                  ]  65.54kB/3.915MB
- beba46623240 Extracting [==================================================>]  3.915MB/3.915MB
- beba46623240 Extracting [==================================================>]  3.915MB/3.915MB
- beba46623240 Pull complete 
- beba46623240 Pull complete 
- app-2 Pulled 
+ 189ba5e3fd4a Pulling fs layer 
+ 189ba5e3fd4a Downloading [>                                                  ]  50.72kB/3.915MB
+ 189ba5e3fd4a Downloading [>                                                  ]  50.72kB/3.915MB
+ 189ba5e3fd4a Downloading [==================================================>]  3.915MB/3.915MB
+ 189ba5e3fd4a Download complete 
+ 189ba5e3fd4a Download complete 
+ 189ba5e3fd4a Extracting [>                                                  ]  65.54kB/3.915MB
+ 189ba5e3fd4a Extracting [>                                                  ]  65.54kB/3.915MB
+ 189ba5e3fd4a Extracting [==================================================>]  3.915MB/3.915MB
+ 189ba5e3fd4a Extracting [==================================================>]  3.915MB/3.915MB
+ 189ba5e3fd4a Extracting [==================================================>]  3.915MB/3.915MB
+ 189ba5e3fd4a Extracting [==================================================>]  3.915MB/3.915MB
+ 189ba5e3fd4a Pull complete 
+ 189ba5e3fd4a Pull complete 
  app-1 Pulled 
+ app-2 Pulled 
  Network david-delta-sierra-go_backend  Creating
  Network david-delta-sierra-go_backend  Created
  Container david-delta-sierra-go-postgres-1  Creating
  Container david-delta-sierra-go-postgres-1  Created
  Container david-delta-sierra-go-app-1-1  Creating
  Container david-delta-sierra-go-app-2-1  Creating
- Container david-delta-sierra-go-app-2-1  Created
  Container david-delta-sierra-go-app-1-1  Created
+ Container david-delta-sierra-go-app-2-1  Created
  Container david-delta-sierra-go-lb-1  Creating
  Container david-delta-sierra-go-lb-1  Created
 Attaching to app-1-1, app-2-1, lb-1, postgres-1
@@ -54,16 +55,16 @@ postgres-1  | fixing permissions on existing directory /var/lib/postgresql/data 
 postgres-1  | creating subdirectories ... ok
 postgres-1  | selecting dynamic shared memory implementation ... posix
 postgres-1  | selecting default "max_connections" ... 100
+app-1-1     | init api
 postgres-1  | selecting default "shared_buffers" ... 128MB
 app-2-1     | init api
-app-1-1     | init api
 postgres-1  | selecting default time zone ... UTC
-lb-1        | Await app1 and app2...
 postgres-1  | creating configuration files ... ok
+lb-1        | Await app1 and app2...
 lb-1        | All ready! init NGINX...
 postgres-1  | running bootstrap script ... ok
 postgres-1  | sh: locale: not found
-postgres-1  | 2025-08-17 21:05:15.045 UTC [22] WARNING:  no usable system locales were found
+postgres-1  | 2025-08-17 21:51:34.021 UTC [22] WARNING:  no usable system locales were found
 postgres-1  | performing post-bootstrap initialization ... ok
 postgres-1  | initdb: warning: enabling "trust" authentication for local connections
 postgres-1  | initdb: hint: You can change this by editing pg_hba.conf or using the option -A, or --auth-local and --auth-host, the next time you run initdb.
@@ -74,10 +75,10 @@ postgres-1  | Success. You can now start the database server using:
 postgres-1  | 
 postgres-1  |     pg_ctl -D /var/lib/postgresql/data -l logfile start
 postgres-1  | 
-postgres-1  | waiting for server to start....2025-08-17 21:05:16.839 UTC [28] LOG:  starting PostgreSQL 17.5 on x86_64-pc-linux-musl, compiled by gcc (Alpine 14.2.0) 14.2.0, 64-bit
-postgres-1  | 2025-08-17 21:05:16.843 UTC [28] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
-postgres-1  | 2025-08-17 21:05:16.854 UTC [31] LOG:  database system was shut down at 2025-08-17 21:05:16 UTC
-postgres-1  | 2025-08-17 21:05:16.861 UTC [28] LOG:  database system is ready to accept connections
+postgres-1  | waiting for server to start....2025-08-17 21:51:35.824 UTC [28] LOG:  starting PostgreSQL 17.5 on x86_64-pc-linux-musl, compiled by gcc (Alpine 14.2.0) 14.2.0, 64-bit
+postgres-1  | 2025-08-17 21:51:35.828 UTC [28] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+postgres-1  | 2025-08-17 21:51:35.839 UTC [31] LOG:  database system was shut down at 2025-08-17 21:51:35 UTC
+postgres-1  | 2025-08-17 21:51:35.846 UTC [28] LOG:  database system is ready to accept connections
 postgres-1  |  done
 postgres-1  | server started
 postgres-1  | CREATE DATABASE
@@ -85,12 +86,12 @@ postgres-1  |
 postgres-1  | 
 postgres-1  | /usr/local/bin/docker-entrypoint.sh: running /docker-entrypoint-initdb.d/init.sql
 postgres-1  | ALTER DATABASE
-postgres-1  | 2025-08-17 21:05:17.530 UTC [42] ERROR:  relation "public.payments" does not exist at character 83
-postgres-1  | 2025-08-17 21:05:17.530 UTC [42] STATEMENT:  
+postgres-1  | ALTER SYSTEM
+postgres-1  | 2025-08-17 21:51:36.432 UTC [42] ERROR:  relation "public.payments" does not exist at character 83
+postgres-1  | 2025-08-17 21:51:36.432 UTC [42] STATEMENT:  
 postgres-1  | 			SELECT handler, COUNT(*) as total_requests, SUM(amount) as total_amount
 postgres-1  | 			FROM public.payments
 postgres-1  | 		 GROUP BY handler
-postgres-1  | ALTER SYSTEM
 postgres-1  | ALTER SYSTEM
 postgres-1  | ALTER SYSTEM
 postgres-1  | ALTER SYSTEM
@@ -102,82 +103,72 @@ postgres-1  | INSERT 0 2
 postgres-1  | CREATE INDEX
 postgres-1  | 
 postgres-1  | 
-postgres-1  | waiting for server to shut down....2025-08-17 21:05:17.838 UTC [28] LOG:  received fast shutdown request
-postgres-1  | 2025-08-17 21:05:17.841 UTC [28] LOG:  aborting any active transactions
-postgres-1  | 2025-08-17 21:05:17.841 UTC [61] FATAL:  terminating connection due to administrator command
-postgres-1  | 2025-08-17 21:05:17.841 UTC [59] FATAL:  terminating connection due to administrator command
-postgres-1  | 2025-08-17 21:05:17.841 UTC [60] FATAL:  terminating connection due to administrator command
-postgres-1  | 2025-08-17 21:05:17.841 UTC [54] FATAL:  terminating connection due to administrator command
-postgres-1  | 2025-08-17 21:05:17.842 UTC [55] FATAL:  terminating connection due to administrator command
-postgres-1  | 2025-08-17 21:05:17.924 UTC [53] FATAL:  terminating connection due to administrator command
-postgres-1  | 2025-08-17 21:05:17.924 UTC [52] FATAL:  terminating connection due to administrator command
-postgres-1  | 2025-08-17 21:05:17.924 UTC [51] FATAL:  terminating connection due to administrator command
-postgres-1  | 2025-08-17 21:05:17.924 UTC [48] FATAL:  terminating connection due to administrator command
-postgres-1  | 2025-08-17 21:05:17.924 UTC [46] FATAL:  terminating connection due to administrator command
-postgres-1  | 2025-08-17 21:05:17.924 UTC [58] FATAL:  terminating connection due to administrator command
-postgres-1  | 2025-08-17 21:05:17.925 UTC [45] FATAL:  terminating connection due to administrator command
-postgres-1  | 2025-08-17 21:05:17.925 UTC [57] FATAL:  terminating connection due to administrator command
-postgres-1  | 2025-08-17 21:05:17.928 UTC [56] FATAL:  terminating connection due to administrator command
-postgres-1  | 2025-08-17 21:05:17.928 UTC [49] FATAL:  terminating connection due to administrator command
-postgres-1  | 2025-08-17 21:05:17.930 UTC [43] FATAL:  terminating connection due to administrator command
-postgres-1  | 2025-08-17 21:05:17.933 UTC [42] FATAL:  terminating connection due to administrator command
-postgres-1  | 2025-08-17 21:05:18.024 UTC [50] FATAL:  terminating connection due to administrator command
-postgres-1  | 2025-08-17 21:05:18.024 UTC [44] FATAL:  terminating connection due to administrator command
-postgres-1  | 2025-08-17 21:05:18.028 UTC [47] FATAL:  terminating connection due to administrator command
-postgres-1  | 2025-08-17 21:05:18.030 UTC [28] LOG:  background worker "logical replication launcher" (PID 34) exited with exit code 1
-postgres-1  | 2025-08-17 21:05:18.125 UTC [29] LOG:  shutting down
-postgres-1  | 2025-08-17 21:05:18.128 UTC [29] LOG:  checkpoint starting: shutdown immediate
-postgres-1  | 2025-08-17 21:05:18.206 UTC [29] LOG:  checkpoint complete: wrote 933 buffers (5.7%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.035 s, sync=0.033 s, total=0.081 s; sync files=321, longest=0.004 s, average=0.001 s; distance=4290 kB, estimate=4290 kB; lsn=0/191DC50, redo lsn=0/191DC50
-postgres-1  | 2025-08-17 21:05:18.215 UTC [28] LOG:  database system is shut down
+postgres-1  | waiting for server to shut down....2025-08-17 21:51:36.532 UTC [28] LOG:  received fast shutdown request
+postgres-1  | 2025-08-17 21:51:36.535 UTC [28] LOG:  aborting any active transactions
+postgres-1  | 2025-08-17 21:51:36.535 UTC [61] FATAL:  terminating connection due to administrator command
+postgres-1  | 2025-08-17 21:51:36.535 UTC [58] FATAL:  terminating connection due to administrator command
+postgres-1  | 2025-08-17 21:51:36.536 UTC [56] FATAL:  terminating connection due to administrator command
+postgres-1  | 2025-08-17 21:51:36.536 UTC [50] FATAL:  terminating connection due to administrator command
+postgres-1  | 2025-08-17 21:51:36.536 UTC [43] FATAL:  terminating connection due to administrator command
+postgres-1  | 2025-08-17 21:51:36.536 UTC [51] FATAL:  terminating connection due to administrator command
+postgres-1  | 2025-08-17 21:51:36.537 UTC [49] FATAL:  terminating connection due to administrator command
+postgres-1  | 2025-08-17 21:51:36.540 UTC [45] FATAL:  terminating connection due to administrator command
+postgres-1  | 2025-08-17 21:51:36.541 UTC [42] FATAL:  terminating connection due to administrator command
+postgres-1  | 2025-08-17 21:51:36.621 UTC [52] FATAL:  terminating connection due to administrator command
+postgres-1  | 2025-08-17 21:51:36.622 UTC [48] FATAL:  terminating connection due to administrator command
+postgres-1  | 2025-08-17 21:51:36.623 UTC [47] FATAL:  terminating connection due to administrator command
+postgres-1  | 2025-08-17 21:51:36.623 UTC [54] FATAL:  terminating connection due to administrator command
+postgres-1  | 2025-08-17 21:51:36.623 UTC [60] FATAL:  terminating connection due to administrator command
+postgres-1  | 2025-08-17 21:51:36.626 UTC [46] FATAL:  terminating connection due to administrator command
+postgres-1  | 2025-08-17 21:51:36.627 UTC [55] FATAL:  terminating connection due to administrator command
+postgres-1  | 2025-08-17 21:51:36.628 UTC [59] FATAL:  terminating connection due to administrator command
+postgres-1  | 2025-08-17 21:51:36.629 UTC [44] FATAL:  terminating connection due to administrator command
+postgres-1  | 2025-08-17 21:51:36.721 UTC [53] FATAL:  terminating connection due to administrator command
+postgres-1  | 2025-08-17 21:51:36.723 UTC [57] FATAL:  terminating connection due to administrator command
+postgres-1  | 2025-08-17 21:51:36.723 UTC [28] LOG:  background worker "logical replication launcher" (PID 34) exited with exit code 1
+postgres-1  | 2025-08-17 21:51:36.727 UTC [29] LOG:  shutting down
+postgres-1  | 2025-08-17 21:51:36.730 UTC [29] LOG:  checkpoint starting: shutdown immediate
+postgres-1  | 2025-08-17 21:51:36.877 UTC [29] LOG:  checkpoint complete: wrote 933 buffers (5.7%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.104 s, sync=0.033 s, total=0.150 s; sync files=321, longest=0.004 s, average=0.001 s; distance=4290 kB, estimate=4290 kB; lsn=0/191DC50, redo lsn=0/191DC50
+postgres-1  | 2025-08-17 21:51:36.887 UTC [28] LOG:  database system is shut down
 postgres-1  |  done
 postgres-1  | server stopped
 postgres-1  | 
 postgres-1  | PostgreSQL init process complete; ready for start up.
 postgres-1  | 
-postgres-1  | 2025-08-17 21:05:18.252 UTC [1] LOG:  starting PostgreSQL 17.5 on x86_64-pc-linux-musl, compiled by gcc (Alpine 14.2.0) 14.2.0, 64-bit
-postgres-1  | 2025-08-17 21:05:18.252 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
-postgres-1  | 2025-08-17 21:05:18.252 UTC [1] LOG:  listening on IPv6 address "::", port 5432
-postgres-1  | 2025-08-17 21:05:18.252 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
-postgres-1  | 2025-08-17 21:05:18.254 UTC [66] LOG:  database system was shut down at 2025-08-17 21:05:18 UTC
-postgres-1  | 2025-08-17 21:05:18.259 UTC [1] LOG:  database system is ready to accept connections
-postgres-1  | 2025-08-17 21:05:23.042 UTC [70] LOG:  PID 51 in cancel request did not match any process
-postgres-1  | 2025-08-17 21:05:23.043 UTC [71] LOG:  PID 46 in cancel request did not match any process
-postgres-1  | 2025-08-17 21:05:23.043 UTC [72] LOG:  PID 52 in cancel request did not match any process
-postgres-1  | 2025-08-17 21:05:23.045 UTC [73] LOG:  PID 44 in cancel request did not match any process
-postgres-1  | 2025-08-17 21:05:23.046 UTC [74] LOG:  PID 53 in cancel request did not match any process
-postgres-1  | 2025-08-17 21:05:23.046 UTC [75] LOG:  PID 49 in cancel request did not match any process
-postgres-1  | 2025-08-17 21:05:23.048 UTC [76] LOG:  PID 61 in cancel request did not match any process
-postgres-1  | 2025-08-17 21:05:23.048 UTC [78] LOG:  PID 48 in cancel request did not match any process
-postgres-1  | 2025-08-17 21:05:23.049 UTC [79] LOG:  PID 58 in cancel request did not match any process
-postgres-1  | 2025-08-17 21:05:23.050 UTC [77] LOG:  PID 50 in cancel request did not match any process
-postgres-1  | 2025-08-17 21:05:23.125 UTC [80] LOG:  PID 60 in cancel request did not match any process
-postgres-1  | 2025-08-17 21:05:23.125 UTC [81] LOG:  PID 57 in cancel request did not match any process
-postgres-1  | 2025-08-17 21:05:23.126 UTC [82] LOG:  PID 54 in cancel request did not match any process
-postgres-1  | 2025-08-17 21:05:23.126 UTC [83] LOG:  PID 45 in cancel request did not match any process
-postgres-1  | 2025-08-17 21:05:23.128 UTC [84] LOG:  PID 55 in cancel request did not match any process
-postgres-1  | 2025-08-17 21:05:23.129 UTC [85] LOG:  PID 47 in cancel request did not match any process
-postgres-1  | 2025-08-17 21:05:23.130 UTC [86] LOG:  PID 43 in cancel request did not match any process
-postgres-1  | 2025-08-17 21:05:23.130 UTC [87] LOG:  PID 59 in cancel request did not match any process
-postgres-1  | 2025-08-17 21:05:23.131 UTC [88] LOG:  PID 42 in cancel request did not match any process
-postgres-1  | 2025-08-17 21:05:23.225 UTC [89] LOG:  PID 56 in cancel request did not match any process
+postgres-1  | 2025-08-17 21:51:36.948 UTC [1] LOG:  starting PostgreSQL 17.5 on x86_64-pc-linux-musl, compiled by gcc (Alpine 14.2.0) 14.2.0, 64-bit
+postgres-1  | 2025-08-17 21:51:36.948 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+postgres-1  | 2025-08-17 21:51:36.948 UTC [1] LOG:  listening on IPv6 address "::", port 5432
+postgres-1  | 2025-08-17 21:51:36.948 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+postgres-1  | 2025-08-17 21:51:36.950 UTC [66] LOG:  database system was shut down at 2025-08-17 21:51:36 UTC
+postgres-1  | 2025-08-17 21:51:36.955 UTC [1] LOG:  database system is ready to accept connections
+postgres-1  | 2025-08-17 21:51:41.944 UTC [70] LOG:  PID 42 in cancel request did not match any process
+postgres-1  | 2025-08-17 21:51:41.944 UTC [71] LOG:  PID 43 in cancel request did not match any process
+postgres-1  | 2025-08-17 21:51:41.945 UTC [72] LOG:  PID 60 in cancel request did not match any process
+postgres-1  | 2025-08-17 21:51:41.946 UTC [73] LOG:  PID 61 in cancel request did not match any process
+postgres-1  | 2025-08-17 21:51:41.947 UTC [74] LOG:  PID 57 in cancel request did not match any process
+postgres-1  | 2025-08-17 21:51:41.947 UTC [75] LOG:  PID 51 in cancel request did not match any process
+postgres-1  | 2025-08-17 21:51:41.950 UTC [80] LOG:  PID 45 in cancel request did not match any process
+postgres-1  | 2025-08-17 21:51:41.950 UTC [77] LOG:  PID 52 in cancel request did not match any process
+postgres-1  | 2025-08-17 21:51:41.951 UTC [76] LOG:  PID 50 in cancel request did not match any process
+postgres-1  | 2025-08-17 21:51:41.951 UTC [81] LOG:  PID 49 in cancel request did not match any process
+postgres-1  | 2025-08-17 21:51:41.951 UTC [78] LOG:  PID 56 in cancel request did not match any process
+postgres-1  | 2025-08-17 21:51:41.951 UTC [79] LOG:  PID 53 in cancel request did not match any process
+postgres-1  | 2025-08-17 21:51:41.952 UTC [82] LOG:  PID 48 in cancel request did not match any process
+postgres-1  | 2025-08-17 21:51:42.023 UTC [83] LOG:  PID 47 in cancel request did not match any process
+postgres-1  | 2025-08-17 21:51:42.024 UTC [84] LOG:  PID 46 in cancel request did not match any process
+postgres-1  | 2025-08-17 21:51:42.024 UTC [86] LOG:  PID 54 in cancel request did not match any process
+postgres-1  | 2025-08-17 21:51:42.025 UTC [85] LOG:  PID 59 in cancel request did not match any process
+postgres-1  | 2025-08-17 21:51:42.121 UTC [87] LOG:  PID 55 in cancel request did not match any process
+postgres-1  | 2025-08-17 21:51:42.121 UTC [89] LOG:  PID 58 in cancel request did not match any process
+postgres-1  | 2025-08-17 21:51:42.121 UTC [88] LOG:  PID 44 in cancel request did not match any process
 [Klb-1 exited with code 137
 [Kapp-2-1 exited with code 2
 [Kapp-1-1 exited with code 2
-postgres-1  | 2025-08-17 21:06:43.025 UTC [1] LOG:  received fast shutdown request
-postgres-1  | 2025-08-17 21:06:43.025 UTC [1] LOG:  aborting any active transactions
-postgres-1  | 2025-08-17 21:06:43.026 UTC [114] FATAL:  terminating connection due to administrator command
-postgres-1  | 2025-08-17 21:06:43.026 UTC [114] LOG:  could not send data to client: Broken pipe
-postgres-1  | 2025-08-17 21:06:43.026 UTC [108] FATAL:  terminating connection due to administrator command
-postgres-1  | 2025-08-17 21:06:43.026 UTC [108] LOG:  could not send data to client: Broken pipe
-postgres-1  | 2025-08-17 21:06:43.027 UTC [104] FATAL:  terminating connection due to administrator command
-postgres-1  | 2025-08-17 21:06:43.027 UTC [104] LOG:  could not send data to client: Broken pipe
-postgres-1  | 2025-08-17 21:06:43.031 UTC [117] FATAL:  terminating connection due to administrator command
-postgres-1  | 2025-08-17 21:06:43.031 UTC [117] LOG:  could not send data to client: Broken pipe
-postgres-1  | 2025-08-17 21:06:43.033 UTC [1] LOG:  background worker "logical replication launcher" (PID 69) exited with exit code 1
-postgres-1  | 2025-08-17 21:06:43.124 UTC [115] FATAL:  terminating connection due to administrator command
-postgres-1  | 2025-08-17 21:06:43.124 UTC [115] LOG:  could not send data to client: Broken pipe
-postgres-1  | 2025-08-17 21:06:43.131 UTC [64] LOG:  shutting down
-postgres-1  | 2025-08-17 21:06:43.131 UTC [64] LOG:  checkpoint starting: shutdown immediate
-postgres-1  | 2025-08-17 21:06:43.133 UTC [64] LOG:  checkpoint complete: wrote 336 buffers (2.1%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.003 s, sync=0.001 s, total=0.003 s; sync files=0, longest=0.000 s, average=0.000 s; distance=735 kB, estimate=735 kB; lsn=0/19D5BE0, redo lsn=0/19D5BE0
-postgres-1  | 2025-08-17 21:06:43.228 UTC [1] LOG:  database system is shut down
+postgres-1  | 2025-08-17 21:53:01.922 UTC [1] LOG:  received fast shutdown request
+postgres-1  | 2025-08-17 21:53:01.922 UTC [1] LOG:  aborting any active transactions
+postgres-1  | 2025-08-17 21:53:01.927 UTC [1] LOG:  background worker "logical replication launcher" (PID 69) exited with exit code 1
+postgres-1  | 2025-08-17 21:53:02.023 UTC [64] LOG:  shutting down
+postgres-1  | 2025-08-17 21:53:02.023 UTC [64] LOG:  checkpoint starting: shutdown immediate
+postgres-1  | 2025-08-17 21:53:02.026 UTC [64] LOG:  checkpoint complete: wrote 336 buffers (2.1%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.003 s, sync=0.001 s, total=0.003 s; sync files=0, longest=0.000 s, average=0.000 s; distance=735 kB, estimate=735 kB; lsn=0/19D5BF0, redo lsn=0/19D5BF0
+postgres-1  | 2025-08-17 21:53:02.034 UTC [1] LOG:  database system is shut down
 log truncated at line 1000
