@@ -1,0 +1,67 @@
+services:
+  nginx:
+    image: nginx:alpine
+    restart: always
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - backend1
+      - backend2
+    ports:
+      - "9999:9999"
+    networks:
+      - dearrudam-java-2-net
+    deploy:
+      resources:
+        limits:
+          cpus: "0.20"
+          memory: "30MB"
+
+  #--- BACKEND 1 ---
+  backend1: &backend
+    image: ghcr.io/dearrudam/rinha-de-backend-2025-quarkus-in-memory:1.0.0
+    environment:
+      - QUARKUS_HTTP_PORT=8080
+      - DEFAULT_PAYMENT_PROCESSOR_URL=http://payment-processor-default:8080
+      - FALLBACK_PAYMENT_PROCESSOR_URL=http://payment-processor-fallback:8080
+      - INTERNAL_PAYMENTS_MANAGEMENT_URL=http://backend2:8080
+      - WORKER_QUEUE_BUFFER=999999999
+      - RETRIES_BEFORE_FALLBACK=10000
+      - PAYMENTS_PARALLEL_STREAM_THRESHOLD=1000000
+      - QUARKUS_OTEL_ENABLED=false
+      - QUARKUS_OTEL_METRICS_ENABLED=false
+      - QUARKUS_OTEL_LOGS_ENABLED=false
+      - QUARKUS_OTEL_SDK_DISABLED=true
+      - WORKER_SIZE=12
+    networks:
+      - dearrudam-java-2-net
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          cpus: "0.65"
+          memory: "160MB"
+
+  #--- BACKEND 2 ---
+  backend2:
+    <<: *backend
+    environment:
+      - QUARKUS_HTTP_PORT=8080
+      - DEFAULT_PAYMENT_PROCESSOR_URL=http://payment-processor-default:8080
+      - FALLBACK_PAYMENT_PROCESSOR_URL=http://payment-processor-fallback:8080
+      - INTERNAL_PAYMENTS_MANAGEMENT_URL=http://backend1:8080
+      - WORKER_QUEUE_BUFFER=999999999
+      - RETRIES_BEFORE_FALLBACK=10000
+      - PAYMENTS_PARALLEL_STREAM_THRESHOLD=1000000
+      - QUARKUS_OTEL_ENABLED=false
+      - QUARKUS_OTEL_METRICS_ENABLED=false
+      - QUARKUS_OTEL_LOGS_ENABLED=false
+      - QUARKUS_OTEL_SDK_DISABLED=true
+      - WORKER_SIZE=12
+
+#--- NETWORKS ---
+networks:
+  dearrudam-java-2-net:
+    driver: bridge
+  payment-processor:
+    external: true
