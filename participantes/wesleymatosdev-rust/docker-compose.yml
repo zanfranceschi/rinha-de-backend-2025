@@ -18,16 +18,7 @@ x-api-template: &api-template
     resources:
       limits:
         cpus: '0.15'
-        memory: '20MB'
-
-x-worker-template: &worker-template
-  <<: *base-app
-  command: ["./worker"]
-  deploy:
-    resources:
-      limits:
-        cpus: '0.18'
-        memory: '70MB'
+        memory: '25MB'
 
 services:
   api01:
@@ -59,18 +50,21 @@ services:
       resources:
         limits:
           cpus: "0.39"
-          memory: 40MB
+          memory: 60MB
 
-  # Payment processing workers
-  worker01:
-    <<: *worker-template
-
-  worker02:
-    <<: *worker-template
+  # Payment processing worker
+  worker:
+    <<: *base-app
+    command: ["./worker"]
+    deploy:
+      resources:
+        limits:
+          cpus: '0.18'
+          memory: '100MB'
 
   nats:
     image: nats:2.10.16-alpine3.19
-    command: -js -sd /data -m 8222
+    command: -m 8222
     ports:
       - "4222:4222"
       - "8222:8222"
@@ -88,7 +82,7 @@ services:
       resources:
         limits:
           cpus: '0.2'
-          memory: '30MB'
+          memory: '40MB'
 
   postgres:
     image: postgres:17.5-alpine
