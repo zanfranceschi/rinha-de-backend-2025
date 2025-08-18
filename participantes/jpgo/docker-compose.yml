@@ -1,3 +1,17 @@
+x-service-templates:
+  backend: &backend
+    image: jpgo1580/rinha-backend-2025
+    networks:
+      - payment-processor
+      - backend
+    depends_on:
+      - database
+    deploy:
+      resources:
+        limits:
+          cpus: "0.40"
+          memory: "100MB"
+
 services:
   database:
     container_name: rinha-db
@@ -16,18 +30,9 @@ services:
       timeout: 5s
       retries: 5
   backend_one:
+    <<: *backend
     container_name: rinha-srv-one
-    image: jpgo1580/rinha-backend-2025
-    networks:
-      - backend
-      - payment-processor
-    depends_on:
-      - database
-    deploy:
-      resources:
-        limits:
-          cpus: "0.40"
-          memory: "100MB"
+    hostname: rinha-srv-one
     environment:
       - DATABASE_URL=rinha-db:6379
       - PORT=8000
@@ -36,8 +41,9 @@ services:
       - N_WORKERS=5
       - INSTANCE_ID=1
   backend_two:
+    <<: *backend
     container_name: rinha-srv-two
-    image: jpgo1580/rinha-backend-2025
+    hostname: rinha-srv-two
     environment:
       - DATABASE_URL=rinha-db:6379
       - PORT=8000
@@ -45,16 +51,6 @@ services:
       - FALLBACK_PROCESSOR_HOST=http://payment-processor-fallback:8080
       - N_WORKERS=5
       - INSTANCE_ID=2
-    networks:
-      - backend
-      - payment-processor
-    depends_on:
-      - database
-    deploy:
-      resources:
-        limits:
-          cpus: "0.40"
-          memory: "100MB"
   proxy:
     container_name: nginx-proxy
     image: nginx:mainline-alpine-slim
