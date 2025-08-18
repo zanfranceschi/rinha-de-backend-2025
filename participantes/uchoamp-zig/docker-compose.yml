@@ -1,6 +1,6 @@
 services:
   lb:
-    image: uchoamp/zigpay:1.10
+    image: uchoamp/zigpay:1.23
     environment:
       - PORT=9999
       - SERVER_ENV=PROD
@@ -19,19 +19,19 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.20"
-          memory: "250MB"
+          cpus: "0.50"
+          memory: "130MB"
   zig1: &zig
     container_name: zig-pay-1
-    image: uchoamp/zigpay:1.10
+    image: uchoamp/zigpay:1.23
     environment:
       - SERVER_ENV=PROD
       - DEFAULT_HOST=payment-processor-default
       - DEFAULT_PORT=8080
-      - DEFAULT_POOL=100
+      - DEFAULT_POOL=400
       - FALLBACK_HOST=payment-processor-fallback
       - FALLBACK_PORT=8080
-      - FALLBACK_POOL=0
+      - FALLBACK_POOL=200
       - PORT=8080
       - PAYMENT_SUMMARY_EXCHANGE_HOST=zig2
       - PAYMENT_SUMMARY_EXCHANGE_PORT=6969
@@ -40,8 +40,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.30"
-          memory: "50MB"
+          cpus: "0.50"
+          memory: "110MB"
   zig2: 
     <<: *zig
     container_name: zig-pay-2
@@ -49,10 +49,10 @@ services:
       - SERVER_ENV=PROD
       - DEFAULT_HOST=payment-processor-default
       - DEFAULT_PORT=8080
-      - DEFAULT_POOL=100
+      - DEFAULT_POOL=400
       - FALLBACK_HOST=payment-processor-fallback
       - FALLBACK_PORT=8080
-      - FALLBACK_POOL=0
+      - FALLBACK_POOL=200
       - PORT=8080
       - PAYMENT_SUMMARY_EXCHANGE_HOST=zig1
       - PAYMENT_SUMMARY_EXCHANGE_PORT=6969
