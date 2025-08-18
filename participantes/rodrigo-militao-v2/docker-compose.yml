@@ -1,22 +1,22 @@
 services:
-  nginx:
-    image: nginx:alpine
-    container_name: nginx-lb
-    hostname: nginx-lb
+  haproxy:
+    image: haproxy:latest
+    container_name: haproxy-lb
     ports:
-      - 9999:9999
+      - "9999:80"
     volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf:ro
-    networks:
-      - backend
+      - ./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
     depends_on:
       - backend-1
       - backend-2
+    networks:
+      - backend
+      - payment-processor
     deploy:
       resources:
         limits:
-          cpus: '0.2'
-          memory: '30MB'
+          cpus: "0.2"
+          memory: 30MB
 
   backend-1: &backend-template
     image: rodrigomilitao/rinha-go:2025-v14
