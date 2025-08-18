@@ -1,0 +1,114 @@
+x-service-templates:
+  payment-gateway-service: &payment-gateway-service
+    image: ghcr.io/jotaviobiondo/rinha-backend-2025:1.1.0
+    environment: &payment-gateway-env
+      PROCESSOR_DEFAULT_URL: http://payment-processor-default:8080
+      PROCESSOR_FALLBACK_URL: http://payment-processor-fallback:8080
+      REDIS_UNIX_SOCKET: /tmp/sockets/redis.sock
+      RELEASE_COOKIE: "super_secret_cookie"
+      RELEASE_DISTRIBUTION: "name"
+    depends_on:
+      redis:
+        condition: service_healthy
+    volumes:
+      - sockets:/tmp/sockets
+    networks:
+      - backend
+      - payment-processor
+
+services:
+  haproxy:
+    image: haproxy:3.2.4-alpine
+    user: root
+    ports:
+      - 9999:80
+    volumes:
+      - ./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
+      - sockets:/tmp/sockets
+    networks:
+      - backend
+    depends_on:
+      app1:
+        condition: service_healthy
+      app2:
+        condition: service_healthy
+    deploy:
+      resources:
+        limits:
+          cpus: "0.25"
+          memory: "25MB"
+
+  redis:
+    image: redis:8.0.3-alpine
+    ports:
+      - "6379:6379"
+    command: redis-server /usr/local/etc/redis.conf
+    volumes:
+      - ./redis.conf:/usr/local/etc/redis.conf
+      - sockets:/tmp/sockets
+    networks:
+      - backend
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    deploy:
+      resources:
+        limits:
+          cpus: "0.25"
+          memory: "25MB"
+
+  app1:
+    <<: *payment-gateway-service
+    container_name: app1
+    hostname: app1.internal
+    environment:
+      <<: *payment-gateway-env
+      SERVER_UNIX_SOCKET: /tmp/sockets/app1.sock
+      RELEASE_NODE: payment_gateway@app1.internal
+      CLUSTER_NODES: payment_gateway@app2.internal
+    healthcheck:
+      test: curl -fs --unix-socket /tmp/sockets/app1.sock http://localhost/health || exit 1
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    deploy:
+      resources:
+        limits:
+          cpus: "0.50"
+          memory: "150MB"
+
+  app2:
+    <<: *payment-gateway-service
+    container_name: app2
+    hostname: app2.internal
+    environment:
+      <<: *payment-gateway-env
+      SERVER_UNIX_SOCKET: /tmp/sockets/app2.sock
+      RELEASE_NODE: payment_gateway@app2.internal
+      CLUSTER_NODES: payment_gateway@app1.internal
+    healthcheck:
+      test: curl -fs --unix-socket /tmp/sockets/app2.sock http://localhost/health || exit 1
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    deploy:
+      resources:
+        limits:
+          cpus: "0.50"
+          memory: "150MB"
+
+networks:
+  backend:
+    driver: bridge
+  payment-processor:
+    external: true
+
+volumes:
+  sockets:
+    driver: local
+    driver_opts:
+      type: tmpfs
+      device: tmpfs
+      o: "size=32m,mode=1777"
