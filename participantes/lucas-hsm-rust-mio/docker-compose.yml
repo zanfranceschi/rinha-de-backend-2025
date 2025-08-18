@@ -1,0 +1,118 @@
+x-service-templates:
+  api: &api
+    image: lucasmula125/rinha2025:latest
+    networks:
+      - api
+      - database
+      - payment-processor
+    environment:
+      - CONN_STRING=postgresql://postgres:postgres@database:5432/rinha
+      - DEFAULT_ADDR=http://payment-processor-default:8080
+      - FALLBACK_ADDR=http://payment-processor-fallback:8080
+      - ADDR=0.0.0.0:9000
+      - REDIS=redis
+      - WORKERS=2
+      - INSERTION_WORKERS=2
+      - GLOBAL_WORKERS=2
+  depends_on:
+      - redis
+      - api_db
+  deploy:
+    resources:
+      limits:
+        cpus: "0.35"
+        memory: "75MB"
+
+services:
+  api_db:
+    image: postgres:17-alpine
+    command: postgres -c checkpoint_timeout=600 -c max_wal_size=4096 -c synchronous_commit=0 -c fsync=0 -c full_page_writes=0
+    ports:
+      - 5431:5432
+    hostname: database
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=rinha
+    networks:
+      - database
+    volumes:
+      - ./script.sql:/docker-entrypoint-initdb.d/script.sql
+      - database:/var/run/postgresql
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: "150MB"
+
+  nginx:
+    image: nginx:1.25-alpine
+    sysctls:
+      net.core.somaxconn: 16384
+    container_name: rinha-nginxer
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - api1
+      - api2
+    ports:
+      - "9999:9999"
+    networks:
+      - api
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          cpus: "0.15"
+          memory: "15MB"
+
+  redis:
+    image: redis
+    networks:
+      - api
+    ports:
+      - 6379:6379
+    volumes:
+      - redis_volume:/data
+    restart: always
+    deploy:
+      resources:
+        limits:
+          cpus: "0.15"
+          memory: "35MB"
+
+  api1:
+    <<: *api
+    container_name: api1
+    hostname: api1
+    environment:
+      - CONN_STRING=postgresql://postgres:postgres@database:5432/rinha
+      - DEFAULT_ADDR=http://payment-processor-default:8080
+      - FALLBACK_ADDR=http://payment-processor-fallback:8080
+      - ADDR=0.0.0.0:9000
+      - REDIS=redis
+      - WORKERS=2
+      - INSERTION_WORKERS=2
+      - GLOBAL_WORKERS=2
+      - checker=true
+    ports:
+      - 9001:9000
+
+  api2:
+    <<: *api
+    container_name: api2
+    hostname: api2
+    ports:
+      - 9002:9000
+
+networks:
+  api:
+    driver: bridge
+  database:
+    driver: bridge
+  payment-processor:
+    external: true
+
+volumes:
+  redis_volume:
+  database:
