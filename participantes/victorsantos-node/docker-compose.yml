@@ -2,7 +2,7 @@ services:
   nginx:
     image: nginx:1.25-alpine
     ports:
-      - "9999:80"
+      - "9999:9999"
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf:ro
     depends_on:
@@ -15,10 +15,10 @@ services:
       resources:
         limits:
           cpus: "0.15"
-          memory: "15MB"
+          memory: "32MB"
   
   api1: &api
-    build: .
+    image: tilnoene/rinha-de-backend-2025-nodejs:1.0.2
     hostname: api1
     environment:
       - PORT=3000
@@ -37,8 +37,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.55"
-          memory: "30MB"
+          cpus: "0.50"
+          memory: "100MB"
 
   api2:
     <<: *api
@@ -58,8 +58,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.25"
-          memory: "275MB"
+          cpus: "0.35"
+          memory: "118MB"
 
 volumes:
   postgres-data:
