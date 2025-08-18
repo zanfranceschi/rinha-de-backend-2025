@@ -61,12 +61,12 @@ Criar uma API robusta capaz de processar pagamentos de forma assíncrona, garant
 
 | Serviço      | Imagem                               | CPU        | Memória | Porta | Descrição                     |
 | ------------ | ------------------------------------ | ---------- | ------- | ----- | ----------------------------- |
-| **api1**     | `jos3duardo/rinha-backend-2025:v1.0` | 0.3 cores  | 64MB    | -     | API NestJS - Instância 1      |
-| **api2**     | `jos3duardo/rinha-backend-2025:v1.0` | 0.3 cores  | 64MB    | -     | API NestJS - Instância 2      |
-| **api3**     | `jos3duardo/rinha-backend-2025:v1.0` | 0.3 cores  | 64MB    | -     | API NestJS - Instância 3      |
+| **api1**     | `jos3duardo/rinha-backend-2025:v1.0` | 0.3 cores  | 67MB    | -     | API NestJS - Instância 1      |
+| **api2**     | `jos3duardo/rinha-backend-2025:v1.0` | 0.3 cores  | 67MB    | -     | API NestJS - Instância 2      |
+| **api3**     | `jos3duardo/rinha-backend-2025:v1.0` | 0.3 cores  | 67MB    | -     | API NestJS - Instância 3      |
 | **nginx**    | `nginx:latest`                       | 0.10 cores | 9MB     | 9999  | Load Balancer / Reverse Proxy |
-| **redis**    | `redis:7.2-alpine`                   | 0.3 cores  | 25MB    | 6379  | Queue e Cache (BullMQ)        |
-| **database** | `postgres:17-alpine`                 | 0.20 cores | 124MB   | 5432  | Banco de Dados Principal      |
+| **redis**    | `redis:7.2-alpine`                   | 0.3 cores  | 15MB    | 6379  | Queue e Cache (BullMQ)        |
+| **database** | `postgres:17-alpine`                 | 0.20 cores | 125MB   | 5432  | Banco de Dados Principal      |
 
 ### 📊 Resumo de Recursos
 
