@@ -1,6 +1,6 @@
 # Prévia do Resultados da Rinha de Backend 2025
-Atualizado em **seg 18 ago 2025 18:01:29 -03**
-458 submissões / 394 resultados / 64 submissões com erro
+Atualizado em **seg 18 ago 2025 18:12:57 -03**
+458 submissões / 395 resultados / 63 submissões com erro
 
 
 | participante | p99 | bônus por desempenho (%) | multa ($) | lucro | submissão |
@@ -195,6 +195,7 @@ Atualizado em **seg 18 ago 2025 18:01:29 -03**
 |	joyce-go-4	|	1.34ms	|	19%	|	0	|	371319.26405	|	[joyce-go-4](https://github.com/zanfranceschi/rinha-de-backend-2025/tree/main/participantes/joyce-go-4)
 |	joyce-go-5	|	1.49ms	|	19%	|	0	|	376913.9003	|	[joyce-go-5](https://github.com/zanfranceschi/rinha-de-backend-2025/tree/main/participantes/joyce-go-5)
 |	joyce-go	|	1.26ms	|	19%	|	0	|	376913.9003	|	[joyce-go](https://github.com/zanfranceschi/rinha-de-backend-2025/tree/main/participantes/joyce-go)
+|	jpgo	|	23.35ms	|	0%	|	0	|	0	|	[jpgo](https://github.com/zanfranceschi/rinha-de-backend-2025/tree/main/participantes/jpgo)
 |	jrblatt-nodejs-v1	|	1.2ms	|	20%	|	0	|	380103.93	|	[jrblatt-nodejs-v1](https://github.com/zanfranceschi/rinha-de-backend-2025/tree/main/participantes/jrblatt-nodejs-v1)
 |	jrblatt-nodejs-v2	|	1.52ms	|	19%	|	0	|	376846.40945	|	[jrblatt-nodejs-v2](https://github.com/zanfranceschi/rinha-de-backend-2025/tree/main/participantes/jrblatt-nodejs-v2)
 |	jrblatt-nodejs-v3	|	8.82ms	|	4%	|	0	|	329108.8268	|	[jrblatt-nodejs-v3](https://github.com/zanfranceschi/rinha-de-backend-2025/tree/main/participantes/jrblatt-nodejs-v3)
