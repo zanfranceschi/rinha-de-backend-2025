@@ -2,7 +2,7 @@
 services:
   api1: &api1
     hostname: api1
-    image: rafaelpadovezi/rinha-2025-dotnet:1.3
+    image: rafaelpadovezi/rinha-2025-dotnet:1.6
     depends_on:
       redis:
         condition: service_healthy
@@ -16,8 +16,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.6"
-          memory: "100MB"
+          cpus: "0.55"
+          memory: "135MB"
   
   api2:
     <<: *api1
@@ -40,7 +40,7 @@ services:
       resources:
         limits:
           cpus: "0.2"
-          memory: "100MB"
+          memory: "60MB"
   
   nginx:
     image: nginx
@@ -56,8 +56,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.10"
-          memory: "50MB"
+          cpus: "0.20"
+          memory: "20MB"
 
 networks:
   backend:

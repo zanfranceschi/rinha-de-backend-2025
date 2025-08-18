@@ -1,6 +1,13 @@
 # mpedroni-go
 
-Versão inicial, focada apenas em criar uma implementação minimamente satisfatória, elegível para participar do desafio. A ideia é que essa implementação sirva como base para evoluções futuras, tanto em termos de performance quanto de resiliência e consistência de dados.
+## Changelog
+
+- v1.1.0
+  - Fix no endpoint payments summary (aceitar query params vazios)
+  - Redistribuição de memória entre os containers
+  - Usando volume `tmpfs` para o banco de dados
+- v1.0.0
+  - Versão inicial, focada apenas em criar uma implementação minimamente satisfatória, elegível para participar do desafio. A ideia é que essa implementação sirva como base para evoluções futuras, tanto em termos de performance quanto de resiliência e consistência de dados.
 
 ## Abordagem para processamento dos pagamentos
 

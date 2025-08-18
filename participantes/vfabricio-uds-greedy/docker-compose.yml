@@ -1,0 +1,114 @@
+services:
+  load-balancer:
+    image: fabriciojuliatto/rinha_2025-load-balancer:v.0.3.0
+    container_name: load-balancer
+    ports:
+      - "9999:9999"
+    environment:
+      - LB_LISTEN_ADDRESS=0.0.0.0:9999
+      - LB_UPSTREAM_ADDRESSES=/tmp/sockets/gateway-1,/tmp/sockets/gateway-2
+      - LB_CONNECTIONS_PER_UPSTREAM=1000
+      - LB_UPSTREAM_CONNECTION_TIMEOUT_MILLIS=50000
+    volumes:
+      - sockets:/tmp/sockets
+    depends_on:
+      - gateway-1
+      - gateway-2
+    ulimits:
+      nofile:
+        soft: 65535
+        hard: 65535
+    deploy:
+      resources:
+        limits:
+          cpus: '0.2'
+          memory: 140M
+
+  gateway-1: &gateway
+    image: fabriciojuliatto/rinha_2025-gateway:v.0.3.0
+    hostname: gateway-1
+    environment: &gateway-environment
+      - GATEWAY_LISTEN_ADDRESS=/tmp/sockets/gateway-1
+      - GATEWAY_QUEUE_URL=/tmp/sockets/queue
+      - GATEWAY_QUEUE_CONNECTION_POOL_SIZE=1000
+      - GATEWAY_RESULT_DIRECTORY=/data/results
+    volumes:
+      - payment-results:/data/results
+      - sockets:/tmp/sockets
+    depends_on:
+      - queue
+    ulimits:
+      nofile:
+        soft: 65535
+        hard: 65535
+    deploy:
+      resources:
+        limits:
+          cpus: '0.1'
+          memory: 60M
+
+  gateway-2:
+    <<: *gateway
+    hostname: gateway-2
+    environment:
+      - GATEWAY_LISTEN_ADDRESS=/tmp/sockets/gateway-2
+      - GATEWAY_QUEUE_URL=/tmp/sockets/queue
+      - GATEWAY_QUEUE_CONNECTION_POOL_SIZE=400
+      - GATEWAY_RESULT_DIRECTORY=/data/results
+
+  worker:
+    image: fabriciojuliatto/rinha_2025-worker:v.0.3.0
+    container_name: worker
+    environment:
+      - WORKER_QUEUE_URL=/tmp/sockets/queue
+      - WORKER_DEFAULT_PROVIDER_URL=http://payment-processor-default:8080
+      - WORKER_FALLBACK_PROVIDER_URL=http://payment-processor-fallback:8080
+      - WORKER_STRATEGY=quick
+      - WORKER_WORKER_COUNT=100
+      - WORKER_PROVIDER_TIMEOUT_MS=5000
+      - WORKER_RESULT_DIRECTORY=/data/results
+      - WORKER_HEALTH_CHECK_INTERVAL_MS=5500
+      - WORKER_FAILURE_SLEEP_MS=100
+    volumes:
+      - payment-results:/data/results
+      - sockets:/tmp/sockets
+    networks:
+      - payment-processor
+    depends_on:
+      - queue
+    deploy:
+      resources:
+        limits:
+          cpus: '0.7'
+          memory: 65M
+
+  queue:
+    image: fabriciojuliatto/rinha_2025-queue:v.0.3.0
+    container_name: queue
+    environment:
+      - QUEUE_LISTEN_ADDRESS=/tmp/sockets/queue
+      - QUEUE_SNAPSHOT_FREQUENCY_SECONDS=5
+    volumes:
+      - queue-data:/data
+      - sockets:/tmp/sockets
+    ulimits:
+      nofile:
+        soft: 65535
+        hard: 65535
+    deploy:
+      resources:
+        limits:
+          cpus: '0.4'
+          memory: 25M
+
+
+networks:
+  internal-network:
+    driver: bridge
+  payment-processor:
+    external: true
+
+volumes:
+  payment-results:
+  queue-data:
+  sockets:

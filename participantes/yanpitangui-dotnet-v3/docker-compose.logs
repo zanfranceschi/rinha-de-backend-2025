@@ -1,0 +1,263 @@
+
+ Network yanpitangui-dotnet-v3_backend  Creating
+ Network yanpitangui-dotnet-v3_backend  Created
+ Volume "yanpitangui-dotnet-v3_postgres-socket"  Creating
+ Volume "yanpitangui-dotnet-v3_postgres-socket"  Created
+ Volume "yanpitangui-dotnet-v3_uds-sockets"  Creating
+ Volume "yanpitangui-dotnet-v3_uds-sockets"  Created
+ Container yanpitangui-dotnet-v3-rinha-db-1  Creating
+ Container yanpitangui-dotnet-v3-nats-1  Creating
+ Container yanpitangui-dotnet-v3-nats-1  Created
+ Container yanpitangui-dotnet-v3-rinha-db-1  Created
+ Container yanpitangui-dotnet-v3-worker-1  Creating
+ Container backend-1  Creating
+ Container backend-2  Creating
+ Container backend-2  Created
+ Container yanpitangui-dotnet-v3-worker-1  Created
+ Container backend-1  Created
+ Container yanpitangui-dotnet-v3-nginx-1  Creating
+ Container yanpitangui-dotnet-v3-nginx-1  Created
+Attaching to backend-1, backend-2, nats-1, nginx-1, rinha-db-1, worker-1
+nats-1  | [1] 2025/08/16 15:16:53.731855 [INF] Starting nats-server
+nats-1  | [1] 2025/08/16 15:16:53.731921 [INF]   Version:  2.11.7
+nats-1  | [1] 2025/08/16 15:16:53.731924 [INF]   Git:      [df44964]
+nats-1  | [1] 2025/08/16 15:16:53.731927 [INF]   Cluster:  my_cluster
+nats-1  | [1] 2025/08/16 15:16:53.732162 [INF]   Name:     NDNHKTVQDLD6MCKW6XMVGUH2SJEAUJ4FRNHWDZFNE3QM6U2UKLOEQGNN
+nats-1  | [1] 2025/08/16 15:16:53.732182 [INF]   ID:       NDNHKTVQDLD6MCKW6XMVGUH2SJEAUJ4FRNHWDZFNE3QM6U2UKLOEQGNN
+nats-1  | [1] 2025/08/16 15:16:53.732200 [INF] Using configuration file: /etc/nats/nats-server.conf (sha256:c7aaa34d64beb74e7c700fd3504b40b01deb1275f6567fb81ed3809ff03a5fe4)
+nats-1  | [1] 2025/08/16 15:16:53.808027 [INF] Starting http monitor on 0.0.0.0:8222
+nats-1  | [1] 2025/08/16 15:16:53.808264 [INF] Listening for client connections on 0.0.0.0:4222
+nats-1  | [1] 2025/08/16 15:16:53.808572 [INF] Server is ready
+nats-1  | [1] 2025/08/16 15:16:53.808649 [INF] Cluster name is my_cluster
+nats-1  | [1] 2025/08/16 15:16:53.808692 [INF] Listening for route connections on 0.0.0.0:6222
+rinha-db-1  | The files belonging to this database system will be owned by user "postgres".
+rinha-db-1  | This user must also own the server process.
+rinha-db-1  | 
+rinha-db-1  | The database cluster will be initialized with locale "en_US.utf8".
+rinha-db-1  | The default database encoding has accordingly been set to "UTF8".
+rinha-db-1  | The default text search configuration will be set to "english".
+rinha-db-1  | 
+rinha-db-1  | Data page checksums are disabled.
+rinha-db-1  | 
+rinha-db-1  | fixing permissions on existing directory /var/lib/postgresql/data ... ok
+rinha-db-1  | creating subdirectories ... ok
+rinha-db-1  | selecting dynamic shared memory implementation ... posix
+rinha-db-1  | selecting default "max_connections" ... 100
+rinha-db-1  | selecting default "shared_buffers" ... 128MB
+rinha-db-1  | selecting default time zone ... Etc/UTC
+rinha-db-1  | creating configuration files ... ok
+rinha-db-1  | running bootstrap script ... ok
+rinha-db-1  | performing post-bootstrap initialization ... ok
+rinha-db-1  | initdb: warning: enabling "trust" authentication for local connections
+rinha-db-1  | initdb: hint: You can change this by editing pg_hba.conf or using the option -A, or --auth-local and --auth-host, the next time you run initdb.
+rinha-db-1  | syncing data to disk ... ok
+rinha-db-1  | 
+rinha-db-1  | 
+rinha-db-1  | Success. You can now start the database server using:
+rinha-db-1  | 
+rinha-db-1  |     pg_ctl -D /var/lib/postgresql/data -l logfile start
+rinha-db-1  | 
+rinha-db-1  | waiting for server to start....2025-08-16 15:17:03.851 UTC [55] LOG:  starting PostgreSQL 17.5 (Debian 17.5-1.pgdg130+1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 14.2.0-19) 14.2.0, 64-bit
+rinha-db-1  | 2025-08-16 15:17:03.854 UTC [55] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+rinha-db-1  | 2025-08-16 15:17:03.944 UTC [58] LOG:  database system was shut down at 2025-08-16 15:17:03 UTC
+rinha-db-1  | 2025-08-16 15:17:03.951 UTC [55] LOG:  database system is ready to accept connections
+rinha-db-1  |  done
+rinha-db-1  | server started
+rinha-db-1  | 2025-08-16 15:17:05.344 UTC [75] FATAL:  database "rinha" does not exist
+rinha-db-1  | CREATE DATABASE
+rinha-db-1  | 
+rinha-db-1  | 
+rinha-db-1  | /usr/local/bin/docker-entrypoint.sh: running /docker-entrypoint-initdb.d/init.sql
+backend-1   | backend-1
+backend-2   | backend-2
+nginx-1     | /docker-entrypoint.sh: /docker-entrypoint.d/ is not empty, will attempt to perform configuration
+nginx-1     | /docker-entrypoint.sh: Looking for shell scripts in /docker-entrypoint.d/
+nginx-1     | /docker-entrypoint.sh: Launching /docker-entrypoint.d/10-listen-on-ipv6-by-default.sh
+nginx-1     | 10-listen-on-ipv6-by-default.sh: info: Getting the checksum of /etc/nginx/conf.d/default.conf
+nginx-1     | 10-listen-on-ipv6-by-default.sh: info: Enabled listen on IPv6 in /etc/nginx/conf.d/default.conf
+nginx-1     | /docker-entrypoint.sh: Sourcing /docker-entrypoint.d/15-local-resolvers.envsh
+nginx-1     | /docker-entrypoint.sh: Launching /docker-entrypoint.d/20-envsubst-on-templates.sh
+nginx-1     | /docker-entrypoint.sh: Launching /docker-entrypoint.d/30-tune-worker-processes.sh
+nginx-1     | /docker-entrypoint.sh: Configuration complete; ready for start up
+rinha-db-1  | CREATE TABLE
+worker-1    | PoolConfig { RouterPoolSize = 3 }
+worker-1    | PipelineConfig { HandlePaymentParallelism = 20, PersistPaymentsParallelism = 10, GroupSize = 100, Timeout = 10 }
+backend-1   | warn: Microsoft.AspNetCore.Server.Kestrel[0]
+backend-1   |       Overriding address(es) 'http://*:8080'. Binding to endpoints defined via IConfiguration and/or UseKestrel() instead.
+backend-1   | info: Microsoft.Hosting.Lifetime[14]
+backend-1   |       Now listening on: http://unix:/sockets/backend-1.sock
+backend-1   | info: Microsoft.Hosting.Lifetime[0]
+backend-1   |       Application started. Press Ctrl+C to shut down.
+backend-1   | info: Microsoft.Hosting.Lifetime[0]
+backend-1   |       Hosting environment: Production
+backend-1   | info: Microsoft.Hosting.Lifetime[0]
+backend-1   |       Content root path: /app
+rinha-db-1  | CREATE INDEX
+rinha-db-1  | 
+rinha-db-1  | 
+backend-2   | warn: Microsoft.AspNetCore.Server.Kestrel[0]
+backend-2   |       Overriding address(es) 'http://*:8080'. Binding to endpoints defined via IConfiguration and/or UseKestrel() instead.
+backend-2   | info: Microsoft.Hosting.Lifetime[14]
+backend-2   |       Now listening on: http://unix:/sockets/backend-2.sock
+backend-2   | info: Microsoft.Hosting.Lifetime[0]
+backend-2   |       Application started. Press Ctrl+C to shut down.
+backend-2   | info: Microsoft.Hosting.Lifetime[0]
+backend-2   |       Hosting environment: Production
+backend-2   | info: Microsoft.Hosting.Lifetime[0]
+backend-2   |       Content root path: /app
+rinha-db-1  | waiting for server to shut down...2025-08-16 15:17:07.145 UTC [55] LOG:  received fast shutdown request
+rinha-db-1  | .2025-08-16 15:17:07.149 UTC [55] LOG:  aborting any active transactions
+rinha-db-1  | 2025-08-16 15:17:07.150 UTC [86] FATAL:  terminating connection due to administrator command
+rinha-db-1  | 2025-08-16 15:17:07.150 UTC [87] FATAL:  terminating connection due to administrator command
+rinha-db-1  | 2025-08-16 15:17:07.151 UTC [85] FATAL:  terminating connection due to administrator command
+rinha-db-1  | 2025-08-16 15:17:07.244 UTC [55] LOG:  background worker "logical replication launcher" (PID 61) exited with exit code 1
+rinha-db-1  | 2025-08-16 15:17:07.244 UTC [82] FATAL:  terminating connection due to administrator command
+rinha-db-1  | 2025-08-16 15:17:07.244 UTC [83] FATAL:  terminating connection due to administrator command
+rinha-db-1  | 2025-08-16 15:17:07.244 UTC [84] FATAL:  terminating connection due to administrator command
+rinha-db-1  | 2025-08-16 15:17:07.244 UTC [79] FATAL:  terminating connection due to administrator command
+rinha-db-1  | 2025-08-16 15:17:07.244 UTC [81] FATAL:  terminating connection due to administrator command
+rinha-db-1  | 2025-08-16 15:17:07.249 UTC [78] FATAL:  terminating connection due to administrator command
+rinha-db-1  | 2025-08-16 15:17:07.344 UTC [80] FATAL:  terminating connection due to administrator command
+rinha-db-1  | 2025-08-16 15:17:07.446 UTC [56] LOG:  shutting down
+rinha-db-1  | 2025-08-16 15:17:07.449 UTC [56] LOG:  checkpoint starting: shutdown immediate
+rinha-db-1  | 2025-08-16 15:17:07.681 UTC [56] LOG:  checkpoint complete: wrote 927 buffers (5.7%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.198 s, sync=0.026 s, total=0.236 s; sync files=311, longest=0.004 s, average=0.001 s; distance=4278 kB, estimate=4278 kB; lsn=0/191AF78, redo lsn=0/191AF78
+rinha-db-1  | 2025-08-16 15:17:07.747 UTC [55] LOG:  database system is shut down
+rinha-db-1  |  done
+rinha-db-1  | server stopped
+rinha-db-1  | 
+rinha-db-1  | PostgreSQL init process complete; ready for start up.
+rinha-db-1  | 
+backend-1   | fail: Microsoft.AspNetCore.Server.Kestrel[13]
+backend-1   |       Connection id "0HNESQVRHU01U", Request id "0HNESQVRHU01U:00000001": An unhandled exception was thrown by the application.
+backend-1   |       Npgsql.NpgsqlException (0x80004005): Exception while writing to stream
+backend-1   |        ---> System.IO.IOException: Unable to write data to the transport connection: Broken pipe.
+backend-1   |        ---> System.Net.Sockets.SocketException (32): Broken pipe
+backend-1   |          at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.CreateException(SocketError, Boolean) + 0x7e
+backend-1   |          at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.SendAsyncForNetworkStream(Socket, CancellationToken) + 0xc1
+backend-1   |          at System.Net.Sockets.NetworkStream.WriteAsync(Byte[], Int32, Int32, CancellationToken) + 0xd3
+backend-1   |          at Npgsql.Internal.NpgsqlWriteBuffer.<Flush>d__38.MoveNext() + 0x20f
+backend-1   |          at System.Runtime.CompilerServices.AsyncMethodBuilderCore.Start[TStateMachine](TStateMachine&) + 0x60
+backend-1   |          at Npgsql.MultiplexingDataSource.<MultiplexingWriteLoop>g__Flush|11_1(NpgsqlConnector, MultiplexingDataSource.MultiplexingStats&) + 0x5a
+backend-1   |          at Npgsql.MultiplexingDataSource.<MultiplexingWriteLoop>d__11.MoveNext() + 0x96a
+backend-1   |          at System.Threading.ExecutionContext.RunInternal(ExecutionContext, ContextCallback, Object) + 0xab
+backend-1   |          at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext(Thread) + 0xd4
+backend-1   |          at System.Threading.ThreadPoolWorkQueue.Dispatch() + 0x339
+backend-1   |          at System.Threading.PortableThreadPool.WorkerThread.WorkerThreadStart() + 0x158
+backend-1   |          at System.Threading.Thread.StartThread(IntPtr) + 0x138
+backend-1   |          at System.Threading.Thread.ThreadEntryPoint(IntPtr) + 0x19
+backend-1   |       --- End of stack trace from previous location ---
+backend-1   |       
+backend-1   |          --- End of inner exception stack trace ---
+backend-1   |          at Npgsql.Internal.NpgsqlWriteBuffer.<Flush>d__38.MoveNext() + 0x23b
+backend-1   |          at Npgsql.Internal.NpgsqlWriteBuffer.<Flush>d__38.MoveNext() + 0x634
+backend-1   |       --- End of stack trace from previous location ---
+backend-1   |          at Npgsql.MultiplexingDataSource.<MultiplexingWriteLoop>g__Flush|11_1(NpgsqlConnector, MultiplexingDataSource.MultiplexingStats&) + 0xc2
+backend-1   |          at Npgsql.MultiplexingDataSource.<MultiplexingWriteLoop>d__11.MoveNext() + 0x96a
+backend-1   |       --- End of stack trace from previous location ---
+backend-1   |          at Npgsql.Util.ManualResetValueTaskSource`1.GetResult(Int16) + 0x51
+backend-1   |          at Npgsql.NpgsqlCommand.<ExecuteReader>d__120.MoveNext() + 0xfce
+backend-1   |       --- End of stack trace from previous location ---
+backend-1   |          at Npgsql.NpgsqlCommand.<ExecuteReader>d__120.MoveNext() + 0x1120
+backend-1   |       --- End of stack trace from previous location ---
+backend-1   |          at Npgsql.NpgsqlCommand.<ExecuteDbDataReaderAsync>d__113.MoveNext() + 0x196
+backend-1   |       --- End of stack trace from previous location ---
+backend-1   |          at Dapper.Internal.AsyncQueryState.<ExecuteReaderAsync>d__8.MoveNext() + 0x1ce
+backend-1   |       --- End of stack trace from previous location ---
+backend-1   |          at Dapper.Command`1.<QueryBufferedAsync>d__63`1.MoveNext() + 0x67d
+backend-1   |       --- End of stack trace from previous location ---
+backend-1   |          at Dapper.Command`1.<QueryBufferedAsync>d__63`1.MoveNext() + 0xc45
+backend-1   |       --- End of stack trace from previous location ---
+backend-1   |          at Dapper.DapperAotExtensions.<AsEnumerableAsync>d__1`1.MoveNext() + 0xcc
+backend-1   |       --- End of stack trace from previous location ---
+backend-1   |          at Program.<>c__DisplayClass0_0.<<<Main>$>b__4>d.MoveNext() + 0x5df
+backend-1   |       --- End of stack trace from previous location ---
+backend-1   |          at Program.<>c__DisplayClass0_0.<<<Main>$>b__4>d.MoveNext() + 0x7d9
+backend-1   |       --- End of stack trace from previous location ---
+backend-1   |          at Microsoft.AspNetCore.Http.Generated.<GeneratedRouteBuilderExtensions_g>F2FD64621DE9B38A95E02F9C6F26DFA976C77F5CCC12E253DA4440C96956CA890__GeneratedRouteBuilderExtensionsCore.<>c__DisplayClass3_0.<<MapGet0>g__RequestHandler|5>d.MoveNext() + 0x653
+backend-1   |       --- End of stack trace from previous location ---
+backend-1   |          at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.<ProcessRequests>d__238`1.MoveNext() + 0x4cd
+rinha-db-1  | 2025-08-16 15:17:07.961 UTC [1] LOG:  starting PostgreSQL 17.5 (Debian 17.5-1.pgdg130+1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 14.2.0-19) 14.2.0, 64-bit
+rinha-db-1  | 2025-08-16 15:17:07.961 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+rinha-db-1  | 2025-08-16 15:17:07.961 UTC [1] LOG:  listening on IPv6 address "::", port 5432
+rinha-db-1  | 2025-08-16 15:17:08.050 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+rinha-db-1  | 2025-08-16 15:17:08.059 UTC [92] LOG:  database system was shut down at 2025-08-16 15:17:07 UTC
+rinha-db-1  | 2025-08-16 15:17:08.067 UTC [1] LOG:  database system is ready to accept connections
+backend-2   | fail: Microsoft.AspNetCore.Server.Kestrel[13]
+backend-2   |       Connection id "0HNESQVT1TDLF", Request id "0HNESQVT1TDLF:00000001": An unhandled exception was thrown by the application.
+backend-2   |       Npgsql.NpgsqlException (0x80004005): Exception while writing to stream
+backend-2   |        ---> System.IO.IOException: Unable to write data to the transport connection: Broken pipe.
+backend-2   |        ---> System.Net.Sockets.SocketException (32): Broken pipe
+backend-2   |          at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.CreateException(SocketError, Boolean) + 0x7e
+backend-2   |          at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.SendAsyncForNetworkStream(Socket, CancellationToken) + 0xc1
+backend-2   |          at System.Net.Sockets.NetworkStream.WriteAsync(Byte[], Int32, Int32, CancellationToken) + 0xd3
+backend-2   |          at Npgsql.Internal.NpgsqlWriteBuffer.<Flush>d__38.MoveNext() + 0x20f
+backend-2   |          at System.Runtime.CompilerServices.AsyncMethodBuilderCore.Start[TStateMachine](TStateMachine&) + 0x60
+backend-2   |          at Npgsql.MultiplexingDataSource.<MultiplexingWriteLoop>g__Flush|11_1(NpgsqlConnector, MultiplexingDataSource.MultiplexingStats&) + 0x5a
+backend-2   |          at Npgsql.MultiplexingDataSource.<MultiplexingWriteLoop>d__11.MoveNext() + 0x96a
+backend-2   |          at System.Threading.ExecutionContext.RunInternal(ExecutionContext, ContextCallback, Object) + 0xab
+backend-2   |          at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext(Thread) + 0xd4
+backend-2   |          at System.Threading.ThreadPoolWorkQueue.Dispatch() + 0x339
+backend-2   |          at System.Threading.PortableThreadPool.WorkerThread.WorkerThreadStart() + 0x158
+backend-2   |          at System.Threading.Thread.StartThread(IntPtr) + 0x138
+backend-2   |          at System.Threading.Thread.ThreadEntryPoint(IntPtr) + 0x19
+backend-2   |       --- End of stack trace from previous location ---
+backend-2   |       
+backend-2   |          --- End of inner exception stack trace ---
+backend-2   |          at Npgsql.Internal.NpgsqlWriteBuffer.<Flush>d__38.MoveNext() + 0x23b
+backend-2   |          at Npgsql.Internal.NpgsqlWriteBuffer.<Flush>d__38.MoveNext() + 0x634
+backend-2   |       --- End of stack trace from previous location ---
+backend-2   |          at Npgsql.MultiplexingDataSource.<MultiplexingWriteLoop>g__Flush|11_1(NpgsqlConnector, MultiplexingDataSource.MultiplexingStats&) + 0xc2
+backend-2   |          at Npgsql.MultiplexingDataSource.<MultiplexingWriteLoop>d__11.MoveNext() + 0x96a
+backend-2   |       --- End of stack trace from previous location ---
+backend-2   |          at Npgsql.Util.ManualResetValueTaskSource`1.GetResult(Int16) + 0x51
+backend-2   |          at Npgsql.NpgsqlCommand.<ExecuteReader>d__120.MoveNext() + 0xfce
+backend-2   |       --- End of stack trace from previous location ---
+backend-2   |          at Npgsql.NpgsqlCommand.<ExecuteReader>d__120.MoveNext() + 0x1120
+backend-2   |       --- End of stack trace from previous location ---
+backend-2   |          at Npgsql.NpgsqlCommand.<ExecuteDbDataReaderAsync>d__113.MoveNext() + 0x196
+backend-2   |       --- End of stack trace from previous location ---
+backend-2   |          at Dapper.Internal.AsyncQueryState.<ExecuteReaderAsync>d__8.MoveNext() + 0x1ce
+backend-2   |       --- End of stack trace from previous location ---
+backend-2   |          at Dapper.Command`1.<QueryBufferedAsync>d__63`1.MoveNext() + 0x67d
+backend-2   |       --- End of stack trace from previous location ---
+backend-2   |          at Dapper.Command`1.<QueryBufferedAsync>d__63`1.MoveNext() + 0xc45
+backend-2   |       --- End of stack trace from previous location ---
+backend-2   |          at Dapper.DapperAotExtensions.<AsEnumerableAsync>d__1`1.MoveNext() + 0xcc
+backend-2   |       --- End of stack trace from previous location ---
+backend-2   |          at Program.<>c__DisplayClass0_0.<<<Main>$>b__4>d.MoveNext() + 0x5df
+backend-2   |       --- End of stack trace from previous location ---
+backend-2   |          at Program.<>c__DisplayClass0_0.<<<Main>$>b__4>d.MoveNext() + 0x7d9
+backend-2   |       --- End of stack trace from previous location ---
+backend-2   |          at Microsoft.AspNetCore.Http.Generated.<GeneratedRouteBuilderExtensions_g>F2FD64621DE9B38A95E02F9C6F26DFA976C77F5CCC12E253DA4440C96956CA890__GeneratedRouteBuilderExtensionsCore.<>c__DisplayClass3_0.<<MapGet0>g__RequestHandler|5>d.MoveNext() + 0x653
+backend-2   |       --- End of stack trace from previous location ---
+backend-2   |          at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.<ProcessRequests>d__238`1.MoveNext() + 0x4cd
+worker-1    | [INFO][08/16/2025 15:17:35.318Z][Thread 0008][akka://Rinha/user/rinha/$d] Message [HealthUpdate] from [akka://Rinha/user/$a#903077687] to [akka://Rinha/user/rinha/$d#1301321929] was not delivered. [1] dead letters encountered. If this is not an expected behavior then [akka://Rinha/user/rinha/$d#1301321929] may have terminated unexpectedly. This logging can be turned off or adjusted with configuration settings 'akka.log-dead-letters' and 'akka.log-dead-letters-during-shutdown'. Message content: HealthUpdate { Default = ServiceHealth { Failing = False, MinResponseTime = 100 }, Fallback = ServiceHealth { Failing = False, MinResponseTime = 0 } }
+worker-1    | [INFO][08/16/2025 15:17:35.318Z][Thread 0008][akka://Rinha/user/rinha/$e] Message [HealthUpdate] from [akka://Rinha/user/$a#903077687] to [akka://Rinha/user/rinha/$e#275738101] was not delivered. [2] dead letters encountered. If this is not an expected behavior then [akka://Rinha/user/rinha/$e#275738101] may have terminated unexpectedly. This logging can be turned off or adjusted with configuration settings 'akka.log-dead-letters' and 'akka.log-dead-letters-during-shutdown'. Message content: HealthUpdate { Default = ServiceHealth { Failing = False, MinResponseTime = 100 }, Fallback = ServiceHealth { Failing = False, MinResponseTime = 0 } }
+worker-1    | [INFO][08/16/2025 15:17:35.318Z][Thread 0008][akka://Rinha/user/rinha/$f] Message [HealthUpdate] from [akka://Rinha/user/$a#903077687] to [akka://Rinha/user/rinha/$f#1999952483] was not delivered. [3] dead letters encountered. If this is not an expected behavior then [akka://Rinha/user/rinha/$f#1999952483] may have terminated unexpectedly. This logging can be turned off or adjusted with configuration settings 'akka.log-dead-letters' and 'akka.log-dead-letters-during-shutdown'. Message content: HealthUpdate { Default = ServiceHealth { Failing = False, MinResponseTime = 100 }, Fallback = ServiceHealth { Failing = False, MinResponseTime = 0 } }
+worker-1    | [INFO][08/16/2025 15:17:35.318Z][Thread 0008][akka://Rinha/user/rinha/$g] Message [HealthUpdate] from [akka://Rinha/user/$a#903077687] to [akka://Rinha/user/rinha/$g#1122534314] was not delivered. [4] dead letters encountered. If this is not an expected behavior then [akka://Rinha/user/rinha/$g#1122534314] may have terminated unexpectedly. This logging can be turned off or adjusted with configuration settings 'akka.log-dead-letters' and 'akka.log-dead-letters-during-shutdown'. Message content: HealthUpdate { Default = ServiceHealth { Failing = False, MinResponseTime = 100 }, Fallback = ServiceHealth { Failing = False, MinResponseTime = 0 } }
+worker-1    | [INFO][08/16/2025 15:17:40.415Z][Thread 0012][akka://Rinha/user/rinha/$d] Message [HealthUpdate] from [akka://Rinha/user/$a#903077687] to [akka://Rinha/user/rinha/$d#1301321929] was not delivered. [5] dead letters encountered. If this is not an expected behavior then [akka://Rinha/user/rinha/$d#1301321929] may have terminated unexpectedly. This logging can be turned off or adjusted with configuration settings 'akka.log-dead-letters' and 'akka.log-dead-letters-during-shutdown'. Message content: HealthUpdate { Default = ServiceHealth { Failing = False, MinResponseTime = 100 }, Fallback = ServiceHealth { Failing = False, MinResponseTime = 0 } }
+worker-1    | [INFO][08/16/2025 15:17:40.415Z][Thread 0012][akka://Rinha/user/rinha/$e] Message [HealthUpdate] from [akka://Rinha/user/$a#903077687] to [akka://Rinha/user/rinha/$e#275738101] was not delivered. [6] dead letters encountered. If this is not an expected behavior then [akka://Rinha/user/rinha/$e#275738101] may have terminated unexpectedly. This logging can be turned off or adjusted with configuration settings 'akka.log-dead-letters' and 'akka.log-dead-letters-during-shutdown'. Message content: HealthUpdate { Default = ServiceHealth { Failing = False, MinResponseTime = 100 }, Fallback = ServiceHealth { Failing = False, MinResponseTime = 0 } }
+worker-1    | [INFO][08/16/2025 15:17:40.415Z][Thread 0012][akka://Rinha/user/rinha/$f] Message [HealthUpdate] from [akka://Rinha/user/$a#903077687] to [akka://Rinha/user/rinha/$f#1999952483] was not delivered. [7] dead letters encountered. If this is not an expected behavior then [akka://Rinha/user/rinha/$f#1999952483] may have terminated unexpectedly. This logging can be turned off or adjusted with configuration settings 'akka.log-dead-letters' and 'akka.log-dead-letters-during-shutdown'. Message content: HealthUpdate { Default = ServiceHealth { Failing = False, MinResponseTime = 100 }, Fallback = ServiceHealth { Failing = False, MinResponseTime = 0 } }
+worker-1    | [INFO][08/16/2025 15:17:40.415Z][Thread 0012][akka://Rinha/user/rinha/$g] Message [HealthUpdate] from [akka://Rinha/user/$a#903077687] to [akka://Rinha/user/rinha/$g#1122534314] was not delivered. [8] dead letters encountered. If this is not an expected behavior then [akka://Rinha/user/rinha/$g#1122534314] may have terminated unexpectedly. This logging can be turned off or adjusted with configuration settings 'akka.log-dead-letters' and 'akka.log-dead-letters-during-shutdown'. Message content: HealthUpdate { Default = ServiceHealth { Failing = False, MinResponseTime = 100 }, Fallback = ServiceHealth { Failing = False, MinResponseTime = 0 } }
+worker-1    | [INFO][08/16/2025 15:17:40.415Z][Thread 0012][akka://Rinha/user/rinha/$h] Message [HealthUpdate] from [akka://Rinha/user/$a#903077687] to [akka://Rinha/user/rinha/$h#589054852] was not delivered. [9] dead letters encountered. If this is not an expected behavior then [akka://Rinha/user/rinha/$h#589054852] may have terminated unexpectedly. This logging can be turned off or adjusted with configuration settings 'akka.log-dead-letters' and 'akka.log-dead-letters-during-shutdown'. Message content: HealthUpdate { Default = ServiceHealth { Failing = False, MinResponseTime = 100 }, Fallback = ServiceHealth { Failing = False, MinResponseTime = 0 } }
+worker-1    | [INFO][08/16/2025 15:17:40.417Z][Thread 0012][akka://Rinha/user/rinha/$i] Message [HealthUpdate] from [akka://Rinha/user/$a#903077687] to [akka://Rinha/user/rinha/$i#2046384323] was not delivered. [10] dead letters encountered, no more dead letters will be logged in next [00:05:00]. If this is not an expected behavior then [akka://Rinha/user/rinha/$i#2046384323] may have terminated unexpectedly. This logging can be turned off or adjusted with configuration settings 'akka.log-dead-letters' and 'akka.log-dead-letters-during-shutdown'. Message content: HealthUpdate { Default = ServiceHealth { Failing = False, MinResponseTime = 100 }, Fallback = ServiceHealth { Failing = False, MinResponseTime = 0 } }
+[Knginx-1 exited with code 0
+backend-1   | info: Microsoft.Hosting.Lifetime[0]
+backend-1   |       Application is shutting down...
+backend-2   | info: Microsoft.Hosting.Lifetime[0]
+backend-2   |       Application is shutting down...
+[Kworker-1 exited with code 0
+[Kbackend-2 exited with code 0
+[Kbackend-1 exited with code 0
+rinha-db-1  | 2025-08-16 15:18:25.259 UTC [1] LOG:  received fast shutdown request
+nats-1      | [1] 2025/08/16 15:18:25.259064 [INF] Trapped "terminated" signal
+nats-1      | [1] 2025/08/16 15:18:25.262081 [INF] Initiating Shutdown...
+nats-1      | [1] 2025/08/16 15:18:25.262256 [INF] Server Exiting..
+rinha-db-1  | 2025-08-16 15:18:25.262 UTC [1] LOG:  aborting any active transactions
+rinha-db-1  | 2025-08-16 15:18:25.344 UTC [1] LOG:  background worker "logical replication launcher" (PID 95) exited with exit code 1
+rinha-db-1  | 2025-08-16 15:18:25.344 UTC [90] LOG:  shutting down
+rinha-db-1  | 2025-08-16 15:18:25.347 UTC [90] LOG:  checkpoint starting: shutdown immediate
+rinha-db-1  | 2025-08-16 15:18:25.375 UTC [90] LOG:  checkpoint complete: wrote 324 buffers (2.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.012 s, sync=0.005 s, total=0.032 s; sync files=31, longest=0.003 s, average=0.001 s; distance=176 kB, estimate=176 kB; lsn=0/19470A0, redo lsn=0/19470A0
+[Knats-1 exited with code 0
+rinha-db-1  | 2025-08-16 15:18:25.446 UTC [1] LOG:  database system is shut down
+log truncated at line 1000

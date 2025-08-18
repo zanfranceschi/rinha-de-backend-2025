@@ -1,0 +1,92 @@
+x-service-templates:
+  payment-gateway: &payment-gateway
+    image: docker.io/phaalonso/rinha-backend-2025-java:0.0.6
+    hostname: api01
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - backend
+      - payment-processor
+    environment:
+      JAVA_OPTS: >-
+        -XX:+UseZGC
+        -Djdk.tracePinnedThreads=full
+      MAX_PAYMENTS_THREADS: 100
+      "server.undertow.threads.io": 1
+      "server.undertow.threads.worker": 8
+      "pagamento.processor.default.url": http://payment-processor-default:8080
+      "pagamento.processor.fallback.url": http://payment-processor-fallback:8080
+      "spring.datasource.url": jdbc:postgresql://db:5432/rinha
+      "spring.datasource.username": postgres
+      "spring.datasource.password": postgres
+      "spring.datasource.hikari.minimum-idle": 5
+      "spring.datasource.hikari.maximum-pool-size": 10
+      "spring.datasource.hikari.idle-timeout": 5000
+      "spring.datasource.hikari.connection-timeout": 1000
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: "100MB"
+services:
+  api01:
+    <<: *payment-gateway
+    container_name: api01
+    hostname: api01
+    ports:
+      - "8080:8080"
+  api02:
+    <<: *payment-gateway
+    container_name: api02
+    hostname: api02
+    ports:
+      - "8081:8080"
+  db:
+    container_name: db
+    hostname: db
+    image: postgres:17-alpine
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/script.sql:ro
+    #      - ./postgres.conf:/docker-entrypoint-initdb.d/postgresql.conf
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=rinha
+    networks:
+      - backend
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready", "-q", "-d", "rinha", "-U", "postgres"]
+      interval: 3s
+      timeout: 3s
+      retries: 10
+    deploy:
+      resources:
+        limits:
+          cpus: "0.3"
+          memory: "100MB"
+  nginx:
+    image: nginx:alpine
+    container_name: rinha-router-nginx
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    ports:
+      - "9999:9999"
+    depends_on:
+      - api01
+      - api02
+    networks:
+      - backend
+    deploy:
+      resources:
+        limits:
+          cpus: "0.2"
+          memory: "50MB"
+
+networks:
+  backend:
+    driver: bridge
+  payment-processor:
+    external: true

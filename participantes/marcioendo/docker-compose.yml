@@ -1,0 +1,69 @@
+services:
+  pay:
+    image: ghcr.io/marcioendo/rinha2025-pay:v011
+    container_name: pay
+    hostname: pay
+    volumes:
+      - /tmp:/tmp
+    networks:
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          cpus: "0.6"
+          memory: "200MB"
+
+  back0:
+    image: ghcr.io/marcioendo/rinha2025-back:v011
+    command: ["0"]
+    container_name: back0
+    hostname: back0
+    volumes:
+      - /tmp:/tmp
+    depends_on:
+      - pay
+    deploy:
+      resources:
+        limits:
+          cpus: "0.3"
+          memory: "50MB"
+
+  back1:
+    image: ghcr.io/marcioendo/rinha2025-back:v011
+    command: ["1"]
+    container_name: back1
+    hostname: back1
+    volumes:
+      - /tmp:/tmp
+    depends_on:
+      - pay
+    deploy:
+      resources:
+        limits:
+          cpus: "0.3"
+          memory: "50MB"
+
+  front:
+    image: ghcr.io/marcioendo/rinha2025-front:v011
+    container_name: front
+    hostname: front
+    volumes:
+      - /tmp:/tmp
+    depends_on:
+      - back0
+      - back1
+    ports:
+      - "9999:9999"
+    networks:
+      - backend
+    deploy:
+      resources:
+        limits:
+          cpus: "0.3"
+          memory: "50MB"
+
+networks:
+  backend:
+    driver: bridge
+  payment-processor:
+    external: true

@@ -5,8 +5,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.5"
-          memory: 90M
+          cpus: "0.4"
+          memory: 70M
     image: nginx:stable-alpine
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf:ro
@@ -39,13 +39,13 @@ services:
       resources:
         limits:
           cpus: "0.4"
-          memory: 90M
-    image: daviddeltasierra/rinha-2025-go-2:1.28
+          memory: 70M
+    image: daviddeltasierra/rinha-2025-go-2:1.42
     volumes:
       - /tmp:/tmp
     environment:
       - SOCK=/tmp/unix-app1.sock
-      - WORKERS=2
+      - WORKERS=25
       - GOMAXPROCS=3
     depends_on:
       - postgres
@@ -58,13 +58,13 @@ services:
       resources:
         limits:
           cpus: "0.4"
-          memory: 90M
-    image: daviddeltasierra/rinha-2025-go-2:1.28
+          memory: 70M
+    image: daviddeltasierra/rinha-2025-go-2:1.42
     volumes:
       - /tmp:/tmp
     environment:
       - SOCK=/tmp/unix-app2.sock
-      - WORKERS=2
+      - WORKERS=25
       - GOMAXPROCS=3
     depends_on:
       - postgres
@@ -75,8 +75,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.2"
-          memory: 80M
+          cpus: "0.3"
+          memory: 140M
     image: postgres:alpine
     user: postgres
     volumes:

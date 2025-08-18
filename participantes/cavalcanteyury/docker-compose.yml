@@ -1,0 +1,90 @@
+version: '3.8'
+
+# CPU MAX: 1.5
+# MEM MAX: 350MB
+services:
+  # Firebrand itself
+  api01: &api
+    # Instructing docker to build the Ruby image using the Dockerfile in this project
+    image: yurypcf/rinha-de-backend-2025-ruby-firebrand
+    container_name: firebrand01
+    hostname: firebrand01
+    environment:
+    # Defines environment variable REDIS_URL used in Firebrand
+      REDIS_URL: redis://redis:6379/0
+      RUBY_YJIT_ENABLE: 1
+      PUMA_WORKERS: 1
+      PUMA_MIN_THREADS: 5
+      PUMA_MAX_THREADS: 10
+      THREAD_POOL_SIZE: 5
+    depends_on:
+    # Ensure that listed services starts before Firebrand
+      redis:
+        condition: service_started
+    networks:
+    # Connects app service to same network as Redis
+      - rinha_network
+      - payment-processor
+    # Resources definition
+    deploy:
+      resources:
+        limits:
+          cpus: "0.6"
+          memory: "145MB"
+
+  api02:
+    <<: *api
+    container_name: firebrand02
+    hostname: firebrand02
+    deploy:
+      resources:
+        limits:
+          cpus: "0.6"
+          memory: "145MB"
+
+  nginx:
+    image: nginx 
+    container_name: nginx
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    ports:
+      - 9999:9999
+    networks:
+      - rinha_network
+    depends_on:
+      - redis
+      - api01
+      - api02
+    deploy:
+      resources:
+        limits:
+          cpus: "0.1"
+          memory: "10MB"
+
+  # Redis service
+  redis:
+    image: redis:7-alpine
+    command: redis-server --save 60 1 --loglevel warning
+    volumes:
+      - redis_data:/data
+    ports:
+    # Optional: Maps Redis default Port to host. Useful for CLI access
+      - "6379:6379"
+    networks:
+    # Connects app service to same network as Redis
+      - rinha_network
+    deploy:
+      resources:
+        limits:
+          cpus: "0.2"
+          memory: "50MB"
+
+volumes:
+  redis_data:
+
+# Defining a shared network so the services may communicate with themselves
+networks:
+  rinha_network:
+    driver: bridge
+  payment-processor:
+    external: true

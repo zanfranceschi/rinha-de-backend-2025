@@ -1,0 +1,82 @@
+services:
+  haproxy:
+    image: haproxy:3.2.3-alpine
+    command: >
+      sh -c "
+      echo 'global
+        maxconn 20000
+      defaults
+        mode http
+        option http-keep-alive
+      frontend api_frontend
+        bind *:80
+        default_backend api_backend
+      backend api_backend
+        balance roundrobin
+        server backend1 /sockets/may.sock.1
+        server backend2 /sockets/may.sock.2' > /tmp/haproxy.cfg &&
+      haproxy -f /tmp/haproxy.cfg"
+    user: "0"
+    ports:
+      - "9999:80"
+    depends_on:
+      - backend1
+      - backend2
+    networks:
+      - backend
+    volumes:
+      - sockets:/sockets:rw
+    deploy:
+      resources:
+        limits:
+          memory: 50M
+          cpus: "0.3"
+
+  backend1:
+    image: not4rt/rinha-2025-fast:uring_v4.1
+    environment:
+      PEER1_SOCKET: /sockets/may.sock.2
+      SOCKET_PATH: /sockets/may.sock.1
+    security_opt: 
+          - seccomp=unconfined  # io_ring support
+    volumes:
+      - sockets:/sockets:rw
+    networks:
+      - backend
+      - payment-processor
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    deploy:
+      resources:
+        limits:
+          memory: 100M
+          cpus: "0.6"
+
+  backend2:
+    image: not4rt/rinha-2025-fast:uring_v4.1
+    environment:
+      PEER1_SOCKET: /sockets/may.sock.1
+      SOCKET_PATH: /sockets/may.sock.2
+    volumes:
+      - sockets:/sockets:rw
+    security_opt: 
+          - seccomp=unconfined  # io_ring support
+    networks:
+      - backend
+      - payment-processor
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    deploy:
+      resources:
+        limits:
+          memory: 100M
+          cpus: "0.6"
+
+volumes:
+  sockets:
+
+networks:
+  backend:
+    driver: bridge
+  payment-processor:
+    external: true

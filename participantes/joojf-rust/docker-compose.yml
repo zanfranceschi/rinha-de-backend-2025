@@ -1,0 +1,96 @@
+services:
+  app1:
+    # build: .
+    image: ghcr.io/joojf/rinha-de-backend:1.2.6
+    environment:
+      - BIND_ADDR=0.0.0.0:9999
+      - DEFAULT_URL=http://payment-processor-default:8080
+      - FALLBACK_URL=http://payment-processor-fallback:8080
+      - MEMSTORE_SOCKET=/shared/memstore.sock
+      - REQ_TIMEOUT_MS=50
+      - WORKERS=4
+      - PROC_CONCURRENCY=8
+      - RETRY_BACKOFF_MS=10
+      - CB_FAIL_THRESHOLD=2
+      - CB_OPEN_MS=500
+      - TIMEOUT_MARGIN_MS=2
+      - MAX_RETRIES=2
+      - TRACE_SLOW_MS=10
+    depends_on:
+      - memstore
+    networks:
+      - default
+      - payment-processor
+    volumes:
+      - shared-sock:/shared
+    deploy:
+      resources:
+        limits:
+          cpus: "0.65"
+          memory: "140MB"
+
+  app2:
+    # build: .
+    image: ghcr.io/joojf/rinha-de-backend:1.2.6
+    environment:
+      - BIND_ADDR=0.0.0.0:9999
+      - DEFAULT_URL=http://payment-processor-default:8080
+      - FALLBACK_URL=http://payment-processor-fallback:8080
+      - MEMSTORE_SOCKET=/shared/memstore.sock
+      - REQ_TIMEOUT_MS=50
+      - WORKERS=4
+      - PROC_CONCURRENCY=8
+      - RETRY_BACKOFF_MS=10
+      - CB_FAIL_THRESHOLD=2
+      - CB_OPEN_MS=500
+      - TIMEOUT_MARGIN_MS=2
+      - MAX_RETRIES=2
+      - TRACE_SLOW_MS=10
+    depends_on:
+      - memstore
+    networks:
+      - default
+      - payment-processor
+    volumes:
+      - shared-sock:/shared
+    deploy:
+      resources:
+        limits:
+          cpus: "0.65"
+          memory: "140MB"
+
+  nginx:
+    image: nginx:1.29-alpine
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - app1
+      - app2
+    ports:
+      - "9999:9999"
+    networks:
+      - default
+    deploy:
+      resources:
+        limits:
+          cpus: "0.1"
+          memory: "40MB"
+
+  memstore:
+    image: ghcr.io/joojf/rinha-de-backend-memstore:1.2.6
+    volumes:
+      - shared-sock:/tmp
+    deploy:
+      resources:
+        limits:
+          cpus: "0.1"
+          memory: "30MB"
+
+networks:
+  default:
+    driver: bridge
+  payment-processor:
+    external: true
+
+volumes:
+  shared-sock:

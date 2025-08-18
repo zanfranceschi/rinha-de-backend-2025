@@ -1,11 +1,16 @@
 x-service-templates:
   backend: &backend
-    image: githiago/rinha2025:3.0.0
+    image: githiago/rinha2025:4.0.0
     depends_on:
-      - payments-db
+      - storage
     networks:
       - backend
       - payment-processor
+    environment:
+      APP_WORKERS_SIZE: 16
+      APP_DEFAULT_PAYMENT_PROVIDER: http://payment-processor-default:8080
+      APP_FALLBACK_PAYMENT_PROVIDER: http://payment-processor-fallback:8080
+      APP_PAYMENT_SUMMARY_STORAGE: http://storage:8080
     deploy:
       resources:
         limits:
@@ -13,42 +18,27 @@ x-service-templates:
           memory: "120MB"
 
 services:
-  payments-db:
-    image: postgres:17.5-alpine3.22
-    command: postgres -c config_file=/etc/postgresql/postgresql.conf
+  storage:
+    image: githiago/rinha2025-storage:1.0.0
     networks:
       - backend
-    environment:
-      POSTGRES_USER: payments
-      POSTGRES_PASSWORD: payments
-      POSTGRES_DB: payments
-    volumes:
-      - ./postgresql.conf:/etc/postgresql/postgresql.conf
-      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
     ports:
-      - 54321:5432
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres -d your_db"]
-      interval: 5s
-      timeout: 5s
-      retries: 5
-      start_period: 10s
+      - 8003:8080
     deploy:
       resources:
         limits:
           cpus: "0.25"
-          memory: "70MB"
+          memory: 70M
   nginx:
-    image: nginx
+    image: githiago/ngixn-lua:1.0.0
     networks:
       - backend
-    volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf
     ports:
       - 9999:9999
     depends_on:
       - backend1
       - backend2
+      - storage
     deploy:
       resources:
         limits:
@@ -57,22 +47,9 @@ services:
   backend1:
     <<: *backend
     hostname: backend1
-    environment:
-      PAYMENT_PROCESSOR_API_URL: http://payment-processor-default:8080
-      PAYMENT_PROCESSOR_FALLBACK_URL: http://payment-processor-fallback:8080
-      PAYMENT_PROCESSOR_IS_LEADER: true
-      PAYMENT_PROCESSOR_CHECK_TIMING: 5s
-      PAYMENT_PROCESSOR_WORKERS: 16
-      DB_URL: postgresql://payments-db:5432/payments
   backend2:
     <<: *backend
     hostname: backend2
-    environment:
-      PAYMENT_PROCESSOR_API_URL: http://payment-processor-default:8080
-      PAYMENT_PROCESSOR_FALLBACK_URL: http://payment-processor-fallback:8080
-      PAYMENT_PROCESSOR_LEADER_HOST: backend1
-      PAYMENT_PROCESSOR_WORKERS: 16
-      DB_URL: postgresql://payments-db:5432/payments
 
 networks:
   backend:

@@ -1,0 +1,100 @@
+x-api-env: &api-env
+  PAYMENTS_PROCESSOR_URL_DEFAULT: http://payment-processor-default:8080/payments
+  PAYMENTS_PROCESSOR_URL_FALLBACK: http://payment-processor-fallback:8080/payments
+  HEALTH_PROCESSOR_URL_DEFAULT: http://payment-processor-default:8080/payments/service-health
+  HEALTH_PROCESSOR_URL_FALLBACK: http://payment-processor-fallback:8080/payments/service-health
+
+services:
+  loadbalancer:
+    image: craytee/goo-loadbalancer:latest
+    container_name: loadbalancer
+    hostname: lb
+    environment:
+      <<: *api-env
+      GOGC: "1200"
+      LB_LISTENERS: "2"
+      LB_UPSTREAM_SOCKETS: "/var/run/sockets/api1.sock,/var/run/sockets/api2.sock"
+    deploy:
+      resources:
+        limits:
+          cpus: "0.8"
+          memory: "140MB"
+    ports:
+      - "9999:8080"
+    volumes:
+      - socket_volume:/var/run/sockets
+      - shared_memory:/tmp
+    depends_on:
+      - api1
+      - api2
+    networks:
+      - backend
+      - payment-processor
+    ulimits:
+      nofile: 32768
+
+  api1:
+    image: craytee/goo-api:latest
+    container_name: api1
+    hostname: api1
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: "170MB"
+    environment:
+      PORT: 9997
+      UNIX_SOCKET_PATH: /var/run/sockets/api1.sock
+      PROCESS_PAYMENTS: "true"
+      <<: *api-env
+      GOGC: "1200"
+    volumes:
+      - socket_volume:/var/run/sockets
+      - shared_memory:/tmp
+    networks:
+      - backend
+      - payment-processor
+    ulimits:
+      nofile: 32768
+
+  api2:
+    image: craytee/goo-api:latest
+    container_name: api2
+    hostname: api2
+    deploy:
+      resources:
+        limits:
+          cpus: "0.2"
+          memory: "40MB"
+    environment:
+      PORT: 9996
+      UNIX_SOCKET_PATH: /var/run/sockets/api2.sock
+      PROCESS_PAYMENTS: "false"
+      GOMEMLIMIT: 24MiB
+      GOGC: "50"
+      <<: *api-env
+    volumes:
+      - socket_volume:/var/run/sockets
+      - shared_memory:/tmp
+    networks:
+      - backend
+      - payment-processor
+    ulimits:
+      nofile: 32768
+
+
+networks:
+  backend:
+    driver: bridge
+  payment-processor:
+    external: true
+
+volumes:
+  socket_volume:
+    driver: local
+  shared_memory:
+    driver: local
+    driver_opts:
+      type: tmpfs
+      device: tmpfs
+      o: "size=40m,uid=1000,gid=1000"

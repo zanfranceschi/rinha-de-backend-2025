@@ -8,7 +8,6 @@ services:
     depends_on:
       - api1
       - api2
-      - api3
     ports:
       - "9999:9999"
     networks:
@@ -17,29 +16,27 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.30"
+          cpus: "0.20"
           memory: "50MB"
   api1:
-    #build:
-    #  context: .
-    #  dockerfile: Dockerfile
-    image: danielsuhett1999/rinha-backend-go:1.1.5
+    image: danielsuhett1999/rinha-backend-go:1.2.5
     hostname: api1
     volumes:
       - sockets:/var/run/sockets
+      - redis-socket:/var/run/redis
+      - health-sockets:/var/run/health
     environment:
       - APP_NAME=1
       - SOCKET_PATH=/var/run/sockets/app1.sock
-      - REDIS_HOST=redis
-      - REDIS_PORT=6379
+      - REDIS_SOCKET_PATH=/var/run/redis/redis.sock
+      - HEALTH_SOCKET_PATH=/var/run/health/health.sock
       - PROCESSOR_DEFAULT_URL=http://payment-processor-default:8080
       - PROCESSOR_FALLBACK_URL=http://payment-processor-fallback:8080
       - POOLING_INTERVAL=100
-      - HEALTH_TIMEOUT=1000
+      - HEALTH_TIMEOUT=500
       - HEALTH_INTERVAL=6000
       - LATENCY_DIFF_TO_USE_FALLBACK=5000
       - BATCH_SIZE=10
-      - WORKER_COUNT=2
       - GOGC=off
     networks:
       - backend
@@ -50,30 +47,27 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.30"
-          memory: "83MB"
+          cpus: "0.50"
+          memory: "125MB"
   api2:
-    #build:
-    #  context: .
-    #  dockerfile: Dockerfile
-    #image: danielsuhett1999/rinha-backend-go:1.0.10
-    image: danielsuhett1999/rinha-backend-go:1.1.5
+    image: danielsuhett1999/rinha-backend-go:1.2.5
     hostname: api2
     volumes:
       - sockets:/var/run/sockets
+      - redis-socket:/var/run/redis
+      - health-sockets:/var/run/health
     environment:
       - APP_NAME=2
       - SOCKET_PATH=/var/run/sockets/app2.sock
-      - REDIS_HOST=redis
-      - REDIS_PORT=6379
+      - REDIS_SOCKET_PATH=/var/run/redis/redis.sock
+      - HEALTH_SOCKET_PATH=/var/run/health/health.sock
       - PROCESSOR_DEFAULT_URL=http://payment-processor-default:8080
       - PROCESSOR_FALLBACK_URL=http://payment-processor-fallback:8080
       - POOLING_INTERVAL=100
-      - HEALTH_TIMEOUT=1000
-      - HEALTH_INTERVAL=3000
+      - HEALTH_TIMEOUT=500
+      - HEALTH_INTERVAL=6000
       - LATENCY_DIFF_TO_USE_FALLBACK=5000
       - BATCH_SIZE=10
-      - WORKER_COUNT=2
       - GOGC=off
     networks:
       - backend
@@ -84,51 +78,18 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.30"
-          memory: "83MB"
-  api3:
-    # build:
-    #  context: .
-    #  dockerfile: Dockerfile
-    image: danielsuhett1999/rinha-backend-go:1.1.5
-    hostname: api3
-    volumes:
-      - sockets:/var/run/sockets
-    environment:
-      - APP_NAME=3
-      - SOCKET_PATH=/var/run/sockets/app3.sock
-      - REDIS_HOST=redis
-      - REDIS_PORT=6379
-      - PROCESSOR_DEFAULT_URL=http://payment-processor-default:8080
-      - PROCESSOR_FALLBACK_URL=http://payment-processor-fallback:8080
-      - POOLING_INTERVAL=100
-      - HEALTH_TIMEOUT=1000
-      - HEALTH_INTERVAL=3000
-      - LATENCY_DIFF_TO_USE_FALLBACK=5000
-      - BATCH_SIZE=10
-      - WORKER_COUNT=2
-      - GOGC=off
-    networks:
-      - backend
-      - payment-processor
-    depends_on:
-      redis:
-        condition: service_healthy
-    deploy:
-      resources:
-        limits:
-          cpus: "0.30"
-          memory: "83MB"
+          cpus: "0.50"
+          memory: "125MB"
   redis:
     image: valkey/valkey:7.2-alpine
     container_name: go-rinha-redis
-    command: redis-server --save "" --appendonly no --maxmemory 40mb --maxmemory-policy allkeys-lru --tcp-keepalive 30 --timeout 0 --tcp-backlog 4096 --databases 1 --maxclients 5000 --rdbcompression no --rdbchecksum no --hz 100
+    command: redis-server --save "" --appendonly no --maxmemory 40mb --maxmemory-policy allkeys-lru --databases 1 --maxclients 5000 --rdbcompression no --rdbchecksum no --hz 100 --unixsocket /var/run/redis/redis.sock --unixsocketperm 777 --port 0
+    volumes:
+      - redis-socket:/var/run/redis
     networks:
       - backend
-    ports:
-      - 6380:6379
     healthcheck:
-      test: ["CMD", "redis-cli", "ping"]
+      test: ["CMD", "redis-cli", "-s", "/var/run/redis/redis.sock", "ping"]
       interval: 5s
       timeout: 5s
       retries: 5
@@ -140,10 +101,11 @@ services:
 
 volumes:
   sockets:
+  redis-socket:
+  health-sockets:
 
 networks:
   backend:
     driver: bridge
   payment-processor:
     external: true
-

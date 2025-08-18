@@ -1,5 +1,5 @@
 x-api_template: &api
-  image: ghcr.io/diofeher/rinha-de-backend-2025-diofeher:main-872ab63
+  image: ghcr.io/diofeher/rinha-de-backend-2025-diofeher:main-e722a6e
   depends_on:
     redis:
       condition: service_healthy
@@ -16,9 +16,11 @@ x-api_template: &api
     - payment-processor
 
 services:
-  haproxy:
-    image: haproxy:latest
-    container_name: haproxy
+  nginx:
+    image: nginx:latest
+    environment:
+      - BACKEND1_SOCKET=/tmp/api1.sock
+      - BACKEND2_SOCKET=/tmp/api2.sock
     ports:
       - "9999:80"
     networks:
@@ -32,31 +34,30 @@ services:
           cpus: "0.45"
           memory: "100MB"
     volumes:
-      - ./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
-      - ./pre-processing.lua:/tmp/pre-processing.lua
       - socket_data:/tmp
-    command: ["haproxy", "-f", "/usr/local/etc/haproxy/haproxy.cfg"]
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
   api1:
     <<: *api
     environment:
-      # - CPU_PROFILE=/app/profile/diogenes.pprof
+      # - CPU_PROFILE=/app/profile/diogenes1.pprof
       - SOCKET_PATH=/tmp/api1.sock
       - DEBUG=false
       - REDIS_URL=/tmp/redis.sock
       - REDIS_DB=rinha
       - PROCESSOR_DEFAULT_URL=http://payment-processor-default:8080
       - PROCESSOR_FALLBACK_URL=http://payment-processor-fallback:8080
-      - NUM_WORKERS=12
+      - NUM_WORKERS=10
   api2:
     <<: *api
     environment:
+      # - CPU_PROFILE=/app/profile/diogenes2.pprof
       - SOCKET_PATH=/tmp/api2.sock
       - DEBUG=false
       - REDIS_URL=/tmp/redis.sock
       - REDIS_DB=rinha
       - PROCESSOR_DEFAULT_URL=http://payment-processor-default:8080
       - PROCESSOR_FALLBACK_URL=http://payment-processor-fallback:8080
-      - NUM_WORKERS=12
+      - NUM_WORKERS=10
   redis:
     image: redis:latest
     container_name: redis

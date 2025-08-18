@@ -2,18 +2,21 @@ version: '3.8'
 
 services:
   api01:
-    image: suntzu12/quarkus-payment-router-java-21:1.0.0
+    image: suntzu12/quarkus-payment-router-java-21:2.0.0
     container_name: api01
     depends_on:
-      - api03
+      - payment-router-db
     hostname: api01
     ports:
       - "8081:8080"
     environment:
+      BATCH_SIZE: 600
       PROCESS_THREAD_POOL: 20
+      DB_USER: postgres
+      DB_PASS: postgres
       QUARKUS_REST_CLIENT_DEFAULT_API_URL: http://payment-processor-default:8080
       QUARKUS_REST_CLIENT_FALLBACK_API_URL: http://payment-processor-fallback:8080
-      QUARKUS_REST_CLIENT_STORAGE_API_URL: http://api03:8080
+      DB_URL: vertx-reactive:postgresql://payment-router-db:5432/rinha
     deploy:
       resources:
         limits:
@@ -24,18 +27,21 @@ services:
       - payment-processor
 
   api02:
-    image: suntzu12/quarkus-payment-router-java-21:1.0.0
+    image: suntzu12/quarkus-payment-router-java-21:2.0.0
     container_name: api02
     depends_on:
-      - api03
+      - payment-router-db
     hostname: api02
     ports:
       - "8082:8080"
     environment:
+      BATCH_SIZE: 600
       PROCESS_THREAD_POOL: 20
+      DB_USER: postgres
+      DB_PASS: postgres
       QUARKUS_REST_CLIENT_DEFAULT_API_URL: http://payment-processor-default:8080
       QUARKUS_REST_CLIENT_FALLBACK_API_URL: http://payment-processor-fallback:8080
-      QUARKUS_REST_CLIENT_STORAGE_API_URL: http://api03:8080
+      DB_URL: vertx-reactive:postgresql://payment-router-db:5432/rinha
     deploy:
       resources:
         limits:
@@ -45,18 +51,22 @@ services:
       - payment-router
       - payment-processor
 
-  api03:
-    image: suntzu12/quarkus-payment-storage:1.0.0
-    container_name: api03
-    hostname: api03
+  payment-router-db:
+    image: postgres:17-alpine
+    container_name: payment-router-db
+    hostname: payment-router-db
     ports:
-      - "8083:8080"
+      - "5432:5432"
     environment:
-      LISTEN: 8080
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=rinha
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
     deploy:
       resources:
         limits:
-          cpus: "0.30"
+          cpus: "0.40"
           memory: "100MB"
     networks:
       - payment-router

@@ -1,1001 +1,167 @@
 
- Container felipeschirmann-rinha  Creating
- Container felipeschirmann-rinha  Created
-Attaching to felipeschirmann-rinha
-felipeschirmann-rinha  |   .   ____          _            __ _ _
-felipeschirmann-rinha  |  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
-felipeschirmann-rinha  | ( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
-felipeschirmann-rinha  |  \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
-felipeschirmann-rinha  |   '  |____| .__|_| |_|_| |_\__, | / / / /
-felipeschirmann-rinha  |  =========|_|==============|___/=/_/_/_/
-felipeschirmann-rinha  | 
-felipeschirmann-rinha  |  :: Spring Boot ::                (v3.3.0)
-felipeschirmann-rinha  | 
-felipeschirmann-rinha  | 17:15:10.825 [main] INFO  b.d.f.rinha.Application - Starting AOT-processed Application using Java 21.0.7 with PID 1 (/app/rinha-reativa started by nonroot in /app)
-felipeschirmann-rinha  | 17:15:10.826 [main] INFO  b.d.f.rinha.Application - No active profile set, falling back to 1 default profile: "default"
-felipeschirmann-rinha  | 17:15:10.972 [main] INFO  b.d.f.r.service.MemoryMonitorService - Iniciando monitor de memória... Verificação a cada 5 segundos.
-felipeschirmann-rinha  | 17:15:10.977 [main] INFO  b.d.f.r.s.PaymentStorageService - Fila de pagamentos configurada com tamanho máximo de 50000
-felipeschirmann-rinha  | 17:15:11.038 [main] INFO  b.d.f.r.s.PaymentProcessorService - Iniciando processador de pagamentos com inteligência de fallback...
-felipeschirmann-rinha  | 17:15:11.045 [main] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
-felipeschirmann-rinha  | 17:15:11.069 [reactor-http-epoll-2] INFO  b.d.f.r.s.PaymentProcessorService - Health Check: Default voltou a ficar SAUDÁVEL. minResponseTime: 0ms
-felipeschirmann-rinha  | 17:15:11.257 [main] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
-felipeschirmann-rinha  | 17:15:11.544 [main] INFO  o.s.b.w.e.netty.NettyWebServer - Netty started on port 9999 (http)
-felipeschirmann-rinha  | 17:15:11.545 [main] INFO  b.d.f.rinha.Application - Started Application in 0.739 seconds (process running for 0.745)
-felipeschirmann-rinha  | 17:15:12.044 [reactor-http-epoll-4] INFO  b.d.f.r.s.PaymentProcessorService - Health Check: Fallback voltou a ficar SAUDÁVEL. minResponseTime: 0ms
-felipeschirmann-rinha  | 17:15:15.973 [pool-6-thread-1] WARN  b.d.f.r.service.MemoryMonitorService - AVISO DE MEMÓRIA: Uso de Heap ultrapassou 100 MB. Uso atual: 102 MB
-felipeschirmann-rinha  | 17:15:41.350 [reactor-http-epoll-3] WARN  b.d.f.r.s.PaymentProcessorService - Health Check: Default agora está COM FALHAS.
-felipeschirmann-rinha  | 17:15:52.465 [reactor-http-epoll-3] WARN  b.d.f.r.s.PaymentProcessorService - Health Check: Fallback agora está COM FALHAS.
-felipeschirmann-rinha  | 17:16:01.752 [reactor-http-epoll-1] INFO  b.d.f.r.s.PaymentProcessorService - Health Check: Default voltou a ficar SAUDÁVEL. minResponseTime: 20ms
-felipeschirmann-rinha  | 17:16:02.466 [reactor-http-epoll-1] INFO  b.d.f.r.s.PaymentProcessorService - Health Check: Fallback voltou a ficar SAUDÁVEL. minResponseTime: 20ms
-felipeschirmann-rinha  | 17:16:21.293 [reactor-http-epoll-3] WARN  r.n.http.client.HttpClientConnect - [1dbed376-534, L:/172.19.0.4:58396 ! R:payment-processor-default/172.19.0.2:8080] The connection observed an error
-felipeschirmann-rinha  | reactor.netty.http.client.PrematureCloseException: Connection prematurely closed BEFORE response
-felipeschirmann-rinha  | 17:16:21.294 [reactor-http-epoll-3] ERROR b.d.f.r.s.PaymentProcessorService - Health Check: Falha ao contatar o Processador Default, marcando como offline.
-felipeschirmann-rinha  | 17:16:21.294 [reactor-http-epoll-3] ERROR reactor.core.publisher.Operators - Operator called default onErrorDropped
-felipeschirmann-rinha  | reactor.core.Exceptions$ErrorCallbackNotImplemented: org.springframework.web.reactive.function.client.WebClientRequestException: Connection prematurely closed BEFORE response
-felipeschirmann-rinha  | Caused by: org.springframework.web.reactive.function.client.WebClientRequestException: Connection prematurely closed BEFORE response
-felipeschirmann-rinha  | 	at org.springframework.web.reactive.function.client.ExchangeFunctions$DefaultExchangeFunction.lambda$wrapException$9(ExchangeFunctions.java:136)
-felipeschirmann-rinha  | 	Suppressed: reactor.core.publisher.FluxOnAssembly$OnAssemblyException: 
-felipeschirmann-rinha  | Error has been observed at the following site(s):
-felipeschirmann-rinha  | 	*__checkpoint ⇢ Request to GET http://payment-processor-default:8080/payments/service-health [DefaultWebClient]
-felipeschirmann-rinha  | Original Stack Trace:
-felipeschirmann-rinha  | 		at org.springframework.web.reactive.function.client.ExchangeFunctions$DefaultExchangeFunction.lambda$wrapException$9(ExchangeFunctions.java:136)
-felipeschirmann-rinha  | 		at reactor.core.publisher.MonoErrorSupplied.subscribe(MonoErrorSupplied.java:55)
-felipeschirmann-rinha  | 		at reactor.core.publisher.Mono.subscribe(Mono.java:4568)
-felipeschirmann-rinha  | 		at reactor.core.publisher.FluxOnErrorResume$ResumeSubscriber.onError(FluxOnErrorResume.java:103)
-felipeschirmann-rinha  | 		at reactor.core.publisher.FluxPeek$PeekSubscriber.onError(FluxPeek.java:222)
-felipeschirmann-rinha  | 		at reactor.core.publisher.FluxPeek$PeekSubscriber.onError(FluxPeek.java:222)
-felipeschirmann-rinha  | 		at reactor.core.publisher.FluxPeek$PeekSubscriber.onError(FluxPeek.java:222)
-felipeschirmann-rinha  | 		at reactor.core.publisher.MonoNext$NextSubscriber.onError(MonoNext.java:93)
-felipeschirmann-rinha  | 		at reactor.core.publisher.MonoFlatMapMany$FlatMapManyMain.onError(MonoFlatMapMany.java:205)
-felipeschirmann-rinha  | 		at reactor.core.publisher.SerializedSubscriber.onError(SerializedSubscriber.java:124)
-felipeschirmann-rinha  | 		at reactor.core.publisher.FluxRetryWhen$RetryWhenMainSubscriber.whenError(FluxRetryWhen.java:229)
-felipeschirmann-rinha  | 		at reactor.core.publisher.FluxRetryWhen$RetryWhenOtherSubscriber.onError(FluxRetryWhen.java:279)
-felipeschirmann-rinha  | 		at reactor.core.publisher.FluxContextWrite$ContextWriteSubscriber.onError(FluxContextWrite.java:121)
-felipeschirmann-rinha  | 		at reactor.core.publisher.FluxConcatMapNoPrefetch$FluxConcatMapNoPrefetchSubscriber.maybeOnError(FluxConcatMapNoPrefetch.java:327)
-felipeschirmann-rinha  | 		at reactor.core.publisher.FluxConcatMapNoPrefetch$FluxConcatMapNoPrefetchSubscriber.onNext(FluxConcatMapNoPrefetch.java:212)
-felipeschirmann-rinha  | 		at reactor.core.publisher.FluxContextWrite$ContextWriteSubscriber.onNext(FluxContextWrite.java:107)
-felipeschirmann-rinha  | 		at reactor.core.publisher.SinkManyEmitterProcessor.drain(SinkManyEmitterProcessor.java:476)
-felipeschirmann-rinha  | 		at reactor.core.publisher.SinkManyEmitterProcessor$EmitterInner.drainParent(SinkManyEmitterProcessor.java:620)
-felipeschirmann-rinha  | 		at reactor.core.publisher.FluxPublish$PubSubInner.request(FluxPublish.java:874)
-felipeschirmann-rinha  | 		at reactor.core.publisher.FluxContextWrite$ContextWriteSubscriber.request(FluxContextWrite.java:136)
-felipeschirmann-rinha  | 		at reactor.core.publisher.FluxConcatMapNoPrefetch$FluxConcatMapNoPrefetchSubscriber.request(FluxConcatMapNoPrefetch.java:337)
-felipeschirmann-rinha  | 		at reactor.core.publisher.FluxContextWrite$ContextWriteSubscriber.request(FluxContextWrite.java:136)
-felipeschirmann-rinha  | 		at reactor.core.publisher.Operators$DeferredSubscription.request(Operators.java:1743)
-felipeschirmann-rinha  | 		at reactor.core.publisher.FluxRetryWhen$RetryWhenMainSubscriber.onError(FluxRetryWhen.java:196)
-felipeschirmann-rinha  | 		at reactor.core.publisher.MonoCreate$DefaultMonoSink.error(MonoCreate.java:205)
-felipeschirmann-rinha  | 		at reactor.netty.http.client.HttpClientConnect$HttpObserver.onUncaughtException(HttpClientConnect.java:403)
-felipeschirmann-rinha  | 		at reactor.netty.ReactorNetty$CompositeConnectionObserver.onUncaughtException(ReactorNetty.java:703)
-felipeschirmann-rinha  | 		at reactor.netty.resources.DefaultPooledConnectionProvider$DisposableAcquire.onUncaughtException(DefaultPooledConnectionProvider.java:223)
-felipeschirmann-rinha  | 		at reactor.netty.resources.DefaultPooledConnectionProvider$PooledConnection.onUncaughtException(DefaultPooledConnectionProvider.java:476)
-felipeschirmann-rinha  | 		at reactor.netty.http.client.HttpClientOperations.onInboundClose(HttpClientOperations.java:325)
-felipeschirmann-rinha  | 		at reactor.netty.channel.ChannelOperationsHandler.channelInactive(ChannelOperationsHandler.java:73)
-felipeschirmann-rinha  | 		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelInactive(AbstractChannelHandlerContext.java:303)
-felipeschirmann-rinha  | 		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelInactive(AbstractChannelHandlerContext.java:281)
-felipeschirmann-rinha  | 		at io.netty.channel.AbstractChannelHandlerContext.fireChannelInactive(AbstractChannelHandlerContext.java:274)
-felipeschirmann-rinha  | 		at io.netty.channel.ChannelInboundHandlerAdapter.channelInactive(ChannelInboundHandlerAdapter.java:81)
-felipeschirmann-rinha  | 		at io.netty.handler.timeout.IdleStateHandler.channelInactive(IdleStateHandler.java:280)
-felipeschirmann-rinha  | 		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelInactive(AbstractChannelHandlerContext.java:303)
-felipeschirmann-rinha  | 		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelInactive(AbstractChannelHandlerContext.java:281)
-felipeschirmann-rinha  | 		at io.netty.channel.AbstractChannelHandlerContext.fireChannelInactive(AbstractChannelHandlerContext.java:274)
-felipeschirmann-rinha  | 		at io.netty.channel.CombinedChannelDuplexHandler$DelegatingChannelHandlerContext.fireChannelInactive(CombinedChannelDuplexHandler.java:418)
-felipeschirmann-rinha  | 		at io.netty.handler.codec.ByteToMessageDecoder.channelInputClosed(ByteToMessageDecoder.java:412)
-felipeschirmann-rinha  | 		at io.netty.handler.codec.ByteToMessageDecoder.channelInactive(ByteToMessageDecoder.java:377)
-felipeschirmann-rinha  | 		at io.netty.handler.codec.http.HttpClientCodec$Decoder.channelInactive(HttpClientCodec.java:410)
-felipeschirmann-rinha  | 		at io.netty.channel.CombinedChannelDuplexHandler.channelInactive(CombinedChannelDuplexHandler.java:221)
-felipeschirmann-rinha  | 		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelInactive(AbstractChannelHandlerContext.java:303)
-felipeschirmann-rinha  | 		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelInactive(AbstractChannelHandlerContext.java:281)
-felipeschirmann-rinha  | 		at io.netty.channel.AbstractChannelHandlerContext.fireChannelInactive(AbstractChannelHandlerContext.java:274)
-felipeschirmann-rinha  | 		at io.netty.channel.DefaultChannelPipeline$HeadContext.channelInactive(DefaultChannelPipeline.java:1402)
-felipeschirmann-rinha  | 		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelInactive(AbstractChannelHandlerContext.java:301)
-felipeschirmann-rinha  | 		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelInactive(AbstractChannelHandlerContext.java:281)
-felipeschirmann-rinha  | 		at io.netty.channel.DefaultChannelPipeline.fireChannelInactive(DefaultChannelPipeline.java:900)
-felipeschirmann-rinha  | 		at io.netty.channel.AbstractChannel$AbstractUnsafe$7.run(AbstractChannel.java:811)
-felipeschirmann-rinha  | 		at io.netty.util.concurrent.AbstractEventExecutor.runTask(AbstractEventExecutor.java:173)
-felipeschirmann-rinha  | 		at io.netty.util.concurrent.AbstractEventExecutor.safeExecute(AbstractEventExecutor.java:166)
-felipeschirmann-rinha  | 		at io.netty.util.concurrent.SingleThreadEventExecutor.runAllTasksFrom(SingleThreadEventExecutor.java:425)
-felipeschirmann-rinha  | 		at io.netty.util.concurrent.SingleThreadEventExecutor.runAllTasks(SingleThreadEventExecutor.java:374)
-felipeschirmann-rinha  | 		at io.netty.util.concurrent.SingleThreadEventExecutor.confirmShutdown(SingleThreadEventExecutor.java:760)
-felipeschirmann-rinha  | 		at io.netty.channel.epoll.EpollEventLoop.run(EpollEventLoop.java:423)
-felipeschirmann-rinha  | 		at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:994)
-felipeschirmann-rinha  | 		at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
-felipeschirmann-rinha  | 		at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
-felipeschirmann-rinha  | 		at java.base@21.0.7/java.lang.Thread.runWith(Thread.java:1596)
-felipeschirmann-rinha  | 		at java.base@21.0.7/java.lang.Thread.run(Thread.java:1583)
-felipeschirmann-rinha  | 		at org.graalvm.nativeimage.builder/com.oracle.svm.core.thread.PlatformThreads.threadStartRoutine(PlatformThreads.java:896)
-felipeschirmann-rinha  | 		at org.graalvm.nativeimage.builder/com.oracle.svm.core.thread.PlatformThreads.threadStartRoutine(PlatformThreads.java:872)
-felipeschirmann-rinha  | Caused by: reactor.netty.http.client.PrematureCloseException: Connection prematurely closed BEFORE response
-felipeschirmann-rinha  | 17:16:23.297 [SpringApplicationShutdownHook] INFO  b.d.f.r.s.PaymentProcessorService - Iniciando desligamento gracioso...
-felipeschirmann-rinha  | 17:16:23.297 [SpringApplicationShutdownHook] INFO  b.d.f.r.s.PaymentProcessorService - Aguardando 381 tarefas em andamento finalizarem...
-felipeschirmann-rinha  | 17:16:26.307 [reactor-http-epoll-3] WARN  r.n.http.client.HttpClientConnect - [1a5c3c46-1, L:/172.19.0.4:56700 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:26.307 [reactor-http-epoll-3] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar e8120b47-4b1d-4c94-b139-41fed8313453 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:26.321 [reactor-http-epoll-2] WARN  r.n.http.client.HttpClientConnect - [0f316777-1, L:/172.19.0.4:56708 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:26.321 [reactor-http-epoll-2] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar fe6f66fe-88eb-43c5-8b03-633137daa7d6 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:26.326 [reactor-http-epoll-3] WARN  r.n.http.client.HttpClientConnect - [0f61f547-1, L:/172.19.0.4:56722 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:26.326 [reactor-http-epoll-3] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 62883488-6066-44d1-9cb8-d3fc495abe7a com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:26.331 [reactor-http-epoll-4] WARN  r.n.http.client.HttpClientConnect - [57883513-1, L:/172.19.0.4:56732 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:26.331 [reactor-http-epoll-4] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 8d36646c-3f5d-4325-8343-8e71a6aecaf4 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:26.336 [reactor-http-epoll-1] WARN  r.n.http.client.HttpClientConnect - [c649036b-1, L:/172.19.0.4:56744 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:26.337 [reactor-http-epoll-1] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar ce630c78-c72a-4032-94cc-0c4790aa0be6 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:26.342 [reactor-http-epoll-2] WARN  r.n.http.client.HttpClientConnect - [edf49e09-1, L:/172.19.0.4:56752 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:26.342 [reactor-http-epoll-2] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar d6bc1c89-439c-4a7d-b2af-3ca604025fae com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:26.347 [reactor-http-epoll-3] WARN  r.n.http.client.HttpClientConnect - [561d1fd9-1, L:/172.19.0.4:56760 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:26.347 [reactor-http-epoll-3] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 49379725-770a-4a51-b793-a1623b1367b5 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:26.352 [reactor-http-epoll-4] WARN  r.n.http.client.HttpClientConnect - [d65decc8-1, L:/172.19.0.4:56774 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:26.352 [reactor-http-epoll-4] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar f047d334-88c3-4c7a-8a45-1167d5c95756 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:26.357 [reactor-http-epoll-1] WARN  r.n.http.client.HttpClientConnect - [72b5cb2c-1, L:/172.19.0.4:56790 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:26.357 [reactor-http-epoll-1] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 23dbe0ad-9e15-418b-9e81-d38da87b331a com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:26.362 [reactor-http-epoll-2] WARN  r.n.http.client.HttpClientConnect - [c4e1b521-1, L:/172.19.0.4:56794 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:26.363 [reactor-http-epoll-2] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 8944a311-1721-4440-a10d-ebbfaeba3904 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:26.368 [reactor-http-epoll-3] WARN  r.n.http.client.HttpClientConnect - [daa765c9-1, L:/172.19.0.4:56806 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:26.368 [reactor-http-epoll-3] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar e019cb06-8bf8-4609-aa62-43f380d29b65 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:26.373 [reactor-http-epoll-4] WARN  r.n.http.client.HttpClientConnect - [8f06d69d-1, L:/172.19.0.4:56814 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:26.373 [reactor-http-epoll-4] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 5b729e5e-d027-4907-b4e3-b1548e295605 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:26.378 [reactor-http-epoll-1] WARN  r.n.http.client.HttpClientConnect - [a6c53348-1, L:/172.19.0.4:56820 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:26.378 [reactor-http-epoll-1] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar c0d9f5c9-e156-4c95-9e54-662127038bf7 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:26.384 [reactor-http-epoll-2] WARN  r.n.http.client.HttpClientConnect - [c15d7251-1, L:/172.19.0.4:56830 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:26.384 [reactor-http-epoll-2] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 926e1f85-286e-4048-ac6c-44c02e0f2989 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:26.389 [reactor-http-epoll-3] WARN  r.n.http.client.HttpClientConnect - [21621291-1, L:/172.19.0.4:56834 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:26.389 [reactor-http-epoll-3] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 1e142c86-7747-401d-b7b9-5a5290af3072 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:26.394 [reactor-http-epoll-4] WARN  r.n.http.client.HttpClientConnect - [87cc9cc1-1, L:/172.19.0.4:56842 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:26.394 [reactor-http-epoll-4] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 6c1720d6-b2ef-4e18-875b-3b880f1fb7e5 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:26.399 [reactor-http-epoll-1] WARN  r.n.http.client.HttpClientConnect - [63991dc9-1, L:/172.19.0.4:56844 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:26.399 [reactor-http-epoll-1] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 2403f556-aa64-4314-8e3e-91367cc25970 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:26.405 [reactor-http-epoll-2] WARN  r.n.http.client.HttpClientConnect - [af2b17e2-1, L:/172.19.0.4:56858 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:26.405 [reactor-http-epoll-2] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 6c68d9d8-8000-4182-85c8-3b8d5fb417f2 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:26.410 [reactor-http-epoll-3] WARN  r.n.http.client.HttpClientConnect - [0a317aa8-1, L:/172.19.0.4:56872 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:26.410 [reactor-http-epoll-3] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar a1bc19af-949d-4880-bfe5-eceacd77aba8 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:26.415 [reactor-http-epoll-4] WARN  r.n.http.client.HttpClientConnect - [2012f727-1, L:/172.19.0.4:56882 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:26.415 [reactor-http-epoll-4] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 5b28e9b5-cc03-424b-9b17-a39773199336 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:26.420 [reactor-http-epoll-1] WARN  r.n.http.client.HttpClientConnect - [37bac84b-1, L:/172.19.0.4:56894 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:26.421 [reactor-http-epoll-1] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 1eb363d9-ac0a-4262-83dd-aaa4b1da24b4 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:26.426 [reactor-http-epoll-2] WARN  r.n.http.client.HttpClientConnect - [8209da33-1, L:/172.19.0.4:56906 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:26.426 [reactor-http-epoll-2] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 3efe3381-e204-42b7-a8f5-d60bd968ccdf com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:26.431 [reactor-http-epoll-3] WARN  r.n.http.client.HttpClientConnect - [0702fa32-1, L:/172.19.0.4:56910 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:26.431 [reactor-http-epoll-3] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar c588d8be-1bb0-47b2-9da3-b873bbd530af com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:26.442 [reactor-http-epoll-1] WARN  r.n.http.client.HttpClientConnect - [00594d2a-1, L:/172.19.0.4:56934 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:26.442 [reactor-http-epoll-1] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 9d5fcda7-a1bd-48ae-a411-2c63f8e4140d com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:26.447 [reactor-http-epoll-2] WARN  r.n.http.client.HttpClientConnect - [e4ee50af-1, L:/172.19.0.4:56946 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:26.447 [reactor-http-epoll-2] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar dcbd3a78-78c6-4395-9f2f-d14a0ffdbcd3 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:26.453 [reactor-http-epoll-3] WARN  r.n.http.client.HttpClientConnect - [c7993b60-1, L:/172.19.0.4:56952 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:26.453 [reactor-http-epoll-3] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 28febb28-9bcf-4608-99ff-d525cbe8889d com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:26.458 [reactor-http-epoll-4] WARN  r.n.http.client.HttpClientConnect - [a4a34c29-1, L:/172.19.0.4:56968 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:26.458 [reactor-http-epoll-4] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 1b930cce-6087-449a-811a-c78c7fdb428c com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:26.463 [reactor-http-epoll-1] WARN  r.n.http.client.HttpClientConnect - [d91ee975-1, L:/172.19.0.4:56972 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:26.463 [reactor-http-epoll-1] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar b0dfb553-53a4-415f-85c8-15c1bb0123b8 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:26.468 [reactor-http-epoll-2] WARN  r.n.http.client.HttpClientConnect - [63b4c0b6-1, L:/172.19.0.4:56982 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:26.469 [reactor-http-epoll-2] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 70b0c67e-bf1b-4ede-9c02-263451427fa1 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:26.474 [reactor-http-epoll-3] WARN  r.n.http.client.HttpClientConnect - [e97372f1-1, L:/172.19.0.4:56986 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:26.474 [reactor-http-epoll-3] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 93264b8b-592a-465f-81b8-91b67014443e com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:26.479 [reactor-http-epoll-4] WARN  r.n.http.client.HttpClientConnect - [29bfffee-1, L:/172.19.0.4:56998 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:26.479 [reactor-http-epoll-4] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar e20c9ff7-6a4e-417a-a0a3-94fb6a364af9 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:26.484 [reactor-http-epoll-1] WARN  r.n.http.client.HttpClientConnect - [4794fa22-1, L:/172.19.0.4:57010 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:26.485 [reactor-http-epoll-1] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar ac50ea1a-eac3-4a57-95c3-1ff3c77e638f com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:26.490 [reactor-http-epoll-2] WARN  r.n.http.client.HttpClientConnect - [c90638e8-1, L:/172.19.0.4:57012 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:26.490 [reactor-http-epoll-2] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar ccd26898-3cc5-494f-80d7-750115cfb4b5 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:26.495 [reactor-http-epoll-3] WARN  r.n.http.client.HttpClientConnect - [fad8da97-1, L:/172.19.0.4:57024 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:26.495 [reactor-http-epoll-3] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 54d98b97-86d1-4dd2-a03f-f831f7d48fd9 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:26.500 [reactor-http-epoll-4] WARN  r.n.http.client.HttpClientConnect - [3e70f7f2-1, L:/172.19.0.4:57026 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:26.500 [reactor-http-epoll-4] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 6911e781-267d-494c-b764-5c918733d461 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:26.505 [reactor-http-epoll-1] WARN  r.n.http.client.HttpClientConnect - [824fbeb6-1, L:/172.19.0.4:57040 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:26.506 [reactor-http-epoll-1] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar f7eb7a08-d27c-4bb2-bd92-9418e16e626e com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:26.511 [reactor-http-epoll-2] WARN  r.n.http.client.HttpClientConnect - [2b786f83-1, L:/172.19.0.4:57048 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:26.511 [reactor-http-epoll-2] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 443ae06a-9d1a-49d2-a18d-a2201ab6beba com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:26.516 [reactor-http-epoll-3] WARN  r.n.http.client.HttpClientConnect - [d181b334-1, L:/172.19.0.4:57054 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:26.516 [reactor-http-epoll-3] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar f8183cbb-7f1c-4221-9ef6-87ca3a0c2f29 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:26.521 [reactor-http-epoll-4] WARN  r.n.http.client.HttpClientConnect - [7d98fa46-1, L:/172.19.0.4:57064 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:26.521 [reactor-http-epoll-4] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 1fde3c6f-b2e8-411e-88e6-850fc5c9a68f com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:26.527 [reactor-http-epoll-1] WARN  r.n.http.client.HttpClientConnect - [462720df-1, L:/172.19.0.4:57080 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:26.527 [reactor-http-epoll-1] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 8b2619f6-e461-4679-b756-1a6e31c97829 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:26.532 [reactor-http-epoll-2] WARN  r.n.http.client.HttpClientConnect - [c276556a-1, L:/172.19.0.4:57096 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:26.532 [reactor-http-epoll-2] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 7951558f-3d39-41f2-ae39-ebc37eceb685 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:26.537 [reactor-http-epoll-3] WARN  r.n.http.client.HttpClientConnect - [6fbb520c-1, L:/172.19.0.4:57108 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:26.537 [reactor-http-epoll-3] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 41cf71a9-e7c1-4306-ac8d-a5d46f311eef com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:26.548 [reactor-http-epoll-1] WARN  r.n.http.client.HttpClientConnect - [de0c0a2c-1, L:/172.19.0.4:57120 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:26.548 [reactor-http-epoll-1] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 825566ec-39ee-464c-bd01-29680af77ec9 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:26.553 [reactor-http-epoll-2] WARN  r.n.http.client.HttpClientConnect - [f8356068-1, L:/172.19.0.4:57134 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:26.553 [reactor-http-epoll-2] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar f41f2975-eeb3-43b1-be22-73be664de6f8 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:26.558 [reactor-http-epoll-3] WARN  r.n.http.client.HttpClientConnect - [7f13151a-1, L:/172.19.0.4:57138 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:26.559 [reactor-http-epoll-3] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar bdb181ce-d9ab-47a0-aba6-fc005b8c6d81 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:26.564 [reactor-http-epoll-4] WARN  r.n.http.client.HttpClientConnect - [dffce455-1, L:/172.19.0.4:57150 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:26.564 [reactor-http-epoll-4] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar f90de320-5961-4ed9-a80b-4ae2cb1cd253 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:26.569 [reactor-http-epoll-1] WARN  r.n.http.client.HttpClientConnect - [e4a6459f-1, L:/172.19.0.4:57152 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:26.569 [reactor-http-epoll-1] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 79fbc76b-e0df-4432-b79c-73341de9bdf7 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:26.574 [reactor-http-epoll-2] WARN  r.n.http.client.HttpClientConnect - [d08db5f2-1, L:/172.19.0.4:57162 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:26.574 [reactor-http-epoll-2] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 34db5c80-d691-41a3-8c51-053bbd8746fb com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:26.580 [reactor-http-epoll-3] WARN  r.n.http.client.HttpClientConnect - [59a8e1dd-1, L:/172.19.0.4:57174 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:26.580 [reactor-http-epoll-3] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar bcff37c9-4384-4f36-92d3-77b1e28c6fd7 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:26.585 [reactor-http-epoll-4] WARN  r.n.http.client.HttpClientConnect - [b90592fe-1, L:/172.19.0.4:57178 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:26.585 [reactor-http-epoll-4] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar eb44fa19-5ffa-4106-88ac-c1c21a46f6fe com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:26.590 [reactor-http-epoll-1] WARN  r.n.http.client.HttpClientConnect - [c7b21a5c-1, L:/172.19.0.4:57180 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:26.590 [reactor-http-epoll-1] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 0679a8b5-14bb-41e1-81c2-f4d4975ec601 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:26.595 [reactor-http-epoll-2] WARN  r.n.http.client.HttpClientConnect - [b07c9e35-1, L:/172.19.0.4:57194 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:26.595 [reactor-http-epoll-2] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 0c6138d3-cd72-404e-9ca6-7c21b29e6348 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:26.602 [reactor-http-epoll-3] WARN  r.n.http.client.HttpClientConnect - [82b8f7f0-1, L:/172.19.0.4:57210 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:26.603 [reactor-http-epoll-3] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar f1c5f4e9-f5e2-4a16-8e7b-749a855812f6 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:26.611 [reactor-http-epoll-1] WARN  r.n.http.client.HttpClientConnect - [399c9f35-1, L:/172.19.0.4:57236 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:26.611 [reactor-http-epoll-1] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 3399dd50-a51d-49d8-bf36-c1cc51b33439 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:26.616 [reactor-http-epoll-2] WARN  r.n.http.client.HttpClientConnect - [e8e1a197-1, L:/172.19.0.4:57250 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:26.616 [reactor-http-epoll-2] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 33f91901-69aa-488d-ba67-4d66ba885f86 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:26.621 [reactor-http-epoll-3] WARN  r.n.http.client.HttpClientConnect - [095ef7bd-1, L:/172.19.0.4:57254 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:26.621 [reactor-http-epoll-3] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar a420525d-93a4-464d-bb26-6539a0921692 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:26.637 [reactor-http-epoll-2] WARN  r.n.http.client.HttpClientConnect - [fee8959c-1, L:/172.19.0.4:57278 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:26.637 [reactor-http-epoll-2] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar bd0b24dc-e1d9-4136-ac14-efd5a0a3d210 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:26.642 [reactor-http-epoll-3] WARN  r.n.http.client.HttpClientConnect - [83afbc84-1, L:/172.19.0.4:57290 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:26.642 [reactor-http-epoll-3] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar f5b5cd78-a920-4b4f-9ce5-2c9c8874ba89 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:26.647 [reactor-http-epoll-4] WARN  r.n.http.client.HttpClientConnect - [2743c25f-1, L:/172.19.0.4:57302 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:26.648 [reactor-http-epoll-4] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 77cc75df-d363-4c98-94ed-97eb284e7108 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:26.653 [reactor-http-epoll-1] WARN  r.n.http.client.HttpClientConnect - [33769729-1, L:/172.19.0.4:57308 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:26.653 [reactor-http-epoll-1] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 5225440c-1a36-484a-b25f-99021bce6ed3 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:26.658 [reactor-http-epoll-2] WARN  r.n.http.client.HttpClientConnect - [6d25d0db-1, L:/172.19.0.4:57312 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:26.658 [reactor-http-epoll-2] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar acc89248-e22a-4145-b8df-de40356988fc com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:26.663 [reactor-http-epoll-3] WARN  r.n.http.client.HttpClientConnect - [fc2bf4bb-1, L:/172.19.0.4:57320 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:26.664 [reactor-http-epoll-3] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar b01ac277-7a62-4d81-8478-d0c001315408 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:26.669 [reactor-http-epoll-4] WARN  r.n.http.client.HttpClientConnect - [d0de0d7f-1, L:/172.19.0.4:57326 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:26.669 [reactor-http-epoll-4] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar ea2bb287-cfc3-4ed6-beb0-57a3cdae7177 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:26.674 [reactor-http-epoll-1] WARN  r.n.http.client.HttpClientConnect - [36392667-1, L:/172.19.0.4:57328 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:26.674 [reactor-http-epoll-1] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 411103b0-c72f-4890-b3fb-d9c7a2c85cbf com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:26.679 [reactor-http-epoll-2] WARN  r.n.http.client.HttpClientConnect - [8b63c7d6-1, L:/172.19.0.4:57330 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:26.679 [reactor-http-epoll-2] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 64aab8bf-49ad-416c-b7d5-69fd0a9b0755 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:26.684 [reactor-http-epoll-3] WARN  r.n.http.client.HttpClientConnect - [31507b5c-1, L:/172.19.0.4:57334 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:26.684 [reactor-http-epoll-3] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 59d4d88a-65ff-4905-a50a-916924d92581 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:26.690 [reactor-http-epoll-4] WARN  r.n.http.client.HttpClientConnect - [df9a1815-1, L:/172.19.0.4:57336 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:26.690 [reactor-http-epoll-4] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 7ee7b305-488c-4e96-b5b8-4ebad6446489 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:26.695 [reactor-http-epoll-1] WARN  r.n.http.client.HttpClientConnect - [994d17ad-1, L:/172.19.0.4:57352 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:26.695 [reactor-http-epoll-1] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 29b03a3f-d77b-40b8-bca4-bbd20bf66671 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:26.700 [reactor-http-epoll-2] WARN  r.n.http.client.HttpClientConnect - [ec201c84-1, L:/172.19.0.4:57364 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:26.700 [reactor-http-epoll-2] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 2b585ddf-d958-4d4f-aac0-d5ceb6d10086 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:26.705 [reactor-http-epoll-3] WARN  r.n.http.client.HttpClientConnect - [fd88e7a3-1, L:/172.19.0.4:57374 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:26.706 [reactor-http-epoll-3] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar b1933260-8c8d-4d7b-aaca-e32cee93229e com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:26.711 [reactor-http-epoll-4] WARN  r.n.http.client.HttpClientConnect - [a859b448-1, L:/172.19.0.4:57384 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:26.711 [reactor-http-epoll-4] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 5ba11d8e-76ac-4b3b-b04c-6e6258cf1b37 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:26.716 [reactor-http-epoll-1] WARN  r.n.http.client.HttpClientConnect - [6fa1f36b-1, L:/172.19.0.4:57386 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:26.716 [reactor-http-epoll-1] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 9e0bec69-cac0-4440-856b-496301aa7924 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:26.721 [reactor-http-epoll-2] WARN  r.n.http.client.HttpClientConnect - [417e9d57-1, L:/172.19.0.4:57388 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:26.721 [reactor-http-epoll-2] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar ccea94ba-ec0a-4f64-98e4-22b9b24c690f com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:26.726 [reactor-http-epoll-3] WARN  r.n.http.client.HttpClientConnect - [3d7267ed-1, L:/172.19.0.4:57396 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:26.726 [reactor-http-epoll-3] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 8f0ba5ba-0f85-423b-bfba-8070b5f97c24 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:26.731 [reactor-http-epoll-4] WARN  r.n.http.client.HttpClientConnect - [76d540ae-1, L:/172.19.0.4:57412 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:26.731 [reactor-http-epoll-4] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 95d6e51d-4d77-4884-a884-ce64bc21447d com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:26.736 [reactor-http-epoll-1] WARN  r.n.http.client.HttpClientConnect - [34e38247-1, L:/172.19.0.4:57414 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:26.737 [reactor-http-epoll-1] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 4c80f042-cf09-4655-a1fb-245bf005f4d3 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:26.742 [reactor-http-epoll-2] WARN  r.n.http.client.HttpClientConnect - [b7b2e06e-1, L:/172.19.0.4:57420 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:26.742 [reactor-http-epoll-2] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar d91ead74-0b37-4d19-ad79-37f38f85c585 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:26.747 [reactor-http-epoll-3] WARN  r.n.http.client.HttpClientConnect - [02273b1a-1, L:/172.19.0.4:57436 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:26.747 [reactor-http-epoll-3] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 39fdb11e-ef9a-420c-87ef-629f3b8c4b97 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:26.752 [reactor-http-epoll-4] WARN  r.n.http.client.HttpClientConnect - [708db188-1, L:/172.19.0.4:57446 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:26.752 [reactor-http-epoll-4] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar e3cec5ae-592a-4df9-826d-6d8c991001a9 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:26.757 [reactor-http-epoll-1] WARN  r.n.http.client.HttpClientConnect - [1627000d-1, L:/172.19.0.4:57460 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:26.758 [reactor-http-epoll-1] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 2ac6b719-0862-497d-ab3c-2f485e29bd8b com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:26.763 [reactor-http-epoll-2] WARN  r.n.http.client.HttpClientConnect - [832ea45b-1, L:/172.19.0.4:57474 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:26.763 [reactor-http-epoll-2] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 33b7a42e-15c4-47e1-ada8-33f61d067c30 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:26.768 [reactor-http-epoll-3] WARN  r.n.http.client.HttpClientConnect - [8529964b-1, L:/172.19.0.4:57476 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:26.768 [reactor-http-epoll-3] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar a43d49bd-31dd-4a23-9ab4-09b31ff3b4a4 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:26.773 [reactor-http-epoll-4] WARN  r.n.http.client.HttpClientConnect - [ba856a33-1, L:/172.19.0.4:57490 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:26.773 [reactor-http-epoll-4] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 31f3c386-7d7c-44e5-94b1-e53a63d07263 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:26.778 [reactor-http-epoll-1] WARN  r.n.http.client.HttpClientConnect - [2700e9e5-1, L:/172.19.0.4:57492 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:26.778 [reactor-http-epoll-1] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 4a0ce87a-3f46-40c7-a5e9-670b0001b9cc com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:26.783 [reactor-http-epoll-2] WARN  r.n.http.client.HttpClientConnect - [b87e3c64-1, L:/172.19.0.4:57494 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:26.784 [reactor-http-epoll-2] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 6e3df44a-ae17-4b5f-a7ab-f5cd80ede0ac com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:26.789 [reactor-http-epoll-3] WARN  r.n.http.client.HttpClientConnect - [20022716-1, L:/172.19.0.4:57508 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:26.789 [reactor-http-epoll-3] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 91c5852d-891e-4f7c-be85-7f02da2ad2ec com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:26.794 [reactor-http-epoll-4] WARN  r.n.http.client.HttpClientConnect - [025c9ac5-1, L:/172.19.0.4:57520 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:26.794 [reactor-http-epoll-4] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 1989def4-d361-4f8b-a2b2-9d3efe694b74 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:26.799 [reactor-http-epoll-1] WARN  r.n.http.client.HttpClientConnect - [a64ab249-1, L:/172.19.0.4:57534 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:26.799 [reactor-http-epoll-1] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar f354bdbb-4a0b-4baf-b6e3-c640f9d41445 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:26.804 [reactor-http-epoll-2] WARN  r.n.http.client.HttpClientConnect - [502aaaf7-1, L:/172.19.0.4:57538 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:26.805 [reactor-http-epoll-2] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 615b97c1-7b53-47fa-9d3c-20e858436b82 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:26.810 [reactor-http-epoll-3] WARN  r.n.http.client.HttpClientConnect - [01dbf0a9-1, L:/172.19.0.4:57548 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:26.810 [reactor-http-epoll-3] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar eb513401-3f37-4bba-a799-e4e21ec87126 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:26.815 [reactor-http-epoll-4] WARN  r.n.http.client.HttpClientConnect - [3ff17503-1, L:/172.19.0.4:57556 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:26.815 [reactor-http-epoll-4] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar b68e025c-d6d8-4f7c-afee-4ba4a11a83b1 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:26.820 [reactor-http-epoll-1] WARN  r.n.http.client.HttpClientConnect - [99522d35-1, L:/172.19.0.4:57564 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:26.820 [reactor-http-epoll-1] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar a95f0e32-80d0-4822-a8ba-54dc91ff288a com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:26.836 [reactor-http-epoll-4] WARN  r.n.http.client.HttpClientConnect - [691becd6-1, L:/172.19.0.4:57596 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:26.836 [reactor-http-epoll-4] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 7c10b407-a199-4dbd-8ac0-93fda3c61840 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:26.841 [reactor-http-epoll-1] WARN  r.n.http.client.HttpClientConnect - [6429645e-1, L:/172.19.0.4:57602 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:26.841 [reactor-http-epoll-1] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 0bfe3759-2e75-46e5-8c75-344dc1522ecc com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:26.846 [reactor-http-epoll-2] WARN  r.n.http.client.HttpClientConnect - [7c9d607b-1, L:/172.19.0.4:57618 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:26.847 [reactor-http-epoll-2] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 22a48a41-f833-429c-b2c8-dfda7d349982 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:26.852 [reactor-http-epoll-3] WARN  r.n.http.client.HttpClientConnect - [83a88b56-1, L:/172.19.0.4:57632 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:26.852 [reactor-http-epoll-3] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 3026fbe4-afbe-4d55-9f81-8562d23788e9 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:26.857 [reactor-http-epoll-4] WARN  r.n.http.client.HttpClientConnect - [9f212a99-1, L:/172.19.0.4:57638 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:26.857 [reactor-http-epoll-4] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 4a9853ae-2809-478a-b679-c8644cf84949 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:26.862 [reactor-http-epoll-1] WARN  r.n.http.client.HttpClientConnect - [aad9b557-1, L:/172.19.0.4:57640 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:26.862 [reactor-http-epoll-1] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 4e5b973e-d09c-40f1-8473-51a3dcd801e8 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:26.868 [reactor-http-epoll-2] WARN  r.n.http.client.HttpClientConnect - [19054043-1, L:/172.19.0.4:57656 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:26.868 [reactor-http-epoll-2] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 07a16b86-036b-4d1b-bcf6-64df6e6ec63d com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:26.873 [reactor-http-epoll-3] WARN  r.n.http.client.HttpClientConnect - [728a8b61-1, L:/172.19.0.4:57670 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:26.873 [reactor-http-epoll-3] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 519d2ede-959b-47a2-88f6-aa6f5637f1f4 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:26.878 [reactor-http-epoll-4] WARN  r.n.http.client.HttpClientConnect - [4826fd25-1, L:/172.19.0.4:57680 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:26.878 [reactor-http-epoll-4] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 8ca3cbea-06bb-41ba-aa1f-f5c73a913410 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:26.883 [reactor-http-epoll-1] WARN  r.n.http.client.HttpClientConnect - [c40fc367-1, L:/172.19.0.4:57686 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:26.883 [reactor-http-epoll-1] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 9ac1e258-f6cb-451c-8927-9638aa83151a com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:26.899 [reactor-http-epoll-4] WARN  r.n.http.client.HttpClientConnect - [fe79fa86-1, L:/172.19.0.4:57712 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:26.899 [reactor-http-epoll-4] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar bfca0402-5e78-4ac2-9659-da4d382e09bd com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:26.904 [reactor-http-epoll-1] WARN  r.n.http.client.HttpClientConnect - [7f6ef604-1, L:/172.19.0.4:57720 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:26.904 [reactor-http-epoll-1] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 43fc9983-7e38-47d0-b48e-29af4429d388 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:26.909 [reactor-http-epoll-2] WARN  r.n.http.client.HttpClientConnect - [87b719ed-1, L:/172.19.0.4:57726 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:26.909 [reactor-http-epoll-2] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 5e53c9f9-d5ef-493a-8164-32c27086dd57 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:26.914 [reactor-http-epoll-3] WARN  r.n.http.client.HttpClientConnect - [708c70e9-1, L:/172.19.0.4:57728 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:26.915 [reactor-http-epoll-3] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 0d3e5e87-a7fa-491d-822b-713d547d5f56 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:26.920 [reactor-http-epoll-4] WARN  r.n.http.client.HttpClientConnect - [962f2800-1, L:/172.19.0.4:57744 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:26.920 [reactor-http-epoll-4] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 40f60d04-759e-43a0-9d74-8e0231bcedce com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:26.925 [reactor-http-epoll-1] WARN  r.n.http.client.HttpClientConnect - [693c77b0-1, L:/172.19.0.4:57750 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:26.925 [reactor-http-epoll-1] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar acae3656-ef96-4b2c-86d7-a7b7bfb6ab73 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:26.930 [reactor-http-epoll-2] WARN  r.n.http.client.HttpClientConnect - [98381090-1, L:/172.19.0.4:57764 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:26.930 [reactor-http-epoll-2] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar b16e5e67-f95f-4694-ac31-24b0f8d25f48 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:26.935 [reactor-http-epoll-3] WARN  r.n.http.client.HttpClientConnect - [3b2eeee3-1, L:/172.19.0.4:57766 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:26.935 [reactor-http-epoll-3] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar baf485fe-c298-4186-91a0-55d19d3fd81a com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:26.941 [reactor-http-epoll-4] WARN  r.n.http.client.HttpClientConnect - [9d67769e-1, L:/172.19.0.4:57768 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:26.941 [reactor-http-epoll-4] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 2adf8233-43ce-47ad-b137-b10da24cb437 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:26.946 [reactor-http-epoll-1] WARN  r.n.http.client.HttpClientConnect - [401fb820-1, L:/172.19.0.4:57774 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:26.946 [reactor-http-epoll-1] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 5a7d53bf-24d1-4d99-a446-32e40efdd164 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:26.951 [reactor-http-epoll-2] WARN  r.n.http.client.HttpClientConnect - [cb982f0b-1, L:/172.19.0.4:57784 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:26.951 [reactor-http-epoll-2] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 5aca2736-5161-4f4b-a6d2-66234f2865cf com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:26.962 [reactor-http-epoll-4] WARN  r.n.http.client.HttpClientConnect - [d0e6ee3f-1, L:/172.19.0.4:57806 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:26.962 [reactor-http-epoll-4] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar bd4b5419-c0d5-44cf-9ff8-73da3ef463ab com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:26.967 [reactor-http-epoll-1] WARN  r.n.http.client.HttpClientConnect - [79bd1723-1, L:/172.19.0.4:57810 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:26.967 [reactor-http-epoll-1] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar dd4e710b-f29a-4cb3-9fb7-466bac0d3f0c com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:26.972 [reactor-http-epoll-2] WARN  r.n.http.client.HttpClientConnect - [05e3931a-1, L:/172.19.0.4:57820 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:26.972 [reactor-http-epoll-2] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 7ace6afd-78c5-4c7d-bf46-876f128eb712 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:26.977 [reactor-http-epoll-3] WARN  r.n.http.client.HttpClientConnect - [07ea9cae-1, L:/172.19.0.4:57822 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:26.977 [reactor-http-epoll-3] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 70bbb2ce-e6f8-4cf6-8e5b-99a68f8e8906 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:26.982 [reactor-http-epoll-4] WARN  r.n.http.client.HttpClientConnect - [c45efc35-1, L:/172.19.0.4:57832 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:26.983 [reactor-http-epoll-4] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 9ad50071-5a7f-4dd3-b8a6-b7f3dab2b000 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:26.988 [reactor-http-epoll-1] WARN  r.n.http.client.HttpClientConnect - [2552e9ee-1, L:/172.19.0.4:57846 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:26.988 [reactor-http-epoll-1] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar e59f0b48-b7f6-4a0d-9cb2-e9dbf3ca0eb2 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:26.993 [reactor-http-epoll-2] WARN  r.n.http.client.HttpClientConnect - [5248e147-1, L:/172.19.0.4:57862 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:26.993 [reactor-http-epoll-2] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar e0bc251e-2d2d-4335-b6d7-a69680009644 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:26.998 [reactor-http-epoll-3] WARN  r.n.http.client.HttpClientConnect - [d58e986c-1, L:/172.19.0.4:57876 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:26.998 [reactor-http-epoll-3] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar a36561f7-da6f-4d47-a695-e900d1bac85b com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.014 [reactor-http-epoll-2] WARN  r.n.http.client.HttpClientConnect - [8fed0093-1, L:/172.19.0.4:57900 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.014 [reactor-http-epoll-2] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 43663272-a591-47bb-b5f5-15fcf424bd0a com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.019 [reactor-http-epoll-3] WARN  r.n.http.client.HttpClientConnect - [45166a04-1, L:/172.19.0.4:57916 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.019 [reactor-http-epoll-3] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar cf8393f2-6c1f-4e7b-9db2-30afbeed76d9 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.025 [reactor-http-epoll-4] WARN  r.n.http.client.HttpClientConnect - [8e119b0b-1, L:/172.19.0.4:57924 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.025 [reactor-http-epoll-4] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 478a4f6b-9edc-49a7-b995-46dfead87bff com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.030 [reactor-http-epoll-1] WARN  r.n.http.client.HttpClientConnect - [8a76b7e6-1, L:/172.19.0.4:57938 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.030 [reactor-http-epoll-1] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar e7eda57e-1973-4bd6-a4ce-47de3e2818a1 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.035 [reactor-http-epoll-2] WARN  r.n.http.client.HttpClientConnect - [04f0c9a7-1, L:/172.19.0.4:57954 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.035 [reactor-http-epoll-2] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 749da7d9-d293-452d-8098-ff334787b797 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.041 [reactor-http-epoll-4] WARN  r.n.http.client.HttpClientConnect - [db31abd3-1, L:/172.19.0.4:57972 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.041 [reactor-http-epoll-4] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 9b2fd6e8-26df-4e7b-b734-6e071f1d2940 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.046 [reactor-http-epoll-1] WARN  r.n.http.client.HttpClientConnect - [31fd0b5b-1, L:/172.19.0.4:57978 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.046 [reactor-http-epoll-1] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 45aa004a-2c22-4cf1-bf68-09be0a55c3a7 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.051 [reactor-http-epoll-2] WARN  r.n.http.client.HttpClientConnect - [ed64fe68-1, L:/172.19.0.4:57980 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.052 [reactor-http-epoll-2] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 1d04cd6b-858a-4f64-9651-eb85d9a769c6 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.057 [reactor-http-epoll-3] WARN  r.n.http.client.HttpClientConnect - [f7b326d1-1, L:/172.19.0.4:57990 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.057 [reactor-http-epoll-3] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar dd1f767d-5a3d-475b-bd81-f9db339d52cc com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.062 [reactor-http-epoll-4] WARN  r.n.http.client.HttpClientConnect - [3be261f4-1, L:/172.19.0.4:57994 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.062 [reactor-http-epoll-4] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 18cf6fd5-d9f1-40b2-912b-290dc4aae18c com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.073 [reactor-http-epoll-2] WARN  r.n.http.client.HttpClientConnect - [63aa5a60-1, L:/172.19.0.4:58016 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.073 [reactor-http-epoll-2] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 50b26e5b-3e00-4bf6-a612-6f9994b1bdfc com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.078 [reactor-http-epoll-3] WARN  r.n.http.client.HttpClientConnect - [23f784d5-1, L:/172.19.0.4:58022 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.078 [reactor-http-epoll-3] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar b6012f9a-8c4c-4a42-9bfd-5620c703cb0d com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.083 [reactor-http-epoll-4] WARN  r.n.http.client.HttpClientConnect - [26364c97-1, L:/172.19.0.4:58024 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.083 [reactor-http-epoll-4] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar ae25b9d4-ae15-4454-959f-7801aede93f5 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.089 [reactor-http-epoll-1] WARN  r.n.http.client.HttpClientConnect - [9c4ea014-1, L:/172.19.0.4:58032 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.089 [reactor-http-epoll-1] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 25b8d9dc-40f3-493a-93ba-efe2c35e5312 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.094 [reactor-http-epoll-2] WARN  r.n.http.client.HttpClientConnect - [249e83ac-1, L:/172.19.0.4:58040 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.094 [reactor-http-epoll-2] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar fb67ab90-2ab7-4878-8cb5-22e19615b39d com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.105 [reactor-http-epoll-4] WARN  r.n.http.client.HttpClientConnect - [72e99d67-1, L:/172.19.0.4:58048 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.105 [reactor-http-epoll-4] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 7174d731-1554-4623-a7ea-f836c6c12764 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.110 [reactor-http-epoll-1] WARN  r.n.http.client.HttpClientConnect - [9214b549-1, L:/172.19.0.4:58056 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.110 [reactor-http-epoll-1] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 69a5e14e-a3eb-400e-b527-5a8f61ce1b01 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.115 [reactor-http-epoll-2] WARN  r.n.http.client.HttpClientConnect - [436da918-1, L:/172.19.0.4:58064 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.115 [reactor-http-epoll-2] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar d8927b40-65bf-4e11-88af-5db00b2685a2 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.121 [reactor-http-epoll-3] WARN  r.n.http.client.HttpClientConnect - [9f0e4163-1, L:/172.19.0.4:58078 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.121 [reactor-http-epoll-3] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 8f8d9748-5541-468d-b81d-8f0222c8269a com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.126 [reactor-http-epoll-4] WARN  r.n.http.client.HttpClientConnect - [8f7251d0-1, L:/172.19.0.4:58084 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.126 [reactor-http-epoll-4] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar aff948ef-f17f-4f5c-b352-da66cb33169d com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.137 [reactor-http-epoll-2] WARN  r.n.http.client.HttpClientConnect - [dec0cddd-1, L:/172.19.0.4:58106 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.137 [reactor-http-epoll-2] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 0398ddec-53c4-4cec-8a8c-33a293a4aa6a com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.142 [reactor-http-epoll-3] WARN  r.n.http.client.HttpClientConnect - [7bf374eb-1, L:/172.19.0.4:58120 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.142 [reactor-http-epoll-3] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar c43aac00-015a-4ea5-9ef2-40907842f856 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.147 [reactor-http-epoll-4] WARN  r.n.http.client.HttpClientConnect - [c87a3de9-1, L:/172.19.0.4:58132 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.148 [reactor-http-epoll-4] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar fc8cc4ac-34c4-4b84-b03d-3479b27a14b4 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.153 [reactor-http-epoll-1] WARN  r.n.http.client.HttpClientConnect - [c2e7bb99-1, L:/172.19.0.4:58148 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.153 [reactor-http-epoll-1] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar ed3bfd63-5e86-461b-9d2e-caa615735a1d com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.158 [reactor-http-epoll-2] WARN  r.n.http.client.HttpClientConnect - [1b1587ca-1, L:/172.19.0.4:58160 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.158 [reactor-http-epoll-2] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar eb377b87-1a3e-428e-85b1-5f07aa87eb08 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.164 [reactor-http-epoll-3] WARN  r.n.http.client.HttpClientConnect - [030b3b90-1, L:/172.19.0.4:58176 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.164 [reactor-http-epoll-3] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 91ee129e-0b06-4cd2-81b8-ee67a7bb5863 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.169 [reactor-http-epoll-4] WARN  r.n.http.client.HttpClientConnect - [52eeba08-1, L:/172.19.0.4:58178 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.169 [reactor-http-epoll-4] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar a7e5fd47-8c58-4e0f-ab95-ffea2b8c1ce9 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.174 [reactor-http-epoll-1] WARN  r.n.http.client.HttpClientConnect - [3ac8e619-1, L:/172.19.0.4:58182 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.174 [reactor-http-epoll-1] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar e5db9dde-7044-4cfd-8622-3748cf865d0b com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.180 [reactor-http-epoll-2] WARN  r.n.http.client.HttpClientConnect - [cb015059-1, L:/172.19.0.4:58188 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.180 [reactor-http-epoll-2] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar d7473a23-5820-41e7-8697-496a5eab1722 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.185 [reactor-http-epoll-3] WARN  r.n.http.client.HttpClientConnect - [1f17dd3d-1, L:/172.19.0.4:58198 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.185 [reactor-http-epoll-3] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 7fe133ae-5682-4118-80cc-e3a983960ad1 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.190 [reactor-http-epoll-4] WARN  r.n.http.client.HttpClientConnect - [ef590d09-1, L:/172.19.0.4:58214 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.191 [reactor-http-epoll-4] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 6ff2eef1-e78b-4d3e-927e-ae2cfe7067d9 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.201 [reactor-http-epoll-2] WARN  r.n.http.client.HttpClientConnect - [f290acc0-1, L:/172.19.0.4:58242 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.201 [reactor-http-epoll-2] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 05a534e3-dfd4-4fed-8a3a-d9e5e5a6038e com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.206 [reactor-http-epoll-3] WARN  r.n.http.client.HttpClientConnect - [470d7e03-1, L:/172.19.0.4:58248 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.206 [reactor-http-epoll-3] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 1f59534f-650d-4e0d-981b-50a4aba47458 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.212 [reactor-http-epoll-4] WARN  r.n.http.client.HttpClientConnect - [55b127a5-1, L:/172.19.0.4:58262 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.212 [reactor-http-epoll-4] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 1c521f6e-b58f-449a-9827-70e37d3a0bd1 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.217 [reactor-http-epoll-1] WARN  r.n.http.client.HttpClientConnect - [f31cb609-1, L:/172.19.0.4:58270 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.217 [reactor-http-epoll-1] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 0cb304ae-5e76-44e7-81de-3c71544c0696 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.222 [reactor-http-epoll-2] WARN  r.n.http.client.HttpClientConnect - [cd865665-1, L:/172.19.0.4:58274 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.222 [reactor-http-epoll-2] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 807d73f0-aee9-49d2-95bd-ba8f5e4d584d com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.227 [reactor-http-epoll-3] WARN  r.n.http.client.HttpClientConnect - [eab4cd5e-1, L:/172.19.0.4:58280 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.227 [reactor-http-epoll-3] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar ea86a654-dba7-4f9a-becd-f014fa687a58 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.233 [reactor-http-epoll-4] WARN  r.n.http.client.HttpClientConnect - [7b46973a-1, L:/172.19.0.4:58282 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.233 [reactor-http-epoll-4] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar ab3d2449-8c1f-406c-ae18-4fb379ea8247 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.238 [reactor-http-epoll-1] WARN  r.n.http.client.HttpClientConnect - [7e0e78b7-1, L:/172.19.0.4:58298 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.238 [reactor-http-epoll-1] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar f4f68f27-ba2e-4340-a083-4994275e2060 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.243 [reactor-http-epoll-2] WARN  r.n.http.client.HttpClientConnect - [fb8ddf33-1, L:/172.19.0.4:58304 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.243 [reactor-http-epoll-2] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 0ae1b01f-a021-498f-b2c1-89accfec316e com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.248 [reactor-http-epoll-3] WARN  r.n.http.client.HttpClientConnect - [f8d0cf96-1, L:/172.19.0.4:58314 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.248 [reactor-http-epoll-3] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar b12c83ee-6bca-4c3b-b46f-31713a28550f com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.253 [reactor-http-epoll-4] WARN  r.n.http.client.HttpClientConnect - [8c395a41-1, L:/172.19.0.4:58316 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.254 [reactor-http-epoll-4] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 5a84f77a-fc6b-4b95-9f2f-8b2e055bbe33 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.259 [reactor-http-epoll-1] WARN  r.n.http.client.HttpClientConnect - [0162c47c-1, L:/172.19.0.4:58326 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.259 [reactor-http-epoll-1] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 5046a8f8-faa5-44f1-a53a-ff4c07310155 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.264 [reactor-http-epoll-2] WARN  r.n.http.client.HttpClientConnect - [4da05dd2-1, L:/172.19.0.4:58330 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.264 [reactor-http-epoll-2] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 194b1eec-b6cb-4cd5-83ed-9723a07a5c4c com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.269 [reactor-http-epoll-3] WARN  r.n.http.client.HttpClientConnect - [c4a27ac3-1, L:/172.19.0.4:58336 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.269 [reactor-http-epoll-3] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 0a46610c-4a64-44c9-910c-23fa3c452ed6 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.275 [reactor-http-epoll-4] WARN  r.n.http.client.HttpClientConnect - [c90fb43b-1, L:/172.19.0.4:58340 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.275 [reactor-http-epoll-4] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 760ac1b3-6d86-49c2-a490-986aeb686928 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.280 [reactor-http-epoll-1] WARN  r.n.http.client.HttpClientConnect - [7a5b8467-1, L:/172.19.0.4:58354 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.280 [reactor-http-epoll-1] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar e7e76ed7-c215-494e-8573-de65d919bf10 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.285 [reactor-http-epoll-2] WARN  r.n.http.client.HttpClientConnect - [7c7c71c0-1, L:/172.19.0.4:58366 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.285 [reactor-http-epoll-2] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 5f308ae7-ab52-4449-b1a6-34c8bb43a565 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.290 [reactor-http-epoll-3] WARN  r.n.http.client.HttpClientConnect - [f84fff91-1, L:/172.19.0.4:58376 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.290 [reactor-http-epoll-3] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar ffaff486-9335-46fc-94e1-4b668a119a2b com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.301 [reactor-http-epoll-1] WARN  r.n.http.client.HttpClientConnect - [1c9775bf-1, L:/172.19.0.4:58394 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.301 [reactor-http-epoll-1] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar f8ffe543-acc1-4838-ad48-e8558c02b473 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.306 [reactor-http-epoll-2] WARN  r.n.http.client.HttpClientConnect - [73d76971-1, L:/172.19.0.4:58406 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.306 [reactor-http-epoll-2] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 3b657538-4549-4e7e-84b2-31039c3229e2 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.311 [reactor-http-epoll-3] WARN  r.n.http.client.HttpClientConnect - [5fc90929-1, L:/172.19.0.4:58416 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.311 [reactor-http-epoll-3] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 69777d15-fbe4-4a41-998f-9f39d30da94e com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.316 [reactor-http-epoll-4] WARN  r.n.http.client.HttpClientConnect - [c8151ae1-1, L:/172.19.0.4:58424 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.317 [reactor-http-epoll-4] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 26e0b9bd-155b-4b7a-bb3b-0a62c84f13be com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.327 [reactor-http-epoll-2] WARN  r.n.http.client.HttpClientConnect - [8da766ee-1, L:/172.19.0.4:58442 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.327 [reactor-http-epoll-2] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 395e576a-56c3-4445-a276-38573e12062c com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.332 [reactor-http-epoll-3] WARN  r.n.http.client.HttpClientConnect - [02973e25-1, L:/172.19.0.4:58446 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.332 [reactor-http-epoll-3] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar d1349474-ab89-489e-aea2-895453307ed1 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.337 [reactor-http-epoll-4] WARN  r.n.http.client.HttpClientConnect - [a15cb6b0-1, L:/172.19.0.4:58452 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.337 [reactor-http-epoll-4] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar c0522fab-9c8a-42a0-b624-6321a79d9a59 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.342 [reactor-http-epoll-1] WARN  r.n.http.client.HttpClientConnect - [483fef7a-1, L:/172.19.0.4:58458 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.343 [reactor-http-epoll-1] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 468d566d-4603-46bb-bf10-3e5c1257aba9 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.348 [reactor-http-epoll-2] WARN  r.n.http.client.HttpClientConnect - [4b7e6fd3-1, L:/172.19.0.4:58472 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.348 [reactor-http-epoll-2] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar e9d9ff66-1890-44a8-8f37-533fd7d41aae com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.353 [reactor-http-epoll-3] WARN  r.n.http.client.HttpClientConnect - [3a537195-1, L:/172.19.0.4:58474 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.353 [reactor-http-epoll-3] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 07f9e7e2-a3ef-46e7-b21a-a7abf51b346f com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.358 [reactor-http-epoll-4] WARN  r.n.http.client.HttpClientConnect - [7343d88a-1, L:/172.19.0.4:58480 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.358 [reactor-http-epoll-4] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 2d4fc7ba-97ff-41b3-bb75-1df0b2333f37 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.363 [reactor-http-epoll-1] WARN  r.n.http.client.HttpClientConnect - [6f7af237-1, L:/172.19.0.4:58486 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.363 [reactor-http-epoll-1] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar eee2904d-db98-4528-aac2-951934aff407 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.374 [reactor-http-epoll-3] WARN  r.n.http.client.HttpClientConnect - [23f4d328-1, L:/172.19.0.4:58500 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.374 [reactor-http-epoll-3] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 58e96f19-ea13-48f6-9305-d3f3836f76d0 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.379 [reactor-http-epoll-4] WARN  r.n.http.client.HttpClientConnect - [d532ad0e-1, L:/172.19.0.4:58508 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.379 [reactor-http-epoll-4] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 40790449-2880-4177-8cab-b917d77a0d7a com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.384 [reactor-http-epoll-1] WARN  r.n.http.client.HttpClientConnect - [2b8b1022-1, L:/172.19.0.4:58510 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.384 [reactor-http-epoll-1] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 528fbc0e-3434-45b4-bbc0-c4bcd6ac42e0 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.389 [reactor-http-epoll-2] WARN  r.n.http.client.HttpClientConnect - [95b320b7-1, L:/172.19.0.4:58514 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.389 [reactor-http-epoll-2] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar e8789aff-c938-4e46-8198-e0c132c2f8a7 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.400 [reactor-http-epoll-4] WARN  r.n.http.client.HttpClientConnect - [124a05b8-1, L:/172.19.0.4:58544 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.400 [reactor-http-epoll-4] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar e27e3360-eb65-4a99-9cc3-47e0dc8bf69a com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.405 [reactor-http-epoll-1] WARN  r.n.http.client.HttpClientConnect - [22895917-1, L:/172.19.0.4:58554 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.405 [reactor-http-epoll-1] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 43f24f55-27ac-4d8f-8c64-2b5a531c9c25 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.410 [reactor-http-epoll-2] WARN  r.n.http.client.HttpClientConnect - [6de3e0c5-1, L:/172.19.0.4:58558 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.410 [reactor-http-epoll-2] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 4e32d0b6-59ae-40cb-a817-981a1daa0fc1 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.415 [reactor-http-epoll-3] WARN  r.n.http.client.HttpClientConnect - [34219386-1, L:/172.19.0.4:58572 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.415 [reactor-http-epoll-3] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 2b6c662b-4ffd-41d7-b28d-7e8e5ed95d51 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.420 [reactor-http-epoll-4] WARN  r.n.http.client.HttpClientConnect - [95d83101-1, L:/172.19.0.4:58588 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.421 [reactor-http-epoll-4] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar a9da8bb6-5643-4336-87de-21f99828f5d3 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.426 [reactor-http-epoll-1] WARN  r.n.http.client.HttpClientConnect - [bbc922ab-1, L:/172.19.0.4:58592 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.426 [reactor-http-epoll-1] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar d2de6972-1242-4c77-992f-423c7d5babd7 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.431 [reactor-http-epoll-2] WARN  r.n.http.client.HttpClientConnect - [8e2b602d-1, L:/172.19.0.4:58600 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.431 [reactor-http-epoll-2] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 16b747a8-88d6-4ea1-b916-e1c39c81fdbf com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.436 [reactor-http-epoll-3] WARN  r.n.http.client.HttpClientConnect - [8f5f9016-1, L:/172.19.0.4:58608 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.436 [reactor-http-epoll-3] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 082bdef1-1fba-41c8-a20b-40f862801ef6 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.441 [reactor-http-epoll-4] WARN  r.n.http.client.HttpClientConnect - [8571fb53-1, L:/172.19.0.4:58622 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.441 [reactor-http-epoll-4] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar d7308946-1366-49d9-83df-79140d939e27 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.446 [reactor-http-epoll-1] WARN  r.n.http.client.HttpClientConnect - [b58a10dd-1, L:/172.19.0.4:58624 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.447 [reactor-http-epoll-1] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 0bc330a8-209c-43fe-bed2-fa5e3f9fcbcc com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.452 [reactor-http-epoll-2] WARN  r.n.http.client.HttpClientConnect - [58337b2f-1, L:/172.19.0.4:58640 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.452 [reactor-http-epoll-2] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar a4fdf4ab-f4b6-4aae-ac0f-58a640d41578 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.457 [reactor-http-epoll-3] WARN  r.n.http.client.HttpClientConnect - [eb5f98e1-1, L:/172.19.0.4:58650 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.457 [reactor-http-epoll-3] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 35c2a171-d364-4605-9ff0-681a18e4e8f8 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.462 [reactor-http-epoll-4] WARN  r.n.http.client.HttpClientConnect - [58a8bd38-1, L:/172.19.0.4:58652 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.462 [reactor-http-epoll-4] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 8858b2b3-08de-4997-87b7-1205a4ad7607 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.467 [reactor-http-epoll-1] WARN  r.n.http.client.HttpClientConnect - [d0a0218d-1, L:/172.19.0.4:58664 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.467 [reactor-http-epoll-1] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 8ca93f20-c61f-4529-b654-b0ba8b20b53c com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.473 [reactor-http-epoll-2] WARN  r.n.http.client.HttpClientConnect - [64b91a30-1, L:/172.19.0.4:58680 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.473 [reactor-http-epoll-2] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 9bf5c7e8-90f9-4a82-b0b6-0a535a62e8ac com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.478 [reactor-http-epoll-3] WARN  r.n.http.client.HttpClientConnect - [a64f8f70-1, L:/172.19.0.4:58690 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.478 [reactor-http-epoll-3] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 9dcefc72-3128-4228-a658-6e12423840da com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.483 [reactor-http-epoll-4] WARN  r.n.http.client.HttpClientConnect - [1e23cf13-1, L:/172.19.0.4:58704 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.483 [reactor-http-epoll-4] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 1b26c769-7fef-42ad-af2e-091a1344fe4e com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.488 [reactor-http-epoll-1] WARN  r.n.http.client.HttpClientConnect - [0b3190b4-1, L:/172.19.0.4:58708 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.488 [reactor-http-epoll-1] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar c8b8506d-9f97-4625-b6e0-1c3af09e00a5 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.493 [reactor-http-epoll-2] WARN  r.n.http.client.HttpClientConnect - [5a632b3d-1, L:/172.19.0.4:58716 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.494 [reactor-http-epoll-2] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 818cb0f8-d572-442e-aea6-ad612f192874 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.499 [reactor-http-epoll-3] WARN  r.n.http.client.HttpClientConnect - [69c9b105-1, L:/172.19.0.4:58726 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.499 [reactor-http-epoll-3] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar b2ac0636-57bb-4618-93d1-a4cd86341243 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.504 [reactor-http-epoll-4] WARN  r.n.http.client.HttpClientConnect - [75ee619d-1, L:/172.19.0.4:58742 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.504 [reactor-http-epoll-4] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 6bb072d7-0e92-4517-9d86-01c4ed6d9411 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.509 [reactor-http-epoll-1] WARN  r.n.http.client.HttpClientConnect - [d31ccd8e-1, L:/172.19.0.4:58758 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.509 [reactor-http-epoll-1] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar dcca147e-844d-4aa5-8260-2ea55c2a08ff com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.515 [reactor-http-epoll-2] WARN  r.n.http.client.HttpClientConnect - [3c05d6eb-1, L:/172.19.0.4:58764 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.515 [reactor-http-epoll-2] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 884139d2-c987-4a75-afd4-0383cb895f6a com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.520 [reactor-http-epoll-3] WARN  r.n.http.client.HttpClientConnect - [6e3fdc5b-1, L:/172.19.0.4:58768 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.520 [reactor-http-epoll-3] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 056e246a-c294-47e5-b350-3dfc6bdea55b com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.525 [reactor-http-epoll-4] WARN  r.n.http.client.HttpClientConnect - [31099f9f-1, L:/172.19.0.4:58772 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.525 [reactor-http-epoll-4] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar d4caf03e-c52d-4178-b37a-7885158f0d26 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.530 [reactor-http-epoll-1] WARN  r.n.http.client.HttpClientConnect - [ab93727e-1, L:/172.19.0.4:58786 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.530 [reactor-http-epoll-1] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar d7b5a22f-e781-47c7-8b6f-b02a3920127a com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.536 [reactor-http-epoll-2] WARN  r.n.http.client.HttpClientConnect - [8d60f0a5-1, L:/172.19.0.4:58792 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.536 [reactor-http-epoll-2] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 4dd9bc86-27f0-45a8-aaca-c9e5b0fb33da com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.541 [reactor-http-epoll-3] WARN  r.n.http.client.HttpClientConnect - [389f1b5a-1, L:/172.19.0.4:58798 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.541 [reactor-http-epoll-3] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 6e1e8070-4657-4ec5-beed-6fd6f6c53102 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.546 [reactor-http-epoll-4] WARN  r.n.http.client.HttpClientConnect - [b67e3c4d-1, L:/172.19.0.4:58812 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.546 [reactor-http-epoll-4] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 1a7b5739-1f2c-4191-b37f-6f1ecacb8ad3 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.551 [reactor-http-epoll-1] WARN  r.n.http.client.HttpClientConnect - [f6443af9-1, L:/172.19.0.4:58818 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.552 [reactor-http-epoll-1] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 80a8eab6-dfc4-4b19-84cf-4595d022d884 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.557 [reactor-http-epoll-2] WARN  r.n.http.client.HttpClientConnect - [05c29d03-1, L:/172.19.0.4:58820 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.557 [reactor-http-epoll-2] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 71fe7e64-9baf-4435-886c-bd7d0b0832a2 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.562 [reactor-http-epoll-3] WARN  r.n.http.client.HttpClientConnect - [eed1f460-1, L:/172.19.0.4:58834 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.562 [reactor-http-epoll-3] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar f00f3bec-f05b-41fe-842a-e86ea6a72843 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.567 [reactor-http-epoll-4] WARN  r.n.http.client.HttpClientConnect - [96d39efd-1, L:/172.19.0.4:58836 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.567 [reactor-http-epoll-4] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 6df2fb6d-0171-4c5a-8acf-317baba9d2e1 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.572 [reactor-http-epoll-1] WARN  r.n.http.client.HttpClientConnect - [d1d6eeb2-1, L:/172.19.0.4:58852 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.573 [reactor-http-epoll-1] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar d49fe0dd-a347-4a09-8581-6c8482be0400 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.578 [reactor-http-epoll-2] WARN  r.n.http.client.HttpClientConnect - [b7b7b47b-1, L:/172.19.0.4:58860 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.578 [reactor-http-epoll-2] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 3ae52925-cbf9-4e02-83e1-05396848403c com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.583 [reactor-http-epoll-3] WARN  r.n.http.client.HttpClientConnect - [3e3c1a5d-1, L:/172.19.0.4:58866 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.583 [reactor-http-epoll-3] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 22170044-bfd4-4053-b71e-475bfc7701a2 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.588 [reactor-http-epoll-4] WARN  r.n.http.client.HttpClientConnect - [c6c1b581-1, L:/172.19.0.4:58872 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.588 [reactor-http-epoll-4] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 49a45b0c-cc3d-447a-823a-99576b8b9dbd com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.593 [reactor-http-epoll-1] WARN  r.n.http.client.HttpClientConnect - [31c9d118-1, L:/172.19.0.4:58878 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.593 [reactor-http-epoll-1] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 0fdcc952-233f-4403-8cba-c0da9979e300 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.598 [reactor-http-epoll-2] WARN  r.n.http.client.HttpClientConnect - [6f6e5ad3-1, L:/172.19.0.4:58882 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.598 [reactor-http-epoll-2] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar f1f5edec-9533-46b4-b0bf-47563b34e715 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.609 [reactor-http-epoll-4] WARN  r.n.http.client.HttpClientConnect - [d09e687d-1, L:/172.19.0.4:58910 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.609 [reactor-http-epoll-4] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar c5403d37-52eb-4364-b615-e4fae4a0f8b2 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.614 [reactor-http-epoll-1] WARN  r.n.http.client.HttpClientConnect - [c7280bf0-1, L:/172.19.0.4:58912 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.614 [reactor-http-epoll-1] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar bcd0122a-8bbd-459a-9aee-c4846488f68b com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.619 [reactor-http-epoll-2] WARN  r.n.http.client.HttpClientConnect - [c92961cc-1, L:/172.19.0.4:58924 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.619 [reactor-http-epoll-2] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar da871876-5da4-4b46-a925-fc88458757f0 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.624 [reactor-http-epoll-3] WARN  r.n.http.client.HttpClientConnect - [bbca2cdf-1, L:/172.19.0.4:58938 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.624 [reactor-http-epoll-3] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 9fc7ebf6-60c8-4ac5-8cb5-1eedcef97340 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.630 [reactor-http-epoll-4] WARN  r.n.http.client.HttpClientConnect - [9c2eef55-1, L:/172.19.0.4:58948 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.630 [reactor-http-epoll-4] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar ac310da1-7f29-4930-a07e-d98c244a7e0d com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.635 [reactor-http-epoll-1] WARN  r.n.http.client.HttpClientConnect - [ca9a9bbd-1, L:/172.19.0.4:58960 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.635 [reactor-http-epoll-1] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar f6b33e14-d00d-403a-9186-049c87d07608 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.640 [reactor-http-epoll-2] WARN  r.n.http.client.HttpClientConnect - [74348f8e-1, L:/172.19.0.4:58968 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.640 [reactor-http-epoll-2] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar c09d7595-3d09-4664-b63f-fa142187de9a com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.645 [reactor-http-epoll-3] WARN  r.n.http.client.HttpClientConnect - [16dfcb2e-1, L:/172.19.0.4:58984 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.645 [reactor-http-epoll-3] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 4173866e-4d66-468c-a57e-49f5f2c95bfc com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.650 [reactor-http-epoll-4] WARN  r.n.http.client.HttpClientConnect - [d5ec391d-1, L:/172.19.0.4:58998 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.651 [reactor-http-epoll-4] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 532f370c-8c5a-457e-a351-4cf9f4f12d31 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.656 [reactor-http-epoll-1] WARN  r.n.http.client.HttpClientConnect - [0ca0384f-1, L:/172.19.0.4:59002 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.656 [reactor-http-epoll-1] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar a0a1149f-ee10-4d3c-874b-a9555bd58b1b com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.661 [reactor-http-epoll-2] WARN  r.n.http.client.HttpClientConnect - [d99f0dc4-1, L:/172.19.0.4:59012 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.661 [reactor-http-epoll-2] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 00f11f38-a66c-4117-a74c-2ed896909928 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.666 [reactor-http-epoll-3] WARN  r.n.http.client.HttpClientConnect - [3d8e3f28-2, L:/172.19.0.4:57958 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.666 [reactor-http-epoll-3] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 12cbb233-317f-4b34-ba88-1d50ed8215ac com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.671 [reactor-http-epoll-3] WARN  r.n.http.client.HttpClientConnect - [33c153a8-1, L:/172.19.0.4:59018 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.671 [reactor-http-epoll-3] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 0b889d91-9de6-4b0d-b367-0dd0067106da com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.677 [reactor-http-epoll-4] WARN  r.n.http.client.HttpClientConnect - [9a0961d7-1, L:/172.19.0.4:59020 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.677 [reactor-http-epoll-4] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 462544fe-70fa-485e-90a1-1b41aeea3bec com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.682 [reactor-http-epoll-1] WARN  r.n.http.client.HttpClientConnect - [006cbc82-1, L:/172.19.0.4:59024 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.682 [reactor-http-epoll-1] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 79123f29-3a07-4f4a-97a2-12045312edf1 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.687 [reactor-http-epoll-2] WARN  r.n.http.client.HttpClientConnect - [f790c21a-1, L:/172.19.0.4:59036 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.687 [reactor-http-epoll-2] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 14125936-621c-4dc7-a6a3-393544de7c5c com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.692 [reactor-http-epoll-3] WARN  r.n.http.client.HttpClientConnect - [2364856e-1, L:/172.19.0.4:59042 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.692 [reactor-http-epoll-3] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 900c3ae1-1892-4488-9293-a115a66333de com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.698 [reactor-http-epoll-4] WARN  r.n.http.client.HttpClientConnect - [f7b7963b-1, L:/172.19.0.4:59052 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.698 [reactor-http-epoll-4] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 9e832ac0-c164-43f4-b3cb-0049fc97edb4 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.703 [reactor-http-epoll-1] WARN  r.n.http.client.HttpClientConnect - [d15eb471-1, L:/172.19.0.4:59064 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.703 [reactor-http-epoll-1] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 4fcb97f5-a236-427a-b868-4e0ced5212d2 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.708 [reactor-http-epoll-2] WARN  r.n.http.client.HttpClientConnect - [ce880390-1, L:/172.19.0.4:59078 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.708 [reactor-http-epoll-2] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar a1f7b7fc-0133-4ec0-93ba-dd0f0579a3e1 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.713 [reactor-http-epoll-3] WARN  r.n.http.client.HttpClientConnect - [36d59361-1, L:/172.19.0.4:59086 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.714 [reactor-http-epoll-3] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 09c1c6de-a0ed-4016-aabe-e68642818f8b com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.719 [reactor-http-epoll-4] WARN  r.n.http.client.HttpClientConnect - [e0d4631e-1, L:/172.19.0.4:59098 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.719 [reactor-http-epoll-4] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 5e8997e7-9e1d-4f05-b7ed-abd3bf3a330c com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.724 [reactor-http-epoll-1] WARN  r.n.http.client.HttpClientConnect - [4b19755e-1, L:/172.19.0.4:59106 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.724 [reactor-http-epoll-1] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 8caa9cbc-1c70-494c-90c2-597cbd71a57d com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.729 [reactor-http-epoll-2] WARN  r.n.http.client.HttpClientConnect - [8aa87f44-1, L:/172.19.0.4:59122 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.729 [reactor-http-epoll-2] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 92adcab7-c898-42a5-a688-54f958a2f8a9 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.734 [reactor-http-epoll-3] WARN  r.n.http.client.HttpClientConnect - [b0fe3b07-1, L:/172.19.0.4:59136 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.734 [reactor-http-epoll-3] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar ee6c4524-85fa-4a69-8010-ecec5912eebf com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.740 [reactor-http-epoll-4] WARN  r.n.http.client.HttpClientConnect - [d74e084f-1, L:/172.19.0.4:59148 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.740 [reactor-http-epoll-4] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar c48d287b-cd4e-4830-8e6f-f707a5107e57 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.745 [reactor-http-epoll-1] WARN  r.n.http.client.HttpClientConnect - [d1f6b200-1, L:/172.19.0.4:59152 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.745 [reactor-http-epoll-1] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 7eae789b-71b8-41f6-906f-898c2c851f48 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.761 [reactor-http-epoll-4] WARN  r.n.http.client.HttpClientConnect - [14f1b2c0-1, L:/172.19.0.4:59186 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.761 [reactor-http-epoll-4] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar dc8eb4f8-6b71-4d8d-a4d3-5353d7105d22 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.766 [reactor-http-epoll-1] WARN  r.n.http.client.HttpClientConnect - [19c8beb4-1, L:/172.19.0.4:59194 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.766 [reactor-http-epoll-1] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 8cecf4e1-3efe-4742-8073-2377320d7490 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.771 [reactor-http-epoll-2] WARN  r.n.http.client.HttpClientConnect - [25e75317-1, L:/172.19.0.4:59206 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.771 [reactor-http-epoll-2] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 4f81b229-828c-4c00-96b3-21a701d5a87a com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.777 [reactor-http-epoll-3] WARN  r.n.http.client.HttpClientConnect - [e7a0f209-1, L:/172.19.0.4:59210 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.777 [reactor-http-epoll-3] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar f7744d84-a1a1-4b11-bbdc-8cd0fd1802d1 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.782 [reactor-http-epoll-4] WARN  r.n.http.client.HttpClientConnect - [dd680a62-1, L:/172.19.0.4:59218 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.782 [reactor-http-epoll-4] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 14862fc0-d529-4c28-a35d-1c7982536764 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.787 [reactor-http-epoll-1] WARN  r.n.http.client.HttpClientConnect - [35e26ae2-1, L:/172.19.0.4:59232 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.787 [reactor-http-epoll-1] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar eb1ca921-974c-41ba-8f0a-f6d70e318466 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.792 [reactor-http-epoll-2] WARN  r.n.http.client.HttpClientConnect - [8ddb0184-1, L:/172.19.0.4:59238 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.792 [reactor-http-epoll-2] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 93eed0bc-49f6-4c85-9f19-247103e81e07 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.798 [reactor-http-epoll-3] WARN  r.n.http.client.HttpClientConnect - [8362567c-1, L:/172.19.0.4:59242 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.798 [reactor-http-epoll-3] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 9bdf696f-96bb-446f-b20a-66b72afc70ba com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.803 [reactor-http-epoll-4] WARN  r.n.http.client.HttpClientConnect - [051e903e-1, L:/172.19.0.4:59248 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.803 [reactor-http-epoll-4] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 74dcd31a-47c5-4077-97fc-705f124bd1c6 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.808 [reactor-http-epoll-1] WARN  r.n.http.client.HttpClientConnect - [e5fc49da-1, L:/172.19.0.4:59254 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.808 [reactor-http-epoll-1] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 5e94bff9-1b09-48b9-8318-46708e606ba3 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.813 [reactor-http-epoll-2] WARN  r.n.http.client.HttpClientConnect - [93b6b230-1, L:/172.19.0.4:59264 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.813 [reactor-http-epoll-2] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 824c5779-4b0d-4624-8da5-0b6f1823cbce com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.829 [reactor-http-epoll-1] WARN  r.n.http.client.HttpClientConnect - [c9012eeb-1, L:/172.19.0.4:59288 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.829 [reactor-http-epoll-1] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 9eccdf88-4cd7-4793-965b-e1188893af23 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.834 [reactor-http-epoll-2] WARN  r.n.http.client.HttpClientConnect - [788e27cb-1, L:/172.19.0.4:59302 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.834 [reactor-http-epoll-2] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 5bcd2be6-914f-4d9b-87e6-c31f8cb7367a com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.839 [reactor-http-epoll-3] WARN  r.n.http.client.HttpClientConnect - [ff7626ab-1, L:/172.19.0.4:59306 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.840 [reactor-http-epoll-3] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 35ff282f-cb40-4e63-84ca-11658d6d494f com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.845 [reactor-http-epoll-4] WARN  r.n.http.client.HttpClientConnect - [674c7e5c-1, L:/172.19.0.4:59308 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.845 [reactor-http-epoll-4] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar bc89a719-1c50-4d71-852d-56b6366c391a com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.850 [reactor-http-epoll-1] WARN  r.n.http.client.HttpClientConnect - [9040f992-1, L:/172.19.0.4:59314 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.850 [reactor-http-epoll-1] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 92682546-8f97-4403-98a3-3b0140487f74 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.855 [reactor-http-epoll-2] WARN  r.n.http.client.HttpClientConnect - [ecbd64f7-1, L:/172.19.0.4:59326 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.855 [reactor-http-epoll-2] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 5dd1277a-3e7a-41cd-a4bb-80c8ab15f426 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.860 [reactor-http-epoll-3] WARN  r.n.http.client.HttpClientConnect - [ba40eaca-1, L:/172.19.0.4:59328 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.860 [reactor-http-epoll-3] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 442963b4-ed64-4838-a3fe-e99609780a36 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.865 [reactor-http-epoll-4] WARN  r.n.http.client.HttpClientConnect - [5937a103-1, L:/172.19.0.4:59330 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.865 [reactor-http-epoll-4] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 12ec7bf1-e41d-49b6-a7b8-0d1c6221c106 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.871 [reactor-http-epoll-1] WARN  r.n.http.client.HttpClientConnect - [70b1d83b-1, L:/172.19.0.4:59342 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.871 [reactor-http-epoll-1] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar efa9baf0-7736-4056-8dab-cdb0b2492290 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.876 [reactor-http-epoll-2] WARN  r.n.http.client.HttpClientConnect - [85bca2d8-1, L:/172.19.0.4:59350 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.876 [reactor-http-epoll-2] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar e8582b40-d891-42fc-8d05-83bcaaf33d2c com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.881 [reactor-http-epoll-3] WARN  r.n.http.client.HttpClientConnect - [5f1370f8-1, L:/172.19.0.4:59366 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.882 [reactor-http-epoll-3] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 995cff2e-5b33-47e1-b957-24872629b927 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.887 [reactor-http-epoll-4] WARN  r.n.http.client.HttpClientConnect - [a2c92482-1, L:/172.19.0.4:59382 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.887 [reactor-http-epoll-4] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 10a5a7c0-e977-41d4-a4d5-831533017f5d com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.892 [reactor-http-epoll-1] WARN  r.n.http.client.HttpClientConnect - [6a2b07ad-1, L:/172.19.0.4:59386 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.892 [reactor-http-epoll-1] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 1eac2ee1-8f08-4204-8ae1-5935cc298f89 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.897 [reactor-http-epoll-2] WARN  r.n.http.client.HttpClientConnect - [475995d3-1, L:/172.19.0.4:59388 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.897 [reactor-http-epoll-2] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 2e590f23-e425-404c-9499-805525a2e841 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.902 [reactor-http-epoll-3] WARN  r.n.http.client.HttpClientConnect - [a6deeb06-1, L:/172.19.0.4:59392 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.902 [reactor-http-epoll-3] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 31920d5b-4831-4858-b9f4-8bca5117acba com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.908 [reactor-http-epoll-4] WARN  r.n.http.client.HttpClientConnect - [5720dc92-1, L:/172.19.0.4:59398 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.908 [reactor-http-epoll-4] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 56e16e17-7b09-4f11-80de-ebfcababa2f2 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.913 [reactor-http-epoll-1] WARN  r.n.http.client.HttpClientConnect - [b7aaa626-1, L:/172.19.0.4:59400 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.913 [reactor-http-epoll-1] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar c1034b9d-eaa1-4345-95a4-349f0a71814d com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.918 [reactor-http-epoll-2] WARN  r.n.http.client.HttpClientConnect - [b4b7374a-1, L:/172.19.0.4:59412 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.918 [reactor-http-epoll-2] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 35d8f0b6-ba06-4048-b7d1-1a2a38c27d4f com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.929 [reactor-http-epoll-4] WARN  r.n.http.client.HttpClientConnect - [7fdd005c-1, L:/172.19.0.4:59442 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.929 [reactor-http-epoll-4] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar d997ae28-6996-43d9-8c31-055ca4f731ac com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.934 [reactor-http-epoll-1] WARN  r.n.http.client.HttpClientConnect - [3b38f212-1, L:/172.19.0.4:59454 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.934 [reactor-http-epoll-1] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar b1fd2cd2-b15c-4aec-823c-c9768b4de7ca com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.939 [reactor-http-epoll-2] WARN  r.n.http.client.HttpClientConnect - [5631e043-1, L:/172.19.0.4:59468 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.939 [reactor-http-epoll-2] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 70bc1a7f-8a44-4736-9b9d-93c6d151b8f0 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.945 [reactor-http-epoll-3] WARN  r.n.http.client.HttpClientConnect - [c10e23d0-1, L:/172.19.0.4:59482 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.945 [reactor-http-epoll-3] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar dced927a-e87a-4baf-9936-c6ddd52c7131 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.950 [reactor-http-epoll-4] WARN  r.n.http.client.HttpClientConnect - [dcc27172-1, L:/172.19.0.4:59486 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.950 [reactor-http-epoll-4] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 34f6f2e1-0e31-436c-b7ce-95f792f31265 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.955 [reactor-http-epoll-1] WARN  r.n.http.client.HttpClientConnect - [9612bb32-1, L:/172.19.0.4:59488 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.955 [reactor-http-epoll-1] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar a11f643d-a12d-4547-8449-60368dc31253 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.960 [reactor-http-epoll-2] WARN  r.n.http.client.HttpClientConnect - [72f1ef4e-1, L:/172.19.0.4:59492 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.961 [reactor-http-epoll-2] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar b672b06a-8ad9-4e2b-98d7-456b356e78d3 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.966 [reactor-http-epoll-3] WARN  r.n.http.client.HttpClientConnect - [41d8163a-1, L:/172.19.0.4:59502 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.966 [reactor-http-epoll-3] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar ca3fc8a3-e278-4769-ad24-26462030586c com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.971 [reactor-http-epoll-4] WARN  r.n.http.client.HttpClientConnect - [aca34ad8-1, L:/172.19.0.4:59512 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.971 [reactor-http-epoll-4] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 708f47bd-9199-428a-ae96-754396ab3cc9 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.976 [reactor-http-epoll-1] WARN  r.n.http.client.HttpClientConnect - [f696b2fb-1, L:/172.19.0.4:59518 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.976 [reactor-http-epoll-1] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar dd47ed67-4f3d-4afd-a03e-03f56bbaa418 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.981 [reactor-http-epoll-2] WARN  r.n.http.client.HttpClientConnect - [9a408509-1, L:/172.19.0.4:59520 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.981 [reactor-http-epoll-2] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 4cb4b13a-7c4d-4086-8a9f-09eb96ef5ca9 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.987 [reactor-http-epoll-3] WARN  r.n.http.client.HttpClientConnect - [45c32ad6-1, L:/172.19.0.4:59534 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.987 [reactor-http-epoll-3] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 36f581d6-8d06-453c-b65f-7c3edcffea4b com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.992 [reactor-http-epoll-4] WARN  r.n.http.client.HttpClientConnect - [b9a6bda1-1, L:/172.19.0.4:59536 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.992 [reactor-http-epoll-4] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 950fb1c2-c035-4c00-8dfd-792d868974ae com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:27.997 [reactor-http-epoll-1] WARN  r.n.http.client.HttpClientConnect - [3d820b31-1, L:/172.19.0.4:59552 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:27.997 [reactor-http-epoll-1] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar c80f9fc9-c433-4cc1-bc9e-db994cd76985 com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:28.002 [reactor-http-epoll-2] WARN  r.n.http.client.HttpClientConnect - [f5009846-1, L:/172.19.0.4:59564 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:28.002 [reactor-http-epoll-2] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 96f6e686-907c-4285-aa70-fcafea74a60e com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:28.008 [reactor-http-epoll-3] WARN  r.n.http.client.HttpClientConnect - [cb8286e0-1, L:/172.19.0.4:59580 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
-felipeschirmann-rinha  | io.netty.handler.timeout.ReadTimeoutException: null
-felipeschirmann-rinha  | 17:16:28.008 [reactor-http-epoll-3] WARN  b.d.f.r.s.PaymentProcessorService - Falha de rede recuperável ('ReadTimeoutException') ao processar 9c9b572d-377d-4bb5-87c7-3be2c8a0a8ac com o FALLBACK. Verificando consistência...
-felipeschirmann-rinha  | 17:16:28.013 [reactor-http-epoll-4] WARN  r.n.http.client.HttpClientConnect - [9c0fb0c8-1, L:/172.19.0.4:59596 - R:payment-processor-fallback/172.19.0.3:8080] The connection observed an error
+ Container felipeschirmann-redis-1  Creating
+ Container felipeschirmann-redis-1  Created
+ Container felipeschirmann-api02-1  Creating
+ Container felipeschirmann-api01-1  Creating
+ Container felipeschirmann-api02-1  Created
+ Container felipeschirmann-api01-1  Created
+ Container felipeschirmann-nginx-1  Creating
+ Container felipeschirmann-nginx-1  Created
+Attaching to api01-1, api02-1, nginx-1, redis-1
+redis-1  | 1:C 14 Aug 2025 22:28:23.544 # WARNING Memory overcommit must be enabled! Without it, a background save or replication may fail under low memory condition. Being disabled, it can also cause failures without low memory condition, see https://github.com/jemalloc/jemalloc/issues/1328. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.
+redis-1  | 1:C 14 Aug 2025 22:28:23.544 * oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+redis-1  | 1:C 14 Aug 2025 22:28:23.544 * Redis version=7.2.10, bits=64, commit=00000000, modified=0, pid=1, just started
+redis-1  | 1:C 14 Aug 2025 22:28:23.544 * Configuration loaded
+redis-1  | 1:M 14 Aug 2025 22:28:23.545 * monotonic clock: POSIX clock_gettime
+redis-1  | 1:M 14 Aug 2025 22:28:23.546 * Running mode=standalone, port=6379.
+redis-1  | 1:M 14 Aug 2025 22:28:23.547 * Server initialized
+redis-1  | 1:M 14 Aug 2025 22:28:23.601 * Ready to accept connections tcp
+api01-1  |   .   ____          _            __ _ _
+api02-1  |   .   ____          _            __ _ _
+api02-1  |  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+api02-1  | ( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+api02-1  |  \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+api02-1  |   '  |____| .__|_| |_|_| |_\__, | / / / /
+api02-1  |  =========|_|==============|___/=/_/_/_/
+api01-1  |  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+api01-1  | ( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+api01-1  |  \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+api01-1  |   '  |____| .__|_| |_|_| |_\__, | / / / /
+api01-1  |  =========|_|==============|___/=/_/_/_/
+api01-1  | 
+api02-1  | 
+api02-1  |  :: Spring Boot ::                (v3.3.0)
+api02-1  | 
+api01-1  |  :: Spring Boot ::                (v3.3.0)
+api01-1  | 
+api02-1  | 22:28:23.917 [main] INFO  b.d.f.rinha.Application - Starting AOT-processed Application using Java 21.0.7 with PID 1 (/app/rinha-reativa started by nonroot in /app)
+api02-1  | 22:28:23.917 [main] INFO  b.d.f.rinha.Application - The following 1 profile is active: "test"
+api01-1  | 22:28:23.917 [main] INFO  b.d.f.rinha.Application - Starting AOT-processed Application using Java 21.0.7 with PID 1 (/app/rinha-reativa started by nonroot in /app)
+api01-1  | 22:28:23.917 [main] INFO  b.d.f.rinha.Application - The following 1 profile is active: "test"
+api02-1  | 22:28:24.088 [main] INFO  b.d.f.r.service.MemoryMonitorService - Iniciando monitor de memória... Verificação a cada 5 segundos.
+api01-1  | 22:28:24.088 [main] INFO  b.d.f.r.service.MemoryMonitorService - Iniciando monitor de memória... Verificação a cada 5 segundos.
+api02-1  | 22:28:24.344 [main] INFO  b.d.f.r.s.PaymentProcessorService - Iniciando processador de pagamentos com estratégia adaptativa...
+api01-1  | 22:28:24.359 [main] INFO  b.d.f.r.s.PaymentProcessorService - Iniciando processador de pagamentos com estratégia adaptativa...
+api01-1  | 22:28:25.084 [main] INFO  b.d.f.rinha.Application - Started Application in 1.259 seconds (process running for 1.355)
+api01-1  | 22:28:25.084 [main] INFO  b.d.f.r.config.ConfigurationBanner - 
+api01-1  | 
+api01-1  | 
+api01-1  | ╔═════════════════════════════════════════════════════════════════════════════╗
+api01-1  | ║                 Configurações Ativas da Aplicação Rinha                     ║
+api01-1  | ╠═════════════════════════════════════════════════════════════════════════════╣
+api01-1  | ║ Spring Profiles Ativos : [test]                                                ║
+api01-1  | ╠═══════════════════════════╦═════════════════════════════════════════════════╣
+api01-1  | ║ Parâmetro                 ║ Valor                                           ║
+api01-1  | ╠═══════════════════════════╬═════════════════════════════════════════════════╣
+api01-1  | ║ Fila (Queue)              ║                                                 ║
+api01-1  | ║   Tamanho Máximo          ║ 50000                                           ║
+api01-1  | ╠═══════════════════════════╬═════════════════════════════════════════════════╣
+api01-1  | ║ Executor de Consumidores  ║                                                 ║
+api01-1  | ║   Threads                 ║ Virtual Threads (Dinâmico)                      ║
+api01-1  | ╠═══════════════════════════╬═════════════════════════════════════════════════╣
+api01-1  | ║ Agendador de Estratégia   ║                                                 ║
+api01-1  | ║   Período de Decisão      ║ 1000 ms                                         ║
+api01-1  | ╠═══════════════════════════╬═════════════════════════════════════════════════╣
+api01-1  | ║ Cliente Web (WebClient)   ║                                                 ║
+api01-1  | ║   Conexões Máximas        ║ 700                                             ║
+api01-1  | ║   Timeout de Conexão      ║ 2000 ms                                         ║
+api01-1  | ║   Timeout de Resposta     ║ 10 s                                            ║
+api01-1  | ╠═══════════════════════════╬═════════════════════════════════════════════════╣
+api01-1  | ║ Monitor de Memória        ║                                                 ║
+api01-1  | ║   Limite para Aviso       ║ 50 MB                                           ║
+api01-1  | ║   Atraso Inicial          ║ 5 s                                             ║
+api01-1  | ║   Período                 ║ 5 s                                             ║
+api01-1  | ╚═══════════════════════════╩═════════════════════════════════════════════════╝
+api01-1  | 
+api02-1  | 22:28:25.084 [main] INFO  b.d.f.rinha.Application - Started Application in 1.259 seconds (process running for 1.358)
+api02-1  | 22:28:25.084 [main] INFO  b.d.f.r.config.ConfigurationBanner - 
+api02-1  | 
+api02-1  | 
+api02-1  | ╔═════════════════════════════════════════════════════════════════════════════╗
+api02-1  | ║                 Configurações Ativas da Aplicação Rinha                     ║
+api02-1  | ╠═════════════════════════════════════════════════════════════════════════════╣
+api02-1  | ║ Spring Profiles Ativos : [test]                                                ║
+api02-1  | ╠═══════════════════════════╦═════════════════════════════════════════════════╣
+api02-1  | ║ Parâmetro                 ║ Valor                                           ║
+api02-1  | ╠═══════════════════════════╬═════════════════════════════════════════════════╣
+api02-1  | ║ Fila (Queue)              ║                                                 ║
+api02-1  | ║   Tamanho Máximo          ║ 50000                                           ║
+api02-1  | ╠═══════════════════════════╬═════════════════════════════════════════════════╣
+api02-1  | ║ Executor de Consumidores  ║                                                 ║
+api02-1  | ║   Threads                 ║ Virtual Threads (Dinâmico)                      ║
+api02-1  | ╠═══════════════════════════╬═════════════════════════════════════════════════╣
+api02-1  | ║ Agendador de Estratégia   ║                                                 ║
+api02-1  | ║   Período de Decisão      ║ 1000 ms                                         ║
+api02-1  | ╠═══════════════════════════╬═════════════════════════════════════════════════╣
+api02-1  | ║ Cliente Web (WebClient)   ║                                                 ║
+api02-1  | ║   Conexões Máximas        ║ 700                                             ║
+api02-1  | ║   Timeout de Conexão      ║ 2000 ms                                         ║
+api02-1  | ║   Timeout de Resposta     ║ 10 s                                            ║
+api02-1  | ╠═══════════════════════════╬═════════════════════════════════════════════════╣
+api02-1  | ║ Monitor de Memória        ║                                                 ║
+api02-1  | ║   Limite para Aviso       ║ 50 MB                                           ║
+api02-1  | ║   Atraso Inicial          ║ 5 s                                             ║
+api02-1  | ║   Período                 ║ 5 s                                             ║
+api02-1  | ╚═══════════════════════════╩═════════════════════════════════════════════════╝
+api02-1  | 
+api01-1  | 22:28:29.088 [pool-6-thread-1] WARN  b.d.f.r.service.MemoryMonitorService - AVISO DE MEMÓRIA: Uso de Heap ultrapassou 100 MB. Uso atual: 131 MB
+api02-1  | 22:28:29.088 [pool-6-thread-1] WARN  b.d.f.r.service.MemoryMonitorService - AVISO DE MEMÓRIA: Uso de Heap ultrapassou 100 MB. Uso atual: 128 MB
+api02-1  | 22:28:29.345 [pool-8-thread-1] WARN  b.d.f.r.s.PaymentProcessorService - ESTRATÉGIA: Processador DEFAULT não confiável. Roteando preferencialmente para FALLBACK.
+api02-1  | 22:28:30.345 [pool-8-thread-1] WARN  b.d.f.r.s.PaymentProcessorService - ESTRATÉGIA: Processador DEFAULT confiável. Roteando preferencialmente para DEFAULT.
+api02-1  | 22:28:33.223 [reactor-http-epoll-2] WARN  b.d.f.rinha.web.PaymentHandler - Recebida requisição para PURGAR todos os dados de pagamento.
+api02-1  | 22:28:33.223 [reactor-http-epoll-2] INFO  b.d.f.r.s.PaymentStorageService - Filas de pagamentos no Redis foram limpas.
+api02-1  | 22:28:34.345 [pool-8-thread-1] WARN  b.d.f.r.s.PaymentProcessorService - ESTRATÉGIA: Processador DEFAULT não confiável. Roteando preferencialmente para FALLBACK.
+api02-1  | 22:28:35.345 [pool-8-thread-1] WARN  b.d.f.r.s.PaymentProcessorService - ESTRATÉGIA: Processador DEFAULT confiável. Roteando preferencialmente para DEFAULT.
+api02-1  | 22:28:39.345 [pool-8-thread-1] WARN  b.d.f.r.s.PaymentProcessorService - ESTRATÉGIA: Processador DEFAULT não confiável. Roteando preferencialmente para FALLBACK.
+api01-1  | 22:28:39.360 [pool-8-thread-1] WARN  b.d.f.r.s.PaymentProcessorService - ESTRATÉGIA: Processador DEFAULT não confiável. Roteando preferencialmente para FALLBACK.
+api02-1  | 22:28:40.345 [pool-8-thread-1] WARN  b.d.f.r.s.PaymentProcessorService - ESTRATÉGIA: Processador DEFAULT confiável. Roteando preferencialmente para DEFAULT.
+api01-1  | 22:28:40.360 [pool-8-thread-1] WARN  b.d.f.r.s.PaymentProcessorService - ESTRATÉGIA: Processador DEFAULT confiável. Roteando preferencialmente para DEFAULT.
+api02-1  | 22:28:44.345 [pool-8-thread-1] WARN  b.d.f.r.s.PaymentProcessorService - ESTRATÉGIA: Processador DEFAULT não confiável. Roteando preferencialmente para FALLBACK.
+api01-1  | 22:28:44.360 [pool-8-thread-1] WARN  b.d.f.r.s.PaymentProcessorService - ESTRATÉGIA: Processador DEFAULT não confiável. Roteando preferencialmente para FALLBACK.
+api02-1  | 22:28:45.345 [pool-8-thread-1] WARN  b.d.f.r.s.PaymentProcessorService - ESTRATÉGIA: Processador DEFAULT confiável. Roteando preferencialmente para DEFAULT.
+api01-1  | 22:28:45.360 [pool-8-thread-1] WARN  b.d.f.r.s.PaymentProcessorService - ESTRATÉGIA: Processador DEFAULT confiável. Roteando preferencialmente para DEFAULT.
+api02-1  | 22:28:49.345 [pool-8-thread-1] WARN  b.d.f.r.s.PaymentProcessorService - ESTRATÉGIA: Processador DEFAULT não confiável. Roteando preferencialmente para FALLBACK.
+api01-1  | 22:28:49.360 [pool-8-thread-1] WARN  b.d.f.r.s.PaymentProcessorService - ESTRATÉGIA: Processador DEFAULT não confiável. Roteando preferencialmente para FALLBACK.
+api02-1  | 22:28:50.345 [pool-8-thread-1] WARN  b.d.f.r.s.PaymentProcessorService - ESTRATÉGIA: Processador DEFAULT confiável. Roteando preferencialmente para DEFAULT.
+api01-1  | 22:28:50.360 [pool-8-thread-1] WARN  b.d.f.r.s.PaymentProcessorService - ESTRATÉGIA: Processador DEFAULT confiável. Roteando preferencialmente para DEFAULT.
+api01-1  | 22:28:54.402 [pool-8-thread-1] WARN  b.d.f.r.s.PaymentProcessorService - ESTRATÉGIA: Processador DEFAULT não confiável. Roteando preferencialmente para FALLBACK.
+api02-1  | 22:28:54.402 [pool-8-thread-1] WARN  b.d.f.r.s.PaymentProcessorService - ESTRATÉGIA: Processador DEFAULT não confiável. Roteando preferencialmente para FALLBACK.
+api02-1  | 22:28:54.605 [pool-7-thread-1] WARN  b.d.f.r.s.PaymentProcessorService - Health Check: Default COM FALHAS (falha consecutiva #1)
+api02-1  | 22:28:55.345 [pool-8-thread-1] WARN  b.d.f.r.s.PaymentProcessorService - ESTRATÉGIA: Processador DEFAULT confiável. Roteando preferencialmente para DEFAULT.
+api01-1  | 22:28:55.360 [pool-8-thread-1] WARN  b.d.f.r.s.PaymentProcessorService - ESTRATÉGIA: Processador DEFAULT confiável. Roteando preferencialmente para DEFAULT.
+api01-1  | 22:28:59.401 [pool-8-thread-1] WARN  b.d.f.r.s.PaymentProcessorService - ESTRATÉGIA: Processador DEFAULT não confiável. Roteando preferencialmente para FALLBACK.
+api02-1  | 22:28:59.401 [pool-8-thread-1] WARN  b.d.f.r.s.PaymentProcessorService - ESTRATÉGIA: Processador DEFAULT não confiável. Roteando preferencialmente para FALLBACK.
+api02-1  | 22:28:59.701 [pool-7-thread-1] WARN  b.d.f.r.s.PaymentProcessorService - Health Check: Default COM FALHAS (falha consecutiva #2)
+api01-1  | 22:29:00.401 [pool-8-thread-1] WARN  b.d.f.r.s.PaymentProcessorService - ESTRATÉGIA: Processador DEFAULT confiável. Roteando preferencialmente para DEFAULT.
+api02-1  | 22:29:00.402 [pool-8-thread-1] WARN  b.d.f.r.s.PaymentProcessorService - ESTRATÉGIA: Processador DEFAULT confiável. Roteando preferencialmente para DEFAULT.
+api01-1  | 22:29:04.401 [pool-8-thread-1] WARN  b.d.f.r.s.PaymentProcessorService - ESTRATÉGIA: Processador DEFAULT não confiável. Roteando preferencialmente para FALLBACK.
+api02-1  | 22:29:04.401 [pool-8-thread-1] WARN  b.d.f.r.s.PaymentProcessorService - ESTRATÉGIA: Processador DEFAULT não confiável. Roteando preferencialmente para FALLBACK.
+api02-1  | 22:29:04.801 [pool-7-thread-1] WARN  b.d.f.r.s.PaymentProcessorService - Health Check: Default COM FALHAS (falha consecutiva #3)
+api02-1  | 22:29:05.433 [pool-8-thread-1] WARN  b.d.f.r.s.PaymentProcessorService - ESTRATÉGIA: Processador DEFAULT confiável. Roteando preferencialmente para DEFAULT.
+api01-1  | 22:29:05.516 [pool-8-thread-1] WARN  b.d.f.r.s.PaymentProcessorService - ESTRATÉGIA: Processador DEFAULT confiável. Roteando preferencialmente para DEFAULT.
+api02-1  | 22:29:05.820 [pool-7-thread-1] WARN  b.d.f.r.s.PaymentProcessorService - Health Check: Fallback COM FALHAS (falha consecutiva #1)
+api02-1  | 22:29:09.402 [pool-8-thread-1] WARN  b.d.f.r.s.PaymentProcessorService - ESTRATÉGIA: Processador DEFAULT não confiável. Roteando preferencialmente para FALLBACK.
+api01-1  | 22:29:09.401 [pool-8-thread-1] WARN  b.d.f.r.s.PaymentProcessorService - ESTRATÉGIA: Processador DEFAULT não confiável. Roteando preferencialmente para FALLBACK.
+api02-1  | 22:29:09.801 [pool-7-thread-1] WARN  b.d.f.r.s.PaymentProcessorService - Health Check: Default COM FALHAS (falha consecutiva #4)
+api02-1  | 22:29:10.401 [pool-8-thread-1] WARN  b.d.f.r.s.PaymentProcessorService - ESTRATÉGIA: Processador DEFAULT confiável. Roteando preferencialmente para DEFAULT.
+api01-1  | 22:29:10.401 [pool-8-thread-1] WARN  b.d.f.r.s.PaymentProcessorService - ESTRATÉGIA: Processador DEFAULT confiável. Roteando preferencialmente para DEFAULT.
+api02-1  | 22:29:10.901 [pool-7-thread-1] WARN  b.d.f.r.s.PaymentProcessorService - Health Check: Fallback COM FALHAS (falha consecutiva #2)
+api02-1  | 22:29:14.403 [pool-8-thread-1] WARN  b.d.f.r.s.PaymentProcessorService - ESTRATÉGIA: Processador DEFAULT não confiável. Roteando preferencialmente para FALLBACK.
+api01-1  | 22:29:14.404 [pool-8-thread-1] WARN  b.d.f.r.s.PaymentProcessorService - ESTRATÉGIA: Processador DEFAULT não confiável. Roteando preferencialmente para FALLBACK.
+api02-1  | 22:29:14.901 [pool-7-thread-1] INFO  b.d.f.r.s.PaymentProcessorService - Health Check: Default recuperado.
+api02-1  | 22:29:15.402 [pool-8-thread-1] WARN  b.d.f.r.s.PaymentProcessorService - ESTRATÉGIA: Processador DEFAULT confiável. Roteando preferencialmente para DEFAULT.
+api01-1  | 22:29:15.402 [pool-8-thread-1] WARN  b.d.f.r.s.PaymentProcessorService - ESTRATÉGIA: Processador DEFAULT confiável. Roteando preferencialmente para DEFAULT.
+api02-1  | 22:29:16.003 [pool-7-thread-1] INFO  b.d.f.r.s.PaymentProcessorService - Health Check: Fallback recuperado.
+api01-1  | 22:29:19.405 [pool-8-thread-1] WARN  b.d.f.r.s.PaymentProcessorService - ESTRATÉGIA: Processador DEFAULT não confiável. Roteando preferencialmente para FALLBACK.
+api01-1  | 22:29:20.402 [pool-8-thread-1] WARN  b.d.f.r.s.PaymentProcessorService - ESTRATÉGIA: Processador DEFAULT confiável. Roteando preferencialmente para DEFAULT.
+api01-1  | 22:29:24.360 [pool-8-thread-1] WARN  b.d.f.r.s.PaymentProcessorService - ESTRATÉGIA: Processador DEFAULT não confiável. Roteando preferencialmente para FALLBACK.
+api01-1  | 22:29:25.401 [pool-8-thread-1] WARN  b.d.f.r.s.PaymentProcessorService - ESTRATÉGIA: Processador DEFAULT confiável. Roteando preferencialmente para DEFAULT.
+[Knginx-1 exited with code 0
+api02-1  | 22:29:36.683 [SpringApplicationShutdownHook] INFO  b.d.f.r.s.PaymentProcessorService - Iniciando desligamento gracioso...
+api01-1  | 22:29:36.683 [SpringApplicationShutdownHook] INFO  b.d.f.r.s.PaymentProcessorService - Iniciando desligamento gracioso...
+[Kapi01-1 exited with code 137
+[Kapi02-1 exited with code 137
+redis-1  | 1:signal-handler (1755210584) Received SIGTERM scheduling shutdown...
+redis-1  | 1:M 14 Aug 2025 22:29:44.958 * User requested shutdown...
+redis-1  | 1:M 14 Aug 2025 22:29:44.958 # Redis is now ready to exit, bye bye...
 log truncated at line 1000

@@ -1,18 +1,16 @@
 x-service-templates:
   api: &api
-    image: gabrieleiro/rinha-de-backend-2025-api:7.0
+    image: gabrieleiro/rinha-de-backend-2025-api:13.0
     networks:
       - rinha-de-backend-2025
       - payment-processor
     deploy:
       resources:
         limits:
-          cpus: "0.5"
-          memory: "100MB"
+          cpus: "0.6"
+          memory: "80MB"
     volumes:
       - /tmp:/tmp
-    depends_on:
-      - tracker
 
 services:
   api-1: 
@@ -21,8 +19,7 @@ services:
     environment:
       DEFAULT_PROCESSOR_URL: "http://payment-processor-default:8080"
       FALLBACK_PROCESSOR_URL: "http://payment-processor-fallback:8080"
-      TRACKER_URI: "/tmp/tracker.sock"
-      LOAD_BALANCER_URI: "/tmp/lb.sock"
+      OTHER_BACKEND_URI: "/tmp/api_2.sock"
       ADDRESS: "/tmp/api_1.sock"
 
   api-2:
@@ -31,12 +28,11 @@ services:
     environment:
       DEFAULT_PROCESSOR_URL: "http://payment-processor-default:8080"
       FALLBACK_PROCESSOR_URL: "http://payment-processor-fallback:8080"
-      LOAD_BALANCER_URI: "/tmp/lb.sock"
-      TRACKER_URI: "/tmp/tracker.sock"
+      OTHER_BACKEND_URI: "/tmp/api_1.sock"
       ADDRESS: "/tmp/api_2.sock"
 
   load-balancer:
-    image: gabrieleiro/rinha-de-backend-2025-load-balancer:7.0
+    image: gabrieleiro/rinha-de-backend-2025-load-balancer:haproxy-2.0
     networks:
       - rinha-de-backend-2025
     deploy:
@@ -44,32 +40,13 @@ services:
         limits:
           cpus: "0.3"
           memory: "50MB"
-    volumes:
-      - /tmp:/tmp
     ports:
       - "9999:9999"
-    environment:
-      UNIX_SOCKET_ADDRESS: "/tmp/lb.sock"
-      TCP_ADDRESS: ":9999"
-      SERVERS: "/tmp/api_1.sock,/tmp/api_2.sock"
+    volumes:
+      - /tmp:/tmp
     depends_on:
       - api-1
       - api-2
-
-  tracker:
-    hostname: tracker
-    image: gabrieleiro/rinha-de-backend-2025-tracker:7.0
-    networks:
-      - rinha-de-backend-2025
-    deploy:
-      resources:
-        limits:
-          cpus: "0.2"
-          memory: "50MB"
-    volumes:
-      - /tmp:/tmp
-    environment:
-      ADDRESS: "/tmp/tracker.sock"
 
 networks:
   rinha-de-backend-2025:

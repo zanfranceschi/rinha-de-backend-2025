@@ -1,0 +1,57 @@
+services:
+  load-balancer:
+    image: nginx:latest
+    ports:
+      - 9999:9999
+    networks:
+      - backend
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - go-service-1
+      - go-service-2
+    deploy:
+      resources:
+        limits:
+          cpus: "0.1"
+          memory: "50MB"
+
+  redis:
+    image: redis:7-alpine
+    networks:
+      - backend
+    deploy:
+      resources:
+        limits:
+          cpus: "0.1"
+          memory: "100MB"
+
+  go-service-1: &api
+    image: guilhermeabel8/rinha-q1-2025-golang:latest
+    platform: linux/amd64
+    networks:
+      - backend
+      - payment-processor
+    environment:
+      - PAYMENT_PROCESSOR_URL_DEFAULT=http://payment-processor-default:8080
+      - PAYMENT_PROCESSOR_URL_FALLBACK=http://payment-processor-fallback:8080
+    depends_on:
+      - redis
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+    deploy:
+      resources:
+        limits:
+          cpus: "0.65"
+          memory: "100MB"
+  go-service-2:
+    <<: *api
+
+networks:
+  backend:
+    driver: bridge
+  payment-processor:
+    external: true

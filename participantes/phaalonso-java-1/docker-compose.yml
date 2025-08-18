@@ -1,6 +1,6 @@
 x-service-templates:
   payment-gateway: &payment-gateway
-    image: docker.io/phaalonso/rinha-backend-2025-java:0.0.4
+    image: docker.io/phaalonso/rinha-backend-2025-java:0.0.6
     hostname: api01
     depends_on:
       db:
@@ -12,14 +12,16 @@ x-service-templates:
       JAVA_OPTS: >-
         -XX:+UseZGC
         -Djdk.tracePinnedThreads=full
-      "pagamento.processor.concurrency": 1000
+      MAX_PAYMENTS_THREADS: 50
+      "server.undertow.threads.io": 1
+      "server.undertow.threads.worker": 8
       "pagamento.processor.default.url": http://payment-processor-default:8080
       "pagamento.processor.fallback.url": http://payment-processor-fallback:8080
       "spring.datasource.url": jdbc:postgresql://db:5432/rinha
       "spring.datasource.username": postgres
       "spring.datasource.password": postgres
-      "spring.datasource.hikari.minimum-idle": 25
-      "spring.datasource.hikari.maximum-pool-size": 50
+      "spring.datasource.hikari.minimum-idle": 5
+      "spring.datasource.hikari.maximum-pool-size": 10
       "spring.datasource.hikari.idle-timeout": 5000
       "spring.datasource.hikari.connection-timeout": 1000
     deploy:
@@ -44,10 +46,9 @@ services:
     container_name: db
     hostname: db
     image: postgres:17-alpine
-    #command: postgres -c config-file=/etc/postgres.conf
     volumes:
       - ./init.sql:/docker-entrypoint-initdb.d/script.sql:ro
-      - ./postgres.conf:/etc/postgres.conf
+    #      - ./postgres.conf:/docker-entrypoint-initdb.d/postgresql.conf
     ports:
       - "5432:5432"
     environment:
@@ -57,17 +58,11 @@ services:
     networks:
       - backend
     healthcheck:
-      test: [ "CMD-SHELL", "pg_isready", "-q", "-d", "rinha", "-U", "postgres" ]
-      interval: 2s
-      timeout: 5s
-      retries: 5
-      start_period: 10s
+      test: ["CMD-SHELL", "pg_isready", "-q", "-d", "rinha", "-U", "postgres"]
+      interval: 3s
+      timeout: 3s
+      retries: 10
     deploy:
-      restart_policy:
-        condition: on-failure
-        delay: 2s
-        max_attempts: 10
-        window: 5s
       resources:
         limits:
           cpus: "0.3"

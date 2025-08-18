@@ -1,0 +1,89 @@
+services:
+  elb:
+    image: haproxy:3.2-alpine
+    container_name: rinha-elb
+    ports:
+      - 9999:80
+      - 88:88
+    depends_on:
+      - api-1
+      - api-2
+    volumes:
+      - ./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
+      - socket-volume:/tmp
+    networks:
+      - backend
+    deploy:
+      resources:
+        limits:
+          cpus: "0.25"
+          memory: "150M"
+    
+  database:
+    image: redis:8.2-alpine
+    container_name: rinha-redis
+    command: ["redis-server", "--unixsocket", "/tmp/redis.sock", "--save", "", "--appendonly", "no"]
+    networks:
+      - backend
+    volumes:
+      - socket-volume:/tmp
+    deploy:
+      resources:
+        limits:
+          cpus: "0.20"
+          memory: "50M"
+
+  api-1: &api-1
+    # build: ./api
+    image: fabianosl1/rinha-backend-api:1
+    container_name: rinha-api-1
+    environment:
+      - SOCKET_PATH=/tmp/api-1.sock
+      - REDIS_PATH=/tmp/redis.sock
+    volumes:
+      - socket-volume:/tmp
+    networks:
+      - backend
+    depends_on:
+      - database
+      - worker
+    deploy:
+      resources:
+        limits:
+          cpus: "0.40"
+          memory: "25M"
+
+  api-2:
+    <<: *api-1
+    container_name: rinha-api-2
+    environment:
+      - SOCKET_PATH=/tmp/api-2.sock
+      - REDIS_PATH=/tmp/redis.sock
+
+  worker:
+    # build: ./worker
+    image: fabianosl1/rinha-backend-worker:1
+    container_name: rinha-worker
+    volumes:
+      - socket-volume:/tmp
+    depends_on:
+      - database
+    environment:
+      - REDIS_URL=redis+unix:///tmp/redis.sock    
+    networks:
+      - backend
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          cpus: "0.25"
+          memory: "100M"
+
+volumes:
+  socket-volume:
+
+networks:
+  backend:
+    driver: bridge
+  payment-processor:
+    external: true

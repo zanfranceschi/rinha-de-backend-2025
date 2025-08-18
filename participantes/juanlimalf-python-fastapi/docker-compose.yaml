@@ -1,53 +1,34 @@
-x-services-template:
+
+services:
   api: &api
-    image: juanlimalf/api-payment_processor-rinha_backend_2025:redis
+    container_name: api
+    image: juanlimalf/api-payment_processor-rinha_backend_2025:redis-1.2
     depends_on:
       - redis
     restart: unless-stopped
-    environment:
-      - REDIS_HOST=redis
-      - REDIS_PORT=6379
-    networks:
-      - api
-    deploy:
-      resources:
-        limits:
-          cpus: '0.4'
-          memory: 85M
-
-  worker: &worker
-    image: juanlimalf/worker-payment_processor-rinha_backend_2025:redis
     environment:
       - REDIS_HOST=redis
       - REDIS_PORT=6379
       - PAYMENT_PROCESSOR_DEFAULT=http://payment-processor-default:8080
       - PAYMENT_PROCESSOR_FALLBACK=http://payment-processor-fallback:8080
+      - NUM_WORKERS=5
+      - LOG_LEVEL=ERROR
     networks:
       - api
       - payment-processor
-    depends_on:
-      - redis
-      - api
-      - api2
-    restart: unless-stopped
     deploy:
       resources:
         limits:
-          cpus: '0.3'
-          memory: 90M
-
-services:
-  api:
-    <<: *api
-    container_name: api
+          cpus: '0.4'
+          memory: 80M
 
   api2:
     <<: *api
     container_name: api2
 
-  worker:
-    <<: *worker
-    container_name: worker
+  api3:
+    <<: *api
+    container_name: api3
 
   nginx:
     image: nginx:alpine
@@ -65,17 +46,18 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '0.2'
-          memory: 30M
+          cpus: '0.1'
+          memory: 50M
 
   redis:
-    image: redis
+    image: redis:8-alpine
     container_name: redis
+    command: [ "redis-server", "--save", "", "--appendonly", "no", "--maxmemory", "60mb", "--maxmemory-policy", "allkeys-lru", "--io-threads", "1", "--io-threads-do-reads", "yes" ]
     restart: unless-stopped
-    networks:
-      - api
     ports:
       - "6379:6379"
+    networks:
+      - api
     deploy:
       resources:
         limits:

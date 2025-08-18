@@ -1,0 +1,87 @@
+x-service-templates:
+  backend: &backend
+    image: cesario/ktor-native:latest
+    depends_on:
+      - redis
+    networks:
+      - payment-processor
+      - backend
+    restart: unless-stopped
+
+services:
+  nginx:
+    image: nginx:latest
+    ports:
+      - "9999:9999"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    networks:
+      - backend
+    depends_on:
+      - backend-01
+      - backend-02
+    deploy:
+      resources:
+        limits:
+          cpus: "0.1"
+          memory: "10MB"
+
+  redis:
+    image: redis:8.0.3-alpine
+    command: redis-server --save "" --appendonly no
+    container_name: redis
+    hostname: redis
+    ports:
+      - "6379:6379"
+    networks:
+      - backend
+    deploy:
+      resources:
+        limits:
+          cpus: "0.2"
+          memory: "20MB"
+    restart: unless-stopped
+
+  backend-01:
+    <<: *backend
+    container_name: backend-01
+    hostname: backend-01
+    environment:
+      - IS_HEALTH_CHECK_UPDATER=true
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - DEFAULT_PROCESSOR_HOST=payment-processor-1
+      - DEFAULT_PROCESSOR_PORT=8080
+      - FALLBACK_PROCESSOR_HOST=payment-processor-2
+      - FALLBACK_PROCESSOR_PORT=8080
+      - PORT=9999
+    deploy:
+      resources:
+        limits:
+          cpus: "0.6"
+          memory: "160MB"
+
+  backend-02:
+    <<: *backend
+    container_name: backend-02
+    hostname: backend-02
+    environment:
+      - IS_HEALTH_CHECK_UPDATER=false
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - DEFAULT_PROCESSOR_HOST=payment-processor-1
+      - DEFAULT_PROCESSOR_PORT=8080
+      - FALLBACK_PROCESSOR_HOST=payment-processor-2
+      - FALLBACK_PROCESSOR_PORT=8080
+      - PORT=9999
+    deploy:
+      resources:
+        limits:
+          cpus: "0.6"
+          memory: "160MB"
+
+networks:
+  backend:
+    driver: bridge
+  payment-processor:
+    external: true

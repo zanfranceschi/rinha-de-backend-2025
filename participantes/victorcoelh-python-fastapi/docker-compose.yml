@@ -1,11 +1,44 @@
+x-base-service: &fastapi-server
+  image: victorcoelh/rinha-backend-2025-app:a917
+  environment:
+    REDIS_URL: redis://redis:6379/0
+  networks:
+    - default
+    - payment-processor
+  expose:
+    - "8000"
+  entrypoint: ["python", "-m", "granian", "--interface", "asgi", "src.server:app", "--host", "0.0.0.0"]
+  command: ["--workers", "1", "--loop", "uvloop"]
+  deploy:
+    resources:
+      limits:
+        cpus: "0.65"
+        memory: 150M
+
 services:
+  web-server-1:
+    <<: *fastapi-server
+    container_name: fastapi-1
+    healthcheck:
+      test: ["CMD-SHELL", "python -c 'import urllib.request; urllib.request.urlopen(\"http://127.0.0.1:8000/health\")' || exit 1"]
+      interval: 1s
+      timeout: 1s
+      retries: 15
+
+  web-server-2:
+    <<: *fastapi-server
+    container_name: fastapi-2
+
   nginx:
     image: nginx:latest
+    container_name: nginx
     ports:
       - "9999:9999"
     depends_on:
-      - web-server-1
-      - web-server-2
+      web-server-1:
+        condition: service_healthy
+      web-server-2:
+        condition: service_started
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf:ro
     deploy:
@@ -14,63 +47,25 @@ services:
           cpus: "0.1"
           memory: 25M
 
-  web-server-1:
-    image: victorcoelh/rinha-backend-2025-app:server
-    expose:
-      - "8000"
-    depends_on:
-      - redis
-    environment:
-      REDIS_URL: redis://redis:6379/0
-    networks:
-      - default
-    deploy:
-      resources:
-        limits:
-          cpus: "0.25"
-          memory: 100M
-
-  web-server-2:
-    image: victorcoelh/rinha-backend-2025-app:server
-    expose:
-      - "8000"
-    depends_on:
-      - redis
-    environment:
-      REDIS_URL: redis://redis:6379/0
-    networks:
-      - default
-    deploy:
-      resources:
-        limits:
-          cpus: "0.25"
-          memory: 100M
-
-  workers:
-    image: victorcoelh/rinha-backend-2025-app:worker
-    depends_on:
-      - redis
-    environment:
-      REDIS_URL: redis://redis:6379/0
-    networks:
-      - default
-      - payment-processor
-    deploy:
-      resources:
-        limits:
-          cpus: "0.8"
-          memory: 105M
-
   redis:
-    hostname: redis
-    image: redis:alpine
+    container_name: redis
+    image: redis:7.2-alpine
+    command: >
+      redis-server
+      --save ""
+      --tcp-backlog 511
+      --appendonly no
+      --jemalloc-bg-thread yes
+      --client-output-buffer-limit normal 0 0 0
     expose:
       - "6379"
+    sysctls:
+      - net.core.somaxconn=1024
     deploy:
       resources:
         limits:
           cpus: "0.1"
-          memory: 20M
+          memory: 25M
 
 networks:
   default:

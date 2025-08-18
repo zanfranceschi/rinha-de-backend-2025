@@ -1,26 +1,67 @@
 services:
-  backend:
-    image: felipeschirmann/rinha-backend-2025:15.0.0
-    #    image: rinha-backend:latest
-    container_name: felipeschirmann-rinha
+  api01: &api-template
+    image: felipeschirmann/rinha-backend-2025:17.0.3
+    hostname: api01
     environment:
-      # --- Client and Health Check Settings ---
-      PAYMENT_PROCESSOR_DEFAULT_URL: "http://payment-processor-default:8080"
-      PAYMENT_PROCESSOR_FALLBACK_URL: "http://payment-processor-fallback:8080"
-      RINHA_PROCESSOR_FALLBACK_TOLERANCE_MS: 5000
+      PROCESSOR_DEFAULT_URL: http://payment-processor-default:8080
+      PROCESSOR_FALLBACK_URL: http://payment-processor-fallback:8080
+      SPRING_PROFILES_ACTIVE: test
+      SPRING_DATA_REDIS_HOST: redis
+      SPRING_DATA_REDIS_PORT: 6379
+      LOGGING_LEVEL_ROOT: OFF
+      RINHA_QUEUE_MAX_SIZE: 50000
+      RINHA_QUEUE_FALLBACK_TRIGGER_SIZE: 35000
+      RINHA_STRATEGY_DECISION_PERIOD_MS: 1000
+      RINHA_CB_DEFAULT_WAIT_DURATION: 1s
+      RINHA_PROCESSOR_HEALTH_DATA_MAX_AGE_MS: 4500
+    networks:
+      - payment-processor
+    depends_on:
+      - redis
+    deploy:
+      resources:
+        limits:
+          cpus: "0.64"
+          memory: "150M"
+
+  api02:
+    <<: *api-template
+    hostname: api02
+
+  nginx:
+    image: openresty/openresty:1.21.4.1-alpine
     sysctls:
-      net.core.somaxconn: 4096
+      net.core.somaxconn: 65535
+      net.ipv4.tcp_tw_reuse: "1"
+    volumes:
+      - ./nginx.conf:/usr/local/openresty/nginx/conf/nginx.conf:ro
+      - ./enqueue_payment.lua:/usr/local/openresty/nginx/scripts/enqueue_payment.lua:ro
     ports:
       - "9999:9999"
+    networks:
+      - payment-processor
+    depends_on:
+      - api01
+      - api02
+    deploy:
+      resources:
+        limits:
+          cpus: "0.10"
+          memory: "20M"
+
+  redis:
+    image: redis:7.2-alpine
+    hostname: redis
+    command: redis-server /usr/local/etc/redis/redis.conf
+    volumes:
+      - ./redis.conf:/usr/local/etc/redis/redis.conf:ro
     networks:
       - payment-processor
     deploy:
       resources:
         limits:
-          cpus: "1.5"
-          memory: "350MB"
-
+          cpus: "0.12"
+          memory: "30M"
 networks:
   payment-processor:
-    # This assumes the network is created externally by the payment-processor's docker-compose.
     external: true

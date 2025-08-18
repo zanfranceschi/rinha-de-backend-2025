@@ -1,0 +1,75 @@
+version: '3.8'
+
+services:
+  # Load Balancer - Nginx
+  nginx:
+    image: nginx:1.25-alpine
+    hostname: nginx
+    ports:
+      - "9999:9999"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - api1
+      - api2
+    networks:
+      - backend
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          cpus: "0.1"
+          memory: "15MB"
+    restart: unless-stopped
+
+  # API Instance 1
+  api1: &api
+    build: .
+    hostname: api1
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_URLS=http://+:8080
+      - ConnectionStrings__DefaultConnection=Data Source=/app/data/payments.db;Mode=ReadWriteCreate;Journal Mode=WAL;Cache Size=2000;Page Size=4096;Synchronous=NORMAL;
+      - Logging__LogLevel__Default=Warning
+      - Logging__LogLevel__Microsoft=Warning
+      - PaymentProcessor__DefaultUrl=http://payment-processor-default:8080
+      - PaymentProcessor__FallbackUrl=http://payment-processor-fallback:8080
+      - PaymentProcessor__TimeoutMs=5000
+      - PaymentProcessor__CircuitBreakerFailureThreshold=5
+      - PaymentProcessor__CircuitBreakerTimeoutMs=10000
+    volumes:
+      - rinha-data:/app/data
+    networks:
+      - backend
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          cpus: "0.7"
+          memory: "167MB"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "wget --no-verbose --tries=1 --spider http://localhost:8080/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # API Instance 2
+  api2:
+    <<: *api
+    hostname: api2
+
+# Volumes
+volumes:
+  rinha-data:
+    driver: local
+
+# Networks
+networks:
+  backend:
+    driver: bridge
+    driver_opts:
+      com.docker.network.bridge.name: rinha-backend
+  payment-processor:
+    external: true

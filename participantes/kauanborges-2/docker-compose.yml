@@ -1,0 +1,59 @@
+services:
+  app1: &app-config
+    image: kauanborges/payment-processor-proxy:0.0.1-SNAPSHOT
+    deploy:
+      resources:
+        limits:
+          cpus: "0.60"
+          memory: "170MB"
+    environment:
+      - PAYMENT_GATEWAY_DEFAULT=http://payment-processor-default:8080
+      - PAYMENT_GATEWAY_FALLBACK=http://payment-processor-fallback:8080
+      - SERVER_ADDRESS_URL=/tmp/springboot/app1.sock
+      - SUMMARY_SERVICE_URL=/tmp/springboot/app2.sock
+    volumes:
+      - sockets:/tmp/springboot/:rw  # Shared volume for socket files
+    networks:
+      - backend
+      - payment-processor
+    restart: unless-stopped
+
+  app2:
+    <<: *app-config
+    environment:
+      - PAYMENT_GATEWAY_DEFAULT=http://payment-processor-default:8080
+      - PAYMENT_GATEWAY_FALLBACK=http://payment-processor-fallback:8080
+      - SERVER_ADDRESS_URL=/tmp/springboot/app2.sock
+      - SUMMARY_SERVICE_URL=/tmp/springboot/app1.sock
+
+  load-balancer:
+    image: nginx:alpine
+    ports:
+      - "9999:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:rw
+      - sockets:/tmp/springboot/:rw  # Same socket volume
+    networks:
+      - backend
+    deploy:
+      resources:
+        limits:
+          cpus: "0.3"
+          memory: "10MB"
+    depends_on:
+      - app1
+      - app2
+
+volumes:
+  sockets:
+    driver: local
+    driver_opts:
+      type: tmpfs
+      device: tmpfs
+      o: "uid=0,gid=0,mode=1777"
+
+networks:
+  backend:
+    driver: bridge
+  payment-processor:
+    external: true

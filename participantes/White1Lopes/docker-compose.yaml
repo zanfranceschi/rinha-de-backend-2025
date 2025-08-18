@@ -1,0 +1,69 @@
+﻿x-services-templates:
+  api: &api-template  
+    restart: unless-stopped
+    image: ghcr.io/white1lopes/rinha-2025:v1.0.7
+    ports:
+      - "8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - default_url=http://payment-processor-default:8080
+      - fallback_url=http://payment-processor-fallback:8080
+      - redis_url=redis:6379
+    depends_on:
+      - redis
+    networks:
+      - app-network
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          cpus: "0.6"
+          memory: "140MB"          
+          
+services:
+  api1:
+    <<: *api-template
+    environment:
+      - APP_NAME=api1
+  
+  api2:
+    <<: *api-template
+    environment:
+      - APP_NAME=api2
+  
+  load-balancer:
+    restart: unless-stopped
+    image: nginx:latest
+    ports:
+      - "9999:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - api1
+      - api2
+    networks:
+      - app-network
+    deploy:
+      resources:
+        limits:
+          cpus: "0.1"
+          memory: "40MB"
+  redis:
+    restart: unless-stopped
+    image: redis:latest
+    command: redis-server --maxmemory 30mb --maxmemory-policy allkeys-lru --save "" --appendonly no
+    ports:
+      - "6379"
+    networks:
+      - app-network
+    deploy:
+      resources:
+        limits:
+          cpus: "0.2"
+          memory: "30MB"
+
+networks:
+  app-network:
+    driver: bridge
+  payment-processor:
+    external: true

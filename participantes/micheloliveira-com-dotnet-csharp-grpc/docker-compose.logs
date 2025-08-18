@@ -1,0 +1,487 @@
+
+ backend-2 Pulling 
+ backend-1 Pulling 
+ 9824c27679d3 Already exists 
+ 1a283093615e Already exists 
+ c0055458ac5d Already exists 
+ 6c7de5a9ed28 Pulling fs layer 
+ 10f3812fbf34 Pulling fs layer 
+ 9824c27679d3 Already exists 
+ 1a283093615e Already exists 
+ c0055458ac5d Already exists 
+ 6c7de5a9ed28 Pulling fs layer 
+ 10f3812fbf34 Pulling fs layer 
+ 6c7de5a9ed28 Downloading [==================================================>]      93B/93B
+ 6c7de5a9ed28 Verifying Checksum 
+ 6c7de5a9ed28 Download complete 
+ 6c7de5a9ed28 Extracting [==================================================>]      93B/93B
+ 6c7de5a9ed28 Download complete 
+ 6c7de5a9ed28 Extracting [==================================================>]      93B/93B
+ 6c7de5a9ed28 Extracting [==================================================>]      93B/93B
+ 6c7de5a9ed28 Extracting [==================================================>]      93B/93B
+ 6c7de5a9ed28 Pull complete 
+ 6c7de5a9ed28 Pull complete 
+ 10f3812fbf34 Downloading [>                                                  ]  211.8kB/19.97MB
+ 10f3812fbf34 Downloading [>                                                  ]  211.8kB/19.97MB
+ 10f3812fbf34 Downloading [==========================================>        ]  16.83MB/19.97MB
+ 10f3812fbf34 Downloading [==========================================>        ]  16.83MB/19.97MB
+ 10f3812fbf34 Verifying Checksum 
+ 10f3812fbf34 Download complete 
+ 10f3812fbf34 Download complete 
+ 10f3812fbf34 Extracting [>                                                  ]  229.4kB/19.97MB
+ 10f3812fbf34 Extracting [>                                                  ]  229.4kB/19.97MB
+ 10f3812fbf34 Extracting [===================>                               ]  7.799MB/19.97MB
+ 10f3812fbf34 Extracting [===================>                               ]  7.799MB/19.97MB
+ 10f3812fbf34 Extracting [=============================================>     ]  18.12MB/19.97MB
+ 10f3812fbf34 Extracting [=============================================>     ]  18.12MB/19.97MB
+ 10f3812fbf34 Extracting [==================================================>]  19.97MB/19.97MB
+ 10f3812fbf34 Extracting [==================================================>]  19.97MB/19.97MB
+ 10f3812fbf34 Pull complete 
+ 10f3812fbf34 Pull complete 
+ backend-2 Pulled 
+ backend-1 Pulled 
+ Network micheloliveira-com-dotnet-csharp-grpc_backend  Creating
+ Network micheloliveira-com-dotnet-csharp-grpc_backend  Created
+ Container micheloliveira-com-dotnet-csharp-grpc-backend-1-1  Creating
+ Container micheloliveira-com-dotnet-csharp-grpc-backend-2-1  Creating
+ Container micheloliveira-com-dotnet-csharp-grpc-backend-2-1  Created
+ Container micheloliveira-com-dotnet-csharp-grpc-backend-1-1  Created
+ Container micheloliveira-com-dotnet-csharp-grpc-load-balancer-1  Creating
+ Container micheloliveira-com-dotnet-csharp-grpc-load-balancer-1  Created
+Attaching to backend-1-1, backend-2-1, load-balancer-1
+backend-1-1  | WORKER_SIZE: 25
+backend-1-1  | BATCH_SIZE: 100
+backend-1-1  | Retry 1: RpcException - Status(StatusCode="Unavailable", Detail="Error connecting to subchannel.", DebugException="System.Net.Sockets.SocketException: Connection refused")
+backend-1-1  | StackTrace:
+backend-1-1  |    at Grpc.Net.Client.Balancer.Internal.ConnectionManager.<PickAsync>d__46.MoveNext() + 0x43f
+backend-1-1  | --- End of stack trace from previous location ---
+backend-1-1  |    at Grpc.Net.Client.Balancer.Internal.BalancerHttpHandler.<SendAsync>d__11.MoveNext() + 0x371
+backend-1-1  | --- End of stack trace from previous location ---
+backend-1-1  |    at Grpc.Net.Client.Internal.GrpcCall`2.<RunCall>d__82.MoveNext() + 0xefd
+backend-1-1  | --- End of stack trace from previous location ---
+backend-1-1  |    at MichelOliveira.Com.ReactiveLock.Distributed.Grpc.ReactiveLockGrpcTrackerStore.<SetStatusAsync>d__4.MoveNext() + 0x7a
+backend-1-1  | --- End of stack trace from previous location ---
+backend-1-1  |    at MichelOliveira.Com.ReactiveLock.Core.ReactiveLockTrackerController.<DecrementAsync>d__13.MoveNext() + 0x68
+backend-1-1  | --- End of stack trace from previous location ---
+backend-1-1  |    at MichelOliveira.Com.ReactiveLock.Distributed.Grpc.ReactiveLockGrpcTrackerExtensions.<UseDistributedGrpcReactiveLockAsync>d__10.MoveNext() + 0x2ac
+backend-1-1  | --- End of stack trace from previous location ---
+backend-1-1  |    at Program.<>c__DisplayClass0_0.<<<Main>$>b__17>d.MoveNext() + 0x50
+backend-1-1  | --- End of stack trace from previous location ---
+backend-1-1  |    at Polly.AsyncPolicy.<>c__DisplayClass40_0.<<ImplementationAsync>b__0>d.MoveNext() + 0x68
+backend-1-1  | --- End of stack trace from previous location ---
+backend-1-1  |    at Polly.Retry.AsyncRetryEngine.<ImplementationAsync>d__0`1.MoveNext() + 0x1c5
+backend-1-1  | ----------------------------------------
+backend-2-1  | WORKER_SIZE: 25
+backend-2-1  | BATCH_SIZE: 100
+backend-2-1  | Retry 1: RpcException - Status(StatusCode="Unavailable", Detail="Error connecting to subchannel.", DebugException="System.Net.Sockets.SocketException: Connection refused")
+backend-2-1  | StackTrace:
+backend-2-1  |    at Grpc.Net.Client.Balancer.Internal.ConnectionManager.<PickAsync>d__46.MoveNext() + 0x43f
+backend-2-1  | --- End of stack trace from previous location ---
+backend-2-1  |    at Grpc.Net.Client.Balancer.Internal.BalancerHttpHandler.<SendAsync>d__11.MoveNext() + 0x371
+backend-2-1  | --- End of stack trace from previous location ---
+backend-2-1  |    at Grpc.Net.Client.Internal.GrpcCall`2.<RunCall>d__82.MoveNext() + 0xefd
+backend-2-1  | --- End of stack trace from previous location ---
+backend-2-1  |    at MichelOliveira.Com.ReactiveLock.Distributed.Grpc.ReactiveLockGrpcTrackerStore.<SetStatusAsync>d__4.MoveNext() + 0x7a
+backend-2-1  | --- End of stack trace from previous location ---
+backend-2-1  |    at MichelOliveira.Com.ReactiveLock.Core.ReactiveLockTrackerController.<DecrementAsync>d__13.MoveNext() + 0x68
+backend-2-1  | --- End of stack trace from previous location ---
+backend-2-1  |    at MichelOliveira.Com.ReactiveLock.Distributed.Grpc.ReactiveLockGrpcTrackerExtensions.<UseDistributedGrpcReactiveLockAsync>d__10.MoveNext() + 0x2ac
+backend-2-1  | --- End of stack trace from previous location ---
+backend-2-1  |    at Program.<>c__DisplayClass0_0.<<<Main>$>b__17>d.MoveNext() + 0x50
+backend-2-1  | --- End of stack trace from previous location ---
+backend-2-1  |    at Polly.AsyncPolicy.<>c__DisplayClass40_0.<<ImplementationAsync>b__0>d.MoveNext() + 0x68
+backend-2-1  | --- End of stack trace from previous location ---
+backend-2-1  |    at Polly.Retry.AsyncRetryEngine.<ImplementationAsync>d__0`1.MoveNext() + 0x1c5
+backend-2-1  | ----------------------------------------
+backend-1-1  | Retry 2: RpcException - Status(StatusCode="Unavailable", Detail="Error connecting to subchannel.", DebugException="System.Net.Sockets.SocketException: Connection refused")
+backend-1-1  | StackTrace:
+backend-1-1  |    at Grpc.Net.Client.Balancer.Internal.ConnectionManager.<PickAsync>d__46.MoveNext() + 0x43f
+backend-1-1  | --- End of stack trace from previous location ---
+backend-1-1  |    at Grpc.Net.Client.Balancer.Internal.BalancerHttpHandler.<SendAsync>d__11.MoveNext() + 0x371
+backend-1-1  | --- End of stack trace from previous location ---
+backend-1-1  |    at Grpc.Net.Client.Internal.GrpcCall`2.<RunCall>d__82.MoveNext() + 0xefd
+backend-1-1  | --- End of stack trace from previous location ---
+backend-1-1  |    at MichelOliveira.Com.ReactiveLock.Distributed.Grpc.ReactiveLockGrpcTrackerStore.<SetStatusAsync>d__4.MoveNext() + 0x7a
+backend-1-1  | --- End of stack trace from previous location ---
+backend-1-1  |    at MichelOliveira.Com.ReactiveLock.Core.ReactiveLockTrackerController.<DecrementAsync>d__13.MoveNext() + 0x68
+backend-1-1  | --- End of stack trace from previous location ---
+backend-1-1  |    at MichelOliveira.Com.ReactiveLock.Distributed.Grpc.ReactiveLockGrpcTrackerExtensions.<UseDistributedGrpcReactiveLockAsync>d__10.MoveNext() + 0x2ac
+backend-1-1  | --- End of stack trace from previous location ---
+backend-1-1  |    at Program.<>c__DisplayClass0_0.<<<Main>$>b__17>d.MoveNext() + 0x50
+backend-1-1  | --- End of stack trace from previous location ---
+backend-1-1  |    at Polly.AsyncPolicy.<>c__DisplayClass40_0.<<ImplementationAsync>b__0>d.MoveNext() + 0x68
+backend-1-1  | --- End of stack trace from previous location ---
+backend-1-1  |    at Polly.Retry.AsyncRetryEngine.<ImplementationAsync>d__0`1.MoveNext() + 0x1c5
+backend-1-1  | ----------------------------------------
+backend-2-1  | Retry 2: RpcException - Status(StatusCode="Unavailable", Detail="Error connecting to subchannel.", DebugException="System.Net.Sockets.SocketException: Connection refused")
+backend-2-1  | StackTrace:
+backend-2-1  |    at Grpc.Net.Client.Balancer.Internal.ConnectionManager.<PickAsync>d__46.MoveNext() + 0x43f
+backend-2-1  | --- End of stack trace from previous location ---
+backend-2-1  |    at Grpc.Net.Client.Balancer.Internal.BalancerHttpHandler.<SendAsync>d__11.MoveNext() + 0x371
+backend-2-1  | --- End of stack trace from previous location ---
+backend-2-1  |    at Grpc.Net.Client.Internal.GrpcCall`2.<RunCall>d__82.MoveNext() + 0xefd
+backend-2-1  | --- End of stack trace from previous location ---
+backend-2-1  |    at MichelOliveira.Com.ReactiveLock.Distributed.Grpc.ReactiveLockGrpcTrackerStore.<SetStatusAsync>d__4.MoveNext() + 0x7a
+backend-2-1  | --- End of stack trace from previous location ---
+backend-2-1  |    at MichelOliveira.Com.ReactiveLock.Core.ReactiveLockTrackerController.<DecrementAsync>d__13.MoveNext() + 0x68
+backend-2-1  | --- End of stack trace from previous location ---
+backend-2-1  |    at MichelOliveira.Com.ReactiveLock.Distributed.Grpc.ReactiveLockGrpcTrackerExtensions.<UseDistributedGrpcReactiveLockAsync>d__10.MoveNext() + 0x2ac
+backend-2-1  | --- End of stack trace from previous location ---
+backend-2-1  |    at Program.<>c__DisplayClass0_0.<<<Main>$>b__17>d.MoveNext() + 0x50
+backend-2-1  | --- End of stack trace from previous location ---
+backend-2-1  |    at Polly.AsyncPolicy.<>c__DisplayClass40_0.<<ImplementationAsync>b__0>d.MoveNext() + 0x68
+backend-2-1  | --- End of stack trace from previous location ---
+backend-2-1  |    at Polly.Retry.AsyncRetryEngine.<ImplementationAsync>d__0`1.MoveNext() + 0x1c5
+backend-2-1  | ----------------------------------------
+backend-1-1  | Retry 3: RpcException - Status(StatusCode="Unavailable", Detail="Error connecting to subchannel.", DebugException="System.Net.Sockets.SocketException: Connection refused")
+backend-1-1  | StackTrace:
+backend-1-1  |    at Grpc.Net.Client.Balancer.Internal.ConnectionManager.<PickAsync>d__46.MoveNext() + 0x43f
+backend-1-1  | --- End of stack trace from previous location ---
+backend-1-1  |    at Grpc.Net.Client.Balancer.Internal.BalancerHttpHandler.<SendAsync>d__11.MoveNext() + 0x371
+backend-1-1  | --- End of stack trace from previous location ---
+backend-1-1  |    at Grpc.Net.Client.Internal.GrpcCall`2.<RunCall>d__82.MoveNext() + 0xefd
+backend-1-1  | --- End of stack trace from previous location ---
+backend-1-1  |    at MichelOliveira.Com.ReactiveLock.Distributed.Grpc.ReactiveLockGrpcTrackerStore.<SetStatusAsync>d__4.MoveNext() + 0x7a
+backend-1-1  | --- End of stack trace from previous location ---
+backend-1-1  |    at MichelOliveira.Com.ReactiveLock.Core.ReactiveLockTrackerController.<DecrementAsync>d__13.MoveNext() + 0x68
+backend-1-1  | --- End of stack trace from previous location ---
+backend-1-1  |    at MichelOliveira.Com.ReactiveLock.Distributed.Grpc.ReactiveLockGrpcTrackerExtensions.<UseDistributedGrpcReactiveLockAsync>d__10.MoveNext() + 0x2ac
+backend-1-1  | --- End of stack trace from previous location ---
+backend-1-1  |    at Program.<>c__DisplayClass0_0.<<<Main>$>b__17>d.MoveNext() + 0x50
+backend-1-1  | --- End of stack trace from previous location ---
+backend-1-1  |    at Polly.AsyncPolicy.<>c__DisplayClass40_0.<<ImplementationAsync>b__0>d.MoveNext() + 0x68
+backend-1-1  | --- End of stack trace from previous location ---
+backend-1-1  |    at Polly.Retry.AsyncRetryEngine.<ImplementationAsync>d__0`1.MoveNext() + 0x1c5
+backend-1-1  | ----------------------------------------
+backend-2-1  | Retry 3: RpcException - Status(StatusCode="Unavailable", Detail="Error connecting to subchannel.", DebugException="System.Net.Sockets.SocketException: Connection refused")
+backend-2-1  | StackTrace:
+backend-2-1  |    at Grpc.Net.Client.Balancer.Internal.ConnectionManager.<PickAsync>d__46.MoveNext() + 0x43f
+backend-2-1  | --- End of stack trace from previous location ---
+backend-2-1  |    at Grpc.Net.Client.Balancer.Internal.BalancerHttpHandler.<SendAsync>d__11.MoveNext() + 0x371
+backend-2-1  | --- End of stack trace from previous location ---
+backend-2-1  |    at Grpc.Net.Client.Internal.GrpcCall`2.<RunCall>d__82.MoveNext() + 0xefd
+backend-2-1  | --- End of stack trace from previous location ---
+backend-2-1  |    at MichelOliveira.Com.ReactiveLock.Distributed.Grpc.ReactiveLockGrpcTrackerStore.<SetStatusAsync>d__4.MoveNext() + 0x7a
+backend-2-1  | --- End of stack trace from previous location ---
+backend-2-1  |    at MichelOliveira.Com.ReactiveLock.Core.ReactiveLockTrackerController.<DecrementAsync>d__13.MoveNext() + 0x68
+backend-2-1  | --- End of stack trace from previous location ---
+backend-2-1  |    at MichelOliveira.Com.ReactiveLock.Distributed.Grpc.ReactiveLockGrpcTrackerExtensions.<UseDistributedGrpcReactiveLockAsync>d__10.MoveNext() + 0x2ac
+backend-2-1  | --- End of stack trace from previous location ---
+backend-2-1  |    at Program.<>c__DisplayClass0_0.<<<Main>$>b__17>d.MoveNext() + 0x50
+backend-2-1  | --- End of stack trace from previous location ---
+backend-2-1  |    at Polly.AsyncPolicy.<>c__DisplayClass40_0.<<ImplementationAsync>b__0>d.MoveNext() + 0x68
+backend-2-1  | --- End of stack trace from previous location ---
+backend-2-1  |    at Polly.Retry.AsyncRetryEngine.<ImplementationAsync>d__0`1.MoveNext() + 0x1c5
+backend-2-1  | ----------------------------------------
+backend-1-1  | Retry 4: RpcException - Status(StatusCode="Unavailable", Detail="Error connecting to subchannel.", DebugException="System.Net.Sockets.SocketException: Connection refused")
+backend-1-1  | StackTrace:
+backend-1-1  |    at Grpc.Net.Client.Balancer.Internal.ConnectionManager.<PickAsync>d__46.MoveNext() + 0x43f
+backend-1-1  | --- End of stack trace from previous location ---
+backend-1-1  |    at Grpc.Net.Client.Balancer.Internal.BalancerHttpHandler.<SendAsync>d__11.MoveNext() + 0x371
+backend-1-1  | --- End of stack trace from previous location ---
+backend-1-1  |    at Grpc.Net.Client.Internal.GrpcCall`2.<RunCall>d__82.MoveNext() + 0xefd
+backend-1-1  | --- End of stack trace from previous location ---
+backend-1-1  |    at MichelOliveira.Com.ReactiveLock.Distributed.Grpc.ReactiveLockGrpcTrackerStore.<SetStatusAsync>d__4.MoveNext() + 0x7a
+backend-1-1  | --- End of stack trace from previous location ---
+backend-1-1  |    at MichelOliveira.Com.ReactiveLock.Core.ReactiveLockTrackerController.<DecrementAsync>d__13.MoveNext() + 0x68
+backend-1-1  | --- End of stack trace from previous location ---
+backend-1-1  |    at MichelOliveira.Com.ReactiveLock.Distributed.Grpc.ReactiveLockGrpcTrackerExtensions.<UseDistributedGrpcReactiveLockAsync>d__10.MoveNext() + 0x2ac
+backend-1-1  | --- End of stack trace from previous location ---
+backend-1-1  |    at Program.<>c__DisplayClass0_0.<<<Main>$>b__17>d.MoveNext() + 0x50
+backend-1-1  | --- End of stack trace from previous location ---
+backend-1-1  |    at Polly.AsyncPolicy.<>c__DisplayClass40_0.<<ImplementationAsync>b__0>d.MoveNext() + 0x68
+backend-1-1  | --- End of stack trace from previous location ---
+backend-1-1  |    at Polly.Retry.AsyncRetryEngine.<ImplementationAsync>d__0`1.MoveNext() + 0x1c5
+backend-1-1  | ----------------------------------------
+backend-2-1  | Retry 4: RpcException - Status(StatusCode="Unavailable", Detail="Error connecting to subchannel.", DebugException="System.Net.Sockets.SocketException: Connection refused")
+backend-2-1  | StackTrace:
+backend-2-1  |    at Grpc.Net.Client.Balancer.Internal.ConnectionManager.<PickAsync>d__46.MoveNext() + 0x43f
+backend-2-1  | --- End of stack trace from previous location ---
+backend-2-1  |    at Grpc.Net.Client.Balancer.Internal.BalancerHttpHandler.<SendAsync>d__11.MoveNext() + 0x371
+backend-2-1  | --- End of stack trace from previous location ---
+backend-2-1  |    at Grpc.Net.Client.Internal.GrpcCall`2.<RunCall>d__82.MoveNext() + 0xefd
+backend-2-1  | --- End of stack trace from previous location ---
+backend-2-1  |    at MichelOliveira.Com.ReactiveLock.Distributed.Grpc.ReactiveLockGrpcTrackerStore.<SetStatusAsync>d__4.MoveNext() + 0x7a
+backend-2-1  | --- End of stack trace from previous location ---
+backend-2-1  |    at MichelOliveira.Com.ReactiveLock.Core.ReactiveLockTrackerController.<DecrementAsync>d__13.MoveNext() + 0x68
+backend-2-1  | --- End of stack trace from previous location ---
+backend-2-1  |    at MichelOliveira.Com.ReactiveLock.Distributed.Grpc.ReactiveLockGrpcTrackerExtensions.<UseDistributedGrpcReactiveLockAsync>d__10.MoveNext() + 0x2ac
+backend-2-1  | --- End of stack trace from previous location ---
+backend-2-1  |    at Program.<>c__DisplayClass0_0.<<<Main>$>b__17>d.MoveNext() + 0x50
+backend-2-1  | --- End of stack trace from previous location ---
+backend-2-1  |    at Polly.AsyncPolicy.<>c__DisplayClass40_0.<<ImplementationAsync>b__0>d.MoveNext() + 0x68
+backend-2-1  | --- End of stack trace from previous location ---
+backend-2-1  |    at Polly.Retry.AsyncRetryEngine.<ImplementationAsync>d__0`1.MoveNext() + 0x1c5
+backend-2-1  | ----------------------------------------
+backend-1-1  | Retry 5: RpcException - Status(StatusCode="Unavailable", Detail="Error connecting to subchannel.", DebugException="System.Net.Sockets.SocketException: Connection refused")
+backend-1-1  | StackTrace:
+backend-1-1  |    at Grpc.Net.Client.Balancer.Internal.ConnectionManager.<PickAsync>d__46.MoveNext() + 0x43f
+backend-1-1  | --- End of stack trace from previous location ---
+backend-1-1  |    at Grpc.Net.Client.Balancer.Internal.BalancerHttpHandler.<SendAsync>d__11.MoveNext() + 0x371
+backend-1-1  | --- End of stack trace from previous location ---
+backend-1-1  |    at Grpc.Net.Client.Internal.GrpcCall`2.<RunCall>d__82.MoveNext() + 0xefd
+backend-1-1  | --- End of stack trace from previous location ---
+backend-1-1  |    at MichelOliveira.Com.ReactiveLock.Distributed.Grpc.ReactiveLockGrpcTrackerStore.<SetStatusAsync>d__4.MoveNext() + 0x7a
+backend-1-1  | --- End of stack trace from previous location ---
+backend-1-1  |    at MichelOliveira.Com.ReactiveLock.Core.ReactiveLockTrackerController.<DecrementAsync>d__13.MoveNext() + 0x68
+backend-1-1  | --- End of stack trace from previous location ---
+backend-1-1  |    at MichelOliveira.Com.ReactiveLock.Distributed.Grpc.ReactiveLockGrpcTrackerExtensions.<UseDistributedGrpcReactiveLockAsync>d__10.MoveNext() + 0x2ac
+backend-1-1  | --- End of stack trace from previous location ---
+backend-1-1  |    at Program.<>c__DisplayClass0_0.<<<Main>$>b__17>d.MoveNext() + 0x50
+backend-1-1  | --- End of stack trace from previous location ---
+backend-1-1  |    at Polly.AsyncPolicy.<>c__DisplayClass40_0.<<ImplementationAsync>b__0>d.MoveNext() + 0x68
+backend-1-1  | --- End of stack trace from previous location ---
+backend-1-1  |    at Polly.Retry.AsyncRetryEngine.<ImplementationAsync>d__0`1.MoveNext() + 0x1c5
+backend-1-1  | ----------------------------------------
+backend-2-1  | Retry 5: RpcException - Status(StatusCode="Unavailable", Detail="Error connecting to subchannel.", DebugException="System.Net.Sockets.SocketException: Connection refused")
+backend-2-1  | StackTrace:
+backend-2-1  |    at Grpc.Net.Client.Balancer.Internal.ConnectionManager.<PickAsync>d__46.MoveNext() + 0x43f
+backend-2-1  | --- End of stack trace from previous location ---
+backend-2-1  |    at Grpc.Net.Client.Balancer.Internal.BalancerHttpHandler.<SendAsync>d__11.MoveNext() + 0x371
+backend-2-1  | --- End of stack trace from previous location ---
+backend-2-1  |    at Grpc.Net.Client.Internal.GrpcCall`2.<RunCall>d__82.MoveNext() + 0xefd
+backend-2-1  | --- End of stack trace from previous location ---
+backend-2-1  |    at MichelOliveira.Com.ReactiveLock.Distributed.Grpc.ReactiveLockGrpcTrackerStore.<SetStatusAsync>d__4.MoveNext() + 0x7a
+backend-2-1  | --- End of stack trace from previous location ---
+backend-2-1  |    at MichelOliveira.Com.ReactiveLock.Core.ReactiveLockTrackerController.<DecrementAsync>d__13.MoveNext() + 0x68
+backend-2-1  | --- End of stack trace from previous location ---
+backend-2-1  |    at MichelOliveira.Com.ReactiveLock.Distributed.Grpc.ReactiveLockGrpcTrackerExtensions.<UseDistributedGrpcReactiveLockAsync>d__10.MoveNext() + 0x2ac
+backend-2-1  | --- End of stack trace from previous location ---
+backend-2-1  |    at Program.<>c__DisplayClass0_0.<<<Main>$>b__17>d.MoveNext() + 0x50
+backend-2-1  | --- End of stack trace from previous location ---
+backend-2-1  |    at Polly.AsyncPolicy.<>c__DisplayClass40_0.<<ImplementationAsync>b__0>d.MoveNext() + 0x68
+backend-2-1  | --- End of stack trace from previous location ---
+backend-2-1  |    at Polly.Retry.AsyncRetryEngine.<ImplementationAsync>d__0`1.MoveNext() + 0x1c5
+backend-2-1  | ----------------------------------------
+backend-1-1  | Retry 6: RpcException - Status(StatusCode="Unavailable", Detail="Error connecting to subchannel.", DebugException="System.Net.Sockets.SocketException: Connection refused")
+backend-1-1  | StackTrace:
+backend-1-1  |    at Grpc.Net.Client.Balancer.Internal.ConnectionManager.<PickAsync>d__46.MoveNext() + 0x43f
+backend-1-1  | --- End of stack trace from previous location ---
+backend-1-1  |    at Grpc.Net.Client.Balancer.Internal.BalancerHttpHandler.<SendAsync>d__11.MoveNext() + 0x371
+backend-1-1  | --- End of stack trace from previous location ---
+backend-1-1  |    at Grpc.Net.Client.Internal.GrpcCall`2.<RunCall>d__82.MoveNext() + 0xefd
+backend-1-1  | --- End of stack trace from previous location ---
+backend-1-1  |    at MichelOliveira.Com.ReactiveLock.Distributed.Grpc.ReactiveLockGrpcTrackerStore.<SetStatusAsync>d__4.MoveNext() + 0x7a
+backend-1-1  | --- End of stack trace from previous location ---
+backend-1-1  |    at MichelOliveira.Com.ReactiveLock.Core.ReactiveLockTrackerController.<DecrementAsync>d__13.MoveNext() + 0x68
+backend-1-1  | --- End of stack trace from previous location ---
+backend-1-1  |    at MichelOliveira.Com.ReactiveLock.Distributed.Grpc.ReactiveLockGrpcTrackerExtensions.<UseDistributedGrpcReactiveLockAsync>d__10.MoveNext() + 0x2ac
+backend-1-1  | --- End of stack trace from previous location ---
+backend-1-1  |    at Program.<>c__DisplayClass0_0.<<<Main>$>b__17>d.MoveNext() + 0x50
+backend-1-1  | --- End of stack trace from previous location ---
+backend-1-1  |    at Polly.AsyncPolicy.<>c__DisplayClass40_0.<<ImplementationAsync>b__0>d.MoveNext() + 0x68
+backend-1-1  | --- End of stack trace from previous location ---
+backend-1-1  |    at Polly.Retry.AsyncRetryEngine.<ImplementationAsync>d__0`1.MoveNext() + 0x1c5
+backend-1-1  | ----------------------------------------
+backend-2-1  | Retry 6: RpcException - Status(StatusCode="Unavailable", Detail="Error connecting to subchannel.", DebugException="System.Net.Sockets.SocketException: Connection refused")
+backend-2-1  | StackTrace:
+backend-2-1  |    at Grpc.Net.Client.Balancer.Internal.ConnectionManager.<PickAsync>d__46.MoveNext() + 0x43f
+backend-2-1  | --- End of stack trace from previous location ---
+backend-2-1  |    at Grpc.Net.Client.Balancer.Internal.BalancerHttpHandler.<SendAsync>d__11.MoveNext() + 0x371
+backend-2-1  | --- End of stack trace from previous location ---
+backend-2-1  |    at Grpc.Net.Client.Internal.GrpcCall`2.<RunCall>d__82.MoveNext() + 0xefd
+backend-2-1  | --- End of stack trace from previous location ---
+backend-2-1  |    at MichelOliveira.Com.ReactiveLock.Distributed.Grpc.ReactiveLockGrpcTrackerStore.<SetStatusAsync>d__4.MoveNext() + 0x7a
+backend-2-1  | --- End of stack trace from previous location ---
+backend-2-1  |    at MichelOliveira.Com.ReactiveLock.Core.ReactiveLockTrackerController.<DecrementAsync>d__13.MoveNext() + 0x68
+backend-2-1  | --- End of stack trace from previous location ---
+backend-2-1  |    at MichelOliveira.Com.ReactiveLock.Distributed.Grpc.ReactiveLockGrpcTrackerExtensions.<UseDistributedGrpcReactiveLockAsync>d__10.MoveNext() + 0x2ac
+backend-2-1  | --- End of stack trace from previous location ---
+backend-2-1  |    at Program.<>c__DisplayClass0_0.<<<Main>$>b__17>d.MoveNext() + 0x50
+backend-2-1  | --- End of stack trace from previous location ---
+backend-2-1  |    at Polly.AsyncPolicy.<>c__DisplayClass40_0.<<ImplementationAsync>b__0>d.MoveNext() + 0x68
+backend-2-1  | --- End of stack trace from previous location ---
+backend-2-1  |    at Polly.Retry.AsyncRetryEngine.<ImplementationAsync>d__0`1.MoveNext() + 0x1c5
+backend-2-1  | ----------------------------------------
+backend-1-1  | Retry 7: RpcException - Status(StatusCode="Unavailable", Detail="Error connecting to subchannel.", DebugException="System.Net.Sockets.SocketException: Connection refused")
+backend-1-1  | StackTrace:
+backend-1-1  |    at Grpc.Net.Client.Balancer.Internal.ConnectionManager.<PickAsync>d__46.MoveNext() + 0x43f
+backend-1-1  | --- End of stack trace from previous location ---
+backend-1-1  |    at Grpc.Net.Client.Balancer.Internal.BalancerHttpHandler.<SendAsync>d__11.MoveNext() + 0x371
+backend-1-1  | --- End of stack trace from previous location ---
+backend-1-1  |    at Grpc.Net.Client.Internal.GrpcCall`2.<RunCall>d__82.MoveNext() + 0xefd
+backend-1-1  | --- End of stack trace from previous location ---
+backend-1-1  |    at MichelOliveira.Com.ReactiveLock.Distributed.Grpc.ReactiveLockGrpcTrackerStore.<SetStatusAsync>d__4.MoveNext() + 0x7a
+backend-1-1  | --- End of stack trace from previous location ---
+backend-1-1  |    at MichelOliveira.Com.ReactiveLock.Core.ReactiveLockTrackerController.<DecrementAsync>d__13.MoveNext() + 0x68
+backend-1-1  | --- End of stack trace from previous location ---
+backend-1-1  |    at MichelOliveira.Com.ReactiveLock.Distributed.Grpc.ReactiveLockGrpcTrackerExtensions.<UseDistributedGrpcReactiveLockAsync>d__10.MoveNext() + 0x2ac
+backend-1-1  | --- End of stack trace from previous location ---
+backend-1-1  |    at Program.<>c__DisplayClass0_0.<<<Main>$>b__17>d.MoveNext() + 0x50
+backend-1-1  | --- End of stack trace from previous location ---
+backend-1-1  |    at Polly.AsyncPolicy.<>c__DisplayClass40_0.<<ImplementationAsync>b__0>d.MoveNext() + 0x68
+backend-1-1  | --- End of stack trace from previous location ---
+backend-1-1  |    at Polly.Retry.AsyncRetryEngine.<ImplementationAsync>d__0`1.MoveNext() + 0x1c5
+backend-1-1  | ----------------------------------------
+backend-2-1  | Retry 7: RpcException - Status(StatusCode="Unavailable", Detail="Error connecting to subchannel.", DebugException="System.Net.Sockets.SocketException: Connection refused")
+backend-2-1  | StackTrace:
+backend-2-1  |    at Grpc.Net.Client.Balancer.Internal.ConnectionManager.<PickAsync>d__46.MoveNext() + 0x43f
+backend-2-1  | --- End of stack trace from previous location ---
+backend-2-1  |    at Grpc.Net.Client.Balancer.Internal.BalancerHttpHandler.<SendAsync>d__11.MoveNext() + 0x371
+backend-2-1  | --- End of stack trace from previous location ---
+backend-2-1  |    at Grpc.Net.Client.Internal.GrpcCall`2.<RunCall>d__82.MoveNext() + 0xefd
+backend-2-1  | --- End of stack trace from previous location ---
+backend-2-1  |    at MichelOliveira.Com.ReactiveLock.Distributed.Grpc.ReactiveLockGrpcTrackerStore.<SetStatusAsync>d__4.MoveNext() + 0x7a
+backend-2-1  | --- End of stack trace from previous location ---
+backend-2-1  |    at MichelOliveira.Com.ReactiveLock.Core.ReactiveLockTrackerController.<DecrementAsync>d__13.MoveNext() + 0x68
+backend-2-1  | --- End of stack trace from previous location ---
+backend-2-1  |    at MichelOliveira.Com.ReactiveLock.Distributed.Grpc.ReactiveLockGrpcTrackerExtensions.<UseDistributedGrpcReactiveLockAsync>d__10.MoveNext() + 0x2ac
+backend-2-1  | --- End of stack trace from previous location ---
+backend-2-1  |    at Program.<>c__DisplayClass0_0.<<<Main>$>b__17>d.MoveNext() + 0x50
+backend-2-1  | --- End of stack trace from previous location ---
+backend-2-1  |    at Polly.AsyncPolicy.<>c__DisplayClass40_0.<<ImplementationAsync>b__0>d.MoveNext() + 0x68
+backend-2-1  | --- End of stack trace from previous location ---
+backend-2-1  |    at Polly.Retry.AsyncRetryEngine.<ImplementationAsync>d__0`1.MoveNext() + 0x1c5
+backend-2-1  | ----------------------------------------
+backend-1-1  | Retry 8: RpcException - Status(StatusCode="Unavailable", Detail="Error connecting to subchannel.", DebugException="System.Net.Sockets.SocketException: Connection refused")
+backend-1-1  | StackTrace:
+backend-1-1  |    at Grpc.Net.Client.Balancer.Internal.ConnectionManager.<PickAsync>d__46.MoveNext() + 0x43f
+backend-1-1  | --- End of stack trace from previous location ---
+backend-1-1  |    at Grpc.Net.Client.Balancer.Internal.BalancerHttpHandler.<SendAsync>d__11.MoveNext() + 0x371
+backend-1-1  | --- End of stack trace from previous location ---
+backend-1-1  |    at Grpc.Net.Client.Internal.GrpcCall`2.<RunCall>d__82.MoveNext() + 0xefd
+backend-1-1  | --- End of stack trace from previous location ---
+backend-1-1  |    at MichelOliveira.Com.ReactiveLock.Distributed.Grpc.ReactiveLockGrpcTrackerStore.<SetStatusAsync>d__4.MoveNext() + 0x7a
+backend-1-1  | --- End of stack trace from previous location ---
+backend-1-1  |    at MichelOliveira.Com.ReactiveLock.Core.ReactiveLockTrackerController.<DecrementAsync>d__13.MoveNext() + 0x68
+backend-1-1  | --- End of stack trace from previous location ---
+backend-1-1  |    at MichelOliveira.Com.ReactiveLock.Distributed.Grpc.ReactiveLockGrpcTrackerExtensions.<UseDistributedGrpcReactiveLockAsync>d__10.MoveNext() + 0x2ac
+backend-1-1  | --- End of stack trace from previous location ---
+backend-1-1  |    at Program.<>c__DisplayClass0_0.<<<Main>$>b__17>d.MoveNext() + 0x50
+backend-1-1  | --- End of stack trace from previous location ---
+backend-1-1  |    at Polly.AsyncPolicy.<>c__DisplayClass40_0.<<ImplementationAsync>b__0>d.MoveNext() + 0x68
+backend-1-1  | --- End of stack trace from previous location ---
+backend-1-1  |    at Polly.Retry.AsyncRetryEngine.<ImplementationAsync>d__0`1.MoveNext() + 0x1c5
+backend-1-1  | ----------------------------------------
+backend-2-1  | Retry 8: RpcException - Status(StatusCode="Unavailable", Detail="Error connecting to subchannel.", DebugException="System.Net.Sockets.SocketException: Connection refused")
+backend-2-1  | StackTrace:
+backend-2-1  |    at Grpc.Net.Client.Balancer.Internal.ConnectionManager.<PickAsync>d__46.MoveNext() + 0x43f
+backend-2-1  | --- End of stack trace from previous location ---
+backend-2-1  |    at Grpc.Net.Client.Balancer.Internal.BalancerHttpHandler.<SendAsync>d__11.MoveNext() + 0x371
+backend-2-1  | --- End of stack trace from previous location ---
+backend-2-1  |    at Grpc.Net.Client.Internal.GrpcCall`2.<RunCall>d__82.MoveNext() + 0xefd
+backend-2-1  | --- End of stack trace from previous location ---
+backend-2-1  |    at MichelOliveira.Com.ReactiveLock.Distributed.Grpc.ReactiveLockGrpcTrackerStore.<SetStatusAsync>d__4.MoveNext() + 0x7a
+backend-2-1  | --- End of stack trace from previous location ---
+backend-2-1  |    at MichelOliveira.Com.ReactiveLock.Core.ReactiveLockTrackerController.<DecrementAsync>d__13.MoveNext() + 0x68
+backend-2-1  | --- End of stack trace from previous location ---
+backend-2-1  |    at MichelOliveira.Com.ReactiveLock.Distributed.Grpc.ReactiveLockGrpcTrackerExtensions.<UseDistributedGrpcReactiveLockAsync>d__10.MoveNext() + 0x2ac
+backend-2-1  | --- End of stack trace from previous location ---
+backend-2-1  |    at Program.<>c__DisplayClass0_0.<<<Main>$>b__17>d.MoveNext() + 0x50
+backend-2-1  | --- End of stack trace from previous location ---
+backend-2-1  |    at Polly.AsyncPolicy.<>c__DisplayClass40_0.<<ImplementationAsync>b__0>d.MoveNext() + 0x68
+backend-2-1  | --- End of stack trace from previous location ---
+backend-2-1  |    at Polly.Retry.AsyncRetryEngine.<ImplementationAsync>d__0`1.MoveNext() + 0x1c5
+backend-2-1  | ----------------------------------------
+backend-1-1  | Retry 9: RpcException - Status(StatusCode="Unavailable", Detail="Error connecting to subchannel.", DebugException="System.Net.Sockets.SocketException: Connection refused")
+backend-1-1  | StackTrace:
+backend-1-1  |    at Grpc.Net.Client.Balancer.Internal.ConnectionManager.<PickAsync>d__46.MoveNext() + 0x43f
+backend-1-1  | --- End of stack trace from previous location ---
+backend-1-1  |    at Grpc.Net.Client.Balancer.Internal.BalancerHttpHandler.<SendAsync>d__11.MoveNext() + 0x371
+backend-1-1  | --- End of stack trace from previous location ---
+backend-1-1  |    at Grpc.Net.Client.Internal.GrpcCall`2.<RunCall>d__82.MoveNext() + 0xefd
+backend-1-1  | --- End of stack trace from previous location ---
+backend-1-1  |    at MichelOliveira.Com.ReactiveLock.Distributed.Grpc.ReactiveLockGrpcTrackerStore.<SetStatusAsync>d__4.MoveNext() + 0x7a
+backend-1-1  | --- End of stack trace from previous location ---
+backend-1-1  |    at MichelOliveira.Com.ReactiveLock.Core.ReactiveLockTrackerController.<DecrementAsync>d__13.MoveNext() + 0x68
+backend-1-1  | --- End of stack trace from previous location ---
+backend-1-1  |    at MichelOliveira.Com.ReactiveLock.Distributed.Grpc.ReactiveLockGrpcTrackerExtensions.<UseDistributedGrpcReactiveLockAsync>d__10.MoveNext() + 0x2ac
+backend-1-1  | --- End of stack trace from previous location ---
+backend-1-1  |    at Program.<>c__DisplayClass0_0.<<<Main>$>b__17>d.MoveNext() + 0x50
+backend-1-1  | --- End of stack trace from previous location ---
+backend-1-1  |    at Polly.AsyncPolicy.<>c__DisplayClass40_0.<<ImplementationAsync>b__0>d.MoveNext() + 0x68
+backend-1-1  | --- End of stack trace from previous location ---
+backend-1-1  |    at Polly.Retry.AsyncRetryEngine.<ImplementationAsync>d__0`1.MoveNext() + 0x1c5
+backend-1-1  | ----------------------------------------
+backend-2-1  | Retry 9: RpcException - Status(StatusCode="Unavailable", Detail="Error connecting to subchannel.", DebugException="System.Net.Sockets.SocketException: Connection refused")
+backend-2-1  | StackTrace:
+backend-2-1  |    at Grpc.Net.Client.Balancer.Internal.ConnectionManager.<PickAsync>d__46.MoveNext() + 0x43f
+backend-2-1  | --- End of stack trace from previous location ---
+backend-2-1  |    at Grpc.Net.Client.Balancer.Internal.BalancerHttpHandler.<SendAsync>d__11.MoveNext() + 0x371
+backend-2-1  | --- End of stack trace from previous location ---
+backend-2-1  |    at Grpc.Net.Client.Internal.GrpcCall`2.<RunCall>d__82.MoveNext() + 0xefd
+backend-2-1  | --- End of stack trace from previous location ---
+backend-2-1  |    at MichelOliveira.Com.ReactiveLock.Distributed.Grpc.ReactiveLockGrpcTrackerStore.<SetStatusAsync>d__4.MoveNext() + 0x7a
+backend-2-1  | --- End of stack trace from previous location ---
+backend-2-1  |    at MichelOliveira.Com.ReactiveLock.Core.ReactiveLockTrackerController.<DecrementAsync>d__13.MoveNext() + 0x68
+backend-2-1  | --- End of stack trace from previous location ---
+backend-2-1  |    at MichelOliveira.Com.ReactiveLock.Distributed.Grpc.ReactiveLockGrpcTrackerExtensions.<UseDistributedGrpcReactiveLockAsync>d__10.MoveNext() + 0x2ac
+backend-2-1  | --- End of stack trace from previous location ---
+backend-2-1  |    at Program.<>c__DisplayClass0_0.<<<Main>$>b__17>d.MoveNext() + 0x50
+backend-2-1  | --- End of stack trace from previous location ---
+backend-2-1  |    at Polly.AsyncPolicy.<>c__DisplayClass40_0.<<ImplementationAsync>b__0>d.MoveNext() + 0x68
+backend-2-1  | --- End of stack trace from previous location ---
+backend-2-1  |    at Polly.Retry.AsyncRetryEngine.<ImplementationAsync>d__0`1.MoveNext() + 0x1c5
+backend-2-1  | ----------------------------------------
+backend-1-1  | Retry 10: RpcException - Status(StatusCode="Unavailable", Detail="Error connecting to subchannel.", DebugException="System.Net.Sockets.SocketException: Connection refused")
+backend-1-1  | StackTrace:
+backend-1-1  |    at Grpc.Net.Client.Balancer.Internal.ConnectionManager.<PickAsync>d__46.MoveNext() + 0x43f
+backend-1-1  | --- End of stack trace from previous location ---
+backend-1-1  |    at Grpc.Net.Client.Balancer.Internal.BalancerHttpHandler.<SendAsync>d__11.MoveNext() + 0x371
+backend-1-1  | --- End of stack trace from previous location ---
+backend-1-1  |    at Grpc.Net.Client.Internal.GrpcCall`2.<RunCall>d__82.MoveNext() + 0xefd
+backend-1-1  | --- End of stack trace from previous location ---
+backend-1-1  |    at MichelOliveira.Com.ReactiveLock.Distributed.Grpc.ReactiveLockGrpcTrackerStore.<SetStatusAsync>d__4.MoveNext() + 0x7a
+backend-1-1  | --- End of stack trace from previous location ---
+backend-1-1  |    at MichelOliveira.Com.ReactiveLock.Core.ReactiveLockTrackerController.<DecrementAsync>d__13.MoveNext() + 0x68
+backend-1-1  | --- End of stack trace from previous location ---
+backend-1-1  |    at MichelOliveira.Com.ReactiveLock.Distributed.Grpc.ReactiveLockGrpcTrackerExtensions.<UseDistributedGrpcReactiveLockAsync>d__10.MoveNext() + 0x2ac
+backend-1-1  | --- End of stack trace from previous location ---
+backend-1-1  |    at Program.<>c__DisplayClass0_0.<<<Main>$>b__17>d.MoveNext() + 0x50
+backend-1-1  | --- End of stack trace from previous location ---
+backend-1-1  |    at Polly.AsyncPolicy.<>c__DisplayClass40_0.<<ImplementationAsync>b__0>d.MoveNext() + 0x68
+backend-1-1  | --- End of stack trace from previous location ---
+backend-1-1  |    at Polly.Retry.AsyncRetryEngine.<ImplementationAsync>d__0`1.MoveNext() + 0x1c5
+backend-1-1  | ----------------------------------------
+backend-2-1  | Retry 10: RpcException - Status(StatusCode="Unavailable", Detail="Error connecting to subchannel.", DebugException="System.Net.Sockets.SocketException: Connection refused")
+backend-2-1  | StackTrace:
+backend-2-1  |    at Grpc.Net.Client.Balancer.Internal.ConnectionManager.<PickAsync>d__46.MoveNext() + 0x43f
+backend-2-1  | --- End of stack trace from previous location ---
+backend-2-1  |    at Grpc.Net.Client.Balancer.Internal.BalancerHttpHandler.<SendAsync>d__11.MoveNext() + 0x371
+backend-2-1  | --- End of stack trace from previous location ---
+backend-2-1  |    at Grpc.Net.Client.Internal.GrpcCall`2.<RunCall>d__82.MoveNext() + 0xefd
+backend-2-1  | --- End of stack trace from previous location ---
+backend-2-1  |    at MichelOliveira.Com.ReactiveLock.Distributed.Grpc.ReactiveLockGrpcTrackerStore.<SetStatusAsync>d__4.MoveNext() + 0x7a
+backend-2-1  | --- End of stack trace from previous location ---
+backend-2-1  |    at MichelOliveira.Com.ReactiveLock.Core.ReactiveLockTrackerController.<DecrementAsync>d__13.MoveNext() + 0x68
+backend-2-1  | --- End of stack trace from previous location ---
+backend-2-1  |    at MichelOliveira.Com.ReactiveLock.Distributed.Grpc.ReactiveLockGrpcTrackerExtensions.<UseDistributedGrpcReactiveLockAsync>d__10.MoveNext() + 0x2ac
+backend-2-1  | --- End of stack trace from previous location ---
+backend-2-1  |    at Program.<>c__DisplayClass0_0.<<<Main>$>b__17>d.MoveNext() + 0x50
+backend-2-1  | --- End of stack trace from previous location ---
+backend-2-1  |    at Polly.AsyncPolicy.<>c__DisplayClass40_0.<<ImplementationAsync>b__0>d.MoveNext() + 0x68
+backend-2-1  | --- End of stack trace from previous location ---
+backend-2-1  |    at Polly.Retry.AsyncRetryEngine.<ImplementationAsync>d__0`1.MoveNext() + 0x1c5
+backend-2-1  | ----------------------------------------
+backend-2-1  | Retry 11: RpcException - Status(StatusCode="Unavailable", Detail="Error connecting to subchannel.", DebugException="System.Net.Sockets.SocketException: Connection refused")
+backend-2-1  | StackTrace:
+backend-2-1  |    at Grpc.Net.Client.Balancer.Internal.ConnectionManager.<PickAsync>d__46.MoveNext() + 0x43f
+backend-2-1  | --- End of stack trace from previous location ---
+backend-2-1  |    at Grpc.Net.Client.Balancer.Internal.BalancerHttpHandler.<SendAsync>d__11.MoveNext() + 0x371
+backend-2-1  | --- End of stack trace from previous location ---
+backend-2-1  |    at Grpc.Net.Client.Internal.GrpcCall`2.<RunCall>d__82.MoveNext() + 0xefd
+backend-2-1  | --- End of stack trace from previous location ---
+backend-2-1  |    at MichelOliveira.Com.ReactiveLock.Distributed.Grpc.ReactiveLockGrpcTrackerStore.<SetStatusAsync>d__4.MoveNext() + 0x7a
+backend-2-1  | --- End of stack trace from previous location ---
+backend-2-1  |    at MichelOliveira.Com.ReactiveLock.Core.ReactiveLockTrackerController.<DecrementAsync>d__13.MoveNext() + 0x68
+backend-2-1  | --- End of stack trace from previous location ---
+backend-2-1  |    at MichelOliveira.Com.ReactiveLock.Distributed.Grpc.ReactiveLockGrpcTrackerExtensions.<UseDistributedGrpcReactiveLockAsync>d__10.MoveNext() + 0x2ac
+backend-2-1  | --- End of stack trace from previous location ---
+backend-2-1  |    at Program.<>c__DisplayClass0_0.<<<Main>$>b__17>d.MoveNext() + 0x50
+backend-2-1  | --- End of stack trace from previous location ---
+backend-2-1  |    at Polly.AsyncPolicy.<>c__DisplayClass40_0.<<ImplementationAsync>b__0>d.MoveNext() + 0x68
+backend-2-1  | --- End of stack trace from previous location ---
+backend-2-1  |    at Polly.Retry.AsyncRetryEngine.<ImplementationAsync>d__0`1.MoveNext() + 0x1c5
+backend-2-1  | ----------------------------------------
+load-balancer-1  | /docker-entrypoint.sh: /docker-entrypoint.d/ is not empty, will attempt to perform configuration
+load-balancer-1  | /docker-entrypoint.sh: Looking for shell scripts in /docker-entrypoint.d/
+load-balancer-1  | /docker-entrypoint.sh: Launching /docker-entrypoint.d/10-listen-on-ipv6-by-default.sh
+load-balancer-1  | 10-listen-on-ipv6-by-default.sh: info: Getting the checksum of /etc/nginx/conf.d/default.conf
+load-balancer-1  | 10-listen-on-ipv6-by-default.sh: info: Enabled listen on IPv6 in /etc/nginx/conf.d/default.conf
+load-balancer-1  | /docker-entrypoint.sh: Sourcing /docker-entrypoint.d/15-local-resolvers.envsh
+load-balancer-1  | /docker-entrypoint.sh: Launching /docker-entrypoint.d/20-envsubst-on-templates.sh
+load-balancer-1  | /docker-entrypoint.sh: Launching /docker-entrypoint.d/30-tune-worker-processes.sh
+load-balancer-1  | /docker-entrypoint.sh: Configuration complete; ready for start up
+[Kload-balancer-1 exited with code 0
+[Kbackend-2-1 exited with code 137
+log truncated at line 1000

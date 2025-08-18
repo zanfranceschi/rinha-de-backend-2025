@@ -1,8 +1,9 @@
 x-base-env: &base-env
   DB_SOCKET_PATH: /sockets/database.sock
+  GC_MODE: off
 services:
   payments-service: &payments-service
-    image: joycegodinhoo/payments-service:latest
+    image: joycegodinhoo/payments-service:v0.0.7
     container_name: payments-service
     environment:
       <<: *base-env
@@ -25,7 +26,7 @@ services:
 
   payments-service-2:
     <<: *payments-service
-    image: joycegodinhoo/payments-service:latest
+    image: joycegodinhoo/payments-service:v0.0.7
     container_name: payments-service-2
     environment:
       <<: *base-env
@@ -47,11 +48,12 @@ services:
           memory: "85MB"
 
   load-balancer-backend:
-    image: joycegodinhoo/load-balancer-backend:latest
+    image: joycegodinhoo/load-balancer-backend:v0.0.3
     ports:
       - "9999:9999"
     environment:
       - PORT=9999
+      - GC_MODE=off
       - SOCKET1_PATH=/sockets/payments-service-1.sock
       - SOCKET2_PATH=/sockets/payments-service-2.sock
     volumes:
@@ -66,13 +68,14 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.45"
-          memory: "100MB"
+          cpus: "0.42"
+          memory: "90MB"
 
   database:
-    image: joycegodinhoo/database:latest
+    image: joycegodinhoo/database:v0.0.6
     environment:
       - SOCKET_PATH=/sockets/database.sock
+      - GC_MODE=off
     volumes:
       - ./:/db/
       - sockets-volume:/sockets
@@ -81,8 +84,22 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.15"
+          cpus: "0.13"
           memory: "80MB"
+
+  warm-up:
+    image: joycegodinhoo/warm-up:latest
+    volumes:
+      - ./:/wu/
+    networks:
+      - backend
+    depends_on:
+      - load-balancer-backend
+    deploy:
+      resources:
+        limits:
+          cpus: "0.05"
+          memory: "10MB"
 
 networks:
   backend:

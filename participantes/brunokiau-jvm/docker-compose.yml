@@ -1,0 +1,80 @@
+x-backend-templates:
+  backend-app: &backend
+    image: brunomad/rb25-jvm:latest
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: "160MB"
+
+
+services:
+  # Backend 1
+  backend1:
+    <<: *backend
+    networks:
+      backend_net:
+        ipv4_address: 172.20.0.100
+      payment-processor: {}
+    environment:
+      - NODE=172.20.0.101
+      - PAYMENT_PROCESSOR_DEFAULT=http://payment-processor-default:8080
+      - PAYMENT_PROCESSOR_FALLBACK=http://payment-processor-fallback:8080
+      - PAYMENT_PROCESSOR_TIMEOUT=6000
+      - PAYMENT_PROCESSOR_MAX_ERRORS=2
+      - THREAD_COUNT=2
+      - USE_VIRTUAL_THREADS=true
+      - MAX_ATTEMPS=3
+      - BACKOFF=0
+      - FALLBACK=true
+      - JAVA_OPTIONS=-server -XX:+TieredCompilation -XX:CompileThreshold=1000 -XX:+UseG1GC -Xmx64m -Xms64m -XX:MaxDirectMemorySize=10M -XX:MaxHeapFreeRatio=10 -XX:MinHeapFreeRatio=5 -XX:+AlwaysPreTouch -XX:+PerfDisableSharedMem -XX:+DisableExplicitGC -XX:InitialCodeCacheSize=4m -XX:ReservedCodeCacheSize=8m -Xlog:disable
+      
+  # Backend 2
+  backend2:
+    <<: *backend
+    networks:
+      backend_net:
+        ipv4_address: 172.20.0.101
+      payment-processor: {}    
+    environment:
+      - NODE=172.20.0.100
+      - PAYMENT_PROCESSOR_DEFAULT=http://payment-processor-default:8080
+      - PAYMENT_PROCESSOR_FALLBACK=http://payment-processor-fallback:8080
+      - PAYMENT_PROCESSOR_TIMEOUT=6000
+      - PAYMENT_PROCESSOR_MAX_ERRORS=2
+      - THREAD_COUNT=2
+      - USE_VIRTUAL_THREADS=true
+      - MAX_ATTEMPS=3
+      - BACKOFF=0
+      - FALLBACK=true
+      - JAVA_OPTIONS=-server -XX:+TieredCompilation -XX:CompileThreshold=1000 -XX:+UseG1GC -Xmx64m -Xms64m -XX:MaxDirectMemorySize=10M -XX:MaxHeapFreeRatio=10 -XX:MinHeapFreeRatio=5 -XX:+AlwaysPreTouch -XX:+PerfDisableSharedMem -XX:+DisableExplicitGC -XX:InitialCodeCacheSize=4m -XX:ReservedCodeCacheSize=8m -Xlog:disable
+      
+  haproxy:
+      image: haproxy:3.2-alpine
+      ports:
+        - "9999:9999"
+      volumes:
+        - ./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
+      depends_on:
+        - backend1
+        - backend2
+      networks:
+        backend_net:
+          ipv4_address: 172.20.0.99
+      sysctls:
+        - net.ipv4.tcp_tw_reuse=1
+      deploy:
+        resources:
+          limits:
+            cpus: "0.5"
+            memory: "30MB"
+
+networks:
+  backend_net:
+    name: backend_net
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/24
+  payment-processor:
+    external: true

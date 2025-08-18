@@ -1,0 +1,64 @@
+services:
+  api1: &api
+    image: dnery/rinha-backend-2025
+    hostname: api1
+    networks:
+      - backend
+      - payment-processor
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+    ports:
+      - "8080:8080"
+    deploy:
+      resources:
+        limits:
+          cpus: "0.55"
+          memory: "90MB"
+
+  api2:
+    <<: *api
+    hostname: api2
+    ports:
+      - "8081:8080"
+
+  postgres:
+    image: postgres:17-alpine
+    command: 'postgres -c max_connections=400 -c synchronous_commit=off -c fsync=off -c full_page_writes=off'
+    networks:
+      - backend
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=backend-db
+    ports:
+      - "5432:5432"
+    deploy:
+      resources:
+        limits:
+          cpus: "0.25"
+          memory: "120MB"
+
+  nginx:
+    image: nginx:1.29.0-alpine
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - api1
+      - api2
+    ports:
+      - "9999:9999"
+    networks:
+      - backend
+    deploy:
+      resources:
+        limits:
+          cpus: "0.15"
+          memory: "50MB"
+
+networks:
+  backend:
+    driver: bridge
+  payment-processor:
+    external: true

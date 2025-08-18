@@ -1,6 +1,6 @@
 x-backend-templates:
   app: &app
-    image: csouzadocker/java-http-server-postgres:0.0.6
+    image: csouzadocker/java-http-server-postgres:v0.0.7
     depends_on:
       backend-db:
         condition: service_healthy
@@ -19,8 +19,8 @@ x-backend-templates:
           memory: "100MB"
 
   app-env: &app-env
-    BATCH_SIZE: "150"
-    BATCH_LIMIT: "15"
+    BATCH_SIZE: "100"
+    BATCH_LIMIT: "10"
     DATASOURCE_CLASS_NAME: "org.postgresql.Driver"
     DATASOURCE_MAXIMUM_POOL_SIZE: "3"
     DATASOURCE_MINIMUM_IDLE: "3"
@@ -32,11 +32,11 @@ x-backend-templates:
     PAYMENT_PROCESSOR_FALLBACK_URL: "http://payment-processor-fallback:8080"
     PAYMENT_PROCESSOR_WORKERS: "10"
     PAYMENT_PROCESSOR_REQUEST_TIMEOUT: "6000"
-    PAYMENT_PROCESSOR_CONNECTION_TIMEOUT: "200"
+    PAYMENT_PROCESSOR_CONNECTION_TIMEOUT: "50"
     PAYMENT_QUEUE: "3000"
     SERVER_PORT: "8080"
-    THREAD_POOL_SIZE: "8"
-    THREAD_QUEUE_SIZE: "500"
+    THREAD_POOL_SIZE: "10"
+    THREAD_QUEUE_SIZE: "1000"
 
 #############################################################################################
 

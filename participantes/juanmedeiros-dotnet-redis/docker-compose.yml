@@ -1,0 +1,125 @@
+services:
+  api1:
+    image: juanormelli/rinharedis2025:latest 
+    hostname: api1
+    ulimits:
+      nofile:
+        soft: 1048576
+        hard: 1048576
+    networks:
+      - payment-processor
+    environment:
+      - ASPNETCORE_URLS=http://+:8080
+      - workerSync=http://api2:8081
+      - REDIS_HOST=redis:6379
+      - BUFFER2=5000
+      - BUFFER1=100
+      - DOTNET_GCServer=1
+      - DOTNET_GCConcurrent=1
+      - DOTNET_GCHeapCount=2
+      - DOTNET_GCLatencyLevel=1
+      - DOTNET_TieredCompilation=0
+      - DOTNET_ReadyToRun=1
+      - DOTNET_TC_QuickJitForLoops=1
+      - DOTNET_ThreadPool_ForceMinWorkerThreads=2048
+      - DOTNET_ThreadPool_ForceMinIOThreads=256
+      - DOTNET_EnableDiagnostics=0
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: "120MB"
+
+  api2:
+    image: juanormelli/rinharedis2025:latest
+    hostname: api2
+    ulimits:
+      nofile:
+        soft: 1048576
+        hard: 1048576
+    networks:
+      - payment-processor
+    environment:
+      - ASPNETCORE_URLS=http://+:8081
+      - REDIS_HOST=redis:6379
+      - workerSync=http://api1:8080
+      - BUFFER2=5000
+      - BUFFER1=100
+      - DOTNET_GCServer=1
+      - DOTNET_GCConcurrent=1
+      - DOTNET_ReadyToRun=1
+      - DOTNET_GCHeapCount=2
+      - DOTNET_GCLatencyLevel=1
+      - DOTNET_TieredCompilation=0
+      - DOTNET_TC_QuickJitForLoops=1
+      - DOTNET_ThreadPool_ForceMinWorkerThreads=2048
+      - DOTNET_ThreadPool_ForceMinIOThreads=256
+      - DOTNET_EnableDiagnostics=0
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: "120MB"
+
+  haproxy:
+    image: haproxytech/haproxy-alpine:2.9
+    container_name: haproxy_gateway
+    ports:
+      - "9999:9999"
+    volumes:
+      - ./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
+    depends_on:
+      - api1
+    ulimits:
+      nofile:
+        soft: 1048576
+        hard: 1048576
+    deploy:
+      resources:
+        limits:
+          cpus: "0.2"
+          memory: "40MB"
+    networks:
+      - payment-processor
+
+  redis:
+    image: redis:7.2-alpine
+    hostname: redis
+    command: >
+      redis-server
+      --save ""
+      --appendonly no
+      --maxmemory 100mb
+      --maxmemory-policy allkeys-lru
+      --io-threads 4
+      --io-threads-do-reads yes
+      --tcp-backlog 65535
+      --timeout 0
+      --tcp-keepalive 60
+      --databases 1
+      --hz 50
+      --client-output-buffer-limit normal 0 0 0
+      --client-output-buffer-limit pubsub 0 0 0
+      --client-output-buffer-limit replica 0 0 0
+      --protected-mode no
+    ulimits:
+      nofile:
+        soft: 1048576
+        hard: 1048576
+    sysctls:
+      net.core.somaxconn: 65535
+      net.ipv4.tcp_max_syn_backlog: 65535
+      net.ipv4.ip_local_port_range: "1024 65535"
+      net.ipv4.tcp_fin_timeout: 10
+    networks:
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          cpus: "0.2"
+          memory: "40MB"
+
+networks:
+  payment-processor:
+    external: true
+    name: payment-processor

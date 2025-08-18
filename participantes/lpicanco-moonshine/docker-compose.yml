@@ -1,0 +1,108 @@
+services:
+  api01: &api
+    image: ghcr.io/lpicanco/backend-dogfight-moonshine-25:api-746a34
+    hostname: api01
+    restart: unless-stopped
+    environment:
+      RUST_LOG: warn
+      UDS_PATH: /var/run/api01.sock
+      PROCESSOR_UDS_PATH: /var/run/processor.sock
+    volumes:
+      - uds_volume:/var/run
+    depends_on:
+      - processor
+    networks:
+      - backend-dogfight-moonshine-25
+    deploy:
+      resources:
+        limits:
+          cpus: '0.4'
+          memory: "50MB"
+
+  api02:
+    <<: *api
+    hostname: api02
+    environment:
+      RUST_LOG: warn
+      UDS_PATH: /var/run/api02.sock
+      PROCESSOR_UDS_PATH: /var/run/processor.sock
+
+  processor:
+    image: ghcr.io/lpicanco/backend-dogfight-moonshine-25:processor-746a34
+    hostname: processor
+    restart: unless-stopped
+    environment:
+      RUST_LOG: warn
+      UDS_PATH: /var/run/processor.sock
+      PAYMENT_ENDPOINT: http://payment-processor-default:8080
+      PAYMENT_FALLBACK_ENDPOINT: http://payment-processor-fallback:8080
+    volumes:
+      - uds_volume:/var/run
+    networks:
+      - backend-dogfight-moonshine-25
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: "200MB"
+
+  nginx:
+    image: ghcr.io/lpicanco/backend-dogfight-rust-25:nginx-1.29
+    configs:
+      - source: nginx_conf
+        target: /etc/nginx/nginx.conf
+    restart: unless-stopped
+    volumes:
+      - uds_volume:/var/run
+    ports:
+      - "9999:9999"
+    depends_on:
+      - api01
+      - api02
+    deploy:
+      resources:
+        limits:
+          cpus: "0.2"
+          memory: "50MB"
+    networks:
+      - backend-dogfight-moonshine-25
+
+networks:
+  backend-dogfight-moonshine-25:
+    driver: bridge
+  payment-processor:
+    external: true
+
+volumes:
+  uds_volume:
+
+configs:
+  nginx_conf:
+    name: nginx.conf
+    content: |
+      events {
+        worker_connections 2048;
+        use epoll;
+      }
+      http {
+        access_log off;
+
+        tcp_nopush on;
+        tcp_nodelay on;
+      
+        upstream api {
+          keepalive 500;
+
+          server unix:/var/run/api01.sock;
+          server unix:/var/run/api02.sock;
+        }
+        server {
+          listen 9999;
+          location / {
+            proxy_buffering off;
+            proxy_http_version 1.1;
+            proxy_pass http://api;
+          }
+        }
+      }

@@ -4,10 +4,9 @@
 
 - **Java 21 Native GraalVM**
 - **Quarkus**
-- **Redis**
 - **Nginx**
 - **Docker**
 
 ## Repositório
 
-[GitHub /morais15](https://github.com/morais15/rinha-backend-2025-quarkus)
+[GitHub](https://github.com/morais15/rinha-backend-2025-quarkus)

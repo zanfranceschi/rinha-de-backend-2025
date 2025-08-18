@@ -1,0 +1,86 @@
+
+ Network murilo-kendjy-node_internal  Creating
+ Network murilo-kendjy-node_internal  Created
+ Container keydb  Creating
+ Container keydb  Created
+ Container api2  Creating
+ Container api1  Creating
+ Container api1  Created
+ Container api2  Created
+ Container murilo-kendjy-node-load-balance-1  Creating
+ Container murilo-kendjy-node-load-balance-1  Created
+Attaching to api1, api2, keydb, load-balance-1
+keydb  | 1:1:C 17 Aug 2025 12:59:29.650 # oO0OoO0OoO0Oo KeyDB is starting oO0OoO0OoO0Oo
+keydb  | 1:1:C 17 Aug 2025 12:59:29.650 # KeyDB version=6.3.4, bits=64, commit=7e7e5e57, modified=1, pid=1, just started
+keydb  | 1:1:C 17 Aug 2025 12:59:29.650 # Configuration loaded
+keydb  | 1:1:C 17 Aug 2025 12:59:29.651 # WARNING overcommit_memory is set to 0! Background save may fail under low memory condition. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.
+keydb  | 1:1:M 17 Aug 2025 12:59:29.652 * monotonic clock: POSIX clock_gettime
+keydb  |                                                                       
+keydb  |                   _                                                   
+keydb  |                _-(+)-_                                                
+keydb  |             _-- /   \ --_                                            
+keydb  |          _--   /     \   --_            KeyDB  6.3.4 (7e7e5e57/1) 64 bit     
+keydb  |      __--     /       \     --__                                     
+keydb  |     (+) _    /         \    _ (+)       Running in standalone mode
+keydb  |      |   -- /           \ --   |        Port: 6379
+keydb  |      |     /--_   _   _--\     |        PID: 1
+keydb  |      |    /     -(+)-     \    |                                     
+keydb  |      |   /        |        \   |        https://docs.keydb.dev       
+keydb  |      |  /         |         \  |                                     
+keydb  |      | /          |          \ |                                     
+keydb  |     (+)_ -- -- -- | -- -- -- _(+)                                     
+keydb  |         --_       |       _--                                         
+keydb  |             --_   |   _--                                             
+keydb  |                 -(+)-        KeyDB has now joined Snap! See the announcement at:  https://docs.keydb.dev/news
+keydb  | 
+keydb  |                                                                      
+keydb  | 1:1:M 17 Aug 2025 12:59:29.702 # Server initialized
+keydb  | 1:25:M 17 Aug 2025 12:59:29.708 * Thread 0 alive.
+keydb  | 1:26:M 17 Aug 2025 12:59:29.734 * Thread 1 alive.
+load-balance-1  | /docker-entrypoint.sh: /docker-entrypoint.d/ is not empty, will attempt to perform configuration
+load-balance-1  | /docker-entrypoint.sh: Looking for shell scripts in /docker-entrypoint.d/
+load-balance-1  | /docker-entrypoint.sh: Launching /docker-entrypoint.d/10-listen-on-ipv6-by-default.sh
+load-balance-1  | 10-listen-on-ipv6-by-default.sh: info: Getting the checksum of /etc/nginx/conf.d/default.conf
+load-balance-1  | 10-listen-on-ipv6-by-default.sh: info: Enabled listen on IPv6 in /etc/nginx/conf.d/default.conf
+load-balance-1  | /docker-entrypoint.sh: Sourcing /docker-entrypoint.d/15-local-resolvers.envsh
+load-balance-1  | /docker-entrypoint.sh: Launching /docker-entrypoint.d/20-envsubst-on-templates.sh
+load-balance-1  | /docker-entrypoint.sh: Launching /docker-entrypoint.d/30-tune-worker-processes.sh
+load-balance-1  | /docker-entrypoint.sh: Configuration complete; ready for start up
+api1            | 
+api1            | > rinha-backend-2025-node@1.0.3 start
+api1            | > node dist/index.js
+api1            | 
+api2            | 
+api2            | > rinha-backend-2025-node@1.0.3 start
+api2            | > node dist/index.js
+api2            | 
+api2            | Server running at http://localhost:3000/
+api1            | Server running at http://localhost:3000/
+[Kload-balance-1 exited with code 0
+api2            | npm error path /home/node/app
+api2            | npm error command failed
+api2            | npm error signal SIGTERM
+api2            | npm error command sh -c node dist/index.js
+api1            | npm error path /home/node/app
+api1            | npm error command failed
+api1            | npm error signal SIGTERM
+api1            | npm error command sh -c node dist/index.js
+api2            | npm notice
+api2            | npm notice New major version of npm available! 10.9.3 -> 11.5.2
+api2            | npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.5.2
+api2            | npm notice To update run: npm install -g npm@11.5.2
+api2            | npm notice
+api2            | npm error A complete log of this run can be found in: /root/.npm/_logs/2025-08-17T12_59_29_726Z-debug-0.log
+api1            | npm notice
+api1            | npm notice New major version of npm available! 10.9.3 -> 11.5.2
+api1            | npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.5.2
+api1            | npm notice To update run: npm install -g npm@11.5.2
+api1            | npm notice
+api1            | npm error A complete log of this run can be found in: /root/.npm/_logs/2025-08-17T12_59_29_726Z-debug-0.log
+[Kapi1 exited with code 1
+[Kapi2 exited with code 1
+keydb           | 1:signal-handler (1755435641) Received SIGTERM scheduling shutdown...
+keydb           | 1:25:M 17 Aug 2025 13:00:41.243 # User requested shutdown...
+keydb           | 1:25:M 17 Aug 2025 13:00:41.243 * Removing the pid file.
+keydb           | 1:25:M 17 Aug 2025 13:00:41.244 # KeyDB is now ready to exit, bye bye...
+log truncated at line 1000

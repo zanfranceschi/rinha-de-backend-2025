@@ -1,0 +1,113 @@
+version: '3.5'
+
+services:
+  api01: &api
+    image: phalabadessa/rinha-rust:v1.1
+    hostname: api01
+    networks:
+      - backend
+      - payment-processor    
+    expose: 
+      - "3000"
+    depends_on:
+      - db
+      - redis
+    labels:
+      - "autoheal=true"
+    restart: always
+    environment:
+      - PAYMENT_PROCESSOR_DEFAULT_URL=http://payment-processor-default:8080
+      - PAYMENT_PROCESSOR_FALLBACK_URL=http://payment-processor-fallback:8080
+      - PORT=3000
+      - MEMORY_DATABASE_URL=redis://redis:6379
+      - NUM_WORKERS=20
+    deploy:
+      resources:
+        limits:
+          cpus: "0.4"
+          memory: "70MB"
+
+  api02:
+    <<: *api
+    hostname: api02
+    networks:
+      - backend
+      - payment-processor    
+    expose: 
+      - "3000"
+    environment:
+      - PAYMENT_PROCESSOR_DEFAULT_URL=http://payment-processor-default:8080
+      - PAYMENT_PROCESSOR_FALLBACK_URL=http://payment-processor-fallback:8080
+      - PORT=3000
+      - MEMORY_DATABASE_URL=redis://redis:6379
+      - NUM_WORKERS=0
+    deploy:
+      resources:
+        limits:
+          cpus: "0.2"
+          memory: "30MB"
+
+
+  redis:
+    image: redis:7-alpine
+    hostname: redis
+    ports:
+      - "6379:6379"
+    networks:
+      - backend
+    deploy:
+      resources:
+        limits:
+          cpus: "0.3"
+          memory: "70MB"
+
+  nginx:
+    image: nginx:alpine
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - api01
+      - api02
+    ports:
+      - "9999:9999"
+    networks:
+      - backend
+      - payment-processor
+    privileged: true
+    environment:
+      - AUTOHEAL_INTERVAL=60  
+      - AUTOHEAL_START_PERIOD=300 
+      - AUTOHEAL_DEFAULT_STOP_TIMEOUT=10  
+    deploy:
+      resources:
+        limits:
+          cpus: "0.2"
+          memory: "30MB"
+
+  db:
+    image: postgres:latest
+    hostname: db
+    environment:
+     - POSTGRES_USER=postgres
+     - POSTGRES_PASSWORD=postgres
+     - POSTGRES_DB=rinha_2025_db
+     - AUTOHEAL_INTERVAL=60  
+     - AUTOHEAL_START_PERIOD=300 
+     - AUTOHEAL_DEFAULT_STOP_TIMEOUT=10  
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - backend
+    deploy:
+      resources:
+        limits:
+          cpus: "0.4"
+          memory: "150MB"
+
+networks:
+  backend:
+    driver: bridge
+  payment-processor:
+    external: true

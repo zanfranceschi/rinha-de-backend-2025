@@ -1,0 +1,81 @@
+services:
+  redis:
+    image: redis:7-alpine
+    container_name: payment-redis
+    ports:
+      - "6379:6379"
+    command: >
+      redis-server 
+      --appendonly no
+      --tcp-keepalive 60
+      --timeout 0
+    networks:
+      - payment-network
+    deploy:
+      resources:
+        limits:
+          cpus: '0.2'
+          memory: '50MB'
+
+  api-1:
+    image: igorfvicente/rinha-go:1.0.0
+    container_name: payment-api-1
+    environment:
+      - REDIS_ADDR=redis:6379
+      - PORT=8080
+    volumes:
+      - ./data:/root/data
+    networks:
+      - payment-network
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: '125MB'
+    depends_on:
+      - redis
+
+  api-2:
+    image: igorfvicente/rinha-go:1.0.0
+    container_name: payment-api-2
+    environment:
+      - REDIS_ADDR=redis:6379
+      - PORT=8080
+    volumes:
+      - ./data:/root/data
+    networks:
+      - payment-network
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: '125MB'
+    depends_on:
+      - redis
+
+  nginx:
+    image: nginx:alpine
+    container_name: payment-nginx
+    ports:
+      - "9999:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    networks:
+      - payment-network
+    deploy:
+      resources:
+        limits:
+          cpus: '0.3'
+          memory: '50MB'
+    depends_on:
+      - api-1
+      - api-2
+
+networks:
+  payment-network:
+    driver: bridge
+    
+  payment-processor:
+    external: true

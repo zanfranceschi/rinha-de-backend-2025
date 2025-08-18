@@ -1,5 +1,5 @@
 services:
-  api1: 
+  api1:
     image: juanormelli/rinha2025-jl:latest
     hostname: api1
     ulimits:
@@ -14,15 +14,18 @@ services:
       - DOTNET_GCServer=1
       - DOTNET_GCConcurrent=1
       - DOTNET_ReadyToRun=1
+      - DOTNET_GCHeapCount=2
+      - DOTNET_GCLatencyLevel=1
+      - DOTNET_TieredCompilation=0
       - DOTNET_TC_QuickJitForLoops=1
-      - DOTNET_ThreadPool_ForceMinWorkerThreads=512
+      - DOTNET_ThreadPool_ForceMinWorkerThreads=1024
       - DOTNET_ThreadPool_ForceMinIOThreads=256
       - DOTNET_EnableDiagnostics=0
     deploy:
       resources:
         limits:
-          cpus: "1"    
-          memory: "250MB" 
+          cpus: "1"
+          memory: "270MB"
   api2:
     image: juanormelli/rinha2025-jl:latest
     hostname: api2
@@ -34,15 +37,18 @@ services:
       - DOTNET_GCServer=1
       - DOTNET_GCConcurrent=1
       - DOTNET_ReadyToRun=1
+      - DOTNET_GCHeapCount=2
+      - DOTNET_GCLatencyLevel=1
+      - DOTNET_TieredCompilation=0
       - DOTNET_TC_QuickJitForLoops=1
-      - DOTNET_ThreadPool_ForceMinWorkerThreads=512
+      - DOTNET_ThreadPool_ForceMinWorkerThreads=1024
       - DOTNET_ThreadPool_ForceMinIOThreads=256
       - DOTNET_EnableDiagnostics=0
     deploy:
       resources:
         limits:
-          cpus: "0.2"    
-          memory: "50MB" 
+          cpus: "0.2"
+          memory: "50MB"
   haproxy:
     image: haproxytech/haproxy-alpine:2.9
     container_name: haproxy_gateway
@@ -59,10 +65,10 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.3"    
-          memory: "30MB" 
+          cpus: "0.3"
+          memory: "30MB"
     networks:
-     - payment-processor 
+     - payment-processor
 
 networks:
   payment-processor:

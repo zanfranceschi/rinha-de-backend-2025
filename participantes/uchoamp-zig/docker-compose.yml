@@ -1,0 +1,65 @@
+services:
+  lb:
+    image: uchoamp/zigpay:1.10
+    environment:
+      - PORT=9999
+      - SERVER_ENV=PROD
+      - DEFAULT_HOST=zig1
+      - DEFAULT_PORT=8080
+      - FALLBACK_HOST=zig2
+      - FALLBACK_PORT=8080
+    depends_on:
+      - zig1
+      - zig2
+    ports:
+      - "9999:9999"
+    networks:
+      - payment-processor
+    command: ["--load-balancer"]
+    deploy:
+      resources:
+        limits:
+          cpus: "0.20"
+          memory: "250MB"
+  zig1: &zig
+    container_name: zig-pay-1
+    image: uchoamp/zigpay:1.10
+    environment:
+      - SERVER_ENV=PROD
+      - DEFAULT_HOST=payment-processor-default
+      - DEFAULT_PORT=8080
+      - DEFAULT_POOL=100
+      - FALLBACK_HOST=payment-processor-fallback
+      - FALLBACK_PORT=8080
+      - FALLBACK_POOL=0
+      - PORT=8080
+      - PAYMENT_SUMMARY_EXCHANGE_HOST=zig2
+      - PAYMENT_SUMMARY_EXCHANGE_PORT=6969
+    networks:
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          cpus: "0.30"
+          memory: "50MB"
+  zig2: 
+    <<: *zig
+    container_name: zig-pay-2
+    environment:
+      - SERVER_ENV=PROD
+      - DEFAULT_HOST=payment-processor-default
+      - DEFAULT_PORT=8080
+      - DEFAULT_POOL=100
+      - FALLBACK_HOST=payment-processor-fallback
+      - FALLBACK_PORT=8080
+      - FALLBACK_POOL=0
+      - PORT=8080
+      - PAYMENT_SUMMARY_EXCHANGE_HOST=zig1
+      - PAYMENT_SUMMARY_EXCHANGE_PORT=6969
+
+networks:
+  backend:
+    driver: bridge
+  payment-processor:
+    external: true
+

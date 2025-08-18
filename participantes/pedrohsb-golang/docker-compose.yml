@@ -1,40 +1,63 @@
 services:
-  app1:
-    image: pedrohsbarbosa99/rinha-golang-2025:0.2.3
-    command: ["./main"]
-    environment:
-      - SUMMARY_URL=http://app2:8080/internal/payments-summary
-      - PROCESSOR_DEFAULT_URL=http://payment-processor-default:8080
-      - PROCESSOR_FALLBACK_URL=http://payment-processor-fallback:8080
+  memdb:
+    image: pedrohsbarbosa99/rinha-golang-2025:0.3.7
+    command: ["./memdb"]
     volumes:
       - memsock:/tmp
     networks:
       - backend
       - payment-processor
+    environment:
+      - MEMDB_SOCKET=/tmp/kvstore.sock
+      - PROCESSOR_DEFAULT_URL=http://payment-processor-default:8080
+      - PROCESSOR_FALLBACK_URL=http://payment-processor-fallback:8080
     deploy:
       resources:
         limits:
-          cpus: "0.6"
-          memory: 70M
+          cpus: "0.4"
+          memory: 100M
+    restart: unless-stopped
+
+  app1:
+    image: pedrohsbarbosa99/rinha-golang-2025:0.3.7
+    command: ["./main"]
+    volumes:
+      - memsock:/tmp
+    networks:
+      - backend
+      - payment-processor
+    environment:
+      - MEMDB_SOCKET=/tmp/kvstore.sock
+      - PROCESSOR_DEFAULT_URL=http://payment-processor-default:8080
+      - PROCESSOR_FALLBACK_URL=http://payment-processor-fallback:8080
+    depends_on:
+      - memdb
+    deploy:
+      resources:
+        limits:
+          cpus: "0.4"
+          memory: 50M
     restart: unless-stopped
 
   app2:
-    image: pedrohsbarbosa99/rinha-golang-2025:0.2.3
+    image: pedrohsbarbosa99/rinha-golang-2025:0.3.7
     command: ["./main"]
-    environment:
-      - SUMMARY_URL=http://app1:8080/internal/payments-summary
-      - PROCESSOR_DEFAULT_URL=http://payment-processor-default:8080
-      - PROCESSOR_FALLBACK_URL=http://payment-processor-fallback:8080
     volumes:
       - memsock:/tmp
     networks:
       - backend
       - payment-processor
+    environment:
+      - MEMDB_SOCKET=/tmp/kvstore.sock
+      - PROCESSOR_DEFAULT_URL=http://payment-processor-default:8080
+      - PROCESSOR_FALLBACK_URL=http://payment-processor-fallback:8080
+    depends_on:
+      - memdb
     deploy:
       resources:
         limits:
-          cpus: "0.6"
-          memory: 70M
+          cpus: "0.4"
+          memory: 50M
     restart: unless-stopped
 
   nginx:
@@ -54,7 +77,7 @@ services:
       resources:
         limits:
           cpus: "0.3"
-          memory: 50M
+          memory: 100M
     restart: unless-stopped
 
 volumes:

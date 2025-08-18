@@ -1,0 +1,108 @@
+services:
+  nginx:
+    image: nginx:1.25.3-alpine
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    ports:
+      - "9999:9999"
+    depends_on:
+      api1:
+        condition: service_healthy
+      api2:
+        condition: service_healthy
+    deploy:
+      resources:
+        limits:
+          cpus: "0.20"
+          memory: "40MB"
+    networks:
+      - backend
+      - payment-processor
+
+  api1: &api
+    image: th1d0ck3r/rinha-backend-node:1.0
+    hostname: api1
+    environment:
+      - PORT=8080
+      - REDIS_URL=redis://redis:6379
+      - PAYMENT_PROCESSOR_DEFAULT_URL=http://payment-processor-default:8080
+      - PAYMENT_PROCESSOR_FALLBACK_URL=http://payment-processor-fallback:8080
+    depends_on:    
+      redis:
+        condition: service_healthy
+    command: node dist/server.js 
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q --spider http://localhost:8080/health || exit 1"]
+      interval: 3s
+      timeout: 5s
+      retries: 5
+      start_period: 15s
+    deploy:
+      resources:
+        limits:
+          cpus: "0.35"
+          memory: "80MB"
+    networks:
+      - backend
+      - payment-processor
+
+  api2:
+    <<: *api
+    hostname: api2
+
+  worker1: &worker
+    image: th1d0ck3r/rinha-backend-node:1.0
+    hostname: worker1
+    environment:
+      - REDIS_URL=redis://redis:6379
+      - PAYMENT_PROCESSOR_DEFAULT_URL=http://payment-processor-default:8080
+      - PAYMENT_PROCESSOR_FALLBACK_URL=http://payment-processor-fallback:8080
+    depends_on:
+      redis: 
+        condition: service_healthy
+    command: node dist/worker.js
+    deploy:
+      resources:
+        limits:
+          cpus: "0.40"
+          memory: "80MB"
+    networks:
+      - backend
+      - payment-processor
+
+  redis:
+    image: redis:7.2-alpine
+    hostname: redis
+    command:
+      [
+        "redis-server",
+        "--appendonly",
+        "no",
+        "--appendfsync",
+        "no",
+        "--save",
+        "",
+        "--maxclients",
+        "20000",
+        "--maxmemory-policy", "allkeys-lru",
+        "--maxmemory",
+        "70mb",
+      ]
+    deploy:
+      resources:
+        limits:
+          cpus: "0.20"
+          memory: "70MB"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - backend
+      
+networks:
+  backend:
+    driver: bridge
+  payment-processor:
+    external: true

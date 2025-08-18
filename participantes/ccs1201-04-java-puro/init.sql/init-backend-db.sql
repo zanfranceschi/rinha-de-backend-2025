@@ -7,8 +7,7 @@ CREATE UNLOGGED TABLE IF NOT EXISTS payments
 );
 
 CREATE INDEX IF NOT EXISTS idx_payments_covering
-    ON payments (requested_at)
-    INCLUDE (is_default, amount);
+    ON payments (requested_at);
 
 insert into public.payments (amount, requested_at, is_default)
 values  (19.90, 1754137241720, false),
@@ -16768,5 +16767,3 @@ values  (19.90, 1754137241720, false),
         (19.90, 1754137241848, false),
         (19.90, 1754137242391, false),
         (19.90, 1754137241835, false);
-
-delete from payments;

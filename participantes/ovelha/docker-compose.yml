@@ -1,0 +1,87 @@
+services:
+  api01: &api
+    image: leandronsp/ovelha
+    container_name: api01
+    hostname: api01
+    networks:
+      - payment-processor
+      - backend
+    depends_on:
+      redis:
+        condition: service_healthy
+    environment:
+      - API_REDIS_POOL_SIZE=10
+      - API_THREAD_POOL_SIZE=10
+    deploy:
+      resources:
+        limits:
+          cpus: '0.25'
+          memory: '50MB'
+
+  api02: 
+    <<: *api
+    container_name: api02
+    hostname: api02
+
+  worker: &worker
+    <<: *api
+    container_name: worker
+    hostname: worker
+    command: worker
+    environment:
+      - WORKER_REDIS_POOL_SIZE=10
+      - WORKER_THREAD_POOL_SIZE=10
+      - WORKER_MAX_ATTEMPTS=3
+      - WORKER_BACKOFF_SLEEP_MS=5
+      - WORKER_DEFAULT_TIMEOUT_MS=300
+      - WORKER_FALLBACK_TIMEOUT_MS=100
+      - WORKER_MAX_RETRIES=10
+    deploy:
+      resources:
+        limits:
+          cpus: '0.6'
+          memory: '100MB'
+
+  redis:
+    image: redis:7-alpine
+    container_name: redis
+    hostname: redis
+    ports:
+      - 6379:6379
+    networks:
+      - backend
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 1s
+      timeout: 3s
+      retries: 30
+    deploy:
+      resources:
+        limits:
+          cpus: '0.2'
+          memory: '100MB'
+
+  nginx:
+    image: nginx 
+    container_name: nginx
+    volumes:
+      - ./config/nginx.conf:/etc/nginx/nginx.conf:ro
+    ports:
+      - 9999:9999
+    networks:
+      - backend
+    depends_on:
+      - redis
+      - api01
+      - api02
+      - worker
+    deploy:
+      resources:
+        limits:
+          cpus: '0.2'
+          memory: '50MB'
+
+networks:
+  payment-processor:
+    external: true
+  backend:

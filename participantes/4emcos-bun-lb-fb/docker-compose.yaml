@@ -1,0 +1,80 @@
+x-service-templates:
+  backend-service: &backend-service
+    image: 4emcos/rinha-backend-2025-bun:1.0.16
+    depends_on:
+      - writer
+    volumes:
+      - socket_data:/tmp
+    networks:
+      - payment-processor
+      - backend
+    deploy:
+      resources:
+        limits:
+          cpus: "0.45"
+          memory: "55MB"
+
+services:
+  backend-01:
+    <<: *backend-service
+    container_name: backend-01
+    hostname: backend-01
+    environment:
+      APP_PORT: 5000
+      PAYMENT_PROCESSOR_FALLBACK: http://payment-processor-fallback:8080
+      PAYMENT_PROCESSOR_DEFAULT: http://payment-processor-default:8080
+      WRITER_SOCKET_PATH: /tmp/writer.sock
+      SERVICE_SOCKET_PATH: /tmp/backend_1.sock
+
+  backend-02:
+    <<: *backend-service
+    container_name: backend-02
+    hostname: backend-02
+    environment:
+      APP_PORT: 5000
+      PAYMENT_PROCESSOR_FALLBACK: http://payment-processor-fallback:8080
+      PAYMENT_PROCESSOR_DEFAULT: http://payment-processor-default:8080
+      WRITER_SOCKET_PATH: /tmp/writer.sock
+      SERVICE_SOCKET_PATH: /tmp/backend_2.sock
+
+  writer:
+    hostname: writer
+    image: 4emcos/writer:2.0.4
+    environment:
+      - DATABASE_SOCKET_PATH=/tmp/writer.sock
+      - GOGC=100
+      - GOMAXPROCS=1
+      - GODEBUG=gctrace=0
+    volumes:
+      - socket_data:/tmp
+    deploy:
+      resources:
+        limits:
+          cpus: "0.4"
+          memory: "100MB"
+
+  load-balance:
+    image: 4emcos/load-balance:1.0.1
+    volumes:
+      - socket_data:/tmp
+    depends_on:
+      - backend-01
+      - backend-02
+    networks:
+      - backend
+    ports:
+      - '9999:9999'
+    deploy:
+      resources:
+        limits:
+          cpus: "0.2"
+          memory: "75MB"
+          
+volumes:
+  socket_data:
+
+networks:
+  backend:
+    driver: bridge
+  payment-processor:
+    external: true

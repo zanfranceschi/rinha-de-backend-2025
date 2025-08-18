@@ -1,0 +1,113 @@
+x-service-templates:
+  base: &base
+    image: josiney/rdb25_02-amd64:dcf26e4
+    volumes:
+      - sockets:/sockets
+    networks:
+      - backend
+      - payment-processor
+
+
+services:
+  lb:
+    <<: *base
+    container_name: lb
+    hostname: lb
+    deploy:
+      resources:
+        limits:
+          cpus: "0.25"
+          memory: "30MB"
+    environment:
+      - LB=1
+      - PORT=:80
+      - SOCKET_PATH=/sockets/api1.sock
+      - WORKER_SOCKET_PATH=/sockets/worker_http.sock
+      - PAYMENTS_SOCKET_PATH=/sockets/payments.sock
+      - SUMMARY_SOCKET_PATH=/sockets/summary.sock
+      - PURGE_SOCKET_PATH=/sockets/purge.sock
+      - PAYMENTS_PROCESSOR_URL_DEFAULT=http://payment-processor-default:8080/payments
+      - PAYMENTS_PROCESSOR_URL_FALLBACK=http://payment-processor-fallback:8080/payments
+      - HEALTH_PROCESSOR_URL_DEFAULT=http://payment-processor-default:8080/payments/service-health
+      - HEALTH_PROCESSOR_URL_FALLBACK=http://payment-processor-fallback:8080/payments/service-health
+    command: ./api
+    ports:
+      - 9999:80
+    depends_on:
+      - api1
+      - api2
+
+  api1:
+    <<: *base
+    container_name: api1
+    hostname: api1
+    deploy:
+      resources:
+        limits:
+          cpus: "0.25"
+          memory: "30MB"
+    environment:
+      - SOCKET_PATH=/sockets/api2.sock
+      - WORKER_SOCKET_PATH=/sockets/worker_http.sock
+      - PAYMENTS_SOCKET_PATH=/sockets/payments.sock
+      - SUMMARY_SOCKET_PATH=/sockets/summary.sock
+      - PURGE_SOCKET_PATH=/sockets/purge.sock
+      - PAYMENTS_PROCESSOR_URL_DEFAULT=http://payment-processor-default:8080/payments
+      - PAYMENTS_PROCESSOR_URL_FALLBACK=http://payment-processor-fallback:8080/payments
+      - HEALTH_PROCESSOR_URL_DEFAULT=http://payment-processor-default:8080/payments/service-health
+      - HEALTH_PROCESSOR_URL_FALLBACK=http://payment-processor-fallback:8080/payments/service-health
+    command: ./api
+    depends_on:
+      - worker1
+
+  api2:
+    <<: *base
+    container_name: api2
+    hostname: api2
+    deploy:
+      resources:
+        limits:
+          cpus: "0.25"
+          memory: "30MB"
+    environment:
+      - SOCKET_PATH=/sockets/api3.sock
+      - WORKER_SOCKET_PATH=/sockets/worker_http.sock
+      - PAYMENTS_SOCKET_PATH=/sockets/payments.sock
+      - SUMMARY_SOCKET_PATH=/sockets/summary.sock
+      - PURGE_SOCKET_PATH=/sockets/purge.sock
+      - PAYMENTS_PROCESSOR_URL_DEFAULT=http://payment-processor-default:8080/payments
+      - PAYMENTS_PROCESSOR_URL_FALLBACK=http://payment-processor-fallback:8080/payments
+      - HEALTH_PROCESSOR_URL_DEFAULT=http://payment-processor-default:8080/payments/service-health
+      - HEALTH_PROCESSOR_URL_FALLBACK=http://payment-processor-fallback:8080/payments/service-health
+    command: ./api
+    depends_on:
+      - worker1
+
+  worker1:
+    <<: *base
+    container_name: worker1
+    hostname: worker1
+    deploy:
+      resources:
+        limits:
+          cpus: "0.75"
+          memory: "100MB"
+    environment:
+      - SOCKET_PATH=/sockets/worker_http.sock
+      - PAYMENTS_SOCKET_PATH=/sockets/payments.sock
+      - SUMMARY_SOCKET_PATH=/sockets/summary.sock
+      - PURGE_SOCKET_PATH=/sockets/purge.sock
+      - PAYMENTS_PROCESSOR_URL_DEFAULT=http://payment-processor-default:8080/payments
+      - PAYMENTS_PROCESSOR_URL_FALLBACK=http://payment-processor-fallback:8080/payments
+      - HEALTH_PROCESSOR_URL_DEFAULT=http://payment-processor-default:8080/payments/service-health
+      - HEALTH_PROCESSOR_URL_FALLBACK=http://payment-processor-fallback:8080/payments/service-health
+    command: ./worker
+
+volumes:
+  sockets:
+
+networks:
+  backend:
+    driver: bridge
+  payment-processor:
+    external: true

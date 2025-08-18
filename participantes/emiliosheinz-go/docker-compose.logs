@@ -9,24 +9,25 @@
  3686710dcfc4 Pulling fs layer 
  469b6f7869c8 Downloading [>                                                  ]  26.03kB/2.554MB
  469b6f7869c8 Downloading [>                                                  ]  26.03kB/2.554MB
+ 469b6f7869c8 Verifying Checksum 
+ 469b6f7869c8 Downloading [==================================================>]  2.554MB/2.554MB
  469b6f7869c8 Download complete 
- 469b6f7869c8 Extracting [>                                                  ]  32.77kB/2.554MB
  469b6f7869c8 Verifying Checksum 
  469b6f7869c8 Download complete 
  469b6f7869c8 Extracting [>                                                  ]  32.77kB/2.554MB
+ 469b6f7869c8 Extracting [>                                                  ]  32.77kB/2.554MB
  3686710dcfc4 Downloading [>                                                  ]  80.72kB/7.899MB
  3686710dcfc4 Downloading [>                                                  ]  80.72kB/7.899MB
- 469b6f7869c8 Extracting [========================================>          ]  2.064MB/2.554MB
- 469b6f7869c8 Extracting [========================================>          ]  2.064MB/2.554MB
- 469b6f7869c8 Extracting [==================================================>]  2.554MB/2.554MB
- 469b6f7869c8 Extracting [==================================================>]  2.554MB/2.554MB
- 469b6f7869c8 Extracting [==================================================>]  2.554MB/2.554MB
- 469b6f7869c8 Extracting [==================================================>]  2.554MB/2.554MB
- 3686710dcfc4 Downloading [===========================================>       ]   6.83MB/7.899MB
- 3686710dcfc4 Downloading [===========================================>       ]   6.83MB/7.899MB
+ 469b6f7869c8 Extracting [===================================>               ]  1.835MB/2.554MB
+ 469b6f7869c8 Extracting [===================================>               ]  1.835MB/2.554MB
  3686710dcfc4 Verifying Checksum 
  3686710dcfc4 Download complete 
+ 3686710dcfc4 Verifying Checksum 
  3686710dcfc4 Download complete 
+ 469b6f7869c8 Extracting [==================================================>]  2.554MB/2.554MB
+ 469b6f7869c8 Extracting [==================================================>]  2.554MB/2.554MB
+ 469b6f7869c8 Extracting [==================================================>]  2.554MB/2.554MB
+ 469b6f7869c8 Extracting [==================================================>]  2.554MB/2.554MB
  469b6f7869c8 Pull complete 
  469b6f7869c8 Pull complete 
  3686710dcfc4 Extracting [>                                                  ]   98.3kB/7.899MB
@@ -35,21 +36,22 @@
  3686710dcfc4 Extracting [==================================================>]  7.899MB/7.899MB
  3686710dcfc4 Pull complete 
  3686710dcfc4 Pull complete 
- api01 Pulled 
  api02 Pulled 
+ api01 Pulled 
  Network rinha  Creating
  Network rinha  Created
- Container postgres  Creating
  Container redis  Creating
- Container postgres  Created
+ Container postgres  Creating
  Container redis  Created
+ Container postgres  Created
  Container api01  Creating
  Container api02  Creating
- Container api01  Created
  Container api02  Created
+ Container api01  Created
  Container nginx  Creating
  Container nginx  Created
 Attaching to api01, api02, nginx, postgres, redis
+redis  | Starting Redis Server
 postgres  | The files belonging to this database system will be owned by user "postgres".
 postgres  | This user must also own the server process.
 postgres  | 
@@ -62,15 +64,14 @@ postgres  |
 postgres  | fixing permissions on existing directory /var/lib/postgresql/data ... ok
 postgres  | creating subdirectories ... ok
 postgres  | selecting dynamic shared memory implementation ... posix
-redis     | Starting Redis Server
-redis     | 1:C 08 Aug 2025 02:03:31.406 # WARNING Memory overcommit must be enabled! Without it, a background save or replication may fail under low memory condition. Being disabled, it can also cause failures without low memory condition, see https://github.com/jemalloc/jemalloc/issues/1328. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.
 postgres  | selecting default "max_connections" ... 100
+redis     | 1:C 12 Aug 2025 20:57:17.907 # WARNING Memory overcommit must be enabled! Without it, a background save or replication may fail under low memory condition. Being disabled, it can also cause failures without low memory condition, see https://github.com/jemalloc/jemalloc/issues/1328. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.
 postgres  | selecting default "shared_buffers" ... 128MB
 postgres  | selecting default time zone ... UTC
 postgres  | creating configuration files ... ok
 postgres  | running bootstrap script ... ok
 postgres  | sh: locale: not found
-postgres  | 2025-08-08 02:03:34.015 UTC [35] WARNING:  no usable system locales were found
+postgres  | 2025-08-12 20:57:20.344 UTC [35] WARNING:  no usable system locales were found
 postgres  | performing post-bootstrap initialization ... ok
 postgres  | initdb: warning: enabling "trust" authentication for local connections
 postgres  | initdb: hint: You can change this by editing pg_hba.conf or using the option -A, or --auth-local and --auth-host, the next time you run initdb.
@@ -81,18 +82,18 @@ postgres  | Success. You can now start the database server using:
 postgres  | 
 postgres  |     pg_ctl -D /var/lib/postgresql/data -l logfile start
 postgres  | 
-postgres  | waiting for server to start....2025-08-08 02:03:37.201 UTC [53] LOG:  starting PostgreSQL 17.5 on x86_64-pc-linux-musl, compiled by gcc (Alpine 14.2.0) 14.2.0, 64-bit
-postgres  | 2025-08-08 02:03:37.206 UTC [53] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
-postgres  | 2025-08-08 02:03:37.223 UTC [56] LOG:  database system was shut down at 2025-08-08 02:03:36 UTC
-postgres  | 2025-08-08 02:03:37.242 UTC [53] LOG:  database system is ready to accept connections
+postgres  | waiting for server to start....2025-08-12 20:57:23.244 UTC [53] LOG:  starting PostgreSQL 17.5 on x86_64-pc-linux-musl, compiled by gcc (Alpine 14.2.0) 14.2.0, 64-bit
+postgres  | 2025-08-12 20:57:23.248 UTC [53] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+postgres  | 2025-08-12 20:57:23.259 UTC [56] LOG:  database system was shut down at 2025-08-12 20:57:22 UTC
+postgres  | 2025-08-12 20:57:23.271 UTC [53] LOG:  database system is ready to accept connections
 postgres  |  done
 postgres  | server started
 postgres  | CREATE DATABASE
 postgres  | 
 postgres  | 
 postgres  | /usr/local/bin/docker-entrypoint.sh: running /docker-entrypoint-initdb.d/script.sql
-postgres  | DROP TABLE
 postgres  | psql:/docker-entrypoint-initdb.d/script.sql:1: NOTICE:  table "payments" does not exist, skipping
+postgres  | DROP TABLE
 postgres  | CREATE TYPE
 postgres  | CREATE TABLE
 postgres  | CREATE INDEX
@@ -100,37 +101,36 @@ postgres  | CREATE INDEX
 postgres  | CREATE INDEX
 postgres  | 
 postgres  | 
-postgres  | waiting for server to shut down....2025-08-08 02:03:37.822 UTC [53] LOG:  received fast shutdown request
-postgres  | 2025-08-08 02:03:37.831 UTC [53] LOG:  aborting any active transactions
-postgres  | 2025-08-08 02:03:37.836 UTC [53] LOG:  background worker "logical replication launcher" (PID 59) exited with exit code 1
-postgres  | 2025-08-08 02:03:37.899 UTC [54] LOG:  shutting down
-postgres  | 2025-08-08 02:03:37.910 UTC [54] LOG:  checkpoint starting: shutdown immediate
-postgres  | 2025-08-08 02:03:38.102 UTC [74] FATAL:  the database system is shutting down
-postgres  | 2025-08-08 02:03:38.168 UTC [54] LOG:  checkpoint complete: wrote 937 buffers (5.7%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.167 s, sync=0.060 s, total=0.270 s; sync files=309, longest=0.011 s, average=0.001 s; distance=4289 kB, estimate=4289 kB; lsn=0/191D740, redo lsn=0/191D740
-postgres  | 2025-08-08 02:03:38.202 UTC [53] LOG:  database system is shut down
+postgres  | waiting for server to shut down....2025-08-12 20:57:23.850 UTC [53] LOG:  received fast shutdown request
+postgres  | 2025-08-12 20:57:23.854 UTC [53] LOG:  aborting any active transactions
+postgres  | 2025-08-12 20:57:23.939 UTC [53] LOG:  background worker "logical replication launcher" (PID 59) exited with exit code 1
+postgres  | 2025-08-12 20:57:23.939 UTC [54] LOG:  shutting down
+postgres  | 2025-08-12 20:57:23.942 UTC [54] LOG:  checkpoint starting: shutdown immediate
+postgres  | 2025-08-12 20:57:24.070 UTC [54] LOG:  checkpoint complete: wrote 937 buffers (5.7%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.095 s, sync=0.022 s, total=0.132 s; sync files=309, longest=0.004 s, average=0.001 s; distance=4289 kB, estimate=4289 kB; lsn=0/191D740, redo lsn=0/191D740
+postgres  | 2025-08-12 20:57:24.083 UTC [53] LOG:  database system is shut down
 postgres  |  done
 postgres  | server stopped
 postgres  | 
 postgres  | PostgreSQL init process complete; ready for start up.
 postgres  | 
-postgres  | 2025-08-08 02:03:38.325 UTC [1] LOG:  starting PostgreSQL 17.5 on x86_64-pc-linux-musl, compiled by gcc (Alpine 14.2.0) 14.2.0, 64-bit
-postgres  | 2025-08-08 02:03:38.325 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
-postgres  | 2025-08-08 02:03:38.325 UTC [1] LOG:  listening on IPv6 address "::", port 5432
-postgres  | 2025-08-08 02:03:38.337 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
-postgres  | 2025-08-08 02:03:38.400 UTC [78] LOG:  database system was shut down at 2025-08-08 02:03:38 UTC
-postgres  | 2025-08-08 02:03:38.413 UTC [1] LOG:  database system is ready to accept connections
-api02     | 2025/08/08 02:03:40 Configuration initialized successfully
+postgres  | 2025-08-12 20:57:24.248 UTC [1] LOG:  starting PostgreSQL 17.5 on x86_64-pc-linux-musl, compiled by gcc (Alpine 14.2.0) 14.2.0, 64-bit
+postgres  | 2025-08-12 20:57:24.248 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+postgres  | 2025-08-12 20:57:24.248 UTC [1] LOG:  listening on IPv6 address "::", port 5432
+postgres  | 2025-08-12 20:57:24.254 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+postgres  | 2025-08-12 20:57:24.263 UTC [71] LOG:  database system was shut down at 2025-08-12 20:57:24 UTC
+postgres  | 2025-08-12 20:57:24.271 UTC [1] LOG:  database system is ready to accept connections
+api02     | 2025/08/12 20:57:24 Configuration initialized successfully
 api02     | Database connection established successfully
-api02     | 2025/08/08 02:03:40 Default health status initialized for default: &{Failing:false MinResponseTime:0}
-api02     | 2025/08/08 02:03:40 Default health status initialized for fallback: &{Failing:false MinResponseTime:0}
-api01     | 2025/08/08 02:03:40 Configuration initialized successfully
-api02     | asynq: pid=1 2025/08/08 02:03:40.774311 INFO: Starting processing
-api02     | asynq: pid=1 2025/08/08 02:03:40.774329 INFO: Send signal TSTP to stop processing new tasks
-api02     | asynq: pid=1 2025/08/08 02:03:40.774332 INFO: Send signal TERM or INT to terminate the process
+api02     | 2025/08/12 20:57:25 Default health status initialized for default: &{Failing:false MinResponseTime:0}
+api02     | 2025/08/12 20:57:25 Default health status initialized for fallback: &{Failing:false MinResponseTime:0}
+api02     | asynq: pid=1 2025/08/12 20:57:25.018216 INFO: Starting processing
+api02     | asynq: pid=1 2025/08/12 20:57:25.018240 INFO: Send signal TSTP to stop processing new tasks
+api02     | asynq: pid=1 2025/08/12 20:57:25.018243 INFO: Send signal TERM or INT to terminate the process
+api01     | 2025/08/12 20:57:25 Configuration initialized successfully
 api01     | Database connection established successfully
-api01     | asynq: pid=1 2025/08/08 02:03:40.812375 INFO: Starting processing
-api01     | asynq: pid=1 2025/08/08 02:03:40.812406 INFO: Send signal TSTP to stop processing new tasks
-api01     | asynq: pid=1 2025/08/08 02:03:40.812411 INFO: Send signal TERM or INT to terminate the process
+api01     | asynq: pid=1 2025/08/12 20:57:25.031243 INFO: Starting processing
+api01     | asynq: pid=1 2025/08/12 20:57:25.031326 INFO: Send signal TSTP to stop processing new tasks
+api01     | asynq: pid=1 2025/08/12 20:57:25.031341 INFO: Send signal TERM or INT to terminate the process
 nginx     | /docker-entrypoint.sh: /docker-entrypoint.d/ is not empty, will attempt to perform configuration
 nginx     | /docker-entrypoint.sh: Looking for shell scripts in /docker-entrypoint.d/
 nginx     | /docker-entrypoint.sh: Launching /docker-entrypoint.d/10-listen-on-ipv6-by-default.sh
@@ -140,35 +140,65 @@ nginx     | /docker-entrypoint.sh: Sourcing /docker-entrypoint.d/15-local-resolv
 nginx     | /docker-entrypoint.sh: Launching /docker-entrypoint.d/20-envsubst-on-templates.sh
 nginx     | /docker-entrypoint.sh: Launching /docker-entrypoint.d/30-tune-worker-processes.sh
 nginx     | /docker-entrypoint.sh: Configuration complete; ready for start up
-api02     | asynq: pid=1 2025/08/08 02:04:07.002128 WARN: Could not remove task id=6f3b105b-9e98-4484-bc0c-d5ca6ba2240c type="payment:process" from "asynq:{payments}:active" err: INTERNAL_ERROR: redis eval error: NOT FOUND; Will retry syncing
-api02     | asynq: pid=1 2025/08/08 02:04:40.001333 WARN: Could not remove task id=abbfd7ca-3a81-4282-a39f-edfcc2068cac type="payment:process" from "asynq:{payments}:active" err: INTERNAL_ERROR: redis eval error: NOT FOUND; Will retry syncing
-api01     | asynq: pid=1 2025/08/08 02:04:40.001188 WARN: Could not remove task id=1e68fb98-fe3d-4863-8be4-994b227a78af type="payment:process" from "asynq:{payments}:active" err: INTERNAL_ERROR: redis eval error: NOT FOUND; Will retry syncing
+api02     | asynq: pid=1 2025/08/12 20:58:23.004744 WARN: Could not remove task id=2ef27d0a-ea60-4af6-9d28-61bae90bfc06 type="payment:process" from "asynq:{payments}:active" err: INTERNAL_ERROR: redis eval error: NOT FOUND; Will retry syncing
+api02     | asynq: pid=1 2025/08/12 20:58:23.004496 WARN: Could not remove task id=68d3043f-ed39-4c29-865d-1a9bd9fc881f type="payment:process" from "asynq:{payments}:active" err: INTERNAL_ERROR: redis eval error: NOT FOUND; Will retry syncing
+api02     | asynq: pid=1 2025/08/12 20:58:23.005764 WARN: Could not remove task id=01a74501-c25a-4762-8566-eb5914c4a79d type="payment:process" from "asynq:{payments}:active" err: INTERNAL_ERROR: redis eval error: NOT FOUND; Will retry syncing
+api01     | asynq: pid=1 2025/08/12 20:58:23.004861 WARN: Could not remove task id=61eec4ea-07f3-41cf-8d66-a5ee253584ea type="payment:process" from "asynq:{payments}:active" err: INTERNAL_ERROR: redis eval error: NOT FOUND; Will retry syncing
+api01     | asynq: pid=1 2025/08/12 20:58:23.004911 WARN: Could not remove task id=a1f65d11-6ee9-4c5a-a46e-214092267887 type="payment:process" from "asynq:{payments}:active" err: INTERNAL_ERROR: redis eval error: NOT FOUND; Will retry syncing
+api01     | asynq: pid=1 2025/08/12 20:58:23.004925 WARN: Could not remove task id=b8d65a85-154a-43ba-81ef-baea34283e50 type="payment:process" from "asynq:{payments}:active" err: INTERNAL_ERROR: redis eval error: NOT FOUND; Will retry syncing
+api01     | asynq: pid=1 2025/08/12 20:58:23.004938 WARN: Could not remove task id=fced82fc-6d12-4021-880e-47e195a83b42 type="payment:process" from "asynq:{payments}:active" err: INTERNAL_ERROR: redis eval error: NOT FOUND; Will retry syncing
+api02     | asynq: pid=1 2025/08/12 20:58:23.006266 WARN: Could not remove task id=83ce5705-4917-40cc-aa9c-f2b1553c7195 type="payment:process" from "asynq:{payments}:active" err: INTERNAL_ERROR: redis eval error: NOT FOUND; Will retry syncing
+api02     | asynq: pid=1 2025/08/12 20:58:23.081419 WARN: Could not remove task id=6469dd81-2f85-420b-9044-c0bbb9811929 type="payment:process" from "asynq:{payments}:active" err: INTERNAL_ERROR: redis eval error: i/o timeout; Will retry syncing
+api01     | asynq: pid=1 2025/08/12 20:58:23.102214 WARN: Could not remove task id=5eabc011-04ea-4700-83d8-398a54224c6b type="payment:process" from "asynq:{payments}:active" err: INTERNAL_ERROR: redis eval error: NOT FOUND; Will retry syncing
+api02     | asynq: pid=1 2025/08/12 20:58:23.106054 WARN: Could not remove task id=efafab8a-3daf-4249-9c5e-caf8dd335ff7 type="payment:process" from "asynq:{payments}:active" err: INTERNAL_ERROR: redis eval error: NOT FOUND; Will retry syncing
+api01     | asynq: pid=1 2025/08/12 20:58:23.106215 WARN: Could not remove task id=d9158c01-3f53-4fdc-9012-c445b008091c type="payment:process" from "asynq:{payments}:active" err: INTERNAL_ERROR: redis eval error: NOT FOUND; Will retry syncing
+api01     | asynq: pid=1 2025/08/12 20:58:23.106357 WARN: Could not remove task id=97ed8d4a-4ee7-46bd-ae7e-f74d04ce6020 type="payment:process" from "asynq:{payments}:active" err: INTERNAL_ERROR: redis eval error: NOT FOUND; Will retry syncing
+api02     | asynq: pid=1 2025/08/12 20:58:23.106889 WARN: Could not remove task id=69c65beb-4a29-4827-9e61-9fa5b69f2ed7 type="payment:process" from "asynq:{payments}:active" err: INTERNAL_ERROR: redis eval error: NOT FOUND; Will retry syncing
+api01     | asynq: pid=1 2025/08/12 20:58:23.202989 WARN: Could not remove task id=d58ca84a-1704-4095-b9b5-ab3bdee53955 type="payment:process" from "asynq:{payments}:active" err: INTERNAL_ERROR: redis eval error: NOT FOUND; Will retry syncing
+api01     | asynq: pid=1 2025/08/12 20:58:23.203230 WARN: Could not remove task id=567a3f6c-2bc7-4bc2-bcff-3e12fc3d1565 type="payment:process" from "asynq:{payments}:active" err: INTERNAL_ERROR: redis eval error: NOT FOUND; Will retry syncing
+api01     | asynq: pid=1 2025/08/12 20:58:23.203361 WARN: Could not remove task id=cdbc71bf-a19b-4e08-8c40-b3a87b0ee4be type="payment:process" from "asynq:{payments}:active" err: INTERNAL_ERROR: redis eval error: NOT FOUND; Will retry syncing
+api02     | asynq: pid=1 2025/08/12 20:58:23.204813 WARN: Could not remove task id=247c44d1-25a3-4b60-9001-81492bed90fb type="payment:process" from "asynq:{payments}:active" err: INTERNAL_ERROR: redis eval error: NOT FOUND; Will retry syncing
 [Knginx exited with code 0
-api02     | asynq: pid=1 2025/08/08 02:04:55.473268 INFO: Stopping processor
-api01     | asynq: pid=1 2025/08/08 02:04:55.478738 INFO: Stopping processor
-api01     | asynq: pid=1 2025/08/08 02:04:55.499329 INFO: Processor stopped
-api01     | asynq: pid=1 2025/08/08 02:04:55.499344 INFO: Starting graceful shutdown
-api01     | asynq: pid=1 2025/08/08 02:04:55.499350 INFO: Waiting for all workers to finish...
-api02     | asynq: pid=1 2025/08/08 02:04:55.500237 INFO: Processor stopped
-api02     | asynq: pid=1 2025/08/08 02:04:55.500252 INFO: Starting graceful shutdown
-api02     | asynq: pid=1 2025/08/08 02:04:55.500259 INFO: Waiting for all workers to finish...
-api01     | asynq: pid=1 2025/08/08 02:04:55.510932 INFO: All workers have finished
-api01     | asynq: pid=1 2025/08/08 02:04:55.510979 ERROR: Could not remove task id=1e68fb98-fe3d-4863-8be4-994b227a78af type="payment:process" from "asynq:{payments}:active" err: INTERNAL_ERROR: redis eval error: NOT FOUND
-api02     | asynq: pid=1 2025/08/08 02:04:55.511330 INFO: All workers have finished
-api02     | asynq: pid=1 2025/08/08 02:04:55.511361 ERROR: Could not remove task id=abbfd7ca-3a81-4282-a39f-edfcc2068cac type="payment:process" from "asynq:{payments}:active" err: INTERNAL_ERROR: redis eval error: NOT FOUND
-api01     | asynq: pid=1 2025/08/08 02:04:55.511600 INFO: Exiting
-api02     | asynq: pid=1 2025/08/08 02:04:55.511739 INFO: Exiting
+api02     | asynq: pid=1 2025/08/12 20:58:38.142596 INFO: Stopping processor
+api01     | asynq: pid=1 2025/08/12 20:58:38.145148 INFO: Stopping processor
+api01     | asynq: pid=1 2025/08/12 20:58:38.202735 INFO: Processor stopped
+api01     | asynq: pid=1 2025/08/12 20:58:38.202753 INFO: Starting graceful shutdown
+api01     | asynq: pid=1 2025/08/12 20:58:38.202759 INFO: Waiting for all workers to finish...
+api02     | asynq: pid=1 2025/08/12 20:58:38.202975 INFO: Processor stopped
+api02     | asynq: pid=1 2025/08/12 20:58:38.203723 INFO: Starting graceful shutdown
+api02     | asynq: pid=1 2025/08/12 20:58:38.203791 INFO: Waiting for all workers to finish...
+api02     | asynq: pid=1 2025/08/12 20:58:38.210147 INFO: All workers have finished
+api02     | asynq: pid=1 2025/08/12 20:58:38.210263 ERROR: Could not remove task id=2ef27d0a-ea60-4af6-9d28-61bae90bfc06 type="payment:process" from "asynq:{payments}:active" err: INTERNAL_ERROR: redis eval error: NOT FOUND
+api02     | asynq: pid=1 2025/08/12 20:58:38.210290 ERROR: Could not remove task id=68d3043f-ed39-4c29-865d-1a9bd9fc881f type="payment:process" from "asynq:{payments}:active" err: INTERNAL_ERROR: redis eval error: NOT FOUND
+api02     | asynq: pid=1 2025/08/12 20:58:38.210297 ERROR: Could not remove task id=01a74501-c25a-4762-8566-eb5914c4a79d type="payment:process" from "asynq:{payments}:active" err: INTERNAL_ERROR: redis eval error: NOT FOUND
+api02     | asynq: pid=1 2025/08/12 20:58:38.210303 ERROR: Could not remove task id=83ce5705-4917-40cc-aa9c-f2b1553c7195 type="payment:process" from "asynq:{payments}:active" err: INTERNAL_ERROR: redis eval error: NOT FOUND
+api02     | asynq: pid=1 2025/08/12 20:58:38.210309 ERROR: Could not remove task id=6469dd81-2f85-420b-9044-c0bbb9811929 type="payment:process" from "asynq:{payments}:active" err: INTERNAL_ERROR: redis eval error: i/o timeout
+api02     | asynq: pid=1 2025/08/12 20:58:38.210315 ERROR: Could not remove task id=efafab8a-3daf-4249-9c5e-caf8dd335ff7 type="payment:process" from "asynq:{payments}:active" err: INTERNAL_ERROR: redis eval error: NOT FOUND
+api02     | asynq: pid=1 2025/08/12 20:58:38.210321 ERROR: Could not remove task id=69c65beb-4a29-4827-9e61-9fa5b69f2ed7 type="payment:process" from "asynq:{payments}:active" err: INTERNAL_ERROR: redis eval error: NOT FOUND
+api02     | asynq: pid=1 2025/08/12 20:58:38.210331 ERROR: Could not remove task id=247c44d1-25a3-4b60-9001-81492bed90fb type="payment:process" from "asynq:{payments}:active" err: INTERNAL_ERROR: redis eval error: NOT FOUND
+api01     | asynq: pid=1 2025/08/12 20:58:38.210895 INFO: All workers have finished
+api01     | asynq: pid=1 2025/08/12 20:58:38.210962 ERROR: Could not remove task id=61eec4ea-07f3-41cf-8d66-a5ee253584ea type="payment:process" from "asynq:{payments}:active" err: INTERNAL_ERROR: redis eval error: NOT FOUND
+api01     | asynq: pid=1 2025/08/12 20:58:38.210972 ERROR: Could not remove task id=a1f65d11-6ee9-4c5a-a46e-214092267887 type="payment:process" from "asynq:{payments}:active" err: INTERNAL_ERROR: redis eval error: NOT FOUND
+api01     | asynq: pid=1 2025/08/12 20:58:38.210978 ERROR: Could not remove task id=b8d65a85-154a-43ba-81ef-baea34283e50 type="payment:process" from "asynq:{payments}:active" err: INTERNAL_ERROR: redis eval error: NOT FOUND
+api01     | asynq: pid=1 2025/08/12 20:58:38.210984 ERROR: Could not remove task id=fced82fc-6d12-4021-880e-47e195a83b42 type="payment:process" from "asynq:{payments}:active" err: INTERNAL_ERROR: redis eval error: NOT FOUND
+api01     | asynq: pid=1 2025/08/12 20:58:38.210990 ERROR: Could not remove task id=5eabc011-04ea-4700-83d8-398a54224c6b type="payment:process" from "asynq:{payments}:active" err: INTERNAL_ERROR: redis eval error: NOT FOUND
+api01     | asynq: pid=1 2025/08/12 20:58:38.210996 ERROR: Could not remove task id=d9158c01-3f53-4fdc-9012-c445b008091c type="payment:process" from "asynq:{payments}:active" err: INTERNAL_ERROR: redis eval error: NOT FOUND
+api01     | asynq: pid=1 2025/08/12 20:58:38.211002 ERROR: Could not remove task id=97ed8d4a-4ee7-46bd-ae7e-f74d04ce6020 type="payment:process" from "asynq:{payments}:active" err: INTERNAL_ERROR: redis eval error: NOT FOUND
+api01     | asynq: pid=1 2025/08/12 20:58:38.211008 ERROR: Could not remove task id=d58ca84a-1704-4095-b9b5-ab3bdee53955 type="payment:process" from "asynq:{payments}:active" err: INTERNAL_ERROR: redis eval error: NOT FOUND
+api01     | asynq: pid=1 2025/08/12 20:58:38.211014 ERROR: Could not remove task id=567a3f6c-2bc7-4bc2-bcff-3e12fc3d1565 type="payment:process" from "asynq:{payments}:active" err: INTERNAL_ERROR: redis eval error: NOT FOUND
+api01     | asynq: pid=1 2025/08/12 20:58:38.211020 ERROR: Could not remove task id=cdbc71bf-a19b-4e08-8c40-b3a87b0ee4be type="payment:process" from "asynq:{payments}:active" err: INTERNAL_ERROR: redis eval error: NOT FOUND
+api02     | asynq: pid=1 2025/08/12 20:58:38.211113 INFO: Exiting
+api01     | asynq: pid=1 2025/08/12 20:58:38.211480 INFO: Exiting
 [Kapi01 exited with code 137
-redis     | 1:signal-handler (1754618706) Received SIGTERM scheduling shutdown...
-postgres  | 2025-08-08 02:05:06.312 UTC [1] LOG:  received fast shutdown request
-redis     | 1:M 08 Aug 2025 02:05:06.313 # Redis is now ready to exit, bye bye...
-postgres  | 2025-08-08 02:05:06.324 UTC [1] LOG:  aborting any active transactions
-postgres  | 2025-08-08 02:05:06.324 UTC [406] FATAL:  the database system is shutting down
-postgres  | 2025-08-08 02:05:06.402 UTC [1] LOG:  background worker "logical replication launcher" (PID 81) exited with exit code 1
-postgres  | 2025-08-08 02:05:06.404 UTC [76] LOG:  shutting down
-postgres  | 2025-08-08 02:05:06.423 UTC [76] LOG:  checkpoint starting: shutdown immediate
-postgres  | 2025-08-08 02:05:06.847 UTC [76] LOG:  checkpoint complete: wrote 348 buffers (2.1%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.043 s, sync=0.325 s, total=0.444 s; sync files=30, longest=0.196 s, average=0.011 s; distance=5391 kB, estimate=5391 kB; lsn=0/1E613F8, redo lsn=0/1E613F8
-postgres  | 2025-08-08 02:05:06.854 UTC [1] LOG:  database system is shut down
+[Kapi02 exited with code 137
+redis     | 1:signal-handler (1755032328) Received SIGTERM scheduling shutdown...
+redis     | 1:M 12 Aug 2025 20:58:48.486 # Redis is now ready to exit, bye bye...
 [Kredis exited with code 0
-[Kpostgres exited with code 0
+postgres  | 2025-08-12 20:58:48.638 UTC [1] LOG:  received fast shutdown request
+postgres  | 2025-08-12 20:58:48.643 UTC [1] LOG:  aborting any active transactions
+postgres  | 2025-08-12 20:58:48.739 UTC [1] LOG:  background worker "logical replication launcher" (PID 74) exited with exit code 1
+postgres  | 2025-08-12 20:58:48.740 UTC [69] LOG:  shutting down
+postgres  | 2025-08-12 20:58:48.743 UTC [69] LOG:  checkpoint starting: shutdown immediate
+postgres  | 2025-08-12 20:58:48.769 UTC [69] LOG:  checkpoint complete: wrote 332 buffers (2.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.010 s, sync=0.005 s, total=0.029 s; sync files=30, longest=0.003 s, average=0.001 s; distance=5065 kB, estimate=5065 kB; lsn=0/1E0FC50, redo lsn=0/1E0FC50
+postgres  | 2025-08-12 20:58:48.845 UTC [1] LOG:  database system is shut down
 log truncated at line 1000

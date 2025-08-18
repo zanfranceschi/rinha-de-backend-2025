@@ -1,0 +1,154 @@
+services:
+  
+  
+  nginx:
+    image: nginx:stable-alpine
+    container_name: nginx-balancer
+    volumes:
+      - type: bind
+        source: ./nginx.conf
+        target: /etc/nginx/nginx.conf
+        read_only: true
+    ports:
+      - 9999:9999
+    networks:
+      - backend
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          cpus: "0.15"
+          memory: "30MB"
+    depends_on:
+      - api5
+  
+
+  redis:
+    image: redis:8.2.0-alpine
+    container_name: redis-rinha
+    ports:
+      - "6379:6379"
+    networks:
+      - backend
+      - payment-processor
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 1s
+      timeout: 3s
+      retries: 5
+
+    deploy:
+      resources:
+        limits:
+          cpus: "0.35"
+          memory: "80MB"
+
+
+  api1:
+    image: gustavosilvaoliv/api-rinha-25:latest
+    container_name: api1
+    environment:
+      - PORT=8009
+      - API_ID=1
+    networks:
+      - backend
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          cpus: 0.10
+          memory: "25MB"
+    depends_on:
+      redis:
+        condition: service_healthy
+
+
+
+  api2:
+    image: gustavosilvaoliv/api-rinha-25:latest
+    container_name: api2
+    environment:
+      - PORT=8002
+      - API_ID=2
+    networks:
+      - backend
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          cpus: 0.10
+          memory: "25MB"
+    depends_on:
+      - api1
+
+  api3:
+    image: gustavosilvaoliv/api-rinha-25:latest
+    container_name: api3
+    environment:
+      - PORT=8003
+      - API_ID=3
+    networks:
+      - backend
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          cpus: 0.10
+          memory: "25MB"
+    depends_on:
+      - api2
+
+  api4:
+    image: gustavosilvaoliv/api-rinha-25:latest
+    container_name: api4
+    environment:
+      - PORT=8004
+      - API_ID=5
+    networks:
+      - backend
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          cpus: 0.10
+          memory: "25MB"
+    depends_on:
+      - api3
+
+  api5:
+    image: gustavosilvaoliv/api-rinha-25:latest
+    container_name: api5
+    environment:
+      - PORT=8005
+      - API_ID=5
+    networks:
+      - backend
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          cpus: 0.10
+          memory: "25MB"
+    depends_on:
+      - api4
+
+  worker-pool-1:
+    image: gustavosilvaoliv/worker-rinha-25:latest
+    container_name: wkrPool-1
+    networks:
+      - backend
+      - payment-processor 
+    deploy:
+      resources:
+        limits:
+          cpus: 0.5
+          memory: "80MB"
+    depends_on:
+      - nginx
+
+networks:
+  backend:
+    driver: bridge
+  
+  payment-processor:
+    external: true

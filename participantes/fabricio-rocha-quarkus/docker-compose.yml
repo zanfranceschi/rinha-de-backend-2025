@@ -18,7 +18,7 @@ services:
           cpus: "0.15"
           memory: "40mb"
   api01:
-    image: fabriciopalmeiradev/rinha-de-backend-2025-quarkus
+    image: fabriciopalmeiradev/rinha-de-backend-2025-quarkus:1.0.1
     container_name: api01
     networks:
       - backend
@@ -29,6 +29,7 @@ services:
       DB_HOST: jdbc:postgresql://postgres:5432/rinha
       DEFAULT_URL: http://payment-processor-default:8080
       FALLBACK_URL: http://payment-processor-fallback:8080
+      MAX_THREADS: 13
     depends_on:
       - postgres
     deploy:
@@ -37,7 +38,7 @@ services:
           cpus: "0.55"
           memory: "120MB"
   api02:
-    image: fabriciopalmeiradev/rinha-de-backend-2025-quarkus
+    image: fabriciopalmeiradev/rinha-de-backend-2025-quarkus:1.0.1
     container_name: api02
     networks:
       - backend
@@ -48,6 +49,7 @@ services:
       DB_HOST: jdbc:postgresql://postgres:5432/rinha
       DEFAULT_URL: http://payment-processor-default:8080
       FALLBACK_URL: http://payment-processor-fallback:8080
+      MAX_THREADS: 13
     depends_on:
       - postgres
     deploy:

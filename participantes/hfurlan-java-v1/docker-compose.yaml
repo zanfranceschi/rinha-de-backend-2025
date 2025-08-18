@@ -1,0 +1,102 @@
+services:
+  db:
+    image: postgres:16-alpine
+    hostname: db
+    environment:
+      - POSTGRES_PASSWORD=rinha
+      - POSTGRES_USER=rinha
+      - POSTGRES_DB=rinha
+    ports:
+      - "5432:5432"
+    command: postgres -c max_connections=30 -c shared_buffers=32MB -c effective_cache_size=96MB -c work_mem=3MB -c maintenance_work_mem=12MB -c synchronous_commit=off -c fsync=off
+    networks:
+      - rinha-net
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U rinha -d rinha"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    volumes:
+      - ./sql/ddl.sql:/docker-entrypoint-initdb.d/ddl.sql
+      - ./sql/dml.sql:/docker-entrypoint-initdb.d/dml.sql
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: "110MB"
+
+  api01:
+    image: hfurlan/rinha-backend-2025-java-v1:0.0.2
+    hostname: api01
+    environment:
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_USER=rinha
+      - DB_PASSWORD=rinha
+      - DB_NAME=rinha
+      - PROCESSOR_DEFAULT_URL=http://payment-processor-default:8080
+      - PROCESSOR_FALLBACK_URL=http://payment-processor-fallback:8080
+      - LOGGING_LEVEL_ROOT=ERROR
+      - SERVER_TOMCAT_THREADS_MAX=10
+    networks:
+      - payment-processor
+      - rinha-net
+    depends_on:
+      db:
+        condition: service_healthy
+    deploy:
+      resources:
+        limits:
+          cpus: "0.4"
+          memory: "100MB"
+
+  api02:
+    image: hfurlan/rinha-backend-2025-java-v1:0.0.2
+    hostname: api01
+    environment:
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_USER=rinha
+      - DB_PASSWORD=rinha
+      - DB_NAME=rinha
+      - PROCESSOR_DEFAULT_URL=http://payment-processor-default:8080
+      - PROCESSOR_FALLBACK_URL=http://payment-processor-fallback:8080
+      - LOGGING_LEVEL_ROOT=ERROR
+      - SERVER_TOMCAT_THREADS_MAX=10
+      - RINHA_PAYMENT_PROCESSOR_SCHEDULLER_ENABLED=false
+    networks:
+      - payment-processor
+      - rinha-net
+    depends_on:
+      db:
+        condition: service_healthy
+    deploy:
+      resources:
+        limits:
+          cpus: "0.4"
+          memory: "100MB"
+
+  lb:
+    image: nginx:latest
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    ports:
+      - "9999:9999"
+    networks:
+      - payment-processor
+      - rinha-net
+    depends_on:
+      - api01
+      - api02
+    deploy:
+      resources:
+        limits:
+          cpus: "0.2"
+          memory: "15MB"
+
+networks:
+  payment-processor:
+    external: true
+  rinha-net:
+    driver: bridge

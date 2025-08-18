@@ -1,0 +1,106 @@
+version: '3.8'
+
+# Template base para as APIs
+x-api-template: &api-template
+  image: arthurisvi/api-php-hyperf-nano:1.0
+  environment:
+    - APP_ENV=production
+    - REDIS_HOST=redis
+    - REDIS_PORT=6379
+  depends_on:
+    - redis
+  networks:
+    - rinha-network
+    - payment-processor
+  deploy:
+    resources:
+      limits:
+        cpus: "0.25"
+        memory: "80MB"
+
+services:
+  # Load Balancer - Nginx
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "9999:9999"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - api_1
+      - api_2
+    networks:
+      - rinha-network
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          cpus: "0.2"
+          memory: "40MB"
+
+  # API Instance 1
+  api_1:
+    <<: *api-template
+
+  # API Instance 2
+  api_2:
+    <<: *api-template
+
+  # Worker - Payment Processing
+  worker_payments:
+    image: arthurisvi/worker-payments-php-swoole:1.0.1
+    environment:
+      - APP_ENV=production
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - PROCESSOR_DEFAULT_URL=http://payment-processor-default:8080
+      - PROCESSOR_FALLBACK_URL=http://payment-processor-fallback:8080
+      - MAX_CONCURRENT_PAYMENTS=20
+    depends_on:
+      - redis
+    networks:
+      - rinha-network
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          cpus: "0.4"
+          memory: "40MB"
+
+  # Worker - Health Check
+  worker_health:
+    image: arthurisvi/worker-health-rinha-backend:1.1
+    environment:
+      - APP_ENV=production
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - PROCESSOR_DEFAULT_URL=http://payment-processor-default:8080
+      - PROCESSOR_FALLBACK_URL=http://payment-processor-fallback:8080
+    depends_on:
+      - redis
+    networks:
+      - rinha-network
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          cpus: "0.1"
+          memory: "20MB"
+
+  # Redis
+  redis:
+    image: redis:alpine
+    command: redis-server --appendonly no --maxmemory 90mb --maxmemory-policy allkeys-lru
+    networks:
+      - rinha-network
+    deploy:
+      resources:
+        limits:
+          cpus: "0.3"
+          memory: "90MB"
+
+networks:
+  payment-processor:
+    external: true
+  rinha-network:
+    driver: bridge

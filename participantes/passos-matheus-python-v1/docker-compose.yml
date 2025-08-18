@@ -1,19 +1,20 @@
-x-worker-templates:
-  worker-backend: &worker-backend
-    image: passosmatheus/python-backend-rinha-api-worker:1.0.1
-    environment:
-      - REDIS_HOST=redis-db
-      - REDIS_PORT=6379
-      - PAYMENT_PROCESSOR_DEFAULT=http://payment-processor-default:8080/payments
-      - PAYMENT_PROCESSOR_FALLBACK=http://payment-processor-fallback:8080/payments
-    deploy:
-      resources:
-        limits:
-          cpus: '0.6'
-          memory: '110MB'
-    sysctls:
-      - net.core.somaxconn=65535
-      - net.ipv4.tcp_tw_reuse=1
+x-api-template: &api-template
+  image: passosmatheus/python-backend-rinha-api:tcp-client
+  environment:
+    - REDIS_HOST=redis-db
+    - REDIS_PORT=6379
+    - TCP_QUEUE_HOST=worker-3
+    - TCP_QUEUE_PORT=8888
+    - TCP_QUEUE_TIMEOUT=5.0
+    - PORT=8080
+  deploy:
+    resources:
+      limits:
+        cpus: '0.4'
+        memory: '70MB'
+  sysctls:
+    - net.core.somaxconn=65535
+    - net.ipv4.tcp_tw_reuse=1
 
 services:
   redis:
@@ -45,23 +46,58 @@ services:
           cpus: '0.12'
           memory: '65MB'
 
-  worker-1:
-    <<: *worker-backend
-    container_name: worker-1
+  api-1:
+    <<: *api-template
+    container_name: api-1
     networks:
       - app
-      - payment-processor
     depends_on:
       - redis
+      - worker-3
 
-  worker-2:
-    <<: *worker-backend
-    container_name: worker-2
+  api-2:
+    <<: *api-template
+    container_name: api-2
+    networks:
+      - app
+    depends_on:
+      - redis
+      - worker-3
+
+  worker-3:
+    image: passosmatheus/python-backend-rinha-worker:tcp-server
+    container_name: worker-3
+    environment:
+      - REDIS_HOST=redis-db
+      - REDIS_PORT=6379
+      - PAYMENT_PROCESSOR_DEFAULT=http://payment-processor-default:8080/payments
+      - PAYMENT_PROCESSOR_FALLBACK=http://payment-processor-fallback:8080/payments
+      - TCP_QUEUE_HOST=0.0.0.0
+      - TCP_QUEUE_PORT=8888
+      - NUM_WORKERS=4
+      - CONCURRENT_REQUESTS=8
+      - MAX_BATCH_SIZE=250
+    ports:
+      - "8888:8888"
     networks:
       - app
       - payment-processor
     depends_on:
       - redis
+    deploy:
+      resources:
+        limits:
+          cpus: '0.4'
+          memory: '70MB'
+    sysctls:
+      - net.core.somaxconn=65535
+      - net.ipv4.tcp_tw_reuse=1
+    healthcheck:
+      test: ["CMD", "nc", "-z", "localhost", "8888"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 15s
 
   load-balancer:
     image: nginx:1.25-alpine
@@ -69,9 +105,9 @@ services:
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf:ro
     depends_on:
-      worker-1:
+      api-1:
         condition: service_started
-      worker-2:
+      api-2:
         condition: service_started
     ports:
       - "9999:9999"
@@ -87,7 +123,7 @@ services:
       - net.core.somaxconn=131072
       - net.ipv4.tcp_tw_reuse=1
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:9999/nginx-health"]
+      test: ["CMD", "curl", "-f", "http://localhost:9999/health"]
       interval: 10s
       timeout: 5s
       retries: 3

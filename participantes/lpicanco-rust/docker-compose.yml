@@ -1,14 +1,17 @@
 services:
   api01: &api
-    image: ghcr.io/lpicanco/backend-dogfight-rust-25:latest
+    image: ghcr.io/lpicanco/backend-dogfight-rust-25:95Tg48
     hostname: api01
     restart: unless-stopped
     environment:
       RUST_LOG: warn
       REDIS_URL: redis://redis:6379
       PORT: 3042
+      UDS_PATH: /var/run/uds01.sock
       PAYMENT_ENDPOINT: http://payment-processor-default:8080
       PAYMENT_FALLBACK_ENDPOINT: http://payment-processor-fallback:8080
+    volumes:
+      - uds_volume:/var/run
     depends_on:
       - redis
     networks:
@@ -27,6 +30,7 @@ services:
       RUST_LOG: warn
       REDIS_URL: redis://redis:6379
       PORT: 3043
+      UDS_PATH: /var/run/uds02.sock
       PAYMENT_ENDPOINT: http://payment-processor-default:8080
       PAYMENT_FALLBACK_ENDPOINT: http://payment-processor-fallback:8080
   nginx:
@@ -35,6 +39,8 @@ services:
       - source: nginx_conf
         target: /etc/nginx/nginx.conf
     restart: unless-stopped
+    volumes:
+      - uds_volume:/var/run
     ports:
       - "9999:9999"
     depends_on:
@@ -64,6 +70,9 @@ networks:
   payment-processor:
     external: true
 
+volumes:
+  uds_volume:
+
 configs:
   nginx_conf:
     name: nginx.conf
@@ -74,17 +83,22 @@ configs:
       }
       http {
         access_log off;
-        sendfile   on;
+
+        tcp_nopush on;
+        tcp_nodelay on;
         
         upstream api {
-          server api01:3042;
-          server api02:3043;
+          keepalive 500;
+
+          server unix:/var/run/uds01.sock;
+          server unix:/var/run/uds02.sock;
         }
         server {
           listen 9999;
           location / {
+            proxy_buffering off;
+            proxy_http_version 1.1;
             proxy_pass http://api;
           }
-          access_log  off;
         }
       }

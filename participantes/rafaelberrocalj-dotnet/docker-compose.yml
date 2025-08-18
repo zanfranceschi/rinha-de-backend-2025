@@ -1,0 +1,76 @@
+services:
+  nginx:
+    image: nginx:alpine
+    pull_policy: always
+    networks:
+      - backend
+    ports:
+      - "9999:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - backend-1
+      - backend-2
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: "50MB"
+
+  backend-1:
+    container_name: backend-1
+    image: rafaelberrocalj/bz1:rinha-de-backend-2025-latest
+    pull_policy: always
+    platform: linux/amd64
+    networks:
+      - backend
+      - payment-processor
+    environment:
+      - DOTNET_ENVIRONMENT=Production
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_URLS=http://+:9999
+      - PAYMENT_PROCESSOR_URL_DEFAULT=http://payment-processor-default:8080
+      - PAYMENT_PROCESSOR_URL_FALLBACK=http://payment-processor-fallback:8080
+      - SQLITE_DATABASE=/data/app1.db
+      - BACKEND_ID=1
+    volumes:
+      - sqlite-data:/data
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: "150MB"
+
+  backend-2:
+    container_name: backend-2
+    image: rafaelberrocalj/bz1:rinha-de-backend-2025-latest
+    pull_policy: always
+    platform: linux/amd64
+    networks:
+      - backend
+      - payment-processor
+    environment:
+      - DOTNET_ENVIRONMENT=Production
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_URLS=http://+:9999
+      - PAYMENT_PROCESSOR_URL_DEFAULT=http://payment-processor-default:8080
+      - PAYMENT_PROCESSOR_URL_FALLBACK=http://payment-processor-fallback:8080
+      - SQLITE_DATABASE=/data/app2.db
+      - BACKEND_ID=2
+    volumes:
+      - sqlite-data:/data
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: "150MB"
+
+volumes:
+  sqlite-data:
+    name: sqlite-data
+
+networks:
+  backend:
+    driver: bridge
+  payment-processor:
+    external: true

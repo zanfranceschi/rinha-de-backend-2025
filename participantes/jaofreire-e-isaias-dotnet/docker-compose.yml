@@ -1,0 +1,70 @@
+x-service-templates:
+ api: &backend
+    image: jaofreire/rinha-backend-2025-api:latest
+    networks:
+     - backend-network
+     - payment-processor
+    expose:
+     - 8080
+    deploy:
+      resources:
+        limits:
+          cpus: "0.60"
+          memory: "125MB"
+
+services:
+
+  api-1:
+    <<: *backend
+    container_name: api-container-1
+    
+  api-2:
+    <<: *backend
+    container_name: api-container-2
+
+  nginx:
+    image: nginx:latest
+    container_name: load-balancer-nginx
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - api-1
+      - api-2
+    ports:
+      - "9999:9999"
+    networks:
+      - backend-network
+    deploy:
+      resources:
+        limits:
+          cpus: "0.15"
+          memory: "25mb"
+
+  database:
+   container_name: api-postgres-db
+   image: postgres
+   restart: always
+   environment:
+    - POSTGRES_PASSWORD=postgres
+    - POSTGRES_DB=rinha
+   ports:
+    - 5432:5432
+   volumes:
+    - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+   networks:
+    - backend-network
+    - payment-processor
+   deploy:
+      resources:
+        limits:
+          cpus: "0.15"
+          memory: "75MB"
+   
+
+networks:
+ backend-network:
+   driver: bridge
+
+ payment-processor:
+   external: true
+  

@@ -1,0 +1,100 @@
+
+ api1 Pulling 
+ api2 Pulling 
+ loadbalancer Pulling 
+ 9824c27679d3 Already exists 
+ eb2b48b4f943 Pulling fs layer 
+ 637ed3ae49be Pulling fs layer 
+ 9824c27679d3 Already exists 
+ c00b8ebfa154 Pulling fs layer 
+ 4f4fb700ef54 Pulling fs layer 
+ 01e12962d044 Pulling fs layer 
+ b99ffec15502 Pulling fs layer 
+ 4f4fb700ef54 Waiting 
+ 01e12962d044 Waiting 
+ b99ffec15502 Waiting 
+ eb2b48b4f943 Download complete 
+ eb2b48b4f943 Extracting [==================================================>]      93B/93B
+ eb2b48b4f943 Extracting [==================================================>]      93B/93B
+ 9824c27679d3 Already exists 
+ eb2b48b4f943 Pulling fs layer 
+ 637ed3ae49be Pulling fs layer 
+ eb2b48b4f943 Extracting [==================================================>]      93B/93B
+ eb2b48b4f943 Pull complete 
+ eb2b48b4f943 Pull complete 
+ 4f4fb700ef54 Downloading [==================================================>]      32B/32B
+ 4f4fb700ef54 Verifying Checksum 
+ 4f4fb700ef54 Download complete 
+ c00b8ebfa154 Downloading [==>                                                ]  16.38kB/282.5kB
+ c00b8ebfa154 Download complete 
+ c00b8ebfa154 Extracting [=====>                                             ]  32.77kB/282.5kB
+ 01e12962d044 Downloading [==================================================>]     125B/125B
+ 01e12962d044 Verifying Checksum 
+ 01e12962d044 Download complete 
+ 637ed3ae49be Downloading [>                                                  ]  50.72kB/3.74MB
+ 637ed3ae49be Downloading [>                                                  ]  50.72kB/3.74MB
+ c00b8ebfa154 Extracting [==================================================>]  282.5kB/282.5kB
+ c00b8ebfa154 Extracting [==================================================>]  282.5kB/282.5kB
+ 637ed3ae49be Download complete 
+ 637ed3ae49be Download complete 
+ 637ed3ae49be Extracting [>                                                  ]  65.54kB/3.74MB
+ 637ed3ae49be Extracting [>                                                  ]  65.54kB/3.74MB
+ c00b8ebfa154 Pull complete 
+ b99ffec15502 Downloading [>                                                  ]  69.15kB/6.891MB
+ 4f4fb700ef54 Extracting [==================================================>]      32B/32B
+ 4f4fb700ef54 Extracting [==================================================>]      32B/32B
+ 4f4fb700ef54 Pull complete 
+ 01e12962d044 Extracting [==================================================>]     125B/125B
+ 01e12962d044 Extracting [==================================================>]     125B/125B
+ 637ed3ae49be Extracting [=================================================> ]   3.67MB/3.74MB
+ 637ed3ae49be Extracting [=================================================> ]   3.67MB/3.74MB
+ 637ed3ae49be Extracting [==================================================>]   3.74MB/3.74MB
+ 637ed3ae49be Extracting [==================================================>]   3.74MB/3.74MB
+ 637ed3ae49be Pull complete 
+ 637ed3ae49be Pull complete 
+ 01e12962d044 Pull complete 
+ api1 Pulled 
+ api2 Pulled 
+ b99ffec15502 Downloading [================================================>  ]  6.631MB/6.891MB
+ b99ffec15502 Verifying Checksum 
+ b99ffec15502 Download complete 
+ b99ffec15502 Extracting [>                                                  ]   98.3kB/6.891MB
+ b99ffec15502 Extracting [==================================================>]  6.891MB/6.891MB
+ b99ffec15502 Pull complete 
+ loadbalancer Pulled 
+ Network craytee_backend  Creating
+ Network craytee_backend  Created
+ Volume "craytee_socket_volume"  Creating
+ Volume "craytee_socket_volume"  Created
+ Volume "craytee_shared_memory"  Creating
+ Volume "craytee_shared_memory"  Created
+ Container api1  Creating
+ Container api2  Creating
+ Container api1  Created
+ Container api2  Created
+ Container loadbalancer  Creating
+ Container loadbalancer  Created
+Attaching to api1, api2, loadbalancer
+api2  | {"level":"info","time":"2025-08-17T01:30:45Z","message":"API created shared storage memory buffer"}
+api2  | {"level":"info","time":"2025-08-17T01:30:45Z","message":"PROCESS_PAYMENTS=false: this API instance will not process payments"}
+api1  | {"level":"info","time":"2025-08-17T01:30:45Z","message":"API attached to existing shared storage memory buffer"}
+api2  | {"level":"info","path":"/var/run/sockets/api2.sock","time":"2025-08-17T01:30:45Z","message":"Unix server started"}
+api1  | {"level":"info","path":"/var/run/sockets/api1.sock","time":"2025-08-17T01:30:45Z","message":"Unix server started"}
+api1  | {"level":"info","time":"2025-08-17T01:30:45Z","message":"API created new shared memory ring buffer"}
+api1  | {"level":"info","time":"2025-08-17T01:30:45Z","message":"API ready - shared memory mode enabled!"}
+api1  | {"level":"info","time":"2025-08-17T01:30:45Z","message":"Starting shared memory processing loop"}
+loadbalancer  | {"level":"info","time":"2025-08-17T01:30:45Z","message":"LoadBalancer attached to existing shared memory ring buffer"}
+loadbalancer  | {"level":"info","time":"2025-08-17T01:30:45Z","message":"🚀 Starting Load Balancer..."}
+loadbalancer  | {"level":"info","server":0,"path":"/var/run/sockets/api1.sock","time":"2025-08-17T01:30:45Z","message":"LoadBalancer: Created connection pool for server"}
+loadbalancer  | {"level":"info","server":1,"path":"/var/run/sockets/api2.sock","time":"2025-08-17T01:30:45Z","message":"LoadBalancer: Created connection pool for server"}
+loadbalancer  | {"level":"info","addr":":8080","listeners":2,"time":"2025-08-17T01:30:45Z","message":"⚡ Reuseport listeners started"}
+loadbalancer  | {"level":"info","time":"2025-08-17T01:31:55Z","message":"🛑 LoadBalancer shutting down..."}
+loadbalancer  | {"level":"info","server":0,"time":"2025-08-17T01:31:55Z","message":"Closed connection pool for server"}
+loadbalancer  | {"level":"info","server":1,"time":"2025-08-17T01:31:55Z","message":"Closed connection pool for server"}
+[Kloadbalancer exited with code 0
+api2          | {"level":"info","time":"2025-08-17T01:31:55Z","message":"Server shutting down..."}
+api2          | {"level":"info","time":"2025-08-17T01:31:55Z","message":"Shared memory storage closed successfully"}
+api1          | {"level":"info","time":"2025-08-17T01:31:55Z","message":"Server shutting down..."}
+api1          | {"level":"info","time":"2025-08-17T01:31:55Z","message":"Shared memory storage closed successfully"}
+[Kapi2 exited with code 0
+log truncated at line 1000

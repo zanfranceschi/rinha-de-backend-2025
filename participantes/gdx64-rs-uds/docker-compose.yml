@@ -1,0 +1,89 @@
+services:
+  db-api:
+    image: gdx64/rinha-clb-uds
+    hostname: db-api
+    environment:
+      - IS_DB_SERVICE=true
+      - DEFAULT_PAYMENT=http://payment-processor-default:8080
+      - FALLBACK_PAYMENT=http://payment-processor-fallback:8080
+      - DB_UDS_PATH=/tmp/db.sock
+    networks:
+      - backend
+      - payment-processor
+    command: ["/db_api"]
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: "50MB"
+    volumes:
+      - uds:/tmp/
+
+  api1: &api
+    volumes:
+      - uds:/tmp/
+    image: gdx64/rinha-clb-uds
+    hostname: api1
+    environment:
+      - DB_URL=db-api:8080
+      - SOCKET_PATH=/tmp/api1.sock
+      - DB_UDS_PATH=/tmp/db.sock
+    networks:
+      - backend
+      - payment-processor
+    command: ["/api"]
+    depends_on:
+      - db-api
+    deploy:
+      resources:
+        limits:
+          cpus: "0.4"
+          memory: "50MB"
+
+  api2:
+    <<: *api
+    hostname: api2
+    depends_on:
+      - db-api
+    environment:
+      - DB_URL=db-api:8080
+      - SOCKET_PATH=/tmp/api2.sock
+      - DB_UDS_PATH=/tmp/db.sock
+    deploy:
+      resources:
+        limits:
+          cpus: "0.4"
+          memory: "50MB"
+  
+  redirect:
+    <<: *api
+    hostname: redirect
+    depends_on:
+      - api1
+      - api2
+    networks:
+      - backend
+      - payment-processor
+    environment:
+      - LISTEN_ADDR=0.0.0.0:9999
+      - TARGET_ADDRS=/tmp/api1.sock,/tmp/api2.sock
+    ports:
+      - "9999:9999"
+    command: ["/redirect"]
+    deploy:
+      resources:
+          limits:
+            cpus: "0.2"
+            memory: "50MB"
+    volumes:
+      - uds:/tmp/
+
+networks:
+  backend:
+    driver: bridge
+  payment-processor:
+    external: true
+
+volumes:
+  uds:
+    driver: local

@@ -1,1 +1,1 @@
-Ativando timeout adaptativo, na minha máquina não era suportado, então verificando se o servidor de testes aguenta.
+Essa versão implementa um circuit breaker simples, que apenas coloca o processamento em sleep em cenários de instabilidade, e processa em ambos processors.

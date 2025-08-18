@@ -3,17 +3,18 @@
 ## Tecnologias utilizadas
 - **Linguagem:** Go
 - **Armazenamento/Fila:** Redis
-- **Balanceador:** Nginx
+- **Balanceador:** Extreme (Custom Made)
 - **Orquestração:** Docker Compose
 
 ## Sobre a solução
 Essa versão foi adaptada para:
-- Usar Unix Sockets entre o Nginx e as APIs de backend.
+- Usar Unix Sockets entre o Extreme (custom load balancer em Go) e as APIs de backend (4 instancias).
 - A API salva os bytes numa fila do Redis.
-- Um Worker processa as mensagens da memoria para uma fila in memory (channel).
-- O processamento é realizado no endpoint default somente caso esteja disponível.
-- Os retries voltam para a fila in memory.
+- Um Worker processa as mensagens no endpoint do Processor Default caso esteja disponivel.
+- Os retries voltam para a fila do Redis.
 - A comunicação com Redis também está usando Unix Sockets.
 
 ## Repositório
-[https://github.com/davidalecrim1/rinha-with-go-2025/tree/release/unix-sockets](https://github.com/davidalecrim1/rinha-with-go-2025/tree/release/unix-sockets)
+[https://github.com/davidalecrim1/rinha-with-go-2025/tree/release/redis-fasthttp-extreme-v4](https://github.com/davidalecrim1/rinha-with-go-2025/tree/release/redis-fasthttp-extreme-v4)
+
+[Repositório do Load balancer customizado](https://github.com/davidalecrim1/extreme). Ele NÃO realiza early return das requisições, apenas faz o reverse proxy para as instancias do backend.

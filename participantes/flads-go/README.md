@@ -5,23 +5,9 @@
 ##### Tecnologias utilizadas:
 
 * [Go](https://go.dev/) - Linguagem de programação.
-* [Gin](https://gin-gonic.com/) - The fastest full-featured web framework for Go. Crystal clear.
+* [Fast HTTP](https://github.com/valyala/fasthttp) - Servidor HTTP de alto desempenho em Go.
 * [Redis](https://redis.io/) - Banco de dados em memória.
-* [HAProxy](https://www.haproxy.org/) - Proxy reverso e balanceador de carga de alto desempenho.
-
-##### Solução
-
-A tabela abaixo mostra como os recursos foram alocados:
-
-| Serviço      | Linguagem | CPU  | Memória   |
-|--------------|-----------|------|-----------|
-| **api-1**    | Go        | 0.32 | 45MB      |
-| **api-2**    | Go        | 0.32 | 45MB      |
-| **worker-1** | Go        | 0.18 | 90MB      |
-| **worker-2** | Go        | 0.18 | 90MB      |
-| **haproxy**  | -         | 0.30 | 50MB      |
-| **redis**    | -         | 0.20 | 30MB      |
-| **Total**    | -         | 1.50 | 350MB     |
+* [Nginx](https://nginx.org/) - Proxy reverso e balanceador de carga.
 
 ##### Arquitetura dos Serviços
 

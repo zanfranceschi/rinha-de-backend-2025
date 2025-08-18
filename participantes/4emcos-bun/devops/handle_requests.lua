@@ -1,8 +1,14 @@
-ngx.req.read_body()
-local data = ngx.req.get_body_data()
+local ngx_req = ngx.req
+local ngx_timer = ngx.timer
+local ngx_socket = ngx.socket
+local string_format = string.format
+local shared = ngx.shared.route_selector
+
+ngx_req.read_body()
+local data = ngx_req.get_body_data()
 
 if not data then
-    local tmp = ngx.req.get_body_file()
+    local tmp = ngx_req.get_body_file()
     if tmp then
         local f = io.open(tmp, "rb")
         if f then
@@ -12,56 +18,47 @@ if not data then
     end
 end
 
-ngx.status = 200
+ngx.status = 201
 ngx.header.content_length = 0
 ngx.eof()
 
-if not data or data == "" then
+if not data or #data == 0 or #data > 10240 then
     return
 end
 
-local len = #data
-local shared = ngx.shared.route_selector
-local idx = (shared:incr("turn", 1, 0) or 1) % 2
+local turn = shared:incr("turn", 1, 0) or 1
+local idx = turn % 2
 
 local primary = (idx == 0) and "unix:/tmp/backend_1.sock" or "unix:/tmp/backend_2.sock"
-local secondary = (idx == 0) and "unix:/tmp/backend_2.sock" or "unix:/tmp/backend_1.sock"
+local secondary = (idx == 1) and "unix:/tmp/backend_1.sock" or "unix:/tmp/backend_2.sock"
 
-local http_request = string.format(
+local http_request = string_format(
         "POST /payments HTTP/1.1\r\nHost: localhost\r\nContent-Type: application/json\r\nContent-Length: %d\r\nConnection: keep-alive\r\n\r\n%s",
-        len, data
+        #data, data
 )
-
-local function get_pooled_socket(target)
-    local sock = ngx.socket.tcp()
-    sock:settimeouts(200, 400, 400)
-
-    local ok, err = sock:connect(target)
-    if not ok then
-        return nil, err
-    end
-    return sock
-end
 
 local function forward(premature)
     if premature then
         return
     end
 
-    local sock, err = get_pooled_socket(primary)
-    if not sock then
-        sock, err = get_pooled_socket(secondary)
-        if not sock then
-            return
-        end
+    local sock = ngx_socket.tcp()
+    sock:settimeouts(100, 300, 300)
+    local ok = sock:connect(primary)
+    if not ok then
+        ok = sock:connect(secondary)
     end
 
-    local bytes, err = sock:send(http_request)
-    if bytes then
-        sock:setkeepalive(60000, 50)
+    if ok then
+        local bytes, err = sock:send(http_request)
+        if not bytes then
+            shared:incr("errors", 1, 0)
+        end
     else
-        sock:close()
+        shared:incr("errors", 1, 0)
     end
+
+    sock:close()
 end
 
-ngx.timer.at(0, forward)
+ngx_timer.at(0, forward)

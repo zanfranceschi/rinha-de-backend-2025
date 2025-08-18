@@ -1,0 +1,24 @@
+# Proxy Server Configuration
+
+# Server settings
+server:
+  listen_address: ":9999"
+  keep_alive_timeout: 90s
+  read_timeout: 1s
+  write_timeout: 1s
+
+# Backend servers to connect using unix sockets
+backends:
+  - /var/run/api_1.sock
+  - /var/run/api_2.sock
+  - /var/run/api_3.sock
+  - /var/run/api_4.sock
+
+# Logging configuration
+logging:
+  enabled: true
+  level: "info" # debug, info, warn, error
+
+pre_warm:
+  enabled: true
+  requests_per_backend: 30 # times the amount of backends for total

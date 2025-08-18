@@ -1,6 +1,6 @@
 services:
     app1:
-        image: joaogsbittencourt/rinha-de-backend-2025-php:1.6
+        image: joaogsbittencourt/rinha-de-backend-2025-php:1.7
         restart: unless-stopped
         working_dir: /var/www/
         networks:
@@ -13,7 +13,7 @@ services:
                     memory: "25MB"
 
     app2:
-        image: joaogsbittencourt/rinha-de-backend-2025-php:1.6
+        image: joaogsbittencourt/rinha-de-backend-2025-php:1.7
         restart: unless-stopped
         working_dir: /var/www/
         networks:
@@ -60,16 +60,8 @@ services:
             --max_connections=1000
             --innodb_flush_log_at_trx_commit=2
             --skip-log-bin
-        ports:
-            - "3388:3306"
         networks:
             - rinha
-        healthcheck:
-            test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
-            interval: 10s
-            timeout: 5s
-            retries: 5
-            start_period: 10s
         deploy:
             resources:
                 limits:
@@ -81,4 +73,3 @@ networks:
         driver: bridge
     payment-processor:
         external: true
-

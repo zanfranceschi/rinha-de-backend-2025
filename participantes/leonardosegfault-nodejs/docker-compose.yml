@@ -1,0 +1,87 @@
+x-common-env: &env
+  REDIS: "/tmp/sockets/redis.sock"
+  DEFAULT: "http://payment-processor-default:8080"
+  FALLBACK: "http://payment-processor-fallback:8080"
+
+x-base: &node
+  image: leosegfault/rinha-backend-2025:nodejs
+  depends_on:
+    - redis
+  networks:
+    - backend
+    - payment-processor
+  volumes:
+    - socks:/tmp/sockets
+
+services:
+  node1:
+    <<: *node
+    container_name: rinha-back1
+    environment:
+      <<: *env
+      WORKERS: 1
+      UNIX_SOCK: "/tmp/sockets/node1.sock"
+    deploy:
+      resources:
+        limits:
+          cpus: "0.575"
+          memory: "150MB"
+  
+  node2:
+    <<: *node
+    container_name: rinha-back2
+    environment:
+      <<: *env
+      WORKERS: 1
+      UNIX_SOCK: "/tmp/sockets/node2.sock"
+    deploy:
+      resources:
+        limits:
+          cpus: "0.575"
+          memory: "150MB"
+
+  redis:
+    build:
+      context: .
+      dockerfile: Dockerfile.redis
+    container_name: rinha-redis
+    command: ["redis-server", "/usr/local/etc/redis/redis.conf"]
+    deploy:
+      resources:
+        limits:
+          cpus: "0.1"
+          memory: "32MB"
+    volumes:
+      - ./redis.conf:/usr/local/etc/redis/redis.conf:ro
+      - socks:/tmp/sockets
+    networks:
+      - backend
+
+  nginx:
+    image: nginx:stable
+    container_name: rinha-nginx
+    depends_on:
+      - node1
+      - node2
+    deploy:
+      resources:
+        limits:
+          cpus: "0.25"
+          memory: "18MB"
+    ports:
+      - "9999:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - socks:/tmp/sockets
+    networks:
+      - backend
+
+networks:
+  backend:
+    name: rinha-net
+    driver: bridge
+  payment-processor:
+    external: true
+
+volumes:
+  socks:

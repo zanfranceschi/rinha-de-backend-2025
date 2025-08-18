@@ -1,114 +1,85 @@
-x-service-templates:
-  app: &app
-    image: fabianoflorentino/mr_robot:v0.0.1
-    env_file: ./config/.env
-    volumes:
-      - ./config:/config
-      - mr_robot_db:/var/run/postgresql
-    working_dir: /
-    networks:
-      - mr_robot
-      - payment-processor
-    healthcheck:
-      test: ["CMD-SHELL", "pgrep mr_robot > /dev/null || exit 1"]
-      interval: 15s
-      timeout: 5s
-      retries: 5
-      start_period: 5s
-    depends_on:
-      db:
-        condition: service_healthy
-    deploy:
-      restart_policy:
-        condition: on-failure
-        delay: 5s
-        max_attempts: 5
-        window: 5s
-      resources:
-        limits:
-          cpus: "0.5"
-          memory: "20MB"
-
-  db: &db
-    image: postgres:latest
-    restart: unless-stopped
-    env_file: ./config/.env
-    volumes:
-      - mr_robot_db:/var/lib/postgresql/data
-      - ./config/postgresql.conf:/etc/postgresql/postgresql.conf
-    command: ["postgres", "-c", "config_file=/etc/postgresql/postgresql.conf"]
-    networks:
-      - mr_robot
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U mr_robot -d mr_robot -h localhost"]
-      interval: 15s
-      timeout: 5s
-      retries: 3
-      start_period: 5s
-    deploy:
-      restart_policy:
-        condition: on-failure
-        delay: 1s
-        max_attempts: 3
-        window: 3s
-      resources:
-        limits:
-          cpus: "0.5"
-          memory: "100MB"
-
-  lb: &lb
+services:
+  haproxy:
     image: haproxy:3.1.8-alpine3.22
+    container_name: eliot-haproxy
+    hostname: eliot-haproxy
     ports:
       - "9999:9999"
-      - "8404:8404"
     volumes:
-      - ./config/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
-    networks:
-      - mr_robot
-    restart: unless-stopped
+      - ./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
     depends_on:
-      app1:
-        condition: service_healthy
-    healthcheck:
-      test: ["CMD-SHELL", "wget --quiet --tries=1 --spider http://localhost:8404/stats || exit 1"]
-      interval: 30s
-      timeout: 5s
-      retries: 3
-      start_period: 10s
+      - eliot1
+      - eliot2
     deploy:
-      restart_policy:
-        condition: on-failure
-        delay: 2s
-        max_attempts: 3
-        window: 5s
       resources:
         limits:
-          cpus: "0.5"
-          memory: "20MB"
+          cpus: "0.15"
+          memory: "40MB"
+    networks:
+      - payment-processor
+      - rinha
 
-services:
-  lb:
-    <<: *lb
-    container_name: mr_robot_lb
-    hostname: mr_robot_lb
-  db:
-    <<: *db
-    container_name: mr_robot_db
-    hostname: mr_robot_db
+  eliot1:
+    image: fabianoflorentino/eliot:v0.0.2
+    container_name: eliot-1
+    hostname: eliot-1
+    environment:
+      HTTP_ADDR: ":8080"
+      REDIS_ADDR: "redis:6379"
+      REDIS_POOL: "250"
+      PROCESSOR_DEFAULT_URL: "http://payment-processor-default:8080"
+      PROCESSOR_FALLBACK_URL: "http://payment-processor-fallback:8080"
+      TIMEOUT_MS: "120"
+      HEDGE_MS: "40"
+    depends_on:
+      - redis
+    deploy:
+      resources:
+        limits:
+          cpus: "0.6"
+          memory: "120MB"
+    networks:
+      - payment-processor
+      - rinha
 
-  app1: &api
-    <<: *app
-    container_name: mr_robot1
-    hostname: mr_robot1
+  eliot2:
+    image: fabianoflorentino/eliot:v0.0.2
+    container_name: eliot-2
+    hostname: eliot-2
+    environment:
+      HTTP_ADDR: ":8080"
+      REDIS_ADDR: "redis:6379"
+      REDIS_POOL: "250"
+      PROCESSOR_DEFAULT_URL: "http://payment-processor-default:8080"
+      PROCESSOR_FALLBACK_URL: "http://payment-processor-fallback:8080"
+      TIMEOUT_MS: "120"
+      HEDGE_MS: "40"
+    depends_on:
+      - redis
+    deploy:
+      resources:
+        limits:
+          cpus: "0.6"
+          memory: "120MB"
+    networks:
+      - payment-processor
+      - rinha
+
+  redis:
+    image: redis:alpine3.22
+    container_name: eliot-redis
+    hostname: eliot-redis
+    command: ["redis-server", "--save", "", "--appendonly", "no", "--maxmemory", "256mb", "--maxmemory-policy", "allkeys-lru"]
+    deploy:
+      resources:
+        limits:
+          cpus: "0.15"
+          memory: "70MB"
+    networks:
+      - rinha
 
 networks:
-  mr_robot:
-    name: mr_robot
-    driver: bridge
+  rinha:
   payment-processor:
     external: true
-
-volumes:
-  mr_robot_db:
-    name: mr_robot_db
-    driver: local
+    name: payment-processor

@@ -1,0 +1,81 @@
+services:
+  db:
+    image: postgres:17-alpine
+    hostname: db
+    environment:
+      - POSTGRES_DB=payments_db
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_INITDB_ARGS=--auth-host=scram-sha-256
+    volumes:
+      - ./db/postgresql.conf:/etc/postgresql/postgresql.conf:ro
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    command: postgres -c config_file=/etc/postgresql/postgresql.conf
+    deploy:
+      resources:
+        limits:
+          cpus: "0.2"
+          memory: "180MB"
+    networks:
+      - backend
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d payments_db && psql -U postgres -d payments_db -c 'SELECT 1' > /dev/null 2>&1"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+      start_period: 10s 
+
+  api01:
+    image: maicosmaniotto/rinha-backend-2025-objpas-pgsql:0.0.2
+    hostname: api01
+    networks:
+      - backend
+      - payment-processor
+    depends_on:
+      db:
+        condition: service_healthy
+    deploy:
+      resources:
+        limits:
+          cpus: "0.55"
+          memory: "60MB"
+
+  api02:
+    image: maicosmaniotto/rinha-backend-2025-objpas-pgsql:0.0.2
+    hostname: api02
+    networks:
+      - backend
+      - payment-processor
+    depends_on:
+      db:
+        condition: service_healthy
+    deploy:
+      resources:
+        limits:
+          cpus: "0.55"
+          memory: "60MB"
+          
+  nginx:
+    image: nginx:1.29.0-alpine
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    ports:
+      - "9999:9999"
+    networks:
+      - backend
+      - payment-processor
+    depends_on:
+      - api01
+      - api02
+    deploy:
+      resources:
+        limits:
+          cpus: "0.2"
+          memory: "50MB"
+     
+networks:
+  backend:
+    driver: bridge
+  payment-processor:
+    external: true
+

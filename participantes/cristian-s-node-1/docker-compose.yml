@@ -1,0 +1,104 @@
+services:
+  haproxy:
+    image: haproxy:alpine
+    ports:
+      - "9999:80"
+    networks:
+      - backend
+    volumes:
+      - ./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
+      - socket_volume:/var/run
+    depends_on:
+      - backend-1
+      - backend-2
+    deploy:
+      resources:
+        limits:
+          cpus: "0.2"
+          memory: 30M
+
+  backend-1:
+    image: chrisblood777/rinha-de-backend-2025-node:latest
+    networks:
+      - backend
+      - payment-processor
+    environment:
+      - PAYMENT_PROCESSOR_URL_DEFAULT=http://payment-processor-default:8080
+      - PAYMENT_PROCESSOR_URL_FALLBACK=http://payment-processor-fallback:8080
+      - SOCKET_PATH=/var/run/memorydb.sock
+      - ZEROMQ_SUFFIXS=1
+      - SOCKET_PATH_SERVER=/var/run/server1.sock
+      - NODE_ENV=production
+      - BATCH_TIMEOUT=1000
+      - BATCH_SIZE=100
+    volumes:
+      - socket_volume:/tmp
+      - socket_volume:/var/run
+    depends_on:
+      memorydb:
+        condition: service_healthy
+    deploy:
+      resources:
+        limits:
+          cpus: "0.55"
+          memory: 115M
+
+  backend-2:
+    image: chrisblood777/rinha-de-backend-2025-node:latest
+    networks:
+      - backend
+      - payment-processor
+    environment:
+      - PAYMENT_PROCESSOR_URL_DEFAULT=http://payment-processor-default:8080
+      - PAYMENT_PROCESSOR_URL_FALLBACK=http://payment-processor-fallback:8080
+      - SOCKET_PATH=/var/run/memorydb.sock
+      - ZEROMQ_SUFFIXS=2
+      - SOCKET_PATH_SERVER=/var/run/server2.sock
+      - NODE_ENV=production
+      - BATCH_TIMEOUT=1000
+      - BATCH_SIZE=100
+    volumes:
+      - socket_volume:/tmp
+      - socket_volume:/var/run
+    depends_on:
+      memorydb:
+        condition: service_healthy
+    deploy:
+      resources:
+        limits:
+          cpus: "0.55"
+          memory: 115M
+
+  memorydb:
+    image: chrisblood777/rinha-de-backend-2025-node-memorydb:latest
+    networks:
+      - backend
+      - payment-processor
+    environment:
+      - PAYMENT_PROCESSOR_URL_DEFAULT=http://payment-processor-default:8080
+      - PAYMENT_PROCESSOR_URL_FALLBACK=http://payment-processor-fallback:8080
+      - SOCKET_PATH=/var/run/memorydb.sock
+      - ZEROMQ_SUFFIXS=1,2
+    volumes:
+      - socket_volume:/tmp
+      - socket_volume:/var/run
+    deploy:
+      resources:
+        limits:
+          cpus: "0.2"
+          memory: 90M
+    healthcheck:
+      test: ["CMD", "test", "-S", "/var/run/memorydb.sock"]
+      interval: 2s
+      timeout: 2s
+      retries: 15
+      start_period: 2s
+
+volumes:
+  socket_volume:
+
+networks:
+  backend:
+    driver: bridge
+  payment-processor:
+    external: true

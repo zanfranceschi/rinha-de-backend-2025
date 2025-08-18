@@ -1,6 +1,6 @@
 services:
   haproxy:
-    image: haproxy:2.9-alpine
+    image: haproxy:3.2-alpine
     container_name: my-haproxy
     ports:
       - "9999:9999"
@@ -16,18 +16,14 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.6"
+          cpus: "0.5"
           memory: "70MB"
 
   api1: &api
-    image: enermaxx/rinha-standalone:1.0.1
+    image: enermaxx/rinha-standalone:10.0.5
     container_name: springboot-api1
     hostname: api1
-    ports:
-      - "7777:8080"
     environment:
-      - HOST_TO_LOCK=api2
-      - PORT_TO_LOCK=8080
       - MAIN_PROCESSOR_HOST=payment-processor-default
       - MAIN_PROCESSOR_PORT=8080
       - FALLBACK_PROCESSOR_HOST=payment-processor-fallback
@@ -43,18 +39,14 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.45"
+          cpus: "0.5"
           memory: "140MB"
 
   api2:
     <<: *api
     container_name: springboot-api2
     hostname: api2
-    ports:
-      - "7778:8080"
     environment:
-      - HOST_TO_LOCK=api1
-      - PORT_TO_LOCK=8080
       - MAIN_PROCESSOR_HOST=payment-processor-default
       - MAIN_PROCESSOR_PORT=8080
       - FALLBACK_PROCESSOR_HOST=payment-processor-fallback
@@ -67,7 +59,7 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.45"
+          cpus: "0.5"
           memory: "140MB"
 
 networks:

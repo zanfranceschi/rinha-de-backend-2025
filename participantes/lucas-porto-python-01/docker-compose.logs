@@ -1,0 +1,1001 @@
+
+ Network lucas-porto-python-01_rinha-network  Creating
+ Network lucas-porto-python-01_rinha-network  Created
+ Container rinha-redis  Creating
+ Container rinha-redis  Created
+ Container rinha-python-app  Creating
+ Container rinha-python-worker1  Creating
+ Container rinha-python-worker2  Creating
+ Container rinha-python-worker3  Creating
+ Container rinha-python-worker1  Created
+ Container rinha-python-worker2  Created
+ Container rinha-python-app  Created
+ Container rinha-haproxy-py  Creating
+ Container rinha-python-worker3  Created
+ Container rinha-haproxy-py  Created
+Attaching to rinha-haproxy-py, rinha-python-app, rinha-python-worker1, rinha-python-worker2, rinha-python-worker3, rinha-redis
+rinha-redis  | 1:C 15 Aug 2025 12:06:00.644 # WARNING Memory overcommit must be enabled! Without it, a background save or replication may fail under low memory condition. Being disabled, it can also cause failures without low memory condition, see https://github.com/jemalloc/jemalloc/issues/1328. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.
+rinha-redis  | 1:C 15 Aug 2025 12:06:00.644 * oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+rinha-redis  | 1:C 15 Aug 2025 12:06:00.644 * Redis version=7.4.5, bits=64, commit=00000000, modified=0, pid=1, just started
+rinha-redis  | 1:C 15 Aug 2025 12:06:00.644 * Configuration loaded
+rinha-redis  | 1:M 15 Aug 2025 12:06:00.645 * monotonic clock: POSIX clock_gettime
+rinha-redis  | 1:M 15 Aug 2025 12:06:00.646 * Running mode=standalone, port=6379.
+rinha-redis  | 1:M 15 Aug 2025 12:06:00.646 * Server initialized
+rinha-redis  | 1:M 15 Aug 2025 12:06:00.646 * Ready to accept connections tcp
+rinha-python-app  | Starting server...
+rinha-python-app  | Database inicializado com sucesso
+rinha-python-app  | Server configured, starting...
+rinha-python-app  | INFO:     Started server process [1]
+rinha-python-app  | INFO:     Waiting for application startup.
+rinha-python-app  | INFO:     Application startup complete.
+rinha-python-app  | INFO:     Uvicorn running on http://0.0.0.0:9999 (Press CTRL+C to quit)
+rinha-python-app  | INFO:     127.0.0.1:48224 - "GET /health HTTP/1.1" 204 No Content
+rinha-haproxy-py  | [NOTICE]   (1) : New worker (8) forked
+rinha-haproxy-py  | [NOTICE]   (1) : Loading success.
+rinha-python-app  | INFO:     172.20.0.7:35806 - "GET /health HTTP/1.0" 204 No Content
+rinha-python-app  | INFO:     172.20.0.7:40190 - "GET /health HTTP/1.0" 204 No Content
+rinha-python-app  | INFO:     172.20.0.7:40192 - "GET /health HTTP/1.0" 204 No Content
+rinha-haproxy-py  | Connect from 172.20.0.1:51018 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:40198 - "GET /payments-summary HTTP/1.1" 200 OK
+rinha-python-app  | INFO:     172.20.0.7:40212 - "GET /health HTTP/1.0" 204 No Content
+rinha-python-app  | INFO:     127.0.0.1:39996 - "GET /health HTTP/1.1" 204 No Content
+rinha-python-app  | INFO:     172.20.0.7:40222 - "GET /health HTTP/1.0" 204 No Content
+rinha-python-app  | INFO:     172.20.0.7:40234 - "GET /health HTTP/1.0" 204 No Content
+rinha-haproxy-py  | Connect from 172.20.0.1:51026 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:40244 - "POST /purge-payments HTTP/1.1" 404 Not Found
+rinha-python-app  | INFO:     172.20.0.7:40258 - "GET /payments-summary?from=2025-08-15T12:06:10.592Z&to=2025-08-15T12:06:24.092Z HTTP/1.1" 200 OK
+rinha-haproxy-py  | Connect from 172.20.0.1:51036 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-haproxy-py  | Connect from 172.20.0.1:51046 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:40266 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36708 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35394 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36712 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35404 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36724 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35414 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36732 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35430 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36748 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35444 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36764 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35458 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36780 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35470 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36786 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35486 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36802 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35496 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:51046 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:40266 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36812 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35510 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36708 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35394 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36826 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35518 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36712 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35394 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36836 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35528 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36724 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:40266 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36842 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35530 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36732 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:40244 - "POST /payments HTTP/1.1" 201 Created
+rinha-python-app  | INFO:     172.20.0.7:35542 - "GET /health HTTP/1.0" 204 No Content
+rinha-haproxy-py  | Connect from 172.20.0.1:36856 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35546 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36748 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:40258 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36870 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35558 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36764 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:40258 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36880 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35562 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36780 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:40266 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36886 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35576 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36786 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35394 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36890 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35578 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36802 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:40244 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:51046 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:40266 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36896 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35580 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36812 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:40244 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36708 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35394 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36904 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35582 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36826 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:40258 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36712 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35394 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36910 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35594 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36836 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35394 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36724 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:40266 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36922 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35600 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36842 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:40266 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36732 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:40244 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36934 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35610 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36856 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:40266 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36748 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:40258 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36948 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35616 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36870 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35394 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36764 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:40258 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36956 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35620 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36880 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:40258 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36780 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:40266 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36972 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35634 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36886 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:40244 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36786 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35394 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36984 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35644 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36890 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:40244 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36802 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:40244 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:51046 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:40266 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36992 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35656 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36896 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:40258 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36812 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:40244 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36708 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35394 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37008 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35670 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36904 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:40266 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36826 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:40258 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36712 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35394 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37020 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35672 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36910 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35394 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36836 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35394 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36724 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:40266 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37030 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35678 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36922 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35394 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36842 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:40266 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36732 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:40244 - "POST /payments HTTP/1.1" 201 Created
+rinha-python-app  | INFO:     172.20.0.7:35690 - "GET /health HTTP/1.0" 204 No Content
+rinha-haproxy-py  | Connect from 172.20.0.1:37046 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35692 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36934 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:40244 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36856 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:40266 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36748 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:40258 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37050 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35694 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36948 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:40258 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36870 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35394 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36764 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:40258 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37066 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35708 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36956 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:40266 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36880 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:40258 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36780 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:40266 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37076 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35716 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36972 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:40266 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36886 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:40244 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36786 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35394 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37078 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35726 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36984 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35394 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36890 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:40244 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36802 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:40244 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:51046 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:40266 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37082 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35730 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36992 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:40258 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36896 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:40258 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36812 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:40244 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36708 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35394 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37088 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35740 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37008 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:40244 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36904 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:40266 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36826 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:40258 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36712 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35394 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37100 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35752 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37020 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:40244 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36910 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35394 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36836 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35394 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36724 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:40266 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37102 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35756 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37030 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:40258 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36922 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35394 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36842 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:40266 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36732 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:40244 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37106 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35772 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37046 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:40266 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36934 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:40244 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36856 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:40266 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36748 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:40258 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37118 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35780 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37050 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35394 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36948 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:40258 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36870 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35394 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36764 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:40258 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37132 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35796 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37066 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35394 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36956 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:40266 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36880 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:40258 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36780 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:40266 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37148 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35798 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37076 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:40244 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36972 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:40266 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36886 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:40244 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36786 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35394 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37154 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35810 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37078 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:40258 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36984 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35394 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36890 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:40244 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36802 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:40244 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:51046 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35822 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37166 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35832 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37082 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35832 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36992 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35832 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36896 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35832 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36812 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35822 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36708 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35822 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37178 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35844 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37088 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35844 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37008 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35822 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36904 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35844 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36826 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35832 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36712 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35844 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37192 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35856 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37100 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35844 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37020 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35822 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36910 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35832 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36836 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35832 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36724 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35844 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37196 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35864 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37102 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35832 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37030 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35822 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36922 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35832 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36842 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35844 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36732 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35832 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37200 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35870 - "POST /payments HTTP/1.1" 201 Created
+rinha-python-app  | INFO:     172.20.0.7:35880 - "GET /health HTTP/1.0" 204 No Content
+rinha-haproxy-py  | Connect from 172.20.0.1:37106 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35832 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37046 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35844 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36934 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35832 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36856 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35844 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36748 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35822 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37214 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35894 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37118 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35832 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37050 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35822 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36948 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35844 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36870 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35822 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36764 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35844 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37226 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35902 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37132 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35832 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37066 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35822 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36956 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35832 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36880 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35844 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36780 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35832 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37232 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35906 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37148 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35832 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37076 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35822 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36972 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35832 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36886 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35822 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36786 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35844 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37244 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35912 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37154 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35832 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37078 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35832 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36984 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35844 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36890 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35822 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36802 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35822 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37248 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35924 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:51046 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35832 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37166 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35832 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37082 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35832 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36992 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35832 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36896 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35832 - "POST /payments HTTP/1.1" 201 Created
+rinha-python-app  | INFO:     127.0.0.1:44558 - "GET /health HTTP/1.1" 204 No Content
+rinha-haproxy-py  | Connect from 172.20.0.1:36812 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35822 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37260 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35932 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36708 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35844 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37178 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35822 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37088 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35822 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37008 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35844 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36904 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35822 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36826 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35832 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37266 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35938 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36712 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35822 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37192 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35822 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37100 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35844 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37020 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35832 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36910 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35822 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36836 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35822 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37268 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35948 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36724 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35844 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37196 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35832 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37102 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35822 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37030 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35832 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36922 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35822 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36842 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35844 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37284 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35960 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36732 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35822 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37200 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35822 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37106 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35832 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37046 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35844 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36934 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35822 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36856 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35844 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37290 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35972 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36748 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35832 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37214 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35832 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37118 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35822 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37050 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35832 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36948 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35844 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36870 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35832 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37296 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35978 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36764 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35844 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37226 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35832 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37132 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35822 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37066 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35832 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36956 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35822 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36880 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35844 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37304 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35988 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36780 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35822 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37232 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35822 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37148 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35822 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37076 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35832 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36972 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35822 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36886 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35832 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37318 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35998 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36786 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35844 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37244 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35822 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37154 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35844 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37078 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35844 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36984 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35822 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36890 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35832 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37326 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:36012 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36802 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35832 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37248 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35822 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:51046 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35832 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37166 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35844 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37082 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35844 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36992 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35844 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36896 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35844 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37330 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:36022 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36812 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35832 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37260 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35844 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36708 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35822 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37178 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35832 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37088 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35832 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37008 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35822 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36904 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35832 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37342 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:36024 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36826 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35844 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37266 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35822 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36712 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35844 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37192 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35844 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37100 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35832 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37020 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35822 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36910 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35844 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37348 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:36026 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36836 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35844 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37268 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35822 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36724 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35832 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37196 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35822 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37102 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35844 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37030 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35822 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36922 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35844 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37354 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:36030 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36842 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35832 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37284 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35822 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36732 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35832 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37200 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35832 - "POST /payments HTTP/1.1" 201 Created
+rinha-python-app  | INFO:     172.20.0.7:36044 - "GET /health HTTP/1.0" 204 No Content
+rinha-haproxy-py  | Connect from 172.20.0.1:37106 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35844 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37046 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35832 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36934 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35822 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37360 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:36046 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36856 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35832 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37290 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35832 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36748 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35844 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37214 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35844 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37118 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35822 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37050 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35844 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36948 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35832 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37368 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:36052 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36870 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35844 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37296 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35844 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36764 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35832 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37226 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35844 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37132 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35822 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37066 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35844 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36956 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35822 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37372 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:36056 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36880 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35832 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37304 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35844 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36780 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35822 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37232 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35822 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37148 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35822 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37076 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35844 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36972 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35822 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37378 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:36066 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36886 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35844 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37318 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-haproxy-py  | Connect from 172.20.0.1:36786 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35844 - "POST /payments HTTP/1.1" 201 Created
+rinha-python-app  | INFO:     172.20.0.7:35832 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37244 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35822 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37154 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35832 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37078 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35832 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36984 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35822 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37394 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-haproxy-py  | Connect from 172.20.0.1:36890 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35844 - "POST /payments HTTP/1.1" 201 Created
+rinha-python-app  | INFO:     172.20.0.7:36080 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37326 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35832 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36802 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35844 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37248 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35822 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:51046 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35844 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37166 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35832 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37082 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35832 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36992 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35832 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37402 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:36090 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36896 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35832 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37330 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35832 - "POST /payments HTTP/1.1" 201 Created
+rinha-python-app  | INFO:     172.20.0.7:35844 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37260 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-haproxy-py  | Connect from 172.20.0.1:36708 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35832 - "POST /payments HTTP/1.1" 201 Created
+rinha-python-app  | INFO:     172.20.0.7:35822 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37178 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35844 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37088 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35844 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37008 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35822 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37412 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-haproxy-py  | Connect from 172.20.0.1:36904 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35844 - "POST /payments HTTP/1.1" 201 Created
+rinha-python-app  | INFO:     172.20.0.7:36100 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37342 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35844 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36826 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35832 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37266 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-haproxy-py  | Connect from 172.20.0.1:36712 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35822 - "POST /payments HTTP/1.1" 201 Created
+rinha-python-app  | INFO:     172.20.0.7:35832 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37192 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35832 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37100 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35844 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37020 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35822 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36910 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-haproxy-py  | Connect from 172.20.0.1:37424 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35832 - "POST /payments HTTP/1.1" 201 Created
+rinha-python-app  | INFO:     172.20.0.7:36110 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37348 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-haproxy-py  | Connect from 172.20.0.1:36836 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35844 - "POST /payments HTTP/1.1" 201 Created
+rinha-python-app  | INFO:     172.20.0.7:35832 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37268 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35822 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36724 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35844 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37196 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35822 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37102 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35832 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37030 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35822 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37436 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:36114 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36922 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35832 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37354 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35832 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36842 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35844 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37284 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35822 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36732 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:36114 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37200 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:36114 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37106 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35832 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37046 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35844 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37452 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-haproxy-py  | Connect from 172.20.0.1:36934 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:36122 - "POST /payments HTTP/1.1" 201 Created
+rinha-python-app  | INFO:     172.20.0.7:36114 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37360 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35832 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36856 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35844 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37290 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35844 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36748 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35822 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37214 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35822 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37118 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:36122 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37050 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35832 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37462 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:36130 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36948 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35822 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37368 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:36114 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36870 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35832 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37296 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35832 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36764 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35822 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37226 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35832 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37132 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:36114 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37066 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35832 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36956 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-haproxy-py  | Connect from 172.20.0.1:37470 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35844 - "POST /payments HTTP/1.1" 201 Created
+rinha-python-app  | INFO:     172.20.0.7:36144 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37372 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35844 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36880 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35822 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37304 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-haproxy-py  | Connect from 172.20.0.1:36780 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35832 - "POST /payments HTTP/1.1" 201 Created
+rinha-python-app  | INFO:     172.20.0.7:35844 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37232 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35844 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37148 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35844 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37076 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:36114 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36972 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-haproxy-py  | Connect from 172.20.0.1:37478 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35844 - "POST /payments HTTP/1.1" 201 Created
+rinha-python-app  | INFO:     172.20.0.7:36148 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37378 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:36114 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36886 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35822 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37318 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:36114 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36786 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35832 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37244 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35844 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37154 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35832 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37078 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35832 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36984 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35844 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37488 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:36158 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36890 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:36114 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37394 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35832 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37326 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35832 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36802 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:36114 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37248 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35844 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:51046 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:36158 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37166 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35832 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37082 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35832 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37504 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:36170 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36992 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35832 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37402 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35832 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36896 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35832 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36812 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-haproxy-py  | Connect from 172.20.0.1:37330 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:36114 - "POST /payments HTTP/1.1" 201 Created
+rinha-python-app  | INFO:     172.20.0.7:35832 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36708 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-haproxy-py  | Connect from 172.20.0.1:37260 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35844 - "POST /payments HTTP/1.1" 201 Created
+rinha-python-app  | INFO:     172.20.0.7:35832 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37178 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:36158 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37088 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:36158 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37512 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:36172 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37008 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:36114 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37412 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-haproxy-py  | Connect from 172.20.0.1:36904 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:36158 - "POST /payments HTTP/1.1" 201 Created
+rinha-python-app  | INFO:     172.20.0.7:35844 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37342 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:36158 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36826 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35832 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37266 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:36114 - "POST /payments HTTP/1.1" 201 Created
+rinha-python-app  | INFO:     172.20.0.7:36158 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37192 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:36158 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37100 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:36114 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37524 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:36176 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37020 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:36176 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37424 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-haproxy-py  | Connect from 172.20.0.1:36910 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:36158 - "POST /payments HTTP/1.1" 201 Created
+rinha-python-app  | INFO:     172.20.0.7:36176 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37348 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:36114 - "POST /payments HTTP/1.1" 201 Created
+rinha-python-app  | INFO:     172.20.0.7:36158 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37268 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:36158 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36724 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:36114 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37196 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:36158 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37102 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35832 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37540 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:36188 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37030 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:36114 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36922 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35832 - "POST /payments HTTP/1.1" 201 Created
+rinha-python-app  | INFO:     172.20.0.7:36158 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37354 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35832 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36842 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:36158 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37284 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:36114 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36732 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:36158 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37200 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:36158 - "POST /payments HTTP/1.1" 201 Created
+rinha-python-app  | INFO:     172.20.0.7:36204 - "GET /health HTTP/1.0" 204 No Content
+rinha-haproxy-py  | Connect from 172.20.0.1:37106 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35832 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37546 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:36206 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37046 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:36158 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36934 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-haproxy-py  | Connect from 172.20.0.1:37452 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:36114 - "POST /payments HTTP/1.1" 201 Created
+rinha-python-app  | INFO:     172.20.0.7:36158 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37360 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35832 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36856 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:36114 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37290 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:36114 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:36748 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35832 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37214 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35832 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37118 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:36114 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37552 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:36220 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37050 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:36114 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37462 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-haproxy-py  | Connect from 172.20.0.1:36948 to 172.20.0.7:9999 (http_front/HTTP)
+rinha-python-app  | INFO:     172.20.0.7:35832 - "POST /payments HTTP/1.1" 201 Created
+rinha-python-app  | INFO:     172.20.0.7:36220 - "POST /payments HTTP/1.1" 201 Created
+rinha-haproxy-py  | Connect from 172.20.0.1:37368 to 172.20.0.7:9999 (http_front/HTTP)
+log truncated at line 1000

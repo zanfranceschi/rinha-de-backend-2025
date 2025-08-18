@@ -19,10 +19,40 @@ stopContainers() {
     pushd ../participantes/$1
         docker compose down -v --remove-orphans
         docker compose rm -s -v -f
-        find * ! -group $(whoami) | xargs sudo rm -rf
+        sudo find * -group root | xargs sudo rm -rf
     popd > /dev/null
     pushd ../payment-processor > /dev/null
         docker compose down --volumes > /dev/null
+    popd > /dev/null
+}
+
+scheduleReboot() {
+    epoch=$(date +%s)
+    schedule_epochtime=$((epoch + (5 * 60)))
+    schedule_datetime=$(date -d @$schedule_epochtime +"%Y-%m-%dT%H:%M:%S")
+
+    aws scheduler create-schedule \
+        --name OneTimeScheduler-$epoch \
+        --schedule-expression "at($schedule_datetime)" \
+        --target "{\"Arn\": \"arn:aws:lambda:us-east-1:${AWS_ACCOUNT}:function:start-ec2-instance\", \"RoleArn\": \"arn:aws:iam::${AWS_ACCOUNT}:role/service-role/start-ec2-instance-role\"}" \
+        --flexible-time-window '{"Mode": "OFF"}' \
+        --region us-east-1
+}
+
+maybeReboot() {
+    pushd ../participantes/$1 > /dev/null
+    pull_errors=$(grep -l "Error toomanyrequests" docker-compose.logs | wc -l)
+    if [ $pull_errors -gt 0 ]; then
+        echo "Preparing to shutdown due to docker pull limit errors"
+        stopContainers $1
+        rm docker-compose.logs
+        rm partial-results.json
+        scheduleReboot
+        sleep 15
+        sudo shutdown now
+        kill -9 $$
+        exit 0
+    fi
     popd > /dev/null
 }
 
@@ -30,13 +60,13 @@ MAX_REQUESTS=550
 
 while true; do
 
-    # docker system prune -a -f --volumes
-
     for directory in ../participantes/*; do
     (
         git pull
         participant=$(echo $directory | sed -e 's/..\/participantes\///g' -e 's/\///g')
-        echo "========================================"
+        echo ""
+        echo ""
+	    echo "========================================"
         echo "  Participant $participant starting..."
         echo "========================================"
 
@@ -47,7 +77,8 @@ while true; do
             echo "executing test for $participant..."
             stopContainers $participant
             startContainers $participant
-            
+            maybeReboot $participant
+
             success=1
             max_attempts=15
             attempt=1

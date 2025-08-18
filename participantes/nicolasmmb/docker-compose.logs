@@ -1,0 +1,126 @@
+
+ api-2 Pulling 
+ api-1 Pulling 
+ 9824c27679d3 Already exists 
+ 4f4fb700ef54 Already exists 
+ e77d1c03034b Pulling fs layer 
+ da06f3a5a237 Pulling fs layer 
+ 9824c27679d3 Already exists 
+ 4f4fb700ef54 Already exists 
+ e77d1c03034b Pulling fs layer 
+ da06f3a5a237 Pulling fs layer 
+ e77d1c03034b Downloading [>                                                  ]  24.65kB/2.416MB
+ e77d1c03034b Downloading [>                                                  ]  24.65kB/2.416MB
+ e77d1c03034b Download complete 
+ e77d1c03034b Extracting [>                                                  ]  32.77kB/2.416MB
+ e77d1c03034b Verifying Checksum 
+ e77d1c03034b Download complete 
+ e77d1c03034b Extracting [>                                                  ]  32.77kB/2.416MB
+ da06f3a5a237 Downloading [>                                                  ]  48.13kB/3.476MB
+ da06f3a5a237 Downloading [>                                                  ]  48.13kB/3.476MB
+ da06f3a5a237 Downloading [==================================================>]  3.476MB/3.476MB
+ da06f3a5a237 Download complete 
+ da06f3a5a237 Download complete 
+ e77d1c03034b Extracting [==================================================>]  2.416MB/2.416MB
+ e77d1c03034b Extracting [==================================================>]  2.416MB/2.416MB
+ e77d1c03034b Pull complete 
+ e77d1c03034b Pull complete 
+ da06f3a5a237 Extracting [>                                                  ]  65.54kB/3.476MB
+ da06f3a5a237 Extracting [>                                                  ]  65.54kB/3.476MB
+ da06f3a5a237 Extracting [==================================================>]  3.476MB/3.476MB
+ da06f3a5a237 Extracting [==================================================>]  3.476MB/3.476MB
+ da06f3a5a237 Pull complete 
+ da06f3a5a237 Pull complete 
+ api-2 Pulled 
+ api-1 Pulled 
+ Network nicolasmmb_backend  Creating
+ Network nicolasmmb_backend  Created
+ Container mem-db  Creating
+ Container mem-db  Created
+ Container api-go-2  Creating
+ Container api-go-1  Creating
+ Container api-go-2  Created
+ Container api-go-1  Created
+ Container lb  Creating
+ Container lb  Created
+Attaching to api-go-1, api-go-2, lb, mem-db
+mem-db  | 1:M 15 Aug 2025 11:24:11.386 # WARNING Memory overcommit must be enabled! Without it, a background save or replication may fail under low memory condition. Being disabled, it can also cause failures without low memory condition, see https://github.com/jemalloc/jemalloc/issues/1328. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.
+mem-db  | 1:M 15 Aug 2025 11:24:11.386 * oO0OoO0OoO0Oo Valkey is starting oO0OoO0OoO0Oo
+mem-db  | 1:M 15 Aug 2025 11:24:11.386 * Valkey version=8.1.3, bits=64, commit=00000000, modified=0, pid=1, just started
+mem-db  | 1:M 15 Aug 2025 11:24:11.386 * Configuration loaded
+mem-db  | 1:M 15 Aug 2025 11:24:11.388 * monotonic clock: POSIX clock_gettime
+mem-db  | 1:M 15 Aug 2025 11:24:11.389 * Running mode=standalone, port=6379.
+mem-db  | 1:M 15 Aug 2025 11:24:11.390 * Server initialized
+mem-db  | 1:M 15 Aug 2025 11:24:11.391 * Ready to accept connections tcp
+api-go-2  | 2025/08/15 11:24:17 Aviso: Não foi possível carregar o arquivo .env. Usando variáveis de ambiente do sistema.
+api-go-2  | Env: ---------------------------------------------------------------------------------------------
+api-go-2  | Env: SERVER_ADDR                   : 0.0.0.0
+api-go-2  | Env: SERVER_PORT                   : 8080
+api-go-2  | Env: REDIS_ADDR                    : mem-db:6379
+api-go-2  | Env: PAYMENT_PROCESSOR_URL_DEFAULT : http://payment-processor-default:8080/payments
+api-go-2  | Env: PAYMENT_PROCESSOR_URL_FALLBACK: http://payment-processor-fallback:8080/payments
+api-go-2  | Env: HEALTH_URL_DEFAULT            : http://payment-processor-default:8080/payments/service-health
+api-go-2  | Env: HEALTH_URL_FALLBACK           : http://payment-processor-fallback:8080/payments/service-health
+api-go-2  | Env: WORKER_POOL                   : 15
+api-go-2  | Env: PAYMENT_CHAN_SIZE             : 10000
+api-go-2  | Env: ---------------------------------------------------------------------------------------------
+api-go-2  | 2025/08/15 11:24:17 ⚙️  Iniciando conexão com o Redis...
+api-go-2  | 2025/08/15 11:24:17 ✅ Cliente Redis conectado e pronto para uso!
+api-go-2  | 2025/08/15 11:24:17 🔥 Iniciando o aquecimento do banco de dados...
+api-go-1  | 2025/08/15 11:24:17 Aviso: Não foi possível carregar o arquivo .env. Usando variáveis de ambiente do sistema.
+api-go-1  | Env: ---------------------------------------------------------------------------------------------
+api-go-2  | 2025/08/15 11:24:17 ✅ Banco de dados aquecido com sucesso!
+api-go-2  | 2025/08/15 11:24:17 Servidor iniciado em 0.0.0.0:8080
+api-go-1  | Env: SERVER_ADDR                   : 0.0.0.0
+api-go-1  | Env: SERVER_PORT                   : 8080
+api-go-1  | Env: REDIS_ADDR                    : mem-db:6379
+api-go-1  | Env: PAYMENT_PROCESSOR_URL_DEFAULT : http://payment-processor-default:8080/payments
+api-go-1  | Env: PAYMENT_PROCESSOR_URL_FALLBACK: http://payment-processor-fallback:8080/payments
+api-go-1  | Env: HEALTH_URL_DEFAULT            : http://payment-processor-default:8080/payments/service-health
+api-go-1  | Env: HEALTH_URL_FALLBACK           : http://payment-processor-fallback:8080/payments/service-health
+api-go-1  | Env: WORKER_POOL                   : 15
+api-go-1  | Env: PAYMENT_CHAN_SIZE             : 10000
+api-go-1  | Env: ---------------------------------------------------------------------------------------------
+api-go-1  | 2025/08/15 11:24:17 ⚙️  Iniciando conexão com o Redis...
+api-go-2  | 2025/08/15 11:24:17 🚀 Servidor HTTP escutando em: 0.0.0.0:8080
+api-go-1  | 2025/08/15 11:24:17 ✅ Cliente Redis conectado e pronto para uso!
+api-go-1  | 2025/08/15 11:24:17 🔥 Iniciando o aquecimento do banco de dados...
+api-go-1  | 2025/08/15 11:24:17 ✅ Banco de dados aquecido com sucesso!
+api-go-1  | 2025/08/15 11:24:17 Servidor iniciado em 0.0.0.0:8080
+api-go-1  | 2025/08/15 11:24:17 🚀 Servidor HTTP escutando em: 0.0.0.0:8080
+lb        | [NOTICE]   (1) : haproxy version is 2.8.15-a9aef56
+lb        | [WARNING]  (1) : config : missing timeouts for frontend 'http_front'.
+lb        |    | While not properly invalid, you will certainly encounter various problems
+lb        |    | with such a configuration. To fix this, please ensure that all following
+lb        |    | timeouts are set to a non-zero value: 'client', 'connect', 'server'.
+lb        | [WARNING]  (1) : config : missing timeouts for backend 'http_back'.
+lb        |    | While not properly invalid, you will certainly encounter various problems
+lb        |    | with such a configuration. To fix this, please ensure that all following
+lb        |    | timeouts are set to a non-zero value: 'client', 'connect', 'server'.
+lb        | [NOTICE]   (1) : New worker (8) forked
+lb        | [NOTICE]   (1) : Loading success.
+lb        | [ALERT]    (8) : sendmsg()/writev() failed in logger #1: No such file or directory (errno=2)
+mem-db    | 1:M 15 Aug 2025 11:25:12.072 * 10000 changes in 60 seconds. Saving...
+mem-db    | 1:M 15 Aug 2025 11:25:12.072 * Background saving started by pid 88
+mem-db    | 88:C 15 Aug 2025 11:25:12.092 * DB saved on disk
+mem-db    | 88:C 15 Aug 2025 11:25:12.094 * Fork CoW for RDB: current 0 MB, peak 0 MB, average 0 MB
+mem-db    | 1:M 15 Aug 2025 11:25:12.173 * Background saving terminated with success
+lb        | [NOTICE]   (1) : haproxy version is 2.8.15-a9aef56
+lb        | [WARNING]  (1) : Exiting Master process...
+lb        | [WARNING]  (8) : Proxy http_front stopped (cumulated conns: FE: 553, BE: 0).
+lb        | [WARNING]  (8) : Proxy http_back stopped (cumulated conns: FE: 0, BE: 16711).
+lb        | [WARNING]  (1) : Current worker (8) exited with code 0 (Exit)
+lb        | [WARNING]  (1) : All workers exited. Exiting... (0)
+[Klb exited with code 0
+api-go-1  | 2025/08/15 11:25:26 🔌 Desligando o servidor...
+api-go-1  | 2025/08/15 11:25:26 ✅ Servidor desligado com sucesso.
+api-go-2  | 2025/08/15 11:25:26 🔌 Desligando o servidor...
+api-go-2  | 2025/08/15 11:25:26 ✅ Servidor desligado com sucesso.
+[Kapi-go-1 exited with code 0
+[Kapi-go-2 exited with code 0
+mem-db    | 1:signal-handler (1755257126) Received SIGTERM scheduling shutdown...
+mem-db    | 1:M 15 Aug 2025 11:25:26.759 * User requested shutdown...
+mem-db    | 1:M 15 Aug 2025 11:25:26.759 * Saving the final RDB snapshot before exiting.
+mem-db    | 1:M 15 Aug 2025 11:25:26.782 * DB saved on disk
+mem-db    | 1:M 15 Aug 2025 11:25:26.782 # Valkey is now ready to exit, bye bye...
+log truncated at line 1000

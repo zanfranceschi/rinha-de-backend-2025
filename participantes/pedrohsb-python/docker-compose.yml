@@ -1,27 +1,31 @@
 services:
   api1:
-    image: pedrohsbarbosa99/rinha-fastapi-2025:0.2.0
-    command: uvicorn app.apis.main:app --host 0.0.0.0 --port 9999 --workers 1 --loop uvloop --http httptools
+    image: pedrohsbarbosa99/rinha-fastapi-2025:0.2.2
+    command: uvicorn app.apis.main:app --host 0.0.0.0 --port 9999 --workers 1 --loop uvloop --http httptools --no-access-log
     networks:
       - backend
       - payment-processor
+    environment:
+      - SUMMARY_URL=http://api2:9999/internal/payments-summary
     deploy:
       resources:
         limits:
-          cpus: "0.5"
-          memory: "70M"
+          cpus: "0.7"
+          memory: "100M"
 
   api2:
-    image: pedrohsbarbosa99/rinha-fastapi-2025:0.2.0
-    command: uvicorn app.apis.main:app --host 0.0.0.0 --port 9999 --workers 1 --loop uvloop --http httptools
+    image: pedrohsbarbosa99/rinha-fastapi-2025:0.2.2
+    command: uvicorn app.apis.main:app --host 0.0.0.0 --port 9999 --workers 1 --loop uvloop --http httptools --no-access-log
     networks:
       - backend
       - payment-processor
+    environment:
+      - SUMMARY_URL=http://api1:9999/internal/payments-summary
     deploy:
       resources:
         limits:
-          cpus: "0.5"
-          memory: "70M"
+          cpus: "0.7"
+          memory: "100M"
 
   nginx:
     image: nginx:alpine
@@ -37,19 +41,10 @@ services:
       resources:
         limits:
           cpus: "0.1"
-          memory: "70M"
+          memory: "150M"
     networks:
       - backend
 
-  redis:
-    image: redis:7-alpine
-    deploy:
-      resources:
-        limits:
-          cpus: "0.4"
-          memory: "70M"
-    networks:
-      - backend
 
 networks:
   backend:

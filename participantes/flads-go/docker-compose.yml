@@ -1,18 +1,13 @@
 x-service-templates:
   api: &api
-    image: flads/rinha25-go-api:0.1.0
+    image: flads/rinha25-go-api:1.0.0
     user: "1000:1001"
     networks:
       - main-network
       - payment-processor
-    deploy:
-      resources:
-        limits:
-          cpus: "0.20"
-          memory: "55MB"
 
   worker: &worker
-    image: flads/rinha25-go-worker:0.0.2
+    image: flads/rinha25-go-worker:1.0.0
     container_name: worker
     networks:
       - main-network
@@ -20,11 +15,6 @@ x-service-templates:
     depends_on:
       redis:
         condition: service_started
-    deploy:
-      resources:
-        limits:
-          cpus: "0.30"
-          memory: "80MB"
 
 services:
   api-1:
@@ -34,6 +24,11 @@ services:
       - sockets:/tmp/sockets
     environment:
       - SOCKET_PATH=/tmp/sockets/api-1.sock
+    deploy:
+      resources:
+        limits:
+          cpus: "0.25"
+          memory: "35MB"
 
   api-2:
     <<: *api
@@ -42,19 +37,47 @@ services:
       - sockets:/tmp/sockets
     environment:
       - SOCKET_PATH=/tmp/sockets/api-2.sock
+    deploy:
+      resources:
+        limits:
+          cpus: "0.25"
+          memory: "35MB"
+
+  database:
+    image: flads/rinha25-go-database:1.0.0
+    networks:
+      - main-network
+      - payment-processor
+    container_name: database
+    deploy:
+      resources:
+        limits:
+          cpus: "0.3"
+          memory: "130MB"
 
   worker-1:
     <<: *worker
     container_name: worker-1
+    deploy:
+      resources:
+        limits:
+          cpus: "0.15"
+          memory: "40MB"
 
   worker-2:
     <<: *worker
     container_name: worker-2
+    deploy:
+      resources:
+        limits:
+          cpus: "0.15"
+          memory: "40MB"
 
-  haproxy:
-    image: haproxy:alpine
+  nginx:
+    image: nginx:alpine
     volumes:
-      - ./haproxy/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
+      - ./nginx:/var/www
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
       - sockets:/sockets
     user: "1000:1001"
     ports:
@@ -69,21 +92,37 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.3"
-          memory: "50MB"
+          cpus: "0.2"
+          memory: "20MB"
 
   redis:
-    image: redis:alpine
+    image: valkey/valkey:8.1-alpine
     ports:
       - '6379:6379'
     networks:
       - main-network
-    command: ["redis-server"]
+    command: >
+      redis-server
+      --save ""
+      --appendonly no
+      --maxmemory 50mb
+      --maxmemory-policy allkeys-lru
+      --tcp-keepalive 30
+      --timeout 0
+      --tcp-backlog 65535
+      --databases 1
+      --maxclients 5000
+      --rdbcompression no
+      --rdbchecksum no
+      --hz 100
+      --lazyfree-lazy-eviction yes
+      --lazyfree-lazy-expire yes
+      --lazyfree-lazy-server-del yes
     deploy:
       resources:
         limits:
           cpus: "0.2"
-          memory: "30MB"
+          memory: "50MB"
 
 volumes:
   sockets:

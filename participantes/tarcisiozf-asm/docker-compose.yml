@@ -3,12 +3,13 @@ x-service-templates:
     networks:
       - payment-processor
       - app
-    image: tarcisiozf/rinha-de-backend-2025-asm:v6
+    image: tarcisiozf/rinha-de-backend-2025-asm:v11
     security_opt:
       - seccomp:unconfined
     volumes:
       - app-data:/app/data
       - sockets:/app/sockets:rw
+      - shmem:/shm:rw
 #    deploy:
 #      resources:
 #        limits:
@@ -27,10 +28,12 @@ services:
       PORT_DEFAULT: "8080"
       HOST_FALLBACK: "payment-processor-fallback"
       PORT_FALLBACK: "8080"
+      APP_SOCK_PATH: "sockets/one.sock"
+      SCHED_BENCH_SIZE: "1"
     deploy:
       resources:
         limits:
-          cpus: "0.3"
+          cpus: "0.5"
           memory: 100M
   app-2:
     <<: *base-app
@@ -43,69 +46,37 @@ services:
       PORT_DEFAULT: "8080"
       HOST_FALLBACK: "payment-processor-fallback"
       PORT_FALLBACK: "8080"
+      APP_SOCK_PATH: "sockets/two.sock"
+      SCHED_BENCH_SIZE: "1"
     deploy:
       resources:
         limits:
-          cpus: "0.3"
+          cpus: "0.5"
           memory: 100M
 
-#  lb:
-#    networks:
-#      - app
-##    cpuset: "2"
-#    image: tarcisiozf/rinha-de-backend-2025-asm-lb:v4
-#    security_opt:
-#      - seccomp:unconfined
-#    volumes:
-#      - sockets:/app/sockets:rw
-#    ports:
-#      - "9999:9999"
-#    deploy:
-#      resources:
-#        limits:
-#          cpus: "0.5"
-#          memory: 150M
-
-#  proxy:
-#    image: haproxy:3.2.3-alpine
-##    cpuset: "2-3"
-#    ports:
-#      - 9999:80
-#    volumes:
-#      - sockets:/sockets:rw
-#      - ./proxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
-#    networks:
-#      - app
-#    depends_on:
-#      - app-1
-#      - app-2
-#    ulimits:
-#      nofile:
-#        soft: 200000
-#        hard: 200000
-#    deploy:
-#      resources:
-#        limits:
-#          cpus: "0.6"
-#          memory: "150MB"
-
-  nginx:
-    image: nginx:alpine
+  proxy:
+    image: haproxy:3.2.3-alpine
+#    cpuset: "2-3"
     ports:
-      - "9999:80"
+      - 9999:80
     volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf:ro
-      - sockets:/sockets
+      - sockets:/sockets:rw
+      - ./proxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
+    networks:
+      - app
+    depends_on:
+      - app-1
+      - app-2
     ulimits:
       nofile:
         soft: 200000
         hard: 200000
+      memlock: -1
     deploy:
       resources:
         limits:
-          cpus: "0.9"
+          cpus: "0.5"
           memory: "150MB"
-    command: [ "nginx", "-g", "daemon off;" ]
 
 volumes:
   app-data:
@@ -115,6 +86,11 @@ volumes:
       type: tmpfs
       device: tmpfs
       o: "size=32m,mode=1777"
+  shmem:
+    driver: local
+    driver_opts:
+      type: tmpfs
+      device: tmpfs
 
 networks:
   payment-processor:

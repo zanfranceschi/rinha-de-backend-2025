@@ -19,7 +19,7 @@ services:
           memory: '30MB'
 
   backend-1: &backend-template
-    image: rodrigomilitao/rinha-go:2025-v10
+    image: rodrigomilitao/rinha-go:2025-v14
     expose:
       - '8080'
     networks:
@@ -46,7 +46,7 @@ services:
     <<: *backend-template
 
   worker:
-    image: rodrigomilitao/rinha-go:2025-v10
+    image: rodrigomilitao/rinha-go:2025-v14
     environment:
       - LISTEN_ADDR=disabled
       - REDIS_URL=redis:6379

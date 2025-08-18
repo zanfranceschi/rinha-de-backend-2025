@@ -7,9 +7,10 @@
  9824c27679d3 Already exists 
  4f4fb700ef54 Already exists 
  d968f0f3343c Pulling fs layer 
- d968f0f3343c Downloading [>                                                  ]  63.09kB/6.272MB
- d968f0f3343c Downloading [>                                                  ]  63.09kB/6.272MB
- d968f0f3343c Verifying Checksum 
+ d968f0f3343c Downloading [>                                                  ]   78.8kB/6.272MB
+ d968f0f3343c Downloading [>                                                  ]   78.8kB/6.272MB
+ d968f0f3343c Downloading [===================================>               ]  4.399MB/6.272MB
+ d968f0f3343c Downloading [===================================>               ]  4.399MB/6.272MB
  d968f0f3343c Download complete 
  d968f0f3343c Download complete 
  d968f0f3343c Extracting [>                                                  ]  65.54kB/6.272MB
@@ -18,30 +19,42 @@
  d968f0f3343c Extracting [==================================================>]  6.272MB/6.272MB
  d968f0f3343c Pull complete 
  d968f0f3343c Pull complete 
- app2 Pulled 
  app1 Pulled 
+ app2 Pulled 
  Network rodrigo-schonardt-go_app-network  Creating
  Network rodrigo-schonardt-go_app-network  Created
  Volume "rodrigo-schonardt-go_postgres_data"  Creating
  Volume "rodrigo-schonardt-go_postgres_data"  Created
  Container rodrigo-schonardt-go-redis-1  Creating
  Container rodrigo-schonardt-go-postgres-1  Creating
- Container rodrigo-schonardt-go-redis-1  Created
  Container rodrigo-schonardt-go-postgres-1  Created
- Container rodrigo-schonardt-go-app1-1  Creating
+ Container rodrigo-schonardt-go-redis-1  Created
  Container rodrigo-schonardt-go-app2-1  Creating
+ Container rodrigo-schonardt-go-app1-1  Creating
  Container rodrigo-schonardt-go-app1-1  Created
  Container rodrigo-schonardt-go-app2-1  Created
  Container rodrigo-schonardt-go-haproxy-1  Creating
  Container rodrigo-schonardt-go-haproxy-1  Created
 Attaching to app1-1, app2-1, haproxy-1, postgres-1, redis-1
-redis-1     | Starting Redis Server
-redis-1     | 1:C 30 Jul 2025 04:17:20.124 # WARNING Memory overcommit must be enabled! Without it, a background save or replication may fail under low memory condition. Being disabled, it can also cause failures without low memory condition, see https://github.com/jemalloc/jemalloc/issues/1328. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.
-redis-1     | 1:C 30 Jul 2025 04:17:20.124 * oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
-redis-1     | 1:C 30 Jul 2025 04:17:20.124 * Redis version=8.0.3, bits=64, commit=00000000, modified=1, pid=1, just started
-redis-1     | 1:C 30 Jul 2025 04:17:20.124 * Configuration loaded
-redis-1     | 1:M 30 Jul 2025 04:17:20.125 * monotonic clock: POSIX clock_gettime
-redis-1     | 1:M 30 Jul 2025 04:17:20.126 * Running mode=standalone, port=6379.
+redis-1  | Starting Redis Server
+redis-1  | 1:C 13 Aug 2025 07:21:21.610 # WARNING Memory overcommit must be enabled! Without it, a background save or replication may fail under low memory condition. Being disabled, it can also cause failures without low memory condition, see https://github.com/jemalloc/jemalloc/issues/1328. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.
+redis-1  | 1:C 13 Aug 2025 07:21:21.611 * oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+redis-1  | 1:C 13 Aug 2025 07:21:21.611 * Redis version=8.2.0, bits=64, commit=00000000, modified=1, pid=1, just started
+redis-1  | 1:C 13 Aug 2025 07:21:21.611 * Configuration loaded
+redis-1  | 1:M 13 Aug 2025 07:21:21.611 * monotonic clock: POSIX clock_gettime
+redis-1  | 1:M 13 Aug 2025 07:21:21.614 * Running mode=standalone, port=6379.
+redis-1  | 1:M 13 Aug 2025 07:21:21.620 * <bf> RedisBloom version 8.2.0 (Git=unknown)
+redis-1  | 1:M 13 Aug 2025 07:21:21.620 * <bf> Registering configuration options: [
+redis-1  | 1:M 13 Aug 2025 07:21:21.620 * <bf> 	{ bf-error-rate       :      0.01 }
+redis-1  | 1:M 13 Aug 2025 07:21:21.620 * <bf> 	{ bf-initial-size     :       100 }
+redis-1  | 1:M 13 Aug 2025 07:21:21.620 * <bf> 	{ bf-expansion-factor :         2 }
+redis-1  | 1:M 13 Aug 2025 07:21:21.620 * <bf> 	{ cf-bucket-size      :         2 }
+redis-1  | 1:M 13 Aug 2025 07:21:21.620 * <bf> 	{ cf-initial-size     :      1024 }
+redis-1  | 1:M 13 Aug 2025 07:21:21.620 * <bf> 	{ cf-max-iterations   :        20 }
+redis-1  | 1:M 13 Aug 2025 07:21:21.620 * <bf> 	{ cf-expansion-factor :         1 }
+redis-1  | 1:M 13 Aug 2025 07:21:21.620 * <bf> 	{ cf-max-expansions   :        32 }
+redis-1  | 1:M 13 Aug 2025 07:21:21.620 * <bf> ]
+redis-1  | 1:M 13 Aug 2025 07:21:21.620 * Module 'bf' loaded from /usr/local/lib/redis/modules//redisbloom.so
 postgres-1  | The files belonging to this database system will be owned by user "postgres".
 postgres-1  | This user must also own the server process.
 postgres-1  | 
@@ -54,77 +67,66 @@ postgres-1  |
 postgres-1  | fixing permissions on existing directory /var/lib/postgresql/data ... ok
 postgres-1  | creating subdirectories ... ok
 postgres-1  | selecting dynamic shared memory implementation ... posix
-redis-1     | 1:M 30 Jul 2025 04:17:20.202 * <bf> RedisBloom version 8.0.1 (Git=unknown)
-redis-1     | 1:M 30 Jul 2025 04:17:20.202 * <bf> Registering configuration options: [
-redis-1     | 1:M 30 Jul 2025 04:17:20.202 * <bf> 	{ bf-error-rate       :      0.01 }
-redis-1     | 1:M 30 Jul 2025 04:17:20.202 * <bf> 	{ bf-initial-size     :       100 }
-redis-1     | 1:M 30 Jul 2025 04:17:20.202 * <bf> 	{ bf-expansion-factor :         2 }
-redis-1     | 1:M 30 Jul 2025 04:17:20.202 * <bf> 	{ cf-bucket-size      :         2 }
-redis-1     | 1:M 30 Jul 2025 04:17:20.202 * <bf> 	{ cf-initial-size     :      1024 }
-redis-1     | 1:M 30 Jul 2025 04:17:20.202 * <bf> 	{ cf-max-iterations   :        20 }
-redis-1     | 1:M 30 Jul 2025 04:17:20.202 * <bf> 	{ cf-expansion-factor :         1 }
-redis-1     | 1:M 30 Jul 2025 04:17:20.202 * <bf> 	{ cf-max-expansions   :        32 }
-redis-1     | 1:M 30 Jul 2025 04:17:20.202 * <bf> ]
-redis-1     | 1:M 30 Jul 2025 04:17:20.203 * Module 'bf' loaded from /usr/local/lib/redis/modules//redisbloom.so
-redis-1     | 1:M 30 Jul 2025 04:17:20.204 * <search> Redis version found by RedisSearch : 8.0.3 - oss
-redis-1     | 1:M 30 Jul 2025 04:17:20.204 * <search> RediSearch version 8.0.1 (Git=5688fcc)
-redis-1     | 1:M 30 Jul 2025 04:17:20.204 * <search> Low level api version 1 initialized successfully
-redis-1     | 1:M 30 Jul 2025 04:17:20.205 * <search> gc: ON, prefix min length: 2, min word length to stem: 4, prefix max expansions: 200, query timeout (ms): 500, timeout policy: return, cursor read size: 1000, cursor max idle (ms): 300000, max doctable size: 1000000, max number of search results:  1000000, 
-redis-1     | 1:M 30 Jul 2025 04:17:20.205 * <search> Initialized thread pools!
-redis-1     | 1:M 30 Jul 2025 04:17:20.205 * <search> Disabled workers threadpool of size 0
-redis-1     | 1:M 30 Jul 2025 04:17:20.205 * <search> Subscribe to config changes
-redis-1     | 1:M 30 Jul 2025 04:17:20.205 * <search> Enabled role change notification
-redis-1     | 1:M 30 Jul 2025 04:17:20.205 * <search> Cluster configuration: AUTO partitions, type: 0, coordinator timeout: 0ms
-redis-1     | 1:M 30 Jul 2025 04:17:20.205 * <search> Register write commands
-redis-1     | 1:M 30 Jul 2025 04:17:20.205 * Module 'search' loaded from /usr/local/lib/redis/modules//redisearch.so
-redis-1     | 1:M 30 Jul 2025 04:17:20.205 * <timeseries> RedisTimeSeries version 80001, git_sha=577bfa8b5909e7ee572f0b651399be8303dc6641
-redis-1     | 1:M 30 Jul 2025 04:17:20.205 * <timeseries> Redis version found by RedisTimeSeries : 8.0.3 - oss
-redis-1     | 1:M 30 Jul 2025 04:17:20.205 * <timeseries> Registering configuration options: [
-redis-1     | 1:M 30 Jul 2025 04:17:20.205 * <timeseries> 	{ ts-compaction-policy   :              }
-redis-1     | 1:M 30 Jul 2025 04:17:20.205 * <timeseries> 	{ ts-num-threads         :            3 }
-redis-1     | 1:M 30 Jul 2025 04:17:20.205 * <timeseries> 	{ ts-retention-policy    :            0 }
-redis-1     | 1:M 30 Jul 2025 04:17:20.205 * <timeseries> 	{ ts-duplicate-policy    :        block }
-redis-1     | 1:M 30 Jul 2025 04:17:20.205 * <timeseries> 	{ ts-chunk-size-bytes    :         4096 }
-redis-1     | 1:M 30 Jul 2025 04:17:20.205 * <timeseries> 	{ ts-encoding            :   compressed }
-redis-1     | 1:M 30 Jul 2025 04:17:20.205 * <timeseries> 	{ ts-ignore-max-time-diff:            0 }
-redis-1     | 1:M 30 Jul 2025 04:17:20.205 * <timeseries> 	{ ts-ignore-max-val-diff :     0.000000 }
-redis-1     | 1:M 30 Jul 2025 04:17:20.205 * <timeseries> ]
-redis-1     | 1:M 30 Jul 2025 04:17:20.206 * <timeseries> Detected redis oss
-redis-1     | 1:M 30 Jul 2025 04:17:20.206 * Module 'timeseries' loaded from /usr/local/lib/redis/modules//redistimeseries.so
-redis-1     | 1:M 30 Jul 2025 04:17:20.206 * <ReJSON> Created new data type 'ReJSON-RL'
-redis-1     | 1:M 30 Jul 2025 04:17:20.206 * <ReJSON> version: 80001 git sha: unknown branch: unknown
-redis-1     | 1:M 30 Jul 2025 04:17:20.206 * <ReJSON> Exported RedisJSON_V1 API
-redis-1     | 1:M 30 Jul 2025 04:17:20.206 * <ReJSON> Exported RedisJSON_V2 API
-redis-1     | 1:M 30 Jul 2025 04:17:20.206 * <ReJSON> Exported RedisJSON_V3 API
-redis-1     | 1:M 30 Jul 2025 04:17:20.206 * <ReJSON> Exported RedisJSON_V4 API
-redis-1     | 1:M 30 Jul 2025 04:17:20.206 * <ReJSON> Exported RedisJSON_V5 API
-redis-1     | 1:M 30 Jul 2025 04:17:20.206 * <ReJSON> Enabled diskless replication
-redis-1     | 1:M 30 Jul 2025 04:17:20.206 * <ReJSON> Initialized shared string cache, thread safe: false.
-redis-1     | 1:M 30 Jul 2025 04:17:20.206 * Module 'ReJSON' loaded from /usr/local/lib/redis/modules//rejson.so
-redis-1     | 1:M 30 Jul 2025 04:17:20.206 * <search> Acquired RedisJSON_V5 API
-redis-1     | 1:M 30 Jul 2025 04:17:20.207 * Server initialized
-redis-1     | 1:M 30 Jul 2025 04:17:20.207 * Ready to accept connections tcp
+redis-1     | 1:M 13 Aug 2025 07:21:21.688 * <search> Redis version found by RedisSearch : 8.2.0 - oss
+redis-1     | 1:M 13 Aug 2025 07:21:21.688 * <search> RediSearch version 8.2.0 (Git=d81ebce)
+redis-1     | 1:M 13 Aug 2025 07:21:21.689 * <search> Low level api version 1 initialized successfully
+redis-1     | 1:M 13 Aug 2025 07:21:21.691 * <search> gc: ON, prefix min length: 2, min word length to stem: 4, prefix max expansions: 200, query timeout (ms): 500, timeout policy: return, cursor read size: 1000, cursor max idle (ms): 300000, max doctable size: 1000000, max number of search results:  1000000, 
+redis-1     | 1:M 13 Aug 2025 07:21:21.694 * <search> Initialized thread pools!
+redis-1     | 1:M 13 Aug 2025 07:21:21.694 * <search> Disabled workers threadpool of size 0
+redis-1     | 1:M 13 Aug 2025 07:21:21.697 * <search> Subscribe to config changes
+redis-1     | 1:M 13 Aug 2025 07:21:21.697 * <search> Enabled role change notification
+redis-1     | 1:M 13 Aug 2025 07:21:21.697 * <search> Cluster configuration: AUTO partitions, type: 0, coordinator timeout: 0ms
+redis-1     | 1:M 13 Aug 2025 07:21:21.697 * <search> Register write commands
+redis-1     | 1:M 13 Aug 2025 07:21:21.697 * Module 'search' loaded from /usr/local/lib/redis/modules//redisearch.so
+redis-1     | 1:M 13 Aug 2025 07:21:21.703 * <timeseries> RedisTimeSeries version 80200, git_sha=1439d4a439ca9c063e6ef124a510abff09a5d493
+redis-1     | 1:M 13 Aug 2025 07:21:21.703 * <timeseries> Redis version found by RedisTimeSeries : 8.2.0 - oss
+redis-1     | 1:M 13 Aug 2025 07:21:21.703 * <timeseries> Registering configuration options: [
+redis-1     | 1:M 13 Aug 2025 07:21:21.703 * <timeseries> 	{ ts-compaction-policy   :              }
+redis-1     | 1:M 13 Aug 2025 07:21:21.703 * <timeseries> 	{ ts-num-threads         :            3 }
+redis-1     | 1:M 13 Aug 2025 07:21:21.703 * <timeseries> 	{ ts-retention-policy    :            0 }
+redis-1     | 1:M 13 Aug 2025 07:21:21.703 * <timeseries> 	{ ts-duplicate-policy    :        block }
+redis-1     | 1:M 13 Aug 2025 07:21:21.703 * <timeseries> 	{ ts-chunk-size-bytes    :         4096 }
+redis-1     | 1:M 13 Aug 2025 07:21:21.703 * <timeseries> 	{ ts-encoding            :   compressed }
+redis-1     | 1:M 13 Aug 2025 07:21:21.703 * <timeseries> 	{ ts-ignore-max-time-diff:            0 }
+redis-1     | 1:M 13 Aug 2025 07:21:21.703 * <timeseries> 	{ ts-ignore-max-val-diff :     0.000000 }
+redis-1     | 1:M 13 Aug 2025 07:21:21.703 * <timeseries> ]
+redis-1     | 1:M 13 Aug 2025 07:21:21.703 * <timeseries> Detected redis oss
+redis-1     | 1:M 13 Aug 2025 07:21:21.704 * <timeseries> Enabled diskless replication
+redis-1     | 1:M 13 Aug 2025 07:21:21.704 * Module 'timeseries' loaded from /usr/local/lib/redis/modules//redistimeseries.so
+redis-1     | 1:M 13 Aug 2025 07:21:21.716 * <ReJSON> Created new data type 'ReJSON-RL'
 postgres-1  | selecting default max_connections ... 100
+redis-1     | 1:M 13 Aug 2025 07:21:21.720 * <ReJSON> version: 80200 git sha: unknown branch: unknown
+redis-1     | 1:M 13 Aug 2025 07:21:21.721 * <ReJSON> Exported RedisJSON_V1 API
+redis-1     | 1:M 13 Aug 2025 07:21:21.721 * <ReJSON> Exported RedisJSON_V2 API
+redis-1     | 1:M 13 Aug 2025 07:21:21.721 * <ReJSON> Exported RedisJSON_V3 API
+redis-1     | 1:M 13 Aug 2025 07:21:21.721 * <ReJSON> Exported RedisJSON_V4 API
+redis-1     | 1:M 13 Aug 2025 07:21:21.721 * <ReJSON> Exported RedisJSON_V5 API
+redis-1     | 1:M 13 Aug 2025 07:21:21.721 * <ReJSON> Enabled diskless replication
+redis-1     | 1:M 13 Aug 2025 07:21:21.721 * <ReJSON> Initialized shared string cache, thread safe: false.
+redis-1     | 1:M 13 Aug 2025 07:21:21.721 * Module 'ReJSON' loaded from /usr/local/lib/redis/modules//rejson.so
+redis-1     | 1:M 13 Aug 2025 07:21:21.721 * <search> Acquired RedisJSON_V5 API
+redis-1     | 1:M 13 Aug 2025 07:21:21.721 * Server initialized
+redis-1     | 1:M 13 Aug 2025 07:21:21.723 * Ready to accept connections tcp
 postgres-1  | selecting default shared_buffers ... 128MB
 postgres-1  | selecting default time zone ... UTC
 postgres-1  | creating configuration files ... ok
 postgres-1  | running bootstrap script ... ok
 postgres-1  | sh: locale: not found
-postgres-1  | 2025-07-30 04:17:21.902 UTC [35] WARNING:  no usable system locales were found
+postgres-1  | 2025-08-13 07:21:25.084 UTC [36] WARNING:  no usable system locales were found
 postgres-1  | performing post-bootstrap initialization ... ok
-postgres-1  | syncing data to disk ... ok
-postgres-1  | 
 postgres-1  | initdb: warning: enabling "trust" authentication for local connections
 postgres-1  | initdb: hint: You can change this by editing pg_hba.conf or using the option -A, or --auth-local and --auth-host, the next time you run initdb.
+postgres-1  | syncing data to disk ... ok
+postgres-1  | 
 postgres-1  | 
 postgres-1  | Success. You can now start the database server using:
 postgres-1  | 
 postgres-1  |     pg_ctl -D /var/lib/postgresql/data -l logfile start
 postgres-1  | 
-postgres-1  | waiting for server to start....2025-07-30 04:17:24.002 UTC [41] LOG:  starting PostgreSQL 15.13 on x86_64-pc-linux-musl, compiled by gcc (Alpine 14.2.0) 14.2.0, 64-bit
-postgres-1  | 2025-07-30 04:17:24.009 UTC [41] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
-postgres-1  | 2025-07-30 04:17:24.040 UTC [44] LOG:  database system was shut down at 2025-07-30 04:17:23 UTC
-postgres-1  | 2025-07-30 04:17:24.051 UTC [41] LOG:  database system is ready to accept connections
+postgres-1  | waiting for server to start....2025-08-13 07:21:27.092 UTC [48] LOG:  starting PostgreSQL 15.13 on x86_64-pc-linux-musl, compiled by gcc (Alpine 14.2.0) 14.2.0, 64-bit
+postgres-1  | 2025-08-13 07:21:27.096 UTC [48] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+postgres-1  | 2025-08-13 07:21:27.108 UTC [51] LOG:  database system was shut down at 2025-08-13 07:21:26 UTC
+postgres-1  | 2025-08-13 07:21:27.163 UTC [48] LOG:  database system is ready to accept connections
 postgres-1  |  done
 postgres-1  | server started
 postgres-1  | CREATE DATABASE
@@ -132,59 +134,55 @@ postgres-1  |
 postgres-1  | 
 postgres-1  | /usr/local/bin/docker-entrypoint.sh: ignoring /docker-entrypoint-initdb.d/*
 postgres-1  | 
-postgres-1  | waiting for server to shut down....2025-07-30 04:17:24.337 UTC [41] LOG:  received fast shutdown request
-postgres-1  | 2025-07-30 04:17:24.344 UTC [41] LOG:  aborting any active transactions
-postgres-1  | 2025-07-30 04:17:24.404 UTC [41] LOG:  background worker "logical replication launcher" (PID 47) exited with exit code 1
-postgres-1  | 2025-07-30 04:17:24.406 UTC [42] LOG:  shutting down
-postgres-1  | 2025-07-30 04:17:24.411 UTC [42] LOG:  checkpoint starting: shutdown immediate
-postgres-1  | 2025-07-30 04:17:24.532 UTC [42] LOG:  checkpoint complete: wrote 921 buffers (5.6%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.052 s, sync=0.042 s, total=0.126 s; sync files=301, longest=0.022 s, average=0.001 s; distance=4239 kB, estimate=4239 kB
-postgres-1  | 2025-07-30 04:17:24.540 UTC [41] LOG:  database system is shut down
+postgres-1  | waiting for server to shut down....2025-08-13 07:21:27.469 UTC [48] LOG:  received fast shutdown request
+postgres-1  | 2025-08-13 07:21:27.473 UTC [48] LOG:  aborting any active transactions
+postgres-1  | 2025-08-13 07:21:27.476 UTC [48] LOG:  background worker "logical replication launcher" (PID 54) exited with exit code 1
+postgres-1  | 2025-08-13 07:21:27.477 UTC [49] LOG:  shutting down
+postgres-1  | 2025-08-13 07:21:27.479 UTC [49] LOG:  checkpoint starting: shutdown immediate
+postgres-1  | 2025-08-13 07:21:27.601 UTC [49] LOG:  checkpoint complete: wrote 921 buffers (5.6%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.106 s, sync=0.006 s, total=0.125 s; sync files=301, longest=0.003 s, average=0.001 s; distance=4239 kB, estimate=4239 kB
+postgres-1  | 2025-08-13 07:21:27.610 UTC [48] LOG:  database system is shut down
 postgres-1  |  done
 postgres-1  | server stopped
 postgres-1  | 
 postgres-1  | PostgreSQL init process complete; ready for start up.
 postgres-1  | 
-postgres-1  | 2025-07-30 04:17:24.666 UTC [1] LOG:  starting PostgreSQL 15.13 on x86_64-pc-linux-musl, compiled by gcc (Alpine 14.2.0) 14.2.0, 64-bit
-postgres-1  | 2025-07-30 04:17:24.667 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
-postgres-1  | 2025-07-30 04:17:24.667 UTC [1] LOG:  listening on IPv6 address "::", port 5432
-postgres-1  | 2025-07-30 04:17:24.679 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
-postgres-1  | 2025-07-30 04:17:24.692 UTC [57] LOG:  database system was shut down at 2025-07-30 04:17:24 UTC
-postgres-1  | 2025-07-30 04:17:24.706 UTC [1] LOG:  database system is ready to accept connections
-postgres-1  | 2025-07-30 04:17:25.988 UTC [69] ERROR:  duplicate key value violates unique constraint "pg_class_relname_nsp_index"
-postgres-1  | 2025-07-30 04:17:25.988 UTC [69] DETAIL:  Key (relname, relnamespace)=(idx_datetime, 2200) already exists.
-postgres-1  | 2025-07-30 04:17:25.988 UTC [69] STATEMENT:  CREATE INDEX IF NOT EXISTS idx_datetime ON payments(date);
-app2-1      | 2025/07/30 04:17:25 pq: duplicate key value violates unique constraint "pg_class_relname_nsp_index"
+postgres-1  | 2025-08-13 07:21:27.698 UTC [1] LOG:  starting PostgreSQL 15.13 on x86_64-pc-linux-musl, compiled by gcc (Alpine 14.2.0) 14.2.0, 64-bit
+postgres-1  | 2025-08-13 07:21:27.698 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+postgres-1  | 2025-08-13 07:21:27.698 UTC [1] LOG:  listening on IPv6 address "::", port 5432
+postgres-1  | 2025-08-13 07:21:27.704 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+postgres-1  | 2025-08-13 07:21:27.714 UTC [64] LOG:  database system was shut down at 2025-08-13 07:21:27 UTC
+postgres-1  | 2025-08-13 07:21:27.722 UTC [1] LOG:  database system is ready to accept connections
 haproxy-1   | [NOTICE]   (1) : Initializing new worker (8)
-[Kapp2-1 exited with code 0
 haproxy-1   | [NOTICE]   (1) : Loading success.
 haproxy-1   | [ALERT]    (8) : sendmsg()/writev() failed in logger #1: No such file or directory (errno=2)
-redis-1     | 1:M 30 Jul 2025 04:18:21.066 * 10000 changes in 60 seconds. Saving...
-redis-1     | 1:M 30 Jul 2025 04:18:21.066 * Background saving started by pid 31
-redis-1     | 31:C 30 Jul 2025 04:18:21.092 * DB saved on disk
-redis-1     | 31:C 30 Jul 2025 04:18:21.092 * Fork CoW for RDB: current 0 MB, peak 0 MB, average 0 MB
-redis-1     | 1:M 30 Jul 2025 04:18:21.167 * Background saving terminated with success
+redis-1     | 1:M 13 Aug 2025 07:22:22.007 * 10000 changes in 60 seconds. Saving...
+redis-1     | 1:M 13 Aug 2025 07:22:22.008 * Background saving started by pid 31
+redis-1     | 31:C 13 Aug 2025 07:22:22.022 * DB saved on disk
+redis-1     | 31:C 13 Aug 2025 07:22:22.024 * Fork CoW for RDB: current 0 MB, peak 0 MB, average 0 MB
+redis-1     | 1:M 13 Aug 2025 07:22:22.108 * Background saving terminated with success
+[Kapp1-1 exited with code 137
+[Kapp2-1 exited with code 137
 haproxy-1   | [NOTICE]   (1) : haproxy version is 3.2.3-1844da7
 haproxy-1   | [NOTICE]   (1) : path to executable is /usr/local/sbin/haproxy
 haproxy-1   | [WARNING]  (1) : Exiting Master process...
-haproxy-1   | [WARNING]  (8) : Proxy http_front stopped (cumulated conns: FE: 553, BE: 0).
-haproxy-1   | [WARNING]  (8) : Proxy app_backend stopped (cumulated conns: FE: 0, BE: 16742).
+haproxy-1   | [WARNING]  (8) : Proxy http_front stopped (cumulated conns: FE: 569, BE: 0).
+haproxy-1   | [WARNING]  (8) : Proxy app_backend stopped (cumulated conns: FE: 0, BE: 16454).
 haproxy-1   | [WARNING]  (1) : Current worker (8) exited with code 0 (Exit)
 haproxy-1   | [WARNING]  (1) : All workers exited. Exiting... (0)
 [Khaproxy-1 exited with code 0
-[Kapp2-1 exited with code 2
 [Kapp1-1 exited with code 2
-redis-1     | 1:signal-handler (1753849116) Received SIGTERM scheduling shutdown...
-postgres-1  | 2025-07-30 04:18:36.408 UTC [1] LOG:  received fast shutdown request
-postgres-1  | 2025-07-30 04:18:36.413 UTC [1] LOG:  aborting any active transactions
-postgres-1  | 2025-07-30 04:18:36.415 UTC [1] LOG:  background worker "logical replication launcher" (PID 60) exited with exit code 1
-postgres-1  | 2025-07-30 04:18:36.418 UTC [55] LOG:  shutting down
-postgres-1  | 2025-07-30 04:18:36.423 UTC [55] LOG:  checkpoint starting: shutdown immediate
-redis-1     | 1:M 30 Jul 2025 04:18:36.486 * User requested shutdown...
-redis-1     | 1:M 30 Jul 2025 04:18:36.486 * Saving the final RDB snapshot before exiting.
-postgres-1  | 2025-07-30 04:18:36.509 UTC [55] LOG:  checkpoint complete: wrote 147 buffers (0.9%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.016 s, sync=0.035 s, total=0.091 s; sync files=42, longest=0.030 s, average=0.001 s; distance=1631 kB, estimate=1631 kB
-postgres-1  | 2025-07-30 04:18:36.514 UTC [1] LOG:  database system is shut down
-redis-1     | 1:M 30 Jul 2025 04:18:36.518 * DB saved on disk
-redis-1     | 1:M 30 Jul 2025 04:18:36.518 # Redis is now ready to exit, bye bye...
+[Kapp2-1 exited with code 2
+postgres-1  | 2025-08-13 07:22:42.203 UTC [1] LOG:  received fast shutdown request
+redis-1     | 1:signal-handler (1755069762) Received SIGTERM scheduling shutdown...
+postgres-1  | 2025-08-13 07:22:42.207 UTC [1] LOG:  aborting any active transactions
+postgres-1  | 2025-08-13 07:22:42.210 UTC [1] LOG:  background worker "logical replication launcher" (PID 67) exited with exit code 1
+postgres-1  | 2025-08-13 07:22:42.210 UTC [62] LOG:  shutting down
+postgres-1  | 2025-08-13 07:22:42.213 UTC [62] LOG:  checkpoint starting: shutdown immediate
+postgres-1  | 2025-08-13 07:22:42.245 UTC [62] LOG:  checkpoint complete: wrote 174 buffers (1.1%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.017 s, sync=0.005 s, total=0.036 s; sync files=42, longest=0.003 s, average=0.001 s; distance=2110 kB, estimate=2110 kB
+postgres-1  | 2025-08-13 07:22:42.252 UTC [1] LOG:  database system is shut down
+redis-1     | 1:M 13 Aug 2025 07:22:42.261 * User requested shutdown...
+redis-1     | 1:M 13 Aug 2025 07:22:42.261 * Saving the final RDB snapshot before exiting.
+redis-1     | 1:M 13 Aug 2025 07:22:42.276 * DB saved on disk
+redis-1     | 1:M 13 Aug 2025 07:22:42.276 # Redis is now ready to exit, bye bye...
 [Kpostgres-1 exited with code 0
-[Kredis-1 exited with code 0
 log truncated at line 1000

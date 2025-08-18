@@ -1,10 +1,10 @@
-# Rinha Backend - R + Plumber + Dotnet
+# Rinha Backend - Dotnet
 
 **Repositório**: https://github.com/RuanPabloCR/Rinha-backend
 
 ## Tecnologias Utilizadas
-- **Linguagem**: R e C#
-- **Framework**: Plumber e .NET 9
-- **Database**: Redis
+- **Linguagem**:  C#
+- **Framework**: .NET 9
+- **Storage**: Redis
 - **Load Balancer**: nginx
 - **Conteinerização**: Docker

@@ -23,4 +23,4 @@ Receba o maior número de requisições possível e depois se vira maluco...
 
 ## Repositório do código-fonte
 
-[GitHub /ccs1201](https://github.com/ccs1201/rinha2025-java-http-server/tree/feat/undertow)
+[GitHub /ccs1201](https://github.com/ccs1201/rinha2025-native-pgo/tree/feat/v0.0.4)

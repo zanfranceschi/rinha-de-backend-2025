@@ -1,0 +1,133 @@
+x-service-templates:
+  backend: &backend
+    image: ghcr.io/yanpitangui/rinha-2025-01-api-covardia:20250814-2020
+    deploy:
+      resources:
+        limits:
+          cpus: "0.35"
+          memory: "30MB"
+    networks:
+      - backend
+      - payment-processor
+    depends_on:
+      rinha-db:
+        condition: service_healthy
+      nats:
+        condition: service_healthy
+    volumes:
+      - postgres-socket:/var/run/postgresql
+      - uds-sockets:/sockets
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ConnectionStrings__nats=nats:4222
+      - ConnectionStrings__postgres=Host=/var/run/postgresql;Port=5432;Database=rinha;Username=postgres;Password=postgres;Pooling=true;Maximum Pool Size=5;Multiplexing=true;Timeout=15;Command Timeout=15;Cancellation Timeout=-1;No Reset On Close=true;Max Auto Prepare=20;Auto Prepare Min Usages=1;
+
+services:
+  backend-1:
+    <<: *backend
+    container_name: backend-1
+    hostname: backend-1
+  backend-2:
+    <<: *backend
+    container_name: backend-2
+    hostname: backend-2
+    
+  worker: 
+    image: ghcr.io/yanpitangui/rinha-2025-01-worker-covardia:20250814-2020
+    environment:
+      - DOTNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_ENVIRONMENT=Production
+      - Pool__RouterPoolSize=3
+      - Pipeline__HandlePaymentParallelism=20
+      - Pipeline__PersistPaymentsParallelism=10
+      - Pipeline__GroupSize=100
+      - Pipeline__Timeout=10
+      - ConnectionStrings__nats=nats:4222
+      - ConnectionStrings__postgres=Host=/var/run/postgresql;Port=5432;Database=rinha;Username=postgres;Password=postgres;Pooling=true;Maximum Pool Size=20;Multiplexing=true;Timeout=15;Command Timeout=15;Cancellation Timeout=-1;No Reset On Close=true;Max Auto Prepare=20;Auto Prepare Min Usages=1;
+      - ConnectionStrings__default=http://payment-processor-default:8080
+      - ConnectionStrings__fallback=http://payment-processor-fallback:8080
+    volumes:
+      - postgres-socket:/var/run/postgresql
+    networks:
+      - backend
+      - payment-processor
+    depends_on:
+      rinha-db:
+        condition: service_healthy
+      nats:
+        condition: service_healthy
+    deploy:
+      resources:
+        limits:
+          cpus: "0.2"
+          memory: "100MB"
+  nginx:
+    image: nginx:alpine
+    volumes:
+      - uds-sockets:/sockets
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    ports:
+      - "9999:8080"
+    depends_on:
+      - backend-1
+      - backend-2
+    networks:
+      - backend
+    ulimits:
+      nofile:
+        soft: 65536
+        hard: 65536
+    deploy:
+      resources:
+        limits:
+          cpus: "0.4"
+          memory: "80MB"
+  nats:
+    image: nats:alpine
+    hostname: nats
+    networks:
+      - backend
+    ports:
+      - "4222:4222"
+    healthcheck:
+      test: [ "CMD", "nats-server", "--version" ]
+      interval: 1s
+      timeout: 5s
+      retries: 10
+    deploy:
+      resources:
+        limits:
+          cpus: "0.1"
+          memory: "20MB"
+  
+  rinha-db:
+    image: postgres:latest
+    networks:
+      - payment-processor
+    volumes:
+      - postgres-socket:/var/run/postgresql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=rinha
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres -d rinha" ]
+      interval: 5s
+      timeout: 20s
+      retries: 15
+    deploy:
+      resources:
+        limits:
+          cpus: "0.1"
+          memory: "90MB"
+volumes:
+  postgres-socket:
+  uds-sockets:
+networks:
+  backend:
+    driver: bridge
+  payment-processor:
+    external: true

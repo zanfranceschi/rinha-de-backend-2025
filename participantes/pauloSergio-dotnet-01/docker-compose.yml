@@ -1,0 +1,102 @@
+services:
+  # O serviço do banco de dados PostgreSQL - O componente mais crítico
+  db:
+    image: postgres:latest
+    container_name: rinha-postgres-db
+    restart: always
+    deploy:
+      resources:
+        limits:
+          cpus: "0.70" # <-- RECURSO OTIMIZADO PARA RINHA
+          memory: "160MB" # <-- RECURSO OTIMIZADO PARA RINHA
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=payments
+    ports:
+      - "5433:5432"
+    volumes:
+      - ./src/InitDb:/docker-entrypoint-initdb.d 
+      - postgres_data:/var/lib/postgresql/data
+      
+    networks:
+      - rinha-app-net
+
+  # Serviço do Load Balancer YARP - O Carteiro
+  yarp-gateway:
+    container_name: yarp-gateway
+    build:
+      context: .
+      # Aponta para o novo Dockerfile do YARP
+      dockerfile: Dockerfile.yarp
+    deploy:
+      resources:
+        limits:
+          cpus: "0.20" # <-- RECURSO OTIMIZADO PARA RINHA
+          memory: "50MB" # <-- RECURSO OTIMIZADO PARA RINHA
+    ports:
+      # Porta 9999 exposta para o teste de carga, como manda o regulamento
+      - "9999:8080"
+    networks:
+      - rinha-app-net
+    depends_on:
+      - api1
+      - api2
+
+  # Primeira instância da sua API .NET - O Cérebro
+  api1:
+    container_name: api1
+    build:
+      context: .
+      # Aponta para o novo Dockerfile da API
+      dockerfile: Dockerfile.api
+    deploy:
+      resources:
+        limits:
+          cpus: "0.30"
+          memory: "70MB"
+    environment:
+      - ConnectionStrings__DbConnectionString=Server=db;Port=5432;User Id=postgres;Password=root;Database=payments
+      - ClientConfiguration__DefaultAddress=http://payment-processor-default:8080
+      - ClientConfiguration__FallbackAddress=http://payment-processor-fallback:8080
+    depends_on:
+      - db
+    networks:
+      - rinha-app-net
+      - rinha-externa
+
+  # Segunda instância da sua API .NET - O Cérebro
+  api2:
+    container_name: api2
+    build:
+      context: .
+      # Aponta para o novo Dockerfile da API
+      dockerfile: Dockerfile.api
+    deploy:
+      resources:
+        limits:
+          cpus: "0.30"
+          memory: "70MB"
+    environment:
+      - ConnectionStrings__DbConnectionString=Server=db;Port=5432;User Id=postgres;Password=root;Database=payments
+      - ClientConfiguration__DefaultAddress=http://payment-processor-default:8080
+      - ClientConfiguration__FallbackAddress=http://payment-processor-fallback:8080
+    depends_on:
+      - db
+    networks:
+      - rinha-app-net
+      - rinha-externa
+
+# Define as redes
+networks:
+  # Rede interna para a comunicação entre a API, o gateway e o banco de dados
+  rinha-app-net:
+    driver: bridge
+  # Rede externa para se comunicar com os Payment Processors, como manda o regulamento
+  rinha-externa:
+    name: payment-processor
+    external: true
+
+# Define o volume para armazenamento de dados persistentes
+volumes:
+  postgres_data:

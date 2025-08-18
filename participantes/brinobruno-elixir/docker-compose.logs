@@ -1,0 +1,1001 @@
+
+ Network brinobruno-elixir_rinha-backend-ex  Creating
+ Network brinobruno-elixir_rinha-backend-ex  Created
+ Volume "brinobruno-elixir_postgres_data"  Creating
+ Volume "brinobruno-elixir_postgres_data"  Created
+ Container pit-db  Creating
+ Container pit-db  Created
+ Container api-1  Creating
+ Container api-2  Creating
+ Container api-1  Created
+ Container api-2  Created
+ Container nginx-lb  Creating
+ Container nginx-lb  Created
+Attaching to api-1, api-2, nginx-lb, pit-db
+pit-db  | ********************************************************************************
+pit-db  | WARNING: POSTGRES_HOST_AUTH_METHOD has been set to "trust". This will allow
+pit-db  |          anyone with access to the Postgres port to access your database without
+pit-db  |          a password, even if POSTGRES_PASSWORD is set. See PostgreSQL
+pit-db  |          documentation about "trust":
+pit-db  |          https://www.postgresql.org/docs/current/auth-trust.html
+pit-db  |          In Docker's default configuration, this is effectively any other
+pit-db  |          container on the same system.
+pit-db  | 
+pit-db  |          It is not recommended to use POSTGRES_HOST_AUTH_METHOD=trust. Replace
+pit-db  |          it with "-e POSTGRES_PASSWORD=password" instead to set a password in
+pit-db  |          "docker run".
+pit-db  | ********************************************************************************
+pit-db  | The files belonging to this database system will be owned by user "postgres".
+pit-db  | This user must also own the server process.
+pit-db  | 
+pit-db  | The database cluster will be initialized with locale "en_US.utf8".
+pit-db  | The default database encoding has accordingly been set to "UTF8".
+pit-db  | The default text search configuration will be set to "english".
+pit-db  | 
+pit-db  | Data page checksums are disabled.
+pit-db  | 
+pit-db  | fixing permissions on existing directory /var/lib/postgresql/data ... ok
+pit-db  | creating subdirectories ... ok
+pit-db  | selecting dynamic shared memory implementation ... posix
+pit-db  | selecting default "max_connections" ... 100
+pit-db  | selecting default "shared_buffers" ... 128MB
+pit-db  | selecting default time zone ... UTC
+pit-db  | creating configuration files ... ok
+pit-db  | running bootstrap script ... ok
+pit-db  | sh: locale: not found
+pit-db  | 2025-08-15 21:56:21.354 UTC [37] WARNING:  no usable system locales were found
+pit-db  | performing post-bootstrap initialization ... ok
+pit-db  | syncing data to disk ... ok
+pit-db  | 
+pit-db  | 
+pit-db  | Success. You can now start the database server using:
+pit-db  | 
+pit-db  |     pg_ctl -D /var/lib/postgresql/data -l logfile start
+pit-db  | 
+pit-db  | initdb: warning: enabling "trust" authentication for local connections
+pit-db  | initdb: hint: You can change this by editing pg_hba.conf or using the option -A, or --auth-local and --auth-host, the next time you run initdb.
+pit-db  | waiting for server to start....2025-08-15 21:56:25.132 UTC [49] LOG:  starting PostgreSQL 17.5 on x86_64-pc-linux-musl, compiled by gcc (Alpine 14.2.0) 14.2.0, 64-bit
+pit-db  | 2025-08-15 21:56:25.132 UTC [49] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+pit-db  | 2025-08-15 21:56:25.134 UTC [52] LOG:  database system was shut down at 2025-08-15 21:56:24 UTC
+pit-db  | 2025-08-15 21:56:25.139 UTC [49] LOG:  database system is ready to accept connections
+pit-db  |  done
+pit-db  | server started
+pit-db  | CREATE DATABASE
+pit-db  | 
+pit-db  | 
+pit-db  | /usr/local/bin/docker-entrypoint.sh: ignoring /docker-entrypoint-initdb.d/*
+pit-db  | 
+pit-db  | waiting for server to shut down....2025-08-15 21:56:25.444 UTC [49] LOG:  received fast shutdown request
+pit-db  | 2025-08-15 21:56:25.444 UTC [49] LOG:  aborting any active transactions
+pit-db  | 2025-08-15 21:56:25.532 UTC [49] LOG:  background worker "logical replication launcher" (PID 55) exited with exit code 1
+pit-db  | 2025-08-15 21:56:25.533 UTC [50] LOG:  shutting down
+pit-db  | 2025-08-15 21:56:25.533 UTC [50] LOG:  checkpoint starting: shutdown immediate
+pit-db  | 2025-08-15 21:56:25.543 UTC [50] LOG:  checkpoint complete: wrote 925 buffers (5.6%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.010 s, sync=0.001 s, total=0.010 s; sync files=0, longest=0.000 s, average=0.000 s; distance=4254 kB, estimate=4254 kB; lsn=0/1914D88, redo lsn=0/1914D88
+pit-db  | 2025-08-15 21:56:25.552 UTC [49] LOG:  database system is shut down
+pit-db  |  done
+pit-db  | server stopped
+pit-db  | 
+pit-db  | PostgreSQL init process complete; ready for start up.
+pit-db  | 
+pit-db  | 2025-08-15 21:56:25.664 UTC [1] LOG:  starting PostgreSQL 17.5 on x86_64-pc-linux-musl, compiled by gcc (Alpine 14.2.0) 14.2.0, 64-bit
+pit-db  | 2025-08-15 21:56:25.664 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+pit-db  | 2025-08-15 21:56:25.664 UTC [1] LOG:  listening on IPv6 address "::", port 5432
+pit-db  | 2025-08-15 21:56:25.664 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+pit-db  | 2025-08-15 21:56:25.731 UTC [65] LOG:  database system was shut down at 2025-08-15 21:56:25 UTC
+pit-db  | 2025-08-15 21:56:25.735 UTC [1] LOG:  database system is ready to accept connections
+nginx-lb  | /docker-entrypoint.sh: /docker-entrypoint.d/ is not empty, will attempt to perform configuration
+nginx-lb  | /docker-entrypoint.sh: Looking for shell scripts in /docker-entrypoint.d/
+nginx-lb  | /docker-entrypoint.sh: Launching /docker-entrypoint.d/10-listen-on-ipv6-by-default.sh
+nginx-lb  | 10-listen-on-ipv6-by-default.sh: info: Getting the checksum of /etc/nginx/conf.d/default.conf
+nginx-lb  | 10-listen-on-ipv6-by-default.sh: info: Enabled listen on IPv6 in /etc/nginx/conf.d/default.conf
+nginx-lb  | /docker-entrypoint.sh: Sourcing /docker-entrypoint.d/15-local-resolvers.envsh
+nginx-lb  | /docker-entrypoint.sh: Launching /docker-entrypoint.d/20-envsubst-on-templates.sh
+nginx-lb  | /docker-entrypoint.sh: Launching /docker-entrypoint.d/30-tune-worker-processes.sh
+nginx-lb  | /docker-entrypoint.sh: Configuration complete; ready for start up
+api-1     | The database for Pit.Repo has already been created
+api-2     | The database for Pit.Repo has already been created
+pit-db    | 2025-08-15 21:56:32.731 UTC [83] ERROR:  duplicate key value violates unique constraint "pg_type_typname_nsp_index"
+pit-db    | 2025-08-15 21:56:32.731 UTC [83] DETAIL:  Key (typname, typnamespace)=(schema_migrations, 2200) already exists.
+pit-db    | 2025-08-15 21:56:32.731 UTC [83] STATEMENT:  CREATE TABLE IF NOT EXISTS "schema_migrations" ("version" bigint, "inserted_at" timestamp(0), PRIMARY KEY ("version"))
+api-1     | 
+api-1     | 21:56:32.739 [error] Could not create schema migrations table. This error usually happens due to the following:
+api-1     | 
+api-1     |   * The database does not exist
+api-1     |   * The "schema_migrations" table, which Ecto uses for managing
+api-1     |     migrations, was defined by another library
+api-1     |   * There is a deadlock while migrating (such as using concurrent
+api-1     |     indexes with a migration_lock)
+api-1     | 
+api-1     | To fix the first issue, run "mix ecto.create" for the desired MIX_ENV.
+api-1     | 
+api-1     | To address the second, you can run "mix ecto.drop" followed by
+api-1     | "mix ecto.create", both for the desired MIX_ENV. Alternatively you may
+api-1     | configure Ecto to use another table and/or repository for managing
+api-1     | migrations:
+api-1     | 
+api-1     |     config :pit, Pit.Repo,
+api-1     |       migration_source: "some_other_table_for_schema_migrations",
+api-1     |       migration_repo: AnotherRepoForSchemaMigrations
+api-1     | 
+api-1     | The full error report is shown below.
+api-1     | 
+api-1     | ** (Postgrex.Error) ERROR 23505 (unique_violation) duplicate key value violates unique constraint "pg_type_typname_nsp_index"
+api-1     | 
+api-1     |     table: pg_type
+api-1     |     constraint: pg_type_typname_nsp_index
+api-1     | 
+api-1     | Key (typname, typnamespace)=(schema_migrations, 2200) already exists.
+api-1     |     (ecto_sql 3.13.2) lib/ecto/adapters/sql.ex:1098: Ecto.Adapters.SQL.raise_sql_call_error/1
+api-1     |     (elixir 1.16.3) lib/enum.ex:1700: Enum."-map/2-lists^map/1-1-"/2
+api-1     |     (ecto_sql 3.13.2) lib/ecto/adapters/sql.ex:1219: Ecto.Adapters.SQL.execute_ddl/4
+api-1     |     (ecto_sql 3.13.2) lib/ecto/migrator.ex:779: Ecto.Migrator.verbose_schema_migration/3
+api-1     |     (ecto_sql 3.13.2) lib/ecto/migrator.ex:563: Ecto.Migrator.lock_for_migrations/4
+api-1     |     (ecto_sql 3.13.2) lib/ecto/migrator.ex:432: Ecto.Migrator.run/4
+api-1     |     (ecto_sql 3.13.2) lib/ecto/migrator.ex:170: Ecto.Migrator.with_repo/3
+api-1     |     (ecto_sql 3.13.2) lib/mix/tasks/ecto.migrate.ex:151: anonymous fn/5 in Mix.Tasks.Ecto.Migrate.run/2
+api-2     | 
+api-2     | 21:56:32.801 [info] == Running 20250101000000 Pit.Repo.Migrations.CreatePayments.change/0 forward
+api-2     | 
+api-2     | 21:56:32.803 [info] create table payments
+api-2     | 
+api-2     | 21:56:32.807 [info] create index payments_correlation_id_index
+api-2     | 
+api-2     | 21:56:32.809 [info] create index payments_service_name_index
+api-2     | 
+api-2     | 21:56:32.811 [info] create index payments_inserted_at_index
+api-2     | 
+api-2     | 21:56:32.814 [info] == Migrated 20250101000000 in 0.0s
+[Kapi-1 exited with code 1
+api-2     | 21:56:35.323 [info] Running PitWeb.Endpoint with Bandit 1.7.0 at :::9999 (http)
+api-2     | 21:56:35.329 [info] Access PitWeb.Endpoint at http://localhost:9999
+api-2     | 21:56:35.434 [info] ✅ Application started successfully
+api-2     | 21:56:35.538 [info] ✅ Successfully created 8 workers
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:36 +0000] "GET /payments-summary HTTP/1.1" 499 0 "-" "curl/8.5.0"
+api-2     | 21:56:40.477 [info] 🔍 HealthCheck: http://payment-processor-default:8080 - failing: false, minResponseTime: 0
+api-2     | 21:56:40.481 [info] 🔍 HealthCheck: http://payment-processor-fallback:8080 - failing: false, minResponseTime: 0
+api-2     | 21:56:41.717 request_id=GFwPgQ1Js-Vdq9wAAAOB [info] GET /payments-summary
+api-2     | 21:56:41.815 request_id=GFwPgQ1Js-Vdq9wAAAOB [info] Sent 200 in 98ms
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:41 +0000] "GET /payments-summary HTTP/1.1" 200 98 "-" "curl/8.5.0"
+api-2     | 21:56:45.476 [info] 🔍 HealthCheck: http://payment-processor-default:8080 - failing: false, minResponseTime: 0
+api-2     | 21:56:45.522 [info] 🔍 HealthCheck: http://payment-processor-fallback:8080 - failing: false, minResponseTime: 0
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:48 +0000] "POST /purge-payments HTTP/1.1" 499 0 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:48.847 request_id=GFwPgrZg4BbSbcEAAAPB [info] GET /payments-summary
+api-2     | 21:56:48.870 request_id=GFwPgrZg4BbSbcEAAAPB [info] Sent 200 in 22ms
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:48 +0000] "GET /payments-summary?from=2025-08-15T21:56:33.846Z&to=2025-08-15T21:56:47.346Z HTTP/1.1" 200 98 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:48.957 request_id=GFwPgrzphyNTB30AAAQB [info] POST /payments
+api-2     | 21:56:48.961 request_id=GFwPgrzphyNTB30AAAQB [info] 🆕 New payment request: b02a7eeb-0c6c-4af5-8051-f165961e0c29, amount: 19.9
+api-2     | 21:56:48.968 request_id=GFwPgrzphyNTB30AAAQB [info] ✅ New payment, queueing: b02a7eeb-0c6c-4af5-8051-f165961e0c29
+api-2     | 21:56:48.968 request_id=GFwPgrzphyNTB30AAAQB [info] Sent 202 in 11ms
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:48 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:49.011 [info] ✅ Successfully persisted 1/1 payments to database
+api-2     | 21:56:49.066 request_id=GFwPgsNx5QUsZ5QAAARB [info] POST /payments
+api-2     | 21:56:49.066 request_id=GFwPgsNx5QUsZ5QAAARB [info] 🆕 New payment request: b979c5b7-5206-4d51-a101-a2f351bb6a42, amount: 19.9
+api-2     | 21:56:49.069 request_id=GFwPgsNx5QUsZ5QAAARB [info] ✅ New payment, queueing: b979c5b7-5206-4d51-a101-a2f351bb6a42
+api-2     | 21:56:49.069 request_id=GFwPgsNx5QUsZ5QAAARB [info] Sent 202 in 2ms
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:49 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:49.106 [info] ✅ Successfully persisted 1/1 payments to database
+api-2     | 21:56:49.175 request_id=GFwPgsnoCkDg5Y8AAARh [info] POST /payments
+api-2     | 21:56:49.175 request_id=GFwPgsnoCkDg5Y8AAARh [info] 🆕 New payment request: 9b5d6d2c-416a-418f-aa7e-3d805e56bfa5, amount: 19.9
+api-2     | 21:56:49.176 request_id=GFwPgsnoCkDg5Y8AAARh [info] ✅ New payment, queueing: 9b5d6d2c-416a-418f-aa7e-3d805e56bfa5
+api-2     | 21:56:49.176 request_id=GFwPgsnoCkDg5Y8AAARh [info] Sent 202 in 864µs
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:49 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:49.214 [info] ✅ Successfully persisted 1/1 payments to database
+api-2     | 21:56:49.284 request_id=GFwPgtBsg3XAy54AAASB [info] POST /payments
+api-2     | 21:56:49.284 request_id=GFwPgtBsg3XAy54AAASB [info] 🆕 New payment request: 6b76c823-e1df-4477-b4ae-e3ee6a14fd32, amount: 19.9
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:49 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:49.285 request_id=GFwPgtBsg3XAy54AAASB [info] ✅ New payment, queueing: 6b76c823-e1df-4477-b4ae-e3ee6a14fd32
+api-2     | 21:56:49.285 request_id=GFwPgtBsg3XAy54AAASB [info] Sent 202 in 1ms
+api-2     | 21:56:49.322 [info] ✅ Successfully persisted 1/1 payments to database
+api-2     | 21:56:49.393 request_id=GFwPgtbvi79DfjkAAASh [info] POST /payments
+api-2     | 21:56:49.393 request_id=GFwPgtbvi79DfjkAAASh [info] 🆕 New payment request: 380876bf-18b7-4e2d-a134-70fb8570962c, amount: 19.9
+api-2     | 21:56:49.394 request_id=GFwPgtbvi79DfjkAAASh [info] ✅ New payment, queueing: 380876bf-18b7-4e2d-a134-70fb8570962c
+api-2     | 21:56:49.394 request_id=GFwPgtbvi79DfjkAAASh [info] Sent 202 in 886µs
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:49 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:49.430 [info] ✅ Successfully persisted 1/1 payments to database
+api-2     | 21:56:49.503 request_id=GFwPgt1_DH0hRhgAAATB [info] POST /payments
+api-2     | 21:56:49.503 request_id=GFwPgt1_DH0hRhgAAATB [info] 🆕 New payment request: e65570ab-a2c8-41b2-a7e2-243b780e4ef7, amount: 19.9
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:49 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:49.504 request_id=GFwPgt1_DH0hRhgAAATB [info] ✅ New payment, queueing: e65570ab-a2c8-41b2-a7e2-243b780e4ef7
+api-2     | 21:56:49.504 request_id=GFwPgt1_DH0hRhgAAATB [info] Sent 202 in 648µs
+api-2     | 21:56:49.538 [info] ✅ Successfully persisted 1/1 payments to database
+api-2     | 21:56:49.612 request_id=GFwPguP-3JGZttoAAATh [info] POST /payments
+api-2     | 21:56:49.613 request_id=GFwPguP-3JGZttoAAATh [info] 🆕 New payment request: e5d35864-54e8-4a95-b4f3-3ef4e8b79154, amount: 19.9
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:49 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:49.613 request_id=GFwPguP-3JGZttoAAATh [info] ✅ New payment, queueing: e5d35864-54e8-4a95-b4f3-3ef4e8b79154
+api-2     | 21:56:49.613 request_id=GFwPguP-3JGZttoAAATh [info] Sent 202 in 580µs
+api-2     | 21:56:49.645 [info] ✅ Successfully persisted 1/1 payments to database
+api-2     | 21:56:49.722 request_id=GFwPguqATlxAiAEAAAUB [info] POST /payments
+api-2     | 21:56:49.722 request_id=GFwPguqATlxAiAEAAAUB [info] 🆕 New payment request: e3be31fc-d115-4e5e-ab2e-6d716076db2e, amount: 19.9
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:49 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:49.722 request_id=GFwPguqATlxAiAEAAAUB [info] ✅ New payment, queueing: e3be31fc-d115-4e5e-ab2e-6d716076db2e
+api-2     | 21:56:49.722 request_id=GFwPguqATlxAiAEAAAUB [info] Sent 202 in 588µs
+api-2     | 21:56:49.753 [info] ✅ Successfully persisted 1/1 payments to database
+api-2     | 21:56:49.830 request_id=GFwPgvD7cHhVR2QAAAUh [info] POST /payments
+api-2     | 21:56:49.830 request_id=GFwPgvD7cHhVR2QAAAUh [info] 🆕 New payment request: 2a0a6769-b97c-4677-9665-3faf5c4be314, amount: 19.9
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:49 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:49.831 request_id=GFwPgvD7cHhVR2QAAAUh [info] ✅ New payment, queueing: 2a0a6769-b97c-4677-9665-3faf5c4be314
+api-2     | 21:56:49.831 request_id=GFwPgvD7cHhVR2QAAAUh [info] Sent 202 in 667µs
+api-2     | 21:56:49.862 [info] ✅ Successfully persisted 1/1 payments to database
+api-2     | 21:56:49.940 request_id=GFwPgveIWXki2k0AAAVB [info] POST /payments
+api-2     | 21:56:49.940 request_id=GFwPgveIWXki2k0AAAVB [info] 🆕 New payment request: 0f62ab98-5aa7-46c9-a46b-ee73dd6b1e08, amount: 19.9
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:49 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:49.941 request_id=GFwPgveIWXki2k0AAAVB [info] ✅ New payment, queueing: 0f62ab98-5aa7-46c9-a46b-ee73dd6b1e08
+api-2     | 21:56:49.941 request_id=GFwPgveIWXki2k0AAAVB [info] Sent 202 in 586µs
+api-2     | 21:56:49.969 [info] ✅ Successfully persisted 1/1 payments to database
+api-2     | 21:56:49.970 request_id=GFwPgvlTskJAYrQAAAVh [info] POST /payments
+api-2     | 21:56:49.970 request_id=GFwPgvlTskJAYrQAAAVh [info] 🆕 New payment request: 642e764b-622e-4b82-84d7-f0513dcfb948, amount: 19.9
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:49 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:49.971 request_id=GFwPgvlTskJAYrQAAAVh [info] ✅ New payment, queueing: 642e764b-622e-4b82-84d7-f0513dcfb948
+api-2     | 21:56:49.971 request_id=GFwPgvlTskJAYrQAAAVh [info] Sent 202 in 527µs
+api-2     | 21:56:50.005 [info] ✅ Successfully persisted 1/1 payments to database
+api-2     | 21:56:50.049 request_id=GFwPgv4Gjppt0ckAAAWB [info] POST /payments
+api-2     | 21:56:50.049 request_id=GFwPgv4Gjppt0ckAAAWB [info] 🆕 New payment request: 20ed89cd-ebb6-4ed0-9405-fea9359ad120, amount: 19.9
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:50 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:50.050 request_id=GFwPgv4Gjppt0ckAAAWB [info] ✅ New payment, queueing: 20ed89cd-ebb6-4ed0-9405-fea9359ad120
+api-2     | 21:56:50.050 request_id=GFwPgv4Gjppt0ckAAAWB [info] Sent 202 in 926µs
+api-2     | 21:56:50.071 request_id=GFwPgv9Qfr84DzYAAAWh [info] POST /payments
+api-2     | 21:56:50.071 request_id=GFwPgv9Qfr84DzYAAAWh [info] 🆕 New payment request: c6177b18-3c25-4bc7-b22c-d02069652283, amount: 19.9
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:50 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:50.072 request_id=GFwPgv9Qfr84DzYAAAWh [info] ✅ New payment, queueing: c6177b18-3c25-4bc7-b22c-d02069652283
+api-2     | 21:56:50.072 request_id=GFwPgv9Qfr84DzYAAAWh [info] Sent 202 in 763µs
+api-2     | 21:56:50.078 [info] ✅ Successfully persisted 2/2 payments to database
+api-2     | 21:56:50.159 request_id=GFwPgwSSAX8VjFQAAAXB [info] POST /payments
+api-2     | 21:56:50.159 request_id=GFwPgwSSAX8VjFQAAAXB [info] 🆕 New payment request: 1b6c6959-89f4-47fe-8d30-02a8305e793e, amount: 19.9
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:50 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:50.160 request_id=GFwPgwSSAX8VjFQAAAXB [info] ✅ New payment, queueing: 1b6c6959-89f4-47fe-8d30-02a8305e793e
+api-2     | 21:56:50.160 request_id=GFwPgwSSAX8VjFQAAAXB [info] Sent 202 in 768µs
+api-2     | 21:56:50.177 request_id=GFwPgwWmNAauEBIAAAXh [info] POST /payments
+api-2     | 21:56:50.177 request_id=GFwPgwWmNAauEBIAAAXh [info] 🆕 New payment request: 3f92b292-916e-4b14-9e19-07d209c0eb31, amount: 19.9
+api-2     | 21:56:50.178 request_id=GFwPgwWmNAauEBIAAAXh [info] ✅ New payment, queueing: 3f92b292-916e-4b14-9e19-07d209c0eb31
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:50 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:50.178 request_id=GFwPgwWmNAauEBIAAAXh [info] Sent 202 in 649µs
+api-2     | 21:56:50.186 [info] ✅ Successfully persisted 2/2 payments to database
+api-2     | 21:56:50.268 request_id=GFwPgwsOnYRaYc4AAAYB [info] POST /payments
+api-2     | 21:56:50.268 request_id=GFwPgwsOnYRaYc4AAAYB [info] 🆕 New payment request: 110bd46c-22dc-4939-bf37-967dfd4db216, amount: 19.9
+api-2     | 21:56:50.268 request_id=GFwPgwsOnYRaYc4AAAYB [info] ✅ New payment, queueing: 110bd46c-22dc-4939-bf37-967dfd4db216
+api-2     | 21:56:50.268 request_id=GFwPgwsOnYRaYc4AAAYB [info] Sent 202 in 649µs
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:50 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:50.287 request_id=GFwPgwwvCdW1Qd8AAAYh [info] POST /payments
+api-2     | 21:56:50.287 request_id=GFwPgwwvCdW1Qd8AAAYh [info] 🆕 New payment request: a9c660ea-1d68-4ffd-ac1d-a9feabdad19c, amount: 19.9
+api-2     | 21:56:50.287 request_id=GFwPgwwvCdW1Qd8AAAYh [info] ✅ New payment, queueing: a9c660ea-1d68-4ffd-ac1d-a9feabdad19c
+api-2     | 21:56:50.287 request_id=GFwPgwwvCdW1Qd8AAAYh [info] Sent 202 in 599µs
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:50 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:50.293 [info] ✅ Successfully persisted 1/1 payments to database
+api-2     | 21:56:50.329 [info] ✅ Successfully persisted 1/1 payments to database
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:50 +0000] "POST /payments HTTP/1.1" 499 0 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:50.396 request_id=GFwPgxKwriKWR_EAAAZB [info] POST /payments
+api-2     | 21:56:50.396 request_id=GFwPgxKwriKWR_EAAAZB [info] 🆕 New payment request: 710fe2f4-4f47-494c-a41b-fbaaed881dfe, amount: 19.9
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:50 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:50.396 request_id=GFwPgxKwriKWR_EAAAZB [info] ✅ New payment, queueing: 710fe2f4-4f47-494c-a41b-fbaaed881dfe
+api-2     | 21:56:50.397 request_id=GFwPgxKwriKWR_EAAAZB [info] Sent 202 in 643µs
+nginx-lb  | 2025/08/15 21:56:50 [error] 30#30: *41 connect() failed (113: Host is unreachable) while connecting to upstream, client: 172.20.0.1, server: localhost, request: "POST /payments HTTP/1.1", upstream: "http://172.20.0.4:9999/payments", host: "localhost:9999"
+api-2     | 21:56:50.400 request_id=GFwPgxLoOXzC8-wAAAZh [info] POST /payments
+api-2     | 21:56:50.400 request_id=GFwPgxLoOXzC8-wAAAZh [info] 🆕 New payment request: fd54228b-e29c-4370-8873-45ed3eda7d9b, amount: 19.9
+api-2     | 21:56:50.400 request_id=GFwPgxLoOXzC8-wAAAZh [info] ✅ New payment, queueing: fd54228b-e29c-4370-8873-45ed3eda7d9b
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:50 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:50.400 request_id=GFwPgxLoOXzC8-wAAAZh [info] Sent 202 in 473µs
+api-2     | 21:56:50.438 [info] ✅ Successfully persisted 2/2 payments to database
+api-2     | 21:56:50.476 [info] 🔍 HealthCheck: http://payment-processor-default:8080 - failing: false, minResponseTime: 0
+api-2     | 21:56:50.486 request_id=GFwPgxgT0vGjtZsAAAaB [info] POST /payments
+api-2     | 21:56:50.486 request_id=GFwPgxgT0vGjtZsAAAaB [info] 🆕 New payment request: c3f664d5-f118-494e-b23b-15475b7966fe, amount: 19.9
+api-2     | 21:56:50.487 request_id=GFwPgxgT0vGjtZsAAAaB [info] ✅ New payment, queueing: c3f664d5-f118-494e-b23b-15475b7966fe
+api-2     | 21:56:50.487 request_id=GFwPgxgT0vGjtZsAAAaB [info] Sent 202 in 588µs
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:50 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:50.509 [info] ✅ Successfully persisted 1/1 payments to database
+api-2     | 21:56:50.595 request_id=GFwPgx6UIYxDpzwAAAah [info] POST /payments
+api-2     | 21:56:50.595 request_id=GFwPgx6UIYxDpzwAAAah [info] 🆕 New payment request: 663b84a2-a798-461e-b83f-9534c643787c, amount: 19.9
+api-2     | 21:56:50.596 request_id=GFwPgx6UIYxDpzwAAAah [info] ✅ New payment, queueing: 663b84a2-a798-461e-b83f-9534c643787c
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:50 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:50.596 request_id=GFwPgx6UIYxDpzwAAAah [info] Sent 202 in 586µs
+api-2     | 21:56:50.614 request_id=GFwPgx-3b7Q1JvIAAAbB [info] POST /payments
+api-2     | 21:56:50.614 request_id=GFwPgx-3b7Q1JvIAAAbB [info] 🆕 New payment request: b86979a8-d009-401f-9a3a-59889426b332, amount: 19.9
+api-2     | 21:56:50.615 request_id=GFwPgx-3b7Q1JvIAAAbB [info] ✅ New payment, queueing: b86979a8-d009-401f-9a3a-59889426b332
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:50 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:50.615 request_id=GFwPgx-3b7Q1JvIAAAbB [info] Sent 202 in 563µs
+api-2     | 21:56:50.618 [info] ✅ Successfully persisted 1/1 payments to database
+api-2     | 21:56:50.622 [info] 🔍 HealthCheck: http://payment-processor-fallback:8080 - failing: false, minResponseTime: 0
+api-2     | 21:56:50.653 [info] ✅ Successfully persisted 1/1 payments to database
+api-2     | 21:56:50.705 request_id=GFwPgyUg5Zr-qaMAAAbh [info] POST /payments
+api-2     | 21:56:50.705 request_id=GFwPgyUg5Zr-qaMAAAbh [info] 🆕 New payment request: 8a558c80-6874-42c0-8311-fd06452d3a1c, amount: 19.9
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:50 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:50.706 request_id=GFwPgyUg5Zr-qaMAAAbh [info] ✅ New payment, queueing: 8a558c80-6874-42c0-8311-fd06452d3a1c
+api-2     | 21:56:50.706 request_id=GFwPgyUg5Zr-qaMAAAbh [info] Sent 202 in 620µs
+api-2     | 21:56:50.724 request_id=GFwPgyZEs2vnEVQAAAcB [info] POST /payments
+api-2     | 21:56:50.724 request_id=GFwPgyZEs2vnEVQAAAcB [info] 🆕 New payment request: 802f1a21-82cd-4aee-9fb7-3f506e1aeb15, amount: 19.9
+api-2     | 21:56:50.725 request_id=GFwPgyZEs2vnEVQAAAcB [info] ✅ New payment, queueing: 802f1a21-82cd-4aee-9fb7-3f506e1aeb15
+api-2     | 21:56:50.725 request_id=GFwPgyZEs2vnEVQAAAcB [info] Sent 202 in 608µs
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:50 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:50.725 [info] ✅ Successfully persisted 1/1 payments to database
+api-2     | 21:56:50.762 [info] ✅ Successfully persisted 1/1 payments to database
+api-2     | 21:56:50.814 request_id=GFwPgyue7hXM5HcAAAch [info] POST /payments
+api-2     | 21:56:50.814 request_id=GFwPgyue7hXM5HcAAAch [info] 🆕 New payment request: 198841cf-1fca-4b1c-b1be-3833101b0d18, amount: 19.9
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:50 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:50.815 request_id=GFwPgyue7hXM5HcAAAch [info] ✅ New payment, queueing: 198841cf-1fca-4b1c-b1be-3833101b0d18
+api-2     | 21:56:50.815 request_id=GFwPgyue7hXM5HcAAAch [info] Sent 202 in 617µs
+api-2     | 21:56:50.833 request_id=GFwPgyzEkKosEh0AAAdB [info] POST /payments
+api-2     | 21:56:50.833 request_id=GFwPgyzEkKosEh0AAAdB [info] 🆕 New payment request: fbbc2cad-e265-4fba-a287-208edb7fe810, amount: 19.9
+api-2     | 21:56:50.834 [info] ✅ Successfully persisted 1/1 payments to database
+api-2     | 21:56:50.834 request_id=GFwPgyzEkKosEh0AAAdB [info] ✅ New payment, queueing: fbbc2cad-e265-4fba-a287-208edb7fe810
+api-2     | 21:56:50.834 request_id=GFwPgyzEkKosEh0AAAdB [info] Sent 202 in 598µs
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:50 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:50.869 [info] ✅ Successfully persisted 1/1 payments to database
+api-2     | 21:56:50.924 request_id=GFwPgzIj4lcqlpgAAAdh [info] POST /payments
+api-2     | 21:56:50.924 request_id=GFwPgzIj4lcqlpgAAAdh [info] 🆕 New payment request: 909f2bf6-c782-40f0-8f56-74e13ed1cc2a, amount: 19.9
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:50 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:50.924 request_id=GFwPgzIj4lcqlpgAAAdh [info] ✅ New payment, queueing: 909f2bf6-c782-40f0-8f56-74e13ed1cc2a
+api-2     | 21:56:50.924 request_id=GFwPgzIj4lcqlpgAAAdh [info] Sent 202 in 556µs
+api-2     | 21:56:50.941 [info] ✅ Successfully persisted 1/1 payments to database
+api-2     | 21:56:50.942 request_id=GFwPgzND0IX_TToAAAeB [info] POST /payments
+api-2     | 21:56:50.942 request_id=GFwPgzND0IX_TToAAAeB [info] 🆕 New payment request: 411409f7-61c0-488e-abd6-5687eae34ce1, amount: 19.9
+api-2     | 21:56:50.943 request_id=GFwPgzND0IX_TToAAAeB [info] ✅ New payment, queueing: 411409f7-61c0-488e-abd6-5687eae34ce1
+api-2     | 21:56:50.943 request_id=GFwPgzND0IX_TToAAAeB [info] Sent 202 in 521µs
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:50 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:50.972 request_id=GFwPgzUNC7iPGq4AAAeh [info] POST /payments
+api-2     | 21:56:50.972 request_id=GFwPgzUNC7iPGq4AAAeh [info] 🆕 New payment request: 1efefa52-dc6c-4394-baa3-dbbda16a4af7, amount: 19.9
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:50 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:50.973 request_id=GFwPgzUNC7iPGq4AAAeh [info] ✅ New payment, queueing: 1efefa52-dc6c-4394-baa3-dbbda16a4af7
+api-2     | 21:56:50.973 request_id=GFwPgzUNC7iPGq4AAAeh [info] Sent 202 in 497µs
+api-2     | 21:56:50.977 [info] ✅ Successfully persisted 1/1 payments to database
+api-2     | 21:56:51.013 [info] ✅ Successfully persisted 1/1 payments to database
+api-2     | 21:56:51.051 request_id=GFwPgzm2YJK1KKMAAAfB [info] POST /payments
+api-2     | 21:56:51.051 request_id=GFwPgzm2YJK1KKMAAAfB [info] 🆕 New payment request: 5aff323c-4b95-486a-b131-9d3d7a2cf6d7, amount: 19.9
+api-2     | 21:56:51.051 request_id=GFwPgzm2YJK1KKMAAAfB [info] ✅ New payment, queueing: 5aff323c-4b95-486a-b131-9d3d7a2cf6d7
+api-2     | 21:56:51.051 request_id=GFwPgzm2YJK1KKMAAAfB [info] Sent 202 in 544µs
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:51 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:51.052 request_id=GFwPgznPA4vSnr8AAAfh [info] POST /payments
+api-2     | 21:56:51.052 request_id=GFwPgznPA4vSnr8AAAfh [info] 🆕 New payment request: 1dba1606-23a3-4f16-a48e-735477d4d5dd, amount: 19.9
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:51 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:51.053 request_id=GFwPgznPA4vSnr8AAAfh [info] ✅ New payment, queueing: 1dba1606-23a3-4f16-a48e-735477d4d5dd
+api-2     | 21:56:51.053 request_id=GFwPgznPA4vSnr8AAAfh [info] Sent 202 in 521µs
+api-2     | 21:56:51.073 request_id=GFwPgzsS3ExtlCsAAAgB [info] POST /payments
+api-2     | 21:56:51.074 request_id=GFwPgzsS3ExtlCsAAAgB [info] 🆕 New payment request: a7187582-d005-405f-8a7c-6726547138f8, amount: 19.9
+api-2     | 21:56:51.074 request_id=GFwPgzsS3ExtlCsAAAgB [info] ✅ New payment, queueing: a7187582-d005-405f-8a7c-6726547138f8
+api-2     | 21:56:51.074 request_id=GFwPgzsS3ExtlCsAAAgB [info] Sent 202 in 685µs
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:51 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:51.086 [info] ✅ Successfully persisted 3/3 payments to database
+api-2     | 21:56:51.142 request_id=GFwPgz8uOAB04wAAAAgh [info] POST /payments
+api-2     | 21:56:51.142 request_id=GFwPgz8uOAB04wAAAAgh [info] 🆕 New payment request: bc5479ad-dcda-4ab7-a2a1-949ec9422c11, amount: 19.9
+api-2     | 21:56:51.143 request_id=GFwPgz8uOAB04wAAAAgh [info] ✅ New payment, queueing: bc5479ad-dcda-4ab7-a2a1-949ec9422c11
+api-2     | 21:56:51.143 request_id=GFwPgz8uOAB04wAAAAgh [info] Sent 202 in 633µs
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:51 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:51.158 [info] ✅ Successfully persisted 1/1 payments to database
+api-2     | 21:56:51.161 request_id=GFwPg0BOVS3P11YAAAhB [info] POST /payments
+api-2     | 21:56:51.161 request_id=GFwPg0BOVS3P11YAAAhB [info] 🆕 New payment request: 3105e5f2-2a43-4e8a-8dd9-3f42413c1600, amount: 19.9
+api-2     | 21:56:51.162 request_id=GFwPg0BOVS3P11YAAAhB [info] ✅ New payment, queueing: 3105e5f2-2a43-4e8a-8dd9-3f42413c1600
+api-2     | 21:56:51.162 request_id=GFwPg0BOVS3P11YAAAhB [info] Sent 202 in 509µs
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:51 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:51.179 request_id=GFwPg0Fkk1D6w48AAAhh [info] POST /payments
+api-2     | 21:56:51.179 request_id=GFwPg0Fkk1D6w48AAAhh [info] 🆕 New payment request: 3e5e7fa0-0804-4723-8549-f007a13d81d0, amount: 19.9
+api-2     | 21:56:51.180 request_id=GFwPg0Fkk1D6w48AAAhh [info] ✅ New payment, queueing: 3e5e7fa0-0804-4723-8549-f007a13d81d0
+api-2     | 21:56:51.180 request_id=GFwPg0Fkk1D6w48AAAhh [info] Sent 202 in 448µs
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:51 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:51.194 [info] ✅ Successfully persisted 2/2 payments to database
+api-2     | 21:56:51.252 request_id=GFwPg0W2igtxu0AAAAiB [info] POST /payments
+api-2     | 21:56:51.252 request_id=GFwPg0W2igtxu0AAAAiB [info] 🆕 New payment request: d2a00930-a291-47d0-83fc-f53346f8aee8, amount: 19.9
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:51 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:51.252 request_id=GFwPg0W2igtxu0AAAAiB [info] ✅ New payment, queueing: d2a00930-a291-47d0-83fc-f53346f8aee8
+api-2     | 21:56:51.253 request_id=GFwPg0W2igtxu0AAAAiB [info] Sent 202 in 632µs
+api-2     | 21:56:51.265 [info] ✅ Successfully persisted 1/1 payments to database
+api-2     | 21:56:51.270 request_id=GFwPg0bLNft6H3UAAAih [info] POST /payments
+api-2     | 21:56:51.270 request_id=GFwPg0bLNft6H3UAAAih [info] 🆕 New payment request: 1208555d-e857-4949-a3b2-b689985110ff, amount: 19.9
+api-2     | 21:56:51.271 request_id=GFwPg0bLNft6H3UAAAih [info] ✅ New payment, queueing: 1208555d-e857-4949-a3b2-b689985110ff
+api-2     | 21:56:51.271 request_id=GFwPg0bLNft6H3UAAAih [info] Sent 202 in 551µs
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:51 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:51.289 request_id=GFwPg0fpXMGsLnYAAAjB [info] POST /payments
+api-2     | 21:56:51.289 request_id=GFwPg0fpXMGsLnYAAAjB [info] 🆕 New payment request: 6e97c9d6-d5a1-4f0c-9495-e3018316858e, amount: 19.9
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:51 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:51.289 request_id=GFwPg0fpXMGsLnYAAAjB [info] ✅ New payment, queueing: 6e97c9d6-d5a1-4f0c-9495-e3018316858e
+api-2     | 21:56:51.289 request_id=GFwPg0fpXMGsLnYAAAjB [info] Sent 202 in 547µs
+api-2     | 21:56:51.301 [info] ✅ Successfully persisted 2/2 payments to database
+api-2     | 21:56:51.351 request_id=GFwPg0ujZxq32QsAAAjh [info] POST /payments
+api-2     | 21:56:51.351 request_id=GFwPg0ujZxq32QsAAAjh [info] 🆕 New payment request: d59b8502-2481-4d08-849c-bb781f943b30, amount: 19.9
+api-2     | 21:56:51.352 request_id=GFwPg0ujZxq32QsAAAjh [info] ✅ New payment, queueing: d59b8502-2481-4d08-849c-bb781f943b30
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:51 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:51.352 request_id=GFwPg0ujZxq32QsAAAjh [info] Sent 202 in 459µs
+api-2     | 21:56:51.360 request_id=GFwPg0wtlsQYsOEAAAkB [info] POST /payments
+api-2     | 21:56:51.360 request_id=GFwPg0wtlsQYsOEAAAkB [info] 🆕 New payment request: d962fd54-d901-460b-83ee-84e112ab0a47, amount: 19.9
+api-2     | 21:56:51.361 request_id=GFwPg0wtlsQYsOEAAAkB [info] ✅ New payment, queueing: d962fd54-d901-460b-83ee-84e112ab0a47
+api-2     | 21:56:51.361 request_id=GFwPg0wtlsQYsOEAAAkB [info] Sent 202 in 525µs
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:51 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:51.374 [info] ✅ Successfully persisted 2/2 payments to database
+api-2     | 21:56:51.398 request_id=GFwPg05w-sKY1xAAAAkh [info] POST /payments
+api-2     | 21:56:51.398 request_id=GFwPg05w-sKY1xAAAAkh [info] 🆕 New payment request: 25c23d34-1826-4b78-a778-e79ace015251, amount: 19.9
+api-2     | 21:56:51.399 request_id=GFwPg05w-sKY1xAAAAkh [info] ✅ New payment, queueing: 25c23d34-1826-4b78-a778-e79ace015251
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:51 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:51.399 request_id=GFwPg05w-sKY1xAAAAkh [info] Sent 202 in 503µs
+api-2     | 21:56:51.402 request_id=GFwPg06qTWe8M_sAAAlB [info] POST /payments
+api-2     | 21:56:51.402 request_id=GFwPg06qTWe8M_sAAAlB [info] 🆕 New payment request: c9de3c76-2ade-4020-8b63-bf7f2f71a232, amount: 19.9
+api-2     | 21:56:51.403 request_id=GFwPg06qTWe8M_sAAAlB [info] ✅ New payment, queueing: c9de3c76-2ade-4020-8b63-bf7f2f71a232
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:51 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:51.403 request_id=GFwPg06qTWe8M_sAAAlB [info] Sent 202 in 507µs
+api-2     | 21:56:51.410 [info] ✅ Successfully persisted 2/2 payments to database
+api-2     | 21:56:51.470 request_id=GFwPg1KybPzYCqYAAAlh [info] POST /payments
+api-2     | 21:56:51.470 request_id=GFwPg1KybPzYCqYAAAlh [info] 🆕 New payment request: ef607225-0220-4dee-9e6f-47557aff2f54, amount: 19.9
+api-2     | 21:56:51.470 request_id=GFwPg1KybPzYCqYAAAlh [info] ✅ New payment, queueing: ef607225-0220-4dee-9e6f-47557aff2f54
+api-2     | 21:56:51.470 request_id=GFwPg1KybPzYCqYAAAlh [info] Sent 202 in 562µs
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:51 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:51.482 [info] ✅ Successfully persisted 1/1 payments to database
+api-2     | 21:56:51.488 request_id=GFwPg1PQ4BgDZVAAAAmB [info] POST /payments
+api-2     | 21:56:51.489 request_id=GFwPg1PQ4BgDZVAAAAmB [info] 🆕 New payment request: 8904df34-01c6-40f6-aff6-ca68d15b4515, amount: 19.9
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:51 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:51.489 request_id=GFwPg1PQ4BgDZVAAAAmB [info] ✅ New payment, queueing: 8904df34-01c6-40f6-aff6-ca68d15b4515
+api-2     | 21:56:51.489 request_id=GFwPg1PQ4BgDZVAAAAmB [info] Sent 202 in 554µs
+api-2     | 21:56:51.518 [info] ✅ Successfully persisted 1/1 payments to database
+api-2     | 21:56:51.579 request_id=GFwPg1k7Iwk0w4IAAAmh [info] POST /payments
+api-2     | 21:56:51.579 request_id=GFwPg1k7Iwk0w4IAAAmh [info] 🆕 New payment request: 1508aeea-c8d2-47f9-aaa8-122813b03953, amount: 19.9
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:51 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:51.580 request_id=GFwPg1k7Iwk0w4IAAAmh [info] ✅ New payment, queueing: 1508aeea-c8d2-47f9-aaa8-122813b03953
+api-2     | 21:56:51.580 request_id=GFwPg1k7Iwk0w4IAAAmh [info] Sent 202 in 518µs
+api-2     | 21:56:51.597 request_id=GFwPg1pMW0QXgCkAAAnB [info] POST /payments
+api-2     | 21:56:51.597 request_id=GFwPg1pMW0QXgCkAAAnB [info] 🆕 New payment request: 8b3822eb-dfd4-4c90-987f-65c731a14814, amount: 19.9
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:51 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:51.598 request_id=GFwPg1pMW0QXgCkAAAnB [info] ✅ New payment, queueing: 8b3822eb-dfd4-4c90-987f-65c731a14814
+api-2     | 21:56:51.598 request_id=GFwPg1pMW0QXgCkAAAnB [info] Sent 202 in 511µs
+api-2     | 21:56:51.617 request_id=GFwPg1t88IZs8wkAAAnh [info] POST /payments
+api-2     | 21:56:51.617 request_id=GFwPg1t88IZs8wkAAAnh [info] 🆕 New payment request: f6101417-b01d-4dcd-bfa0-152c188bb104, amount: 19.9
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:51 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:51.618 request_id=GFwPg1t88IZs8wkAAAnh [info] ✅ New payment, queueing: f6101417-b01d-4dcd-bfa0-152c188bb104
+api-2     | 21:56:51.618 request_id=GFwPg1t88IZs8wkAAAnh [info] Sent 202 in 656µs
+api-2     | 21:56:51.626 [info] ✅ Successfully persisted 3/3 payments to database
+api-2     | 21:56:51.689 request_id=GFwPg1_EXi108GAAAAoB [info] POST /payments
+api-2     | 21:56:51.689 request_id=GFwPg1_EXi108GAAAAoB [info] 🆕 New payment request: b8ffbce2-e8b4-4e08-a091-41f18ef74da6, amount: 19.9
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:51 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:51.690 request_id=GFwPg1_EXi108GAAAAoB [info] ✅ New payment, queueing: b8ffbce2-e8b4-4e08-a091-41f18ef74da6
+api-2     | 21:56:51.690 request_id=GFwPg1_EXi108GAAAAoB [info] Sent 202 in 571µs
+api-2     | 21:56:51.698 [info] ✅ Successfully persisted 1/1 payments to database
+api-2     | 21:56:51.708 request_id=GFwPg2Dj4TTgb_gAAAoh [info] POST /payments
+api-2     | 21:56:51.708 request_id=GFwPg2Dj4TTgb_gAAAoh [info] 🆕 New payment request: da9b9b58-1b98-4daf-ad1b-fbe58328c539, amount: 19.9
+api-2     | 21:56:51.708 request_id=GFwPg2Dj4TTgb_gAAAoh [info] ✅ New payment, queueing: da9b9b58-1b98-4daf-ad1b-fbe58328c539
+api-2     | 21:56:51.708 request_id=GFwPg2Dj4TTgb_gAAAoh [info] Sent 202 in 545µs
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:51 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:51.727 request_id=GFwPg2IGUBMmxe8AAApB [info] POST /payments
+api-2     | 21:56:51.727 request_id=GFwPg2IGUBMmxe8AAApB [info] 🆕 New payment request: e4cf5ec5-b555-4319-8940-b835c0452c57, amount: 19.9
+api-2     | 21:56:51.727 request_id=GFwPg2IGUBMmxe8AAApB [info] ✅ New payment, queueing: e4cf5ec5-b555-4319-8940-b835c0452c57
+api-2     | 21:56:51.727 request_id=GFwPg2IGUBMmxe8AAApB [info] Sent 202 in 581µs
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:51 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:51.734 [info] ✅ Successfully persisted 2/2 payments to database
+api-2     | 21:56:51.798 request_id=GFwPg2ZH7JuBkLkAAAph [info] POST /payments
+api-2     | 21:56:51.798 request_id=GFwPg2ZH7JuBkLkAAAph [info] 🆕 New payment request: 57112c00-684b-4358-99df-3ff536889f85, amount: 19.9
+api-2     | 21:56:51.799 request_id=GFwPg2ZH7JuBkLkAAAph [info] ✅ New payment, queueing: 57112c00-684b-4358-99df-3ff536889f85
+api-2     | 21:56:51.799 request_id=GFwPg2ZH7JuBkLkAAAph [info] Sent 202 in 489µs
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:51 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:51.805 [info] ✅ Successfully persisted 1/1 payments to database
+api-2     | 21:56:51.816 request_id=GFwPg2dVVWAG1dEAAAqB [info] POST /payments
+api-2     | 21:56:51.816 request_id=GFwPg2dVVWAG1dEAAAqB [info] 🆕 New payment request: 4b99cb0a-c2c2-4917-bdad-abfbf331a321, amount: 19.9
+api-2     | 21:56:51.816 request_id=GFwPg2dVVWAG1dEAAAqB [info] ✅ New payment, queueing: 4b99cb0a-c2c2-4917-bdad-abfbf331a321
+api-2     | 21:56:51.816 request_id=GFwPg2dVVWAG1dEAAAqB [info] Sent 202 in 526µs
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:51 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:51.836 request_id=GFwPg2iEotBzB0wAAAqh [info] POST /payments
+api-2     | 21:56:51.836 request_id=GFwPg2iEotBzB0wAAAqh [info] 🆕 New payment request: b63f2854-b7c9-4dfe-9f05-728bc23ce93e, amount: 19.9
+api-2     | 21:56:51.836 request_id=GFwPg2iEotBzB0wAAAqh [info] ✅ New payment, queueing: b63f2854-b7c9-4dfe-9f05-728bc23ce93e
+api-2     | 21:56:51.836 request_id=GFwPg2iEotBzB0wAAAqh [info] Sent 202 in 501µs
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:51 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:51.842 [info] ✅ Successfully persisted 1/1 payments to database
+api-2     | 21:56:51.877 [info] ✅ Successfully persisted 1/1 payments to database
+api-2     | 21:56:51.907 request_id=GFwPg2zGOFvqi60AAArB [info] POST /payments
+api-2     | 21:56:51.907 request_id=GFwPg2zGOFvqi60AAArB [info] 🆕 New payment request: f15ccd5b-c134-4567-b96e-9ffae22d6a3a, amount: 19.9
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:51 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:51.908 request_id=GFwPg2zGOFvqi60AAArB [info] ✅ New payment, queueing: f15ccd5b-c134-4567-b96e-9ffae22d6a3a
+api-2     | 21:56:51.908 request_id=GFwPg2zGOFvqi60AAArB [info] Sent 202 in 445µs
+api-2     | 21:56:51.926 request_id=GFwPg23n8JnPgWkAAArh [info] POST /payments
+api-2     | 21:56:51.926 request_id=GFwPg23n8JnPgWkAAArh [info] 🆕 New payment request: 7094891a-147b-4c04-9bd6-af1ae6d6ad3d, amount: 19.9
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:51 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:51.927 request_id=GFwPg23n8JnPgWkAAArh [info] ✅ New payment, queueing: 7094891a-147b-4c04-9bd6-af1ae6d6ad3d
+api-2     | 21:56:51.927 request_id=GFwPg23n8JnPgWkAAArh [info] Sent 202 in 474µs
+api-2     | 21:56:51.945 request_id=GFwPg28FUawiGpQAAAsB [info] POST /payments
+api-2     | 21:56:51.945 request_id=GFwPg28FUawiGpQAAAsB [info] 🆕 New payment request: 508fc7cb-8fcd-48d0-b5e7-19a892a0ab84, amount: 19.9
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:51 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:51.945 request_id=GFwPg28FUawiGpQAAAsB [info] ✅ New payment, queueing: 508fc7cb-8fcd-48d0-b5e7-19a892a0ab84
+api-2     | 21:56:51.945 request_id=GFwPg28FUawiGpQAAAsB [info] Sent 202 in 499µs
+api-2     | 21:56:51.950 [info] ✅ Successfully persisted 3/3 payments to database
+api-2     | 21:56:51.974 request_id=GFwPg3DAy9CVgRoAAAsh [info] POST /payments
+api-2     | 21:56:51.974 request_id=GFwPg3DAy9CVgRoAAAsh [info] 🆕 New payment request: a26088df-faa6-43f5-9851-8aca6c15eb9c, amount: 19.9
+api-2     | 21:56:51.974 request_id=GFwPg3DAy9CVgRoAAAsh [info] ✅ New payment, queueing: a26088df-faa6-43f5-9851-8aca6c15eb9c
+api-2     | 21:56:51.974 request_id=GFwPg3DAy9CVgRoAAAsh [info] Sent 202 in 483µs
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:51 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:51.985 [info] ✅ Successfully persisted 1/1 payments to database
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:52 +0000] "POST /payments HTTP/1.1" 499 0 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:52.016 request_id=GFwPg3NInvWSzrAAAAtB [info] POST /payments
+api-2     | 21:56:52.017 request_id=GFwPg3NInvWSzrAAAAtB [info] 🆕 New payment request: 3f19d036-2928-4562-ab33-936f0a2263a3, amount: 19.9
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:52 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:52.017 request_id=GFwPg3NInvWSzrAAAAtB [info] ✅ New payment, queueing: 3f19d036-2928-4562-ab33-936f0a2263a3
+api-2     | 21:56:52.017 request_id=GFwPg3NInvWSzrAAAAtB [info] Sent 202 in 542µs
+api-2     | 21:56:52.054 request_id=GFwPg3WMkZxqUnkAAAth [info] POST /payments
+api-2     | 21:56:52.055 request_id=GFwPg3WMkZxqUnkAAAth [info] 🆕 New payment request: 73127552-a5b5-4151-837b-f2d6c9cc3e54, amount: 19.9
+api-2     | 21:56:52.055 request_id=GFwPg3WMkZxqUnkAAAth [info] ✅ New payment, queueing: 73127552-a5b5-4151-837b-f2d6c9cc3e54
+api-2     | 21:56:52.055 request_id=GFwPg3WMkZxqUnkAAAth [info] Sent 202 in 535µs
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:52 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:52.058 [info] ✅ Successfully persisted 1/1 payments to database
+api-2     | 21:56:52.076 request_id=GFwPg3bPD0iPpEsAAAuB [info] POST /payments
+api-2     | 21:56:52.076 request_id=GFwPg3bPD0iPpEsAAAuB [info] 🆕 New payment request: 8eb8588c-132e-4469-bf53-d78f4b5bf8f9, amount: 19.9
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:52 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:52.076 request_id=GFwPg3bPD0iPpEsAAAuB [info] ✅ New payment, queueing: 8eb8588c-132e-4469-bf53-d78f4b5bf8f9
+api-2     | 21:56:52.076 request_id=GFwPg3bPD0iPpEsAAAuB [info] Sent 202 in 485µs
+api-2     | 21:56:52.094 [info] ✅ Successfully persisted 2/2 payments to database
+api-2     | 21:56:52.126 request_id=GFwPg3nR8LgpykMAAAuh [info] POST /payments
+api-2     | 21:56:52.126 request_id=GFwPg3nR8LgpykMAAAuh [info] 🆕 New payment request: 09b95aa4-1f6f-48b1-b194-0e75450f23cc, amount: 19.9
+api-2     | 21:56:52.127 request_id=GFwPg3nR8LgpykMAAAuh [info] ✅ New payment, queueing: 09b95aa4-1f6f-48b1-b194-0e75450f23cc
+api-2     | 21:56:52.127 request_id=GFwPg3nR8LgpykMAAAuh [info] Sent 202 in 532µs
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:52 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:52.145 request_id=GFwPg3rx5BhxNeEAAAvB [info] POST /payments
+api-2     | 21:56:52.145 request_id=GFwPg3rx5BhxNeEAAAvB [info] 🆕 New payment request: b1b138c1-4246-4122-8570-5e00a047e40b, amount: 19.9
+api-2     | 21:56:52.145 request_id=GFwPg3rx5BhxNeEAAAvB [info] ✅ New payment, queueing: b1b138c1-4246-4122-8570-5e00a047e40b
+api-2     | 21:56:52.145 request_id=GFwPg3rx5BhxNeEAAAvB [info] Sent 202 in 512µs
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:52 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:52.164 request_id=GFwPg3wQniRGadkAAAvh [info] POST /payments
+api-2     | 21:56:52.164 request_id=GFwPg3wQniRGadkAAAvh [info] 🆕 New payment request: 9905bfa2-692f-4319-ad1d-367c081a302d, amount: 19.9
+api-2     | 21:56:52.164 request_id=GFwPg3wQniRGadkAAAvh [info] ✅ New payment, queueing: 9905bfa2-692f-4319-ad1d-367c081a302d
+api-2     | 21:56:52.164 request_id=GFwPg3wQniRGadkAAAvh [info] Sent 202 in 533µs
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:52 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:52.166 [info] ✅ Successfully persisted 2/2 payments to database
+api-2     | 21:56:52.182 request_id=GFwPg30ip3GaQUEAAAwB [info] POST /payments
+api-2     | 21:56:52.182 request_id=GFwPg30ip3GaQUEAAAwB [info] 🆕 New payment request: f47b09ef-89c7-436a-9e33-a22bcb5be0a1, amount: 19.9
+api-2     | 21:56:52.182 request_id=GFwPg30ip3GaQUEAAAwB [info] ✅ New payment, queueing: f47b09ef-89c7-436a-9e33-a22bcb5be0a1
+api-2     | 21:56:52.182 request_id=GFwPg30ip3GaQUEAAAwB [info] Sent 202 in 498µs
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:52 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:52.201 [info] ✅ Successfully persisted 1/1 payments to database
+api-2     | 21:56:52.235 request_id=GFwPg4BVbpZYHbUAAAwh [info] POST /payments
+api-2     | 21:56:52.235 request_id=GFwPg4BVbpZYHbUAAAwh [info] 🆕 New payment request: 7f66e170-40bb-423d-8468-4cd2968675cf, amount: 19.9
+api-2     | 21:56:52.236 request_id=GFwPg4BVbpZYHbUAAAwh [info] ✅ New payment, queueing: 7f66e170-40bb-423d-8468-4cd2968675cf
+api-2     | 21:56:52.236 request_id=GFwPg4BVbpZYHbUAAAwh [info] Sent 202 in 522µs
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:52 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:52.237 [info] ✅ Successfully persisted 1/1 payments to database
+api-2     | 21:56:52.254 request_id=GFwPg4FyhT7XWvwAAAxB [info] POST /payments
+api-2     | 21:56:52.254 request_id=GFwPg4FyhT7XWvwAAAxB [info] 🆕 New payment request: 64e38356-1f4e-4897-8f34-3e8c5b8163d5, amount: 19.9
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:52 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:52.255 request_id=GFwPg4FyhT7XWvwAAAxB [info] ✅ New payment, queueing: 64e38356-1f4e-4897-8f34-3e8c5b8163d5
+api-2     | 21:56:52.255 request_id=GFwPg4FyhT7XWvwAAAxB [info] Sent 202 in 567µs
+api-2     | 21:56:52.272 request_id=GFwPg4KEBuC6xjwAAAxh [info] POST /payments
+api-2     | 21:56:52.272 request_id=GFwPg4KEBuC6xjwAAAxh [info] 🆕 New payment request: 9db91b6f-8fd4-4f86-b0af-6a635db44b67, amount: 19.9
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:52 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:52.273 request_id=GFwPg4KEBuC6xjwAAAxh [info] ✅ New payment, queueing: 9db91b6f-8fd4-4f86-b0af-6a635db44b67
+api-2     | 21:56:52.273 request_id=GFwPg4KEBuC6xjwAAAxh [info] Sent 202 in 589µs
+api-2     | 21:56:52.274 [info] ✅ Successfully persisted 2/2 payments to database
+api-2     | 21:56:52.291 request_id=GFwPg4OlKpA5_poAAAyB [info] POST /payments
+api-2     | 21:56:52.291 request_id=GFwPg4OlKpA5_poAAAyB [info] 🆕 New payment request: 0fd0bd09-bf10-4f5b-be11-042ea4710a9d, amount: 19.9
+api-2     | 21:56:52.292 request_id=GFwPg4OlKpA5_poAAAyB [info] ✅ New payment, queueing: 0fd0bd09-bf10-4f5b-be11-042ea4710a9d
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:52 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:52.292 request_id=GFwPg4OlKpA5_poAAAyB [info] Sent 202 in 611µs
+api-2     | 21:56:52.310 [info] ✅ Successfully persisted 2/2 payments to database
+api-2     | 21:56:52.344 request_id=GFwPg4bVgDeoATMAAAyh [info] POST /payments
+api-2     | 21:56:52.345 request_id=GFwPg4bVgDeoATMAAAyh [info] 🆕 New payment request: 3d28f84b-bade-4300-a1c4-15b28d47d2d7, amount: 19.9
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:52 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:52.345 request_id=GFwPg4bVgDeoATMAAAyh [info] ✅ New payment, queueing: 3d28f84b-bade-4300-a1c4-15b28d47d2d7
+api-2     | 21:56:52.345 request_id=GFwPg4bVgDeoATMAAAyh [info] Sent 202 in 551µs
+api-2     | 21:56:52.353 request_id=GFwPg4dcPoUbi7IAAAzB [info] POST /payments
+api-2     | 21:56:52.353 request_id=GFwPg4dcPoUbi7IAAAzB [info] 🆕 New payment request: ac7b6795-dca8-4c1e-9016-55780f4f44e6, amount: 19.9
+api-2     | 21:56:52.354 request_id=GFwPg4dcPoUbi7IAAAzB [info] ✅ New payment, queueing: ac7b6795-dca8-4c1e-9016-55780f4f44e6
+api-2     | 21:56:52.354 request_id=GFwPg4dcPoUbi7IAAAzB [info] Sent 202 in 533µs
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:52 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:52.363 request_id=GFwPg4fvpSJVa3EAAAzh [info] POST /payments
+api-2     | 21:56:52.363 request_id=GFwPg4fvpSJVa3EAAAzh [info] 🆕 New payment request: 634a0531-9d4e-4f6b-8f81-0768cf8b80aa, amount: 19.9
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:52 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:52.363 request_id=GFwPg4fvpSJVa3EAAAzh [info] ✅ New payment, queueing: 634a0531-9d4e-4f6b-8f81-0768cf8b80aa
+api-2     | 21:56:52.363 request_id=GFwPg4fvpSJVa3EAAAzh [info] Sent 202 in 481µs
+api-2     | 21:56:52.382 [info] ✅ Successfully persisted 3/3 payments to database
+api-2     | 21:56:52.401 request_id=GFwPg4o1KDrHY4cAAA0B [info] POST /payments
+api-2     | 21:56:52.401 request_id=GFwPg4o1KDrHY4cAAA0B [info] 🆕 New payment request: dbd618ca-e2b2-4103-9445-5df8ee080be5, amount: 19.9
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:52 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:52.402 request_id=GFwPg4o1KDrHY4cAAA0B [info] ✅ New payment, queueing: dbd618ca-e2b2-4103-9445-5df8ee080be5
+api-2     | 21:56:52.402 request_id=GFwPg4o1KDrHY4cAAA0B [info] Sent 202 in 553µs
+api-2     | 21:56:52.404 request_id=GFwPg4pd-hQ3F50AAA0h [info] POST /payments
+api-2     | 21:56:52.404 request_id=GFwPg4pd-hQ3F50AAA0h [info] 🆕 New payment request: 54b77652-cd40-433c-b8f2-045c53924371, amount: 19.9
+api-2     | 21:56:52.404 request_id=GFwPg4pd-hQ3F50AAA0h [info] ✅ New payment, queueing: 54b77652-cd40-433c-b8f2-045c53924371
+api-2     | 21:56:52.404 request_id=GFwPg4pd-hQ3F50AAA0h [info] Sent 202 in 474µs
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:52 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:52.417 [info] ✅ Successfully persisted 2/2 payments to database
+api-2     | 21:56:52.454 request_id=GFwPg41iaxjS7GkAAA1B [info] POST /payments
+api-2     | 21:56:52.454 request_id=GFwPg41iaxjS7GkAAA1B [info] 🆕 New payment request: 55e21a9b-6ef8-4f61-b46e-42b2c7896930, amount: 19.9
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:52 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:52.455 request_id=GFwPg41iaxjS7GkAAA1B [info] ✅ New payment, queueing: 55e21a9b-6ef8-4f61-b46e-42b2c7896930
+api-2     | 21:56:52.455 request_id=GFwPg41iaxjS7GkAAA1B [info] Sent 202 in 536µs
+api-2     | 21:56:52.472 request_id=GFwPg451Hg3wsSUAAA1h [info] POST /payments
+api-2     | 21:56:52.472 request_id=GFwPg451Hg3wsSUAAA1h [info] 🆕 New payment request: 2ad4d511-cce5-4faa-960a-144202fb0f7d, amount: 19.9
+api-2     | 21:56:52.473 request_id=GFwPg451Hg3wsSUAAA1h [info] ✅ New payment, queueing: 2ad4d511-cce5-4faa-960a-144202fb0f7d
+api-2     | 21:56:52.473 request_id=GFwPg451Hg3wsSUAAA1h [info] Sent 202 in 473µs
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:52 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:52.489 [info] ✅ Successfully persisted 2/2 payments to database
+api-2     | 21:56:52.491 request_id=GFwPg4-R8ht43hoAAA2B [info] POST /payments
+api-2     | 21:56:52.491 request_id=GFwPg4-R8ht43hoAAA2B [info] 🆕 New payment request: c2e4c6c1-5942-4318-890f-ec795bd4928d, amount: 19.9
+api-2     | 21:56:52.491 request_id=GFwPg4-R8ht43hoAAA2B [info] ✅ New payment, queueing: c2e4c6c1-5942-4318-890f-ec795bd4928d
+api-2     | 21:56:52.491 request_id=GFwPg4-R8ht43hoAAA2B [info] Sent 202 in 468µs
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:52 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:52.526 [info] ✅ Successfully persisted 1/1 payments to database
+api-2     | 21:56:52.563 request_id=GFwPg5Pjkoz9m7IAAA2h [info] POST /payments
+api-2     | 21:56:52.564 request_id=GFwPg5Pjkoz9m7IAAA2h [info] 🆕 New payment request: 6b898c85-0f40-4981-84a8-8e01e39f64cc, amount: 19.9
+api-2     | 21:56:52.564 request_id=GFwPg5Pjkoz9m7IAAA2h [info] ✅ New payment, queueing: 6b898c85-0f40-4981-84a8-8e01e39f64cc
+api-2     | 21:56:52.564 request_id=GFwPg5Pjkoz9m7IAAA2h [info] Sent 202 in 475µs
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:52 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:52.581 request_id=GFwPg5T2kQMmUE4AAA3B [info] POST /payments
+api-2     | 21:56:52.582 request_id=GFwPg5T2kQMmUE4AAA3B [info] 🆕 New payment request: d36da92c-1d0e-4373-af54-84ee37c5f364, amount: 19.9
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:52 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:52.582 request_id=GFwPg5T2kQMmUE4AAA3B [info] ✅ New payment, queueing: d36da92c-1d0e-4373-af54-84ee37c5f364
+api-2     | 21:56:52.582 request_id=GFwPg5T2kQMmUE4AAA3B [info] Sent 202 in 496µs
+api-2     | 21:56:52.597 [info] ✅ Successfully persisted 2/2 payments to database
+api-2     | 21:56:52.599 request_id=GFwPg5YE92w0jUIAAA3h [info] POST /payments
+api-2     | 21:56:52.599 request_id=GFwPg5YE92w0jUIAAA3h [info] 🆕 New payment request: b145eff4-735f-49f3-b1c3-fe2edffd9c49, amount: 19.9
+api-2     | 21:56:52.600 request_id=GFwPg5YE92w0jUIAAA3h [info] ✅ New payment, queueing: b145eff4-735f-49f3-b1c3-fe2edffd9c49
+api-2     | 21:56:52.600 request_id=GFwPg5YE92w0jUIAAA3h [info] Sent 202 in 441µs
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:52 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:52.620 request_id=GFwPg5dCkIRHBzYAAA4B [info] POST /payments
+api-2     | 21:56:52.620 request_id=GFwPg5dCkIRHBzYAAA4B [info] 🆕 New payment request: 968e3dd4-d85f-44f1-8b84-76f7757200a0, amount: 19.9
+api-2     | 21:56:52.621 request_id=GFwPg5dCkIRHBzYAAA4B [info] ✅ New payment, queueing: 968e3dd4-d85f-44f1-8b84-76f7757200a0
+api-2     | 21:56:52.621 request_id=GFwPg5dCkIRHBzYAAA4B [info] Sent 202 in 536µs
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:52 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:52.633 [info] ✅ Successfully persisted 2/2 payments to database
+api-2     | 21:56:52.672 request_id=GFwPg5piGVGhBekAAA4h [info] POST /payments
+api-2     | 21:56:52.672 request_id=GFwPg5piGVGhBekAAA4h [info] 🆕 New payment request: 4b354885-0f68-4b4d-b4d1-d23709ae48e4, amount: 19.9
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:52 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:52.673 request_id=GFwPg5piGVGhBekAAA4h [info] ✅ New payment, queueing: 4b354885-0f68-4b4d-b4d1-d23709ae48e4
+api-2     | 21:56:52.673 request_id=GFwPg5piGVGhBekAAA4h [info] Sent 202 in 533µs
+api-2     | 21:56:52.691 request_id=GFwPg5uAnP0uAOEAAA5B [info] POST /payments
+api-2     | 21:56:52.691 request_id=GFwPg5uAnP0uAOEAAA5B [info] 🆕 New payment request: c3a8a102-d94a-4a56-b22c-e4caff18407c, amount: 19.9
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:52 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:52.692 request_id=GFwPg5uAnP0uAOEAAA5B [info] ✅ New payment, queueing: c3a8a102-d94a-4a56-b22c-e4caff18407c
+api-2     | 21:56:52.692 request_id=GFwPg5uAnP0uAOEAAA5B [info] Sent 202 in 493µs
+api-2     | 21:56:52.706 [info] ✅ Successfully persisted 1/1 payments to database
+api-2     | 21:56:52.710 request_id=GFwPg5yeFyTpNS8AAA5h [info] POST /payments
+api-2     | 21:56:52.710 request_id=GFwPg5yeFyTpNS8AAA5h [info] 🆕 New payment request: 0720dc1c-b243-4853-ab02-39b13dd34450, amount: 19.9
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:52 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:52.710 request_id=GFwPg5yeFyTpNS8AAA5h [info] ✅ New payment, queueing: 0720dc1c-b243-4853-ab02-39b13dd34450
+api-2     | 21:56:52.710 request_id=GFwPg5yeFyTpNS8AAA5h [info] Sent 202 in 530µs
+api-2     | 21:56:52.729 request_id=GFwPg53Ad-gyXuoAAA6B [info] POST /payments
+api-2     | 21:56:52.729 request_id=GFwPg53Ad-gyXuoAAA6B [info] 🆕 New payment request: d994e283-1b84-4950-9f9e-2b06818e92fa, amount: 19.9
+api-2     | 21:56:52.729 request_id=GFwPg53Ad-gyXuoAAA6B [info] ✅ New payment, queueing: d994e283-1b84-4950-9f9e-2b06818e92fa
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:52 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:52.730 request_id=GFwPg53Ad-gyXuoAAA6B [info] Sent 202 in 585µs
+api-2     | 21:56:52.741 [info] ✅ Successfully persisted 3/3 payments to database
+api-2     | 21:56:52.781 request_id=GFwPg6DgUYn0su4AAA6h [info] POST /payments
+api-2     | 21:56:52.781 request_id=GFwPg6DgUYn0su4AAA6h [info] 🆕 New payment request: 68cb0d10-29b0-4e43-9f41-9fd6039264dd, amount: 19.9
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:52 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:52.782 request_id=GFwPg6DgUYn0su4AAA6h [info] ✅ New payment, queueing: 68cb0d10-29b0-4e43-9f41-9fd6039264dd
+api-2     | 21:56:52.782 request_id=GFwPg6DgUYn0su4AAA6h [info] Sent 202 in 530µs
+api-2     | 21:56:52.800 request_id=GFwPg6IAZfW2q-IAAA7B [info] POST /payments
+api-2     | 21:56:52.800 request_id=GFwPg6IAZfW2q-IAAA7B [info] 🆕 New payment request: 18a54bdf-9b2e-449f-ae67-c193675c1b8a, amount: 19.9
+api-2     | 21:56:52.801 request_id=GFwPg6IAZfW2q-IAAA7B [info] ✅ New payment, queueing: 18a54bdf-9b2e-449f-ae67-c193675c1b8a
+api-2     | 21:56:52.801 request_id=GFwPg6IAZfW2q-IAAA7B [info] Sent 202 in 466µs
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:52 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:52.814 [info] ✅ Successfully persisted 2/2 payments to database
+api-2     | 21:56:52.818 request_id=GFwPg6MQpxPTD8kAAA7h [info] POST /payments
+api-2     | 21:56:52.818 request_id=GFwPg6MQpxPTD8kAAA7h [info] 🆕 New payment request: d6f97936-197e-4ed7-9d16-82b96cf4d3d0, amount: 19.9
+api-2     | 21:56:52.819 request_id=GFwPg6MQpxPTD8kAAA7h [info] ✅ New payment, queueing: d6f97936-197e-4ed7-9d16-82b96cf4d3d0
+api-2     | 21:56:52.819 request_id=GFwPg6MQpxPTD8kAAA7h [info] Sent 202 in 523µs
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:52 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:52.838 request_id=GFwPg6Q-a4YRgoQAAA8B [info] POST /payments
+api-2     | 21:56:52.838 request_id=GFwPg6Q-a4YRgoQAAA8B [info] 🆕 New payment request: 17747972-f565-42fd-9abb-67a35d2daa3d, amount: 19.9
+api-2     | 21:56:52.838 request_id=GFwPg6Q-a4YRgoQAAA8B [info] ✅ New payment, queueing: 17747972-f565-42fd-9abb-67a35d2daa3d
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:52 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:52.838 request_id=GFwPg6Q-a4YRgoQAAA8B [info] Sent 202 in 526µs
+api-2     | 21:56:52.850 [info] ✅ Successfully persisted 1/1 payments to database
+api-2     | 21:56:52.885 [info] ✅ Successfully persisted 1/1 payments to database
+api-2     | 21:56:52.891 request_id=GFwPg6duhschyEwAAA8h [info] POST /payments
+api-2     | 21:56:52.891 request_id=GFwPg6duhschyEwAAA8h [info] 🆕 New payment request: eec02dce-514c-45af-8387-da1844728398, amount: 19.9
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:52 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:52.892 request_id=GFwPg6duhschyEwAAA8h [info] ✅ New payment, queueing: eec02dce-514c-45af-8387-da1844728398
+api-2     | 21:56:52.892 request_id=GFwPg6duhschyEwAAA8h [info] Sent 202 in 456µs
+api-2     | 21:56:52.909 request_id=GFwPg6h7kNHZXOsAAA9B [info] POST /payments
+api-2     | 21:56:52.909 request_id=GFwPg6h7kNHZXOsAAA9B [info] 🆕 New payment request: dfaaaeba-ae0b-4019-b0f4-719b6ada77ba, amount: 19.9
+api-2     | 21:56:52.909 request_id=GFwPg6h7kNHZXOsAAA9B [info] ✅ New payment, queueing: dfaaaeba-ae0b-4019-b0f4-719b6ada77ba
+api-2     | 21:56:52.909 request_id=GFwPg6h7kNHZXOsAAA9B [info] Sent 202 in 528µs
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:52 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:52.922 [info] ✅ Successfully persisted 2/2 payments to database
+api-2     | 21:56:52.929 request_id=GFwPg6mr9EU_LggAAA9h [info] POST /payments
+api-2     | 21:56:52.929 request_id=GFwPg6mr9EU_LggAAA9h [info] 🆕 New payment request: 9a2f2863-0202-4aa4-bf82-377c25e40f49, amount: 19.9
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:52 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:52.929 request_id=GFwPg6mr9EU_LggAAA9h [info] ✅ New payment, queueing: 9a2f2863-0202-4aa4-bf82-377c25e40f49
+api-2     | 21:56:52.929 request_id=GFwPg6mr9EU_LggAAA9h [info] Sent 202 in 507µs
+api-2     | 21:56:52.947 request_id=GFwPg6q6N3JbuYsAAA-B [info] POST /payments
+api-2     | 21:56:52.947 request_id=GFwPg6q6N3JbuYsAAA-B [info] 🆕 New payment request: 5c990af8-bfd1-426e-b6af-045ad09e6ebe, amount: 19.9
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:52 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:52.947 request_id=GFwPg6q6N3JbuYsAAA-B [info] ✅ New payment, queueing: 5c990af8-bfd1-426e-b6af-045ad09e6ebe
+api-2     | 21:56:52.947 request_id=GFwPg6q6N3JbuYsAAA-B [info] Sent 202 in 481µs
+api-2     | 21:56:52.958 [info] ✅ Successfully persisted 1/1 payments to database
+api-2     | 21:56:52.977 request_id=GFwPg6yCcw02QN4AAA-h [info] POST /payments
+api-2     | 21:56:52.977 request_id=GFwPg6yCcw02QN4AAA-h [info] 🆕 New payment request: 204da4be-46ec-42ab-9b05-4158d3cfadf6, amount: 19.9
+api-2     | 21:56:52.977 request_id=GFwPg6yCcw02QN4AAA-h [info] ✅ New payment, queueing: 204da4be-46ec-42ab-9b05-4158d3cfadf6
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:52 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:52.977 request_id=GFwPg6yCcw02QN4AAA-h [info] Sent 202 in 544µs
+api-2     | 21:56:52.993 [info] ✅ Successfully persisted 2/2 payments to database
+api-2     | 21:56:53.000 request_id=GFwPg63lKiXKRDEAAA_B [info] POST /payments
+api-2     | 21:56:53.000 request_id=GFwPg63lKiXKRDEAAA_B [info] 🆕 New payment request: 4e66b97b-380a-4b28-84d3-24ef72360311, amount: 19.9
+api-2     | 21:56:53.000 request_id=GFwPg63lKiXKRDEAAA_B [info] ✅ New payment, queueing: 4e66b97b-380a-4b28-84d3-24ef72360311
+api-2     | 21:56:53.000 request_id=GFwPg63lKiXKRDEAAA_B [info] Sent 202 in 562µs
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:53 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:53.008 request_id=GFwPg65gM4NIisYAAA_h [info] POST /payments
+api-2     | 21:56:53.008 request_id=GFwPg65gM4NIisYAAA_h [info] 🆕 New payment request: b4bc2562-b41a-494a-a03b-5d0aa559a346, amount: 19.9
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:53 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:53.008 request_id=GFwPg65gM4NIisYAAA_h [info] ✅ New payment, queueing: b4bc2562-b41a-494a-a03b-5d0aa559a346
+api-2     | 21:56:53.008 request_id=GFwPg65gM4NIisYAAA_h [info] Sent 202 in 550µs
+api-2     | 21:56:53.019 request_id=GFwPg68GwGjHYZAAABAB [info] POST /payments
+api-2     | 21:56:53.019 request_id=GFwPg68GwGjHYZAAABAB [info] 🆕 New payment request: 983821cb-f83b-42c4-add6-d62c9d7fe690, amount: 19.9
+api-2     | 21:56:53.019 request_id=GFwPg68GwGjHYZAAABAB [info] ✅ New payment, queueing: 983821cb-f83b-42c4-add6-d62c9d7fe690
+api-2     | 21:56:53.019 request_id=GFwPg68GwGjHYZAAABAB [info] Sent 202 in 454µs
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:53 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:53.030 [info] ✅ Successfully persisted 3/3 payments to database
+api-2     | 21:56:53.057 request_id=GFwPg7FIxequUkYAABAh [info] POST /payments
+api-2     | 21:56:53.057 request_id=GFwPg7FIxequUkYAABAh [info] 🆕 New payment request: 79e8f1e7-5539-4f33-ab58-3a6ccbf1e648, amount: 19.9
+api-2     | 21:56:53.057 request_id=GFwPg7FIxequUkYAABAh [info] ✅ New payment, queueing: 79e8f1e7-5539-4f33-ab58-3a6ccbf1e648
+api-2     | 21:56:53.057 request_id=GFwPg7FIxequUkYAABAh [info] Sent 202 in 464µs
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:53 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:53.078 request_id=GFwPg7KIrVfQ5ckAABBB [info] POST /payments
+api-2     | 21:56:53.078 request_id=GFwPg7KIrVfQ5ckAABBB [info] 🆕 New payment request: 35ce1c97-10e3-49eb-945e-b5ece8f415e9, amount: 19.9
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:53 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:53.078 request_id=GFwPg7KIrVfQ5ckAABBB [info] ✅ New payment, queueing: 35ce1c97-10e3-49eb-945e-b5ece8f415e9
+api-2     | 21:56:53.078 request_id=GFwPg7KIrVfQ5ckAABBB [info] Sent 202 in 512µs
+api-2     | 21:56:53.102 [info] ✅ Successfully persisted 2/2 payments to database
+api-2     | 21:56:53.109 request_id=GFwPg7Rl6I64wVwAABBh [info] POST /payments
+api-2     | 21:56:53.109 request_id=GFwPg7Rl6I64wVwAABBh [info] 🆕 New payment request: cd62aa4a-aeae-439f-b3a1-39bd49779ec9, amount: 19.9
+api-2     | 21:56:53.109 request_id=GFwPg7Rl6I64wVwAABBh [info] ✅ New payment, queueing: cd62aa4a-aeae-439f-b3a1-39bd49779ec9
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:53 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:53.109 request_id=GFwPg7Rl6I64wVwAABBh [info] Sent 202 in 508µs
+api-2     | 21:56:53.129 request_id=GFwPg7WWDLDdnXEAABCB [info] POST /payments
+api-2     | 21:56:53.129 request_id=GFwPg7WWDLDdnXEAABCB [info] 🆕 New payment request: 76556e8c-3cc7-444e-b77c-8628c878c981, amount: 19.9
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:53 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:53.129 request_id=GFwPg7WWDLDdnXEAABCB [info] ✅ New payment, queueing: 76556e8c-3cc7-444e-b77c-8628c878c981
+api-2     | 21:56:53.129 request_id=GFwPg7WWDLDdnXEAABCB [info] Sent 202 in 549µs
+api-2     | 21:56:53.137 [info] ✅ Successfully persisted 2/2 payments to database
+api-2     | 21:56:53.148 request_id=GFwPg7a0H1i6-KsAABCh [info] POST /payments
+api-2     | 21:56:53.148 request_id=GFwPg7a0H1i6-KsAABCh [info] 🆕 New payment request: 22cc4869-2c7b-405d-9e87-ad3fcc66731b, amount: 19.9
+api-2     | 21:56:53.148 request_id=GFwPg7a0H1i6-KsAABCh [info] ✅ New payment, queueing: 22cc4869-2c7b-405d-9e87-ad3fcc66731b
+api-2     | 21:56:53.148 request_id=GFwPg7a0H1i6-KsAABCh [info] Sent 202 in 456µs
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:53 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:53.166 request_id=GFwPg7fR6yOa6AkAABDB [info] POST /payments
+api-2     | 21:56:53.166 request_id=GFwPg7fR6yOa6AkAABDB [info] 🆕 New payment request: ebb55c4d-4e75-4439-8776-cdcd485be6c9, amount: 19.9
+api-2     | 21:56:53.167 request_id=GFwPg7fR6yOa6AkAABDB [info] ✅ New payment, queueing: ebb55c4d-4e75-4439-8776-cdcd485be6c9
+api-2     | 21:56:53.167 request_id=GFwPg7fR6yOa6AkAABDB [info] Sent 202 in 511µs
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:53 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:53.174 [info] ✅ Successfully persisted 2/2 payments to database
+api-2     | 21:56:53.184 request_id=GFwPg7jj4X9CKvYAABDh [info] POST /payments
+api-2     | 21:56:53.184 request_id=GFwPg7jj4X9CKvYAABDh [info] 🆕 New payment request: ab9469bf-462c-4b36-8ab7-0465559e1a85, amount: 19.9
+api-2     | 21:56:53.185 request_id=GFwPg7jj4X9CKvYAABDh [info] ✅ New payment, queueing: ab9469bf-462c-4b36-8ab7-0465559e1a85
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:53 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:53.185 request_id=GFwPg7jj4X9CKvYAABDh [info] Sent 202 in 573µs
+api-2     | 21:56:53.210 [info] ✅ Successfully persisted 1/1 payments to database
+api-2     | 21:56:53.232 request_id=GFwPg7u1KGh6LgUAABEB [info] POST /payments
+api-2     | 21:56:53.232 request_id=GFwPg7u1KGh6LgUAABEB [info] 🆕 New payment request: 88c66f25-532c-4919-95d4-f5c8944a322f, amount: 19.9
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:53 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:53.232 request_id=GFwPg7u1KGh6LgUAABEB [info] ✅ New payment, queueing: 88c66f25-532c-4919-95d4-f5c8944a322f
+api-2     | 21:56:53.232 request_id=GFwPg7u1KGh6LgUAABEB [info] Sent 202 in 466µs
+api-2     | 21:56:53.238 request_id=GFwPg7wcdAxAatoAABEh [info] POST /payments
+api-2     | 21:56:53.238 request_id=GFwPg7wcdAxAatoAABEh [info] 🆕 New payment request: 023a8fcc-0974-4493-a793-3e924df0e549, amount: 19.9
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:53 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:53.239 request_id=GFwPg7wcdAxAatoAABEh [info] ✅ New payment, queueing: 023a8fcc-0974-4493-a793-3e924df0e549
+api-2     | 21:56:53.239 request_id=GFwPg7wcdAxAatoAABEh [info] Sent 202 in 552µs
+api-2     | 21:56:53.246 [info] ✅ Successfully persisted 1/1 payments to database
+api-2     | 21:56:53.256 request_id=GFwPg70uaOJ5gOoAABFB [info] POST /payments
+api-2     | 21:56:53.256 request_id=GFwPg70uaOJ5gOoAABFB [info] 🆕 New payment request: 40c822a0-1e0d-46e2-8da1-e3af4f218591, amount: 19.9
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:53 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:53.257 request_id=GFwPg70uaOJ5gOoAABFB [info] ✅ New payment, queueing: 40c822a0-1e0d-46e2-8da1-e3af4f218591
+api-2     | 21:56:53.257 request_id=GFwPg70uaOJ5gOoAABFB [info] Sent 202 in 520µs
+api-2     | 21:56:53.274 request_id=GFwPg75DkBoXhAoAABFh [info] POST /payments
+api-2     | 21:56:53.274 request_id=GFwPg75DkBoXhAoAABFh [info] 🆕 New payment request: 1ec43510-39e1-4470-a7d9-cf49b67138bc, amount: 19.9
+api-2     | 21:56:53.275 request_id=GFwPg75DkBoXhAoAABFh [info] ✅ New payment, queueing: 1ec43510-39e1-4470-a7d9-cf49b67138bc
+api-2     | 21:56:53.275 request_id=GFwPg75DkBoXhAoAABFh [info] Sent 202 in 471µs
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:53 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:53.282 [info] ✅ Successfully persisted 3/3 payments to database
+api-2     | 21:56:53.293 request_id=GFwPg79hCedRk7kAABGB [info] POST /payments
+api-2     | 21:56:53.293 request_id=GFwPg79hCedRk7kAABGB [info] 🆕 New payment request: f1c4ed51-74c6-426f-a192-9a95d1b2a5ea, amount: 19.9
+api-2     | 21:56:53.294 request_id=GFwPg79hCedRk7kAABGB [info] ✅ New payment, queueing: f1c4ed51-74c6-426f-a192-9a95d1b2a5ea
+api-2     | 21:56:53.294 request_id=GFwPg79hCedRk7kAABGB [info] Sent 202 in 570µs
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:53 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:53.317 [info] ✅ Successfully persisted 1/1 payments to database
+api-2     | 21:56:53.328 request_id=GFwPg8Fvnb4KxMMAABGh [info] POST /payments
+api-2     | 21:56:53.328 request_id=GFwPg8Fvnb4KxMMAABGh [info] 🆕 New payment request: 0833dbaf-ea08-4920-9f62-0918f2d8d5c1, amount: 19.9
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:53 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:53.328 request_id=GFwPg8Fvnb4KxMMAABGh [info] ✅ New payment, queueing: 0833dbaf-ea08-4920-9f62-0918f2d8d5c1
+api-2     | 21:56:53.328 request_id=GFwPg8Fvnb4KxMMAABGh [info] Sent 202 in 495µs
+api-2     | 21:56:53.346 request_id=GFwPg8KOquDdZNoAABHB [info] POST /payments
+api-2     | 21:56:53.346 request_id=GFwPg8KOquDdZNoAABHB [info] 🆕 New payment request: 0546b99a-6abf-46f5-88ee-21fafbbf9934, amount: 19.9
+api-2     | 21:56:53.347 request_id=GFwPg8KOquDdZNoAABHB [info] ✅ New payment, queueing: 0546b99a-6abf-46f5-88ee-21fafbbf9934
+api-2     | 21:56:53.347 request_id=GFwPg8KOquDdZNoAABHB [info] Sent 202 in 564µs
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:53 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:53.354 [info] ✅ Successfully persisted 1/1 payments to database
+api-2     | 21:56:53.355 request_id=GFwPg8MYOmu1QLsAABHh [info] POST /payments
+api-2     | 21:56:53.356 request_id=GFwPg8MYOmu1QLsAABHh [info] 🆕 New payment request: e135a8ef-03f8-44d2-a2d0-738a152e7f06, amount: 19.9
+api-2     | 21:56:53.356 request_id=GFwPg8MYOmu1QLsAABHh [info] ✅ New payment, queueing: e135a8ef-03f8-44d2-a2d0-738a152e7f06
+api-2     | 21:56:53.356 request_id=GFwPg8MYOmu1QLsAABHh [info] Sent 202 in 464µs
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:53 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:53.365 request_id=GFwPg8OuqC1Nj58AABIB [info] POST /payments
+api-2     | 21:56:53.365 request_id=GFwPg8OuqC1Nj58AABIB [info] 🆕 New payment request: 9dc9cf33-f221-401f-955c-ac6f2e38c130, amount: 19.9
+api-2     | 21:56:53.366 request_id=GFwPg8OuqC1Nj58AABIB [info] ✅ New payment, queueing: 9dc9cf33-f221-401f-955c-ac6f2e38c130
+api-2     | 21:56:53.366 request_id=GFwPg8OuqC1Nj58AABIB [info] Sent 202 in 463µs
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:53 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:53.389 [info] ✅ Successfully persisted 3/3 payments to database
+api-2     | 21:56:53.403 request_id=GFwPg8XxxF6MwNcAABIh [info] POST /payments
+api-2     | 21:56:53.403 request_id=GFwPg8XxxF6MwNcAABIh [info] 🆕 New payment request: c1ab9553-89f6-4b3a-b1f7-045f2622b405, amount: 19.9
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:53 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:53.404 request_id=GFwPg8XxxF6MwNcAABIh [info] ✅ New payment, queueing: c1ab9553-89f6-4b3a-b1f7-045f2622b405
+api-2     | 21:56:53.404 request_id=GFwPg8XxxF6MwNcAABIh [info] Sent 202 in 541µs
+api-2     | 21:56:53.406 request_id=GFwPg8YarikmpiwAABJB [info] POST /payments
+api-2     | 21:56:53.406 request_id=GFwPg8YarikmpiwAABJB [info] 🆕 New payment request: fcebea2f-ae12-4d7a-858e-df4f61ceb31e, amount: 19.9
+api-2     | 21:56:53.406 request_id=GFwPg8YarikmpiwAABJB [info] ✅ New payment, queueing: fcebea2f-ae12-4d7a-858e-df4f61ceb31e
+api-2     | 21:56:53.406 request_id=GFwPg8YarikmpiwAABJB [info] Sent 202 in 557µs
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:53 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:53.426 [info] ✅ Successfully persisted 1/1 payments to database
+api-2     | 21:56:53.438 request_id=GFwPg8f9TJu6xbwAABJh [info] POST /payments
+api-2     | 21:56:53.438 request_id=GFwPg8f9TJu6xbwAABJh [info] 🆕 New payment request: 3750aeb0-1cc1-4311-bceb-ffbb0cec8b02, amount: 19.9
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:53 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:53.438 request_id=GFwPg8f9TJu6xbwAABJh [info] ✅ New payment, queueing: 3750aeb0-1cc1-4311-bceb-ffbb0cec8b02
+api-2     | 21:56:53.438 request_id=GFwPg8f9TJu6xbwAABJh [info] Sent 202 in 470µs
+api-2     | 21:56:53.456 request_id=GFwPg8kc4_6bNl8AABKB [info] POST /payments
+api-2     | 21:56:53.456 request_id=GFwPg8kc4_6bNl8AABKB [info] 🆕 New payment request: 34428351-2d9b-4e9e-9bf4-6c95daaa3413, amount: 19.9
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:53 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:53.457 request_id=GFwPg8kc4_6bNl8AABKB [info] ✅ New payment, queueing: 34428351-2d9b-4e9e-9bf4-6c95daaa3413
+api-2     | 21:56:53.457 request_id=GFwPg8kc4_6bNl8AABKB [info] Sent 202 in 493µs
+api-2     | 21:56:53.462 [info] ✅ Successfully persisted 2/2 payments to database
+api-2     | 21:56:53.474 request_id=GFwPg8ouhMIsyQ4AABKh [info] POST /payments
+api-2     | 21:56:53.474 request_id=GFwPg8ouhMIsyQ4AABKh [info] 🆕 New payment request: 08264237-b205-4214-b5d6-66025ea597f4, amount: 19.9
+api-2     | 21:56:53.475 request_id=GFwPg8ouhMIsyQ4AABKh [info] ✅ New payment, queueing: 08264237-b205-4214-b5d6-66025ea597f4
+api-2     | 21:56:53.475 request_id=GFwPg8ouhMIsyQ4AABKh [info] Sent 202 in 476µs
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:53 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:53.493 request_id=GFwPg8tLkAIXrFoAABLB [info] POST /payments
+api-2     | 21:56:53.493 request_id=GFwPg8tLkAIXrFoAABLB [info] 🆕 New payment request: 7b7fe28f-ce19-4922-b4f3-4df0836bfc97, amount: 19.9
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:53 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:53.494 request_id=GFwPg8tLkAIXrFoAABLB [info] ✅ New payment, queueing: 7b7fe28f-ce19-4922-b4f3-4df0836bfc97
+api-2     | 21:56:53.494 request_id=GFwPg8tLkAIXrFoAABLB [info] Sent 202 in 596µs
+api-2     | 21:56:53.498 [info] ✅ Successfully persisted 2/2 payments to database
+api-2     | 21:56:53.534 [info] ✅ Successfully persisted 1/1 payments to database
+api-2     | 21:56:53.547 request_id=GFwPg86ABLyQKBEAABLh [info] POST /payments
+api-2     | 21:56:53.547 request_id=GFwPg86ABLyQKBEAABLh [info] 🆕 New payment request: a868fa3b-623f-460c-908e-fc56edbfe68f, amount: 19.9
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:53 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:53.547 request_id=GFwPg86ABLyQKBEAABLh [info] ✅ New payment, queueing: a868fa3b-623f-460c-908e-fc56edbfe68f
+api-2     | 21:56:53.547 request_id=GFwPg86ABLyQKBEAABLh [info] Sent 202 in 559µs
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:53 +0000] "POST /payments HTTP/1.1" 499 0 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:53.566 request_id=GFwPg8-hk4nqp4cAABMB [info] POST /payments
+api-2     | 21:56:53.566 request_id=GFwPg8-hk4nqp4cAABMB [info] 🆕 New payment request: e5b0cd84-0ff8-447b-ae10-5354dca7dcd8, amount: 19.9
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:53 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:53.566 request_id=GFwPg8-hk4nqp4cAABMB [info] ✅ New payment, queueing: e5b0cd84-0ff8-447b-ae10-5354dca7dcd8
+api-2     | 21:56:53.566 request_id=GFwPg8-hk4nqp4cAABMB [info] Sent 202 in 484µs
+api-2     | 21:56:53.569 [info] ✅ Successfully persisted 1/1 payments to database
+nginx-lb  | 2025/08/15 21:56:53 [error] 30#30: *82 connect() failed (113: Host is unreachable) while connecting to upstream, client: 172.20.0.1, server: localhost, request: "POST /payments HTTP/1.1", upstream: "http://172.20.0.4:9999/payments", host: "localhost:9999"
+api-2     | 21:56:53.600 request_id=GFwPg9Gm-kVHsFAAABMh [info] POST /payments
+api-2     | 21:56:53.600 request_id=GFwPg9Gm-kVHsFAAABMh [info] 🆕 New payment request: c436285d-7f8a-4300-a885-6ee0ab1b0fa3, amount: 19.9
+api-2     | 21:56:53.601 request_id=GFwPg9Gm-kVHsFAAABMh [info] ✅ New payment, queueing: c436285d-7f8a-4300-a885-6ee0ab1b0fa3
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:53 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:53.601 request_id=GFwPg9Gm-kVHsFAAABMh [info] Sent 202 in 887µs
+api-2     | 21:56:53.602 request_id=GFwPg9HIaHS4ogkAABNB [info] POST /payments
+api-2     | 21:56:53.602 request_id=GFwPg9HIaHS4ogkAABNB [info] 🆕 New payment request: ae3e9246-161d-4032-b663-7ca0c90c1e7a, amount: 19.9
+api-2     | 21:56:53.602 request_id=GFwPg9HIaHS4ogkAABNB [info] ✅ New payment, queueing: ae3e9246-161d-4032-b663-7ca0c90c1e7a
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:53 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:53.602 request_id=GFwPg9HIaHS4ogkAABNB [info] Sent 202 in 491µs
+api-2     | 21:56:53.605 [info] ✅ Successfully persisted 1/1 payments to database
+api-2     | 21:56:53.642 [info] ✅ Successfully persisted 2/2 payments to database
+api-2     | 21:56:53.655 request_id=GFwPg9T5tqHaCcEAABNh [info] POST /payments
+api-2     | 21:56:53.656 request_id=GFwPg9T5tqHaCcEAABNh [info] 🆕 New payment request: 459782bb-a208-43db-ab22-dc669388e0ff, amount: 19.9
+api-2     | 21:56:53.656 request_id=GFwPg9T5tqHaCcEAABNh [info] ✅ New payment, queueing: 459782bb-a208-43db-ab22-dc669388e0ff
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:53 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:53.656 request_id=GFwPg9T5tqHaCcEAABNh [info] Sent 202 in 418µs
+api-2     | 21:56:53.674 request_id=GFwPg9YbBUmobvEAABOB [info] POST /payments
+api-2     | 21:56:53.674 request_id=GFwPg9YbBUmobvEAABOB [info] 🆕 New payment request: fa966497-ea2d-4244-8b14-caf09ab082c0, amount: 19.9
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:53 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:53.675 request_id=GFwPg9YbBUmobvEAABOB [info] ✅ New payment, queueing: fa966497-ea2d-4244-8b14-caf09ab082c0
+api-2     | 21:56:53.675 request_id=GFwPg9YbBUmobvEAABOB [info] Sent 202 in 474µs
+api-2     | 21:56:53.677 [info] ✅ Successfully persisted 1/1 payments to database
+api-2     | 21:56:53.693 request_id=GFwPg9c6SoQCMQkAABOh [info] POST /payments
+api-2     | 21:56:53.693 request_id=GFwPg9c6SoQCMQkAABOh [info] 🆕 New payment request: 1bf39487-48e9-4bed-af69-78f1eb6d9a3e, amount: 19.9
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:53 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:53.694 request_id=GFwPg9c6SoQCMQkAABOh [info] ✅ New payment, queueing: 1bf39487-48e9-4bed-af69-78f1eb6d9a3e
+api-2     | 21:56:53.694 request_id=GFwPg9c6SoQCMQkAABOh [info] Sent 202 in 512µs
+api-2     | 21:56:53.712 request_id=GFwPg9hXlymixrwAABPB [info] POST /payments
+api-2     | 21:56:53.712 request_id=GFwPg9hXlymixrwAABPB [info] 🆕 New payment request: 418a0e09-bbf6-4a11-b13c-bf4717a69fda, amount: 19.9
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:53 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:53.712 request_id=GFwPg9hXlymixrwAABPB [info] ✅ New payment, queueing: 418a0e09-bbf6-4a11-b13c-bf4717a69fda
+api-2     | 21:56:53.712 request_id=GFwPg9hXlymixrwAABPB [info] Sent 202 in 487µs
+api-2     | 21:56:53.714 [info] ✅ Successfully persisted 2/2 payments to database
+api-2     | 21:56:53.731 request_id=GFwPg9l3WKfTQngAABPh [info] POST /payments
+api-2     | 21:56:53.731 request_id=GFwPg9l3WKfTQngAABPh [info] 🆕 New payment request: 7b781ba7-135f-43d0-ba01-a6fc08e59816, amount: 19.9
+api-2     | 21:56:53.731 request_id=GFwPg9l3WKfTQngAABPh [info] ✅ New payment, queueing: 7b781ba7-135f-43d0-ba01-a6fc08e59816
+api-2     | 21:56:53.731 request_id=GFwPg9l3WKfTQngAABPh [info] Sent 202 in 503µs
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:53 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:53.750 [info] ✅ Successfully persisted 2/2 payments to database
+api-2     | 21:56:53.765 request_id=GFwPg9uBaqrDp5cAABQB [info] POST /payments
+api-2     | 21:56:53.765 request_id=GFwPg9uBaqrDp5cAABQB [info] 🆕 New payment request: 85da8daa-be26-4a42-92c0-1613e9e99167, amount: 19.9
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:53 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:53.765 request_id=GFwPg9uBaqrDp5cAABQB [info] ✅ New payment, queueing: 85da8daa-be26-4a42-92c0-1613e9e99167
+api-2     | 21:56:53.765 request_id=GFwPg9uBaqrDp5cAABQB [info] Sent 202 in 498µs
+api-2     | 21:56:53.784 request_id=GFwPg9yf5W3O24QAABQh [info] POST /payments
+api-2     | 21:56:53.784 request_id=GFwPg9yf5W3O24QAABQh [info] 🆕 New payment request: 9a42e72f-51c5-4681-9a0f-dbda1298d9cf, amount: 19.9
+api-2     | 21:56:53.784 request_id=GFwPg9yf5W3O24QAABQh [info] ✅ New payment, queueing: 9a42e72f-51c5-4681-9a0f-dbda1298d9cf
+api-2     | 21:56:53.784 request_id=GFwPg9yf5W3O24QAABQh [info] Sent 202 in 495µs
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:53 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:53.803 request_id=GFwPg93BMGnwYt4AABRB [info] POST /payments
+api-2     | 21:56:53.803 request_id=GFwPg93BMGnwYt4AABRB [info] 🆕 New payment request: ed416bc8-2fde-4891-a57e-e98a476999c1, amount: 19.9
+api-2     | 21:56:53.803 request_id=GFwPg93BMGnwYt4AABRB [info] ✅ New payment, queueing: ed416bc8-2fde-4891-a57e-e98a476999c1
+api-2     | 21:56:53.803 request_id=GFwPg93BMGnwYt4AABRB [info] Sent 202 in 515µs
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:53 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:53.821 request_id=GFwPg97ViFG0o6UAABRh [info] POST /payments
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:53 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:53.821 request_id=GFwPg97ViFG0o6UAABRh [info] 🆕 New payment request: da6e08e5-96ae-4ade-a69f-3a96925466c7, amount: 19.9
+api-2     | 21:56:53.821 request_id=GFwPg97ViFG0o6UAABRh [info] ✅ New payment, queueing: da6e08e5-96ae-4ade-a69f-3a96925466c7
+api-2     | 21:56:53.821 request_id=GFwPg97ViFG0o6UAABRh [info] Sent 202 in 507µs
+api-2     | 21:56:53.822 [info] ✅ Successfully persisted 3/3 payments to database
+api-2     | 21:56:53.840 request_id=GFwPg9_248kgj4wAABSB [info] POST /payments
+api-2     | 21:56:53.840 request_id=GFwPg9_248kgj4wAABSB [info] 🆕 New payment request: b075a54b-b985-42a5-9f48-8f2491f3ba27, amount: 19.9
+api-2     | 21:56:53.840 request_id=GFwPg9_248kgj4wAABSB [info] ✅ New payment, queueing: b075a54b-b985-42a5-9f48-8f2491f3ba27
+api-2     | 21:56:53.840 request_id=GFwPg9_248kgj4wAABSB [info] Sent 202 in 594µs
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:53 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:53.858 [info] ✅ Successfully persisted 2/2 payments to database
+api-2     | 21:56:53.874 request_id=GFwPg-IE1iKl3rIAABSh [info] POST /payments
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:53 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:53.874 request_id=GFwPg-IE1iKl3rIAABSh [info] 🆕 New payment request: ae6bda9e-b732-41b0-b203-6c344ce5ac44, amount: 19.9
+api-2     | 21:56:53.875 request_id=GFwPg-IE1iKl3rIAABSh [info] ✅ New payment, queueing: ae6bda9e-b732-41b0-b203-6c344ce5ac44
+api-2     | 21:56:53.875 request_id=GFwPg-IE1iKl3rIAABSh [info] Sent 202 in 407µs
+api-2     | 21:56:53.894 [info] ✅ Successfully persisted 1/1 payments to database
+api-2     | 21:56:53.894 request_id=GFwPg-Mzz4FqibsAABTB [info] POST /payments
+api-2     | 21:56:53.894 request_id=GFwPg-Mzz4FqibsAABTB [info] 🆕 New payment request: d393d507-5109-4529-9fbe-047c66ce35eb, amount: 19.9
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:53 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:53.895 request_id=GFwPg-Mzz4FqibsAABTB [info] ✅ New payment, queueing: d393d507-5109-4529-9fbe-047c66ce35eb
+api-2     | 21:56:53.895 request_id=GFwPg-Mzz4FqibsAABTB [info] Sent 202 in 567µs
+api-2     | 21:56:53.911 request_id=GFwPg-Q4mpx2HioAABTh [info] POST /payments
+api-2     | 21:56:53.911 request_id=GFwPg-Q4mpx2HioAABTh [info] 🆕 New payment request: 3eef3631-fe28-40d7-9b68-82c7bb446ab0, amount: 19.9
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:53 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:53.912 request_id=GFwPg-Q4mpx2HioAABTh [info] ✅ New payment, queueing: 3eef3631-fe28-40d7-9b68-82c7bb446ab0
+api-2     | 21:56:53.912 request_id=GFwPg-Q4mpx2HioAABTh [info] Sent 202 in 489µs
+api-2     | 21:56:53.929 [info] ✅ Successfully persisted 2/2 payments to database
+api-2     | 21:56:53.931 request_id=GFwPg-VrwqUp8-MAABUB [info] POST /payments
+api-2     | 21:56:53.931 request_id=GFwPg-VrwqUp8-MAABUB [info] 🆕 New payment request: e40997ff-2371-44c3-8667-0228d62b82fb, amount: 19.9
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:53 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:53.932 request_id=GFwPg-VrwqUp8-MAABUB [info] ✅ New payment, queueing: e40997ff-2371-44c3-8667-0228d62b82fb
+api-2     | 21:56:53.932 request_id=GFwPg-VrwqUp8-MAABUB [info] Sent 202 in 473µs
+api-2     | 21:56:53.949 request_id=GFwPg-Z8gy-xMBMAABUh [info] POST /payments
+api-2     | 21:56:53.949 request_id=GFwPg-Z8gy-xMBMAABUh [info] 🆕 New payment request: 7d74aaf2-a2a7-45ac-8278-4f8d8c929737, amount: 19.9
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:53 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:53.950 request_id=GFwPg-Z8gy-xMBMAABUh [info] ✅ New payment, queueing: 7d74aaf2-a2a7-45ac-8278-4f8d8c929737
+api-2     | 21:56:53.950 request_id=GFwPg-Z8gy-xMBMAABUh [info] Sent 202 in 554µs
+api-2     | 21:56:53.966 [info] ✅ Successfully persisted 2/2 payments to database
+api-2     | 21:56:53.979 request_id=GFwPg-hJGhl7uwcAABVB [info] POST /payments
+api-2     | 21:56:53.979 request_id=GFwPg-hJGhl7uwcAABVB [info] 🆕 New payment request: 342c91de-6411-4a84-a907-43604724523a, amount: 19.9
+api-2     | 21:56:53.980 request_id=GFwPg-hJGhl7uwcAABVB [info] ✅ New payment, queueing: 342c91de-6411-4a84-a907-43604724523a
+api-2     | 21:56:53.980 request_id=GFwPg-hJGhl7uwcAABVB [info] Sent 202 in 440µs
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:53 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:53.983 request_id=GFwPg-iHK26ySL0AABVh [info] POST /payments
+api-2     | 21:56:53.984 request_id=GFwPg-iHK26ySL0AABVh [info] 🆕 New payment request: ea6cf076-9d36-4a4a-8b6a-33030a80d73f, amount: 19.9
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:53 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:53.984 request_id=GFwPg-iHK26ySL0AABVh [info] ✅ New payment, queueing: ea6cf076-9d36-4a4a-8b6a-33030a80d73f
+api-2     | 21:56:53.984 request_id=GFwPg-iHK26ySL0AABVh [info] Sent 202 in 452µs
+api-2     | 21:56:54.002 [info] ✅ Successfully persisted 2/2 payments to database
+api-2     | 21:56:54.002 request_id=GFwPg-mmnZZ4uO4AABWB [info] POST /payments
+api-2     | 21:56:54.002 request_id=GFwPg-mmnZZ4uO4AABWB [info] 🆕 New payment request: be04e33e-ff93-4187-b2b4-95cfec97d1d3, amount: 19.9
+api-2     | 21:56:54.003 request_id=GFwPg-mmnZZ4uO4AABWB [info] ✅ New payment, queueing: be04e33e-ff93-4187-b2b4-95cfec97d1d3
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:54 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:54.003 request_id=GFwPg-mmnZZ4uO4AABWB [info] Sent 202 in 480µs
+api-2     | 21:56:54.010 request_id=GFwPg-obTbQqKNAAABWh [info] POST /payments
+api-2     | 21:56:54.010 request_id=GFwPg-obTbQqKNAAABWh [info] 🆕 New payment request: 5c00a16a-990c-4656-b0f9-006a73182b4e, amount: 19.9
+api-2     | 21:56:54.010 request_id=GFwPg-obTbQqKNAAABWh [info] ✅ New payment, queueing: 5c00a16a-990c-4656-b0f9-006a73182b4e
+api-2     | 21:56:54.010 request_id=GFwPg-obTbQqKNAAABWh [info] Sent 202 in 456µs
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:54 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:54.021 request_id=GFwPg-rBVROBYRQAABXB [info] POST /payments
+api-2     | 21:56:54.021 request_id=GFwPg-rBVROBYRQAABXB [info] 🆕 New payment request: fa5508b3-4632-42d7-8028-e8b5afa39f7d, amount: 19.9
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:54 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:54.021 request_id=GFwPg-rBVROBYRQAABXB [info] ✅ New payment, queueing: fa5508b3-4632-42d7-8028-e8b5afa39f7d
+api-2     | 21:56:54.021 request_id=GFwPg-rBVROBYRQAABXB [info] Sent 202 in 571µs
+api-2     | 21:56:54.037 [info] ✅ Successfully persisted 2/2 payments to database
+api-2     | 21:56:54.059 request_id=GFwPg-0HWdxrGQQAABXh [info] POST /payments
+api-2     | 21:56:54.059 request_id=GFwPg-0HWdxrGQQAABXh [info] 🆕 New payment request: 891d6e0e-faed-41ea-a976-5bba0a9e7390, amount: 19.9
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:54 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:54.060 request_id=GFwPg-0HWdxrGQQAABXh [info] ✅ New payment, queueing: 891d6e0e-faed-41ea-a976-5bba0a9e7390
+api-2     | 21:56:54.060 request_id=GFwPg-0HWdxrGQQAABXh [info] Sent 202 in 597µs
+api-2     | 21:56:54.074 [info] ✅ Successfully persisted 2/2 payments to database
+api-2     | 21:56:54.080 request_id=GFwPg-5JM5W7CEoAABYB [info] POST /payments
+api-2     | 21:56:54.080 request_id=GFwPg-5JM5W7CEoAABYB [info] 🆕 New payment request: 6bb42252-e95b-4631-8a62-3cc0e3e3bb9c, amount: 19.9
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:54 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:54.081 request_id=GFwPg-5JM5W7CEoAABYB [info] ✅ New payment, queueing: 6bb42252-e95b-4631-8a62-3cc0e3e3bb9c
+api-2     | 21:56:54.081 request_id=GFwPg-5JM5W7CEoAABYB [info] Sent 202 in 594µs
+api-2     | 21:56:54.093 request_id=GFwPg-8G5OVzZd4AABYh [info] POST /payments
+api-2     | 21:56:54.093 request_id=GFwPg-8G5OVzZd4AABYh [info] 🆕 New payment request: a53ca323-4127-49a0-b81e-262e0afb41fd, amount: 19.9
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:54 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:54.093 request_id=GFwPg-8G5OVzZd4AABYh [info] ✅ New payment, queueing: a53ca323-4127-49a0-b81e-262e0afb41fd
+api-2     | 21:56:54.093 request_id=GFwPg-8G5OVzZd4AABYh [info] Sent 202 in 528µs
+api-2     | 21:56:54.110 [info] ✅ Successfully persisted 2/2 payments to database
+api-2     | 21:56:54.111 request_id=GFwPg_AmIN6_5qQAABZB [info] POST /payments
+api-2     | 21:56:54.111 request_id=GFwPg_AmIN6_5qQAABZB [info] 🆕 New payment request: 51a3a2c8-18f2-4b01-96fe-c8ffc85039b4, amount: 19.9
+api-2     | 21:56:54.112 request_id=GFwPg_AmIN6_5qQAABZB [info] ✅ New payment, queueing: 51a3a2c8-18f2-4b01-96fe-c8ffc85039b4
+api-2     | 21:56:54.112 request_id=GFwPg_AmIN6_5qQAABZB [info] Sent 202 in 467µs
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:54 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:54.131 request_id=GFwPg_FYcMwMOeEAABZh [info] POST /payments
+api-2     | 21:56:54.131 request_id=GFwPg_FYcMwMOeEAABZh [info] 🆕 New payment request: 04db3858-f639-4238-9c2b-cc7578ac33d1, amount: 19.9
+nginx-lb  | 172.20.0.1 - - [15/Aug/2025:21:56:54 +0000] "POST /payments HTTP/1.1" 202 21 "-" "Grafana k6/1.1.0"
+api-2     | 21:56:54.132 request_id=GFwPg_FYcMwMOeEAABZh [info] ✅ New payment, queueing: 04db3858-f639-4238-9c2b-cc7578ac33d1
+api-2     | 21:56:54.132 request_id=GFwPg_FYcMwMOeEAABZh [info] Sent 202 in 555µs
+api-2     | 21:56:54.145 [info] ✅ Successfully persisted 2/2 payments to database
+log truncated at line 1000

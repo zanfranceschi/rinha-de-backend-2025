@@ -1,0 +1,98 @@
+services:
+  postgres:
+    image: postgres
+    container_name: db
+    volumes:
+      - ./create-table.sql:/docker-entrypoint-initdb.d/create-table.sql
+    environment:
+      POSTGRES_PASSWORD: "dbpassword"
+      POSTGRES_DB: db_payment
+    ports:
+      - "5432:5432"
+    networks:
+      - backend
+      - payment-processor
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 2s
+        max_attempts: 10
+        window: 5s
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: "110MB"  
+
+  redis:
+    image: redis
+    container_name: cache
+    ports:
+      - "6379:6379"
+    restart: on-failure
+    networks:
+      - backend
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          cpus: "0.1"
+          memory: "10MB"  
+
+  api-1: &api-service
+    image: brunoinacio45/rinhabackend2025:1089f65
+    container_name: api-1
+    expose:
+      - "8080"
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ConnectionStrings__DefaultConnection: "Host=postgres;Port=5432;Database=db_payment;Username=postgres;Password=dbpassword"
+    depends_on:
+      - postgres
+      - redis
+    networks:
+      - backend
+      - payment-processor
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 2s
+        max_attempts: 10
+        window: 5s
+      resources:
+        limits:
+          cpus: "0.4"
+          memory: "105MB"  
+
+  api-2:
+    <<: *api-service
+    container_name: api-2
+    deploy:
+      resources:
+          limits:
+            cpus: "0.3"
+            memory: "105MB"
+
+  load-balancer:
+    container_name: load-balancer
+    image: nginx:latest
+    ports:
+      - "9999:80"  
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - api-1
+      - api-2
+    networks:
+      - backend
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          cpus: "0.2"
+          memory: "20MB"  
+
+networks:
+  backend:
+    driver: bridge
+  payment-processor:
+    external: true

@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   api1:
-    image: jorgedevsoftware/jorge-rinha:7.0
+    image: jorgedevsoftware/jorge-rinha:10.3-bytes-15f
     container_name: api1
     environment:
      - URL_INSTANCE=http://api2:8080/payments-summary/internal
@@ -14,11 +14,11 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.6"
-          memory: "140MB"
+          cpus: "0.65"
+          memory: "150MB"
 
   api2:
-    image: jorgedevsoftware/jorge-rinha:7.0
+    image: jorgedevsoftware/jorge-rinha:10.3-bytes-15f
     container_name: api2
     environment:
      - URL_INSTANCE=http://api1:8080/payments-summary/internal
@@ -30,8 +30,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.6"
-          memory: "140MB"
+          cpus: "0.65"
+          memory: "150MB"
 
   haproxy:
     image: haproxy:latest
@@ -48,7 +48,7 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.3"
+          cpus: "0.2"
           memory: "40MB"
           
 networks:

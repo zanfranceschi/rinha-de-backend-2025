@@ -1,0 +1,347 @@
+
+ Network alcides-e-antonio_backend  Creating
+ Network alcides-e-antonio_backend  Created
+ Container alcides-e-antonio-db-1  Creating
+ Container alcides-e-antonio-db-1  Created
+ Container alcides-e-antonio-api01-1  Creating
+ Container alcides-e-antonio-api02-1  Creating
+ Container alcides-e-antonio-api02-1  Created
+ Container alcides-e-antonio-api01-1  Created
+ Container alcides-e-antonio-elb-1  Creating
+ Container alcides-e-antonio-elb-1  Created
+Attaching to api01-1, api02-1, db-1, elb-1
+db-1  | The files belonging to this database system will be owned by user "postgres".
+db-1  | This user must also own the server process.
+db-1  | 
+db-1  | The database cluster will be initialized with locale "en_US.utf8".
+db-1  | The default database encoding has accordingly been set to "UTF8".
+db-1  | The default text search configuration will be set to "english".
+db-1  | 
+db-1  | Data page checksums are disabled.
+db-1  | 
+db-1  | fixing permissions on existing directory /var/lib/postgresql/data ... ok
+db-1  | creating subdirectories ... ok
+db-1  | selecting dynamic shared memory implementation ... posix
+db-1  | selecting default max_connections ... 100
+db-1  | selecting default shared_buffers ... 128MB
+db-1  | selecting default time zone ... Etc/UTC
+db-1  | creating configuration files ... ok
+db-1  | running bootstrap script ... ok
+elb-1  | [NOTICE]   (1) : Initializing new worker (8)
+elb-1  | [NOTICE]   (1) : Loading success.
+db-1   | performing post-bootstrap initialization ... ok
+db-1   | initdb: warning: enabling "trust" authentication for local connections
+db-1   | initdb: hint: You can change this by editing pg_hba.conf or using the option -A, or --auth-local and --auth-host, the next time you run initdb.
+db-1   | syncing data to disk ... ok
+db-1   | 
+db-1   | 
+db-1   | Success. You can now start the database server using:
+db-1   | 
+db-1   |     pg_ctl -D /var/lib/postgresql/data -l logfile start
+db-1   | 
+db-1   | waiting for server to start....2025-08-17 21:44:00.884 UTC [48] LOG:  starting PostgreSQL 16.9 (Debian 16.9-1.pgdg130+1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 14.2.0-19) 14.2.0, 64-bit
+db-1   | 2025-08-17 21:44:00.885 UTC [48] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+db-1   | 2025-08-17 21:44:00.888 UTC [51] LOG:  database system was shut down at 2025-08-17 21:44:00 UTC
+db-1   | 2025-08-17 21:44:00.892 UTC [48] LOG:  database system is ready to accept connections
+db-1   |  done
+db-1   | server started
+api02-1  | 2025-08-17 21:44:01.150 [main] DEBUG i.v.c.internal.logging.LoggerFactory - Using io.vertx.core.logging.SLF4JLogDelegateFactory
+api01-1  | 2025-08-17 21:44:01.176 [main] DEBUG i.v.c.internal.logging.LoggerFactory - Using io.vertx.core.logging.SLF4JLogDelegateFactory
+api01-1  | 2025-08-17 21:44:01.779 [main] DEBUG i.n.u.i.l.InternalLoggerFactory - Using SLF4J as the default logging framework
+api01-1  | 2025-08-17 21:44:01.783 [main] DEBUG i.n.util.internal.PlatformDependent0 - Java version: 21
+api01-1  | 2025-08-17 21:44:01.784 [main] DEBUG i.n.util.internal.PlatformDependent0 - -Dio.netty.noUnsafe: false
+api01-1  | 2025-08-17 21:44:01.787 [main] DEBUG i.n.util.internal.PlatformDependent0 - sun.misc.Unsafe.theUnsafe: available
+api01-1  | 2025-08-17 21:44:01.789 [main] DEBUG i.n.util.internal.PlatformDependent0 - sun.misc.Unsafe base methods: all available
+api01-1  | 2025-08-17 21:44:01.790 [main] DEBUG i.n.util.internal.PlatformDependent0 - java.nio.Buffer.address: available
+api01-1  | 2025-08-17 21:44:01.791 [main] DEBUG i.n.util.internal.PlatformDependent0 - direct buffer constructor: unavailable: Reflective setAccessible(true) disabled
+api01-1  | 2025-08-17 21:44:01.791 [main] DEBUG i.n.util.internal.PlatformDependent0 - java.nio.Bits.unaligned: available, true
+api01-1  | 2025-08-17 21:44:01.792 [main] DEBUG i.n.util.internal.PlatformDependent0 - jdk.internal.misc.Unsafe.allocateUninitializedArray(int): unavailable: symbolic reference class is not accessible: class jdk.internal.misc.Unsafe, from class io.netty.util.internal.PlatformDependent0 (unnamed module @238d7bbb)
+api01-1  | 2025-08-17 21:44:01.792 [main] DEBUG i.n.util.internal.PlatformDependent0 - java.nio.DirectByteBuffer.<init>(long, {int,long}): unavailable
+api01-1  | 2025-08-17 21:44:01.792 [main] DEBUG i.n.util.internal.PlatformDependent - sun.misc.Unsafe: available
+api01-1  | 2025-08-17 21:44:01.793 [main] DEBUG i.n.util.internal.PlatformDependent - -Dio.netty.tmpdir: /tmp (java.io.tmpdir)
+api01-1  | 2025-08-17 21:44:01.793 [main] DEBUG i.n.util.internal.PlatformDependent - -Dio.netty.bitMode: 64 (sun.arch.data.model)
+api01-1  | 2025-08-17 21:44:01.793 [main] DEBUG i.n.util.internal.PlatformDependent - -Dio.netty.maxDirectMemory: -1 bytes
+api02-1  | 2025-08-17 21:44:01.837 [main] DEBUG i.n.u.i.l.InternalLoggerFactory - Using SLF4J as the default logging framework
+api02-1  | 2025-08-17 21:44:01.840 [main] DEBUG i.n.util.internal.PlatformDependent0 - Java version: 21
+api02-1  | 2025-08-17 21:44:01.840 [main] DEBUG i.n.util.internal.PlatformDependent0 - -Dio.netty.noUnsafe: false
+api02-1  | 2025-08-17 21:44:01.842 [main] DEBUG i.n.util.internal.PlatformDependent0 - sun.misc.Unsafe.theUnsafe: available
+api02-1  | 2025-08-17 21:44:01.843 [main] DEBUG i.n.util.internal.PlatformDependent0 - sun.misc.Unsafe base methods: all available
+api02-1  | 2025-08-17 21:44:01.843 [main] DEBUG i.n.util.internal.PlatformDependent0 - java.nio.Buffer.address: available
+api02-1  | 2025-08-17 21:44:01.844 [main] DEBUG i.n.util.internal.PlatformDependent0 - direct buffer constructor: unavailable: Reflective setAccessible(true) disabled
+api02-1  | 2025-08-17 21:44:01.844 [main] DEBUG i.n.util.internal.PlatformDependent0 - java.nio.Bits.unaligned: available, true
+api02-1  | 2025-08-17 21:44:01.845 [main] DEBUG i.n.util.internal.PlatformDependent0 - jdk.internal.misc.Unsafe.allocateUninitializedArray(int): unavailable: symbolic reference class is not accessible: class jdk.internal.misc.Unsafe, from class io.netty.util.internal.PlatformDependent0 (unnamed module @238d7bbb)
+api02-1  | 2025-08-17 21:44:01.845 [main] DEBUG i.n.util.internal.PlatformDependent0 - java.nio.DirectByteBuffer.<init>(long, {int,long}): unavailable
+api02-1  | 2025-08-17 21:44:01.845 [main] DEBUG i.n.util.internal.PlatformDependent - sun.misc.Unsafe: available
+api02-1  | 2025-08-17 21:44:01.845 [main] DEBUG i.n.util.internal.PlatformDependent - -Dio.netty.tmpdir: /tmp (java.io.tmpdir)
+api02-1  | 2025-08-17 21:44:01.845 [main] DEBUG i.n.util.internal.PlatformDependent - -Dio.netty.bitMode: 64 (sun.arch.data.model)
+api02-1  | 2025-08-17 21:44:01.846 [main] DEBUG i.n.util.internal.PlatformDependent - -Dio.netty.maxDirectMemory: -1 bytes
+api02-1  | 2025-08-17 21:44:01.848 [main] DEBUG io.netty.util.internal.CleanerJava9 - java.nio.ByteBuffer.cleaner(): available
+api02-1  | 2025-08-17 21:44:01.849 [main] DEBUG i.n.util.internal.PlatformDependent - -Dio.netty.noPreferDirect: false
+api01-1  | 2025-08-17 21:44:01.872 [main] DEBUG io.netty.util.internal.CleanerJava9 - java.nio.ByteBuffer.cleaner(): available
+api01-1  | 2025-08-17 21:44:01.872 [main] DEBUG i.n.util.internal.PlatformDependent - -Dio.netty.noPreferDirect: false
+api01-1  | 2025-08-17 21:44:02.211 [main] DEBUG io.netty.util.ResourceLeakDetector - -Dio.netty.leakDetection.level: simple
+api01-1  | 2025-08-17 21:44:02.212 [main] DEBUG io.netty.util.ResourceLeakDetector - -Dio.netty.leakDetection.targetRecords: 4
+api02-1  | 2025-08-17 21:44:02.257 [main] DEBUG io.netty.util.ResourceLeakDetector - -Dio.netty.leakDetection.level: simple
+api02-1  | 2025-08-17 21:44:02.258 [main] DEBUG io.netty.util.ResourceLeakDetector - -Dio.netty.leakDetection.targetRecords: 4
+api01-1  | 2025-08-17 21:44:02.299 [main] DEBUG i.n.c.MultithreadEventLoopGroup - -Dio.netty.eventLoopThreads: 8
+api01-1  | 2025-08-17 21:44:02.302 [main] DEBUG io.netty.channel.nio.NioIoHandler - -Dio.netty.noKeySetOptimization: false
+api01-1  | 2025-08-17 21:44:02.302 [main] DEBUG io.netty.channel.nio.NioIoHandler - -Dio.netty.selectorAutoRebuildThreshold: 512
+api02-1  | 2025-08-17 21:44:02.349 [main] DEBUG i.n.c.MultithreadEventLoopGroup - -Dio.netty.eventLoopThreads: 8
+api02-1  | 2025-08-17 21:44:02.351 [main] DEBUG io.netty.channel.nio.NioIoHandler - -Dio.netty.noKeySetOptimization: false
+api02-1  | 2025-08-17 21:44:02.351 [main] DEBUG io.netty.channel.nio.NioIoHandler - -Dio.netty.selectorAutoRebuildThreshold: 512
+api01-1  | 2025-08-17 21:44:02.378 [main] DEBUG i.n.u.concurrent.GlobalEventExecutor - -Dio.netty.globalEventExecutor.quietPeriodSeconds: 1
+api01-1  | 2025-08-17 21:44:02.385 [main] DEBUG i.n.u.i.InternalThreadLocalMap - -Dio.netty.threadLocalMap.stringBuilder.initialSize: 1024
+api01-1  | 2025-08-17 21:44:02.386 [main] DEBUG i.n.u.i.InternalThreadLocalMap - -Dio.netty.threadLocalMap.stringBuilder.maxSize: 4096
+api02-1  | 2025-08-17 21:44:02.437 [main] DEBUG i.n.u.concurrent.GlobalEventExecutor - -Dio.netty.globalEventExecutor.quietPeriodSeconds: 1
+api02-1  | 2025-08-17 21:44:02.442 [main] DEBUG i.n.u.i.InternalThreadLocalMap - -Dio.netty.threadLocalMap.stringBuilder.initialSize: 1024
+api02-1  | 2025-08-17 21:44:02.442 [main] DEBUG i.n.u.i.InternalThreadLocalMap - -Dio.netty.threadLocalMap.stringBuilder.maxSize: 4096
+api02-1  | 2025-08-17 21:44:02.457 [main] DEBUG i.n.r.d.DefaultDnsServerAddressStreamProvider - Default DNS servers: [/127.0.0.11:53] (sun.net.dns.ResolverConfiguration)
+api01-1  | 2025-08-17 21:44:02.473 [main] DEBUG i.n.r.d.DefaultDnsServerAddressStreamProvider - Default DNS servers: [/127.0.0.11:53] (sun.net.dns.ResolverConfiguration)
+api02-1  | 2025-08-17 21:44:02.547 [main] DEBUG io.netty.util.NetUtil - -Djava.net.preferIPv4Stack: false
+api02-1  | 2025-08-17 21:44:02.547 [main] DEBUG io.netty.util.NetUtil - -Djava.net.preferIPv6Addresses: false
+api02-1  | 2025-08-17 21:44:02.550 [main] DEBUG i.netty.util.NetUtilInitializations - Loopback interface: lo (lo, 0:0:0:0:0:0:0:1%lo)
+api02-1  | 2025-08-17 21:44:02.550 [main] DEBUG io.netty.util.NetUtil - /proc/sys/net/core/somaxconn: 4096
+api02-1  | 2025-08-17 21:44:02.551 [main] DEBUG i.netty.resolver.dns.DnsNameResolver - Default ResolvedAddressTypes: IPV4_ONLY
+api02-1  | 2025-08-17 21:44:02.551 [main] DEBUG i.netty.resolver.dns.DnsNameResolver - Localhost address: localhost/127.0.0.1
+api02-1  | 2025-08-17 21:44:02.551 [main] DEBUG i.netty.resolver.dns.DnsNameResolver - Windows hostname: null
+api01-1  | 2025-08-17 21:44:02.574 [main] DEBUG io.netty.util.NetUtil - -Djava.net.preferIPv4Stack: false
+api01-1  | 2025-08-17 21:44:02.574 [main] DEBUG io.netty.util.NetUtil - -Djava.net.preferIPv6Addresses: false
+api01-1  | 2025-08-17 21:44:02.576 [main] DEBUG i.netty.util.NetUtilInitializations - Loopback interface: lo (lo, 0:0:0:0:0:0:0:1%lo)
+api01-1  | 2025-08-17 21:44:02.577 [main] DEBUG io.netty.util.NetUtil - /proc/sys/net/core/somaxconn: 4096
+api01-1  | 2025-08-17 21:44:02.577 [main] DEBUG i.netty.resolver.dns.DnsNameResolver - Default ResolvedAddressTypes: IPV4_ONLY
+api01-1  | 2025-08-17 21:44:02.577 [main] DEBUG i.netty.resolver.dns.DnsNameResolver - Localhost address: localhost/127.0.0.1
+api01-1  | 2025-08-17 21:44:02.577 [main] DEBUG i.netty.resolver.dns.DnsNameResolver - Windows hostname: null
+api01-1  | 2025-08-17 21:44:02.581 [main] DEBUG i.netty.resolver.dns.DnsNameResolver - Default search domains: [ec2.internal]
+api01-1  | 2025-08-17 21:44:02.582 [main] DEBUG i.netty.resolver.dns.DnsNameResolver - Default UnixResolverOptions{ndots=0, timeout=5, attempts=16}
+api01-1  | 2025-08-17 21:44:02.595 [main] DEBUG i.n.r.DefaultHostsFileEntriesResolver - -Dio.netty.hostsFileRefreshInterval: 0
+api02-1  | 2025-08-17 21:44:02.635 [main] DEBUG i.netty.resolver.dns.DnsNameResolver - Default search domains: [ec2.internal]
+api02-1  | 2025-08-17 21:44:02.636 [main] DEBUG i.netty.resolver.dns.DnsNameResolver - Default UnixResolverOptions{ndots=0, timeout=5, attempts=16}
+api02-1  | 2025-08-17 21:44:02.642 [main] DEBUG i.n.r.DefaultHostsFileEntriesResolver - -Dio.netty.hostsFileRefreshInterval: 0
+db-1     | CREATE DATABASE
+db-1     | 
+db-1     | 
+db-1     | /usr/local/bin/docker-entrypoint.sh: running /docker-entrypoint-initdb.d/init.sql
+db-1     | CREATE TABLE
+db-1     | 
+db-1     | 
+db-1     | waiting for server to shut down...2025-08-17 21:44:02.785 UTC [48] LOG:  received fast shutdown request
+db-1     | .2025-08-17 21:44:02.785 UTC [48] LOG:  aborting any active transactions
+db-1     | 2025-08-17 21:44:02.789 UTC [48] LOG:  background worker "logical replication launcher" (PID 54) exited with exit code 1
+db-1     | 2025-08-17 21:44:02.789 UTC [49] LOG:  shutting down
+db-1     | 2025-08-17 21:44:02.789 UTC [49] LOG:  checkpoint starting: shutdown immediate
+db-1     | 2025-08-17 21:44:02.799 UTC [49] LOG:  checkpoint complete: wrote 926 buffers (5.7%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.010 s, sync=0.001 s, total=0.010 s; sync files=0, longest=0.000 s, average=0.000 s; distance=4280 kB, estimate=4280 kB; lsn=0/1920D18, redo lsn=0/1920D18
+db-1     | 2025-08-17 21:44:02.807 UTC [48] LOG:  database system is shut down
+api02-1  | 2025-08-17 21:44:02.864 [vert.x-eventloop-thread-1] DEBUG i.n.util.internal.PlatformDependent - org.jctools-core.MpscChunkedArrayQueue: available
+api01-1  | 2025-08-17 21:44:02.884 [vert.x-eventloop-thread-1] DEBUG i.n.util.internal.PlatformDependent - org.jctools-core.MpscChunkedArrayQueue: available
+db-1     |  done
+db-1     | server stopped
+db-1     | 
+db-1     | PostgreSQL init process complete; ready for start up.
+db-1     | 
+db-1     | 2025-08-17 21:44:02.907 UTC [1] LOG:  starting PostgreSQL 16.9 (Debian 16.9-1.pgdg130+1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 14.2.0-19) 14.2.0, 64-bit
+db-1     | 2025-08-17 21:44:02.908 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+db-1     | 2025-08-17 21:44:02.908 UTC [1] LOG:  listening on IPv6 address "::", port 5432
+db-1     | 2025-08-17 21:44:02.908 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+db-1     | 2025-08-17 21:44:02.910 UTC [66] LOG:  database system was shut down at 2025-08-17 21:44:02 UTC
+db-1     | 2025-08-17 21:44:02.915 UTC [1] LOG:  database system is ready to accept connections
+api01-1  | 2025-08-17 21:44:03.281 [vert.x-eventloop-thread-1] DEBUG i.n.buffer.AdaptiveByteBufAllocator - -Dio.netty.allocator.useCachedMagazinesForNonEventLoopThreads: false
+api02-1  | 2025-08-17 21:44:03.336 [vert.x-eventloop-thread-1] DEBUG i.n.buffer.AdaptiveByteBufAllocator - -Dio.netty.allocator.useCachedMagazinesForNonEventLoopThreads: false
+api02-1  | 2025-08-17 21:44:03.345 [vert.x-eventloop-thread-1] DEBUG io.netty.util.Recycler - -Dio.netty.recycler.maxCapacityPerThread: 4096
+api02-1  | 2025-08-17 21:44:03.345 [vert.x-eventloop-thread-1] DEBUG io.netty.util.Recycler - -Dio.netty.recycler.ratio: 8
+api02-1  | 2025-08-17 21:44:03.345 [vert.x-eventloop-thread-1] DEBUG io.netty.util.Recycler - -Dio.netty.recycler.chunkSize: 32
+api02-1  | 2025-08-17 21:44:03.345 [vert.x-eventloop-thread-1] DEBUG io.netty.util.Recycler - -Dio.netty.recycler.blocking: false
+api02-1  | 2025-08-17 21:44:03.346 [vert.x-eventloop-thread-1] DEBUG io.netty.util.Recycler - -Dio.netty.recycler.batchFastThreadLocalOnly: true
+api02-1  | 2025-08-17 21:44:03.348 [vert.x-eventloop-thread-1] DEBUG io.netty.buffer.ByteBufUtil - -Dio.netty.allocator.type: adaptive
+api02-1  | 2025-08-17 21:44:03.348 [vert.x-eventloop-thread-1] DEBUG io.netty.buffer.ByteBufUtil - -Dio.netty.threadLocalDirectBufferSize: 0
+api02-1  | 2025-08-17 21:44:03.348 [vert.x-eventloop-thread-1] DEBUG io.netty.buffer.ByteBufUtil - -Dio.netty.maxThreadLocalCharBufferSize: 16384
+api01-1  | 2025-08-17 21:44:03.371 [vert.x-eventloop-thread-1] DEBUG io.netty.util.Recycler - -Dio.netty.recycler.maxCapacityPerThread: 4096
+api01-1  | 2025-08-17 21:44:03.371 [vert.x-eventloop-thread-1] DEBUG io.netty.util.Recycler - -Dio.netty.recycler.ratio: 8
+api01-1  | 2025-08-17 21:44:03.371 [vert.x-eventloop-thread-1] DEBUG io.netty.util.Recycler - -Dio.netty.recycler.chunkSize: 32
+api01-1  | 2025-08-17 21:44:03.371 [vert.x-eventloop-thread-1] DEBUG io.netty.util.Recycler - -Dio.netty.recycler.blocking: false
+api01-1  | 2025-08-17 21:44:03.372 [vert.x-eventloop-thread-1] DEBUG io.netty.util.Recycler - -Dio.netty.recycler.batchFastThreadLocalOnly: true
+api01-1  | 2025-08-17 21:44:03.374 [vert.x-eventloop-thread-1] DEBUG io.netty.buffer.ByteBufUtil - -Dio.netty.allocator.type: adaptive
+api01-1  | 2025-08-17 21:44:03.374 [vert.x-eventloop-thread-1] DEBUG io.netty.buffer.ByteBufUtil - -Dio.netty.threadLocalDirectBufferSize: 0
+api01-1  | 2025-08-17 21:44:03.374 [vert.x-eventloop-thread-1] DEBUG io.netty.buffer.ByteBufUtil - -Dio.netty.maxThreadLocalCharBufferSize: 16384
+api01-1  | 2025-08-17 21:44:03.480 [vert.x-eventloop-thread-1] DEBUG io.netty.channel.DefaultChannelId - -Dio.netty.processId: 1 (auto-detected)
+api01-1  | 2025-08-17 21:44:03.482 [vert.x-eventloop-thread-1] DEBUG io.netty.channel.DefaultChannelId - -Dio.netty.machineId: 8a:7c:db:ff:fe:0d:81:df (auto-detected)
+api01-1  | 2025-08-17 21:44:03.502 [vert.x-eventloop-thread-1] DEBUG i.n.b.ChannelInitializerExtensions - -Dio.netty.bootstrap.extensions: null
+api02-1  | 2025-08-17 21:44:03.539 [vert.x-eventloop-thread-1] DEBUG io.netty.channel.DefaultChannelId - -Dio.netty.processId: 1 (auto-detected)
+api02-1  | 2025-08-17 21:44:03.541 [vert.x-eventloop-thread-1] DEBUG io.netty.channel.DefaultChannelId - -Dio.netty.machineId: da:99:8e:ff:fe:b7:7d:8b (auto-detected)
+api02-1  | 2025-08-17 21:44:03.553 [vert.x-eventloop-thread-1] DEBUG i.n.b.ChannelInitializerExtensions - -Dio.netty.bootstrap.extensions: null
+api01-1  | 2025-08-17 21:44:03.577 [vert.x-eventloop-thread-1] INFO  b.c.r.paymentgateway.MainVerticle - HTTP server started on port 8080
+api01-1  | 2025-08-17 21:44:03.578 [main] INFO  i.v.l.application.VertxApplication - Succeeded in deploying verticle
+api02-1  | 2025-08-17 21:44:03.644 [vert.x-eventloop-thread-1] INFO  b.c.r.paymentgateway.MainVerticle - HTTP server started on port 8080
+api02-1  | 2025-08-17 21:44:03.645 [main] INFO  i.v.l.application.VertxApplication - Succeeded in deploying verticle
+api01-1  | 2025-08-17 21:44:04.380 [vert.x-eventloop-thread-1] DEBUG io.netty.buffer.AbstractByteBuf - -Dio.netty.buffer.checkAccessible: true
+api01-1  | 2025-08-17 21:44:04.380 [vert.x-eventloop-thread-1] DEBUG io.netty.buffer.AbstractByteBuf - -Dio.netty.buffer.checkBounds: true
+api01-1  | 2025-08-17 21:44:04.381 [vert.x-eventloop-thread-1] DEBUG i.n.util.ResourceLeakDetectorFactory - Loaded default ResourceLeakDetector: io.netty.util.ResourceLeakDetector@79342050
+api01-1  | 2025-08-17 21:44:04.596 [vert.x-eventloop-thread-1] DEBUG i.n.h.c.compression.ZlibCodecFactory - -Dio.netty.noJdkZlibDecoder: false
+api01-1  | 2025-08-17 21:44:04.596 [vert.x-eventloop-thread-1] DEBUG i.n.h.c.compression.ZlibCodecFactory - -Dio.netty.noJdkZlibEncoder: false
+api01-1  | 2025-08-17 21:44:04.597 [vert.x-eventloop-thread-1] DEBUG i.n.h.c.compression.ZlibCodecFactory - JZlib not in the classpath; the only window bits supported value will be 15
+api01-1  | 2025-08-17 21:44:05.071 [vert.x-eventloop-thread-1] DEBUG i.n.resolver.dns.DnsResolveContext - -Dio.netty.resolver.dns.tryCnameOnAddressLookups: false
+api01-1  | 2025-08-17 21:44:05.074 [vert.x-eventloop-thread-1] DEBUG i.netty.resolver.dns.DnsQueryContext - -Dio.netty.resolver.dns.idReuseOnTimeoutDelayMillis: 10000
+api01-1  | 2025-08-17 21:44:05.080 [vert.x-eventloop-thread-1] DEBUG i.n.util.ResourceLeakDetectorFactory - Loaded default ResourceLeakDetector: io.netty.util.ResourceLeakDetector@28e40eca
+api01-1  | 2025-08-17 21:44:05.175 [vert.x-eventloop-thread-1] DEBUG i.netty.resolver.dns.DnsQueryContext - [id: 0xbdd5fc41, L:/[0:0:0:0:0:0:0:0]:45795] WRITE: UDP, [8964: /127.0.0.11:53], DefaultDnsQuestion(db.ec2.internal. IN A)
+api01-1  | 2025-08-17 21:44:05.183 [vert.x-eventloop-thread-1] DEBUG i.netty.resolver.dns.DnsNameResolver - [id: 0xbdd5fc41, L:/[0:0:0:0:0:0:0:0]:45795] RECEIVED: UDP [8964: /127.0.0.11:53], DatagramDnsResponse(from: /127.0.0.11:53, to: /[0:0:0:0:0:0:0:0]:45795, id: 8964, QUERY(0), NXDomain(3), RD RA)
+api01-1  | 	DefaultDnsQuestion(db.ec2.internal. IN A)
+api01-1  | 	DefaultDnsRawRecord(ec2.internal. 60 IN SOA 49B)
+api01-1  | 2025-08-17 21:44:05.183 [vert.x-eventloop-thread-1] DEBUG i.netty.resolver.dns.DnsQueryContext - [id: 0xbdd5fc41, L:/[0:0:0:0:0:0:0:0]:45795] WRITE: UDP, [16191: /127.0.0.11:53], DefaultDnsQuestion(db. IN A)
+api01-1  | 2025-08-17 21:44:05.184 [vert.x-eventloop-thread-1] DEBUG i.netty.resolver.dns.DnsNameResolver - [id: 0xbdd5fc41, L:/[0:0:0:0:0:0:0:0]:45795] RECEIVED: UDP [16191: /127.0.0.11:53], DatagramDnsResponse(from: /127.0.0.11:53, to: /[0:0:0:0:0:0:0:0]:45795, id: 16191, QUERY(0), NoError(0), RD RA)
+api01-1  | 	DefaultDnsQuestion(db. IN A)
+api01-1  | 	DefaultDnsRawRecord(db. 600 IN A 4B)
+api01-1  | 2025-08-17 21:44:05.283 [vert.x-eventloop-thread-1] DEBUG i.v.p.i.a.scram.ScramAuthentication - Scram authentication is available com.ongres.scram.client.ScramClient$Builder@70fc8cc7
+api02-1  | 2025-08-17 21:44:16.947 [vert.x-eventloop-thread-1] DEBUG io.netty.buffer.AbstractByteBuf - -Dio.netty.buffer.checkAccessible: true
+api02-1  | 2025-08-17 21:44:16.947 [vert.x-eventloop-thread-1] DEBUG io.netty.buffer.AbstractByteBuf - -Dio.netty.buffer.checkBounds: true
+api02-1  | 2025-08-17 21:44:16.949 [vert.x-eventloop-thread-1] DEBUG i.n.util.ResourceLeakDetectorFactory - Loaded default ResourceLeakDetector: io.netty.util.ResourceLeakDetector@29cd5fa1
+api02-1  | 2025-08-17 21:44:17.143 [vert.x-eventloop-thread-1] DEBUG i.n.h.c.compression.ZlibCodecFactory - -Dio.netty.noJdkZlibDecoder: false
+api02-1  | 2025-08-17 21:44:17.143 [vert.x-eventloop-thread-1] DEBUG i.n.h.c.compression.ZlibCodecFactory - -Dio.netty.noJdkZlibEncoder: false
+api02-1  | 2025-08-17 21:44:17.143 [vert.x-eventloop-thread-1] DEBUG i.n.h.c.compression.ZlibCodecFactory - JZlib not in the classpath; the only window bits supported value will be 15
+api01-1  | 2025-08-17 21:44:17.087 [vert.x-eventloop-thread-3] DEBUG i.netty.resolver.dns.DnsQueryContext - [id: 0x8907c9a7, L:/[0:0:0:0:0:0:0:0]:36004] WRITE: UDP, [7217: /127.0.0.11:53], DefaultDnsQuestion(elb.ec2.internal. IN A)
+api01-1  | 2025-08-17 21:44:17.173 [vert.x-eventloop-thread-3] DEBUG i.netty.resolver.dns.DnsNameResolver - [id: 0x8907c9a7, L:/[0:0:0:0:0:0:0:0]:36004] RECEIVED: UDP [7217: /127.0.0.11:53], DatagramDnsResponse(from: /127.0.0.11:53, to: /[0:0:0:0:0:0:0:0]:36004, id: 7217, QUERY(0), NXDomain(3), RD RA)
+api01-1  | 	DefaultDnsQuestion(elb.ec2.internal. IN A)
+api01-1  | 	DefaultDnsRawRecord(ec2.internal. 60 IN SOA 49B)
+api01-1  | 2025-08-17 21:44:17.173 [vert.x-eventloop-thread-3] DEBUG i.netty.resolver.dns.DnsQueryContext - [id: 0x8907c9a7, L:/[0:0:0:0:0:0:0:0]:36004] WRITE: UDP, [12084: /127.0.0.11:53], DefaultDnsQuestion(elb. IN A)
+api01-1  | 2025-08-17 21:44:17.174 [vert.x-eventloop-thread-3] DEBUG i.netty.resolver.dns.DnsNameResolver - [id: 0x8907c9a7, L:/[0:0:0:0:0:0:0:0]:36004] RECEIVED: UDP [12084: /127.0.0.11:53], DatagramDnsResponse(from: /127.0.0.11:53, to: /[0:0:0:0:0:0:0:0]:36004, id: 12084, QUERY(0), NoError(0), RD RA)
+api01-1  | 	DefaultDnsQuestion(elb. IN A)
+api01-1  | 	DefaultDnsRawRecord(elb. 600 IN A 4B)
+api02-1  | 2025-08-17 21:44:18.546 [vert.x-eventloop-thread-3] DEBUG i.n.resolver.dns.DnsResolveContext - -Dio.netty.resolver.dns.tryCnameOnAddressLookups: false
+api02-1  | 2025-08-17 21:44:18.636 [vert.x-eventloop-thread-3] DEBUG i.netty.resolver.dns.DnsQueryContext - -Dio.netty.resolver.dns.idReuseOnTimeoutDelayMillis: 10000
+api02-1  | 2025-08-17 21:44:18.642 [vert.x-eventloop-thread-3] DEBUG i.n.util.ResourceLeakDetectorFactory - Loaded default ResourceLeakDetector: io.netty.util.ResourceLeakDetector@401b3253
+api02-1  | 2025-08-17 21:44:18.735 [vert.x-eventloop-thread-3] DEBUG i.netty.resolver.dns.DnsQueryContext - [id: 0xc0bbbc4d, L:/[0:0:0:0:0:0:0:0]:39426] WRITE: UDP, [7708: /127.0.0.11:53], DefaultDnsQuestion(elb.ec2.internal. IN A)
+api02-1  | 2025-08-17 21:44:18.740 [vert.x-eventloop-thread-3] DEBUG i.netty.resolver.dns.DnsNameResolver - [id: 0xc0bbbc4d, L:/[0:0:0:0:0:0:0:0]:39426] RECEIVED: UDP [7708: /127.0.0.11:53], DatagramDnsResponse(from: /127.0.0.11:53, to: /[0:0:0:0:0:0:0:0]:39426, id: 7708, QUERY(0), NXDomain(3), RD RA)
+api02-1  | 	DefaultDnsQuestion(elb.ec2.internal. IN A)
+api02-1  | 	DefaultDnsRawRecord(ec2.internal. 60 IN SOA 49B)
+api02-1  | 2025-08-17 21:44:18.740 [vert.x-eventloop-thread-3] DEBUG i.netty.resolver.dns.DnsQueryContext - [id: 0xc0bbbc4d, L:/[0:0:0:0:0:0:0:0]:39426] WRITE: UDP, [7540: /127.0.0.11:53], DefaultDnsQuestion(elb. IN A)
+api02-1  | 2025-08-17 21:44:18.741 [vert.x-eventloop-thread-3] DEBUG i.netty.resolver.dns.DnsNameResolver - [id: 0xc0bbbc4d, L:/[0:0:0:0:0:0:0:0]:39426] RECEIVED: UDP [7540: /127.0.0.11:53], DatagramDnsResponse(from: /127.0.0.11:53, to: /[0:0:0:0:0:0:0:0]:39426, id: 7540, QUERY(0), NoError(0), RD RA)
+api02-1  | 	DefaultDnsQuestion(elb. IN A)
+api02-1  | 	DefaultDnsRawRecord(elb. 600 IN A 4B)
+api02-1  | 2025-08-17 21:44:19.135 [vert.x-eventloop-thread-3] DEBUG i.netty.resolver.dns.DnsQueryContext - [id: 0xc0bbbc4d, L:/[0:0:0:0:0:0:0:0]:39426] WRITE: UDP, [14007: /127.0.0.11:53], DefaultDnsQuestion(db.ec2.internal. IN A)
+api02-1  | 2025-08-17 21:44:19.240 [vert.x-eventloop-thread-3] DEBUG i.netty.resolver.dns.DnsNameResolver - [id: 0xc0bbbc4d, L:/[0:0:0:0:0:0:0:0]:39426] RECEIVED: UDP [14007: /127.0.0.11:53], DatagramDnsResponse(from: /127.0.0.11:53, to: /[0:0:0:0:0:0:0:0]:39426, id: 14007, QUERY(0), NXDomain(3), RD RA)
+api02-1  | 	DefaultDnsQuestion(db.ec2.internal. IN A)
+api02-1  | 	DefaultDnsRawRecord(ec2.internal. 60 IN SOA 49B)
+api02-1  | 2025-08-17 21:44:19.241 [vert.x-eventloop-thread-3] DEBUG i.netty.resolver.dns.DnsQueryContext - [id: 0xc0bbbc4d, L:/[0:0:0:0:0:0:0:0]:39426] WRITE: UDP, [6302: /127.0.0.11:53], DefaultDnsQuestion(db. IN A)
+api02-1  | 2025-08-17 21:44:19.243 [vert.x-eventloop-thread-3] DEBUG i.netty.resolver.dns.DnsNameResolver - [id: 0xc0bbbc4d, L:/[0:0:0:0:0:0:0:0]:39426] RECEIVED: UDP [6302: /127.0.0.11:53], DatagramDnsResponse(from: /127.0.0.11:53, to: /[0:0:0:0:0:0:0:0]:39426, id: 6302, QUERY(0), NoError(0), RD RA)
+api02-1  | 	DefaultDnsQuestion(db. IN A)
+api02-1  | 	DefaultDnsRawRecord(db. 600 IN A 4B)
+api02-1  | 2025-08-17 21:44:19.445 [vert.x-eventloop-thread-3] DEBUG i.v.p.i.a.scram.ScramAuthentication - Scram authentication is available com.ongres.scram.client.ScramClient$Builder@49cfb68e
+[Kapi01-1 exited with code 137
+db-1     | 2025-08-17 21:44:25.457 UTC [109] LOG:  could not receive data from client: Connection reset by peer
+db-1     | 2025-08-17 21:44:25.458 UTC [107] LOG:  could not receive data from client: Connection reset by peer
+db-1     | 2025-08-17 21:44:25.459 UTC [108] LOG:  could not receive data from client: Connection reset by peer
+[Kapi02-1 exited with code 137
+elb-1    | [NOTICE]   (1) : haproxy version is 3.2.3-1844da7
+elb-1    | [NOTICE]   (1) : path to executable is /usr/local/sbin/haproxy
+elb-1    | [ALERT]    (1) : Current worker (8) exited with code 137 (Killed)
+elb-1    | [WARNING]  (1) : A worker process unexpectedly died and this can only be explained by a bug in haproxy or its dependencies.
+elb-1    | Please check that you are running an up to date and maintained version of haproxy and open a bug report.
+elb-1    | [ALERT]    (1) : exit-on-failure: killing every processes with SIGTERM
+elb-1    | [WARNING]  (1) : All workers exited. Exiting... (137)
+elb-1    | HAProxy version 3.2.3-1844da7 2025/07/09 - https://haproxy.org/
+elb-1    | Status: long-term supported branch - will stop receiving fixes around Q2 2030.
+elb-1    | Known bugs: http://www.haproxy.org/bugs/bugs-3.2.3.html
+elb-1    | Running on: Linux 6.14.0-1010-aws #10~24.04.1-Ubuntu SMP Fri Jul 18 20:44:30 UTC 2025 x86_64
+[Kelb-1 exited with code 137
+elb-1    | [NOTICE]   (1) : Initializing new worker (8)
+elb-1    | [NOTICE]   (8) : haproxy version is 3.2.3-1844da7
+elb-1    | [NOTICE]   (8) : path to executable is /usr/local/sbin/haproxy
+elb-1    | [ALERT]    (8) : [/usr/local/etc/haproxy/haproxy.cfg:27] : 'server payment/s1' : could not resolve address 'api01'.
+elb-1    | [ALERT]    (8) : [/usr/local/etc/haproxy/haproxy.cfg:28] : 'server payment/s2' : could not resolve address 'api02'.
+elb-1    | [ALERT]    (8) : [/usr/local/etc/haproxy/haproxy.cfg:35] : 'server summary/s1' : could not resolve address 'api01'.
+elb-1    | [ALERT]    (8) : [/usr/local/etc/haproxy/haproxy.cfg:36] : 'server summary/s2' : could not resolve address 'api02'.
+elb-1    | [ALERT]    (8) : Failed to initialize server(s) addr.
+elb-1    | [NOTICE]   (1) : haproxy version is 3.2.3-1844da7
+elb-1    | [NOTICE]   (1) : path to executable is /usr/local/sbin/haproxy
+elb-1    | [WARNING]  (1) : Failed to load worker!
+[Kelb-1 exited with code 1
+elb-1    | [NOTICE]   (1) : Initializing new worker (8)
+elb-1    | [NOTICE]   (8) : haproxy version is 3.2.3-1844da7
+elb-1    | [NOTICE]   (8) : path to executable is /usr/local/sbin/haproxy
+elb-1    | [ALERT]    (8) : [/usr/local/etc/haproxy/haproxy.cfg:27] : 'server payment/s1' : could not resolve address 'api01'.
+elb-1    | [ALERT]    (8) : [/usr/local/etc/haproxy/haproxy.cfg:28] : 'server payment/s2' : could not resolve address 'api02'.
+elb-1    | [ALERT]    (8) : [/usr/local/etc/haproxy/haproxy.cfg:35] : 'server summary/s1' : could not resolve address 'api01'.
+elb-1    | [ALERT]    (8) : [/usr/local/etc/haproxy/haproxy.cfg:36] : 'server summary/s2' : could not resolve address 'api02'.
+elb-1    | [ALERT]    (8) : Failed to initialize server(s) addr.
+elb-1    | [NOTICE]   (1) : haproxy version is 3.2.3-1844da7
+elb-1    | [NOTICE]   (1) : path to executable is /usr/local/sbin/haproxy
+elb-1    | [WARNING]  (1) : Failed to load worker!
+[Kelb-1 exited with code 1
+elb-1    | [NOTICE]   (1) : Initializing new worker (8)
+elb-1    | [NOTICE]   (8) : haproxy version is 3.2.3-1844da7
+elb-1    | [NOTICE]   (8) : path to executable is /usr/local/sbin/haproxy
+elb-1    | [ALERT]    (8) : [/usr/local/etc/haproxy/haproxy.cfg:27] : 'server payment/s1' : could not resolve address 'api01'.
+elb-1    | [ALERT]    (8) : [/usr/local/etc/haproxy/haproxy.cfg:28] : 'server payment/s2' : could not resolve address 'api02'.
+elb-1    | [ALERT]    (8) : [/usr/local/etc/haproxy/haproxy.cfg:35] : 'server summary/s1' : could not resolve address 'api01'.
+elb-1    | [ALERT]    (8) : [/usr/local/etc/haproxy/haproxy.cfg:36] : 'server summary/s2' : could not resolve address 'api02'.
+elb-1    | [ALERT]    (8) : Failed to initialize server(s) addr.
+elb-1    | [NOTICE]   (1) : haproxy version is 3.2.3-1844da7
+elb-1    | [NOTICE]   (1) : path to executable is /usr/local/sbin/haproxy
+elb-1    | [WARNING]  (1) : Failed to load worker!
+[Kelb-1 exited with code 1
+elb-1    | [NOTICE]   (1) : Initializing new worker (8)
+elb-1    | [NOTICE]   (8) : haproxy version is 3.2.3-1844da7
+elb-1    | [NOTICE]   (8) : path to executable is /usr/local/sbin/haproxy
+elb-1    | [ALERT]    (8) : [/usr/local/etc/haproxy/haproxy.cfg:27] : 'server payment/s1' : could not resolve address 'api01'.
+elb-1    | [ALERT]    (8) : [/usr/local/etc/haproxy/haproxy.cfg:28] : 'server payment/s2' : could not resolve address 'api02'.
+elb-1    | [ALERT]    (8) : [/usr/local/etc/haproxy/haproxy.cfg:35] : 'server summary/s1' : could not resolve address 'api01'.
+elb-1    | [ALERT]    (8) : [/usr/local/etc/haproxy/haproxy.cfg:36] : 'server summary/s2' : could not resolve address 'api02'.
+elb-1    | [ALERT]    (8) : Failed to initialize server(s) addr.
+elb-1    | [NOTICE]   (1) : haproxy version is 3.2.3-1844da7
+elb-1    | [NOTICE]   (1) : path to executable is /usr/local/sbin/haproxy
+elb-1    | [WARNING]  (1) : Failed to load worker!
+[Kelb-1 exited with code 1
+elb-1    | [NOTICE]   (1) : Initializing new worker (8)
+elb-1    | [NOTICE]   (8) : haproxy version is 3.2.3-1844da7
+elb-1    | [NOTICE]   (8) : path to executable is /usr/local/sbin/haproxy
+elb-1    | [ALERT]    (8) : [/usr/local/etc/haproxy/haproxy.cfg:27] : 'server payment/s1' : could not resolve address 'api01'.
+elb-1    | [ALERT]    (8) : [/usr/local/etc/haproxy/haproxy.cfg:28] : 'server payment/s2' : could not resolve address 'api02'.
+elb-1    | [ALERT]    (8) : [/usr/local/etc/haproxy/haproxy.cfg:35] : 'server summary/s1' : could not resolve address 'api01'.
+elb-1    | [ALERT]    (8) : [/usr/local/etc/haproxy/haproxy.cfg:36] : 'server summary/s2' : could not resolve address 'api02'.
+elb-1    | [ALERT]    (8) : Failed to initialize server(s) addr.
+elb-1    | [NOTICE]   (1) : haproxy version is 3.2.3-1844da7
+elb-1    | [NOTICE]   (1) : path to executable is /usr/local/sbin/haproxy
+elb-1    | [WARNING]  (1) : Failed to load worker!
+[Kelb-1 exited with code 1
+elb-1    | [NOTICE]   (1) : Initializing new worker (9)
+elb-1    | [NOTICE]   (9) : haproxy version is 3.2.3-1844da7
+elb-1    | [NOTICE]   (9) : path to executable is /usr/local/sbin/haproxy
+elb-1    | [ALERT]    (9) : [/usr/local/etc/haproxy/haproxy.cfg:27] : 'server payment/s1' : could not resolve address 'api01'.
+elb-1    | [ALERT]    (9) : [/usr/local/etc/haproxy/haproxy.cfg:28] : 'server payment/s2' : could not resolve address 'api02'.
+elb-1    | [ALERT]    (9) : [/usr/local/etc/haproxy/haproxy.cfg:35] : 'server summary/s1' : could not resolve address 'api01'.
+elb-1    | [ALERT]    (9) : [/usr/local/etc/haproxy/haproxy.cfg:36] : 'server summary/s2' : could not resolve address 'api02'.
+elb-1    | [ALERT]    (9) : Failed to initialize server(s) addr.
+elb-1    | [NOTICE]   (1) : haproxy version is 3.2.3-1844da7
+elb-1    | [NOTICE]   (1) : path to executable is /usr/local/sbin/haproxy
+elb-1    | [WARNING]  (1) : Failed to load worker!
+[Kelb-1 exited with code 1
+elb-1    | [NOTICE]   (1) : Initializing new worker (8)
+elb-1    | [NOTICE]   (8) : haproxy version is 3.2.3-1844da7
+elb-1    | [NOTICE]   (8) : path to executable is /usr/local/sbin/haproxy
+elb-1    | [ALERT]    (8) : [/usr/local/etc/haproxy/haproxy.cfg:27] : 'server payment/s1' : could not resolve address 'api01'.
+elb-1    | [ALERT]    (8) : [/usr/local/etc/haproxy/haproxy.cfg:28] : 'server payment/s2' : could not resolve address 'api02'.
+elb-1    | [ALERT]    (8) : [/usr/local/etc/haproxy/haproxy.cfg:35] : 'server summary/s1' : could not resolve address 'api01'.
+elb-1    | [ALERT]    (8) : [/usr/local/etc/haproxy/haproxy.cfg:36] : 'server summary/s2' : could not resolve address 'api02'.
+elb-1    | [ALERT]    (8) : Failed to initialize server(s) addr.
+elb-1    | [NOTICE]   (1) : haproxy version is 3.2.3-1844da7
+elb-1    | [NOTICE]   (1) : path to executable is /usr/local/sbin/haproxy
+elb-1    | [WARNING]  (1) : Failed to load worker!
+[Kelb-1 exited with code 1
+elb-1    | [NOTICE]   (1) : Initializing new worker (8)
+elb-1    | [NOTICE]   (8) : haproxy version is 3.2.3-1844da7
+elb-1    | [NOTICE]   (8) : path to executable is /usr/local/sbin/haproxy
+elb-1    | [ALERT]    (8) : [/usr/local/etc/haproxy/haproxy.cfg:27] : 'server payment/s1' : could not resolve address 'api01'.
+elb-1    | [ALERT]    (8) : [/usr/local/etc/haproxy/haproxy.cfg:28] : 'server payment/s2' : could not resolve address 'api02'.
+elb-1    | [ALERT]    (8) : [/usr/local/etc/haproxy/haproxy.cfg:35] : 'server summary/s1' : could not resolve address 'api01'.
+elb-1    | [ALERT]    (8) : [/usr/local/etc/haproxy/haproxy.cfg:36] : 'server summary/s2' : could not resolve address 'api02'.
+elb-1    | [ALERT]    (8) : Failed to initialize server(s) addr.
+elb-1    | [NOTICE]   (1) : haproxy version is 3.2.3-1844da7
+elb-1    | [NOTICE]   (1) : path to executable is /usr/local/sbin/haproxy
+elb-1    | [WARNING]  (1) : Failed to load worker!
+[Kelb-1 exited with code 1
+db-1     | 2025-08-17 21:45:18.722 UTC [1] LOG:  received fast shutdown request
+db-1     | 2025-08-17 21:45:18.722 UTC [1] LOG:  aborting any active transactions
+db-1     | 2025-08-17 21:45:18.724 UTC [1] LOG:  background worker "logical replication launcher" (PID 69) exited with exit code 1
+db-1     | 2025-08-17 21:45:18.725 UTC [64] LOG:  shutting down
+db-1     | 2025-08-17 21:45:18.725 UTC [64] LOG:  checkpoint starting: shutdown immediate
+db-1     | 2025-08-17 21:45:18.726 UTC [64] LOG:  checkpoint complete: wrote 59 buffers (0.4%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.001 s, sync=0.001 s, total=0.002 s; sync files=0, longest=0.000 s, average=0.000 s; distance=134 kB, estimate=134 kB; lsn=0/19427B8, redo lsn=0/19427B8
+db-1     | 2025-08-17 21:45:18.732 UTC [1] LOG:  database system is shut down
+log truncated at line 1000

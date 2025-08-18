@@ -1,3 +1,21 @@
+x-rinhaquark2025: &rinhaquark2025
+  image: kauanmocelin/rinhaquark2025:1.0.26
+  environment:
+    - QUARKUS_PAYMENTS_BATCH_SIZE=100
+    - QUARKUS_PAYMENTS_BATCH_INTERVAL_MS=20
+    - QUARKUS_PAYMENTS_THREADS_NUMBER=20
+  depends_on:
+    postgres:
+      condition: service_healthy
+  networks:
+    - rinhaquark-rede
+    - payment-processor
+  deploy:
+    resources:
+      limits:
+        cpus: "0.6"
+        memory: "80MB"
+
 services:
 
   nginx:
@@ -15,32 +33,23 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.2"
-          memory: "10MB"
+          cpus: "0.1"
+          memory: "50MB"
 
-  rinhaquark2025-a: &rinhaquark2025
-    image: kauanmocelin/rinhaquark2025:1.0.6
+  rinhaquark2025-a:
+    <<: *rinhaquark2025
     container_name: rinhaquark2025-a
     environment:
-      - QUARKUS_MONGODB_CONNECTION_STRING=mongodb://mongo:27017
-    depends_on:
-      postgres:
-        condition: service_healthy
-    networks:
-      - rinhaquark-rede
-      - payment-processor
-    deploy:
-      resources:
-        limits:
-          cpus: "0.5"
-          memory: "80MB"
+      - INTERNAL_SYNC_PAYMENTS_API=http://rinhaquark2025-b:8080
 
   rinhaquark2025-b:
     <<: *rinhaquark2025
     container_name: rinhaquark2025-b
+    environment:
+      - INTERNAL_SYNC_PAYMENTS_API=http://rinhaquark2025-a:8080
 
   postgres:
-    image: postgres:16-alpine
+    image: postgres:17-alpine
     container_name: postgres
     environment:
       POSTGRES_DB: payments_db
@@ -49,24 +58,22 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - postgres-data:/var/lib/postgresql/data
-      - ./initdb:/docker-entrypoint-initdb.d
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+      - ./postgresql.conf:/etc/postgresql/postgresql.conf
     networks:
       - rinhaquark-rede
+    command: [ "postgres", "-c", "config_file=/etc/postgresql/postgresql.conf" ]
     deploy:
       resources:
         limits:
-          cpus: "0.3"
-          memory: "180MB"
+          cpus: "0.2"
+          memory: "140MB"
     healthcheck:
       test: [ "CMD-SHELL", "pg_isready -U postgres -d payments_db" ]
       interval: 10s
       timeout: 5s
       retries: 5
       start_period: 30s
-
-volumes:
-  postgres-data:
 
 networks:
   rinhaquark-rede:

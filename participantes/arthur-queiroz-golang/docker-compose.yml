@@ -1,0 +1,70 @@
+services:
+  api1: &same
+    image: arthurqueiroz04/go-rinha2025-api
+    hostname: api1
+    environment:
+      - DEFAULT_PAYMENT_PROCESSOR_URL=http://payment-processor-default:8080
+      - FALLBACK_PAYMENT_PROCESSOR_URL=http://payment-processor-fallback:8080
+      - CONNECTION_STRING_REDIS=redis://rinha-redis:6379/0
+      - WORKER_COUNT=18
+    networks:
+      - backend
+      - payment-processor
+    depends_on:
+      rinha-redis:
+        condition: service_healthy
+    deploy:
+      resources:
+        limits:
+          cpus: "0.4"
+          memory: "90MB"
+
+  api2:
+    <<: *same
+    hostname: api2
+
+  rinha-redis:
+    image: redis:7.2-alpine
+    container_name: rinha-redis
+    command: redis-server --save "" --appendonly no --maxclients 20000
+    volumes:
+      - redis-data:/data
+    networks:
+      - backend
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+    deploy:
+      resources:
+        limits:
+          cpus: "0.6"
+          memory: "115MB"
+
+  nginx:
+    image: nginx:latest
+    ports:
+      - "9999:9999"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    networks:
+      - backend
+    depends_on:
+      - api1
+      - api2
+    deploy:
+      resources:
+        limits:
+          cpus: "0.1"
+          memory: "55MB"
+
+networks:
+  backend:
+    driver: bridge
+  payment-processor:
+    external: true
+
+volumes:
+  redis-data:
+

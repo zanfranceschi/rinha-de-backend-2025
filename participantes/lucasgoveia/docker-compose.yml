@@ -2,10 +2,9 @@ x-default-user: &default-user "1000:1000"
 x-build-args: &build-args
   APP_UID: "1000"
   APP_GID: "1000"
-
 x-service-templates:
-  server: &server
-    image: lucasgoveia/rinha-2025-api:4351d8c426fc3
+  gateway: &gateway
+    image: lucasgoveia/rinha-2025-gateway:a282e059dd75
     user: *default-user
     restart: always
     depends_on:
@@ -28,14 +27,13 @@ x-service-templates:
       - tmp_sockets:/tmp
 
 services:
-  pingora:
-    image: lucasgoveia/rinha-2025-proxy:4351d8c426fc3
-    user: *default-user
+  loadbalancer:
+    image: haproxy:alpine
     ports:
       - "9999:9999"
     depends_on:
-      - server1
-      - server2
+      - gateway1
+      - gateway2
     networks:
       - backend
     restart: always
@@ -50,38 +48,28 @@ services:
           memory: '50M'
     volumes:
       - tmp_sockets:/tmp
-      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
 
-  server1:
-    <<: *server
-    container_name: server1
-    hostname: server1
+  gateway1:
+    <<: *gateway
+    container_name: gateway1
+    hostname: gateway1
     environment:
-      - SERVER_SOCKET=/tmp/server1.sock
-      - SERVER_HOST=0.0.0.0
-      - SERVER_PORT=7118
-      - POSTGRES_URL=postgres://postgres:password@/rinha2025?host=/var/run/postgresql&pool_max_conns=3&pool_min_conns=2&pool_max_conn_idle_time=30s&pool_max_conn_lifetime=5m&pool_health_check_period=30s
-      - SERVICE_DEFAULT_URL=http://payment-processor-default:8080/payments
-      - SERVICE_FALLBACK_URL=http://payment-processor-fallback:8080/payments
-      - SERVICE_DEFAULT_HEALTH_URL=http://nginx:9000/default/payments/service-health
-      - SERVICE_FALLBACK_HEALTH_URL=http://nginx:9000/fallback/payments/service-health
+      - GATEWAY_LISTEN_SOCKET=/tmp/gateway1.sock
+      - POSTGRES_URL=postgres://postgres:password@/rinha2025?host=/var/run/postgresql
+      - GATEWAY_PUBLISH_SOCKET=/tmp/payments-stream.sock
 
-  server2:
-    <<: *server
-    container_name: server2
-    hostname: server2
+  gateway2:
+    <<: *gateway
+    container_name: gateway2
+    hostname: gateway2
     environment:
-      - SERVER_SOCKET=/tmp/server2.sock
-      - SERVER_HOST=0.0.0.0
-      - SERVER_PORT=7118
-      - POSTGRES_URL=postgres://postgres:password@/rinha2025?host=/var/run/postgresql&pool_max_conns=3&pool_min_conns=2&pool_max_conn_idle_time=30s&pool_max_conn_lifetime=5m&pool_health_check_period=30s
-      - SERVICE_DEFAULT_URL=http://payment-processor-default:8080/payments
-      - SERVICE_FALLBACK_URL=http://payment-processor-fallback:8080/payments
-      - SERVICE_DEFAULT_HEALTH_URL=http://nginx:9000/default/payments/service-health
-      - SERVICE_FALLBACK_HEALTH_URL=http://nginx:9000/fallback/payments/service-health
+      - GATEWAY_LISTEN_SOCKET=/tmp/gateway2.sock
+      - POSTGRES_URL=postgres://postgres:password@/rinha2025?host=/var/run/postgresql
+      - GATEWAY_PUBLISH_SOCKET=/tmp/payments-stream.sock
 
   worker:
-    image: lucasgoveia/rinha-2025-worker:4351d8c426fc3
+    image: lucasgoveia/rinha-2025-worker:a282e059dd75
     user: *default-user
     restart: always
     depends_on:
@@ -104,11 +92,11 @@ services:
     container_name: worker
     hostname: worker
     environment:
-      - POSTGRES_URL=postgres://postgres:password@/rinha2025?host=/var/run/postgresql&pool_max_conns=3&pool_min_conns=2&pool_max_conn_idle_time=30s&pool_max_conn_lifetime=5m&pool_health_check_period=30s
-      - SERVICE_DEFAULT_URL=http://payment-processor-default:8080/payments
-      - SERVICE_FALLBACK_URL=http://payment-processor-fallback:8080/payments
-      - SERVICE_DEFAULT_HEALTH_URL=http://payment-processor-default:8080/payments/service-health
-      - SERVICE_FALLBACK_HEALTH_URL=http://payment-processor-fallback:8080/payments/service-health
+      - LISTEN_PATH=/tmp/payments-stream.sock
+      - NUM_WORKERS=64
+      - POSTGRES_URL=postgres://postgres:password@/rinha2025?host=/var/run/postgresql
+      - DEFAULT_PROCESSOR_URL=http://payment-processor-default:8080
+      - FALLBACK_PROCESSOR_URL=http://payment-processor-fallback:8080
 
   postgres:
     image: postgres:17-alpine
@@ -148,7 +136,6 @@ volumes:
       type: tmpfs
       device: tmpfs
       o: uid=1000,gid=1000
-
 
 networks:
   backend:

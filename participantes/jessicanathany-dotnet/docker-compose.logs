@@ -1,0 +1,414 @@
+
+ backend-api-2 Pulling 
+ backend-api-1 Pulling 
+ af7c915c8849 Already exists 
+ af7c915c8849 Already exists 
+ 16bf5aa6abcc Already exists 
+ 16bf5aa6abcc Already exists 
+ d58a7b951b05 Already exists 
+ d58a7b951b05 Already exists 
+ 8824f6aeff37 Already exists 
+ 8824f6aeff37 Already exists 
+ 2b6f82574228 Already exists 
+ 2b6f82574228 Already exists 
+ 15113326d880 Already exists 
+ 15113326d880 Already exists 
+ d96853440117 Pulling fs layer 
+ 4f4fb700ef54 Pulling fs layer 
+ 53504b5188d4 Pulling fs layer 
+ d96853440117 Pulling fs layer 
+ 4f4fb700ef54 Pulling fs layer 
+ 53504b5188d4 Pulling fs layer 
+ 4f4fb700ef54 Downloading [==================================================>]      32B/32B
+ 4f4fb700ef54 Verifying Checksum 
+ 4f4fb700ef54 Download complete 
+ 4f4fb700ef54 Downloading [==================================================>]      32B/32B
+ 4f4fb700ef54 Verifying Checksum 
+ 4f4fb700ef54 Download complete 
+ d96853440117 Downloading [==================================================>]      96B/96B
+ d96853440117 Verifying Checksum 
+ d96853440117 Download complete 
+ d96853440117 Downloading [==================================================>]      96B/96B
+ d96853440117 Verifying Checksum 
+ d96853440117 Download complete 
+ d96853440117 Extracting [==================================================>]      96B/96B
+ d96853440117 Extracting [==================================================>]      96B/96B
+ d96853440117 Extracting [==================================================>]      96B/96B
+ d96853440117 Extracting [==================================================>]      96B/96B
+ 53504b5188d4 Downloading [>                                                  ]  33.31kB/1.917MB
+ 53504b5188d4 Downloading [>                                                  ]  33.31kB/1.917MB
+ 53504b5188d4 Verifying Checksum 
+ 53504b5188d4 Download complete 
+ 53504b5188d4 Verifying Checksum 
+ 53504b5188d4 Download complete 
+ d96853440117 Pull complete 
+ d96853440117 Pull complete 
+ 4f4fb700ef54 Extracting [==================================================>]      32B/32B
+ 4f4fb700ef54 Extracting [==================================================>]      32B/32B
+ 4f4fb700ef54 Extracting [==================================================>]      32B/32B
+ 4f4fb700ef54 Extracting [==================================================>]      32B/32B
+ 4f4fb700ef54 Pull complete 
+ 4f4fb700ef54 Pull complete 
+ 53504b5188d4 Extracting [>                                                  ]  32.77kB/1.917MB
+ 53504b5188d4 Extracting [>                                                  ]  32.77kB/1.917MB
+ 53504b5188d4 Extracting [==================================================>]  1.917MB/1.917MB
+ 53504b5188d4 Extracting [==================================================>]  1.917MB/1.917MB
+ 53504b5188d4 Pull complete 
+ 53504b5188d4 Pull complete 
+ backend-api-1 Pulled 
+ backend-api-2 Pulled 
+ Network jessicanathany-dotnet_backend_network  Creating
+ Network jessicanathany-dotnet_backend_network  Created
+ Container backend_database  Creating
+ Container backend_database  Created
+ Container backend-api-2  Creating
+ Container backend-api-1  Creating
+ Container backend-api-1  Created
+ Container backend-api-2  Created
+ Container load_balancer  Creating
+ Container load_balancer  Created
+Attaching to backend-api-1, backend-api-2, backend_database, load_balancer
+backend_database  | The files belonging to this database system will be owned by user "postgres".
+backend_database  | This user must also own the server process.
+backend_database  | 
+backend_database  | The database cluster will be initialized with locale "en_US.utf8".
+backend_database  | The default database encoding has accordingly been set to "UTF8".
+backend_database  | The default text search configuration will be set to "english".
+backend_database  | 
+backend_database  | Data page checksums are disabled.
+backend_database  | 
+backend_database  | fixing permissions on existing directory /var/lib/postgresql/data ... ok
+backend_database  | creating subdirectories ... ok
+backend_database  | selecting dynamic shared memory implementation ... posix
+backend_database  | selecting default "max_connections" ... 100
+backend_database  | selecting default "shared_buffers" ... 128MB
+load_balancer     | /docker-entrypoint.sh: /docker-entrypoint.d/ is not empty, will attempt to perform configuration
+load_balancer     | /docker-entrypoint.sh: Looking for shell scripts in /docker-entrypoint.d/
+load_balancer     | /docker-entrypoint.sh: Launching /docker-entrypoint.d/10-listen-on-ipv6-by-default.sh
+backend_database  | selecting default time zone ... UTC
+backend_database  | creating configuration files ... ok
+load_balancer     | 10-listen-on-ipv6-by-default.sh: info: Getting the checksum of /etc/nginx/conf.d/default.conf
+load_balancer     | 10-listen-on-ipv6-by-default.sh: info: Enabled listen on IPv6 in /etc/nginx/conf.d/default.conf
+load_balancer     | /docker-entrypoint.sh: Sourcing /docker-entrypoint.d/15-local-resolvers.envsh
+load_balancer     | /docker-entrypoint.sh: Launching /docker-entrypoint.d/20-envsubst-on-templates.sh
+load_balancer     | /docker-entrypoint.sh: Launching /docker-entrypoint.d/30-tune-worker-processes.sh
+load_balancer     | /docker-entrypoint.sh: Configuration complete; ready for start up
+backend_database  | running bootstrap script ... ok
+backend-api-1     | fail: Microsoft.AspNetCore.Server.Kestrel[13]
+backend-api-1     |       Connection id "0HNETRS2E704D", Request id "0HNETRS2E704D:00000001": An unhandled exception was thrown by the application.
+backend-api-1     |       Npgsql.NpgsqlException (0x80004005): Failed to connect to 172.20.0.2:5432
+backend-api-1     |        ---> System.Net.Sockets.SocketException (111): Connection refused
+backend-api-1     |          at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+backend-api-1     |          at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource.GetResult(Int16 token)
+backend-api-1     |          at System.Net.Sockets.Socket.<ConnectAsync>g__WaitForConnectWithCancellation|285_0(AwaitableSocketAsyncEventArgs saea, ValueTask connectTask, CancellationToken cancellationToken)
+backend-api-1     |          at Npgsql.TaskTimeoutAndCancellation.ExecuteAsync(Func`2 getTaskFunc, NpgsqlTimeout timeout, CancellationToken cancellationToken)
+backend-api-1     |          at Npgsql.Internal.NpgsqlConnector.ConnectAsync(NpgsqlTimeout timeout, CancellationToken cancellationToken)
+backend-api-1     |          at Npgsql.Internal.NpgsqlConnector.ConnectAsync(NpgsqlTimeout timeout, CancellationToken cancellationToken)
+backend-api-1     |          at Npgsql.Internal.NpgsqlConnector.RawOpen(SslMode sslMode, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+backend-api-1     |          at Npgsql.Internal.NpgsqlConnector.<Open>g__OpenCore|214_1(NpgsqlConnector conn, SslMode sslMode, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+backend-api-1     |          at Npgsql.Internal.NpgsqlConnector.Open(NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+backend-api-1     |          at Npgsql.PoolingDataSource.OpenNewConnector(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+backend-api-1     |          at Npgsql.PoolingDataSource.<Get>g__RentAsync|33_0(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+backend-api-1     |          at Npgsql.NpgsqlConnection.<Open>g__OpenAsync|42_0(Boolean async, CancellationToken cancellationToken)
+backend-api-1     |          at rinha_de_backend_2025.api.Infraestrutura.Postgres.PostgresConnection.OpenConnectionAsync() in /src/src/rinha-de-backend-2025.api/Infraestrutura/Postgres/PostgresConnection.cs:line 16
+backend-api-1     |          at rinha_de_backend_2025.api.Infraestrutura.Repositories.PaymentRepository.GetPaymentSummary(Nullable`1 startDate, Nullable`1 endDate) in /src/src/rinha-de-backend-2025.api/Infraestrutura/Repositories/PaymentRepository.cs:line 18
+backend-api-1     |          at rinha_de_backend_2025.api.Service.PaymentProcessor.GetSummaryAndAll(Nullable`1 startDate, Nullable`1 endDate) in /src/src/rinha-de-backend-2025.api/Service/PaymentProcessor.cs:line 27
+backend-api-1     |          at rinha_de_backend_2025.api.Controllers.PaymentController.PaymentSummary(Nullable`1 from, Nullable`1 to) in /src/src/rinha-de-backend-2025.api/Controllers/PaymentController.cs:line 27
+backend-api-1     |          at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+backend-api-1     |          at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+backend-api-1     |          at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+backend-api-1     |          at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+backend-api-1     |          at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+backend-api-1     |          at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+backend-api-1     |          at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+backend-api-1     |          at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+backend-api-1     |          at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+backend-api-1     |          at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+backend-api-1     |          at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+backend-api-1     |          at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+backend_database  | sh: locale: not found
+backend_database  | 2025-08-17 22:40:09.833 UTC [34] WARNING:  no usable system locales were found
+backend_database  | performing post-bootstrap initialization ... ok
+backend_database  | initdb: warning: enabling "trust" authentication for local connections
+backend_database  | initdb: hint: You can change this by editing pg_hba.conf or using the option -A, or --auth-local and --auth-host, the next time you run initdb.
+backend_database  | syncing data to disk ... ok
+backend_database  | 
+backend_database  | 
+backend_database  | Success. You can now start the database server using:
+backend_database  | 
+backend_database  |     pg_ctl -D /var/lib/postgresql/data -l logfile start
+backend_database  | 
+backend_database  | waiting for server to start....2025-08-17 22:40:12.648 UTC [46] LOG:  starting PostgreSQL 17.5 on x86_64-pc-linux-musl, compiled by gcc (Alpine 14.2.0) 14.2.0, 64-bit
+backend_database  | 2025-08-17 22:40:12.651 UTC [46] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+backend_database  | 2025-08-17 22:40:12.662 UTC [49] LOG:  database system was shut down at 2025-08-17 22:40:12 UTC
+backend_database  | 2025-08-17 22:40:12.670 UTC [46] LOG:  database system is ready to accept connections
+backend_database  |  done
+backend_database  | server started
+backend_database  | CREATE DATABASE
+backend_database  | 
+backend_database  | 
+backend_database  | /usr/local/bin/docker-entrypoint.sh: running /docker-entrypoint-initdb.d/init-schema.sql
+backend_database  | CREATE TABLE
+backend_database  | CREATE TABLE
+backend_database  | CREATE INDEX
+backend_database  | CREATE INDEX
+backend_database  | INSERT 0 1
+backend_database  | 
+backend_database  | 
+backend_database  | waiting for server to shut down....2025-08-17 22:40:13.336 UTC [46] LOG:  received fast shutdown request
+backend_database  | 2025-08-17 22:40:13.340 UTC [46] LOG:  aborting any active transactions
+backend_database  | 2025-08-17 22:40:13.433 UTC [46] LOG:  background worker "logical replication launcher" (PID 52) exited with exit code 1
+backend_database  | 2025-08-17 22:40:13.433 UTC [47] LOG:  shutting down
+backend_database  | 2025-08-17 22:40:13.437 UTC [47] LOG:  checkpoint starting: shutdown immediate
+backend_database  | 2025-08-17 22:40:13.545 UTC [47] LOG:  checkpoint complete: wrote 935 buffers (5.7%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.036 s, sync=0.061 s, total=0.112 s; sync files=315, longest=0.031 s, average=0.001 s; distance=4289 kB, estimate=4289 kB; lsn=0/191D780, redo lsn=0/191D780
+backend_database  | 2025-08-17 22:40:13.554 UTC [46] LOG:  database system is shut down
+backend_database  |  done
+backend_database  | server stopped
+backend_database  | 
+backend_database  | PostgreSQL init process complete; ready for start up.
+backend_database  | 
+backend_database  | 2025-08-17 22:40:13.663 UTC [1] LOG:  starting PostgreSQL 17.5 on x86_64-pc-linux-musl, compiled by gcc (Alpine 14.2.0) 14.2.0, 64-bit
+backend_database  | 2025-08-17 22:40:13.663 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+backend_database  | 2025-08-17 22:40:13.663 UTC [1] LOG:  listening on IPv6 address "::", port 5432
+backend_database  | 2025-08-17 22:40:13.669 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+backend_database  | 2025-08-17 22:40:13.736 UTC [64] LOG:  database system was shut down at 2025-08-17 22:40:13 UTC
+backend_database  | 2025-08-17 22:40:13.745 UTC [1] LOG:  database system is ready to accept connections
+backend-api-1     | fail: rinha_de_backend_2025.api.Infraestrutura.Clients.PaymentGatewayClient[0]
+backend-api-1     |       HTTP error occurred while processing payment with Default for correlation 4b5b9cf3-ce08-4690-aec2-861423c5d3ee
+backend-api-1     |       System.Net.Http.HttpRequestException: Payment processing failed with status InternalServerError: Internal Server Error
+backend-api-1     |          at rinha_de_backend_2025.api.Infraestrutura.Clients.PaymentGatewayClient.ProcessPayment(PaymentRequest request, service_used serviceType) in /src/src/rinha-de-backend-2025.api/Infraestrutura/Clients/PaymentGatewayClient.cs:line 70
+backend-api-2     | fail: rinha_de_backend_2025.api.Infraestrutura.Clients.PaymentGatewayClient[0]
+backend-api-2     |       HTTP error occurred while processing payment with Default for correlation f8029687-76c0-4770-b8c8-4179c746d504
+backend-api-2     |       System.Net.Http.HttpRequestException: Payment processing failed with status InternalServerError: Internal Server Error
+backend-api-2     |          at rinha_de_backend_2025.api.Infraestrutura.Clients.PaymentGatewayClient.ProcessPayment(PaymentRequest request, service_used serviceType) in /src/src/rinha-de-backend-2025.api/Infraestrutura/Clients/PaymentGatewayClient.cs:line 70
+backend-api-1     | fail: rinha_de_backend_2025.api.Infraestrutura.Clients.PaymentGatewayClient[0]
+backend-api-1     |       HTTP error occurred while processing payment with Fallback for correlation 2272eed3-d71f-4a71-a192-3e822f51cd89
+backend-api-1     |       System.Net.Http.HttpRequestException: Payment processing failed with status InternalServerError: Internal Server Error
+backend-api-1     |          at rinha_de_backend_2025.api.Infraestrutura.Clients.PaymentGatewayClient.ProcessPayment(PaymentRequest request, service_used serviceType) in /src/src/rinha-de-backend-2025.api/Infraestrutura/Clients/PaymentGatewayClient.cs:line 70
+backend-api-2     | fail: rinha_de_backend_2025.api.Infraestrutura.Clients.PaymentGatewayClient[0]
+backend-api-2     |       HTTP error occurred while processing payment with Fallback for correlation 763da4cb-10d1-4ba0-9673-8a0d0d9ae0b4
+backend-api-2     |       System.Net.Http.HttpRequestException: Payment processing failed with status InternalServerError: Internal Server Error
+backend-api-2     |          at rinha_de_backend_2025.api.Infraestrutura.Clients.PaymentGatewayClient.ProcessPayment(PaymentRequest request, service_used serviceType) in /src/src/rinha-de-backend-2025.api/Infraestrutura/Clients/PaymentGatewayClient.cs:line 70
+backend-api-1     | fail: rinha_de_backend_2025.api.Infraestrutura.Workers.PaymentEventConsumer[0]
+backend-api-1     |       An error occurred while processing the payment request.
+backend-api-1     |       System.InvalidOperationException: Payment processing failed due to network error with Fallback
+backend-api-1     |        ---> System.Net.Http.HttpRequestException: Payment processing failed with status InternalServerError: Internal Server Error
+backend-api-1     |          at rinha_de_backend_2025.api.Infraestrutura.Clients.PaymentGatewayClient.ProcessPayment(PaymentRequest request, service_used serviceType) in /src/src/rinha-de-backend-2025.api/Infraestrutura/Clients/PaymentGatewayClient.cs:line 70
+backend-api-1     |          --- End of inner exception stack trace ---
+backend-api-1     |          at rinha_de_backend_2025.api.Infraestrutura.Clients.PaymentGatewayClient.ProcessPayment(PaymentRequest request, service_used serviceType) in /src/src/rinha-de-backend-2025.api/Infraestrutura/Clients/PaymentGatewayClient.cs:line 78
+backend-api-1     |          at rinha_de_backend_2025.api.Infraestrutura.Clients.PaymentGatewayClient.ProcessPaymentFallback(PaymentRequest request) in /src/src/rinha-de-backend-2025.api/Infraestrutura/Clients/PaymentGatewayClient.cs:line 17
+backend-api-1     |          at rinha_de_backend_2025.api.Service.PaymentProcessor.PaymentProcessorFallback(PaymentRequest request) in /src/src/rinha-de-backend-2025.api/Service/PaymentProcessor.cs:line 20
+backend-api-1     |          at rinha_de_backend_2025.api.Configurations.PaymentResiliencePolicyProvider.<>c__DisplayClass6_0.<<-ctor>b__0>d.MoveNext() in /src/src/rinha-de-backend-2025.api/Configurations/PaymentResiliencePolicyProvider.cs:line 28
+backend-api-1     |       --- End of stack trace from previous location ---
+backend-api-1     |          at Polly.Fallback.AsyncFallbackPolicy.<>c__DisplayClass3_0.<<ImplementationAsync>b__2>d.MoveNext()
+backend-api-1     |       --- End of stack trace from previous location ---
+backend-api-1     |          at Polly.Fallback.AsyncFallbackEngine.ImplementationAsync[TResult](Func`3 action, Context context, ExceptionPredicates shouldHandleExceptionPredicates, ResultPredicates`1 shouldHandleResultPredicates, Func`3 onFallbackAsync, Func`4 fallbackAction, Boolean continueOnCapturedContext, CancellationToken cancellationToken)
+backend-api-1     |          at Polly.AsyncPolicy.ExecuteInternalAsync(Func`3 action, Context context, Boolean continueOnCapturedContext, CancellationToken cancellationToken)
+backend-api-1     |          at Polly.AsyncPolicy.ExecuteInternalAsync(Func`3 action, Context context, Boolean continueOnCapturedContext, CancellationToken cancellationToken)
+backend-api-1     |          at rinha_de_backend_2025.api.Service.PaymentManager.SubmitPayment(PaymentRequest request, CancellationToken cancellationToken) in /src/src/rinha-de-backend-2025.api/Service/PaymentManager.cs:line 23
+backend-api-1     |          at rinha_de_backend_2025.api.Infraestrutura.Workers.PaymentEventConsumer.ExecuteAsync(CancellationToken stoppingToken) in /src/src/rinha-de-backend-2025.api/Infraestrutura/Workers/PaymentEventConsumer.cs:line 20
+backend-api-2     | fail: rinha_de_backend_2025.api.Infraestrutura.Workers.PaymentEventConsumer[0]
+backend-api-2     |       An error occurred while processing the payment request.
+backend-api-2     |       System.InvalidOperationException: Payment processing failed due to network error with Fallback
+backend-api-2     |        ---> System.Net.Http.HttpRequestException: Payment processing failed with status InternalServerError: Internal Server Error
+backend-api-2     |          at rinha_de_backend_2025.api.Infraestrutura.Clients.PaymentGatewayClient.ProcessPayment(PaymentRequest request, service_used serviceType) in /src/src/rinha-de-backend-2025.api/Infraestrutura/Clients/PaymentGatewayClient.cs:line 70
+backend-api-2     |          --- End of inner exception stack trace ---
+backend-api-2     |          at rinha_de_backend_2025.api.Infraestrutura.Clients.PaymentGatewayClient.ProcessPayment(PaymentRequest request, service_used serviceType) in /src/src/rinha-de-backend-2025.api/Infraestrutura/Clients/PaymentGatewayClient.cs:line 78
+backend-api-2     |          at rinha_de_backend_2025.api.Infraestrutura.Clients.PaymentGatewayClient.ProcessPaymentFallback(PaymentRequest request) in /src/src/rinha-de-backend-2025.api/Infraestrutura/Clients/PaymentGatewayClient.cs:line 17
+backend-api-2     |          at rinha_de_backend_2025.api.Service.PaymentProcessor.PaymentProcessorFallback(PaymentRequest request) in /src/src/rinha-de-backend-2025.api/Service/PaymentProcessor.cs:line 20
+backend-api-2     |          at rinha_de_backend_2025.api.Configurations.PaymentResiliencePolicyProvider.<>c__DisplayClass6_0.<<-ctor>b__0>d.MoveNext() in /src/src/rinha-de-backend-2025.api/Configurations/PaymentResiliencePolicyProvider.cs:line 28
+backend-api-2     |       --- End of stack trace from previous location ---
+backend-api-2     |          at Polly.Fallback.AsyncFallbackPolicy.<>c__DisplayClass3_0.<<ImplementationAsync>b__2>d.MoveNext()
+backend-api-2     |       --- End of stack trace from previous location ---
+backend-api-2     |          at Polly.Fallback.AsyncFallbackEngine.ImplementationAsync[TResult](Func`3 action, Context context, ExceptionPredicates shouldHandleExceptionPredicates, ResultPredicates`1 shouldHandleResultPredicates, Func`3 onFallbackAsync, Func`4 fallbackAction, Boolean continueOnCapturedContext, CancellationToken cancellationToken)
+backend-api-2     |          at Polly.AsyncPolicy.ExecuteInternalAsync(Func`3 action, Context context, Boolean continueOnCapturedContext, CancellationToken cancellationToken)
+backend-api-2     |          at Polly.AsyncPolicy.ExecuteInternalAsync(Func`3 action, Context context, Boolean continueOnCapturedContext, CancellationToken cancellationToken)
+backend-api-2     |          at rinha_de_backend_2025.api.Service.PaymentManager.SubmitPayment(PaymentRequest request, CancellationToken cancellationToken) in /src/src/rinha-de-backend-2025.api/Service/PaymentManager.cs:line 23
+backend-api-2     |          at rinha_de_backend_2025.api.Infraestrutura.Workers.PaymentEventConsumer.ExecuteAsync(CancellationToken stoppingToken) in /src/src/rinha-de-backend-2025.api/Infraestrutura/Workers/PaymentEventConsumer.cs:line 20
+backend-api-1     | fail: rinha_de_backend_2025.api.Infraestrutura.Clients.PaymentGatewayClient[0]
+backend-api-1     |       HTTP error occurred while processing payment with Fallback for correlation 2a278bbc-e95d-47e9-a665-e87b45ccf51f
+backend-api-1     |       System.Net.Http.HttpRequestException: Payment processing failed with status InternalServerError: Internal Server Error
+backend-api-1     |          at rinha_de_backend_2025.api.Infraestrutura.Clients.PaymentGatewayClient.ProcessPayment(PaymentRequest request, service_used serviceType) in /src/src/rinha-de-backend-2025.api/Infraestrutura/Clients/PaymentGatewayClient.cs:line 70
+backend-api-2     | fail: rinha_de_backend_2025.api.Infraestrutura.Clients.PaymentGatewayClient[0]
+backend-api-2     |       HTTP error occurred while processing payment with Fallback for correlation dde01f60-2b81-4d63-9e15-a80c058a2598
+backend-api-2     |       System.Net.Http.HttpRequestException: Payment processing failed with status InternalServerError: Internal Server Error
+backend-api-2     |          at rinha_de_backend_2025.api.Infraestrutura.Clients.PaymentGatewayClient.ProcessPayment(PaymentRequest request, service_used serviceType) in /src/src/rinha-de-backend-2025.api/Infraestrutura/Clients/PaymentGatewayClient.cs:line 70
+backend-api-1     | fail: rinha_de_backend_2025.api.Infraestrutura.Workers.PaymentEventConsumer[0]
+backend-api-1     |       An error occurred while processing the payment request.
+backend-api-1     |       System.InvalidOperationException: Payment processing failed due to network error with Fallback
+backend-api-2     | fail: rinha_de_backend_2025.api.Infraestrutura.Workers.PaymentEventConsumer[0]
+backend-api-2     |       An error occurred while processing the payment request.
+backend-api-2     |       System.InvalidOperationException: Payment processing failed due to network error with Fallback
+backend-api-2     |        ---> System.Net.Http.HttpRequestException: Payment processing failed with status InternalServerError: Internal Server Error
+backend-api-2     |          at rinha_de_backend_2025.api.Infraestrutura.Clients.PaymentGatewayClient.ProcessPayment(PaymentRequest request, service_used serviceType) in /src/src/rinha-de-backend-2025.api/Infraestrutura/Clients/PaymentGatewayClient.cs:line 70
+backend-api-2     |          --- End of inner exception stack trace ---
+backend-api-2     |          at rinha_de_backend_2025.api.Infraestrutura.Clients.PaymentGatewayClient.ProcessPayment(PaymentRequest request, service_used serviceType) in /src/src/rinha-de-backend-2025.api/Infraestrutura/Clients/PaymentGatewayClient.cs:line 78
+backend-api-2     |          at rinha_de_backend_2025.api.Infraestrutura.Clients.PaymentGatewayClient.ProcessPaymentFallback(PaymentRequest request) in /src/src/rinha-de-backend-2025.api/Infraestrutura/Clients/PaymentGatewayClient.cs:line 17
+backend-api-2     |          at rinha_de_backend_2025.api.Service.PaymentProcessor.PaymentProcessorFallback(PaymentRequest request) in /src/src/rinha-de-backend-2025.api/Service/PaymentProcessor.cs:line 20
+backend-api-2     |          at rinha_de_backend_2025.api.Configurations.PaymentResiliencePolicyProvider.<>c__DisplayClass6_0.<<-ctor>b__0>d.MoveNext() in /src/src/rinha-de-backend-2025.api/Configurations/PaymentResiliencePolicyProvider.cs:line 28
+backend-api-2     |       --- End of stack trace from previous location ---
+backend-api-2     |          at Polly.Fallback.AsyncFallbackPolicy.<>c__DisplayClass3_0.<<ImplementationAsync>b__2>d.MoveNext()
+backend-api-2     |       --- End of stack trace from previous location ---
+backend-api-2     |          at Polly.Fallback.AsyncFallbackEngine.ImplementationAsync[TResult](Func`3 action, Context context, ExceptionPredicates shouldHandleExceptionPredicates, ResultPredicates`1 shouldHandleResultPredicates, Func`3 onFallbackAsync, Func`4 fallbackAction, Boolean continueOnCapturedContext, CancellationToken cancellationToken)
+backend-api-2     |          at Polly.AsyncPolicy.ExecuteInternalAsync(Func`3 action, Context context, Boolean continueOnCapturedContext, CancellationToken cancellationToken)
+backend-api-2     |          at Polly.AsyncPolicy.ExecuteInternalAsync(Func`3 action, Context context, Boolean continueOnCapturedContext, CancellationToken cancellationToken)
+backend-api-2     |          at rinha_de_backend_2025.api.Service.PaymentManager.SubmitPayment(PaymentRequest request, CancellationToken cancellationToken) in /src/src/rinha-de-backend-2025.api/Service/PaymentManager.cs:line 23
+backend-api-2     |          at rinha_de_backend_2025.api.Infraestrutura.Workers.PaymentEventConsumer.ExecuteAsync(CancellationToken stoppingToken) in /src/src/rinha-de-backend-2025.api/Infraestrutura/Workers/PaymentEventConsumer.cs:line 20
+backend-api-1     |        ---> System.Net.Http.HttpRequestException: Payment processing failed with status InternalServerError: Internal Server Error
+backend-api-1     |          at rinha_de_backend_2025.api.Infraestrutura.Clients.PaymentGatewayClient.ProcessPayment(PaymentRequest request, service_used serviceType) in /src/src/rinha-de-backend-2025.api/Infraestrutura/Clients/PaymentGatewayClient.cs:line 70
+backend-api-1     |          --- End of inner exception stack trace ---
+backend-api-1     |          at rinha_de_backend_2025.api.Infraestrutura.Clients.PaymentGatewayClient.ProcessPayment(PaymentRequest request, service_used serviceType) in /src/src/rinha-de-backend-2025.api/Infraestrutura/Clients/PaymentGatewayClient.cs:line 78
+backend-api-1     |          at rinha_de_backend_2025.api.Infraestrutura.Clients.PaymentGatewayClient.ProcessPaymentFallback(PaymentRequest request) in /src/src/rinha-de-backend-2025.api/Infraestrutura/Clients/PaymentGatewayClient.cs:line 17
+backend-api-1     |          at rinha_de_backend_2025.api.Service.PaymentProcessor.PaymentProcessorFallback(PaymentRequest request) in /src/src/rinha-de-backend-2025.api/Service/PaymentProcessor.cs:line 20
+backend-api-1     |          at rinha_de_backend_2025.api.Configurations.PaymentResiliencePolicyProvider.<>c__DisplayClass6_0.<<-ctor>b__0>d.MoveNext() in /src/src/rinha-de-backend-2025.api/Configurations/PaymentResiliencePolicyProvider.cs:line 28
+backend-api-1     |       --- End of stack trace from previous location ---
+backend-api-1     |          at Polly.Fallback.AsyncFallbackPolicy.<>c__DisplayClass3_0.<<ImplementationAsync>b__2>d.MoveNext()
+backend-api-1     |       --- End of stack trace from previous location ---
+backend-api-1     |          at Polly.Fallback.AsyncFallbackEngine.ImplementationAsync[TResult](Func`3 action, Context context, ExceptionPredicates shouldHandleExceptionPredicates, ResultPredicates`1 shouldHandleResultPredicates, Func`3 onFallbackAsync, Func`4 fallbackAction, Boolean continueOnCapturedContext, CancellationToken cancellationToken)
+backend-api-1     |          at Polly.AsyncPolicy.ExecuteInternalAsync(Func`3 action, Context context, Boolean continueOnCapturedContext, CancellationToken cancellationToken)
+backend-api-1     |          at Polly.AsyncPolicy.ExecuteInternalAsync(Func`3 action, Context context, Boolean continueOnCapturedContext, CancellationToken cancellationToken)
+backend-api-1     |          at rinha_de_backend_2025.api.Service.PaymentManager.SubmitPayment(PaymentRequest request, CancellationToken cancellationToken) in /src/src/rinha-de-backend-2025.api/Service/PaymentManager.cs:line 23
+backend-api-1     |          at rinha_de_backend_2025.api.Infraestrutura.Workers.PaymentEventConsumer.ExecuteAsync(CancellationToken stoppingToken) in /src/src/rinha-de-backend-2025.api/Infraestrutura/Workers/PaymentEventConsumer.cs:line 20
+backend-api-2     | fail: rinha_de_backend_2025.api.Infraestrutura.Clients.PaymentGatewayClient[0]
+backend-api-2     |       HTTP error occurred while processing payment with Fallback for correlation 8bf41c19-5c92-4e42-bdf1-33a0d9a6e322
+backend-api-2     |       System.Net.Http.HttpRequestException: Payment processing failed with status InternalServerError: Internal Server Error
+backend-api-2     |          at rinha_de_backend_2025.api.Infraestrutura.Clients.PaymentGatewayClient.ProcessPayment(PaymentRequest request, service_used serviceType) in /src/src/rinha-de-backend-2025.api/Infraestrutura/Clients/PaymentGatewayClient.cs:line 70
+backend-api-1     | fail: rinha_de_backend_2025.api.Infraestrutura.Clients.PaymentGatewayClient[0]
+backend-api-1     |       HTTP error occurred while processing payment with Fallback for correlation cf30ce1f-5bc2-43ec-afbc-52cb408df91b
+backend-api-1     |       System.Net.Http.HttpRequestException: Payment processing failed with status InternalServerError: Internal Server Error
+backend-api-1     |          at rinha_de_backend_2025.api.Infraestrutura.Clients.PaymentGatewayClient.ProcessPayment(PaymentRequest request, service_used serviceType) in /src/src/rinha-de-backend-2025.api/Infraestrutura/Clients/PaymentGatewayClient.cs:line 70
+backend-api-2     | fail: rinha_de_backend_2025.api.Infraestrutura.Workers.PaymentEventConsumer[0]
+backend-api-2     |       An error occurred while processing the payment request.
+backend-api-2     |       System.InvalidOperationException: Payment processing failed due to network error with Fallback
+backend-api-2     |        ---> System.Net.Http.HttpRequestException: Payment processing failed with status InternalServerError: Internal Server Error
+backend-api-2     |          at rinha_de_backend_2025.api.Infraestrutura.Clients.PaymentGatewayClient.ProcessPayment(PaymentRequest request, service_used serviceType) in /src/src/rinha-de-backend-2025.api/Infraestrutura/Clients/PaymentGatewayClient.cs:line 70
+backend-api-2     |          --- End of inner exception stack trace ---
+backend-api-2     |          at rinha_de_backend_2025.api.Infraestrutura.Clients.PaymentGatewayClient.ProcessPayment(PaymentRequest request, service_used serviceType) in /src/src/rinha-de-backend-2025.api/Infraestrutura/Clients/PaymentGatewayClient.cs:line 78
+backend-api-2     |          at rinha_de_backend_2025.api.Infraestrutura.Clients.PaymentGatewayClient.ProcessPaymentFallback(PaymentRequest request) in /src/src/rinha-de-backend-2025.api/Infraestrutura/Clients/PaymentGatewayClient.cs:line 17
+backend-api-2     |          at rinha_de_backend_2025.api.Service.PaymentProcessor.PaymentProcessorFallback(PaymentRequest request) in /src/src/rinha-de-backend-2025.api/Service/PaymentProcessor.cs:line 20
+backend-api-2     |          at rinha_de_backend_2025.api.Configurations.PaymentResiliencePolicyProvider.<>c__DisplayClass6_0.<<-ctor>b__0>d.MoveNext() in /src/src/rinha-de-backend-2025.api/Configurations/PaymentResiliencePolicyProvider.cs:line 28
+backend-api-2     |       --- End of stack trace from previous location ---
+backend-api-2     |          at Polly.Fallback.AsyncFallbackPolicy.<>c__DisplayClass3_0.<<ImplementationAsync>b__2>d.MoveNext()
+backend-api-2     |       --- End of stack trace from previous location ---
+backend-api-2     |          at Polly.Fallback.AsyncFallbackEngine.ImplementationAsync[TResult](Func`3 action, Context context, ExceptionPredicates shouldHandleExceptionPredicates, ResultPredicates`1 shouldHandleResultPredicates, Func`3 onFallbackAsync, Func`4 fallbackAction, Boolean continueOnCapturedContext, CancellationToken cancellationToken)
+backend-api-2     |          at Polly.AsyncPolicy.ExecuteInternalAsync(Func`3 action, Context context, Boolean continueOnCapturedContext, CancellationToken cancellationToken)
+backend-api-2     |          at Polly.AsyncPolicy.ExecuteInternalAsync(Func`3 action, Context context, Boolean continueOnCapturedContext, CancellationToken cancellationToken)
+backend-api-2     |          at rinha_de_backend_2025.api.Service.PaymentManager.SubmitPayment(PaymentRequest request, CancellationToken cancellationToken) in /src/src/rinha-de-backend-2025.api/Service/PaymentManager.cs:line 23
+backend-api-2     |          at rinha_de_backend_2025.api.Infraestrutura.Workers.PaymentEventConsumer.ExecuteAsync(CancellationToken stoppingToken) in /src/src/rinha-de-backend-2025.api/Infraestrutura/Workers/PaymentEventConsumer.cs:line 20
+backend-api-1     | fail: rinha_de_backend_2025.api.Infraestrutura.Workers.PaymentEventConsumer[0]
+backend-api-1     |       An error occurred while processing the payment request.
+backend-api-1     |       System.InvalidOperationException: Payment processing failed due to network error with Fallback
+backend-api-1     |        ---> System.Net.Http.HttpRequestException: Payment processing failed with status InternalServerError: Internal Server Error
+backend-api-1     |          at rinha_de_backend_2025.api.Infraestrutura.Clients.PaymentGatewayClient.ProcessPayment(PaymentRequest request, service_used serviceType) in /src/src/rinha-de-backend-2025.api/Infraestrutura/Clients/PaymentGatewayClient.cs:line 70
+backend-api-1     |          --- End of inner exception stack trace ---
+backend-api-1     |          at rinha_de_backend_2025.api.Infraestrutura.Clients.PaymentGatewayClient.ProcessPayment(PaymentRequest request, service_used serviceType) in /src/src/rinha-de-backend-2025.api/Infraestrutura/Clients/PaymentGatewayClient.cs:line 78
+backend-api-1     |          at rinha_de_backend_2025.api.Infraestrutura.Clients.PaymentGatewayClient.ProcessPaymentFallback(PaymentRequest request) in /src/src/rinha-de-backend-2025.api/Infraestrutura/Clients/PaymentGatewayClient.cs:line 17
+backend-api-1     |          at rinha_de_backend_2025.api.Service.PaymentProcessor.PaymentProcessorFallback(PaymentRequest request) in /src/src/rinha-de-backend-2025.api/Service/PaymentProcessor.cs:line 20
+backend-api-1     |          at rinha_de_backend_2025.api.Configurations.PaymentResiliencePolicyProvider.<>c__DisplayClass6_0.<<-ctor>b__0>d.MoveNext() in /src/src/rinha-de-backend-2025.api/Configurations/PaymentResiliencePolicyProvider.cs:line 28
+backend-api-1     |       --- End of stack trace from previous location ---
+backend-api-1     |          at Polly.Fallback.AsyncFallbackPolicy.<>c__DisplayClass3_0.<<ImplementationAsync>b__2>d.MoveNext()
+backend-api-1     |       --- End of stack trace from previous location ---
+backend-api-1     |          at Polly.Fallback.AsyncFallbackEngine.ImplementationAsync[TResult](Func`3 action, Context context, ExceptionPredicates shouldHandleExceptionPredicates, ResultPredicates`1 shouldHandleResultPredicates, Func`3 onFallbackAsync, Func`4 fallbackAction, Boolean continueOnCapturedContext, CancellationToken cancellationToken)
+backend-api-1     |          at Polly.AsyncPolicy.ExecuteInternalAsync(Func`3 action, Context context, Boolean continueOnCapturedContext, CancellationToken cancellationToken)
+backend-api-1     |          at Polly.AsyncPolicy.ExecuteInternalAsync(Func`3 action, Context context, Boolean continueOnCapturedContext, CancellationToken cancellationToken)
+backend-api-1     |          at rinha_de_backend_2025.api.Service.PaymentManager.SubmitPayment(PaymentRequest request, CancellationToken cancellationToken) in /src/src/rinha-de-backend-2025.api/Service/PaymentManager.cs:line 23
+backend-api-1     |          at rinha_de_backend_2025.api.Infraestrutura.Workers.PaymentEventConsumer.ExecuteAsync(CancellationToken stoppingToken) in /src/src/rinha-de-backend-2025.api/Infraestrutura/Workers/PaymentEventConsumer.cs:line 20
+backend-api-1     | fail: rinha_de_backend_2025.api.Infraestrutura.Clients.PaymentGatewayClient[0]
+backend-api-1     |       HTTP error occurred while processing payment with Fallback for correlation c70fb77f-b643-453c-93e1-2e5339a76b45
+backend-api-1     |       System.Net.Http.HttpRequestException: Payment processing failed with status InternalServerError: Internal Server Error
+backend-api-1     |          at rinha_de_backend_2025.api.Infraestrutura.Clients.PaymentGatewayClient.ProcessPayment(PaymentRequest request, service_used serviceType) in /src/src/rinha-de-backend-2025.api/Infraestrutura/Clients/PaymentGatewayClient.cs:line 70
+backend-api-1     | fail: rinha_de_backend_2025.api.Infraestrutura.Workers.PaymentEventConsumer[0]
+backend-api-1     |       An error occurred while processing the payment request.
+backend-api-1     |       System.InvalidOperationException: Payment processing failed due to network error with Fallback
+backend-api-1     |        ---> System.Net.Http.HttpRequestException: Payment processing failed with status InternalServerError: Internal Server Error
+backend-api-1     |          at rinha_de_backend_2025.api.Infraestrutura.Clients.PaymentGatewayClient.ProcessPayment(PaymentRequest request, service_used serviceType) in /src/src/rinha-de-backend-2025.api/Infraestrutura/Clients/PaymentGatewayClient.cs:line 70
+backend-api-1     |          --- End of inner exception stack trace ---
+backend-api-1     |          at rinha_de_backend_2025.api.Infraestrutura.Clients.PaymentGatewayClient.ProcessPayment(PaymentRequest request, service_used serviceType) in /src/src/rinha-de-backend-2025.api/Infraestrutura/Clients/PaymentGatewayClient.cs:line 78
+backend-api-1     |          at rinha_de_backend_2025.api.Infraestrutura.Clients.PaymentGatewayClient.ProcessPaymentFallback(PaymentRequest request) in /src/src/rinha-de-backend-2025.api/Infraestrutura/Clients/PaymentGatewayClient.cs:line 17
+backend-api-1     |          at rinha_de_backend_2025.api.Service.PaymentProcessor.PaymentProcessorFallback(PaymentRequest request) in /src/src/rinha-de-backend-2025.api/Service/PaymentProcessor.cs:line 20
+backend-api-1     |          at rinha_de_backend_2025.api.Configurations.PaymentResiliencePolicyProvider.<>c__DisplayClass6_0.<<-ctor>b__0>d.MoveNext() in /src/src/rinha-de-backend-2025.api/Configurations/PaymentResiliencePolicyProvider.cs:line 28
+backend-api-1     |       --- End of stack trace from previous location ---
+backend-api-1     |          at Polly.Fallback.AsyncFallbackPolicy.<>c__DisplayClass3_0.<<ImplementationAsync>b__2>d.MoveNext()
+backend-api-1     |       --- End of stack trace from previous location ---
+backend-api-1     |          at Polly.Fallback.AsyncFallbackEngine.ImplementationAsync[TResult](Func`3 action, Context context, ExceptionPredicates shouldHandleExceptionPredicates, ResultPredicates`1 shouldHandleResultPredicates, Func`3 onFallbackAsync, Func`4 fallbackAction, Boolean continueOnCapturedContext, CancellationToken cancellationToken)
+backend-api-1     |          at Polly.AsyncPolicy.ExecuteInternalAsync(Func`3 action, Context context, Boolean continueOnCapturedContext, CancellationToken cancellationToken)
+backend-api-1     |          at Polly.AsyncPolicy.ExecuteInternalAsync(Func`3 action, Context context, Boolean continueOnCapturedContext, CancellationToken cancellationToken)
+backend-api-1     |          at rinha_de_backend_2025.api.Service.PaymentManager.SubmitPayment(PaymentRequest request, CancellationToken cancellationToken) in /src/src/rinha-de-backend-2025.api/Service/PaymentManager.cs:line 23
+backend-api-1     |          at rinha_de_backend_2025.api.Infraestrutura.Workers.PaymentEventConsumer.ExecuteAsync(CancellationToken stoppingToken) in /src/src/rinha-de-backend-2025.api/Infraestrutura/Workers/PaymentEventConsumer.cs:line 20
+backend-api-2     | fail: rinha_de_backend_2025.api.Infraestrutura.Clients.PaymentGatewayClient[0]
+backend-api-2     |       HTTP error occurred while processing payment with Fallback for correlation 924a56c4-3dce-4b84-a95e-5547e2b18b66
+backend-api-2     |       System.Net.Http.HttpRequestException: Payment processing failed with status InternalServerError: Internal Server Error
+backend-api-2     |          at rinha_de_backend_2025.api.Infraestrutura.Clients.PaymentGatewayClient.ProcessPayment(PaymentRequest request, service_used serviceType) in /src/src/rinha-de-backend-2025.api/Infraestrutura/Clients/PaymentGatewayClient.cs:line 70
+backend-api-2     | fail: rinha_de_backend_2025.api.Infraestrutura.Workers.PaymentEventConsumer[0]
+backend-api-2     |       An error occurred while processing the payment request.
+backend-api-2     |       System.InvalidOperationException: Payment processing failed due to network error with Fallback
+backend-api-2     |        ---> System.Net.Http.HttpRequestException: Payment processing failed with status InternalServerError: Internal Server Error
+backend-api-2     |          at rinha_de_backend_2025.api.Infraestrutura.Clients.PaymentGatewayClient.ProcessPayment(PaymentRequest request, service_used serviceType) in /src/src/rinha-de-backend-2025.api/Infraestrutura/Clients/PaymentGatewayClient.cs:line 70
+backend-api-2     |          --- End of inner exception stack trace ---
+backend-api-2     |          at rinha_de_backend_2025.api.Infraestrutura.Clients.PaymentGatewayClient.ProcessPayment(PaymentRequest request, service_used serviceType) in /src/src/rinha-de-backend-2025.api/Infraestrutura/Clients/PaymentGatewayClient.cs:line 78
+backend-api-2     |          at rinha_de_backend_2025.api.Infraestrutura.Clients.PaymentGatewayClient.ProcessPaymentFallback(PaymentRequest request) in /src/src/rinha-de-backend-2025.api/Infraestrutura/Clients/PaymentGatewayClient.cs:line 17
+backend-api-2     |          at rinha_de_backend_2025.api.Service.PaymentProcessor.PaymentProcessorFallback(PaymentRequest request) in /src/src/rinha-de-backend-2025.api/Service/PaymentProcessor.cs:line 20
+backend-api-2     |          at rinha_de_backend_2025.api.Configurations.PaymentResiliencePolicyProvider.<>c__DisplayClass6_0.<<-ctor>b__0>d.MoveNext() in /src/src/rinha-de-backend-2025.api/Configurations/PaymentResiliencePolicyProvider.cs:line 28
+backend-api-2     |       --- End of stack trace from previous location ---
+backend-api-2     |          at Polly.Fallback.AsyncFallbackPolicy.<>c__DisplayClass3_0.<<ImplementationAsync>b__2>d.MoveNext()
+backend-api-2     |       --- End of stack trace from previous location ---
+backend-api-2     |          at Polly.Fallback.AsyncFallbackEngine.ImplementationAsync[TResult](Func`3 action, Context context, ExceptionPredicates shouldHandleExceptionPredicates, ResultPredicates`1 shouldHandleResultPredicates, Func`3 onFallbackAsync, Func`4 fallbackAction, Boolean continueOnCapturedContext, CancellationToken cancellationToken)
+backend-api-2     |          at Polly.AsyncPolicy.ExecuteInternalAsync(Func`3 action, Context context, Boolean continueOnCapturedContext, CancellationToken cancellationToken)
+backend-api-2     |          at Polly.AsyncPolicy.ExecuteInternalAsync(Func`3 action, Context context, Boolean continueOnCapturedContext, CancellationToken cancellationToken)
+backend-api-2     |          at rinha_de_backend_2025.api.Service.PaymentManager.SubmitPayment(PaymentRequest request, CancellationToken cancellationToken) in /src/src/rinha-de-backend-2025.api/Service/PaymentManager.cs:line 23
+backend-api-2     |          at rinha_de_backend_2025.api.Infraestrutura.Workers.PaymentEventConsumer.ExecuteAsync(CancellationToken stoppingToken) in /src/src/rinha-de-backend-2025.api/Infraestrutura/Workers/PaymentEventConsumer.cs:line 20
+backend-api-1     | fail: rinha_de_backend_2025.api.Infraestrutura.Clients.PaymentGatewayClient[0]
+backend-api-1     |       HTTP error occurred while processing payment with Fallback for correlation 16286f7a-af3e-4df8-a390-4a57538773c8
+backend-api-1     |       System.Net.Http.HttpRequestException: Payment processing failed with status InternalServerError: Internal Server Error
+backend-api-1     |          at rinha_de_backend_2025.api.Infraestrutura.Clients.PaymentGatewayClient.ProcessPayment(PaymentRequest request, service_used serviceType) in /src/src/rinha-de-backend-2025.api/Infraestrutura/Clients/PaymentGatewayClient.cs:line 70
+backend-api-1     | fail: rinha_de_backend_2025.api.Infraestrutura.Workers.PaymentEventConsumer[0]
+backend-api-1     |       An error occurred while processing the payment request.
+backend-api-1     |       System.InvalidOperationException: Payment processing failed due to network error with Fallback
+backend-api-1     |        ---> System.Net.Http.HttpRequestException: Payment processing failed with status InternalServerError: Internal Server Error
+backend-api-1     |          at rinha_de_backend_2025.api.Infraestrutura.Clients.PaymentGatewayClient.ProcessPayment(PaymentRequest request, service_used serviceType) in /src/src/rinha-de-backend-2025.api/Infraestrutura/Clients/PaymentGatewayClient.cs:line 70
+backend-api-1     |          --- End of inner exception stack trace ---
+backend-api-1     |          at rinha_de_backend_2025.api.Infraestrutura.Clients.PaymentGatewayClient.ProcessPayment(PaymentRequest request, service_used serviceType) in /src/src/rinha-de-backend-2025.api/Infraestrutura/Clients/PaymentGatewayClient.cs:line 78
+backend-api-1     |          at rinha_de_backend_2025.api.Infraestrutura.Clients.PaymentGatewayClient.ProcessPaymentFallback(PaymentRequest request) in /src/src/rinha-de-backend-2025.api/Infraestrutura/Clients/PaymentGatewayClient.cs:line 17
+backend-api-1     |          at rinha_de_backend_2025.api.Service.PaymentProcessor.PaymentProcessorFallback(PaymentRequest request) in /src/src/rinha-de-backend-2025.api/Service/PaymentProcessor.cs:line 20
+backend-api-1     |          at rinha_de_backend_2025.api.Configurations.PaymentResiliencePolicyProvider.<>c__DisplayClass6_0.<<-ctor>b__0>d.MoveNext() in /src/src/rinha-de-backend-2025.api/Configurations/PaymentResiliencePolicyProvider.cs:line 28
+backend-api-1     |       --- End of stack trace from previous location ---
+backend-api-1     |          at Polly.Fallback.AsyncFallbackPolicy.<>c__DisplayClass3_0.<<ImplementationAsync>b__2>d.MoveNext()
+backend-api-1     |       --- End of stack trace from previous location ---
+backend-api-1     |          at Polly.Fallback.AsyncFallbackEngine.ImplementationAsync[TResult](Func`3 action, Context context, ExceptionPredicates shouldHandleExceptionPredicates, ResultPredicates`1 shouldHandleResultPredicates, Func`3 onFallbackAsync, Func`4 fallbackAction, Boolean continueOnCapturedContext, CancellationToken cancellationToken)
+backend-api-1     |          at Polly.AsyncPolicy.ExecuteInternalAsync(Func`3 action, Context context, Boolean continueOnCapturedContext, CancellationToken cancellationToken)
+backend-api-1     |          at Polly.AsyncPolicy.ExecuteInternalAsync(Func`3 action, Context context, Boolean continueOnCapturedContext, CancellationToken cancellationToken)
+backend-api-1     |          at rinha_de_backend_2025.api.Service.PaymentManager.SubmitPayment(PaymentRequest request, CancellationToken cancellationToken) in /src/src/rinha-de-backend-2025.api/Service/PaymentManager.cs:line 23
+backend-api-1     |          at rinha_de_backend_2025.api.Infraestrutura.Workers.PaymentEventConsumer.ExecuteAsync(CancellationToken stoppingToken) in /src/src/rinha-de-backend-2025.api/Infraestrutura/Workers/PaymentEventConsumer.cs:line 20
+backend-api-2     | fail: rinha_de_backend_2025.api.Infraestrutura.Clients.PaymentGatewayClient[0]
+backend-api-2     |       HTTP error occurred while processing payment with Fallback for correlation 60e36c93-5a38-4e1a-b70b-15bc902278df
+backend-api-2     |       System.Net.Http.HttpRequestException: Payment processing failed with status InternalServerError: Internal Server Error
+backend-api-2     |          at rinha_de_backend_2025.api.Infraestrutura.Clients.PaymentGatewayClient.ProcessPayment(PaymentRequest request, service_used serviceType) in /src/src/rinha-de-backend-2025.api/Infraestrutura/Clients/PaymentGatewayClient.cs:line 70
+backend-api-2     | fail: rinha_de_backend_2025.api.Infraestrutura.Workers.PaymentEventConsumer[0]
+backend-api-2     |       An error occurred while processing the payment request.
+backend-api-2     |       System.InvalidOperationException: Payment processing failed due to network error with Fallback
+backend-api-2     |        ---> System.Net.Http.HttpRequestException: Payment processing failed with status InternalServerError: Internal Server Error
+backend-api-2     |          at rinha_de_backend_2025.api.Infraestrutura.Clients.PaymentGatewayClient.ProcessPayment(PaymentRequest request, service_used serviceType) in /src/src/rinha-de-backend-2025.api/Infraestrutura/Clients/PaymentGatewayClient.cs:line 70
+backend-api-2     |          --- End of inner exception stack trace ---
+backend-api-2     |          at rinha_de_backend_2025.api.Infraestrutura.Clients.PaymentGatewayClient.ProcessPayment(PaymentRequest request, service_used serviceType) in /src/src/rinha-de-backend-2025.api/Infraestrutura/Clients/PaymentGatewayClient.cs:line 78
+backend-api-2     |          at rinha_de_backend_2025.api.Infraestrutura.Clients.PaymentGatewayClient.ProcessPaymentFallback(PaymentRequest request) in /src/src/rinha-de-backend-2025.api/Infraestrutura/Clients/PaymentGatewayClient.cs:line 17
+backend-api-2     |          at rinha_de_backend_2025.api.Service.PaymentProcessor.PaymentProcessorFallback(PaymentRequest request) in /src/src/rinha-de-backend-2025.api/Service/PaymentProcessor.cs:line 20
+backend-api-2     |          at rinha_de_backend_2025.api.Configurations.PaymentResiliencePolicyProvider.<>c__DisplayClass6_0.<<-ctor>b__0>d.MoveNext() in /src/src/rinha-de-backend-2025.api/Configurations/PaymentResiliencePolicyProvider.cs:line 28
+backend-api-2     |       --- End of stack trace from previous location ---
+backend-api-2     |          at Polly.Fallback.AsyncFallbackPolicy.<>c__DisplayClass3_0.<<ImplementationAsync>b__2>d.MoveNext()
+backend-api-2     |       --- End of stack trace from previous location ---
+backend-api-2     |          at Polly.Fallback.AsyncFallbackEngine.ImplementationAsync[TResult](Func`3 action, Context context, ExceptionPredicates shouldHandleExceptionPredicates, ResultPredicates`1 shouldHandleResultPredicates, Func`3 onFallbackAsync, Func`4 fallbackAction, Boolean continueOnCapturedContext, CancellationToken cancellationToken)
+backend-api-2     |          at Polly.AsyncPolicy.ExecuteInternalAsync(Func`3 action, Context context, Boolean continueOnCapturedContext, CancellationToken cancellationToken)
+backend-api-2     |          at Polly.AsyncPolicy.ExecuteInternalAsync(Func`3 action, Context context, Boolean continueOnCapturedContext, CancellationToken cancellationToken)
+backend-api-2     |          at rinha_de_backend_2025.api.Service.PaymentManager.SubmitPayment(PaymentRequest request, CancellationToken cancellationToken) in /src/src/rinha-de-backend-2025.api/Service/PaymentManager.cs:line 23
+backend-api-2     |          at rinha_de_backend_2025.api.Infraestrutura.Workers.PaymentEventConsumer.ExecuteAsync(CancellationToken stoppingToken) in /src/src/rinha-de-backend-2025.api/Infraestrutura/Workers/PaymentEventConsumer.cs:line 20
+[Kload_balancer exited with code 0
+[Kbackend-api-1 exited with code 0
+[Kbackend-api-2 exited with code 0
+backend_database  | 2025-08-17 22:41:24.639 UTC [1] LOG:  received fast shutdown request
+backend_database  | 2025-08-17 22:41:24.642 UTC [1] LOG:  aborting any active transactions
+backend_database  | 2025-08-17 22:41:24.645 UTC [1] LOG:  background worker "logical replication launcher" (PID 67) exited with exit code 1
+backend_database  | 2025-08-17 22:41:24.646 UTC [62] LOG:  shutting down
+backend_database  | 2025-08-17 22:41:24.649 UTC [62] LOG:  checkpoint starting: shutdown immediate
+backend_database  | 2025-08-17 22:41:24.676 UTC [62] LOG:  checkpoint complete: wrote 412 buffers (2.5%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.011 s, sync=0.006 s, total=0.031 s; sync files=27, longest=0.002 s, average=0.001 s; distance=871 kB, estimate=871 kB; lsn=0/19F7540, redo lsn=0/19F7540
+backend_database  | 2025-08-17 22:41:24.735 UTC [1] LOG:  database system is shut down
+log truncated at line 1000

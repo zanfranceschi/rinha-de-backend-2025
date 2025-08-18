@@ -12,7 +12,7 @@ networks:
 
 x-service-templates:
   base: &apibase
-    image: acslook/payment-proxy:v6
+    image: acslook/payment-proxy:v7
 
 services:  
   network-setup:
@@ -40,7 +40,7 @@ services:
       deploy:
         resources:
           limits:
-            cpus: '0.5'
+            cpus: '0.3'
             memory: "30MB"
       depends_on:
         - network-setup
@@ -61,7 +61,7 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '0.5'
+          cpus: '0.3'
           memory: "30MB"
     depends_on:
       - network-setup
@@ -83,7 +83,7 @@ services:
       deploy:
         resources:
           limits:
-            cpus: '0.2'
+            cpus: '0.6'
             memory: "200MB"
       depends_on:
         - network-setup

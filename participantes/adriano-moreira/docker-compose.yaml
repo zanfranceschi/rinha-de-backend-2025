@@ -1,5 +1,5 @@
 x-api-template: &api-template
-  image: adrianomoreira86/rinha-de-backend-2025-java-quarkus-api:reactive
+  image: adrianomoreira86/rinha-de-backend-2025-java-quarkus-api:final
   networks:
     - app
     - payment-processor
@@ -11,6 +11,7 @@ x-api-template: &api-template
     quarkus.datasource.username: admin
     quarkus.datasource.password: 123
     quarkus.datasource.reactive.url: vertx-reactive:postgresql://postgres:5432/rinha
+    quarkus.datasource.jdbc.max-size: 50
 
 x-worker-template: &worker-template
   image: adrianomoreira86/rinha-de-backend-2025-java-quarkus-worker:latest
@@ -25,6 +26,7 @@ x-worker-template: &worker-template
     quarkus.datasource.username: admin
     quarkus.datasource.password: 123
     quarkus.datasource.reactive.url: vertx-reactive:postgresql://postgres:5432/rinha
+    quarkus.datasource.jdbc.max-size: 20 #20 is default
     quarkus.rest-client.processor-default.url: http://payment-processor-default:8080/
     quarkus.rest-client.processor-fallback.url: http://payment-processor-fallback:8080/
     quarkus.log.level: INFO
@@ -44,7 +46,7 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.2"
+          cpus: ".2"
           memory: "48MB"
 
   api-1:
@@ -91,7 +93,7 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.3"
+          cpus: ".3"
           memory: "158MB"
 
 networks:

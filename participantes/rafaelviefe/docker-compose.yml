@@ -15,11 +15,11 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.15"
-          memory: "47MB"
+          cpus: "0.17"
+          memory: "52MB"
   
   api1: &api
-    image: rafaelviefe/pagamentos:1
+    image: rafaelviefe/pagamentos:2
     hostname: api1
     environment:
       - SPRING_DATA_REDIS_HOST=redis
@@ -32,8 +32,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.56"
-          memory: "121MB"
+          cpus: "0.54"
+          memory: "116MB"
   
   api2:
     <<: *api
@@ -52,11 +52,12 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.23"
-          memory: "61MB"
+          cpus: "0.25"
+          memory: "66MB"
 
 networks:
   backend:
     driver: bridge
   payment-processor:
     external: true
+    

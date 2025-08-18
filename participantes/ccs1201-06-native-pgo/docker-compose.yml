@@ -1,6 +1,6 @@
 x-backend-templates:
   app: &app
-    image: csouzadocker/rinha-native-pgo:v0.0.1
+    image: csouzadocker/rinha-native-pgo:v0.0.4
     depends_on:
       backend-db:
         condition: service_healthy
@@ -15,28 +15,28 @@ x-backend-templates:
         window: 5s
       resources:
         limits:
-          cpus: "0.6"
+          cpus: "0.65"
           memory: "100MB"
 
   app-cmd: &app-cmd
-      - "./app-optimized"
-      - "-DBATCH_SIZE=100"
-      - "-DBATCH_LIMIT=10"
-      - "-DDATASOURCE_CLASS_NAME=org.postgresql.Driver"
-      - "-DDATASOURCE_MAXIMUM_POOL_SIZE=3"
-      - "-DDATASOURCE_MINIMUM_IDLE=3"
-      - "-DDATASOURCE_PASSWORD=rinha"
-      - "-DDATASOURCE_TIMEOUT=20000"
-      - "-DDATASOURCE_URL=jdbc:postgresql://postgres:5432/rinha"
-      - "-DDATASOURCE_USERNAME=rinha"
-      - "-DPAYMENT_PROCESSOR_DEFAULT_URL=http://payment-processor-default:8080"
-      - "-DPAYMENT_PROCESSOR_FALLBACK_URL=http://payment-processor-fallback:8080"
-      - "-DPAYMENT_PROCESSOR_WORKERS=10"
-      - "-DPAYMENT_PROCESSOR_REQUEST_TIMEOUT=6000"
-      - "-DPAYMENT_PROCESSOR_CONNECTION_TIMEOUT=50"
-      - "-DSERVER_PORT=8080"
-      - "-DSERVER_IO_THREADS=2"
-      - "-DSERVER_WORKER_THREADS=8"
+    - "./app-optimized"
+    - "-DBATCH_SIZE=100"
+    - "-DBATCH_LIMIT=10"
+    - "-DDATASOURCE_CLASS_NAME=org.postgresql.Driver"
+    - "-DDATASOURCE_MAXIMUM_POOL_SIZE=3"
+    - "-DDATASOURCE_MINIMUM_IDLE=3"
+    - "-DDATASOURCE_PASSWORD=rinha"
+    - "-DDATASOURCE_TIMEOUT=20000"
+    - "-DDATASOURCE_URL=jdbc:postgresql://postgres:5432/rinha"
+    - "-DDATASOURCE_USERNAME=rinha"
+    - "-DPAYMENT_PROCESSOR_DEFAULT_URL=http://payment-processor-default:8080"
+    - "-DPAYMENT_PROCESSOR_FALLBACK_URL=http://payment-processor-fallback:8080"
+    - "-DPAYMENT_PROCESSOR_WORKERS=10"
+    - "-DPAYMENT_PROCESSOR_REQUEST_TIMEOUT=6000"
+    - "-DPAYMENT_PROCESSOR_CONNECTION_TIMEOUT=30"
+    - "-DSERVER_PORT=8080"
+    - "-DSERVER_IO_THREADS=6"
+    - "-DSERVER_WORKER_THREADS=2"
 
 #############################################################################################
 
@@ -58,7 +58,7 @@ services:
       resources:
         limits:
           cpus: "0.1"
-          memory: "30MB"
+          memory: "20MB"
 
   app1:
     <<: *app
@@ -95,8 +95,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.2"
-          memory: "120MB"
+          cpus: "0.1"
+          memory: "130MB"
 
 networks:
   backend:

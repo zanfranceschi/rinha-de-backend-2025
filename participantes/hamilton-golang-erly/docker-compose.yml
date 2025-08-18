@@ -1,0 +1,91 @@
+x-rinha-api-base: &rinha-api-base
+  image: jhamiltonjunior/rinha-go-socket:0.1.0
+  volumes:
+    - api-socketsv6:/var/run
+  depends_on:
+    - redis
+  networks:
+    - app-network
+    - payment-processor
+  deploy: &rinha-api-deploy
+    resources:
+      limits:
+        cpus: "0.4"
+        memory: "80MB"
+
+  environment: &common-environment
+    GOGC: 500
+    APP_PORT: 3000
+    REDIS_ADDR: redis:6379
+    POSTGRES_URL: postgres://user:password-very-har@postgres:5432/rinha_de_backend?sslmode=disable
+    NATS_URL: nats://nats:4222
+    PAYMENT_PROCESSOR_URL_DEFAULT: http://payment-processor-default:8080
+    PAYMENT_PROCESSOR_URL_FALLBACK: http://payment-processor-fallback:8080
+
+services:
+  nginx:
+    image: nginx:1.25.3-alpine
+    pull_policy: always
+    environment:
+      - EXTERNAL_HOSTS=/var/run/api_1.sock,/var/run/api_2.sock,/var/run/api_3.sock
+    container_name: nginx_load_balancer
+    ports:
+      - "9999:80"
+    volumes:
+      - ./config/nginx.conf:/etc/nginx/nginx.conf:ro
+      - api-socketsv6:/var/run:rw
+    depends_on:
+      - rinha-api-1
+      - rinha-api-2
+      # - rinha-api-3
+    networks:
+      - app-network
+    deploy:
+      resources:
+        limits:
+          cpus: "0.35"
+          memory: "80MB"
+
+  rinha-api-1:
+    <<: *rinha-api-base
+    container_name: rinha-api-1
+    environment:
+      <<: *common-environment
+      RUN_VERIFY_PAYMENT_SERVICE: "true"
+      UNIX_SOCKET: /var/run/api_1.sock
+    command: ./main -socket /var/run/api_1.sock
+
+  rinha-api-2:
+    <<: *rinha-api-base
+    container_name: rinha-api-2
+    environment:
+      <<: *common-environment
+      UNIX_SOCKET: /var/run/api_2.sock
+    command: ./main -socket /var/run/api_2.sock
+
+  redis:
+    image: redis:7.2.4-alpine
+    container_name: redis_cache
+    networks:
+      - app-network
+    volumes:
+      - redis-data:/data
+    deploy:
+      resources:
+        limits:
+          cpus: "0.35"
+          memory: "60MB"
+
+networks:
+  app-network:
+    driver: bridge
+  payment-processor:
+    external: true
+
+volumes:
+  redis-data:
+  api-socketsv6:
+    driver_opts:
+      type: tmpfs
+      device: tmpfs
+      o: size=16m,mode=1777

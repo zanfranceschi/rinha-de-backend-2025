@@ -26,7 +26,7 @@
 
 ## ▶️ Código fonte
 
-https://github.com/G4brielV/RinhaBackend2025_Imp_1
+https://github.com/G4brielV/Impl_Java_RinhaBackend2025
 
 
 

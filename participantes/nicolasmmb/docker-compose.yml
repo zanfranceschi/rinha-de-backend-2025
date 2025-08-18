@@ -1,0 +1,102 @@
+x-api-service: &api-service
+  image: ghcr.io/nicolasmmb/go-rinha-backend-2025:v1.7.0
+  networks:
+    - backend
+    - payment-processor
+  environment:
+    # - GOGC=50
+    - GOMEMLIMIT=150
+    - WORKER_POOL=15
+    - PAYMENT_CHAN_SIZE=10000
+    - REDIS_ADDR=mem-db:6379
+    - SERVER_ADDR=0.0.0.0
+    - SERVER_PORT=8080
+    - PAYMENT_PROCESSOR_URL_DEFAULT=http://payment-processor-default:8080/payments
+    - PAYMENT_PROCESSOR_URL_FALLBACK=http://payment-processor-fallback:8080/payments
+    - HEALTH_URL_DEFAULT=http://payment-processor-default:8080/payments/service-health
+    - HEALTH_URL_FALLBACK=http://payment-processor-fallback:8080/payments/service-health
+  healthcheck:
+    test: ["CMD", "curl", "--silent", "--fail", "http://localhost:8080/health"]
+    interval: 3s
+    timeout: 1s
+    retries: 5
+    start_period: 10s
+  depends_on:
+    mem-db:
+      condition: service_healthy
+  deploy:
+    resources:
+      limits:
+        cpus: "0.5"
+        memory: "100MB"
+  ulimits:
+      nproc: 1000000
+      nofile:
+        soft: 1000000
+        hard: 1000000
+
+
+
+services:
+  api-1:
+    <<: *api-service
+    container_name: api-go-1
+    hostname: api-go-1
+
+  api-2:
+    <<: *api-service
+    container_name: api-go-2
+    hostname: api-go-2
+ 
+  haproxy:
+    image: haproxy:2.8-alpine
+    container_name: lb
+    hostname: lb
+    ports:
+      - "9999:9999"
+    volumes:
+      - ./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
+    networks:
+      - backend
+    depends_on:
+      - api-1
+      - api-2
+    deploy:
+      resources:
+        limits:
+          cpus: "0.2"
+          memory: "100MB"
+    ulimits:
+      nproc: 1000000
+      nofile:
+        soft: 1000000
+        hard: 1000000
+
+  mem-db:
+    image: valkey/valkey
+    container_name: mem-db
+    hostname: mem-db
+    command: >
+     valkey-server --maxmemory-policy allkeys-lru --tcp-backlog 511 --timeout 0 --maxclients 1024
+      
+    networks:
+      - backend
+    deploy:
+      resources:
+        limits:
+          cpus: "0.3"
+          memory: "50MB"
+    healthcheck:
+      test: ["CMD", "valkey-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    ports:
+      - "6379:6379"
+
+networks:
+  backend:
+    driver: bridge
+
+  payment-processor:
+    external: true
