@@ -1,721 +1,267 @@
 
-time="2025-08-19T16:33:08Z" level=warning msg="/home/ubuntu/rinha-de-backend-2025/participantes/ryangst-bun/docker-compose.yml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion"
- Network ryangst-bun_ryangst  Creating
- Network ryangst-bun_ryangst  Created
- Volume "ryangst-bun_mongodb_data"  Creating
- Volume "ryangst-bun_mongodb_data"  Created
- Volume "ryangst-bun_redis_data"  Creating
- Volume "ryangst-bun_redis_data"  Created
- Container ryangst-bun-mongodb-1  Creating
- Container ryangst-bun-redis-1  Creating
- Container traefik  Creating
- Container traefik  Created
- Container ryangst-bun-mongodb-1  Created
- Container ryangst-bun-redis-1  Created
- Container worker-rinha  Creating
- Container api-rinha-2  Creating
- Container api-rinha  Creating
- Container api-rinha  Created
- Container worker-rinha  Created
- Container api-rinha-2  Created
-Attaching to api-rinha, api-rinha-2, mongodb-1, redis-1, traefik, worker-rinha
-redis-1  | 1:C 19 Aug 2025 16:33:09.561 # WARNING Memory overcommit must be enabled! Without it, a background save or replication may fail under low memory condition. Being disabled, it can also cause failures without low memory condition, see https://github.com/jemalloc/jemalloc/issues/1328. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.
-redis-1  | 1:C 19 Aug 2025 16:33:09.561 * oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
-redis-1  | 1:C 19 Aug 2025 16:33:09.561 * Redis version=7.4.5, bits=64, commit=00000000, modified=0, pid=1, just started
-redis-1  | 1:C 19 Aug 2025 16:33:09.561 * Configuration loaded
-redis-1  | 1:M 19 Aug 2025 16:33:09.563 * monotonic clock: POSIX clock_gettime
-redis-1  | 1:M 19 Aug 2025 16:33:09.676 * Running mode=standalone, port=6379.
-redis-1  | 1:M 19 Aug 2025 16:33:09.680 * Server initialized
-redis-1  | 1:M 19 Aug 2025 16:33:09.680 * Ready to accept connections tcp
-mongodb-1  | {"t":{"$date":"2025-08-19T16:33:10.273+00:00"},"s":"I",  "c":"CONTROL",  "id":23285,   "ctx":"main","msg":"Automatically disabling TLS 1.0, to force-enable TLS 1.0 specify --sslDisabledProtocols 'none'"}
-mongodb-1  | {"t":{"$date":"2025-08-19T16:33:10.280+00:00"},"s":"I",  "c":"NETWORK",  "id":4915701, "ctx":"main","msg":"Initialized wire specification","attr":{"spec":{"incomingExternalClient":{"minWireVersion":0,"maxWireVersion":21},"incomingInternalClient":{"minWireVersion":0,"maxWireVersion":21},"outgoing":{"minWireVersion":6,"maxWireVersion":21},"isInternalClient":true}}}
-mongodb-1  | {"t":{"$date":"2025-08-19T16:33:10.280+00:00"},"s":"I",  "c":"NETWORK",  "id":4648601, "ctx":"main","msg":"Implicit TCP FastOpen unavailable. If TCP FastOpen is required, set tcpFastOpenServer, tcpFastOpenClient, and tcpFastOpenQueueSize."}
-mongodb-1  | {"t":{"$date":"2025-08-19T16:33:10.288+00:00"},"s":"I",  "c":"REPL",     "id":5123008, "ctx":"main","msg":"Successfully registered PrimaryOnlyService","attr":{"service":"TenantMigrationDonorService","namespace":"config.tenantMigrationDonors"}}
-mongodb-1  | {"t":{"$date":"2025-08-19T16:33:10.288+00:00"},"s":"I",  "c":"REPL",     "id":5123008, "ctx":"main","msg":"Successfully registered PrimaryOnlyService","attr":{"service":"TenantMigrationRecipientService","namespace":"config.tenantMigrationRecipients"}}
-mongodb-1  | {"t":{"$date":"2025-08-19T16:33:10.288+00:00"},"s":"I",  "c":"CONTROL",  "id":5945603, "ctx":"main","msg":"Multi threading initialized"}
-mongodb-1  | {"t":{"$date":"2025-08-19T16:33:10.288+00:00"},"s":"I",  "c":"TENANT_M", "id":7091600, "ctx":"main","msg":"Starting TenantMigrationAccessBlockerRegistry"}
-mongodb-1  | {"t":{"$date":"2025-08-19T16:33:10.288+00:00"},"s":"I",  "c":"CONTROL",  "id":4615611, "ctx":"initandlisten","msg":"MongoDB starting","attr":{"pid":1,"port":27017,"dbPath":"/data/db","architecture":"64-bit","host":"eeec7e036ff2"}}
-mongodb-1  | {"t":{"$date":"2025-08-19T16:33:10.288+00:00"},"s":"W",  "c":"CONTROL",  "id":20720,   "ctx":"initandlisten","msg":"Memory available to mongo process is less than total system memory","attr":{"availableMemSizeMB":110,"systemMemSizeMB":7820}}
-mongodb-1  | {"t":{"$date":"2025-08-19T16:33:10.288+00:00"},"s":"I",  "c":"CONTROL",  "id":23403,   "ctx":"initandlisten","msg":"Build Info","attr":{"buildInfo":{"version":"7.0.22","gitVersion":"6660d93e97cdb0dc35d8ceb699c511f5850278a5","openSSLVersion":"OpenSSL 3.0.2 15 Mar 2022","modules":[],"allocator":"tcmalloc","environment":{"distmod":"ubuntu2204","distarch":"x86_64","target_arch":"x86_64"}}}}
-mongodb-1  | {"t":{"$date":"2025-08-19T16:33:10.288+00:00"},"s":"I",  "c":"CONTROL",  "id":51765,   "ctx":"initandlisten","msg":"Operating System","attr":{"os":{"name":"Ubuntu","version":"22.04"}}}
-mongodb-1  | {"t":{"$date":"2025-08-19T16:33:10.288+00:00"},"s":"I",  "c":"CONTROL",  "id":21951,   "ctx":"initandlisten","msg":"Options set by command line","attr":{"options":{"net":{"bindIp":"*"}}}}
-mongodb-1  | {"t":{"$date":"2025-08-19T16:33:10.297+00:00"},"s":"I",  "c":"STORAGE",  "id":22297,   "ctx":"initandlisten","msg":"Using the XFS filesystem is strongly recommended with the WiredTiger storage engine. See http://dochub.mongodb.org/core/prodnotes-filesystem","tags":["startupWarnings"]}
-mongodb-1  | {"t":{"$date":"2025-08-19T16:33:10.297+00:00"},"s":"I",  "c":"STORAGE",  "id":22300,   "ctx":"initandlisten","msg":"The configured WiredTiger cache size is more than 80% of available RAM. See http://dochub.mongodb.org/core/faq-memory-diagnostics-wt","tags":["startupWarnings"]}
-mongodb-1  | {"t":{"$date":"2025-08-19T16:33:10.297+00:00"},"s":"I",  "c":"STORAGE",  "id":22315,   "ctx":"initandlisten","msg":"Opening WiredTiger","attr":{"config":"create,cache_size=256M,session_max=33000,eviction=(threads_min=4,threads_max=4),config_base=false,statistics=(fast),log=(enabled=true,remove=true,path=journal,compressor=snappy),builtin_extension_config=(zstd=(compression_level=6)),file_manager=(close_idle_time=600,close_scan_interval=10,close_handle_minimum=2000),statistics_log=(wait=0),json_output=(error,message),verbose=[recovery_progress:1,checkpoint_progress:1,compact_progress:1,backup:0,checkpoint:0,compact:0,evict:0,history_store:0,recovery:0,rts:0,salvage:0,tiered:0,timestamp:0,transaction:0,verify:0,log:0],"}}
-mongodb-1  | {"t":{"$date":"2025-08-19T16:33:11.613+00:00"},"s":"I",  "c":"WTRECOV",  "id":22430,   "ctx":"initandlisten","msg":"WiredTiger message","attr":{"message":{"ts_sec":1755621191,"ts_usec":595762,"thread":"1:0x76e28b96dc80","session_name":"txn-recover","category":"WT_VERB_RECOVERY_PROGRESS","category_id":30,"verbose_level":"DEBUG_1","verbose_level_id":1,"msg":"recovery log replay has successfully finished and ran for 2 milliseconds"}}}
-mongodb-1  | {"t":{"$date":"2025-08-19T16:33:11.619+00:00"},"s":"I",  "c":"WTRECOV",  "id":22430,   "ctx":"initandlisten","msg":"WiredTiger message","attr":{"message":{"ts_sec":1755621191,"ts_usec":617921,"thread":"1:0x76e28b96dc80","session_name":"txn-recover","category":"WT_VERB_RECOVERY_PROGRESS","category_id":30,"verbose_level":"DEBUG_1","verbose_level_id":1,"msg":"Set global recovery timestamp: (0, 0)"}}}
-mongodb-1  | {"t":{"$date":"2025-08-19T16:33:11.622+00:00"},"s":"I",  "c":"WTRECOV",  "id":22430,   "ctx":"initandlisten","msg":"WiredTiger message","attr":{"message":{"ts_sec":1755621191,"ts_usec":619497,"thread":"1:0x76e28b96dc80","session_name":"txn-recover","category":"WT_VERB_RECOVERY_PROGRESS","category_id":30,"verbose_level":"DEBUG_1","verbose_level_id":1,"msg":"Set global oldest timestamp: (0, 0)"}}}
-mongodb-1  | {"t":{"$date":"2025-08-19T16:33:11.622+00:00"},"s":"I",  "c":"WTRECOV",  "id":22430,   "ctx":"initandlisten","msg":"WiredTiger message","attr":{"message":{"ts_sec":1755621191,"ts_usec":622092,"thread":"1:0x76e28b96dc80","session_name":"txn-recover","category":"WT_VERB_RECOVERY_PROGRESS","category_id":30,"verbose_level":"DEBUG_1","verbose_level_id":1,"msg":"recovery was completed successfully and took 28ms, including 2ms for the log replay, 0ms for the rollback to stable, and 0ms for the checkpoint."}}}
-mongodb-1  | {"t":{"$date":"2025-08-19T16:33:11.653+00:00"},"s":"I",  "c":"STORAGE",  "id":4795906, "ctx":"initandlisten","msg":"WiredTiger opened","attr":{"durationMillis":1356}}
-mongodb-1  | {"t":{"$date":"2025-08-19T16:33:11.659+00:00"},"s":"I",  "c":"RECOVERY", "id":23987,   "ctx":"initandlisten","msg":"WiredTiger recoveryTimestamp","attr":{"recoveryTimestamp":{"$timestamp":{"t":0,"i":0}}}}
-mongodb-1  | {"t":{"$date":"2025-08-19T16:33:11.811+00:00"},"s":"W",  "c":"CONTROL",  "id":22120,   "ctx":"initandlisten","msg":"Access control is not enabled for the database. Read and write access to data and configuration is unrestricted","tags":["startupWarnings"]}
-mongodb-1  | {"t":{"$date":"2025-08-19T16:33:11.811+00:00"},"s":"W",  "c":"CONTROL",  "id":5123300, "ctx":"initandlisten","msg":"vm.max_map_count is too low","attr":{"currentValue":1048576,"recommendedMinimum":1677720,"maxConns":838860},"tags":["startupWarnings"]}
-mongodb-1  | {"t":{"$date":"2025-08-19T16:33:11.827+00:00"},"s":"I",  "c":"STORAGE",  "id":20320,   "ctx":"initandlisten","msg":"createCollection","attr":{"namespace":"admin.system.version","uuidDisposition":"provided","uuid":{"uuid":{"$uuid":"36dec934-dac0-4b43-a8dc-c12a6ec13f6b"}},"options":{"uuid":{"$uuid":"36dec934-dac0-4b43-a8dc-c12a6ec13f6b"}}}}
-mongodb-1  | {"t":{"$date":"2025-08-19T16:33:11.962+00:00"},"s":"I",  "c":"INDEX",    "id":20345,   "ctx":"initandlisten","msg":"Index build: done building","attr":{"buildUUID":null,"collectionUUID":{"uuid":{"$uuid":"36dec934-dac0-4b43-a8dc-c12a6ec13f6b"}},"namespace":"admin.system.version","index":"_id_","ident":"index-1-3913688274019428433","collectionIdent":"collection-0-3913688274019428433","commitTimestamp":null}}
-mongodb-1  | {"t":{"$date":"2025-08-19T16:33:11.968+00:00"},"s":"I",  "c":"REPL",     "id":20459,   "ctx":"initandlisten","msg":"Setting featureCompatibilityVersion","attr":{"newVersion":"7.0"}}
-mongodb-1  | {"t":{"$date":"2025-08-19T16:33:11.968+00:00"},"s":"I",  "c":"REPL",     "id":5853300, "ctx":"initandlisten","msg":"current featureCompatibilityVersion value","attr":{"featureCompatibilityVersion":"7.0","context":"setFCV"}}
-mongodb-1  | {"t":{"$date":"2025-08-19T16:33:11.968+00:00"},"s":"I",  "c":"NETWORK",  "id":4915702, "ctx":"initandlisten","msg":"Updated wire specification","attr":{"oldSpec":{"incomingExternalClient":{"minWireVersion":0,"maxWireVersion":21},"incomingInternalClient":{"minWireVersion":0,"maxWireVersion":21},"outgoing":{"minWireVersion":6,"maxWireVersion":21},"isInternalClient":true},"newSpec":{"incomingExternalClient":{"minWireVersion":0,"maxWireVersion":21},"incomingInternalClient":{"minWireVersion":21,"maxWireVersion":21},"outgoing":{"minWireVersion":21,"maxWireVersion":21},"isInternalClient":true}}}
-mongodb-1  | {"t":{"$date":"2025-08-19T16:33:11.988+00:00"},"s":"I",  "c":"NETWORK",  "id":4915702, "ctx":"initandlisten","msg":"Updated wire specification","attr":{"oldSpec":{"incomingExternalClient":{"minWireVersion":0,"maxWireVersion":21},"incomingInternalClient":{"minWireVersion":21,"maxWireVersion":21},"outgoing":{"minWireVersion":21,"maxWireVersion":21},"isInternalClient":true},"newSpec":{"incomingExternalClient":{"minWireVersion":0,"maxWireVersion":21},"incomingInternalClient":{"minWireVersion":21,"maxWireVersion":21},"outgoing":{"minWireVersion":21,"maxWireVersion":21},"isInternalClient":true}}}
-mongodb-1  | {"t":{"$date":"2025-08-19T16:33:11.988+00:00"},"s":"I",  "c":"REPL",     "id":5853300, "ctx":"initandlisten","msg":"current featureCompatibilityVersion value","attr":{"featureCompatibilityVersion":"7.0","context":"startup"}}
-mongodb-1  | {"t":{"$date":"2025-08-19T16:33:11.992+00:00"},"s":"I",  "c":"STORAGE",  "id":5071100, "ctx":"initandlisten","msg":"Clearing temp directory"}
-mongodb-1  | {"t":{"$date":"2025-08-19T16:33:12.004+00:00"},"s":"I",  "c":"CONTROL",  "id":6608200, "ctx":"initandlisten","msg":"Initializing cluster server parameters from disk"}
-mongodb-1  | {"t":{"$date":"2025-08-19T16:33:12.006+00:00"},"s":"I",  "c":"CONTROL",  "id":20536,   "ctx":"initandlisten","msg":"Flow Control is enabled on this deployment"}
-mongodb-1  | {"t":{"$date":"2025-08-19T16:33:12.010+00:00"},"s":"I",  "c":"FTDC",     "id":20625,   "ctx":"initandlisten","msg":"Initializing full-time diagnostic data capture","attr":{"dataDirectory":"/data/db/diagnostic.data"}}
-mongodb-1  | {"t":{"$date":"2025-08-19T16:33:12.131+00:00"},"s":"I",  "c":"STORAGE",  "id":20320,   "ctx":"initandlisten","msg":"createCollection","attr":{"namespace":"local.startup_log","uuidDisposition":"generated","uuid":{"uuid":{"$uuid":"5592a19a-fc39-4569-8252-8c52cb230123"}},"options":{"capped":true,"size":10485760}}}
-mongodb-1  | {"t":{"$date":"2025-08-19T16:33:12.179+00:00"},"s":"I",  "c":"INDEX",    "id":20345,   "ctx":"initandlisten","msg":"Index build: done building","attr":{"buildUUID":null,"collectionUUID":{"uuid":{"$uuid":"5592a19a-fc39-4569-8252-8c52cb230123"}},"namespace":"local.startup_log","index":"_id_","ident":"index-3-3913688274019428433","collectionIdent":"collection-2-3913688274019428433","commitTimestamp":null}}
-mongodb-1  | {"t":{"$date":"2025-08-19T16:33:12.179+00:00"},"s":"I",  "c":"REPL",     "id":6015317, "ctx":"initandlisten","msg":"Setting new configuration state","attr":{"newState":"ConfigReplicationDisabled","oldState":"ConfigPreStart"}}
-mongodb-1  | {"t":{"$date":"2025-08-19T16:33:12.181+00:00"},"s":"I",  "c":"STORAGE",  "id":22262,   "ctx":"initandlisten","msg":"Timestamp monitor starting"}
-mongodb-1  | {"t":{"$date":"2025-08-19T16:33:12.192+00:00"},"s":"I",  "c":"NETWORK",  "id":23015,   "ctx":"listener","msg":"Listening on","attr":{"address":"/tmp/mongodb-27017.sock"}}
-mongodb-1  | {"t":{"$date":"2025-08-19T16:33:12.192+00:00"},"s":"I",  "c":"NETWORK",  "id":23015,   "ctx":"listener","msg":"Listening on","attr":{"address":"0.0.0.0"}}
-mongodb-1  | {"t":{"$date":"2025-08-19T16:33:12.192+00:00"},"s":"I",  "c":"NETWORK",  "id":23016,   "ctx":"listener","msg":"Waiting for connections","attr":{"port":27017,"ssl":"off"}}
-mongodb-1  | {"t":{"$date":"2025-08-19T16:33:12.192+00:00"},"s":"I",  "c":"CONTROL",  "id":8423403, "ctx":"initandlisten","msg":"mongod startup complete","attr":{"Summary of time elapsed":{"Startup from clean shutdown?":true,"Statistics":{"Transport layer setup":"0 ms","Run initial syncer crash recovery":"0 ms","Create storage engine lock file in the data directory":"0 ms","Get metadata describing storage engine":"0 ms","Create storage engine":"1463 ms","Write current PID to file":"10 ms","Write a new metadata for storage engine":"29 ms","Initialize FCV before rebuilding indexes":"16 ms","Drop abandoned idents and get back indexes that need to be rebuilt or builds that need to be restarted":"4 ms","Rebuild indexes for collections":"0 ms","Load cluster parameters from disk for a standalone":"3 ms","Build user and roles graph":"0 ms","Set up the background thread pool responsible for waiting for opTimes to be majority committed":"8 ms","Initialize information needed to make a mongod instance shard aware":"0 ms","Start up the replication coordinator":"0 ms","Start transport layer":"1 ms","_initAndListen total elapsed time":"1904 ms"}}}}
-mongodb-1  | {"t":{"$date":"2025-08-19T16:33:12.281+00:00"},"s":"I",  "c":"CONTROL",  "id":20712,   "ctx":"LogicalSessionCacheReap","msg":"Sessions collection is not set up; waiting until next sessions reap interval","attr":{"error":"NamespaceNotFound: config.system.sessions does not exist"}}
-mongodb-1  | {"t":{"$date":"2025-08-19T16:33:12.283+00:00"},"s":"I",  "c":"STORAGE",  "id":20320,   "ctx":"LogicalSessionCacheRefresh","msg":"createCollection","attr":{"namespace":"config.system.sessions","uuidDisposition":"generated","uuid":{"uuid":{"$uuid":"4ffe50eb-d988-423a-bff9-a6092a77767e"}},"options":{}}}
-mongodb-1  | {"t":{"$date":"2025-08-19T16:33:12.308+00:00"},"s":"I",  "c":"REPL",     "id":7360102, "ctx":"LogicalSessionCacheRefresh","msg":"Added oplog entry for create to transaction","attr":{"namespace":"config.$cmd","uuid":{"uuid":{"$uuid":"4ffe50eb-d988-423a-bff9-a6092a77767e"}},"object":{"create":"system.sessions","idIndex":{"v":2,"key":{"_id":1},"name":"_id_"}}}}
-mongodb-1  | {"t":{"$date":"2025-08-19T16:33:12.308+00:00"},"s":"I",  "c":"REPL",     "id":7360100, "ctx":"LogicalSessionCacheRefresh","msg":"Added oplog entry for createIndexes to transaction","attr":{"namespace":"config.$cmd","uuid":{"uuid":{"$uuid":"4ffe50eb-d988-423a-bff9-a6092a77767e"}},"object":{"createIndexes":"system.sessions","v":2,"key":{"lastUse":1},"name":"lsidTTLIndex","expireAfterSeconds":1800}}}
-mongodb-1  | {"t":{"$date":"2025-08-19T16:33:12.326+00:00"},"s":"I",  "c":"INDEX",    "id":20345,   "ctx":"LogicalSessionCacheRefresh","msg":"Index build: done building","attr":{"buildUUID":null,"collectionUUID":{"uuid":{"$uuid":"4ffe50eb-d988-423a-bff9-a6092a77767e"}},"namespace":"config.system.sessions","index":"_id_","ident":"index-5-3913688274019428433","collectionIdent":"collection-4-3913688274019428433","commitTimestamp":null}}
-mongodb-1  | {"t":{"$date":"2025-08-19T16:33:12.326+00:00"},"s":"I",  "c":"INDEX",    "id":20345,   "ctx":"LogicalSessionCacheRefresh","msg":"Index build: done building","attr":{"buildUUID":null,"collectionUUID":{"uuid":{"$uuid":"4ffe50eb-d988-423a-bff9-a6092a77767e"}},"namespace":"config.system.sessions","index":"lsidTTLIndex","ident":"index-6-3913688274019428433","collectionIdent":"collection-4-3913688274019428433","commitTimestamp":null}}
-mongodb-1  | {"t":{"$date":"2025-08-19T16:33:12.433+00:00"},"s":"I",  "c":"NETWORK",  "id":22943,   "ctx":"listener","msg":"Connection accepted","attr":{"remote":"172.20.0.5:43978","isLoadBalanced":false,"uuid":{"uuid":{"$uuid":"4f903c95-0c6b-42a3-8bd7-b2f9111ae6b3"}},"connectionId":1,"connectionCount":1}}
-mongodb-1  | {"t":{"$date":"2025-08-19T16:33:12.501+00:00"},"s":"I",  "c":"NETWORK",  "id":51800,   "ctx":"conn1","msg":"client metadata","attr":{"remote":"172.20.0.5:43978","client":"conn1","negotiatedCompressors":[],"doc":{"driver":{"name":"nodejs|Mongoose","version":"6.17.0|8.16.2"},"platform":"Bun v1.2.18, LE","os":{"name":"linux","architecture":"x64","version":"6.14.0-1010-aws","type":"Linux"},"env":{"container":{"runtime":"docker"}}}}}
-mongodb-1  | {"t":{"$date":"2025-08-19T16:33:12.544+00:00"},"s":"I",  "c":"NETWORK",  "id":22943,   "ctx":"listener","msg":"Connection accepted","attr":{"remote":"172.20.0.5:43982","isLoadBalanced":false,"uuid":{"uuid":{"$uuid":"212d386a-e1fa-4b71-8f0d-6142998576d1"}},"connectionId":2,"connectionCount":2}}
-worker-rinha  | Connected to database
-mongodb-1     | {"t":{"$date":"2025-08-19T16:33:12.680+00:00"},"s":"I",  "c":"NETWORK",  "id":22943,   "ctx":"listener","msg":"Connection accepted","attr":{"remote":"172.20.0.5:43990","isLoadBalanced":false,"uuid":{"uuid":{"$uuid":"64b3682e-44f2-40f0-a258-e33432b22dc6"}},"connectionId":3,"connectionCount":3}}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:33:12.728+00:00"},"s":"I",  "c":"NETWORK",  "id":22943,   "ctx":"listener","msg":"Connection accepted","attr":{"remote":"172.20.0.7:49952","isLoadBalanced":false,"uuid":{"uuid":{"$uuid":"d847c847-11a1-4307-a027-006a570d4d27"}},"connectionId":4,"connectionCount":4}}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:33:12.728+00:00"},"s":"I",  "c":"NETWORK",  "id":22943,   "ctx":"listener","msg":"Connection accepted","attr":{"remote":"172.20.0.6:50860","isLoadBalanced":false,"uuid":{"uuid":{"$uuid":"2abba34d-51c7-467b-a1e7-4e95ff0e70ad"}},"connectionId":5,"connectionCount":5}}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:33:12.900+00:00"},"s":"I",  "c":"NETWORK",  "id":51800,   "ctx":"conn2","msg":"client metadata","attr":{"remote":"172.20.0.5:43982","client":"conn2","negotiatedCompressors":[],"doc":{"driver":{"name":"nodejs|Mongoose","version":"6.17.0|8.16.2"},"platform":"Bun v1.2.18, LE","os":{"name":"linux","architecture":"x64","version":"6.14.0-1010-aws","type":"Linux"},"env":{"container":{"runtime":"docker"}}}}}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:33:12.984+00:00"},"s":"I",  "c":"NETWORK",  "id":51800,   "ctx":"conn4","msg":"client metadata","attr":{"remote":"172.20.0.7:49952","client":"conn4","negotiatedCompressors":[],"doc":{"driver":{"name":"nodejs|Mongoose","version":"6.17.0|8.16.2"},"platform":"Bun v1.2.18, LE","os":{"name":"linux","architecture":"x64","version":"6.14.0-1010-aws","type":"Linux"},"env":{"container":{"runtime":"docker"}}}}}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:33:12.984+00:00"},"s":"I",  "c":"NETWORK",  "id":51800,   "ctx":"conn5","msg":"client metadata","attr":{"remote":"172.20.0.6:50860","client":"conn5","negotiatedCompressors":[],"doc":{"driver":{"name":"nodejs|Mongoose","version":"6.17.0|8.16.2"},"platform":"Bun v1.2.18, LE","os":{"name":"linux","architecture":"x64","version":"6.14.0-1010-aws","type":"Linux"},"env":{"container":{"runtime":"docker"}}}}}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:33:13.144+00:00"},"s":"I",  "c":"NETWORK",  "id":51800,   "ctx":"conn3","msg":"client metadata","attr":{"remote":"172.20.0.5:43990","client":"conn3","negotiatedCompressors":[],"doc":{"driver":{"name":"nodejs|Mongoose","version":"6.17.0|8.16.2"},"platform":"Bun v1.2.18, LE","os":{"name":"linux","architecture":"x64","version":"6.14.0-1010-aws","type":"Linux"},"env":{"container":{"runtime":"docker"}}}}}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:33:13.277+00:00"},"s":"I",  "c":"NETWORK",  "id":6788700, "ctx":"conn3","msg":"Received first command on ingress connection since session start or auth handshake","attr":{"elapsedMillis":132}}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:33:13.277+00:00"},"s":"I",  "c":"STORAGE",  "id":20320,   "ctx":"conn3","msg":"createCollection","attr":{"namespace":"rinha-ryangst.payments","uuidDisposition":"generated","uuid":{"uuid":{"$uuid":"d8d5bdea-9f06-4ddb-bf36-994e315e6e83"}},"options":{}}}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:33:13.327+00:00"},"s":"I",  "c":"REPL",     "id":7360102, "ctx":"conn3","msg":"Added oplog entry for create to transaction","attr":{"namespace":"rinha-ryangst.$cmd","uuid":{"uuid":{"$uuid":"d8d5bdea-9f06-4ddb-bf36-994e315e6e83"}},"object":{"create":"payments","idIndex":{"v":2,"key":{"_id":1},"name":"_id_"}}}}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:33:13.327+00:00"},"s":"I",  "c":"INDEX",    "id":20345,   "ctx":"conn3","msg":"Index build: done building","attr":{"buildUUID":null,"collectionUUID":{"uuid":{"$uuid":"d8d5bdea-9f06-4ddb-bf36-994e315e6e83"}},"namespace":"rinha-ryangst.payments","index":"_id_","ident":"index-8-3913688274019428433","collectionIdent":"collection-7-3913688274019428433","commitTimestamp":null}}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:33:13.413+00:00"},"s":"I",  "c":"NETWORK",  "id":22943,   "ctx":"listener","msg":"Connection accepted","attr":{"remote":"172.20.0.7:49964","isLoadBalanced":false,"uuid":{"uuid":{"$uuid":"10492295-75c6-49ca-aed6-ad2a7490485f"}},"connectionId":6,"connectionCount":6}}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:33:13.413+00:00"},"s":"I",  "c":"NETWORK",  "id":22943,   "ctx":"listener","msg":"Connection accepted","attr":{"remote":"172.20.0.6:50864","isLoadBalanced":false,"uuid":{"uuid":{"$uuid":"0a607130-9958-4083-868d-abecbd6f5efd"}},"connectionId":7,"connectionCount":7}}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:33:13.448+00:00"},"s":"I",  "c":"NETWORK",  "id":22943,   "ctx":"listener","msg":"Connection accepted","attr":{"remote":"172.20.0.5:44000","isLoadBalanced":false,"uuid":{"uuid":{"$uuid":"46d2f7cc-2df4-4521-8f55-b2e22f4f508d"}},"connectionId":8,"connectionCount":8}}
-api-rinha-2   | Connected to database
-api-rinha     | Connected to database
-mongodb-1     | {"t":{"$date":"2025-08-19T16:33:13.615+00:00"},"s":"I",  "c":"INDEX",    "id":20438,   "ctx":"conn3","msg":"Index build: registering","attr":{"buildUUID":{"uuid":{"$uuid":"54c3f917-b4a8-420f-a4e0-8e80eccc2632"}},"namespace":"rinha-ryangst.payments","collectionUUID":{"uuid":{"$uuid":"d8d5bdea-9f06-4ddb-bf36-994e315e6e83"}},"indexes":1,"firstIndex":{"name":"requestedAt_1_processor_1"},"command":{"createIndexes":"payments","v":2,"indexes":[{"background":true,"partialFilterExpression":{"processor":{"$in":["default","fallback"]}},"name":"requestedAt_1_processor_1","key":{"requestedAt":1,"processor":1}}],"ignoreUnknownIndexOptions":false}}}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:33:13.615+00:00"},"s":"I",  "c":"REPL",     "id":7360100, "ctx":"conn3","msg":"Added oplog entry for createIndexes to transaction","attr":{"namespace":"rinha-ryangst.$cmd","uuid":{"uuid":{"$uuid":"d8d5bdea-9f06-4ddb-bf36-994e315e6e83"}},"object":{"createIndexes":"payments","v":2,"key":{"requestedAt":1,"processor":1},"name":"requestedAt_1_processor_1","background":true,"partialFilterExpression":{"processor":{"$in":["default","fallback"]}}}}}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:33:13.645+00:00"},"s":"I",  "c":"INDEX",    "id":20345,   "ctx":"conn3","msg":"Index build: done building","attr":{"buildUUID":null,"collectionUUID":{"uuid":{"$uuid":"d8d5bdea-9f06-4ddb-bf36-994e315e6e83"}},"namespace":"rinha-ryangst.payments","index":"requestedAt_1_processor_1","ident":"index-9-3913688274019428433","collectionIdent":"collection-7-3913688274019428433","commitTimestamp":null}}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:33:13.646+00:00"},"s":"I",  "c":"INDEX",    "id":20440,   "ctx":"conn3","msg":"Index build: waiting for index build to complete","attr":{"buildUUID":{"uuid":{"$uuid":"54c3f917-b4a8-420f-a4e0-8e80eccc2632"}},"deadline":{"$date":{"$numberLong":"9223372036854775807"}}}}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:33:13.646+00:00"},"s":"I",  "c":"INDEX",    "id":20447,   "ctx":"conn3","msg":"Index build: completed","attr":{"buildUUID":{"uuid":{"$uuid":"54c3f917-b4a8-420f-a4e0-8e80eccc2632"}}}}
-traefik       | time="2025-08-19T16:33:13Z" level=info msg="Configuration loaded from flags."
-mongodb-1     | {"t":{"$date":"2025-08-19T16:33:13.831+00:00"},"s":"I",  "c":"NETWORK",  "id":51800,   "ctx":"conn8","msg":"client metadata","attr":{"remote":"172.20.0.5:44000","client":"conn8","negotiatedCompressors":[],"doc":{"driver":{"name":"nodejs|Mongoose","version":"6.17.0|8.16.2"},"platform":"Bun v1.2.18, LE","os":{"name":"linux","architecture":"x64","version":"6.14.0-1010-aws","type":"Linux"},"env":{"container":{"runtime":"docker"}}}}}
-worker-rinha  | Worker ready payments
-mongodb-1     | {"t":{"$date":"2025-08-19T16:33:13.957+00:00"},"s":"I",  "c":"INDEX",    "id":20438,   "ctx":"conn3","msg":"Index build: registering","attr":{"buildUUID":{"uuid":{"$uuid":"421eb319-b02f-4735-9664-6bc9f1f8617d"}},"namespace":"rinha-ryangst.payments","collectionUUID":{"uuid":{"$uuid":"d8d5bdea-9f06-4ddb-bf36-994e315e6e83"}},"indexes":1,"firstIndex":{"name":"correlationId_1"},"command":{"createIndexes":"payments","v":2,"indexes":[{"unique":true,"background":true,"name":"correlationId_1","key":{"correlationId":1}}],"ignoreUnknownIndexOptions":false}}}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:33:13.957+00:00"},"s":"I",  "c":"REPL",     "id":7360100, "ctx":"conn3","msg":"Added oplog entry for createIndexes to transaction","attr":{"namespace":"rinha-ryangst.$cmd","uuid":{"uuid":{"$uuid":"d8d5bdea-9f06-4ddb-bf36-994e315e6e83"}},"object":{"createIndexes":"payments","v":2,"unique":true,"key":{"correlationId":1},"name":"correlationId_1","background":true}}}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:33:13.974+00:00"},"s":"I",  "c":"INDEX",    "id":20345,   "ctx":"conn3","msg":"Index build: done building","attr":{"buildUUID":null,"collectionUUID":{"uuid":{"$uuid":"d8d5bdea-9f06-4ddb-bf36-994e315e6e83"}},"namespace":"rinha-ryangst.payments","index":"correlationId_1","ident":"index-10-3913688274019428433","collectionIdent":"collection-7-3913688274019428433","commitTimestamp":null}}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:33:13.974+00:00"},"s":"I",  "c":"INDEX",    "id":20440,   "ctx":"conn3","msg":"Index build: waiting for index build to complete","attr":{"buildUUID":{"uuid":{"$uuid":"421eb319-b02f-4735-9664-6bc9f1f8617d"}},"deadline":{"$date":{"$numberLong":"9223372036854775807"}}}}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:33:13.974+00:00"},"s":"I",  "c":"INDEX",    "id":20447,   "ctx":"conn3","msg":"Index build: completed","attr":{"buildUUID":{"uuid":{"$uuid":"421eb319-b02f-4735-9664-6bc9f1f8617d"}}}}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:33:14.242+00:00"},"s":"I",  "c":"INDEX",    "id":20438,   "ctx":"conn3","msg":"Index build: registering","attr":{"buildUUID":{"uuid":{"$uuid":"9ffe0a13-5f52-4793-a103-e76c2467c90d"}},"namespace":"rinha-ryangst.payments","collectionUUID":{"uuid":{"$uuid":"d8d5bdea-9f06-4ddb-bf36-994e315e6e83"}},"indexes":1,"firstIndex":{"name":"processor_1_requestedAt_1"},"command":{"createIndexes":"payments","v":2,"indexes":[{"background":true,"name":"processor_1_requestedAt_1","key":{"processor":1,"requestedAt":1}}],"ignoreUnknownIndexOptions":false}}}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:33:14.242+00:00"},"s":"I",  "c":"REPL",     "id":7360100, "ctx":"conn3","msg":"Added oplog entry for createIndexes to transaction","attr":{"namespace":"rinha-ryangst.$cmd","uuid":{"uuid":{"$uuid":"d8d5bdea-9f06-4ddb-bf36-994e315e6e83"}},"object":{"createIndexes":"payments","v":2,"key":{"processor":1,"requestedAt":1},"name":"processor_1_requestedAt_1","background":true}}}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:33:14.254+00:00"},"s":"I",  "c":"INDEX",    "id":20345,   "ctx":"conn3","msg":"Index build: done building","attr":{"buildUUID":null,"collectionUUID":{"uuid":{"$uuid":"d8d5bdea-9f06-4ddb-bf36-994e315e6e83"}},"namespace":"rinha-ryangst.payments","index":"processor_1_requestedAt_1","ident":"index-11-3913688274019428433","collectionIdent":"collection-7-3913688274019428433","commitTimestamp":null}}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:33:14.255+00:00"},"s":"I",  "c":"INDEX",    "id":20440,   "ctx":"conn3","msg":"Index build: waiting for index build to complete","attr":{"buildUUID":{"uuid":{"$uuid":"9ffe0a13-5f52-4793-a103-e76c2467c90d"}},"deadline":{"$date":{"$numberLong":"9223372036854775807"}}}}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:33:14.255+00:00"},"s":"I",  "c":"INDEX",    "id":20447,   "ctx":"conn3","msg":"Index build: completed","attr":{"buildUUID":{"uuid":{"$uuid":"9ffe0a13-5f52-4793-a103-e76c2467c90d"}}}}
-api-rinha-2   | 🦊 Elysia is running at localhost:9998
-api-rinha     | 🦊 Elysia is running at localhost:9999
-mongodb-1     | {"t":{"$date":"2025-08-19T16:33:14.359+00:00"},"s":"I",  "c":"NETWORK",  "id":22943,   "ctx":"listener","msg":"Connection accepted","attr":{"remote":"172.20.0.5:44002","isLoadBalanced":false,"uuid":{"uuid":{"$uuid":"09dce483-76f9-401e-87fe-94efe42db8d0"}},"connectionId":9,"connectionCount":9}}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:33:14.445+00:00"},"s":"I",  "c":"NETWORK",  "id":51800,   "ctx":"conn9","msg":"client metadata","attr":{"remote":"172.20.0.5:44002","client":"conn9","negotiatedCompressors":[],"doc":{"driver":{"name":"nodejs|Mongoose","version":"6.17.0|8.16.2"},"platform":"Bun v1.2.18, LE","os":{"name":"linux","architecture":"x64","version":"6.14.0-1010-aws","type":"Linux"},"env":{"container":{"runtime":"docker"}}}}}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:33:14.830+00:00"},"s":"I",  "c":"NETWORK",  "id":22943,   "ctx":"listener","msg":"Connection accepted","attr":{"remote":"172.20.0.5:44018","isLoadBalanced":false,"uuid":{"uuid":{"$uuid":"33fbac10-ca9c-45cd-afa6-45556c81377f"}},"connectionId":10,"connectionCount":10}}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:33:14.960+00:00"},"s":"I",  "c":"NETWORK",  "id":51800,   "ctx":"conn10","msg":"client metadata","attr":{"remote":"172.20.0.5:44018","client":"conn10","negotiatedCompressors":[],"doc":{"driver":{"name":"nodejs|Mongoose","version":"6.17.0|8.16.2"},"platform":"Bun v1.2.18, LE","os":{"name":"linux","architecture":"x64","version":"6.14.0-1010-aws","type":"Linux"},"env":{"container":{"runtime":"docker"}}}}}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:33:15.176+00:00"},"s":"I",  "c":"NETWORK",  "id":22943,   "ctx":"listener","msg":"Connection accepted","attr":{"remote":"172.20.0.7:49966","isLoadBalanced":false,"uuid":{"uuid":{"$uuid":"bba1285f-8266-4365-bf5a-4f330604f181"}},"connectionId":11,"connectionCount":11}}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:33:15.176+00:00"},"s":"I",  "c":"NETWORK",  "id":22943,   "ctx":"listener","msg":"Connection accepted","attr":{"remote":"172.20.0.6:50878","isLoadBalanced":false,"uuid":{"uuid":{"$uuid":"808b2f48-2fd1-4173-b843-12c9197aba11"}},"connectionId":12,"connectionCount":12}}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:33:16.246+00:00"},"s":"I",  "c":"NETWORK",  "id":51800,   "ctx":"conn6","msg":"client metadata","attr":{"remote":"172.20.0.7:49964","client":"conn6","negotiatedCompressors":[],"doc":{"driver":{"name":"nodejs|Mongoose","version":"6.17.0|8.16.2"},"platform":"Bun v1.2.18, LE","os":{"name":"linux","architecture":"x64","version":"6.14.0-1010-aws","type":"Linux"},"env":{"container":{"runtime":"docker"}}}}}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:33:16.246+00:00"},"s":"I",  "c":"NETWORK",  "id":51800,   "ctx":"conn7","msg":"client metadata","attr":{"remote":"172.20.0.6:50864","client":"conn7","negotiatedCompressors":[],"doc":{"driver":{"name":"nodejs|Mongoose","version":"6.17.0|8.16.2"},"platform":"Bun v1.2.18, LE","os":{"name":"linux","architecture":"x64","version":"6.14.0-1010-aws","type":"Linux"},"env":{"container":{"runtime":"docker"}}}}}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:33:16.751+00:00"},"s":"I",  "c":"NETWORK",  "id":51800,   "ctx":"conn11","msg":"client metadata","attr":{"remote":"172.20.0.7:49966","client":"conn11","negotiatedCompressors":[],"doc":{"driver":{"name":"nodejs|Mongoose","version":"6.17.0|8.16.2"},"platform":"Bun v1.2.18, LE","os":{"name":"linux","architecture":"x64","version":"6.14.0-1010-aws","type":"Linux"},"env":{"container":{"runtime":"docker"}}}}}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:33:16.751+00:00"},"s":"I",  "c":"NETWORK",  "id":51800,   "ctx":"conn12","msg":"client metadata","attr":{"remote":"172.20.0.6:50878","client":"conn12","negotiatedCompressors":[],"doc":{"driver":{"name":"nodejs|Mongoose","version":"6.17.0|8.16.2"},"platform":"Bun v1.2.18, LE","os":{"name":"linux","architecture":"x64","version":"6.14.0-1010-aws","type":"Linux"},"env":{"container":{"runtime":"docker"}}}}}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:33:17.714+00:00"},"s":"I",  "c":"NETWORK",  "id":6788700, "ctx":"conn12","msg":"Received first command on ingress connection since session start or auth handshake","attr":{"elapsedMillis":963}}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:33:17.714+00:00"},"s":"I",  "c":"NETWORK",  "id":6788700, "ctx":"conn11","msg":"Received first command on ingress connection since session start or auth handshake","attr":{"elapsedMillis":963}}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:33:18.141+00:00"},"s":"I",  "c":"NETWORK",  "id":22943,   "ctx":"listener","msg":"Connection accepted","attr":{"remote":"172.20.0.7:37828","isLoadBalanced":false,"uuid":{"uuid":{"$uuid":"777cd690-c682-4a48-9723-9ddea24274f1"}},"connectionId":13,"connectionCount":13}}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:33:18.141+00:00"},"s":"I",  "c":"NETWORK",  "id":22943,   "ctx":"listener","msg":"Connection accepted","attr":{"remote":"172.20.0.6:56264","isLoadBalanced":false,"uuid":{"uuid":{"$uuid":"a78f9d1f-94d3-4dd6-8ae3-39508f87c60c"}},"connectionId":14,"connectionCount":14}}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:33:18.645+00:00"},"s":"I",  "c":"NETWORK",  "id":51800,   "ctx":"conn13","msg":"client metadata","attr":{"remote":"172.20.0.7:37828","client":"conn13","negotiatedCompressors":[],"doc":{"driver":{"name":"nodejs|Mongoose","version":"6.17.0|8.16.2"},"platform":"Bun v1.2.18, LE","os":{"name":"linux","architecture":"x64","version":"6.14.0-1010-aws","type":"Linux"},"env":{"container":{"runtime":"docker"}}}}}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:33:18.645+00:00"},"s":"I",  "c":"NETWORK",  "id":51800,   "ctx":"conn14","msg":"client metadata","attr":{"remote":"172.20.0.6:56264","client":"conn14","negotiatedCompressors":[],"doc":{"driver":{"name":"nodejs|Mongoose","version":"6.17.0|8.16.2"},"platform":"Bun v1.2.18, LE","os":{"name":"linux","architecture":"x64","version":"6.14.0-1010-aws","type":"Linux"},"env":{"container":{"runtime":"docker"}}}}}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:33:19.427+00:00"},"s":"I",  "c":"NETWORK",  "id":22943,   "ctx":"listener","msg":"Connection accepted","attr":{"remote":"172.20.0.7:37842","isLoadBalanced":false,"uuid":{"uuid":{"$uuid":"f4da7f2c-b1e0-48b0-8a4c-783fc160c3d3"}},"connectionId":15,"connectionCount":15}}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:33:19.947+00:00"},"s":"I",  "c":"NETWORK",  "id":51800,   "ctx":"conn15","msg":"client metadata","attr":{"remote":"172.20.0.7:37842","client":"conn15","negotiatedCompressors":[],"doc":{"driver":{"name":"nodejs|Mongoose","version":"6.17.0|8.16.2"},"platform":"Bun v1.2.18, LE","os":{"name":"linux","architecture":"x64","version":"6.14.0-1010-aws","type":"Linux"},"env":{"container":{"runtime":"docker"}}}}}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:33:20.608+00:00"},"s":"I",  "c":"NETWORK",  "id":22943,   "ctx":"listener","msg":"Connection accepted","attr":{"remote":"172.20.0.6:56280","isLoadBalanced":false,"uuid":{"uuid":{"$uuid":"62a2f847-a85e-4b88-b66e-12b8461f71d6"}},"connectionId":16,"connectionCount":16}}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:33:21.161+00:00"},"s":"I",  "c":"NETWORK",  "id":22943,   "ctx":"listener","msg":"Connection accepted","attr":{"remote":"172.20.0.7:37858","isLoadBalanced":false,"uuid":{"uuid":{"$uuid":"169b2685-ddd2-4748-8b93-3bd31215bf94"}},"connectionId":17,"connectionCount":17}}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:33:21.677+00:00"},"s":"I",  "c":"NETWORK",  "id":51800,   "ctx":"conn17","msg":"client metadata","attr":{"remote":"172.20.0.7:37858","client":"conn17","negotiatedCompressors":[],"doc":{"driver":{"name":"nodejs|Mongoose","version":"6.17.0|8.16.2"},"platform":"Bun v1.2.18, LE","os":{"name":"linux","architecture":"x64","version":"6.14.0-1010-aws","type":"Linux"},"env":{"container":{"runtime":"docker"}}}}}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:33:22.001+00:00"},"s":"I",  "c":"NETWORK",  "id":51800,   "ctx":"conn16","msg":"client metadata","attr":{"remote":"172.20.0.6:56280","client":"conn16","negotiatedCompressors":[],"doc":{"driver":{"name":"nodejs|Mongoose","version":"6.17.0|8.16.2"},"platform":"Bun v1.2.18, LE","os":{"name":"linux","architecture":"x64","version":"6.14.0-1010-aws","type":"Linux"},"env":{"container":{"runtime":"docker"}}}}}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:33:23.280+00:00"},"s":"I",  "c":"NETWORK",  "id":22943,   "ctx":"listener","msg":"Connection accepted","attr":{"remote":"172.20.0.5:59252","isLoadBalanced":false,"uuid":{"uuid":{"$uuid":"b572dfcc-3806-42dc-9c85-11c8ce8c4ec4"}},"connectionId":18,"connectionCount":18}}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:33:23.431+00:00"},"s":"I",  "c":"NETWORK",  "id":51800,   "ctx":"conn18","msg":"client metadata","attr":{"remote":"172.20.0.5:59252","client":"conn18","negotiatedCompressors":[],"doc":{"driver":{"name":"nodejs|Mongoose","version":"6.17.0|8.16.2"},"platform":"Bun v1.2.18, LE","os":{"name":"linux","architecture":"x64","version":"6.14.0-1010-aws","type":"Linux"},"env":{"container":{"runtime":"docker"}}}}}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:33:23.959+00:00"},"s":"I",  "c":"COMMAND",  "id":51803,   "ctx":"conn12","msg":"Slow query","attr":{"type":"command","ns":"rinha-ryangst.payments","command":{"aggregate":"payments","pipeline":[{"$match":{"requestedAt":{"$gte":{"$date":"2025-08-18T16:33:19.636Z"},"$lte":{"$date":"2025-08-19T16:33:19.636Z"}},"processor":{"$in":["default","fallback"]}}},{"$group":{"_id":"$processor","totalRequests":{"$sum":1},"totalAmount":{"$sum":{"$toDouble":"$amount"}}}},{"$sort":{"_id":1}}],"allowDiskUse":false,"hint":{"requestedAt":1,"processor":1},"cursor":{},"maxTimeMS":5000,"lsid":{"id":{"$uuid":"97b017c4-2e00-4721-9533-5a1d02081555"}},"$db":"rinha-ryangst"},"planSummary":"IXSCAN { requestedAt: 1, processor: 1 }","planningTimeMicros":65730,"keysExamined":0,"docsExamined":0,"hasSortStage":true,"cursorExhausted":true,"numYields":0,"nreturned":0,"queryHash":"687AEA37","planCacheKey":"5F2D355D","queryFramework":"classic","reslen":111,"locks":{"FeatureCompatibilityVersion":{"acquireCount":{"r":2}},"Global":{"acquireCount":{"r":2}}},"storage":{},"cpuNanos":12898587,"remote":"172.20.0.6:50878","protocol":"op_msg","durationMillis":178}}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:33:24.124+00:00"},"s":"I",  "c":"NETWORK",  "id":22943,   "ctx":"listener","msg":"Connection accepted","attr":{"remote":"172.20.0.6:56288","isLoadBalanced":false,"uuid":{"uuid":{"$uuid":"f98e7f46-5dfb-4e39-b052-0ec8630c4d0a"}},"connectionId":19,"connectionCount":19}}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:33:24.818+00:00"},"s":"I",  "c":"NETWORK",  "id":51800,   "ctx":"conn19","msg":"client metadata","attr":{"remote":"172.20.0.6:56288","client":"conn19","negotiatedCompressors":[],"doc":{"driver":{"name":"nodejs|Mongoose","version":"6.17.0|8.16.2"},"platform":"Bun v1.2.18, LE","os":{"name":"linux","architecture":"x64","version":"6.14.0-1010-aws","type":"Linux"},"env":{"container":{"runtime":"docker"}}}}}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:33:25.558+00:00"},"s":"I",  "c":"NETWORK",  "id":22943,   "ctx":"listener","msg":"Connection accepted","attr":{"remote":"172.20.0.7:37860","isLoadBalanced":false,"uuid":{"uuid":{"$uuid":"660484d4-a3d8-4737-8e27-e7b217af7422"}},"connectionId":20,"connectionCount":20}}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:33:25.570+00:00"},"s":"I",  "c":"NETWORK",  "id":22943,   "ctx":"listener","msg":"Connection accepted","attr":{"remote":"172.20.0.6:56292","isLoadBalanced":false,"uuid":{"uuid":{"$uuid":"c12a9b9d-d8ef-491d-b20a-af357e5cb5fc"}},"connectionId":21,"connectionCount":21}}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:33:25.674+00:00"},"s":"I",  "c":"NETWORK",  "id":51800,   "ctx":"conn20","msg":"client metadata","attr":{"remote":"172.20.0.7:37860","client":"conn20","negotiatedCompressors":[],"doc":{"driver":{"name":"nodejs|Mongoose","version":"6.17.0|8.16.2"},"platform":"Bun v1.2.18, LE","os":{"name":"linux","architecture":"x64","version":"6.14.0-1010-aws","type":"Linux"},"env":{"container":{"runtime":"docker"}}}}}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:33:25.674+00:00"},"s":"I",  "c":"NETWORK",  "id":51800,   "ctx":"conn21","msg":"client metadata","attr":{"remote":"172.20.0.6:56292","client":"conn21","negotiatedCompressors":[],"doc":{"driver":{"name":"nodejs|Mongoose","version":"6.17.0|8.16.2"},"platform":"Bun v1.2.18, LE","os":{"name":"linux","architecture":"x64","version":"6.14.0-1010-aws","type":"Linux"},"env":{"container":{"runtime":"docker"}}}}}
-worker-rinha  | Worker completed payments with id: "f550d9e7-479f-4043-9080-537f84b22dd3"
-worker-rinha  | Worker completed payments with id: "eb6aef7c-5567-4fe3-a78c-0981f470c0da"
-mongodb-1     | {"t":{"$date":"2025-08-19T16:34:06.823+00:00"},"s":"I",  "c":"NETWORK",  "id":6788700, "ctx":"conn2","msg":"Received first command on ingress connection since session start or auth handshake","attr":{"elapsedMillis":53923}}
-worker-rinha  | Worker completed payments with id: "49beb555-5537-4854-b689-703f00aeaec8"
-mongodb-1     | {"t":{"$date":"2025-08-19T16:34:11.822+00:00"},"s":"I",  "c":"WTCHKPT",  "id":22430,   "ctx":"Checkpointer","msg":"WiredTiger message","attr":{"message":{"ts_sec":1755621251,"ts_usec":822491,"thread":"1:0x76e28295a640","session_name":"WT_SESSION.checkpoint","category":"WT_VERB_CHECKPOINT_PROGRESS","category_id":6,"verbose_level":"DEBUG_1","verbose_level_id":1,"msg":"saving checkpoint snapshot min: 56, snapshot max: 56 snapshot count: 0, oldest timestamp: (0, 0) , meta checkpoint timestamp: (0, 0) base write gen: 1"}}}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:34:12.013+00:00"},"s":"I",  "c":"NETWORK",  "id":22943,   "ctx":"listener","msg":"Connection accepted","attr":{"remote":"172.20.0.5:38242","isLoadBalanced":false,"uuid":{"uuid":{"$uuid":"494508ba-5159-4b13-b0c0-b044480eb6d2"}},"connectionId":22,"connectionCount":22}}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:34:12.013+00:00"},"s":"I",  "c":"NETWORK",  "id":22943,   "ctx":"listener","msg":"Connection accepted","attr":{"remote":"172.20.0.5:38248","isLoadBalanced":false,"uuid":{"uuid":{"$uuid":"eb4781d0-1d4b-45ad-81a6-92fed1b61cdf"}},"connectionId":23,"connectionCount":23}}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:34:12.218+00:00"},"s":"I",  "c":"NETWORK",  "id":6788700, "ctx":"conn8","msg":"Received first command on ingress connection since session start or auth handshake","attr":{"elapsedMillis":58386}}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:34:12.218+00:00"},"s":"I",  "c":"NETWORK",  "id":6788700, "ctx":"conn9","msg":"Received first command on ingress connection since session start or auth handshake","attr":{"elapsedMillis":57772}}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:34:12.218+00:00"},"s":"I",  "c":"NETWORK",  "id":6788700, "ctx":"conn10","msg":"Received first command on ingress connection since session start or auth handshake","attr":{"elapsedMillis":57258}}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:34:12.875+00:00"},"s":"I",  "c":"NETWORK",  "id":51800,   "ctx":"conn22","msg":"client metadata","attr":{"remote":"172.20.0.5:38242","client":"conn22","negotiatedCompressors":[],"doc":{"driver":{"name":"nodejs|Mongoose","version":"6.17.0|8.16.2"},"platform":"Bun v1.2.18, LE","os":{"name":"linux","architecture":"x64","version":"6.14.0-1010-aws","type":"Linux"},"env":{"container":{"runtime":"docker"}}}}}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:34:13.067+00:00"},"s":"I",  "c":"NETWORK",  "id":51800,   "ctx":"conn23","msg":"client metadata","attr":{"remote":"172.20.0.5:38248","client":"conn23","negotiatedCompressors":[],"doc":{"driver":{"name":"nodejs|Mongoose","version":"6.17.0|8.16.2"},"platform":"Bun v1.2.18, LE","os":{"name":"linux","architecture":"x64","version":"6.14.0-1010-aws","type":"Linux"},"env":{"container":{"runtime":"docker"}}}}}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:34:15.548+00:00"},"s":"I",  "c":"NETWORK",  "id":6788700, "ctx":"conn22","msg":"Received first command on ingress connection since session start or auth handshake","attr":{"elapsedMillis":2672}}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:34:15.770+00:00"},"s":"I",  "c":"NETWORK",  "id":6788700, "ctx":"conn23","msg":"Received first command on ingress connection since session start or auth handshake","attr":{"elapsedMillis":2702}}
-worker-rinha  | Both processors failing, delaying job c11b9b1d-e7e8-46b6-996a-6d4dae3f69a3
-worker-rinha  | Both processors failing, delaying job 2abcf8fe-0b61-45c4-ba29-f6ed80cfeacb
-worker-rinha  | Worker completed payments with id: "0fb3e400-4a07-4a6d-954c-9d6c12750df7"
-worker-rinha  | Worker completed payments with id: "70f9a444-9bf4-4e66-930c-e7e55184d76e"
-worker-rinha  | Worker completed payments with id: "3f5024a8-fe14-4fb7-8690-70fd43145338"
-worker-rinha  | Rate limited for default, using cached health data
-worker-rinha  | Worker completed payments with id: "c3775d69-0c55-48ba-9b54-3465ea18b5d0"
-worker-rinha  | Worker completed payments with id: "486ba885-630f-444d-90b8-ba3519d0464d"
-worker-rinha  | Worker completed payments with id: "50efe487-ca4f-4a4c-8a99-592f86218e3e"
-worker-rinha  | Worker completed payments with id: "9d0a0674-9d01-46df-82d0-9ae438af77f8"
-worker-rinha  | Worker completed payments with id: "bfc0f3a7-99bc-4277-8bdf-57feeec32588"
-worker-rinha  | Rate limited for default, using cached health data
-worker-rinha  | Rate limited for fallback, using cached health data
-worker-rinha  | Rate limited for fallback, using cached health data
-worker-rinha  | Rate limited for default, using cached health data
-worker-rinha  | Rate limited for default, using cached health data
-worker-rinha  | Rate limited for fallback, using cached health data
-worker-rinha  | Rate limited for fallback, using cached health data
-worker-rinha  | Worker completed payments with id: "e5bf8008-bbe8-4692-93db-96737de6d8cf"
-worker-rinha  | Rate limited for default, using cached health data
-worker-rinha  | Rate limited for fallback, using cached health data
-worker-rinha  | Worker completed payments with id: "ebdf6240-7f1e-4a18-8e0f-d403daf311e6"
-worker-rinha  | Worker completed payments with id: "dc301be8-bb20-4b64-9c33-ec3f587cde91"
-worker-rinha  | Worker completed payments with id: "ce1b5e97-6c9a-4cea-bb55-ee86fd4018a0"
-worker-rinha  | Worker completed payments with id: "afeab862-3174-4ca6-8219-087ebf2c3208"
-worker-rinha  | Worker completed payments with id: "051bd936-8bc1-4dec-8f83-1d45da3be881"
-mongodb-1     | {"t":{"$date":"2025-08-19T16:35:11.932+00:00"},"s":"I",  "c":"WTCHKPT",  "id":22430,   "ctx":"Checkpointer","msg":"WiredTiger message","attr":{"message":{"ts_sec":1755621311,"ts_usec":932339,"thread":"1:0x76e28295a640","session_name":"WT_SESSION.checkpoint","category":"WT_VERB_CHECKPOINT_PROGRESS","category_id":6,"verbose_level":"DEBUG_1","verbose_level_id":1,"msg":"saving checkpoint snapshot min: 75, snapshot max: 75 snapshot count: 0, oldest timestamp: (0, 0) , meta checkpoint timestamp: (0, 0) base write gen: 1"}}}
-worker-rinha  | Worker completed payments with id: "f6f7d733-2cfb-4fd5-b70d-2e23ee760174"
-worker-rinha  | Worker completed payments with id: "a383ffa9-695b-4680-ba1f-5041f5e57f89"
-worker-rinha  | Worker completed payments with id: "b2becd30-49c0-45fc-9b0f-74201ad25718"
-worker-rinha  | Worker completed payments with id: "6759c9b6-d50b-4f40-9d2e-f8870edf9be2"
-worker-rinha  | Both processors failing, delaying job cd1dee08-699a-4037-b60a-5a5d04035310
-worker-rinha  | Worker completed payments with id: "261ce687-64cb-40e7-8fe6-798b53c2e77e"
-traefik       | time="2025-08-19T16:35:47Z" level=error msg="Error while Peeking first byte: read tcp 172.20.0.3:9999->172.20.0.1:51254: i/o timeout"
-worker-rinha  | Worker error 9033 | elseif rcall("ZSCORE", repeatKey, legacyCustomKey) ~= false then
-worker-rinha  | 9034 |     rcall("ZADD", repeatKey, nextMillis, legacyCustomKey)
-worker-rinha  | 9035 |     return legacyCustomKey
-worker-rinha  | 9036 | end
-worker-rinha  | 9037 | return ''
-worker-rinha  | 9038 |              Current: ${this.version}`)}this.capabilities={canDoubleTimeout:!isRedisVersionLowerThan(this.version,"6.0.0"),canBlockFor1Ms:!isRedisVersionLowerThan(this.version,"7.0.8")},this.status="ready"}return this._client}async disconnect(wait=!0){let client=await this.client;if(client.status!=="end"){let _resolve,_reject;if(!wait)return client.disconnect();let disconnecting=new Promise((resolve,reject)=>{increaseMaxListeners(client,2),client.once("end",resolve),client.once("error",reject),_resolve=resolve,_reject=reject});client.disconnect();try{await disconnecting}finally{decreaseMaxListeners(client,2),client.removeListener("end",_resolve),client.removeListener("error",_reject)}}}async reconnect(){return(await this.client).connect()}async close(force=!1){if(!this.closing){let status=this.status;this.status="closing",this.closing=!0;try{if(status==="ready")await this.initializing;if(!this.extraOptions.shared){if(status=="initializing"||force)this._client.disconnect();else await this._client.quit();this._
-worker-rinha  | 
-worker-rinha  | error: could not renew lock for job 32
-worker-rinha  |       at <anonymous> (/$bunfs/root/server:9038:34256)
-worker-rinha  | 
-worker-rinha  | Worker completed payments with id: "9c250100-e718-49fa-8cac-4d857cc8ffd9"
-worker-rinha  | Worker completed payments with id: "479fcf57-1020-4c75-9976-538e069a67fb"
-worker-rinha  | Worker completed payments with id: "d1cc733c-1b6b-49f2-9cf4-aa89dd315797"
-worker-rinha  | Worker completed payments with id: "7333e56f-14da-4a81-8aff-b056acca2d28"
-traefik       | time="2025-08-19T16:36:00Z" level=error msg="Error while Peeking first byte: read tcp 172.20.0.3:9999->172.20.0.1:51270: i/o timeout"
-mongodb-1     | {"t":{"$date":"2025-08-19T16:36:12.029+00:00"},"s":"I",  "c":"WTCHKPT",  "id":22430,   "ctx":"Checkpointer","msg":"WiredTiger message","attr":{"message":{"ts_sec":1755621372,"ts_usec":29049,"thread":"1:0x76e28295a640","session_name":"WT_SESSION.checkpoint","category":"WT_VERB_CHECKPOINT_PROGRESS","category_id":6,"verbose_level":"DEBUG_1","verbose_level_id":1,"msg":"saving checkpoint snapshot min: 82, snapshot max: 82 snapshot count: 0, oldest timestamp: (0, 0) , meta checkpoint timestamp: (0, 0) base write gen: 1"}}}
-traefik       | time="2025-08-19T16:36:09Z" level=error msg="Error while Peeking first byte: read tcp 172.20.0.3:9999->172.20.0.1:51282: i/o timeout"
-traefik       | time="2025-08-19T16:36:16Z" level=error msg="Error while Peeking first byte: read tcp 172.20.0.3:9999->172.20.0.1:51288: i/o timeout"
-traefik       | time="2025-08-19T16:36:18Z" level=error msg="Error while Peeking first byte: read tcp 172.20.0.3:9999->172.20.0.1:51308: i/o timeout"
-mongodb-1     | {"t":{"$date":"2025-08-19T16:36:25.430+00:00"},"s":"I",  "c":"NETWORK",  "id":22943,   "ctx":"listener","msg":"Connection accepted","attr":{"remote":"172.20.0.5:53674","isLoadBalanced":false,"uuid":{"uuid":{"$uuid":"dc1f81fc-626e-49ab-babf-ad817b89716c"}},"connectionId":24,"connectionCount":24}}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:36:25.487+00:00"},"s":"I",  "c":"NETWORK",  "id":22943,   "ctx":"listener","msg":"Connection accepted","attr":{"remote":"172.20.0.5:53690","isLoadBalanced":false,"uuid":{"uuid":{"$uuid":"1531c748-6e0e-423b-be8d-433ccbad4d09"}},"connectionId":25,"connectionCount":25}}
-worker-rinha  | Worker error 9033 | elseif rcall("ZSCORE", repeatKey, legacyCustomKey) ~= false then
-worker-rinha  | 9034 |     rcall("ZADD", repeatKey, nextMillis, legacyCustomKey)
-worker-rinha  | 9035 |     return legacyCustomKey
-worker-rinha  | 9036 | end
-worker-rinha  | 9037 | return ''
-worker-rinha  | 9038 |              Current: ${this.version}`)}this.capabilities={canDoubleTimeout:!isRedisVersionLowerThan(this.version,"6.0.0"),canBlockFor1Ms:!isRedisVersionLowerThan(this.version,"7.0.8")},this.status="ready"}return this._client}async disconnect(wait=!0){let client=await this.client;if(client.status!=="end"){let _resolve,_reject;if(!wait)return client.disconnect();let disconnecting=new Promise((resolve,reject)=>{increaseMaxListeners(client,2),client.once("end",resolve),client.once("error",reject),_resolve=resolve,_reject=reject});client.disconnect();try{await disconnecting}finally{decreaseMaxListeners(client,2),client.removeListener("end",_resolve),client.removeListener("error",_reject)}}}async reconnect(){return(await this.client).connect()}async close(force=!1){if(!this.closing){let status=this.status;this.status="closing",this.closing=!0;try{if(status==="ready")await this.initializing;if(!this.extraOptions.shared){if(status=="initializing"||force)this._client.disconnect();else await this._client.quit();this._
-worker-rinha  | 
-worker-rinha  | error: could not renew lock for job 30
-worker-rinha  |       at <anonymous> (/$bunfs/root/server:9038:34256)
-worker-rinha  | 
-worker-rinha  | Worker error 9033 | elseif rcall("ZSCORE", repeatKey, legacyCustomKey) ~= false then
-worker-rinha  | 9034 |     rcall("ZADD", repeatKey, nextMillis, legacyCustomKey)
-worker-rinha  | 9035 |     return legacyCustomKey
-worker-rinha  | 9036 | end
-worker-rinha  | 9037 | return ''
-worker-rinha  | 9038 |              Current: ${this.version}`)}this.capabilities={canDoubleTimeout:!isRedisVersionLowerThan(this.version,"6.0.0"),canBlockFor1Ms:!isRedisVersionLowerThan(this.version,"7.0.8")},this.status="ready"}return this._client}async disconnect(wait=!0){let client=await this.client;if(client.status!=="end"){let _resolve,_reject;if(!wait)return client.disconnect();let disconnecting=new Promise((resolve,reject)=>{increaseMaxListeners(client,2),client.once("end",resolve),client.once("error",reject),_resolve=resolve,_reject=reject});client.disconnect();try{await disconnecting}finally{decreaseMaxListeners(client,2),client.removeListener("end",_resolve),client.removeListener("error",_reject)}}}async reconnect(){return(await this.client).connect()}async close(force=!1){if(!this.closing){let status=this.status;this.status="closing",this.closing=!0;try{if(status==="ready")await this.initializing;if(!this.extraOptions.shared){if(status=="initializing"||force)this._client.disconnect();else await this._client.quit();this._
-worker-rinha  | 
-worker-rinha  | error: could not renew lock for job 7
-worker-rinha  |       at <anonymous> (/$bunfs/root/server:9038:34256)
-worker-rinha  | 
-worker-rinha  | Worker error 9033 | elseif rcall("ZSCORE", repeatKey, legacyCustomKey) ~= false then
-worker-rinha  | 9034 |     rcall("ZADD", repeatKey, nextMillis, legacyCustomKey)
-worker-rinha  | 9035 |     return legacyCustomKey
-worker-rinha  | 9036 | end
-worker-rinha  | 9037 | return ''
-worker-rinha  | 9038 |              Current: ${this.version}`)}this.capabilities={canDoubleTimeout:!isRedisVersionLowerThan(this.version,"6.0.0"),canBlockFor1Ms:!isRedisVersionLowerThan(this.version,"7.0.8")},this.status="ready"}return this._client}async disconnect(wait=!0){let client=await this.client;if(client.status!=="end"){let _resolve,_reject;if(!wait)return client.disconnect();let disconnecting=new Promise((resolve,reject)=>{increaseMaxListeners(client,2),client.once("end",resolve),client.once("error",reject),_resolve=resolve,_reject=reject});client.disconnect();try{await disconnecting}finally{decreaseMaxListeners(client,2),client.removeListener("end",_resolve),client.removeListener("error",_reject)}}}async reconnect(){return(await this.client).connect()}async close(force=!1){if(!this.closing){let status=this.status;this.status="closing",this.closing=!0;try{if(status==="ready")await this.initializing;if(!this.extraOptions.shared){if(status=="initializing"||force)this._client.disconnect();else await this._client.quit();this._
-worker-rinha  | 
-worker-rinha  | error: could not renew lock for job 8
-worker-rinha  |       at <anonymous> (/$bunfs/root/server:9038:34256)
-worker-rinha  | 
-worker-rinha  | Worker error 9033 | elseif rcall("ZSCORE", repeatKey, legacyCustomKey) ~= false then
-worker-rinha  | 9034 |     rcall("ZADD", repeatKey, nextMillis, legacyCustomKey)
-worker-rinha  | 9035 |     return legacyCustomKey
-worker-rinha  | 9036 | end
-worker-rinha  | 9037 | return ''
-worker-rinha  | 9038 |              Current: ${this.version}`)}this.capabilities={canDoubleTimeout:!isRedisVersionLowerThan(this.version,"6.0.0"),canBlockFor1Ms:!isRedisVersionLowerThan(this.version,"7.0.8")},this.status="ready"}return this._client}async disconnect(wait=!0){let client=await this.client;if(client.status!=="end"){let _resolve,_reject;if(!wait)return client.disconnect();let disconnecting=new Promise((resolve,reject)=>{increaseMaxListeners(client,2),client.once("end",resolve),client.once("error",reject),_resolve=resolve,_reject=reject});client.disconnect();try{await disconnecting}finally{decreaseMaxListeners(client,2),client.removeListener("end",_resolve),client.removeListener("error",_reject)}}}async reconnect(){return(await this.client).connect()}async close(force=!1){if(!this.closing){let status=this.status;this.status="closing",this.closing=!0;try{if(status==="ready")await this.initializing;if(!this.extraOptions.shared){if(status=="initializing"||force)this._client.disconnect();else await this._client.quit();this._
-worker-rinha  | 
-worker-rinha  | error: could not renew lock for job 31
-worker-rinha  |       at <anonymous> (/$bunfs/root/server:9038:34256)
-worker-rinha  | 
-worker-rinha  | Worker error 9033 | elseif rcall("ZSCORE", repeatKey, legacyCustomKey) ~= false then
-worker-rinha  | 9034 |     rcall("ZADD", repeatKey, nextMillis, legacyCustomKey)
-worker-rinha  | 9035 |     return legacyCustomKey
-worker-rinha  | 9036 | end
-worker-rinha  | 9037 | return ''
-worker-rinha  | 9038 |              Current: ${this.version}`)}this.capabilities={canDoubleTimeout:!isRedisVersionLowerThan(this.version,"6.0.0"),canBlockFor1Ms:!isRedisVersionLowerThan(this.version,"7.0.8")},this.status="ready"}return this._client}async disconnect(wait=!0){let client=await this.client;if(client.status!=="end"){let _resolve,_reject;if(!wait)return client.disconnect();let disconnecting=new Promise((resolve,reject)=>{increaseMaxListeners(client,2),client.once("end",resolve),client.once("error",reject),_resolve=resolve,_reject=reject});client.disconnect();try{await disconnecting}finally{decreaseMaxListeners(client,2),client.removeListener("end",_resolve),client.removeListener("error",_reject)}}}async reconnect(){return(await this.client).connect()}async close(force=!1){if(!this.closing){let status=this.status;this.status="closing",this.closing=!0;try{if(status==="ready")await this.initializing;if(!this.extraOptions.shared){if(status=="initializing"||force)this._client.disconnect();else await this._client.quit();this._
-worker-rinha  | 
-worker-rinha  | error: could not renew lock for job 32
-worker-rinha  |       at <anonymous> (/$bunfs/root/server:9038:34256)
-worker-rinha  | 
-worker-rinha  | Worker error 9033 | elseif rcall("ZSCORE", repeatKey, legacyCustomKey) ~= false then
-worker-rinha  | 9034 |     rcall("ZADD", repeatKey, nextMillis, legacyCustomKey)
-worker-rinha  | 9035 |     return legacyCustomKey
-worker-rinha  | 9036 | end
-worker-rinha  | 9037 | return ''
-worker-rinha  | 9038 |              Current: ${this.version}`)}this.capabilities={canDoubleTimeout:!isRedisVersionLowerThan(this.version,"6.0.0"),canBlockFor1Ms:!isRedisVersionLowerThan(this.version,"7.0.8")},this.status="ready"}return this._client}async disconnect(wait=!0){let client=await this.client;if(client.status!=="end"){let _resolve,_reject;if(!wait)return client.disconnect();let disconnecting=new Promise((resolve,reject)=>{increaseMaxListeners(client,2),client.once("end",resolve),client.once("error",reject),_resolve=resolve,_reject=reject});client.disconnect();try{await disconnecting}finally{decreaseMaxListeners(client,2),client.removeListener("end",_resolve),client.removeListener("error",_reject)}}}async reconnect(){return(await this.client).connect()}async close(force=!1){if(!this.closing){let status=this.status;this.status="closing",this.closing=!0;try{if(status==="ready")await this.initializing;if(!this.extraOptions.shared){if(status=="initializing"||force)this._client.disconnect();else await this._client.quit();this._
-worker-rinha  | 
-worker-rinha  | error: could not renew lock for job 33
-worker-rinha  |       at <anonymous> (/$bunfs/root/server:9038:34256)
-worker-rinha  | 
-worker-rinha  | Worker error 9033 | elseif rcall("ZSCORE", repeatKey, legacyCustomKey) ~= false then
-worker-rinha  | 9034 |     rcall("ZADD", repeatKey, nextMillis, legacyCustomKey)
-worker-rinha  | 9035 |     return legacyCustomKey
-worker-rinha  | 9036 | end
-worker-rinha  | 9037 | return ''
-worker-rinha  | 9038 |              Current: ${this.version}`)}this.capabilities={canDoubleTimeout:!isRedisVersionLowerThan(this.version,"6.0.0"),canBlockFor1Ms:!isRedisVersionLowerThan(this.version,"7.0.8")},this.status="ready"}return this._client}async disconnect(wait=!0){let client=await this.client;if(client.status!=="end"){let _resolve,_reject;if(!wait)return client.disconnect();let disconnecting=new Promise((resolve,reject)=>{increaseMaxListeners(client,2),client.once("end",resolve),client.once("error",reject),_resolve=resolve,_reject=reject});client.disconnect();try{await disconnecting}finally{decreaseMaxListeners(client,2),client.removeListener("end",_resolve),client.removeListener("error",_reject)}}}async reconnect(){return(await this.client).connect()}async close(force=!1){if(!this.closing){let status=this.status;this.status="closing",this.closing=!0;try{if(status==="ready")await this.initializing;if(!this.extraOptions.shared){if(status=="initializing"||force)this._client.disconnect();else await this._client.quit();this._
-worker-rinha  | 
-worker-rinha  | error: could not renew lock for job 34
-worker-rinha  |       at <anonymous> (/$bunfs/root/server:9038:34256)
-worker-rinha  | 
-mongodb-1     | {"t":{"$date":"2025-08-19T16:36:42.889+00:00"},"s":"I",  "c":"NETWORK",  "id":51800,   "ctx":"conn24","msg":"client metadata","attr":{"remote":"172.20.0.5:53674","client":"conn24","negotiatedCompressors":[],"doc":{"driver":{"name":"nodejs|Mongoose","version":"6.17.0|8.16.2"},"platform":"Bun v1.2.18, LE","os":{"name":"linux","architecture":"x64","version":"6.14.0-1010-aws","type":"Linux"},"env":{"container":{"runtime":"docker"}}}}}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:36:43.716+00:00"},"s":"I",  "c":"NETWORK",  "id":51800,   "ctx":"conn25","msg":"client metadata","attr":{"remote":"172.20.0.5:53690","client":"conn25","negotiatedCompressors":[],"doc":{"driver":{"name":"nodejs|Mongoose","version":"6.17.0|8.16.2"},"platform":"Bun v1.2.18, LE","os":{"name":"linux","architecture":"x64","version":"6.14.0-1010-aws","type":"Linux"},"env":{"container":{"runtime":"docker"}}}}}
-worker-rinha  | Worker error 1071 | `);for(let i=0;i<lines.length;++i){let[fieldName,...fieldValueParts]=lines[i].split(":"),fieldValue=fieldValueParts.join(":");if(fieldValue)info[fieldName]=fieldValue}if(!info.loading||info.loading==="0")callback(null,info);else{let loadingEtaMs=(info.loading_eta_seconds||1)*1000,retryTime=_this.options.maxLoadingRetryTime&&_this.options.maxLoadingRetryTime<loadingEtaMs?_this.options.maxLoadingRetryTime:loadingEtaMs;debug("Redis server still loading, trying again in "+retryTime+"ms"),setTimeout(function(){_this._readyCheck(callback)},retryTime)}}).catch(lodash_1.noop)}}Redis.Cluster=cluster_1.default;Redis.Command=Command_1.default;Redis.defaultOptions=RedisOptions_1.DEFAULT_REDIS_OPTIONS;applyMixin_1.default(Redis,events_1.EventEmitter);transaction_1.addTransactionSupport(Redis.prototype);exports.default=Redis});var require_built3=__commonJS((exports,module)=>{Object.defineProperty(exports,"__esModule",{value:!0});exports.print=exports.ReplyError=exports.SentinelIterator=exports.SentinelConnector=exports.Abs
-worker-rinha  | 1072 |     attempted loading from: `+dir+" and package: "+platformPackage+`
-worker-rinha  | 1073 | `;if(packageNameError)errMessage+="Error finding package.json: "+packageNameError.message+`
-worker-rinha  | 1074 | `;if(packageResolutionError)errMessage+="Error resolving package: "+packageResolutionError.message+`
-worker-rinha  | 1075 | `;throw new Error(errMessage);function resolve(dir2){var tuples=readdirSync(path2.join(dir2,"prebuilds")).map(parseTuple),tuple=tuples.filter(matchTuple(platform,arch)).sort(compareTuples)[0];if(!tuple)return;return resolveFile(path2.join(dir2,"prebuilds",tuple.name))}function resolveFile(prebuilds){var parsed=readdirSync(prebuilds).map(parseTags),candidates=parsed.filter(matchTags(runtime,abi)),winner=candidates.sort(compareTags(runtime))[0];if(winner)return path2.join(prebuilds,winner.file)}};function readdirSync(dir){try{return fs.readdirSync(dir)}catch(err){return[]}}function getFirst(dir,filter){var files=readdirSync(dir).filter(filter);return files[0]&&path2.join(dir,files[0])}function matchBuild(name){return/\.node$/.test(name)}function parseTuple(name){var arr=name.split("-");if(arr.length!==2)return;var platform2=arr[0],architectures=arr[1].split("+");if(!platform2)return;if(!architectures.length)return;if(!architectures.every(Boolean))return;return{name,platform:platform2,architectures}}function mat
-worker-rinha  | 1076 |       If a custom backoff strategy is used, specify it when the queue is created.`)}import{fork}from"child_process";import{createServer}from"net";import{Worker}from"worker_threads";var ChildCommand;(function(ChildCommand2){ChildCommand2[ChildCommand2.Init=0]="Init",ChildCommand2[ChildCommand2.Start=1]="Start",ChildCommand2[ChildCommand2.Stop=2]="Stop",ChildCommand2[ChildCommand2.GetChildrenValuesResponse=3]="GetChildrenValuesResponse",ChildCommand2[ChildCommand2.GetIgnoredChildrenFailuresResponse=4]="GetIgnoredChildrenFailuresResponse"})(ChildCommand||(ChildCommand={}));var ErrorCode;(function(ErrorCode2){ErrorCode2[ErrorCode2.JobNotExist=-1]="JobNotExist",ErrorCode2[ErrorCode2.JobLockNotExist=-2]="JobLockNotExist",ErrorCode2[ErrorCode2.JobNotInState=-3]="JobNotInState",ErrorCode2[ErrorCode2.JobPendingChildren=-4]="JobPendingChildren",ErrorCode2[ErrorCode2.ParentJobNotExist=-5]="ParentJobNotExist",ErrorCode2[ErrorCode2.JobLockMismatch=-6]="JobLockMismatch",ErrorCode2[ErrorCode2.ParentJobCannotBeReplaced=-7]="
-worker-rinha  | 
-worker-rinha  | error: Missing lock for job 30. moveToDelayed
-worker-rinha  |       at finishedErrors (/$bunfs/root/server:1076:102936)
-worker-rinha  |       at moveToDelayed (/$bunfs/root/server:1076:96377)
-worker-rinha  | 
-worker-rinha  | Worker error 1071 | `);for(let i=0;i<lines.length;++i){let[fieldName,...fieldValueParts]=lines[i].split(":"),fieldValue=fieldValueParts.join(":");if(fieldValue)info[fieldName]=fieldValue}if(!info.loading||info.loading==="0")callback(null,info);else{let loadingEtaMs=(info.loading_eta_seconds||1)*1000,retryTime=_this.options.maxLoadingRetryTime&&_this.options.maxLoadingRetryTime<loadingEtaMs?_this.options.maxLoadingRetryTime:loadingEtaMs;debug("Redis server still loading, trying again in "+retryTime+"ms"),setTimeout(function(){_this._readyCheck(callback)},retryTime)}}).catch(lodash_1.noop)}}Redis.Cluster=cluster_1.default;Redis.Command=Command_1.default;Redis.defaultOptions=RedisOptions_1.DEFAULT_REDIS_OPTIONS;applyMixin_1.default(Redis,events_1.EventEmitter);transaction_1.addTransactionSupport(Redis.prototype);exports.default=Redis});var require_built3=__commonJS((exports,module)=>{Object.defineProperty(exports,"__esModule",{value:!0});exports.print=exports.ReplyError=exports.SentinelIterator=exports.SentinelConnector=exports.Abs
-worker-rinha  | 1072 |     attempted loading from: `+dir+" and package: "+platformPackage+`
-worker-rinha  | 1073 | `;if(packageNameError)errMessage+="Error finding package.json: "+packageNameError.message+`
-worker-rinha  | 1074 | `;if(packageResolutionError)errMessage+="Error resolving package: "+packageResolutionError.message+`
-worker-rinha  | 1075 | `;throw new Error(errMessage);function resolve(dir2){var tuples=readdirSync(path2.join(dir2,"prebuilds")).map(parseTuple),tuple=tuples.filter(matchTuple(platform,arch)).sort(compareTuples)[0];if(!tuple)return;return resolveFile(path2.join(dir2,"prebuilds",tuple.name))}function resolveFile(prebuilds){var parsed=readdirSync(prebuilds).map(parseTags),candidates=parsed.filter(matchTags(runtime,abi)),winner=candidates.sort(compareTags(runtime))[0];if(winner)return path2.join(prebuilds,winner.file)}};function readdirSync(dir){try{return fs.readdirSync(dir)}catch(err){return[]}}function getFirst(dir,filter){var files=readdirSync(dir).filter(filter);return files[0]&&path2.join(dir,files[0])}function matchBuild(name){return/\.node$/.test(name)}function parseTuple(name){var arr=name.split("-");if(arr.length!==2)return;var platform2=arr[0],architectures=arr[1].split("+");if(!platform2)return;if(!architectures.length)return;if(!architectures.every(Boolean))return;return{name,platform:platform2,architectures}}function mat
-worker-rinha  | 1076 |       If a custom backoff strategy is used, specify it when the queue is created.`)}import{fork}from"child_process";import{createServer}from"net";import{Worker}from"worker_threads";var ChildCommand;(function(ChildCommand2){ChildCommand2[ChildCommand2.Init=0]="Init",ChildCommand2[ChildCommand2.Start=1]="Start",ChildCommand2[ChildCommand2.Stop=2]="Stop",ChildCommand2[ChildCommand2.GetChildrenValuesResponse=3]="GetChildrenValuesResponse",ChildCommand2[ChildCommand2.GetIgnoredChildrenFailuresResponse=4]="GetIgnoredChildrenFailuresResponse"})(ChildCommand||(ChildCommand={}));var ErrorCode;(function(ErrorCode2){ErrorCode2[ErrorCode2.JobNotExist=-1]="JobNotExist",ErrorCode2[ErrorCode2.JobLockNotExist=-2]="JobLockNotExist",ErrorCode2[ErrorCode2.JobNotInState=-3]="JobNotInState",ErrorCode2[ErrorCode2.JobPendingChildren=-4]="JobPendingChildren",ErrorCode2[ErrorCode2.ParentJobNotExist=-5]="ParentJobNotExist",ErrorCode2[ErrorCode2.JobLockMismatch=-6]="JobLockMismatch",ErrorCode2[ErrorCode2.ParentJobCannotBeReplaced=-7]="
-worker-rinha  | 
-worker-rinha  | error: Missing lock for job 31. moveToDelayed
-worker-rinha  |       at finishedErrors (/$bunfs/root/server:1076:102936)
-worker-rinha  |       at moveToDelayed (/$bunfs/root/server:1076:96377)
-worker-rinha  | 
-worker-rinha  | Worker error 1071 | `);for(let i=0;i<lines.length;++i){let[fieldName,...fieldValueParts]=lines[i].split(":"),fieldValue=fieldValueParts.join(":");if(fieldValue)info[fieldName]=fieldValue}if(!info.loading||info.loading==="0")callback(null,info);else{let loadingEtaMs=(info.loading_eta_seconds||1)*1000,retryTime=_this.options.maxLoadingRetryTime&&_this.options.maxLoadingRetryTime<loadingEtaMs?_this.options.maxLoadingRetryTime:loadingEtaMs;debug("Redis server still loading, trying again in "+retryTime+"ms"),setTimeout(function(){_this._readyCheck(callback)},retryTime)}}).catch(lodash_1.noop)}}Redis.Cluster=cluster_1.default;Redis.Command=Command_1.default;Redis.defaultOptions=RedisOptions_1.DEFAULT_REDIS_OPTIONS;applyMixin_1.default(Redis,events_1.EventEmitter);transaction_1.addTransactionSupport(Redis.prototype);exports.default=Redis});var require_built3=__commonJS((exports,module)=>{Object.defineProperty(exports,"__esModule",{value:!0});exports.print=exports.ReplyError=exports.SentinelIterator=exports.SentinelConnector=exports.Abs
-worker-rinha  | 1072 |     attempted loading from: `+dir+" and package: "+platformPackage+`
-worker-rinha  | 1073 | `;if(packageNameError)errMessage+="Error finding package.json: "+packageNameError.message+`
-worker-rinha  | 1074 | `;if(packageResolutionError)errMessage+="Error resolving package: "+packageResolutionError.message+`
-worker-rinha  | 1075 | `;throw new Error(errMessage);function resolve(dir2){var tuples=readdirSync(path2.join(dir2,"prebuilds")).map(parseTuple),tuple=tuples.filter(matchTuple(platform,arch)).sort(compareTuples)[0];if(!tuple)return;return resolveFile(path2.join(dir2,"prebuilds",tuple.name))}function resolveFile(prebuilds){var parsed=readdirSync(prebuilds).map(parseTags),candidates=parsed.filter(matchTags(runtime,abi)),winner=candidates.sort(compareTags(runtime))[0];if(winner)return path2.join(prebuilds,winner.file)}};function readdirSync(dir){try{return fs.readdirSync(dir)}catch(err){return[]}}function getFirst(dir,filter){var files=readdirSync(dir).filter(filter);return files[0]&&path2.join(dir,files[0])}function matchBuild(name){return/\.node$/.test(name)}function parseTuple(name){var arr=name.split("-");if(arr.length!==2)return;var platform2=arr[0],architectures=arr[1].split("+");if(!platform2)return;if(!architectures.length)return;if(!architectures.every(Boolean))return;return{name,platform:platform2,architectures}}function mat
-worker-rinha  | 1076 |       If a custom backoff strategy is used, specify it when the queue is created.`)}import{fork}from"child_process";import{createServer}from"net";import{Worker}from"worker_threads";var ChildCommand;(function(ChildCommand2){ChildCommand2[ChildCommand2.Init=0]="Init",ChildCommand2[ChildCommand2.Start=1]="Start",ChildCommand2[ChildCommand2.Stop=2]="Stop",ChildCommand2[ChildCommand2.GetChildrenValuesResponse=3]="GetChildrenValuesResponse",ChildCommand2[ChildCommand2.GetIgnoredChildrenFailuresResponse=4]="GetIgnoredChildrenFailuresResponse"})(ChildCommand||(ChildCommand={}));var ErrorCode;(function(ErrorCode2){ErrorCode2[ErrorCode2.JobNotExist=-1]="JobNotExist",ErrorCode2[ErrorCode2.JobLockNotExist=-2]="JobLockNotExist",ErrorCode2[ErrorCode2.JobNotInState=-3]="JobNotInState",ErrorCode2[ErrorCode2.JobPendingChildren=-4]="JobPendingChildren",ErrorCode2[ErrorCode2.ParentJobNotExist=-5]="ParentJobNotExist",ErrorCode2[ErrorCode2.JobLockMismatch=-6]="JobLockMismatch",ErrorCode2[ErrorCode2.ParentJobCannotBeReplaced=-7]="
-worker-rinha  | 
-worker-rinha  | error: Missing lock for job 7. moveToDelayed
-worker-rinha  |       at finishedErrors (/$bunfs/root/server:1076:102936)
-worker-rinha  |       at moveToDelayed (/$bunfs/root/server:1076:96377)
-worker-rinha  | 
-worker-rinha  | Worker error 1071 | `);for(let i=0;i<lines.length;++i){let[fieldName,...fieldValueParts]=lines[i].split(":"),fieldValue=fieldValueParts.join(":");if(fieldValue)info[fieldName]=fieldValue}if(!info.loading||info.loading==="0")callback(null,info);else{let loadingEtaMs=(info.loading_eta_seconds||1)*1000,retryTime=_this.options.maxLoadingRetryTime&&_this.options.maxLoadingRetryTime<loadingEtaMs?_this.options.maxLoadingRetryTime:loadingEtaMs;debug("Redis server still loading, trying again in "+retryTime+"ms"),setTimeout(function(){_this._readyCheck(callback)},retryTime)}}).catch(lodash_1.noop)}}Redis.Cluster=cluster_1.default;Redis.Command=Command_1.default;Redis.defaultOptions=RedisOptions_1.DEFAULT_REDIS_OPTIONS;applyMixin_1.default(Redis,events_1.EventEmitter);transaction_1.addTransactionSupport(Redis.prototype);exports.default=Redis});var require_built3=__commonJS((exports,module)=>{Object.defineProperty(exports,"__esModule",{value:!0});exports.print=exports.ReplyError=exports.SentinelIterator=exports.SentinelConnector=exports.Abs
-worker-rinha  | 1072 |     attempted loading from: `+dir+" and package: "+platformPackage+`
-worker-rinha  | 1073 | `;if(packageNameError)errMessage+="Error finding package.json: "+packageNameError.message+`
-worker-rinha  | 1074 | `;if(packageResolutionError)errMessage+="Error resolving package: "+packageResolutionError.message+`
-worker-rinha  | 1075 | `;throw new Error(errMessage);function resolve(dir2){var tuples=readdirSync(path2.join(dir2,"prebuilds")).map(parseTuple),tuple=tuples.filter(matchTuple(platform,arch)).sort(compareTuples)[0];if(!tuple)return;return resolveFile(path2.join(dir2,"prebuilds",tuple.name))}function resolveFile(prebuilds){var parsed=readdirSync(prebuilds).map(parseTags),candidates=parsed.filter(matchTags(runtime,abi)),winner=candidates.sort(compareTags(runtime))[0];if(winner)return path2.join(prebuilds,winner.file)}};function readdirSync(dir){try{return fs.readdirSync(dir)}catch(err){return[]}}function getFirst(dir,filter){var files=readdirSync(dir).filter(filter);return files[0]&&path2.join(dir,files[0])}function matchBuild(name){return/\.node$/.test(name)}function parseTuple(name){var arr=name.split("-");if(arr.length!==2)return;var platform2=arr[0],architectures=arr[1].split("+");if(!platform2)return;if(!architectures.length)return;if(!architectures.every(Boolean))return;return{name,platform:platform2,architectures}}function mat
-worker-rinha  | 1076 |       If a custom backoff strategy is used, specify it when the queue is created.`)}import{fork}from"child_process";import{createServer}from"net";import{Worker}from"worker_threads";var ChildCommand;(function(ChildCommand2){ChildCommand2[ChildCommand2.Init=0]="Init",ChildCommand2[ChildCommand2.Start=1]="Start",ChildCommand2[ChildCommand2.Stop=2]="Stop",ChildCommand2[ChildCommand2.GetChildrenValuesResponse=3]="GetChildrenValuesResponse",ChildCommand2[ChildCommand2.GetIgnoredChildrenFailuresResponse=4]="GetIgnoredChildrenFailuresResponse"})(ChildCommand||(ChildCommand={}));var ErrorCode;(function(ErrorCode2){ErrorCode2[ErrorCode2.JobNotExist=-1]="JobNotExist",ErrorCode2[ErrorCode2.JobLockNotExist=-2]="JobLockNotExist",ErrorCode2[ErrorCode2.JobNotInState=-3]="JobNotInState",ErrorCode2[ErrorCode2.JobPendingChildren=-4]="JobPendingChildren",ErrorCode2[ErrorCode2.ParentJobNotExist=-5]="ParentJobNotExist",ErrorCode2[ErrorCode2.JobLockMismatch=-6]="JobLockMismatch",ErrorCode2[ErrorCode2.ParentJobCannotBeReplaced=-7]="
-worker-rinha  | 
-worker-rinha  | error: Missing lock for job 8. moveToDelayed
-worker-rinha  |       at finishedErrors (/$bunfs/root/server:1076:102936)
-worker-rinha  |       at moveToDelayed (/$bunfs/root/server:1076:96377)
-worker-rinha  | 
-worker-rinha  | Worker error 1071 | `);for(let i=0;i<lines.length;++i){let[fieldName,...fieldValueParts]=lines[i].split(":"),fieldValue=fieldValueParts.join(":");if(fieldValue)info[fieldName]=fieldValue}if(!info.loading||info.loading==="0")callback(null,info);else{let loadingEtaMs=(info.loading_eta_seconds||1)*1000,retryTime=_this.options.maxLoadingRetryTime&&_this.options.maxLoadingRetryTime<loadingEtaMs?_this.options.maxLoadingRetryTime:loadingEtaMs;debug("Redis server still loading, trying again in "+retryTime+"ms"),setTimeout(function(){_this._readyCheck(callback)},retryTime)}}).catch(lodash_1.noop)}}Redis.Cluster=cluster_1.default;Redis.Command=Command_1.default;Redis.defaultOptions=RedisOptions_1.DEFAULT_REDIS_OPTIONS;applyMixin_1.default(Redis,events_1.EventEmitter);transaction_1.addTransactionSupport(Redis.prototype);exports.default=Redis});var require_built3=__commonJS((exports,module)=>{Object.defineProperty(exports,"__esModule",{value:!0});exports.print=exports.ReplyError=exports.SentinelIterator=exports.SentinelConnector=exports.Abs
-worker-rinha  | 1072 |     attempted loading from: `+dir+" and package: "+platformPackage+`
-worker-rinha  | 1073 | `;if(packageNameError)errMessage+="Error finding package.json: "+packageNameError.message+`
-worker-rinha  | 1074 | `;if(packageResolutionError)errMessage+="Error resolving package: "+packageResolutionError.message+`
-worker-rinha  | 1075 | `;throw new Error(errMessage);function resolve(dir2){var tuples=readdirSync(path2.join(dir2,"prebuilds")).map(parseTuple),tuple=tuples.filter(matchTuple(platform,arch)).sort(compareTuples)[0];if(!tuple)return;return resolveFile(path2.join(dir2,"prebuilds",tuple.name))}function resolveFile(prebuilds){var parsed=readdirSync(prebuilds).map(parseTags),candidates=parsed.filter(matchTags(runtime,abi)),winner=candidates.sort(compareTags(runtime))[0];if(winner)return path2.join(prebuilds,winner.file)}};function readdirSync(dir){try{return fs.readdirSync(dir)}catch(err){return[]}}function getFirst(dir,filter){var files=readdirSync(dir).filter(filter);return files[0]&&path2.join(dir,files[0])}function matchBuild(name){return/\.node$/.test(name)}function parseTuple(name){var arr=name.split("-");if(arr.length!==2)return;var platform2=arr[0],architectures=arr[1].split("+");if(!platform2)return;if(!architectures.length)return;if(!architectures.every(Boolean))return;return{name,platform:platform2,architectures}}function mat
-worker-rinha  | 1076 |       If a custom backoff strategy is used, specify it when the queue is created.`)}import{fork}from"child_process";import{createServer}from"net";import{Worker}from"worker_threads";var ChildCommand;(function(ChildCommand2){ChildCommand2[ChildCommand2.Init=0]="Init",ChildCommand2[ChildCommand2.Start=1]="Start",ChildCommand2[ChildCommand2.Stop=2]="Stop",ChildCommand2[ChildCommand2.GetChildrenValuesResponse=3]="GetChildrenValuesResponse",ChildCommand2[ChildCommand2.GetIgnoredChildrenFailuresResponse=4]="GetIgnoredChildrenFailuresResponse"})(ChildCommand||(ChildCommand={}));var ErrorCode;(function(ErrorCode2){ErrorCode2[ErrorCode2.JobNotExist=-1]="JobNotExist",ErrorCode2[ErrorCode2.JobLockNotExist=-2]="JobLockNotExist",ErrorCode2[ErrorCode2.JobNotInState=-3]="JobNotInState",ErrorCode2[ErrorCode2.JobPendingChildren=-4]="JobPendingChildren",ErrorCode2[ErrorCode2.ParentJobNotExist=-5]="ParentJobNotExist",ErrorCode2[ErrorCode2.JobLockMismatch=-6]="JobLockMismatch",ErrorCode2[ErrorCode2.ParentJobCannotBeReplaced=-7]="
-worker-rinha  | 
-worker-rinha  | error: Missing lock for job 32. moveToDelayed
-worker-rinha  |       at finishedErrors (/$bunfs/root/server:1076:102936)
-worker-rinha  |       at moveToDelayed (/$bunfs/root/server:1076:96377)
-worker-rinha  | 
-mongodb-1     | {"t":{"$date":"2025-08-19T16:36:51.960+00:00"},"s":"I",  "c":"NETWORK",  "id":6788700, "ctx":"conn24","msg":"Received first command on ingress connection since session start or auth handshake","attr":{"elapsedMillis":9070}}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:36:53.249+00:00"},"s":"I",  "c":"NETWORK",  "id":6788700, "ctx":"conn25","msg":"Received first command on ingress connection since session start or auth handshake","attr":{"elapsedMillis":9533}}
-worker-rinha  | Worker error 9033 | elseif rcall("ZSCORE", repeatKey, legacyCustomKey) ~= false then
-worker-rinha  | 9034 |     rcall("ZADD", repeatKey, nextMillis, legacyCustomKey)
-worker-rinha  | 9035 |     return legacyCustomKey
-worker-rinha  | 9036 | end
-worker-rinha  | 9037 | return ''
-worker-rinha  | 9038 |              Current: ${this.version}`)}this.capabilities={canDoubleTimeout:!isRedisVersionLowerThan(this.version,"6.0.0"),canBlockFor1Ms:!isRedisVersionLowerThan(this.version,"7.0.8")},this.status="ready"}return this._client}async disconnect(wait=!0){let client=await this.client;if(client.status!=="end"){let _resolve,_reject;if(!wait)return client.disconnect();let disconnecting=new Promise((resolve,reject)=>{increaseMaxListeners(client,2),client.once("end",resolve),client.once("error",reject),_resolve=resolve,_reject=reject});client.disconnect();try{await disconnecting}finally{decreaseMaxListeners(client,2),client.removeListener("end",_resolve),client.removeListener("error",_reject)}}}async reconnect(){return(await this.client).connect()}async close(force=!1){if(!this.closing){let status=this.status;this.status="closing",this.closing=!0;try{if(status==="ready")await this.initializing;if(!this.extraOptions.shared){if(status=="initializing"||force)this._client.disconnect();else await this._client.quit();this._
-worker-rinha  | 
-worker-rinha  | error: could not renew lock for job 33
-worker-rinha  |       at <anonymous> (/$bunfs/root/server:9038:34256)
-worker-rinha  | 
-worker-rinha  | Worker error 9033 | elseif rcall("ZSCORE", repeatKey, legacyCustomKey) ~= false then
-worker-rinha  | 9034 |     rcall("ZADD", repeatKey, nextMillis, legacyCustomKey)
-worker-rinha  | 9035 |     return legacyCustomKey
-worker-rinha  | 9036 | end
-worker-rinha  | 9037 | return ''
-worker-rinha  | 9038 |              Current: ${this.version}`)}this.capabilities={canDoubleTimeout:!isRedisVersionLowerThan(this.version,"6.0.0"),canBlockFor1Ms:!isRedisVersionLowerThan(this.version,"7.0.8")},this.status="ready"}return this._client}async disconnect(wait=!0){let client=await this.client;if(client.status!=="end"){let _resolve,_reject;if(!wait)return client.disconnect();let disconnecting=new Promise((resolve,reject)=>{increaseMaxListeners(client,2),client.once("end",resolve),client.once("error",reject),_resolve=resolve,_reject=reject});client.disconnect();try{await disconnecting}finally{decreaseMaxListeners(client,2),client.removeListener("end",_resolve),client.removeListener("error",_reject)}}}async reconnect(){return(await this.client).connect()}async close(force=!1){if(!this.closing){let status=this.status;this.status="closing",this.closing=!0;try{if(status==="ready")await this.initializing;if(!this.extraOptions.shared){if(status=="initializing"||force)this._client.disconnect();else await this._client.quit();this._
-worker-rinha  | 
-worker-rinha  | error: could not renew lock for job 34
-worker-rinha  |       at <anonymous> (/$bunfs/root/server:9038:34256)
-worker-rinha  | 
-mongodb-1     | {"t":{"$date":"2025-08-19T16:37:12.160+00:00"},"s":"I",  "c":"WTCHKPT",  "id":22430,   "ctx":"Checkpointer","msg":"WiredTiger message","attr":{"message":{"ts_sec":1755621432,"ts_usec":160121,"thread":"1:0x76e28295a640","session_name":"WT_SESSION.checkpoint","category":"WT_VERB_CHECKPOINT_PROGRESS","category_id":6,"verbose_level":"DEBUG_1","verbose_level_id":1,"msg":"saving checkpoint snapshot min: 89, snapshot max: 89 snapshot count: 0, oldest timestamp: (0, 0) , meta checkpoint timestamp: (0, 0) base write gen: 1"}}}
-worker-rinha  | Worker error 9033 | elseif rcall("ZSCORE", repeatKey, legacyCustomKey) ~= false then
-worker-rinha  | 9034 |     rcall("ZADD", repeatKey, nextMillis, legacyCustomKey)
-worker-rinha  | 9035 |     return legacyCustomKey
-worker-rinha  | 9036 | end
-worker-rinha  | 9037 | return ''
-worker-rinha  | 9038 |              Current: ${this.version}`)}this.capabilities={canDoubleTimeout:!isRedisVersionLowerThan(this.version,"6.0.0"),canBlockFor1Ms:!isRedisVersionLowerThan(this.version,"7.0.8")},this.status="ready"}return this._client}async disconnect(wait=!0){let client=await this.client;if(client.status!=="end"){let _resolve,_reject;if(!wait)return client.disconnect();let disconnecting=new Promise((resolve,reject)=>{increaseMaxListeners(client,2),client.once("end",resolve),client.once("error",reject),_resolve=resolve,_reject=reject});client.disconnect();try{await disconnecting}finally{decreaseMaxListeners(client,2),client.removeListener("end",_resolve),client.removeListener("error",_reject)}}}async reconnect(){return(await this.client).connect()}async close(force=!1){if(!this.closing){let status=this.status;this.status="closing",this.closing=!0;try{if(status==="ready")await this.initializing;if(!this.extraOptions.shared){if(status=="initializing"||force)this._client.disconnect();else await this._client.quit();this._
-worker-rinha  | 
-worker-rinha  | error: could not renew lock for job 33
-worker-rinha  |       at <anonymous> (/$bunfs/root/server:9038:34256)
-worker-rinha  | 
-worker-rinha  | Worker error 9033 | elseif rcall("ZSCORE", repeatKey, legacyCustomKey) ~= false then
-worker-rinha  | 9034 |     rcall("ZADD", repeatKey, nextMillis, legacyCustomKey)
-worker-rinha  | 9035 |     return legacyCustomKey
-worker-rinha  | 9036 | end
-worker-rinha  | 9037 | return ''
-worker-rinha  | 9038 |              Current: ${this.version}`)}this.capabilities={canDoubleTimeout:!isRedisVersionLowerThan(this.version,"6.0.0"),canBlockFor1Ms:!isRedisVersionLowerThan(this.version,"7.0.8")},this.status="ready"}return this._client}async disconnect(wait=!0){let client=await this.client;if(client.status!=="end"){let _resolve,_reject;if(!wait)return client.disconnect();let disconnecting=new Promise((resolve,reject)=>{increaseMaxListeners(client,2),client.once("end",resolve),client.once("error",reject),_resolve=resolve,_reject=reject});client.disconnect();try{await disconnecting}finally{decreaseMaxListeners(client,2),client.removeListener("end",_resolve),client.removeListener("error",_reject)}}}async reconnect(){return(await this.client).connect()}async close(force=!1){if(!this.closing){let status=this.status;this.status="closing",this.closing=!0;try{if(status==="ready")await this.initializing;if(!this.extraOptions.shared){if(status=="initializing"||force)this._client.disconnect();else await this._client.quit();this._
-worker-rinha  | 
-worker-rinha  | error: could not renew lock for job 34
-worker-rinha  |       at <anonymous> (/$bunfs/root/server:9038:34256)
-worker-rinha  | 
-traefik       | time="2025-08-19T16:37:31Z" level=error msg="Error while Peeking first byte: read tcp 172.20.0.3:9999->172.20.0.1:39156: i/o timeout"
-traefik       | time="2025-08-19T16:37:34Z" level=error msg="Error while Peeking first byte: read tcp 172.20.0.3:9999->172.20.0.1:39158: i/o timeout"
-worker-rinha  | Worker error 1071 | `);for(let i=0;i<lines.length;++i){let[fieldName,...fieldValueParts]=lines[i].split(":"),fieldValue=fieldValueParts.join(":");if(fieldValue)info[fieldName]=fieldValue}if(!info.loading||info.loading==="0")callback(null,info);else{let loadingEtaMs=(info.loading_eta_seconds||1)*1000,retryTime=_this.options.maxLoadingRetryTime&&_this.options.maxLoadingRetryTime<loadingEtaMs?_this.options.maxLoadingRetryTime:loadingEtaMs;debug("Redis server still loading, trying again in "+retryTime+"ms"),setTimeout(function(){_this._readyCheck(callback)},retryTime)}}).catch(lodash_1.noop)}}Redis.Cluster=cluster_1.default;Redis.Command=Command_1.default;Redis.defaultOptions=RedisOptions_1.DEFAULT_REDIS_OPTIONS;applyMixin_1.default(Redis,events_1.EventEmitter);transaction_1.addTransactionSupport(Redis.prototype);exports.default=Redis});var require_built3=__commonJS((exports,module)=>{Object.defineProperty(exports,"__esModule",{value:!0});exports.print=exports.ReplyError=exports.SentinelIterator=exports.SentinelConnector=exports.Abs
-worker-rinha  | 1072 |     attempted loading from: `+dir+" and package: "+platformPackage+`
-worker-rinha  | 1073 | `;if(packageNameError)errMessage+="Error finding package.json: "+packageNameError.message+`
-worker-rinha  | 1074 | `;if(packageResolutionError)errMessage+="Error resolving package: "+packageResolutionError.message+`
-worker-rinha  | 1075 | `;throw new Error(errMessage);function resolve(dir2){var tuples=readdirSync(path2.join(dir2,"prebuilds")).map(parseTuple),tuple=tuples.filter(matchTuple(platform,arch)).sort(compareTuples)[0];if(!tuple)return;return resolveFile(path2.join(dir2,"prebuilds",tuple.name))}function resolveFile(prebuilds){var parsed=readdirSync(prebuilds).map(parseTags),candidates=parsed.filter(matchTags(runtime,abi)),winner=candidates.sort(compareTags(runtime))[0];if(winner)return path2.join(prebuilds,winner.file)}};function readdirSync(dir){try{return fs.readdirSync(dir)}catch(err){return[]}}function getFirst(dir,filter){var files=readdirSync(dir).filter(filter);return files[0]&&path2.join(dir,files[0])}function matchBuild(name){return/\.node$/.test(name)}function parseTuple(name){var arr=name.split("-");if(arr.length!==2)return;var platform2=arr[0],architectures=arr[1].split("+");if(!platform2)return;if(!architectures.length)return;if(!architectures.every(Boolean))return;return{name,platform:platform2,architectures}}function mat
-worker-rinha  | 1076 |       If a custom backoff strategy is used, specify it when the queue is created.`)}import{fork}from"child_process";import{createServer}from"net";import{Worker}from"worker_threads";var ChildCommand;(function(ChildCommand2){ChildCommand2[ChildCommand2.Init=0]="Init",ChildCommand2[ChildCommand2.Start=1]="Start",ChildCommand2[ChildCommand2.Stop=2]="Stop",ChildCommand2[ChildCommand2.GetChildrenValuesResponse=3]="GetChildrenValuesResponse",ChildCommand2[ChildCommand2.GetIgnoredChildrenFailuresResponse=4]="GetIgnoredChildrenFailuresResponse"})(ChildCommand||(ChildCommand={}));var ErrorCode;(function(ErrorCode2){ErrorCode2[ErrorCode2.JobNotExist=-1]="JobNotExist",ErrorCode2[ErrorCode2.JobLockNotExist=-2]="JobLockNotExist",ErrorCode2[ErrorCode2.JobNotInState=-3]="JobNotInState",ErrorCode2[ErrorCode2.JobPendingChildren=-4]="JobPendingChildren",ErrorCode2[ErrorCode2.ParentJobNotExist=-5]="ParentJobNotExist",ErrorCode2[ErrorCode2.JobLockMismatch=-6]="JobLockMismatch",ErrorCode2[ErrorCode2.ParentJobCannotBeReplaced=-7]="
-worker-rinha  | 
-worker-rinha  | error: Lock mismatch for job 33. Cmd moveToDelayed from active
-worker-rinha  |       at finishedErrors (/$bunfs/root/server:1076:103341)
-worker-rinha  |       at moveToDelayed (/$bunfs/root/server:1076:96377)
-worker-rinha  | 
-worker-rinha  | Worker completed payments with id: "013fe64a-0c21-4008-8ce4-1b7281027bc3"
-worker-rinha  | Worker error 9033 | elseif rcall("ZSCORE", repeatKey, legacyCustomKey) ~= false then
-worker-rinha  | 9034 |     rcall("ZADD", repeatKey, nextMillis, legacyCustomKey)
-worker-rinha  | 9035 |     return legacyCustomKey
-worker-rinha  | 9036 | end
-worker-rinha  | 9037 | return ''
-worker-rinha  | 9038 |              Current: ${this.version}`)}this.capabilities={canDoubleTimeout:!isRedisVersionLowerThan(this.version,"6.0.0"),canBlockFor1Ms:!isRedisVersionLowerThan(this.version,"7.0.8")},this.status="ready"}return this._client}async disconnect(wait=!0){let client=await this.client;if(client.status!=="end"){let _resolve,_reject;if(!wait)return client.disconnect();let disconnecting=new Promise((resolve,reject)=>{increaseMaxListeners(client,2),client.once("end",resolve),client.once("error",reject),_resolve=resolve,_reject=reject});client.disconnect();try{await disconnecting}finally{decreaseMaxListeners(client,2),client.removeListener("end",_resolve),client.removeListener("error",_reject)}}}async reconnect(){return(await this.client).connect()}async close(force=!1){if(!this.closing){let status=this.status;this.status="closing",this.closing=!0;try{if(status==="ready")await this.initializing;if(!this.extraOptions.shared){if(status=="initializing"||force)this._client.disconnect();else await this._client.quit();this._
-worker-rinha  | 
-worker-rinha  | error: could not renew lock for job 36
-worker-rinha  |       at <anonymous> (/$bunfs/root/server:9038:34256)
-worker-rinha  | 
-worker-rinha  | Worker error 9033 | elseif rcall("ZSCORE", repeatKey, legacyCustomKey) ~= false then
-worker-rinha  | 9034 |     rcall("ZADD", repeatKey, nextMillis, legacyCustomKey)
-worker-rinha  | 9035 |     return legacyCustomKey
-worker-rinha  | 9036 | end
-worker-rinha  | 9037 | return ''
-worker-rinha  | 9038 |              Current: ${this.version}`)}this.capabilities={canDoubleTimeout:!isRedisVersionLowerThan(this.version,"6.0.0"),canBlockFor1Ms:!isRedisVersionLowerThan(this.version,"7.0.8")},this.status="ready"}return this._client}async disconnect(wait=!0){let client=await this.client;if(client.status!=="end"){let _resolve,_reject;if(!wait)return client.disconnect();let disconnecting=new Promise((resolve,reject)=>{increaseMaxListeners(client,2),client.once("end",resolve),client.once("error",reject),_resolve=resolve,_reject=reject});client.disconnect();try{await disconnecting}finally{decreaseMaxListeners(client,2),client.removeListener("end",_resolve),client.removeListener("error",_reject)}}}async reconnect(){return(await this.client).connect()}async close(force=!1){if(!this.closing){let status=this.status;this.status="closing",this.closing=!0;try{if(status==="ready")await this.initializing;if(!this.extraOptions.shared){if(status=="initializing"||force)this._client.disconnect();else await this._client.quit();this._
-worker-rinha  | 
-worker-rinha  | error: could not renew lock for job 37
-worker-rinha  |       at <anonymous> (/$bunfs/root/server:9038:34256)
-worker-rinha  | 
-worker-rinha  | Worker error 1071 | `);for(let i=0;i<lines.length;++i){let[fieldName,...fieldValueParts]=lines[i].split(":"),fieldValue=fieldValueParts.join(":");if(fieldValue)info[fieldName]=fieldValue}if(!info.loading||info.loading==="0")callback(null,info);else{let loadingEtaMs=(info.loading_eta_seconds||1)*1000,retryTime=_this.options.maxLoadingRetryTime&&_this.options.maxLoadingRetryTime<loadingEtaMs?_this.options.maxLoadingRetryTime:loadingEtaMs;debug("Redis server still loading, trying again in "+retryTime+"ms"),setTimeout(function(){_this._readyCheck(callback)},retryTime)}}).catch(lodash_1.noop)}}Redis.Cluster=cluster_1.default;Redis.Command=Command_1.default;Redis.defaultOptions=RedisOptions_1.DEFAULT_REDIS_OPTIONS;applyMixin_1.default(Redis,events_1.EventEmitter);transaction_1.addTransactionSupport(Redis.prototype);exports.default=Redis});var require_built3=__commonJS((exports,module)=>{Object.defineProperty(exports,"__esModule",{value:!0});exports.print=exports.ReplyError=exports.SentinelIterator=exports.SentinelConnector=exports.Abs
-worker-rinha  | 1072 |     attempted loading from: `+dir+" and package: "+platformPackage+`
-worker-rinha  | 1073 | `;if(packageNameError)errMessage+="Error finding package.json: "+packageNameError.message+`
-worker-rinha  | 1074 | `;if(packageResolutionError)errMessage+="Error resolving package: "+packageResolutionError.message+`
-worker-rinha  | 1075 | `;throw new Error(errMessage);function resolve(dir2){var tuples=readdirSync(path2.join(dir2,"prebuilds")).map(parseTuple),tuple=tuples.filter(matchTuple(platform,arch)).sort(compareTuples)[0];if(!tuple)return;return resolveFile(path2.join(dir2,"prebuilds",tuple.name))}function resolveFile(prebuilds){var parsed=readdirSync(prebuilds).map(parseTags),candidates=parsed.filter(matchTags(runtime,abi)),winner=candidates.sort(compareTags(runtime))[0];if(winner)return path2.join(prebuilds,winner.file)}};function readdirSync(dir){try{return fs.readdirSync(dir)}catch(err){return[]}}function getFirst(dir,filter){var files=readdirSync(dir).filter(filter);return files[0]&&path2.join(dir,files[0])}function matchBuild(name){return/\.node$/.test(name)}function parseTuple(name){var arr=name.split("-");if(arr.length!==2)return;var platform2=arr[0],architectures=arr[1].split("+");if(!platform2)return;if(!architectures.length)return;if(!architectures.every(Boolean))return;return{name,platform:platform2,architectures}}function mat
-worker-rinha  | 1076 |       If a custom backoff strategy is used, specify it when the queue is created.`)}import{fork}from"child_process";import{createServer}from"net";import{Worker}from"worker_threads";var ChildCommand;(function(ChildCommand2){ChildCommand2[ChildCommand2.Init=0]="Init",ChildCommand2[ChildCommand2.Start=1]="Start",ChildCommand2[ChildCommand2.Stop=2]="Stop",ChildCommand2[ChildCommand2.GetChildrenValuesResponse=3]="GetChildrenValuesResponse",ChildCommand2[ChildCommand2.GetIgnoredChildrenFailuresResponse=4]="GetIgnoredChildrenFailuresResponse"})(ChildCommand||(ChildCommand={}));var ErrorCode;(function(ErrorCode2){ErrorCode2[ErrorCode2.JobNotExist=-1]="JobNotExist",ErrorCode2[ErrorCode2.JobLockNotExist=-2]="JobLockNotExist",ErrorCode2[ErrorCode2.JobNotInState=-3]="JobNotInState",ErrorCode2[ErrorCode2.JobPendingChildren=-4]="JobPendingChildren",ErrorCode2[ErrorCode2.ParentJobNotExist=-5]="ParentJobNotExist",ErrorCode2[ErrorCode2.JobLockMismatch=-6]="JobLockMismatch",ErrorCode2[ErrorCode2.ParentJobCannotBeReplaced=-7]="
-worker-rinha  | 
-worker-rinha  | error: Missing lock for job 34. moveToDelayed
-worker-rinha  |       at finishedErrors (/$bunfs/root/server:1076:102936)
-worker-rinha  |       at moveToDelayed (/$bunfs/root/server:1076:96377)
-worker-rinha  | 
-redis-1       | 1:M 19 Aug 2025 16:38:10.058 * 100 changes in 300 seconds. Saving...
-redis-1       | 1:M 19 Aug 2025 16:38:10.059 * Background saving started by pid 22
-redis-1       | 22:C 19 Aug 2025 16:38:10.096 * DB saved on disk
-redis-1       | 22:C 19 Aug 2025 16:38:10.096 * Fork CoW for RDB: current 0 MB, peak 0 MB, average 0 MB
-redis-1       | 1:M 19 Aug 2025 16:38:10.159 * Background saving terminated with success
-mongodb-1     | {"t":{"$date":"2025-08-19T16:38:12.373+00:00"},"s":"I",  "c":"WTCHKPT",  "id":22430,   "ctx":"Checkpointer","msg":"WiredTiger message","attr":{"message":{"ts_sec":1755621492,"ts_usec":373571,"thread":"1:0x76e28295a640","session_name":"WT_SESSION.checkpoint","category":"WT_VERB_CHECKPOINT_PROGRESS","category_id":6,"verbose_level":"DEBUG_1","verbose_level_id":1,"msg":"saving checkpoint snapshot min: 96, snapshot max: 96 snapshot count: 0, oldest timestamp: (0, 0) , meta checkpoint timestamp: (0, 0) base write gen: 1"}}}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:38:12.486+00:00"},"s":"I",  "c":"WRITE",    "id":51803,   "ctx":"LogicalSessionCacheRefresh","msg":"Slow query","attr":{"type":"update","ns":"config.system.sessions","command":{"q":{"_id":{"id":{"$uuid":"e419ebef-bbd4-4c0a-90b2-bd1a0e50429b"},"uid":{"$binary":{"base64":"47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=","subType":"0"}}}},"u":[{"$set":{"lastUse":"$$NOW"}}],"multi":false,"upsert":true},"planSummary":"IDHACK","planningTimeMicros":101913,"keysExamined":0,"docsExamined":0,"nMatched":0,"nModified":0,"nUpserted":1,"keysInserted":2,"numYields":0,"locks":{"ParallelBatchWriterMode":{"acquireCount":{"r":1}},"FeatureCompatibilityVersion":{"acquireCount":{"w":1}},"ReplicationStateTransition":{"acquireCount":{"w":1}},"Global":{"acquireCount":{"w":1}},"Database":{"acquireCount":{"w":1}},"Collection":{"acquireCount":{"w":1}}},"flowControl":{"acquireCount":1},"storage":{},"cpuNanos":2889169,"durationMillis":171}}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:38:12.538+00:00"},"s":"I",  "c":"COMMAND",  "id":51803,   "ctx":"LogicalSessionCacheRefresh","msg":"Slow query","attr":{"type":"command","ns":"config.$cmd","command":{"update":"system.sessions","ordered":false,"writeConcern":{"w":"majority","wtimeout":60000},"$db":"config"},"numYields":0,"reslen":939,"locks":{"ParallelBatchWriterMode":{"acquireCount":{"r":9}},"FeatureCompatibilityVersion":{"acquireCount":{"r":1,"w":9}},"ReplicationStateTransition":{"acquireCount":{"w":9}},"Global":{"acquireCount":{"r":1,"w":9}},"Database":{"acquireCount":{"w":9}},"Collection":{"acquireCount":{"w":9}}},"flowControl":{"acquireCount":9},"writeConcern":{"w":"majority","wtimeout":60000,"provenance":"clientSupplied"},"waitForWriteConcernDurationMillis":41,"storage":{},"cpuNanos":4765833,"protocol":"op_msg","durationMillis":258}}
-worker-rinha  | Worker error 9033 | elseif rcall("ZSCORE", repeatKey, legacyCustomKey) ~= false then
-worker-rinha  | 9034 |     rcall("ZADD", repeatKey, nextMillis, legacyCustomKey)
-worker-rinha  | 9035 |     return legacyCustomKey
-worker-rinha  | 9036 | end
-worker-rinha  | 9037 | return ''
-worker-rinha  | 9038 |              Current: ${this.version}`)}this.capabilities={canDoubleTimeout:!isRedisVersionLowerThan(this.version,"6.0.0"),canBlockFor1Ms:!isRedisVersionLowerThan(this.version,"7.0.8")},this.status="ready"}return this._client}async disconnect(wait=!0){let client=await this.client;if(client.status!=="end"){let _resolve,_reject;if(!wait)return client.disconnect();let disconnecting=new Promise((resolve,reject)=>{increaseMaxListeners(client,2),client.once("end",resolve),client.once("error",reject),_resolve=resolve,_reject=reject});client.disconnect();try{await disconnecting}finally{decreaseMaxListeners(client,2),client.removeListener("end",_resolve),client.removeListener("error",_reject)}}}async reconnect(){return(await this.client).connect()}async close(force=!1){if(!this.closing){let status=this.status;this.status="closing",this.closing=!0;try{if(status==="ready")await this.initializing;if(!this.extraOptions.shared){if(status=="initializing"||force)this._client.disconnect();else await this._client.quit();this._
-worker-rinha  | 
-worker-rinha  | error: could not renew lock for job 36
-worker-rinha  |       at <anonymous> (/$bunfs/root/server:9038:34256)
-worker-rinha  | 
-worker-rinha  | Worker error 9033 | elseif rcall("ZSCORE", repeatKey, legacyCustomKey) ~= false then
-worker-rinha  | 9034 |     rcall("ZADD", repeatKey, nextMillis, legacyCustomKey)
-worker-rinha  | 9035 |     return legacyCustomKey
-worker-rinha  | 9036 | end
-worker-rinha  | 9037 | return ''
-worker-rinha  | 9038 |              Current: ${this.version}`)}this.capabilities={canDoubleTimeout:!isRedisVersionLowerThan(this.version,"6.0.0"),canBlockFor1Ms:!isRedisVersionLowerThan(this.version,"7.0.8")},this.status="ready"}return this._client}async disconnect(wait=!0){let client=await this.client;if(client.status!=="end"){let _resolve,_reject;if(!wait)return client.disconnect();let disconnecting=new Promise((resolve,reject)=>{increaseMaxListeners(client,2),client.once("end",resolve),client.once("error",reject),_resolve=resolve,_reject=reject});client.disconnect();try{await disconnecting}finally{decreaseMaxListeners(client,2),client.removeListener("end",_resolve),client.removeListener("error",_reject)}}}async reconnect(){return(await this.client).connect()}async close(force=!1){if(!this.closing){let status=this.status;this.status="closing",this.closing=!0;try{if(status==="ready")await this.initializing;if(!this.extraOptions.shared){if(status=="initializing"||force)this._client.disconnect();else await this._client.quit();this._
-worker-rinha  | 
-worker-rinha  | error: could not renew lock for job 37
-worker-rinha  |       at <anonymous> (/$bunfs/root/server:9038:34256)
-worker-rinha  | 
-worker-rinha  | Worker error 9033 | elseif rcall("ZSCORE", repeatKey, legacyCustomKey) ~= false then
-worker-rinha  | 9034 |     rcall("ZADD", repeatKey, nextMillis, legacyCustomKey)
-worker-rinha  | 9035 |     return legacyCustomKey
-worker-rinha  | 9036 | end
-worker-rinha  | 9037 | return ''
-worker-rinha  | 9038 |              Current: ${this.version}`)}this.capabilities={canDoubleTimeout:!isRedisVersionLowerThan(this.version,"6.0.0"),canBlockFor1Ms:!isRedisVersionLowerThan(this.version,"7.0.8")},this.status="ready"}return this._client}async disconnect(wait=!0){let client=await this.client;if(client.status!=="end"){let _resolve,_reject;if(!wait)return client.disconnect();let disconnecting=new Promise((resolve,reject)=>{increaseMaxListeners(client,2),client.once("end",resolve),client.once("error",reject),_resolve=resolve,_reject=reject});client.disconnect();try{await disconnecting}finally{decreaseMaxListeners(client,2),client.removeListener("end",_resolve),client.removeListener("error",_reject)}}}async reconnect(){return(await this.client).connect()}async close(force=!1){if(!this.closing){let status=this.status;this.status="closing",this.closing=!0;try{if(status==="ready")await this.initializing;if(!this.extraOptions.shared){if(status=="initializing"||force)this._client.disconnect();else await this._client.quit();this._
-worker-rinha  | 
-worker-rinha  | error: could not renew lock for job 32
-worker-rinha  |       at <anonymous> (/$bunfs/root/server:9038:34256)
-worker-rinha  | 
-worker-rinha  | Worker error 9033 | elseif rcall("ZSCORE", repeatKey, legacyCustomKey) ~= false then
-worker-rinha  | 9034 |     rcall("ZADD", repeatKey, nextMillis, legacyCustomKey)
-worker-rinha  | 9035 |     return legacyCustomKey
-worker-rinha  | 9036 | end
-worker-rinha  | 9037 | return ''
-worker-rinha  | 9038 |              Current: ${this.version}`)}this.capabilities={canDoubleTimeout:!isRedisVersionLowerThan(this.version,"6.0.0"),canBlockFor1Ms:!isRedisVersionLowerThan(this.version,"7.0.8")},this.status="ready"}return this._client}async disconnect(wait=!0){let client=await this.client;if(client.status!=="end"){let _resolve,_reject;if(!wait)return client.disconnect();let disconnecting=new Promise((resolve,reject)=>{increaseMaxListeners(client,2),client.once("end",resolve),client.once("error",reject),_resolve=resolve,_reject=reject});client.disconnect();try{await disconnecting}finally{decreaseMaxListeners(client,2),client.removeListener("end",_resolve),client.removeListener("error",_reject)}}}async reconnect(){return(await this.client).connect()}async close(force=!1){if(!this.closing){let status=this.status;this.status="closing",this.closing=!0;try{if(status==="ready")await this.initializing;if(!this.extraOptions.shared){if(status=="initializing"||force)this._client.disconnect();else await this._client.quit();this._
-worker-rinha  | 
-worker-rinha  | error: could not renew lock for job 34
-worker-rinha  |       at <anonymous> (/$bunfs/root/server:9038:34256)
-worker-rinha  | 
-worker-rinha  | Worker error 9033 | elseif rcall("ZSCORE", repeatKey, legacyCustomKey) ~= false then
-worker-rinha  | 9034 |     rcall("ZADD", repeatKey, nextMillis, legacyCustomKey)
-worker-rinha  | 9035 |     return legacyCustomKey
-worker-rinha  | 9036 | end
-worker-rinha  | 9037 | return ''
-worker-rinha  | 9038 |              Current: ${this.version}`)}this.capabilities={canDoubleTimeout:!isRedisVersionLowerThan(this.version,"6.0.0"),canBlockFor1Ms:!isRedisVersionLowerThan(this.version,"7.0.8")},this.status="ready"}return this._client}async disconnect(wait=!0){let client=await this.client;if(client.status!=="end"){let _resolve,_reject;if(!wait)return client.disconnect();let disconnecting=new Promise((resolve,reject)=>{increaseMaxListeners(client,2),client.once("end",resolve),client.once("error",reject),_resolve=resolve,_reject=reject});client.disconnect();try{await disconnecting}finally{decreaseMaxListeners(client,2),client.removeListener("end",_resolve),client.removeListener("error",_reject)}}}async reconnect(){return(await this.client).connect()}async close(force=!1){if(!this.closing){let status=this.status;this.status="closing",this.closing=!0;try{if(status==="ready")await this.initializing;if(!this.extraOptions.shared){if(status=="initializing"||force)this._client.disconnect();else await this._client.quit();this._
-worker-rinha  | 
-worker-rinha  | error: could not renew lock for job 33
-worker-rinha  |       at <anonymous> (/$bunfs/root/server:9038:34256)
-worker-rinha  | 
-worker-rinha  | Worker error 9033 | elseif rcall("ZSCORE", repeatKey, legacyCustomKey) ~= false then
-worker-rinha  | 9034 |     rcall("ZADD", repeatKey, nextMillis, legacyCustomKey)
-worker-rinha  | 9035 |     return legacyCustomKey
-worker-rinha  | 9036 | end
-worker-rinha  | 9037 | return ''
-worker-rinha  | 9038 |              Current: ${this.version}`)}this.capabilities={canDoubleTimeout:!isRedisVersionLowerThan(this.version,"6.0.0"),canBlockFor1Ms:!isRedisVersionLowerThan(this.version,"7.0.8")},this.status="ready"}return this._client}async disconnect(wait=!0){let client=await this.client;if(client.status!=="end"){let _resolve,_reject;if(!wait)return client.disconnect();let disconnecting=new Promise((resolve,reject)=>{increaseMaxListeners(client,2),client.once("end",resolve),client.once("error",reject),_resolve=resolve,_reject=reject});client.disconnect();try{await disconnecting}finally{decreaseMaxListeners(client,2),client.removeListener("end",_resolve),client.removeListener("error",_reject)}}}async reconnect(){return(await this.client).connect()}async close(force=!1){if(!this.closing){let status=this.status;this.status="closing",this.closing=!0;try{if(status==="ready")await this.initializing;if(!this.extraOptions.shared){if(status=="initializing"||force)this._client.disconnect();else await this._client.quit();this._
-worker-rinha  | 
-worker-rinha  | error: could not renew lock for job 31
-worker-rinha  |       at <anonymous> (/$bunfs/root/server:9038:34256)
-worker-rinha  | 
-traefik       | time="2025-08-19T16:38:32Z" level=error msg="Error while Peeking first byte: read tcp 172.20.0.3:9999->172.20.0.1:39278: i/o timeout"
-traefik       | time="2025-08-19T16:38:41Z" level=error msg="Error while Peeking first byte: read tcp 172.20.0.3:9999->172.20.0.1:39296: i/o timeout"
-worker-rinha  | Worker error 9033 | elseif rcall("ZSCORE", repeatKey, legacyCustomKey) ~= false then
-worker-rinha  | 9034 |     rcall("ZADD", repeatKey, nextMillis, legacyCustomKey)
-worker-rinha  | 9035 |     return legacyCustomKey
-worker-rinha  | 9036 | end
-worker-rinha  | 9037 | return ''
-worker-rinha  | 9038 |              Current: ${this.version}`)}this.capabilities={canDoubleTimeout:!isRedisVersionLowerThan(this.version,"6.0.0"),canBlockFor1Ms:!isRedisVersionLowerThan(this.version,"7.0.8")},this.status="ready"}return this._client}async disconnect(wait=!0){let client=await this.client;if(client.status!=="end"){let _resolve,_reject;if(!wait)return client.disconnect();let disconnecting=new Promise((resolve,reject)=>{increaseMaxListeners(client,2),client.once("end",resolve),client.once("error",reject),_resolve=resolve,_reject=reject});client.disconnect();try{await disconnecting}finally{decreaseMaxListeners(client,2),client.removeListener("end",_resolve),client.removeListener("error",_reject)}}}async reconnect(){return(await this.client).connect()}async close(force=!1){if(!this.closing){let status=this.status;this.status="closing",this.closing=!0;try{if(status==="ready")await this.initializing;if(!this.extraOptions.shared){if(status=="initializing"||force)this._client.disconnect();else await this._client.quit();this._
-worker-rinha  | 
-worker-rinha  | error: could not renew lock for job 32
-worker-rinha  |       at <anonymous> (/$bunfs/root/server:9038:34256)
-worker-rinha  | 
-worker-rinha  | Worker error 9033 | elseif rcall("ZSCORE", repeatKey, legacyCustomKey) ~= false then
-worker-rinha  | 9034 |     rcall("ZADD", repeatKey, nextMillis, legacyCustomKey)
-worker-rinha  | 9035 |     return legacyCustomKey
-worker-rinha  | 9036 | end
-worker-rinha  | 9037 | return ''
-worker-rinha  | 9038 |              Current: ${this.version}`)}this.capabilities={canDoubleTimeout:!isRedisVersionLowerThan(this.version,"6.0.0"),canBlockFor1Ms:!isRedisVersionLowerThan(this.version,"7.0.8")},this.status="ready"}return this._client}async disconnect(wait=!0){let client=await this.client;if(client.status!=="end"){let _resolve,_reject;if(!wait)return client.disconnect();let disconnecting=new Promise((resolve,reject)=>{increaseMaxListeners(client,2),client.once("end",resolve),client.once("error",reject),_resolve=resolve,_reject=reject});client.disconnect();try{await disconnecting}finally{decreaseMaxListeners(client,2),client.removeListener("end",_resolve),client.removeListener("error",_reject)}}}async reconnect(){return(await this.client).connect()}async close(force=!1){if(!this.closing){let status=this.status;this.status="closing",this.closing=!0;try{if(status==="ready")await this.initializing;if(!this.extraOptions.shared){if(status=="initializing"||force)this._client.disconnect();else await this._client.quit();this._
-worker-rinha  | 
-worker-rinha  | error: could not renew lock for job 30
-worker-rinha  |       at <anonymous> (/$bunfs/root/server:9038:34256)
-worker-rinha  | 
-worker-rinha  | Worker error 9033 | elseif rcall("ZSCORE", repeatKey, legacyCustomKey) ~= false then
-worker-rinha  | 9034 |     rcall("ZADD", repeatKey, nextMillis, legacyCustomKey)
-worker-rinha  | 9035 |     return legacyCustomKey
-worker-rinha  | 9036 | end
-worker-rinha  | 9037 | return ''
-worker-rinha  | 9038 |              Current: ${this.version}`)}this.capabilities={canDoubleTimeout:!isRedisVersionLowerThan(this.version,"6.0.0"),canBlockFor1Ms:!isRedisVersionLowerThan(this.version,"7.0.8")},this.status="ready"}return this._client}async disconnect(wait=!0){let client=await this.client;if(client.status!=="end"){let _resolve,_reject;if(!wait)return client.disconnect();let disconnecting=new Promise((resolve,reject)=>{increaseMaxListeners(client,2),client.once("end",resolve),client.once("error",reject),_resolve=resolve,_reject=reject});client.disconnect();try{await disconnecting}finally{decreaseMaxListeners(client,2),client.removeListener("end",_resolve),client.removeListener("error",_reject)}}}async reconnect(){return(await this.client).connect()}async close(force=!1){if(!this.closing){let status=this.status;this.status="closing",this.closing=!0;try{if(status==="ready")await this.initializing;if(!this.extraOptions.shared){if(status=="initializing"||force)this._client.disconnect();else await this._client.quit();this._
-worker-rinha  | 
-worker-rinha  | error: could not renew lock for job 8
-worker-rinha  |       at <anonymous> (/$bunfs/root/server:9038:34256)
-worker-rinha  | 
-traefik       | time="2025-08-19T16:38:54Z" level=error msg="Error while Peeking first byte: read tcp 172.20.0.3:9999->172.20.0.1:39306: i/o timeout"
-traefik       | time="2025-08-19T16:38:58Z" level=error msg="Error while Peeking first byte: read tcp 172.20.0.3:9999->172.20.0.1:39298: i/o timeout"
-traefik       | time="2025-08-19T16:39:00Z" level=error msg="Error while Peeking first byte: read tcp 172.20.0.3:9999->172.20.0.1:39312: i/o timeout"
-mongodb-1     | {"t":{"$date":"2025-08-19T16:39:12.552+00:00"},"s":"I",  "c":"WTCHKPT",  "id":22430,   "ctx":"Checkpointer","msg":"WiredTiger message","attr":{"message":{"ts_sec":1755621552,"ts_usec":551992,"thread":"1:0x76e28295a640","session_name":"WT_SESSION.checkpoint","category":"WT_VERB_CHECKPOINT_PROGRESS","category_id":6,"verbose_level":"DEBUG_1","verbose_level_id":1,"msg":"saving checkpoint snapshot min: 107, snapshot max: 107 snapshot count: 0, oldest timestamp: (0, 0) , meta checkpoint timestamp: (0, 0) base write gen: 1"}}}
-worker-rinha  | Worker error 9033 | elseif rcall("ZSCORE", repeatKey, legacyCustomKey) ~= false then
-worker-rinha  | 9034 |     rcall("ZADD", repeatKey, nextMillis, legacyCustomKey)
-worker-rinha  | 9035 |     return legacyCustomKey
-worker-rinha  | 9036 | end
-worker-rinha  | 9037 | return ''
-worker-rinha  | 9038 |              Current: ${this.version}`)}this.capabilities={canDoubleTimeout:!isRedisVersionLowerThan(this.version,"6.0.0"),canBlockFor1Ms:!isRedisVersionLowerThan(this.version,"7.0.8")},this.status="ready"}return this._client}async disconnect(wait=!0){let client=await this.client;if(client.status!=="end"){let _resolve,_reject;if(!wait)return client.disconnect();let disconnecting=new Promise((resolve,reject)=>{increaseMaxListeners(client,2),client.once("end",resolve),client.once("error",reject),_resolve=resolve,_reject=reject});client.disconnect();try{await disconnecting}finally{decreaseMaxListeners(client,2),client.removeListener("end",_resolve),client.removeListener("error",_reject)}}}async reconnect(){return(await this.client).connect()}async close(force=!1){if(!this.closing){let status=this.status;this.status="closing",this.closing=!0;try{if(status==="ready")await this.initializing;if(!this.extraOptions.shared){if(status=="initializing"||force)this._client.disconnect();else await this._client.quit();this._
-worker-rinha  | 
-worker-rinha  | error: could not renew lock for job 32
-worker-rinha  |       at <anonymous> (/$bunfs/root/server:9038:34256)
-worker-rinha  | 
-worker-rinha  | Worker error 9033 | elseif rcall("ZSCORE", repeatKey, legacyCustomKey) ~= false then
-worker-rinha  | 9034 |     rcall("ZADD", repeatKey, nextMillis, legacyCustomKey)
-worker-rinha  | 9035 |     return legacyCustomKey
-worker-rinha  | 9036 | end
-worker-rinha  | 9037 | return ''
-worker-rinha  | 9038 |              Current: ${this.version}`)}this.capabilities={canDoubleTimeout:!isRedisVersionLowerThan(this.version,"6.0.0"),canBlockFor1Ms:!isRedisVersionLowerThan(this.version,"7.0.8")},this.status="ready"}return this._client}async disconnect(wait=!0){let client=await this.client;if(client.status!=="end"){let _resolve,_reject;if(!wait)return client.disconnect();let disconnecting=new Promise((resolve,reject)=>{increaseMaxListeners(client,2),client.once("end",resolve),client.once("error",reject),_resolve=resolve,_reject=reject});client.disconnect();try{await disconnecting}finally{decreaseMaxListeners(client,2),client.removeListener("end",_resolve),client.removeListener("error",_reject)}}}async reconnect(){return(await this.client).connect()}async close(force=!1){if(!this.closing){let status=this.status;this.status="closing",this.closing=!0;try{if(status==="ready")await this.initializing;if(!this.extraOptions.shared){if(status=="initializing"||force)this._client.disconnect();else await this._client.quit();this._
-worker-rinha  | 
-worker-rinha  | error: could not renew lock for job 7
-worker-rinha  |       at <anonymous> (/$bunfs/root/server:9038:34256)
-worker-rinha  | 
-worker-rinha  | Worker error 9033 | elseif rcall("ZSCORE", repeatKey, legacyCustomKey) ~= false then
-worker-rinha  | 9034 |     rcall("ZADD", repeatKey, nextMillis, legacyCustomKey)
-worker-rinha  | 9035 |     return legacyCustomKey
-worker-rinha  | 9036 | end
-worker-rinha  | 9037 | return ''
-worker-rinha  | 9038 |              Current: ${this.version}`)}this.capabilities={canDoubleTimeout:!isRedisVersionLowerThan(this.version,"6.0.0"),canBlockFor1Ms:!isRedisVersionLowerThan(this.version,"7.0.8")},this.status="ready"}return this._client}async disconnect(wait=!0){let client=await this.client;if(client.status!=="end"){let _resolve,_reject;if(!wait)return client.disconnect();let disconnecting=new Promise((resolve,reject)=>{increaseMaxListeners(client,2),client.once("end",resolve),client.once("error",reject),_resolve=resolve,_reject=reject});client.disconnect();try{await disconnecting}finally{decreaseMaxListeners(client,2),client.removeListener("end",_resolve),client.removeListener("error",_reject)}}}async reconnect(){return(await this.client).connect()}async close(force=!1){if(!this.closing){let status=this.status;this.status="closing",this.closing=!0;try{if(status==="ready")await this.initializing;if(!this.extraOptions.shared){if(status=="initializing"||force)this._client.disconnect();else await this._client.quit();this._
-worker-rinha  | 
-worker-rinha  | error: could not renew lock for job 38
-worker-rinha  |       at <anonymous> (/$bunfs/root/server:9038:34256)
-worker-rinha  | 
-worker-rinha  | Worker error 1071 | `);for(let i=0;i<lines.length;++i){let[fieldName,...fieldValueParts]=lines[i].split(":"),fieldValue=fieldValueParts.join(":");if(fieldValue)info[fieldName]=fieldValue}if(!info.loading||info.loading==="0")callback(null,info);else{let loadingEtaMs=(info.loading_eta_seconds||1)*1000,retryTime=_this.options.maxLoadingRetryTime&&_this.options.maxLoadingRetryTime<loadingEtaMs?_this.options.maxLoadingRetryTime:loadingEtaMs;debug("Redis server still loading, trying again in "+retryTime+"ms"),setTimeout(function(){_this._readyCheck(callback)},retryTime)}}).catch(lodash_1.noop)}}Redis.Cluster=cluster_1.default;Redis.Command=Command_1.default;Redis.defaultOptions=RedisOptions_1.DEFAULT_REDIS_OPTIONS;applyMixin_1.default(Redis,events_1.EventEmitter);transaction_1.addTransactionSupport(Redis.prototype);exports.default=Redis});var require_built3=__commonJS((exports,module)=>{Object.defineProperty(exports,"__esModule",{value:!0});exports.print=exports.ReplyError=exports.SentinelIterator=exports.SentinelConnector=exports.Abs
-worker-rinha  | 1072 |     attempted loading from: `+dir+" and package: "+platformPackage+`
-worker-rinha  | 1073 | `;if(packageNameError)errMessage+="Error finding package.json: "+packageNameError.message+`
-worker-rinha  | 1074 | `;if(packageResolutionError)errMessage+="Error resolving package: "+packageResolutionError.message+`
-worker-rinha  | 1075 | `;throw new Error(errMessage);function resolve(dir2){var tuples=readdirSync(path2.join(dir2,"prebuilds")).map(parseTuple),tuple=tuples.filter(matchTuple(platform,arch)).sort(compareTuples)[0];if(!tuple)return;return resolveFile(path2.join(dir2,"prebuilds",tuple.name))}function resolveFile(prebuilds){var parsed=readdirSync(prebuilds).map(parseTags),candidates=parsed.filter(matchTags(runtime,abi)),winner=candidates.sort(compareTags(runtime))[0];if(winner)return path2.join(prebuilds,winner.file)}};function readdirSync(dir){try{return fs.readdirSync(dir)}catch(err){return[]}}function getFirst(dir,filter){var files=readdirSync(dir).filter(filter);return files[0]&&path2.join(dir,files[0])}function matchBuild(name){return/\.node$/.test(name)}function parseTuple(name){var arr=name.split("-");if(arr.length!==2)return;var platform2=arr[0],architectures=arr[1].split("+");if(!platform2)return;if(!architectures.length)return;if(!architectures.every(Boolean))return;return{name,platform:platform2,architectures}}function mat
-worker-rinha  | 1076 |       If a custom backoff strategy is used, specify it when the queue is created.`)}import{fork}from"child_process";import{createServer}from"net";import{Worker}from"worker_threads";var ChildCommand;(function(ChildCommand2){ChildCommand2[ChildCommand2.Init=0]="Init",ChildCommand2[ChildCommand2.Start=1]="Start",ChildCommand2[ChildCommand2.Stop=2]="Stop",ChildCommand2[ChildCommand2.GetChildrenValuesResponse=3]="GetChildrenValuesResponse",ChildCommand2[ChildCommand2.GetIgnoredChildrenFailuresResponse=4]="GetIgnoredChildrenFailuresResponse"})(ChildCommand||(ChildCommand={}));var ErrorCode;(function(ErrorCode2){ErrorCode2[ErrorCode2.JobNotExist=-1]="JobNotExist",ErrorCode2[ErrorCode2.JobLockNotExist=-2]="JobLockNotExist",ErrorCode2[ErrorCode2.JobNotInState=-3]="JobNotInState",ErrorCode2[ErrorCode2.JobPendingChildren=-4]="JobPendingChildren",ErrorCode2[ErrorCode2.ParentJobNotExist=-5]="ParentJobNotExist",ErrorCode2[ErrorCode2.JobLockMismatch=-6]="JobLockMismatch",ErrorCode2[ErrorCode2.ParentJobCannotBeReplaced=-7]="
-worker-rinha  | 
-worker-rinha  | error: Missing lock for job 34. moveToDelayed
-worker-rinha  |       at finishedErrors (/$bunfs/root/server:1076:102936)
-worker-rinha  |       at moveToDelayed (/$bunfs/root/server:1076:96377)
-worker-rinha  | 
-worker-rinha  | Worker error 1071 | `);for(let i=0;i<lines.length;++i){let[fieldName,...fieldValueParts]=lines[i].split(":"),fieldValue=fieldValueParts.join(":");if(fieldValue)info[fieldName]=fieldValue}if(!info.loading||info.loading==="0")callback(null,info);else{let loadingEtaMs=(info.loading_eta_seconds||1)*1000,retryTime=_this.options.maxLoadingRetryTime&&_this.options.maxLoadingRetryTime<loadingEtaMs?_this.options.maxLoadingRetryTime:loadingEtaMs;debug("Redis server still loading, trying again in "+retryTime+"ms"),setTimeout(function(){_this._readyCheck(callback)},retryTime)}}).catch(lodash_1.noop)}}Redis.Cluster=cluster_1.default;Redis.Command=Command_1.default;Redis.defaultOptions=RedisOptions_1.DEFAULT_REDIS_OPTIONS;applyMixin_1.default(Redis,events_1.EventEmitter);transaction_1.addTransactionSupport(Redis.prototype);exports.default=Redis});var require_built3=__commonJS((exports,module)=>{Object.defineProperty(exports,"__esModule",{value:!0});exports.print=exports.ReplyError=exports.SentinelIterator=exports.SentinelConnector=exports.Abs
-worker-rinha  | 1072 |     attempted loading from: `+dir+" and package: "+platformPackage+`
-worker-rinha  | 1073 | `;if(packageNameError)errMessage+="Error finding package.json: "+packageNameError.message+`
-worker-rinha  | 1074 | `;if(packageResolutionError)errMessage+="Error resolving package: "+packageResolutionError.message+`
-worker-rinha  | 1075 | `;throw new Error(errMessage);function resolve(dir2){var tuples=readdirSync(path2.join(dir2,"prebuilds")).map(parseTuple),tuple=tuples.filter(matchTuple(platform,arch)).sort(compareTuples)[0];if(!tuple)return;return resolveFile(path2.join(dir2,"prebuilds",tuple.name))}function resolveFile(prebuilds){var parsed=readdirSync(prebuilds).map(parseTags),candidates=parsed.filter(matchTags(runtime,abi)),winner=candidates.sort(compareTags(runtime))[0];if(winner)return path2.join(prebuilds,winner.file)}};function readdirSync(dir){try{return fs.readdirSync(dir)}catch(err){return[]}}function getFirst(dir,filter){var files=readdirSync(dir).filter(filter);return files[0]&&path2.join(dir,files[0])}function matchBuild(name){return/\.node$/.test(name)}function parseTuple(name){var arr=name.split("-");if(arr.length!==2)return;var platform2=arr[0],architectures=arr[1].split("+");if(!platform2)return;if(!architectures.length)return;if(!architectures.every(Boolean))return;return{name,platform:platform2,architectures}}function mat
-worker-rinha  | 1076 |       If a custom backoff strategy is used, specify it when the queue is created.`)}import{fork}from"child_process";import{createServer}from"net";import{Worker}from"worker_threads";var ChildCommand;(function(ChildCommand2){ChildCommand2[ChildCommand2.Init=0]="Init",ChildCommand2[ChildCommand2.Start=1]="Start",ChildCommand2[ChildCommand2.Stop=2]="Stop",ChildCommand2[ChildCommand2.GetChildrenValuesResponse=3]="GetChildrenValuesResponse",ChildCommand2[ChildCommand2.GetIgnoredChildrenFailuresResponse=4]="GetIgnoredChildrenFailuresResponse"})(ChildCommand||(ChildCommand={}));var ErrorCode;(function(ErrorCode2){ErrorCode2[ErrorCode2.JobNotExist=-1]="JobNotExist",ErrorCode2[ErrorCode2.JobLockNotExist=-2]="JobLockNotExist",ErrorCode2[ErrorCode2.JobNotInState=-3]="JobNotInState",ErrorCode2[ErrorCode2.JobPendingChildren=-4]="JobPendingChildren",ErrorCode2[ErrorCode2.ParentJobNotExist=-5]="ParentJobNotExist",ErrorCode2[ErrorCode2.JobLockMismatch=-6]="JobLockMismatch",ErrorCode2[ErrorCode2.ParentJobCannotBeReplaced=-7]="
-worker-rinha  | 
-worker-rinha  | error: Missing lock for job 33. moveToDelayed
-worker-rinha  |       at finishedErrors (/$bunfs/root/server:1076:102936)
-worker-rinha  |       at moveToDelayed (/$bunfs/root/server:1076:96377)
-worker-rinha  | 
-worker-rinha  | Worker error 1071 | `);for(let i=0;i<lines.length;++i){let[fieldName,...fieldValueParts]=lines[i].split(":"),fieldValue=fieldValueParts.join(":");if(fieldValue)info[fieldName]=fieldValue}if(!info.loading||info.loading==="0")callback(null,info);else{let loadingEtaMs=(info.loading_eta_seconds||1)*1000,retryTime=_this.options.maxLoadingRetryTime&&_this.options.maxLoadingRetryTime<loadingEtaMs?_this.options.maxLoadingRetryTime:loadingEtaMs;debug("Redis server still loading, trying again in "+retryTime+"ms"),setTimeout(function(){_this._readyCheck(callback)},retryTime)}}).catch(lodash_1.noop)}}Redis.Cluster=cluster_1.default;Redis.Command=Command_1.default;Redis.defaultOptions=RedisOptions_1.DEFAULT_REDIS_OPTIONS;applyMixin_1.default(Redis,events_1.EventEmitter);transaction_1.addTransactionSupport(Redis.prototype);exports.default=Redis});var require_built3=__commonJS((exports,module)=>{Object.defineProperty(exports,"__esModule",{value:!0});exports.print=exports.ReplyError=exports.SentinelIterator=exports.SentinelConnector=exports.Abs
-worker-rinha  | 1072 |     attempted loading from: `+dir+" and package: "+platformPackage+`
-worker-rinha  | 1073 | `;if(packageNameError)errMessage+="Error finding package.json: "+packageNameError.message+`
-worker-rinha  | 1074 | `;if(packageResolutionError)errMessage+="Error resolving package: "+packageResolutionError.message+`
-worker-rinha  | 1075 | `;throw new Error(errMessage);function resolve(dir2){var tuples=readdirSync(path2.join(dir2,"prebuilds")).map(parseTuple),tuple=tuples.filter(matchTuple(platform,arch)).sort(compareTuples)[0];if(!tuple)return;return resolveFile(path2.join(dir2,"prebuilds",tuple.name))}function resolveFile(prebuilds){var parsed=readdirSync(prebuilds).map(parseTags),candidates=parsed.filter(matchTags(runtime,abi)),winner=candidates.sort(compareTags(runtime))[0];if(winner)return path2.join(prebuilds,winner.file)}};function readdirSync(dir){try{return fs.readdirSync(dir)}catch(err){return[]}}function getFirst(dir,filter){var files=readdirSync(dir).filter(filter);return files[0]&&path2.join(dir,files[0])}function matchBuild(name){return/\.node$/.test(name)}function parseTuple(name){var arr=name.split("-");if(arr.length!==2)return;var platform2=arr[0],architectures=arr[1].split("+");if(!platform2)return;if(!architectures.length)return;if(!architectures.every(Boolean))return;return{name,platform:platform2,architectures}}function mat
-worker-rinha  | 1076 |       If a custom backoff strategy is used, specify it when the queue is created.`)}import{fork}from"child_process";import{createServer}from"net";import{Worker}from"worker_threads";var ChildCommand;(function(ChildCommand2){ChildCommand2[ChildCommand2.Init=0]="Init",ChildCommand2[ChildCommand2.Start=1]="Start",ChildCommand2[ChildCommand2.Stop=2]="Stop",ChildCommand2[ChildCommand2.GetChildrenValuesResponse=3]="GetChildrenValuesResponse",ChildCommand2[ChildCommand2.GetIgnoredChildrenFailuresResponse=4]="GetIgnoredChildrenFailuresResponse"})(ChildCommand||(ChildCommand={}));var ErrorCode;(function(ErrorCode2){ErrorCode2[ErrorCode2.JobNotExist=-1]="JobNotExist",ErrorCode2[ErrorCode2.JobLockNotExist=-2]="JobLockNotExist",ErrorCode2[ErrorCode2.JobNotInState=-3]="JobNotInState",ErrorCode2[ErrorCode2.JobPendingChildren=-4]="JobPendingChildren",ErrorCode2[ErrorCode2.ParentJobNotExist=-5]="ParentJobNotExist",ErrorCode2[ErrorCode2.JobLockMismatch=-6]="JobLockMismatch",ErrorCode2[ErrorCode2.ParentJobCannotBeReplaced=-7]="
-worker-rinha  | 
-worker-rinha  | error: Missing lock for job 31. moveToDelayed
-worker-rinha  |       at finishedErrors (/$bunfs/root/server:1076:102936)
-worker-rinha  |       at moveToDelayed (/$bunfs/root/server:1076:96377)
-worker-rinha  | 
-worker-rinha  | Worker error 1071 | `);for(let i=0;i<lines.length;++i){let[fieldName,...fieldValueParts]=lines[i].split(":"),fieldValue=fieldValueParts.join(":");if(fieldValue)info[fieldName]=fieldValue}if(!info.loading||info.loading==="0")callback(null,info);else{let loadingEtaMs=(info.loading_eta_seconds||1)*1000,retryTime=_this.options.maxLoadingRetryTime&&_this.options.maxLoadingRetryTime<loadingEtaMs?_this.options.maxLoadingRetryTime:loadingEtaMs;debug("Redis server still loading, trying again in "+retryTime+"ms"),setTimeout(function(){_this._readyCheck(callback)},retryTime)}}).catch(lodash_1.noop)}}Redis.Cluster=cluster_1.default;Redis.Command=Command_1.default;Redis.defaultOptions=RedisOptions_1.DEFAULT_REDIS_OPTIONS;applyMixin_1.default(Redis,events_1.EventEmitter);transaction_1.addTransactionSupport(Redis.prototype);exports.default=Redis});var require_built3=__commonJS((exports,module)=>{Object.defineProperty(exports,"__esModule",{value:!0});exports.print=exports.ReplyError=exports.SentinelIterator=exports.SentinelConnector=exports.Abs
-worker-rinha  | 1072 |     attempted loading from: `+dir+" and package: "+platformPackage+`
-worker-rinha  | 1073 | `;if(packageNameError)errMessage+="Error finding package.json: "+packageNameError.message+`
-worker-rinha  | 1074 | `;if(packageResolutionError)errMessage+="Error resolving package: "+packageResolutionError.message+`
-worker-rinha  | 1075 | `;throw new Error(errMessage);function resolve(dir2){var tuples=readdirSync(path2.join(dir2,"prebuilds")).map(parseTuple),tuple=tuples.filter(matchTuple(platform,arch)).sort(compareTuples)[0];if(!tuple)return;return resolveFile(path2.join(dir2,"prebuilds",tuple.name))}function resolveFile(prebuilds){var parsed=readdirSync(prebuilds).map(parseTags),candidates=parsed.filter(matchTags(runtime,abi)),winner=candidates.sort(compareTags(runtime))[0];if(winner)return path2.join(prebuilds,winner.file)}};function readdirSync(dir){try{return fs.readdirSync(dir)}catch(err){return[]}}function getFirst(dir,filter){var files=readdirSync(dir).filter(filter);return files[0]&&path2.join(dir,files[0])}function matchBuild(name){return/\.node$/.test(name)}function parseTuple(name){var arr=name.split("-");if(arr.length!==2)return;var platform2=arr[0],architectures=arr[1].split("+");if(!platform2)return;if(!architectures.length)return;if(!architectures.every(Boolean))return;return{name,platform:platform2,architectures}}function mat
-worker-rinha  | 1076 |       If a custom backoff strategy is used, specify it when the queue is created.`)}import{fork}from"child_process";import{createServer}from"net";import{Worker}from"worker_threads";var ChildCommand;(function(ChildCommand2){ChildCommand2[ChildCommand2.Init=0]="Init",ChildCommand2[ChildCommand2.Start=1]="Start",ChildCommand2[ChildCommand2.Stop=2]="Stop",ChildCommand2[ChildCommand2.GetChildrenValuesResponse=3]="GetChildrenValuesResponse",ChildCommand2[ChildCommand2.GetIgnoredChildrenFailuresResponse=4]="GetIgnoredChildrenFailuresResponse"})(ChildCommand||(ChildCommand={}));var ErrorCode;(function(ErrorCode2){ErrorCode2[ErrorCode2.JobNotExist=-1]="JobNotExist",ErrorCode2[ErrorCode2.JobLockNotExist=-2]="JobLockNotExist",ErrorCode2[ErrorCode2.JobNotInState=-3]="JobNotInState",ErrorCode2[ErrorCode2.JobPendingChildren=-4]="JobPendingChildren",ErrorCode2[ErrorCode2.ParentJobNotExist=-5]="ParentJobNotExist",ErrorCode2[ErrorCode2.JobLockMismatch=-6]="JobLockMismatch",ErrorCode2[ErrorCode2.ParentJobCannotBeReplaced=-7]="
-worker-rinha  | 
-worker-rinha  | error: Missing lock for job 36. moveToDelayed
-worker-rinha  |       at finishedErrors (/$bunfs/root/server:1076:102936)
-worker-rinha  |       at moveToDelayed (/$bunfs/root/server:1076:96377)
-worker-rinha  | 
-worker-rinha  | Worker error 1071 | `);for(let i=0;i<lines.length;++i){let[fieldName,...fieldValueParts]=lines[i].split(":"),fieldValue=fieldValueParts.join(":");if(fieldValue)info[fieldName]=fieldValue}if(!info.loading||info.loading==="0")callback(null,info);else{let loadingEtaMs=(info.loading_eta_seconds||1)*1000,retryTime=_this.options.maxLoadingRetryTime&&_this.options.maxLoadingRetryTime<loadingEtaMs?_this.options.maxLoadingRetryTime:loadingEtaMs;debug("Redis server still loading, trying again in "+retryTime+"ms"),setTimeout(function(){_this._readyCheck(callback)},retryTime)}}).catch(lodash_1.noop)}}Redis.Cluster=cluster_1.default;Redis.Command=Command_1.default;Redis.defaultOptions=RedisOptions_1.DEFAULT_REDIS_OPTIONS;applyMixin_1.default(Redis,events_1.EventEmitter);transaction_1.addTransactionSupport(Redis.prototype);exports.default=Redis});var require_built3=__commonJS((exports,module)=>{Object.defineProperty(exports,"__esModule",{value:!0});exports.print=exports.ReplyError=exports.SentinelIterator=exports.SentinelConnector=exports.Abs
-worker-rinha  | 1072 |     attempted loading from: `+dir+" and package: "+platformPackage+`
-worker-rinha  | 1073 | `;if(packageNameError)errMessage+="Error finding package.json: "+packageNameError.message+`
-worker-rinha  | 1074 | `;if(packageResolutionError)errMessage+="Error resolving package: "+packageResolutionError.message+`
-worker-rinha  | 1075 | `;throw new Error(errMessage);function resolve(dir2){var tuples=readdirSync(path2.join(dir2,"prebuilds")).map(parseTuple),tuple=tuples.filter(matchTuple(platform,arch)).sort(compareTuples)[0];if(!tuple)return;return resolveFile(path2.join(dir2,"prebuilds",tuple.name))}function resolveFile(prebuilds){var parsed=readdirSync(prebuilds).map(parseTags),candidates=parsed.filter(matchTags(runtime,abi)),winner=candidates.sort(compareTags(runtime))[0];if(winner)return path2.join(prebuilds,winner.file)}};function readdirSync(dir){try{return fs.readdirSync(dir)}catch(err){return[]}}function getFirst(dir,filter){var files=readdirSync(dir).filter(filter);return files[0]&&path2.join(dir,files[0])}function matchBuild(name){return/\.node$/.test(name)}function parseTuple(name){var arr=name.split("-");if(arr.length!==2)return;var platform2=arr[0],architectures=arr[1].split("+");if(!platform2)return;if(!architectures.length)return;if(!architectures.every(Boolean))return;return{name,platform:platform2,architectures}}function mat
-worker-rinha  | 1076 |       If a custom backoff strategy is used, specify it when the queue is created.`)}import{fork}from"child_process";import{createServer}from"net";import{Worker}from"worker_threads";var ChildCommand;(function(ChildCommand2){ChildCommand2[ChildCommand2.Init=0]="Init",ChildCommand2[ChildCommand2.Start=1]="Start",ChildCommand2[ChildCommand2.Stop=2]="Stop",ChildCommand2[ChildCommand2.GetChildrenValuesResponse=3]="GetChildrenValuesResponse",ChildCommand2[ChildCommand2.GetIgnoredChildrenFailuresResponse=4]="GetIgnoredChildrenFailuresResponse"})(ChildCommand||(ChildCommand={}));var ErrorCode;(function(ErrorCode2){ErrorCode2[ErrorCode2.JobNotExist=-1]="JobNotExist",ErrorCode2[ErrorCode2.JobLockNotExist=-2]="JobLockNotExist",ErrorCode2[ErrorCode2.JobNotInState=-3]="JobNotInState",ErrorCode2[ErrorCode2.JobPendingChildren=-4]="JobPendingChildren",ErrorCode2[ErrorCode2.ParentJobNotExist=-5]="ParentJobNotExist",ErrorCode2[ErrorCode2.JobLockMismatch=-6]="JobLockMismatch",ErrorCode2[ErrorCode2.ParentJobCannotBeReplaced=-7]="
-worker-rinha  | 
-worker-rinha  | error: Missing lock for job 37. moveToDelayed
-worker-rinha  |       at finishedErrors (/$bunfs/root/server:1076:102936)
-worker-rinha  |       at moveToDelayed (/$bunfs/root/server:1076:96377)
-worker-rinha  | 
-mongodb-1     | {"t":{"$date":"2025-08-19T16:39:19.271+00:00"},"s":"I",  "c":"-",        "id":20883,   "ctx":"conn4","msg":"Interrupted operation as its client disconnected","attr":{"opId":4748}}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:39:19.280+00:00"},"s":"I",  "c":"-",        "id":20883,   "ctx":"conn1","msg":"Interrupted operation as its client disconnected","attr":{"opId":4720}}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:39:19.313+00:00"},"s":"I",  "c":"NETWORK",  "id":22944,   "ctx":"conn9","msg":"Connection ended","attr":{"remote":"172.20.0.5:44002","isLoadBalanced":false,"uuid":{"uuid":{"$uuid":"09dce483-76f9-401e-87fe-94efe42db8d0"}},"connectionId":9,"connectionCount":24}}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:39:19.313+00:00"},"s":"I",  "c":"NETWORK",  "id":22944,   "ctx":"conn20","msg":"Connection ended","attr":{"remote":"172.20.0.7:37860","isLoadBalanced":false,"uuid":{"uuid":{"$uuid":"660484d4-a3d8-4737-8e27-e7b217af7422"}},"connectionId":20,"connectionCount":23}}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:39:19.313+00:00"},"s":"I",  "c":"NETWORK",  "id":22944,   "ctx":"conn6","msg":"Connection ended","attr":{"remote":"172.20.0.7:49964","isLoadBalanced":false,"uuid":{"uuid":{"$uuid":"10492295-75c6-49ca-aed6-ad2a7490485f"}},"connectionId":6,"connectionCount":22}}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:39:19.313+00:00"},"s":"I",  "c":"NETWORK",  "id":22944,   "ctx":"conn13","msg":"Connection ended","attr":{"remote":"172.20.0.7:37828","isLoadBalanced":false,"uuid":{"uuid":{"$uuid":"777cd690-c682-4a48-9723-9ddea24274f1"}},"connectionId":13,"connectionCount":21}}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:39:19.313+00:00"},"s":"I",  "c":"NETWORK",  "id":22944,   "ctx":"conn11","msg":"Connection ended","attr":{"remote":"172.20.0.7:49966","isLoadBalanced":false,"uuid":{"uuid":{"$uuid":"bba1285f-8266-4365-bf5a-4f330604f181"}},"connectionId":11,"connectionCount":20}}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:39:19.314+00:00"},"s":"I",  "c":"NETWORK",  "id":22944,   "ctx":"conn24","msg":"Connection ended","attr":{"remote":"172.20.0.5:53674","isLoadBalanced":false,"uuid":{"uuid":{"$uuid":"dc1f81fc-626e-49ab-babf-ad817b89716c"}},"connectionId":24,"connectionCount":19}}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:39:19.314+00:00"},"s":"I",  "c":"EXECUTOR", "id":22989,   "ctx":"conn4","msg":"Error sending response to client. Ending connection from remote","attr":{"error":{"code":6,"codeName":"HostUnreachable","errmsg":"futurize :: caused by :: Connection reset by peer"},"remote":"172.20.0.7:49952","connectionId":4}}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:39:19.314+00:00"},"s":"I",  "c":"NETWORK",  "id":22944,   "ctx":"conn4","msg":"Connection ended","attr":{"remote":"172.20.0.7:49952","isLoadBalanced":false,"uuid":{"uuid":{"$uuid":"d847c847-11a1-4307-a027-006a570d4d27"}},"connectionId":4,"connectionCount":18}}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:39:19.314+00:00"},"s":"I",  "c":"NETWORK",  "id":22944,   "ctx":"conn2","msg":"Connection ended","attr":{"remote":"172.20.0.5:43982","isLoadBalanced":false,"uuid":{"uuid":{"$uuid":"212d386a-e1fa-4b71-8f0d-6142998576d1"}},"connectionId":2,"connectionCount":17}}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:39:19.314+00:00"},"s":"I",  "c":"EXECUTOR", "id":22989,   "ctx":"conn1","msg":"Error sending response to client. Ending connection from remote","attr":{"error":{"code":6,"codeName":"HostUnreachable","errmsg":"futurize :: caused by :: Connection reset by peer"},"remote":"172.20.0.5:43978","connectionId":1}}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:39:19.314+00:00"},"s":"I",  "c":"NETWORK",  "id":22944,   "ctx":"conn1","msg":"Connection ended","attr":{"remote":"172.20.0.5:43978","isLoadBalanced":false,"uuid":{"uuid":{"$uuid":"4f903c95-0c6b-42a3-8bd7-b2f9111ae6b3"}},"connectionId":1,"connectionCount":16}}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:39:19.314+00:00"},"s":"I",  "c":"NETWORK",  "id":22944,   "ctx":"conn25","msg":"Connection ended","attr":{"remote":"172.20.0.5:53690","isLoadBalanced":false,"uuid":{"uuid":{"$uuid":"1531c748-6e0e-423b-be8d-433ccbad4d09"}},"connectionId":25,"connectionCount":15}}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:39:19.314+00:00"},"s":"I",  "c":"NETWORK",  "id":22944,   "ctx":"conn17","msg":"Connection ended","attr":{"remote":"172.20.0.7:37858","isLoadBalanced":false,"uuid":{"uuid":{"$uuid":"169b2685-ddd2-4748-8b93-3bd31215bf94"}},"connectionId":17,"connectionCount":14}}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:39:19.314+00:00"},"s":"I",  "c":"NETWORK",  "id":22944,   "ctx":"conn3","msg":"Connection ended","attr":{"remote":"172.20.0.5:43990","isLoadBalanced":false,"uuid":{"uuid":{"$uuid":"64b3682e-44f2-40f0-a258-e33432b22dc6"}},"connectionId":3,"connectionCount":13}}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:39:19.314+00:00"},"s":"I",  "c":"NETWORK",  "id":22944,   "ctx":"conn8","msg":"Connection ended","attr":{"remote":"172.20.0.5:44000","isLoadBalanced":false,"uuid":{"uuid":{"$uuid":"46d2f7cc-2df4-4521-8f55-b2e22f4f508d"}},"connectionId":8,"connectionCount":12}}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:39:19.315+00:00"},"s":"I",  "c":"NETWORK",  "id":22944,   "ctx":"conn21","msg":"Connection ended","attr":{"remote":"172.20.0.6:56292","isLoadBalanced":false,"uuid":{"uuid":{"$uuid":"c12a9b9d-d8ef-491d-b20a-af357e5cb5fc"}},"connectionId":21,"connectionCount":11}}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:39:19.315+00:00"},"s":"I",  "c":"NETWORK",  "id":22944,   "ctx":"conn18","msg":"Connection ended","attr":{"remote":"172.20.0.5:59252","isLoadBalanced":false,"uuid":{"uuid":{"$uuid":"b572dfcc-3806-42dc-9c85-11c8ce8c4ec4"}},"connectionId":18,"connectionCount":10}}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:39:19.315+00:00"},"s":"I",  "c":"NETWORK",  "id":22944,   "ctx":"conn23","msg":"Connection ended","attr":{"remote":"172.20.0.5:38248","isLoadBalanced":false,"uuid":{"uuid":{"$uuid":"eb4781d0-1d4b-45ad-81a6-92fed1b61cdf"}},"connectionId":23,"connectionCount":9}}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:39:19.315+00:00"},"s":"I",  "c":"NETWORK",  "id":22944,   "ctx":"conn12","msg":"Connection ended","attr":{"remote":"172.20.0.6:50878","isLoadBalanced":false,"uuid":{"uuid":{"$uuid":"808b2f48-2fd1-4173-b843-12c9197aba11"}},"connectionId":12,"connectionCount":8}}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:39:19.315+00:00"},"s":"I",  "c":"NETWORK",  "id":22944,   "ctx":"conn19","msg":"Connection ended","attr":{"remote":"172.20.0.6:56288","isLoadBalanced":false,"uuid":{"uuid":{"$uuid":"f98e7f46-5dfb-4e39-b052-0ec8630c4d0a"}},"connectionId":19,"connectionCount":7}}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:39:19.315+00:00"},"s":"I",  "c":"NETWORK",  "id":22944,   "ctx":"conn14","msg":"Connection ended","attr":{"remote":"172.20.0.6:56264","isLoadBalanced":false,"uuid":{"uuid":{"$uuid":"a78f9d1f-94d3-4dd6-8ae3-39508f87c60c"}},"connectionId":14,"connectionCount":6}}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:39:19.315+00:00"},"s":"I",  "c":"NETWORK",  "id":22944,   "ctx":"conn22","msg":"Connection ended","attr":{"remote":"172.20.0.5:38242","isLoadBalanced":false,"uuid":{"uuid":{"$uuid":"494508ba-5159-4b13-b0c0-b044480eb6d2"}},"connectionId":22,"connectionCount":5}}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:39:19.315+00:00"},"s":"I",  "c":"NETWORK",  "id":22944,   "ctx":"conn10","msg":"Connection ended","attr":{"remote":"172.20.0.5:44018","isLoadBalanced":false,"uuid":{"uuid":{"$uuid":"33fbac10-ca9c-45cd-afa6-45556c81377f"}},"connectionId":10,"connectionCount":4}}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:39:19.315+00:00"},"s":"I",  "c":"NETWORK",  "id":22944,   "ctx":"conn16","msg":"Connection ended","attr":{"remote":"172.20.0.6:56280","isLoadBalanced":false,"uuid":{"uuid":{"$uuid":"62a2f847-a85e-4b88-b66e-12b8461f71d6"}},"connectionId":16,"connectionCount":3}}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:39:19.316+00:00"},"s":"I",  "c":"NETWORK",  "id":22944,   "ctx":"conn15","msg":"Connection ended","attr":{"remote":"172.20.0.7:37842","isLoadBalanced":false,"uuid":{"uuid":{"$uuid":"f4da7f2c-b1e0-48b0-8a4c-783fc160c3d3"}},"connectionId":15,"connectionCount":2}}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:39:19.321+00:00"},"s":"I",  "c":"-",        "id":20883,   "ctx":"conn5","msg":"Interrupted operation as its client disconnected","attr":{"opId":4749}}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:39:19.321+00:00"},"s":"I",  "c":"NETWORK",  "id":22944,   "ctx":"conn7","msg":"Connection ended","attr":{"remote":"172.20.0.6:50864","isLoadBalanced":false,"uuid":{"uuid":{"$uuid":"0a607130-9958-4083-868d-abecbd6f5efd"}},"connectionId":7,"connectionCount":1}}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:39:19.321+00:00"},"s":"I",  "c":"EXECUTOR", "id":22989,   "ctx":"conn5","msg":"Error sending response to client. Ending connection from remote","attr":{"error":{"code":6,"codeName":"HostUnreachable","errmsg":"futurize :: caused by :: Connection reset by peer"},"remote":"172.20.0.6:50860","connectionId":5}}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:39:19.321+00:00"},"s":"I",  "c":"NETWORK",  "id":22944,   "ctx":"conn5","msg":"Connection ended","attr":{"remote":"172.20.0.6:50860","isLoadBalanced":false,"uuid":{"uuid":{"$uuid":"2abba34d-51c7-467b-a1e7-4e95ff0e70ad"}},"connectionId":5,"connectionCount":0}}
-[Kapi-rinha-2 exited with code 137
-[Kapi-rinha exited with code 137
-[Ktraefik exited with code 137
-[Kworker-rinha exited with code 137
-redis-1       | 1:signal-handler (1755621561) Received SIGTERM scheduling shutdown...
-mongodb-1     | {"t":{"$date":"2025-08-19T16:39:21.955+00:00"},"s":"I",  "c":"CONTROL",  "id":23377,   "ctx":"SignalHandler","msg":"Received signal","attr":{"signal":15,"error":"Terminated"}}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:39:21.955+00:00"},"s":"I",  "c":"CONTROL",  "id":23378,   "ctx":"SignalHandler","msg":"Signal was sent by kill(2)","attr":{"pid":0,"uid":0}}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:39:21.955+00:00"},"s":"I",  "c":"CONTROL",  "id":23381,   "ctx":"SignalHandler","msg":"will terminate after current cmd ends"}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:39:21.956+00:00"},"s":"I",  "c":"REPL",     "id":4784900, "ctx":"SignalHandler","msg":"Stepping down the ReplicationCoordinator for shutdown","attr":{"waitTimeMillis":15000}}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:39:21.960+00:00"},"s":"I",  "c":"REPL",     "id":4794602, "ctx":"SignalHandler","msg":"Attempting to enter quiesce mode"}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:39:21.960+00:00"},"s":"I",  "c":"-",        "id":6371601, "ctx":"SignalHandler","msg":"Shutting down the FLE Crud thread pool"}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:39:21.960+00:00"},"s":"I",  "c":"COMMAND",  "id":4784901, "ctx":"SignalHandler","msg":"Shutting down the MirrorMaestro"}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:39:21.960+00:00"},"s":"I",  "c":"SHARDING", "id":4784902, "ctx":"SignalHandler","msg":"Shutting down the WaitForMajorityService"}
-redis-1       | 1:M 19 Aug 2025 16:39:21.961 * User requested shutdown...
-redis-1       | 1:M 19 Aug 2025 16:39:21.961 * Saving the final RDB snapshot before exiting.
-mongodb-1     | {"t":{"$date":"2025-08-19T16:39:21.964+00:00"},"s":"I",  "c":"CONTROL",  "id":4784903, "ctx":"SignalHandler","msg":"Shutting down the LogicalSessionCache"}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:39:21.964+00:00"},"s":"I",  "c":"NETWORK",  "id":20562,   "ctx":"SignalHandler","msg":"Shutdown: going to close listening sockets"}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:39:21.964+00:00"},"s":"I",  "c":"NETWORK",  "id":23017,   "ctx":"listener","msg":"removing socket file","attr":{"path":"/tmp/mongodb-27017.sock"}}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:39:21.965+00:00"},"s":"I",  "c":"NETWORK",  "id":4784905, "ctx":"SignalHandler","msg":"Shutting down the global connection pool"}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:39:21.965+00:00"},"s":"I",  "c":"CONTROL",  "id":4784906, "ctx":"SignalHandler","msg":"Shutting down the FlowControlTicketholder"}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:39:21.966+00:00"},"s":"I",  "c":"-",        "id":20520,   "ctx":"SignalHandler","msg":"Stopping further Flow Control ticket acquisitions."}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:39:21.966+00:00"},"s":"I",  "c":"CONTROL",  "id":4784908, "ctx":"SignalHandler","msg":"Shutting down the PeriodicThreadToAbortExpiredTransactions"}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:39:21.966+00:00"},"s":"I",  "c":"REPL",     "id":4784909, "ctx":"SignalHandler","msg":"Shutting down the ReplicationCoordinator"}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:39:21.966+00:00"},"s":"I",  "c":"SHARDING", "id":4784910, "ctx":"SignalHandler","msg":"Shutting down the ShardingInitializationMongoD"}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:39:21.966+00:00"},"s":"I",  "c":"REPL",     "id":4784911, "ctx":"SignalHandler","msg":"Enqueuing the ReplicationStateTransitionLock for shutdown"}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:39:21.967+00:00"},"s":"I",  "c":"-",        "id":4784912, "ctx":"SignalHandler","msg":"Killing all operations for shutdown"}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:39:21.967+00:00"},"s":"I",  "c":"-",        "id":4695300, "ctx":"SignalHandler","msg":"Interrupted all currently running operations","attr":{"opsKilled":3}}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:39:21.967+00:00"},"s":"I",  "c":"TENANT_M", "id":5093807, "ctx":"SignalHandler","msg":"Shutting down all TenantMigrationAccessBlockers on global shutdown"}
-redis-1       | 1:M 19 Aug 2025 16:39:21.968 * DB saved on disk
-redis-1       | 1:M 19 Aug 2025 16:39:21.968 # Redis is now ready to exit, bye bye...
-mongodb-1     | {"t":{"$date":"2025-08-19T16:39:21.970+00:00"},"s":"I",  "c":"ASIO",     "id":22582,   "ctx":"TenantMigrationBlockerNet","msg":"Killing all outstanding egress activity."}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:39:21.970+00:00"},"s":"I",  "c":"ASIO",     "id":6529201, "ctx":"SignalHandler","msg":"Network interface redundant shutdown","attr":{"state":"Stopped"}}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:39:21.970+00:00"},"s":"I",  "c":"ASIO",     "id":22582,   "ctx":"SignalHandler","msg":"Killing all outstanding egress activity."}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:39:21.971+00:00"},"s":"I",  "c":"COMMAND",  "id":4784913, "ctx":"SignalHandler","msg":"Shutting down all open transactions"}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:39:21.971+00:00"},"s":"I",  "c":"REPL",     "id":4784914, "ctx":"SignalHandler","msg":"Acquiring the ReplicationStateTransitionLock for shutdown"}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:39:21.971+00:00"},"s":"I",  "c":"INDEX",    "id":4784915, "ctx":"SignalHandler","msg":"Shutting down the IndexBuildsCoordinator"}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:39:21.973+00:00"},"s":"I",  "c":"NETWORK",  "id":4784918, "ctx":"SignalHandler","msg":"Shutting down the ReplicaSetMonitor"}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:39:21.975+00:00"},"s":"I",  "c":"SHARDING", "id":4784921, "ctx":"SignalHandler","msg":"Shutting down the MigrationUtilExecutor"}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:39:21.976+00:00"},"s":"I",  "c":"ASIO",     "id":22582,   "ctx":"MigrationUtil-TaskExecutor","msg":"Killing all outstanding egress activity."}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:39:21.976+00:00"},"s":"I",  "c":"COMMAND",  "id":4784923, "ctx":"SignalHandler","msg":"Shutting down the ServiceEntryPoint"}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:39:21.977+00:00"},"s":"I",  "c":"CONTROL",  "id":4784927, "ctx":"SignalHandler","msg":"Shutting down the HealthLog"}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:39:21.977+00:00"},"s":"I",  "c":"CONTROL",  "id":4784928, "ctx":"SignalHandler","msg":"Shutting down the TTL monitor"}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:39:21.977+00:00"},"s":"I",  "c":"INDEX",    "id":3684100, "ctx":"SignalHandler","msg":"Shutting down TTL collection monitor thread"}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:39:21.978+00:00"},"s":"I",  "c":"INDEX",    "id":3684101, "ctx":"SignalHandler","msg":"Finished shutting down TTL collection monitor thread"}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:39:21.978+00:00"},"s":"I",  "c":"CONTROL",  "id":6278511, "ctx":"SignalHandler","msg":"Shutting down the Change Stream Expired Pre-images Remover"}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:39:21.978+00:00"},"s":"I",  "c":"CONTROL",  "id":4784929, "ctx":"SignalHandler","msg":"Acquiring the global lock for shutdown"}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:39:21.978+00:00"},"s":"I",  "c":"CONTROL",  "id":4784930, "ctx":"SignalHandler","msg":"Shutting down the storage engine"}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:39:21.978+00:00"},"s":"I",  "c":"STORAGE",  "id":22320,   "ctx":"SignalHandler","msg":"Shutting down journal flusher thread"}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:39:21.978+00:00"},"s":"I",  "c":"STORAGE",  "id":22321,   "ctx":"SignalHandler","msg":"Finished shutting down journal flusher thread"}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:39:21.979+00:00"},"s":"I",  "c":"STORAGE",  "id":22322,   "ctx":"SignalHandler","msg":"Shutting down checkpoint thread"}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:39:21.979+00:00"},"s":"I",  "c":"STORAGE",  "id":22323,   "ctx":"SignalHandler","msg":"Finished shutting down checkpoint thread"}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:39:21.979+00:00"},"s":"I",  "c":"STORAGE",  "id":22261,   "ctx":"SignalHandler","msg":"Timestamp monitor shutting down"}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:39:21.980+00:00"},"s":"I",  "c":"STORAGE",  "id":20282,   "ctx":"SignalHandler","msg":"Deregistering all the collections"}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:39:21.984+00:00"},"s":"I",  "c":"STORAGE",  "id":22317,   "ctx":"SignalHandler","msg":"WiredTigerKVEngine shutting down"}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:39:21.984+00:00"},"s":"I",  "c":"STORAGE",  "id":22318,   "ctx":"SignalHandler","msg":"Shutting down session sweeper thread"}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:39:21.984+00:00"},"s":"I",  "c":"STORAGE",  "id":22319,   "ctx":"SignalHandler","msg":"Finished shutting down session sweeper thread"}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:39:21.984+00:00"},"s":"I",  "c":"STORAGE",  "id":4795902, "ctx":"SignalHandler","msg":"Closing WiredTiger","attr":{"closeConfig":"leak_memory=true,use_timestamp=false,"}}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:39:21.986+00:00"},"s":"I",  "c":"WTCHKPT",  "id":22430,   "ctx":"SignalHandler","msg":"WiredTiger message","attr":{"message":{"ts_sec":1755621561,"ts_usec":986873,"thread":"1:0x76e28b96c640","session_name":"close_ckpt","category":"WT_VERB_CHECKPOINT_PROGRESS","category_id":6,"verbose_level":"DEBUG_1","verbose_level_id":1,"msg":"saving checkpoint snapshot min: 108, snapshot max: 108 snapshot count: 0, oldest timestamp: (0, 0) , meta checkpoint timestamp: (0, 0) base write gen: 1"}}}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:39:21.997+00:00"},"s":"I",  "c":"WTRECOV",  "id":22430,   "ctx":"SignalHandler","msg":"WiredTiger message","attr":{"message":{"ts_sec":1755621561,"ts_usec":997283,"thread":"1:0x76e28b96c640","session_name":"WT_CONNECTION.close","category":"WT_VERB_RECOVERY_PROGRESS","category_id":30,"verbose_level":"DEBUG_1","verbose_level_id":1,"msg":"shutdown checkpoint has successfully finished and ran for 10 milliseconds"}}}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:39:21.997+00:00"},"s":"I",  "c":"WTRECOV",  "id":22430,   "ctx":"SignalHandler","msg":"WiredTiger message","attr":{"message":{"ts_sec":1755621561,"ts_usec":997471,"thread":"1:0x76e28b96c640","session_name":"WT_CONNECTION.close","category":"WT_VERB_RECOVERY_PROGRESS","category_id":30,"verbose_level":"DEBUG_1","verbose_level_id":1,"msg":"shutdown was completed successfully and took 10ms, including 0ms for the rollback to stable, and 10ms for the checkpoint."}}}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:39:22.013+00:00"},"s":"I",  "c":"STORAGE",  "id":4795901, "ctx":"SignalHandler","msg":"WiredTiger closed","attr":{"durationMillis":29}}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:39:22.013+00:00"},"s":"I",  "c":"STORAGE",  "id":22279,   "ctx":"SignalHandler","msg":"shutdown: removing fs lock..."}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:39:22.013+00:00"},"s":"I",  "c":"-",        "id":4784931, "ctx":"SignalHandler","msg":"Dropping the scope cache for shutdown"}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:39:22.014+00:00"},"s":"I",  "c":"FTDC",     "id":20626,   "ctx":"SignalHandler","msg":"Shutting down full-time diagnostic data capture"}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:39:22.015+00:00"},"s":"I",  "c":"CONTROL",  "id":20565,   "ctx":"SignalHandler","msg":"Now exiting"}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:39:22.016+00:00"},"s":"I",  "c":"CONTROL",  "id":8423404, "ctx":"SignalHandler","msg":"mongod shutdown complete","attr":{"Summary of time elapsed":{"Statistics":{"Enter terminal shutdown":"0 ms","Step down the replication coordinator for shutdown":"4 ms","Time spent in quiesce mode":"0 ms","Shut down FLE Crud subsystem":"0 ms","Shut down MirrorMaestro":"0 ms","Shut down WaitForMajorityService":"4 ms","Shut down the logical session cache":"0 ms","Shut down the transport layer":"0 ms","Shut down the global connection pool":"1 ms","Shut down the flow control ticket holder":"1 ms","Kill all operations for shutdown":"0 ms","Shut down all tenant migration access blockers on global shutdown":"3 ms","Shut down all open transactions":"1 ms","Acquire the RSTL for shutdown":"0 ms","Shut down the IndexBuildsCoordinator and wait for index builds to finish":"0 ms","Shut down the replica set monitor":"2 ms","Shut down the migration util executor":"0 ms","Shut down the health log":"1 ms","Shut down the TTL monitor":"1 ms","Shut down expired pre-images and documents removers":"0 ms","Shut down the storage engine":"35 ms","Wait for the oplog cap maintainer thread to stop":"0 ms","Shut down full-time data capture":"1 ms","shutdownTask total elapsed time":"59 ms"}}}}
-mongodb-1     | {"t":{"$date":"2025-08-19T16:39:22.016+00:00"},"s":"I",  "c":"CONTROL",  "id":23138,   "ctx":"SignalHandler","msg":"Shutting down","attr":{"exitCode":0}}
-[Kredis-1 exited with code 0
-log truncated at line 1000
+time="2025-08-21T06:16:18Z" level=warning msg="/home/admin/fork-rinha-de-backend-2025/participantes/ryangst-bun/docker-compose.yml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion"
+ api-2 Pulling 
+ traefik Pulling 
+ worker Pulling 
+ mongodb Pulling 
+ redis Pulling 
+ api Pulling 
+ 35d697fe2738 Pulling fs layer 
+ bfb59b82a9b6 Pulling fs layer 
+ 4eff9a62d888 Pulling fs layer 
+ a62778643d56 Pulling fs layer 
+ 7c12895b777b Pulling fs layer 
+ 3214acf345c0 Pulling fs layer 
+ 5664b15f108b Pulling fs layer 
+ 0bab15eea81d Pulling fs layer 
+ 4aa0ea1413d3 Pulling fs layer 
+ da7816fa955e Pulling fs layer 
+ ddf74a63f7d8 Pulling fs layer 
+ d00c3209d929 Pulling fs layer 
+ c1e595f74d52 Pulling fs layer 
+ b4e86264483b Pulling fs layer 
+ da5b118382bf Pulling fs layer 
+ 4aa0ea1413d3 Waiting 
+ da7816fa955e Waiting 
+ ddf74a63f7d8 Waiting 
+ d00c3209d929 Waiting 
+ c1e595f74d52 Waiting 
+ b4e86264483b Waiting 
+ da5b118382bf Waiting 
+ 7c12895b777b Waiting 
+ 3214acf345c0 Waiting 
+ 5664b15f108b Waiting 
+ 0bab15eea81d Waiting 
+ a62778643d56 Waiting 
+ 35d697fe2738 Pulling fs layer 
+ bfb59b82a9b6 Pulling fs layer 
+ 4eff9a62d888 Pulling fs layer 
+ a62778643d56 Pulling fs layer 
+ 7c12895b777b Pulling fs layer 
+ 3214acf345c0 Pulling fs layer 
+ 5664b15f108b Pulling fs layer 
+ 0bab15eea81d Pulling fs layer 
+ 4aa0ea1413d3 Pulling fs layer 
+ da7816fa955e Pulling fs layer 
+ ddf74a63f7d8 Pulling fs layer 
+ d00c3209d929 Pulling fs layer 
+ c1e595f74d52 Pulling fs layer 
+ b4e86264483b Pulling fs layer 
+ da5b118382bf Pulling fs layer 
+ da5b118382bf Waiting 
+ a62778643d56 Waiting 
+ 7c12895b777b Waiting 
+ 3214acf345c0 Waiting 
+ 5664b15f108b Waiting 
+ 0bab15eea81d Waiting 
+ 4aa0ea1413d3 Waiting 
+ da7816fa955e Waiting 
+ ddf74a63f7d8 Waiting 
+ d00c3209d929 Waiting 
+ c1e595f74d52 Waiting 
+ b4e86264483b Waiting 
+ 35d697fe2738 Pulling fs layer 
+ bfb59b82a9b6 Pulling fs layer 
+ 4eff9a62d888 Pulling fs layer 
+ a62778643d56 Pulling fs layer 
+ 7c12895b777b Pulling fs layer 
+ 3214acf345c0 Pulling fs layer 
+ 5664b15f108b Pulling fs layer 
+ 0bab15eea81d Pulling fs layer 
+ 4aa0ea1413d3 Pulling fs layer 
+ da7816fa955e Pulling fs layer 
+ ddf74a63f7d8 Pulling fs layer 
+ 7c12895b777b Waiting 
+ d00c3209d929 Pulling fs layer 
+ c1e595f74d52 Pulling fs layer 
+ a62778643d56 Waiting 
+ b4e86264483b Pulling fs layer 
+ 4aa0ea1413d3 Waiting 
+ 3214acf345c0 Waiting 
+ 9b42699f2ec7 Pulling fs layer 
+ 5664b15f108b Waiting 
+ 0bab15eea81d Waiting 
+ d00c3209d929 Waiting 
+ da7816fa955e Waiting 
+ ddf74a63f7d8 Waiting 
+ c1e595f74d52 Waiting 
+ b4e86264483b Waiting 
+ 9b42699f2ec7 Waiting 
+ bfb59b82a9b6 Downloading [=====>                                             ]  1.371kB/13.36kB
+ bfb59b82a9b6 Downloading [=====>                                             ]  1.371kB/13.36kB
+ bfb59b82a9b6 Downloading [=====>                                             ]  1.371kB/13.36kB
+ 4eff9a62d888 Downloading [>                                                  ]  5.512kB/547.6kB
+ 4eff9a62d888 Downloading [>                                                  ]  5.512kB/547.6kB
+ 4eff9a62d888 Downloading [>                                                  ]  5.512kB/547.6kB
+ bfb59b82a9b6 Downloading [==================================================>]  13.36kB/13.36kB
+ bfb59b82a9b6 Downloading [==================================================>]  13.36kB/13.36kB
+ bfb59b82a9b6 Downloading [==================================================>]  13.36kB/13.36kB
+ bfb59b82a9b6 Verifying Checksum 
+ bfb59b82a9b6 Verifying Checksum 
+ bfb59b82a9b6 Download complete 
+ bfb59b82a9b6 Download complete 
+ bfb59b82a9b6 Download complete 
+ 4eff9a62d888 Verifying Checksum 
+ 4eff9a62d888 Download complete 
+ 4eff9a62d888 Downloading [==================================================>]  547.6kB/547.6kB
+ 4eff9a62d888 Verifying Checksum 
+ 4eff9a62d888 Download complete 
+ 4eff9a62d888 Download complete 
+ 35d697fe2738 Downloading [>                                                  ]  1.378kB/104.2kB
+ 35d697fe2738 Downloading [>                                                  ]  1.378kB/104.2kB
+ 35d697fe2738 Downloading [>                                                  ]  1.378kB/104.2kB
+ 35d697fe2738 Downloading [==================================================>]  104.2kB/104.2kB
+ 35d697fe2738 Verifying Checksum 
+ 35d697fe2738 Download complete 
+ 35d697fe2738 Extracting [===============>                                   ]  32.77kB/104.2kB
+ 35d697fe2738 Downloading [==================================================>]  104.2kB/104.2kB
+ 35d697fe2738 Verifying Checksum 
+ 35d697fe2738 Download complete 
+ 35d697fe2738 Extracting [===============>                                   ]  32.77kB/104.2kB
+ 35d697fe2738 Downloading [==================================================>]  104.2kB/104.2kB
+ 35d697fe2738 Verifying Checksum 
+ 35d697fe2738 Download complete 
+ 35d697fe2738 Extracting [===============>                                   ]  32.77kB/104.2kB
+ 35d697fe2738 Extracting [==================================================>]  104.2kB/104.2kB
+ 35d697fe2738 Extracting [==================================================>]  104.2kB/104.2kB
+ 35d697fe2738 Extracting [==================================================>]  104.2kB/104.2kB
+ 35d697fe2738 Extracting [==================================================>]  104.2kB/104.2kB
+ 35d697fe2738 Extracting [==================================================>]  104.2kB/104.2kB
+ 35d697fe2738 Extracting [==================================================>]  104.2kB/104.2kB
+ 35d697fe2738 Pull complete 
+ 35d697fe2738 Pull complete 
+ 35d697fe2738 Pull complete 
+ bfb59b82a9b6 Extracting [==================================================>]  13.36kB/13.36kB
+ bfb59b82a9b6 Extracting [==================================================>]  13.36kB/13.36kB
+ bfb59b82a9b6 Extracting [==================================================>]  13.36kB/13.36kB
+ bfb59b82a9b6 Extracting [==================================================>]  13.36kB/13.36kB
+ bfb59b82a9b6 Extracting [==================================================>]  13.36kB/13.36kB
+ bfb59b82a9b6 Extracting [==================================================>]  13.36kB/13.36kB
+ bfb59b82a9b6 Pull complete 
+ bfb59b82a9b6 Pull complete 
+ bfb59b82a9b6 Pull complete 
+ 4eff9a62d888 Extracting [==>                                                ]  32.77kB/547.6kB
+ 4eff9a62d888 Extracting [==>                                                ]  32.77kB/547.6kB
+ 4eff9a62d888 Extracting [==>                                                ]  32.77kB/547.6kB
+ 7c12895b777b Downloading [==================================================>]     188B/188B
+ 7c12895b777b Downloading [==================================================>]     188B/188B
+ 7c12895b777b Verifying Checksum 
+ 7c12895b777b Download complete 
+ 7c12895b777b Verifying Checksum 
+ 7c12895b777b Download complete 
+ 7c12895b777b Downloading [==================================================>]     188B/188B
+ 7c12895b777b Verifying Checksum 
+ 7c12895b777b Download complete 
+ 4eff9a62d888 Extracting [======================================>            ]    426kB/547.6kB
+ 4eff9a62d888 Extracting [======================================>            ]    426kB/547.6kB
+ 4eff9a62d888 Extracting [======================================>            ]    426kB/547.6kB
+ a62778643d56 Verifying Checksum 
+ a62778643d56 Downloading [==================================================>]      67B/67B
+ a62778643d56 Download complete 
+ a62778643d56 Verifying Checksum 
+ a62778643d56 Download complete 
+ a62778643d56 Verifying Checksum 
+ a62778643d56 Download complete 
+ 4eff9a62d888 Extracting [==================================================>]  547.6kB/547.6kB
+ 4eff9a62d888 Extracting [==================================================>]  547.6kB/547.6kB
+ 4eff9a62d888 Extracting [==================================================>]  547.6kB/547.6kB
+ 3214acf345c0 Downloading [==================================================>]     123B/123B
+ 3214acf345c0 Downloading [==================================================>]     123B/123B
+ 3214acf345c0 Downloading [==================================================>]     123B/123B
+ 3214acf345c0 Verifying Checksum 
+ 3214acf345c0 Download complete 
+ 3214acf345c0 Verifying Checksum 
+ 3214acf345c0 Verifying Checksum 
+ 3214acf345c0 Download complete 
+ 3214acf345c0 Download complete 
+ 4eff9a62d888 Extracting [==================================================>]  547.6kB/547.6kB
+ 4eff9a62d888 Extracting [==================================================>]  547.6kB/547.6kB
+ 4eff9a62d888 Extracting [==================================================>]  547.6kB/547.6kB
+ 5664b15f108b Verifying Checksum 
+ 5664b15f108b Download complete 
+ 5664b15f108b Verifying Checksum 
+ 5664b15f108b Download complete 
+ 5664b15f108b Downloading [==================================================>]     168B/168B
+ 5664b15f108b Verifying Checksum 
+ 5664b15f108b Download complete 
+ 4eff9a62d888 Pull complete 
+ 4eff9a62d888 Pull complete 
+ 4eff9a62d888 Pull complete 
+ a62778643d56 Extracting [==================================================>]      67B/67B
+ a62778643d56 Extracting [==================================================>]      67B/67B
+ a62778643d56 Extracting [==================================================>]      67B/67B
+ a62778643d56 Extracting [==================================================>]      67B/67B
+ a62778643d56 Extracting [==================================================>]      67B/67B
+ a62778643d56 Extracting [==================================================>]      67B/67B
+ 4aa0ea1413d3 Download complete 
+ 4aa0ea1413d3 Download complete 
+ 4aa0ea1413d3 Downloading [==================================================>]     385B/385B
+ 4aa0ea1413d3 Verifying Checksum 
+ 4aa0ea1413d3 Download complete 
+ a62778643d56 Pull complete 
+ a62778643d56 Pull complete 
+ a62778643d56 Pull complete 
+ 7c12895b777b Extracting [==================================================>]     188B/188B
+ 7c12895b777b Extracting [==================================================>]     188B/188B
+ 7c12895b777b Extracting [==================================================>]     188B/188B
+ 7c12895b777b Extracting [==================================================>]     188B/188B
+ 7c12895b777b Extracting [==================================================>]     188B/188B
+ 7c12895b777b Extracting [==================================================>]     188B/188B
+ 7c12895b777b Pull complete 
+ 7c12895b777b Pull complete 
+ 7c12895b777b Pull complete 
+ 3214acf345c0 Extracting [==================================================>]     123B/123B
+ 3214acf345c0 Extracting [==================================================>]     123B/123B
+ 3214acf345c0 Extracting [==================================================>]     123B/123B
+ 3214acf345c0 Extracting [==================================================>]     123B/123B
+ 3214acf345c0 Extracting [==================================================>]     123B/123B
+ 3214acf345c0 Extracting [==================================================>]     123B/123B
+ da7816fa955e Downloading [==================================================>]     321B/321B
+ da7816fa955e Verifying Checksum 
+ da7816fa955e Download complete 
+ da7816fa955e Downloading [==================================================>]     321B/321B
+ da7816fa955e Verifying Checksum 
+ da7816fa955e Download complete 
+ da7816fa955e Downloading [==================================================>]     321B/321B
+ da7816fa955e Verifying Checksum 
+ da7816fa955e Download complete 
+ 3214acf345c0 Pull complete 
+ 3214acf345c0 Pull complete 
+ 3214acf345c0 Pull complete 
+ 5664b15f108b Extracting [==================================================>]     168B/168B
+ 5664b15f108b Extracting [==================================================>]     168B/168B
+ 5664b15f108b Extracting [==================================================>]     168B/168B
+ 5664b15f108b Extracting [==================================================>]     168B/168B
+ 5664b15f108b Extracting [==================================================>]     168B/168B
+ 5664b15f108b Extracting [==================================================>]     168B/168B
+ 0bab15eea81d Downloading [==================================================>]      93B/93B
+ 0bab15eea81d Downloading [==================================================>]      93B/93B
+ 0bab15eea81d Downloading [==================================================>]      93B/93B
+ 0bab15eea81d Verifying Checksum 
+ 0bab15eea81d Verifying Checksum 
+ 0bab15eea81d Download complete 
+ 0bab15eea81d Download complete 
+ 0bab15eea81d Verifying Checksum 
+ 0bab15eea81d Download complete 
+ 5664b15f108b Pull complete 
+ 5664b15f108b Pull complete 
+ 5664b15f108b Pull complete 
+ 0bab15eea81d Extracting [==================================================>]      93B/93B
+ 0bab15eea81d Extracting [==================================================>]      93B/93B
+ 0bab15eea81d Extracting [==================================================>]      93B/93B
+ 0bab15eea81d Extracting [==================================================>]      93B/93B
+ 0bab15eea81d Extracting [==================================================>]      93B/93B
+ 0bab15eea81d Extracting [==================================================>]      93B/93B
+ 0bab15eea81d Pull complete 
+ 0bab15eea81d Pull complete 
+ 0bab15eea81d Pull complete 
+ 4aa0ea1413d3 Extracting [==================================================>]     385B/385B
+ 4aa0ea1413d3 Extracting [==================================================>]     385B/385B
+ 4aa0ea1413d3 Extracting [==================================================>]     385B/385B
+ 4aa0ea1413d3 Extracting [==================================================>]     385B/385B
+ 4aa0ea1413d3 Extracting [==================================================>]     385B/385B
+ 4aa0ea1413d3 Extracting [==================================================>]     385B/385B
+ traefik Error toomanyrequests: You have reached your unauthenticated pull rate limit. https://www.docker.com/increase-rate-limit
+ redis  Interrupted
+ mongodb  Interrupted
+Error response from daemon: toomanyrequests: You have reached your unauthenticated pull rate limit. https://www.docker.com/increase-rate-limit

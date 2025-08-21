@@ -7,27 +7,261 @@
  Container pay  Created
  Container back1  Creating
  Container back0  Creating
- Container back0  Created
  Container back1  Created
+ Container back0  Created
  Container front  Creating
  Container front  Created
 Attaching to back0, back1, front, pay
-back1  | [0.030s][warning][perf,memops] Cannot use file /tmp/hsperfdata_root/1 because it is locked by another process (errno = 11)
-back0  | [0.030s][warning][perf,memops] Cannot use file /tmp/hsperfdata_root/1 because it is locked by another process (errno = 11)
-pay    | Pay
-front  | [0.032s][warning][perf,memops] Cannot use file /tmp/hsperfdata_root/1 because it is locked by another process (errno = 11)
-pay    | Connect ok=payment-processor-default/172.18.0.3:8080
-pay    | Connect ok=payment-processor-fallback/172.18.0.2:8080
-back0  | Back
+pay  | Pay
+back0  | [0.001s][warning][perf,memops] Cannot use file /tmp/hsperfdata_root/1 because it is locked by another process (errno = 11)
+back1  | [0.001s][warning][perf,memops] Cannot use file /tmp/hsperfdata_root/1 because it is locked by another process (errno = 11)
+pay    | Connect ok=payment-processor-default/172.19.0.2:8080
+pay    | Connect ok=payment-processor-fallback/172.19.0.3:8080
+front  | [0.001s][warning][perf,memops] Cannot use file /tmp/hsperfdata_root/1 because it is locked by another process (errno = 11)
 back1  | Back
+back0  | Back
 front  | Front
-back0  | Connect ok=/tmp/kag8kie5uDie3lei0toh-pay.sock
 back1  | Connect ok=/tmp/kag8kie5uDie3lei0toh-pay.sock
+back0  | Connect ok=/tmp/kag8kie5uDie3lei0toh-pay.sock
 front  | Connect ok=/tmp/kag8kie5uDie3lei0toh-back0.sock
 front  | Connect ok=/tmp/kag8kie5uDie3lei0toh-back1.sock
 front  | Connect ok=/tmp/kag8kie5uDie3lei0toh-pay.sock
-[Kfront exited with code 137
-back0  | Failed to accept client conn
-[Kback1 exited with code 143
-[Kback0 exited with code 143
+pay    | demo.rinha.Shared$TaskException: java.lang.ArrayIndexOutOfBoundsException: Index 17000 out of bounds for length 17000
+pay    | 	at demo.rinha@012/demo.rinha.Pay$Task.run(Pay.java:437)
+pay    | 	at java.base/java.lang.VirtualThread.run(VirtualThread.java:466)
+pay    | Caused by: java.lang.ArrayIndexOutOfBoundsException: Index 17000 out of bounds for length 17000
+pay    | 	at demo.rinha@012/demo.rinha.Pay.pay(Pay.java:728)
+pay    | 	at demo.rinha@012/demo.rinha.Pay.task(Pay.java:453)
+pay    | 	at demo.rinha@012/demo.rinha.Pay$Task.run(Pay.java:435)
+pay    | 	... 1 more
+pay    | HTTP/1.1 200 OK
+pay    | Connection: close
+pay    | Content-Type: application/json; charset=utf-8
+pay    | Date: Thu, 21 Aug 2025 01:04:45 GMT
+pay    | Server: Kestrel
+pay    | 
+pay    | {"message":"payment processed successfully"}
+pay    | demo.rinha.Shared$TaskException: java.lang.ArrayIndexOutOfBoundsException: Index 17001 out of bounds for length 17000
+pay    | 	at demo.rinha@012/demo.rinha.Pay$Task.run(Pay.java:437)
+pay    | 	at java.base/java.lang.VirtualThread.run(VirtualThread.java:466)
+pay    | Caused by: java.lang.ArrayIndexOutOfBoundsException: Index 17001 out of bounds for length 17000
+pay    | 	at demo.rinha@012/demo.rinha.Pay.pay(Pay.java:728)
+pay    | 	at demo.rinha@012/demo.rinha.Pay.task(Pay.java:453)
+pay    | 	at demo.rinha@012/demo.rinha.Pay$Task.run(Pay.java:435)
+pay    | 	... 1 more
+pay    | HTTP/1.1 200 OK
+pay    | Connection: close
+pay    | Content-Type: application/json; charset=utf-8
+pay    | Date: Thu, 21 Aug 2025 01:04:45 GMT
+pay    | Server: Kestrel
+pay    | 
+pay    | {"message":"payment processed successfully"}
+back0  | demo.rinha.Shared$TaskException: java.net.SocketException: No such file or directory
+back0  | 	at demo.rinha@012/demo.rinha.Back$Task.run(Back.java:273)
+back0  | 	at java.base/java.lang.VirtualThread.run(VirtualThread.java:466)
+back0  | Caused by: java.net.SocketException: No such file or directory
+back0  | 	at java.base/sun.nio.ch.UnixDomainSockets.connect0(Native Method)
+back0  | 	at java.base/sun.nio.ch.UnixDomainSockets.connect(UnixDomainSockets.java:130)
+back0  | 	at java.base/sun.nio.ch.UnixDomainSockets.connect(UnixDomainSockets.java:126)
+back0  | 	at java.base/sun.nio.ch.SocketChannelImpl.connect(SocketChannelImpl.java:950)
+back0  | 	at demo.rinha@012/demo.rinha.Back.taskRoute(Back.java:334)
+back0  | 	at demo.rinha@012/demo.rinha.Back$Task.run(Back.java:271)
+back0  | 	... 1 more
+back0  | {"correlationId":"86b60835-df6c-4052-b5dc-54834570e6b9","amount":20.05}
+back1  | demo.rinha.Shared$TaskException: java.net.SocketException: No such file or directory
+back1  | 	at demo.rinha@012/demo.rinha.Back$Task.run(Back.java:273)
+back1  | 	at java.base/java.lang.VirtualThread.run(VirtualThread.java:466)
+back1  | Caused by: java.net.SocketException: No such file or directory
+back1  | 	at java.base/sun.nio.ch.UnixDomainSockets.connect0(Native Method)
+back1  | 	at java.base/sun.nio.ch.UnixDomainSockets.connect(UnixDomainSockets.java:130)
+back1  | 	at java.base/sun.nio.ch.UnixDomainSockets.connect(UnixDomainSockets.java:126)
+back1  | 	at java.base/sun.nio.ch.SocketChannelImpl.connect(SocketChannelImpl.java:950)
+back1  | 	at demo.rinha@012/demo.rinha.Back.taskRoute(Back.java:334)
+back1  | 	at demo.rinha@012/demo.rinha.Back$Task.run(Back.java:271)
+back1  | 	... 1 more
+back1  | {"correlationId":"b35eb321-f40b-456d-9834-0926c8dbc0a5","amount":20.05}
+back0  | demo.rinha.Shared$TaskException: java.net.SocketException: No such file or directory
+back0  | 	at demo.rinha@012/demo.rinha.Back$Task.run(Back.java:273)
+back0  | 	at java.base/java.lang.VirtualThread.run(VirtualThread.java:466)
+back0  | Caused by: java.net.SocketException: No such file or directory
+back1  | demo.rinha.Shared$TaskException: java.net.SocketException: No such file or directory
+back1  | 	at demo.rinha@012/demo.rinha.Back$Task.run(Back.java:273)
+back1  | 	at java.base/java.lang.VirtualThread.run(VirtualThread.java:466)
+back0  | 	at java.base/sun.nio.ch.UnixDomainSockets.connect0(Native Method)
+back0  | 	at java.base/sun.nio.ch.UnixDomainSockets.connect(UnixDomainSockets.java:130)
+back0  | 	at java.base/sun.nio.ch.UnixDomainSockets.connect(UnixDomainSockets.java:126)
+back0  | 	at java.base/sun.nio.ch.SocketChannelImpl.connect(SocketChannelImpl.java:950)
+back0  | 	at demo.rinha@012/demo.rinha.Back.taskRoute(Back.java:334)
+back0  | 	at demo.rinha@012/demo.rinha.Back$Task.run(Back.java:271)
+back0  | 	... 1 more
+back0  | {"correlationId":"edb841cf-c9dd-4a7a-836f-a615983033b4","amount":20.05}
+front  | demo.rinha.Shared$TaskException: java.net.SocketException: No such file or directory
+front  | 	at demo.rinha@012/demo.rinha.Front$Task.run(Front.java:261)
+front  | 	at java.base/java.lang.VirtualThread.run(VirtualThread.java:466)
+front  | Caused by: java.net.SocketException: No such file or directory
+front  | 	at java.base/sun.nio.ch.UnixDomainSockets.connect0(Native Method)
+front  | 	at java.base/sun.nio.ch.UnixDomainSockets.connect(UnixDomainSockets.java:130)
+front  | 	at java.base/sun.nio.ch.UnixDomainSockets.connect(UnixDomainSockets.java:126)
+front  | 	at java.base/sun.nio.ch.SocketChannelImpl.connect(SocketChannelImpl.java:950)
+front  | 	at demo.rinha@012/demo.rinha.Front.taskPayment(Front.java:442)
+front  | 	at demo.rinha@012/demo.rinha.Front.taskRoute(Front.java:306)
+front  | 	at demo.rinha@012/demo.rinha.Front$Task.run(Front.java:259)
+front  | 	... 1 more
+front  | POST /payments HTTP/1.1
+front  | Host: localhost:9999
+front  | User-Agent: Grafana k6/1.2.2
+front  | Content-Length: 71
+front  | Content-Type: application/json
+front  | {"correlationId":"a8439208-8377-4d97-8501-6ecd97349ec7","amount":20.05}
+front  | demo.rinha.Shared$TaskException: java.net.SocketException: No such file or directory
+front  | 	at demo.rinha@012/demo.rinha.Front$Task.run(Front.java:261)
+front  | 	at java.base/java.lang.VirtualThread.run(VirtualThread.java:466)
+front  | Caused by: java.net.SocketException: No such file or directory
+front  | 	at java.base/sun.nio.ch.UnixDomainSockets.connect0(Native Method)
+front  | 	at java.base/sun.nio.ch.UnixDomainSockets.connect(UnixDomainSockets.java:130)
+front  | 	at java.base/sun.nio.ch.UnixDomainSockets.connect(UnixDomainSockets.java:126)
+front  | 	at java.base/sun.nio.ch.SocketChannelImpl.connect(SocketChannelImpl.java:950)
+front  | 	at demo.rinha@012/demo.rinha.Front.taskPayment(Front.java:442)
+front  | 	at demo.rinha@012/demo.rinha.Front.taskRoute(Front.java:306)
+front  | 	at demo.rinha@012/demo.rinha.Front$Task.run(Front.java:259)
+front  | 	... 1 more
+front  | POST /payments HTTP/1.1
+front  | Host: localhost:9999
+front  | User-Agent: Grafana k6/1.2.2
+front  | Content-Length: 71
+front  | Content-Type: application/json
+front  | {"correlationId":"d211a75b-b85c-4bb6-a0f5-8ff1e0201a9f","amount":20.05}
+front  | demo.rinha.Shared$TaskException: java.net.SocketException: No such file or directory
+front  | 	at demo.rinha@012/demo.rinha.Front$Task.run(Front.java:261)
+front  | 	at java.base/java.lang.VirtualThread.run(VirtualThread.java:466)
+front  | Caused by: java.net.SocketException: No such file or directory
+front  | 	at java.base/sun.nio.ch.UnixDomainSockets.connect0(Native Method)
+front  | 	at java.base/sun.nio.ch.UnixDomainSockets.connect(UnixDomainSockets.java:130)
+front  | 	at java.base/sun.nio.ch.UnixDomainSockets.connect(UnixDomainSockets.java:126)
+front  | 	at java.base/sun.nio.ch.SocketChannelImpl.connect(SocketChannelImpl.java:950)
+front  | 	at demo.rinha@012/demo.rinha.Front.taskPayment(Front.java:442)
+front  | 	at demo.rinha@012/demo.rinha.Front.taskRoute(Front.java:306)
+front  | 	at demo.rinha@012/demo.rinha.Front$Task.run(Front.java:259)
+front  | 	... 1 more
+front  | POST /payments HTTP/1.1
+front  | Host: localhost:9999
+front  | User-Agent: Grafana k6/1.2.2
+front  | Content-Length: 71
+front  | Content-Type: application/json
+front  | {"correlationId":"51baab14-87fd-4893-8649-a36f310075fc","amount":20.05}
+front  | demo.rinha.Shared$TaskException: java.net.SocketException: No such file or directory
+front  | 	at demo.rinha@012/demo.rinha.Front$Task.run(Front.java:261)
+front  | 	at java.base/java.lang.VirtualThread.run(VirtualThread.java:466)
+front  | Caused by: java.net.SocketException: No such file or directory
+front  | 	at java.base/sun.nio.ch.UnixDomainSockets.connect0(Native Method)
+front  | 	at java.base/sun.nio.ch.UnixDomainSockets.connect(UnixDomainSockets.java:130)
+front  | 	at java.base/sun.nio.ch.UnixDomainSockets.connect(UnixDomainSockets.java:126)
+front  | 	at java.base/sun.nio.ch.SocketChannelImpl.connect(SocketChannelImpl.java:950)
+front  | 	at demo.rinha@012/demo.rinha.Front.taskPayment(Front.java:442)
+front  | 	at demo.rinha@012/demo.rinha.Front.taskRoute(Front.java:306)
+front  | 	at demo.rinha@012/demo.rinha.Front$Task.run(Front.java:259)
+front  | 	... 1 more
+front  | POST /payments HTTP/1.1
+front  | Host: localhost:9999
+front  | User-Agent: Grafana k6/1.2.2
+front  | Content-Length: 71
+front  | Content-Type: application/json
+front  | {"correlationId":"37c27858-0615-4f72-985d-60ac775819b3","amount":20.05}
+front  | demo.rinha.Shared$TaskException: java.net.SocketException: No such file or directory
+front  | 	at demo.rinha@012/demo.rinha.Front$Task.run(Front.java:261)
+front  | 	at java.base/java.lang.VirtualThread.run(VirtualThread.java:466)
+front  | Caused by: java.net.SocketException: No such file or directory
+front  | 	at java.base/sun.nio.ch.UnixDomainSockets.connect0(Native Method)
+front  | 	at java.base/sun.nio.ch.UnixDomainSockets.connect(UnixDomainSockets.java:130)
+front  | 	at java.base/sun.nio.ch.UnixDomainSockets.connect(UnixDomainSockets.java:126)
+front  | 	at java.base/sun.nio.ch.SocketChannelImpl.connect(SocketChannelImpl.java:950)
+front  | 	at demo.rinha@012/demo.rinha.Front.taskPayment(Front.java:442)
+front  | 	at demo.rinha@012/demo.rinha.Front.taskRoute(Front.java:306)
+front  | 	at demo.rinha@012/demo.rinha.Front$Task.run(Front.java:259)
+front  | 	... 1 more
+front  | POST /payments HTTP/1.1
+front  | Host: localhost:9999
+front  | User-Agent: Grafana k6/1.2.2
+front  | Content-Length: 71
+front  | Content-Type: application/json
+front  | {"correlationId":"1aca08ce-be2f-499e-ac48-5699ced10bae","amount":20.05}
+front  | demo.rinha.Shared$TaskException: java.net.SocketException: No such file or directory
+front  | 	at demo.rinha@012/demo.rinha.Front$Task.run(Front.java:261)
+front  | 	at java.base/java.lang.VirtualThread.run(VirtualThread.java:466)
+front  | Caused by: java.net.SocketException: No such file or directory
+front  | 	at java.base/sun.nio.ch.UnixDomainSockets.connect0(Native Method)
+front  | 	at java.base/sun.nio.ch.UnixDomainSockets.connect(UnixDomainSockets.java:130)
+front  | 	at java.base/sun.nio.ch.UnixDomainSockets.connect(UnixDomainSockets.java:126)
+front  | 	at java.base/sun.nio.ch.SocketChannelImpl.connect(SocketChannelImpl.java:950)
+front  | 	at demo.rinha@012/demo.rinha.Front.taskPayment(Front.java:442)
+front  | 	at demo.rinha@012/demo.rinha.Front.taskRoute(Front.java:306)
+front  | 	at demo.rinha@012/demo.rinha.Front$Task.run(Front.java:259)
+front  | 	... 1 more
+front  | POST /payments HTTP/1.1
+front  | Host: localhost:9999
+front  | User-Agent: Grafana k6/1.2.2
+front  | Content-Length: 71
+front  | Content-Type: application/json
+front  | {"correlationId":"be9ea984-aca5-43b1-b538-6fb086212780","amount":20.05}
+front  | demo.rinha.Shared$TaskException: java.net.SocketException: No such file or directory
+front  | 	at demo.rinha@012/demo.rinha.Front$Task.run(Front.java:261)
+front  | 	at java.base/java.lang.VirtualThread.run(VirtualThread.java:466)
+front  | Caused by: java.net.SocketException: No such file or directory
+front  | 	at java.base/sun.nio.ch.UnixDomainSockets.connect0(Native Method)
+front  | 	at java.base/sun.nio.ch.UnixDomainSockets.connect(UnixDomainSockets.java:130)
+front  | 	at java.base/sun.nio.ch.UnixDomainSockets.connect(UnixDomainSockets.java:126)
+front  | 	at java.base/sun.nio.ch.SocketChannelImpl.connect(SocketChannelImpl.java:950)
+front  | 	at demo.rinha@012/demo.rinha.Front.taskPayment(Front.java:442)
+front  | 	at demo.rinha@012/demo.rinha.Front.taskRoute(Front.java:306)
+front  | 	at demo.rinha@012/demo.rinha.Front$Task.run(Front.java:259)
+front  | 	... 1 more
+front  | POST /payments HTTP/1.1
+front  | Host: localhost:9999
+front  | User-Agent: Grafana k6/1.2.2
+front  | Content-Length: 71
+front  | Content-Type: application/json
+front  | {"correlationId":"9dd72621-bb7f-4d2c-a104-63e39ce9057a","amount":20.05}
+front  | demo.rinha.Shared$TaskException: java.net.SocketException: No such file or directory
+front  | 	at demo.rinha@012/demo.rinha.Front$Task.run(Front.java:261)
+front  | 	at java.base/java.lang.VirtualThread.run(VirtualThread.java:466)
+front  | Caused by: java.net.SocketException: No such file or directory
+front  | 	at java.base/sun.nio.ch.UnixDomainSockets.connect0(Native Method)
+front  | 	at java.base/sun.nio.ch.UnixDomainSockets.connect(UnixDomainSockets.java:130)
+front  | 	at java.base/sun.nio.ch.UnixDomainSockets.connect(UnixDomainSockets.java:126)
+front  | 	at java.base/sun.nio.ch.SocketChannelImpl.connect(SocketChannelImpl.java:950)
+front  | 	at demo.rinha@012/demo.rinha.Front.taskPayment(Front.java:442)
+front  | 	at demo.rinha@012/demo.rinha.Front.taskRoute(Front.java:306)
+front  | 	at demo.rinha@012/demo.rinha.Front$Task.run(Front.java:259)
+front  | 	... 1 more
+front  | POST /payments HTTP/1.1
+front  | Host: localhost:9999
+front  | User-Agent: Grafana k6/1.2.2
+front  | Content-Length: 71
+front  | Content-Type: application/json
+front  | {"correlationId":"4441e7ff-961e-4dd4-9f2e-36d0ae9a2d5e","amount":20.05}
+front  | demo.rinha.Shared$TaskException: java.net.SocketException: No such file or directory
+front  | 	at demo.rinha@012/demo.rinha.Front$Task.run(Front.java:261)
+front  | 	at java.base/java.lang.VirtualThread.run(VirtualThread.java:466)
+front  | Caused by: java.net.SocketException: No such file or directory
+front  | 	at java.base/sun.nio.ch.UnixDomainSockets.connect0(Native Method)
+front  | 	at java.base/sun.nio.ch.UnixDomainSockets.connect(UnixDomainSockets.java:130)
+front  | 	at java.base/sun.nio.ch.UnixDomainSockets.connect(UnixDomainSockets.java:126)
+front  | 	at java.base/sun.nio.ch.SocketChannelImpl.connect(SocketChannelImpl.java:950)
+front  | 	at demo.rinha@012/demo.rinha.Front.taskPayment(Front.java:442)
+front  | 	at demo.rinha@012/demo.rinha.Front.taskRoute(Front.java:306)
+front  | 	at demo.rinha@012/demo.rinha.Front$Task.run(Front.java:259)
+front  | 	... 1 more
+front  | POST /payments HTTP/1.1
+front  | Host: localhost:9999
+front  | User-Agent: Grafana k6/1.2.2
+front  | Content-Length: 71
+front  | Content-Type: application/json
+front  | {"correlationId":"1fcf6282-b764-4baa-9aa6-84905c75190b","amount":20.05}
+front  | demo.rinha.Shared$TaskException: java.net.SocketException: No such file or directory
+front  | 	at demo.rinha@012/demo.rinha.Front$Task.run(Front.java:261)
+front  | 	at java.base/java.lang.VirtualThread.run(VirtualThread.java:466)
+[Kpay exited with code 0
+[Kback1 exited with code 0
+[Kback0 exited with code 0
+[Kfront exited with code 0
 log truncated at line 1000

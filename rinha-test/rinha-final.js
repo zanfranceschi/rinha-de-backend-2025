@@ -12,7 +12,7 @@ import {
   getPPPaymentsSummary,
   resetBackendDatabase,
   getBackendPaymentsSummary,
-  requestBackendPayment
+  requestBackendPayment,
 } from "./requests.js";
 
 import Big from "https://cdn.jsdelivr.net/npm/big.js@7.0.1/big.min.js";
@@ -20,10 +20,7 @@ import Big from "https://cdn.jsdelivr.net/npm/big.js@7.0.1/big.min.js";
 const MAX_REQUESTS = __ENV.MAX_REQUESTS ?? 603;
 
 export const options = {
-  summaryTrendStats: [
-    "p(99)",
-    "count",
-  ],
+  summaryTrendStats: ["p(99)", "count"],
   scenarios: {
     payments: {
       exec: "payments",
@@ -68,7 +65,7 @@ export const options = {
         fallbackFailure: "false",
       },
     },
-    // Pode ser que escolher só o defaul não seja uma 
+    // Pode ser que escolher só o defaul não seja uma
     // ideia tão ruim assim...
     stage_02: {
       exec: "define_stage",
@@ -85,7 +82,7 @@ export const options = {
     },
     // Ás vezes vale pagar mais caro por um serviço melhor, sabe?
     // NPS, satisfação do cliente, etc.
-    // Dizem que recuperar um cliente é muito mais difícil do que 
+    // Dizem que recuperar um cliente é muito mais difícil do que
     // conquistar um novo.
     stage_03: {
       exec: "define_stage",
@@ -215,17 +212,25 @@ export async function setup() {
 const paymentRequestFixedAmount = new Big(20.05);
 
 export async function teardown() {
-
   const to = new Date();
-  const from = new Date(to.getTime() - 70 * 1000); // 1 minuto e 10 segundos atrás
+  const from = new Date(to.getTime() - 360 * 1000); // 6 minutos atrás
 
   console.info(`summaries from ${from.toISOString()} to ${to.toISOString()}`);
 
-  const defaultResponse = await getPPPaymentsSummary("default", from.toISOString(), to.toISOString());
-  const fallbackResponse = await getPPPaymentsSummary("fallback", from.toISOString(), to.toISOString());
+  const defaultResponse = await getPPPaymentsSummary(
+    "default",
+    from.toISOString(),
+    to.toISOString(),
+  );
+  const fallbackResponse = await getPPPaymentsSummary(
+    "fallback",
+    from.toISOString(),
+    to.toISOString(),
+  );
 
-  const totalTransactionsAmount = new Big(defaultResponse.totalAmount)
-    .plus(fallbackResponse.totalAmount);
+  const totalTransactionsAmount = new Big(defaultResponse.totalAmount).plus(
+    fallbackResponse.totalAmount,
+  );
 
   totalTransactionsAmountCounter.add(totalTransactionsAmount.toNumber());
 
@@ -234,18 +239,21 @@ export async function teardown() {
   fallbackTotalAmountCounter.add(fallbackResponse.totalAmount);
   fallbackTotalRequestsCounter.add(fallbackResponse.totalRequests);
 
-  const defaultTotalFee = new Big(defaultResponse.feePerTransaction).times(defaultResponse.totalAmount);
-  const fallbackTotalFee = new Big(fallbackResponse.feePerTransaction).times(fallbackResponse.totalAmount);
+  const defaultTotalFee = new Big(defaultResponse.feePerTransaction).times(
+    defaultResponse.totalAmount,
+  );
+  const fallbackTotalFee = new Big(fallbackResponse.feePerTransaction).times(
+    fallbackResponse.totalAmount,
+  );
 
   defaultTotalFeeCounter.add(defaultTotalFee.toNumber());
   fallbackTotalFeeCounter.add(fallbackTotalFee.toNumber());
 }
 
 export async function payments() {
-
   const payload = {
     correlationId: uuidv4(),
-    amount: paymentRequestFixedAmount.toNumber()
+    amount: paymentRequestFixedAmount.toNumber(),
   };
 
   const response = await requestBackendPayment(payload);
@@ -262,7 +270,6 @@ export async function payments() {
 }
 
 export async function checkPaymentsConsistency() {
-
   const now = new Date();
 
   const from = new Date(now - 1000 * 15).toISOString();
@@ -280,24 +287,38 @@ export async function checkPaymentsConsistency() {
   );
   const backendPaymentsSummaryPromise = getBackendPaymentsSummary(from, to);
 
-  const [defaultAdminPaymentsSummary, fallbackAdminPaymentsSummary, backendPaymentsSummary] = await Promise.all([
+  const [
+    defaultAdminPaymentsSummary,
+    fallbackAdminPaymentsSummary,
+    backendPaymentsSummary,
+  ] = await Promise.all([
     defaultAdminPaymentsSummaryPromise,
     fallbackAdminPaymentsSummaryPromise,
-    backendPaymentsSummaryPromise
+    backendPaymentsSummaryPromise,
   ]);
 
   const inconsistencies =
     Math.abs(
-      (backendPaymentsSummary.default.totalRequests - defaultAdminPaymentsSummary.totalRequests) +
-      (backendPaymentsSummary.fallback.totalRequests - fallbackAdminPaymentsSummary.totalRequests)
+      backendPaymentsSummary.default.totalRequests -
+        defaultAdminPaymentsSummary.totalRequests,
+    ) +
+    Math.abs(
+      backendPaymentsSummary.fallback.totalRequests -
+        fallbackAdminPaymentsSummary.totalRequests,
     );
 
   paymentsInconsistencyCounter.add(inconsistencies);
 
   if (inconsistencies > 0) {
-    console.warn("================ [inconsistências encontradas] ================");
-    console.warn(`backend.default.totalRequests vs default.totalRequests: ${backendPaymentsSummary.default.totalRequests} vs ${defaultAdminPaymentsSummary.totalRequests}`);
-    console.warn(`backend.fallback.totalRequests vs fallback.totalRequests: ${backendPaymentsSummary.fallback.totalRequests} vs ${fallbackAdminPaymentsSummary.totalRequests}`);
+    console.warn(
+      "================ [inconsistências encontradas] ================",
+    );
+    console.warn(
+      `backend.default.totalRequests vs default.totalRequests: ${backendPaymentsSummary.default.totalRequests} vs ${defaultAdminPaymentsSummary.totalRequests}`,
+    );
+    console.warn(
+      `backend.fallback.totalRequests vs fallback.totalRequests: ${backendPaymentsSummary.fallback.totalRequests} vs ${fallbackAdminPaymentsSummary.totalRequests}`,
+    );
   }
 
   sleep(10);
@@ -319,29 +340,46 @@ export async function define_stage() {
 }
 
 export function handleSummary(data) {
-
-  const total_transactions_requested = data.metrics.transactions_success.values.count;
-  const actual_total_amount = data.metrics.total_transactions_amount.values.count;
+  const total_transactions_requested =
+    data.metrics.transactions_success.values.count;
+  const actual_total_amount =
+    data.metrics.total_transactions_amount.values.count;
 
   const default_total_fee = data.metrics.default_total_fee.values.count;
   const fallback_total_fee = data.metrics.fallback_total_fee.values.count;
-  const total_fee = new Big(default_total_fee).plus(fallback_total_fee).toNumber();
+  const total_fee = new Big(default_total_fee)
+    .plus(fallback_total_fee)
+    .toNumber();
 
-  const p_99 = new Big(data.metrics["http_req_duration{expected_response:true}"].values["p(99)"]).round(2).toNumber();
-  const p_99_bonus = Math.max(new Big((11 - p_99) * 0.02).round(2).toNumber(), 0);
-  const contains_inconsistencies = data.metrics.payments_inconsistency.values.count > 0;
+  const p_99 = new Big(
+    data.metrics["http_req_duration{expected_response:true}"].values["p(99)"],
+  )
+    .round(2)
+    .toNumber();
+  const p_99_bonus = Math.max(
+    new Big((11 - p_99) * 0.02).round(2).toNumber(),
+    0,
+  );
+  const contains_inconsistencies =
+    data.metrics.payments_inconsistency.values.count > 0;
 
   const inconsistencies_fine = contains_inconsistencies ? 0.35 : 0;
 
   // caixa dois
-  const lag = data.metrics.transactions_success.values.count - (data.metrics.default_total_requests.values.count + data.metrics.fallback_total_requests.values.count);
+  const lag =
+    data.metrics.transactions_success.values.count -
+    (data.metrics.default_total_requests.values.count +
+      data.metrics.fallback_total_requests.values.count);
   const slush_fund = lag < 0;
 
-  const liquid_partial_amount = new Big(actual_total_amount).minus(total_fee).toNumber();
+  const liquid_partial_amount = new Big(actual_total_amount)
+    .minus(total_fee)
+    .toNumber();
 
   const liquid_amount = new Big(liquid_partial_amount)
     .plus(new Big(liquid_partial_amount).times(p_99_bonus))
-    .minus(new Big(liquid_partial_amount).times(inconsistencies_fine)).toNumber();
+    .minus(new Big(liquid_partial_amount).times(inconsistencies_fine))
+    .toNumber();
 
   const name = __ENV.PARTICIPANT ?? "anonymous";
 
@@ -351,7 +389,8 @@ export function handleSummary(data) {
     total_liquido: liquid_amount,
     total_bruto: actual_total_amount,
     total_taxas: total_fee,
-    descricao: "'total_liquido' é sua pontuação final. Equivale ao seu lucro. Fórmula: total_liquido + (total_liquido * p99.bonus) - (total_liquido * multa.porcentagem)",
+    descricao:
+      "'total_liquido' é sua pontuação final. Equivale ao seu lucro. Fórmula: total_liquido + (total_liquido * p99.bonus) - (total_liquido * multa.porcentagem)",
     p99: {
       valor: `${p_99}ms`,
       bonus: `${new Big(p_99_bonus).times(100)}%`,
@@ -360,39 +399,52 @@ export function handleSummary(data) {
     },
     multa: {
       porcentagem: inconsistencies_fine,
-      total: new Big(liquid_partial_amount).times(inconsistencies_fine).toNumber(),
+      total: new Big(liquid_partial_amount)
+        .times(inconsistencies_fine)
+        .toNumber(),
       composicao: {
         num_inconsistencias: data.metrics.payments_inconsistency.values.count,
         descricao: "Se 'num_inconsistencias' > 0, há multa de 35%.",
-      }
+      },
     },
     caixa_dois: {
       detectado: slush_fund,
-      descricao: "Se 'lag' for negativo, significa que seu backend registrou mais pagamentos do que solicitado, automaticamente desclassificando sua submissão!",
+      descricao:
+        "Se 'lag' for negativo, significa que seu backend registrou mais pagamentos do que solicitado, automaticamente desclassificando sua submissão!",
     },
     lag: {
-      num_pagamentos_total: data.metrics.default_total_requests.values.count + data.metrics.fallback_total_requests.values.count,
-      num_pagamentos_solicitados: data.metrics.transactions_success.values.count,
-      lag: data.metrics.transactions_success.values.count - (data.metrics.default_total_requests.values.count + data.metrics.fallback_total_requests.values.count),
-      descricao: "Lag é a diferença entre a quantidade de solicitações de pagamentos e o que foi realmente computado pelo backend. Mostra a perda de pagamentos possivelmente por estarem enfileirados."
+      num_pagamentos_total:
+        data.metrics.default_total_requests.values.count +
+        data.metrics.fallback_total_requests.values.count,
+      num_pagamentos_solicitados:
+        data.metrics.transactions_success.values.count,
+      lag:
+        data.metrics.transactions_success.values.count -
+        (data.metrics.default_total_requests.values.count +
+          data.metrics.fallback_total_requests.values.count),
+      descricao:
+        "Lag é a diferença entre a quantidade de solicitações de pagamentos e o que foi realmente computado pelo backend. Mostra a perda de pagamentos possivelmente por estarem enfileirados.",
     },
     pagamentos_solicitados: {
       qtd_sucesso: data.metrics.transactions_success.values.count,
       qtd_falha: data.metrics.transactions_failure.values.count,
-      descricao: "'qtd_sucesso' foram requests bem sucedidos para 'POST /payments' e 'qtd_falha' os requests com erro."
+      descricao:
+        "'qtd_sucesso' foram requests bem sucedidos para 'POST /payments' e 'qtd_falha' os requests com erro.",
     },
     pagamentos_realizados_default: {
       total_bruto: data.metrics.default_total_amount.values.count,
       num_pagamentos: data.metrics.default_total_requests.values.count,
       total_taxas: data.metrics.default_total_fee.values.count,
-      descricao: "Informações do backend sobre solicitações de pagamento para o Payment Processor Default."
+      descricao:
+        "Informações do backend sobre solicitações de pagamento para o Payment Processor Default.",
     },
     pagamentos_realizados_fallback: {
       total_bruto: data.metrics.fallback_total_amount.values.count,
       num_pagamentos: data.metrics.fallback_total_requests.values.count,
       total_taxas: data.metrics.fallback_total_fee.values.count,
-      descricao: "Informações do backend sobre solicitações de pagamento para o Payment Processor Fallback."
-    }
+      descricao:
+        "Informações do backend sobre solicitações de pagamento para o Payment Processor Fallback.",
+    },
   };
 
   const result = {
@@ -400,10 +452,10 @@ export function handleSummary(data) {
   };
 
   const participant = __ENV.PARTICIPANT;
-  let summaryJsonFileName = `../participantes/${participant}/final-results.json`
+  let summaryJsonFileName = `../participantes/${participant}/final-results.json`;
 
   if (participant == undefined) {
-    summaryJsonFileName = `./final-results.json`
+    summaryJsonFileName = `./final-results.json`;
   }
 
   result[summaryJsonFileName] = JSON.stringify(custom_data, null, 2);

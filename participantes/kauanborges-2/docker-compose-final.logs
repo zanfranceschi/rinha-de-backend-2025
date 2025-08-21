@@ -1,1001 +1,185 @@
 
- Network kauanborges-2_backend  Creating
- Network kauanborges-2_backend  Created
- Volume "kauanborges-2_sockets"  Creating
- Volume "kauanborges-2_sockets"  Created
- Container kauanborges-2-app1-1  Creating
- Container kauanborges-2-app2-1  Creating
- Container kauanborges-2-app1-1  Created
- Container kauanborges-2-app2-1  Created
- Container kauanborges-2-load-balancer-1  Creating
- Container kauanborges-2-load-balancer-1  Created
-Attaching to app1-1, app2-1, load-balancer-1
-app2-1  | 
-app2-1  |   .   ____          _            __ _ _
-app2-1  |  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
-app2-1  | ( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
-app2-1  |  \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
-app2-1  |   '  |____| .__|_| |_|_| |_\__, | / / / /
-app2-1  |  =========|_|==============|___/=/_/_/_/
-app2-1  | 
-app2-1  |  :: Spring Boot ::                (v3.5.4)
-app2-1  | 
-app2-1  | 2025-08-19T02:10:21.365Z  INFO 1 --- [payment-processor-proxy] [           main] b.k.p.PaymentProcessorProxyApplication   : Starting AOT-processed PaymentProcessorProxyApplication using Java 21.0.8 with PID 1 (/workspace/borges.kauan.paymentprocessorproxy.PaymentProcessorProxyApplication started by cnb in /workspace)
-app2-1  | 2025-08-19T02:10:21.365Z  INFO 1 --- [payment-processor-proxy] [           main] b.k.p.PaymentProcessorProxyApplication   : No active profile set, falling back to 1 default profile: "default"
-app2-1  | 2025-08-19T02:10:21.375Z  INFO 1 --- [payment-processor-proxy] [           main] b.k.p.adapter.input.UnixSocketConfig     : Configuring Netty server to use Unix socket at: /tmp/springboot/app2.sock
-app1-1  | 
-app1-1  |   .   ____          _            __ _ _
-app1-1  |  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
-app1-1  | ( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
-app1-1  |  \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
-app1-1  |   '  |____| .__|_| |_|_| |_\__, | / / / /
-app1-1  |  =========|_|==============|___/=/_/_/_/
-app1-1  | 
-app1-1  |  :: Spring Boot ::                (v3.5.4)
-app1-1  | 
-app1-1  | 2025-08-19T02:10:21.382Z  INFO 1 --- [payment-processor-proxy] [           main] b.k.p.PaymentProcessorProxyApplication   : Starting AOT-processed PaymentProcessorProxyApplication using Java 21.0.8 with PID 1 (/workspace/borges.kauan.paymentprocessorproxy.PaymentProcessorProxyApplication started by cnb in /workspace)
-app1-1  | 2025-08-19T02:10:21.382Z  INFO 1 --- [payment-processor-proxy] [           main] b.k.p.PaymentProcessorProxyApplication   : No active profile set, falling back to 1 default profile: "default"
-app1-1  | 2025-08-19T02:10:21.389Z  INFO 1 --- [payment-processor-proxy] [           main] b.k.p.adapter.input.UnixSocketConfig     : Configuring Netty server to use Unix socket at: /tmp/springboot/app1.sock
-app1-1  | 2025-08-19T02:10:21.565Z  INFO 1 --- [payment-processor-proxy] [           main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 13 endpoints beneath base path '/actuator'
-app2-1  | 2025-08-19T02:10:21.574Z  INFO 1 --- [payment-processor-proxy] [           main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 13 endpoints beneath base path '/actuator'
-app2-1  | 2025-08-19T02:10:21.582Z  WARN 1 --- [payment-processor-proxy] [           main] i.m.c.i.binder.jvm.JvmGcMetrics          : GC notifications will not be available because no GarbageCollectorMXBean of the JVM provides any. GCs=[young generation scavenger, complete scavenger]
-app2-1  | 2025-08-19T02:10:21.593Z  INFO 1 --- [payment-processor-proxy] [           main] o.s.b.web.embedded.netty.NettyWebServer  : Netty started on path /tmp/springboot/app2.sock
-app2-1  | 2025-08-19T02:10:21.593Z  INFO 1 --- [payment-processor-proxy] [or-http-epoll-1] b.k.p.adapter.input.UnixSocketConfig     : Netty server bound to Unix socket at: /tmp/springboot/app2.sock
-app2-1  | 2025-08-19T02:10:21.594Z  INFO 1 --- [payment-processor-proxy] [           main] b.k.p.PaymentProcessorProxyApplication   : Started PaymentProcessorProxyApplication in 0.256 seconds (process running for 0.263)
-app2-1  | 2025-08-19T02:10:21.594Z  INFO 1 --- [payment-processor-proxy] [           main] b.k.p.a.o.g.w.ConnectionPoolWarmup       : Warming up connection pools...
-load-balancer-1  | /docker-entrypoint.sh: /docker-entrypoint.d/ is not empty, will attempt to perform configuration
-load-balancer-1  | /docker-entrypoint.sh: Looking for shell scripts in /docker-entrypoint.d/
-load-balancer-1  | /docker-entrypoint.sh: Launching /docker-entrypoint.d/10-listen-on-ipv6-by-default.sh
-app1-1           | 2025-08-19T02:10:21.610Z  WARN 1 --- [payment-processor-proxy] [           main] i.m.c.i.binder.jvm.JvmGcMetrics          : GC notifications will not be available because no GarbageCollectorMXBean of the JVM provides any. GCs=[young generation scavenger, complete scavenger]
-load-balancer-1  | 10-listen-on-ipv6-by-default.sh: info: Getting the checksum of /etc/nginx/conf.d/default.conf
-app1-1           | 2025-08-19T02:10:21.623Z  INFO 1 --- [payment-processor-proxy] [or-http-epoll-1] b.k.p.adapter.input.UnixSocketConfig     : Netty server bound to Unix socket at: /tmp/springboot/app1.sock
-app1-1           | 2025-08-19T02:10:21.623Z  INFO 1 --- [payment-processor-proxy] [           main] o.s.b.web.embedded.netty.NettyWebServer  : Netty started on path /tmp/springboot/app1.sock
-app1-1           | 2025-08-19T02:10:21.624Z  INFO 1 --- [payment-processor-proxy] [           main] b.k.p.PaymentProcessorProxyApplication   : Started PaymentProcessorProxyApplication in 0.285 seconds (process running for 0.291)
-app1-1           | 2025-08-19T02:10:21.624Z  INFO 1 --- [payment-processor-proxy] [           main] b.k.p.a.o.g.w.ConnectionPoolWarmup       : Warming up connection pools...
-load-balancer-1  | 10-listen-on-ipv6-by-default.sh: info: Enabled listen on IPv6 in /etc/nginx/conf.d/default.conf
-load-balancer-1  | /docker-entrypoint.sh: Sourcing /docker-entrypoint.d/15-local-resolvers.envsh
-load-balancer-1  | /docker-entrypoint.sh: Launching /docker-entrypoint.d/20-envsubst-on-templates.sh
-load-balancer-1  | /docker-entrypoint.sh: Launching /docker-entrypoint.d/30-tune-worker-processes.sh
-load-balancer-1  | /docker-entrypoint.sh: Configuration complete; ready for start up
-app1-1           | 2025-08-19T02:10:25.578Z  INFO 1 --- [payment-processor-proxy] [or-http-epoll-3] b.k.p.a.i.PaymentProcessorController     : Fetching payments summary from null to null
-app2-1           | 2025-08-19T02:10:25.580Z  INFO 1 --- [payment-processor-proxy] [or-http-epoll-3] b.k.p.a.i.PaymentProcessorController     : Fetching standalone payments summary from null to null
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:25 +0000] "GET /payments-summary HTTP/1.1" 200 94 "-" "curl/8.5.0"
-app1-1           | 2025-08-19T02:10:26.636Z  WARN 1 --- [payment-processor-proxy] [or-http-epoll-4] r.netty.http.client.HttpClientConnect    : [51d40623-1, L:/172.18.0.4:33156 - R:payment-processor-default/172.18.0.3:8080] The connection observed an error
-app1-1           | 
-app1-1           | io.netty.handler.timeout.ReadTimeoutException: null
-app1-1           | 
-app1-1           | 2025-08-19T02:10:26.636Z  WARN 1 --- [payment-processor-proxy] [or-http-epoll-4] r.netty.http.client.HttpClientConnect    : [4da8da70-1, L:/172.18.0.4:33192 - R:payment-processor-default/172.18.0.3:8080] The connection observed an error
-app1-1           | 
-app1-1           | io.netty.handler.timeout.ReadTimeoutException: null
-app1-1           | 
-app2-1           | 2025-08-19T02:10:26.865Z  WARN 1 --- [payment-processor-proxy] [or-http-epoll-3] r.netty.http.client.HttpClientConnect    : [e633dcc8-1, L:/172.18.0.5:51946 - R:payment-processor-fallback/172.18.0.2:8080] The connection observed an error
-app2-1           | 
-app2-1           | io.netty.handler.timeout.ReadTimeoutException: null
-app2-1           | 
-app2-1           | 2025-08-19T02:10:26.867Z  WARN 1 --- [payment-processor-proxy] [or-http-epoll-1] r.netty.http.client.HttpClientConnect    : [efebe83c-1, L:/172.18.0.5:52074 - R:payment-processor-fallback/172.18.0.2:8080] The connection observed an error
-app2-1           | 
-app2-1           | io.netty.handler.timeout.ReadTimeoutException: null
-app2-1           | 
-app2-1           | 2025-08-19T02:10:31.138Z  INFO 1 --- [payment-processor-proxy] [or-http-epoll-4] b.k.p.a.i.PaymentProcessorController     : Purging all payments
-app1-1           | 2025-08-19T02:10:31.139Z  INFO 1 --- [payment-processor-proxy] [or-http-epoll-1] b.k.p.a.i.PaymentProcessorController     : Purging standalone payments
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:31 +0000] "POST /purge-payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-app1-1           | 2025-08-19T02:10:31.143Z  INFO 1 --- [payment-processor-proxy] [or-http-epoll-2] b.k.p.a.i.PaymentProcessorController     : Fetching payments summary from 2025-08-19T02:10:16.140Z to 2025-08-19T02:10:29.140Z
-app2-1           | 2025-08-19T02:10:31.144Z  INFO 1 --- [payment-processor-proxy] [or-http-epoll-3] b.k.p.a.i.PaymentProcessorController     : Fetching standalone payments summary from 2025-08-19T02:10:16.140Z to 2025-08-19T02:10:29.140Z
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:31 +0000] "GET /payments-summary?from=2025-08-19T02:10:16.140Z&to=2025-08-19T02:10:29.140Z HTTP/1.1" 200 94 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:31 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:31 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:32 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:32 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:32 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:32 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:33 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:33 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:33 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:33 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:33 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:33 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:34 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:34 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:34 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:34 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:34 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:34 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:34 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:34 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:35 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:35 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:35 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:35 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:35 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:35 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:35 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:35 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:35 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:35 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:36 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:36 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:36 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:36 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:36 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:36 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:36 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:36 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:36 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:36 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:36 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:36 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:37 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:37 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:37 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:37 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:37 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:37 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:37 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:37 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:37 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:37 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:37 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:37 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:37 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:37 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:38 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:38 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:38 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:38 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:38 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:38 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:38 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:38 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:38 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:38 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:38 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:38 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:38 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:38 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:38 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:38 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:39 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:39 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:39 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:39 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:39 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:39 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:39 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:39 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:39 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:39 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:39 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:39 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:39 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:39 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:39 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:39 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:39 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:39 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:40 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:40 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:40 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:40 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:40 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:40 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:40 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:40 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:40 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:40 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:40 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:40 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:40 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:40 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:40 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:40 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:40 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:40 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:40 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:40 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:41 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:41 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:41 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:41 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:41 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:41 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:41 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:41 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-app2-1           | 2025-08-19T02:10:41.148Z  INFO 1 --- [payment-processor-proxy] [or-http-epoll-3] b.k.p.a.i.PaymentProcessorController     : Fetching payments summary from 2025-08-19T02:10:26.147Z to 2025-08-19T02:10:39.147Z
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:41 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-app1-1           | 2025-08-19T02:10:41.150Z  INFO 1 --- [payment-processor-proxy] [or-http-epoll-1] b.k.p.a.i.PaymentProcessorController     : Fetching standalone payments summary from 2025-08-19T02:10:26.147Z to 2025-08-19T02:10:39.147Z
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:41 +0000] "GET /payments-summary?from=2025-08-19T02:10:26.147Z&to=2025-08-19T02:10:39.147Z HTTP/1.1" 200 101 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:41 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:41 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:41 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:41 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:41 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:41 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:41 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:41 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:41 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:41 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:41 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:41 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:41 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:42 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:42 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:42 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:42 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:42 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:42 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:42 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:42 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:42 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:42 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:42 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:42 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:42 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:42 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:42 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:42 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:42 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:42 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:42 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:42 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:42 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:42 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:42 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:42 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:43 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:43 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:43 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:43 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:43 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:43 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:43 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:43 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:43 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:43 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:43 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:43 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:43 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:43 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:43 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:43 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:43 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:43 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:43 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:43 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:43 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:43 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:43 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:43 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:43 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:43 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:44 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:44 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:44 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:44 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:44 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:44 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:44 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:44 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:44 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:44 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:44 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:44 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:44 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:44 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:44 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:44 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:44 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:44 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:44 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:44 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:44 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:44 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:44 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:44 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:44 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:44 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:44 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:44 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:45 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:45 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:45 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:45 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:45 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:45 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:45 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:45 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:45 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:45 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:45 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:45 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:45 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:45 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:45 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:45 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:45 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:45 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:45 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:45 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:45 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:45 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:45 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:45 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:45 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:45 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:45 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:45 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:45 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:45 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:46 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:46 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:46 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:46 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:46 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:46 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:46 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:46 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:46 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:46 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:46 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:46 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:46 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:46 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:46 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:46 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:46 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:46 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:46 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:46 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:46 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:46 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:46 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:46 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:46 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:46 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:46 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:46 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:46 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:46 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:46 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:46 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:47 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:47 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:47 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:47 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:47 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:47 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:47 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:47 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:47 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:47 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:47 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:47 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:47 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:47 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:47 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:47 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:47 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:47 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:47 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:47 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:47 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:47 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:47 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:47 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:47 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:47 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:47 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:47 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:47 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:47 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:47 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:47 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:47 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:47 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:48 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:48 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:48 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:48 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:48 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:48 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:48 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:48 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:48 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:48 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:48 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:48 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:48 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:48 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:48 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:48 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:48 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:48 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:48 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:48 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:48 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:48 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:48 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:48 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:48 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:48 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:48 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:48 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:48 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:48 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:48 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:48 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:48 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:48 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:48 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:48 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:49 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:49 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:49 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:49 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:49 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:49 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:49 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:49 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:49 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:49 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:49 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:49 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:49 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:49 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:49 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:49 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:49 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:49 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:49 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:49 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:49 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:49 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:49 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:49 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:49 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:49 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:49 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:49 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:49 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:49 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:49 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:49 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:49 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:49 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:49 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:49 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:49 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:49 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:50 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:50 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:50 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:50 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:50 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:50 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:50 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:50 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:50 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:50 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:50 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:50 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:50 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:50 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:50 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:50 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:50 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:50 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:50 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:50 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:50 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:50 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:50 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:50 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:50 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:50 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:50 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:50 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:50 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:50 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:50 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:50 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:50 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:50 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:50 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:50 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:50 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:50 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:50 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:50 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:51 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:51 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:51 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:51 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:51 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:51 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:51 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:51 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:51 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:51 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:51 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:51 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:51 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:51 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:51 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:51 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-app1-1           | 2025-08-19T02:10:51.153Z  INFO 1 --- [payment-processor-proxy] [or-http-epoll-1] b.k.p.a.i.PaymentProcessorController     : Fetching payments summary from 2025-08-19T02:10:36.152Z to 2025-08-19T02:10:49.152Z
-app2-1           | 2025-08-19T02:10:51.154Z  INFO 1 --- [payment-processor-proxy] [or-http-epoll-3] b.k.p.a.i.PaymentProcessorController     : Fetching standalone payments summary from 2025-08-19T02:10:36.152Z to 2025-08-19T02:10:49.152Z
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:51 +0000] "GET /payments-summary?from=2025-08-19T02:10:36.152Z&to=2025-08-19T02:10:49.152Z HTTP/1.1" 200 102 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:51 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:51 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:51 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:51 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:51 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:51 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:51 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:51 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:51 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:51 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:51 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:51 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:51 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:51 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:51 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:51 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:51 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:51 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:51 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:51 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:51 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:51 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:51 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:51 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:51 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:51 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:52 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:52 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:52 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:52 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:52 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:52 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:52 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:52 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:52 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:52 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:52 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:52 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:52 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:52 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:52 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:52 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:52 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:52 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:52 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:52 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:52 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:52 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:52 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:52 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:52 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:52 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:52 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:52 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:52 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:52 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:52 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:52 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:52 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:52 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:52 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:52 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:52 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:52 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:52 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:52 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:52 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:52 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:52 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:52 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:53 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:53 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:53 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:53 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:53 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:53 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:53 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:53 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:53 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:53 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:53 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:53 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:53 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:53 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:53 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:53 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:53 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:53 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:53 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:53 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:53 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:53 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:53 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:53 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:53 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:53 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:53 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:53 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:53 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:53 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:53 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:53 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:53 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:53 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:53 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:53 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:53 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:53 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:53 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:53 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:53 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:53 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:53 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:53 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:53 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:53 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:54 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:54 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:54 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:54 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:54 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:54 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:54 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:54 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:54 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:54 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:54 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:54 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:54 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:54 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:54 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:54 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:54 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:54 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:54 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:54 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:54 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:54 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:54 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:54 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:54 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:54 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:54 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:54 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:54 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:54 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:54 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:54 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:54 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:54 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:54 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:54 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:54 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:54 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:54 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:54 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:54 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:54 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:54 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:54 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:54 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:54 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:54 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:54 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:55 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:55 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:55 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:55 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:55 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:55 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:55 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:55 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:55 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:55 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:55 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:55 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:55 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:55 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:55 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:55 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:55 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:55 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:55 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:55 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:55 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:55 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:55 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:55 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:55 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:55 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:55 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:55 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:55 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:55 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:55 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:55 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:55 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:55 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:55 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:55 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:55 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:55 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:55 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:55 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:55 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:55 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:55 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:55 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:55 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:55 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:55 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:55 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:55 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:55 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:56 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:56 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:56 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:56 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:56 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:56 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:56 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:56 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:56 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:56 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:56 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:56 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:56 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:56 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:56 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:56 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:56 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:56 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:56 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:56 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:56 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:56 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:56 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:56 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:56 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:56 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:56 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:56 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:56 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:56 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:56 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:56 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:56 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:56 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:56 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:56 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:56 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:56 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:56 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:56 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:56 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:56 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:56 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:56 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:56 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:56 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:56 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:56 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:56 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:56 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:56 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:56 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:57 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:57 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:57 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:57 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:57 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:57 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:57 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:57 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:57 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:57 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:57 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:57 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:57 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:57 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:57 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:57 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:57 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:57 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:57 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:57 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:57 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:57 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:57 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:57 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:57 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:57 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:57 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:57 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:57 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:57 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:57 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:57 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:57 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:57 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:57 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:57 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:57 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:57 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:57 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:57 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:57 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:57 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:57 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:57 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:57 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:57 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:57 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:57 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:57 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:57 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:57 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:57 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:57 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:57 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:58 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:58 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:58 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:58 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:58 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:58 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:58 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:58 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:58 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:58 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:58 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:58 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:58 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:58 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:58 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:58 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:58 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:58 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:58 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:58 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:58 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:58 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:58 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:58 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:58 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:58 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:58 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:58 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:58 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:58 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:58 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:58 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:58 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:58 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:58 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:58 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:58 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:58 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:58 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:58 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:58 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:58 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:58 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:58 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:58 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:58 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:58 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:58 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:58 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:58 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:58 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:58 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:58 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:58 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:58 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:58 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:59 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:59 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:59 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:59 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:59 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:59 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:59 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:59 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:59 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:59 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:59 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:59 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:59 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:59 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:59 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:59 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:59 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:59 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:59 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:59 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:59 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:59 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:59 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:59 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:59 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:59 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:59 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:59 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:59 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:59 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:59 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:59 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:59 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:59 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:59 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:59 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:59 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:59 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:59 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:59 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:59 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:59 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:59 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:59 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:59 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:59 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:59 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:59 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:59 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:59 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:59 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:59 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:59 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:59 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:59 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:59 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:59 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:10:59 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:11:00 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:11:00 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:11:00 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:11:00 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:11:00 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:11:00 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:11:00 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:11:00 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:11:00 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:11:00 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:11:00 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:11:00 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:11:00 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:11:00 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:11:00 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:11:00 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:11:00 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:11:00 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:11:00 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:11:00 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:11:00 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:11:00 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:11:00 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:11:00 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:11:00 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:11:00 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:11:00 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:11:00 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:11:00 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:11:00 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:11:00 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:11:00 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:11:00 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:11:00 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:11:00 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:11:00 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:11:00 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:11:00 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:11:00 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-load-balancer-1  | 172.20.0.1 - - [19/Aug/2025:02:11:00 +0000] "POST /payments HTTP/1.1" 200 0 "-" "Grafana k6/1.1.0"
-log truncated at line 1000
+ load-balancer Pulling 
+ app2 Pulling 
+ app1 Pulling 
+ 9824c27679d3 Already exists 
+ 6bc572a340ec Pulling fs layer 
+ 403e3f251637 Pulling fs layer 
+ 9adfbae99cb7 Pulling fs layer 
+ 7a8a46741e18 Pulling fs layer 
+ c9ebe2ff2d2c Pulling fs layer 
+ a992fbc61ecc Pulling fs layer 
+ cb1ff4086f82 Pulling fs layer 
+ c9ebe2ff2d2c Waiting 
+ a992fbc61ecc Waiting 
+ cb1ff4086f82 Waiting 
+ 7a8a46741e18 Waiting 
+ e3b0c44298fc Pulling fs layer 
+ 32d64675e3cb Pulling fs layer 
+ e3b0c44298fc Waiting 
+ b8578b8a2ac5 Pulling fs layer 
+ 77157569eefd Pulling fs layer 
+ 32d64675e3cb Waiting 
+ 8a649209738c Pulling fs layer 
+ b8578b8a2ac5 Waiting 
+ 5ed3fba2e93d Pulling fs layer 
+ 77157569eefd Waiting 
+ 66729bbb37d9 Pulling fs layer 
+ 8a649209738c Waiting 
+ 224aa1eaa696 Pulling fs layer 
+ 5ed3fba2e93d Waiting 
+ 66729bbb37d9 Waiting 
+ 224aa1eaa696 Waiting 
+ e3b0c44298fc Pulling fs layer 
+ 32d64675e3cb Pulling fs layer 
+ b8578b8a2ac5 Pulling fs layer 
+ 77157569eefd Pulling fs layer 
+ 8a649209738c Pulling fs layer 
+ 5ed3fba2e93d Pulling fs layer 
+ 66729bbb37d9 Pulling fs layer 
+ 224aa1eaa696 Pulling fs layer 
+ 224aa1eaa696 Waiting 
+ 32d64675e3cb Waiting 
+ b8578b8a2ac5 Waiting 
+ 77157569eefd Waiting 
+ 8a649209738c Waiting 
+ 5ed3fba2e93d Waiting 
+ 66729bbb37d9 Waiting 
+ e3b0c44298fc Waiting 
+ 403e3f251637 Downloading [==================================================>]     628B/628B
+ 403e3f251637 Verifying Checksum 
+ 403e3f251637 Download complete 
+ 9adfbae99cb7 Downloading [==================================================>]     955B/955B
+ 9adfbae99cb7 Verifying Checksum 
+ 9adfbae99cb7 Download complete 
+ 6bc572a340ec Downloading [>                                                  ]  18.84kB/1.806MB
+ 6bc572a340ec Download complete 
+ 6bc572a340ec Extracting [>                                                  ]  32.77kB/1.806MB
+ 6bc572a340ec Extracting [==================================================>]  1.806MB/1.806MB
+ 6bc572a340ec Pull complete 
+ 403e3f251637 Extracting [==================================================>]     628B/628B
+ 403e3f251637 Extracting [==================================================>]     628B/628B
+ 403e3f251637 Pull complete 
+ 9adfbae99cb7 Extracting [==================================================>]     955B/955B
+ 9adfbae99cb7 Extracting [==================================================>]     955B/955B
+ 9adfbae99cb7 Pull complete 
+ 7a8a46741e18 Downloading [==================================================>]     405B/405B
+ 7a8a46741e18 Download complete 
+ 7a8a46741e18 Extracting [==================================================>]     405B/405B
+ 7a8a46741e18 Extracting [==================================================>]     405B/405B
+ 7a8a46741e18 Pull complete 
+ c9ebe2ff2d2c Downloading [===========================================>       ]  1.049kB/1.209kB
+ c9ebe2ff2d2c Downloading [==================================================>]  1.209kB/1.209kB
+ c9ebe2ff2d2c Verifying Checksum 
+ c9ebe2ff2d2c Download complete 
+ c9ebe2ff2d2c Extracting [==================================================>]  1.209kB/1.209kB
+ c9ebe2ff2d2c Extracting [==================================================>]  1.209kB/1.209kB
+ a992fbc61ecc Downloading [=====================================>             ]  1.049kB/1.398kB
+ a992fbc61ecc Download complete 
+ c9ebe2ff2d2c Pull complete 
+ a992fbc61ecc Extracting [==================================================>]  1.398kB/1.398kB
+ a992fbc61ecc Extracting [==================================================>]  1.398kB/1.398kB
+ a992fbc61ecc Pull complete 
+ e3b0c44298fc Download complete 
+ e3b0c44298fc Download complete 
+ e3b0c44298fc Extracting 
+ e3b0c44298fc Extracting 
+ e3b0c44298fc Extracting 
+ e3b0c44298fc Extracting 
+ 32d64675e3cb Downloading [>                                                  ]  22.84kB/2.149MB
+ 32d64675e3cb Downloading [>                                                  ]  22.84kB/2.149MB
+ e3b0c44298fc Pull complete 
+ e3b0c44298fc Pull complete 
+ 32d64675e3cb Verifying Checksum 
+ 32d64675e3cb Download complete 
+ 32d64675e3cb Verifying Checksum 
+ 32d64675e3cb Download complete 
+ 32d64675e3cb Extracting [>                                                  ]  32.77kB/2.149MB
+ 32d64675e3cb Extracting [>                                                  ]  32.77kB/2.149MB
+ 32d64675e3cb Extracting [==================================================>]  2.149MB/2.149MB
+ 32d64675e3cb Extracting [==================================================>]  2.149MB/2.149MB
+ cb1ff4086f82 Downloading [>                                                  ]  171.9kB/16.84MB
+ 32d64675e3cb Pull complete 
+ 32d64675e3cb Pull complete 
+ cb1ff4086f82 Downloading [================================>                  ]  10.86MB/16.84MB
+ cb1ff4086f82 Verifying Checksum 
+ cb1ff4086f82 Download complete 
+ cb1ff4086f82 Extracting [>                                                  ]  196.6kB/16.84MB
+ b8578b8a2ac5 Downloading [==================================================>]     285B/285B
+ b8578b8a2ac5 Downloading [==================================================>]     285B/285B
+ b8578b8a2ac5 Download complete 
+ b8578b8a2ac5 Extracting [==================================================>]     285B/285B
+ b8578b8a2ac5 Extracting [==================================================>]     285B/285B
+ b8578b8a2ac5 Download complete 
+ b8578b8a2ac5 Extracting [==================================================>]     285B/285B
+ 77157569eefd Downloading [>                                                  ]  2.302kB/151.3kB
+ 77157569eefd Downloading [>                                                  ]  2.302kB/151.3kB
+ b8578b8a2ac5 Pull complete 
+ b8578b8a2ac5 Pull complete 
+ 77157569eefd Download complete 
+ 77157569eefd Download complete 
+ 77157569eefd Extracting [==========>                                        ]  32.77kB/151.3kB
+ 77157569eefd Extracting [==========>                                        ]  32.77kB/151.3kB
+ 77157569eefd Extracting [==================================================>]  151.3kB/151.3kB
+ 77157569eefd Extracting [==================================================>]  151.3kB/151.3kB
+ cb1ff4086f82 Extracting [=========>                                         ]  3.342MB/16.84MB
+ 77157569eefd Extracting [==================================================>]  151.3kB/151.3kB
+ 77157569eefd Extracting [==================================================>]  151.3kB/151.3kB
+ 77157569eefd Pull complete 
+ 77157569eefd Pull complete 
+ cb1ff4086f82 Extracting [=================================>                 ]  11.21MB/16.84MB
+ cb1ff4086f82 Extracting [==================================================>]  16.84MB/16.84MB
+ 8a649209738c Downloading [>                                                  ]  388.6kB/37.66MB
+ 8a649209738c Downloading [>                                                  ]  388.6kB/37.66MB
+ cb1ff4086f82 Pull complete 
+ 5ed3fba2e93d Downloading [>                                                  ]  13.25kB/1.318MB
+ 5ed3fba2e93d Downloading [>                                                  ]  13.25kB/1.318MB
+ 5ed3fba2e93d Download complete 
+ 5ed3fba2e93d Download complete 
+ load-balancer Pulled 
+ 8a649209738c Downloading [=======================================>           ]  29.42MB/37.66MB
+ 8a649209738c Downloading [=======================================>           ]  29.42MB/37.66MB
+ 66729bbb37d9 Download complete 
+ 66729bbb37d9 Downloading [==================================================>]     661B/661B
+ 66729bbb37d9 Verifying Checksum 
+ 66729bbb37d9 Download complete 
+ 8a649209738c Verifying Checksum 
+ 8a649209738c Download complete 
+ 8a649209738c Download complete 
+ 8a649209738c Extracting [>                                                  ]  393.2kB/37.66MB
+ 8a649209738c Extracting [>                                                  ]  393.2kB/37.66MB
+ 8a649209738c Extracting [=========>                                         ]  7.471MB/37.66MB
+ 8a649209738c Extracting [=========>                                         ]  7.471MB/37.66MB
+ 8a649209738c Extracting [===================>                               ]  14.94MB/37.66MB
+ 8a649209738c Extracting [===================>                               ]  14.94MB/37.66MB
+ 8a649209738c Extracting [==============================>                    ]  22.81MB/37.66MB
+ 8a649209738c Extracting [==============================>                    ]  22.81MB/37.66MB
+ 224aa1eaa696 Downloading [==================================================>]     231B/231B
+ 224aa1eaa696 Verifying Checksum 
+ 224aa1eaa696 Download complete 
+ 224aa1eaa696 Download complete 
+ 8a649209738c Extracting [=======================================>           ]  29.88MB/37.66MB
+ 8a649209738c Extracting [=======================================>           ]  29.88MB/37.66MB
+ 8a649209738c Extracting [==================================================>]  37.66MB/37.66MB
+ 8a649209738c Extracting [==================================================>]  37.66MB/37.66MB
+ 8a649209738c Pull complete 
+ 8a649209738c Pull complete 
+ 5ed3fba2e93d Extracting [=>                                                 ]  32.77kB/1.318MB
+ 5ed3fba2e93d Extracting [=>                                                 ]  32.77kB/1.318MB
+ 5ed3fba2e93d Extracting [==================================================>]  1.318MB/1.318MB
+ 5ed3fba2e93d Extracting [==================================================>]  1.318MB/1.318MB
+ 5ed3fba2e93d Pull complete 
+ 5ed3fba2e93d Pull complete 
+ 66729bbb37d9 Extracting [==================================================>]     661B/661B
+ 66729bbb37d9 Extracting [==================================================>]     661B/661B
+ 66729bbb37d9 Extracting [==================================================>]     661B/661B
+ 66729bbb37d9 Extracting [==================================================>]     661B/661B
+ 66729bbb37d9 Pull complete 
+ 66729bbb37d9 Pull complete 
+ 224aa1eaa696 Extracting [==================================================>]     231B/231B
+ 224aa1eaa696 Extracting [==================================================>]     231B/231B
+ 224aa1eaa696 Extracting [==================================================>]     231B/231B
+ 224aa1eaa696 Extracting [==================================================>]     231B/231B
+ 224aa1eaa696 Pull complete 
+ 224aa1eaa696 Pull complete 
+layers from manifest don't match image configuration

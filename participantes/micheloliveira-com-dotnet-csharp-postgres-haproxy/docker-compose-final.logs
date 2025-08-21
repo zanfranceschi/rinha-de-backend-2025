@@ -3,24 +3,26 @@
  Network micheloliveira-com-dotnet-csharp-postgres-haproxy_backend  Created
  Container micheloliveira-com-dotnet-csharp-postgres-haproxy-backend-db-1  Creating
  Container micheloliveira-com-dotnet-csharp-postgres-haproxy-backend-2-1  Creating
- Container micheloliveira-com-dotnet-csharp-postgres-haproxy-redis-1  Creating
  Container micheloliveira-com-dotnet-csharp-postgres-haproxy-backend-1-1  Creating
+ Container micheloliveira-com-dotnet-csharp-postgres-haproxy-redis-1  Creating
  Container micheloliveira-com-dotnet-csharp-postgres-haproxy-backend-1-1  Created
- Container micheloliveira-com-dotnet-csharp-postgres-haproxy-redis-1  Created
- Container micheloliveira-com-dotnet-csharp-postgres-haproxy-backend-db-1  Created
  Container micheloliveira-com-dotnet-csharp-postgres-haproxy-backend-2-1  Created
  Container micheloliveira-com-dotnet-csharp-postgres-haproxy-load-balancer-1  Creating
+ Container micheloliveira-com-dotnet-csharp-postgres-haproxy-redis-1  Created
+ Container micheloliveira-com-dotnet-csharp-postgres-haproxy-backend-db-1  Created
  Container micheloliveira-com-dotnet-csharp-postgres-haproxy-load-balancer-1  Created
 Attaching to backend-1-1, backend-2-1, backend-db-1, load-balancer-1, redis-1
-backend-1-1  | WORKER_SIZE: 10
-backend-1-1  | BATCH_SIZE: 100
-backend-1-1  | [Redis] Attempting connection...
 backend-2-1  | WORKER_SIZE: 10
 backend-2-1  | BATCH_SIZE: 100
 backend-2-1  | [Redis] Attempting connection...
 backend-2-1  | Retry 1: RedisConnectionException - It was not possible to connect to the redis server(s). Error connecting right now. To allow this multiplexer to continue retrying until it's able to connect, use abortConnect=false in your connection string or AbortOnConnectFail=false; in your code.
+redis-1      | Starting Redis Server
 backend-2-1  | [Redis] Attempting connection...
 backend-2-1  | Retry 2: RedisConnectionException - It was not possible to connect to the redis server(s). Error connecting right now. To allow this multiplexer to continue retrying until it's able to connect, use abortConnect=false in your connection string or AbortOnConnectFail=false; in your code.
+backend-1-1  | WORKER_SIZE: 10
+backend-1-1  | BATCH_SIZE: 100
+backend-1-1  | [Redis] Attempting connection...
+backend-1-1  | Retry 1: RedisConnectionException - It was not possible to connect to the redis server(s). Error connecting right now. To allow this multiplexer to continue retrying until it's able to connect, use abortConnect=false in your connection string or AbortOnConnectFail=false; in your code.
 backend-db-1  | The files belonging to this database system will be owned by user "postgres".
 backend-db-1  | This user must also own the server process.
 backend-db-1  | 
@@ -33,229 +35,263 @@ backend-db-1  |
 backend-db-1  | fixing permissions on existing directory /var/lib/postgresql/data ... ok
 backend-db-1  | creating subdirectories ... ok
 backend-db-1  | selecting dynamic shared memory implementation ... posix
-redis-1       | Starting Redis Server
+redis-1       | 1:C 21 Aug 2025 03:08:13.357 # WARNING Memory overcommit must be enabled! Without it, a background save or replication may fail under low memory condition. Being disabled, it can also cause failures without low memory condition, see https://github.com/jemalloc/jemalloc/issues/1328. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.
+redis-1       | 1:C 21 Aug 2025 03:08:13.357 * oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+redis-1       | 1:C 21 Aug 2025 03:08:13.357 * Redis version=8.2.1, bits=64, commit=00000000, modified=1, pid=1, just started
+redis-1       | 1:C 21 Aug 2025 03:08:13.357 * Configuration loaded
+redis-1       | 1:M 21 Aug 2025 03:08:13.357 * monotonic clock: POSIX clock_gettime
+redis-1       | 1:M 21 Aug 2025 03:08:13.358 * Running mode=standalone, port=6379.
+redis-1       | 1:M 21 Aug 2025 03:08:13.358 * <bf> RedisBloom version 8.2.0 (Git=unknown)
+redis-1       | 1:M 21 Aug 2025 03:08:13.358 * <bf> Registering configuration options: [
+redis-1       | 1:M 21 Aug 2025 03:08:13.358 * <bf> 	{ bf-error-rate       :      0.01 }
+redis-1       | 1:M 21 Aug 2025 03:08:13.358 * <bf> 	{ bf-initial-size     :       100 }
+redis-1       | 1:M 21 Aug 2025 03:08:13.358 * <bf> 	{ bf-expansion-factor :         2 }
+redis-1       | 1:M 21 Aug 2025 03:08:13.358 * <bf> 	{ cf-bucket-size      :         2 }
+redis-1       | 1:M 21 Aug 2025 03:08:13.358 * <bf> 	{ cf-initial-size     :      1024 }
+redis-1       | 1:M 21 Aug 2025 03:08:13.358 * <bf> 	{ cf-max-iterations   :        20 }
+redis-1       | 1:M 21 Aug 2025 03:08:13.358 * <bf> 	{ cf-expansion-factor :         1 }
+redis-1       | 1:M 21 Aug 2025 03:08:13.358 * <bf> 	{ cf-max-expansions   :        32 }
+redis-1       | 1:M 21 Aug 2025 03:08:13.358 * <bf> ]
+redis-1       | 1:M 21 Aug 2025 03:08:13.358 * Module 'bf' loaded from /usr/local/lib/redis/modules//redisbloom.so
+redis-1       | 1:M 21 Aug 2025 03:08:13.361 * <search> Redis version found by RedisSearch : 8.2.1 - oss
+redis-1       | 1:M 21 Aug 2025 03:08:13.361 * <search> RediSearch version 8.2.1 (Git=dba8dd0)
+redis-1       | 1:M 21 Aug 2025 03:08:13.361 * <search> Low level api version 1 initialized successfully
+redis-1       | 1:M 21 Aug 2025 03:08:13.361 * <search> gc: ON, prefix min length: 2, min word length to stem: 4, prefix max expansions: 200, query timeout (ms): 500, timeout policy: return, cursor read size: 1000, cursor max idle (ms): 300000, max doctable size: 1000000, max number of search results:  1000000, 
+redis-1       | 1:M 21 Aug 2025 03:08:13.361 * <search> Initialized thread pools!
 backend-2-1   | [Redis] Attempting connection...
 backend-2-1   | Retry 3: RedisConnectionException - It was not possible to connect to the redis server(s). Error connecting right now. To allow this multiplexer to continue retrying until it's able to connect, use abortConnect=false in your connection string or AbortOnConnectFail=false; in your code.
+backend-1-1   | [Redis] Attempting connection...
 backend-db-1  | selecting default "max_connections" ... 100
-redis-1       | 1:C 19 Aug 2025 09:31:41.707 # WARNING Memory overcommit must be enabled! Without it, a background save or replication may fail under low memory condition. Being disabled, it can also cause failures without low memory condition, see https://github.com/jemalloc/jemalloc/issues/1328. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.
-redis-1       | 1:C 19 Aug 2025 09:31:41.707 * oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
-redis-1       | 1:C 19 Aug 2025 09:31:41.707 * Redis version=8.2.0, bits=64, commit=00000000, modified=1, pid=1, just started
-redis-1       | 1:C 19 Aug 2025 09:31:41.707 * Configuration loaded
-redis-1       | 1:M 19 Aug 2025 09:31:41.707 * monotonic clock: POSIX clock_gettime
-redis-1       | 1:M 19 Aug 2025 09:31:41.708 * Running mode=standalone, port=6379.
-redis-1       | 1:M 19 Aug 2025 09:31:41.708 * <bf> RedisBloom version 8.2.0 (Git=unknown)
-redis-1       | 1:M 19 Aug 2025 09:31:41.708 * <bf> Registering configuration options: [
-redis-1       | 1:M 19 Aug 2025 09:31:41.708 * <bf> 	{ bf-error-rate       :      0.01 }
-redis-1       | 1:M 19 Aug 2025 09:31:41.708 * <bf> 	{ bf-initial-size     :       100 }
-redis-1       | 1:M 19 Aug 2025 09:31:41.709 * <bf> 	{ bf-expansion-factor :         2 }
-redis-1       | 1:M 19 Aug 2025 09:31:41.709 * <bf> 	{ cf-bucket-size      :         2 }
-redis-1       | 1:M 19 Aug 2025 09:31:41.709 * <bf> 	{ cf-initial-size     :      1024 }
-redis-1       | 1:M 19 Aug 2025 09:31:41.709 * <bf> 	{ cf-max-iterations   :        20 }
-redis-1       | 1:M 19 Aug 2025 09:31:41.709 * <bf> 	{ cf-expansion-factor :         1 }
-redis-1       | 1:M 19 Aug 2025 09:31:41.709 * <bf> 	{ cf-max-expansions   :        32 }
-redis-1       | 1:M 19 Aug 2025 09:31:41.709 * <bf> ]
-redis-1       | 1:M 19 Aug 2025 09:31:41.709 * Module 'bf' loaded from /usr/local/lib/redis/modules//redisbloom.so
-redis-1       | 1:M 19 Aug 2025 09:31:41.714 * <search> Redis version found by RedisSearch : 8.2.0 - oss
-redis-1       | 1:M 19 Aug 2025 09:31:41.714 * <search> RediSearch version 8.2.0 (Git=d81ebce)
-redis-1       | 1:M 19 Aug 2025 09:31:41.714 * <search> Low level api version 1 initialized successfully
-redis-1       | 1:M 19 Aug 2025 09:31:41.714 * <search> gc: ON, prefix min length: 2, min word length to stem: 4, prefix max expansions: 200, query timeout (ms): 500, timeout policy: return, cursor read size: 1000, cursor max idle (ms): 300000, max doctable size: 1000000, max number of search results:  1000000, 
-redis-1       | 1:M 19 Aug 2025 09:31:41.715 * <search> Initialized thread pools!
-redis-1       | 1:M 19 Aug 2025 09:31:41.715 * <search> Disabled workers threadpool of size 0
-redis-1       | 1:M 19 Aug 2025 09:31:41.715 * <search> Subscribe to config changes
-redis-1       | 1:M 19 Aug 2025 09:31:41.715 * <search> Enabled role change notification
-redis-1       | 1:M 19 Aug 2025 09:31:41.715 * <search> Cluster configuration: AUTO partitions, type: 0, coordinator timeout: 0ms
-redis-1       | 1:M 19 Aug 2025 09:31:41.715 * <search> Register write commands
-redis-1       | 1:M 19 Aug 2025 09:31:41.715 * Module 'search' loaded from /usr/local/lib/redis/modules//redisearch.so
-redis-1       | 1:M 19 Aug 2025 09:31:41.716 * <timeseries> RedisTimeSeries version 80200, git_sha=1439d4a439ca9c063e6ef124a510abff09a5d493
-redis-1       | 1:M 19 Aug 2025 09:31:41.716 * <timeseries> Redis version found by RedisTimeSeries : 8.2.0 - oss
-redis-1       | 1:M 19 Aug 2025 09:31:41.716 * <timeseries> Registering configuration options: [
-redis-1       | 1:M 19 Aug 2025 09:31:41.716 * <timeseries> 	{ ts-compaction-policy   :              }
-redis-1       | 1:M 19 Aug 2025 09:31:41.716 * <timeseries> 	{ ts-num-threads         :            3 }
-redis-1       | 1:M 19 Aug 2025 09:31:41.717 * <timeseries> 	{ ts-retention-policy    :            0 }
-redis-1       | 1:M 19 Aug 2025 09:31:41.717 * <timeseries> 	{ ts-duplicate-policy    :        block }
-redis-1       | 1:M 19 Aug 2025 09:31:41.717 * <timeseries> 	{ ts-chunk-size-bytes    :         4096 }
-redis-1       | 1:M 19 Aug 2025 09:31:41.717 * <timeseries> 	{ ts-encoding            :   compressed }
-redis-1       | 1:M 19 Aug 2025 09:31:41.717 * <timeseries> 	{ ts-ignore-max-time-diff:            0 }
-redis-1       | 1:M 19 Aug 2025 09:31:41.717 * <timeseries> 	{ ts-ignore-max-val-diff :     0.000000 }
-redis-1       | 1:M 19 Aug 2025 09:31:41.717 * <timeseries> ]
-redis-1       | 1:M 19 Aug 2025 09:31:41.717 * <timeseries> Detected redis oss
-redis-1       | 1:M 19 Aug 2025 09:31:41.717 * <timeseries> Enabled diskless replication
-redis-1       | 1:M 19 Aug 2025 09:31:41.717 * Module 'timeseries' loaded from /usr/local/lib/redis/modules//redistimeseries.so
-redis-1       | 1:M 19 Aug 2025 09:31:41.718 * <ReJSON> Created new data type 'ReJSON-RL'
-backend-2-1   | [Redis] Attempting connection...
-backend-2-1   | Retry 4: RedisConnectionException - It was not possible to connect to the redis server(s). Error connecting right now. To allow this multiplexer to continue retrying until it's able to connect, use abortConnect=false in your connection string or AbortOnConnectFail=false; in your code.
-redis-1       | 1:M 19 Aug 2025 09:31:41.805 * <ReJSON> version: 80200 git sha: unknown branch: unknown
-redis-1       | 1:M 19 Aug 2025 09:31:41.805 * <ReJSON> Exported RedisJSON_V1 API
-redis-1       | 1:M 19 Aug 2025 09:31:41.805 * <ReJSON> Exported RedisJSON_V2 API
-redis-1       | 1:M 19 Aug 2025 09:31:41.805 * <ReJSON> Exported RedisJSON_V3 API
-redis-1       | 1:M 19 Aug 2025 09:31:41.805 * <ReJSON> Exported RedisJSON_V4 API
-redis-1       | 1:M 19 Aug 2025 09:31:41.806 * <ReJSON> Exported RedisJSON_V5 API
-redis-1       | 1:M 19 Aug 2025 09:31:41.806 * <ReJSON> Enabled diskless replication
-redis-1       | 1:M 19 Aug 2025 09:31:41.806 * <ReJSON> Initialized shared string cache, thread safe: false.
-redis-1       | 1:M 19 Aug 2025 09:31:41.806 * Module 'ReJSON' loaded from /usr/local/lib/redis/modules//rejson.so
-redis-1       | 1:M 19 Aug 2025 09:31:41.806 * <search> Acquired RedisJSON_V5 API
-redis-1       | 1:M 19 Aug 2025 09:31:41.806 * Server initialized
-redis-1       | 1:M 19 Aug 2025 09:31:41.807 * Ready to accept connections tcp
-backend-db-1  | selecting default "shared_buffers" ... 128MB
+backend-1-1   | Retry 2: RedisConnectionException - It was not possible to connect to the redis server(s). Error connecting right now. To allow this multiplexer to continue retrying until it's able to connect, use abortConnect=false in your connection string or AbortOnConnectFail=false; in your code.
+redis-1       | 1:M 21 Aug 2025 03:08:13.447 * <search> Disabled workers threadpool of size 0
+redis-1       | 1:M 21 Aug 2025 03:08:13.447 * <search> Subscribe to config changes
+redis-1       | 1:M 21 Aug 2025 03:08:13.447 * <search> Enabled role change notification
+redis-1       | 1:M 21 Aug 2025 03:08:13.448 * <search> Cluster configuration: AUTO partitions, type: 0, coordinator timeout: 0ms
+redis-1       | 1:M 21 Aug 2025 03:08:13.448 * <search> Register write commands
+redis-1       | 1:M 21 Aug 2025 03:08:13.448 * Module 'search' loaded from /usr/local/lib/redis/modules//redisearch.so
+redis-1       | 1:M 21 Aug 2025 03:08:13.448 * <timeseries> RedisTimeSeries version 80200, git_sha=1439d4a439ca9c063e6ef124a510abff09a5d493
+redis-1       | 1:M 21 Aug 2025 03:08:13.448 * <timeseries> Redis version found by RedisTimeSeries : 8.2.1 - oss
+redis-1       | 1:M 21 Aug 2025 03:08:13.448 * <timeseries> Registering configuration options: [
+redis-1       | 1:M 21 Aug 2025 03:08:13.448 * <timeseries> 	{ ts-compaction-policy   :              }
+redis-1       | 1:M 21 Aug 2025 03:08:13.448 * <timeseries> 	{ ts-num-threads         :            3 }
+redis-1       | 1:M 21 Aug 2025 03:08:13.448 * <timeseries> 	{ ts-retention-policy    :            0 }
+redis-1       | 1:M 21 Aug 2025 03:08:13.448 * <timeseries> 	{ ts-duplicate-policy    :        block }
+redis-1       | 1:M 21 Aug 2025 03:08:13.448 * <timeseries> 	{ ts-chunk-size-bytes    :         4096 }
+redis-1       | 1:M 21 Aug 2025 03:08:13.448 * <timeseries> 	{ ts-encoding            :   compressed }
+redis-1       | 1:M 21 Aug 2025 03:08:13.448 * <timeseries> 	{ ts-ignore-max-time-diff:            0 }
+redis-1       | 1:M 21 Aug 2025 03:08:13.448 * <timeseries> 	{ ts-ignore-max-val-diff :     0.000000 }
+redis-1       | 1:M 21 Aug 2025 03:08:13.448 * <timeseries> ]
+redis-1       | 1:M 21 Aug 2025 03:08:13.449 * <timeseries> Detected redis oss
+redis-1       | 1:M 21 Aug 2025 03:08:13.449 * <timeseries> Enabled diskless replication
+redis-1       | 1:M 21 Aug 2025 03:08:13.449 * Module 'timeseries' loaded from /usr/local/lib/redis/modules//redistimeseries.so
+redis-1       | 1:M 21 Aug 2025 03:08:13.449 * <ReJSON> Created new data type 'ReJSON-RL'
+redis-1       | 1:M 21 Aug 2025 03:08:13.449 * <ReJSON> version: 80200 git sha: unknown branch: unknown
+redis-1       | 1:M 21 Aug 2025 03:08:13.449 * <ReJSON> Exported RedisJSON_V1 API
+redis-1       | 1:M 21 Aug 2025 03:08:13.449 * <ReJSON> Exported RedisJSON_V2 API
+redis-1       | 1:M 21 Aug 2025 03:08:13.449 * <ReJSON> Exported RedisJSON_V3 API
+redis-1       | 1:M 21 Aug 2025 03:08:13.449 * <ReJSON> Exported RedisJSON_V4 API
+redis-1       | 1:M 21 Aug 2025 03:08:13.449 * <ReJSON> Exported RedisJSON_V5 API
+redis-1       | 1:M 21 Aug 2025 03:08:13.449 * <ReJSON> Enabled diskless replication
+redis-1       | 1:M 21 Aug 2025 03:08:13.449 * <ReJSON> Initialized shared string cache, thread safe: false.
+redis-1       | 1:M 21 Aug 2025 03:08:13.449 * Module 'ReJSON' loaded from /usr/local/lib/redis/modules//rejson.so
+redis-1       | 1:M 21 Aug 2025 03:08:13.449 * <search> Acquired RedisJSON_V5 API
+redis-1       | 1:M 21 Aug 2025 03:08:13.450 * Server initialized
+redis-1       | 1:M 21 Aug 2025 03:08:13.450 * Ready to accept connections tcp
 backend-2-1   | [Redis] Attempting connection...
 backend-2-1   | [Redis] Connected successfully.
 backend-2-1   | [Postgres] Attempting warmup connection...
-backend-2-1   | Async Retry 1: NpgsqlException - Failed to connect to 172.20.0.4:5432
-backend-2-1   | [Postgres] Attempting warmup connection...
-backend-2-1   | Async Retry 2: NpgsqlException - Failed to connect to 172.20.0.4:5432
-backend-db-1  | selecting default time zone ... UTC
-backend-db-1  | creating configuration files ... ok
-backend-2-1   | [Postgres] Attempting warmup connection...
-backend-2-1   | Async Retry 3: NpgsqlException - Failed to connect to 172.20.0.4:5432
-backend-2-1   | [Postgres] Attempting warmup connection...
-backend-2-1   | Async Retry 4: NpgsqlException - Failed to connect to 172.20.0.4:5432
-backend-2-1   | [Postgres] Attempting warmup connection...
-backend-2-1   | Async Retry 5: NpgsqlException - Failed to connect to 172.20.0.4:5432
-backend-2-1   | [Postgres] Attempting warmup connection...
-backend-2-1   | Async Retry 6: NpgsqlException - Failed to connect to 172.20.0.4:5432
-backend-2-1   | [Postgres] Attempting warmup connection...
-backend-2-1   | Async Retry 7: NpgsqlException - Failed to connect to 172.20.0.4:5432
-backend-2-1   | [Postgres] Attempting warmup connection...
-backend-2-1   | Async Retry 8: NpgsqlException - Failed to connect to 172.20.0.4:5432
-backend-2-1   | [Postgres] Attempting warmup connection...
-backend-2-1   | Async Retry 9: NpgsqlException - Failed to connect to 172.20.0.4:5432
-backend-2-1   | [Postgres] Attempting warmup connection...
-backend-2-1   | Async Retry 10: NpgsqlException - Failed to connect to 172.20.0.4:5432
-backend-2-1   | [Postgres] Attempting warmup connection...
-backend-2-1   | Async Retry 11: NpgsqlException - Failed to connect to 172.20.0.4:5432
-backend-db-1  | running bootstrap script ... ok
-backend-2-1   | [Postgres] Attempting warmup connection...
-backend-2-1   | Async Retry 12: NpgsqlException - Failed to connect to 172.20.0.4:5432
-backend-2-1   | [Postgres] Attempting warmup connection...
-backend-2-1   | Async Retry 13: NpgsqlException - Failed to connect to 172.20.0.4:5432
-backend-2-1   | [Postgres] Attempting warmup connection...
-backend-2-1   | Async Retry 14: NpgsqlException - Failed to connect to 172.20.0.4:5432
-backend-2-1   | [Postgres] Attempting warmup connection...
-backend-2-1   | Async Retry 15: NpgsqlException - Failed to connect to 172.20.0.4:5432
-backend-2-1   | [Postgres] Attempting warmup connection...
-backend-2-1   | Async Retry 16: NpgsqlException - Failed to connect to 172.20.0.4:5432
-backend-2-1   | [Postgres] Attempting warmup connection...
-backend-2-1   | Async Retry 17: NpgsqlException - Failed to connect to 172.20.0.4:5432
-backend-2-1   | [Postgres] Attempting warmup connection...
-backend-2-1   | Async Retry 18: NpgsqlException - Failed to connect to 172.20.0.4:5432
-backend-2-1   | [Postgres] Attempting warmup connection...
-backend-2-1   | Async Retry 19: NpgsqlException - Failed to connect to 172.20.0.4:5432
-backend-2-1   | [Postgres] Attempting warmup connection...
-backend-2-1   | Async Retry 20: NpgsqlException - Failed to connect to 172.20.0.4:5432
+backend-2-1   | Async Retry 1: NpgsqlException - Failed to connect to 172.21.0.3:5432
+backend-db-1  | selecting default "shared_buffers" ... 128MB
+backend-1-1   | [Redis] Attempting connection...
 backend-1-1   | [Redis] Connected successfully.
 backend-1-1   | [Postgres] Attempting warmup connection...
-backend-1-1   | Async Retry 1: NpgsqlException - Failed to connect to 172.20.0.4:5432
+backend-1-1   | Async Retry 1: NpgsqlException - Failed to connect to 172.21.0.3:5432
 backend-2-1   | [Postgres] Attempting warmup connection...
-backend-2-1   | Async Retry 21: NpgsqlException - Failed to connect to 172.20.0.4:5432
+backend-2-1   | Async Retry 2: NpgsqlException - Failed to connect to 172.21.0.3:5432
 backend-1-1   | [Postgres] Attempting warmup connection...
-backend-1-1   | Async Retry 2: NpgsqlException - Failed to connect to 172.20.0.4:5432
+backend-1-1   | Async Retry 2: NpgsqlException - Failed to connect to 172.21.0.3:5432
 backend-2-1   | [Postgres] Attempting warmup connection...
-backend-2-1   | Async Retry 22: NpgsqlException - Failed to connect to 172.20.0.4:5432
+backend-2-1   | Async Retry 3: NpgsqlException - Failed to connect to 172.21.0.3:5432
+backend-db-1  | selecting default time zone ... UTC
+backend-db-1  | creating configuration files ... ok
+backend-1-1   | [Postgres] Attempting warmup connection...
+backend-1-1   | Async Retry 3: NpgsqlException - Failed to connect to 172.21.0.3:5432
+backend-2-1   | [Postgres] Attempting warmup connection...
+backend-2-1   | Async Retry 4: NpgsqlException - Failed to connect to 172.21.0.3:5432
+backend-1-1   | [Postgres] Attempting warmup connection...
+backend-1-1   | Async Retry 4: NpgsqlException - Failed to connect to 172.21.0.3:5432
+backend-2-1   | [Postgres] Attempting warmup connection...
+backend-2-1   | Async Retry 5: NpgsqlException - Failed to connect to 172.21.0.3:5432
+backend-1-1   | [Postgres] Attempting warmup connection...
+backend-1-1   | Async Retry 5: NpgsqlException - Failed to connect to 172.21.0.3:5432
+backend-2-1   | [Postgres] Attempting warmup connection...
+backend-2-1   | Async Retry 6: NpgsqlException - Failed to connect to 172.21.0.3:5432
+backend-1-1   | [Postgres] Attempting warmup connection...
+backend-1-1   | Async Retry 6: NpgsqlException - Failed to connect to 172.21.0.3:5432
+backend-2-1   | [Postgres] Attempting warmup connection...
+backend-2-1   | Async Retry 7: NpgsqlException - Failed to connect to 172.21.0.3:5432
+backend-1-1   | [Postgres] Attempting warmup connection...
+backend-1-1   | Async Retry 7: NpgsqlException - Failed to connect to 172.21.0.3:5432
+backend-2-1   | [Postgres] Attempting warmup connection...
+backend-2-1   | Async Retry 8: NpgsqlException - Failed to connect to 172.21.0.3:5432
+backend-1-1   | [Postgres] Attempting warmup connection...
+backend-1-1   | Async Retry 8: NpgsqlException - Failed to connect to 172.21.0.3:5432
+backend-2-1   | [Postgres] Attempting warmup connection...
+backend-2-1   | Async Retry 9: NpgsqlException - Failed to connect to 172.21.0.3:5432
+backend-1-1   | [Postgres] Attempting warmup connection...
+backend-1-1   | Async Retry 9: NpgsqlException - Failed to connect to 172.21.0.3:5432
+backend-2-1   | [Postgres] Attempting warmup connection...
+backend-2-1   | Async Retry 10: NpgsqlException - Failed to connect to 172.21.0.3:5432
+backend-1-1   | [Postgres] Attempting warmup connection...
+backend-1-1   | Async Retry 10: NpgsqlException - Failed to connect to 172.21.0.3:5432
+backend-2-1   | [Postgres] Attempting warmup connection...
+backend-2-1   | Async Retry 11: NpgsqlException - Failed to connect to 172.21.0.3:5432
+backend-1-1   | [Postgres] Attempting warmup connection...
+backend-1-1   | Async Retry 11: NpgsqlException - Failed to connect to 172.21.0.3:5432
+backend-2-1   | [Postgres] Attempting warmup connection...
+backend-2-1   | Async Retry 12: NpgsqlException - Failed to connect to 172.21.0.3:5432
+backend-db-1  | running bootstrap script ... ok
+backend-1-1   | [Postgres] Attempting warmup connection...
+backend-1-1   | Async Retry 12: NpgsqlException - Failed to connect to 172.21.0.3:5432
+backend-2-1   | [Postgres] Attempting warmup connection...
+backend-2-1   | Async Retry 13: NpgsqlException - Failed to connect to 172.21.0.3:5432
+backend-1-1   | [Postgres] Attempting warmup connection...
+backend-1-1   | Async Retry 13: NpgsqlException - Failed to connect to 172.21.0.3:5432
+backend-2-1   | [Postgres] Attempting warmup connection...
+backend-2-1   | Async Retry 14: NpgsqlException - Failed to connect to 172.21.0.3:5432
+backend-1-1   | [Postgres] Attempting warmup connection...
+backend-1-1   | Async Retry 14: NpgsqlException - Failed to connect to 172.21.0.3:5432
+backend-2-1   | [Postgres] Attempting warmup connection...
+backend-2-1   | Async Retry 15: NpgsqlException - Failed to connect to 172.21.0.3:5432
+backend-1-1   | [Postgres] Attempting warmup connection...
+backend-1-1   | Async Retry 15: NpgsqlException - Failed to connect to 172.21.0.3:5432
+backend-2-1   | [Postgres] Attempting warmup connection...
+backend-2-1   | Async Retry 16: NpgsqlException - Failed to connect to 172.21.0.3:5432
+backend-1-1   | [Postgres] Attempting warmup connection...
+backend-1-1   | Async Retry 16: NpgsqlException - Failed to connect to 172.21.0.3:5432
+backend-2-1   | [Postgres] Attempting warmup connection...
+backend-2-1   | Async Retry 17: NpgsqlException - Failed to connect to 172.21.0.3:5432
+backend-1-1   | [Postgres] Attempting warmup connection...
+backend-1-1   | Async Retry 17: NpgsqlException - Failed to connect to 172.21.0.3:5432
+backend-2-1   | [Postgres] Attempting warmup connection...
+backend-2-1   | Async Retry 18: NpgsqlException - Failed to connect to 172.21.0.3:5432
+backend-1-1   | [Postgres] Attempting warmup connection...
+backend-1-1   | Async Retry 18: NpgsqlException - Failed to connect to 172.21.0.3:5432
+backend-2-1   | [Postgres] Attempting warmup connection...
+backend-2-1   | Async Retry 19: NpgsqlException - Failed to connect to 172.21.0.3:5432
+backend-1-1   | [Postgres] Attempting warmup connection...
+backend-1-1   | Async Retry 19: NpgsqlException - Failed to connect to 172.21.0.3:5432
+backend-2-1   | [Postgres] Attempting warmup connection...
+backend-2-1   | Async Retry 20: NpgsqlException - Failed to connect to 172.21.0.3:5432
+backend-1-1   | [Postgres] Attempting warmup connection...
+backend-1-1   | Async Retry 20: NpgsqlException - Failed to connect to 172.21.0.3:5432
+backend-2-1   | [Postgres] Attempting warmup connection...
+backend-2-1   | Async Retry 21: NpgsqlException - Failed to connect to 172.21.0.3:5432
+backend-1-1   | [Postgres] Attempting warmup connection...
+backend-1-1   | Async Retry 21: NpgsqlException - Failed to connect to 172.21.0.3:5432
+backend-2-1   | [Postgres] Attempting warmup connection...
+backend-2-1   | Async Retry 22: NpgsqlException - Failed to connect to 172.21.0.3:5432
 backend-db-1  | sh: locale: not found
-backend-db-1  | 2025-08-19 09:31:44.091 UTC [36] WARNING:  no usable system locales were found
 backend-1-1   | [Postgres] Attempting warmup connection...
-backend-1-1   | Async Retry 3: NpgsqlException - Failed to connect to 172.20.0.4:5432
+backend-1-1   | Async Retry 22: NpgsqlException - Failed to connect to 172.21.0.3:5432
 backend-2-1   | [Postgres] Attempting warmup connection...
-backend-2-1   | Async Retry 23: NpgsqlException - Failed to connect to 172.20.0.4:5432
+backend-2-1   | Async Retry 23: NpgsqlException - Failed to connect to 172.21.0.3:5432
+backend-db-1  | 2025-08-21 03:08:15.698 UTC [35] WARNING:  no usable system locales were found
 backend-1-1   | [Postgres] Attempting warmup connection...
-backend-1-1   | Async Retry 4: NpgsqlException - Failed to connect to 172.20.0.4:5432
+backend-1-1   | Async Retry 23: NpgsqlException - Failed to connect to 172.21.0.3:5432
 backend-2-1   | [Postgres] Attempting warmup connection...
-backend-2-1   | Async Retry 24: NpgsqlException - Failed to connect to 172.20.0.4:5432
+backend-2-1   | Async Retry 24: NpgsqlException - Failed to connect to 172.21.0.3:5432
 backend-1-1   | [Postgres] Attempting warmup connection...
-backend-1-1   | Async Retry 5: NpgsqlException - Failed to connect to 172.20.0.4:5432
+backend-1-1   | Async Retry 24: NpgsqlException - Failed to connect to 172.21.0.3:5432
 backend-2-1   | [Postgres] Attempting warmup connection...
-backend-2-1   | Async Retry 25: NpgsqlException - Failed to connect to 172.20.0.4:5432
+backend-2-1   | Async Retry 25: NpgsqlException - Failed to connect to 172.21.0.3:5432
 backend-1-1   | [Postgres] Attempting warmup connection...
-backend-1-1   | Async Retry 6: NpgsqlException - Failed to connect to 172.20.0.4:5432
+backend-1-1   | Async Retry 25: NpgsqlException - Failed to connect to 172.21.0.3:5432
 backend-2-1   | [Postgres] Attempting warmup connection...
-backend-2-1   | Async Retry 26: NpgsqlException - Failed to connect to 172.20.0.4:5432
+backend-2-1   | Async Retry 26: NpgsqlException - Failed to connect to 172.21.0.3:5432
 backend-1-1   | [Postgres] Attempting warmup connection...
-backend-1-1   | Async Retry 7: NpgsqlException - Failed to connect to 172.20.0.4:5432
+backend-1-1   | Async Retry 26: NpgsqlException - Failed to connect to 172.21.0.3:5432
 backend-2-1   | [Postgres] Attempting warmup connection...
-backend-2-1   | Async Retry 27: NpgsqlException - Failed to connect to 172.20.0.4:5432
+backend-2-1   | Async Retry 27: NpgsqlException - Failed to connect to 172.21.0.3:5432
 backend-1-1   | [Postgres] Attempting warmup connection...
-backend-1-1   | Async Retry 8: NpgsqlException - Failed to connect to 172.20.0.4:5432
+backend-1-1   | Async Retry 27: NpgsqlException - Failed to connect to 172.21.0.3:5432
 backend-2-1   | [Postgres] Attempting warmup connection...
-backend-2-1   | Async Retry 28: NpgsqlException - Failed to connect to 172.20.0.4:5432
+backend-2-1   | Async Retry 28: NpgsqlException - Failed to connect to 172.21.0.3:5432
 backend-1-1   | [Postgres] Attempting warmup connection...
-backend-1-1   | Async Retry 9: NpgsqlException - Failed to connect to 172.20.0.4:5432
+backend-1-1   | Async Retry 28: NpgsqlException - Failed to connect to 172.21.0.3:5432
 backend-2-1   | [Postgres] Attempting warmup connection...
-backend-2-1   | Async Retry 29: NpgsqlException - Failed to connect to 172.20.0.4:5432
+backend-2-1   | Async Retry 29: NpgsqlException - Failed to connect to 172.21.0.3:5432
 backend-1-1   | [Postgres] Attempting warmup connection...
-backend-1-1   | Async Retry 10: NpgsqlException - Failed to connect to 172.20.0.4:5432
+backend-1-1   | Async Retry 29: NpgsqlException - Failed to connect to 172.21.0.3:5432
 backend-2-1   | [Postgres] Attempting warmup connection...
-backend-2-1   | Async Retry 30: NpgsqlException - Failed to connect to 172.20.0.4:5432
+backend-2-1   | Async Retry 30: NpgsqlException - Failed to connect to 172.21.0.3:5432
 backend-1-1   | [Postgres] Attempting warmup connection...
-backend-1-1   | Async Retry 11: NpgsqlException - Failed to connect to 172.20.0.4:5432
+backend-1-1   | Async Retry 30: NpgsqlException - Failed to connect to 172.21.0.3:5432
 backend-2-1   | [Postgres] Attempting warmup connection...
-backend-2-1   | Async Retry 31: NpgsqlException - Failed to connect to 172.20.0.4:5432
+backend-2-1   | Async Retry 31: NpgsqlException - Failed to connect to 172.21.0.3:5432
 backend-1-1   | [Postgres] Attempting warmup connection...
-backend-1-1   | Async Retry 12: NpgsqlException - Failed to connect to 172.20.0.4:5432
+backend-1-1   | Async Retry 31: NpgsqlException - Failed to connect to 172.21.0.3:5432
 backend-2-1   | [Postgres] Attempting warmup connection...
-backend-2-1   | Async Retry 32: NpgsqlException - Failed to connect to 172.20.0.4:5432
+backend-2-1   | Async Retry 32: NpgsqlException - Failed to connect to 172.21.0.3:5432
 backend-1-1   | [Postgres] Attempting warmup connection...
-backend-1-1   | Async Retry 13: NpgsqlException - Failed to connect to 172.20.0.4:5432
+backend-1-1   | Async Retry 32: NpgsqlException - Failed to connect to 172.21.0.3:5432
 backend-2-1   | [Postgres] Attempting warmup connection...
-backend-2-1   | Async Retry 33: NpgsqlException - Failed to connect to 172.20.0.4:5432
+backend-2-1   | Async Retry 33: NpgsqlException - Failed to connect to 172.21.0.3:5432
 backend-1-1   | [Postgres] Attempting warmup connection...
-backend-1-1   | Async Retry 14: NpgsqlException - Failed to connect to 172.20.0.4:5432
+backend-1-1   | Async Retry 33: NpgsqlException - Failed to connect to 172.21.0.3:5432
 backend-2-1   | [Postgres] Attempting warmup connection...
-backend-2-1   | Async Retry 34: NpgsqlException - Failed to connect to 172.20.0.4:5432
+backend-2-1   | Async Retry 34: NpgsqlException - Failed to connect to 172.21.0.3:5432
 backend-1-1   | [Postgres] Attempting warmup connection...
-backend-1-1   | Async Retry 15: NpgsqlException - Failed to connect to 172.20.0.4:5432
+backend-1-1   | Async Retry 34: NpgsqlException - Failed to connect to 172.21.0.3:5432
 backend-2-1   | [Postgres] Attempting warmup connection...
-backend-2-1   | Async Retry 35: NpgsqlException - Failed to connect to 172.20.0.4:5432
+backend-2-1   | Async Retry 35: NpgsqlException - Failed to connect to 172.21.0.3:5432
 backend-1-1   | [Postgres] Attempting warmup connection...
-backend-1-1   | Async Retry 16: NpgsqlException - Failed to connect to 172.20.0.4:5432
+backend-1-1   | Async Retry 35: NpgsqlException - Failed to connect to 172.21.0.3:5432
 backend-2-1   | [Postgres] Attempting warmup connection...
-backend-2-1   | Async Retry 36: NpgsqlException - Failed to connect to 172.20.0.4:5432
+backend-2-1   | Async Retry 36: NpgsqlException - Failed to connect to 172.21.0.3:5432
 backend-1-1   | [Postgres] Attempting warmup connection...
-backend-1-1   | Async Retry 17: NpgsqlException - Failed to connect to 172.20.0.4:5432
+backend-1-1   | Async Retry 36: NpgsqlException - Failed to connect to 172.21.0.3:5432
 backend-2-1   | [Postgres] Attempting warmup connection...
-backend-2-1   | Async Retry 37: NpgsqlException - Failed to connect to 172.20.0.4:5432
+backend-2-1   | Async Retry 37: NpgsqlException - Failed to connect to 172.21.0.3:5432
 backend-1-1   | [Postgres] Attempting warmup connection...
-backend-1-1   | Async Retry 18: NpgsqlException - Failed to connect to 172.20.0.4:5432
+backend-1-1   | Async Retry 37: NpgsqlException - Failed to connect to 172.21.0.3:5432
 backend-2-1   | [Postgres] Attempting warmup connection...
-backend-2-1   | Async Retry 38: NpgsqlException - Failed to connect to 172.20.0.4:5432
+backend-2-1   | Async Retry 38: NpgsqlException - Failed to connect to 172.21.0.3:5432
 backend-1-1   | [Postgres] Attempting warmup connection...
-backend-1-1   | Async Retry 19: NpgsqlException - Failed to connect to 172.20.0.4:5432
+backend-1-1   | Async Retry 38: NpgsqlException - Failed to connect to 172.21.0.3:5432
 backend-2-1   | [Postgres] Attempting warmup connection...
-backend-2-1   | Async Retry 39: NpgsqlException - Failed to connect to 172.20.0.4:5432
+backend-2-1   | Async Retry 39: NpgsqlException - Failed to connect to 172.21.0.3:5432
 backend-1-1   | [Postgres] Attempting warmup connection...
-backend-1-1   | Async Retry 20: NpgsqlException - Failed to connect to 172.20.0.4:5432
+backend-1-1   | Async Retry 39: NpgsqlException - Failed to connect to 172.21.0.3:5432
 backend-2-1   | [Postgres] Attempting warmup connection...
-backend-2-1   | Async Retry 40: NpgsqlException - Failed to connect to 172.20.0.4:5432
+backend-2-1   | Async Retry 40: NpgsqlException - Failed to connect to 172.21.0.3:5432
 backend-1-1   | [Postgres] Attempting warmup connection...
-backend-1-1   | Async Retry 21: NpgsqlException - Failed to connect to 172.20.0.4:5432
+backend-1-1   | Async Retry 40: NpgsqlException - Failed to connect to 172.21.0.3:5432
 backend-2-1   | [Postgres] Attempting warmup connection...
-backend-2-1   | Async Retry 41: NpgsqlException - Failed to connect to 172.20.0.4:5432
+backend-2-1   | Async Retry 41: NpgsqlException - Failed to connect to 172.21.0.3:5432
 backend-1-1   | [Postgres] Attempting warmup connection...
-backend-1-1   | Async Retry 22: NpgsqlException - Failed to connect to 172.20.0.4:5432
+backend-1-1   | Async Retry 41: NpgsqlException - Failed to connect to 172.21.0.3:5432
 backend-2-1   | [Postgres] Attempting warmup connection...
-backend-2-1   | Async Retry 42: NpgsqlException - Failed to connect to 172.20.0.4:5432
+backend-2-1   | Async Retry 42: NpgsqlException - Failed to connect to 172.21.0.3:5432
 backend-1-1   | [Postgres] Attempting warmup connection...
-backend-1-1   | Async Retry 23: NpgsqlException - Failed to connect to 172.20.0.4:5432
+backend-1-1   | Async Retry 42: NpgsqlException - Failed to connect to 172.21.0.3:5432
 backend-2-1   | [Postgres] Attempting warmup connection...
-backend-2-1   | Async Retry 43: NpgsqlException - Failed to connect to 172.20.0.4:5432
+backend-2-1   | Async Retry 43: NpgsqlException - Failed to connect to 172.21.0.3:5432
 backend-1-1   | [Postgres] Attempting warmup connection...
-backend-1-1   | Async Retry 24: NpgsqlException - Failed to connect to 172.20.0.4:5432
+backend-1-1   | Async Retry 43: NpgsqlException - Failed to connect to 172.21.0.3:5432
 backend-2-1   | [Postgres] Attempting warmup connection...
-backend-2-1   | Async Retry 44: NpgsqlException - Failed to connect to 172.20.0.4:5432
+backend-2-1   | Async Retry 44: NpgsqlException - Failed to connect to 172.21.0.3:5432
 backend-1-1   | [Postgres] Attempting warmup connection...
-backend-1-1   | Async Retry 25: NpgsqlException - Failed to connect to 172.20.0.4:5432
+backend-1-1   | Async Retry 44: NpgsqlException - Failed to connect to 172.21.0.3:5432
 backend-2-1   | [Postgres] Attempting warmup connection...
-backend-2-1   | Async Retry 45: NpgsqlException - Failed to connect to 172.20.0.4:5432
-backend-1-1   | [Postgres] Attempting warmup connection...
-backend-1-1   | Async Retry 26: NpgsqlException - Failed to connect to 172.20.0.4:5432
-backend-2-1   | [Postgres] Attempting warmup connection...
-backend-2-1   | Async Retry 46: NpgsqlException - Failed to connect to 172.20.0.4:5432
+backend-2-1   | Async Retry 45: NpgsqlException - Failed to connect to 172.21.0.3:5432
 backend-db-1  | performing post-bootstrap initialization ... ok
 backend-1-1   | [Postgres] Attempting warmup connection...
-backend-1-1   | Async Retry 27: NpgsqlException - Failed to connect to 172.20.0.4:5432
+backend-1-1   | Async Retry 45: NpgsqlException - Failed to connect to 172.21.0.3:5432
 backend-2-1   | [Postgres] Attempting warmup connection...
-backend-2-1   | Async Retry 47: NpgsqlException - Failed to connect to 172.20.0.4:5432
+backend-2-1   | Async Retry 46: NpgsqlException - Failed to connect to 172.21.0.3:5432
 backend-1-1   | [Postgres] Attempting warmup connection...
-backend-1-1   | Async Retry 28: NpgsqlException - Failed to connect to 172.20.0.4:5432
+backend-1-1   | Async Retry 46: NpgsqlException - Failed to connect to 172.21.0.3:5432
 backend-db-1  | syncing data to disk ... ok
 backend-db-1  | 
 backend-db-1  | 
@@ -266,120 +302,700 @@ backend-db-1  |
 backend-db-1  | initdb: warning: enabling "trust" authentication for local connections
 backend-db-1  | initdb: hint: You can change this by editing pg_hba.conf or using the option -A, or --auth-local and --auth-host, the next time you run initdb.
 backend-2-1   | [Postgres] Attempting warmup connection...
-backend-2-1   | Async Retry 48: NpgsqlException - Failed to connect to 172.20.0.4:5432
+backend-2-1   | Async Retry 47: NpgsqlException - Failed to connect to 172.21.0.3:5432
 backend-1-1   | [Postgres] Attempting warmup connection...
-backend-1-1   | Async Retry 29: NpgsqlException - Failed to connect to 172.20.0.4:5432
+backend-1-1   | Async Retry 47: NpgsqlException - Failed to connect to 172.21.0.3:5432
 backend-2-1   | [Postgres] Attempting warmup connection...
-backend-2-1   | Async Retry 49: NpgsqlException - Failed to connect to 172.20.0.4:5432
+backend-2-1   | Async Retry 48: NpgsqlException - Failed to connect to 172.21.0.3:5432
 backend-1-1   | [Postgres] Attempting warmup connection...
-backend-1-1   | Async Retry 30: NpgsqlException - Failed to connect to 172.20.0.4:5432
+backend-1-1   | Async Retry 48: NpgsqlException - Failed to connect to 172.21.0.3:5432
 backend-2-1   | [Postgres] Attempting warmup connection...
-backend-2-1   | Async Retry 50: NpgsqlException - Failed to connect to 172.20.0.4:5432
-backend-db-1  | waiting for server to start....2025-08-19 09:31:46.891 UTC [42] LOG:  starting PostgreSQL 17.5 on x86_64-pc-linux-musl, compiled by gcc (Alpine 14.2.0) 14.2.0, 64-bit
-backend-db-1  | 2025-08-19 09:31:46.891 UTC [42] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
-backend-db-1  | 2025-08-19 09:31:46.893 UTC [45] LOG:  database system was shut down at 2025-08-19 09:31:46 UTC
-backend-db-1  | 2025-08-19 09:31:46.898 UTC [42] LOG:  database system is ready to accept connections
+backend-2-1   | Async Retry 49: NpgsqlException - Failed to connect to 172.21.0.3:5432
+backend-db-1  | waiting for server to start....2025-08-21 03:08:18.311 UTC [41] LOG:  starting PostgreSQL 17.6 on x86_64-pc-linux-musl, compiled by gcc (Alpine 14.2.0) 14.2.0, 64-bit
+backend-db-1  | 2025-08-21 03:08:18.311 UTC [41] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
 backend-1-1   | [Postgres] Attempting warmup connection...
-backend-1-1   | Async Retry 31: NpgsqlException - Failed to connect to 172.20.0.4:5432
-backend-2-1   | [Postgres] Attempting warmup connection...
-backend-2-1   | Async Retry 51: NpgsqlException - Failed to connect to 172.20.0.4:5432
+backend-1-1   | Async Retry 49: NpgsqlException - Failed to connect to 172.21.0.3:5432
+backend-db-1  | 2025-08-21 03:08:18.399 UTC [44] LOG:  database system was shut down at 2025-08-21 03:08:17 UTC
+backend-db-1  | 2025-08-21 03:08:18.403 UTC [41] LOG:  database system is ready to accept connections
 backend-db-1  |  done
 backend-db-1  | server started
-backend-1-1   | [Postgres] Attempting warmup connection...
-backend-1-1   | Async Retry 32: NpgsqlException - Failed to connect to 172.20.0.4:5432
 backend-2-1   | [Postgres] Attempting warmup connection...
-backend-2-1   | Async Retry 52: NpgsqlException - Failed to connect to 172.20.0.4:5432
+backend-2-1   | Async Retry 50: NpgsqlException - Failed to connect to 172.21.0.3:5432
 backend-1-1   | [Postgres] Attempting warmup connection...
-backend-1-1   | Async Retry 33: NpgsqlException - Failed to connect to 172.20.0.4:5432
+backend-1-1   | Async Retry 50: NpgsqlException - Failed to connect to 172.21.0.3:5432
 backend-2-1   | [Postgres] Attempting warmup connection...
-backend-2-1   | Async Retry 53: NpgsqlException - Failed to connect to 172.20.0.4:5432
+backend-2-1   | Async Retry 51: NpgsqlException - Failed to connect to 172.21.0.3:5432
 backend-1-1   | [Postgres] Attempting warmup connection...
-backend-1-1   | Async Retry 34: NpgsqlException - Failed to connect to 172.20.0.4:5432
+backend-1-1   | Async Retry 51: NpgsqlException - Failed to connect to 172.21.0.3:5432
 backend-2-1   | [Postgres] Attempting warmup connection...
-backend-2-1   | Async Retry 54: NpgsqlException - Failed to connect to 172.20.0.4:5432
+backend-2-1   | Async Retry 52: NpgsqlException - Failed to connect to 172.21.0.3:5432
+backend-1-1   | [Postgres] Attempting warmup connection...
+backend-1-1   | Async Retry 52: NpgsqlException - Failed to connect to 172.21.0.3:5432
+backend-2-1   | [Postgres] Attempting warmup connection...
+backend-2-1   | Async Retry 53: NpgsqlException - Failed to connect to 172.21.0.3:5432
 backend-db-1  | CREATE DATABASE
 backend-db-1  | 
 backend-db-1  | 
 backend-db-1  | /usr/local/bin/docker-entrypoint.sh: running /docker-entrypoint-initdb.d/init.sql
 backend-1-1   | [Postgres] Attempting warmup connection...
-backend-1-1   | Async Retry 35: NpgsqlException - Failed to connect to 172.20.0.4:5432
+backend-1-1   | Async Retry 53: NpgsqlException - Failed to connect to 172.21.0.3:5432
 backend-2-1   | [Postgres] Attempting warmup connection...
-backend-2-1   | Async Retry 55: NpgsqlException - Failed to connect to 172.20.0.4:5432
-backend-1-1   | [Postgres] Attempting warmup connection...
-backend-1-1   | Async Retry 36: NpgsqlException - Failed to connect to 172.20.0.4:5432
-backend-2-1   | [Postgres] Attempting warmup connection...
-backend-2-1   | Async Retry 56: NpgsqlException - Failed to connect to 172.20.0.4:5432
+backend-2-1   | Async Retry 54: NpgsqlException - Failed to connect to 172.21.0.3:5432
 backend-db-1  | CREATE TABLE
+backend-1-1   | [Postgres] Attempting warmup connection...
+backend-1-1   | Async Retry 54: NpgsqlException - Failed to connect to 172.21.0.3:5432
 backend-db-1  | CREATE INDEX
 backend-db-1  | 
 backend-db-1  | 
-backend-db-1  | waiting for server to shut down....2025-08-19 09:31:47.487 UTC [42] LOG:  received fast shutdown request
-backend-db-1  | 2025-08-19 09:31:47.487 UTC [42] LOG:  aborting any active transactions
-backend-1-1   | [Postgres] Attempting warmup connection...
-backend-1-1   | Async Retry 37: NpgsqlException - Failed to connect to 172.20.0.4:5432
+backend-db-1  | waiting for server to shut down....2025-08-21 03:08:18.902 UTC [41] LOG:  received fast shutdown request
+backend-db-1  | 2025-08-21 03:08:18.902 UTC [41] LOG:  aborting any active transactions
+backend-db-1  | 2025-08-21 03:08:18.905 UTC [41] LOG:  background worker "logical replication launcher" (PID 47) exited with exit code 1
+backend-db-1  | 2025-08-21 03:08:18.906 UTC [42] LOG:  shutting down
+backend-db-1  | 2025-08-21 03:08:18.906 UTC [42] LOG:  checkpoint starting: shutdown immediate
 backend-2-1   | [Postgres] Attempting warmup connection...
-backend-2-1   | Async Retry 57: NpgsqlException - Failed to connect to 172.20.0.4:5432
-backend-db-1  | 2025-08-19 09:31:47.582 UTC [42] LOG:  background worker "logical replication launcher" (PID 48) exited with exit code 1
-backend-db-1  | 2025-08-19 09:31:47.584 UTC [43] LOG:  shutting down
-backend-db-1  | 2025-08-19 09:31:47.584 UTC [43] LOG:  checkpoint starting: shutdown immediate
-backend-db-1  | 2025-08-19 09:31:47.593 UTC [43] LOG:  checkpoint complete: wrote 927 buffers (5.7%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.010 s, sync=0.001 s, total=0.010 s; sync files=0, longest=0.000 s, average=0.000 s; distance=4276 kB, estimate=4276 kB; lsn=0/191A368, redo lsn=0/191A368
+backend-2-1   | Async Retry 55: NpgsqlException - Failed to connect to 172.21.0.3:5432
 backend-1-1   | [Postgres] Attempting warmup connection...
-backend-1-1   | Async Retry 38: NpgsqlException - Failed to connect to 172.20.0.4:5432
+backend-1-1   | Async Retry 55: NpgsqlException - Failed to connect to 172.21.0.3:5432
+backend-db-1  | 2025-08-21 03:08:19.005 UTC [42] LOG:  checkpoint complete: wrote 927 buffers (5.7%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.099 s, sync=0.001 s, total=0.099 s; sync files=0, longest=0.000 s, average=0.000 s; distance=4276 kB, estimate=4276 kB; lsn=0/191A368, redo lsn=0/191A368
 backend-2-1   | [Postgres] Attempting warmup connection...
-backend-2-1   | Async Retry 58: NpgsqlException - Failed to connect to 172.20.0.4:5432
-backend-db-1  | 2025-08-19 09:31:47.686 UTC [42] LOG:  database system is shut down
+backend-2-1   | Async Retry 56: NpgsqlException - Failed to connect to 172.21.0.3:5432
+backend-db-1  | 2025-08-21 03:08:19.016 UTC [41] LOG:  database system is shut down
+backend-1-1   | [Postgres] Attempting warmup connection...
+backend-1-1   | Async Retry 56: NpgsqlException - Failed to connect to 172.21.0.3:5432
 backend-db-1  |  done
 backend-db-1  | server stopped
 backend-db-1  | 
 backend-db-1  | PostgreSQL init process complete; ready for start up.
 backend-db-1  | 
-backend-1-1   | [Postgres] Attempting warmup connection...
-backend-1-1   | Async Retry 39: NpgsqlException - Failed to connect to 172.20.0.4:5432
 backend-2-1   | [Postgres] Attempting warmup connection...
-backend-2-1   | Async Retry 59: NpgsqlException - Failed to connect to 172.20.0.4:5432
-backend-db-1  | 2025-08-19 09:31:47.797 UTC [1] LOG:  starting PostgreSQL 17.5 on x86_64-pc-linux-musl, compiled by gcc (Alpine 14.2.0) 14.2.0, 64-bit
-backend-db-1  | 2025-08-19 09:31:47.797 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
-backend-db-1  | 2025-08-19 09:31:47.797 UTC [1] LOG:  listening on IPv6 address "::", port 5432
-backend-db-1  | 2025-08-19 09:31:47.797 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
-backend-db-1  | 2025-08-19 09:31:47.799 UTC [60] LOG:  database system was shut down at 2025-08-19 09:31:47 UTC
+backend-2-1   | Async Retry 57: NpgsqlException - Failed to connect to 172.21.0.3:5432
 backend-1-1   | [Postgres] Attempting warmup connection...
+backend-1-1   | Async Retry 57: NpgsqlException - Failed to connect to 172.21.0.3:5432
+backend-db-1  | 2025-08-21 03:08:19.207 UTC [1] LOG:  starting PostgreSQL 17.6 on x86_64-pc-linux-musl, compiled by gcc (Alpine 14.2.0) 14.2.0, 64-bit
+backend-db-1  | 2025-08-21 03:08:19.207 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+backend-db-1  | 2025-08-21 03:08:19.207 UTC [1] LOG:  listening on IPv6 address "::", port 5432
+backend-db-1  | 2025-08-21 03:08:19.207 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
 backend-2-1   | [Postgres] Attempting warmup connection...
-backend-db-1  | 2025-08-19 09:31:47.883 UTC [61] FATAL:  the database system is starting up
-backend-1-1   | Async Retry 40: PostgresException - 57P03: the database system is starting up
-backend-db-1  | 2025-08-19 09:31:47.884 UTC [62] FATAL:  the database system is starting up
-backend-2-1   | Async Retry 60: PostgresException - 57P03: the database system is starting up
-backend-db-1  | 2025-08-19 09:31:47.886 UTC [1] LOG:  database system is ready to accept connections
+backend-db-1  | 2025-08-21 03:08:19.210 UTC [59] LOG:  database system was shut down at 2025-08-21 03:08:19 UTC
+backend-db-1  | 2025-08-21 03:08:19.210 UTC [60] FATAL:  the database system is starting up
+backend-2-1   | Async Retry 58: PostgresException - 57P03: the database system is starting up
 backend-1-1   | [Postgres] Attempting warmup connection...
+backend-db-1  | 2025-08-21 03:08:19.299 UTC [1] LOG:  database system is ready to accept connections
 backend-2-1   | [Postgres] Attempting warmup connection...
 backend-2-1   | [Postgres] Connection warmup successful.
 backend-1-1   | [Postgres] Connection warmup successful.
-load-balancer-1  | [NOTICE]   (1) : Initializing new worker (8)
+load-balancer-1  | [NOTICE]   (1) : Initializing new worker (9)
 load-balancer-1  | [NOTICE]   (1) : Loading success.
-backend-db-1     | 2025-08-19 09:36:47.899 UTC [58] LOG:  checkpoint starting: time
-backend-db-1     | 2025-08-19 09:36:53.110 UTC [58] LOG:  checkpoint complete: wrote 56 buffers (0.3%); 0 WAL file(s) added, 0 removed, 0 recycled; write=5.211 s, sync=0.001 s, total=5.211 s; sync files=0, longest=0.000 s, average=0.000 s; distance=171 kB, estimate=171 kB; lsn=0/19453B8, redo lsn=0/1945360
-redis-1          | 1:signal-handler (1755596224) Received SIGTERM scheduling shutdown...
-backend-db-1     | 2025-08-19 09:37:04.416 UTC [1] LOG:  received fast shutdown request
-backend-db-1     | 2025-08-19 09:37:04.416 UTC [1] LOG:  aborting any active transactions
-backend-db-1     | 2025-08-19 09:37:04.416 UTC [89] FATAL:  terminating connection due to administrator command
-backend-db-1     | 2025-08-19 09:37:04.416 UTC [88] FATAL:  terminating connection due to administrator command
-load-balancer-1  | [NOTICE]   (1) : haproxy version is 3.2.4-98813a1
-load-balancer-1  | [WARNING]  (1) : Exiting Master process...
-load-balancer-1  | [WARNING]  (8) : Proxy front stopped (cumulated conns: FE: 605, BE: 0).
-load-balancer-1  | [WARNING]  (8) : Proxy back stopped (cumulated conns: FE: 0, BE: 90609).
-backend-db-1     | 2025-08-19 09:37:04.416 UTC [87] FATAL:  terminating connection due to administrator command
-backend-db-1     | 2025-08-19 09:37:04.416 UTC [66] FATAL:  terminating connection due to administrator command
-backend-db-1     | 2025-08-19 09:37:04.416 UTC [67] FATAL:  terminating connection due to administrator command
-load-balancer-1  | [WARNING]  (1) : Current worker (8) exited with code 0 (Exit)
-load-balancer-1  | [WARNING]  (1) : All workers exited. Exiting... (0)
-backend-db-1     | 2025-08-19 09:37:04.482 UTC [1] LOG:  background worker "logical replication launcher" (PID 65) exited with exit code 1
-backend-db-1     | 2025-08-19 09:37:04.485 UTC [58] LOG:  shutting down
-backend-db-1     | 2025-08-19 09:37:04.485 UTC [58] LOG:  checkpoint starting: shutdown immediate
-backend-db-1     | 2025-08-19 09:37:04.490 UTC [58] LOG:  checkpoint complete: wrote 1012 buffers (6.2%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.005 s, sync=0.001 s, total=0.006 s; sync files=0, longest=0.000 s, average=0.000 s; distance=0 kB, estimate=154 kB; lsn=0/1945580, redo lsn=0/1945580
-redis-1          | 1:M 19 Aug 2025 09:37:04.498 * User requested shutdown...
-redis-1          | 1:M 19 Aug 2025 09:37:04.498 # Redis is now ready to exit, bye bye...
-backend-db-1     | 2025-08-19 09:37:04.595 UTC [1] LOG:  database system is shut down
-[Kload-balancer-1 exited with code 0
-[Kredis-1 exited with code 0
-[Kbackend-db-1 exited with code 0
-[Kbackend-2-1 exited with code 0
+backend-1-1      | [Worker Error] StackExchange.Redis.RedisConnectionException: SocketClosed (WriteSocketError/ConnectionReset, last-recv: 0) on redis:6379/Interactive, Idle/MarkProcessed, last: RPUSH, origin: ReadFromPipe, outstanding: 1578, last-read: 0s ago, last-write: 0s ago, unanswered-write: 5s ago, keep-alive: 60s, state: ConnectedEstablished, mgr: 8 of 10 available, in: 0, in-pipe: 0, out-pipe: 0, last-heartbeat: 0s ago, last-mbeat: 0s ago, global: 0s ago, v: 2.8.58.19568
+backend-1-1      |    at RedisQueueWorker.<WorkerLoopAsync>d__11.MoveNext() + 0x154
+backend-1-1      | [Worker Error] StackExchange.Redis.RedisConnectionException: SocketClosed (WriteSocketError/ConnectionReset, last-recv: 0) on redis:6379/Interactive, Idle/MarkProcessed, last: RPUSH, origin: ReadFromPipe, outstanding: 1578, last-read: 0s ago, last-write: 0s ago, unanswered-write: 5s ago, keep-alive: 60s, state: ConnectedEstablished, mgr: 8 of 10 available, in: 0, in-pipe: 0, out-pipe: 0, last-heartbeat: 0s ago, last-mbeat: 0s ago, global: 0s ago, v: 2.8.58.19568
+backend-1-1      |    at RedisQueueWorker.<WorkerLoopAsync>d__11.MoveNext() + 0x154
+backend-1-1      | [Worker Error] StackExchange.Redis.RedisConnectionException: SocketClosed (WriteSocketError/ConnectionReset, last-recv: 0) on redis:6379/Interactive, Idle/MarkProcessed, last: RPUSH, origin: ReadFromPipe, outstanding: 1578, last-read: 0s ago, last-write: 0s ago, unanswered-write: 5s ago, keep-alive: 60s, state: ConnectedEstablished, mgr: 8 of 10 available, in: 0, in-pipe: 0, out-pipe: 0, last-heartbeat: 0s ago, last-mbeat: 0s ago, global: 0s ago, v: 2.8.58.19568
+backend-1-1      |    at RedisQueueWorker.<WorkerLoopAsync>d__11.MoveNext() + 0x154
+backend-1-1      | [Worker Error] StackExchange.Redis.RedisConnectionException: SocketClosed (WriteSocketError/ConnectionReset, last-recv: 0) on redis:6379/Interactive, Idle/MarkProcessed, last: RPUSH, origin: ReadFromPipe, outstanding: 1578, last-read: 0s ago, last-write: 0s ago, unanswered-write: 5s ago, keep-alive: 60s, state: ConnectedEstablished, mgr: 8 of 10 available, in: 0, in-pipe: 0, out-pipe: 0, last-heartbeat: 0s ago, last-mbeat: 0s ago, global: 0s ago, v: 2.8.58.19568
+backend-1-1      |    at RedisQueueWorker.<WorkerLoopAsync>d__11.MoveNext() + 0x154
+backend-1-1      | [Worker Error] StackExchange.Redis.RedisConnectionException: SocketClosed (WriteSocketError/ConnectionReset, last-recv: 0) on redis:6379/Interactive, Idle/MarkProcessed, last: RPUSH, origin: ReadFromPipe, outstanding: 1578, last-read: 0s ago, last-write: 0s ago, unanswered-write: 5s ago, keep-alive: 60s, state: ConnectedEstablished, mgr: 8 of 10 available, in: 0, in-pipe: 0, out-pipe: 0, last-heartbeat: 0s ago, last-mbeat: 0s ago, global: 0s ago, v: 2.8.58.19568
+backend-1-1      |    at RedisQueueWorker.<WorkerLoopAsync>d__11.MoveNext() + 0x154
+backend-1-1      | [Worker Error] StackExchange.Redis.RedisConnectionException: SocketClosed (WriteSocketError/ConnectionReset, last-recv: 0) on redis:6379/Interactive, Idle/MarkProcessed, last: RPUSH, origin: ReadFromPipe, outstanding: 1578, last-read: 0s ago, last-write: 0s ago, unanswered-write: 5s ago, keep-alive: 60s, state: ConnectedEstablished, mgr: 8 of 10 available, in: 0, in-pipe: 0, out-pipe: 0, last-heartbeat: 0s ago, last-mbeat: 0s ago, global: 0s ago, v: 2.8.58.19568
+backend-1-1      |    at RedisQueueWorker.<WorkerLoopAsync>d__11.MoveNext() + 0x154
+backend-1-1      | [Worker Error] StackExchange.Redis.RedisConnectionException: SocketClosed (WriteSocketError/ConnectionReset, last-recv: 0) on redis:6379/Interactive, Idle/MarkProcessed, last: RPUSH, origin: ReadFromPipe, outstanding: 1578, last-read: 0s ago, last-write: 0s ago, unanswered-write: 5s ago, keep-alive: 60s, state: ConnectedEstablished, mgr: 8 of 10 available, in: 0, in-pipe: 0, out-pipe: 0, last-heartbeat: 0s ago, last-mbeat: 0s ago, global: 0s ago, v: 2.8.58.19568
+backend-1-1      |    at RedisQueueWorker.<WorkerLoopAsync>d__11.MoveNext() + 0x154
+backend-1-1      | [Worker Error] StackExchange.Redis.RedisConnectionException: SocketClosed (WriteSocketError/ConnectionReset, last-recv: 0) on redis:6379/Interactive, Idle/MarkProcessed, last: RPUSH, origin: ReadFromPipe, outstanding: 1578, last-read: 0s ago, last-write: 0s ago, unanswered-write: 5s ago, keep-alive: 60s, state: ConnectedEstablished, mgr: 8 of 10 available, in: 0, in-pipe: 0, out-pipe: 0, last-heartbeat: 0s ago, last-mbeat: 0s ago, global: 0s ago, v: 2.8.58.19568
+backend-1-1      |    at RedisQueueWorker.<WorkerLoopAsync>d__11.MoveNext() + 0x154
+backend-1-1      | [Worker Error] StackExchange.Redis.RedisConnectionException: SocketClosed (WriteSocketError/ConnectionReset, last-recv: 0) on redis:6379/Interactive, Idle/MarkProcessed, last: RPUSH, origin: ReadFromPipe, outstanding: 1578, last-read: 0s ago, last-write: 0s ago, unanswered-write: 5s ago, keep-alive: 60s, state: ConnectedEstablished, mgr: 8 of 10 available, in: 0, in-pipe: 0, out-pipe: 0, last-heartbeat: 0s ago, last-mbeat: 0s ago, global: 0s ago, v: 2.8.58.19568
+backend-1-1      |    at RedisQueueWorker.<WorkerLoopAsync>d__11.MoveNext() + 0x154
+backend-2-1      | [Worker Error] StackExchange.Redis.RedisConnectionException: SocketFailure (ReadSocketError/ConnectionReset, last-recv: 8) on redis:6379/Interactive, Idle/Faulted, last: RPUSH, origin: ReadFromPipe, outstanding: 1577, last-read: 5s ago, last-write: 0s ago, unanswered-write: 5s ago, keep-alive: 60s, state: ConnectedEstablished, mgr: 8 of 10 available, in: 0, in-pipe: 0, out-pipe: 0, last-heartbeat: 0s ago, last-mbeat: 0s ago, global: 0s ago, v: 2.8.58.19568
+backend-2-1      |  ---> Pipelines.Sockets.Unofficial.ConnectionResetException: Connection reset by peer
+backend-2-1      |  ---> System.Net.Sockets.SocketException (104): Connection reset by peer
+backend-2-1      |    at Pipelines.Sockets.Unofficial.Internal.Throw.Socket(Int32) + 0x27
+backend-2-1      |    at Pipelines.Sockets.Unofficial.SocketAwaitableEventArgs.GetResult() + 0x3e
+backend-2-1      |    at Pipelines.Sockets.Unofficial.SocketConnection.<DoReceiveAsync>d__73.MoveNext() + 0xec
+backend-2-1      |    --- End of inner exception stack trace ---
+backend-2-1      |    at System.IO.Pipelines.Pipe.GetReadResult(ReadResult&) + 0x170
+backend-2-1      |    at System.IO.Pipelines.Pipe.GetReadAsyncResult() + 0x96
+backend-2-1      |    at StackExchange.Redis.PhysicalConnection.<ReadFromPipe>d__134.MoveNext() + 0x544
+backend-2-1      |    --- End of inner exception stack trace ---
+backend-2-1      |    at RedisQueueWorker.<WorkerLoopAsync>d__11.MoveNext() + 0x154
+backend-2-1      | [Worker Error] StackExchange.Redis.RedisConnectionException: SocketFailure (ReadSocketError/ConnectionReset, last-recv: 8) on redis:6379/Interactive, Idle/Faulted, last: RPUSH, origin: ReadFromPipe, outstanding: 1577, last-read: 5s ago, last-write: 0s ago, unanswered-write: 5s ago, keep-alive: 60s, state: ConnectedEstablished, mgr: 8 of 10 available, in: 0, in-pipe: 0, out-pipe: 0, last-heartbeat: 0s ago, last-mbeat: 0s ago, global: 0s ago, v: 2.8.58.19568
+backend-2-1      |  ---> Pipelines.Sockets.Unofficial.ConnectionResetException: Connection reset by peer
+backend-2-1      |  ---> System.Net.Sockets.SocketException (104): Connection reset by peer
+backend-2-1      |    at Pipelines.Sockets.Unofficial.Internal.Throw.Socket(Int32) + 0x27
+backend-2-1      |    at Pipelines.Sockets.Unofficial.SocketAwaitableEventArgs.GetResult() + 0x3e
+backend-2-1      |    at Pipelines.Sockets.Unofficial.SocketConnection.<DoReceiveAsync>d__73.MoveNext() + 0xec
+backend-2-1      |    --- End of inner exception stack trace ---
+backend-2-1      |    at System.IO.Pipelines.Pipe.GetReadResult(ReadResult&) + 0x170
+backend-2-1      |    at System.IO.Pipelines.Pipe.GetReadAsyncResult() + 0x96
+backend-2-1      |    at StackExchange.Redis.PhysicalConnection.<ReadFromPipe>d__134.MoveNext() + 0x544
+backend-2-1      |    --- End of inner exception stack trace ---
+backend-2-1      |    at RedisQueueWorker.<WorkerLoopAsync>d__11.MoveNext() + 0x154
+backend-2-1      | [Worker Error] StackExchange.Redis.RedisConnectionException: SocketFailure (ReadSocketError/ConnectionReset, last-recv: 8) on redis:6379/Interactive, Idle/Faulted, last: RPUSH, origin: ReadFromPipe, outstanding: 1577, last-read: 5s ago, last-write: 0s ago, unanswered-write: 5s ago, keep-alive: 60s, state: ConnectedEstablished, mgr: 8 of 10 available, in: 0, in-pipe: 0, out-pipe: 0, last-heartbeat: 0s ago, last-mbeat: 0s ago, global: 0s ago, v: 2.8.58.19568
+backend-2-1      |  ---> Pipelines.Sockets.Unofficial.ConnectionResetException: Connection reset by peer
+backend-2-1      |  ---> System.Net.Sockets.SocketException (104): Connection reset by peer
+backend-2-1      |    at Pipelines.Sockets.Unofficial.Internal.Throw.Socket(Int32) + 0x27
+backend-2-1      |    at Pipelines.Sockets.Unofficial.SocketAwaitableEventArgs.GetResult() + 0x3e
+backend-2-1      |    at Pipelines.Sockets.Unofficial.SocketConnection.<DoReceiveAsync>d__73.MoveNext() + 0xec
+backend-2-1      |    --- End of inner exception stack trace ---
+backend-2-1      |    at System.IO.Pipelines.Pipe.GetReadResult(ReadResult&) + 0x170
+backend-2-1      |    at System.IO.Pipelines.Pipe.GetReadAsyncResult() + 0x96
+backend-2-1      |    at StackExchange.Redis.PhysicalConnection.<ReadFromPipe>d__134.MoveNext() + 0x544
+backend-2-1      |    --- End of inner exception stack trace ---
+backend-2-1      |    at RedisQueueWorker.<WorkerLoopAsync>d__11.MoveNext() + 0x154
+backend-2-1      | [Worker Error] StackExchange.Redis.RedisConnectionException: SocketFailure (ReadSocketError/ConnectionReset, last-recv: 8) on redis:6379/Interactive, Idle/Faulted, last: RPUSH, origin: ReadFromPipe, outstanding: 1577, last-read: 5s ago, last-write: 0s ago, unanswered-write: 5s ago, keep-alive: 60s, state: ConnectedEstablished, mgr: 8 of 10 available, in: 0, in-pipe: 0, out-pipe: 0, last-heartbeat: 0s ago, last-mbeat: 0s ago, global: 0s ago, v: 2.8.58.19568
+backend-2-1      |  ---> Pipelines.Sockets.Unofficial.ConnectionResetException: Connection reset by peer
+backend-2-1      |  ---> System.Net.Sockets.SocketException (104): Connection reset by peer
+backend-2-1      |    at Pipelines.Sockets.Unofficial.Internal.Throw.Socket(Int32) + 0x27
+backend-2-1      |    at Pipelines.Sockets.Unofficial.SocketAwaitableEventArgs.GetResult() + 0x3e
+backend-2-1      |    at Pipelines.Sockets.Unofficial.SocketConnection.<DoReceiveAsync>d__73.MoveNext() + 0xec
+backend-2-1      |    --- End of inner exception stack trace ---
+backend-2-1      |    at System.IO.Pipelines.Pipe.GetReadResult(ReadResult&) + 0x170
+backend-2-1      |    at System.IO.Pipelines.Pipe.GetReadAsyncResult() + 0x96
+backend-2-1      |    at StackExchange.Redis.PhysicalConnection.<ReadFromPipe>d__134.MoveNext() + 0x544
+backend-2-1      |    --- End of inner exception stack trace ---
+backend-2-1      |    at RedisQueueWorker.<WorkerLoopAsync>d__11.MoveNext() + 0x154
+backend-2-1      | [Worker Error] StackExchange.Redis.RedisConnectionException: SocketFailure (ReadSocketError/ConnectionReset, last-recv: 8) on redis:6379/Interactive, Idle/Faulted, last: RPUSH, origin: ReadFromPipe, outstanding: 1577, last-read: 5s ago, last-write: 0s ago, unanswered-write: 5s ago, keep-alive: 60s, state: ConnectedEstablished, mgr: 8 of 10 available, in: 0, in-pipe: 0, out-pipe: 0, last-heartbeat: 0s ago, last-mbeat: 0s ago, global: 0s ago, v: 2.8.58.19568
+backend-2-1      |  ---> Pipelines.Sockets.Unofficial.ConnectionResetException: Connection reset by peer
+backend-2-1      |  ---> System.Net.Sockets.SocketException (104): Connection reset by peer
+backend-2-1      |    at Pipelines.Sockets.Unofficial.Internal.Throw.Socket(Int32) + 0x27
+backend-2-1      |    at Pipelines.Sockets.Unofficial.SocketAwaitableEventArgs.GetResult() + 0x3e
+backend-2-1      |    at Pipelines.Sockets.Unofficial.SocketConnection.<DoReceiveAsync>d__73.MoveNext() + 0xec
+backend-2-1      |    --- End of inner exception stack trace ---
+backend-2-1      |    at System.IO.Pipelines.Pipe.GetReadResult(ReadResult&) + 0x170
+backend-2-1      |    at System.IO.Pipelines.Pipe.GetReadAsyncResult() + 0x96
+backend-2-1      |    at StackExchange.Redis.PhysicalConnection.<ReadFromPipe>d__134.MoveNext() + 0x544
+backend-2-1      |    --- End of inner exception stack trace ---
+backend-2-1      |    at RedisQueueWorker.<WorkerLoopAsync>d__11.MoveNext() + 0x154
+backend-2-1      | [Worker Error] StackExchange.Redis.RedisConnectionException: SocketFailure (ReadSocketError/ConnectionReset, last-recv: 8) on redis:6379/Interactive, Idle/Faulted, last: RPUSH, origin: ReadFromPipe, outstanding: 1577, last-read: 5s ago, last-write: 0s ago, unanswered-write: 5s ago, keep-alive: 60s, state: ConnectedEstablished, mgr: 8 of 10 available, in: 0, in-pipe: 0, out-pipe: 0, last-heartbeat: 0s ago, last-mbeat: 0s ago, global: 0s ago, v: 2.8.58.19568
+backend-2-1      |  ---> Pipelines.Sockets.Unofficial.ConnectionResetException: Connection reset by peer
+backend-2-1      |  ---> System.Net.Sockets.SocketException (104): Connection reset by peer
+backend-2-1      |    at Pipelines.Sockets.Unofficial.Internal.Throw.Socket(Int32) + 0x27
+backend-2-1      |    at Pipelines.Sockets.Unofficial.SocketAwaitableEventArgs.GetResult() + 0x3e
+backend-2-1      |    at Pipelines.Sockets.Unofficial.SocketConnection.<DoReceiveAsync>d__73.MoveNext() + 0xec
+backend-2-1      |    --- End of inner exception stack trace ---
+backend-2-1      |    at System.IO.Pipelines.Pipe.GetReadResult(ReadResult&) + 0x170
+backend-2-1      |    at System.IO.Pipelines.Pipe.GetReadAsyncResult() + 0x96
+backend-2-1      |    at StackExchange.Redis.PhysicalConnection.<ReadFromPipe>d__134.MoveNext() + 0x544
+backend-2-1      |    --- End of inner exception stack trace ---
+backend-2-1      |    at RedisQueueWorker.<WorkerLoopAsync>d__11.MoveNext() + 0x154
+backend-1-1      | [Worker Error] StackExchange.Redis.RedisConnectionException: SocketClosed (WriteSocketError/ConnectionReset, last-recv: 0) on redis:6379/Interactive, Idle/MarkProcessed, last: RPUSH, origin: ReadFromPipe, outstanding: 1578, last-read: 0s ago, last-write: 0s ago, unanswered-write: 5s ago, keep-alive: 60s, state: ConnectedEstablished, mgr: 8 of 10 available, in: 0, in-pipe: 0, out-pipe: 0, last-heartbeat: 0s ago, last-mbeat: 0s ago, global: 0s ago, v: 2.8.58.19568
+backend-1-1      |    at MichelOliveira.Com.ReactiveLock.Distributed.Redis.ReactiveLockRedisTrackerStore.<SetStatusAsync>d__10.MoveNext() + 0x9c
+backend-1-1      | --- End of stack trace from previous location ---
+backend-1-1      |    at MichelOliveira.Com.ReactiveLock.Core.ReactiveLockTrackerController.<DecrementAsync>d__13.MoveNext() + 0x68
+backend-1-1      | --- End of stack trace from previous location ---
+backend-1-1      |    at CountingHandler.<SendAsync>d__8.MoveNext() + 0xa0
+backend-1-1      | --- End of stack trace from previous location ---
+backend-1-1      |    at Microsoft.Extensions.Http.Logging.LoggingScopeHttpMessageHandler.<<SendCoreAsync>g__Core|4_0>d.MoveNext() + 0x13c
+backend-1-1      | --- End of stack trace from previous location ---
+backend-1-1      |    at System.Net.Http.HttpClient.<<SendAsync>g__Core|83_0>d.MoveNext() + 0x399
+backend-1-1      | --- End of stack trace from previous location ---
+backend-1-1      |    at PaymentProcessorService.<ProcessPaymentAsync>d__26.MoveNext() + 0x27e
+backend-1-1      | --- End of stack trace from previous location ---
+backend-1-1      |    at PaymentService.<ProcessPaymentAsync>d__22.MoveNext() + 0x15a
+backend-1-1      | --- End of stack trace from previous location ---
+backend-1-1      |    at RedisQueueWorker.<WorkerLoopAsync>d__11.MoveNext() + 0x43d
+backend-2-1      | [Worker Error] StackExchange.Redis.RedisConnectionException: SocketFailure (ReadSocketError/ConnectionReset, last-recv: 8) on redis:6379/Interactive, Idle/Faulted, last: RPUSH, origin: ReadFromPipe, outstanding: 1577, last-read: 5s ago, last-write: 0s ago, unanswered-write: 5s ago, keep-alive: 60s, state: ConnectedEstablished, mgr: 8 of 10 available, in: 0, in-pipe: 0, out-pipe: 0, last-heartbeat: 0s ago, last-mbeat: 0s ago, global: 0s ago, v: 2.8.58.19568
+backend-2-1      |  ---> Pipelines.Sockets.Unofficial.ConnectionResetException: Connection reset by peer
+backend-2-1      |  ---> System.Net.Sockets.SocketException (104): Connection reset by peer
+backend-2-1      |    at Pipelines.Sockets.Unofficial.Internal.Throw.Socket(Int32) + 0x27
+backend-2-1      |    at Pipelines.Sockets.Unofficial.SocketAwaitableEventArgs.GetResult() + 0x3e
+backend-2-1      |    at Pipelines.Sockets.Unofficial.SocketConnection.<DoReceiveAsync>d__73.MoveNext() + 0xec
+backend-2-1      |    --- End of inner exception stack trace ---
+backend-2-1      |    at System.IO.Pipelines.Pipe.GetReadResult(ReadResult&) + 0x170
+backend-2-1      |    at System.IO.Pipelines.Pipe.GetReadAsyncResult() + 0x96
+backend-2-1      |    at StackExchange.Redis.PhysicalConnection.<ReadFromPipe>d__134.MoveNext() + 0x544
+backend-2-1      |    --- End of inner exception stack trace ---
+backend-2-1      |    at RedisQueueWorker.<WorkerLoopAsync>d__11.MoveNext() + 0x154
+backend-2-1      | [Worker Error] StackExchange.Redis.RedisConnectionException: SocketFailure (ReadSocketError/ConnectionReset, last-recv: 8) on redis:6379/Interactive, Idle/Faulted, last: RPUSH, origin: ReadFromPipe, outstanding: 1577, last-read: 5s ago, last-write: 0s ago, unanswered-write: 5s ago, keep-alive: 60s, state: ConnectedEstablished, mgr: 8 of 10 available, in: 0, in-pipe: 0, out-pipe: 0, last-heartbeat: 0s ago, last-mbeat: 0s ago, global: 0s ago, v: 2.8.58.19568
+backend-2-1      |  ---> Pipelines.Sockets.Unofficial.ConnectionResetException: Connection reset by peer
+backend-2-1      |  ---> System.Net.Sockets.SocketException (104): Connection reset by peer
+backend-2-1      |    at Pipelines.Sockets.Unofficial.Internal.Throw.Socket(Int32) + 0x27
+backend-2-1      |    at Pipelines.Sockets.Unofficial.SocketAwaitableEventArgs.GetResult() + 0x3e
+backend-2-1      |    at Pipelines.Sockets.Unofficial.SocketConnection.<DoReceiveAsync>d__73.MoveNext() + 0xec
+backend-2-1      |    --- End of inner exception stack trace ---
+backend-2-1      |    at System.IO.Pipelines.Pipe.GetReadResult(ReadResult&) + 0x170
+backend-2-1      |    at System.IO.Pipelines.Pipe.GetReadAsyncResult() + 0x96
+backend-2-1      |    at StackExchange.Redis.PhysicalConnection.<ReadFromPipe>d__134.MoveNext() + 0x544
+backend-2-1      |    --- End of inner exception stack trace ---
+backend-2-1      |    at RedisQueueWorker.<WorkerLoopAsync>d__11.MoveNext() + 0x154
+backend-2-1      | [Worker Error] StackExchange.Redis.RedisConnectionException: SocketFailure (ReadSocketError/ConnectionReset, last-recv: 8) on redis:6379/Interactive, Idle/Faulted, last: RPUSH, origin: ReadFromPipe, outstanding: 1577, last-read: 5s ago, last-write: 0s ago, unanswered-write: 5s ago, keep-alive: 60s, state: ConnectedEstablished, mgr: 8 of 10 available, in: 0, in-pipe: 0, out-pipe: 0, last-heartbeat: 0s ago, last-mbeat: 0s ago, global: 0s ago, v: 2.8.58.19568
+backend-2-1      |  ---> Pipelines.Sockets.Unofficial.ConnectionResetException: Connection reset by peer
+backend-2-1      |  ---> System.Net.Sockets.SocketException (104): Connection reset by peer
+backend-2-1      |    at Pipelines.Sockets.Unofficial.Internal.Throw.Socket(Int32) + 0x27
+backend-2-1      |    at Pipelines.Sockets.Unofficial.SocketAwaitableEventArgs.GetResult() + 0x3e
+backend-2-1      |    at Pipelines.Sockets.Unofficial.SocketConnection.<DoReceiveAsync>d__73.MoveNext() + 0xec
+backend-2-1      |    --- End of inner exception stack trace ---
+backend-2-1      |    at System.IO.Pipelines.Pipe.GetReadResult(ReadResult&) + 0x170
+backend-2-1      |    at System.IO.Pipelines.Pipe.GetReadAsyncResult() + 0x96
+backend-2-1      |    at StackExchange.Redis.PhysicalConnection.<ReadFromPipe>d__134.MoveNext() + 0x544
+backend-2-1      |    --- End of inner exception stack trace ---
+backend-2-1      |    at RedisQueueWorker.<WorkerLoopAsync>d__11.MoveNext() + 0x154
+backend-2-1      | [Worker Error] StackExchange.Redis.RedisConnectionException: SocketFailure (ReadSocketError/ConnectionReset, last-recv: 8) on redis:6379/Interactive, Idle/Faulted, last: RPUSH, origin: ReadFromPipe, outstanding: 1577, last-read: 5s ago, last-write: 0s ago, unanswered-write: 5s ago, keep-alive: 60s, state: ConnectedEstablished, mgr: 8 of 10 available, in: 0, in-pipe: 0, out-pipe: 0, last-heartbeat: 0s ago, last-mbeat: 0s ago, global: 0s ago, v: 2.8.58.19568
+backend-2-1      |  ---> Pipelines.Sockets.Unofficial.ConnectionResetException: Connection reset by peer
+backend-2-1      |  ---> System.Net.Sockets.SocketException (104): Connection reset by peer
+backend-2-1      |    at Pipelines.Sockets.Unofficial.Internal.Throw.Socket(Int32) + 0x27
+backend-2-1      |    at Pipelines.Sockets.Unofficial.SocketAwaitableEventArgs.GetResult() + 0x3e
+backend-2-1      |    at Pipelines.Sockets.Unofficial.SocketConnection.<DoReceiveAsync>d__73.MoveNext() + 0xec
+backend-2-1      |    --- End of inner exception stack trace ---
+backend-2-1      |    at System.IO.Pipelines.Pipe.GetReadResult(ReadResult&) + 0x170
+backend-2-1      |    at System.IO.Pipelines.Pipe.GetReadAsyncResult() + 0x96
+backend-2-1      |    at StackExchange.Redis.PhysicalConnection.<ReadFromPipe>d__134.MoveNext() + 0x544
+backend-2-1      |    --- End of inner exception stack trace ---
+backend-2-1      |    at MichelOliveira.Com.ReactiveLock.Distributed.Redis.ReactiveLockRedisTrackerStore.<SetStatusAsync>d__10.MoveNext() + 0x9c
+backend-2-1      | --- End of stack trace from previous location ---
+backend-2-1      |    at MichelOliveira.Com.ReactiveLock.Core.ReactiveLockTrackerController.<DecrementAsync>d__13.MoveNext() + 0x68
+backend-2-1      | --- End of stack trace from previous location ---
+backend-2-1      |    at CountingHandler.<SendAsync>d__8.MoveNext() + 0xa0
+backend-2-1      | --- End of stack trace from previous location ---
+backend-2-1      |    at Microsoft.Extensions.Http.Logging.LoggingScopeHttpMessageHandler.<<SendCoreAsync>g__Core|4_0>d.MoveNext() + 0x13c
+backend-2-1      | --- End of stack trace from previous location ---
+backend-2-1      |    at System.Net.Http.HttpClient.<<SendAsync>g__Core|83_0>d.MoveNext() + 0x399
+backend-2-1      | --- End of stack trace from previous location ---
+backend-2-1      |    at PaymentProcessorService.<ProcessPaymentAsync>d__26.MoveNext() + 0x27e
+backend-2-1      | --- End of stack trace from previous location ---
+backend-2-1      |    at PaymentService.<ProcessPaymentAsync>d__22.MoveNext() + 0x15a
+backend-2-1      | --- End of stack trace from previous location ---
+backend-2-1      |    at RedisQueueWorker.<WorkerLoopAsync>d__11.MoveNext() + 0x43d
+[Kredis-1 exited with code 137
+backend-db-1     | 2025-08-21 03:13:19.210 UTC [57] LOG:  checkpoint starting: time
+backend-2-1      | [Worker Error] StackExchange.Redis.RedisConnectionException: The message timed out in the backlog attempting to send because no connection became available (5000ms) - Last Connection Exception: SocketFailure (ReadSocketError/ConnectionReset, last-recv: 8) on redis:6379/Interactive, Idle/Faulted, last: RPUSH, origin: ReadFromPipe, outstanding: 1577, last-read: 5s ago, last-write: 0s ago, unanswered-write: 5s ago, keep-alive: 60s, state: ConnectedEstablished, mgr: 8 of 10 available, in: 0, in-pipe: 0, out-pipe: 0, last-heartbeat: 0s ago, last-mbeat: 0s ago, global: 0s ago, v: 2.8.58.19568, command=LPOP, timeout: 5000, inst: 0, qu: 1596, qs: 0, aw: False, bw: CheckingForTimeout, last-in: 0, cur-in: 0, sync-ops: 8, async-ops: 145100, serverEndpoint: redis:6379, conn-sec: n/a, aoc: 1, mc: 1/1/0, mgr: 10 of 10 available, clientName: backend-2(SE.Redis-v2.8.58.19568), IOCP: (Busy=0,Free=1000,Min=1,Max=1000), WORKER: (Busy=1,Free=32766,Min=1,Max=32767), POOL: (Threads=3,QueuedItems=0,CompletedItems=444453,Timers=7), v: 2.8.58.19568 (Please take a look at this article for some common client-side issues that can cause timeouts: https://stackexchange.github.io/StackExchange.Redis/Timeouts)
+backend-2-1      |  ---> StackExchange.Redis.RedisConnectionException: SocketFailure (ReadSocketError/ConnectionReset, last-recv: 8) on redis:6379/Interactive, Idle/Faulted, last: RPUSH, origin: ReadFromPipe, outstanding: 1577, last-read: 5s ago, last-write: 0s ago, unanswered-write: 5s ago, keep-alive: 60s, state: ConnectedEstablished, mgr: 8 of 10 available, in: 0, in-pipe: 0, out-pipe: 0, last-heartbeat: 0s ago, last-mbeat: 0s ago, global: 0s ago, v: 2.8.58.19568
+backend-2-1      |  ---> Pipelines.Sockets.Unofficial.ConnectionResetException: Connection reset by peer
+backend-2-1      |  ---> System.Net.Sockets.SocketException (104): Connection reset by peer
+backend-2-1      |    at Pipelines.Sockets.Unofficial.Internal.Throw.Socket(Int32) + 0x27
+backend-2-1      |    at Pipelines.Sockets.Unofficial.SocketAwaitableEventArgs.GetResult() + 0x3e
+backend-2-1      |    at Pipelines.Sockets.Unofficial.SocketConnection.<DoReceiveAsync>d__73.MoveNext() + 0xec
+backend-2-1      |    --- End of inner exception stack trace ---
+backend-2-1      |    at System.IO.Pipelines.Pipe.GetReadResult(ReadResult&) + 0x170
+backend-2-1      |    at System.IO.Pipelines.Pipe.GetReadAsyncResult() + 0x96
+backend-2-1      |    at StackExchange.Redis.PhysicalConnection.<ReadFromPipe>d__134.MoveNext() + 0x544
+backend-2-1      |    --- End of inner exception stack trace ---
+backend-2-1      |    at MichelOliveira.Com.ReactiveLock.Distributed.Redis.ReactiveLockRedisTrackerStore.<SetStatusAsync>d__10.MoveNext() + 0x9c
+backend-2-1      | --- End of stack trace from previous location ---
+backend-2-1      |    at MichelOliveira.Com.ReactiveLock.Core.ReactiveLockTrackerController.<DecrementAsync>d__13.MoveNext() + 0x68
+backend-2-1      | --- End of stack trace from previous location ---
+backend-2-1      |    at CountingHandler.<SendAsync>d__8.MoveNext() + 0xa0
+backend-2-1      | --- End of stack trace from previous location ---
+backend-2-1      |    at Microsoft.Extensions.Http.Logging.LoggingScopeHttpMessageHandler.<<SendCoreAsync>g__Core|4_0>d.MoveNext() + 0x13c
+backend-2-1      | --- End of stack trace from previous location ---
+backend-2-1      |    at System.Net.Http.HttpClient.<<SendAsync>g__Core|83_0>d.MoveNext() + 0x399
+backend-2-1      | --- End of stack trace from previous location ---
+backend-2-1      |    at PaymentProcessorService.<ProcessPaymentAsync>d__26.MoveNext() + 0x27e
+backend-2-1      | --- End of stack trace from previous location ---
+backend-2-1      |    at PaymentService.<ProcessPaymentAsync>d__22.MoveNext() + 0x15a
+backend-2-1      | --- End of stack trace from previous location ---
+backend-2-1      |    at RedisQueueWorker.<WorkerLoopAsync>d__11.MoveNext() + 0x43d
+backend-2-1      |    --- End of inner exception stack trace ---
+backend-2-1      |    at RedisQueueWorker.<WorkerLoopAsync>d__11.MoveNext() + 0x154
+backend-2-1      | [Worker Error] StackExchange.Redis.RedisConnectionException: The message timed out in the backlog attempting to send because no connection became available (5000ms) - Last Connection Exception: SocketFailure (ReadSocketError/ConnectionReset, last-recv: 8) on redis:6379/Interactive, Idle/Faulted, last: RPUSH, origin: ReadFromPipe, outstanding: 1577, last-read: 5s ago, last-write: 0s ago, unanswered-write: 5s ago, keep-alive: 60s, state: ConnectedEstablished, mgr: 8 of 10 available, in: 0, in-pipe: 0, out-pipe: 0, last-heartbeat: 0s ago, last-mbeat: 0s ago, global: 0s ago, v: 2.8.58.19568, command=LPOP, timeout: 5000, inst: 0, qu: 1595, qs: 0, aw: False, bw: CheckingForTimeout, last-in: 0, cur-in: 0, sync-ops: 8, async-ops: 145100, serverEndpoint: redis:6379, conn-sec: n/a, aoc: 1, mc: 1/1/0, mgr: 10 of 10 available, clientName: backend-2(SE.Redis-v2.8.58.19568), IOCP: (Busy=0,Free=1000,Min=1,Max=1000), WORKER: (Busy=2,Free=32765,Min=1,Max=32767), POOL: (Threads=3,QueuedItems=1,CompletedItems=444453,Timers=7), v: 2.8.58.19568 (Please take a look at this article for some common client-side issues that can cause timeouts: https://stackexchange.github.io/StackExchange.Redis/Timeouts)
+backend-2-1      |  ---> StackExchange.Redis.RedisConnectionException: SocketFailure (ReadSocketError/ConnectionReset, last-recv: 8) on redis:6379/Interactive, Idle/Faulted, last: RPUSH, origin: ReadFromPipe, outstanding: 1577, last-read: 5s ago, last-write: 0s ago, unanswered-write: 5s ago, keep-alive: 60s, state: ConnectedEstablished, mgr: 8 of 10 available, in: 0, in-pipe: 0, out-pipe: 0, last-heartbeat: 0s ago, last-mbeat: 0s ago, global: 0s ago, v: 2.8.58.19568
+backend-2-1      |  ---> Pipelines.Sockets.Unofficial.ConnectionResetException: Connection reset by peer
+backend-2-1      |  ---> System.Net.Sockets.SocketException (104): Connection reset by peer
+backend-2-1      |    at Pipelines.Sockets.Unofficial.Internal.Throw.Socket(Int32) + 0x27
+backend-2-1      |    at Pipelines.Sockets.Unofficial.SocketAwaitableEventArgs.GetResult() + 0x3e
+backend-2-1      |    at Pipelines.Sockets.Unofficial.SocketConnection.<DoReceiveAsync>d__73.MoveNext() + 0xec
+backend-2-1      |    --- End of inner exception stack trace ---
+backend-2-1      |    at System.IO.Pipelines.Pipe.GetReadResult(ReadResult&) + 0x170
+backend-2-1      |    at System.IO.Pipelines.Pipe.GetReadAsyncResult() + 0x96
+backend-2-1      |    at StackExchange.Redis.PhysicalConnection.<ReadFromPipe>d__134.MoveNext() + 0x544
+backend-2-1      |    --- End of inner exception stack trace ---
+backend-2-1      |    at MichelOliveira.Com.ReactiveLock.Distributed.Redis.ReactiveLockRedisTrackerStore.<SetStatusAsync>d__10.MoveNext() + 0x9c
+backend-2-1      | --- End of stack trace from previous location ---
+backend-2-1      |    at MichelOliveira.Com.ReactiveLock.Core.ReactiveLockTrackerController.<DecrementAsync>d__13.MoveNext() + 0x68
+backend-2-1      | --- End of stack trace from previous location ---
+backend-2-1      |    at CountingHandler.<SendAsync>d__8.MoveNext() + 0xa0
+backend-2-1      | --- End of stack trace from previous location ---
+backend-2-1      |    at Microsoft.Extensions.Http.Logging.LoggingScopeHttpMessageHandler.<<SendCoreAsync>g__Core|4_0>d.MoveNext() + 0x13c
+backend-2-1      | --- End of stack trace from previous location ---
+backend-2-1      |    at System.Net.Http.HttpClient.<<SendAsync>g__Core|83_0>d.MoveNext() + 0x399
+backend-2-1      | --- End of stack trace from previous location ---
+backend-2-1      |    at PaymentProcessorService.<ProcessPaymentAsync>d__26.MoveNext() + 0x27e
+backend-2-1      | --- End of stack trace from previous location ---
+backend-2-1      |    at PaymentService.<ProcessPaymentAsync>d__22.MoveNext() + 0x15a
+backend-2-1      | --- End of stack trace from previous location ---
+backend-2-1      |    at RedisQueueWorker.<WorkerLoopAsync>d__11.MoveNext() + 0x43d
+backend-2-1      |    --- End of inner exception stack trace ---
+backend-2-1      |    at RedisQueueWorker.<WorkerLoopAsync>d__11.MoveNext() + 0x154
+backend-2-1      | [Worker Error] StackExchange.Redis.RedisConnectionException: The message timed out in the backlog attempting to send because no connection became available (5000ms) - Last Connection Exception: SocketFailure (ReadSocketError/ConnectionReset, last-recv: 8) on redis:6379/Interactive, Idle/Faulted, last: RPUSH, origin: ReadFromPipe, outstanding: 1577, last-read: 5s ago, last-write: 0s ago, unanswered-write: 5s ago, keep-alive: 60s, state: ConnectedEstablished, mgr: 8 of 10 available, in: 0, in-pipe: 0, out-pipe: 0, last-heartbeat: 0s ago, last-mbeat: 0s ago, global: 0s ago, v: 2.8.58.19568, command=LPOP, timeout: 5000, inst: 0, qu: 1594, qs: 0, aw: False, bw: CheckingForTimeout, last-in: 0, cur-in: 0, sync-ops: 8, async-ops: 145100, serverEndpoint: redis:6379, conn-sec: n/a, aoc: 1, mc: 1/1/0, mgr: 10 of 10 available, clientName: backend-2(SE.Redis-v2.8.58.19568), IOCP: (Busy=0,Free=1000,Min=1,Max=1000), WORKER: (Busy=2,Free=32765,Min=1,Max=32767), POOL: (Threads=3,QueuedItems=1,CompletedItems=444453,Timers=7), v: 2.8.58.19568 (Please take a look at this article for some common client-side issues that can cause timeouts: https://stackexchange.github.io/StackExchange.Redis/Timeouts)
+backend-2-1      |  ---> StackExchange.Redis.RedisConnectionException: SocketFailure (ReadSocketError/ConnectionReset, last-recv: 8) on redis:6379/Interactive, Idle/Faulted, last: RPUSH, origin: ReadFromPipe, outstanding: 1577, last-read: 5s ago, last-write: 0s ago, unanswered-write: 5s ago, keep-alive: 60s, state: ConnectedEstablished, mgr: 8 of 10 available, in: 0, in-pipe: 0, out-pipe: 0, last-heartbeat: 0s ago, last-mbeat: 0s ago, global: 0s ago, v: 2.8.58.19568
+backend-2-1      |  ---> Pipelines.Sockets.Unofficial.ConnectionResetException: Connection reset by peer
+backend-2-1      |  ---> System.Net.Sockets.SocketException (104): Connection reset by peer
+backend-2-1      |    at Pipelines.Sockets.Unofficial.Internal.Throw.Socket(Int32) + 0x27
+backend-2-1      |    at Pipelines.Sockets.Unofficial.SocketAwaitableEventArgs.GetResult() + 0x3e
+backend-2-1      |    at Pipelines.Sockets.Unofficial.SocketConnection.<DoReceiveAsync>d__73.MoveNext() + 0xec
+backend-2-1      |    --- End of inner exception stack trace ---
+backend-2-1      |    at System.IO.Pipelines.Pipe.GetReadResult(ReadResult&) + 0x170
+backend-2-1      |    at System.IO.Pipelines.Pipe.GetReadAsyncResult() + 0x96
+backend-2-1      |    at StackExchange.Redis.PhysicalConnection.<ReadFromPipe>d__134.MoveNext() + 0x544
+backend-2-1      |    --- End of inner exception stack trace ---
+backend-2-1      |    at MichelOliveira.Com.ReactiveLock.Distributed.Redis.ReactiveLockRedisTrackerStore.<SetStatusAsync>d__10.MoveNext() + 0x9c
+backend-2-1      | --- End of stack trace from previous location ---
+backend-2-1      |    at MichelOliveira.Com.ReactiveLock.Core.ReactiveLockTrackerController.<DecrementAsync>d__13.MoveNext() + 0x68
+backend-2-1      | --- End of stack trace from previous location ---
+backend-2-1      |    at CountingHandler.<SendAsync>d__8.MoveNext() + 0xa0
+backend-2-1      | --- End of stack trace from previous location ---
+backend-2-1      |    at Microsoft.Extensions.Http.Logging.LoggingScopeHttpMessageHandler.<<SendCoreAsync>g__Core|4_0>d.MoveNext() + 0x13c
+backend-2-1      | --- End of stack trace from previous location ---
+backend-2-1      |    at System.Net.Http.HttpClient.<<SendAsync>g__Core|83_0>d.MoveNext() + 0x399
+backend-2-1      | --- End of stack trace from previous location ---
+backend-2-1      |    at PaymentProcessorService.<ProcessPaymentAsync>d__26.MoveNext() + 0x27e
+backend-2-1      | --- End of stack trace from previous location ---
+backend-2-1      |    at PaymentService.<ProcessPaymentAsync>d__22.MoveNext() + 0x15a
+backend-2-1      | --- End of stack trace from previous location ---
+backend-2-1      |    at RedisQueueWorker.<WorkerLoopAsync>d__11.MoveNext() + 0x43d
+backend-2-1      |    --- End of inner exception stack trace ---
+backend-2-1      |    at RedisQueueWorker.<WorkerLoopAsync>d__11.MoveNext() + 0x154
+backend-2-1      | [Worker Error] StackExchange.Redis.RedisConnectionException: The message timed out in the backlog attempting to send because no connection became available (5000ms) - Last Connection Exception: SocketFailure (ReadSocketError/ConnectionReset, last-recv: 8) on redis:6379/Interactive, Idle/Faulted, last: RPUSH, origin: ReadFromPipe, outstanding: 1577, last-read: 5s ago, last-write: 0s ago, unanswered-write: 5s ago, keep-alive: 60s, state: ConnectedEstablished, mgr: 8 of 10 available, in: 0, in-pipe: 0, out-pipe: 0, last-heartbeat: 0s ago, last-mbeat: 0s ago, global: 0s ago, v: 2.8.58.19568, command=LPOP, timeout: 5000, inst: 0, qu: 1593, qs: 0, aw: False, bw: CheckingForTimeout, last-in: 0, cur-in: 0, sync-ops: 8, async-ops: 145100, serverEndpoint: redis:6379, conn-sec: n/a, aoc: 1, mc: 1/1/0, mgr: 10 of 10 available, clientName: backend-2(SE.Redis-v2.8.58.19568), IOCP: (Busy=0,Free=1000,Min=1,Max=1000), WORKER: (Busy=2,Free=32765,Min=1,Max=32767), POOL: (Threads=3,QueuedItems=2,CompletedItems=444453,Timers=7), v: 2.8.58.19568 (Please take a look at this article for some common client-side issues that can cause timeouts: https://stackexchange.github.io/StackExchange.Redis/Timeouts)
+backend-2-1      |  ---> StackExchange.Redis.RedisConnectionException: SocketFailure (ReadSocketError/ConnectionReset, last-recv: 8) on redis:6379/Interactive, Idle/Faulted, last: RPUSH, origin: ReadFromPipe, outstanding: 1577, last-read: 5s ago, last-write: 0s ago, unanswered-write: 5s ago, keep-alive: 60s, state: ConnectedEstablished, mgr: 8 of 10 available, in: 0, in-pipe: 0, out-pipe: 0, last-heartbeat: 0s ago, last-mbeat: 0s ago, global: 0s ago, v: 2.8.58.19568
+backend-2-1      |  ---> Pipelines.Sockets.Unofficial.ConnectionResetException: Connection reset by peer
+backend-2-1      |  ---> System.Net.Sockets.SocketException (104): Connection reset by peer
+backend-2-1      |    at Pipelines.Sockets.Unofficial.Internal.Throw.Socket(Int32) + 0x27
+backend-2-1      |    at Pipelines.Sockets.Unofficial.SocketAwaitableEventArgs.GetResult() + 0x3e
+backend-2-1      |    at Pipelines.Sockets.Unofficial.SocketConnection.<DoReceiveAsync>d__73.MoveNext() + 0xec
+backend-2-1      |    --- End of inner exception stack trace ---
+backend-2-1      |    at System.IO.Pipelines.Pipe.GetReadResult(ReadResult&) + 0x170
+backend-2-1      |    at System.IO.Pipelines.Pipe.GetReadAsyncResult() + 0x96
+backend-2-1      |    at StackExchange.Redis.PhysicalConnection.<ReadFromPipe>d__134.MoveNext() + 0x544
+backend-2-1      |    --- End of inner exception stack trace ---
+backend-2-1      |    at MichelOliveira.Com.ReactiveLock.Distributed.Redis.ReactiveLockRedisTrackerStore.<SetStatusAsync>d__10.MoveNext() + 0x9c
+backend-2-1      | --- End of stack trace from previous location ---
+backend-2-1      |    at MichelOliveira.Com.ReactiveLock.Core.ReactiveLockTrackerController.<DecrementAsync>d__13.MoveNext() + 0x68
+backend-2-1      | --- End of stack trace from previous location ---
+backend-2-1      |    at CountingHandler.<SendAsync>d__8.MoveNext() + 0xa0
+backend-2-1      | --- End of stack trace from previous location ---
+backend-2-1      |    at Microsoft.Extensions.Http.Logging.LoggingScopeHttpMessageHandler.<<SendCoreAsync>g__Core|4_0>d.MoveNext() + 0x13c
+backend-2-1      | --- End of stack trace from previous location ---
+backend-2-1      |    at System.Net.Http.HttpClient.<<SendAsync>g__Core|83_0>d.MoveNext() + 0x399
+backend-2-1      | --- End of stack trace from previous location ---
+backend-2-1      |    at PaymentProcessorService.<ProcessPaymentAsync>d__26.MoveNext() + 0x27e
+backend-2-1      | --- End of stack trace from previous location ---
+backend-2-1      |    at PaymentService.<ProcessPaymentAsync>d__22.MoveNext() + 0x15a
+backend-2-1      | --- End of stack trace from previous location ---
+backend-2-1      |    at RedisQueueWorker.<WorkerLoopAsync>d__11.MoveNext() + 0x43d
+backend-2-1      |    --- End of inner exception stack trace ---
+backend-2-1      |    at RedisQueueWorker.<WorkerLoopAsync>d__11.MoveNext() + 0x154
+backend-2-1      | [Worker Error] StackExchange.Redis.RedisConnectionException: The message timed out in the backlog attempting to send because no connection became available (5000ms) - Last Connection Exception: SocketFailure (ReadSocketError/ConnectionReset, last-recv: 8) on redis:6379/Interactive, Idle/Faulted, last: RPUSH, origin: ReadFromPipe, outstanding: 1577, last-read: 5s ago, last-write: 0s ago, unanswered-write: 5s ago, keep-alive: 60s, state: ConnectedEstablished, mgr: 8 of 10 available, in: 0, in-pipe: 0, out-pipe: 0, last-heartbeat: 0s ago, last-mbeat: 0s ago, global: 0s ago, v: 2.8.58.19568, command=LPOP, timeout: 5000, inst: 0, qu: 1592, qs: 0, aw: False, bw: CheckingForTimeout, last-in: 0, cur-in: 0, sync-ops: 8, async-ops: 145100, serverEndpoint: redis:6379, conn-sec: n/a, aoc: 1, mc: 1/1/0, mgr: 10 of 10 available, clientName: backend-2(SE.Redis-v2.8.58.19568), IOCP: (Busy=0,Free=1000,Min=1,Max=1000), WORKER: (Busy=2,Free=32765,Min=1,Max=32767), POOL: (Threads=3,QueuedItems=3,CompletedItems=444453,Timers=7), v: 2.8.58.19568 (Please take a look at this article for some common client-side issues that can cause timeouts: https://stackexchange.github.io/StackExchange.Redis/Timeouts)
+backend-2-1      |  ---> StackExchange.Redis.RedisConnectionException: SocketFailure (ReadSocketError/ConnectionReset, last-recv: 8) on redis:6379/Interactive, Idle/Faulted, last: RPUSH, origin: ReadFromPipe, outstanding: 1577, last-read: 5s ago, last-write: 0s ago, unanswered-write: 5s ago, keep-alive: 60s, state: ConnectedEstablished, mgr: 8 of 10 available, in: 0, in-pipe: 0, out-pipe: 0, last-heartbeat: 0s ago, last-mbeat: 0s ago, global: 0s ago, v: 2.8.58.19568
+backend-2-1      |  ---> Pipelines.Sockets.Unofficial.ConnectionResetException: Connection reset by peer
+backend-2-1      |  ---> System.Net.Sockets.SocketException (104): Connection reset by peer
+backend-2-1      |    at Pipelines.Sockets.Unofficial.Internal.Throw.Socket(Int32) + 0x27
+backend-2-1      |    at Pipelines.Sockets.Unofficial.SocketAwaitableEventArgs.GetResult() + 0x3e
+backend-2-1      |    at Pipelines.Sockets.Unofficial.SocketConnection.<DoReceiveAsync>d__73.MoveNext() + 0xec
+backend-2-1      |    --- End of inner exception stack trace ---
+backend-2-1      |    at System.IO.Pipelines.Pipe.GetReadResult(ReadResult&) + 0x170
+backend-2-1      |    at System.IO.Pipelines.Pipe.GetReadAsyncResult() + 0x96
+backend-2-1      |    at StackExchange.Redis.PhysicalConnection.<ReadFromPipe>d__134.MoveNext() + 0x544
+backend-2-1      |    --- End of inner exception stack trace ---
+backend-2-1      |    at MichelOliveira.Com.ReactiveLock.Distributed.Redis.ReactiveLockRedisTrackerStore.<SetStatusAsync>d__10.MoveNext() + 0x9c
+backend-2-1      | --- End of stack trace from previous location ---
+backend-2-1      |    at MichelOliveira.Com.ReactiveLock.Core.ReactiveLockTrackerController.<DecrementAsync>d__13.MoveNext() + 0x68
+backend-2-1      | --- End of stack trace from previous location ---
+backend-2-1      |    at CountingHandler.<SendAsync>d__8.MoveNext() + 0xa0
+backend-2-1      | --- End of stack trace from previous location ---
+backend-2-1      |    at Microsoft.Extensions.Http.Logging.LoggingScopeHttpMessageHandler.<<SendCoreAsync>g__Core|4_0>d.MoveNext() + 0x13c
+backend-2-1      | --- End of stack trace from previous location ---
+backend-2-1      |    at System.Net.Http.HttpClient.<<SendAsync>g__Core|83_0>d.MoveNext() + 0x399
+backend-2-1      | --- End of stack trace from previous location ---
+backend-2-1      |    at PaymentProcessorService.<ProcessPaymentAsync>d__26.MoveNext() + 0x27e
+backend-2-1      | --- End of stack trace from previous location ---
+backend-2-1      |    at PaymentService.<ProcessPaymentAsync>d__22.MoveNext() + 0x15a
+backend-2-1      | --- End of stack trace from previous location ---
+backend-2-1      |    at RedisQueueWorker.<WorkerLoopAsync>d__11.MoveNext() + 0x43d
+backend-2-1      |    --- End of inner exception stack trace ---
+backend-2-1      |    at RedisQueueWorker.<WorkerLoopAsync>d__11.MoveNext() + 0x154
+backend-2-1      | [Worker Error] StackExchange.Redis.RedisConnectionException: The message timed out in the backlog attempting to send because no connection became available (5000ms) - Last Connection Exception: SocketFailure (ReadSocketError/ConnectionReset, last-recv: 8) on redis:6379/Interactive, Idle/Faulted, last: RPUSH, origin: ReadFromPipe, outstanding: 1577, last-read: 5s ago, last-write: 0s ago, unanswered-write: 5s ago, keep-alive: 60s, state: ConnectedEstablished, mgr: 8 of 10 available, in: 0, in-pipe: 0, out-pipe: 0, last-heartbeat: 0s ago, last-mbeat: 0s ago, global: 0s ago, v: 2.8.58.19568, command=LPOP, timeout: 5000, inst: 0, qu: 1591, qs: 0, aw: False, bw: CheckingForTimeout, last-in: 0, cur-in: 0, sync-ops: 8, async-ops: 145100, serverEndpoint: redis:6379, conn-sec: n/a, aoc: 1, mc: 1/1/0, mgr: 10 of 10 available, clientName: backend-2(SE.Redis-v2.8.58.19568), IOCP: (Busy=0,Free=1000,Min=1,Max=1000), WORKER: (Busy=2,Free=32765,Min=1,Max=32767), POOL: (Threads=3,QueuedItems=4,CompletedItems=444453,Timers=7), v: 2.8.58.19568 (Please take a look at this article for some common client-side issues that can cause timeouts: https://stackexchange.github.io/StackExchange.Redis/Timeouts)
+backend-2-1      |  ---> StackExchange.Redis.RedisConnectionException: SocketFailure (ReadSocketError/ConnectionReset, last-recv: 8) on redis:6379/Interactive, Idle/Faulted, last: RPUSH, origin: ReadFromPipe, outstanding: 1577, last-read: 5s ago, last-write: 0s ago, unanswered-write: 5s ago, keep-alive: 60s, state: ConnectedEstablished, mgr: 8 of 10 available, in: 0, in-pipe: 0, out-pipe: 0, last-heartbeat: 0s ago, last-mbeat: 0s ago, global: 0s ago, v: 2.8.58.19568
+backend-2-1      |  ---> Pipelines.Sockets.Unofficial.ConnectionResetException: Connection reset by peer
+backend-2-1      |  ---> System.Net.Sockets.SocketException (104): Connection reset by peer
+backend-2-1      |    at Pipelines.Sockets.Unofficial.Internal.Throw.Socket(Int32) + 0x27
+backend-2-1      |    at Pipelines.Sockets.Unofficial.SocketAwaitableEventArgs.GetResult() + 0x3e
+backend-2-1      |    at Pipelines.Sockets.Unofficial.SocketConnection.<DoReceiveAsync>d__73.MoveNext() + 0xec
+backend-2-1      |    --- End of inner exception stack trace ---
+backend-2-1      |    at System.IO.Pipelines.Pipe.GetReadResult(ReadResult&) + 0x170
+backend-2-1      |    at System.IO.Pipelines.Pipe.GetReadAsyncResult() + 0x96
+backend-2-1      |    at StackExchange.Redis.PhysicalConnection.<ReadFromPipe>d__134.MoveNext() + 0x544
+backend-2-1      |    --- End of inner exception stack trace ---
+backend-2-1      |    at MichelOliveira.Com.ReactiveLock.Distributed.Redis.ReactiveLockRedisTrackerStore.<SetStatusAsync>d__10.MoveNext() + 0x9c
+backend-2-1      | --- End of stack trace from previous location ---
+backend-2-1      |    at MichelOliveira.Com.ReactiveLock.Core.ReactiveLockTrackerController.<DecrementAsync>d__13.MoveNext() + 0x68
+backend-2-1      | --- End of stack trace from previous location ---
+backend-2-1      |    at CountingHandler.<SendAsync>d__8.MoveNext() + 0xa0
+backend-2-1      | --- End of stack trace from previous location ---
+backend-2-1      |    at Microsoft.Extensions.Http.Logging.LoggingScopeHttpMessageHandler.<<SendCoreAsync>g__Core|4_0>d.MoveNext() + 0x13c
+backend-2-1      | --- End of stack trace from previous location ---
+backend-2-1      |    at System.Net.Http.HttpClient.<<SendAsync>g__Core|83_0>d.MoveNext() + 0x399
+backend-2-1      | --- End of stack trace from previous location ---
+backend-2-1      |    at PaymentProcessorService.<ProcessPaymentAsync>d__26.MoveNext() + 0x27e
+backend-2-1      | --- End of stack trace from previous location ---
+backend-2-1      |    at PaymentService.<ProcessPaymentAsync>d__22.MoveNext() + 0x15a
+backend-2-1      | --- End of stack trace from previous location ---
+backend-2-1      |    at RedisQueueWorker.<WorkerLoopAsync>d__11.MoveNext() + 0x43d
+backend-2-1      |    --- End of inner exception stack trace ---
+backend-2-1      |    at RedisQueueWorker.<WorkerLoopAsync>d__11.MoveNext() + 0x154
+backend-2-1      | [Worker Error] StackExchange.Redis.RedisConnectionException: The message timed out in the backlog attempting to send because no connection became available (5000ms) - Last Connection Exception: SocketFailure (ReadSocketError/ConnectionReset, last-recv: 8) on redis:6379/Interactive, Idle/Faulted, last: RPUSH, origin: ReadFromPipe, outstanding: 1577, last-read: 5s ago, last-write: 0s ago, unanswered-write: 5s ago, keep-alive: 60s, state: ConnectedEstablished, mgr: 8 of 10 available, in: 0, in-pipe: 0, out-pipe: 0, last-heartbeat: 0s ago, last-mbeat: 0s ago, global: 0s ago, v: 2.8.58.19568, command=LPOP, timeout: 5000, inst: 0, qu: 1590, qs: 0, aw: False, bw: CheckingForTimeout, last-in: 0, cur-in: 0, sync-ops: 8, async-ops: 145100, serverEndpoint: redis:6379, conn-sec: n/a, aoc: 1, mc: 1/1/0, mgr: 10 of 10 available, clientName: backend-2(SE.Redis-v2.8.58.19568), IOCP: (Busy=0,Free=1000,Min=1,Max=1000), WORKER: (Busy=2,Free=32765,Min=1,Max=32767), POOL: (Threads=3,QueuedItems=5,CompletedItems=444453,Timers=7), v: 2.8.58.19568 (Please take a look at this article for some common client-side issues that can cause timeouts: https://stackexchange.github.io/StackExchange.Redis/Timeouts)
+backend-2-1      |  ---> StackExchange.Redis.RedisConnectionException: SocketFailure (ReadSocketError/ConnectionReset, last-recv: 8) on redis:6379/Interactive, Idle/Faulted, last: RPUSH, origin: ReadFromPipe, outstanding: 1577, last-read: 5s ago, last-write: 0s ago, unanswered-write: 5s ago, keep-alive: 60s, state: ConnectedEstablished, mgr: 8 of 10 available, in: 0, in-pipe: 0, out-pipe: 0, last-heartbeat: 0s ago, last-mbeat: 0s ago, global: 0s ago, v: 2.8.58.19568
+backend-2-1      |  ---> Pipelines.Sockets.Unofficial.ConnectionResetException: Connection reset by peer
+backend-2-1      |  ---> System.Net.Sockets.SocketException (104): Connection reset by peer
+backend-2-1      |    at Pipelines.Sockets.Unofficial.Internal.Throw.Socket(Int32) + 0x27
+backend-2-1      |    at Pipelines.Sockets.Unofficial.SocketAwaitableEventArgs.GetResult() + 0x3e
+backend-2-1      |    at Pipelines.Sockets.Unofficial.SocketConnection.<DoReceiveAsync>d__73.MoveNext() + 0xec
+backend-2-1      |    --- End of inner exception stack trace ---
+backend-2-1      |    at System.IO.Pipelines.Pipe.GetReadResult(ReadResult&) + 0x170
+backend-2-1      |    at System.IO.Pipelines.Pipe.GetReadAsyncResult() + 0x96
+backend-2-1      |    at StackExchange.Redis.PhysicalConnection.<ReadFromPipe>d__134.MoveNext() + 0x544
+backend-2-1      |    --- End of inner exception stack trace ---
+backend-2-1      |    at MichelOliveira.Com.ReactiveLock.Distributed.Redis.ReactiveLockRedisTrackerStore.<SetStatusAsync>d__10.MoveNext() + 0x9c
+backend-2-1      | --- End of stack trace from previous location ---
+backend-2-1      |    at MichelOliveira.Com.ReactiveLock.Core.ReactiveLockTrackerController.<DecrementAsync>d__13.MoveNext() + 0x68
+backend-2-1      | --- End of stack trace from previous location ---
+backend-2-1      |    at CountingHandler.<SendAsync>d__8.MoveNext() + 0xa0
+backend-2-1      | --- End of stack trace from previous location ---
+backend-2-1      |    at Microsoft.Extensions.Http.Logging.LoggingScopeHttpMessageHandler.<<SendCoreAsync>g__Core|4_0>d.MoveNext() + 0x13c
+backend-2-1      | --- End of stack trace from previous location ---
+backend-2-1      |    at System.Net.Http.HttpClient.<<SendAsync>g__Core|83_0>d.MoveNext() + 0x399
+backend-2-1      | --- End of stack trace from previous location ---
+backend-2-1      |    at PaymentProcessorService.<ProcessPaymentAsync>d__26.MoveNext() + 0x27e
+backend-2-1      | --- End of stack trace from previous location ---
+backend-2-1      |    at PaymentService.<ProcessPaymentAsync>d__22.MoveNext() + 0x15a
+backend-2-1      | --- End of stack trace from previous location ---
+backend-2-1      |    at RedisQueueWorker.<WorkerLoopAsync>d__11.MoveNext() + 0x43d
+backend-2-1      |    --- End of inner exception stack trace ---
+backend-2-1      |    at RedisQueueWorker.<WorkerLoopAsync>d__11.MoveNext() + 0x154
+backend-2-1      | [Worker Error] StackExchange.Redis.RedisConnectionException: The message timed out in the backlog attempting to send because no connection became available (5000ms) - Last Connection Exception: SocketFailure (ReadSocketError/ConnectionReset, last-recv: 8) on redis:6379/Interactive, Idle/Faulted, last: RPUSH, origin: ReadFromPipe, outstanding: 1577, last-read: 5s ago, last-write: 0s ago, unanswered-write: 5s ago, keep-alive: 60s, state: ConnectedEstablished, mgr: 8 of 10 available, in: 0, in-pipe: 0, out-pipe: 0, last-heartbeat: 0s ago, last-mbeat: 0s ago, global: 0s ago, v: 2.8.58.19568, command=LPOP, timeout: 5000, inst: 0, qu: 1589, qs: 0, aw: False, bw: CheckingForTimeout, last-in: 0, cur-in: 0, sync-ops: 8, async-ops: 145100, serverEndpoint: redis:6379, conn-sec: n/a, aoc: 1, mc: 1/1/0, mgr: 10 of 10 available, clientName: backend-2(SE.Redis-v2.8.58.19568), IOCP: (Busy=0,Free=1000,Min=1,Max=1000), WORKER: (Busy=2,Free=32765,Min=1,Max=32767), POOL: (Threads=3,QueuedItems=6,CompletedItems=444453,Timers=7), v: 2.8.58.19568 (Please take a look at this article for some common client-side issues that can cause timeouts: https://stackexchange.github.io/StackExchange.Redis/Timeouts)
+backend-2-1      |  ---> StackExchange.Redis.RedisConnectionException: SocketFailure (ReadSocketError/ConnectionReset, last-recv: 8) on redis:6379/Interactive, Idle/Faulted, last: RPUSH, origin: ReadFromPipe, outstanding: 1577, last-read: 5s ago, last-write: 0s ago, unanswered-write: 5s ago, keep-alive: 60s, state: ConnectedEstablished, mgr: 8 of 10 available, in: 0, in-pipe: 0, out-pipe: 0, last-heartbeat: 0s ago, last-mbeat: 0s ago, global: 0s ago, v: 2.8.58.19568
+backend-2-1      |  ---> Pipelines.Sockets.Unofficial.ConnectionResetException: Connection reset by peer
+backend-2-1      |  ---> System.Net.Sockets.SocketException (104): Connection reset by peer
+backend-2-1      |    at Pipelines.Sockets.Unofficial.Internal.Throw.Socket(Int32) + 0x27
+backend-2-1      |    at Pipelines.Sockets.Unofficial.SocketAwaitableEventArgs.GetResult() + 0x3e
+backend-2-1      |    at Pipelines.Sockets.Unofficial.SocketConnection.<DoReceiveAsync>d__73.MoveNext() + 0xec
+backend-2-1      |    --- End of inner exception stack trace ---
+backend-2-1      |    at System.IO.Pipelines.Pipe.GetReadResult(ReadResult&) + 0x170
+backend-2-1      |    at System.IO.Pipelines.Pipe.GetReadAsyncResult() + 0x96
+backend-2-1      |    at StackExchange.Redis.PhysicalConnection.<ReadFromPipe>d__134.MoveNext() + 0x544
+backend-2-1      |    --- End of inner exception stack trace ---
+backend-2-1      |    at MichelOliveira.Com.ReactiveLock.Distributed.Redis.ReactiveLockRedisTrackerStore.<SetStatusAsync>d__10.MoveNext() + 0x9c
+backend-2-1      | --- End of stack trace from previous location ---
+backend-2-1      |    at MichelOliveira.Com.ReactiveLock.Core.ReactiveLockTrackerController.<DecrementAsync>d__13.MoveNext() + 0x68
+backend-2-1      | --- End of stack trace from previous location ---
+backend-2-1      |    at CountingHandler.<SendAsync>d__8.MoveNext() + 0xa0
+backend-2-1      | --- End of stack trace from previous location ---
+backend-2-1      |    at Microsoft.Extensions.Http.Logging.LoggingScopeHttpMessageHandler.<<SendCoreAsync>g__Core|4_0>d.MoveNext() + 0x13c
+backend-2-1      | --- End of stack trace from previous location ---
+backend-2-1      |    at System.Net.Http.HttpClient.<<SendAsync>g__Core|83_0>d.MoveNext() + 0x399
+backend-2-1      | --- End of stack trace from previous location ---
+backend-2-1      |    at PaymentProcessorService.<ProcessPaymentAsync>d__26.MoveNext() + 0x27e
+backend-2-1      | --- End of stack trace from previous location ---
+backend-2-1      |    at PaymentService.<ProcessPaymentAsync>d__22.MoveNext() + 0x15a
+backend-2-1      | --- End of stack trace from previous location ---
+backend-2-1      |    at RedisQueueWorker.<WorkerLoopAsync>d__11.MoveNext() + 0x43d
+backend-2-1      |    --- End of inner exception stack trace ---
+backend-2-1      |    at RedisQueueWorker.<WorkerLoopAsync>d__11.MoveNext() + 0x154
+backend-2-1      | [Worker Error] StackExchange.Redis.RedisConnectionException: The message timed out in the backlog attempting to send because no connection became available (5000ms) - Last Connection Exception: SocketFailure (ReadSocketError/ConnectionReset, last-recv: 8) on redis:6379/Interactive, Idle/Faulted, last: RPUSH, origin: ReadFromPipe, outstanding: 1577, last-read: 5s ago, last-write: 0s ago, unanswered-write: 5s ago, keep-alive: 60s, state: ConnectedEstablished, mgr: 8 of 10 available, in: 0, in-pipe: 0, out-pipe: 0, last-heartbeat: 0s ago, last-mbeat: 0s ago, global: 0s ago, v: 2.8.58.19568, command=LPOP, timeout: 5000, inst: 0, qu: 1588, qs: 0, aw: False, bw: CheckingForTimeout, last-in: 0, cur-in: 0, sync-ops: 8, async-ops: 145100, serverEndpoint: redis:6379, conn-sec: n/a, aoc: 1, mc: 1/1/0, mgr: 10 of 10 available, clientName: backend-2(SE.Redis-v2.8.58.19568), IOCP: (Busy=0,Free=1000,Min=1,Max=1000), WORKER: (Busy=2,Free=32765,Min=1,Max=32767), POOL: (Threads=3,QueuedItems=7,CompletedItems=444453,Timers=7), v: 2.8.58.19568 (Please take a look at this article for some common client-side issues that can cause timeouts: https://stackexchange.github.io/StackExchange.Redis/Timeouts)
+backend-2-1      |  ---> StackExchange.Redis.RedisConnectionException: SocketFailure (ReadSocketError/ConnectionReset, last-recv: 8) on redis:6379/Interactive, Idle/Faulted, last: RPUSH, origin: ReadFromPipe, outstanding: 1577, last-read: 5s ago, last-write: 0s ago, unanswered-write: 5s ago, keep-alive: 60s, state: ConnectedEstablished, mgr: 8 of 10 available, in: 0, in-pipe: 0, out-pipe: 0, last-heartbeat: 0s ago, last-mbeat: 0s ago, global: 0s ago, v: 2.8.58.19568
+backend-2-1      |  ---> Pipelines.Sockets.Unofficial.ConnectionResetException: Connection reset by peer
+backend-2-1      |  ---> System.Net.Sockets.SocketException (104): Connection reset by peer
+backend-2-1      |    at Pipelines.Sockets.Unofficial.Internal.Throw.Socket(Int32) + 0x27
+backend-2-1      |    at Pipelines.Sockets.Unofficial.SocketAwaitableEventArgs.GetResult() + 0x3e
+backend-2-1      |    at Pipelines.Sockets.Unofficial.SocketConnection.<DoReceiveAsync>d__73.MoveNext() + 0xec
+backend-2-1      |    --- End of inner exception stack trace ---
+backend-2-1      |    at System.IO.Pipelines.Pipe.GetReadResult(ReadResult&) + 0x170
+backend-2-1      |    at System.IO.Pipelines.Pipe.GetReadAsyncResult() + 0x96
+backend-2-1      |    at StackExchange.Redis.PhysicalConnection.<ReadFromPipe>d__134.MoveNext() + 0x544
+backend-2-1      |    --- End of inner exception stack trace ---
+backend-2-1      |    at MichelOliveira.Com.ReactiveLock.Distributed.Redis.ReactiveLockRedisTrackerStore.<SetStatusAsync>d__10.MoveNext() + 0x9c
+backend-2-1      | --- End of stack trace from previous location ---
+backend-2-1      |    at MichelOliveira.Com.ReactiveLock.Core.ReactiveLockTrackerController.<DecrementAsync>d__13.MoveNext() + 0x68
+backend-2-1      | --- End of stack trace from previous location ---
+backend-2-1      |    at CountingHandler.<SendAsync>d__8.MoveNext() + 0xa0
+backend-2-1      | --- End of stack trace from previous location ---
+backend-2-1      |    at Microsoft.Extensions.Http.Logging.LoggingScopeHttpMessageHandler.<<SendCoreAsync>g__Core|4_0>d.MoveNext() + 0x13c
+backend-2-1      | --- End of stack trace from previous location ---
+backend-2-1      |    at System.Net.Http.HttpClient.<<SendAsync>g__Core|83_0>d.MoveNext() + 0x399
+backend-2-1      | --- End of stack trace from previous location ---
+backend-2-1      |    at PaymentProcessorService.<ProcessPaymentAsync>d__26.MoveNext() + 0x27e
+backend-2-1      | --- End of stack trace from previous location ---
+backend-2-1      |    at PaymentService.<ProcessPaymentAsync>d__22.MoveNext() + 0x15a
+backend-2-1      | --- End of stack trace from previous location ---
+backend-2-1      |    at RedisQueueWorker.<WorkerLoopAsync>d__11.MoveNext() + 0x43d
+backend-2-1      |    --- End of inner exception stack trace ---
+backend-2-1      |    at RedisQueueWorker.<WorkerLoopAsync>d__11.MoveNext() + 0x154
+backend-2-1      | [Worker Error] StackExchange.Redis.RedisConnectionException: The message timed out in the backlog attempting to send because no connection became available (5000ms) - Last Connection Exception: SocketFailure (ReadSocketError/ConnectionReset, last-recv: 8) on redis:6379/Interactive, Idle/Faulted, last: RPUSH, origin: ReadFromPipe, outstanding: 1577, last-read: 5s ago, last-write: 0s ago, unanswered-write: 5s ago, keep-alive: 60s, state: ConnectedEstablished, mgr: 8 of 10 available, in: 0, in-pipe: 0, out-pipe: 0, last-heartbeat: 0s ago, last-mbeat: 0s ago, global: 0s ago, v: 2.8.58.19568, command=LPOP, timeout: 5000, inst: 0, qu: 1587, qs: 0, aw: False, bw: CheckingForTimeout, last-in: 0, cur-in: 0, sync-ops: 8, async-ops: 145100, serverEndpoint: redis:6379, conn-sec: n/a, aoc: 1, mc: 1/1/0, mgr: 10 of 10 available, clientName: backend-2(SE.Redis-v2.8.58.19568), IOCP: (Busy=0,Free=1000,Min=1,Max=1000), WORKER: (Busy=2,Free=32765,Min=1,Max=32767), POOL: (Threads=3,QueuedItems=8,CompletedItems=444453,Timers=7), v: 2.8.58.19568 (Please take a look at this article for some common client-side issues that can cause timeouts: https://stackexchange.github.io/StackExchange.Redis/Timeouts)
+backend-2-1      |  ---> StackExchange.Redis.RedisConnectionException: SocketFailure (ReadSocketError/ConnectionReset, last-recv: 8) on redis:6379/Interactive, Idle/Faulted, last: RPUSH, origin: ReadFromPipe, outstanding: 1577, last-read: 5s ago, last-write: 0s ago, unanswered-write: 5s ago, keep-alive: 60s, state: ConnectedEstablished, mgr: 8 of 10 available, in: 0, in-pipe: 0, out-pipe: 0, last-heartbeat: 0s ago, last-mbeat: 0s ago, global: 0s ago, v: 2.8.58.19568
+backend-2-1      |  ---> Pipelines.Sockets.Unofficial.ConnectionResetException: Connection reset by peer
+backend-2-1      |  ---> System.Net.Sockets.SocketException (104): Connection reset by peer
+backend-2-1      |    at Pipelines.Sockets.Unofficial.Internal.Throw.Socket(Int32) + 0x27
+backend-2-1      |    at Pipelines.Sockets.Unofficial.SocketAwaitableEventArgs.GetResult() + 0x3e
+backend-2-1      |    at Pipelines.Sockets.Unofficial.SocketConnection.<DoReceiveAsync>d__73.MoveNext() + 0xec
+backend-2-1      |    --- End of inner exception stack trace ---
+backend-2-1      |    at System.IO.Pipelines.Pipe.GetReadResult(ReadResult&) + 0x170
+backend-2-1      |    at System.IO.Pipelines.Pipe.GetReadAsyncResult() + 0x96
+backend-2-1      |    at StackExchange.Redis.PhysicalConnection.<ReadFromPipe>d__134.MoveNext() + 0x544
+backend-2-1      |    --- End of inner exception stack trace ---
+backend-2-1      |    at MichelOliveira.Com.ReactiveLock.Distributed.Redis.ReactiveLockRedisTrackerStore.<SetStatusAsync>d__10.MoveNext() + 0x9c
+backend-2-1      | --- End of stack trace from previous location ---
+backend-2-1      |    at MichelOliveira.Com.ReactiveLock.Core.ReactiveLockTrackerController.<DecrementAsync>d__13.MoveNext() + 0x68
+backend-2-1      | --- End of stack trace from previous location ---
+backend-2-1      |    at CountingHandler.<SendAsync>d__8.MoveNext() + 0xa0
+backend-2-1      | --- End of stack trace from previous location ---
+backend-2-1      |    at Microsoft.Extensions.Http.Logging.LoggingScopeHttpMessageHandler.<<SendCoreAsync>g__Core|4_0>d.MoveNext() + 0x13c
+backend-2-1      | --- End of stack trace from previous location ---
+backend-2-1      |    at System.Net.Http.HttpClient.<<SendAsync>g__Core|83_0>d.MoveNext() + 0x399
+backend-2-1      | --- End of stack trace from previous location ---
+backend-2-1      |    at PaymentProcessorService.<ProcessPaymentAsync>d__26.MoveNext() + 0x27e
+backend-2-1      | --- End of stack trace from previous location ---
+backend-2-1      |    at PaymentService.<ProcessPaymentAsync>d__22.MoveNext() + 0x15a
+backend-2-1      | --- End of stack trace from previous location ---
+backend-2-1      |    at RedisQueueWorker.<WorkerLoopAsync>d__11.MoveNext() + 0x43d
+backend-2-1      |    --- End of inner exception stack trace ---
+backend-2-1      |    at RedisQueueWorker.<WorkerLoopAsync>d__11.MoveNext() + 0x154
+backend-1-1      | [Worker Error] StackExchange.Redis.RedisConnectionException: The message timed out in the backlog attempting to send because no connection became available (5000ms) - Last Connection Exception: SocketClosed (WriteSocketError/ConnectionReset, last-recv: 0) on redis:6379/Interactive, Idle/MarkProcessed, last: RPUSH, origin: ReadFromPipe, outstanding: 1578, last-read: 0s ago, last-write: 0s ago, unanswered-write: 5s ago, keep-alive: 60s, state: ConnectedEstablished, mgr: 8 of 10 available, in: 0, in-pipe: 0, out-pipe: 0, last-heartbeat: 0s ago, last-mbeat: 0s ago, global: 0s ago, v: 2.8.58.19568, command=LPOP, timeout: 5000, inst: 0, qu: 1605, qs: 0, aw: False, bw: CheckingForTimeout, last-in: 0, cur-in: 0, sync-ops: 8, async-ops: 145376, serverEndpoint: redis:6379, conn-sec: n/a, aoc: 1, mc: 1/1/0, mgr: 10 of 10 available, clientName: backend-1(SE.Redis-v2.8.58.19568), IOCP: (Busy=0,Free=1000,Min=1,Max=1000), WORKER: (Busy=1,Free=32766,Min=1,Max=32767), POOL: (Threads=4,QueuedItems=0,CompletedItems=445549,Timers=7), v: 2.8.58.19568 (Please take a look at this article for some common client-side issues that can cause timeouts: https://stackexchange.github.io/StackExchange.Redis/Timeouts)
+backend-1-1      |  ---> StackExchange.Redis.RedisConnectionException: SocketClosed (WriteSocketError/ConnectionReset, last-recv: 0) on redis:6379/Interactive, Idle/MarkProcessed, last: RPUSH, origin: ReadFromPipe, outstanding: 1578, last-read: 0s ago, last-write: 0s ago, unanswered-write: 5s ago, keep-alive: 60s, state: ConnectedEstablished, mgr: 8 of 10 available, in: 0, in-pipe: 0, out-pipe: 0, last-heartbeat: 0s ago, last-mbeat: 0s ago, global: 0s ago, v: 2.8.58.19568
+backend-1-1      |    at MichelOliveira.Com.ReactiveLock.Distributed.Redis.ReactiveLockRedisTrackerStore.<SetStatusAsync>d__10.MoveNext() + 0x9c
+backend-1-1      | --- End of stack trace from previous location ---
+backend-1-1      |    at MichelOliveira.Com.ReactiveLock.Core.ReactiveLockTrackerController.<IncrementAsync>d__12.MoveNext() + 0x64
+backend-1-1      | --- End of stack trace from previous location ---
+backend-1-1      |    at PaymentSummaryService.<GetPaymentsSummaryAsync>d__16.MoveNext() + 0x145
+backend-1-1      | --- End of stack trace from previous location ---
+backend-1-1      |    at Program.<>c.<<<Main>$>b__0_16>d.MoveNext() + 0x51
+backend-1-1      | --- End of stack trace from previous location ---
+backend-1-1      |    at Microsoft.AspNetCore.Http.Generated.<GeneratedRouteBuilderExtensions_g>F610B383FBFDED47E55D79818E5CF227043A09AE168982B17141BBA33492EC9F9__GeneratedRouteBuilderExtensionsCore.<>c__DisplayClass5_0.<<MapGet2>g__RequestHandler|5>d.MoveNext() + 0x95
+backend-1-1      | --- End of stack trace from previous location ---
+backend-1-1      |    at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.<ProcessRequests>d__237`1.MoveNext() + 0x3e7
+backend-1-1      |    --- End of inner exception stack trace ---
+backend-1-1      |    at RedisQueueWorker.<WorkerLoopAsync>d__11.MoveNext() + 0x154
+backend-1-1      | [Worker Error] StackExchange.Redis.RedisConnectionException: The message timed out in the backlog attempting to send because no connection became available (5000ms) - Last Connection Exception: SocketClosed (WriteSocketError/ConnectionReset, last-recv: 0) on redis:6379/Interactive, Idle/MarkProcessed, last: RPUSH, origin: ReadFromPipe, outstanding: 1578, last-read: 0s ago, last-write: 0s ago, unanswered-write: 5s ago, keep-alive: 60s, state: ConnectedEstablished, mgr: 8 of 10 available, in: 0, in-pipe: 0, out-pipe: 0, last-heartbeat: 0s ago, last-mbeat: 0s ago, global: 0s ago, v: 2.8.58.19568, command=LPOP, timeout: 5000, inst: 0, qu: 1604, qs: 0, aw: False, bw: CheckingForTimeout, last-in: 0, cur-in: 0, sync-ops: 8, async-ops: 145376, serverEndpoint: redis:6379, conn-sec: n/a, aoc: 1, mc: 1/1/0, mgr: 10 of 10 available, clientName: backend-1(SE.Redis-v2.8.58.19568), IOCP: (Busy=0,Free=1000,Min=1,Max=1000), WORKER: (Busy=2,Free=32765,Min=1,Max=32767), POOL: (Threads=4,QueuedItems=1,CompletedItems=445549,Timers=7), v: 2.8.58.19568 (Please take a look at this article for some common client-side issues that can cause timeouts: https://stackexchange.github.io/StackExchange.Redis/Timeouts)
+backend-1-1      |  ---> StackExchange.Redis.RedisConnectionException: SocketClosed (WriteSocketError/ConnectionReset, last-recv: 0) on redis:6379/Interactive, Idle/MarkProcessed, last: RPUSH, origin: ReadFromPipe, outstanding: 1578, last-read: 0s ago, last-write: 0s ago, unanswered-write: 5s ago, keep-alive: 60s, state: ConnectedEstablished, mgr: 8 of 10 available, in: 0, in-pipe: 0, out-pipe: 0, last-heartbeat: 0s ago, last-mbeat: 0s ago, global: 0s ago, v: 2.8.58.19568
+backend-1-1      |    at MichelOliveira.Com.ReactiveLock.Distributed.Redis.ReactiveLockRedisTrackerStore.<SetStatusAsync>d__10.MoveNext() + 0x9c
+backend-1-1      | --- End of stack trace from previous location ---
+backend-1-1      |    at MichelOliveira.Com.ReactiveLock.Core.ReactiveLockTrackerController.<IncrementAsync>d__12.MoveNext() + 0x64
+backend-1-1      | --- End of stack trace from previous location ---
+backend-1-1      |    at PaymentSummaryService.<GetPaymentsSummaryAsync>d__16.MoveNext() + 0x145
+backend-1-1      | --- End of stack trace from previous location ---
+backend-1-1      |    at Program.<>c.<<<Main>$>b__0_16>d.MoveNext() + 0x51
+backend-1-1      | --- End of stack trace from previous location ---
+backend-1-1      |    at Microsoft.AspNetCore.Http.Generated.<GeneratedRouteBuilderExtensions_g>F610B383FBFDED47E55D79818E5CF227043A09AE168982B17141BBA33492EC9F9__GeneratedRouteBuilderExtensionsCore.<>c__DisplayClass5_0.<<MapGet2>g__RequestHandler|5>d.MoveNext() + 0x95
+backend-1-1      | --- End of stack trace from previous location ---
+backend-1-1      |    at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.<ProcessRequests>d__237`1.MoveNext() + 0x3e7
+backend-1-1      |    --- End of inner exception stack trace ---
+backend-1-1      |    at RedisQueueWorker.<WorkerLoopAsync>d__11.MoveNext() + 0x154
+backend-1-1      | [Worker Error] StackExchange.Redis.RedisConnectionException: The message timed out in the backlog attempting to send because no connection became available (5000ms) - Last Connection Exception: SocketClosed (WriteSocketError/ConnectionReset, last-recv: 0) on redis:6379/Interactive, Idle/MarkProcessed, last: RPUSH, origin: ReadFromPipe, outstanding: 1578, last-read: 0s ago, last-write: 0s ago, unanswered-write: 5s ago, keep-alive: 60s, state: ConnectedEstablished, mgr: 8 of 10 available, in: 0, in-pipe: 0, out-pipe: 0, last-heartbeat: 0s ago, last-mbeat: 0s ago, global: 0s ago, v: 2.8.58.19568, command=LPOP, timeout: 5000, inst: 0, qu: 1603, qs: 0, aw: False, bw: CheckingForTimeout, last-in: 0, cur-in: 0, sync-ops: 8, async-ops: 145376, serverEndpoint: redis:6379, conn-sec: n/a, aoc: 1, mc: 1/1/0, mgr: 10 of 10 available, clientName: backend-1(SE.Redis-v2.8.58.19568), IOCP: (Busy=0,Free=1000,Min=1,Max=1000), WORKER: (Busy=2,Free=32765,Min=1,Max=32767), POOL: (Threads=4,QueuedItems=0,CompletedItems=445549,Timers=7), v: 2.8.58.19568 (Please take a look at this article for some common client-side issues that can cause timeouts: https://stackexchange.github.io/StackExchange.Redis/Timeouts)
+backend-1-1      |  ---> StackExchange.Redis.RedisConnectionException: SocketClosed (WriteSocketError/ConnectionReset, last-recv: 0) on redis:6379/Interactive, Idle/MarkProcessed, last: RPUSH, origin: ReadFromPipe, outstanding: 1578, last-read: 0s ago, last-write: 0s ago, unanswered-write: 5s ago, keep-alive: 60s, state: ConnectedEstablished, mgr: 8 of 10 available, in: 0, in-pipe: 0, out-pipe: 0, last-heartbeat: 0s ago, last-mbeat: 0s ago, global: 0s ago, v: 2.8.58.19568
+backend-1-1      |    at MichelOliveira.Com.ReactiveLock.Distributed.Redis.ReactiveLockRedisTrackerStore.<SetStatusAsync>d__10.MoveNext() + 0x9c
+backend-1-1      | --- End of stack trace from previous location ---
+backend-1-1      |    at MichelOliveira.Com.ReactiveLock.Core.ReactiveLockTrackerController.<IncrementAsync>d__12.MoveNext() + 0x64
+backend-1-1      | --- End of stack trace from previous location ---
+backend-1-1      |    at PaymentSummaryService.<GetPaymentsSummaryAsync>d__16.MoveNext() + 0x145
+backend-1-1      | --- End of stack trace from previous location ---
+backend-1-1      |    at Program.<>c.<<<Main>$>b__0_16>d.MoveNext() + 0x51
+backend-1-1      | --- End of stack trace from previous location ---
+backend-1-1      |    at Microsoft.AspNetCore.Http.Generated.<GeneratedRouteBuilderExtensions_g>F610B383FBFDED47E55D79818E5CF227043A09AE168982B17141BBA33492EC9F9__GeneratedRouteBuilderExtensionsCore.<>c__DisplayClass5_0.<<MapGet2>g__RequestHandler|5>d.MoveNext() + 0x95
+backend-1-1      | --- End of stack trace from previous location ---
+backend-1-1      |    at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.<ProcessRequests>d__237`1.MoveNext() + 0x3e7
+backend-1-1      |    --- End of inner exception stack trace ---
+backend-1-1      |    at RedisQueueWorker.<WorkerLoopAsync>d__11.MoveNext() + 0x154
+backend-1-1      | [Worker Error] StackExchange.Redis.RedisConnectionException: The message timed out in the backlog attempting to send because no connection became available (5000ms) - Last Connection Exception: SocketClosed (WriteSocketError/ConnectionReset, last-recv: 0) on redis:6379/Interactive, Idle/MarkProcessed, last: RPUSH, origin: ReadFromPipe, outstanding: 1578, last-read: 0s ago, last-write: 0s ago, unanswered-write: 5s ago, keep-alive: 60s, state: ConnectedEstablished, mgr: 8 of 10 available, in: 0, in-pipe: 0, out-pipe: 0, last-heartbeat: 0s ago, last-mbeat: 0s ago, global: 0s ago, v: 2.8.58.19568, command=LPOP, timeout: 5000, inst: 0, qu: 1602, qs: 0, aw: False, bw: CheckingForTimeout, last-in: 0, cur-in: 0, sync-ops: 8, async-ops: 145376, serverEndpoint: redis:6379, conn-sec: n/a, aoc: 1, mc: 1/1/0, mgr: 10 of 10 available, clientName: backend-1(SE.Redis-v2.8.58.19568), IOCP: (Busy=0,Free=1000,Min=1,Max=1000), WORKER: (Busy=2,Free=32765,Min=1,Max=32767), POOL: (Threads=4,QueuedItems=1,CompletedItems=445549,Timers=7), v: 2.8.58.19568 (Please take a look at this article for some common client-side issues that can cause timeouts: https://stackexchange.github.io/StackExchange.Redis/Timeouts)
+backend-1-1      |  ---> StackExchange.Redis.RedisConnectionException: SocketClosed (WriteSocketError/ConnectionReset, last-recv: 0) on redis:6379/Interactive, Idle/MarkProcessed, last: RPUSH, origin: ReadFromPipe, outstanding: 1578, last-read: 0s ago, last-write: 0s ago, unanswered-write: 5s ago, keep-alive: 60s, state: ConnectedEstablished, mgr: 8 of 10 available, in: 0, in-pipe: 0, out-pipe: 0, last-heartbeat: 0s ago, last-mbeat: 0s ago, global: 0s ago, v: 2.8.58.19568
+backend-1-1      |    at MichelOliveira.Com.ReactiveLock.Distributed.Redis.ReactiveLockRedisTrackerStore.<SetStatusAsync>d__10.MoveNext() + 0x9c
+backend-1-1      | --- End of stack trace from previous location ---
+backend-1-1      |    at MichelOliveira.Com.ReactiveLock.Core.ReactiveLockTrackerController.<IncrementAsync>d__12.MoveNext() + 0x64
+backend-1-1      | --- End of stack trace from previous location ---
+backend-1-1      |    at PaymentSummaryService.<GetPaymentsSummaryAsync>d__16.MoveNext() + 0x145
+backend-1-1      | --- End of stack trace from previous location ---
+backend-1-1      |    at Program.<>c.<<<Main>$>b__0_16>d.MoveNext() + 0x51
+backend-1-1      | --- End of stack trace from previous location ---
+backend-1-1      |    at Microsoft.AspNetCore.Http.Generated.<GeneratedRouteBuilderExtensions_g>F610B383FBFDED47E55D79818E5CF227043A09AE168982B17141BBA33492EC9F9__GeneratedRouteBuilderExtensionsCore.<>c__DisplayClass5_0.<<MapGet2>g__RequestHandler|5>d.MoveNext() + 0x95
+backend-1-1      | --- End of stack trace from previous location ---
+backend-1-1      |    at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.<ProcessRequests>d__237`1.MoveNext() + 0x3e7
+backend-1-1      |    --- End of inner exception stack trace ---
+backend-1-1      |    at RedisQueueWorker.<WorkerLoopAsync>d__11.MoveNext() + 0x154
+backend-1-1      | [Worker Error] StackExchange.Redis.RedisConnectionException: The message timed out in the backlog attempting to send because no connection became available (5000ms) - Last Connection Exception: SocketClosed (WriteSocketError/ConnectionReset, last-recv: 0) on redis:6379/Interactive, Idle/MarkProcessed, last: RPUSH, origin: ReadFromPipe, outstanding: 1578, last-read: 0s ago, last-write: 0s ago, unanswered-write: 5s ago, keep-alive: 60s, state: ConnectedEstablished, mgr: 8 of 10 available, in: 0, in-pipe: 0, out-pipe: 0, last-heartbeat: 0s ago, last-mbeat: 0s ago, global: 0s ago, v: 2.8.58.19568, command=LPOP, timeout: 5000, inst: 0, qu: 1601, qs: 0, aw: False, bw: CheckingForTimeout, last-in: 0, cur-in: 0, sync-ops: 8, async-ops: 145376, serverEndpoint: redis:6379, conn-sec: n/a, aoc: 1, mc: 1/1/0, mgr: 10 of 10 available, clientName: backend-1(SE.Redis-v2.8.58.19568), IOCP: (Busy=0,Free=1000,Min=1,Max=1000), WORKER: (Busy=2,Free=32765,Min=1,Max=32767), POOL: (Threads=4,QueuedItems=2,CompletedItems=445549,Timers=7), v: 2.8.58.19568 (Please take a look at this article for some common client-side issues that can cause timeouts: https://stackexchange.github.io/StackExchange.Redis/Timeouts)
+backend-1-1      |  ---> StackExchange.Redis.RedisConnectionException: SocketClosed (WriteSocketError/ConnectionReset, last-recv: 0) on redis:6379/Interactive, Idle/MarkProcessed, last: RPUSH, origin: ReadFromPipe, outstanding: 1578, last-read: 0s ago, last-write: 0s ago, unanswered-write: 5s ago, keep-alive: 60s, state: ConnectedEstablished, mgr: 8 of 10 available, in: 0, in-pipe: 0, out-pipe: 0, last-heartbeat: 0s ago, last-mbeat: 0s ago, global: 0s ago, v: 2.8.58.19568
+backend-1-1      |    at MichelOliveira.Com.ReactiveLock.Distributed.Redis.ReactiveLockRedisTrackerStore.<SetStatusAsync>d__10.MoveNext() + 0x9c
+backend-1-1      | --- End of stack trace from previous location ---
+backend-1-1      |    at MichelOliveira.Com.ReactiveLock.Core.ReactiveLockTrackerController.<IncrementAsync>d__12.MoveNext() + 0x64
+backend-1-1      | --- End of stack trace from previous location ---
+backend-1-1      |    at PaymentSummaryService.<GetPaymentsSummaryAsync>d__16.MoveNext() + 0x145
+backend-1-1      | --- End of stack trace from previous location ---
+backend-1-1      |    at Program.<>c.<<<Main>$>b__0_16>d.MoveNext() + 0x51
+backend-1-1      | --- End of stack trace from previous location ---
+backend-1-1      |    at Microsoft.AspNetCore.Http.Generated.<GeneratedRouteBuilderExtensions_g>F610B383FBFDED47E55D79818E5CF227043A09AE168982B17141BBA33492EC9F9__GeneratedRouteBuilderExtensionsCore.<>c__DisplayClass5_0.<<MapGet2>g__RequestHandler|5>d.MoveNext() + 0x95
+backend-1-1      | --- End of stack trace from previous location ---
+backend-1-1      |    at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.<ProcessRequests>d__237`1.MoveNext() + 0x3e7
+backend-1-1      |    --- End of inner exception stack trace ---
+backend-1-1      |    at RedisQueueWorker.<WorkerLoopAsync>d__11.MoveNext() + 0x154
+backend-1-1      | [Worker Error] StackExchange.Redis.RedisConnectionException: The message timed out in the backlog attempting to send because no connection became available (5000ms) - Last Connection Exception: SocketClosed (WriteSocketError/ConnectionReset, last-recv: 0) on redis:6379/Interactive, Idle/MarkProcessed, last: RPUSH, origin: ReadFromPipe, outstanding: 1578, last-read: 0s ago, last-write: 0s ago, unanswered-write: 5s ago, keep-alive: 60s, state: ConnectedEstablished, mgr: 8 of 10 available, in: 0, in-pipe: 0, out-pipe: 0, last-heartbeat: 0s ago, last-mbeat: 0s ago, global: 0s ago, v: 2.8.58.19568, command=LPOP, timeout: 5000, inst: 0, qu: 1600, qs: 0, aw: False, bw: CheckingForTimeout, last-in: 0, cur-in: 0, sync-ops: 8, async-ops: 145376, serverEndpoint: redis:6379, conn-sec: n/a, aoc: 1, mc: 1/1/0, mgr: 10 of 10 available, clientName: backend-1(SE.Redis-v2.8.58.19568), IOCP: (Busy=0,Free=1000,Min=1,Max=1000), WORKER: (Busy=2,Free=32765,Min=1,Max=32767), POOL: (Threads=4,QueuedItems=3,CompletedItems=445549,Timers=7), v: 2.8.58.19568 (Please take a look at this article for some common client-side issues that can cause timeouts: https://stackexchange.github.io/StackExchange.Redis/Timeouts)
+backend-1-1      |  ---> StackExchange.Redis.RedisConnectionException: SocketClosed (WriteSocketError/ConnectionReset, last-recv: 0) on redis:6379/Interactive, Idle/MarkProcessed, last: RPUSH, origin: ReadFromPipe, outstanding: 1578, last-read: 0s ago, last-write: 0s ago, unanswered-write: 5s ago, keep-alive: 60s, state: ConnectedEstablished, mgr: 8 of 10 available, in: 0, in-pipe: 0, out-pipe: 0, last-heartbeat: 0s ago, last-mbeat: 0s ago, global: 0s ago, v: 2.8.58.19568
+backend-1-1      |    at MichelOliveira.Com.ReactiveLock.Distributed.Redis.ReactiveLockRedisTrackerStore.<SetStatusAsync>d__10.MoveNext() + 0x9c
+backend-1-1      | --- End of stack trace from previous location ---
+backend-1-1      |    at MichelOliveira.Com.ReactiveLock.Core.ReactiveLockTrackerController.<IncrementAsync>d__12.MoveNext() + 0x64
+backend-1-1      | --- End of stack trace from previous location ---
+backend-1-1      |    at PaymentSummaryService.<GetPaymentsSummaryAsync>d__16.MoveNext() + 0x145
+backend-1-1      | --- End of stack trace from previous location ---
+backend-1-1      |    at Program.<>c.<<<Main>$>b__0_16>d.MoveNext() + 0x51
+backend-1-1      | --- End of stack trace from previous location ---
+backend-1-1      |    at Microsoft.AspNetCore.Http.Generated.<GeneratedRouteBuilderExtensions_g>F610B383FBFDED47E55D79818E5CF227043A09AE168982B17141BBA33492EC9F9__GeneratedRouteBuilderExtensionsCore.<>c__DisplayClass5_0.<<MapGet2>g__RequestHandler|5>d.MoveNext() + 0x95
+backend-1-1      | --- End of stack trace from previous location ---
+backend-1-1      |    at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.<ProcessRequests>d__237`1.MoveNext() + 0x3e7
+backend-1-1      |    --- End of inner exception stack trace ---
+backend-1-1      |    at RedisQueueWorker.<WorkerLoopAsync>d__11.MoveNext() + 0x154
+backend-1-1      | [Worker Error] StackExchange.Redis.RedisConnectionException: The message timed out in the backlog attempting to send because no connection became available (5000ms) - Last Connection Exception: SocketClosed (WriteSocketError/ConnectionReset, last-recv: 0) on redis:6379/Interactive, Idle/MarkProcessed, last: RPUSH, origin: ReadFromPipe, outstanding: 1578, last-read: 0s ago, last-write: 0s ago, unanswered-write: 5s ago, keep-alive: 60s, state: ConnectedEstablished, mgr: 8 of 10 available, in: 0, in-pipe: 0, out-pipe: 0, last-heartbeat: 0s ago, last-mbeat: 0s ago, global: 0s ago, v: 2.8.58.19568, command=LPOP, timeout: 5000, inst: 0, qu: 1599, qs: 0, aw: False, bw: CheckingForTimeout, last-in: 0, cur-in: 0, sync-ops: 8, async-ops: 145376, serverEndpoint: redis:6379, conn-sec: n/a, aoc: 1, mc: 1/1/0, mgr: 10 of 10 available, clientName: backend-1(SE.Redis-v2.8.58.19568), IOCP: (Busy=0,Free=1000,Min=1,Max=1000), WORKER: (Busy=2,Free=32765,Min=1,Max=32767), POOL: (Threads=4,QueuedItems=4,CompletedItems=445549,Timers=7), v: 2.8.58.19568 (Please take a look at this article for some common client-side issues that can cause timeouts: https://stackexchange.github.io/StackExchange.Redis/Timeouts)
+backend-1-1      |  ---> StackExchange.Redis.RedisConnectionException: SocketClosed (WriteSocketError/ConnectionReset, last-recv: 0) on redis:6379/Interactive, Idle/MarkProcessed, last: RPUSH, origin: ReadFromPipe, outstanding: 1578, last-read: 0s ago, last-write: 0s ago, unanswered-write: 5s ago, keep-alive: 60s, state: ConnectedEstablished, mgr: 8 of 10 available, in: 0, in-pipe: 0, out-pipe: 0, last-heartbeat: 0s ago, last-mbeat: 0s ago, global: 0s ago, v: 2.8.58.19568
+backend-1-1      |    at MichelOliveira.Com.ReactiveLock.Distributed.Redis.ReactiveLockRedisTrackerStore.<SetStatusAsync>d__10.MoveNext() + 0x9c
+backend-1-1      | --- End of stack trace from previous location ---
+backend-1-1      |    at MichelOliveira.Com.ReactiveLock.Core.ReactiveLockTrackerController.<IncrementAsync>d__12.MoveNext() + 0x64
+backend-1-1      | --- End of stack trace from previous location ---
+backend-1-1      |    at PaymentSummaryService.<GetPaymentsSummaryAsync>d__16.MoveNext() + 0x145
+backend-1-1      | --- End of stack trace from previous location ---
+backend-1-1      |    at Program.<>c.<<<Main>$>b__0_16>d.MoveNext() + 0x51
+backend-1-1      | --- End of stack trace from previous location ---
+backend-1-1      |    at Microsoft.AspNetCore.Http.Generated.<GeneratedRouteBuilderExtensions_g>F610B383FBFDED47E55D79818E5CF227043A09AE168982B17141BBA33492EC9F9__GeneratedRouteBuilderExtensionsCore.<>c__DisplayClass5_0.<<MapGet2>g__RequestHandler|5>d.MoveNext() + 0x95
+backend-1-1      | --- End of stack trace from previous location ---
+backend-1-1      |    at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.<ProcessRequests>d__237`1.MoveNext() + 0x3e7
+backend-1-1      |    --- End of inner exception stack trace ---
+backend-1-1      |    at RedisQueueWorker.<WorkerLoopAsync>d__11.MoveNext() + 0x154
+backend-1-1      | [Worker Error] StackExchange.Redis.RedisConnectionException: The message timed out in the backlog attempting to send because no connection became available (5000ms) - Last Connection Exception: SocketClosed (WriteSocketError/ConnectionReset, last-recv: 0) on redis:6379/Interactive, Idle/MarkProcessed, last: RPUSH, origin: ReadFromPipe, outstanding: 1578, last-read: 0s ago, last-write: 0s ago, unanswered-write: 5s ago, keep-alive: 60s, state: ConnectedEstablished, mgr: 8 of 10 available, in: 0, in-pipe: 0, out-pipe: 0, last-heartbeat: 0s ago, last-mbeat: 0s ago, global: 0s ago, v: 2.8.58.19568, command=LPOP, timeout: 5000, inst: 0, qu: 1598, qs: 0, aw: False, bw: CheckingForTimeout, last-in: 0, cur-in: 0, sync-ops: 8, async-ops: 145376, serverEndpoint: redis:6379, conn-sec: n/a, aoc: 1, mc: 1/1/0, mgr: 10 of 10 available, clientName: backend-1(SE.Redis-v2.8.58.19568), IOCP: (Busy=0,Free=1000,Min=1,Max=1000), WORKER: (Busy=2,Free=32765,Min=1,Max=32767), POOL: (Threads=4,QueuedItems=5,CompletedItems=445549,Timers=7), v: 2.8.58.19568 (Please take a look at this article for some common client-side issues that can cause timeouts: https://stackexchange.github.io/StackExchange.Redis/Timeouts)
+backend-1-1      |  ---> StackExchange.Redis.RedisConnectionException: SocketClosed (WriteSocketError/ConnectionReset, last-recv: 0) on redis:6379/Interactive, Idle/MarkProcessed, last: RPUSH, origin: ReadFromPipe, outstanding: 1578, last-read: 0s ago, last-write: 0s ago, unanswered-write: 5s ago, keep-alive: 60s, state: ConnectedEstablished, mgr: 8 of 10 available, in: 0, in-pipe: 0, out-pipe: 0, last-heartbeat: 0s ago, last-mbeat: 0s ago, global: 0s ago, v: 2.8.58.19568
+backend-1-1      |    at MichelOliveira.Com.ReactiveLock.Distributed.Redis.ReactiveLockRedisTrackerStore.<SetStatusAsync>d__10.MoveNext() + 0x9c
+backend-1-1      | --- End of stack trace from previous location ---
+backend-1-1      |    at MichelOliveira.Com.ReactiveLock.Core.ReactiveLockTrackerController.<IncrementAsync>d__12.MoveNext() + 0x64
+backend-1-1      | --- End of stack trace from previous location ---
+backend-1-1      |    at PaymentSummaryService.<GetPaymentsSummaryAsync>d__16.MoveNext() + 0x145
+backend-1-1      | --- End of stack trace from previous location ---
+backend-1-1      |    at Program.<>c.<<<Main>$>b__0_16>d.MoveNext() + 0x51
+backend-1-1      | --- End of stack trace from previous location ---
+backend-1-1      |    at Microsoft.AspNetCore.Http.Generated.<GeneratedRouteBuilderExtensions_g>F610B383FBFDED47E55D79818E5CF227043A09AE168982B17141BBA33492EC9F9__GeneratedRouteBuilderExtensionsCore.<>c__DisplayClass5_0.<<MapGet2>g__RequestHandler|5>d.MoveNext() + 0x95
+backend-1-1      | --- End of stack trace from previous location ---
+backend-1-1      |    at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.<ProcessRequests>d__237`1.MoveNext() + 0x3e7
+backend-1-1      |    --- End of inner exception stack trace ---
+backend-1-1      |    at RedisQueueWorker.<WorkerLoopAsync>d__11.MoveNext() + 0x154
+backend-1-1      | [Worker Error] StackExchange.Redis.RedisConnectionException: The message timed out in the backlog attempting to send because no connection became available (5000ms) - Last Connection Exception: SocketClosed (WriteSocketError/ConnectionReset, last-recv: 0) on redis:6379/Interactive, Idle/MarkProcessed, last: RPUSH, origin: ReadFromPipe, outstanding: 1578, last-read: 0s ago, last-write: 0s ago, unanswered-write: 5s ago, keep-alive: 60s, state: ConnectedEstablished, mgr: 8 of 10 available, in: 0, in-pipe: 0, out-pipe: 0, last-heartbeat: 0s ago, last-mbeat: 0s ago, global: 0s ago, v: 2.8.58.19568, command=LPOP, timeout: 5000, inst: 0, qu: 1597, qs: 0, aw: False, bw: CheckingForTimeout, last-in: 0, cur-in: 0, sync-ops: 8, async-ops: 145376, serverEndpoint: redis:6379, conn-sec: n/a, aoc: 1, mc: 1/1/0, mgr: 10 of 10 available, clientName: backend-1(SE.Redis-v2.8.58.19568), IOCP: (Busy=0,Free=1000,Min=1,Max=1000), WORKER: (Busy=2,Free=32765,Min=1,Max=32767), POOL: (Threads=4,QueuedItems=6,CompletedItems=445549,Timers=7), v: 2.8.58.19568 (Please take a look at this article for some common client-side issues that can cause timeouts: https://stackexchange.github.io/StackExchange.Redis/Timeouts)
+backend-1-1      |  ---> StackExchange.Redis.RedisConnectionException: SocketClosed (WriteSocketError/ConnectionReset, last-recv: 0) on redis:6379/Interactive, Idle/MarkProcessed, last: RPUSH, origin: ReadFromPipe, outstanding: 1578, last-read: 0s ago, last-write: 0s ago, unanswered-write: 5s ago, keep-alive: 60s, state: ConnectedEstablished, mgr: 8 of 10 available, in: 0, in-pipe: 0, out-pipe: 0, last-heartbeat: 0s ago, last-mbeat: 0s ago, global: 0s ago, v: 2.8.58.19568
+backend-1-1      |    at MichelOliveira.Com.ReactiveLock.Distributed.Redis.ReactiveLockRedisTrackerStore.<SetStatusAsync>d__10.MoveNext() + 0x9c
+backend-1-1      | --- End of stack trace from previous location ---
+backend-1-1      |    at MichelOliveira.Com.ReactiveLock.Core.ReactiveLockTrackerController.<IncrementAsync>d__12.MoveNext() + 0x64
+backend-1-1      | --- End of stack trace from previous location ---
+backend-1-1      |    at PaymentSummaryService.<GetPaymentsSummaryAsync>d__16.MoveNext() + 0x145
+backend-1-1      | --- End of stack trace from previous location ---
+backend-1-1      |    at Program.<>c.<<<Main>$>b__0_16>d.MoveNext() + 0x51
+backend-1-1      | --- End of stack trace from previous location ---
+backend-1-1      |    at Microsoft.AspNetCore.Http.Generated.<GeneratedRouteBuilderExtensions_g>F610B383FBFDED47E55D79818E5CF227043A09AE168982B17141BBA33492EC9F9__GeneratedRouteBuilderExtensionsCore.<>c__DisplayClass5_0.<<MapGet2>g__RequestHandler|5>d.MoveNext() + 0x95
+backend-1-1      | --- End of stack trace from previous location ---
+backend-1-1      |    at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.<ProcessRequests>d__237`1.MoveNext() + 0x3e7
+backend-1-1      |    --- End of inner exception stack trace ---
+backend-1-1      |    at RedisQueueWorker.<WorkerLoopAsync>d__11.MoveNext() + 0x154
+backend-1-1      | [Worker Error] StackExchange.Redis.RedisConnectionException: The message timed out in the backlog attempting to send because no connection became available (5000ms) - Last Connection Exception: SocketClosed (WriteSocketError/ConnectionReset, last-recv: 0) on redis:6379/Interactive, Idle/MarkProcessed, last: RPUSH, origin: ReadFromPipe, outstanding: 1578, last-read: 0s ago, last-write: 0s ago, unanswered-write: 5s ago, keep-alive: 60s, state: ConnectedEstablished, mgr: 8 of 10 available, in: 0, in-pipe: 0, out-pipe: 0, last-heartbeat: 0s ago, last-mbeat: 0s ago, global: 0s ago, v: 2.8.58.19568, command=LPOP, timeout: 5000, inst: 0, qu: 1596, qs: 0, aw: False, bw: CheckingForTimeout, last-in: 0, cur-in: 0, sync-ops: 8, async-ops: 145376, serverEndpoint: redis:6379, conn-sec: n/a, aoc: 1, mc: 1/1/0, mgr: 10 of 10 available, clientName: backend-1(SE.Redis-v2.8.58.19568), IOCP: (Busy=0,Free=1000,Min=1,Max=1000), WORKER: (Busy=2,Free=32765,Min=1,Max=32767), POOL: (Threads=4,QueuedItems=7,CompletedItems=445549,Timers=7), v: 2.8.58.19568 (Please take a look at this article for some common client-side issues that can cause timeouts: https://stackexchange.github.io/StackExchange.Redis/Timeouts)
+backend-1-1      |  ---> StackExchange.Redis.RedisConnectionException: SocketClosed (WriteSocketError/ConnectionReset, last-recv: 0) on redis:6379/Interactive, Idle/MarkProcessed, last: RPUSH, origin: ReadFromPipe, outstanding: 1578, last-read: 0s ago, last-write: 0s ago, unanswered-write: 5s ago, keep-alive: 60s, state: ConnectedEstablished, mgr: 8 of 10 available, in: 0, in-pipe: 0, out-pipe: 0, last-heartbeat: 0s ago, last-mbeat: 0s ago, global: 0s ago, v: 2.8.58.19568
+backend-1-1      |    at MichelOliveira.Com.ReactiveLock.Distributed.Redis.ReactiveLockRedisTrackerStore.<SetStatusAsync>d__10.MoveNext() + 0x9c
+backend-1-1      | --- End of stack trace from previous location ---
+backend-1-1      |    at MichelOliveira.Com.ReactiveLock.Core.ReactiveLockTrackerController.<IncrementAsync>d__12.MoveNext() + 0x64
+backend-1-1      | --- End of stack trace from previous location ---
+backend-1-1      |    at PaymentSummaryService.<GetPaymentsSummaryAsync>d__16.MoveNext() + 0x145
+backend-1-1      | --- End of stack trace from previous location ---
+backend-1-1      |    at Program.<>c.<<<Main>$>b__0_16>d.MoveNext() + 0x51
+backend-1-1      | --- End of stack trace from previous location ---
+backend-1-1      |    at Microsoft.AspNetCore.Http.Generated.<GeneratedRouteBuilderExtensions_g>F610B383FBFDED47E55D79818E5CF227043A09AE168982B17141BBA33492EC9F9__GeneratedRouteBuilderExtensionsCore.<>c__DisplayClass5_0.<<MapGet2>g__RequestHandler|5>d.MoveNext() + 0x95
+backend-1-1      | --- End of stack trace from previous location ---
+backend-1-1      |    at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.<ProcessRequests>d__237`1.MoveNext() + 0x3e7
+backend-1-1      |    --- End of inner exception stack trace ---
+backend-1-1      |    at RedisQueueWorker.<WorkerLoopAsync>d__11.MoveNext() + 0x154
+backend-db-1     | 2025-08-21 03:13:24.420 UTC [57] LOG:  checkpoint complete: wrote 56 buffers (0.3%); 0 WAL file(s) added, 0 removed, 0 recycled; write=5.210 s, sync=0.001 s, total=5.211 s; sync files=0, longest=0.000 s, average=0.000 s; distance=206 kB, estimate=206 kB; lsn=0/194DE40, redo lsn=0/194DDE8
+backend-2-1      | [Worker Error] StackExchange.Redis.RedisConnectionException: The message timed out in the backlog attempting to send because no connection became available (5000ms) - Last Connection Exception: SocketFailure (ReadSocketError/ConnectionReset, last-recv: 8) on redis:6379/Interactive, Idle/Faulted, last: RPUSH, origin: ReadFromPipe, outstanding: 1577, last-read: 5s ago, last-write: 0s ago, unanswered-write: 5s ago, keep-alive: 60s, state: ConnectedEstablished, mgr: 8 of 10 available, in: 0, in-pipe: 0, out-pipe: 0, last-heartbeat: 0s ago, last-mbeat: 0s ago, global: 0s ago, v: 2.8.58.19568, command=LPOP, timeout: 5000, inst: 0, qu: 1501, qs: 0, aw: False, bw: CheckingForTimeout, last-in: 0, cur-in: 0, sync-ops: 8, async-ops: 146602, serverEndpoint: redis:6379, conn-sec: n/a, aoc: 1, mc: 1/1/0, mgr: 10 of 10 available, clientName: backend-2(SE.Redis-v2.8.58.19568), IOCP: (Busy=0,Free=1000,Min=1,Max=1000), WORKER: (Busy=1,Free=32766,Min=1,Max=32767), POOL: (Threads=3,QueuedItems=0,CompletedItems=450128,Timers=9), v: 2.8.58.19568 (Please take a look at this article for some common client-side issues that can cause timeouts: https://stackexchange.github.io/StackExchange.Redis/Timeouts)
 log truncated at line 1000

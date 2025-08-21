@@ -1,1001 +1,1001 @@
 
- Network cristian-s-node-1_backend  Creating
- Network cristian-s-node-1_backend  Created
- Volume "cristian-s-node-1_socket_volume"  Creating
- Volume "cristian-s-node-1_socket_volume"  Created
- Container cristian-s-node-1-memorydb-1  Creating
- Container cristian-s-node-1-memorydb-1  Created
- Container cristian-s-node-1-backend-1-1  Creating
- Container cristian-s-node-1-backend-2-1  Creating
- Container cristian-s-node-1-backend-2-1  Created
- Container cristian-s-node-1-backend-1-1  Created
- Container cristian-s-node-1-haproxy-1  Creating
- Container cristian-s-node-1-haproxy-1  Created
-Attaching to backend-1-1, backend-2-1, haproxy-1, memorydb-1
-memorydb-1  | [zmq] Subscriber connected to ipc:///tmp/zeromq1.sock
-memorydb-1  | [zmq] Subscriber connected to ipc:///tmp/zeromq2.sock
-memorydb-1  | Starting MemoryDB...
-memorydb-1  | MemoryDB is ready and listening on port /var/run/memorydb.sock...
-haproxy-1   | [NOTICE]   (1) : Initializing new worker (8)
-haproxy-1   | [NOTICE]   (8) : haproxy version is 3.2.3-1844da7
-haproxy-1   | [WARNING]  (8) : [haproxy.main()] Failed to drop supplementary groups. Using 'gid'/'group' without 'uid'/'user' is generally useless.
-haproxy-1   | [NOTICE]   (1) : Loading success.
-backend-1-1  | Listening to socket /var/run/server1.sock
-backend-2-1  | Listening to socket /var/run/server2.sock
-backend-2-1  | [zmq] Publisher bind ipc:///tmp/zeromq2.sock
-backend-1-1  | [zmq] Publisher bind ipc:///tmp/zeromq1.sock
-backend-1-1  | Summary request: { from: undefined, to: undefined }
-memorydb-1   | Fetching summary from: undefined to: undefined
-haproxy-1    | 172.21.0.1:40198 [18/Aug/2025:11:14:50.957] http_front http_back/app1 0/0/0/15/15 200 218 - - ---- 1/1/0/0/0 0/0 "GET /payments-summary HTTP/1.1"
-haproxy-1    | 172.21.0.1:34896 [18/Aug/2025:11:14:56.522] http_front http_back/app2 0/0/0/9/9 200 95 - - ---- 1/1/0/0/0 0/0 "POST /purge-payments HTTP/1.1"
-backend-1-1  | Summary request: { from: '2025-08-18T11:14:41.531Z', to: '2025-08-18T11:14:54.531Z' }
-memorydb-1   | Fetching summary from: 2025-08-18T11:14:41.531Z to: 2025-08-18T11:14:54.531Z
-haproxy-1    | 172.21.0.1:34898 [18/Aug/2025:11:14:56.532] http_front http_back/app1 0/0/0/3/3 200 218 - - ---- 2/2/0/0/0 0/0 "GET /payments-summary?from=2025-08-18T11:14:41.531Z&to=2025-08-18T11:14:54.531Z HTTP/1.1"
-haproxy-1    | 172.21.0.1:34914 [18/Aug/2025:11:14:56.536] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 3/3/0/0/0 0/0 "POST /payments HTTP/1.1"
-memorydb-1   | Fetching health summaries...
-memorydb-1   | Default Health: { failing: false, minResponseTime: 0 }
-memorydb-1   | Fallback Health: { failing: false, minResponseTime: 0 }
-haproxy-1    | 172.21.0.1:34916 [18/Aug/2025:11:14:57.031] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 4/4/0/0/0 0/0 "POST /payments HTTP/1.1"
-memorydb-1   | Using cached best processor: {
-memorydb-1   |   processor: 'default',
-memorydb-1   |   url: 'http://payment-processor-default:8080/payments',
-memorydb-1   |   expireAt: 1755515701378
-memorydb-1   | }
-haproxy-1    | 172.21.0.1:34914 [18/Aug/2025:11:14:57.537] http_front http_back/app1 0/0/0/2/2 201 100 - - ---- 5/5/0/0/0 0/0 "POST /payments HTTP/1.1"
-memorydb-1   | Using cached best processor: {
-memorydb-1   |   processor: 'default',
-memorydb-1   |   url: 'http://payment-processor-default:8080/payments',
-memorydb-1   |   expireAt: 1755515701378
-memorydb-1   | }
-memorydb-1   | Using cached best processor: {
-memorydb-1   |   processor: 'default',
-memorydb-1   |   url: 'http://payment-processor-default:8080/payments',
-memorydb-1   |   expireAt: 1755515701378
-memorydb-1   | }
-haproxy-1    | 172.21.0.1:34946 [18/Aug/2025:11:14:58.027] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 6/6/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34916 [18/Aug/2025:11:14:58.033] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 6/6/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34948 [18/Aug/2025:11:14:58.526] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 7/7/0/0/0 0/0 "POST /payments HTTP/1.1"
-memorydb-1   | Using cached best processor: {
-memorydb-1   |   processor: 'default',
-memorydb-1   |   url: 'http://payment-processor-default:8080/payments',
-memorydb-1   |   expireAt: 1755515701378
-memorydb-1   | }
-haproxy-1    | 172.21.0.1:34914 [18/Aug/2025:11:14:58.540] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 7/7/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34932 [18/Aug/2025:11:14:58.540] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 7/7/0/0/0 0/0 "POST /payments HTTP/1.1"
-memorydb-1   | Using cached best processor: {
-memorydb-1   |   processor: 'default',
-memorydb-1   |   url: 'http://payment-processor-default:8080/payments',
-memorydb-1   |   expireAt: 1755515701378
-memorydb-1   | }
-haproxy-1    | 172.21.0.1:34952 [18/Aug/2025:11:14:59.024] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 8/8/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34946 [18/Aug/2025:11:14:59.029] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 8/8/0/0/0 0/0 "POST /payments HTTP/1.1"
-memorydb-1   | Using cached best processor: {
-memorydb-1   |   processor: 'default',
-memorydb-1   |   url: 'http://payment-processor-default:8080/payments',
-memorydb-1   |   expireAt: 1755515701378
-memorydb-1   | }
-haproxy-1    | 172.21.0.1:34916 [18/Aug/2025:11:14:59.035] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 8/8/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34962 [18/Aug/2025:11:14:59.523] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 9/9/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34948 [18/Aug/2025:11:14:59.527] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 9/9/0/0/0 0/0 "POST /payments HTTP/1.1"
-memorydb-1   | Using cached best processor: {
-memorydb-1   |   processor: 'default',
-memorydb-1   |   url: 'http://payment-processor-default:8080/payments',
-memorydb-1   |   expireAt: 1755515701378
-memorydb-1   | }
-haproxy-1    | 172.21.0.1:34932 [18/Aug/2025:11:14:59.542] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 9/9/0/0/0 0/0 "POST /payments HTTP/1.1"
-memorydb-1   | Using cached best processor: {
-memorydb-1   |   processor: 'default',
-memorydb-1   |   url: 'http://payment-processor-default:8080/payments',
-memorydb-1   |   expireAt: 1755515701378
-memorydb-1   | }
-haproxy-1    | 172.21.0.1:34966 [18/Aug/2025:11:15:00.021] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 10/10/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34952 [18/Aug/2025:11:15:00.025] http_front http_back/app1 0/0/0/1/1 201 100 - - ---- 10/10/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34946 [18/Aug/2025:11:15:00.030] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 10/10/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34916 [18/Aug/2025:11:15:00.035] http_front http_back/app1 0/0/0/1/1 201 100 - - ---- 10/10/0/0/0 0/0 "POST /payments HTTP/1.1"
-memorydb-1   | Using cached best processor: {
-memorydb-1   |   processor: 'default',
-memorydb-1   |   url: 'http://payment-processor-default:8080/payments',
-memorydb-1   |   expireAt: 1755515701378
-memorydb-1   | }
-haproxy-1    | 172.21.0.1:34982 [18/Aug/2025:11:15:00.519] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 11/11/0/0/0 0/0 "POST /payments HTTP/1.1"
-memorydb-1   | Using cached best processor: {
-memorydb-1   |   processor: 'default',
-memorydb-1   |   url: 'http://payment-processor-default:8080/payments',
-memorydb-1   |   expireAt: 1755515701378
-memorydb-1   | }
-haproxy-1    | 172.21.0.1:34962 [18/Aug/2025:11:15:00.523] http_front http_back/app1 0/0/0/1/1 201 100 - - ---- 11/11/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34948 [18/Aug/2025:11:15:00.528] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 11/11/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34932 [18/Aug/2025:11:15:00.542] http_front http_back/app1 0/0/0/1/1 201 100 - - ---- 11/11/0/0/0 0/0 "POST /payments HTTP/1.1"
-memorydb-1   | Using cached best processor: {
-memorydb-1   |   processor: 'default',
-memorydb-1   |   url: 'http://payment-processor-default:8080/payments',
-memorydb-1   |   expireAt: 1755515701378
-memorydb-1   | }
-haproxy-1    | 172.21.0.1:34990 [18/Aug/2025:11:15:01.018] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 12/12/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34966 [18/Aug/2025:11:15:01.022] http_front http_back/app2 0/0/0/1/1 201 100 - - ---- 12/12/0/0/0 0/0 "POST /payments HTTP/1.1"
-memorydb-1   | Using cached best processor: {
-memorydb-1   |   processor: 'default',
-memorydb-1   |   url: 'http://payment-processor-default:8080/payments',
-memorydb-1   |   expireAt: 1755515701378
-memorydb-1   | }
-haproxy-1    | 172.21.0.1:34952 [18/Aug/2025:11:15:01.026] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 12/12/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34946 [18/Aug/2025:11:15:01.031] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 12/12/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34916 [18/Aug/2025:11:15:01.037] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 12/12/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35000 [18/Aug/2025:11:15:01.516] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 13/13/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34982 [18/Aug/2025:11:15:01.520] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 13/13/0/0/0 0/0 "POST /payments HTTP/1.1"
-memorydb-1   | Fetching health summaries...
-haproxy-1    | 172.21.0.1:34962 [18/Aug/2025:11:15:01.525] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 13/13/0/0/0 0/0 "POST /payments HTTP/1.1"
-memorydb-1   | Fetching health summaries...
-haproxy-1    | 172.21.0.1:34948 [18/Aug/2025:11:15:01.529] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 13/13/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34914 [18/Aug/2025:11:15:01.544] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 13/13/1/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34932 [18/Aug/2025:11:15:01.544] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 13/13/0/0/0 0/0 "POST /payments HTTP/1.1"
-memorydb-1   | Default Health: { failing: false, minResponseTime: 0 }
-memorydb-1   | Fallback Health: { failing: false, minResponseTime: 0 }
-haproxy-1    | 172.21.0.1:35004 [18/Aug/2025:11:15:02.014] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 14/14/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34990 [18/Aug/2025:11:15:02.019] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 14/14/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34966 [18/Aug/2025:11:15:02.024] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 14/14/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34952 [18/Aug/2025:11:15:02.028] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 14/14/0/0/0 0/0 "POST /payments HTTP/1.1"
-memorydb-1   | Using cached best processor: {
-memorydb-1   |   processor: 'default',
-memorydb-1   |   url: 'http://payment-processor-default:8080/payments',
-memorydb-1   |   expireAt: 1755515706437
-memorydb-1   | }
-haproxy-1    | 172.21.0.1:34946 [18/Aug/2025:11:15:02.032] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 14/14/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34916 [18/Aug/2025:11:15:02.038] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 14/14/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35012 [18/Aug/2025:11:15:02.513] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 15/15/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35000 [18/Aug/2025:11:15:02.516] http_front http_back/app1 0/0/0/1/1 201 100 - - ---- 15/15/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34982 [18/Aug/2025:11:15:02.521] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 15/15/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34962 [18/Aug/2025:11:15:02.526] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 15/15/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34948 [18/Aug/2025:11:15:02.530] http_front http_back/app2 0/0/0/1/1 201 100 - - ---- 15/15/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34932 [18/Aug/2025:11:15:02.545] http_front http_back/app1 0/0/0/1/1 201 100 - - ---- 15/15/1/0/0 0/0 "POST /payments HTTP/1.1"
-memorydb-1   | Using cached best processor: {
-memorydb-1   |   processor: 'default',
-memorydb-1   |   url: 'http://payment-processor-default:8080/payments',
-memorydb-1   |   expireAt: 1755515706437
-memorydb-1   | }
-haproxy-1    | 172.21.0.1:35022 [18/Aug/2025:11:15:03.011] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 16/16/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35004 [18/Aug/2025:11:15:03.016] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 16/16/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34990 [18/Aug/2025:11:15:03.021] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 16/16/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34966 [18/Aug/2025:11:15:03.026] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 16/16/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34952 [18/Aug/2025:11:15:03.030] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 16/16/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34946 [18/Aug/2025:11:15:03.033] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 16/16/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34916 [18/Aug/2025:11:15:03.040] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 16/16/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35036 [18/Aug/2025:11:15:03.510] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 17/17/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35012 [18/Aug/2025:11:15:03.515] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 17/17/0/0/0 0/0 "POST /payments HTTP/1.1"
-memorydb-1   | Using cached best processor: {
-memorydb-1   |   processor: 'default',
-memorydb-1   |   url: 'http://payment-processor-default:8080/payments',
-memorydb-1   |   expireAt: 1755515706437
-memorydb-1   | }
-haproxy-1    | 172.21.0.1:35000 [18/Aug/2025:11:15:03.518] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 17/17/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34982 [18/Aug/2025:11:15:03.523] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 17/17/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34962 [18/Aug/2025:11:15:03.528] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 17/17/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34948 [18/Aug/2025:11:15:03.532] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 17/17/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34914 [18/Aug/2025:11:15:03.546] http_front http_back/app1 0/0/0/1/1 201 100 - - ---- 17/17/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34932 [18/Aug/2025:11:15:03.547] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 17/17/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35050 [18/Aug/2025:11:15:04.007] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 18/18/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35022 [18/Aug/2025:11:15:04.012] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 18/18/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35004 [18/Aug/2025:11:15:04.017] http_front http_back/app2 0/0/0/1/1 201 100 - - ---- 18/18/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34990 [18/Aug/2025:11:15:04.022] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 18/18/0/0/0 0/0 "POST /payments HTTP/1.1"
-memorydb-1   | Using cached best processor: {
-memorydb-1   |   processor: 'default',
-memorydb-1   |   url: 'http://payment-processor-default:8080/payments',
-memorydb-1   |   expireAt: 1755515706437
-memorydb-1   | }
-haproxy-1    | 172.21.0.1:34966 [18/Aug/2025:11:15:04.027] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 18/18/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34952 [18/Aug/2025:11:15:04.030] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 18/18/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34946 [18/Aug/2025:11:15:04.035] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 18/18/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34916 [18/Aug/2025:11:15:04.042] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 18/18/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35054 [18/Aug/2025:11:15:04.506] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 19/19/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35036 [18/Aug/2025:11:15:04.511] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 19/19/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35012 [18/Aug/2025:11:15:04.516] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 19/19/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35000 [18/Aug/2025:11:15:04.520] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 19/19/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34982 [18/Aug/2025:11:15:04.525] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 19/19/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34962 [18/Aug/2025:11:15:04.529] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 19/19/0/0/0 0/0 "POST /payments HTTP/1.1"
-memorydb-1   | Using cached best processor: {
-memorydb-1   |   processor: 'default',
-memorydb-1   |   url: 'http://payment-processor-default:8080/payments',
-memorydb-1   |   expireAt: 1755515706437
-memorydb-1   | }
-haproxy-1    | 172.21.0.1:34948 [18/Aug/2025:11:15:04.532] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 19/19/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34932 [18/Aug/2025:11:15:04.548] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 19/19/1/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35066 [18/Aug/2025:11:15:05.004] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 20/20/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35050 [18/Aug/2025:11:15:05.009] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 20/20/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35022 [18/Aug/2025:11:15:05.013] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 20/20/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35004 [18/Aug/2025:11:15:05.019] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 20/20/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34990 [18/Aug/2025:11:15:05.024] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 20/20/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34966 [18/Aug/2025:11:15:05.028] http_front http_back/app2 0/0/0/1/1 201 100 - - ---- 20/20/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34952 [18/Aug/2025:11:15:05.032] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 20/20/0/0/0 0/0 "POST /payments HTTP/1.1"
-memorydb-1   | Using cached best processor: {
-memorydb-1   |   processor: 'default',
-memorydb-1   |   url: 'http://payment-processor-default:8080/payments',
-memorydb-1   |   expireAt: 1755515706437
-memorydb-1   | }
-haproxy-1    | 172.21.0.1:34946 [18/Aug/2025:11:15:05.036] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 20/20/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34916 [18/Aug/2025:11:15:05.043] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 20/20/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35072 [18/Aug/2025:11:15:05.507] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 21/21/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35054 [18/Aug/2025:11:15:05.508] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 21/21/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35036 [18/Aug/2025:11:15:05.513] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 21/21/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35012 [18/Aug/2025:11:15:05.518] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 21/21/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35000 [18/Aug/2025:11:15:05.521] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 21/21/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34982 [18/Aug/2025:11:15:05.526] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 21/21/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34962 [18/Aug/2025:11:15:05.531] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 21/21/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34948 [18/Aug/2025:11:15:05.534] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 21/21/0/0/0 0/0 "POST /payments HTTP/1.1"
-memorydb-1   | Using cached best processor: {
-memorydb-1   |   processor: 'default',
-memorydb-1   |   url: 'http://payment-processor-default:8080/payments',
-memorydb-1   |   expireAt: 1755515706437
-memorydb-1   | }
-haproxy-1    | 172.21.0.1:34914 [18/Aug/2025:11:15:05.550] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 21/21/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40258 [18/Aug/2025:11:15:06.001] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 22/22/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35066 [18/Aug/2025:11:15:06.005] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 22/22/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35050 [18/Aug/2025:11:15:06.011] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 22/22/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35022 [18/Aug/2025:11:15:06.014] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 22/22/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35004 [18/Aug/2025:11:15:06.020] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 22/22/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34990 [18/Aug/2025:11:15:06.024] http_front http_back/app1 0/0/0/1/1 201 100 - - ---- 22/22/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34966 [18/Aug/2025:11:15:06.029] http_front http_back/app2 0/0/0/1/1 201 100 - - ---- 22/22/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34952 [18/Aug/2025:11:15:06.033] http_front http_back/app1 0/0/0/1/1 201 100 - - ---- 22/22/0/0/0 0/0 "POST /payments HTTP/1.1"
-memorydb-1   | Using cached best processor: {
-memorydb-1   |   processor: 'default',
-memorydb-1   |   url: 'http://payment-processor-default:8080/payments',
-memorydb-1   |   expireAt: 1755515706437
-memorydb-1   | }
-haproxy-1    | 172.21.0.1:34946 [18/Aug/2025:11:15:06.037] http_front http_back/app2 0/0/0/1/1 201 100 - - ---- 22/22/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34916 [18/Aug/2025:11:15:06.045] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 22/22/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40264 [18/Aug/2025:11:15:06.499] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 23/23/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35072 [18/Aug/2025:11:15:06.507] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 23/23/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35054 [18/Aug/2025:11:15:06.508] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 23/23/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35036 [18/Aug/2025:11:15:06.514] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 23/23/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35012 [18/Aug/2025:11:15:06.519] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 23/23/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35000 [18/Aug/2025:11:15:06.523] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 23/23/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34982 [18/Aug/2025:11:15:06.528] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 23/23/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34962 [18/Aug/2025:11:15:06.533] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 23/23/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34948 [18/Aug/2025:11:15:06.535] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 23/23/0/0/0 0/0 "POST /payments HTTP/1.1"
-backend-1-1  | Summary request: { from: '2025-08-18T11:14:51.538Z', to: '2025-08-18T11:15:04.538Z' }
-memorydb-1   | Fetching summary from: 2025-08-18T11:14:51.538Z to: 2025-08-18T11:15:04.538Z
-haproxy-1    | 172.21.0.1:34898 [18/Aug/2025:11:15:06.537] http_front http_back/app1 0/0/0/3/3 200 237 - - ---- 23/23/0/0/0 0/0 "GET /payments-summary?from=2025-08-18T11:14:51.538Z&to=2025-08-18T11:15:04.538Z HTTP/1.1"
-haproxy-1    | 172.21.0.1:34914 [18/Aug/2025:11:15:06.551] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 23/23/0/0/0 0/0 "POST /payments HTTP/1.1"
-memorydb-1   | Fetching health summaries...
-memorydb-1   | Default Health: { failing: false, minResponseTime: 0 }
-memorydb-1   | Fallback Health: { failing: false, minResponseTime: 0 }
-haproxy-1    | 172.21.0.1:40266 [18/Aug/2025:11:15:06.998] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 24/24/0/0/0 0/0 "POST /payments HTTP/1.1"
-memorydb-1   | Using cached best processor: {
-memorydb-1   |   processor: 'default',
-memorydb-1   |   url: 'http://payment-processor-default:8080/payments',
-memorydb-1   |   expireAt: 1755515711536
-memorydb-1   | }
-haproxy-1    | 172.21.0.1:40258 [18/Aug/2025:11:15:07.002] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 24/24/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35066 [18/Aug/2025:11:15:07.007] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 24/24/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35050 [18/Aug/2025:11:15:07.012] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 24/24/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35022 [18/Aug/2025:11:15:07.016] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 24/24/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35004 [18/Aug/2025:11:15:07.022] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 24/24/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34990 [18/Aug/2025:11:15:07.026] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 24/24/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34966 [18/Aug/2025:11:15:07.031] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 24/24/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34952 [18/Aug/2025:11:15:07.035] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 24/24/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34946 [18/Aug/2025:11:15:07.039] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 24/24/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34916 [18/Aug/2025:11:15:07.046] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 24/24/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40280 [18/Aug/2025:11:15:07.496] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 25/25/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40264 [18/Aug/2025:11:15:07.500] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 25/25/0/0/0 0/0 "POST /payments HTTP/1.1"
-memorydb-1   | Using cached best processor: {
-memorydb-1   |   processor: 'default',
-memorydb-1   |   url: 'http://payment-processor-default:8080/payments',
-memorydb-1   |   expireAt: 1755515711536
-memorydb-1   | }
-haproxy-1    | 172.21.0.1:35054 [18/Aug/2025:11:15:07.509] http_front http_back/app2 0/0/0/1/1 201 100 - - ---- 25/25/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35072 [18/Aug/2025:11:15:07.509] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 25/25/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35036 [18/Aug/2025:11:15:07.515] http_front http_back/app1 0/0/0/1/1 201 100 - - ---- 25/25/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35012 [18/Aug/2025:11:15:07.520] http_front http_back/app2 0/0/0/1/1 201 100 - - ---- 25/25/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35000 [18/Aug/2025:11:15:07.524] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 25/25/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34982 [18/Aug/2025:11:15:07.529] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 25/25/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34962 [18/Aug/2025:11:15:07.534] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 25/25/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34948 [18/Aug/2025:11:15:07.537] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 25/25/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34914 [18/Aug/2025:11:15:07.553] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 25/25/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40288 [18/Aug/2025:11:15:07.994] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 26/26/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40266 [18/Aug/2025:11:15:08.000] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 26/26/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40258 [18/Aug/2025:11:15:08.004] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 26/26/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35066 [18/Aug/2025:11:15:08.008] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 26/26/0/0/0 0/0 "POST /payments HTTP/1.1"
-memorydb-1   | Using cached best processor: {
-memorydb-1   |   processor: 'default',
-memorydb-1   |   url: 'http://payment-processor-default:8080/payments',
-memorydb-1   |   expireAt: 1755515711536
-memorydb-1   | }
-haproxy-1    | 172.21.0.1:35050 [18/Aug/2025:11:15:08.013] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 26/26/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35022 [18/Aug/2025:11:15:08.017] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 26/26/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35004 [18/Aug/2025:11:15:08.023] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 26/26/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34990 [18/Aug/2025:11:15:08.028] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 26/26/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34966 [18/Aug/2025:11:15:08.033] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 26/26/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34946 [18/Aug/2025:11:15:08.044] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 26/26/1/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34916 [18/Aug/2025:11:15:08.048] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 26/26/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40300 [18/Aug/2025:11:15:08.493] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 27/27/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40280 [18/Aug/2025:11:15:08.497] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 27/27/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40264 [18/Aug/2025:11:15:08.502] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 27/27/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35054 [18/Aug/2025:11:15:08.511] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 27/27/1/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35072 [18/Aug/2025:11:15:08.510] http_front http_back/app2 0/0/0/1/1 201 100 - - ---- 27/27/0/0/0 0/0 "POST /payments HTTP/1.1"
-memorydb-1   | Using cached best processor: {
-memorydb-1   |   processor: 'default',
-memorydb-1   |   url: 'http://payment-processor-default:8080/payments',
-memorydb-1   |   expireAt: 1755515711536
-memorydb-1   | }
-haproxy-1    | 172.21.0.1:35036 [18/Aug/2025:11:15:08.516] http_front http_back/app2 0/0/0/1/1 201 100 - - ---- 27/27/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35012 [18/Aug/2025:11:15:08.521] http_front http_back/app1 0/0/0/1/1 201 100 - - ---- 27/27/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35000 [18/Aug/2025:11:15:08.525] http_front http_back/app2 0/0/0/1/1 201 100 - - ---- 27/27/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34982 [18/Aug/2025:11:15:08.530] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 27/27/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34962 [18/Aug/2025:11:15:08.535] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 27/27/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34948 [18/Aug/2025:11:15:08.538] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 27/27/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34932 [18/Aug/2025:11:15:08.554] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 27/27/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40302 [18/Aug/2025:11:15:08.991] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 28/28/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40288 [18/Aug/2025:11:15:08.995] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 28/28/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40266 [18/Aug/2025:11:15:09.001] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 28/28/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40258 [18/Aug/2025:11:15:09.005] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 28/28/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35066 [18/Aug/2025:11:15:09.010] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 28/28/0/0/0 0/0 "POST /payments HTTP/1.1"
-memorydb-1   | Using cached best processor: {
-memorydb-1   |   processor: 'default',
-memorydb-1   |   url: 'http://payment-processor-default:8080/payments',
-memorydb-1   |   expireAt: 1755515711536
-memorydb-1   | }
-haproxy-1    | 172.21.0.1:35050 [18/Aug/2025:11:15:09.015] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 28/28/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35022 [18/Aug/2025:11:15:09.019] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 28/28/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35004 [18/Aug/2025:11:15:09.024] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 28/28/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34990 [18/Aug/2025:11:15:09.029] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 28/28/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34966 [18/Aug/2025:11:15:09.034] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 28/28/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34952 [18/Aug/2025:11:15:09.045] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 28/28/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34916 [18/Aug/2025:11:15:09.049] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 28/28/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40310 [18/Aug/2025:11:15:09.490] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 29/29/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40300 [18/Aug/2025:11:15:09.495] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 29/29/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40280 [18/Aug/2025:11:15:09.499] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 29/29/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40264 [18/Aug/2025:11:15:09.503] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 29/29/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35054 [18/Aug/2025:11:15:09.512] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 29/29/1/0/0 0/0 "POST /payments HTTP/1.1"
-memorydb-1   | Using cached best processor: {
-memorydb-1   |   processor: 'default',
-memorydb-1   |   url: 'http://payment-processor-default:8080/payments',
-memorydb-1   |   expireAt: 1755515711536
-memorydb-1   | }
-haproxy-1    | 172.21.0.1:35036 [18/Aug/2025:11:15:09.518] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 29/29/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35012 [18/Aug/2025:11:15:09.523] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 29/29/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35000 [18/Aug/2025:11:15:09.527] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 29/29/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34982 [18/Aug/2025:11:15:09.532] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 29/29/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34962 [18/Aug/2025:11:15:09.536] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 29/29/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34948 [18/Aug/2025:11:15:09.539] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 29/29/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34932 [18/Aug/2025:11:15:09.555] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 29/29/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34914 [18/Aug/2025:11:15:09.555] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 29/29/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40314 [18/Aug/2025:11:15:09.988] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 30/30/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40302 [18/Aug/2025:11:15:09.992] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 30/30/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40288 [18/Aug/2025:11:15:09.997] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 30/30/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40266 [18/Aug/2025:11:15:10.003] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 30/30/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40258 [18/Aug/2025:11:15:10.007] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 30/30/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35066 [18/Aug/2025:11:15:10.012] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 30/30/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35050 [18/Aug/2025:11:15:10.016] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 30/30/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35022 [18/Aug/2025:11:15:10.020] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 30/30/0/0/0 0/0 "POST /payments HTTP/1.1"
-memorydb-1   | Using cached best processor: {
-memorydb-1   |   processor: 'default',
-memorydb-1   |   url: 'http://payment-processor-default:8080/payments',
-memorydb-1   |   expireAt: 1755515711536
-memorydb-1   | }
-haproxy-1    | 172.21.0.1:35004 [18/Aug/2025:11:15:10.026] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 30/30/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34990 [18/Aug/2025:11:15:10.031] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 30/30/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34966 [18/Aug/2025:11:15:10.036] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 30/30/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34952 [18/Aug/2025:11:15:10.047] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 30/30/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34916 [18/Aug/2025:11:15:10.051] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 30/30/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40322 [18/Aug/2025:11:15:10.486] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 31/31/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40310 [18/Aug/2025:11:15:10.491] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 31/31/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40300 [18/Aug/2025:11:15:10.496] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 31/31/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40280 [18/Aug/2025:11:15:10.500] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 31/31/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40264 [18/Aug/2025:11:15:10.505] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 31/31/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35054 [18/Aug/2025:11:15:10.514] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 31/31/1/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35072 [18/Aug/2025:11:15:10.514] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 31/31/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35036 [18/Aug/2025:11:15:10.520] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 31/31/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35012 [18/Aug/2025:11:15:10.524] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 31/31/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35000 [18/Aug/2025:11:15:10.528] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 31/31/0/0/0 0/0 "POST /payments HTTP/1.1"
-memorydb-1   | Using cached best processor: {
-memorydb-1   |   processor: 'default',
-memorydb-1   |   url: 'http://payment-processor-default:8080/payments',
-memorydb-1   |   expireAt: 1755515711536
-memorydb-1   | }
-haproxy-1    | 172.21.0.1:34982 [18/Aug/2025:11:15:10.533] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 31/31/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34962 [18/Aug/2025:11:15:10.538] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 31/31/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34948 [18/Aug/2025:11:15:10.541] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 31/31/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34914 [18/Aug/2025:11:15:10.556] http_front http_back/app1 0/0/0/1/1 201 100 - - ---- 31/31/1/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34932 [18/Aug/2025:11:15:10.556] http_front http_back/app2 0/0/0/1/1 201 100 - - ---- 31/31/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40336 [18/Aug/2025:11:15:10.985] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 32/32/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40314 [18/Aug/2025:11:15:10.989] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 32/32/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40302 [18/Aug/2025:11:15:10.993] http_front http_back/app2 0/0/0/1/1 201 100 - - ---- 32/32/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40288 [18/Aug/2025:11:15:10.998] http_front http_back/app1 0/0/0/1/1 201 100 - - ---- 32/32/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40266 [18/Aug/2025:11:15:11.004] http_front http_back/app2 0/0/0/1/1 201 100 - - ---- 32/32/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40258 [18/Aug/2025:11:15:11.007] http_front http_back/app1 0/0/0/1/1 201 100 - - ---- 32/32/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35066 [18/Aug/2025:11:15:11.012] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 32/32/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35050 [18/Aug/2025:11:15:11.017] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 32/32/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35022 [18/Aug/2025:11:15:11.021] http_front http_back/app2 0/0/0/1/1 201 100 - - ---- 32/32/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35004 [18/Aug/2025:11:15:11.027] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 32/32/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34990 [18/Aug/2025:11:15:11.032] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 32/32/0/0/0 0/0 "POST /payments HTTP/1.1"
-memorydb-1   | Using cached best processor: {
-memorydb-1   |   processor: 'default',
-memorydb-1   |   url: 'http://payment-processor-default:8080/payments',
-memorydb-1   |   expireAt: 1755515711536
-memorydb-1   | }
-haproxy-1    | 172.21.0.1:34966 [18/Aug/2025:11:15:11.037] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 32/32/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34946 [18/Aug/2025:11:15:11.048] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 32/32/1/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34952 [18/Aug/2025:11:15:11.048] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 32/32/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34916 [18/Aug/2025:11:15:11.051] http_front http_back/app2 0/0/0/1/1 201 100 - - ---- 32/32/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40340 [18/Aug/2025:11:15:11.482] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 33/33/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40322 [18/Aug/2025:11:15:11.487] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 33/33/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40310 [18/Aug/2025:11:15:11.492] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 33/33/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40300 [18/Aug/2025:11:15:11.497] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 33/33/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40280 [18/Aug/2025:11:15:11.500] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 33/33/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40264 [18/Aug/2025:11:15:11.505] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 33/33/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35054 [18/Aug/2025:11:15:11.514] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 33/33/1/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35072 [18/Aug/2025:11:15:11.514] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 33/33/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35036 [18/Aug/2025:11:15:11.521] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 33/33/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35012 [18/Aug/2025:11:15:11.526] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 33/33/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35000 [18/Aug/2025:11:15:11.529] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 33/33/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34982 [18/Aug/2025:11:15:11.534] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 33/33/0/0/0 0/0 "POST /payments HTTP/1.1"
-memorydb-1   | Using cached best processor: {
-memorydb-1   |   processor: 'default',
-memorydb-1   |   url: 'http://payment-processor-default:8080/payments',
-memorydb-1   |   expireAt: 1755515711536
-memorydb-1   | }
-haproxy-1    | 172.21.0.1:34962 [18/Aug/2025:11:15:11.539] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 33/33/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34948 [18/Aug/2025:11:15:11.542] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 33/33/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34914 [18/Aug/2025:11:15:11.558] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 33/33/0/0/0 0/0 "POST /payments HTTP/1.1"
-memorydb-1   | Default Health: { failing: false, minResponseTime: 0 }
-memorydb-1   | Fallback Health: { failing: false, minResponseTime: 0 }
-haproxy-1    | 172.21.0.1:40356 [18/Aug/2025:11:15:11.981] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 34/34/0/0/0 0/0 "POST /payments HTTP/1.1"
-memorydb-1   | Using cached best processor: {
-memorydb-1   |   processor: 'default',
-memorydb-1   |   url: 'http://payment-processor-default:8080/payments',
-memorydb-1   |   expireAt: 1755515716537
-memorydb-1   | }
-haproxy-1    | 172.21.0.1:40336 [18/Aug/2025:11:15:11.985] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 34/34/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40314 [18/Aug/2025:11:15:11.990] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 34/34/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40302 [18/Aug/2025:11:15:11.994] http_front http_back/app2 0/0/0/1/1 201 100 - - ---- 34/34/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40288 [18/Aug/2025:11:15:12.000] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 34/34/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40266 [18/Aug/2025:11:15:12.006] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 34/34/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40258 [18/Aug/2025:11:15:12.010] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 34/34/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35066 [18/Aug/2025:11:15:12.014] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 34/34/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35050 [18/Aug/2025:11:15:12.019] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 34/34/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35022 [18/Aug/2025:11:15:12.023] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 34/34/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35004 [18/Aug/2025:11:15:12.029] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 34/34/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34990 [18/Aug/2025:11:15:12.034] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 34/34/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34966 [18/Aug/2025:11:15:12.038] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 34/34/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34946 [18/Aug/2025:11:15:12.049] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 34/34/1/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34952 [18/Aug/2025:11:15:12.049] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 34/34/0/0/0 0/0 "POST /payments HTTP/1.1"
-memorydb-1   | Using cached best processor: {
-memorydb-1   |   processor: 'default',
-memorydb-1   |   url: 'http://payment-processor-default:8080/payments',
-memorydb-1   |   expireAt: 1755515716537
-memorydb-1   | }
-haproxy-1    | 172.21.0.1:34916 [18/Aug/2025:11:15:12.052] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 34/34/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40364 [18/Aug/2025:11:15:12.479] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 35/35/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40340 [18/Aug/2025:11:15:12.484] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 35/35/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40322 [18/Aug/2025:11:15:12.488] http_front http_back/app1 0/0/0/1/1 201 100 - - ---- 35/35/0/0/0 0/0 "POST /payments HTTP/1.1"
-memorydb-1   | Using cached best processor: {
-memorydb-1   |   processor: 'default',
-memorydb-1   |   url: 'http://payment-processor-default:8080/payments',
-memorydb-1   |   expireAt: 1755515716537
-memorydb-1   | }
-haproxy-1    | 172.21.0.1:40310 [18/Aug/2025:11:15:12.493] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 35/35/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40300 [18/Aug/2025:11:15:12.497] http_front http_back/app1 0/0/0/1/1 201 100 - - ---- 35/35/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40280 [18/Aug/2025:11:15:12.501] http_front http_back/app2 0/0/0/1/1 201 100 - - ---- 35/35/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40264 [18/Aug/2025:11:15:12.507] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 35/35/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35072 [18/Aug/2025:11:15:12.516] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 35/35/1/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35054 [18/Aug/2025:11:15:12.516] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 35/35/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35036 [18/Aug/2025:11:15:12.523] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 35/35/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35012 [18/Aug/2025:11:15:12.528] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 35/35/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35000 [18/Aug/2025:11:15:12.529] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 35/35/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34982 [18/Aug/2025:11:15:12.535] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 35/35/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34962 [18/Aug/2025:11:15:12.540] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 35/35/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34948 [18/Aug/2025:11:15:12.543] http_front http_back/app1 0/0/0/1/1 201 100 - - ---- 35/35/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34932 [18/Aug/2025:11:15:12.559] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 35/35/1/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34914 [18/Aug/2025:11:15:12.559] http_front http_back/app1 0/0/0/1/1 201 100 - - ---- 35/35/0/0/0 0/0 "POST /payments HTTP/1.1"
-memorydb-1   | Using cached best processor: {
-memorydb-1   |   processor: 'default',
-memorydb-1   |   url: 'http://payment-processor-default:8080/payments',
-memorydb-1   |   expireAt: 1755515716537
-memorydb-1   | }
-haproxy-1    | 172.21.0.1:40366 [18/Aug/2025:11:15:12.977] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 36/36/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40356 [18/Aug/2025:11:15:12.982] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 36/36/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40336 [18/Aug/2025:11:15:12.987] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 36/36/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40314 [18/Aug/2025:11:15:12.992] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 36/36/0/0/0 0/0 "POST /payments HTTP/1.1"
-memorydb-1   | Using cached best processor: {
-memorydb-1   |   processor: 'default',
-memorydb-1   |   url: 'http://payment-processor-default:8080/payments',
-memorydb-1   |   expireAt: 1755515716537
-memorydb-1   | }
-haproxy-1    | 172.21.0.1:40302 [18/Aug/2025:11:15:12.996] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 36/36/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40288 [18/Aug/2025:11:15:13.001] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 36/36/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40266 [18/Aug/2025:11:15:13.007] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 36/36/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40258 [18/Aug/2025:11:15:13.011] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 36/36/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35066 [18/Aug/2025:11:15:13.016] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 36/36/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35050 [18/Aug/2025:11:15:13.020] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 36/36/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35022 [18/Aug/2025:11:15:13.024] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 36/36/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35004 [18/Aug/2025:11:15:13.030] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 36/36/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34990 [18/Aug/2025:11:15:13.035] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 36/36/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34966 [18/Aug/2025:11:15:13.040] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 36/36/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34952 [18/Aug/2025:11:15:13.051] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 36/36/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34916 [18/Aug/2025:11:15:13.054] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 36/36/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40378 [18/Aug/2025:11:15:13.477] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 37/37/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40364 [18/Aug/2025:11:15:13.480] http_front http_back/app2 0/0/0/1/1 201 100 - - ---- 37/37/0/0/0 0/0 "POST /payments HTTP/1.1"
-memorydb-1   | Using cached best processor: {
-memorydb-1   |   processor: 'default',
-memorydb-1   |   url: 'http://payment-processor-default:8080/payments',
-memorydb-1   |   expireAt: 1755515716537
-memorydb-1   | }
-haproxy-1    | 172.21.0.1:40340 [18/Aug/2025:11:15:13.485] http_front http_back/app1 0/0/0/1/1 201 100 - - ---- 37/37/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40322 [18/Aug/2025:11:15:13.489] http_front http_back/app2 0/0/0/1/1 201 100 - - ---- 37/37/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40310 [18/Aug/2025:11:15:13.494] http_front http_back/app1 0/0/0/1/1 201 100 - - ---- 37/37/0/0/0 0/0 "POST /payments HTTP/1.1"
-memorydb-1   | Using cached best processor: {
-memorydb-1   |   processor: 'default',
-memorydb-1   |   url: 'http://payment-processor-default:8080/payments',
-memorydb-1   |   expireAt: 1755515716537
-memorydb-1   | }
-haproxy-1    | 172.21.0.1:40300 [18/Aug/2025:11:15:13.499] http_front http_back/app2 0/0/0/1/1 201 100 - - ---- 37/37/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40280 [18/Aug/2025:11:15:13.502] http_front http_back/app1 0/0/0/1/1 201 100 - - ---- 37/37/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40264 [18/Aug/2025:11:15:13.508] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 37/37/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35072 [18/Aug/2025:11:15:13.517] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 37/37/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35036 [18/Aug/2025:11:15:13.523] http_front http_back/app1 0/0/0/1/1 201 100 - - ---- 37/37/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35012 [18/Aug/2025:11:15:13.528] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 37/37/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35000 [18/Aug/2025:11:15:13.530] http_front http_back/app1 0/0/0/1/1 201 100 - - ---- 37/37/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34982 [18/Aug/2025:11:15:13.536] http_front http_back/app2 0/0/0/1/1 201 100 - - ---- 37/37/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34962 [18/Aug/2025:11:15:13.542] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 37/37/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34948 [18/Aug/2025:11:15:13.544] http_front http_back/app2 0/0/0/1/1 201 100 - - ---- 37/37/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34914 [18/Aug/2025:11:15:13.560] http_front http_back/app1 0/0/0/1/1 201 100 - - ---- 37/37/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40394 [18/Aug/2025:11:15:13.975] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 38/38/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40366 [18/Aug/2025:11:15:13.978] http_front http_back/app2 0/0/0/1/1 201 100 - - ---- 38/38/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40356 [18/Aug/2025:11:15:13.983] http_front http_back/app1 0/0/0/1/1 201 100 - - ---- 38/38/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40336 [18/Aug/2025:11:15:13.988] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 38/38/0/0/0 0/0 "POST /payments HTTP/1.1"
-memorydb-1   | Using cached best processor: {
-memorydb-1   |   processor: 'default',
-memorydb-1   |   url: 'http://payment-processor-default:8080/payments',
-memorydb-1   |   expireAt: 1755515716537
-memorydb-1   | }
-haproxy-1    | 172.21.0.1:40314 [18/Aug/2025:11:15:13.993] http_front http_back/app1 0/0/0/1/1 201 100 - - ---- 38/38/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40302 [18/Aug/2025:11:15:13.996] http_front http_back/app2 0/0/0/1/1 201 100 - - ---- 38/38/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40288 [18/Aug/2025:11:15:14.001] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 38/38/0/0/0 0/0 "POST /payments HTTP/1.1"
-memorydb-1   | Using cached best processor: {
-memorydb-1   |   processor: 'default',
-memorydb-1   |   url: 'http://payment-processor-default:8080/payments',
-memorydb-1   |   expireAt: 1755515716537
-memorydb-1   | }
-haproxy-1    | 172.21.0.1:40266 [18/Aug/2025:11:15:14.007] http_front http_back/app2 0/0/0/1/1 201 100 - - ---- 38/38/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40258 [18/Aug/2025:11:15:14.011] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 38/38/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35066 [18/Aug/2025:11:15:14.016] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 38/38/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35050 [18/Aug/2025:11:15:14.021] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 38/38/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35022 [18/Aug/2025:11:15:14.026] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 38/38/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35004 [18/Aug/2025:11:15:14.032] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 38/38/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34990 [18/Aug/2025:11:15:14.037] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 38/38/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34966 [18/Aug/2025:11:15:14.040] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 38/38/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34952 [18/Aug/2025:11:15:14.052] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 38/38/1/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34946 [18/Aug/2025:11:15:14.052] http_front http_back/app1 0/0/0/1/1 201 100 - - ---- 38/38/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34916 [18/Aug/2025:11:15:14.056] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 38/38/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40396 [18/Aug/2025:11:15:14.472] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 39/39/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40378 [18/Aug/2025:11:15:14.478] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 39/39/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40364 [18/Aug/2025:11:15:14.482] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 39/39/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40340 [18/Aug/2025:11:15:14.487] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 39/39/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40322 [18/Aug/2025:11:15:14.491] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 39/39/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40310 [18/Aug/2025:11:15:14.496] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 39/39/0/0/0 0/0 "POST /payments HTTP/1.1"
-memorydb-1   | Using cached best processor: {
-memorydb-1   |   processor: 'default',
-memorydb-1   |   url: 'http://payment-processor-default:8080/payments',
-memorydb-1   |   expireAt: 1755515716537
-memorydb-1   | }
-haproxy-1    | 172.21.0.1:40300 [18/Aug/2025:11:15:14.501] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 39/39/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40280 [18/Aug/2025:11:15:14.505] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 39/39/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40264 [18/Aug/2025:11:15:14.510] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 39/39/0/0/0 0/0 "POST /payments HTTP/1.1"
-memorydb-1   | Using cached best processor: {
-memorydb-1   |   processor: 'default',
-memorydb-1   |   url: 'http://payment-processor-default:8080/payments',
-memorydb-1   |   expireAt: 1755515716537
-memorydb-1   | }
-haproxy-1    | 172.21.0.1:35072 [18/Aug/2025:11:15:14.519] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 39/39/1/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35054 [18/Aug/2025:11:15:14.519] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 39/39/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35036 [18/Aug/2025:11:15:14.525] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 39/39/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35012 [18/Aug/2025:11:15:14.530] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 39/39/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35000 [18/Aug/2025:11:15:14.532] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 39/39/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34982 [18/Aug/2025:11:15:14.538] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 39/39/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34962 [18/Aug/2025:11:15:14.543] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 39/39/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34948 [18/Aug/2025:11:15:14.546] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 39/39/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34914 [18/Aug/2025:11:15:14.562] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 39/39/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40394 [18/Aug/2025:11:15:14.976] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 42/42/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40366 [18/Aug/2025:11:15:14.983] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 40/40/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40356 [18/Aug/2025:11:15:14.985] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 40/40/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40336 [18/Aug/2025:11:15:14.990] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 40/40/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40314 [18/Aug/2025:11:15:14.995] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 40/40/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40302 [18/Aug/2025:11:15:14.998] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 40/40/0/0/0 0/0 "POST /payments HTTP/1.1"
-memorydb-1   | Using cached best processor: {
-memorydb-1   |   processor: 'default',
-memorydb-1   |   url: 'http://payment-processor-default:8080/payments',
-memorydb-1   |   expireAt: 1755515716537
-memorydb-1   | }
-haproxy-1    | 172.21.0.1:40288 [18/Aug/2025:11:15:15.003] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 40/40/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40266 [18/Aug/2025:11:15:15.008] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 40/40/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40258 [18/Aug/2025:11:15:15.012] http_front http_back/app1 0/0/0/1/1 201 100 - - ---- 40/40/0/0/0 0/0 "POST /payments HTTP/1.1"
-memorydb-1   | Using cached best processor: {
-memorydb-1   |   processor: 'default',
-memorydb-1   |   url: 'http://payment-processor-default:8080/payments',
-memorydb-1   |   expireAt: 1755515716537
-memorydb-1   | }
-haproxy-1    | 172.21.0.1:35066 [18/Aug/2025:11:15:15.017] http_front http_back/app2 0/0/0/1/1 201 100 - - ---- 40/40/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35050 [18/Aug/2025:11:15:15.023] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 40/40/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35022 [18/Aug/2025:11:15:15.028] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 40/40/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35004 [18/Aug/2025:11:15:15.034] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 40/40/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34990 [18/Aug/2025:11:15:15.038] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 40/40/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34966 [18/Aug/2025:11:15:15.042] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 40/40/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34946 [18/Aug/2025:11:15:15.054] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 40/40/1/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34952 [18/Aug/2025:11:15:15.054] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 40/40/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34916 [18/Aug/2025:11:15:15.057] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 40/40/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40418 [18/Aug/2025:11:15:15.469] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 41/41/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40396 [18/Aug/2025:11:15:15.474] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 41/41/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40378 [18/Aug/2025:11:15:15.479] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 41/41/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40364 [18/Aug/2025:11:15:15.483] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 41/41/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40340 [18/Aug/2025:11:15:15.488] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 41/41/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40322 [18/Aug/2025:11:15:15.492] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 41/41/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40310 [18/Aug/2025:11:15:15.497] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 41/41/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40300 [18/Aug/2025:11:15:15.502] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 41/41/0/0/0 0/0 "POST /payments HTTP/1.1"
-memorydb-1   | Using cached best processor: {
-memorydb-1   |   processor: 'default',
-memorydb-1   |   url: 'http://payment-processor-default:8080/payments',
-memorydb-1   |   expireAt: 1755515716537
-memorydb-1   | }
-haproxy-1    | 172.21.0.1:40280 [18/Aug/2025:11:15:15.506] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 41/41/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40264 [18/Aug/2025:11:15:15.511] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 41/41/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35072 [18/Aug/2025:11:15:15.519] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 41/41/1/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35054 [18/Aug/2025:11:15:15.519] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 41/41/0/0/0 0/0 "POST /payments HTTP/1.1"
-memorydb-1   | Using cached best processor: {
-memorydb-1   |   processor: 'default',
-memorydb-1   |   url: 'http://payment-processor-default:8080/payments',
-memorydb-1   |   expireAt: 1755515716537
-memorydb-1   | }
-haproxy-1    | 172.21.0.1:35036 [18/Aug/2025:11:15:15.527] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 41/41/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35012 [18/Aug/2025:11:15:15.532] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 41/41/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35000 [18/Aug/2025:11:15:15.533] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 41/41/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34982 [18/Aug/2025:11:15:15.539] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 41/41/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34962 [18/Aug/2025:11:15:15.544] http_front http_back/app1 0/0/0/1/1 201 100 - - ---- 41/41/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34948 [18/Aug/2025:11:15:15.547] http_front http_back/app2 0/0/0/1/1 201 100 - - ---- 41/41/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34932 [18/Aug/2025:11:15:15.562] http_front http_back/app2 0/0/0/1/1 201 100 - - ---- 41/41/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:33234 [18/Aug/2025:11:15:15.974] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 42/42/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40394 [18/Aug/2025:11:15:15.978] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 42/42/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40408 [18/Aug/2025:11:15:15.984] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 42/42/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40356 [18/Aug/2025:11:15:15.985] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 42/42/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40336 [18/Aug/2025:11:15:15.990] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 42/42/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40314 [18/Aug/2025:11:15:15.995] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 42/42/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40302 [18/Aug/2025:11:15:15.999] http_front http_back/app2 0/0/0/1/1 201 100 - - ---- 42/42/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40288 [18/Aug/2025:11:15:16.004] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 42/42/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40266 [18/Aug/2025:11:15:16.010] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 42/42/0/0/0 0/0 "POST /payments HTTP/1.1"
-memorydb-1   | Using cached best processor: {
-memorydb-1   |   processor: 'default',
-memorydb-1   |   url: 'http://payment-processor-default:8080/payments',
-memorydb-1   |   expireAt: 1755515716537
-memorydb-1   | }
-haproxy-1    | 172.21.0.1:40258 [18/Aug/2025:11:15:16.014] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 42/42/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35066 [18/Aug/2025:11:15:16.019] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 42/42/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35050 [18/Aug/2025:11:15:16.024] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 42/42/0/0/0 0/0 "POST /payments HTTP/1.1"
-memorydb-1   | Using cached best processor: {
-memorydb-1   |   processor: 'default',
-memorydb-1   |   url: 'http://payment-processor-default:8080/payments',
-memorydb-1   |   expireAt: 1755515716537
-memorydb-1   | }
-haproxy-1    | 172.21.0.1:35022 [18/Aug/2025:11:15:16.029] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 42/42/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35004 [18/Aug/2025:11:15:16.035] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 42/42/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34990 [18/Aug/2025:11:15:16.040] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 42/42/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34966 [18/Aug/2025:11:15:16.044] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 42/42/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34952 [18/Aug/2025:11:15:16.056] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 42/42/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34916 [18/Aug/2025:11:15:16.059] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 42/42/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:33248 [18/Aug/2025:11:15:16.466] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 43/43/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40418 [18/Aug/2025:11:15:16.471] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 43/43/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40396 [18/Aug/2025:11:15:16.476] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 43/43/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40378 [18/Aug/2025:11:15:16.481] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 43/43/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40364 [18/Aug/2025:11:15:16.483] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 43/43/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40340 [18/Aug/2025:11:15:16.488] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 43/43/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40322 [18/Aug/2025:11:15:16.493] http_front http_back/app1 0/0/0/1/1 201 100 - - ---- 43/43/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40310 [18/Aug/2025:11:15:16.498] http_front http_back/app2 0/0/0/1/1 201 100 - - ---- 43/43/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40300 [18/Aug/2025:11:15:16.503] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 43/43/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40280 [18/Aug/2025:11:15:16.508] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 43/43/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40264 [18/Aug/2025:11:15:16.513] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 43/43/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35054 [18/Aug/2025:11:15:16.521] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 43/43/1/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35072 [18/Aug/2025:11:15:16.521] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 43/43/0/0/0 0/0 "POST /payments HTTP/1.1"
-memorydb-1   | Using cached best processor: {
-memorydb-1   |   processor: 'default',
-memorydb-1   |   url: 'http://payment-processor-default:8080/payments',
-memorydb-1   |   expireAt: 1755515716537
-memorydb-1   | }
-haproxy-1    | 172.21.0.1:35036 [18/Aug/2025:11:15:16.528] http_front http_back/app2 0/0/0/1/1 201 100 - - ---- 43/43/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35012 [18/Aug/2025:11:15:16.534] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 43/43/0/0/0 0/0 "POST /payments HTTP/1.1"
-memorydb-1   | Using cached best processor: {
-memorydb-1   |   processor: 'default',
-memorydb-1   |   url: 'http://payment-processor-default:8080/payments',
-memorydb-1   |   expireAt: 1755515716537
-memorydb-1   | }
-haproxy-1    | 172.21.0.1:35000 [18/Aug/2025:11:15:16.535] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 43/43/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34982 [18/Aug/2025:11:15:16.541] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 43/43/0/0/0 0/0 "POST /payments HTTP/1.1"
-backend-2-1  | Summary request: { from: '2025-08-18T11:15:01.541Z', to: '2025-08-18T11:15:14.541Z' }
-memorydb-1   | Fetching summary from: 2025-08-18T11:15:01.541Z to: 2025-08-18T11:15:14.541Z
-haproxy-1    | 172.21.0.1:34962 [18/Aug/2025:11:15:16.546] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 43/43/1/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34898 [18/Aug/2025:11:15:16.542] http_front http_back/app2 0/0/0/4/4 200 237 - - ---- 43/43/0/0/0 0/0 "GET /payments-summary?from=2025-08-18T11:15:01.541Z&to=2025-08-18T11:15:14.541Z HTTP/1.1"
-haproxy-1    | 172.21.0.1:34948 [18/Aug/2025:11:15:16.549] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 43/43/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34932 [18/Aug/2025:11:15:16.564] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 43/43/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:33254 [18/Aug/2025:11:15:16.964] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 44/44/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:33234 [18/Aug/2025:11:15:16.975] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 44/44/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40394 [18/Aug/2025:11:15:16.979] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 44/44/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40366 [18/Aug/2025:11:15:16.985] http_front http_back/app2 0/0/0/1/1 201 100 - - ---- 44/44/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40356 [18/Aug/2025:11:15:16.986] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 44/44/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40336 [18/Aug/2025:11:15:16.991] http_front http_back/app1 0/0/0/1/1 201 100 - - ---- 44/44/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40314 [18/Aug/2025:11:15:16.997] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 44/44/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40302 [18/Aug/2025:11:15:17.000] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 44/44/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40288 [18/Aug/2025:11:15:17.005] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 44/44/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40266 [18/Aug/2025:11:15:17.011] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 44/44/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40258 [18/Aug/2025:11:15:17.016] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 44/44/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35066 [18/Aug/2025:11:15:17.020] http_front http_back/app1 0/0/0/1/1 201 100 - - ---- 44/44/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35050 [18/Aug/2025:11:15:17.025] http_front http_back/app2 0/0/0/1/1 201 100 - - ---- 44/44/0/0/0 0/0 "POST /payments HTTP/1.1"
-memorydb-1   | Fetching health summaries...
-memorydb-1   | Default Health: { failing: false, minResponseTime: 0 }
-memorydb-1   | Fallback Health: { failing: false, minResponseTime: 0 }
-haproxy-1    | 172.21.0.1:35022 [18/Aug/2025:11:15:17.030] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 44/44/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35004 [18/Aug/2025:11:15:17.036] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 44/44/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34990 [18/Aug/2025:11:15:17.041] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 44/44/0/0/0 0/0 "POST /payments HTTP/1.1"
-memorydb-1   | Using cached best processor: {
-memorydb-1   |   processor: 'default',
-memorydb-1   |   url: 'http://payment-processor-default:8080/payments',
-memorydb-1   |   expireAt: 1755515721830
-memorydb-1   | }
-haproxy-1    | 172.21.0.1:34966 [18/Aug/2025:11:15:17.045] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 44/44/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34952 [18/Aug/2025:11:15:17.057] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 44/44/1/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34946 [18/Aug/2025:11:15:17.057] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 44/44/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34916 [18/Aug/2025:11:15:17.060] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 44/44/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:33266 [18/Aug/2025:11:15:17.463] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 45/45/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:33248 [18/Aug/2025:11:15:17.467] http_front http_back/app1 0/0/0/1/1 201 100 - - ---- 45/45/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40418 [18/Aug/2025:11:15:17.472] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 45/45/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40396 [18/Aug/2025:11:15:17.476] http_front http_back/app1 0/0/0/1/1 201 100 - - ---- 45/45/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40378 [18/Aug/2025:11:15:17.481] http_front http_back/app2 0/0/0/1/1 201 100 - - ---- 45/45/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40364 [18/Aug/2025:11:15:17.484] http_front http_back/app1 0/0/0/1/1 201 100 - - ---- 45/45/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40340 [18/Aug/2025:11:15:17.489] http_front http_back/app2 0/0/0/1/1 201 100 - - ---- 45/45/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40322 [18/Aug/2025:11:15:17.494] http_front http_back/app1 0/0/0/1/1 201 100 - - ---- 45/45/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40310 [18/Aug/2025:11:15:17.500] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 45/45/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40300 [18/Aug/2025:11:15:17.504] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 45/45/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40280 [18/Aug/2025:11:15:17.509] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 45/45/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40264 [18/Aug/2025:11:15:17.514] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 45/45/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35072 [18/Aug/2025:11:15:17.522] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 45/45/1/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35054 [18/Aug/2025:11:15:17.522] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 45/45/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35036 [18/Aug/2025:11:15:17.530] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 45/45/0/0/0 0/0 "POST /payments HTTP/1.1"
-memorydb-1   | Using cached best processor: {
-memorydb-1   |   processor: 'default',
-memorydb-1   |   url: 'http://payment-processor-default:8080/payments',
-memorydb-1   |   expireAt: 1755515721830
-memorydb-1   | }
-haproxy-1    | 172.21.0.1:35012 [18/Aug/2025:11:15:17.535] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 45/45/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35000 [18/Aug/2025:11:15:17.536] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 45/45/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34982 [18/Aug/2025:11:15:17.542] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 45/45/0/0/0 0/0 "POST /payments HTTP/1.1"
-memorydb-1   | Using cached best processor: {
-memorydb-1   |   processor: 'default',
-memorydb-1   |   url: 'http://payment-processor-default:8080/payments',
-memorydb-1   |   expireAt: 1755515721830
-memorydb-1   | }
-haproxy-1    | 172.21.0.1:34962 [18/Aug/2025:11:15:17.546] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 45/45/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34948 [18/Aug/2025:11:15:17.550] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 45/45/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34932 [18/Aug/2025:11:15:17.566] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 45/45/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:33282 [18/Aug/2025:11:15:17.961] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 46/46/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:33254 [18/Aug/2025:11:15:17.966] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 46/46/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:33234 [18/Aug/2025:11:15:17.977] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 46/46/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40394 [18/Aug/2025:11:15:17.981] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 46/46/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40366 [18/Aug/2025:11:15:17.987] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 46/46/2/1/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40408 [18/Aug/2025:11:15:17.987] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 46/46/1/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40356 [18/Aug/2025:11:15:17.987] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 46/46/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40336 [18/Aug/2025:11:15:17.992] http_front http_back/app1 0/0/0/1/1 201 100 - - ---- 46/46/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40314 [18/Aug/2025:11:15:17.998] http_front http_back/app2 0/0/0/1/1 201 100 - - ---- 46/46/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40302 [18/Aug/2025:11:15:18.001] http_front http_back/app1 0/0/0/1/1 201 100 - - ---- 46/46/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40288 [18/Aug/2025:11:15:18.006] http_front http_back/app2 0/0/0/1/1 201 100 - - ---- 46/46/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40266 [18/Aug/2025:11:15:18.012] http_front http_back/app1 0/0/0/1/1 201 100 - - ---- 46/46/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40258 [18/Aug/2025:11:15:18.018] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 46/46/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35066 [18/Aug/2025:11:15:18.022] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 46/46/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35050 [18/Aug/2025:11:15:18.027] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 46/46/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35022 [18/Aug/2025:11:15:18.032] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 46/46/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35004 [18/Aug/2025:11:15:18.038] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 46/46/0/0/0 0/0 "POST /payments HTTP/1.1"
-memorydb-1   | Using cached best processor: {
-memorydb-1   |   processor: 'default',
-memorydb-1   |   url: 'http://payment-processor-default:8080/payments',
-memorydb-1   |   expireAt: 1755515721830
-memorydb-1   | }
-haproxy-1    | 172.21.0.1:34990 [18/Aug/2025:11:15:18.043] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 46/46/0/0/0 0/0 "POST /payments HTTP/1.1"
-memorydb-1   | Using cached best processor: {
-memorydb-1   |   processor: 'default',
-memorydb-1   |   url: 'http://payment-processor-default:8080/payments',
-memorydb-1   |   expireAt: 1755515721830
-memorydb-1   | }
-haproxy-1    | 172.21.0.1:34966 [18/Aug/2025:11:15:18.047] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 46/46/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34952 [18/Aug/2025:11:15:18.059] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 46/46/1/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34916 [18/Aug/2025:11:15:18.061] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 46/46/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:33286 [18/Aug/2025:11:15:18.460] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 47/47/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:33266 [18/Aug/2025:11:15:18.465] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 47/47/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:33248 [18/Aug/2025:11:15:18.469] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 47/47/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40418 [18/Aug/2025:11:15:18.474] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 47/47/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40396 [18/Aug/2025:11:15:18.478] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 47/47/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40378 [18/Aug/2025:11:15:18.483] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 47/47/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40364 [18/Aug/2025:11:15:18.486] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 47/47/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40340 [18/Aug/2025:11:15:18.491] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 47/47/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40322 [18/Aug/2025:11:15:18.496] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 47/47/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40310 [18/Aug/2025:11:15:18.502] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 47/47/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40300 [18/Aug/2025:11:15:18.506] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 47/47/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40280 [18/Aug/2025:11:15:18.511] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 47/47/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40264 [18/Aug/2025:11:15:18.515] http_front http_back/app2 0/0/0/1/1 201 100 - - ---- 47/47/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35054 [18/Aug/2025:11:15:18.524] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 47/47/1/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35072 [18/Aug/2025:11:15:18.524] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 47/47/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35036 [18/Aug/2025:11:15:18.531] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 47/47/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35012 [18/Aug/2025:11:15:18.535] http_front http_back/app2 0/0/0/1/1 201 100 - - ---- 47/47/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35000 [18/Aug/2025:11:15:18.537] http_front http_back/app1 0/0/0/1/1 201 100 - - ---- 47/47/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34982 [18/Aug/2025:11:15:18.544] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 47/47/0/0/0 0/0 "POST /payments HTTP/1.1"
-memorydb-1   | Using cached best processor: {
-memorydb-1   |   processor: 'default',
-memorydb-1   |   url: 'http://payment-processor-default:8080/payments',
-memorydb-1   |   expireAt: 1755515721830
-memorydb-1   | }
-haproxy-1    | 172.21.0.1:34962 [18/Aug/2025:11:15:18.548] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 47/47/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34948 [18/Aug/2025:11:15:18.552] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 47/47/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34932 [18/Aug/2025:11:15:18.568] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 47/47/1/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34914 [18/Aug/2025:11:15:18.568] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 47/47/0/0/0 0/0 "POST /payments HTTP/1.1"
-memorydb-1   | Using cached best processor: {
-memorydb-1   |   processor: 'default',
-memorydb-1   |   url: 'http://payment-processor-default:8080/payments',
-memorydb-1   |   expireAt: 1755515721830
-memorydb-1   | }
-haproxy-1    | 172.21.0.1:33292 [18/Aug/2025:11:15:18.958] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 48/48/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:33282 [18/Aug/2025:11:15:18.961] http_front http_back/app2 0/0/0/1/1 201 100 - - ---- 48/48/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:33254 [18/Aug/2025:11:15:18.966] http_front http_back/app1 0/0/0/1/1 201 100 - - ---- 48/48/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:33234 [18/Aug/2025:11:15:18.978] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 48/48/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40394 [18/Aug/2025:11:15:18.982] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 48/48/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40366 [18/Aug/2025:11:15:18.989] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 48/48/2/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40408 [18/Aug/2025:11:15:18.989] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 48/48/1/1/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40356 [18/Aug/2025:11:15:18.989] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 48/48/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40336 [18/Aug/2025:11:15:18.994] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 48/48/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40314 [18/Aug/2025:11:15:19.000] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 48/48/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40302 [18/Aug/2025:11:15:19.003] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 48/48/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40288 [18/Aug/2025:11:15:19.008] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 48/48/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40266 [18/Aug/2025:11:15:19.014] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 48/48/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40258 [18/Aug/2025:11:15:19.019] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 48/48/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35066 [18/Aug/2025:11:15:19.024] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 48/48/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35050 [18/Aug/2025:11:15:19.029] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 48/48/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35022 [18/Aug/2025:11:15:19.033] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 48/48/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35004 [18/Aug/2025:11:15:19.039] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 48/48/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34990 [18/Aug/2025:11:15:19.044] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 48/48/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34966 [18/Aug/2025:11:15:19.047] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 48/48/0/0/0 0/0 "POST /payments HTTP/1.1"
-memorydb-1   | Using cached best processor: {
-memorydb-1   |   processor: 'default',
-memorydb-1   |   url: 'http://payment-processor-default:8080/payments',
-memorydb-1   |   expireAt: 1755515721830
-memorydb-1   | }
-haproxy-1    | 172.21.0.1:34946 [18/Aug/2025:11:15:19.060] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 48/48/0/0/0 0/0 "POST /payments HTTP/1.1"
-memorydb-1   | Using cached best processor: {
-memorydb-1   |   processor: 'default',
-memorydb-1   |   url: 'http://payment-processor-default:8080/payments',
-memorydb-1   |   expireAt: 1755515721830
-memorydb-1   | }
-haproxy-1    | 172.21.0.1:34916 [18/Aug/2025:11:15:19.063] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 48/48/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:33294 [18/Aug/2025:11:15:19.456] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 49/49/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:33286 [18/Aug/2025:11:15:19.461] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 49/49/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:33266 [18/Aug/2025:11:15:19.466] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 49/49/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:33248 [18/Aug/2025:11:15:19.470] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 49/49/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40418 [18/Aug/2025:11:15:19.475] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 49/49/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40396 [18/Aug/2025:11:15:19.480] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 49/49/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40378 [18/Aug/2025:11:15:19.485] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 49/49/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40364 [18/Aug/2025:11:15:19.488] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 49/49/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40340 [18/Aug/2025:11:15:19.493] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 49/49/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40322 [18/Aug/2025:11:15:19.497] http_front http_back/app1 0/0/0/1/1 201 100 - - ---- 49/49/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40310 [18/Aug/2025:11:15:19.502] http_front http_back/app2 0/0/0/1/1 201 100 - - ---- 49/49/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40300 [18/Aug/2025:11:15:19.506] http_front http_back/app1 0/0/0/1/1 201 100 - - ---- 49/49/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40280 [18/Aug/2025:11:15:19.512] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 49/49/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40264 [18/Aug/2025:11:15:19.517] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 49/49/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35072 [18/Aug/2025:11:15:19.524] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 49/49/1/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35054 [18/Aug/2025:11:15:19.524] http_front http_back/app1 0/0/0/1/1 201 100 - - ---- 49/49/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35036 [18/Aug/2025:11:15:19.532] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 49/49/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35012 [18/Aug/2025:11:15:19.537] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 49/49/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35000 [18/Aug/2025:11:15:19.539] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 49/49/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34982 [18/Aug/2025:11:15:19.545] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 49/49/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34962 [18/Aug/2025:11:15:19.549] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 49/49/0/0/0 0/0 "POST /payments HTTP/1.1"
-memorydb-1   | Using cached best processor: {
-memorydb-1   |   processor: 'default',
-memorydb-1   |   url: 'http://payment-processor-default:8080/payments',
-memorydb-1   |   expireAt: 1755515721830
-memorydb-1   | }
-haproxy-1    | 172.21.0.1:34948 [18/Aug/2025:11:15:19.553] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 49/49/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34914 [18/Aug/2025:11:15:19.568] http_front http_back/app1 0/0/0/1/1 201 100 - - ---- 49/49/1/0/0 0/0 "POST /payments HTTP/1.1"
-memorydb-1   | Using cached best processor: {
-memorydb-1   |   processor: 'default',
-memorydb-1   |   url: 'http://payment-processor-default:8080/payments',
-memorydb-1   |   expireAt: 1755515721830
-memorydb-1   | }
-haproxy-1    | 172.21.0.1:34932 [18/Aug/2025:11:15:19.569] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 49/49/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:33292 [18/Aug/2025:11:15:19.960] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 49/49/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:33302 [18/Aug/2025:11:15:19.962] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 50/50/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:33282 [18/Aug/2025:11:15:19.963] http_front http_back/app2 0/0/0/1/1 201 100 - - ---- 50/50/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:33254 [18/Aug/2025:11:15:19.967] http_front http_back/app1 0/0/0/1/1 201 100 - - ---- 50/50/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:33234 [18/Aug/2025:11:15:19.978] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 50/50/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40394 [18/Aug/2025:11:15:19.982] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 50/50/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40408 [18/Aug/2025:11:15:19.991] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 50/50/2/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40356 [18/Aug/2025:11:15:19.991] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 50/50/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40336 [18/Aug/2025:11:15:19.996] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 50/50/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40314 [18/Aug/2025:11:15:20.002] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 50/50/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40302 [18/Aug/2025:11:15:20.004] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 50/50/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40288 [18/Aug/2025:11:15:20.009] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 50/50/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40266 [18/Aug/2025:11:15:20.014] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 50/50/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40258 [18/Aug/2025:11:15:20.019] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 50/50/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35066 [18/Aug/2025:11:15:20.024] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 50/50/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35050 [18/Aug/2025:11:15:20.030] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 50/50/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35022 [18/Aug/2025:11:15:20.035] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 50/50/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35004 [18/Aug/2025:11:15:20.041] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 50/50/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34990 [18/Aug/2025:11:15:20.046] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 50/50/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34966 [18/Aug/2025:11:15:20.049] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 50/50/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34952 [18/Aug/2025:11:15:20.062] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 50/50/0/0/0 0/0 "POST /payments HTTP/1.1"
-memorydb-1   | Using cached best processor: {
-memorydb-1   |   processor: 'default',
-memorydb-1   |   url: 'http://payment-processor-default:8080/payments',
-memorydb-1   |   expireAt: 1755515721830
-memorydb-1   | }
-haproxy-1    | 172.21.0.1:34916 [18/Aug/2025:11:15:20.065] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 50/50/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:33310 [18/Aug/2025:11:15:20.453] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 51/51/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:33294 [18/Aug/2025:11:15:20.457] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 51/51/0/0/0 0/0 "POST /payments HTTP/1.1"
-memorydb-1   | Using cached best processor: {
-memorydb-1   |   processor: 'default',
-memorydb-1   |   url: 'http://payment-processor-default:8080/payments',
-memorydb-1   |   expireAt: 1755515721830
-memorydb-1   | }
-haproxy-1    | 172.21.0.1:33286 [18/Aug/2025:11:15:20.463] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 51/51/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:33266 [18/Aug/2025:11:15:20.468] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 51/51/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:33248 [18/Aug/2025:11:15:20.472] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 51/51/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40418 [18/Aug/2025:11:15:20.476] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 51/51/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40396 [18/Aug/2025:11:15:20.481] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 51/51/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40378 [18/Aug/2025:11:15:20.486] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 51/51/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40364 [18/Aug/2025:11:15:20.489] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 51/51/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40340 [18/Aug/2025:11:15:20.494] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 51/51/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40322 [18/Aug/2025:11:15:20.499] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 51/51/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40310 [18/Aug/2025:11:15:20.505] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 51/51/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40300 [18/Aug/2025:11:15:20.508] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 51/51/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40280 [18/Aug/2025:11:15:20.514] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 51/51/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40264 [18/Aug/2025:11:15:20.518] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 51/51/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35072 [18/Aug/2025:11:15:20.526] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 51/51/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35036 [18/Aug/2025:11:15:20.534] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 51/51/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35012 [18/Aug/2025:11:15:20.539] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 51/51/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35000 [18/Aug/2025:11:15:20.541] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 51/51/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34982 [18/Aug/2025:11:15:20.547] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 51/51/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34962 [18/Aug/2025:11:15:20.551] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 51/51/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34948 [18/Aug/2025:11:15:20.555] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 51/51/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34914 [18/Aug/2025:11:15:20.570] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 51/51/0/0/0 0/0 "POST /payments HTTP/1.1"
-memorydb-1   | Using cached best processor: {
-memorydb-1   |   processor: 'default',
-memorydb-1   |   url: 'http://payment-processor-default:8080/payments',
-memorydb-1   |   expireAt: 1755515721830
-memorydb-1   | }
-haproxy-1    | 172.21.0.1:33326 [18/Aug/2025:11:15:20.951] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 52/52/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:33292 [18/Aug/2025:11:15:20.961] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 52/52/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:33302 [18/Aug/2025:11:15:20.964] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 52/52/0/0/0 0/0 "POST /payments HTTP/1.1"
-memorydb-1   | Using cached best processor: {
-memorydb-1   |   processor: 'default',
-memorydb-1   |   url: 'http://payment-processor-default:8080/payments',
-memorydb-1   |   expireAt: 1755515721830
-memorydb-1   | }
-haproxy-1    | 172.21.0.1:33282 [18/Aug/2025:11:15:20.964] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 52/52/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:33254 [18/Aug/2025:11:15:20.969] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 52/52/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:33234 [18/Aug/2025:11:15:20.980] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 52/52/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40394 [18/Aug/2025:11:15:20.984] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 52/52/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40356 [18/Aug/2025:11:15:20.991] http_front http_back/app2 0/0/0/1/1 201 100 - - ---- 52/52/2/1/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40408 [18/Aug/2025:11:15:20.992] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 52/52/1/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40366 [18/Aug/2025:11:15:20.992] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 52/52/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40336 [18/Aug/2025:11:15:20.997] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 52/52/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40314 [18/Aug/2025:11:15:21.004] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 52/52/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40302 [18/Aug/2025:11:15:21.006] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 52/52/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40288 [18/Aug/2025:11:15:21.011] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 52/52/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40266 [18/Aug/2025:11:15:21.016] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 52/52/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:40258 [18/Aug/2025:11:15:21.021] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 52/52/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35066 [18/Aug/2025:11:15:21.026] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 52/52/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35050 [18/Aug/2025:11:15:21.031] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 52/52/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35022 [18/Aug/2025:11:15:21.036] http_front http_back/app1 0/0/0/1/1 201 100 - - ---- 52/52/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:35004 [18/Aug/2025:11:15:21.042] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 52/52/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34990 [18/Aug/2025:11:15:21.047] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 52/52/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34966 [18/Aug/2025:11:15:21.050] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 52/52/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34952 [18/Aug/2025:11:15:21.063] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 52/52/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34946 [18/Aug/2025:11:15:21.063] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 52/52/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:34916 [18/Aug/2025:11:15:21.066] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 52/52/0/0/0 0/0 "POST /payments HTTP/1.1"
-haproxy-1    | 172.21.0.1:33332 [18/Aug/2025:11:15:21.449] http_front http_back/app2 0/0/0/0/0 201 100 - - ---- 53/53/0/0/0 0/0 "POST /payments HTTP/1.1"
-memorydb-1   | Using cached best processor: {
-memorydb-1   |   processor: 'default',
-memorydb-1   |   url: 'http://payment-processor-default:8080/payments',
-memorydb-1   |   expireAt: 1755515721830
-memorydb-1   | }
-haproxy-1    | 172.21.0.1:33310 [18/Aug/2025:11:15:21.454] http_front http_back/app1 0/0/0/0/0 201 100 - - ---- 53/53/0/0/0 0/0 "POST /payments HTTP/1.1"
+ backend-1 Pulling 
+ backend-2 Pulling 
+ memorydb Pulling 
+ haproxy Pulling 
+ f014853ae203 Pulling fs layer 
+ 6d6401b7636b Pulling fs layer 
+ cffef7dc6f99 Pulling fs layer 
+ 1e6ffe3614ab Pulling fs layer 
+ 100dcf33d29c Pulling fs layer 
+ 4c490963eb14 Pulling fs layer 
+ 9ca84c9f270e Pulling fs layer 
+ 6b6ae8c5c9b1 Pulling fs layer 
+ f924e279e640 Pulling fs layer 
+ 678316275f1c Pulling fs layer 
+ 13523a789524 Pulling fs layer 
+ 2c707b2be816 Pulling fs layer 
+ 502449158994 Pulling fs layer 
+ a0abae0c8dcb Pulling fs layer 
+ 1e6ffe3614ab Waiting 
+ 100dcf33d29c Waiting 
+ 4c490963eb14 Waiting 
+ 9ca84c9f270e Waiting 
+ 6b6ae8c5c9b1 Waiting 
+ f924e279e640 Waiting 
+ 678316275f1c Waiting 
+ 13523a789524 Waiting 
+ 2c707b2be816 Waiting 
+ 502449158994 Waiting 
+ a0abae0c8dcb Waiting 
+ ebed137c7c18 Pulling fs layer 
+ c2e76af9483f Pulling fs layer 
+ 37f838b71c6b Pulling fs layer 
+ 873a4c802874 Pulling fs layer 
+ fb52016f3b79 Pulling fs layer 
+ 5c26b6c1d3cc Pulling fs layer 
+ a870a7a19c34 Pulling fs layer 
+ e1c9fcf2cd8e Pulling fs layer 
+ f930dea92b5e Pulling fs layer 
+ 5b738841fe03 Pulling fs layer 
+ 7895ab910710 Pulling fs layer 
+ 75cda01b1329 Pulling fs layer 
+ bc571936bdb9 Pulling fs layer 
+ f77f190879e3 Pulling fs layer 
+ c76ca590f2eb Pulling fs layer 
+ ebed137c7c18 Waiting 
+ c2e76af9483f Waiting 
+ 37f838b71c6b Waiting 
+ 873a4c802874 Waiting 
+ fb52016f3b79 Waiting 
+ 5c26b6c1d3cc Waiting 
+ a870a7a19c34 Waiting 
+ e1c9fcf2cd8e Waiting 
+ f930dea92b5e Waiting 
+ 5b738841fe03 Waiting 
+ 7895ab910710 Waiting 
+ 75cda01b1329 Waiting 
+ bc571936bdb9 Waiting 
+ f77f190879e3 Waiting 
+ c76ca590f2eb Waiting 
+ f014853ae203 Pulling fs layer 
+ 6d6401b7636b Pulling fs layer 
+ cffef7dc6f99 Pulling fs layer 
+ 1e6ffe3614ab Pulling fs layer 
+ 100dcf33d29c Pulling fs layer 
+ 4c490963eb14 Pulling fs layer 
+ 9ca84c9f270e Pulling fs layer 
+ 6b6ae8c5c9b1 Pulling fs layer 
+ f924e279e640 Pulling fs layer 
+ 678316275f1c Pulling fs layer 
+ 13523a789524 Pulling fs layer 
+ 2c707b2be816 Pulling fs layer 
+ 502449158994 Pulling fs layer 
+ a0abae0c8dcb Pulling fs layer 
+ a0abae0c8dcb Waiting 
+ 1e6ffe3614ab Waiting 
+ 100dcf33d29c Waiting 
+ 4c490963eb14 Waiting 
+ 9ca84c9f270e Waiting 
+ 6b6ae8c5c9b1 Waiting 
+ f924e279e640 Waiting 
+ 678316275f1c Waiting 
+ 13523a789524 Waiting 
+ 2c707b2be816 Waiting 
+ 502449158994 Waiting 
+ 6d6401b7636b Downloading [>                                                  ]  244.2kB/24.02MB
+ 6d6401b7636b Downloading [>                                                  ]  244.2kB/24.02MB
+ cffef7dc6f99 Downloading [>                                                  ]  540.1kB/64.4MB
+ cffef7dc6f99 Downloading [>                                                  ]  540.1kB/64.4MB
+ f014853ae203 Downloading [>                                                  ]  495.7kB/48.49MB
+ f014853ae203 Downloading [>                                                  ]  495.7kB/48.49MB
+ 6d6401b7636b Downloading [==================>                                ]  8.891MB/24.02MB
+ 6d6401b7636b Downloading [==================>                                ]  8.891MB/24.02MB
+ f014853ae203 Downloading [=========>                                         ]  9.391MB/48.49MB
+ f014853ae203 Downloading [=========>                                         ]  9.391MB/48.49MB
+ cffef7dc6f99 Downloading [========>                                          ]  10.71MB/64.4MB
+ cffef7dc6f99 Downloading [========>                                          ]  10.71MB/64.4MB
+ 6d6401b7636b Downloading [=============================>                     ]  14.32MB/24.02MB
+ 6d6401b7636b Downloading [=============================>                     ]  14.32MB/24.02MB
+ cffef7dc6f99 Downloading [============>                                      ]  16.59MB/64.4MB
+ cffef7dc6f99 Downloading [============>                                      ]  16.59MB/64.4MB
+ f014853ae203 Downloading [===============>                                   ]  14.79MB/48.49MB
+ f014853ae203 Downloading [===============>                                   ]  14.79MB/48.49MB
+ 6d6401b7636b Downloading [=======================================>           ]  19.02MB/24.02MB
+ 6d6401b7636b Downloading [=======================================>           ]  19.02MB/24.02MB
+ cffef7dc6f99 Downloading [==================>                                ]  24.07MB/64.4MB
+ cffef7dc6f99 Downloading [==================>                                ]  24.07MB/64.4MB
+ f014853ae203 Downloading [=================>                                 ]  17.27MB/48.49MB
+ f014853ae203 Downloading [=================>                                 ]  17.27MB/48.49MB
+ 9824c27679d3 Already exists 
+ 123b92336b82 Pulling fs layer 
+ e7cee334a64b Pulling fs layer 
+ 536eff87c11a Pulling fs layer 
+ 123b92336b82 Waiting 
+ 0b2aa9ab96ae Pulling fs layer 
+ e7cee334a64b Waiting 
+ 4f4fb700ef54 Pulling fs layer 
+ 536eff87c11a Waiting 
+ 0b2aa9ab96ae Waiting 
+ 4f4fb700ef54 Waiting 
+ 6d6401b7636b Downloading [=================================================> ]  23.98MB/24.02MB
+ 6d6401b7636b Downloading [=================================================> ]  23.98MB/24.02MB
+ 6d6401b7636b Verifying Checksum 
+ 6d6401b7636b Download complete 
+ 6d6401b7636b Verifying Checksum 
+ 6d6401b7636b Download complete 
+ cffef7dc6f99 Downloading [==========================>                        ]  34.76MB/64.4MB
+ cffef7dc6f99 Downloading [==========================>                        ]  34.76MB/64.4MB
+ f014853ae203 Downloading [=====================>                             ]  21.19MB/48.49MB
+ f014853ae203 Downloading [=====================>                             ]  21.19MB/48.49MB
+ cffef7dc6f99 Downloading [=================================>                 ]  42.78MB/64.4MB
+ cffef7dc6f99 Downloading [=================================>                 ]  42.78MB/64.4MB
+ f014853ae203 Downloading [========================>                          ]  24.15MB/48.49MB
+ f014853ae203 Downloading [========================>                          ]  24.15MB/48.49MB
+ cffef7dc6f99 Downloading [====================================>              ]  46.52MB/64.4MB
+ cffef7dc6f99 Downloading [====================================>              ]  46.52MB/64.4MB
+ f014853ae203 Downloading [=============================>                     ]   28.6MB/48.49MB
+ f014853ae203 Downloading [=============================>                     ]   28.6MB/48.49MB
+ cffef7dc6f99 Downloading [============================================>      ]  56.69MB/64.4MB
+ cffef7dc6f99 Downloading [============================================>      ]  56.69MB/64.4MB
+ f014853ae203 Downloading [================================>                  ]  31.07MB/48.49MB
+ f014853ae203 Downloading [================================>                  ]  31.07MB/48.49MB
+ 1e6ffe3614ab Downloading [>                                                  ]  539.1kB/211.4MB
+ 1e6ffe3614ab Downloading [>                                                  ]  539.1kB/211.4MB
+ cffef7dc6f99 Downloading [===============================================>   ]   61.5MB/64.4MB
+ cffef7dc6f99 Downloading [===============================================>   ]   61.5MB/64.4MB
+ f014853ae203 Downloading [===================================>               ]  34.55MB/48.49MB
+ f014853ae203 Downloading [===================================>               ]  34.55MB/48.49MB
+ 1e6ffe3614ab Downloading [=>                                                 ]  6.425MB/211.4MB
+ 1e6ffe3614ab Downloading [=>                                                 ]  6.425MB/211.4MB
+ cffef7dc6f99 Verifying Checksum 
+ cffef7dc6f99 Download complete 
+ cffef7dc6f99 Verifying Checksum 
+ cffef7dc6f99 Download complete 
+ f014853ae203 Downloading [==========================================>        ]  41.47MB/48.49MB
+ f014853ae203 Downloading [==========================================>        ]  41.47MB/48.49MB
+ 1e6ffe3614ab Downloading [==>                                                ]  10.17MB/211.4MB
+ 1e6ffe3614ab Downloading [==>                                                ]  10.17MB/211.4MB
+ f014853ae203 Verifying Checksum 
+ f014853ae203 Download complete 
+ f014853ae203 Download complete 
+ f014853ae203 Extracting [>                                                  ]  491.5kB/48.49MB
+ f014853ae203 Extracting [>                                                  ]  491.5kB/48.49MB
+ 1e6ffe3614ab Downloading [==>                                                ]  11.79MB/211.4MB
+ 1e6ffe3614ab Downloading [==>                                                ]  11.79MB/211.4MB
+ f014853ae203 Extracting [======>                                            ]  5.898MB/48.49MB
+ f014853ae203 Extracting [======>                                            ]  5.898MB/48.49MB
+ 1e6ffe3614ab Downloading [===>                                               ]   16.6MB/211.4MB
+ 1e6ffe3614ab Downloading [===>                                               ]   16.6MB/211.4MB
+ f014853ae203 Extracting [=========>                                         ]  9.339MB/48.49MB
+ f014853ae203 Extracting [=========>                                         ]  9.339MB/48.49MB
+ 1e6ffe3614ab Downloading [====>                                              ]  19.27MB/211.4MB
+ 1e6ffe3614ab Downloading [====>                                              ]  19.27MB/211.4MB
+ f014853ae203 Extracting [============>                                      ]  12.29MB/48.49MB
+ f014853ae203 Extracting [============>                                      ]  12.29MB/48.49MB
+ 1e6ffe3614ab Downloading [=====>                                             ]     23MB/211.4MB
+ 1e6ffe3614ab Downloading [=====>                                             ]     23MB/211.4MB
+ f014853ae203 Extracting [====================>                              ]  19.66MB/48.49MB
+ f014853ae203 Extracting [====================>                              ]  19.66MB/48.49MB
+ 1e6ffe3614ab Downloading [======>                                            ]  26.75MB/211.4MB
+ 1e6ffe3614ab Downloading [======>                                            ]  26.75MB/211.4MB
+ 100dcf33d29c Downloading [===============>                                   ]  1.009kB/3.328kB
+ 100dcf33d29c Downloading [==================================================>]  3.328kB/3.328kB
+ 100dcf33d29c Download complete 
+ 100dcf33d29c Downloading [===============>                                   ]  1.009kB/3.328kB
+ 100dcf33d29c Download complete 
+ 1e6ffe3614ab Downloading [======>                                            ]   28.9MB/211.4MB
+ 1e6ffe3614ab Downloading [======>                                            ]   28.9MB/211.4MB
+ f014853ae203 Extracting [========================>                          ]  24.08MB/48.49MB
+ f014853ae203 Extracting [========================>                          ]  24.08MB/48.49MB
+ 4c490963eb14 Downloading [>                                                  ]  527.6kB/56.4MB
+ 4c490963eb14 Downloading [>                                                  ]  527.6kB/56.4MB
+ 1e6ffe3614ab Downloading [========>                                          ]  37.47MB/211.4MB
+ 1e6ffe3614ab Downloading [========>                                          ]  37.47MB/211.4MB
+ f014853ae203 Extracting [===========================>                       ]  27.03MB/48.49MB
+ f014853ae203 Extracting [===========================>                       ]  27.03MB/48.49MB
+ 4c490963eb14 Downloading [===>                                               ]  3.727MB/56.4MB
+ 4c490963eb14 Downloading [===>                                               ]  3.727MB/56.4MB
+ 1e6ffe3614ab Downloading [==========>                                        ]  43.38MB/211.4MB
+ 1e6ffe3614ab Downloading [==========>                                        ]  43.38MB/211.4MB
+ f014853ae203 Extracting [================================>                  ]  31.95MB/48.49MB
+ f014853ae203 Extracting [================================>                  ]  31.95MB/48.49MB
+ 4c490963eb14 Downloading [=======>                                           ]  8.008MB/56.4MB
+ 4c490963eb14 Downloading [=======>                                           ]  8.008MB/56.4MB
+ 1e6ffe3614ab Downloading [===========>                                       ]  47.11MB/211.4MB
+ 1e6ffe3614ab Downloading [===========>                                       ]  47.11MB/211.4MB
+ 9ca84c9f270e Downloading [>                                                  ]  13.75kB/1.251MB
+ 9ca84c9f270e Downloading [>                                                  ]  13.75kB/1.251MB
+ 9ca84c9f270e Verifying Checksum 
+ 9ca84c9f270e Download complete 
+ 9ca84c9f270e Verifying Checksum 
+ 9ca84c9f270e Download complete 
+ f014853ae203 Extracting [====================================>              ]  35.39MB/48.49MB
+ f014853ae203 Extracting [====================================>              ]  35.39MB/48.49MB
+ 4c490963eb14 Downloading [==========>                                        ]  12.29MB/56.4MB
+ 4c490963eb14 Downloading [==========>                                        ]  12.29MB/56.4MB
+ 1e6ffe3614ab Downloading [===========>                                       ]  50.33MB/211.4MB
+ 1e6ffe3614ab Downloading [===========>                                       ]  50.33MB/211.4MB
+ f014853ae203 Extracting [========================================>          ]  38.83MB/48.49MB
+ f014853ae203 Extracting [========================================>          ]  38.83MB/48.49MB
+ 4c490963eb14 Downloading [=============>                                     ]   15.5MB/56.4MB
+ 4c490963eb14 Downloading [=============>                                     ]   15.5MB/56.4MB
+ 1e6ffe3614ab Downloading [============>                                      ]  51.92MB/211.4MB
+ 1e6ffe3614ab Downloading [============>                                      ]  51.92MB/211.4MB
+ f014853ae203 Extracting [===========================================>       ]  41.78MB/48.49MB
+ f014853ae203 Extracting [===========================================>       ]  41.78MB/48.49MB
+ 4c490963eb14 Downloading [=================>                                 ]  19.21MB/56.4MB
+ 4c490963eb14 Downloading [=================>                                 ]  19.21MB/56.4MB
+ 1e6ffe3614ab Downloading [=============>                                     ]  57.27MB/211.4MB
+ 1e6ffe3614ab Downloading [=============>                                     ]  57.27MB/211.4MB
+ 4c490963eb14 Downloading [==================>                                ]  21.34MB/56.4MB
+ 4c490963eb14 Downloading [==================>                                ]  21.34MB/56.4MB
+ f014853ae203 Extracting [==============================================>    ]  45.22MB/48.49MB
+ f014853ae203 Extracting [==============================================>    ]  45.22MB/48.49MB
+ 6b6ae8c5c9b1 Downloading [==================================================>]     447B/447B
+ 6b6ae8c5c9b1 Verifying Checksum 
+ 6b6ae8c5c9b1 Download complete 
+ 6b6ae8c5c9b1 Verifying Checksum 
+ 6b6ae8c5c9b1 Download complete 
+ 1e6ffe3614ab Downloading [===============>                                   ]  64.23MB/211.4MB
+ 1e6ffe3614ab Downloading [===============>                                   ]  64.23MB/211.4MB
+ f014853ae203 Extracting [===============================================>   ]   46.2MB/48.49MB
+ f014853ae203 Extracting [===============================================>   ]   46.2MB/48.49MB
+ 4c490963eb14 Downloading [====================>                              ]  22.94MB/56.4MB
+ 4c490963eb14 Downloading [====================>                              ]  22.94MB/56.4MB
+ 1e6ffe3614ab Downloading [=================>                                 ]  74.39MB/211.4MB
+ 1e6ffe3614ab Downloading [=================>                                 ]  74.39MB/211.4MB
+ 4c490963eb14 Downloading [=====================>                             ]  24.55MB/56.4MB
+ 4c490963eb14 Downloading [=====================>                             ]  24.55MB/56.4MB
+ 1e6ffe3614ab Downloading [==================>                                ]   77.6MB/211.4MB
+ 1e6ffe3614ab Downloading [==================>                                ]   77.6MB/211.4MB
+ 4c490963eb14 Downloading [========================>                          ]  27.74MB/56.4MB
+ 4c490963eb14 Downloading [========================>                          ]  27.74MB/56.4MB
+ 1e6ffe3614ab Downloading [===================>                               ]  81.86MB/211.4MB
+ 1e6ffe3614ab Downloading [===================>                               ]  81.86MB/211.4MB
+ f924e279e640 Downloading [>                                                  ]  155.9kB/15.2MB
+ f924e279e640 Downloading [>                                                  ]  155.9kB/15.2MB
+ 1e6ffe3614ab Downloading [====================>                              ]  85.58MB/211.4MB
+ 1e6ffe3614ab Downloading [====================>                              ]  85.58MB/211.4MB
+ 4c490963eb14 Downloading [==========================>                        ]  29.88MB/56.4MB
+ 4c490963eb14 Downloading [==========================>                        ]  29.88MB/56.4MB
+ f924e279e640 Downloading [===============================================>   ]  14.58MB/15.2MB
+ f924e279e640 Downloading [===============================================>   ]  14.58MB/15.2MB
+ f924e279e640 Verifying Checksum 
+ f924e279e640 Download complete 
+ f924e279e640 Verifying Checksum 
+ f924e279e640 Download complete 
+ f014853ae203 Extracting [=================================================> ]  47.68MB/48.49MB
+ f014853ae203 Extracting [=================================================> ]  47.68MB/48.49MB
+ 4c490963eb14 Downloading [=============================>                     ]  33.06MB/56.4MB
+ 4c490963eb14 Downloading [=============================>                     ]  33.06MB/56.4MB
+ 1e6ffe3614ab Downloading [=====================>                             ]  89.87MB/211.4MB
+ 1e6ffe3614ab Downloading [=====================>                             ]  89.87MB/211.4MB
+ f014853ae203 Extracting [==================================================>]  48.49MB/48.49MB
+ f014853ae203 Extracting [==================================================>]  48.49MB/48.49MB
+ 4c490963eb14 Downloading [================================>                  ]  36.27MB/56.4MB
+ 4c490963eb14 Downloading [================================>                  ]  36.27MB/56.4MB
+ 1e6ffe3614ab Downloading [======================>                            ]  95.24MB/211.4MB
+ 1e6ffe3614ab Downloading [======================>                            ]  95.24MB/211.4MB
+ f014853ae203 Pull complete 
+ f014853ae203 Pull complete 
+ 4c490963eb14 Downloading [==================================>                ]  38.94MB/56.4MB
+ 4c490963eb14 Downloading [==================================>                ]  38.94MB/56.4MB
+ 1e6ffe3614ab Downloading [=======================>                           ]  98.97MB/211.4MB
+ 1e6ffe3614ab Downloading [=======================>                           ]  98.97MB/211.4MB
+ 6d6401b7636b Extracting [>                                                  ]  262.1kB/24.02MB
+ 6d6401b7636b Extracting [>                                                  ]  262.1kB/24.02MB
+ 4c490963eb14 Downloading [====================================>              ]  41.09MB/56.4MB
+ 4c490963eb14 Downloading [====================================>              ]  41.09MB/56.4MB
+ 1e6ffe3614ab Downloading [========================>                          ]  104.3MB/211.4MB
+ 1e6ffe3614ab Downloading [========================>                          ]  104.3MB/211.4MB
+ 6d6401b7636b Extracting [============>                                      ]  5.767MB/24.02MB
+ 6d6401b7636b Extracting [============>                                      ]  5.767MB/24.02MB
+ 678316275f1c Downloading [>                                                  ]    102kB/9.856MB
+ 678316275f1c Downloading [>                                                  ]    102kB/9.856MB
+ 4c490963eb14 Downloading [======================================>            ]  43.24MB/56.4MB
+ 4c490963eb14 Downloading [======================================>            ]  43.24MB/56.4MB
+ 6d6401b7636b Extracting [=========================>                         ]  12.32MB/24.02MB
+ 6d6401b7636b Extracting [=========================>                         ]  12.32MB/24.02MB
+ 1e6ffe3614ab Downloading [=========================>                         ]  105.9MB/211.4MB
+ 1e6ffe3614ab Downloading [=========================>                         ]  105.9MB/211.4MB
+ 678316275f1c Downloading [===================================>               ]  7.076MB/9.856MB
+ 678316275f1c Downloading [===================================>               ]  7.076MB/9.856MB
+ 6d6401b7636b Extracting [=================================>                 ]  16.25MB/24.02MB
+ 6d6401b7636b Extracting [=================================>                 ]  16.25MB/24.02MB
+ 4c490963eb14 Downloading [========================================>          ]  45.91MB/56.4MB
+ 4c490963eb14 Downloading [========================================>          ]  45.91MB/56.4MB
+ 1e6ffe3614ab Downloading [=========================>                         ]  108.6MB/211.4MB
+ 1e6ffe3614ab Downloading [=========================>                         ]  108.6MB/211.4MB
+ 678316275f1c Verifying Checksum 
+ 678316275f1c Download complete 
+ 678316275f1c Verifying Checksum 
+ 678316275f1c Download complete 
+ 6d6401b7636b Extracting [===========================================>       ]  20.97MB/24.02MB
+ 6d6401b7636b Extracting [===========================================>       ]  20.97MB/24.02MB
+ 1e6ffe3614ab Downloading [==========================>                        ]  113.9MB/211.4MB
+ 1e6ffe3614ab Downloading [==========================>                        ]  113.9MB/211.4MB
+ 4c490963eb14 Downloading [==========================================>        ]  48.05MB/56.4MB
+ 4c490963eb14 Downloading [==========================================>        ]  48.05MB/56.4MB
+ 6d6401b7636b Extracting [================================================>  ]  23.33MB/24.02MB
+ 6d6401b7636b Extracting [================================================>  ]  23.33MB/24.02MB
+ 1e6ffe3614ab Downloading [============================>                      ]    122MB/211.4MB
+ 1e6ffe3614ab Downloading [============================>                      ]    122MB/211.4MB
+ 4c490963eb14 Downloading [=============================================>     ]  51.25MB/56.4MB
+ 4c490963eb14 Downloading [=============================================>     ]  51.25MB/56.4MB
+ 6d6401b7636b Extracting [==================================================>]  24.02MB/24.02MB
+ 6d6401b7636b Extracting [==================================================>]  24.02MB/24.02MB
+ 6d6401b7636b Pull complete 
+ 6d6401b7636b Pull complete 
+ 1e6ffe3614ab Downloading [=============================>                     ]  126.3MB/211.4MB
+ 1e6ffe3614ab Downloading [=============================>                     ]  126.3MB/211.4MB
+ cffef7dc6f99 Extracting [>                                                  ]  557.1kB/64.4MB
+ cffef7dc6f99 Extracting [>                                                  ]  557.1kB/64.4MB
+ 4c490963eb14 Downloading [================================================>  ]  54.45MB/56.4MB
+ 4c490963eb14 Downloading [================================================>  ]  54.45MB/56.4MB
+ 13523a789524 Downloading [==================================================>]      92B/92B
+ 13523a789524 Verifying Checksum 
+ 13523a789524 Download complete 
+ 13523a789524 Verifying Checksum 
+ 13523a789524 Download complete 
+ 1e6ffe3614ab Downloading [===============================>                   ]  132.1MB/211.4MB
+ 1e6ffe3614ab Downloading [===============================>                   ]  132.1MB/211.4MB
+ 4c490963eb14 Verifying Checksum 
+ 4c490963eb14 Download complete 
+ 4c490963eb14 Verifying Checksum 
+ 4c490963eb14 Download complete 
+ cffef7dc6f99 Extracting [=====>                                             ]  6.685MB/64.4MB
+ cffef7dc6f99 Extracting [=====>                                             ]  6.685MB/64.4MB
+ 1e6ffe3614ab Downloading [================================>                  ]  135.9MB/211.4MB
+ 1e6ffe3614ab Downloading [================================>                  ]  135.9MB/211.4MB
+ cffef7dc6f99 Extracting [==========>                                        ]  13.37MB/64.4MB
+ cffef7dc6f99 Extracting [==========>                                        ]  13.37MB/64.4MB
+ 1e6ffe3614ab Downloading [==================================>                ]    146MB/211.4MB
+ 1e6ffe3614ab Downloading [==================================>                ]    146MB/211.4MB
+ cffef7dc6f99 Extracting [================>                                  ]  20.61MB/64.4MB
+ cffef7dc6f99 Extracting [================>                                  ]  20.61MB/64.4MB
+ 1e6ffe3614ab Downloading [====================================>              ]  155.6MB/211.4MB
+ 1e6ffe3614ab Downloading [====================================>              ]  155.6MB/211.4MB
+ cffef7dc6f99 Extracting [==================>                                ]  23.95MB/64.4MB
+ cffef7dc6f99 Extracting [==================>                                ]  23.95MB/64.4MB
+ 502449158994 Downloading [>                                                  ]  539.1kB/94.47MB
+ 502449158994 Downloading [>                                                  ]  539.1kB/94.47MB
+ 1e6ffe3614ab Downloading [======================================>            ]  163.7MB/211.4MB
+ 1e6ffe3614ab Downloading [======================================>            ]  163.7MB/211.4MB
+ cffef7dc6f99 Extracting [=====================>                             ]   27.3MB/64.4MB
+ cffef7dc6f99 Extracting [=====================>                             ]   27.3MB/64.4MB
+ 502449158994 Downloading [===>                                               ]  7.486MB/94.47MB
+ 502449158994 Downloading [===>                                               ]  7.486MB/94.47MB
+ 1e6ffe3614ab Downloading [========================================>          ]  170.6MB/211.4MB
+ 1e6ffe3614ab Downloading [========================================>          ]  170.6MB/211.4MB
+ 502449158994 Downloading [=======>                                           ]  13.92MB/94.47MB
+ 502449158994 Downloading [=======>                                           ]  13.92MB/94.47MB
+ 1e6ffe3614ab Downloading [=========================================>         ]  177.6MB/211.4MB
+ 1e6ffe3614ab Downloading [=========================================>         ]  177.6MB/211.4MB
+ cffef7dc6f99 Extracting [=======================>                           ]  30.08MB/64.4MB
+ cffef7dc6f99 Extracting [=======================>                           ]  30.08MB/64.4MB
+ 2c707b2be816 Downloading [==================================================>]     525B/525B
+ 2c707b2be816 Downloading [==================================================>]     525B/525B
+ 2c707b2be816 Verifying Checksum 
+ 2c707b2be816 Verifying Checksum 
+ 2c707b2be816 Download complete 
+ 2c707b2be816 Download complete 
+ 502449158994 Downloading [=============>                                     ]   24.6MB/94.47MB
+ 502449158994 Downloading [=============>                                     ]   24.6MB/94.47MB
+ 1e6ffe3614ab Downloading [===========================================>       ]  185.1MB/211.4MB
+ 1e6ffe3614ab Downloading [===========================================>       ]  185.1MB/211.4MB
+ cffef7dc6f99 Extracting [=========================>                         ]  32.87MB/64.4MB
+ cffef7dc6f99 Extracting [=========================>                         ]  32.87MB/64.4MB
+ 502449158994 Downloading [================>                                  ]  31.54MB/94.47MB
+ 502449158994 Downloading [================>                                  ]  31.54MB/94.47MB
+ 1e6ffe3614ab Downloading [=============================================>     ]  193.6MB/211.4MB
+ 1e6ffe3614ab Downloading [=============================================>     ]  193.6MB/211.4MB
+ 502449158994 Downloading [======================>                            ]  42.74MB/94.47MB
+ 502449158994 Downloading [======================>                            ]  42.74MB/94.47MB
+ cffef7dc6f99 Extracting [==========================>                        ]  34.54MB/64.4MB
+ cffef7dc6f99 Extracting [==========================>                        ]  34.54MB/64.4MB
+ 1e6ffe3614ab Downloading [==============================================>    ]  197.9MB/211.4MB
+ 1e6ffe3614ab Downloading [==============================================>    ]  197.9MB/211.4MB
+ 502449158994 Downloading [===========================>                       ]  51.82MB/94.47MB
+ 502449158994 Downloading [===========================>                       ]  51.82MB/94.47MB
+ cffef7dc6f99 Extracting [============================>                      ]  37.32MB/64.4MB
+ cffef7dc6f99 Extracting [============================>                      ]  37.32MB/64.4MB
+ 1e6ffe3614ab Downloading [===============================================>   ]  200.6MB/211.4MB
+ 1e6ffe3614ab Downloading [===============================================>   ]  200.6MB/211.4MB
+ a0abae0c8dcb Downloading [>                                                  ]  15.99kB/1.514MB
+ a0abae0c8dcb Downloading [>                                                  ]  15.99kB/1.514MB
+ 502449158994 Downloading [=================================>                 ]  63.06MB/94.47MB
+ 502449158994 Downloading [=================================>                 ]  63.06MB/94.47MB
+ a0abae0c8dcb Verifying Checksum 
+ a0abae0c8dcb Download complete 
+ a0abae0c8dcb Verifying Checksum 
+ a0abae0c8dcb Download complete 
+ cffef7dc6f99 Extracting [==============================>                    ]  39.55MB/64.4MB
+ cffef7dc6f99 Extracting [==============================>                    ]  39.55MB/64.4MB
+ 1e6ffe3614ab Downloading [================================================>  ]  205.9MB/211.4MB
+ 1e6ffe3614ab Downloading [================================================>  ]  205.9MB/211.4MB
+ 502449158994 Downloading [=======================================>           ]  74.84MB/94.47MB
+ 502449158994 Downloading [=======================================>           ]  74.84MB/94.47MB
+ cffef7dc6f99 Extracting [==================================>                ]  44.01MB/64.4MB
+ cffef7dc6f99 Extracting [==================================>                ]  44.01MB/64.4MB
+ 1e6ffe3614ab Downloading [=================================================> ]  209.7MB/211.4MB
+ 1e6ffe3614ab Downloading [=================================================> ]  209.7MB/211.4MB
+ 502449158994 Downloading [===========================================>       ]  82.91MB/94.47MB
+ 502449158994 Downloading [===========================================>       ]  82.91MB/94.47MB
+ 1e6ffe3614ab Verifying Checksum 
+ 1e6ffe3614ab Download complete 
+ 1e6ffe3614ab Verifying Checksum 
+ 1e6ffe3614ab Download complete 
+ cffef7dc6f99 Extracting [====================================>              ]  46.79MB/64.4MB
+ cffef7dc6f99 Extracting [====================================>              ]  46.79MB/64.4MB
+ 502449158994 Downloading [==============================================>    ]  88.76MB/94.47MB
+ 502449158994 Downloading [==============================================>    ]  88.76MB/94.47MB
+ ebed137c7c18 Downloading [>                                                  ]  489.9kB/48.49MB
+ 502449158994 Downloading [===============================================>   ]  89.83MB/94.47MB
+ 502449158994 Downloading [===============================================>   ]  89.83MB/94.47MB
+ 502449158994 Verifying Checksum 
+ 502449158994 Verifying Checksum 
+ 502449158994 Download complete 
+ 502449158994 Download complete 
+ cffef7dc6f99 Extracting [======================================>            ]  49.02MB/64.4MB
+ cffef7dc6f99 Extracting [======================================>            ]  49.02MB/64.4MB
+ ebed137c7c18 Downloading [==========>                                        ]  9.862MB/48.49MB
+ cffef7dc6f99 Extracting [========================================>          ]  52.36MB/64.4MB
+ cffef7dc6f99 Extracting [========================================>          ]  52.36MB/64.4MB
+ ebed137c7c18 Downloading [====================>                              ]  19.68MB/48.49MB
+ c2e76af9483f Downloading [>                                                  ]  241.1kB/24.02MB
+ cffef7dc6f99 Extracting [===========================================>       ]  56.26MB/64.4MB
+ cffef7dc6f99 Extracting [===========================================>       ]  56.26MB/64.4MB
+ ebed137c7c18 Downloading [==============================>                    ]  29.54MB/48.49MB
+ c2e76af9483f Downloading [==============>                                    ]  6.921MB/24.02MB
+ cffef7dc6f99 Extracting [=============================================>     ]  59.05MB/64.4MB
+ cffef7dc6f99 Extracting [=============================================>     ]  59.05MB/64.4MB
+ ebed137c7c18 Downloading [==========================================>        ]  40.88MB/48.49MB
+ c2e76af9483f Downloading [=====================>                             ]  10.38MB/24.02MB
+ 37f838b71c6b Downloading [>                                                  ]  531.9kB/64.4MB
+ ebed137c7c18 Verifying Checksum 
+ ebed137c7c18 Download complete 
+ cffef7dc6f99 Extracting [===============================================>   ]  60.72MB/64.4MB
+ cffef7dc6f99 Extracting [===============================================>   ]  60.72MB/64.4MB
+ c2e76af9483f Downloading [==========================>                        ]  12.61MB/24.02MB
+ 37f838b71c6b Downloading [====>                                              ]  6.388MB/64.4MB
+ ebed137c7c18 Extracting [>                                                  ]  491.5kB/48.49MB
+ c2e76af9483f Downloading [=================================>                 ]  15.86MB/24.02MB
+ cffef7dc6f99 Extracting [================================================>  ]  61.83MB/64.4MB
+ cffef7dc6f99 Extracting [================================================>  ]  61.83MB/64.4MB
+ 37f838b71c6b Downloading [=======>                                           ]  9.599MB/64.4MB
+ ebed137c7c18 Extracting [====>                                              ]  4.424MB/48.49MB
+ c2e76af9483f Downloading [======================================>            ]  18.57MB/24.02MB
+ 37f838b71c6b Downloading [===============>                                   ]  20.25MB/64.4MB
+ ebed137c7c18 Extracting [========>                                          ]  8.356MB/48.49MB
+ cffef7dc6f99 Extracting [=================================================> ]   63.5MB/64.4MB
+ cffef7dc6f99 Extracting [=================================================> ]   63.5MB/64.4MB
+ c2e76af9483f Verifying Checksum 
+ c2e76af9483f Download complete 
+ 37f838b71c6b Downloading [======================>                            ]  29.32MB/64.4MB
+ ebed137c7c18 Extracting [==========>                                        ]   9.83MB/48.49MB
+ 873a4c802874 Downloading [>                                                  ]  526.8kB/211.4MB
+ cffef7dc6f99 Extracting [=================================================> ]  64.06MB/64.4MB
+ cffef7dc6f99 Extracting [=================================================> ]  64.06MB/64.4MB
+ 37f838b71c6b Downloading [===========================>                       ]   35.2MB/64.4MB
+ ebed137c7c18 Extracting [=============>                                     ]  12.78MB/48.49MB
+ cffef7dc6f99 Extracting [==================================================>]   64.4MB/64.4MB
+ cffef7dc6f99 Extracting [==================================================>]   64.4MB/64.4MB
+ 873a4c802874 Downloading [==>                                                ]  10.12MB/211.4MB
+ 37f838b71c6b Downloading [=============================>                     ]  37.87MB/64.4MB
+ ebed137c7c18 Extracting [=================>                                 ]  16.71MB/48.49MB
+ cffef7dc6f99 Pull complete 
+ cffef7dc6f99 Pull complete 
+ 873a4c802874 Downloading [===>                                               ]  14.37MB/211.4MB
+ 37f838b71c6b Downloading [================================>                  ]  42.13MB/64.4MB
+ ebed137c7c18 Extracting [=====================>                             ]  21.14MB/48.49MB
+ fb52016f3b79 Downloading [==============>                                    ]     934B/3.323kB
+ fb52016f3b79 Downloading [==================================================>]  3.323kB/3.323kB
+ fb52016f3b79 Verifying Checksum 
+ fb52016f3b79 Download complete 
+ 1e6ffe3614ab Extracting [>                                                  ]  557.1kB/211.4MB
+ 1e6ffe3614ab Extracting [>                                                  ]  557.1kB/211.4MB
+ 873a4c802874 Downloading [=====>                                             ]  23.48MB/211.4MB
+ 37f838b71c6b Downloading [=======================================>           ]  51.21MB/64.4MB
+ 1e6ffe3614ab Extracting [=>                                                 ]  5.014MB/211.4MB
+ 1e6ffe3614ab Extracting [=>                                                 ]  5.014MB/211.4MB
+ 873a4c802874 Downloading [======>                                            ]  28.83MB/211.4MB
+ 37f838b71c6b Downloading [==============================================>    ]  59.74MB/64.4MB
+ 37f838b71c6b Verifying Checksum 
+ 37f838b71c6b Download complete 
+ 1e6ffe3614ab Extracting [==>                                                ]   9.47MB/211.4MB
+ 1e6ffe3614ab Extracting [==>                                                ]   9.47MB/211.4MB
+ 873a4c802874 Downloading [========>                                          ]  35.78MB/211.4MB
+ ebed137c7c18 Extracting [========================>                          ]  24.08MB/48.49MB
+ 1e6ffe3614ab Extracting [===>                                               ]  13.93MB/211.4MB
+ 1e6ffe3614ab Extracting [===>                                               ]  13.93MB/211.4MB
+ 873a4c802874 Downloading [=========>                                         ]  40.09MB/211.4MB
+ 5c26b6c1d3cc Downloading [>                                                  ]  539.1kB/56.4MB
+ ebed137c7c18 Extracting [===========================>                       ]  27.03MB/48.49MB
+ 1e6ffe3614ab Extracting [====>                                              ]  17.83MB/211.4MB
+ 1e6ffe3614ab Extracting [====>                                              ]  17.83MB/211.4MB
+ 873a4c802874 Downloading [===========>                                       ]  50.23MB/211.4MB
+ ebed137c7c18 Extracting [===============================>                   ]  30.47MB/48.49MB
+ 5c26b6c1d3cc Downloading [====>                                              ]   5.34MB/56.4MB
+ 873a4c802874 Downloading [=============>                                     ]  58.27MB/211.4MB
+ a870a7a19c34 Downloading [>                                                  ]  13.25kB/1.251MB
+ 5c26b6c1d3cc Downloading [========>                                          ]  9.067MB/56.4MB
+ a870a7a19c34 Downloading [==================================================>]  1.251MB/1.251MB
+ a870a7a19c34 Verifying Checksum 
+ a870a7a19c34 Download complete 
+ ebed137c7c18 Extracting [==================================>                ]  33.42MB/48.49MB
+ 1e6ffe3614ab Extracting [====>                                              ]  20.61MB/211.4MB
+ 1e6ffe3614ab Extracting [====>                                              ]  20.61MB/211.4MB
+ 873a4c802874 Downloading [===============>                                   ]  64.68MB/211.4MB
+ 5c26b6c1d3cc Downloading [============>                                      ]  13.87MB/56.4MB
+ ebed137c7c18 Extracting [====================================>              ]  35.88MB/48.49MB
+ 1e6ffe3614ab Extracting [=====>                                             ]  21.17MB/211.4MB
+ 1e6ffe3614ab Extracting [=====>                                             ]  21.17MB/211.4MB
+ 873a4c802874 Downloading [=================>                                 ]  73.75MB/211.4MB
+ ebed137c7c18 Extracting [=======================================>           ]  38.34MB/48.49MB
+ 5c26b6c1d3cc Downloading [===============>                                   ]  17.64MB/56.4MB
+ 873a4c802874 Downloading [==================>                                ]  80.16MB/211.4MB
+ 5c26b6c1d3cc Downloading [=======================>                           ]  26.74MB/56.4MB
+ ebed137c7c18 Extracting [=========================================>         ]   40.3MB/48.49MB
+ 873a4c802874 Downloading [======================>                            ]  93.53MB/211.4MB
+ 1e6ffe3614ab Extracting [=====>                                             ]  22.28MB/211.4MB
+ 1e6ffe3614ab Extracting [=====>                                             ]  22.28MB/211.4MB
+ 5c26b6c1d3cc Downloading [====================================>              ]  40.65MB/56.4MB
+ ebed137c7c18 Extracting [============================================>      ]  42.76MB/48.49MB
+ 873a4c802874 Downloading [=======================>                           ]    101MB/211.4MB
+ 5c26b6c1d3cc Downloading [=======================================>           ]  44.93MB/56.4MB
+ 873a4c802874 Downloading [==========================>                        ]  110.1MB/211.4MB
+ ebed137c7c18 Extracting [==============================================>    ]  45.22MB/48.49MB
+ 1e6ffe3614ab Extracting [=====>                                             ]   23.4MB/211.4MB
+ 1e6ffe3614ab Extracting [=====>                                             ]   23.4MB/211.4MB
+ 5c26b6c1d3cc Downloading [=============================================>     ]   50.8MB/56.4MB
+ 873a4c802874 Downloading [============================>                      ]  118.7MB/211.4MB
+ ebed137c7c18 Extracting [===============================================>   ]   46.2MB/48.49MB
+ 1e6ffe3614ab Extracting [=====>                                             ]  23.95MB/211.4MB
+ 1e6ffe3614ab Extracting [=====>                                             ]  23.95MB/211.4MB
+ 5c26b6c1d3cc Downloading [===============================================>   ]  54.01MB/56.4MB
+ 873a4c802874 Downloading [==============================>                    ]  127.7MB/211.4MB
+ ebed137c7c18 Extracting [================================================>  ]  47.19MB/48.49MB
+ e1c9fcf2cd8e Downloading [==================================================>]     448B/448B
+ e1c9fcf2cd8e Verifying Checksum 
+ e1c9fcf2cd8e Download complete 
+ 5c26b6c1d3cc Downloading [=================================================> ]  56.17MB/56.4MB
+ 5c26b6c1d3cc Verifying Checksum 
+ 5c26b6c1d3cc Download complete 
+ 873a4c802874 Downloading [===============================>                   ]  134.7MB/211.4MB
+ 1e6ffe3614ab Extracting [=====>                                             ]  25.07MB/211.4MB
+ 1e6ffe3614ab Extracting [=====>                                             ]  25.07MB/211.4MB
+ 873a4c802874 Downloading [==================================>                ]  144.8MB/211.4MB
+ 1e6ffe3614ab Extracting [======>                                            ]  25.62MB/211.4MB
+ 1e6ffe3614ab Extracting [======>                                            ]  25.62MB/211.4MB
+ 873a4c802874 Downloading [====================================>              ]  153.4MB/211.4MB
+ 1e6ffe3614ab Extracting [======>                                            ]  26.18MB/211.4MB
+ 1e6ffe3614ab Extracting [======>                                            ]  26.18MB/211.4MB
+ 873a4c802874 Downloading [=====================================>             ]  157.1MB/211.4MB
+ ebed137c7c18 Extracting [=================================================> ]  47.68MB/48.49MB
+ f930dea92b5e Downloading [>                                                  ]  155.9kB/15.2MB
+ 873a4c802874 Downloading [======================================>            ]  160.9MB/211.4MB
+ 5b738841fe03 Downloading [>                                                  ]  102.6kB/9.856MB
+ 1e6ffe3614ab Extracting [======>                                            ]   27.3MB/211.4MB
+ 1e6ffe3614ab Extracting [======>                                            ]   27.3MB/211.4MB
+ f930dea92b5e Verifying Checksum 
+ f930dea92b5e Download complete 
+ 873a4c802874 Downloading [=======================================>           ]  165.1MB/211.4MB
+ 5b738841fe03 Downloading [============================>                      ]  5.684MB/9.856MB
+ 5b738841fe03 Downloading [==================================================>]  9.856MB/9.856MB
+ 5b738841fe03 Verifying Checksum 
+ 5b738841fe03 Download complete 
+ ebed137c7c18 Extracting [==================================================>]  48.49MB/48.49MB
+ 1e6ffe3614ab Extracting [======>                                            ]  27.85MB/211.4MB
+ 1e6ffe3614ab Extracting [======>                                            ]  27.85MB/211.4MB
+ 873a4c802874 Downloading [=======================================>           ]  168.9MB/211.4MB
+ 1e6ffe3614ab Extracting [=======>                                           ]  32.31MB/211.4MB
+ 1e6ffe3614ab Extracting [=======>                                           ]  32.31MB/211.4MB
+ 873a4c802874 Downloading [=========================================>         ]  173.7MB/211.4MB
+ 1e6ffe3614ab Extracting [=========>                                         ]  38.44MB/211.4MB
+ 1e6ffe3614ab Extracting [=========>                                         ]  38.44MB/211.4MB
+ ebed137c7c18 Pull complete 
+ 873a4c802874 Downloading [=========================================>         ]  176.4MB/211.4MB
+ 7895ab910710 Downloading [==================================================>]      93B/93B
+ 7895ab910710 Verifying Checksum 
+ 7895ab910710 Download complete 
+ 1e6ffe3614ab Extracting [=========>                                         ]  41.22MB/211.4MB
+ 1e6ffe3614ab Extracting [=========>                                         ]  41.22MB/211.4MB
+ 873a4c802874 Downloading [==========================================>        ]  179.1MB/211.4MB
+ 1e6ffe3614ab Extracting [==========>                                        ]  44.56MB/211.4MB
+ 1e6ffe3614ab Extracting [==========>                                        ]  44.56MB/211.4MB
+ 75cda01b1329 Downloading [==================================================>]     509B/509B
+ 75cda01b1329 Verifying Checksum 
+ 75cda01b1329 Download complete 
+ c2e76af9483f Extracting [>                                                  ]  262.1kB/24.02MB
+ 873a4c802874 Downloading [=============================================>     ]  190.3MB/211.4MB
+ 1e6ffe3614ab Extracting [===========>                                       ]  50.14MB/211.4MB
+ 1e6ffe3614ab Extracting [===========>                                       ]  50.14MB/211.4MB
+ c2e76af9483f Extracting [========>                                          ]  3.932MB/24.02MB
+ 873a4c802874 Downloading [==============================================>    ]  196.2MB/211.4MB
+ 1e6ffe3614ab Extracting [============>                                      ]  54.59MB/211.4MB
+ 1e6ffe3614ab Extracting [============>                                      ]  54.59MB/211.4MB
+ c2e76af9483f Extracting [================>                                  ]  7.864MB/24.02MB
+ 873a4c802874 Downloading [===============================================>   ]    202MB/211.4MB
+ bc571936bdb9 Downloading [>                                                  ]   3.67kB/315.8kB
+ bc571936bdb9 Downloading [==================================================>]  315.8kB/315.8kB
+ bc571936bdb9 Verifying Checksum 
+ bc571936bdb9 Download complete 
+ 1e6ffe3614ab Extracting [=============>                                     ]  56.26MB/211.4MB
+ 1e6ffe3614ab Extracting [=============>                                     ]  56.26MB/211.4MB
+ c2e76af9483f Extracting [==========================>                        ]  12.85MB/24.02MB
+ 873a4c802874 Downloading [================================================>  ]  206.9MB/211.4MB
+ 1e6ffe3614ab Extracting [==============>                                    ]  61.28MB/211.4MB
+ 1e6ffe3614ab Extracting [==============>                                    ]  61.28MB/211.4MB
+ c2e76af9483f Extracting [================================>                  ]  15.47MB/24.02MB
+ 873a4c802874 Downloading [=================================================> ]  210.6MB/211.4MB
+ 873a4c802874 Verifying Checksum 
+ 873a4c802874 Download complete 
+ f77f190879e3 Downloading [>                                                  ]  539.1kB/185.1MB
+ 1e6ffe3614ab Extracting [================>                                  ]  67.96MB/211.4MB
+ 1e6ffe3614ab Extracting [================>                                  ]  67.96MB/211.4MB
+ c2e76af9483f Extracting [==========================================>        ]  20.19MB/24.02MB
+ f77f190879e3 Downloading [>                                                  ]  2.685MB/185.1MB
+ 1e6ffe3614ab Extracting [=================>                                 ]  73.53MB/211.4MB
+ 1e6ffe3614ab Extracting [=================>                                 ]  73.53MB/211.4MB
+ c2e76af9483f Extracting [==============================================>    ]  22.54MB/24.02MB
+ c76ca590f2eb Downloading [===>                                               ]     933B/12.62kB
+ c76ca590f2eb Downloading [==================================================>]  12.62kB/12.62kB
+ c76ca590f2eb Verifying Checksum 
+ c76ca590f2eb Download complete 
+ f77f190879e3 Downloading [=>                                                 ]  4.848MB/185.1MB
+ 1e6ffe3614ab Extracting [=================>                                 ]   75.2MB/211.4MB
+ 1e6ffe3614ab Extracting [=================>                                 ]   75.2MB/211.4MB
+ c2e76af9483f Extracting [=================================================> ]  23.59MB/24.02MB
+ c2e76af9483f Extracting [==================================================>]  24.02MB/24.02MB
+ f77f190879e3 Downloading [==>                                                ]  10.21MB/185.1MB
+ f77f190879e3 Downloading [===>                                               ]  13.42MB/185.1MB
+ 1e6ffe3614ab Extracting [==================>                                ]  76.87MB/211.4MB
+ 1e6ffe3614ab Extracting [==================>                                ]  76.87MB/211.4MB
+ 123b92336b82 Downloading [>                                                  ]  3.785kB/282.4kB
+ f77f190879e3 Downloading [====>                                              ]  15.56MB/185.1MB
+ 123b92336b82 Verifying Checksum 
+ 123b92336b82 Extracting [=====>                                             ]  32.77kB/282.4kB
+ 1e6ffe3614ab Extracting [==================>                                ]  77.43MB/211.4MB
+ 1e6ffe3614ab Extracting [==================>                                ]  77.43MB/211.4MB
+ e7cee334a64b Downloading [==================================================>]     964B/964B
+ f77f190879e3 Downloading [====>                                              ]  17.16MB/185.1MB
+ e7cee334a64b Verifying Checksum 
+ e7cee334a64b Download complete 
+ c2e76af9483f Pull complete 
+ 1e6ffe3614ab Extracting [===================>                               ]  80.77MB/211.4MB
+ 1e6ffe3614ab Extracting [===================>                               ]  80.77MB/211.4MB
+ f77f190879e3 Downloading [======>                                            ]  25.17MB/185.1MB
+ 123b92336b82 Extracting [==================================>                ]  196.6kB/282.4kB
+ 1e6ffe3614ab Extracting [===================>                               ]     83MB/211.4MB
+ 1e6ffe3614ab Extracting [===================>                               ]     83MB/211.4MB
+ 37f838b71c6b Extracting [>                                                  ]  557.1kB/64.4MB
+ 123b92336b82 Extracting [==================================================>]  282.4kB/282.4kB
+ 123b92336b82 Extracting [==================================================>]  282.4kB/282.4kB
+ f77f190879e3 Downloading [=========>                                         ]   34.2MB/185.1MB
+ 1e6ffe3614ab Extracting [====================>                              ]   86.9MB/211.4MB
+ 1e6ffe3614ab Extracting [====================>                              ]   86.9MB/211.4MB
+ 37f838b71c6b Extracting [====>                                              ]  5.571MB/64.4MB
+ f77f190879e3 Downloading [=========>                                         ]  36.87MB/185.1MB
+ 37f838b71c6b Extracting [=====>                                             ]  7.242MB/64.4MB
+ 1e6ffe3614ab Extracting [====================>                              ]  88.57MB/211.4MB
+ 1e6ffe3614ab Extracting [====================>                              ]  88.57MB/211.4MB
+ 536eff87c11a Downloading [>                                                  ]  110.6kB/11.02MB
+ f77f190879e3 Downloading [===========>                                       ]  42.77MB/185.1MB
+ 1e6ffe3614ab Extracting [=====================>                             ]  91.36MB/211.4MB
+ 1e6ffe3614ab Extracting [=====================>                             ]  91.36MB/211.4MB
+ 37f838b71c6b Extracting [=======>                                           ]   9.47MB/64.4MB
+ 123b92336b82 Pull complete 
+ 536eff87c11a Downloading [============================>                      ]  6.308MB/11.02MB
+ e7cee334a64b Extracting [==================================================>]     964B/964B
+ e7cee334a64b Extracting [==================================================>]     964B/964B
+ 0b2aa9ab96ae Downloading [==================================================>]     440B/440B
+ 0b2aa9ab96ae Verifying Checksum 
+ 0b2aa9ab96ae Download complete 
+ f77f190879e3 Downloading [==============>                                    ]  51.85MB/185.1MB
+ 536eff87c11a Verifying Checksum 
+ 536eff87c11a Download complete 
+ 37f838b71c6b Extracting [=========>                                         ]   11.7MB/64.4MB
+ 1e6ffe3614ab Extracting [======================>                            ]  93.03MB/211.4MB
+ 1e6ffe3614ab Extracting [======================>                            ]  93.03MB/211.4MB
+ f77f190879e3 Downloading [=================>                                 ]  64.17MB/185.1MB
+ 37f838b71c6b Extracting [===========>                                       ]  14.48MB/64.4MB
+ 1e6ffe3614ab Extracting [======================>                            ]  95.26MB/211.4MB
+ 1e6ffe3614ab Extracting [======================>                            ]  95.26MB/211.4MB
+ f77f190879e3 Downloading [====================>                              ]  75.37MB/185.1MB
+ e7cee334a64b Pull complete 
+ 37f838b71c6b Extracting [=============>                                     ]  17.27MB/64.4MB
+ 1e6ffe3614ab Extracting [=======================>                           ]  97.48MB/211.4MB
+ 1e6ffe3614ab Extracting [=======================>                           ]  97.48MB/211.4MB
+ f77f190879e3 Downloading [=====================>                             ]  80.72MB/185.1MB
+ 536eff87c11a Extracting [>                                                  ]  131.1kB/11.02MB
+ 1e6ffe3614ab Extracting [=======================>                           ]   98.6MB/211.4MB
+ 1e6ffe3614ab Extracting [=======================>                           ]   98.6MB/211.4MB
+ 37f838b71c6b Extracting [===============>                                   ]   19.5MB/64.4MB
+ f77f190879e3 Downloading [========================>                          ]   89.3MB/185.1MB
+ 1e6ffe3614ab Extracting [=======================>                           ]  100.3MB/211.4MB
+ 1e6ffe3614ab Extracting [=======================>                           ]  100.3MB/211.4MB
+ 536eff87c11a Extracting [=>                                                 ]  262.1kB/11.02MB
+ 37f838b71c6b Extracting [================>                                  ]  21.73MB/64.4MB
+ f77f190879e3 Downloading [========================>                          ]  92.53MB/185.1MB
+ 4f4fb700ef54 Downloading [==================================================>]      32B/32B
+ 4f4fb700ef54 Verifying Checksum 
+ 4f4fb700ef54 Download complete 
+ 1e6ffe3614ab Extracting [========================>                          ]  103.1MB/211.4MB
+ 1e6ffe3614ab Extracting [========================>                          ]  103.1MB/211.4MB
+ 536eff87c11a Extracting [==============>                                    ]  3.277MB/11.02MB
+ f77f190879e3 Downloading [===========================>                       ]  101.6MB/185.1MB
+ 37f838b71c6b Extracting [==================>                                ]   23.4MB/64.4MB
+ 1e6ffe3614ab Extracting [=========================>                         ]  106.4MB/211.4MB
+ 1e6ffe3614ab Extracting [=========================>                         ]  106.4MB/211.4MB
+ 536eff87c11a Extracting [===================================>               ]  7.864MB/11.02MB
+ f77f190879e3 Downloading [============================>                      ]  106.4MB/185.1MB
+ 37f838b71c6b Extracting [===================>                               ]  25.07MB/64.4MB
+ 1e6ffe3614ab Extracting [==========================>                        ]  110.3MB/211.4MB
+ 1e6ffe3614ab Extracting [==========================>                        ]  110.3MB/211.4MB
+ 536eff87c11a Extracting [==============================================>    ]  10.22MB/11.02MB
+ 536eff87c11a Extracting [==================================================>]  11.02MB/11.02MB
+ f77f190879e3 Downloading [==============================>                    ]  112.3MB/185.1MB
+ 1e6ffe3614ab Extracting [===========================>                       ]  114.8MB/211.4MB
+ 1e6ffe3614ab Extracting [===========================>                       ]  114.8MB/211.4MB
+ 37f838b71c6b Extracting [=====================>                             ]   27.3MB/64.4MB
+ f77f190879e3 Downloading [==============================>                    ]  114.4MB/185.1MB
+ 1e6ffe3614ab Extracting [============================>                      ]  120.3MB/211.4MB
+ 1e6ffe3614ab Extracting [============================>                      ]  120.3MB/211.4MB
+ 37f838b71c6b Extracting [======================>                            ]  28.97MB/64.4MB
+ f77f190879e3 Downloading [===============================>                   ]  117.1MB/185.1MB
+ 1e6ffe3614ab Extracting [=============================>                     ]  123.7MB/211.4MB
+ 1e6ffe3614ab Extracting [=============================>                     ]  123.7MB/211.4MB
+ 536eff87c11a Pull complete 
+ f77f190879e3 Downloading [===============================>                   ]  118.2MB/185.1MB
+ 1e6ffe3614ab Extracting [=============================>                     ]  126.5MB/211.4MB
+ 1e6ffe3614ab Extracting [=============================>                     ]  126.5MB/211.4MB
+ f77f190879e3 Downloading [=================================>                 ]    124MB/185.1MB
+ 0b2aa9ab96ae Extracting [==================================================>]     440B/440B
+ 1e6ffe3614ab Extracting [===============================>                   ]  132.6MB/211.4MB
+ 1e6ffe3614ab Extracting [===============================>                   ]  132.6MB/211.4MB
+ f77f190879e3 Downloading [==================================>                ]  129.4MB/185.1MB
+ 1e6ffe3614ab Extracting [================================>                  ]  135.4MB/211.4MB
+ 1e6ffe3614ab Extracting [================================>                  ]  135.4MB/211.4MB
+ 37f838b71c6b Extracting [=======================>                           ]  30.08MB/64.4MB
+ f77f190879e3 Downloading [====================================>              ]  134.2MB/185.1MB
+ 37f838b71c6b Extracting [========================>                          ]   31.2MB/64.4MB
+ 1e6ffe3614ab Extracting [================================>                  ]  138.7MB/211.4MB
+ 1e6ffe3614ab Extracting [================================>                  ]  138.7MB/211.4MB
+ 0b2aa9ab96ae Pull complete 
+ 4f4fb700ef54 Extracting [==================================================>]      32B/32B
+ 4f4fb700ef54 Extracting [==================================================>]      32B/32B
+ 37f838b71c6b Extracting [=========================>                         ]  32.31MB/64.4MB
+ 1e6ffe3614ab Extracting [=================================>                 ]    142MB/211.4MB
+ 1e6ffe3614ab Extracting [=================================>                 ]    142MB/211.4MB
+ f77f190879e3 Downloading [=====================================>             ]  138.5MB/185.1MB
+ 4f4fb700ef54 Pull complete 
+ 1e6ffe3614ab Extracting [==================================>                ]  144.8MB/211.4MB
+ 1e6ffe3614ab Extracting [==================================>                ]  144.8MB/211.4MB
+ f77f190879e3 Downloading [======================================>            ]  142.8MB/185.1MB
+ 37f838b71c6b Extracting [=========================>                         ]  33.42MB/64.4MB
+ haproxy Pulled 
+ 1e6ffe3614ab Extracting [===================================>               ]  148.7MB/211.4MB
+ 1e6ffe3614ab Extracting [===================================>               ]  148.7MB/211.4MB
+ f77f190879e3 Downloading [=======================================>           ]  146.5MB/185.1MB
+ 1e6ffe3614ab Extracting [====================================>              ]  152.6MB/211.4MB
+ 1e6ffe3614ab Extracting [====================================>              ]  152.6MB/211.4MB
+ 37f838b71c6b Extracting [==========================>                        ]  34.54MB/64.4MB
+ 1e6ffe3614ab Extracting [=====================================>             ]  158.2MB/211.4MB
+ 1e6ffe3614ab Extracting [=====================================>             ]  158.2MB/211.4MB
+ f77f190879e3 Downloading [========================================>          ]  149.2MB/185.1MB
+ 37f838b71c6b Extracting [============================>                      ]  36.77MB/64.4MB
+ 1e6ffe3614ab Extracting [======================================>            ]  163.2MB/211.4MB
+ 1e6ffe3614ab Extracting [======================================>            ]  163.2MB/211.4MB
+ f77f190879e3 Downloading [=========================================>         ]  154.5MB/185.1MB
+ 37f838b71c6b Extracting [=============================>                     ]  38.44MB/64.4MB
+ 1e6ffe3614ab Extracting [=======================================>           ]  166.6MB/211.4MB
+ 1e6ffe3614ab Extracting [=======================================>           ]  166.6MB/211.4MB
+ f77f190879e3 Downloading [===========================================>       ]  159.3MB/185.1MB
+ 37f838b71c6b Extracting [================================>                  ]  42.34MB/64.4MB
+ f77f190879e3 Downloading [===========================================>       ]  162.5MB/185.1MB
+ 37f838b71c6b Extracting [==================================>                ]  44.56MB/64.4MB
+ 1e6ffe3614ab Extracting [========================================>          ]  169.3MB/211.4MB
+ 1e6ffe3614ab Extracting [========================================>          ]  169.3MB/211.4MB
+ f77f190879e3 Downloading [=============================================>     ]  166.8MB/185.1MB
+ 1e6ffe3614ab Extracting [========================================>          ]    171MB/211.4MB
+ 1e6ffe3614ab Extracting [========================================>          ]    171MB/211.4MB
+ 37f838b71c6b Extracting [=====================================>             ]  47.91MB/64.4MB
+ f77f190879e3 Downloading [=============================================>     ]    170MB/185.1MB
+ f77f190879e3 Downloading [==============================================>    ]  173.2MB/185.1MB
+ 1e6ffe3614ab Extracting [=========================================>         ]  176.6MB/211.4MB
+ 1e6ffe3614ab Extracting [=========================================>         ]  176.6MB/211.4MB
+ 37f838b71c6b Extracting [======================================>            ]  49.02MB/64.4MB
+ f77f190879e3 Downloading [===============================================>   ]  175.9MB/185.1MB
+ 1e6ffe3614ab Extracting [===========================================>       ]  182.2MB/211.4MB
+ 1e6ffe3614ab Extracting [===========================================>       ]  182.2MB/211.4MB
+ 37f838b71c6b Extracting [========================================>          ]  51.81MB/64.4MB
+ 1e6ffe3614ab Extracting [============================================>      ]  186.1MB/211.4MB
+ 1e6ffe3614ab Extracting [============================================>      ]  186.1MB/211.4MB
+ f77f190879e3 Downloading [================================================>  ]  178.5MB/185.1MB
+ 37f838b71c6b Extracting [==========================================>        ]  54.59MB/64.4MB
+ f77f190879e3 Downloading [=================================================> ]  184.9MB/185.1MB
+ f77f190879e3 Verifying Checksum 
+ f77f190879e3 Download complete 
+ 1e6ffe3614ab Extracting [============================================>      ]  189.4MB/211.4MB
+ 1e6ffe3614ab Extracting [============================================>      ]  189.4MB/211.4MB
+ 37f838b71c6b Extracting [============================================>      ]  57.93MB/64.4MB
+ 1e6ffe3614ab Extracting [=============================================>     ]  192.7MB/211.4MB
+ 1e6ffe3614ab Extracting [=============================================>     ]  192.7MB/211.4MB
+ 37f838b71c6b Extracting [==============================================>    ]   59.6MB/64.4MB
+ 1e6ffe3614ab Extracting [==============================================>    ]    195MB/211.4MB
+ 1e6ffe3614ab Extracting [==============================================>    ]    195MB/211.4MB
+ 37f838b71c6b Extracting [===============================================>   ]  61.28MB/64.4MB
+ 1e6ffe3614ab Extracting [==============================================>    ]  197.2MB/211.4MB
+ 1e6ffe3614ab Extracting [==============================================>    ]  197.2MB/211.4MB
+ 37f838b71c6b Extracting [================================================>  ]  62.39MB/64.4MB
+ 1e6ffe3614ab Extracting [===============================================>   ]  200.5MB/211.4MB
+ 1e6ffe3614ab Extracting [===============================================>   ]  200.5MB/211.4MB
+ 1e6ffe3614ab Extracting [================================================>  ]  203.3MB/211.4MB
+ 1e6ffe3614ab Extracting [================================================>  ]  203.3MB/211.4MB
+ 1e6ffe3614ab Extracting [================================================>  ]  206.1MB/211.4MB
+ 1e6ffe3614ab Extracting [================================================>  ]  206.1MB/211.4MB
+ 37f838b71c6b Extracting [=================================================> ]  64.06MB/64.4MB
+ 37f838b71c6b Extracting [==================================================>]   64.4MB/64.4MB
+ 1e6ffe3614ab Extracting [=================================================> ]  207.8MB/211.4MB
+ 1e6ffe3614ab Extracting [=================================================> ]  207.8MB/211.4MB
+ 1e6ffe3614ab Extracting [=================================================> ]  208.3MB/211.4MB
+ 1e6ffe3614ab Extracting [=================================================> ]  208.3MB/211.4MB
+ 37f838b71c6b Pull complete 
+ 1e6ffe3614ab Extracting [=================================================> ]  208.9MB/211.4MB
+ 1e6ffe3614ab Extracting [=================================================> ]  208.9MB/211.4MB
+ 873a4c802874 Extracting [>                                                  ]  557.1kB/211.4MB
+ 1e6ffe3614ab Extracting [=================================================> ]  209.5MB/211.4MB
+ 1e6ffe3614ab Extracting [=================================================> ]  209.5MB/211.4MB
+ 873a4c802874 Extracting [=>                                                 ]  5.014MB/211.4MB
+ 873a4c802874 Extracting [==>                                                ]  11.14MB/211.4MB
+ 1e6ffe3614ab Extracting [=================================================> ]    210MB/211.4MB
+ 1e6ffe3614ab Extracting [=================================================> ]    210MB/211.4MB
+ 873a4c802874 Extracting [====>                                              ]  17.83MB/211.4MB
+ 1e6ffe3614ab Extracting [=================================================> ]  210.6MB/211.4MB
+ 1e6ffe3614ab Extracting [=================================================> ]  210.6MB/211.4MB
+ 873a4c802874 Extracting [====>                                              ]  20.61MB/211.4MB
+ 1e6ffe3614ab Extracting [=================================================> ]  211.1MB/211.4MB
+ 1e6ffe3614ab Extracting [=================================================> ]  211.1MB/211.4MB
+ 873a4c802874 Extracting [=====>                                             ]  21.73MB/211.4MB
+ 1e6ffe3614ab Extracting [==================================================>]  211.4MB/211.4MB
+ 1e6ffe3614ab Extracting [==================================================>]  211.4MB/211.4MB
+ 873a4c802874 Extracting [=====>                                             ]  22.28MB/211.4MB
+ 873a4c802874 Extracting [=====>                                             ]  22.84MB/211.4MB
+ 1e6ffe3614ab Pull complete 
+ 1e6ffe3614ab Pull complete 
+ 873a4c802874 Extracting [=====>                                             ]   23.4MB/211.4MB
+ 100dcf33d29c Extracting [==================================================>]  3.328kB/3.328kB
+ 100dcf33d29c Extracting [==================================================>]  3.328kB/3.328kB
+ 100dcf33d29c Extracting [==================================================>]  3.328kB/3.328kB
+ 100dcf33d29c Extracting [==================================================>]  3.328kB/3.328kB
+ 873a4c802874 Extracting [=====>                                             ]  23.95MB/211.4MB
+ 873a4c802874 Extracting [=====>                                             ]  24.51MB/211.4MB
+ 100dcf33d29c Pull complete 
+ 100dcf33d29c Pull complete 
+ 873a4c802874 Extracting [=====>                                             ]  25.07MB/211.4MB
+ 873a4c802874 Extracting [======>                                            ]  25.62MB/211.4MB
+ 4c490963eb14 Extracting [>                                                  ]  557.1kB/56.4MB
+ 4c490963eb14 Extracting [>                                                  ]  557.1kB/56.4MB
+ 4c490963eb14 Extracting [====>                                              ]  5.571MB/56.4MB
+ 4c490963eb14 Extracting [====>                                              ]  5.571MB/56.4MB
+ 873a4c802874 Extracting [======>                                            ]  26.74MB/211.4MB
+ 4c490963eb14 Extracting [========>                                          ]  10.03MB/56.4MB
+ 4c490963eb14 Extracting [========>                                          ]  10.03MB/56.4MB
+ 4c490963eb14 Extracting [==============>                                    ]  16.15MB/56.4MB
+ 4c490963eb14 Extracting [==============>                                    ]  16.15MB/56.4MB
+ 873a4c802874 Extracting [======>                                            ]  27.85MB/211.4MB
+ 4c490963eb14 Extracting [==================>                                ]  21.17MB/56.4MB
+ 4c490963eb14 Extracting [==================>                                ]  21.17MB/56.4MB
+ 873a4c802874 Extracting [=======>                                           ]  31.75MB/211.4MB
+ 4c490963eb14 Extracting [======================>                            ]  25.07MB/56.4MB
+ 4c490963eb14 Extracting [======================>                            ]  25.07MB/56.4MB
+ 873a4c802874 Extracting [========>                                          ]  37.88MB/211.4MB
+ 4c490963eb14 Extracting [==========================>                        ]  30.08MB/56.4MB
+ 4c490963eb14 Extracting [==========================>                        ]  30.08MB/56.4MB
+ 873a4c802874 Extracting [==========>                                        ]  43.45MB/211.4MB
+ 4c490963eb14 Extracting [================================>                  ]  36.21MB/56.4MB
+ 4c490963eb14 Extracting [================================>                  ]  36.21MB/56.4MB
+ 873a4c802874 Extracting [===========>                                       ]  49.58MB/211.4MB
+ 4c490963eb14 Extracting [====================================>              ]  40.67MB/56.4MB
+ 4c490963eb14 Extracting [====================================>              ]  40.67MB/56.4MB
+ 873a4c802874 Extracting [============>                                      ]  54.03MB/211.4MB
+ 4c490963eb14 Extracting [=======================================>           ]  44.56MB/56.4MB
+ 4c490963eb14 Extracting [=======================================>           ]  44.56MB/56.4MB
+ 873a4c802874 Extracting [=============>                                     ]  56.26MB/211.4MB
+ 873a4c802874 Extracting [==============>                                    ]  61.83MB/211.4MB
+ 4c490963eb14 Extracting [========================================>          ]  45.68MB/56.4MB
+ 4c490963eb14 Extracting [========================================>          ]  45.68MB/56.4MB
+ 873a4c802874 Extracting [================>                                  ]  68.52MB/211.4MB
+ 4c490963eb14 Extracting [=========================================>         ]  46.79MB/56.4MB
+ 4c490963eb14 Extracting [=========================================>         ]  46.79MB/56.4MB
+ 873a4c802874 Extracting [=================>                                 ]  74.09MB/211.4MB
+ 4c490963eb14 Extracting [==========================================>        ]  47.91MB/56.4MB
+ 4c490963eb14 Extracting [==========================================>        ]  47.91MB/56.4MB
+ 873a4c802874 Extracting [=================>                                 ]  75.76MB/211.4MB
+ 4c490963eb14 Extracting [===========================================>       ]  49.02MB/56.4MB
+ 4c490963eb14 Extracting [===========================================>       ]  49.02MB/56.4MB
+ 873a4c802874 Extracting [==================>                                ]  77.43MB/211.4MB
+ 4c490963eb14 Extracting [============================================>      ]  50.14MB/56.4MB
+ 4c490963eb14 Extracting [============================================>      ]  50.14MB/56.4MB
+ 873a4c802874 Extracting [===================>                               ]  81.33MB/211.4MB
+ 4c490963eb14 Extracting [=============================================>     ]  51.25MB/56.4MB
+ 4c490963eb14 Extracting [=============================================>     ]  51.25MB/56.4MB
+ 873a4c802874 Extracting [====================>                              ]  85.23MB/211.4MB
+ 873a4c802874 Extracting [=====================>                             ]   90.8MB/211.4MB
+ 4c490963eb14 Extracting [==============================================>    ]  52.36MB/56.4MB
+ 4c490963eb14 Extracting [==============================================>    ]  52.36MB/56.4MB
+ 873a4c802874 Extracting [======================>                            ]  95.81MB/211.4MB
+ 4c490963eb14 Extracting [===============================================>   ]  53.48MB/56.4MB
+ 4c490963eb14 Extracting [===============================================>   ]  53.48MB/56.4MB
+ 873a4c802874 Extracting [=======================>                           ]  100.8MB/211.4MB
+ 4c490963eb14 Extracting [===============================================>   ]  54.03MB/56.4MB
+ 4c490963eb14 Extracting [===============================================>   ]  54.03MB/56.4MB
+ 873a4c802874 Extracting [=========================>                         ]  106.4MB/211.4MB
+ 873a4c802874 Extracting [==========================>                        ]  110.9MB/211.4MB
+ 4c490963eb14 Extracting [================================================>  ]  54.59MB/56.4MB
+ 4c490963eb14 Extracting [================================================>  ]  54.59MB/56.4MB
+ 873a4c802874 Extracting [===========================>                       ]    117MB/211.4MB
+ 4c490963eb14 Extracting [================================================>  ]  55.15MB/56.4MB
+ 4c490963eb14 Extracting [================================================>  ]  55.15MB/56.4MB
+ 873a4c802874 Extracting [============================>                      ]  122.6MB/211.4MB
+ 873a4c802874 Extracting [==============================>                    ]  129.8MB/211.4MB
+ 4c490963eb14 Extracting [=================================================> ]  55.71MB/56.4MB
+ 4c490963eb14 Extracting [=================================================> ]  55.71MB/56.4MB
+ 873a4c802874 Extracting [================================>                  ]  135.9MB/211.4MB
+ 4c490963eb14 Extracting [=================================================> ]  56.26MB/56.4MB
+ 4c490963eb14 Extracting [=================================================> ]  56.26MB/56.4MB
+ 873a4c802874 Extracting [=================================>                 ]  139.8MB/211.4MB
+ 4c490963eb14 Extracting [==================================================>]   56.4MB/56.4MB
+ 4c490963eb14 Extracting [==================================================>]   56.4MB/56.4MB
+ 873a4c802874 Extracting [==================================>                ]  144.3MB/211.4MB
+ 873a4c802874 Extracting [===================================>               ]  149.3MB/211.4MB
+ 873a4c802874 Extracting [===================================>               ]    151MB/211.4MB
+ 4c490963eb14 Pull complete 
+ 4c490963eb14 Pull complete 
+ 873a4c802874 Extracting [====================================>              ]    156MB/211.4MB
+ 9ca84c9f270e Extracting [=>                                                 ]  32.77kB/1.251MB
+ 9ca84c9f270e Extracting [=>                                                 ]  32.77kB/1.251MB
+ 873a4c802874 Extracting [=====================================>             ]  159.3MB/211.4MB
+ 9ca84c9f270e Extracting [==================================================>]  1.251MB/1.251MB
+ 9ca84c9f270e Extracting [==================================================>]  1.251MB/1.251MB
+ 9ca84c9f270e Pull complete 
+ 9ca84c9f270e Pull complete 
+ 873a4c802874 Extracting [======================================>            ]  163.8MB/211.4MB
+ 6b6ae8c5c9b1 Extracting [==================================================>]     447B/447B
+ 6b6ae8c5c9b1 Extracting [==================================================>]     447B/447B
+ 6b6ae8c5c9b1 Extracting [==================================================>]     447B/447B
+ 6b6ae8c5c9b1 Extracting [==================================================>]     447B/447B
+ 873a4c802874 Extracting [=======================================>           ]  167.1MB/211.4MB
+ 6b6ae8c5c9b1 Pull complete 
+ 6b6ae8c5c9b1 Pull complete 
+ f924e279e640 Extracting [>                                                  ]  163.8kB/15.2MB
+ f924e279e640 Extracting [>                                                  ]  163.8kB/15.2MB
+ 873a4c802874 Extracting [========================================>          ]  169.3MB/211.4MB
+ f924e279e640 Extracting [=================>                                 ]  5.407MB/15.2MB
+ f924e279e640 Extracting [=================>                                 ]  5.407MB/15.2MB
+ f924e279e640 Extracting [===============================================>   ]  14.58MB/15.2MB
+ f924e279e640 Extracting [===============================================>   ]  14.58MB/15.2MB
+ f924e279e640 Extracting [==================================================>]   15.2MB/15.2MB
+ f924e279e640 Extracting [==================================================>]   15.2MB/15.2MB
+ 873a4c802874 Extracting [========================================>          ]    171MB/211.4MB
+ 873a4c802874 Extracting [========================================>          ]  173.2MB/211.4MB
+ f924e279e640 Pull complete 
+ f924e279e640 Pull complete 
+ 873a4c802874 Extracting [=========================================>         ]    176MB/211.4MB
+ 678316275f1c Extracting [>                                                  ]  131.1kB/9.856MB
+ 678316275f1c Extracting [>                                                  ]  131.1kB/9.856MB
+ 873a4c802874 Extracting [==========================================>        ]  178.3MB/211.4MB
+ 678316275f1c Extracting [=========================>                         ]  5.112MB/9.856MB
+ 678316275f1c Extracting [=========================>                         ]  5.112MB/9.856MB
+ 873a4c802874 Extracting [===========================================>       ]  182.7MB/211.4MB
+ 678316275f1c Extracting [===========================>                       ]  5.505MB/9.856MB
+ 678316275f1c Extracting [===========================>                       ]  5.505MB/9.856MB
+ 873a4c802874 Extracting [============================================>      ]  187.7MB/211.4MB
+ 678316275f1c Extracting [=============================>                     ]  5.767MB/9.856MB
+ 678316275f1c Extracting [=============================>                     ]  5.767MB/9.856MB
+ 873a4c802874 Extracting [=============================================>     ]  191.1MB/211.4MB
+ 678316275f1c Extracting [=================================>                 ]  6.554MB/9.856MB
+ 678316275f1c Extracting [=================================>                 ]  6.554MB/9.856MB
+ 873a4c802874 Extracting [=============================================>     ]  194.4MB/211.4MB
 log truncated at line 1000

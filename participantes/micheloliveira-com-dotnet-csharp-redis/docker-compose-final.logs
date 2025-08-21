@@ -1,91 +1,140 @@
 
+ backend-2 Pulling 
+ backend-1 Pulling 
+ 9824c27679d3 Already exists 
+ 1a283093615e Already exists 
+ c0055458ac5d Already exists 
+ 931829fa3dc7 Pulling fs layer 
+ 601d53dd163c Pulling fs layer 
+ 9824c27679d3 Already exists 
+ 1a283093615e Already exists 
+ c0055458ac5d Already exists 
+ 931829fa3dc7 Pulling fs layer 
+ 601d53dd163c Pulling fs layer 
+ 931829fa3dc7 Downloading [==================================================>]      93B/93B
+ 931829fa3dc7 Verifying Checksum 
+ 931829fa3dc7 Download complete 
+ 931829fa3dc7 Downloading [==================================================>]      93B/93B
+ 931829fa3dc7 Verifying Checksum 
+ 931829fa3dc7 Extracting [==================================================>]      93B/93B
+ 931829fa3dc7 Download complete 
+ 931829fa3dc7 Extracting [==================================================>]      93B/93B
+ 931829fa3dc7 Extracting [==================================================>]      93B/93B
+ 931829fa3dc7 Extracting [==================================================>]      93B/93B
+ 931829fa3dc7 Pull complete 
+ 931829fa3dc7 Pull complete 
+ 601d53dd163c Downloading [>                                                  ]  211.8kB/19.88MB
+ 601d53dd163c Downloading [>                                                  ]  211.8kB/19.88MB
+ 601d53dd163c Downloading [==========>                                        ]  4.046MB/19.88MB
+ 601d53dd163c Downloading [==========>                                        ]  4.046MB/19.88MB
+ 601d53dd163c Downloading [===================>                               ]  7.881MB/19.88MB
+ 601d53dd163c Downloading [===================>                               ]  7.881MB/19.88MB
+ 601d53dd163c Downloading [=============================>                     ]  11.69MB/19.88MB
+ 601d53dd163c Downloading [=============================>                     ]  11.69MB/19.88MB
+ 601d53dd163c Downloading [======================================>            ]  15.46MB/19.88MB
+ 601d53dd163c Downloading [======================================>            ]  15.46MB/19.88MB
+ 601d53dd163c Downloading [================================================>  ]  19.23MB/19.88MB
+ 601d53dd163c Downloading [================================================>  ]  19.23MB/19.88MB
+ 601d53dd163c Download complete 
+ 601d53dd163c Verifying Checksum 
+ 601d53dd163c Download complete 
+ 601d53dd163c Extracting [>                                                  ]  229.4kB/19.88MB
+ 601d53dd163c Extracting [>                                                  ]  229.4kB/19.88MB
+ 601d53dd163c Extracting [============================>                      ]  11.47MB/19.88MB
+ 601d53dd163c Extracting [============================>                      ]  11.47MB/19.88MB
+ 601d53dd163c Extracting [================================================>  ]  19.27MB/19.88MB
+ 601d53dd163c Extracting [================================================>  ]  19.27MB/19.88MB
+ 601d53dd163c Extracting [==================================================>]  19.88MB/19.88MB
+ 601d53dd163c Extracting [==================================================>]  19.88MB/19.88MB
+ 601d53dd163c Pull complete 
+ 601d53dd163c Pull complete 
+ backend-2 Pulled 
+ backend-1 Pulled 
  Network micheloliveira-com-dotnet-csharp-redis_backend  Creating
  Network micheloliveira-com-dotnet-csharp-redis_backend  Created
- Container micheloliveira-com-dotnet-csharp-redis-backend-1-1  Creating
  Container micheloliveira-com-dotnet-csharp-redis-backend-2-1  Creating
  Container micheloliveira-com-dotnet-csharp-redis-redis-1  Creating
- Container micheloliveira-com-dotnet-csharp-redis-backend-2-1  Created
+ Container micheloliveira-com-dotnet-csharp-redis-backend-1-1  Creating
  Container micheloliveira-com-dotnet-csharp-redis-backend-1-1  Created
+ Container micheloliveira-com-dotnet-csharp-redis-backend-2-1  Created
  Container micheloliveira-com-dotnet-csharp-redis-load-balancer-1  Creating
  Container micheloliveira-com-dotnet-csharp-redis-redis-1  Created
  Container micheloliveira-com-dotnet-csharp-redis-load-balancer-1  Created
 Attaching to backend-1-1, backend-2-1, load-balancer-1, redis-1
 backend-1-1  | WORKER_SIZE: 10
 backend-1-1  | BATCH_SIZE: 100
+backend-1-1  | [Redis] Attempting connection...
+backend-1-1  | Retry 1: RedisConnectionException - It was not possible to connect to the redis server(s). Error connecting right now. To allow this multiplexer to continue retrying until it's able to connect, use abortConnect=false in your connection string or AbortOnConnectFail=false; in your code.
 backend-2-1  | WORKER_SIZE: 10
 backend-2-1  | BATCH_SIZE: 100
-backend-1-1  | [Redis] Attempting connection...
 backend-2-1  | [Redis] Attempting connection...
-backend-1-1  | Retry 1: RedisConnectionException - It was not possible to connect to the redis server(s). Error connecting right now. To allow this multiplexer to continue retrying until it's able to connect, use abortConnect=false in your connection string or AbortOnConnectFail=false; in your code.
 backend-2-1  | Retry 1: RedisConnectionException - It was not possible to connect to the redis server(s). Error connecting right now. To allow this multiplexer to continue retrying until it's able to connect, use abortConnect=false in your connection string or AbortOnConnectFail=false; in your code.
-redis-1      | Starting Redis Server
 backend-1-1  | [Redis] Attempting connection...
-backend-2-1  | [Redis] Attempting connection...
 backend-1-1  | Retry 2: RedisConnectionException - It was not possible to connect to the redis server(s). Error connecting right now. To allow this multiplexer to continue retrying until it's able to connect, use abortConnect=false in your connection string or AbortOnConnectFail=false; in your code.
-backend-2-1  | Retry 2: RedisConnectionException - It was not possible to connect to the redis server(s). Error connecting right now. To allow this multiplexer to continue retrying until it's able to connect, use abortConnect=false in your connection string or AbortOnConnectFail=false; in your code.
-redis-1      | 1:C 19 Aug 2025 09:37:14.332 # WARNING Memory overcommit must be enabled! Without it, a background save or replication may fail under low memory condition. Being disabled, it can also cause failures without low memory condition, see https://github.com/jemalloc/jemalloc/issues/1328. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.
-redis-1      | 1:C 19 Aug 2025 09:37:14.332 * oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
-redis-1      | 1:C 19 Aug 2025 09:37:14.332 * Redis version=8.2.0, bits=64, commit=00000000, modified=1, pid=1, just started
-redis-1      | 1:C 19 Aug 2025 09:37:14.332 * Configuration loaded
-redis-1      | 1:M 19 Aug 2025 09:37:14.332 * monotonic clock: POSIX clock_gettime
-redis-1      | 1:M 19 Aug 2025 09:37:14.333 * Running mode=standalone, port=6379.
-redis-1      | 1:M 19 Aug 2025 09:37:14.334 * <bf> RedisBloom version 8.2.0 (Git=unknown)
-redis-1      | 1:M 19 Aug 2025 09:37:14.334 * <bf> Registering configuration options: [
-redis-1      | 1:M 19 Aug 2025 09:37:14.334 * <bf> 	{ bf-error-rate       :      0.01 }
-redis-1      | 1:M 19 Aug 2025 09:37:14.334 * <bf> 	{ bf-initial-size     :       100 }
-redis-1      | 1:M 19 Aug 2025 09:37:14.334 * <bf> 	{ bf-expansion-factor :         2 }
-redis-1      | 1:M 19 Aug 2025 09:37:14.334 * <bf> 	{ cf-bucket-size      :         2 }
-redis-1      | 1:M 19 Aug 2025 09:37:14.334 * <bf> 	{ cf-initial-size     :      1024 }
-redis-1      | 1:M 19 Aug 2025 09:37:14.334 * <bf> 	{ cf-max-iterations   :        20 }
-redis-1      | 1:M 19 Aug 2025 09:37:14.334 * <bf> 	{ cf-expansion-factor :         1 }
-redis-1      | 1:M 19 Aug 2025 09:37:14.334 * <bf> 	{ cf-max-expansions   :        32 }
-redis-1      | 1:M 19 Aug 2025 09:37:14.334 * <bf> ]
-redis-1      | 1:M 19 Aug 2025 09:37:14.335 * Module 'bf' loaded from /usr/local/lib/redis/modules//redisbloom.so
-redis-1      | 1:M 19 Aug 2025 09:37:14.338 * <search> Redis version found by RedisSearch : 8.2.0 - oss
-redis-1      | 1:M 19 Aug 2025 09:37:14.338 * <search> RediSearch version 8.2.0 (Git=d81ebce)
-redis-1      | 1:M 19 Aug 2025 09:37:14.338 * <search> Low level api version 1 initialized successfully
-redis-1      | 1:M 19 Aug 2025 09:37:14.338 * <search> gc: ON, prefix min length: 2, min word length to stem: 4, prefix max expansions: 200, query timeout (ms): 500, timeout policy: return, cursor read size: 1000, cursor max idle (ms): 300000, max doctable size: 1000000, max number of search results:  1000000, 
-redis-1      | 1:M 19 Aug 2025 09:37:14.338 * <search> Initialized thread pools!
-redis-1      | 1:M 19 Aug 2025 09:37:14.338 * <search> Disabled workers threadpool of size 0
+redis-1      | Starting Redis Server
 backend-2-1  | [Redis] Attempting connection...
+backend-2-1  | Retry 2: RedisConnectionException - It was not possible to connect to the redis server(s). Error connecting right now. To allow this multiplexer to continue retrying until it's able to connect, use abortConnect=false in your connection string or AbortOnConnectFail=false; in your code.
 backend-1-1  | [Redis] Attempting connection...
-redis-1      | 1:M 19 Aug 2025 09:37:14.427 * <search> Subscribe to config changes
-redis-1      | 1:M 19 Aug 2025 09:37:14.427 * <search> Enabled role change notification
-redis-1      | 1:M 19 Aug 2025 09:37:14.428 * <search> Cluster configuration: AUTO partitions, type: 0, coordinator timeout: 0ms
-backend-2-1  | Retry 3: RedisConnectionException - It was not possible to connect to the redis server(s). Error connecting right now. To allow this multiplexer to continue retrying until it's able to connect, use abortConnect=false in your connection string or AbortOnConnectFail=false; in your code.
-redis-1      | 1:M 19 Aug 2025 09:37:14.428 * <search> Register write commands
-redis-1      | 1:M 19 Aug 2025 09:37:14.428 * Module 'search' loaded from /usr/local/lib/redis/modules//redisearch.so
-redis-1      | 1:M 19 Aug 2025 09:37:14.429 * <timeseries> RedisTimeSeries version 80200, git_sha=1439d4a439ca9c063e6ef124a510abff09a5d493
-redis-1      | 1:M 19 Aug 2025 09:37:14.429 * <timeseries> Redis version found by RedisTimeSeries : 8.2.0 - oss
-redis-1      | 1:M 19 Aug 2025 09:37:14.429 * <timeseries> Registering configuration options: [
-redis-1      | 1:M 19 Aug 2025 09:37:14.429 * <timeseries> 	{ ts-compaction-policy   :              }
-redis-1      | 1:M 19 Aug 2025 09:37:14.429 * <timeseries> 	{ ts-num-threads         :            3 }
-redis-1      | 1:M 19 Aug 2025 09:37:14.429 * <timeseries> 	{ ts-retention-policy    :            0 }
-redis-1      | 1:M 19 Aug 2025 09:37:14.429 * <timeseries> 	{ ts-duplicate-policy    :        block }
-redis-1      | 1:M 19 Aug 2025 09:37:14.429 * <timeseries> 	{ ts-chunk-size-bytes    :         4096 }
-redis-1      | 1:M 19 Aug 2025 09:37:14.429 * <timeseries> 	{ ts-encoding            :   compressed }
-redis-1      | 1:M 19 Aug 2025 09:37:14.429 * <timeseries> 	{ ts-ignore-max-time-diff:            0 }
-redis-1      | 1:M 19 Aug 2025 09:37:14.429 * <timeseries> 	{ ts-ignore-max-val-diff :     0.000000 }
-redis-1      | 1:M 19 Aug 2025 09:37:14.429 * <timeseries> ]
-redis-1      | 1:M 19 Aug 2025 09:37:14.429 * <timeseries> Detected redis oss
-redis-1      | 1:M 19 Aug 2025 09:37:14.430 * <timeseries> Enabled diskless replication
-redis-1      | 1:M 19 Aug 2025 09:37:14.430 * Module 'timeseries' loaded from /usr/local/lib/redis/modules//redistimeseries.so
-redis-1      | 1:M 19 Aug 2025 09:37:14.430 * <ReJSON> Created new data type 'ReJSON-RL'
-redis-1      | 1:M 19 Aug 2025 09:37:14.431 * <ReJSON> version: 80200 git sha: unknown branch: unknown
-redis-1      | 1:M 19 Aug 2025 09:37:14.431 * <ReJSON> Exported RedisJSON_V1 API
-redis-1      | 1:M 19 Aug 2025 09:37:14.431 * <ReJSON> Exported RedisJSON_V2 API
-redis-1      | 1:M 19 Aug 2025 09:37:14.431 * <ReJSON> Exported RedisJSON_V3 API
-redis-1      | 1:M 19 Aug 2025 09:37:14.431 * <ReJSON> Exported RedisJSON_V4 API
-redis-1      | 1:M 19 Aug 2025 09:37:14.431 * <ReJSON> Exported RedisJSON_V5 API
-redis-1      | 1:M 19 Aug 2025 09:37:14.431 * <ReJSON> Enabled diskless replication
-redis-1      | 1:M 19 Aug 2025 09:37:14.431 * <ReJSON> Initialized shared string cache, thread safe: false.
-redis-1      | 1:M 19 Aug 2025 09:37:14.431 * Module 'ReJSON' loaded from /usr/local/lib/redis/modules//rejson.so
-redis-1      | 1:M 19 Aug 2025 09:37:14.431 * <search> Acquired RedisJSON_V5 API
-redis-1      | 1:M 19 Aug 2025 09:37:14.431 * Server initialized
-redis-1      | 1:M 19 Aug 2025 09:37:14.431 * Ready to accept connections tcp
+backend-1-1  | Retry 3: RedisConnectionException - It was not possible to connect to the redis server(s). Error connecting right now. To allow this multiplexer to continue retrying until it's able to connect, use abortConnect=false in your connection string or AbortOnConnectFail=false; in your code.
+redis-1      | 1:C 21 Aug 2025 03:13:51.529 # WARNING Memory overcommit must be enabled! Without it, a background save or replication may fail under low memory condition. Being disabled, it can also cause failures without low memory condition, see https://github.com/jemalloc/jemalloc/issues/1328. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.
+redis-1      | 1:C 21 Aug 2025 03:13:51.529 * oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+redis-1      | 1:C 21 Aug 2025 03:13:51.529 * Redis version=8.2.1, bits=64, commit=00000000, modified=1, pid=1, just started
+redis-1      | 1:C 21 Aug 2025 03:13:51.529 * Configuration loaded
+redis-1      | 1:M 21 Aug 2025 03:13:51.530 * monotonic clock: POSIX clock_gettime
+redis-1      | 1:M 21 Aug 2025 03:13:51.530 * Running mode=standalone, port=6379.
+redis-1      | 1:M 21 Aug 2025 03:13:51.531 * <bf> RedisBloom version 8.2.0 (Git=unknown)
+redis-1      | 1:M 21 Aug 2025 03:13:51.531 * <bf> Registering configuration options: [
+redis-1      | 1:M 21 Aug 2025 03:13:51.531 * <bf> 	{ bf-error-rate       :      0.01 }
+redis-1      | 1:M 21 Aug 2025 03:13:51.531 * <bf> 	{ bf-initial-size     :       100 }
+redis-1      | 1:M 21 Aug 2025 03:13:51.531 * <bf> 	{ bf-expansion-factor :         2 }
+redis-1      | 1:M 21 Aug 2025 03:13:51.531 * <bf> 	{ cf-bucket-size      :         2 }
+redis-1      | 1:M 21 Aug 2025 03:13:51.531 * <bf> 	{ cf-initial-size     :      1024 }
+redis-1      | 1:M 21 Aug 2025 03:13:51.531 * <bf> 	{ cf-max-iterations   :        20 }
+redis-1      | 1:M 21 Aug 2025 03:13:51.531 * <bf> 	{ cf-expansion-factor :         1 }
+redis-1      | 1:M 21 Aug 2025 03:13:51.531 * <bf> 	{ cf-max-expansions   :        32 }
+redis-1      | 1:M 21 Aug 2025 03:13:51.531 * <bf> ]
+redis-1      | 1:M 21 Aug 2025 03:13:51.531 * Module 'bf' loaded from /usr/local/lib/redis/modules//redisbloom.so
+redis-1      | 1:M 21 Aug 2025 03:13:51.533 * <search> Redis version found by RedisSearch : 8.2.1 - oss
+redis-1      | 1:M 21 Aug 2025 03:13:51.533 * <search> RediSearch version 8.2.1 (Git=dba8dd0)
+redis-1      | 1:M 21 Aug 2025 03:13:51.533 * <search> Low level api version 1 initialized successfully
+redis-1      | 1:M 21 Aug 2025 03:13:51.533 * <search> gc: ON, prefix min length: 2, min word length to stem: 4, prefix max expansions: 200, query timeout (ms): 500, timeout policy: return, cursor read size: 1000, cursor max idle (ms): 300000, max doctable size: 1000000, max number of search results:  1000000, 
+redis-1      | 1:M 21 Aug 2025 03:13:51.533 * <search> Initialized thread pools!
+redis-1      | 1:M 21 Aug 2025 03:13:51.533 * <search> Disabled workers threadpool of size 0
+redis-1      | 1:M 21 Aug 2025 03:13:51.533 * <search> Subscribe to config changes
+redis-1      | 1:M 21 Aug 2025 03:13:51.534 * <search> Enabled role change notification
+redis-1      | 1:M 21 Aug 2025 03:13:51.534 * <search> Cluster configuration: AUTO partitions, type: 0, coordinator timeout: 0ms
+redis-1      | 1:M 21 Aug 2025 03:13:51.534 * <search> Register write commands
+redis-1      | 1:M 21 Aug 2025 03:13:51.534 * Module 'search' loaded from /usr/local/lib/redis/modules//redisearch.so
+redis-1      | 1:M 21 Aug 2025 03:13:51.534 * <timeseries> RedisTimeSeries version 80200, git_sha=1439d4a439ca9c063e6ef124a510abff09a5d493
+redis-1      | 1:M 21 Aug 2025 03:13:51.534 * <timeseries> Redis version found by RedisTimeSeries : 8.2.1 - oss
+redis-1      | 1:M 21 Aug 2025 03:13:51.534 * <timeseries> Registering configuration options: [
+redis-1      | 1:M 21 Aug 2025 03:13:51.534 * <timeseries> 	{ ts-compaction-policy   :              }
+redis-1      | 1:M 21 Aug 2025 03:13:51.534 * <timeseries> 	{ ts-num-threads         :            3 }
+redis-1      | 1:M 21 Aug 2025 03:13:51.534 * <timeseries> 	{ ts-retention-policy    :            0 }
+redis-1      | 1:M 21 Aug 2025 03:13:51.534 * <timeseries> 	{ ts-duplicate-policy    :        block }
+redis-1      | 1:M 21 Aug 2025 03:13:51.534 * <timeseries> 	{ ts-chunk-size-bytes    :         4096 }
+redis-1      | 1:M 21 Aug 2025 03:13:51.534 * <timeseries> 	{ ts-encoding            :   compressed }
+redis-1      | 1:M 21 Aug 2025 03:13:51.534 * <timeseries> 	{ ts-ignore-max-time-diff:            0 }
+redis-1      | 1:M 21 Aug 2025 03:13:51.534 * <timeseries> 	{ ts-ignore-max-val-diff :     0.000000 }
+redis-1      | 1:M 21 Aug 2025 03:13:51.534 * <timeseries> ]
+redis-1      | 1:M 21 Aug 2025 03:13:51.534 * <timeseries> Detected redis oss
+redis-1      | 1:M 21 Aug 2025 03:13:51.535 * <timeseries> Enabled diskless replication
+redis-1      | 1:M 21 Aug 2025 03:13:51.535 * Module 'timeseries' loaded from /usr/local/lib/redis/modules//redistimeseries.so
+redis-1      | 1:M 21 Aug 2025 03:13:51.535 * <ReJSON> Created new data type 'ReJSON-RL'
+redis-1      | 1:M 21 Aug 2025 03:13:51.535 * <ReJSON> version: 80200 git sha: unknown branch: unknown
+redis-1      | 1:M 21 Aug 2025 03:13:51.535 * <ReJSON> Exported RedisJSON_V1 API
+redis-1      | 1:M 21 Aug 2025 03:13:51.535 * <ReJSON> Exported RedisJSON_V2 API
+redis-1      | 1:M 21 Aug 2025 03:13:51.535 * <ReJSON> Exported RedisJSON_V3 API
+redis-1      | 1:M 21 Aug 2025 03:13:51.535 * <ReJSON> Exported RedisJSON_V4 API
+redis-1      | 1:M 21 Aug 2025 03:13:51.535 * <ReJSON> Exported RedisJSON_V5 API
+redis-1      | 1:M 21 Aug 2025 03:13:51.535 * <ReJSON> Enabled diskless replication
+redis-1      | 1:M 21 Aug 2025 03:13:51.535 * <ReJSON> Initialized shared string cache, thread safe: false.
+redis-1      | 1:M 21 Aug 2025 03:13:51.535 * Module 'ReJSON' loaded from /usr/local/lib/redis/modules//rejson.so
+redis-1      | 1:M 21 Aug 2025 03:13:51.535 * <search> Acquired RedisJSON_V5 API
+redis-1      | 1:M 21 Aug 2025 03:13:51.536 * Server initialized
+redis-1      | 1:M 21 Aug 2025 03:13:51.536 * Ready to accept connections tcp
 backend-2-1  | [Redis] Attempting connection...
 backend-2-1  | [Redis] Connected successfully.
-backend-1-1  | Retry 3: RedisConnectionException - It was not possible to connect to the redis server(s). Error connecting right now. To allow this multiplexer to continue retrying until it's able to connect, use abortConnect=false in your connection string or AbortOnConnectFail=false; in your code.
 backend-1-1  | [Redis] Attempting connection...
 backend-1-1  | [Redis] Connected successfully.
 load-balancer-1  | /docker-entrypoint.sh: /docker-entrypoint.d/ is not empty, will attempt to perform configuration
@@ -97,14 +146,21 @@ load-balancer-1  | /docker-entrypoint.sh: Sourcing /docker-entrypoint.d/15-local
 load-balancer-1  | /docker-entrypoint.sh: Launching /docker-entrypoint.d/20-envsubst-on-templates.sh
 load-balancer-1  | /docker-entrypoint.sh: Launching /docker-entrypoint.d/30-tune-worker-processes.sh
 load-balancer-1  | /docker-entrypoint.sh: Configuration complete; ready for start up
-load-balancer-1  | 2025/08/19 09:37:22 [alert] 30#30: setrlimit(RLIMIT_NOFILE, 555555) failed (1: Operation not permitted)
-load-balancer-1  | 2025/08/19 09:37:22 [alert] 31#31: setrlimit(RLIMIT_NOFILE, 555555) failed (1: Operation not permitted)
-load-balancer-1  | 2025/08/19 09:37:22 [alert] 32#32: setrlimit(RLIMIT_NOFILE, 555555) failed (1: Operation not permitted)
-load-balancer-1  | 2025/08/19 09:37:22 [alert] 33#33: setrlimit(RLIMIT_NOFILE, 555555) failed (1: Operation not permitted)
-redis-1          | 1:signal-handler (1755596550) Received SIGTERM scheduling shutdown...
-redis-1          | 1:M 19 Aug 2025 09:42:30.126 * User requested shutdown...
-redis-1          | 1:M 19 Aug 2025 09:42:30.126 # Redis is now ready to exit, bye bye...
-[Kload-balancer-1 exited with code 0
-[Kredis-1 exited with code 0
-[Kbackend-2-1 exited with code 0
-log truncated at line 1000
+load-balancer-1  | 2025/08/21 03:13:57 [alert] 30#30: setrlimit(RLIMIT_NOFILE, 555555) failed (1: Operation not permitted)
+load-balancer-1  | 2025/08/21 03:13:57 [alert] 31#31: setrlimit(RLIMIT_NOFILE, 555555) failed (1: Operation not permitted)
+load-balancer-1  | 2025/08/21 03:13:57 [alert] 32#32: setrlimit(RLIMIT_NOFILE, 555555) failed (1: Operation not permitted)
+load-balancer-1  | 2025/08/21 03:13:57 [alert] 33#33: setrlimit(RLIMIT_NOFILE, 555555) failed (1: Operation not permitted)
+Gracefully Stopping... press Ctrl+C again to force
+ Container micheloliveira-com-dotnet-csharp-redis-load-balancer-1  Stopping
+ Container micheloliveira-com-dotnet-csharp-redis-redis-1  Stopping
+ Container micheloliveira-com-dotnet-csharp-redis-redis-1  Stopped
+[Kredis-1 exited with code 137
+ Container micheloliveira-com-dotnet-csharp-redis-load-balancer-1  Stopped
+ Container micheloliveira-com-dotnet-csharp-redis-backend-2-1  Stopping
+ Container micheloliveira-com-dotnet-csharp-redis-backend-1-1  Stopping
+[Kload-balancer-1 exited with code 137
+ Container micheloliveira-com-dotnet-csharp-redis-backend-2-1  Stopped
+[Kbackend-2-1 exited with code 137
+ Container micheloliveira-com-dotnet-csharp-redis-backend-1-1  Stopped
+[Kbackend-1-1 exited with code 137
+
