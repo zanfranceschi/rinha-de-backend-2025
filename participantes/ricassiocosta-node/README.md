@@ -2,7 +2,7 @@
 
 **Autor:** Ricássio Costa
 **Data:** Julho 2025  
-**Versão:** 1.0
+**Versão:** v0.1.6
 
 ## Visão Geral
 
